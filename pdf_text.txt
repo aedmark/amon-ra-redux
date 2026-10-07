@@ -1,0 +1,281 @@
+Dagger of Amon Ra Modernization
+As the lead developer for the definitive edition patch of The Dagger of Aman Rah, my
+primary focus will be transforming this "beautiful mess" into a compelling and coherent
+mystery adventure game, ensuring that core progression is never accidentally locked and
+that the complexity of the mystery is accessible to thorough players.
+Here is the four-phase roadmap designed to address all bugs, inconsistencies, and pacing
+issues highlighted in the video:
+
+Developer Roadmap: The Dagger of Amon Ra
+Modernization
+Phase 1: Critical Stability and UI/UX Overhaul (Fixing
+the Core Experience)
+This phase addresses game-breaking bugs, stability issues, and the cumbersome user
+interface that negatively impacts player engagement.
+
+Feature
+
+Fix/Action Required
+
+User Interface
+(UI) Efficiency
+
+Reduce the interaction steps required for interrogation.
+Currently requiring five clicks per question. Implement a modern
+context-sensitive UI or 'double-click to ask' function to
+streamline interrogations and alleviate the "excruciating" slog
+of Act 2.
+
+Save/Load
+Functionality
+
+Re-enable the ability to save and load the game on all screens,
+particularly during the critical Act 5 chase sequence, where the
+CD version inexplicably disables the menu, leading to player
+frustration.
+
+Invisible
+Hotspots/Pixel
+Hunts
+
+Adjust the clickable hitboxes for small or obscure items (e.g.,
+the skeleton key glint on the painting, the intercom buttons, the
+poetry book) to match the visual representation, eliminating
+frustrating pixel hunts.
+
+Memory Check Error
+
+Repair the code governing the "About" screen dialogue in Act 2 to
+prevent the erroneous "There is not enough memory available right
+now" message from displaying throughout the entire act.
+
+Graphical &
+Animation Issues
+
+Correct animation glitches such as characters walking through
+doors (Wolf/Olympia, Countess), character sprites scaling
+improperly (Laura during chase, Laura approaching the headdress),
+and characters walking over one another (Steve cutscene glitch).
+
+Feature
+
+Fix/Action Required
+
+CD Version Visual
+Anomalies
+
+Re-evaluate the aesthetic changes made between the floppy and CD
+versions, particularly the loss of brushstroke textures (e.g.,
+the newsroom desk). Aim to restore the original "art deco style"
+fidelity where possible or intended.
+
+Phase 2: Narrative Coherence and Dialogue Accessibility
+This phase focuses on eliminating inconsistencies, addressing anachronisms, ensuring all
+critical plot dialogue is accessible, and activating unused content.
+
+Feature
+
+Fix/Action Required
+
+Inaccessible Plot
+Information
+
+Relocate or add secondary triggers for key
+character names (Najir, Miklo, Countess) to the
+notebook so players are not locked out of vital
+interrogations by missed Act 1 dialogue.
+
+Pocket Watch
+Confrontation Timing
+
+Adjust the game's item acquisition lockouts so
+that the pocket watch can be retrieved and shown
+to the Countess during her meeting with
+Little/Ziggy in the Armor Room, making the vital
+confrontation dialogue accessible.
+
+Unused/Inaccessible
+Voice Assets
+
+Integrate the existing recorded voice acting for
+death messages and ensure that crucial dialogue
+regarding later murders (O'Reilly discussing
+Ziggy's or Carrington's death) is accessible to
+the player after the event occurs.
+
+Narrative Anachronisms
+
+Review and adjust dialogue referencing items that
+post-date the 1926 setting (e.g., Pippi
+Longstocking, Transatlantic Telephone Call) to
+maintain historical consistency, or rewrite lines
+(e.g., The Sun Also Rises) to provide a clearer
+in-game explanation.
+
+Contextual Dialogue
+Errors
+
+Correct dialogue logic where the game assumes
+Laura knows characters' names (e.g., Dr. Smith)
+or assumes she has met others (e.g., Countess)
+when she has not.
+
+Character Consistency
+(Steve/Laura)
+
+Adjust Laura's "insane jealousy" and Steve's
+dialogue about coming to the party to see her to
+only trigger if the player has actually spoken to
+him in Act 1.
+
+Dagger Discovery
+Reaction
+
+Update character dialogue and scripting to
+provide meaningful and consistent reactions when
+Laura shows characters the actual dagger, rather
+than their current reactions of disbelief or
+
+Source
+Citation
+
+Feature
+
+Fix/Action Required
+
+Source
+Citation
+
+avoidance. Ensure giving O'Reilly the dagger
+correctly removes it from inventory.
+
+Phase 3: Gameplay, Puzzles, and Progression Logic
+Refinement
+This phase tackles the "dead man walking" scenarios and redesigns unfair puzzles and
+progression locks that rely on precise, arbitrary actions.
+
+Feature
+
+Fix/Action Required
+
+Dead Man Walking
+Scenarios (Items)
+
+Guarantee that items critical for Act 5 progression
+(Wire Cutters for the pterodactyl wire, Snake Oil
+Refill, Cheese for the rats) are either acquired
+automatically, cannot be permanently lost, or are made
+available near the point of use if missed earlier.
+
+Snake Oil Refill
+Mechanic
+
+Revamp the snake oil use/refill system: Add visual
+feedback (e.g., inventory icon update) when the bottle
+is used or refilled. Prevent refilling a full bottle,
+and make the refill container in the basement
+significantly more conspicuous and accessible,
+regardless of whether the player has picked up the
+grapes.
+
+Pacing and Act
+Length
+
+Review and potentially expand Act 4 to improve pacing
+following the lengthy Act 2 and Act 3. Introduce more
+meaningful progression triggers in Act 2 beyond the
+mandatory 14 eavesdropping scenes.
+
+Unfair
+Deaths/Warnings
+
+Implement a look or warning mechanic before Laura
+automatically enters the dark secret passage in
+Olympia's office, preventing unannounced instant death.
+
+Arbitrary
+Progression
+Triggers
+
+Simplify the sequence of events in Act 1 to acquire
+the dirty taxi and dress, reducing the requirement for
+talking to specific people in a specific order (e.g.,
+talk to Ziggy, use baseball, visit docks).
+
+Wander Mechanic
+Functionality
+
+Ensure characters halt their movement during
+conversation, preventing them from disappearing middialogue. Implement a mechanism to ensure key
+characters (like O'Reilly) remain accessible for
+questioning longer in Act 3 and 4.
+
+Phase 4: Mystery, Grading, and Ending Logic
+
+Source
+Citation
+
+This phase addresses the frustrating lack of logic in the mystery's solution, the
+erroneous grading system, and the contradictory evidence requirements for the best
+endings.
+
+Feature
+
+Fix/Action Required
+
+Mystery
+Accessibility
+(Wattney Little)
+
+Provide clearer, non-pixel-hunt clues to the existence
+of Wattney Little and the contents of the police file.
+This knowledge is essential to solving the mystery.
+
+Evidence
+Validity and Red
+Herrings
+
+Adjust the importance of "red herring" clues (Ankh
+medallion, Evette's schedule, multiple footprints) or
+integrate them logically into the final solution to
+avoid penalizing players who follow the physical
+evidence.
+
+Hint Book
+Contradictions
+
+Correct the game's internal logic for the best ending
+requirements to match the necessity of the evidence.
+Specifically, ensure that non-progression items—like
+the Red Hair and Bifocals—are the only required items
+that can be missed, and clarify why the Police File
+(Wattney Little) is not technically required despite
+being narrative critical.
+
+Quiz/Dagger
+Contradiction
+
+Fix the logic error that conflates failing to answer
+theft questions correctly with magically losing the
+Dagger of Aman Rah.
+
+Grades and
+Scoring System
+
+Standardize the point divisor in the grading system
+across all acts so that scores correctly reflect the
+player's percentage of points possible. Fix the bug
+that pulls the first F-grade message at the start of
+the game.
+
+Non-Essential
+Quiz Questions
+
+Clearly delineate between required and optional final
+quiz questions. Eliminate points given for nonessential questions (Art Theft, High Priest) that "do
+not affect your ending".
+
+Source
+Citation
+
+
