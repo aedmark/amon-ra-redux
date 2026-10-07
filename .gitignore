@@ -1,2 +1,26 @@
-/LB2/
+# Base game assets & copyrighted Sierra archives
+/LB2/RESOURCE.*
+/LB2/*.000
+/LB2/*.CFG
+/LB2/*.AUD
+/LB2/*.DRV
+/LB2/*.V56
+/LB2/VERSION
+/LB2/README
+/LB2_vanilla/
+
+# SCI Companion compiled object caches
+*.sco
+
+# Scratch & temporary logs
+compiler_captured.txt
+log.txt
+compile_output.txt
+*.bak
+
+# Temporary test binaries
+tools/*.exe
+tools/*.dll
+
+# PDF outline
 /Dagger of Amon Ra Modernization.pdf

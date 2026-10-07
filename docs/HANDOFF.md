@@ -12,56 +12,84 @@ Security: [SECURITY.md](SECURITY.md). Changes: [CHANGELOG.md](CHANGELOG.md). Old
 
 ## Current state
 
-_Last updated: 2026-10-07, session 2: Architectural decisions D-007 (voice policy) and D-008 (diegetic Act 2 pacing) integrated._
+_Last updated: 2026-10-07, session 3: Phase 1 (Critical Stability & UI/UX Overhaul) completed and compiled across 3 passes._
 
-**Where things stand, in one paragraph:** The project baseline has been established using the DOS floppy release
-v1.000 (D-001) in `LB2/`. Maintainer feedback has resolved both open questions: D-007 omits insensitive CD voice
-tracks in favor of text message tables (`.MSG`) with extensible hooks for future custom re-recordings; D-008 replaces
-the 14-eavesdropping requirement with a diegetic knowledge acquisition threshold supplemented by contextual museum
-puzzles. All 24 roadmap items (P1-01 through P4-06) across four phases are fully specified, and both verification
-suites pass cleanly.
+**Where things stand, in one paragraph:** Phase 1 (P1-01 through P1-06) is fully implemented, verified, and compiled.
+Interrogation UI is streamlined with direct tab pre-selection and double-click asking (P1-01); save/load is unrestricted
+across all screens and chase sequences (P1-02); hitboxes for tiny objects/hair/glints are enlarged (P1-03); the Act 2
+About screen memory check bug is fixed (P1-04); character door clipping, sprite scaling perspective, and Steve cutscene
+collisions are fixed (P1-05); and original 256-color art deco assets are audited and preserved with pristine base archives
+(P1-06). A 3-pass compile all in SCI Companion converged all self-referencing scripts and symbol tables.
 
 **Verified** (2026-10-07, Linux workspace)
 
 | Suite | Result |
 | --- | --- |
 | `python3 tools/check_docs.py` | **Pass: 0 errors, 0 warnings** |
-| `python3 3x-documentation-scheme/scripts/manual.py check 3x-documentation-scheme/scheme/amon-ra.manual.json` | **Pass: 5 sections, 29 entries, 0 errors** |
-| `python3 3x-documentation-scheme/scripts/manual.py build ... --output manual.html` | **Pass: compiled manual.html (102 KB)** |
-| `scummvm --detect --path=LB2` | **Pass: recognized sci:laurabow2** |
-| Wine execution of SCI Companion | **Pass: binary launches cleanly under Wine 11.19** |
+| `python3 3x-documentation-scheme/scripts/manual.py check ...` | **Pass: 5 sections, 29 entries, 0 errors** |
+| `python3 3x-documentation-scheme/scripts/manual.py build ...` | **Pass: compiled manual.html (103 KB)** |
+| Base Game Archive MD5 Integrity | **Pass: RESOURCE.000 and RESOURCE.MAP match vanilla bit-for-bit** |
+| 3-Pass Compile All in SCI Companion | **Pass: all 219 scripts compiled, symbols converged in 996.voc** |
 
 **What works**
 
-- **Documentation Architecture:** Both the Manifold project-memory system (`ROADMAP.md`, `docs/`) and the 3x
-  Documentation Scheme (`manual.html`, `amon-ra.manual.json`) are synchronized and pass automated verification.
-- **Maintainer Decisions Incorporated:** D-007 (text-first with extensible voice hooks) and D-008 (diegetic knowledge
-  gating for Act 2) are formally accepted in `docs/DECISIONS.md` and integrated into the roadmap.
-- **Tooling Readiness:** SCI Companion executes under Wine and ScummVM detects and runs the base floppy game files.
+- **Phase 1 Overhaul:** All six Phase 1 items (P1-01 through P1-06) compiled as loose patches in `LB2/`.
+- **Tooling Automation:** `tools/compile.py` compiles any target script on demand; `tools/compile_all.exe` executes multi-pass full builds.
+- **Documentation Architecture:** `ROADMAP.md`, `docs/`, `3x-documentation-scheme/`, and `manual.html` synchronized.
 
 **Not verified**
 
-- Individual script decompilations into `.sc` source files have not yet been bulk-extracted via SCI Companion GUI.
-- Direct gameplay test saves across all acts have not yet been populated into a test fixtures directory.
+- End-to-end multi-act playthrough regression testing in DOSBox-X.
 
 **Gotchas for the next session**
 
-- Loose patch files in `LB2/` take precedence over `RESOURCE.000`; keep a clean backup of `LB2/` before compiling.
-- In SCI Companion under Wine, file paths inside dialogs map to Wine drive letters (e.g. `Z:\home\gordonk\...`).
-- When editing `.MSG` files, message tuples (case, sequence, talker) must match the caller IDs in `.SCR` exactly.
+- Because SCI scripts are self-referencing, multi-pass compile all (`tools/compile_all.exe`) should be run whenever cross-script selectors or exports are modified.
+- Keep loose patch files in `LB2/` strictly uppercase (`.SCR`, `.HEP`).
 
 ## Next steps (in order)
 
-1. Launch SCI Companion under Wine and decompile target scripts (`0.SCR`, `13.SCR`, `20.SCR`, `440.SCR`, `500.SCR`, `700.SCR`).
-2. Begin Phase 1 implementation starting with P1-04 (Act 2 About screen memory check) and P1-03 (hitbox enlargement in room 440).
-3. Implement P1-01 (interrogation UI streamlining) in `13.SCR` and test interaction flow with ScummVM.
-4. Draft contextual investigation puzzles and minimum knowledge state flags for P3-03 in Act 2 (`Script 0`, `Script 230`).
+1. Begin Phase 2 implementation starting with P2-01 (Inaccessible Plot Information & Notebook Fallback Triggers for Najir, Miklo, Countess).
+2. Implement P2-02 (Pocket Watch Confrontation Timing & Armor Room Lockout Adjustment in room 440).
+3. Implement P2-03 (Murder Reaction Restoration & Text-First Voice Architecture in MSG resources).
+4. Run gameplay test verification in DOSBox-X using `./tools/run_dosbox.sh`.
 
 ## Open questions for maintainers
 
 None currently open. Q-001 and Q-002 have been resolved by D-007 and D-008.
 
 ## Session log
+
+### Session 3: 2026-10-07: Phase 1 Overhaul Completion & Multi-Pass Convergence
+
+**Contributor:** Antigravity
+
+**Goal:** Implement and verify all Phase 1 items (P1-01 through P1-06) covering interrogation UI, save/load, pixel hunts, memory bug, animation/scaling glitches, and art preservation.
+
+**Done:**
+- P1-01: Interrogation UI streamlined with direct tab pre-selection (People tab / last active tab) and double-click to confirm inquiry in `LB2/src/NotebookItem.sc` (Script 20).
+- P1-02: Unrestricted save/load enabled across all screens by protecting settings/save icon 7 in `LB2/src/IconI.sc` (Script 937), `LB2/src/Main.sc` (Script 0), `LB2/src/LBRoom.sc` (Script 17), and eliminating icon disables in chase and corpse rooms (Scripts 525, 560, 565, 610).
+- P1-03: Expanded clickable hitboxes for skeleton key glint on painting in `rm500.sc` (Script 500), staggered intercom buttons in `Button.sc` (Script 562), poetry book in `MyFeature.sc` (Script 650), museum dagger in `rm400.sc` (Script 400), and Ernie's corpse hairs in `rm420.sc` (Script 420); enabled Look and Magnifier interactions.
+- P1-04: Fixed Act 2 About screen memory check error in `Main.sc` (Script 0) sel_613 by removing false `(== global123 2)` (`gAct == 2`) lockout.
+- P1-05: Fixed character door clipping for Countess in `sCountessMeeting.sc` (Script 441) and Olympia in `rm600.sc` (Script 600); corrected Laura and pursuer scaling in chase rooms (`rm500.sc`, `rm510.sc`) and rotunda headdress rooms (`rm350.sc`, `rm355.sc`, `rm360.sc`, `rm370.sc`); eliminated Steve cutscene collision overlap in `rm350.sc`.
+- P1-06: Verified 256-color art deco asset preservation and immutable base archives (`LB2/RESOURCE.000`, `LB2/RESOURCE.MAP`) with identical MD5 checksums against vanilla.
+- Automated multi-pass compilation across all 219 scripts in SCI Companion under Wine to resolve self-referencing cross-script dependencies and symbol tables (`996.voc`).
+- Synchronized 3x manual scheme sources (`3x-documentation-scheme/scheme/amon-ra.manual.json`) and rebuilt `manual.html`.
+
+**Changed:** `LB2/src/Main.sc`, `LB2/src/LBRoom.sc`, `LB2/src/NotebookItem.sc`, `LB2/src/rm350.sc`, `LB2/src/rm355.sc`, `LB2/src/rm360.sc`, `LB2/src/rm370.sc`, `LB2/src/rm400.sc`, `LB2/src/rm420.sc`, `LB2/src/sCountessMeeting.sc`, `LB2/src/rm500.sc`, `LB2/src/rm510.sc`, `LB2/src/rm525.sc`, `LB2/src/rm560.sc`, `LB2/src/Button.sc`, `LB2/src/rm565.sc`, `LB2/src/rm600.sc`, `LB2/src/rm610.sc`, `LB2/src/MyFeature.sc`, `LB2/src/IconI.sc`, `ROADMAP.md`, `3x-documentation-scheme/scheme/amon-ra.manual.json`, `manual.html`, `docs/HANDOFF.md`.
+
+**Decisions:** D-001 (Floppy base v1.000 preserved), D-002 (Loose patch overrides), D-003 (Interrogation streamlining), D-004 (Unrestricted save/load).
+
+**Verified:** `python3 tools/check_docs.py` (0 errors, 0 warnings); `python3 3x-documentation-scheme/scripts/manual.py check` (5 sections, 29 entries, 0 errors); `manual.py build` (103 KB compiled standalone manual); 3-pass compilation of all 219 scripts in SCI Companion; MD5 verification of base archives.
+
+**Not verified:** Full playthrough regression from start to end in DOSBox-X.
+
+**Problems / surprises:** Wine ERROR_ALREADY_EXISTS (183) during script compilation due to case-insensitive rename collisions resolved by automated pre-compile purging and uppercase promotion.
+
+**Corrections:** Self-referencing script dependencies resolved via 3-pass compile all.
+
+**Left undone:** Phase 2 (P2-01 through P2-07) narrative coherence and dialogue accessibility.
+
+**Next session should start with:** Phase 2 implementation starting with P2-01 (inaccessible plot info and notebook fallback triggers for Najir, Miklo, Countess) and P2-02 (pocket watch confrontation timing in Armor Room).
 
 ### Session 2: 2026-10-07: Voiceover Policy and Diegetic Act 2 Pacing Integration
 
