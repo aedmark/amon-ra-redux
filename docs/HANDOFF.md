@@ -12,14 +12,14 @@ Security: [SECURITY.md](SECURITY.md). Changes: [CHANGELOG.md](CHANGELOG.md). Old
 
 ## Current state
 
-_Last updated: 2026-10-07, session 3: Phase 1 (Critical Stability & UI/UX Overhaul) completed and compiled across 3 passes._
+_Last updated: 2026-10-07, session 4: P2-01 (Inaccessible Plot Information & Notebook Fallback Triggers) implemented, compiled, and verified._
 
-**Where things stand, in one paragraph:** Phase 1 (P1-01 through P1-06) is fully implemented, verified, and compiled.
-Interrogation UI is streamlined with direct tab pre-selection and double-click asking (P1-01); save/load is unrestricted
-across all screens and chase sequences (P1-02); hitboxes for tiny objects/hair/glints are enlarged (P1-03); the Act 2
-About screen memory check bug is fixed (P1-04); character door clipping, sprite scaling perspective, and Steve cutscene
-collisions are fixed (P1-05); and original 256-color art deco assets are audited and preserved with pristine base archives
-(P1-06). A 3-pass compile all in SCI Companion converged all self-referencing scripts and symbol tables.
+**Where things stand, in one paragraph:** Phase 1 (P1-01 through P1-06) and Phase 2's first item (P2-01) are fully
+implemented, verified, and compiled. P2-01 resolves the critical Act 2 suspect interrogation lockout (Najir, Miklo,
+Countess, etc.) through a dual-tier fallback: diegetically registering clues 263..272 during museum check-in via the guest
+register in `rm335.sc` (Script 335), and directly triggering suspect clue addition upon Look/Talk encounters across all
+11 characters in `RotundaRgn.sc` (Script 93). Both scripts are compiled to loose overrides (`335.SCR`, `335.HEP`, `93.SCR`,
+`93.HEP`). All documentation and 3x manuals pass validation with zero errors.
 
 **Verified** (2026-10-07, Linux workspace)
 
@@ -27,15 +27,16 @@ collisions are fixed (P1-05); and original 256-color art deco assets are audited
 | --- | --- |
 | `python3 tools/check_docs.py` | **Pass: 0 errors, 0 warnings** |
 | `python3 3x-documentation-scheme/scripts/manual.py check ...` | **Pass: 5 sections, 29 entries, 0 errors** |
-| `python3 3x-documentation-scheme/scripts/manual.py build ...` | **Pass: compiled manual.html (103 KB)** |
+| `python3 3x-documentation-scheme/scripts/manual.py build ...` | **Pass: compiled manual.html (104 KB)** |
 | Base Game Archive MD5 Integrity | **Pass: RESOURCE.000 and RESOURCE.MAP match vanilla bit-for-bit** |
-| 3-Pass Compile All in SCI Companion | **Pass: all 219 scripts compiled, symbols converged in 996.voc** |
+| SCI Companion Script Compilation | **Pass: rm335.sc (335) and RotundaRgn.sc (93) compiled cleanly to loose overrides** |
 
 **What works**
 
 - **Phase 1 Overhaul:** All six Phase 1 items (P1-01 through P1-06) compiled as loose patches in `LB2/`.
-- **Tooling Automation:** `tools/compile.py` compiles any target script on demand; `tools/compile_all.exe` executes multi-pass full builds.
-- **Documentation Architecture:** `ROADMAP.md`, `docs/`, `3x-documentation-scheme/`, and `manual.html` synchronized.
+- **P2-01 Suspect Fallbacks:** Dual-tier guest register check-in and encounter-based suspect registration operational.
+- **Tooling Automation:** `tools/compile.py` compiles single scripts (including extension-agnostic target lookup in SysListView32); `tools/compile_all.exe` executes multi-pass builds.
+- **Documentation Architecture:** `ROADMAP.md`, `DECISIONS.md` (D-009), `3x-documentation-scheme/`, and `manual.html` synchronized.
 
 **Not verified**
 
@@ -43,14 +44,14 @@ collisions are fixed (P1-05); and original 256-color art deco assets are audited
 
 **Gotchas for the next session**
 
-- Because SCI scripts are self-referencing, multi-pass compile all (`tools/compile_all.exe`) should be run whenever cross-script selectors or exports are modified.
 - Keep loose patch files in `LB2/` strictly uppercase (`.SCR`, `.HEP`).
+- In `RotundaRgn.sc` (Script 93), `Actor` instances must not define extraneous property `name` (already covered by `sel_20`).
 
 ## Next steps (in order)
 
-1. Begin Phase 2 implementation starting with P2-01 (Inaccessible Plot Information & Notebook Fallback Triggers for Najir, Miklo, Countess).
-2. Implement P2-02 (Pocket Watch Confrontation Timing & Armor Room Lockout Adjustment in room 440).
-3. Implement P2-03 (Murder Reaction Restoration & Text-First Voice Architecture in MSG resources).
+1. Implement P2-02 (Pocket Watch Confrontation Timing & Armor Room Lockout Adjustment in room 440).
+2. Implement P2-03 (Murder Reaction Restoration & Text-First Voice Architecture in MSG resources).
+3. Implement P2-04 (Narrative Anachronism Corrections across MSG resources).
 4. Run gameplay test verification in DOSBox-X using `./tools/run_dosbox.sh`.
 
 ## Open questions for maintainers
@@ -58,6 +59,33 @@ collisions are fixed (P1-05); and original 256-color art deco assets are audited
 None currently open. Q-001 and Q-002 have been resolved by D-007 and D-008.
 
 ## Session log
+
+### Session 4: 2026-10-07: P2-01 Notebook Fallback Triggers Implementation
+
+**Contributor:** Antigravity
+
+**Goal:** Implement P2-01 (Inaccessible Plot Information & Notebook Fallback Triggers) to guarantee all Act 2 suspects and museum staff (Najir, Miklo, Countess, etc.) are registered in Laura's notebook regardless of Act 1 inquiry choices.
+
+**Done:**
+- Reverse-engineered SCI 1.1 `RESOURCE.MSG` decompression and identified Category 1 suspect clues 257–274.
+- Discovered vanilla bug: clues 263–272 (Steve, Ziggy, Heimlich, Yvette, Ernie, Rameses, Countess, Olympia, Tut, Watney) were strictly gated behind optional Act 1 dialogues, locking players out of Act 2 interrogations.
+- Implemented dual-tier fallback in accordance with ADR D-009:
+  1. Diegetic guest register check in `LB2/src/rm335.sc` (Script 335) registering clues 263..272 in `sGiveInvite` state 5 and `sExitNorth` state 3.
+  2. Direct Look/Talk encounter triggers in `LB2/src/RotundaRgn.sc` (Script 93) across all 11 rotunda characters (Countess, Heimlich, Olympia, O'Riley, Pippin, Rameses, Steve, Tut, Watney, Yvette, Ziggy).
+- Fixed syntax error in `RotundaRgn.sc` (`name "O'Riley"` instance property conflict with `sel_20`).
+- Updated `tools/compile_any.c` to support case-insensitive, extension-agnostic target lookup in SCI Companion's SysListView32.
+- Successfully compiled `LB2/335.SCR`, `LB2/335.HEP`, `LB2/93.SCR`, and `LB2/93.HEP`.
+- Documented architectural decision D-009 in `docs/DECISIONS.md`.
+- Updated `ROADMAP.md` (P2-01 marked done), updated `3x-documentation-scheme/scheme/amon-ra.manual.json`, and built `manual.html`.
+- Validated docs with `tools/check_docs.py` (0 errors, 0 warnings) and `manual.py check` (0 errors).
+
+**Changed:** `LB2/src/rm335.sc`, `LB2/src/RotundaRgn.sc`, `LB2/335.SCR`, `LB2/335.HEP`, `LB2/93.SCR`, `LB2/93.HEP`, `tools/compile_any.c`, `tools/compile_any.exe`, `docs/DECISIONS.md`, `ROADMAP.md`, `3x-documentation-scheme/scheme/amon-ra.manual.json`, `manual.html`, `docs/HANDOFF.md`.
+
+**Decisions:** D-009 (Dual-tier notebook fallback triggers for Act 2 suspects).
+
+**Verified:** `python3 tools/compile.py rm335`, `python3 tools/compile.py RotundaRgn`, `python3 tools/check_docs.py` (0 errors), `python3 3x-documentation-scheme/scripts/manual.py check` (0 errors), `manual.py build` (104 KB).
+
+**Next session should start with:** P2-02 (Pocket Watch Confrontation Timing & Armor Room Lockout Adjustment in room 440).
 
 ### Session 3: 2026-10-07: Phase 1 Overhaul Completion & Multi-Pass Convergence
 

@@ -96,6 +96,26 @@ with contextual puzzles and investigative activities.
 - **Consequences:** Resolves Q-002. Replaces arbitrary event counting with logical detective agency; players can advance
   naturally as soon as they understand enough of the scenario to justify moving forward.
 
+## D-009 Inaccessible Plot Information & Notebook Fallback Triggers
+
+Establish a two-tier fallback trigger mechanism ensuring all Act 2 suspects and staff are recorded in Laura's notebook.
+
+- **Context:** In vanilla LB2, suspect clues 263..272 (Steve, Ziggy, Heimlich, Yvette, Ernie, Rameses, Countess, Olympia,
+  Tut, Watney) were only recorded during optional Act 1 dialogues (e.g., Lo Fat's laundry in room 270; clue 271 was
+  omitted entirely by Sierra outside debug scripts). Missing these conversations permanently locked players out of
+  questioning gala attendees about these key figures in Act 2. Sierra recognized this deficiency by manually granting
+  clues 263..272 in debug warp `proc0_13` in `Main.sc`.
+- **Decision:** Implement a dual-tier fallback mechanism:
+  1. **Diegetic Check-in Fallback (`LB2/src/rm335.sc` / Script 335):** When Laura presents her press pass to Ernie Leach
+     at the museum benefit desk (`sGiveInvite` state 5, or passing into the rotunda in `sExitNorth` state 3), the game
+     diegetically simulates consulting the benefit guest register and invokes `((ScriptID 21 0) doit: 263..272)`.
+     Because `addCluesCode` (Script 21) is idempotent, existing clues are preserved without duplication.
+  2. **Direct Visual/Conversational Encounter Fallback (`LB2/src/RotundaRgn.sc` / Script 93):** Intercept Look (verb 1)
+     and Talk (verb 2) in `doVerb` (`sel_300:`) across all 11 rotunda characters (Countess, Heimlich, Olympia, O'Riley,
+     Pippin, Rameses, Steve, Tut, Watney, Yvette, Ziggy) to ensure examining or speaking with any character registers
+     their clue immediately.
+- **Consequences:** Eliminates the Act 2 suspect inquiry lockout while maintaining immersion and vanilla story flow.
+
 ---
 
 ## Open questions

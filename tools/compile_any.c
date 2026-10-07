@@ -102,7 +102,13 @@ int main(int argc, char **argv) {
 
         char buf[256] = {0};
         ReadProcessMemory(hProc, remoteText, buf, sizeof(buf) - 1, NULL);
-        if (strcasecmp(buf, target) == 0) {
+
+        char targetNoExt[256];
+        strncpy(targetNoExt, target, sizeof(targetNoExt) - 1);
+        char *dot = strstr(targetNoExt, ".sc");
+        if (dot) *dot = 0;
+
+        if (strcasecmp(buf, target) == 0 || strcasecmp(buf, targetNoExt) == 0) {
             printf("Found target '%s' at index %d ('%s')\n", target, i, buf);
             targetIndex = i;
             break;

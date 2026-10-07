@@ -110,6 +110,9 @@
 	)
 	
 	(method (sel_300 param1 param2 &tmp temp0 temp1 temp2)
+		(if (proc999_5 param1 1 2)
+			((ScriptID 21 0) sel_57: 269)
+		)
 		(cond 
 			((== param1 2)
 				(if (not (proc0_3 112))
@@ -166,6 +169,9 @@
 	)
 	
 	(method (sel_300 param1 param2 &tmp temp0 temp1 temp2)
+		(if (proc999_5 param1 1 2)
+			((ScriptID 21 0) sel_57: 265)
+		)
 		(if (proc999_5 param1 6 14)
 			(if
 				(==
@@ -214,6 +220,9 @@
 	)
 	
 	(method (sel_300 param1 param2 &tmp temp0 temp1 temp2)
+		(if (proc999_5 param1 1 2)
+			((ScriptID 21 0) sel_57: 270)
+		)
 		(if (proc999_5 param1 6 14)
 			(if
 				(==
@@ -259,10 +268,12 @@
 		sel_214 1888
 		sel_2 819
 		sel_14 16384
-		name "O'Riley"
 	)
 	
 	(method (sel_300 param1 param2 &tmp temp0 temp1 temp2)
+		(if (proc999_5 param1 1 2)
+			((ScriptID 21 0) sel_57: 260)
+		)
 		(cond 
 			((== param1 2)
 				(if (not (proc0_3 114))
@@ -425,6 +436,9 @@
 	)
 	
 	(method (sel_300 param1 param2 &tmp temp0 temp1 temp2)
+		(if (proc999_5 param1 1 2)
+			((ScriptID 21 0) sel_57: 258)
+		)
 		(cond 
 			((== param1 2)
 				(if (not (proc0_3 110))
@@ -481,6 +495,9 @@
 	)
 	
 	(method (sel_300 param1 param2 &tmp temp0 temp1 temp2)
+		(if (proc999_5 param1 1 2)
+			((ScriptID 21 0) sel_57: 268)
+		)
 		(cond 
 			((== param1 2)
 				(if (not (proc0_3 115))
@@ -538,6 +555,9 @@
 	)
 	
 	(method (sel_300 param1 param2 &tmp temp0 temp1 temp2)
+		(if (proc999_5 param1 1 2)
+			((ScriptID 21 0) sel_57: 263)
+		)
 		(if (== param1 6)
 			(if
 				(==
@@ -586,6 +606,9 @@
 	)
 	
 	(method (sel_300 param1 param2 &tmp temp0 temp1 temp2)
+		(if (proc999_5 param1 1 2)
+			((ScriptID 21 0) sel_57: 271)
+		)
 		(cond 
 			((== param1 2)
 				(if (not (proc0_3 111))
@@ -642,6 +665,9 @@
 	)
 	
 	(method (sel_300 param1 param2 &tmp temp0 temp1 temp2)
+		(if (proc999_5 param1 1 2)
+			((ScriptID 21 0) sel_57: 272)
+		)
 		(if (== param1 6)
 			(if
 				(==
@@ -691,6 +717,9 @@
 	)
 	
 	(method (sel_300 param1 param2 &tmp temp0 temp1 temp2)
+		(if (proc999_5 param1 1 2)
+			((ScriptID 21 0) sel_57: 266)
+		)
 		(cond 
 			((== param1 2)
 				(if (not (proc0_3 113))
@@ -776,6 +805,9 @@
 	)
 	
 	(method (sel_300 param1 param2 &tmp temp0 temp1 temp2)
+		(if (proc999_5 param1 1 2)
+			((ScriptID 21 0) sel_57: 264)
+		)
 		(if (proc999_5 param1 6 14)
 			(if
 				(==
