@@ -13,6 +13,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - Verification harness integrating Wine-based SCI Companion and DOSBox-X.
 
 ### Changed
+- Paused museum NPC travel for the full lifetime of their dialogue and resumed the same route afterward; kept O'Reilly available past 10:15 in Acts 3 and 4 for follow-up questioning (P3-06, D-021).
+- Made the press pass the sole milestone for the Act 1 dirty taxi and gown claim ticket, so the docks visit, baseball trade, and Ziggy conversation remain optional side paths rather than a four-errand progression gate (P3-05, D-020).
+- Replaced the eastern-tower stairwell's unannounced darkness death with a safe threshold warning that reuses its existing treacherous-staircase Look text and preserves the replacement-bulb solution (P3-04, D-019).
 - Audited P3-03's pacing premise and preserved the game's authored event-driven act transitions after confirming that no 14-eavesdrop Act 2 gate exists; routed the genuine passive-pacing concern into post-bugfix milestone P5-01 for new museum investigation mechanics around the essential conversations (D-017, D-018).
 - Reworked snake oil feedback and refilling: empty bottles now show a red-X inventory/toolbar cel, the Room 610 laboratory jar refills in one guarded action, full bottles and empty jars are rejected, and the jar has a larger click target (P3-02, D-016).
 - Added a one-time, save-compatible Act 5 supply audit that restores missing Wire Cutters, Snake Oil, and Cheese and refills an empty oil bottle without recreating items after use (P3-01, D-005).

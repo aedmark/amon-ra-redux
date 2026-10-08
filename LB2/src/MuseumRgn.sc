@@ -809,6 +809,14 @@
 		sel_656 0
 		sel_657 0
 		sel_533 0
+		sel_667 0
+	)
+
+	(method (sel_668 param1 param2 param3 param4 param5)
+		(= sel_667 1)
+		(museumDialogueResume sel_42: self)
+		(self sel_312: 0)
+		(gLb2Messager sel_295: param1 param2 param3 param4 museumDialogueResume param5)
 	)
 	
 	(method (sel_110 &tmp [temp0 2] temp2 temp3 temp4 temp5 temp6 [temp7 5])
@@ -1146,7 +1154,7 @@
 		(if (== param1 2)
 			(return
 				(if (not (proc0_3 112))
-					(gLb2Messager sel_295: sel_213 param1 80 0 0 sel_214)
+					(self sel_668: sel_213 param1 80 0 0 sel_214)
 				else
 					(super sel_300: param1)
 				)
@@ -1180,15 +1188,15 @@
 					(cond 
 						((proc0_2 134)
 							(if (proc27_0 0 global364)
-								(gLb2Messager sel_295: sel_213 6 1 0 0 sel_214)
+								(self sel_668: sel_213 6 1 0 0 sel_214)
 							else
-								(gLb2Messager sel_295: sel_213 6 72 0 0 sel_214)
+								(self sel_668: sel_213 6 72 0 0 sel_214)
 								(proc27_1 0 @global364)
 							)
 						)
-						((proc27_0 0 global297) (gLb2Messager sel_295: sel_213 6 1 0 0 sel_214))
+						((proc27_0 0 global297) (self sel_668: sel_213 6 1 0 0 sel_214))
 						(else
-							(gLb2Messager sel_295: sel_213 6 3 0 0 sel_214)
+							(self sel_668: sel_213 6 3 0 0 sel_214)
 							(proc27_1 0 @global297)
 						)
 					)
@@ -1197,15 +1205,15 @@
 					(cond 
 						((or (proc0_2 143) (proc0_2 72))
 							(if (proc27_0 0 global366)
-								(gLb2Messager sel_295: sel_213 6 1 0 0 sel_214)
+								(self sel_668: sel_213 6 1 0 0 sel_214)
 							else
-								(gLb2Messager sel_295: sel_213 6 74 0 0 sel_214)
+								(self sel_668: sel_213 6 74 0 0 sel_214)
 								(proc27_1 0 @global366)
 							)
 						)
-						((proc27_0 0 global303) (gLb2Messager sel_295: sel_213 6 1 0 0 sel_214))
+						((proc27_0 0 global303) (self sel_668: sel_213 6 1 0 0 sel_214))
 						(else
-							(gLb2Messager sel_295: sel_213 6 9 0 0 sel_214)
+							(self sel_668: sel_213 6 9 0 0 sel_214)
 							(proc27_1 0 @global303)
 						)
 					)
@@ -1214,15 +1222,15 @@
 					(cond 
 						((or (proc0_2 158) (proc0_2 67))
 							(if (proc27_0 0 global365)
-								(gLb2Messager sel_295: sel_213 6 1 0 0 sel_214)
+								(self sel_668: sel_213 6 1 0 0 sel_214)
 							else
-								(gLb2Messager sel_295: sel_213 6 71 0 0 sel_214)
+								(self sel_668: sel_213 6 71 0 0 sel_214)
 								(proc27_1 0 @global365)
 							)
 						)
-						((proc27_0 0 global306) (gLb2Messager sel_295: sel_213 6 1 0 0 sel_214))
+						((proc27_0 0 global306) (self sel_668: sel_213 6 1 0 0 sel_214))
 						(else
-							(gLb2Messager sel_295: sel_213 6 12 0 0 sel_214)
+							(self sel_668: sel_213 6 12 0 0 sel_214)
 							(proc27_1 0 @global306)
 						)
 					)
@@ -1230,10 +1238,10 @@
 				(else 
 					(cond 
 						(
-						(not (Message msgGET sel_214 sel_213 6 temp1 1)) (gLb2Messager sel_295: sel_213 6 81 0 0 sel_214))
-						((proc27_0 0 [global296 (- temp1 2)]) (gLb2Messager sel_295: sel_213 6 1 0 0 sel_214))
+						(not (Message msgGET sel_214 sel_213 6 temp1 1)) (self sel_668: sel_213 6 81 0 0 sel_214))
+						((proc27_0 0 [global296 (- temp1 2)]) (self sel_668: sel_213 6 1 0 0 sel_214))
 						(else
-							(gLb2Messager sel_295: sel_213 6 temp1 0 0 sel_214)
+							(self sel_668: sel_213 6 temp1 0 0 sel_214)
 							(proc27_1 0 @[global296 (- temp1 2)])
 						)
 					)
@@ -1396,15 +1404,15 @@ code_1432:
 					(cond 
 						((proc0_2 134)
 							(if (proc27_0 3 global364)
-								(gLb2Messager sel_295: sel_213 6 1 0 0 sel_214)
+								(self sel_668: sel_213 6 1 0 0 sel_214)
 							else
-								(gLb2Messager sel_295: sel_213 6 72 0 0 sel_214)
+								(self sel_668: sel_213 6 72 0 0 sel_214)
 								(proc27_1 3 @global364)
 							)
 						)
-						((proc27_0 3 global297) (gLb2Messager sel_295: sel_213 6 1 0 0 sel_214))
+						((proc27_0 3 global297) (self sel_668: sel_213 6 1 0 0 sel_214))
 						(else
-							(gLb2Messager sel_295: sel_213 6 3 0 0 sel_214)
+							(self sel_668: sel_213 6 3 0 0 sel_214)
 							(proc27_1 3 @global297)
 						)
 					)
@@ -1413,15 +1421,15 @@ code_1432:
 					(cond 
 						((or (proc0_2 171) (proc0_2 12))
 							(if (proc27_0 3 global363)
-								(gLb2Messager sel_295: sel_213 6 1 0 0 sel_214)
+								(self sel_668: sel_213 6 1 0 0 sel_214)
 							else
-								(gLb2Messager sel_295: sel_213 6 69 0 0 sel_214)
+								(self sel_668: sel_213 6 69 0 0 sel_214)
 								(proc27_1 3 @global363)
 							)
 						)
-						((proc27_0 3 global298) (gLb2Messager sel_295: sel_213 6 1 0 0 sel_214))
+						((proc27_0 3 global298) (self sel_668: sel_213 6 1 0 0 sel_214))
 						(else
-							(gLb2Messager sel_295: sel_213 6 4 0 0 sel_214)
+							(self sel_668: sel_213 6 4 0 0 sel_214)
 							(proc27_1 3 @global298)
 						)
 					)
@@ -1430,15 +1438,15 @@ code_1432:
 					(cond 
 						((or (proc0_2 143) (proc0_2 72))
 							(if (proc27_0 3 global366)
-								(gLb2Messager sel_295: sel_213 6 1 0 0 sel_214)
+								(self sel_668: sel_213 6 1 0 0 sel_214)
 							else
-								(gLb2Messager sel_295: sel_213 6 74 0 0 sel_214)
+								(self sel_668: sel_213 6 74 0 0 sel_214)
 								(proc27_1 3 @global366)
 							)
 						)
-						((proc27_0 3 global303) (gLb2Messager sel_295: sel_213 6 1 0 0 sel_214))
+						((proc27_0 3 global303) (self sel_668: sel_213 6 1 0 0 sel_214))
 						(else
-							(gLb2Messager sel_295: sel_213 6 9 0 0 sel_214)
+							(self sel_668: sel_213 6 9 0 0 sel_214)
 							(proc27_1 3 @global303)
 						)
 					)
@@ -1447,15 +1455,15 @@ code_1432:
 					(cond 
 						((or (proc0_2 161) (proc0_2 68))
 							(if (proc27_0 3 global367)
-								(gLb2Messager sel_295: sel_213 6 1 0 0 sel_214)
+								(self sel_668: sel_213 6 1 0 0 sel_214)
 							else
-								(gLb2Messager sel_295: sel_213 6 73 0 0 sel_214)
+								(self sel_668: sel_213 6 73 0 0 sel_214)
 								(proc27_1 3 @global367)
 							)
 						)
-						((proc27_0 3 global305) (gLb2Messager sel_295: sel_213 6 1 0 0 sel_214))
+						((proc27_0 3 global305) (self sel_668: sel_213 6 1 0 0 sel_214))
 						(else
-							(gLb2Messager sel_295: sel_213 6 11 0 0 sel_214)
+							(self sel_668: sel_213 6 11 0 0 sel_214)
 							(proc27_1 3 @global305)
 						)
 					)
@@ -1464,15 +1472,15 @@ code_1432:
 					(cond 
 						((or (proc0_2 158) (proc0_2 67))
 							(if (proc27_0 3 global365)
-								(gLb2Messager sel_295: sel_213 6 1 0 0 sel_214)
+								(self sel_668: sel_213 6 1 0 0 sel_214)
 							else
-								(gLb2Messager sel_295: sel_213 6 71 0 0 sel_214)
+								(self sel_668: sel_213 6 71 0 0 sel_214)
 								(proc27_1 3 @global365)
 							)
 						)
-						((proc27_0 3 global306) (gLb2Messager sel_295: sel_213 6 1 0 0 sel_214))
+						((proc27_0 3 global306) (self sel_668: sel_213 6 1 0 0 sel_214))
 						(else
-							(gLb2Messager sel_295: sel_213 6 12 0 0 sel_214)
+							(self sel_668: sel_213 6 12 0 0 sel_214)
 							(proc27_1 3 @global306)
 						)
 					)
@@ -1480,10 +1488,10 @@ code_1432:
 				(else 
 					(cond 
 						(
-						(not (Message msgGET sel_214 sel_213 6 temp1 1)) (gLb2Messager sel_295: sel_213 6 81 0 0 sel_214))
-						((proc27_0 3 [global296 (- temp1 2)]) (gLb2Messager sel_295: sel_213 6 1 0 0 sel_214))
+						(not (Message msgGET sel_214 sel_213 6 temp1 1)) (self sel_668: sel_213 6 81 0 0 sel_214))
+						((proc27_0 3 [global296 (- temp1 2)]) (self sel_668: sel_213 6 1 0 0 sel_214))
 						(else
-							(gLb2Messager sel_295: sel_213 6 temp1 0 0 sel_214)
+							(self sel_668: sel_213 6 temp1 0 0 sel_214)
 							(proc27_1 3 @[global296 (- temp1 2)])
 						)
 					)
@@ -1641,7 +1649,7 @@ code_17e6:
 		(if (== param1 2)
 			(return
 				(if (not (proc0_3 114))
-					(gLb2Messager sel_295: sel_213 param1 80 0 0 sel_214)
+					(self sel_668: sel_213 param1 80 0 0 sel_214)
 				else
 					(super sel_300: param1)
 				)
@@ -1682,15 +1690,15 @@ code_17e6:
 					(cond 
 						((proc0_2 134)
 							(if (proc27_0 4 global364)
-								(gLb2Messager sel_295: sel_213 6 1 0 0 sel_214)
+								(self sel_668: sel_213 6 1 0 0 sel_214)
 							else
-								(gLb2Messager sel_295: sel_213 6 72 0 0 sel_214)
+								(self sel_668: sel_213 6 72 0 0 sel_214)
 								(proc27_1 4 @global364)
 							)
 						)
-						((proc27_0 4 global297) (gLb2Messager sel_295: sel_213 6 1 0 0 sel_214))
+						((proc27_0 4 global297) (self sel_668: sel_213 6 1 0 0 sel_214))
 						(else
-							(gLb2Messager sel_295: sel_213 6 3 0 0 sel_214)
+							(self sel_668: sel_213 6 3 0 0 sel_214)
 							(proc27_1 4 @global297)
 						)
 					)
@@ -1699,15 +1707,15 @@ code_17e6:
 					(cond 
 						((or (proc0_2 171) (proc0_2 12))
 							(if (proc27_0 4 global363)
-								(gLb2Messager sel_295: sel_213 6 1 0 0 sel_214)
+								(self sel_668: sel_213 6 1 0 0 sel_214)
 							else
-								(gLb2Messager sel_295: sel_213 6 69 0 0 sel_214)
+								(self sel_668: sel_213 6 69 0 0 sel_214)
 								(proc27_1 4 @global363)
 							)
 						)
-						((proc27_0 4 global298) (gLb2Messager sel_295: sel_213 6 1 0 0 sel_214))
+						((proc27_0 4 global298) (self sel_668: sel_213 6 1 0 0 sel_214))
 						(else
-							(gLb2Messager sel_295: sel_213 6 4 0 0 sel_214)
+							(self sel_668: sel_213 6 4 0 0 sel_214)
 							(proc27_1 4 @global298)
 						)
 					)
@@ -1716,15 +1724,15 @@ code_17e6:
 					(cond 
 						((or (proc0_2 143) (proc0_2 72))
 							(if (proc27_0 4 global366)
-								(gLb2Messager sel_295: sel_213 6 1 0 0 sel_214)
+								(self sel_668: sel_213 6 1 0 0 sel_214)
 							else
-								(gLb2Messager sel_295: sel_213 6 74 0 0 sel_214)
+								(self sel_668: sel_213 6 74 0 0 sel_214)
 								(proc27_1 4 @global366)
 							)
 						)
-						((proc27_0 4 global303) (gLb2Messager sel_295: sel_213 6 1 0 0 sel_214))
+						((proc27_0 4 global303) (self sel_668: sel_213 6 1 0 0 sel_214))
 						(else
-							(gLb2Messager sel_295: sel_213 6 9 0 0 sel_214)
+							(self sel_668: sel_213 6 9 0 0 sel_214)
 							(proc27_1 4 @global303)
 						)
 					)
@@ -1733,15 +1741,15 @@ code_17e6:
 					(cond 
 						((or (proc0_2 161) (proc0_2 68))
 							(if (proc27_0 4 global367)
-								(gLb2Messager sel_295: sel_213 6 1 0 0 sel_214)
+								(self sel_668: sel_213 6 1 0 0 sel_214)
 							else
-								(gLb2Messager sel_295: sel_213 6 73 0 0 sel_214)
+								(self sel_668: sel_213 6 73 0 0 sel_214)
 								(proc27_1 4 @global367)
 							)
 						)
-						((proc27_0 4 global305) (gLb2Messager sel_295: sel_213 6 1 0 0 sel_214))
+						((proc27_0 4 global305) (self sel_668: sel_213 6 1 0 0 sel_214))
 						(else
-							(gLb2Messager sel_295: sel_213 6 11 0 0 sel_214)
+							(self sel_668: sel_213 6 11 0 0 sel_214)
 							(proc27_1 4 @global305)
 						)
 					)
@@ -1750,15 +1758,15 @@ code_17e6:
 					(cond 
 						((or (proc0_2 158) (proc0_2 67))
 							(if (proc27_0 4 global365)
-								(gLb2Messager sel_295: sel_213 6 1 0 0 sel_214)
+								(self sel_668: sel_213 6 1 0 0 sel_214)
 							else
-								(gLb2Messager sel_295: sel_213 6 71 0 0 sel_214)
+								(self sel_668: sel_213 6 71 0 0 sel_214)
 								(proc27_1 4 @global365)
 							)
 						)
-						((proc27_0 4 global306) (gLb2Messager sel_295: sel_213 6 1 0 0 sel_214))
+						((proc27_0 4 global306) (self sel_668: sel_213 6 1 0 0 sel_214))
 						(else
-							(gLb2Messager sel_295: sel_213 6 12 0 0 sel_214)
+							(self sel_668: sel_213 6 12 0 0 sel_214)
 							(proc27_1 4 @global306)
 						)
 					)
@@ -1767,15 +1775,15 @@ code_17e6:
 					(cond 
 						((or (proc0_2 69) (proc0_2 165) (proc0_2 166))
 							(if (proc27_0 4 global365)
-								(gLb2Messager sel_295: sel_213 6 1 0 0 sel_214)
+								(self sel_668: sel_213 6 1 0 0 sel_214)
 							else
-								(gLb2Messager sel_295: sel_213 6 70 0 0 sel_214)
+								(self sel_668: sel_213 6 70 0 0 sel_214)
 								(proc27_1 4 @global365)
 							)
 						)
-						((proc27_0 4 global308) (gLb2Messager sel_295: sel_213 6 1 0 0 sel_214))
+						((proc27_0 4 global308) (self sel_668: sel_213 6 1 0 0 sel_214))
 						(else
-							(gLb2Messager sel_295: sel_213 6 14 0 0 sel_214)
+							(self sel_668: sel_213 6 14 0 0 sel_214)
 							(proc27_1 4 @global308)
 						)
 					)
@@ -1784,15 +1792,15 @@ code_17e6:
 					(cond 
 						((or (proc0_2 155) (proc0_2 22) (gEgo sel_238: 11))
 							(if (proc27_0 4 global368)
-								(gLb2Messager sel_295: sel_213 6 1 0 0 sel_214)
+								(self sel_668: sel_213 6 1 0 0 sel_214)
 							else
-								(gLb2Messager sel_295: sel_213 6 75 0 0 sel_214)
+								(self sel_668: sel_213 6 75 0 0 sel_214)
 								(proc27_1 4 @global368)
 							)
 						)
-						((proc27_0 4 global332) (gLb2Messager sel_295: sel_213 6 1 0 0 sel_214))
+						((proc27_0 4 global332) (self sel_668: sel_213 6 1 0 0 sel_214))
 						(else
-							(gLb2Messager sel_295: sel_213 6 38 0 0 sel_214)
+							(self sel_668: sel_213 6 38 0 0 sel_214)
 							(proc27_1 4 @global332)
 						)
 					)
@@ -1800,10 +1808,10 @@ code_17e6:
 				(else 
 					(cond 
 						(
-						(not (Message msgGET sel_214 sel_213 6 temp1 1)) (gLb2Messager sel_295: sel_213 6 81 0 0 sel_214))
-						((proc27_0 4 [global296 (- temp1 2)]) (gLb2Messager sel_295: sel_213 6 1 0 0 sel_214))
+						(not (Message msgGET sel_214 sel_213 6 temp1 1)) (self sel_668: sel_213 6 81 0 0 sel_214))
+						((proc27_0 4 [global296 (- temp1 2)]) (self sel_668: sel_213 6 1 0 0 sel_214))
 						(else
-							(gLb2Messager sel_295: sel_213 6 temp1 0 0 sel_214)
+							(self sel_668: sel_213 6 temp1 0 0 sel_214)
 							(proc27_1 4 @[global296 (- temp1 2)])
 						)
 					)
@@ -1828,7 +1836,7 @@ code_17e6:
 		(if (== param1 2)
 			(return
 				(if (not (proc0_3 111))
-					(gLb2Messager sel_295: sel_213 param1 80 0 0 sel_214)
+					(self sel_668: sel_213 param1 80 0 0 sel_214)
 				else
 					(super sel_300: param1)
 				)
@@ -1862,15 +1870,15 @@ code_17e6:
 					(cond 
 						((proc0_2 134)
 							(if (proc27_0 7 global364)
-								(gLb2Messager sel_295: sel_213 6 1 0 0 sel_214)
+								(self sel_668: sel_213 6 1 0 0 sel_214)
 							else
-								(gLb2Messager sel_295: sel_213 6 72 0 0 sel_214)
+								(self sel_668: sel_213 6 72 0 0 sel_214)
 								(proc27_1 7 @global364)
 							)
 						)
-						((proc27_0 7 global297) (gLb2Messager sel_295: sel_213 6 1 0 0 sel_214))
+						((proc27_0 7 global297) (self sel_668: sel_213 6 1 0 0 sel_214))
 						(else
-							(gLb2Messager sel_295: sel_213 6 3 0 0 sel_214)
+							(self sel_668: sel_213 6 3 0 0 sel_214)
 							(proc27_1 7 @global297)
 						)
 					)
@@ -1879,15 +1887,15 @@ code_17e6:
 					(cond 
 						((or (proc0_2 161) (proc0_2 68))
 							(if (proc27_0 7 global367)
-								(gLb2Messager sel_295: sel_213 6 1 0 0 sel_214)
+								(self sel_668: sel_213 6 1 0 0 sel_214)
 							else
-								(gLb2Messager sel_295: sel_213 6 73 0 0 sel_214)
+								(self sel_668: sel_213 6 73 0 0 sel_214)
 								(proc27_1 7 @global367)
 							)
 						)
-						((proc27_0 7 global305) (gLb2Messager sel_295: sel_213 6 1 0 0 sel_214))
+						((proc27_0 7 global305) (self sel_668: sel_213 6 1 0 0 sel_214))
 						(else
-							(gLb2Messager sel_295: sel_213 6 11 0 0 sel_214)
+							(self sel_668: sel_213 6 11 0 0 sel_214)
 							(proc27_1 7 @global305)
 						)
 					)
@@ -1895,10 +1903,10 @@ code_17e6:
 				(else 
 					(cond 
 						(
-						(not (Message msgGET sel_214 sel_213 6 temp1 1)) (gLb2Messager sel_295: sel_213 6 81 0 0 sel_214))
-						((proc27_0 7 [global296 (- temp1 2)]) (gLb2Messager sel_295: sel_213 6 1 0 0 sel_214))
+						(not (Message msgGET sel_214 sel_213 6 temp1 1)) (self sel_668: sel_213 6 81 0 0 sel_214))
+						((proc27_0 7 [global296 (- temp1 2)]) (self sel_668: sel_213 6 1 0 0 sel_214))
 						(else
-							(gLb2Messager sel_295: sel_213 6 temp1 0 0 sel_214)
+							(self sel_668: sel_213 6 temp1 0 0 sel_214)
 							(proc27_1 7 @[global296 (- temp1 2)])
 						)
 					)
@@ -2044,15 +2052,15 @@ code_2176:
 					(cond 
 						((proc0_2 134)
 							(if (proc27_0 8 global364)
-								(gLb2Messager sel_295: sel_213 6 1 0 0 sel_214)
+								(self sel_668: sel_213 6 1 0 0 sel_214)
 							else
-								(gLb2Messager sel_295: sel_213 6 72 0 0 sel_214)
+								(self sel_668: sel_213 6 72 0 0 sel_214)
 								(proc27_1 8 @global364)
 							)
 						)
-						((proc27_0 8 global297) (gLb2Messager sel_295: sel_213 6 1 0 0 sel_214))
+						((proc27_0 8 global297) (self sel_668: sel_213 6 1 0 0 sel_214))
 						(else
-							(gLb2Messager sel_295: sel_213 6 3 0 0 sel_214)
+							(self sel_668: sel_213 6 3 0 0 sel_214)
 							(proc27_1 8 @global297)
 						)
 					)
@@ -2060,10 +2068,10 @@ code_2176:
 				(else 
 					(cond 
 						(
-						(not (Message msgGET sel_214 sel_213 6 temp1 1)) (gLb2Messager sel_295: sel_213 6 81 0 0 sel_214))
-						((proc27_0 8 [global296 (- temp1 2)]) (gLb2Messager sel_295: sel_213 6 1 0 0 sel_214))
+						(not (Message msgGET sel_214 sel_213 6 temp1 1)) (self sel_668: sel_213 6 81 0 0 sel_214))
+						((proc27_0 8 [global296 (- temp1 2)]) (self sel_668: sel_213 6 1 0 0 sel_214))
 						(else
-							(gLb2Messager sel_295: sel_213 6 temp1 0 0 sel_214)
+							(self sel_668: sel_213 6 temp1 0 0 sel_214)
 							(proc27_1 8 @[global296 (- temp1 2)])
 						)
 					)
@@ -2185,9 +2193,9 @@ code_2460:
 		(cond 
 			((== param1 2)
 				(if (not (proc0_3 113))
-					(gLb2Messager sel_295: sel_213 param1 80 0 0 sel_214)
+					(self sel_668: sel_213 param1 80 0 0 sel_214)
 				else
-					(gLb2Messager sel_295: sel_213 param1 27 0 0 sel_214)
+					(self sel_668: sel_213 param1 27 0 0 sel_214)
 				)
 			)
 			((proc999_5 param1 6 14)
@@ -2218,15 +2226,15 @@ code_2460:
 						(cond 
 							((or (proc0_2 158) (proc0_2 67))
 								(if (proc27_0 9 global365)
-									(gLb2Messager sel_295: sel_213 6 1 0 0 sel_214)
+									(self sel_668: sel_213 6 1 0 0 sel_214)
 								else
-									(gLb2Messager sel_295: sel_213 6 71 0 0 sel_214)
+									(self sel_668: sel_213 6 71 0 0 sel_214)
 									(proc27_1 9 @global365)
 								)
 							)
-							((proc27_0 9 global306) (gLb2Messager sel_295: sel_213 6 1 0 0 sel_214))
+							((proc27_0 9 global306) (self sel_668: sel_213 6 1 0 0 sel_214))
 							(else
-								(gLb2Messager sel_295: sel_213 6 12 0 0 sel_214)
+								(self sel_668: sel_213 6 12 0 0 sel_214)
 								(proc27_1 9 @global306)
 							)
 						)
@@ -2235,15 +2243,15 @@ code_2460:
 						(cond 
 							((or (proc0_2 171) (proc0_2 12))
 								(if (proc27_0 9 global363)
-									(gLb2Messager sel_295: sel_213 6 1 0 0 sel_214)
+									(self sel_668: sel_213 6 1 0 0 sel_214)
 								else
-									(gLb2Messager sel_295: sel_213 6 69 0 0 sel_214)
+									(self sel_668: sel_213 6 69 0 0 sel_214)
 									(proc27_1 9 @global363)
 								)
 							)
-							((proc27_0 9 global298) (gLb2Messager sel_295: sel_213 6 1 0 0 sel_214))
+							((proc27_0 9 global298) (self sel_668: sel_213 6 1 0 0 sel_214))
 							(else
-								(gLb2Messager sel_295: sel_213 6 4 0 0 sel_214)
+								(self sel_668: sel_213 6 4 0 0 sel_214)
 								(proc27_1 9 @global298)
 							)
 						)
@@ -2252,34 +2260,34 @@ code_2460:
 						(cond 
 							((proc0_2 134)
 								(if (proc27_0 9 global364)
-									(gLb2Messager sel_295: sel_213 6 1 0 0 sel_214)
+									(self sel_668: sel_213 6 1 0 0 sel_214)
 								else
-									(gLb2Messager sel_295: sel_213 6 72 0 0 sel_214)
+									(self sel_668: sel_213 6 72 0 0 sel_214)
 									(proc27_1 9 @global364)
 								)
 							)
-							((proc27_0 9 global297) (gLb2Messager sel_295: sel_213 6 1 0 0 sel_214))
+							((proc27_0 9 global297) (self sel_668: sel_213 6 1 0 0 sel_214))
 							(else
-								(gLb2Messager sel_295: sel_213 6 3 0 0 sel_214)
+								(self sel_668: sel_213 6 3 0 0 sel_214)
 								(proc27_1 9 @global297)
 							)
 						)
 					)
 					(263
 						(if (proc27_0 9 global302)
-							(gLb2Messager sel_295: sel_213 6 1 0 0 sel_214)
+							(self sel_668: sel_213 6 1 0 0 sel_214)
 						else
-							(gLb2Messager sel_295: sel_213 6 24 0 0 sel_214)
+							(self sel_668: sel_213 6 24 0 0 sel_214)
 							(proc27_1 9 @global302)
 						)
 					)
 					(else 
 						(cond 
 							(
-							(not (Message msgGET sel_214 sel_213 6 temp1 1)) (gLb2Messager sel_295: sel_213 6 81 0 0 sel_214))
-							((proc27_0 9 [global296 (- temp1 2)]) (gLb2Messager sel_295: sel_213 6 1 0 0 sel_214))
+							(not (Message msgGET sel_214 sel_213 6 temp1 1)) (self sel_668: sel_213 6 81 0 0 sel_214))
+							((proc27_0 9 [global296 (- temp1 2)]) (self sel_668: sel_213 6 1 0 0 sel_214))
 							(else
-								(gLb2Messager sel_295: sel_213 6 temp1 0 0 sel_214)
+								(self sel_668: sel_213 6 temp1 0 0 sel_214)
 								(proc27_1 9 @[global296 (- temp1 2)])
 							)
 						)
@@ -2325,10 +2333,10 @@ code_2460:
 			)
 			(cond 
 				(
-				(not (Message msgGET sel_214 sel_213 6 temp1 1)) (gLb2Messager sel_295: sel_213 6 81 0 0 sel_214))
-				((proc27_0 11 [global296 (- temp1 2)]) (gLb2Messager sel_295: sel_213 6 1 0 0 sel_214))
+				(not (Message msgGET sel_214 sel_213 6 temp1 1)) (self sel_668: sel_213 6 81 0 0 sel_214))
+				((proc27_0 11 [global296 (- temp1 2)]) (self sel_668: sel_213 6 1 0 0 sel_214))
 				(else
-					(gLb2Messager sel_295: sel_213 6 temp1 0 0 sel_214)
+					(self sel_668: sel_213 6 temp1 0 0 sel_214)
 					(proc27_1 11 @[global296 (- temp1 2)])
 				)
 			)
@@ -2458,6 +2466,14 @@ code_29fc:
 	(method (sel_111 param1)
 		(if (or (not argc) (not param1)) (= sel_143 0))
 		(super sel_111:)
+	)
+
+	(method (sel_145)
+		(if (sel_42 sel_667?)
+			(return)
+		else
+			(super sel_145: &rest)
+		)
 	)
 	
 	(method (sel_144 theSel_29 &tmp sel_42Sel_663 temp1 museumRgnSel_643 sel_42Sel_620 sel_42Sel_654 sel_42Sel_657 sel_42Sel_660 temp7 theSel_141 theSel_141_2)
@@ -2847,6 +2863,23 @@ code_29fc:
 				)
 				(= sel_666 1)
 				(self sel_144: 1)
+			)
+		)
+	)
+)
+
+(instance museumDialogueResume of Script
+	(properties
+		sel_20 {museumDialogueResume}
+	)
+
+	(method (sel_145 param1 &tmp temp0 temp1)
+		(= temp0 sel_42)
+		(= sel_42 0)
+		(if (IsObject temp0)
+			(temp0 sel_667: 0)
+			(if (IsObject (= temp1 (temp0 sel_142?)))
+				(temp1 sel_144: (temp1 sel_29?))
 			)
 		)
 	)

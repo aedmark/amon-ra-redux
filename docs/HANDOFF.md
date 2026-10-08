@@ -12,20 +12,25 @@ Security: [SECURITY.md](SECURITY.md). Changes: [CHANGELOG.md](CHANGELOG.md). Old
 
 ## Current state
 
-_Last updated: 2026-10-08, session 13: P3-03 (Pacing and Progression Audit) completed and verified._
+_Last updated: 2026-10-08, session 16: P3-06 (NPC Wander Mechanic Stabilization) completed and verified._
 
-**Where things stand, in one paragraph:** Phase 1, Phase 2, and P3-01 through P3-03 are complete. P3-03 audited the
-outline's claimed 14-eavesdrop Act 2 gate and found that it does not exist: authored sequences call Script 26 directly,
-while `global111` is a later scene scheduler that is not read by the act-break controller. D-017 preserves those save and
-story semantics rather than introducing a conflicting knowledge counter. The underlying passive-pacing concern remains
-scheduled as post-bugfix milestone P5-01, which will add player-driven museum investigations around Act 2's essential
-conversations. P3-02's Snake Oil patches remain compiled and uncommitted alongside these documentation changes. All
-project documentation lives under `docs/`, with the manual builder retained under `tools/`.
+**Where things stand, in one paragraph:** Phase 1, Phase 2, and Phase 3 are complete. Script 90 now pauses only the
+selected museum actor's existing `TravelToRoom` state while dialogue is open and resumes that exact state on dismissal;
+Script 22 preserves O'Reilly after 10:15 in Acts 3 and 4. D-021 records the route-preservation design. P3-04 through
+P3-06 remain compiled and uncommitted together with their documentation changes. Act 2's passive-pacing concern remains
+scheduled as post-bugfix milestone P5-01. All project documentation lives under `docs/`, with the manual builder
+retained under `tools/`.
 
 **Verified** (2026-10-08, Linux workspace)
 
 | Suite | Result |
 | --- | --- |
+| P3-06 Script compilation | **Pass: 90.SCR/90.HEP and 22.SCR/22.HEP emitted by SCI Companion with 0 errors and 0 warnings** |
+| P3-06 movement/schedule audit | **Pass: all 112 museum-actor message paths use the dialogue lock; TravelToRoom holds its state; O'Reilly's 10:15 removal excludes only Acts 3 and 4** |
+| P3-05 Script compilation | **Pass: 250.SCR/250.HEP emitted by SCI Companion with 0 errors and 0 warnings** |
+| P3-05 state-path audit | **Pass: all three dirty-taxi checks use press-pass bit 1; docks/baseball/Ziggy bits remain independent and available** |
+| P3-04 Script compilation | **Pass: 530.SCR/530.HEP emitted by SCI Companion with 0 errors and 0 warnings** |
+| P3-04 warning audit | **Pass: dark boundary redirects to sWarnDarkStairs, moves Laura to y=165, and reuses message tuple 11/1/2** |
 | P3-03 progression reference audit | **Pass: all `global111` reads/writes and all Script 26 callers traced; no Act 2 knowledge-count gate exists** |
 | P3-02 Script compilation | **Pass: 15.SCR/15.HEP and 610.SCR/610.HEP emitted by SCI Companion** |
 | P3-02 View 61 structure | **Pass: cursor loop retains one cel; inventory and toolbar loops each expose full cel 0 and empty cel 1** |
@@ -57,13 +62,16 @@ project documentation lives under `docs/`, with the manual builder retained unde
 - **P3-01 Act 5 Supply Safety:** A one-time central audit repairs missing cutters, oil, and cheese for new or existing Act 5 saves without recreating consumed items.
 - **P3-02 Snake Oil Feedback:** Empty bottles visibly switch to a red-X cel; the Room 610 jar provides three guarded one-action refills through a larger hotspot.
 - **P3-03 Progression Audit:** Authored act transitions and the later `global111` scene scheduler are preserved; Act 2's genuine passive-pacing problem is retained as post-bugfix content milestone P5-01.
+- **P3-04 Fair-Play Stairwell:** Crossing the eastern-tower stairwell threshold in darkness now stops Laura safely and repeats the existing warning; replacing the bulb retains the original traversal.
+- **P3-05 Flexible Act 1:** The press pass now exposes the dirty taxi and claim ticket; docks, baseball, and Ziggy remain optional, independently completable paths.
+- **P3-06 Stable Museum Conversations:** The selected wandering NPC holds position for dialogue and resumes its prior route afterward; O'Reilly stays available past 10:15 in Acts 3 and 4.
 - **Tooling Automation:** `tools/compile.py` compiles single scripts (including extension-agnostic target lookup in SysListView32); `tools/compile_all.exe` executes multi-pass builds.
-- **Documentation Architecture:** `docs/ROADMAP.md`, `DECISIONS.md` (D-009 through D-018), `docs/manual/`, and `docs/manual/manual.html` synchronized.
+- **Documentation Architecture:** `docs/ROADMAP.md`, `DECISIONS.md` (D-009 through D-021), `docs/manual/`, and `docs/manual/manual.html` synchronized.
 
 **Not verified**
 
 - End-to-end multi-act playthrough regression testing in DOSBox-X.
-- Direct in-game traversal of the P2-04 historical dialogue, P2-05 first-contact branches, both P2-06 Steve relationship branches, the P2-07 dagger hand-off, P3-01 entry with deliberately missing supplies, and P3-02 bottle depletion/refill transitions; the automated DOSBox-X check is a startup smoke, not an input-driven playthrough.
+- Direct in-game traversal of the P2-04 historical dialogue, P2-05 first-contact branches, both P2-06 Steve relationship branches, the P2-07 dagger hand-off, P3-01 entry with deliberately missing supplies, P3-02 bottle depletion/refill transitions, both P3-04 stairwell paths, P3-05's early dirty-taxi/claim-ticket route, and P3-06 moving-NPC conversations plus O'Reilly's post-10:15 Act 3–4 availability; the automated DOSBox-X check is a startup smoke, not an input-driven playthrough.
 
 **Gotchas for the next session**
 
@@ -71,18 +79,81 @@ project documentation lives under `docs/`, with the manual builder retained unde
 - The dialogue chronology is late 1926; the design outline's “Spring 1926” wording is contradicted by multiple in-game date anchors (D-012).
 - In `RotundaRgn.sc` (Script 93), `Actor` instances must not define extraneous property `name` (already covered by `sel_20`).
 - Script 15's decompiled inventory instances likewise carried invalid `name` pseudo-properties; these were removed because `sel_20` already supplies their labels.
-- If a mapped source is absent from SCI Companion's resource list, a temporary numbered loose resource makes it selectable; compile the real source, then retain only the compiler-emitted patch. Scripts 15 and 240 required this bootstrap.
+- If a mapped source is absent from SCI Companion's resource list, a temporary numbered loose resource makes it selectable; compile the real source, then retain only the compiler-emitted patch. Scripts 15, 90, 240, and 250 required this bootstrap.
 
 ## Next steps (in order)
 
-1. Exercise P2-04 through P2-07 and P3-01/P3-02 branches from deterministic saves in DOSBox-X using `./tools/run_dosbox.sh`.
-2. Implement P3-04 (Unfair Death Warnings & Secret Passage Look Mechanic).
+1. Exercise P2-04 through P2-07 and P3-01 through P3-06 branches from deterministic saves in DOSBox-X using `./tools/run_dosbox.sh`.
+2. Begin P4-01 (Mystery Accessibility & Wattney Little Evidence Discovery).
 
 ## Open questions for maintainers
 
 None currently open. Q-001 and Q-002 have been resolved by D-007, D-017, and D-018.
 
 ## Session log
+
+### Session 16: 2026-10-08: P3-06 NPC Wander Mechanic Stabilization
+
+**Contributor:** Codex
+
+**Goal:** Prevent museum NPCs from leaving during dialogue and keep O'Reilly available for later-act questioning without destroying authored schedules.
+
+**Done:**
+- Traced Script 90's shared `MuseumActor` and `TravelToRoom` controller and confirmed that actor message calls had no dismissal callback while movement scripts continued to cycle.
+- Routed all 112 museum-actor message dispatches through `sel_668`, which locks only the selected actor and stops its mover before opening the message.
+- Added `museumDialogueResume` and a `TravelToRoom.sel_145` guard so dismissal clears the lock and re-enters the same travel state, preserving fixed destinations and random routes.
+- Gated Script 22's 10:15 O'Reilly removal outside Acts 3 and 4, leaving the authored behavior unchanged in other acts.
+- Compiled Scripts 90 and 22 and synchronized the architecture, roadmap, decision log, changelog, testing matrix, handoff, and manual.
+
+**Changed:** `LB2/src/MuseumRgn.sc`, `LB2/src/triggerAndClock.sc`, `LB2/90.SCR`, `LB2/90.HEP`, `LB2/22.SCR`, `LB2/22.HEP`, `docs/ROADMAP.md`, `docs/ARCHITECTURE.md`, `docs/DECISIONS.md`, `docs/CHANGELOG.md`, `docs/TESTING.md`, `docs/manual/amon-ra.manual.json`, `docs/manual/manual.html`, `docs/HANDOFF.md`, `docs/archive/SESSION_LOG_2026_10.md`.
+
+**Decisions:** D-021 (Preserve museum travel state across dialogue).
+
+**Verified:** SCI Companion compilation of Scripts 90 and 22 with 0 errors and 0 warnings; static audit of all museum-actor message paths, pause/resume state handling, and the Act 3–4 clock guard; DOSBox-X original-interpreter startup smoke; documentation/manual validation. Direct save-based observation of a moving speaker and O'Reilly after 10:15 remains a manual regression test.
+
+**Next session should start with:** P4-01 (Mystery Accessibility & Wattney Little Evidence Discovery).
+
+### Session 15: 2026-10-08: P3-05 Act 1 Progression Trigger Simplification
+
+**Contributor:** Codex
+
+**Goal:** Remove arbitrary Act 1 prerequisites from the dirty-taxi and evening-gown route while preserving essential credentials and authored side content.
+
+**Done:**
+- Traced Script 22's `global124` bits and confirmed the press pass, docks visit, baseball trade, and Ziggy conversation are independent events rather than an ordered chain.
+- Identified Script 250's `(proc0_10 16 1)` complete-low-nibble test as the actual bottleneck: it withheld the dirty taxi and its gown claim ticket until all four errands were complete.
+- Changed the three coordinated taxi-state checks to persistent press-pass bit 1, retaining the dirty-taxi scene, claim ticket, Lo Fat gown exchange, and dressed Act 1 transition.
+- Preserved the docks, baseball, and Ziggy paths as optional content with their original clues, character context, clock progression, and rewards.
+- Compiled Script 250 and synchronized the architecture, roadmap, decision log, changelog, handoff, and manual.
+
+**Changed:** `LB2/src/Trash.sc`, `LB2/250.SCR`, `LB2/250.HEP`, `docs/ROADMAP.md`, `docs/ARCHITECTURE.md`, `docs/DECISIONS.md`, `docs/CHANGELOG.md`, `docs/TESTING.md`, `docs/manual/amon-ra.manual.json`, `docs/manual/manual.html`, `docs/HANDOFF.md`, `docs/archive/SESSION_LOG_2026_10.md`.
+
+**Decisions:** D-020 (Make the press pass the Act 1 taxi milestone).
+
+**Verified:** SCI Companion compilation of Script 250 with 0 errors and 0 warnings; static global124, taxi-state, inventory-route, and optional-content audit; DOSBox-X original-interpreter startup smoke; documentation/manual validation. Direct save-based traversal from press-pass acquisition through the early dirty taxi and gown remains a manual regression test.
+
+**Next session should start with:** P3-06 (NPC Wander Mechanic Stabilization).
+
+### Session 14: 2026-10-08: P3-04 Unfair Death Warnings
+
+**Contributor:** Codex
+
+**Goal:** Replace the outline's unannounced secret-passage death with a source-backed, diegetic warning while preserving the intended puzzle solution.
+
+**Done:**
+- Traced the actual hazard to Script 530's eastern-tower stairwell rather than the outline's proposed Rooms 420/450.
+- Confirmed that flag 32 represents the blown-out stairwell bulb, item 23 is its replacement, and the Act 5 lantern intentionally switches off below room 730.
+- Redirected the unsafe dark boundary from `sFallStairs` to `sWarnDarkStairs`, which freezes input, moves Laura back to y=165, reuses the existing dark-passage Look tuple 11/1/2, and restores control.
+- Preserved the original lit traversal and retained the now-unreachable fall sequence as legacy code.
+- Synchronized the architecture, roadmap, decision log, changelog, handoff, and compiled manual.
+
+**Changed:** `LB2/src/ScrewInBulb.sc`, `LB2/530.SCR`, `LB2/530.HEP`, `docs/ROADMAP.md`, `docs/ARCHITECTURE.md`, `docs/DECISIONS.md`, `docs/CHANGELOG.md`, `docs/manual/amon-ra.manual.json`, `docs/manual/manual.html`, `docs/HANDOFF.md`, `docs/archive/SESSION_LOG_2026_10.md`.
+
+**Decisions:** D-019 (Reuse the stairwell's existing darkness state and warning text).
+
+**Verified:** SCI Companion compilation of Script 530 with 0 errors and 0 warnings; static boundary, message-tuple, and solution-state audit; DOSBox-X original-interpreter startup smoke; documentation/manual validation. Direct save-based traversal of the dark and repaired-bulb paths remains a manual regression test.
+
+**Next session should start with:** P3-05 (Act 1 Progression Trigger Simplification).
 
 ### Session 13: 2026-10-08: P3-03 Pacing & Progression Audit
 
@@ -235,95 +306,3 @@ None currently open. Q-001 and Q-002 have been resolved by D-007, D-017, and D-0
 **Verified:** Message structure and effective-string audit (103 modules / 5,888 records / 0 obsolete strings), ScummVM detection, docs validation, 3x manual validation/build, and unchanged base archive hashes. Headless ScummVM startup produces the same pre-existing invalid-selector fault with and without the three new message patches.
 
 **Next session should start with:** P2-05 (Contextual Dialogue Logic & Acquaintance Checks).
-
-### Session 6: 2026-10-07: P2-03 Unused Dialogue & Murder Reaction Restoration
-
-**Contributor:** Antigravity
-
-**Goal:** Implement P2-03 (Unused Dialogue & Murder Reaction Restoration) to restore authored NPC murder reactions, reconnect missing interrogation branches, restore Ziggy's severed head display in room 490, and enable O'Riley's Countess murder confrontation.
-
-**Done:**
-- Audited message resources across suspect talkers (1883..1892) using custom DCL decompression tooling (`/tmp/dump_msg`). Discovered Sierra authors wrote complete, dramatic reactions for all discovered murders (Carrington, Ziggy, Ernie, Yvette, Carter, Countess, and Dagger of Amon Ra) across modules.
-- Diagnosed root causes for inaccessible murder reactions:
-  1. Carrington (clue 259, sequence 69): Room 630 set physical discovery flag 12 upon opening trunk, but interrogation switches checked flag 171 (only set in room 560 when finding Watney Little).
-  2. Ziggy (clue 264, sequence 74): Room 435 set corpse discovery flag 72, but interrogation switches checked flag 143, and Ziggy's severed head in room 490 was gated behind `(if (proc0_2 143))`, preventing the exhibit from ever initializing.
-  3. Ernie (clue 267, sequence 71): Room 420 set corpse discovery flag 67, but interrogation switches checked flag 158.
-  4. Yvette (clue 266, sequence 73): Room 500 set corpse discovery flag 68 upon discovering Yvette, but interrogation switches checked flag 161 (only set after `sSmashPlaster`).
-  5. Countess (clue 269, sequence 70): Sierra authored a full 8-line sequence in module 1888 for questioning O'Riley about Countess's murder, but case 269 was entirely omitted from `aORiley` in `MuseumRgn.sc`.
-  6. Dagger (clue 780, sequence 75): O'Riley's reaction to finding the Dagger in the alcohol vat checked score flag 155 rather than physical item possession.
-- Implemented fixes in accordance with ADR D-011:
-  1. Set narrative homicide flags directly in discovery cutscenes and detail insets: `(proc0_3 171)` and `(proc0_3 134)` in `LB2/src/rm630.sc`, `(proc0_3 143)` in `LB2/src/rm435.sc`, `(proc0_3 158)` in `LB2/src/rm420.sc`, `(proc0_3 161)` in `LB2/src/rm500.sc`, `(proc0_3 165)` in `LB2/src/rm525.sc`, and `(proc0_3 155)` in `LB2/src/rm620.sc`.
-  2. Implemented dual-tier fallback checks across interrogation switches in `LB2/src/MuseumRgn.sc` (Script 90), `LB2/src/RotundaRgn.sc` (Script 93), `LB2/src/aHeimlich.sc` (Script 32), and `LB2/src/aRameses.sc` (Script 36) for clues 259, 264, 266, 267, and 780.
-  3. Added missing case 269 in `aORiley` in `MuseumRgn.sc` to trigger sequence 70 upon Countess's death.
-  4. Restored Ziggy's severed head exhibit in `LB2/src/rm490.sc` by checking `(if (or (proc0_2 143) (proc0_2 72)))`.
-- Compiled all 11 modified scripts: `32.SCR`, `36.SCR`, `90.SCR`, `93.SCR`, `420.SCR`, `435.SCR`, `490.SCR`, `500.SCR`, `525.SCR`, `620.SCR`, `630.SCR`.
-- Recorded architectural decision D-011 in `docs/DECISIONS.md`.
-- Updated `docs/ROADMAP.md` (P2-03 marked done), `docs/manual/amon-ra.manual.json`, and rebuilt `docs/manual/manual.html` (105 KB).
-- Validated docs with `tools/check_docs.py` (0 errors, 0 warnings) and `manual.py check` (0 errors).
-
-**Changed:** `LB2/src/rm630.sc`, `LB2/src/rm435.sc`, `LB2/src/rm490.sc`, `LB2/src/rm420.sc`, `LB2/src/rm500.sc`, `LB2/src/rm525.sc`, `LB2/src/rm620.sc`, `LB2/src/MuseumRgn.sc`, `LB2/src/RotundaRgn.sc`, `LB2/src/aHeimlich.sc`, `LB2/src/aRameses.sc`, `LB2/32.SCR`, `LB2/36.SCR`, `LB2/90.SCR`, `LB2/93.SCR`, `LB2/420.SCR`, `LB2/435.SCR`, `LB2/490.SCR`, `LB2/500.SCR`, `LB2/525.SCR`, `LB2/620.SCR`, `LB2/630.SCR`, `docs/DECISIONS.md`, `docs/ROADMAP.md`, `docs/manual/amon-ra.manual.json`, `docs/manual/manual.html`, `docs/HANDOFF.md`.
-
-**Decisions:** D-011 (Unused dialogue & murder reaction restoration).
-
-**Verified:** `python3 tools/compile.py` for all 11 scripts, `tools/check_docs.py` (0 errors), `manual.py check` (0 errors), `manual.py build` (105 KB), MD5 verification of base archives.
-
-**Next session should start with:** P2-04 (Narrative Anachronism Corrections across MSG resources).
-
-### Session 5: 2026-10-07: P2-02 Pocket Watch Confrontation Timing & Armor Room Lockout Implementation
-
-**Contributor:** Antigravity
-
-**Goal:** Implement P2-02 (Pocket Watch Confrontation Timing & Armor Room Lockout Adjustment) to guarantee Laura can retrieve Carrington's pocket watch from room 630 and present it to Countess Waldorf-Carlton in the Armor Room (room 440).
-
-**Done:**
-- Reverse-engineered bytecode and scripts for Carrington's office (`rm630.sc`), Armor Room (`rm440.sc`), Countess meeting controller (`sCountessMeeting.sc`), and the game clock engine (`triggerAndClock.sc`).
-- Diagnosed compounding vanilla lockouts:
-  1. Retrieving the watch in `rm630.sc` (`inWatchOpen sel_111:`) advances clock to 1:45 by setting bit 16 (`4880`) in `global124`.
-  2. In `rm440.sc` `sOutTapestry` state 2, `(not (proc0_10 4880))` locked out the confrontation dialogue whenever Laura possessed the watch.
-  3. In `rm440.sc` `sel_403`, `(proc0_10 8224 1)` tested whether lower bits summed to 31 (`0x1f`); possessing the watch set bit 16, prematurely triggering `sMeetingNo2` (Ziggy/Little) at 1:45 and completely skipping the Countess meeting.
-  4. In `triggerAndClock.sc`, clock tick 1:45 (`145`) unconditionally relocated Countess to room 520.
-- Implemented fixes in accordance with ADR D-010:
-  1. Removed `(not (proc0_10 4880))` from `sOutTapestry` state 2 in `LB2/src/rm440.sc`.
-  2. Modified `sel_403` in `rm440.sc` so `sMeetingNo2` only takes precedence if `(or (proc0_2 120) (proc0_10 8224))` is satisfied, ensuring Meeting 1 always precedes Meeting 2.
-  3. Updated `sCountessNoMeet` state 3 in `LB2/src/sCountessMeeting.sc` so entering the room with the watch immediately triggers `sTalkWithCountess`.
-  4. Updated `askQuestions of Actions` in `sCountessMeeting.sc` so presenting the watch from behind the tapestry triggers `sOutTapestry`, returning 1.
-  5. In `LB2/src/triggerAndClock.sc`, preserved Countess destination at room 440 at 1:45 until `(proc0_2 120)` is set, relocating her to 520 at 2:00 (`200`).
-- Compiled `LB2/440.SCR`, `LB2/441.SCR`, and `LB2/22.SCR`.
-- Recorded architectural decision D-010 in `docs/DECISIONS.md`.
-- Updated `docs/ROADMAP.md` (P2-02 marked done), `docs/manual/amon-ra.manual.json`, and rebuilt `docs/manual/manual.html`.
-- Validated docs with `tools/check_docs.py` (0 errors, 0 warnings) and `manual.py check` (0 errors).
-
-**Changed:** `LB2/src/rm440.sc`, `LB2/src/sCountessMeeting.sc`, `LB2/src/triggerAndClock.sc`, `LB2/440.SCR`, `LB2/441.SCR`, `LB2/22.SCR`, `docs/DECISIONS.md`, `docs/ROADMAP.md`, `docs/manual/amon-ra.manual.json`, `docs/manual/manual.html`, `docs/HANDOFF.md`.
-
-**Decisions:** D-010 (Pocket watch confrontation timing and Armor Room lockout adjustment).
-
-**Verified:** `python3 tools/compile.py rm440`, `python3 tools/compile.py sCountessMeeting`, `python3 tools/compile.py triggerAndClock`, `python3 tools/check_docs.py` (0 errors), `python3 tools/manual.py check` (0 errors), `manual.py build` (104 KB).
-
-**Next session should start with:** P2-03 (Unused Dialogue & Murder Reaction Restoration in MSG resources).
-
-### Session 4: 2026-10-07: P2-01 Notebook Fallback Triggers Implementation
-
-**Contributor:** Antigravity
-
-**Goal:** Implement P2-01 (Inaccessible Plot Information & Notebook Fallback Triggers) to guarantee all Act 2 suspects and museum staff (Najir, Miklo, Countess, etc.) are registered in Laura's notebook regardless of Act 1 inquiry choices.
-
-**Done:**
-- Reverse-engineered SCI 1.1 `RESOURCE.MSG` decompression and identified Category 1 suspect clues 257–274.
-- Discovered vanilla bug: clues 263–272 (Steve, Ziggy, Heimlich, Yvette, Ernie, Rameses, Countess, Olympia, Tut, Watney) were strictly gated behind optional Act 1 dialogues, locking players out of Act 2 interrogations.
-- Implemented dual-tier fallback in accordance with ADR D-009:
-  1. Diegetic guest register check in `LB2/src/rm335.sc` (Script 335) registering clues 263..272 in `sGiveInvite` state 5 and `sExitNorth` state 3.
-  2. Direct Look/Talk encounter triggers in `LB2/src/RotundaRgn.sc` (Script 93) across all 11 rotunda characters (Countess, Heimlich, Olympia, O'Riley, Pippin, Rameses, Steve, Tut, Watney, Yvette, Ziggy).
-- Fixed syntax error in `RotundaRgn.sc` (`name "O'Riley"` instance property conflict with `sel_20`).
-- Updated `tools/compile_any.c` to support case-insensitive, extension-agnostic target lookup in SCI Companion's SysListView32.
-- Successfully compiled `LB2/335.SCR`, `LB2/335.HEP`, `LB2/93.SCR`, and `LB2/93.HEP`.
-- Documented architectural decision D-009 in `docs/DECISIONS.md`.
-- Updated `docs/ROADMAP.md` (P2-01 marked done), updated `docs/manual/amon-ra.manual.json`, and built `docs/manual/manual.html`.
-- Validated docs with `tools/check_docs.py` (0 errors, 0 warnings) and `manual.py check` (0 errors).
-
-**Changed:** `LB2/src/rm335.sc`, `LB2/src/RotundaRgn.sc`, `LB2/335.SCR`, `LB2/335.HEP`, `LB2/93.SCR`, `LB2/93.HEP`, `tools/compile_any.c`, `tools/compile_any.exe`, `docs/DECISIONS.md`, `docs/ROADMAP.md`, `docs/manual/amon-ra.manual.json`, `docs/manual/manual.html`, `docs/HANDOFF.md`.
-
-**Decisions:** D-009 (Dual-tier notebook fallback triggers for Act 2 suspects).
-
-**Verified:** `python3 tools/compile.py rm335`, `python3 tools/compile.py RotundaRgn`, `python3 tools/check_docs.py` (0 errors), `python3 tools/manual.py check` (0 errors), `manual.py build` (104 KB).
-
-**Next session should start with:** P2-02 (Pocket Watch Confrontation Timing & Armor Room Lockout Adjustment in room 440).

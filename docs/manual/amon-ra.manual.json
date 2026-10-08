@@ -774,28 +774,28 @@
         {
           "id": "p3-04-unfair-deaths-warnings",
           "title": "P3-04: Unfair Deaths & Secret Passage Warning Mechanic",
-          "summary": "Adds a descriptive warning and look mechanic before entering the pitch-black secret passage in Olympia's office.",
+          "summary": "Stops Laura safely at the dark eastern-tower stairwell and repeats its existing warning before she can fall.",
           "tags": [
             "fair-play",
             "player-death",
             "secret-passage",
             "p3"
           ],
-          "what": "Prevents sudden unannounced death when walking toward the dark secret passage in Olympia's office by pausing Laura, displaying an ominous darkness warning, and requiring a conscious confirmation or light source.",
+          "what": "Prevents Script 530's unannounced stairwell death by stopping Laura at the north threshold while the bulb is out, moving her back to safety, and displaying the same treacherous-staircase description exposed by the dark passage's Look handler.",
           "how": [
-            "In Room 420/450 passage boundary polygon, replace instant sDie script trigger with a proximity cue.",
-            "If Laura does not possess an active light source, halt motion and print warning: 'It is pitch black inside. Walking blindly into the unknown would be fatal.'",
-            "Allow player to inspect with the Look or Eye icon to observe danger before stepping forward."
+            "In Script 530's room-boundary handler, redirect boundary signal 8 plus blown-bulb flag 32 from sFallStairs to sWarnDarkStairs.",
+            "Freeze input, move Laura back to y=165, display existing message tuple noun 11 / verb 1 / condition 2, then restore control.",
+            "Preserve item 23, the replacement light bulb, as the intended solution and leave the original lit traversal unchanged; item 15 is not accepted because its timer intentionally disables the lantern below room 730."
           ],
           "why": "Sudden untelegraphed insta-deaths violate core adventure game fairness principles, forcing trial-and-error play.",
           "evidence": [
             {
-              "label": "Olympia Office Script",
-              "target": "LB2/420.SCR"
+              "label": "Stairwell Source",
+              "target": "LB2/src/ScrewInBulb.sc"
             },
             {
-              "label": "Passage Script",
-              "target": "LB2/450.SCR"
+              "label": "Compiled Stairwell Patch",
+              "target": "LB2/530.SCR"
             }
           ],
           "related": [
@@ -806,24 +806,32 @@
         {
           "id": "p3-05-act1-progression-simplification",
           "title": "P3-05: Act 1 Progression Trigger Simplification",
-          "summary": "Simplifies the strict linear chain of events required to obtain the cab and dress in Act 1.",
+          "summary": "Makes the press pass sufficient to expose the dirty taxi and gown claim ticket in Act 1.",
           "tags": [
             "act-1",
             "progression",
             "puzzles",
             "p3"
           ],
-          "what": "Relaxes the rigid ordering dependencies in Act 1 (talking to Ziggy, using the baseball, visiting the docks) needed to secure the dirty taxi and the evening gown.",
+          "what": "Removes the aggregate four-errand gate from Script 250 so acquiring the essential press pass exposes the dirty taxi and its claim ticket without requiring the unrelated docks visit, baseball trade, or Ziggy conversation.",
           "how": [
-            "Audit Act 1 state flags in Script 0 and Room 100/130 scripts.",
-            "Decouple taxi driver trigger from dock visit ordering so tasks can be completed in parallel.",
-            "Allow flexible acquisition paths for the evening dress and cab fare."
+            "Audit Script 22's global124 bits and confirm that press pass, docks, baseball, and Ziggy progress are already stored independently as bits 1, 2, 4, and 8.",
+            "Replace Script 250's complete-low-nibble taxi test with the persistent bit-1 press-pass test in the room, trash hotspot class, and corner-trash description.",
+            "Preserve the dirty-taxi introduction, claim ticket, Lo Fat gown exchange, dressed taxi Act 1 transition, and all three optional errands."
           ],
           "why": "Forcing a hyper-specific, unintuitive sequence of actions in an introductory act creates a poor first impression and frustrates new players before the mystery begins.",
           "evidence": [
             {
-              "label": "Act 1 Root Script",
-              "target": "LB2/0.SCR"
+              "label": "Taxi Interior Source",
+              "target": "LB2/src/Trash.sc"
+            },
+            {
+              "label": "Compiled Taxi Patch",
+              "target": "LB2/250.SCR"
+            },
+            {
+              "label": "Clock and Event Bits",
+              "target": "LB2/src/triggerAndClock.sc"
             }
           ],
           "related": [
@@ -833,31 +841,35 @@
         {
           "id": "p3-06-npc-wander-stabilization",
           "title": "P3-06: NPC Wander Mechanic Stabilization",
-          "summary": "Halts NPC movement during dialogues and extends character availability in Acts 3 and 4.",
+          "summary": "Pauses museum NPC travel during dialogue, resumes the same route afterward, and extends O'Reilly's availability in Acts 3 and 4.",
           "tags": [
             "npcs",
             "wandering",
             "dialogue",
             "p3"
           ],
-          "what": "Stops NPCs from wandering off mid-conversation and disappearing while dialogue boxes are open; keeps critical characters like Officer O'Reilly accessible for questioning longer in Acts 3 and 4.",
+          "what": "Stops Script 90 museum actors from wandering off mid-conversation while preserving their scheduled destination; keeps Officer O'Reilly accessible after 10:15 for questioning in Acts 3 and 4.",
           "how": {
-            "lead": "Modifies actor wander and speech coordination in Script 90 and room scripts:",
+            "lead": "Coordinates Script 90's museum actors, travel controller, message callback, and Script 22 clock event:",
             "points": [
-              "In Talker / Dialog init, call (theNPC setMotion: 0) to freeze actor position.",
-              "On dialogue window dismissal, restore wander mover script (theNPC setMotion: Wander).",
-              "Adjust room wander tables in Acts 3 and 4 to retain key suspects in fixed or predictable room cycles."
+              "Route every museum-actor message through a wrapper that locks the selected actor and stops its active mover.",
+              "Prevent TravelToRoom from advancing while locked; on dismissal, clear the lock and re-enter its current state so the same fixed or random route resumes.",
+              "Skip O'Reilly's 10:15 removal while global123 is Act 3 or Act 4, retaining the original removal behavior in other acts."
             ]
           },
           "why": "Having suspects walk away off-screen in the middle of crucial testimony breaks immersion and wastes player time tracking them down again.",
           "evidence": [
             {
-              "label": "Talker System Script",
-              "target": "LB2/90.SCR"
+              "label": "Museum Actor and Travel Source",
+              "target": "LB2/src/MuseumRgn.sc"
             },
             {
-              "label": "O'Reilly Hallway Script",
-              "target": "LB2/454.SCR"
+              "label": "Clock Schedule Source",
+              "target": "LB2/src/triggerAndClock.sc"
+            },
+            {
+              "label": "Compiled Museum Patch",
+              "target": "LB2/90.SCR"
             }
           ],
           "related": [

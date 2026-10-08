@@ -162,7 +162,9 @@
 		(super sel_111: &rest)
 		(switch local2
 			(1015
-				((ScriptID 90 3) sel_182: -2)
+				(if (or (< global123 3) (> global123 4))
+					((ScriptID 90 3) sel_182: -2)
+				)
 			)
 			(1115
 				((ScriptID 90 1) sel_618: 440)

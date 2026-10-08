@@ -77,7 +77,7 @@
 			(sel_142)
 			((proc0_1 gEgo 16384) (self sel_146: sExitSouth))
 			((proc0_1 gEgo 8192) (self sel_146: sExitSouthWalk))
-			((and (proc0_1 gEgo 8) (proc0_2 32)) (self sel_146: sFallStairs))
+			((and (proc0_1 gEgo 8) (proc0_2 32)) (self sel_146: sWarnDarkStairs))
 		)
 	)
 	
@@ -410,6 +410,28 @@
 					sel_153: 152 158
 					sel_585: 831
 				)
+				(gGame sel_588:)
+				(self sel_111:)
+			)
+		)
+	)
+)
+
+(instance sWarnDarkStairs of Script
+	(properties
+		sel_20 {sWarnDarkStairs}
+	)
+
+	(method (sel_144 theSel_29)
+		(switch (= sel_29 theSel_29)
+			(0
+				(gGame sel_587:)
+				(gEgo sel_312: MoveTo (gEgo sel_1?) 165 self)
+			)
+			(1
+				(gLb2Messager sel_295: 11 1 2 0 self)
+			)
+			(2
 				(gGame sel_588:)
 				(self sel_111:)
 			)

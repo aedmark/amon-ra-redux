@@ -4,20 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c8133cd5-1c34-4cfa-b350-4968ec65328c" name="Changes" comment="m">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+    <list default="true" id="c8133cd5-1c34-4cfa-b350-4968ec65328c" name="Changes" comment="P3-03">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LB2/610.SCR" beforeDir="false" afterPath="$PROJECT_DIR$/LB2/610.SCR" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LB2/src/LBIconItem.sc" beforeDir="false" afterPath="$PROJECT_DIR$/LB2/src/LBIconItem.sc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LB2/src/rm610.sc" beforeDir="false" afterPath="$PROJECT_DIR$/LB2/src/rm610.sc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/ARCHITECTURE.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/ARCHITECTURE.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/CHANGELOG.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/CHANGELOG.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/DECISIONS.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/DECISIONS.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/HANDOFF.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/HANDOFF.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/ROADMAP.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/ROADMAP.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/archive/SESSION_LOG_2026_10.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/archive/SESSION_LOG_2026_10.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/manual/amon-ra.manual.json" beforeDir="false" afterPath="$PROJECT_DIR$/docs/manual/amon-ra.manual.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/manual/manual.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/manual/manual.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -27,37 +15,37 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
-    "state": "OPEN",
-    "assignee": "aedmark"
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;aedmark&quot;
   }
-}]]></component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/aedmark/amon-ra-redux.git",
-    "accountId": "7f40f8e8-8d55-4965-b479-38f7a8f35002"
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/aedmark/amon-ra-redux.git&quot;,
+    &quot;accountId&quot;: &quot;7f40f8e8-8d55-4965-b479-38f7a8f35002&quot;
   }
-}]]></component>
+}</component>
   <component name="NextEditCompletionFeaturesState">
     <decayedCancelled>
-      <entry key="MS100" value="1.0" />
-      <entry key="MS500" value="1.0" />
-      <entry key="S2" value="1.0" />
-      <entry key="S5" value="1.0" />
-      <entry key="S10" value="1.0" />
-      <entry key="S30" value="1.0" />
-      <entry key="S60" value="1.0" />
-      <entry key="M2" value="1.0" />
-      <entry key="M5" value="1.0" />
-      <entry key="M10" value="1.0" />
-      <entry key="M15" value="1.0" />
-      <entry key="M30" value="1.0" />
-      <entry key="H1" value="1.0" />
-      <entry key="H2" value="1.0" />
-      <entry key="H4" value="1.0" />
-      <entry key="D1" value="1.0" />
-      <entry key="W1" value="1.0" />
+      <entry key="MS100" value="1.0040747285192493" />
+      <entry key="MS500" value="1.46558663183378" />
+      <entry key="S2" value="2.7749780477875268" />
+      <entry key="S5" value="3.4208658125224876" />
+      <entry key="S10" value="3.692931045038593" />
+      <entry key="S30" value="3.8934696497149206" />
+      <entry key="S60" value="3.9461941730842325" />
+      <entry key="M2" value="3.9729604627746045" />
+      <entry key="M5" value="3.989151206550615" />
+      <entry key="M10" value="3.9945700910322888" />
+      <entry key="M15" value="3.9963788345708946" />
+      <entry key="M30" value="3.9981888039329254" />
+      <entry key="H1" value="3.999094248573206" />
+      <entry key="H2" value="3.999547085931395" />
+      <entry key="H4" value="3.9997735333760343" />
+      <entry key="D1" value="3.9999622542307014" />
+      <entry key="W1" value="3.9999946077146222" />
     </decayedCancelled>
     <decayedSelected>
       <entry key="MS100" value="0.0" />
@@ -79,29 +67,29 @@
       <entry key="W1" value="0.0" />
     </decayedSelected>
     <decayedShown>
-      <entry key="MS100" value="0.9794202975869268" />
-      <entry key="MS500" value="0.9958497530944581" />
-      <entry key="S2" value="0.998960819551523" />
-      <entry key="S5" value="0.9995841981612189" />
-      <entry key="S10" value="0.9997920774647191" />
-      <entry key="S30" value="0.9999306876841536" />
-      <entry key="S60" value="0.9999653432415313" />
-      <entry key="M2" value="0.9999826714706267" />
-      <entry key="M5" value="0.999993068552217" />
-      <entry key="M10" value="0.9999965342701028" />
-      <entry key="M15" value="0.9999976895120674" />
-      <entry key="M30" value="0.9999988447553664" />
-      <entry key="H1" value="0.9999994223775164" />
-      <entry key="H2" value="0.9999997111887164" />
-      <entry key="H4" value="0.9999998555943478" />
-      <entry key="D1" value="0.9999999759323899" />
-      <entry key="W1" value="0.99999999656177" />
+      <entry key="MS100" value="0.9902513173315998" />
+      <entry key="MS500" value="1.4613451145958083" />
+      <entry key="S2" value="2.7727035907559046" />
+      <entry key="S5" value="3.419706128664708" />
+      <entry key="S10" value="3.692298095790635" />
+      <entry key="S30" value="3.8932455714819967" />
+      <entry key="S60" value="3.9460804095456177" />
+      <entry key="M2" value="3.972903143068106" />
+      <entry key="M5" value="3.9891281726770864" />
+      <entry key="M10" value="3.99455855635605" />
+      <entry key="M15" value="3.9963711408391074" />
+      <entry key="M30" value="3.9981849550918356" />
+      <entry key="H1" value="3.9990923236586027" />
+      <entry key="H2" value="3.999546123350547" />
+      <entry key="H4" value="3.99977305205472" />
+      <entry key="D1" value="3.9999621740061913" />
+      <entry key="W1" value="3.9999945962538734" />
     </decayedShown>
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 8,
-  "fromUser": false
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 8,
+  &quot;fromUser&quot;: false
+}</component>
   <component name="ProjectId" id="3KNcwjmi61feqClY0IjicLnQBdO" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -112,6 +100,7 @@
   "keyToString": {
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
     "RunOnceActivity.typescript.service.memoryLimit.init": "true",
     "git-widget-placeholder": "master",
     "last_opened_file_path": "/home/gordonk/PycharmProjects/amon-ra-redux",
@@ -154,7 +143,15 @@
       <option name="project" value="LOCAL" />
       <updated>1791430671117</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="P3-03">
+      <option name="closed" value="true" />
+      <created>1791477283656</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1791477283656</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -162,6 +159,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="m" />
-    <option name="LAST_COMMIT_MESSAGE" value="m" />
+    <MESSAGE value="P3-03" />
+    <option name="LAST_COMMIT_MESSAGE" value="P3-03" />
   </component>
 </project>

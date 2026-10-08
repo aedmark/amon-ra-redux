@@ -212,6 +212,30 @@ Retain Act 2's essential social context while adding player-driven investigation
 - **Decision:** Add Phase 5 and P5-01 as a post-bugfix content milestone. Its design pass will map the complete Act 2 schedule and clue dependencies before selecting several compact museum activities that route the player naturally between existing conversations. Prefer mechanics grounded in existing rooms and props—such as exhibit-security inspection, guest/staff record comparison, or artifact observations—while preserving essential dialogue, authored act transitions, `global111`, and old-save behavior. Require explicit narrative text, resource ownership, scoring, state allocation, and deterministic DOSBox-X test saves before implementation.
 - **Consequences:** The pacing concern remains first-class work rather than being closed by the technical audit. Deferring new content until P3 and P4 bug fixes are complete prevents new scripts and state from obscuring current defects and gives the expansion a stable behavioral baseline.
 
+## D-019 Reuse the Stairwell's Existing Darkness State and Warning Text
+
+Block the unlit hidden-stairwell boundary using its existing bulb flag and Look description rather than inventing a parallel light-source system.
+
+- **Context:** The P3-04 outline points to Rooms 420/450 and Olympia's office, but the unannounced fall is in Script 530's eastern-tower stairwell. Its `sel_57` handler sent Laura directly to `sFallStairs` whenever boundary signal 8 and blown-bulb flag 32 were active. The room already exposes `darkPassage` Look text at message tuple noun 11 / verb 1 / condition 2: Laura can barely see a narrow, treacherous staircase descending into blackness. Item 23 is the intended replacement bulb. Although inventory item 15 is a lantern, its timer deliberately switches it off below room 730, so it is not a valid Script 530 solution.
+- **Decision:** Replace only the unsafe boundary dispatch with `sWarnDarkStairs`. Freeze input, move Laura back to y=165, display the existing dark-passage warning tuple, restore control, and leave the lit stair traversal unchanged. Retain the original fall animation as unreachable legacy code instead of deleting unrelated assets or death state.
+- **Consequences:** Resolves P3-04 without a new flag, message override, or altered inventory behavior. Players receive the same diegetic warning whether they Look first or approach the hazard, and must restore the intended bulb before proceeding.
+
+## D-020 Make the Press Pass the Act 1 Taxi Milestone
+
+Use the essential press-pass event to unlock the dirty taxi instead of requiring every unrelated introductory errand.
+
+- **Context:** The P3-05 outline described a strict order among the docks, baseball, and Ziggy tasks. Source audit found that Script 22 already records the press pass, first docks visit, baseball trade, and first substantive Ziggy conversation as independent `global124` bits 1, 2, 4, and 8, so those tasks can be completed in any order. The actual bottleneck is Script 250's `(proc0_10 16 1)` test, which requires all four low bits before the dirty taxi appears. The taxi contains the claim ticket used to receive the evening gown from Lo Fat, making the docks, baseball, and Ziggy errands collectively mandatory despite their unrelated narrative and item rewards.
+- **Decision:** Change all three coordinated Script 250 taxi-state checks—room appearance, trash hotspot handler selection, and corner-trash description—from the complete-low-nibble test to `(proc0_10 1)`, the persistent press-pass acquisition bit. Preserve the dirty-taxi introduction, claim ticket, Lo Fat gown exchange, and dressed taxi Act 1 transition. Do not auto-complete or remove the docks, baseball, or Ziggy content.
+- **Consequences:** Resolves P3-05 without new flags, inventory grants, dialogue, or save-format changes. New and existing Act 1 saves that acquired the press pass can reach the claim ticket and gown immediately; the other errands remain available in any order for their clues, character context, clock advancement, and magnifying-glass reward.
+
+## D-021 Preserve Museum Travel State Across Dialogue
+
+Pause the selected museum actor's existing route for the lifetime of a message instead of replacing its destination or globally freezing the cast.
+
+- **Context:** Script 90's `MuseumActor` instances use `TravelToRoom` for both fixed schedules and random wandering. Their Talk and Ask handlers launched `gLb2Messager` without a completion callback, so the mover and travel script could continue while the text UI was open and carry the speaker out of the room. The outline's suggested generic `Wander` restart would discard fixed destinations. Separately, Script 22 removed O'Reilly at 10:15 in every act, cutting off later murder questioning in Acts 3 and 4.
+- **Decision:** Route all Script 90 museum-actor messages through a shared wrapper. It sets an actor-local lock, stops the active mover, and assigns `museumDialogueResume` as the message callback. `TravelToRoom` does not advance while locked; on dismissal, the callback clears the lock and re-enters the same travel state so its original fixed or random destination survives. Gate O'Reilly's 10:15 removal out only when `global123` is 3 or 4, preserving the authored behavior in other acts.
+- **Consequences:** Resolves P3-06 without new globals, save-state fields, room-table rewrites, or a museum-wide freeze. The speaking NPC remains present throughout dialogue, other NPCs continue their schedules, and O'Reilly remains reachable for the restored Act 3–4 questioning. Direct DOSBox-X observation from deterministic Act 3 and Act 4 saves remains the behavioral regression test.
+
 ---
 
 ## Open questions
