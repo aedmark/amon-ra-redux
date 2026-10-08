@@ -23,12 +23,12 @@ BOOL CALLBACK EnumChildWindowsProc(HWND hwnd, LPARAM lParam) {
                     char *pText = (char*)GlobalLock(hData);
                     if (pText) {
                         printf("=== CLIPBOARD OUTPUT (first 2000 chars) ===\n%.2000s\n", pText);
-                        // Write to file compile_output.txt
-                        FILE *f = fopen("compile_output.txt", "w");
+                        // Write to the repository's captured-output directory.
+                        FILE *f = fopen("dumps/compile_output.txt", "w");
                         if (f) {
                             fputs(pText, f);
                             fclose(f);
-                            printf("Wrote full output to compile_output.txt (%zu bytes)\n", strlen(pText));
+                            printf("Wrote full output to dumps/compile_output.txt (%zu bytes)\n", strlen(pText));
                         }
                         GlobalUnlock(hData);
                     }

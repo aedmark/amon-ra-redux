@@ -35,7 +35,7 @@
 		(switch gGSel_40
 			(sel_409
 				(Palette palSET_INTENSITY 0 255 60)
-				(if (and (proc0_10 8) (not (proc0_2 133)))
+				(if (and (proc0_10 8) (proc0_2 122) (not (proc0_2 133)))
 					(frontDoor sel_4: 255 sel_29: 2 sel_599: 2 sel_596: 0)
 					(self sel_146: sOffToSmooch)
 				else

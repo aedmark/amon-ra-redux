@@ -75,7 +75,7 @@ int main() {
             char *pText = (char*)GlobalLock(hData);
             if (pText) {
                 printf("=== COMPILER OUTPUT (%zu bytes) ===\n", strlen(pText));
-                FILE *f = fopen("compile_output.txt", "w");
+                FILE *f = fopen("dumps/compile_output.txt", "w");
                 if (f) {
                     fputs(pText, f);
                     fclose(f);

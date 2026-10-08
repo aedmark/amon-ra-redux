@@ -9,8 +9,8 @@ linked below, not in an agent's private memory.
 ## Start here
 
 1. Read `docs/HANDOFF.md` for current state, active tasks, and gotchas.
-2. Read the relevant roadmap item in `ROADMAP.md` and parts of `docs/ARCHITECTURE.md` and `docs/TESTING.md`.
-3. Verify claims using ScummVM and SCI Companion.
+2. Read the relevant roadmap item in `docs/ROADMAP.md` and parts of `docs/ARCHITECTURE.md` and `docs/TESTING.md`.
+3. Verify claims using DOSBox-X and SCI Companion.
 4. Scope changes strictly to the task at hand.
 
 ## While working
@@ -19,12 +19,12 @@ linked below, not in an agent's private memory.
 - Preserve immutable base game archives (`LB2/RESOURCE.000`, `LB2/RESOURCE.MAP`).
 - Apply fixes as loose `.SCR`, `.HEP`, and `.MSG` files in `LB2/`.
 - Record architectural choices in `docs/DECISIONS.md`.
-- Keep 3x manual sources (`3x-documentation-scheme/scheme/amon-ra.manual.json`) in sync with code fixes.
+- Keep 3x manual sources (`docs/manual/amon-ra.manual.json`) in sync with code fixes.
 
 ## Finishing a change
 
-1. Run checks: `python3 tools/check_docs.py` and `python3 3x-documentation-scheme/scripts/manual.py check 3x-documentation-scheme/scheme/amon-ra.manual.json`.
-2. Build updated manual: `python3 3x-documentation-scheme/scripts/manual.py build 3x-documentation-scheme/scheme/amon-ra.manual.json --output manual.html`.
+1. Run checks: `python3 tools/check_docs.py` and `python3 tools/manual.py check docs/manual/amon-ra.manual.json`.
+2. Build updated manual: `python3 tools/manual.py build docs/manual/amon-ra.manual.json --output docs/manual/manual.html`.
 3. Update `docs/HANDOFF.md` session log.
 
 ## Layout
@@ -33,12 +33,13 @@ linked below, not in an agent's private memory.
 | --- | --- |
 | `LB2` | Floppy v1.000 game files and loose patch override directory |
 | `SCICompanion` | SCI Companion source, documentation, and tools |
-| `3x-documentation-scheme` | 3x documentation scheme tools and schemas |
-| `ROADMAP.md` | Modernization roadmap with permanent item IDs |
-| `manual.html` | Standalone compiled 3x project manual |
+| `docs/manual` | Project-owned 3x manual source, schema, and license |
+| `tools/manual.py` | Standalone 3x manual validator and HTML builder |
+| `docs/ROADMAP.md` | Modernization roadmap with permanent item IDs |
+| `docs/manual/manual.html` | Standalone compiled 3x project manual |
 | `docs/ARCHITECTURE.md` | Engine architecture and subsystem design |
 | `docs/DECISIONS.md` | Architectural decision records (ADRs) |
-| `docs/TESTING.md` | Testing strategy and ScummVM debug commands |
+| `docs/TESTING.md` | DOSBox-X testing strategy and commands |
 | `docs/HANDOFF.md` | Session handoff notes and log |
 | `docs/README.md` | Documentation directory map |
 | `docs/SECURITY.md` | Security and asset integrity policies |

@@ -13,9 +13,8 @@
 *.sco
 
 # Scratch & temporary logs
-compiler_captured.txt
-log.txt
-compile_output.txt
+/dumps/*.txt
+!/dumps/.gitkeep
 *.bak
 
 # Temporary test binaries

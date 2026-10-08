@@ -3,7 +3,7 @@
 Read this first when resuming work. Rewrite the top half whenever current state changes materially or work pauses
 with context another session needs. The session log is append-only history.
 
-Protocol: [AGENTS.md](../AGENTS.md). Plan: [ROADMAP.md](../ROADMAP.md). Architecture:
+Protocol: [AGENTS.md](../AGENTS.md). Plan: [ROADMAP.md](ROADMAP.md). Architecture:
 [ARCHITECTURE.md](ARCHITECTURE.md). Decisions: [DECISIONS.md](DECISIONS.md). Tests: [TESTING.md](TESTING.md).
 Security: [SECURITY.md](SECURITY.md). Changes: [CHANGELOG.md](CHANGELOG.md). Older sessions:
 [archive/](archive/README.md).
@@ -12,25 +12,27 @@ Security: [SECURITY.md](SECURITY.md). Changes: [CHANGELOG.md](CHANGELOG.md). Old
 
 ## Current state
 
-_Last updated: 2026-10-07, session 7: P2-04 (Narrative Anachronism Corrections) implemented and verified._
+_Last updated: 2026-10-07, session 9: P2-06 (Steve & Laura Character Consistency) implemented and verified._
 
-**Where things stand, in one paragraph:** Phase 1 (P1-01 through P1-06) and Phase 2 items P2-01 through P2-04 are fully
-implemented and verified. P2-04 establishes the game's internal setting as late 1926 (not spring), replaces Lo Fat's 1945
-Pippi Longstocking reference with Dickens' Pip in module 270, clarifies the actual 1926 New York-London radiotelephone exchange
-as experimental in module 250, and identifies *The Sun Also Rises* as newly published in module 310. The fixes ship as loose
-`250.MSG`, `270.MSG`, and `310.MSG` overrides without changing `RESOURCE.MSG`, `RESOURCE.000`, or `RESOURCE.MAP`. An
-effective-resource audit parsed all 103 modules and 5,888 message records with no obsolete target strings remaining. ADR D-012
-is recorded and the 3x manual is synchronized.
+**Where things stand, in one paragraph:** Phase 1 (P1-01 through P1-06) and Phase 2 items P2-01 through P2-06 are fully
+implemented. P2-06 reserves flag 122 when Laura talks to or questions Steve in Act 1 and requires that relationship state
+before Scripts 330, 335, or 350 start their museum kiss, embrace, or reunion sequences. Scripts 240, 330, 335, and 350 are
+compiled as loose patches, ADR D-014 is recorded, and the original interpreter reaches startup under DOSBox-X. The former
+external manual symlink has been removed; all project documentation now lives under `docs/`, with the manual builder retained
+under `tools/`.
 
 **Verified** (2026-10-07, Linux workspace)
 
 | Suite | Result |
 | --- | --- |
 | `python3 tools/check_docs.py` | **Pass: 0 errors, 0 warnings** |
-| `python3 3x-documentation-scheme/scripts/manual.py check ...` | **Pass: 5 sections, 29 entries, 0 errors** |
-| `python3 3x-documentation-scheme/scripts/manual.py build ...` | **Pass: compiled manual.html** |
-| Effective MSG string and structure audit | **Pass: 103 modules, 5,888 records, 0 obsolete target strings** |
-| ScummVM detection | **Pass: `sci:laurabow2` detected with loose MSG overrides present** |
+| `python3 tools/manual.py check ...` | **Pass: 5 sections, 29 entries, 0 errors** |
+| `python3 tools/manual.py build ...` | **Pass: compiled docs/manual/manual.html** |
+| P2-06 script compilation | **Pass: 240.SCR, 330.SCR, 335.SCR, and 350.SCR emitted by SCI Companion** |
+| P2-06 flag-use audit | **Pass: relationship flag 122 is set only by Act 1 Steve Talk/Ask and tested only by the three intended museum paths** |
+| P2-05 script compilation | **Pass: 35.SCR, 36.SCR, and 90.SCR emitted by SCI Companion** |
+| P2-05 MSG structure audit | **Pass: modules 1882, 1883, and 1888 parse with only six intended text records changed** |
+| DOSBox-X headless startup | **Pass: original interpreter environment initialized with loose patches mounted** |
 | Base Game Archive MD5 Integrity | **Pass: RESOURCE.000 and RESOURCE.MAP match vanilla bit-for-bit** |
 
 **What works**
@@ -40,31 +42,77 @@ is recorded and the 3x manual is synchronized.
 - **P2-02 Pocket Watch Confrontation:** Armor Room lockout removed, meeting scheduling sequence corrected, and watch confrontation dialogue fully accessible.
 - **P2-03 Murder Reaction Restoration:** Discovered homicide dialogue trees restored across all suspects; O'Riley Countess reaction connected; Ziggy head exhibit restored; Dagger inquiry connected.
 - **P2-04 Historical Dialogue:** Three loose message overrides correct or clarify the identified late-1926 references while preserving message tuples and talkers.
+- **P2-05 Acquaintance Routing:** Six museum characters now honor existing introduction state; Pippin, Smith, and O'Riley introduce themselves in neutral first-contact dialogue.
+- **P2-06 Steve Continuity:** Museum romance sequences require Laura to have spoken with Steve in Act 1; otherwise their relationship remains professional.
 - **Tooling Automation:** `tools/compile.py` compiles single scripts (including extension-agnostic target lookup in SysListView32); `tools/compile_all.exe` executes multi-pass builds.
-- **Documentation Architecture:** `ROADMAP.md`, `DECISIONS.md` (D-009 through D-012), `3x-documentation-scheme/`, and `manual.html` synchronized.
+- **Documentation Architecture:** `docs/ROADMAP.md`, `DECISIONS.md` (D-009 through D-014), `docs/manual/`, and `docs/manual/manual.html` synchronized.
 
 **Not verified**
 
 - End-to-end multi-act playthrough regression testing in DOSBox-X.
-- Direct in-game traversal of the taxi, Lo Fat, and Ziggy dialogue branches. Headless ScummVM startup reaches an existing invalid-selector fault with or without the P2-04 message overrides, so it does not isolate these branches.
+- Direct in-game traversal of the P2-04 historical dialogue, P2-05 first-contact branches, and both P2-06 Steve relationship branches; the automated DOSBox-X check is a startup smoke, not an input-driven playthrough.
 
 **Gotchas for the next session**
 
 - Keep loose patch files in `LB2/` strictly uppercase (`.SCR`, `.HEP`, `.MSG`).
 - The dialogue chronology is late 1926; the design outline's “Spring 1926” wording is contradicted by multiple in-game date anchors (D-012).
 - In `RotundaRgn.sc` (Script 93), `Actor` instances must not define extraneous property `name` (already covered by `sel_20`).
+- If a mapped source is absent from SCI Companion's resource list, a temporary numbered loose resource makes it selectable; compile the real source, then retain only the compiler-emitted patch. Script 240 also required removal of the invalid decompiler-only `name` property before compilation.
 
 ## Next steps (in order)
 
-1. Implement P2-05 (Contextual Dialogue Logic & Acquaintance Checks).
-2. Implement P2-06 (Steve & Laura Character Consistency).
-3. Run gameplay test verification in DOSBox-X using `./tools/run_dosbox.sh`.
+1. Implement P2-07 (Dagger Discovery Reactions & Inventory Hand-off).
+2. Exercise P2-04/P2-05/P2-06 branches from deterministic saves in DOSBox-X using `./tools/run_dosbox.sh`.
+3. Begin Phase 3 with P3-01 after the Phase 2 branch checks pass.
 
 ## Open questions for maintainers
 
 None currently open. Q-001 and Q-002 have been resolved by D-007 and D-008.
 
 ## Session log
+
+### Session 9: 2026-10-07: P2-06 Steve & Laura Character Consistency
+
+**Contributor:** Codex
+
+**Goal:** Make Steve and Laura's museum romance conditional on the player establishing a personal connection in Act 1.
+
+**Done:**
+- Audited the Act 1 Steve conversation and the museum arrival/reunion sequences, then reserved previously unused relationship flag 122.
+- Set flag 122 from both `sTalkSteve` and `sAskSteve` in Script 240.
+- Gated the automatic kiss, embrace, and reunion paths in Scripts 330, 335, and 350 behind that flag while preserving ordinary room initialization when it is unset.
+- Removed an invalid decompiler-only `name` property from `local_Steve`, compiled all four affected scripts, and normalized the loose patches to uppercase.
+- Recorded D-014, synchronized the manual, and kept all documentation under `docs/` after removing the project-local 3x symlink.
+
+**Changed:** `LB2/src/rm240.sc`, `LB2/src/rm330.sc`, `LB2/src/rm335.sc`, `LB2/src/rm350.sc`, `LB2/240.SCR`, `LB2/240.HEP`, `LB2/330.SCR`, `LB2/335.SCR`, `LB2/350.SCR`, `docs/ROADMAP.md`, `docs/ARCHITECTURE.md`, `docs/DECISIONS.md`, `docs/CHANGELOG.md`, `docs/manual/amon-ra.manual.json`, `docs/manual/manual.html`, `docs/HANDOFF.md`.
+
+**Decisions:** D-014 (Gate Steve romance sequences on Act 1 conversation).
+
+**Verified:** SCI Companion compilation with zero errors or warnings; static flag-use audit; DOSBox-X original-interpreter startup smoke; documentation/manual validation; unchanged base archive hashes. Direct traversal of both relationship branches remains a manual save-based regression test.
+
+**Next session should start with:** P2-07 (Dagger Discovery Reactions & Inventory Hand-off).
+
+### Session 8: 2026-10-07: P2-05 Contextual Dialogue Logic & Acquaintance Checks
+
+**Contributor:** Codex
+
+**Goal:** Prevent Laura from addressing museum characters by name before a formal introduction and use DOSBox-X for runtime testing.
+
+**Done:**
+- Audited the rotunda introductions and found six existing acquaintance flags: Pippin 110, Dr. Smith 111, Countess 112, Yvette 113, O'Riley 114, and Rameses 115.
+- Added first-contact Talk routing to `aPippin.sc`, `aRameses.sc`, and the Countess, O'Riley, Dr. Smith, and Yvette actors in `MuseumRgn.sc`. An unset acquaintance flag now selects condition 80; existing dialogue remains unchanged once the flag is set.
+- Added loose `1882.MSG`, `1883.MSG`, and `1888.MSG` overrides. Only the first two condition-80 text records in each module change: Laura opens neutrally, then Pippin, Smith, or O'Riley identifies himself.
+- Recompiled Scripts 35, 36, and 90 with SCI Companion and normalized the loose patch names to uppercase.
+- Replaced the active regression-testing documentation with the checked-in DOSBox-X workflow and recorded D-013.
+- Synchronized the 3x manual and rebuilt `docs/manual/manual.html`.
+
+**Changed:** `LB2/src/aPippin.sc`, `LB2/src/aRameses.sc`, `LB2/src/MuseumRgn.sc`, `LB2/35.SCR`, `LB2/36.SCR`, `LB2/90.SCR`, `LB2/1882.MSG`, `LB2/1883.MSG`, `LB2/1888.MSG`, `docs/ROADMAP.md`, `docs/ARCHITECTURE.md`, `docs/DECISIONS.md`, `docs/CHANGELOG.md`, `docs/TESTING.md`, `docs/manual/amon-ra.manual.json`, `docs/manual/manual.html`, `docs/HANDOFF.md`.
+
+**Decisions:** D-013 (Reuse museum acquaintance flags for formal introductions).
+
+**Verified:** SCI Companion compilation of Scripts 35, 36, and 90; structural parsing of all three message overrides; headless DOSBox-X startup; documentation/manual validation; unchanged base archive hashes.
+
+**Next session should start with:** P2-06 (Steve & Laura Character Consistency).
 
 ### Session 7: 2026-10-07: P2-04 Narrative Anachronism Corrections
 
@@ -78,10 +126,10 @@ None currently open. Q-001 and Q-002 have been resolved by D-007 and D-008.
 - Added `LB2/250.MSG`, clarifying the historically real 1926 New York-London exchange as an experimental two-way radiotelephone conversation rather than the 1927 commercial service.
 - Added `LB2/270.MSG`, replacing the 1945 Pippi Longstocking misunderstanding and its follow-up with period-valid references to Pip from Dickens' *Great Expectations*.
 - Added `LB2/310.MSG`, identifying *The Sun Also Rises* as Hemingway's newly published novel while retaining Ziggy's claim that he saw it before publication.
-- Recorded D-012, marked P2-04 complete, synchronized the 3x manual source, and rebuilt `manual.html`.
+- Recorded D-012, marked P2-04 complete, synchronized the 3x manual source, and rebuilt `docs/manual/manual.html`.
 - Audited the effective resource layer (archived messages plus loose overrides): 103 modules, 5,888 records, zero obsolete target strings.
 
-**Changed:** `LB2/250.MSG`, `LB2/270.MSG`, `LB2/310.MSG`, `ROADMAP.md`, `docs/ARCHITECTURE.md`, `docs/DECISIONS.md`, `docs/CHANGELOG.md`, `3x-documentation-scheme/scheme/amon-ra.manual.json`, `manual.html`, `docs/HANDOFF.md`.
+**Changed:** `LB2/250.MSG`, `LB2/270.MSG`, `LB2/310.MSG`, `docs/ROADMAP.md`, `docs/ARCHITECTURE.md`, `docs/DECISIONS.md`, `docs/CHANGELOG.md`, `docs/manual/amon-ra.manual.json`, `docs/manual/manual.html`, `docs/HANDOFF.md`.
 
 **Decisions:** D-012 (Late-1926 historical dialogue corrections).
 
@@ -111,10 +159,10 @@ None currently open. Q-001 and Q-002 have been resolved by D-007 and D-008.
   4. Restored Ziggy's severed head exhibit in `LB2/src/rm490.sc` by checking `(if (or (proc0_2 143) (proc0_2 72)))`.
 - Compiled all 11 modified scripts: `32.SCR`, `36.SCR`, `90.SCR`, `93.SCR`, `420.SCR`, `435.SCR`, `490.SCR`, `500.SCR`, `525.SCR`, `620.SCR`, `630.SCR`.
 - Recorded architectural decision D-011 in `docs/DECISIONS.md`.
-- Updated `ROADMAP.md` (P2-03 marked done), `3x-documentation-scheme/scheme/amon-ra.manual.json`, and rebuilt `manual.html` (105 KB).
+- Updated `docs/ROADMAP.md` (P2-03 marked done), `docs/manual/amon-ra.manual.json`, and rebuilt `docs/manual/manual.html` (105 KB).
 - Validated docs with `tools/check_docs.py` (0 errors, 0 warnings) and `manual.py check` (0 errors).
 
-**Changed:** `LB2/src/rm630.sc`, `LB2/src/rm435.sc`, `LB2/src/rm490.sc`, `LB2/src/rm420.sc`, `LB2/src/rm500.sc`, `LB2/src/rm525.sc`, `LB2/src/rm620.sc`, `LB2/src/MuseumRgn.sc`, `LB2/src/RotundaRgn.sc`, `LB2/src/aHeimlich.sc`, `LB2/src/aRameses.sc`, `LB2/32.SCR`, `LB2/36.SCR`, `LB2/90.SCR`, `LB2/93.SCR`, `LB2/420.SCR`, `LB2/435.SCR`, `LB2/490.SCR`, `LB2/500.SCR`, `LB2/525.SCR`, `LB2/620.SCR`, `LB2/630.SCR`, `docs/DECISIONS.md`, `ROADMAP.md`, `3x-documentation-scheme/scheme/amon-ra.manual.json`, `manual.html`, `docs/HANDOFF.md`.
+**Changed:** `LB2/src/rm630.sc`, `LB2/src/rm435.sc`, `LB2/src/rm490.sc`, `LB2/src/rm420.sc`, `LB2/src/rm500.sc`, `LB2/src/rm525.sc`, `LB2/src/rm620.sc`, `LB2/src/MuseumRgn.sc`, `LB2/src/RotundaRgn.sc`, `LB2/src/aHeimlich.sc`, `LB2/src/aRameses.sc`, `LB2/32.SCR`, `LB2/36.SCR`, `LB2/90.SCR`, `LB2/93.SCR`, `LB2/420.SCR`, `LB2/435.SCR`, `LB2/490.SCR`, `LB2/500.SCR`, `LB2/525.SCR`, `LB2/620.SCR`, `LB2/630.SCR`, `docs/DECISIONS.md`, `docs/ROADMAP.md`, `docs/manual/amon-ra.manual.json`, `docs/manual/manual.html`, `docs/HANDOFF.md`.
 
 **Decisions:** D-011 (Unused dialogue & murder reaction restoration).
 
@@ -143,14 +191,14 @@ None currently open. Q-001 and Q-002 have been resolved by D-007 and D-008.
   5. In `LB2/src/triggerAndClock.sc`, preserved Countess destination at room 440 at 1:45 until `(proc0_2 120)` is set, relocating her to 520 at 2:00 (`200`).
 - Compiled `LB2/440.SCR`, `LB2/441.SCR`, and `LB2/22.SCR`.
 - Recorded architectural decision D-010 in `docs/DECISIONS.md`.
-- Updated `ROADMAP.md` (P2-02 marked done), `3x-documentation-scheme/scheme/amon-ra.manual.json`, and rebuilt `manual.html`.
+- Updated `docs/ROADMAP.md` (P2-02 marked done), `docs/manual/amon-ra.manual.json`, and rebuilt `docs/manual/manual.html`.
 - Validated docs with `tools/check_docs.py` (0 errors, 0 warnings) and `manual.py check` (0 errors).
 
-**Changed:** `LB2/src/rm440.sc`, `LB2/src/sCountessMeeting.sc`, `LB2/src/triggerAndClock.sc`, `LB2/440.SCR`, `LB2/441.SCR`, `LB2/22.SCR`, `docs/DECISIONS.md`, `ROADMAP.md`, `3x-documentation-scheme/scheme/amon-ra.manual.json`, `manual.html`, `docs/HANDOFF.md`.
+**Changed:** `LB2/src/rm440.sc`, `LB2/src/sCountessMeeting.sc`, `LB2/src/triggerAndClock.sc`, `LB2/440.SCR`, `LB2/441.SCR`, `LB2/22.SCR`, `docs/DECISIONS.md`, `docs/ROADMAP.md`, `docs/manual/amon-ra.manual.json`, `docs/manual/manual.html`, `docs/HANDOFF.md`.
 
 **Decisions:** D-010 (Pocket watch confrontation timing and Armor Room lockout adjustment).
 
-**Verified:** `python3 tools/compile.py rm440`, `python3 tools/compile.py sCountessMeeting`, `python3 tools/compile.py triggerAndClock`, `python3 tools/check_docs.py` (0 errors), `python3 3x-documentation-scheme/scripts/manual.py check` (0 errors), `manual.py build` (104 KB).
+**Verified:** `python3 tools/compile.py rm440`, `python3 tools/compile.py sCountessMeeting`, `python3 tools/compile.py triggerAndClock`, `python3 tools/check_docs.py` (0 errors), `python3 tools/manual.py check` (0 errors), `manual.py build` (104 KB).
 
 **Next session should start with:** P2-03 (Unused Dialogue & Murder Reaction Restoration in MSG resources).
 
@@ -170,14 +218,14 @@ None currently open. Q-001 and Q-002 have been resolved by D-007 and D-008.
 - Updated `tools/compile_any.c` to support case-insensitive, extension-agnostic target lookup in SCI Companion's SysListView32.
 - Successfully compiled `LB2/335.SCR`, `LB2/335.HEP`, `LB2/93.SCR`, and `LB2/93.HEP`.
 - Documented architectural decision D-009 in `docs/DECISIONS.md`.
-- Updated `ROADMAP.md` (P2-01 marked done), updated `3x-documentation-scheme/scheme/amon-ra.manual.json`, and built `manual.html`.
+- Updated `docs/ROADMAP.md` (P2-01 marked done), updated `docs/manual/amon-ra.manual.json`, and built `docs/manual/manual.html`.
 - Validated docs with `tools/check_docs.py` (0 errors, 0 warnings) and `manual.py check` (0 errors).
 
-**Changed:** `LB2/src/rm335.sc`, `LB2/src/RotundaRgn.sc`, `LB2/335.SCR`, `LB2/335.HEP`, `LB2/93.SCR`, `LB2/93.HEP`, `tools/compile_any.c`, `tools/compile_any.exe`, `docs/DECISIONS.md`, `ROADMAP.md`, `3x-documentation-scheme/scheme/amon-ra.manual.json`, `manual.html`, `docs/HANDOFF.md`.
+**Changed:** `LB2/src/rm335.sc`, `LB2/src/RotundaRgn.sc`, `LB2/335.SCR`, `LB2/335.HEP`, `LB2/93.SCR`, `LB2/93.HEP`, `tools/compile_any.c`, `tools/compile_any.exe`, `docs/DECISIONS.md`, `docs/ROADMAP.md`, `docs/manual/amon-ra.manual.json`, `docs/manual/manual.html`, `docs/HANDOFF.md`.
 
 **Decisions:** D-009 (Dual-tier notebook fallback triggers for Act 2 suspects).
 
-**Verified:** `python3 tools/compile.py rm335`, `python3 tools/compile.py RotundaRgn`, `python3 tools/check_docs.py` (0 errors), `python3 3x-documentation-scheme/scripts/manual.py check` (0 errors), `manual.py build` (104 KB).
+**Verified:** `python3 tools/compile.py rm335`, `python3 tools/compile.py RotundaRgn`, `python3 tools/check_docs.py` (0 errors), `python3 tools/manual.py check` (0 errors), `manual.py build` (104 KB).
 
 **Next session should start with:** P2-02 (Pocket Watch Confrontation Timing & Armor Room Lockout Adjustment in room 440).
 
@@ -195,13 +243,13 @@ None currently open. Q-001 and Q-002 have been resolved by D-007 and D-008.
 - P1-05: Fixed character door clipping for Countess in `sCountessMeeting.sc` (Script 441) and Olympia in `rm600.sc` (Script 600); corrected Laura and pursuer scaling in chase rooms (`rm500.sc`, `rm510.sc`) and rotunda headdress rooms (`rm350.sc`, `rm355.sc`, `rm360.sc`, `rm370.sc`); eliminated Steve cutscene collision overlap in `rm350.sc`.
 - P1-06: Verified 256-color art deco asset preservation and immutable base archives (`LB2/RESOURCE.000`, `LB2/RESOURCE.MAP`) with identical MD5 checksums against vanilla.
 - Automated multi-pass compilation across all 219 scripts in SCI Companion under Wine to resolve self-referencing cross-script dependencies and symbol tables (`996.voc`).
-- Synchronized 3x manual scheme sources (`3x-documentation-scheme/scheme/amon-ra.manual.json`) and rebuilt `manual.html`.
+- Synchronized 3x manual scheme sources (`docs/manual/amon-ra.manual.json`) and rebuilt `docs/manual/manual.html`.
 
-**Changed:** `LB2/src/Main.sc`, `LB2/src/LBRoom.sc`, `LB2/src/NotebookItem.sc`, `LB2/src/rm350.sc`, `LB2/src/rm355.sc`, `LB2/src/rm360.sc`, `LB2/src/rm370.sc`, `LB2/src/rm400.sc`, `LB2/src/rm420.sc`, `LB2/src/sCountessMeeting.sc`, `LB2/src/rm500.sc`, `LB2/src/rm510.sc`, `LB2/src/rm525.sc`, `LB2/src/rm560.sc`, `LB2/src/Button.sc`, `LB2/src/rm565.sc`, `LB2/src/rm600.sc`, `LB2/src/rm610.sc`, `LB2/src/MyFeature.sc`, `LB2/src/IconI.sc`, `ROADMAP.md`, `3x-documentation-scheme/scheme/amon-ra.manual.json`, `manual.html`, `docs/HANDOFF.md`.
+**Changed:** `LB2/src/Main.sc`, `LB2/src/LBRoom.sc`, `LB2/src/NotebookItem.sc`, `LB2/src/rm350.sc`, `LB2/src/rm355.sc`, `LB2/src/rm360.sc`, `LB2/src/rm370.sc`, `LB2/src/rm400.sc`, `LB2/src/rm420.sc`, `LB2/src/sCountessMeeting.sc`, `LB2/src/rm500.sc`, `LB2/src/rm510.sc`, `LB2/src/rm525.sc`, `LB2/src/rm560.sc`, `LB2/src/Button.sc`, `LB2/src/rm565.sc`, `LB2/src/rm600.sc`, `LB2/src/rm610.sc`, `LB2/src/MyFeature.sc`, `LB2/src/IconI.sc`, `docs/ROADMAP.md`, `docs/manual/amon-ra.manual.json`, `docs/manual/manual.html`, `docs/HANDOFF.md`.
 
 **Decisions:** D-001 (Floppy base v1.000 preserved), D-002 (Loose patch overrides), D-003 (Interrogation streamlining), D-004 (Unrestricted save/load).
 
-**Verified:** `python3 tools/check_docs.py` (0 errors, 0 warnings); `python3 3x-documentation-scheme/scripts/manual.py check` (5 sections, 29 entries, 0 errors); `manual.py build` (103 KB compiled standalone manual); 3-pass compilation of all 219 scripts in SCI Companion; MD5 verification of base archives.
+**Verified:** `python3 tools/check_docs.py` (0 errors, 0 warnings); `python3 tools/manual.py check` (5 sections, 29 entries, 0 errors); `manual.py build` (103 KB compiled standalone manual); 3-pass compilation of all 219 scripts in SCI Companion; MD5 verification of base archives.
 
 **Not verified:** Full playthrough regression from start to end in DOSBox-X.
 
@@ -220,10 +268,10 @@ None currently open. Q-001 and Q-002 have been resolved by D-007 and D-008.
 **Goal:** Incorporate maintainer feedback regarding voiceover omission (D-007) and diegetic knowledge progression (D-008).
 
 **Done:** Recorded D-007 (omitting insensitive CD audio tracks, text-first with future voiceover hooks) and D-008
-(diegetic knowledge threshold and contextual museum puzzles); updated P2-03 and P3-03 in `ROADMAP.md`,
-`docs/ARCHITECTURE.md`, `3x-documentation-scheme/scheme/amon-ra.manual.json`, and rebuilt `manual.html`.
+(diegetic knowledge threshold and contextual museum puzzles); updated P2-03 and P3-03 in `docs/ROADMAP.md`,
+`docs/ARCHITECTURE.md`, `docs/manual/amon-ra.manual.json`, and rebuilt `docs/manual/manual.html`.
 
-**Changed:** `docs/DECISIONS.md`, `ROADMAP.md`, `docs/ARCHITECTURE.md`, `docs/HANDOFF.md`, `manual.html`.
+**Changed:** `docs/DECISIONS.md`, `docs/ROADMAP.md`, `docs/ARCHITECTURE.md`, `docs/HANDOFF.md`, `docs/manual/manual.html`.
 
 **Decisions:** D-007 (Text-first, omit CD voices, future voice hooks), D-008 (Diegetic knowledge gating for Act 2).
 
@@ -246,9 +294,9 @@ None currently open. Q-001 and Q-002 have been resolved by D-007 and D-008.
 **Goal:** Establish development plan, architecture, and roadmap for modernizing The Dagger of Amon Ra using the floppy
 release and SCI Companion.
 
-**Done:** Created root `ROADMAP.md` covering all 24 items (P1-01 through P4-06); authored `docs/ARCHITECTURE.md`,
+**Done:** Created `docs/ROADMAP.md` covering all 24 items (P1-01 through P4-06); authored `docs/ARCHITECTURE.md`,
 `docs/DECISIONS.md` (D-001 through D-006, Q-001, Q-002), `docs/TESTING.md`, `docs/SECURITY.md`, `docs/CHANGELOG.md`,
-`docs/CONTRIBUTING.md`, `docs/README.md`, `AGENTS.md`, and `CLAUDE.md`; authored and compiled 3x manual `manual.html`.
+`docs/CONTRIBUTING.md`, `docs/README.md`, `AGENTS.md`, and `CLAUDE.md`; authored and compiled 3x manual `docs/manual/manual.html`.
 
 **Changed:** Initialized project memory and documentation toolchain.
 

@@ -20,6 +20,13 @@
 	
 	(method (sel_300 param1 param2 &tmp temp0 temp1 temp2)
 		(switch param1
+			(2
+				(if (not (proc0_3 115))
+					(gLb2Messager sel_295: sel_213 param1 80 0 0 sel_214)
+				else
+					(super sel_300: param1)
+				)
+			)
 			(6
 				(if
 					(==

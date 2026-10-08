@@ -49,7 +49,7 @@
 				(gEgo sel_153: 158 146 sel_14: (| (gEgo sel_14?) $4000))
 				(if
 					(not
-						(if (and (== global123 2) (proc0_10 8))
+						(if (and (== global123 2) (proc0_10 8) (proc0_2 122))
 							(not (proc0_2 133))
 						)
 					)
@@ -59,6 +59,7 @@
 					(and
 						(== global123 2)
 						(proc0_10 8)
+						(proc0_2 122)
 						(not (proc0_2 133))
 					)
 					(steve sel_110: sel_3: 1 sel_161: Walk)

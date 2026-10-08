@@ -16,8 +16,8 @@ Report security concerns or asset integrity issues directly to project maintaine
 ## Threat model and trust boundaries
 
 1. **Game Resource Integrity:** All loose patch files (`.SCR`, `.HEP`, `.MSG`) are parsed by Sierra SCI interpreters
-   and ScummVM. Malformed bytecode or heap offsets could trigger interpreter crashes or buffer overflows in native
-   emulators. All recompiled bytecode must be validated in ScummVM before distribution.
+   and DOSBox-X. Malformed bytecode or heap offsets could trigger interpreter crashes or buffer overflows in the original
+   runtime environment. All recompiled bytecode must be validated in DOSBox-X before distribution.
 2. **Execution Environment:** SCI Companion runs under Wine in Linux. Maintain proper file permission boundaries
    and avoid executing untrusted binary plugins.
 3. **No Network Exposure:** The project is an offline single-player retro adventure mod with zero remote telemetry or

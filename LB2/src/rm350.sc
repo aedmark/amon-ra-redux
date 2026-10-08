@@ -105,6 +105,7 @@
 			((not (== global123 2)))
 			(
 				(and
+					(proc0_2 122)
 					(proc0_10 29188)
 					(not (proc0_10 8))
 					(> (gEgo sel_0?) 175)

@@ -60,11 +60,11 @@ int main() {
         if (hData) {
             char *pText = (char*)GlobalLock(hData);
             if (pText) {
-                FILE *f = fopen("compile_output.txt", "w");
+                FILE *f = fopen("dumps/compile_output.txt", "w");
                 if (f) {
                     fputs(pText, f);
                     fclose(f);
-                    printf("Saved %zu bytes to compile_output.txt\n", strlen(pText));
+                    printf("Saved %zu bytes to dumps/compile_output.txt\n", strlen(pText));
                 }
                 GlobalUnlock(hData);
             }

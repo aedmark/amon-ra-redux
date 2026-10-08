@@ -24,7 +24,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
 DOCS = [
-    "AGENTS.md", "CLAUDE.md", "README.md", "ROADMAP.md",
+    "AGENTS.md", "CLAUDE.md", "README.md",
     "docs/README.md", "docs/ROADMAP.md", "docs/HANDOFF.md", "docs/ARCHITECTURE.md", "docs/DECISIONS.md",
     "docs/TESTING.md", "docs/SECURITY.md", "docs/CHANGELOG.md", "docs/CONTRIBUTING.md",
 ]
@@ -69,10 +69,10 @@ def main():
             for m in re.finditer(r"\{\{[^}]*\}\}", text):
                 errors.append(f"{where(path, text, m.start())}: placeholder left: {m.group(0)[:60]}")
 
-    roadmap = next((p for p in (ROOT / "ROADMAP.md", ROOT / "docs" / "ROADMAP.md") if p in texts), None)
+    roadmap = ROOT / "docs" / "ROADMAP.md"
     items = set()
-    if roadmap is None:
-        errors.append("no ROADMAP.md (looked in the root and in docs/)")
+    if roadmap not in texts:
+        errors.append("no docs/ROADMAP.md")
     else:
         text, phase = texts[roadmap], None
         for m in re.finditer(r"^## Phase (\d+)|^- \[(.)\] (P(\d+)-(\d+))\b", text, flags=re.M):

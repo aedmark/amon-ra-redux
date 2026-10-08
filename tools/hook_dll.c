@@ -30,7 +30,7 @@ int WINAPI MyDrawTextA(HDC hdc, LPCSTR lpchText, int cchText, LPRECT lprc, UINT 
 }
 
 void InstallHook() {
-    g_log = fopen("Z:\\home\\gordonk\\PycharmProjects\\amon-ra-redux\\compiler_captured.txt", "w");
+    g_log = fopen("Z:\\home\\gordonk\\PycharmProjects\\amon-ra-redux\\dumps\\compiler_captured.txt", "w");
     if (!g_log) return;
     fprintf(g_log, "--- Hook installed ---\n");
     fflush(g_log);

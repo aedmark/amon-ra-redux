@@ -8,11 +8,11 @@ in the modernization design specification.
 
 ## Documentation and roadmap
 
-- **Interactive 3x Manual:** Open [manual.html](manual.html) in any browser for complete What/How/Why specifications for every fix.
-- **Modernization Roadmap:** See [ROADMAP.md](ROADMAP.md) for phased development tracking with permanent item IDs.
+- **Interactive 3x Manual:** Open [docs/manual/manual.html](docs/manual/manual.html) in any browser for complete What/How/Why specifications for every fix.
+- **Modernization Roadmap:** See [docs/ROADMAP.md](docs/ROADMAP.md) for phased development tracking with permanent item IDs.
 - **Engine Architecture:** See [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) for SCI 1.1 patch architecture and subsystem design.
 - **Architectural Decisions:** See [docs/DECISIONS.md](docs/DECISIONS.md) for ADRs (`D-001` through `D-006`) and open questions.
-- **Testing & ScummVM Recipes:** See [docs/TESTING.md](docs/TESTING.md) for verification procedures and debug console recipes.
+- **Testing & DOSBox-X Recipes:** See [docs/TESTING.md](docs/TESTING.md) for original-interpreter verification procedures.
 - **Session Handoff:** See [docs/HANDOFF.md](docs/HANDOFF.md) for current state, next steps, and session logs.
 
 ## Quick verification
@@ -22,11 +22,11 @@ in the modernization design specification.
 python3 tools/check_docs.py
 
 # Verify 3x documentation scheme specification
-python3 3x-documentation-scheme/scripts/manual.py check 3x-documentation-scheme/scheme/amon-ra.manual.json
+python3 tools/manual.py check docs/manual/amon-ra.manual.json
 
 # Rebuild standalone 3x manual HTML
-python3 3x-documentation-scheme/scripts/manual.py build 3x-documentation-scheme/scheme/amon-ra.manual.json --output manual.html
+python3 tools/manual.py build docs/manual/amon-ra.manual.json --output docs/manual/manual.html
 
-# Run game in ScummVM with debug logging
-scummvm -d 1 --auto-detect --path=LB2 sci:laurabow2
+# Run game through Sierra's original interpreter in DOSBox-X
+./tools/run_dosbox.sh
 ```

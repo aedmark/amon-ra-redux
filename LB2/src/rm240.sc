@@ -321,6 +321,7 @@
 				(= sel_136 1)
 			)
 			(1
+				(proc0_3 122)
 				((ScriptID 21 0) sel_57: 263)
 				(if (< (gEgo sel_1?) 181)
 					(gEgo sel_312: PolyPath 162 165 self)
@@ -377,6 +378,7 @@
 				(= sel_136 1)
 			)
 			(1
+				(proc0_3 122)
 				((ScriptID 21 0) sel_57: 263)
 				(if (< (gEgo sel_1?) 181)
 					(gEgo sel_312: PolyPath 162 165 self)
@@ -891,7 +893,6 @@
 		sel_26 15
 		sel_549 130
 		sel_550 -75
-		name "local Steve"
 	)
 	
 	(method (sel_110)

@@ -1143,6 +1143,15 @@
 	)
 	
 	(method (sel_300 param1 param2 &tmp temp0 temp1 temp2)
+		(if (== param1 2)
+			(return
+				(if (not (proc0_3 112))
+					(gLb2Messager sel_295: sel_213 param1 80 0 0 sel_214)
+				else
+					(super sel_300: param1)
+				)
+			)
+		)
 		(if (proc999_5 param1 6 14)
 			(if
 				(==
@@ -1629,6 +1638,15 @@ code_17e6:
 	)
 	
 	(method (sel_300 param1 param2 &tmp temp0 temp1 temp2)
+		(if (== param1 2)
+			(return
+				(if (not (proc0_3 114))
+					(gLb2Messager sel_295: sel_213 param1 80 0 0 sel_214)
+				else
+					(super sel_300: param1)
+				)
+			)
+		)
 		(if (proc999_5 param1 6 14)
 			(if
 				(==
@@ -1800,6 +1818,15 @@ code_17e6:
 	)
 	
 	(method (sel_300 param1 param2 &tmp temp0 temp1 temp2)
+		(if (== param1 2)
+			(return
+				(if (not (proc0_3 111))
+					(gLb2Messager sel_295: sel_213 param1 80 0 0 sel_214)
+				else
+					(super sel_300: param1)
+				)
+			)
+		)
 		(if (proc999_5 param1 6 14)
 			(if
 				(==
@@ -2149,7 +2176,13 @@ code_2460:
 	
 	(method (sel_300 param1 param2 &tmp temp0 temp1 temp2)
 		(cond 
-			((== param1 2) (gLb2Messager sel_295: sel_213 param1 27 0 0 sel_214))
+			((== param1 2)
+				(if (not (proc0_3 113))
+					(gLb2Messager sel_295: sel_213 param1 80 0 0 sel_214)
+				else
+					(gLb2Messager sel_295: sel_213 param1 27 0 0 sel_214)
+				)
+			)
 			((proc999_5 param1 6 14)
 				(if
 					(==

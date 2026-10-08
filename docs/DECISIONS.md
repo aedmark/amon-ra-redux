@@ -163,6 +163,22 @@ Anchor narrative corrections to the chronology established by the game itself an
 - **Decision:** Treat late 1926 as the internal chronology rather than the design outline's inaccurate Spring 1926 description. Replace Lo Fat's Pippi joke with a period-valid misunderstanding involving Pip from Dickens' *Great Expectations*. Preserve the genuine transatlantic milestone but explicitly call it an experimental two-way radiotelephone conversation. Identify Hemingway's book as the newly published *The Sun Also Rises*. Package only affected modules as `LB2/250.MSG`, `LB2/270.MSG`, and `LB2/310.MSG`; do not alter `RESOURCE.MSG` or either base archive.
 - **Consequences:** Resolves P2-04 without discarding a real 1926 technology reference or inventing an early publication scenario for Hemingway's novel. The three patches preserve message tuple metadata and talkers while replacing only four text records. Effective-resource auditing across all 103 modules and 5,888 message records finds none of the obsolete target strings.
 
+## D-013 Reuse Museum Acquaintance Flags for Formal Introductions
+
+Route later museum conversations through the introductions Sierra already authored instead of adding parallel state.
+
+- **Context:** `RotundaRgn.sc` already assigns one acquaintance flag to each principal museum character when Laura meets them during the party: Pippin 110, Dr. Smith 111, Countess 112, Yvette 113, O'Riley 114, and Rameses 115. Their later actor implementations did not consult those flags, so Laura could skip the rotunda encounter and then address the character by name elsewhere. The condition-80 dialogue is the intended formal introduction, but the Pippin, Smith, and O'Riley versions still had Laura say their names before they introduced themselves.
+- **Decision:** In actor scripts 35, 36, and 90, intercept Talk when the corresponding acquaintance flag is unset and play message condition 80; otherwise preserve the existing handler. Do not allocate new globals. Supply loose message overrides 1882, 1883, and 1888 that retain tuple/talker metadata while changing only the first two condition-80 records to a neutral greeting followed by the character's self-introduction.
+- **Consequences:** Resolves P2-05 for all six rotunda acquaintances, preserves established save-state semantics, and avoids new flag-array dependencies. A player who missed the party introduction now receives it on first later conversation, while already-acquainted dialogue remains unchanged.
+
+## D-014 Gate Steve Romance Sequences on Act 1 Conversation
+
+Use a dedicated relationship bit to distinguish an established personal connection from an ignored coworker.
+
+- **Context:** Act 2 room scripts could automatically stage a kiss, embrace, or intimate reunion between Laura and Steve even when the player never spoke to him in Act 1. The Act 1 interaction lives in `rm240.sc`, while the affected museum arrivals are distributed across Scripts 330, 335, and 350.
+- **Decision:** Reserve flag 122 as the Steve Act 1 conversation bit. Set it when either `sTalkSteve` or `sAskSteve` begins its dialogue in Script 240. Require the bit alongside the existing timing and presence conditions before starting the romantic sequences in Scripts 330, 335, and 350. When it is unset, preserve the normal room initialization and professional coworker flow.
+- **Consequences:** Resolves P2-06 without rewriting dialogue resources or changing the museum schedule. Existing saves default to the non-romantic branch unless the Act 1 conversation has occurred in that playthrough.
+
 ---
 
 ## Open questions
