@@ -12,17 +12,15 @@ Security: [SECURITY.md](SECURITY.md). Changes: [CHANGELOG.md](CHANGELOG.md). Old
 
 ## Current state
 
-_Last updated: 2026-10-07, session 6: P2-03 (Unused Dialogue & Murder Reaction Restoration) implemented, compiled, and verified._
+_Last updated: 2026-10-07, session 7: P2-04 (Narrative Anachronism Corrections) implemented and verified._
 
-**Where things stand, in one paragraph:** Phase 1 (P1-01 through P1-06) and Phase 2 items P2-01, P2-02, and P2-03 are fully
-implemented, verified, and compiled. P2-03 resolves systematic flag disconnects between homicide discovery cutscenes and NPC
-interrogation dispatchers: sets narrative homicide flags (`171` & `134` in `rm630.sc`, `143` in `rm435.sc`, `158` in `rm420.sc`,
-`161` in `rm500.sc`, `165` in `rm525.sc`, and `155` in `rm620.sc`) upon body/clue discovery; establishes dual-tier fallback checks
-in interrogation switches across `MuseumRgn.sc`, `RotundaRgn.sc`, `aHeimlich.sc`, and `aRameses.sc`; wires missing topic 269 in
-O'Riley (`MuseumRgn.sc`) to activate authored 8-line Countess murder sequence 70; and restores Ziggy's severed head exhibit in
-`rm490.sc` via dual-tier flag 143/72 check. All 11 modified scripts are compiled to loose overrides (`32.SCR`, `36.SCR`, `90.SCR`,
-`93.SCR`, `420.SCR`, `435.SCR`, `490.SCR`, `500.SCR`, `525.SCR`, `620.SCR`, `630.SCR`). Base game archives match bit-for-bit,
-ADR D-011 recorded, and 3x manuals pass validation.
+**Where things stand, in one paragraph:** Phase 1 (P1-01 through P1-06) and Phase 2 items P2-01 through P2-04 are fully
+implemented and verified. P2-04 establishes the game's internal setting as late 1926 (not spring), replaces Lo Fat's 1945
+Pippi Longstocking reference with Dickens' Pip in module 270, clarifies the actual 1926 New York-London radiotelephone exchange
+as experimental in module 250, and identifies *The Sun Also Rises* as newly published in module 310. The fixes ship as loose
+`250.MSG`, `270.MSG`, and `310.MSG` overrides without changing `RESOURCE.MSG`, `RESOURCE.000`, or `RESOURCE.MAP`. An
+effective-resource audit parsed all 103 modules and 5,888 message records with no obsolete target strings remaining. ADR D-012
+is recorded and the 3x manual is synchronized.
 
 **Verified** (2026-10-07, Linux workspace)
 
@@ -30,9 +28,10 @@ ADR D-011 recorded, and 3x manuals pass validation.
 | --- | --- |
 | `python3 tools/check_docs.py` | **Pass: 0 errors, 0 warnings** |
 | `python3 3x-documentation-scheme/scripts/manual.py check ...` | **Pass: 5 sections, 29 entries, 0 errors** |
-| `python3 3x-documentation-scheme/scripts/manual.py build ...` | **Pass: compiled manual.html (105 KB)** |
+| `python3 3x-documentation-scheme/scripts/manual.py build ...` | **Pass: compiled manual.html** |
+| Effective MSG string and structure audit | **Pass: 103 modules, 5,888 records, 0 obsolete target strings** |
+| ScummVM detection | **Pass: `sci:laurabow2` detected with loose MSG overrides present** |
 | Base Game Archive MD5 Integrity | **Pass: RESOURCE.000 and RESOURCE.MAP match vanilla bit-for-bit** |
-| SCI Companion Script Compilation | **Pass: 32, 36, 90, 93, 420, 435, 490, 500, 525, 620, 630 compiled cleanly** |
 
 **What works**
 
@@ -40,30 +39,55 @@ ADR D-011 recorded, and 3x manuals pass validation.
 - **P2-01 Suspect Fallbacks:** Dual-tier guest register check-in and encounter-based suspect registration operational.
 - **P2-02 Pocket Watch Confrontation:** Armor Room lockout removed, meeting scheduling sequence corrected, and watch confrontation dialogue fully accessible.
 - **P2-03 Murder Reaction Restoration:** Discovered homicide dialogue trees restored across all suspects; O'Riley Countess reaction connected; Ziggy head exhibit restored; Dagger inquiry connected.
+- **P2-04 Historical Dialogue:** Three loose message overrides correct or clarify the identified late-1926 references while preserving message tuples and talkers.
 - **Tooling Automation:** `tools/compile.py` compiles single scripts (including extension-agnostic target lookup in SysListView32); `tools/compile_all.exe` executes multi-pass builds.
-- **Documentation Architecture:** `ROADMAP.md`, `DECISIONS.md` (D-009, D-010, D-011), `3x-documentation-scheme/`, and `manual.html` synchronized.
+- **Documentation Architecture:** `ROADMAP.md`, `DECISIONS.md` (D-009 through D-012), `3x-documentation-scheme/`, and `manual.html` synchronized.
 
 **Not verified**
 
 - End-to-end multi-act playthrough regression testing in DOSBox-X.
+- Direct in-game traversal of the taxi, Lo Fat, and Ziggy dialogue branches. Headless ScummVM startup reaches an existing invalid-selector fault with or without the P2-04 message overrides, so it does not isolate these branches.
 
 **Gotchas for the next session**
 
-- Keep loose patch files in `LB2/` strictly uppercase (`.SCR`, `.HEP`).
+- Keep loose patch files in `LB2/` strictly uppercase (`.SCR`, `.HEP`, `.MSG`).
+- The dialogue chronology is late 1926; the design outline's “Spring 1926” wording is contradicted by multiple in-game date anchors (D-012).
 - In `RotundaRgn.sc` (Script 93), `Actor` instances must not define extraneous property `name` (already covered by `sel_20`).
 
 ## Next steps (in order)
 
-1. Implement P2-04 (Narrative Anachronism Corrections across MSG resources).
-2. Implement P2-05 (Contextual Dialogue Logic & Acquaintance Checks).
-3. Implement P2-06 (Steve & Laura Character Consistency).
-4. Run gameplay test verification in DOSBox-X using `./tools/run_dosbox.sh`.
+1. Implement P2-05 (Contextual Dialogue Logic & Acquaintance Checks).
+2. Implement P2-06 (Steve & Laura Character Consistency).
+3. Run gameplay test verification in DOSBox-X using `./tools/run_dosbox.sh`.
 
 ## Open questions for maintainers
 
 None currently open. Q-001 and Q-002 have been resolved by D-007 and D-008.
 
 ## Session log
+
+### Session 7: 2026-10-07: P2-04 Narrative Anachronism Corrections
+
+**Contributor:** Codex
+
+**Goal:** Implement P2-04 by auditing the complete SCI message corpus and correcting or clarifying dialogue that conflicts with the game's 1926 setting.
+
+**Done:**
+- Parsed all 103 archived message modules and located the four obsolete target strings in modules 250, 270, and 310.
+- Established from in-game evidence that the story occurs late in 1926: Rocco's license was renewed September 5, characters call the year almost over, and Lindbergh's flight is advertised for the following spring.
+- Added `LB2/250.MSG`, clarifying the historically real 1926 New York-London exchange as an experimental two-way radiotelephone conversation rather than the 1927 commercial service.
+- Added `LB2/270.MSG`, replacing the 1945 Pippi Longstocking misunderstanding and its follow-up with period-valid references to Pip from Dickens' *Great Expectations*.
+- Added `LB2/310.MSG`, identifying *The Sun Also Rises* as Hemingway's newly published novel while retaining Ziggy's claim that he saw it before publication.
+- Recorded D-012, marked P2-04 complete, synchronized the 3x manual source, and rebuilt `manual.html`.
+- Audited the effective resource layer (archived messages plus loose overrides): 103 modules, 5,888 records, zero obsolete target strings.
+
+**Changed:** `LB2/250.MSG`, `LB2/270.MSG`, `LB2/310.MSG`, `ROADMAP.md`, `docs/ARCHITECTURE.md`, `docs/DECISIONS.md`, `docs/CHANGELOG.md`, `3x-documentation-scheme/scheme/amon-ra.manual.json`, `manual.html`, `docs/HANDOFF.md`.
+
+**Decisions:** D-012 (Late-1926 historical dialogue corrections).
+
+**Verified:** Message structure and effective-string audit (103 modules / 5,888 records / 0 obsolete strings), ScummVM detection, docs validation, 3x manual validation/build, and unchanged base archive hashes. Headless ScummVM startup produces the same pre-existing invalid-selector fault with and without the three new message patches.
+
+**Next session should start with:** P2-05 (Contextual Dialogue Logic & Acquaintance Checks).
 
 ### Session 6: 2026-10-07: P2-03 Unused Dialogue & Murder Reaction Restoration
 

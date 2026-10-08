@@ -155,6 +155,14 @@ Establish a dual-tier flag synchronization architecture and restore missing NPC 
   3. **Room 490 Head Display Restoration:** Update `rm490.sc` line 66 to check `(if (or (proc0_2 143) (proc0_2 72)))`.
 - **Consequences:** Resolves P2-03. Completely restores all authored murder reactions across suspects, enables Ziggy's severed head exhibit in room 490, and connects O'Riley's Countess dialogue without requiring modifications to base resource files.
 
+## D-012 Late-1926 Historical Dialogue Corrections
+
+Anchor narrative corrections to the chronology established by the game itself and deliver them as isolated message overrides.
+
+- **Context:** P2-04 identified three suspect references in the archived message corpus. Pippi Longstocking was not published until 1945. Transatlantic commercial telephone service opened in 1927, but the first experimental two-way radiotelephone conversation between New York and London occurred in 1926. *The Sun Also Rises* was published in late 1926. The game is likewise set late in 1926: Rocco's license says it was renewed September 5, 1926, Laura can ask how characters feel now that the year is almost over, and a notice advertises Lindbergh's proposed flight for the following spring.
+- **Decision:** Treat late 1926 as the internal chronology rather than the design outline's inaccurate Spring 1926 description. Replace Lo Fat's Pippi joke with a period-valid misunderstanding involving Pip from Dickens' *Great Expectations*. Preserve the genuine transatlantic milestone but explicitly call it an experimental two-way radiotelephone conversation. Identify Hemingway's book as the newly published *The Sun Also Rises*. Package only affected modules as `LB2/250.MSG`, `LB2/270.MSG`, and `LB2/310.MSG`; do not alter `RESOURCE.MSG` or either base archive.
+- **Consequences:** Resolves P2-04 without discarding a real 1926 technology reference or inventing an early publication scenario for Hemingway's novel. The three patches preserve message tuple metadata and talkers while replacing only four text records. Effective-resource auditing across all 103 modules and 5,888 message records finds none of the obsolete target strings.
+
 ---
 
 ## Open questions

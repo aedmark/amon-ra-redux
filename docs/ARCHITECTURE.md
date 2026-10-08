@@ -57,6 +57,7 @@ The project builds upon the DOS Floppy v1.000 release (D-001) using a modular lo
 ### 2. Dialogue & Voiceover Asset Subsystem (`RESOURCE.MSG`, `Script 90`)
 - **Vanilla Flow:** Floppy release relies exclusively on text `.MSG` lumps; later CD release bundled caricatured voice tracks widely criticized for cultural insensitivity.
 - **Modernized Flow (P2-03, D-007):** Original CD voice tracks are omitted. All inaccessible murder discussions and death messages are modernized strictly via text `.MSG` message lumps. SCI talker sync and audio hooks remain intact to support future community voice packs.
+- **Historical Text Layer (P2-04, D-012):** Modules 250, 270, and 310 are supplied as loose `.MSG` overrides. They replace the postwar Pippi reference, distinguish the experimental 1926 transatlantic radiotelephone exchange from the 1927 commercial service, and identify *The Sun Also Rises* as a newly published late-1926 novel.
 
 ### 3. Save/Load Subsystem & Chase Safety (`Script 0`, `Script 500` - `550`)
 - **Vanilla Flow:** CD release disabled `theIconBar` save buttons in Act 5 chase sequences, causing instant-death punishment.
