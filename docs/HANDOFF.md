@@ -12,14 +12,15 @@ Security: [SECURITY.md](SECURITY.md). Changes: [CHANGELOG.md](CHANGELOG.md). Old
 
 ## Current state
 
-_Last updated: 2026-10-07, session 4: P2-01 (Inaccessible Plot Information & Notebook Fallback Triggers) implemented, compiled, and verified._
+_Last updated: 2026-10-07, session 5: P2-02 (Pocket Watch Confrontation Timing & Armor Room Lockout Adjustment) implemented, compiled, and verified._
 
-**Where things stand, in one paragraph:** Phase 1 (P1-01 through P1-06) and Phase 2's first item (P2-01) are fully
-implemented, verified, and compiled. P2-01 resolves the critical Act 2 suspect interrogation lockout (Najir, Miklo,
-Countess, etc.) through a dual-tier fallback: diegetically registering clues 263..272 during museum check-in via the guest
-register in `rm335.sc` (Script 335), and directly triggering suspect clue addition upon Look/Talk encounters across all
-11 characters in `RotundaRgn.sc` (Script 93). Both scripts are compiled to loose overrides (`335.SCR`, `335.HEP`, `93.SCR`,
-`93.HEP`). All documentation and 3x manuals pass validation with zero errors.
+**Where things stand, in one paragraph:** Phase 1 (P1-01 through P1-06) and Phase 2 items P2-01 and P2-02 are fully
+implemented, verified, and compiled. P2-02 fixes the impossible pocket watch confrontation in the Armor Room (`rm440.sc`,
+`sCountessMeeting.sc`, `triggerAndClock.sc`): eliminates the premature 1:45 (`4880`) lockout in `sOutTapestry` state 2;
+adjusts `sel_403` scheduling so Meeting 2 (`sMeetingNo2`) does not prematurely override Meeting 1 upon acquiring the watch;
+enables direct watch confrontation upon room entrance in `sCountessNoMeet`; handles watch interactions from behind the
+tapestry in `askQuestions`; and preserves Countess's Armor Room schedule in `triggerAndClock.sc` until 2:00. All three scripts
+are compiled to loose overrides (`440.SCR`, `441.SCR`, `22.SCR`). Documentation, ADR D-010, and 3x manuals pass validation.
 
 **Verified** (2026-10-07, Linux workspace)
 
@@ -29,14 +30,15 @@ register in `rm335.sc` (Script 335), and directly triggering suspect clue additi
 | `python3 3x-documentation-scheme/scripts/manual.py check ...` | **Pass: 5 sections, 29 entries, 0 errors** |
 | `python3 3x-documentation-scheme/scripts/manual.py build ...` | **Pass: compiled manual.html (104 KB)** |
 | Base Game Archive MD5 Integrity | **Pass: RESOURCE.000 and RESOURCE.MAP match vanilla bit-for-bit** |
-| SCI Companion Script Compilation | **Pass: rm335.sc (335) and RotundaRgn.sc (93) compiled cleanly to loose overrides** |
+| SCI Companion Script Compilation | **Pass: rm440.sc (440), sCountessMeeting.sc (441), and triggerAndClock.sc (22) compiled cleanly** |
 
 **What works**
 
 - **Phase 1 Overhaul:** All six Phase 1 items (P1-01 through P1-06) compiled as loose patches in `LB2/`.
 - **P2-01 Suspect Fallbacks:** Dual-tier guest register check-in and encounter-based suspect registration operational.
+- **P2-02 Pocket Watch Confrontation:** Armor Room lockout removed, meeting scheduling sequence corrected, and watch confrontation dialogue fully accessible.
 - **Tooling Automation:** `tools/compile.py` compiles single scripts (including extension-agnostic target lookup in SysListView32); `tools/compile_all.exe` executes multi-pass builds.
-- **Documentation Architecture:** `ROADMAP.md`, `DECISIONS.md` (D-009), `3x-documentation-scheme/`, and `manual.html` synchronized.
+- **Documentation Architecture:** `ROADMAP.md`, `DECISIONS.md` (D-009, D-010), `3x-documentation-scheme/`, and `manual.html` synchronized.
 
 **Not verified**
 
@@ -49,9 +51,9 @@ register in `rm335.sc` (Script 335), and directly triggering suspect clue additi
 
 ## Next steps (in order)
 
-1. Implement P2-02 (Pocket Watch Confrontation Timing & Armor Room Lockout Adjustment in room 440).
-2. Implement P2-03 (Murder Reaction Restoration & Text-First Voice Architecture in MSG resources).
-3. Implement P2-04 (Narrative Anachronism Corrections across MSG resources).
+1. Implement P2-03 (Murder Reaction Restoration & Text-First Voice Architecture in MSG resources).
+2. Implement P2-04 (Narrative Anachronism Corrections across MSG resources).
+3. Implement P2-05 (Contextual Dialogue Logic & Acquaintance Checks).
 4. Run gameplay test verification in DOSBox-X using `./tools/run_dosbox.sh`.
 
 ## Open questions for maintainers
@@ -59,6 +61,38 @@ register in `rm335.sc` (Script 335), and directly triggering suspect clue additi
 None currently open. Q-001 and Q-002 have been resolved by D-007 and D-008.
 
 ## Session log
+
+### Session 5: 2026-10-07: P2-02 Pocket Watch Confrontation Timing & Armor Room Lockout Implementation
+
+**Contributor:** Antigravity
+
+**Goal:** Implement P2-02 (Pocket Watch Confrontation Timing & Armor Room Lockout Adjustment) to guarantee Laura can retrieve Carrington's pocket watch from room 630 and present it to Countess Waldorf-Carlton in the Armor Room (room 440).
+
+**Done:**
+- Reverse-engineered bytecode and scripts for Carrington's office (`rm630.sc`), Armor Room (`rm440.sc`), Countess meeting controller (`sCountessMeeting.sc`), and the game clock engine (`triggerAndClock.sc`).
+- Diagnosed compounding vanilla lockouts:
+  1. Retrieving the watch in `rm630.sc` (`inWatchOpen sel_111:`) advances clock to 1:45 by setting bit 16 (`4880`) in `global124`.
+  2. In `rm440.sc` `sOutTapestry` state 2, `(not (proc0_10 4880))` locked out the confrontation dialogue whenever Laura possessed the watch.
+  3. In `rm440.sc` `sel_403`, `(proc0_10 8224 1)` tested whether lower bits summed to 31 (`0x1f`); possessing the watch set bit 16, prematurely triggering `sMeetingNo2` (Ziggy/Little) at 1:45 and completely skipping the Countess meeting.
+  4. In `triggerAndClock.sc`, clock tick 1:45 (`145`) unconditionally relocated Countess to room 520.
+- Implemented fixes in accordance with ADR D-010:
+  1. Removed `(not (proc0_10 4880))` from `sOutTapestry` state 2 in `LB2/src/rm440.sc`.
+  2. Modified `sel_403` in `rm440.sc` so `sMeetingNo2` only takes precedence if `(or (proc0_2 120) (proc0_10 8224))` is satisfied, ensuring Meeting 1 always precedes Meeting 2.
+  3. Updated `sCountessNoMeet` state 3 in `LB2/src/sCountessMeeting.sc` so entering the room with the watch immediately triggers `sTalkWithCountess`.
+  4. Updated `askQuestions of Actions` in `sCountessMeeting.sc` so presenting the watch from behind the tapestry triggers `sOutTapestry`, returning 1.
+  5. In `LB2/src/triggerAndClock.sc`, preserved Countess destination at room 440 at 1:45 until `(proc0_2 120)` is set, relocating her to 520 at 2:00 (`200`).
+- Compiled `LB2/440.SCR`, `LB2/441.SCR`, and `LB2/22.SCR`.
+- Recorded architectural decision D-010 in `docs/DECISIONS.md`.
+- Updated `ROADMAP.md` (P2-02 marked done), `3x-documentation-scheme/scheme/amon-ra.manual.json`, and rebuilt `manual.html`.
+- Validated docs with `tools/check_docs.py` (0 errors, 0 warnings) and `manual.py check` (0 errors).
+
+**Changed:** `LB2/src/rm440.sc`, `LB2/src/sCountessMeeting.sc`, `LB2/src/triggerAndClock.sc`, `LB2/440.SCR`, `LB2/441.SCR`, `LB2/22.SCR`, `docs/DECISIONS.md`, `ROADMAP.md`, `3x-documentation-scheme/scheme/amon-ra.manual.json`, `manual.html`, `docs/HANDOFF.md`.
+
+**Decisions:** D-010 (Pocket watch confrontation timing and Armor Room lockout adjustment).
+
+**Verified:** `python3 tools/compile.py rm440`, `python3 tools/compile.py sCountessMeeting`, `python3 tools/compile.py triggerAndClock`, `python3 tools/check_docs.py` (0 errors), `python3 3x-documentation-scheme/scripts/manual.py check` (0 errors), `manual.py build` (104 KB).
+
+**Next session should start with:** P2-03 (Unused Dialogue & Murder Reaction Restoration in MSG resources).
 
 ### Session 4: 2026-10-07: P2-01 Notebook Fallback Triggers Implementation
 

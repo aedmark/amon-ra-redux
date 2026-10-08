@@ -189,7 +189,7 @@
 					(global2 sel_146: (ScriptID 444 0))
 				)
 			)
-			((and (== global123 3) (proc0_10 8224 1)) (self sel_146: sMeetingNo2))
+			((and (== global123 3) (or (proc0_2 120) (proc0_10 8224)) (proc0_10 8224 1)) (self sel_146: sMeetingNo2))
 			((and (== global123 3) (proc0_10 4104 1))
 				(proc958_0 128 444 825)
 				(if (== (gEgo sel_2?) 443) (gIconBar sel_233: 1 2 5 6))
@@ -437,7 +437,6 @@
 					(and
 						(== ((ScriptID 90 1) sel_620?) 440)
 						(proc0_10 4104)
-						(not (proc0_10 4880))
 						(not (proc0_2 120))
 					)
 					(gEgo sel_146: (ScriptID 441 3) self)

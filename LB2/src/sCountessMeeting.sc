@@ -76,7 +76,14 @@
 			(2
 				(self sel_146: sCountessEnters self)
 			)
-			(3 (= sel_137 2))
+			(3
+				(if (and (gEgo sel_238: 7) (not (proc0_2 120)))
+					(gEgo sel_146: sTalkWithCountess)
+					(self sel_111:)
+				else
+					(= sel_137 2)
+				)
+			)
 			(4
 				(sel_42 sel_146: sCountessLeaves)
 			)
@@ -232,10 +239,16 @@
 				else
 					(gLb2Messager sel_295: 1 2 0 0 0 1440)
 				)
+				1
 			)
 			(17
-				(gLb2Messager sel_295: 1 17 0 0 0 1440)
-				(countTimer sel_137: (+ (countTimer sel_137?) 10))
+				(if (== (gEgo sel_2?) 443)
+					(global2 sel_146: (ScriptID 440 1))
+				else
+					(gLb2Messager sel_295: 1 17 0 0 0 1440)
+					(countTimer sel_137: (+ (countTimer sel_137?) 10))
+				)
+				1
 			)
 			(else  0)
 		)

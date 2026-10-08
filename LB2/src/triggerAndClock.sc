@@ -173,8 +173,13 @@
 				((ScriptID 90 6) sel_182: -2)
 			)
 			(145
-				((ScriptID 90 1) sel_618: 520)
+				(if (proc0_2 120)
+					((ScriptID 90 1) sel_618: 520)
+				)
 				((ScriptID 90 4) sel_618: 430)
+			)
+			(200
+				((ScriptID 90 1) sel_618: 520)
 			)
 			(215
 				(if (== ((gInv sel_64: 14) sel_166?) 520)

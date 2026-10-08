@@ -116,6 +116,22 @@ Establish a two-tier fallback trigger mechanism ensuring all Act 2 suspects and 
      their clue immediately.
 - **Consequences:** Eliminates the Act 2 suspect inquiry lockout while maintaining immersion and vanilla story flow.
 
+## D-010 Pocket Watch Confrontation Timing & Armor Room Lockout Adjustment
+
+Adjust item acquisition lockouts, schedule gating, and confrontation scripting to make presenting Carrington's pocket watch to Countess Waldorf-Carlton in the Armor Room reliably accessible.
+
+- **Context:** In vanilla LB2, Sierra authored dramatic confrontation dialogue in module 1440 (`noun 1, verb 17`) where Laura confronts Countess Waldorf-Carlton with Carrington's pocket watch in the Armor Room (`rm440.sc`). However, players were completely unable to trigger this exchange due to three compounding logic bugs:
+  1. Retrieving the pocket watch from Carrington's office (`rm630.sc` in `inWatchOpen sel_111:`) advances the clock to 1:45 by setting bit 16 (`4880`) in `global124`.
+  2. In `rm440.sc` `sOutTapestry` state 2, initiating `sTalkWithCountess` was gated behind `(not (proc0_10 4880))`. Possessing the watch guaranteed `(proc0_10 4880)` evaluated to TRUE, making the confrontation check evaluate to FALSE whenever the player carried the watch.
+  3. In `rm440.sc` `sel_403`, the secondary meeting script `sMeetingNo2` (Ziggy/Little) was checked via `(proc0_10 8224 1)`. Because `proc0_10` with `param2 = 1` checks whether all lower bits sum to 31 (`0x1f`), setting bit 16 upon taking the watch caused `(proc0_10 8224 1)` to evaluate to TRUE prematurely at 1:45, overriding the Countess meeting and skipping it entirely.
+  4. In `triggerAndClock.sc` line 176, the clock tick at 1:45 unconditionally rerouted the Countess destination room `sel_618` to 520, causing her to wander away before Laura could return with the watch.
+- **Decision:**
+  1. **Tapestry Emergence Gating (`LB2/src/rm440.sc`):** Removed `(not (proc0_10 4880))` from `sOutTapestry` state 2 so Laura emerging from behind the tapestry reliably initiates `sTalkWithCountess` (`(ScriptID 441 3)`) as long as Countess is present and flag 120 is unset.
+  2. **Armor Room Meeting Scheduling (`LB2/src/rm440.sc`):** Adjusted `sel_403` condition so `sMeetingNo2` only takes precedence if the Countess confrontation has concluded (`(proc0_2 120)`) or the clock has legitimately reached 2:00 (`(proc0_10 8224)` bit 32). This guarantees Meeting 1 (Countess) precedes Meeting 2.
+  3. **Direct Confrontation & Item Handler (`LB2/src/sCountessMeeting.sc`):** Updated `sCountessNoMeet` state 3 so if Laura enters Room 440 carrying the pocket watch (`(gEgo sel_238: 7)`), she immediately triggers `sTalkWithCountess`. In `askQuestions of Actions`, wired verb 17 (pocket watch) and verb 2 (talk) to step Laura out from behind the tapestry (`sOutTapestry`) if interacted with while hidden, returning 1.
+  4. **Countess Relocation Schedule (`LB2/src/triggerAndClock.sc`):** At 1:45 (`145`), preserved Countess destination at Room 440 until confrontation is completed (`if (proc0_2 120)`), moving her to 520 at 2:00 (`200`) if missed.
+- **Consequences:** Resolves P2-02. Restores the dramatic pocket watch confrontation and dialogue in the Armor Room whether Laura hides behind the tapestry or enters directly carrying the watch.
+
 ---
 
 ## Open questions
