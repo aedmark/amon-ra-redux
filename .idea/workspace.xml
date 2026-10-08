@@ -5,20 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c8133cd5-1c34-4cfa-b350-4968ec65328c" name="Changes" comment="m">
-      <change beforePath="$PROJECT_DIR$/.idea/amon-ra-redux.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/amon-ra-redux.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LB2/1888.MSG" beforeDir="false" afterPath="$PROJECT_DIR$/LB2/1888.MSG" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LB2/90.SCR" beforeDir="false" afterPath="$PROJECT_DIR$/LB2/90.SCR" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LB2/93.SCR" beforeDir="false" afterPath="$PROJECT_DIR$/LB2/93.SCR" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LB2/LB2SG.DIR" beforeDir="false" afterPath="$PROJECT_DIR$/LB2/LB2SG.DIR" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LB2/src/MuseumRgn.sc" beforeDir="false" afterPath="$PROJECT_DIR$/LB2/src/MuseumRgn.sc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LB2/src/RotundaRgn.sc" beforeDir="false" afterPath="$PROJECT_DIR$/LB2/src/RotundaRgn.sc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/ARCHITECTURE.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/ARCHITECTURE.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/CHANGELOG.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/CHANGELOG.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/DECISIONS.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/DECISIONS.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/HANDOFF.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/HANDOFF.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/ROADMAP.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/ROADMAP.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/manual/amon-ra.manual.json" beforeDir="false" afterPath="$PROJECT_DIR$/docs/manual/amon-ra.manual.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/docs/manual/manual.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/manual/manual.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
