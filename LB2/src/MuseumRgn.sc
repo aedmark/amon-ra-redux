@@ -1647,6 +1647,13 @@ code_17e6:
 				)
 			)
 		)
+		(if (== param1 22)
+			(super sel_300: param1)
+			(if (gEgo sel_238: 11)
+				(gEgo sel_351: 11)
+			)
+			(return)
+		)
 		(if (proc999_5 param1 6 14)
 			(if
 				(==

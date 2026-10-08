@@ -12,19 +12,22 @@ Security: [SECURITY.md](SECURITY.md). Changes: [CHANGELOG.md](CHANGELOG.md). Old
 
 ## Current state
 
-_Last updated: 2026-10-07, session 9: P2-06 (Steve & Laura Character Consistency) implemented and verified._
+_Last updated: 2026-10-07, session 11: P3-01 (Dead Man Walking Prevention) implemented and verified._
 
-**Where things stand, in one paragraph:** Phase 1 (P1-01 through P1-06) and Phase 2 items P2-01 through P2-06 are fully
-implemented. P2-06 reserves flag 122 when Laura talks to or questions Steve in Act 1 and requires that relationship state
-before Scripts 330, 335, or 350 start their museum kiss, embrace, or reunion sequences. Scripts 240, 330, 335, and 350 are
-compiled as loose patches, ADR D-014 is recorded, and the original interpreter reaches startup under DOSBox-X. The former
-external manual symlink has been removed; all project documentation now lives under `docs/`, with the manual builder retained
-under `tools/`.
+**Where things stand, in one paragraph:** Phase 1, Phase 2, and P3-01 are implemented. P3-01 adds a guarded Act 5 supply
+audit in Main (Script 0): missing Wire Cutters, Snake Oil, and Cheese are restored, empty snake oil is refilled, and flag 123
+prevents later consumption from being undone. Script 0 compiles as a loose patch, D-005 now records the implemented design,
+and the original interpreter reaches startup under DOSBox-X. All project documentation lives under `docs/`, with the manual
+builder retained under `tools/`.
 
 **Verified** (2026-10-07, Linux workspace)
 
 | Suite | Result |
 | --- | --- |
+| P3-01 Script 0 compilation | **Pass: 0.SCR and 0.HEP emitted by SCI Companion** |
+| P3-01 state audit | **Pass: items 10/14/16 repaired once at Act 5; empty global150 restored; guard flag 123 unused elsewhere** |
+| P2-07 script compilation | **Pass: 90.SCR and 93.SCR emitted by SCI Companion** |
+| P2-07 MSG/ownership audit | **Pass: eight intended dagger reactions present; both O'Reilly verb-22 paths remove item 11** |
 | `python3 tools/check_docs.py` | **Pass: 0 errors, 0 warnings** |
 | `python3 tools/manual.py check ...` | **Pass: 5 sections, 29 entries, 0 errors** |
 | `python3 tools/manual.py build ...` | **Pass: compiled docs/manual/manual.html** |
@@ -44,13 +47,15 @@ under `tools/`.
 - **P2-04 Historical Dialogue:** Three loose message overrides correct or clarify the identified late-1926 references while preserving message tuples and talkers.
 - **P2-05 Acquaintance Routing:** Six museum characters now honor existing introduction state; Pippin, Smith, and O'Riley introduce themselves in neutral first-contact dialogue.
 - **P2-06 Steve Continuity:** Museum romance sequences require Laura to have spoken with Steve in Act 1; otherwise their relationship remains professional.
+- **P2-07 Dagger Reactions and Custody:** Accessible suspects recognize the authentic recovered dagger; handing it to O'Reilly removes it from inventory in either museum actor context.
+- **P3-01 Act 5 Supply Safety:** A one-time central audit repairs missing cutters, oil, and cheese for new or existing Act 5 saves without recreating consumed items.
 - **Tooling Automation:** `tools/compile.py` compiles single scripts (including extension-agnostic target lookup in SysListView32); `tools/compile_all.exe` executes multi-pass builds.
-- **Documentation Architecture:** `docs/ROADMAP.md`, `DECISIONS.md` (D-009 through D-014), `docs/manual/`, and `docs/manual/manual.html` synchronized.
+- **Documentation Architecture:** `docs/ROADMAP.md`, `DECISIONS.md` (D-009 through D-015), `docs/manual/`, and `docs/manual/manual.html` synchronized.
 
 **Not verified**
 
 - End-to-end multi-act playthrough regression testing in DOSBox-X.
-- Direct in-game traversal of the P2-04 historical dialogue, P2-05 first-contact branches, and both P2-06 Steve relationship branches; the automated DOSBox-X check is a startup smoke, not an input-driven playthrough.
+- Direct in-game traversal of the P2-04 historical dialogue, P2-05 first-contact branches, both P2-06 Steve relationship branches, the P2-07 dagger hand-off, and P3-01 entry with deliberately missing supplies; the automated DOSBox-X check is a startup smoke, not an input-driven playthrough.
 
 **Gotchas for the next session**
 
@@ -61,15 +66,56 @@ under `tools/`.
 
 ## Next steps (in order)
 
-1. Implement P2-07 (Dagger Discovery Reactions & Inventory Hand-off).
-2. Exercise P2-04/P2-05/P2-06 branches from deterministic saves in DOSBox-X using `./tools/run_dosbox.sh`.
-3. Begin Phase 3 with P3-01 after the Phase 2 branch checks pass.
+1. Exercise P2-04 through P2-07 and P3-01 branches from deterministic saves in DOSBox-X using `./tools/run_dosbox.sh`.
+2. Implement P3-02 (Snake Oil Refill Mechanic & Inventory Feedback Overhaul).
 
 ## Open questions for maintainers
 
 None currently open. Q-001 and Q-002 have been resolved by D-007 and D-008.
 
 ## Session log
+
+### Session 11: 2026-10-07: P3-01 Dead Man Walking Prevention
+
+**Contributor:** Codex
+
+**Goal:** Prevent Act 5 from becoming unwinnable when Wire Cutters, Snake Oil, or Cheese were missed or exhausted earlier.
+
+**Done:**
+- Traced all three items through their inventory indices, acquisition paths, charge state, finale consumption, and the `actBreak` transition into `global123 == 5`.
+- Corrected the original architectural assumption that Room 510 was a basement cache; it is a museum gallery and is not a reliable recovery boundary.
+- Added a one-time supply audit to Main's central room-transition handler. Missing inventory items 10, 14, and 16 are granted, empty `global150` is restored to four charges, and unused flag 123 records completion.
+- Kept the audit idempotent so existing Act 5 saves are repaired while snake oil and cheese remain consumed after their finale puzzles.
+- Compiled Script 0, synchronized D-005 and the manual, and smoke-tested the loose patch set under DOSBox-X.
+
+**Changed:** `LB2/src/Main.sc`, `LB2/0.SCR`, `docs/ROADMAP.md`, `docs/ARCHITECTURE.md`, `docs/DECISIONS.md`, `docs/CHANGELOG.md`, `docs/manual/amon-ra.manual.json`, `docs/manual/manual.html`, `docs/HANDOFF.md`, `docs/archive/SESSION_LOG_2026_10.md`.
+
+**Decisions:** D-005 (Softlock prevention through a guarded Act 5 supply audit).
+
+**Verified:** SCI Companion compilation of Script 0; static inventory-index, charge-counter, and flag-use audit; DOSBox-X original-interpreter startup smoke; documentation/manual validation. Direct save-based entry with deliberately missing items remains a manual regression test.
+
+**Next session should start with:** P3-02 (Snake Oil Refill Mechanic & Inventory Feedback Overhaul).
+
+### Session 10: 2026-10-07: P2-07 Dagger Discovery Reactions & Inventory Hand-off
+
+**Contributor:** Codex
+
+**Goal:** Make the museum cast recognize the recovered Dagger of Amon Ra and transfer physical custody to O'Reilly.
+
+**Done:**
+- Audited archived message modules 1882..1892 and identified eight accessible verb-22 reactions, most of which incorrectly described the recovered dagger as a gift-shop replica.
+- Added loose overrides for modules 1884, 1885, 1887, and 1889..1892, and updated the existing 1888 override without disturbing its P2-05 introduction edits.
+- Added character-specific recognition dialogue for Countess, Yvette, Steve, O'Reilly, Heimlich, Ziggy, Rameses, and Olympia.
+- Updated both O'Reilly actor contexts in Scripts 90 and 93 to dispatch the ordinary dagger dialogue and then remove inventory item 11 with `(gEgo sel_351: 11)`.
+- Compiled Scripts 90 and 93, recorded D-015, synchronized the manual, and smoke-tested the loose patch set under DOSBox-X.
+
+**Changed:** `LB2/src/MuseumRgn.sc`, `LB2/src/RotundaRgn.sc`, `LB2/90.SCR`, `LB2/93.SCR`, `LB2/1884.MSG`, `LB2/1885.MSG`, `LB2/1887.MSG`, `LB2/1888.MSG`, `LB2/1889.MSG`, `LB2/1890.MSG`, `LB2/1891.MSG`, `LB2/1892.MSG`, `docs/ROADMAP.md`, `docs/ARCHITECTURE.md`, `docs/DECISIONS.md`, `docs/CHANGELOG.md`, `docs/manual/amon-ra.manual.json`, `docs/manual/manual.html`, `docs/HANDOFF.md`.
+
+**Decisions:** D-015 (Treat the recovered dagger as physical evidence).
+
+**Verified:** SCI Companion compilation of Scripts 90 and 93; exact-string audit of all eight message overrides; static ownership-path review; DOSBox-X original-interpreter startup smoke; documentation/manual validation; unchanged base archive hashes. Direct save-based traversal of the hand-off remains a manual regression test.
+
+**Next session should start with:** Phase 2 deterministic-save branch testing, then P3-01 (Dead Man Walking Prevention for Act 5 critical items).
 
 ### Session 9: 2026-10-07: P2-06 Steve & Laura Character Consistency
 
@@ -278,34 +324,6 @@ None currently open. Q-001 and Q-002 have been resolved by D-007 and D-008.
 **Verified:** `tools/check_docs.py` passes (0 errors, 0 warnings); `manual.py check` passes (0 errors, 0 warnings).
 
 **Not verified:** In-engine script compilation.
-
-**Problems / surprises:** None.
-
-**Corrections:** None.
-
-**Left undone:** P1-01 through P4-06 implementation.
-
-**Next session should start with:** Decompiling target scripts in SCI Companion and executing P1-04 and P1-03 fixes.
-
-### Session 1: 2026-10-07: Dev Plan & Modernization Roadmap Creation
-
-**Contributor:** Antigravity
-
-**Goal:** Establish development plan, architecture, and roadmap for modernizing The Dagger of Amon Ra using the floppy
-release and SCI Companion.
-
-**Done:** Created `docs/ROADMAP.md` covering all 24 items (P1-01 through P4-06); authored `docs/ARCHITECTURE.md`,
-`docs/DECISIONS.md` (D-001 through D-006, Q-001, Q-002), `docs/TESTING.md`, `docs/SECURITY.md`, `docs/CHANGELOG.md`,
-`docs/CONTRIBUTING.md`, `docs/README.md`, `AGENTS.md`, and `CLAUDE.md`; authored and compiled 3x manual `docs/manual/manual.html`.
-
-**Changed:** Initialized project memory and documentation toolchain.
-
-**Decisions:** D-001 (Floppy base v1.000), D-002 (Loose patch overrides), D-003 (Interrogation streamlining),
-D-004 (Unrestricted save/load), D-005 (Softlock prevention), D-006 (Inquest scoring standardization).
-
-**Verified:** `tools/check_docs.py` passes; `manual.py check` passes; ScummVM detects game; Wine executes SCI Companion.
-
-**Not verified:** Script decompilation output and in-engine regression saves.
 
 **Problems / surprises:** None.
 

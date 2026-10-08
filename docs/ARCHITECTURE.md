@@ -60,6 +60,7 @@ The project builds upon the DOS Floppy v1.000 release (D-001) using a modular lo
 - **Historical Text Layer (P2-04, D-012):** Modules 250, 270, and 310 are supplied as loose `.MSG` overrides. They replace the postwar Pippi reference, distinguish the experimental 1926 transatlantic radiotelephone exchange from the 1927 commercial service, and identify *The Sun Also Rises* as a newly published late-1926 novel.
 - **Acquaintance Routing (P2-05, D-013):** Actor scripts 35, 36, and 90 consult the existing museum acquaintance flags 110..115 before ordinary Talk handling. An unset flag routes to the character's condition-80 formal introduction; message overrides 1882, 1883, and 1888 remove the remaining name assumptions and let Pippin, Dr. Smith, and O'Riley identify themselves.
 - **Steve Relationship Continuity (P2-06, D-014):** Script 240 sets flag 122 when Laura initiates Talk or Ask with Steve in Act 1. Scripts 330, 335, and 350 require that flag before starting the museum reunion, kiss, or embrace sequences, so ignoring Steve preserves a professional coworker relationship instead of manufacturing romantic familiarity.
+- **Dagger Evidence Hand-off (P2-07, D-015):** Loose message modules 1884, 1885, and 1887..1892 replace replica/gift-shop reactions with character-specific recognition of the recovered artifact. O'Reilly's Script 90 and Script 93 actors intercept the dagger's verb 22 after ordinary dialogue dispatch and call `(gEgo sel_351: 11)`, making inventory ownership the canonical custody state without allocating another flag.
 
 ### 3. Save/Load Subsystem & Chase Safety (`Script 0`, `Script 500` - `550`)
 - **Vanilla Flow:** CD release disabled `theIconBar` save buttons in Act 5 chase sequences, causing instant-death punishment.
@@ -69,9 +70,10 @@ The project builds upon the DOS Floppy v1.000 release (D-001) using a modular lo
 - **Vanilla Flow:** Act 2 progression required waiting for 14 arbitrary hallway eavesdropping scenes.
 - **Modernized Flow (P3-03, D-008):** Progression advances once Laura achieves a diegetic threshold of case knowledge (uncovering core suspect motives, alibis, and relationships) through any combination of questioning, discovery, and observation. Act 2 is supplemented with contextual puzzle hooks (inspecting exhibit locks, checking visitor logs) to give players meaningful investigative agency.
 
-### 5. Softlock Prevention & Item Management (`Script 20`, `Script 510`)
+### 5. Softlock Prevention & Item Management (`Script 0`, `Script 15`)
 - **Vanilla Flow:** Missing Wire Cutters, Snake Oil, or Cheese in earlier acts creates unrecoverable "Dead Man Walking" states in Act 5.
-- **Modernized Flow (P3-01, P3-02, D-005):** Emergency backup items are placed in Room 510 (Basement). The snake oil inventory item in `20.SCR` utilizes dynamic multi-cel views (empty vs full) and guards against redundant refills.
+- **Act 5 Supply Audit (P3-01, D-005):** Main's room-transition handler performs one guarded audit when `global123` first equals 5. Missing inventory indices 10 (Wire Cutters), 14 (Snake Oil), and 16 (Cheese) are restored; an empty oil charge counter (`global150 == 0`) is reset to four. Flag 123 makes the repair idempotent, including for existing Act 5 saves, and prevents oil or cheese from reappearing after their intended finale use.
+- **Snake Oil Feedback (P3-02):** The snake oil inventory item in Script 15 is the planned owner of visible empty/full state and refill feedback.
 
 ### 6. Coroner Inquest & Scoring Logic (`Script 700`, `Script 720`, `Script 780`)
 - **Vanilla Flow:** Quiz scoring errors retroactively forced the epilogue to report the Dagger was lost even if Laura retained it. Act score divisors were inconsistent and uninitialized grade indices flashed startup F grades.

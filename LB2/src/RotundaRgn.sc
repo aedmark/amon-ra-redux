@@ -274,6 +274,13 @@
 		(if (proc999_5 param1 1 2)
 			((ScriptID 21 0) sel_57: 260)
 		)
+		(if (== param1 22)
+			(super sel_300: param1)
+			(if (gEgo sel_238: 11)
+				(gEgo sel_351: 11)
+			)
+			(return)
+		)
 		(cond 
 			((== param1 2)
 				(if (not (proc0_3 114))

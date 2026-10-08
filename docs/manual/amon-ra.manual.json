@@ -622,22 +622,26 @@
           ],
           "what": "Characters respond with genuine shock, fear, or suspicion when presented with the actual Dagger of Amon Ra; giving the dagger to Officer O'Reilly correctly removes it from Laura's inventory.",
           "how": {
-            "lead": "Updates doVerb handlers across museum actors for verb vDagger:",
+            "lead": "Uses the dagger's existing verb 22 and loose resource overrides:",
             "points": [
-              "Replace generic dismissal responses with tailored dialogue reflecting the suspect's guilt, fear, or greed.",
-              "In O'Reilly's doVerb handler, execute (ego put: iDagger) and set flag fGivenDaggerToOReilly.",
-              "Update Laura's inventory list and icon bar to immediately reflect item surrender."
+              "Replace the replica and gift-shop responses in modules 1884, 1885, and 1887 through 1892 with tailored recognition of the authentic artifact.",
+              "In both O'Reilly actor handlers (Scripts 90 and 93), preserve normal verb-22 dialogue and then execute (gEgo sel_351: 11) when Laura owns the dagger.",
+              "Use inventory ownership as the canonical custody state, so the icon disappears immediately without adding a parallel hand-off flag."
             ]
           },
           "why": "Finding the titular stolen relic is the central objective of the mystery; suspects ignoring it breaks narrative logic, and retaining the dagger after handing it to police causes item duplication glitches.",
           "evidence": [
             {
-              "label": "Inventory Script",
-              "target": "LB2/20.SCR"
+              "label": "Museum O'Reilly Handler",
+              "target": "LB2/90.SCR"
             },
             {
-              "label": "O'Reilly Script",
-              "target": "LB2/448.SCR"
+              "label": "Rotunda O'Reilly Handler",
+              "target": "LB2/93.SCR"
+            },
+            {
+              "label": "Dagger Reaction Messages",
+              "target": "LB2/1888.MSG"
             }
           ],
           "related": [
@@ -661,28 +665,20 @@
             "act-5",
             "p3"
           ],
-          "what": "Prevents unwinnable game states in Act 5 by ensuring that Wire Cutters (for the pterodactyl wire), Snake Oil Refill, and Cheese (for the rats) are either non-droppable, auto-acquired, or available in backup locations within Act 5.",
+          "what": "Prevents unwinnable game states in Act 5 by repairing missing Wire Cutters, Snake Oil, and Cheese exactly once when the act begins or an older Act 5 save is resumed.",
           "how": {
-            "lead": "Implements multi-layered softlock prevention:",
+            "lead": "Implements a guarded supply audit in Main's room-transition handler:",
             "points": [
-              "In Act 4 exit script, check inventory for critical items. If missing, prevent door seal and prompt Laura with an investigative hunch.",
-              "Spawn secondary emergency pickups in Act 5 maintenance areas (basement storage in Room 510).",
-              "Allow alternate puzzle solutions (e.g., using hairpin or chisel if wire cutters were missed)."
+              "When global123 first equals 5, grant missing inventory indices 10 (Wire Cutters), 14 (Snake Oil), and 16 (Cheese).",
+              "If the snake-oil charge counter global150 is empty, restore its four usable charges.",
+              "Set unused flag 123 after the audit so later consumption remains permanent while existing Act 5 saves are repaired on their next room initialization."
             ]
           },
           "why": "Forcing players into an inescapable death in Act 5 due to an untelegraphed omission in Act 2 or 3 is the worst hallmark of retro adventure design.",
           "evidence": [
             {
-              "label": "Chase Area 1",
-              "target": "LB2/500.SCR"
-            },
-            {
-              "label": "Basement Room",
-              "target": "LB2/510.SCR"
-            },
-            {
-              "label": "Endgame Script",
-              "target": "LB2/550.SCR"
+              "label": "Act 5 Supply Audit",
+              "target": "LB2/0.SCR"
             }
           ],
           "related": [

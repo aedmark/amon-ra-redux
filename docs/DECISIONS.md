@@ -49,10 +49,9 @@ Enable Save and Restore functions across all screens and game phases.
 
 Eliminate "Dead Man Walking" states for Act 5 critical items (Wire Cutters, Snake Oil, Cheese).
 
-- **Context:** In vanilla LB2, missing wire cutters or cheese in earlier acts renders Act 5 unwinnable hours later.
-- **Decision:** Introduce emergency backups in Act 5 accessible areas (Room 510 basement) and prevent act transitions
-  if required items are unacquired.
-- **Consequences:** Players cannot reach the finale in a doomed state, adhering to modern adventure game fairness standards.
+- **Context:** In vanilla LB2, missing wire cutters, exhausting snake oil, or missing cheese in earlier acts renders Act 5 unwinnable hours later. The initial plan incorrectly described Room 510 as a basement cache; it is a museum gallery and does not cover existing saves already beyond that room.
+- **Decision:** In Main's central room-transition handler (Script 0), perform a one-time audit whenever `global123 == 5` and guard flag 123 is unset. Grant only missing inventory indices 10 (Wire Cutters), 14 (Snake Oil), and 16 (Cheese); if the snake-oil charge counter `global150` is zero, restore it to four. Set flag 123 after the audit. This catches normal Act 5 entry, debug warps, and pre-patch Act 5 saves without blocking progression or adding room-specific pickups.
+- **Consequences:** Resolves P3-01. Players cannot enter or resume Act 5 in a doomed inventory state, while the one-shot guard prevents cheese and snake oil from being recreated after their intended consumption. The repair is save-compatible and does not change earlier-act puzzle acquisition.
 
 ## D-006 Inquest Scoring Standardization and Physical Clue Decoupling
 
@@ -178,6 +177,14 @@ Use a dedicated relationship bit to distinguish an established personal connecti
 - **Context:** Act 2 room scripts could automatically stage a kiss, embrace, or intimate reunion between Laura and Steve even when the player never spoke to him in Act 1. The Act 1 interaction lives in `rm240.sc`, while the affected museum arrivals are distributed across Scripts 330, 335, and 350.
 - **Decision:** Reserve flag 122 as the Steve Act 1 conversation bit. Set it when either `sTalkSteve` or `sAskSteve` begins its dialogue in Script 240. Require the bit alongside the existing timing and presence conditions before starting the romantic sequences in Scripts 330, 335, and 350. When it is unset, preserve the normal room initialization and professional coworker flow.
 - **Consequences:** Resolves P2-06 without rewriting dialogue resources or changing the museum schedule. Existing saves default to the non-romantic branch unless the Act 1 conversation has occurred in that playthrough.
+
+## D-015 Treat the Recovered Dagger as Physical Evidence
+
+Use the existing dagger inventory verb and ownership state to represent recognition and police custody.
+
+- **Context:** The real Dagger of Amon Ra is acquired as inventory item 11 and presented to actors with verb 22. Existing records in message modules 1884, 1885, and 1887..1892 mostly dismissed it as a gift-shop replica, even after Laura recovered it from the alcohol vat. O'Reilly's three-line verb-22 exchange offered to borrow the dagger but left item 11 in Laura's inventory, duplicating custody in story and UI.
+- **Decision:** Supply loose message overrides for the eight accessible reactions, preserving their noun/verb/condition/sequence/talker metadata while rewriting only the dagger text. In both O'Reilly implementations (`MuseumRgn.sc` / Script 90 and `RotundaRgn.sc` / Script 93), intercept verb 22, retain the inherited message dispatch, and call `(gEgo sel_351: 11)` when Laura still owns the item. Do not allocate a separate hand-off flag; dagger ownership is the authoritative custody state.
+- **Consequences:** Resolves P2-07. Suspects now react to the authentic central artifact, and surrendering it to O'Reilly immediately removes it from Laura's inventory in either actor context. The loose-patch approach preserves base archives and the earlier P2-05 edits already carried by module 1888.
 
 ---
 
