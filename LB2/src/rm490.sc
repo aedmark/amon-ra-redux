@@ -63,7 +63,7 @@
 			)
 		)
 		(super sel_110:)
-		(if (proc0_2 143)
+		(if (or (proc0_2 143) (proc0_2 72))
 			(if (proc0_2 37)
 				(zHead
 					sel_3: 2

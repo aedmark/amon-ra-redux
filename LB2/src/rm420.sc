@@ -319,6 +319,8 @@
 	
 	(method (sel_110)
 		(super sel_110: &rest)
+		(proc0_3 67)
+		(proc0_3 158)
 		(= theGLb2DoVerbCode gLb2DoVerbCode)
 		(= gLb2DoVerbCode exitDoVerbCode)
 		(proc0_8 1)
@@ -703,6 +705,7 @@
 					(= sel_136 1)
 				else
 					(proc0_3 67)
+					(proc0_3 158)
 					(gSel_561 sel_119: 102)
 					(DrawPic 556)
 					(gSel_563 sel_119: 111 sel_125:)

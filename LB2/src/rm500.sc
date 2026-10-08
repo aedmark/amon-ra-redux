@@ -646,6 +646,8 @@
 	
 	(method (sel_110)
 		(super sel_110: &rest)
+		(proc0_3 68)
+		(proc0_3 161)
 		(= theGLb2DoVerbCode gLb2DoVerbCode)
 		(= gLb2DoVerbCode exitDoVerbCode)
 		(proc0_8 1)
@@ -1209,6 +1211,7 @@
 					(= sel_136 1)
 				else
 					(proc0_3 68)
+					(proc0_3 161)
 					(global2 sel_417: 556)
 					(wrapMusic sel_110: -1 3 6)
 					(= local0 1)

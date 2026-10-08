@@ -145,6 +145,7 @@
 					(screamAndLook sel_40: 6 sel_3: -1 sel_99: 1 sel_39:)
 				else
 					(proc0_3 72)
+					(proc0_3 143)
 				)
 				(sel_42 sel_422: inZiggyDead self)
 			)
@@ -485,6 +486,8 @@
 	
 	(method (sel_110)
 		(super sel_110: &rest)
+		(proc0_3 72)
+		(proc0_3 143)
 		(global2 sel_408: 780)
 		(gGame sel_588:)
 		(proc0_8 1)

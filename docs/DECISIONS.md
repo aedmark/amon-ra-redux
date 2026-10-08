@@ -132,6 +132,29 @@ Adjust item acquisition lockouts, schedule gating, and confrontation scripting t
   4. **Countess Relocation Schedule (`LB2/src/triggerAndClock.sc`):** At 1:45 (`145`), preserved Countess destination at Room 440 until confrontation is completed (`if (proc0_2 120)`), moving her to 520 at 2:00 (`200`) if missed.
 - **Consequences:** Resolves P2-02. Restores the dramatic pocket watch confrontation and dialogue in the Armor Room whether Laura hides behind the tapestry or enters directly carrying the watch.
 
+## D-011 Unused Dialogue & Murder Reaction Restoration
+
+Establish a dual-tier flag synchronization architecture and restore missing NPC interrogation branches for discovered homicides.
+
+- **Context:** Sierra's writers authored extensive, high-quality dialogue sequences across character modules 1883..1892 where suspects and museum staff react to the murders of Dr. Archibald Carrington, Ziggy, Ernie Leach, Yvette Delacroix, Dr. Pippin Carter, and Countess Waldorf-Carlton, as well as the recovery of the Dagger of Amon Ra. In vanilla LB2, these dialogues were inaccessible due to systematic flag disconnects between discovery cutscenes and NPC interrogation dispatchers:
+  1. Carrington (clue 259, sequence 69): Room 630 set physical discovery flag 12 upon opening the trunk, but interrogation switches in `MuseumRgn.sc`, `RotundaRgn.sc`, `aHeimlich.sc`, and `aRameses.sc` checked flag 171 (which was only set in room 560 when discovering Watney Little in the boiler).
+  2. Ziggy (clue 264, sequence 74): Room 435 set corpse discovery flag 72, but interrogation handlers checked flag 143, and Ziggy's severed head display in room 490 was gated behind `(if (proc0_2 143))`, causing the head display to never initialize.
+  3. Ernie Leach (clue 267, sequence 71): Room 420 set corpse discovery flag 67, but interrogation handlers checked flag 158.
+  4. Yvette Delacroix (clue 266, sequence 73): Room 500 set corpse discovery flag 68 upon discovering Yvette, but interrogation handlers checked flag 161 (which was only set if Laura completed `sSmashPlaster`).
+  5. Countess Waldorf-Carlton (clue 269, sequence 70): Sierra authored a complete 8-line sequence in module 1888 for questioning O'Riley about Countess's murder, but case 269 was entirely omitted from `aORiley` in `MuseumRgn.sc`.
+  6. Dagger of Amon Ra (clue 780, sequence 75): O'Riley's reaction to finding the Dagger in the alcohol vat checked score flag 155 rather than physical item possession.
+- **Decision:**
+  1. **Diegetic Discovery Setting:** Set narrative homicide flags (`171` & `134` in `rm630.sc`, `143` in `rm435.sc`, `158` in `rm420.sc`, `161` in `rm500.sc`, `165` in `rm525.sc`, and `155` in `rm620.sc`) directly within discovery cutscenes and detailed examination insets (`inBones`, `inZiggyDead`, `inDeadErnie`, `inDeadYvette`).
+  2. **Interrogation Handler Fallbacks:** Update interrogation switches across `MuseumRgn.sc`, `RotundaRgn.sc`, `aHeimlich.sc`, and `aRameses.sc` to check dual-tier conditions:
+     - Carrington (259): `(or (proc0_2 171) (proc0_2 12))` -> Sequence 69
+     - Ziggy (264): `(or (proc0_2 143) (proc0_2 72))` -> Sequence 74
+     - Yvette (266): `(or (proc0_2 161) (proc0_2 68))` -> Sequence 73
+     - Ernie (267): `(or (proc0_2 158) (proc0_2 67))` -> Sequence 71
+     - Countess (269): Added case 269 in `aORiley` in `MuseumRgn.sc` checking `(or (proc0_2 69) (proc0_2 165) (proc0_2 166))` -> Sequence 70
+     - Dagger (780): `(or (proc0_2 155) (proc0_2 22) (gEgo sel_238: 11))` -> Sequence 75
+  3. **Room 490 Head Display Restoration:** Update `rm490.sc` line 66 to check `(if (or (proc0_2 143) (proc0_2 72)))`.
+- **Consequences:** Resolves P2-03. Completely restores all authored murder reactions across suspects, enables Ziggy's severed head exhibit in room 490, and connects O'Riley's Countess dialogue without requiring modifications to base resource files.
+
 ---
 
 ## Open questions

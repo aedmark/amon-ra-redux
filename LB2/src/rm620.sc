@@ -637,6 +637,7 @@
 				(gEgo sel_350: 11)
 				((ScriptID 21 0) sel_57: 780)
 				(proc0_3 22)
+				(proc0_3 155)
 				(gGame sel_87: 1 155)
 				((ScriptID 22 0) sel_57: 128)
 				(= sel_136 1)

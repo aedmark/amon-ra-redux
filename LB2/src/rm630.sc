@@ -459,6 +459,8 @@
 				(sFX2 sel_170:)
 				(bugsWithMeat sel_111:)
 				(proc0_3 12)
+				(proc0_3 171)
+				(proc0_3 134)
 				(MuseumRgn sel_645:)
 				(fridgeDoor sel_311: 4)
 				(snakeOil sel_311: 4 1 8)
@@ -1048,6 +1050,9 @@
 	
 	(method (sel_110)
 		(super sel_110: &rest)
+		(proc0_3 12)
+		(proc0_3 171)
+		(proc0_3 134)
 		(proc958_0 132 4 6)
 		(= local1 0)
 		(global2 sel_146: sPlayMusic)

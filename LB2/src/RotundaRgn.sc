@@ -325,7 +325,7 @@
 					)
 					(259
 						(cond 
-							((proc0_2 171)
+							((or (proc0_2 171) (proc0_2 12))
 								(if (proc27_0 4 global363)
 									(gLb2Messager sel_295: sel_213 6 1 0 0 sel_214)
 								else
@@ -342,7 +342,7 @@
 					)
 					(264
 						(cond 
-							((proc0_2 143)
+							((or (proc0_2 143) (proc0_2 72))
 								(if (proc27_0 4 global366)
 									(gLb2Messager sel_295: sel_213 6 1 0 0 sel_214)
 								else
@@ -359,7 +359,7 @@
 					)
 					(266
 						(cond 
-							((proc0_2 161)
+							((or (proc0_2 161) (proc0_2 68))
 								(if (proc27_0 4 global367)
 									(gLb2Messager sel_295: sel_213 6 1 0 0 sel_214)
 								else
@@ -376,7 +376,7 @@
 					)
 					(267
 						(cond 
-							((proc0_2 158)
+							((or (proc0_2 158) (proc0_2 67))
 								(if (proc27_0 4 global365)
 									(gLb2Messager sel_295: sel_213 6 1 0 0 sel_214)
 								else
@@ -393,7 +393,7 @@
 					)
 					(780
 						(cond 
-							((proc0_2 155)
+							((or (proc0_2 155) (proc0_2 22) (gEgo sel_238: 11))
 								(if (proc27_0 4 global368)
 									(gLb2Messager sel_295: sel_213 6 1 0 0 sel_214)
 								else

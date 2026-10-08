@@ -48,6 +48,7 @@
 		(self sel_414: 90)
 		(= theGLb2DoVerbCode gLb2DoVerbCode)
 		(= gLb2DoVerbCode exitDoVerbCode)
+		(proc0_3 165)
 		(if (proc0_3 69)
 			(= sel_408 525)
 			(gSel_608 sel_40: 6 sel_3: -1 sel_99: 1 sel_39:)

@@ -12,15 +12,17 @@ Security: [SECURITY.md](SECURITY.md). Changes: [CHANGELOG.md](CHANGELOG.md). Old
 
 ## Current state
 
-_Last updated: 2026-10-07, session 5: P2-02 (Pocket Watch Confrontation Timing & Armor Room Lockout Adjustment) implemented, compiled, and verified._
+_Last updated: 2026-10-07, session 6: P2-03 (Unused Dialogue & Murder Reaction Restoration) implemented, compiled, and verified._
 
-**Where things stand, in one paragraph:** Phase 1 (P1-01 through P1-06) and Phase 2 items P2-01 and P2-02 are fully
-implemented, verified, and compiled. P2-02 fixes the impossible pocket watch confrontation in the Armor Room (`rm440.sc`,
-`sCountessMeeting.sc`, `triggerAndClock.sc`): eliminates the premature 1:45 (`4880`) lockout in `sOutTapestry` state 2;
-adjusts `sel_403` scheduling so Meeting 2 (`sMeetingNo2`) does not prematurely override Meeting 1 upon acquiring the watch;
-enables direct watch confrontation upon room entrance in `sCountessNoMeet`; handles watch interactions from behind the
-tapestry in `askQuestions`; and preserves Countess's Armor Room schedule in `triggerAndClock.sc` until 2:00. All three scripts
-are compiled to loose overrides (`440.SCR`, `441.SCR`, `22.SCR`). Documentation, ADR D-010, and 3x manuals pass validation.
+**Where things stand, in one paragraph:** Phase 1 (P1-01 through P1-06) and Phase 2 items P2-01, P2-02, and P2-03 are fully
+implemented, verified, and compiled. P2-03 resolves systematic flag disconnects between homicide discovery cutscenes and NPC
+interrogation dispatchers: sets narrative homicide flags (`171` & `134` in `rm630.sc`, `143` in `rm435.sc`, `158` in `rm420.sc`,
+`161` in `rm500.sc`, `165` in `rm525.sc`, and `155` in `rm620.sc`) upon body/clue discovery; establishes dual-tier fallback checks
+in interrogation switches across `MuseumRgn.sc`, `RotundaRgn.sc`, `aHeimlich.sc`, and `aRameses.sc`; wires missing topic 269 in
+O'Riley (`MuseumRgn.sc`) to activate authored 8-line Countess murder sequence 70; and restores Ziggy's severed head exhibit in
+`rm490.sc` via dual-tier flag 143/72 check. All 11 modified scripts are compiled to loose overrides (`32.SCR`, `36.SCR`, `90.SCR`,
+`93.SCR`, `420.SCR`, `435.SCR`, `490.SCR`, `500.SCR`, `525.SCR`, `620.SCR`, `630.SCR`). Base game archives match bit-for-bit,
+ADR D-011 recorded, and 3x manuals pass validation.
 
 **Verified** (2026-10-07, Linux workspace)
 
@@ -28,17 +30,18 @@ are compiled to loose overrides (`440.SCR`, `441.SCR`, `22.SCR`). Documentation,
 | --- | --- |
 | `python3 tools/check_docs.py` | **Pass: 0 errors, 0 warnings** |
 | `python3 3x-documentation-scheme/scripts/manual.py check ...` | **Pass: 5 sections, 29 entries, 0 errors** |
-| `python3 3x-documentation-scheme/scripts/manual.py build ...` | **Pass: compiled manual.html (104 KB)** |
+| `python3 3x-documentation-scheme/scripts/manual.py build ...` | **Pass: compiled manual.html (105 KB)** |
 | Base Game Archive MD5 Integrity | **Pass: RESOURCE.000 and RESOURCE.MAP match vanilla bit-for-bit** |
-| SCI Companion Script Compilation | **Pass: rm440.sc (440), sCountessMeeting.sc (441), and triggerAndClock.sc (22) compiled cleanly** |
+| SCI Companion Script Compilation | **Pass: 32, 36, 90, 93, 420, 435, 490, 500, 525, 620, 630 compiled cleanly** |
 
 **What works**
 
 - **Phase 1 Overhaul:** All six Phase 1 items (P1-01 through P1-06) compiled as loose patches in `LB2/`.
 - **P2-01 Suspect Fallbacks:** Dual-tier guest register check-in and encounter-based suspect registration operational.
 - **P2-02 Pocket Watch Confrontation:** Armor Room lockout removed, meeting scheduling sequence corrected, and watch confrontation dialogue fully accessible.
+- **P2-03 Murder Reaction Restoration:** Discovered homicide dialogue trees restored across all suspects; O'Riley Countess reaction connected; Ziggy head exhibit restored; Dagger inquiry connected.
 - **Tooling Automation:** `tools/compile.py` compiles single scripts (including extension-agnostic target lookup in SysListView32); `tools/compile_all.exe` executes multi-pass builds.
-- **Documentation Architecture:** `ROADMAP.md`, `DECISIONS.md` (D-009, D-010), `3x-documentation-scheme/`, and `manual.html` synchronized.
+- **Documentation Architecture:** `ROADMAP.md`, `DECISIONS.md` (D-009, D-010, D-011), `3x-documentation-scheme/`, and `manual.html` synchronized.
 
 **Not verified**
 
@@ -51,9 +54,9 @@ are compiled to loose overrides (`440.SCR`, `441.SCR`, `22.SCR`). Documentation,
 
 ## Next steps (in order)
 
-1. Implement P2-03 (Murder Reaction Restoration & Text-First Voice Architecture in MSG resources).
-2. Implement P2-04 (Narrative Anachronism Corrections across MSG resources).
-3. Implement P2-05 (Contextual Dialogue Logic & Acquaintance Checks).
+1. Implement P2-04 (Narrative Anachronism Corrections across MSG resources).
+2. Implement P2-05 (Contextual Dialogue Logic & Acquaintance Checks).
+3. Implement P2-06 (Steve & Laura Character Consistency).
 4. Run gameplay test verification in DOSBox-X using `./tools/run_dosbox.sh`.
 
 ## Open questions for maintainers
@@ -61,6 +64,39 @@ are compiled to loose overrides (`440.SCR`, `441.SCR`, `22.SCR`). Documentation,
 None currently open. Q-001 and Q-002 have been resolved by D-007 and D-008.
 
 ## Session log
+
+### Session 6: 2026-10-07: P2-03 Unused Dialogue & Murder Reaction Restoration
+
+**Contributor:** Antigravity
+
+**Goal:** Implement P2-03 (Unused Dialogue & Murder Reaction Restoration) to restore authored NPC murder reactions, reconnect missing interrogation branches, restore Ziggy's severed head display in room 490, and enable O'Riley's Countess murder confrontation.
+
+**Done:**
+- Audited message resources across suspect talkers (1883..1892) using custom DCL decompression tooling (`/tmp/dump_msg`). Discovered Sierra authors wrote complete, dramatic reactions for all discovered murders (Carrington, Ziggy, Ernie, Yvette, Carter, Countess, and Dagger of Amon Ra) across modules.
+- Diagnosed root causes for inaccessible murder reactions:
+  1. Carrington (clue 259, sequence 69): Room 630 set physical discovery flag 12 upon opening trunk, but interrogation switches checked flag 171 (only set in room 560 when finding Watney Little).
+  2. Ziggy (clue 264, sequence 74): Room 435 set corpse discovery flag 72, but interrogation switches checked flag 143, and Ziggy's severed head in room 490 was gated behind `(if (proc0_2 143))`, preventing the exhibit from ever initializing.
+  3. Ernie (clue 267, sequence 71): Room 420 set corpse discovery flag 67, but interrogation switches checked flag 158.
+  4. Yvette (clue 266, sequence 73): Room 500 set corpse discovery flag 68 upon discovering Yvette, but interrogation switches checked flag 161 (only set after `sSmashPlaster`).
+  5. Countess (clue 269, sequence 70): Sierra authored a full 8-line sequence in module 1888 for questioning O'Riley about Countess's murder, but case 269 was entirely omitted from `aORiley` in `MuseumRgn.sc`.
+  6. Dagger (clue 780, sequence 75): O'Riley's reaction to finding the Dagger in the alcohol vat checked score flag 155 rather than physical item possession.
+- Implemented fixes in accordance with ADR D-011:
+  1. Set narrative homicide flags directly in discovery cutscenes and detail insets: `(proc0_3 171)` and `(proc0_3 134)` in `LB2/src/rm630.sc`, `(proc0_3 143)` in `LB2/src/rm435.sc`, `(proc0_3 158)` in `LB2/src/rm420.sc`, `(proc0_3 161)` in `LB2/src/rm500.sc`, `(proc0_3 165)` in `LB2/src/rm525.sc`, and `(proc0_3 155)` in `LB2/src/rm620.sc`.
+  2. Implemented dual-tier fallback checks across interrogation switches in `LB2/src/MuseumRgn.sc` (Script 90), `LB2/src/RotundaRgn.sc` (Script 93), `LB2/src/aHeimlich.sc` (Script 32), and `LB2/src/aRameses.sc` (Script 36) for clues 259, 264, 266, 267, and 780.
+  3. Added missing case 269 in `aORiley` in `MuseumRgn.sc` to trigger sequence 70 upon Countess's death.
+  4. Restored Ziggy's severed head exhibit in `LB2/src/rm490.sc` by checking `(if (or (proc0_2 143) (proc0_2 72)))`.
+- Compiled all 11 modified scripts: `32.SCR`, `36.SCR`, `90.SCR`, `93.SCR`, `420.SCR`, `435.SCR`, `490.SCR`, `500.SCR`, `525.SCR`, `620.SCR`, `630.SCR`.
+- Recorded architectural decision D-011 in `docs/DECISIONS.md`.
+- Updated `ROADMAP.md` (P2-03 marked done), `3x-documentation-scheme/scheme/amon-ra.manual.json`, and rebuilt `manual.html` (105 KB).
+- Validated docs with `tools/check_docs.py` (0 errors, 0 warnings) and `manual.py check` (0 errors).
+
+**Changed:** `LB2/src/rm630.sc`, `LB2/src/rm435.sc`, `LB2/src/rm490.sc`, `LB2/src/rm420.sc`, `LB2/src/rm500.sc`, `LB2/src/rm525.sc`, `LB2/src/rm620.sc`, `LB2/src/MuseumRgn.sc`, `LB2/src/RotundaRgn.sc`, `LB2/src/aHeimlich.sc`, `LB2/src/aRameses.sc`, `LB2/32.SCR`, `LB2/36.SCR`, `LB2/90.SCR`, `LB2/93.SCR`, `LB2/420.SCR`, `LB2/435.SCR`, `LB2/490.SCR`, `LB2/500.SCR`, `LB2/525.SCR`, `LB2/620.SCR`, `LB2/630.SCR`, `docs/DECISIONS.md`, `ROADMAP.md`, `3x-documentation-scheme/scheme/amon-ra.manual.json`, `manual.html`, `docs/HANDOFF.md`.
+
+**Decisions:** D-011 (Unused dialogue & murder reaction restoration).
+
+**Verified:** `python3 tools/compile.py` for all 11 scripts, `tools/check_docs.py` (0 errors), `manual.py check` (0 errors), `manual.py build` (105 KB), MD5 verification of base archives.
+
+**Next session should start with:** P2-04 (Narrative Anachronism Corrections across MSG resources).
 
 ### Session 5: 2026-10-07: P2-02 Pocket Watch Confrontation Timing & Armor Room Lockout Implementation
 
