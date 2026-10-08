@@ -95,6 +95,8 @@ with contextual puzzles and investigative activities.
 - **Consequences:** Resolves Q-002. Replaces arbitrary event counting with logical detective agency; players can advance
   naturally as soon as they understand enough of the scenario to justify moving forward.
 
+**Status:** Superseded by D-017 after source audit showed that the described 14-eavesdrop Act 2 gate does not exist.
+
 ## D-009 Inaccessible Plot Information & Notebook Fallback Triggers
 
 Establish a two-tier fallback trigger mechanism ensuring all Act 2 suspects and staff are recorded in Laura's notebook.
@@ -186,11 +188,35 @@ Use the existing dagger inventory verb and ownership state to represent recognit
 - **Decision:** Supply loose message overrides for the eight accessible reactions, preserving their noun/verb/condition/sequence/talker metadata while rewriting only the dagger text. In both O'Reilly implementations (`MuseumRgn.sc` / Script 90 and `RotundaRgn.sc` / Script 93), intercept verb 22, retain the inherited message dispatch, and call `(gEgo sel_351: 11)` when Laura still owns the item. Do not allocate a separate hand-off flag; dagger ownership is the authoritative custody state.
 - **Consequences:** Resolves P2-07. Suspects now react to the authentic central artifact, and surrendering it to O'Reilly immediately removes it from Laura's inventory in either actor context. The loose-patch approach preserves base archives and the earlier P2-05 edits already carried by module 1888.
 
+## D-016 Use Charge State as the Snake Oil UI Source of Truth
+
+Derive bottle feedback and refill eligibility from the existing `global150` charge counter rather than adding parallel state.
+
+- **Context:** The P3-02 outline misidentified the inventory owner as Script 20 and the refill location as Room 510. Audit found the Snake Oil item in Script 15 and the refill jar in Room 610's Alcoholic Preservation Laboratory. View 61 originally supplied one cel in each of its cursor, inventory, and toolbar loops, so no empty cel existed. The jar's verb-25 handler incremented its display cel on each use and refilled only after four applications, while the actual jar depletion flags 107, 106, and 105 already represented three available portions. No grape check exists in the vanilla handler.
+- **Decision:** Keep `global150` as the sole bottle-state authority. Supply loose `61.V56` with cel 1 added to the inventory and toolbar loops as a clear red-X empty state; Script 15 selects cel 0 when charges remain and cel 1 at zero. In Room 610, reject refill attempts when `global150 == 4` or flag 105 marks the jar empty; otherwise restore four charges in one action, advance exactly one depletion flag/cel, and enlarge the oil jar's interaction rectangle. Preserve the audited independence from inventory item 31 (Grapes).
+- **Consequences:** Resolves P3-02 without new globals or base-archive edits. Bottle appearance cannot drift from usable charges, repeated full-bottle clicks cannot consume jar supply, and the jar's three portions now correspond to three successful refills. The View 61 transformation is reproducible with `tools/build_snake_oil_view.py`.
+
+## D-017 Preserve Authored Act Transitions and Scene-Scheduler Semantics
+
+Do not build a replacement knowledge threshold on the outline's unsupported “14 mandatory eavesdropping scenes” premise.
+
+- **Context:** A complete source-reference audit found no Act 2 eavesdropping counter in Script 0 or Room 230. Act changes enter Script 26 directly from authored sequences. The Act 2-to-3 break is reached through Room 454's Pippin discovery/report sequence. The only plausible counter, `global111`, is used later by Rooms 510, 560, and 630 to order door-listening and character scenes across acts; Script 22 can set it directly to 15 at 3:00, and Room 610 also sets 15 after its scheduled event. Script 26 never reads it.
+- **Decision:** Preserve the existing event-driven act transitions and `global111` save semantics. Do not introduce a parallel clue bitmask, force a threshold into Room 230, or skip scheduler states. Treat new museum activities as an explicit content-expansion milestone requiring narrative, message, art, and save-state specifications.
+- **Consequences:** Completes P3-03's technical audit without a risky binary change and avoids skipping authored scenes or invalidating saves. It does not dismiss the underlying pacing problem; that design goal continues as P5-01 after the bug-fix roadmap.
+
+## D-018 Stage Act 2 Interactive Content After Core Bug Fixes
+
+Retain Act 2's essential social context while adding player-driven investigation only after the existing bug-fix phases are stable.
+
+- **Context:** P3-03 established that the often-described “14 eavesdrops” are not a literal progression counter, but the player experience remains overly passive: essential motives, alibis, and relationships are delivered through a long run of dialogue and overheard conversations with too little mechanical variety between them.
+- **Decision:** Add Phase 5 and P5-01 as a post-bugfix content milestone. Its design pass will map the complete Act 2 schedule and clue dependencies before selecting several compact museum activities that route the player naturally between existing conversations. Prefer mechanics grounded in existing rooms and props—such as exhibit-security inspection, guest/staff record comparison, or artifact observations—while preserving essential dialogue, authored act transitions, `global111`, and old-save behavior. Require explicit narrative text, resource ownership, scoring, state allocation, and deterministic DOSBox-X test saves before implementation.
+- **Consequences:** The pacing concern remains first-class work rather than being closed by the technical audit. Deferring new content until P3 and P4 bug fixes are complete prevents new scripts and state from obscuring current defects and gives the expansion a stable behavioral baseline.
+
 ---
 
 ## Open questions
 
 - **Q-001**: Resolved by D-007: Omit insensitive original CD voice tracks; restore murder lines as text messages in
   `.MSG`, leaving talker audio hooks open for future custom voice recordings.
-- **Q-002**: Resolved by D-008: Implement diegetic knowledge acquisition threshold for Act 2 progression and plan
-  contextual museum activities/puzzles.
+- **Q-002**: Resolved by D-017 and D-018: preserve the existing transition/scheduler model, then address the genuine
+  passive-pacing problem through the post-bugfix P5-01 Act 2 content milestone.

@@ -690,28 +690,36 @@
         {
           "id": "p3-02-snake-oil-refill-overhaul",
           "title": "P3-02: Snake Oil Refill Mechanic & Inventory Feedback Overhaul",
-          "summary": "Adds clear inventory feedback for snake oil state, prevents invalid refills, and decouples basement dispenser from grapes.",
+          "summary": "Adds clear inventory and toolbar feedback for snake oil state and makes the laboratory refill jar direct, guarded, and easy to target.",
           "tags": [
             "inventory",
             "puzzles",
             "feedback",
             "p3"
           ],
-          "what": "Revamps the snake oil bottle mechanic: updates the inventory icon to visibly show empty vs full states, blocks refilling an already full bottle, makes the basement dispenser conspicuous, and removes the artificial dependency on picking up grapes.",
-          "how": [
-            "In Inventory Script 20 (20.SCR), assign multi-cel view for iSnakeOil (cel 0 = empty, cel 1 = full).",
-            "Add guard check in refill verb handler: (if snakeOilFull (Print 20 12) else ...).",
-            "In Room 510 (Basement), enhance dispenser hotspot bounds and remove (ego has: iGrapes) prerequisite from the oil barrel script."
-          ],
+          "what": "Revamps the snake oil bottle mechanic: an empty bottle visibly gains a red-X cel in inventory and the toolbar, a full bottle cannot waste jar supply, and the Alcoholic Preservation Laboratory jar refills the bottle in one action through a larger click target.",
+          "how": {
+            "lead": "Uses the existing charge counter as the single source of truth across the actual owning resources:",
+            "points": [
+              "A loose View 61 patch adds cel 1 to the inventory and toolbar loops; Script 15 selects original cel 0 while global150 is nonzero and the red-X cel when it reaches zero.",
+              "Room 610 rejects refill attempts when the bottle already has four charges or depletion flag 105 marks the jar empty.",
+              "A successful refill restores four charges immediately, advances exactly one of the jar's three depletion stages, and uses an enlarged interaction rectangle.",
+              "The audited vanilla Room 610 handler has no Grapes prerequisite, so the refill remains independent without inventing new state."
+            ]
+          },
           "why": "The snake oil puzzle was plagued by invisible state changes, arbitrary puzzle coupling, and misleading feedback, turning an essential survival item into an exercise in frustration.",
           "evidence": [
             {
               "label": "Inventory Script",
-              "target": "LB2/20.SCR"
+              "target": "LB2/15.SCR"
             },
             {
-              "label": "Basement Script",
-              "target": "LB2/510.SCR"
+              "label": "Laboratory Script",
+              "target": "LB2/610.SCR"
+            },
+            {
+              "label": "Snake Oil View",
+              "target": "LB2/61.V56"
             }
           ],
           "related": [
@@ -720,38 +728,47 @@
         },
         {
           "id": "p3-03-pacing-eavesdropping-rebalance",
-          "title": "P3-03: Pacing, Diegetic Knowledge Gating & Contextual Activity Framework",
-          "summary": "Replaces the 14-eavesdropping requirement with a diegetic knowledge acquisition threshold and contextual museum puzzles.",
+          "title": "P3-03: Pacing & Progression Audit",
+          "summary": "Corrects the outline's nonexistent 14-eavesdrop Act 2 gate and preserves the authored event-driven progression model.",
           "tags": [
             "pacing",
             "acts",
             "progression",
             "p3"
           ],
-          "what": "Expands Act 4 narrative flow and replaces Act 2's rigid 14-eavesdropping requirement with a diegetic knowledge acquisition threshold. The game advances to Act 3 as soon as Laura has uncovered the minimum necessary case context (suspect motives, alibis, party dynamics), supplemented by new contextual investigative tasks throughout the museum.",
+          "what": "Audits the claimed 14-eavesdropping requirement against the complete source tree. Act transitions already occur through authored story events, while the superficially counter-like global111 is a later cross-room scene scheduler that the clock can advance directly. The existing progression is preserved rather than replaced with an incompatible synthetic knowledge score.",
           "how": {
-            "lead": "Refactors progression state tracking in Script 0 and Room 230:",
+            "lead": "Traces the actual act-transition and scene-scheduling paths:",
             "points": [
-              "Implement a diegetic knowledge bitmask in Script 0 tracking core suspect motives, alibis, and museum relationships.",
-              "Advance the museum clock once the minimum necessary context threshold is achieved through any combination of questioning, observation, or eavesdropping.",
-              "Introduce contextual museum activities (inspecting exhibit security, cross-referencing visitor logs) to give players meaningful detective agency rather than passive hallway waiting.",
-              "Flesh out Act 4 narrative encounters with remaining suspects before the chase trigger."
+              "Confirm that Script 26 advances acts only when an authored sequence explicitly enters the act-break room.",
+              "Trace the Act 2-to-3 transition to Pippin's discovery and report sequence in Room 454, not Room 230 or a clue count.",
+              "Audit every global111 reference and retain its ordered Rooms 510, 560, and 630 scene-scheduler meaning for existing saves.",
+              "Route the genuine Act 2 pacing concern to P5-01, where new museum activities can be designed after the bug-fix phases against a stable schedule and state model."
             ]
           },
-          "why": "Forcing players to wait for 14 arbitrary corridor eavesdrops makes Act 2 a passive slog. Gating progress behind diegetic understanding rewards genuine deductive reasoning and gives players purposeful things to do.",
+          "why": "Implementing the outline literally would solve a mechanic the game does not contain. Reusing global111 as a knowledge score could skip authored scenes and reinterpret saved games, while a second progression system would create conflicting gates.",
           "evidence": [
             {
-              "label": "Main Controller",
-              "target": "LB2/0.SCR"
+              "label": "Act Break Controller",
+              "target": "LB2/src/actBreak.sc"
             },
             {
-              "label": "Museum Main Hall",
-              "target": "LB2/230.SCR"
+              "label": "Act 2 Story Transition",
+              "target": "LB2/src/rm454.sc"
+            },
+            {
+              "label": "Scene Scheduler",
+              "target": "LB2/src/rm510.sc"
+            },
+            {
+              "label": "Clock Triggers",
+              "target": "LB2/src/triggerAndClock.sc"
             }
           ],
           "related": [
             "p1-01-ui-interrogation",
-            "p3-06-npc-wander-stabilization"
+            "p3-06-npc-wander-stabilization",
+            "p5-01-act-2-interactive-investigation"
           ]
         },
         {
@@ -1052,6 +1069,56 @@
           "related": [
             "p4-03-hint-book-contradictions",
             "p4-05-grading-score-standardization"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "phase-5-act-2-content",
+      "title": "Phase 5: Act 2 Content and Pacing Expansion",
+      "description": "Post-bugfix content work that adds active museum investigation around Act 2's essential social context.",
+      "entries": [
+        {
+          "id": "p5-01-act-2-interactive-investigation",
+          "title": "P5-01: Act 2 Interactive Investigation Milestone",
+          "summary": "Adds compact museum puzzles that route the player naturally through Act 2's essential conversations and eavesdropping.",
+          "tags": [
+            "act-2",
+            "pacing",
+            "puzzles",
+            "new-content",
+            "p5"
+          ],
+          "what": "After the core bug-fix roadmap is stable, expands Act 2 with several player-driven investigative activities between its required social beats. The conversations remain available for character voice and vital context, but Laura gains meaningful things to inspect, compare, and deduce instead of moving from one passive dialogue trigger to the next.",
+          "how": {
+            "lead": "Begins with a dedicated design and dependency pass before any new script state is added:",
+            "points": [
+              "Map the complete Act 2 room schedule, conversation triggers, clue flags, score events, messages, and transition dependencies.",
+              "Select several compact mechanics that reuse museum spaces and props where practical; candidates include exhibit-security inspection, guest-register or staff-route cross-referencing, and artifact-handling observations.",
+              "Use the activities to guide the player naturally toward essential conversations and reinforce motives, alibis, and relationships through interaction without deleting authored dialogue.",
+              "Specify every new message, resource owner, score award, and state bit before implementation, preserving global111 and the authored act-break path.",
+              "Create deterministic DOSBox-X saves for the start, midpoint, and completion paths and verify compatibility with saves made before the expansion."
+            ]
+          },
+          "why": "The P3-03 audit showed that Act 2's weakness is experiential rather than a single numeric gate: too much essential context arrives through consecutive dialogue and eavesdropping with too little player agency between scenes.",
+          "evidence": [
+            {
+              "label": "Act 2 Progression Audit",
+              "target": "docs/DECISIONS.md"
+            },
+            {
+              "label": "Museum Region Controller",
+              "target": "LB2/src/MuseumRgn.sc"
+            },
+            {
+              "label": "Museum Clock and Schedule",
+              "target": "LB2/src/triggerAndClock.sc"
+            }
+          ],
+          "related": [
+            "p3-03-pacing-eavesdropping-rebalance",
+            "p3-06-npc-wander-stabilization",
+            "p4-01-wattney-little-accessibility"
           ]
         }
       ]

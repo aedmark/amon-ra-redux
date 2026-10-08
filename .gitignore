@@ -5,6 +5,7 @@
 /LB2/*.AUD
 /LB2/*.DRV
 /LB2/*.V56
+!/LB2/61.V56
 /LB2/VERSION
 /LB2/README
 /LB2_vanilla/

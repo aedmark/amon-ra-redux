@@ -106,6 +106,10 @@
 				)
 			sel_311: 1 4 8 25
 			sel_110:
+			sel_6: 140
+			sel_7: 4
+			sel_8: 189
+			sel_9: 72
 		)
 		(sink sel_311: 25 8 sel_110:)
 		(desk sel_311: 25 8 sel_110:)
@@ -553,6 +557,7 @@
 			(5
 				(gGame sel_588:)
 				(= global150 0)
+				((gInv sel_64: 14) sel_4: 1)
 				(= local63 1)
 				(self sel_111:)
 			)
@@ -687,13 +692,33 @@
 				)
 			)
 			(25
-				(if (< sel_4 3)
-					(++ sel_4)
-					(= global150 4)
-					(cond 
-						((proc0_2 106) (proc0_4 106) (proc0_3 105))
-						((proc0_2 107) (proc0_4 107) (proc0_3 106))
-						(else (proc0_3 107))
+				(cond
+					((== global150 4)
+						(gLb2Messager sel_295: 33 1 9 0 0 15)
+					)
+					((proc0_2 105)
+						(gLb2Messager sel_295: 31 1 10)
+					)
+					(else
+						(= global150 4)
+						((gInv sel_64: 14) sel_4: 0)
+						(cond
+							((proc0_2 106)
+								(proc0_4 106)
+								(proc0_3 105)
+								(self sel_156: 3)
+							)
+							((proc0_2 107)
+								(proc0_4 107)
+								(proc0_3 106)
+								(self sel_156: 2)
+							)
+							(else
+								(proc0_3 107)
+								(self sel_156: 1)
+							)
+						)
+						(gLb2Messager sel_295: 33 1 9 0 0 15)
 					)
 				)
 			)
@@ -1109,6 +1134,7 @@
 				(if global150
 					(gLb2Messager sel_295: 18 25 14)
 					(-- global150)
+					((gInv sel_64: 14) sel_4: (if global150 0 else 1))
 				else
 					(gLb2Messager sel_295: 18 25 15)
 				)
@@ -1140,6 +1166,7 @@
 				(if global150
 					(gLb2Messager sel_295: 19 25 14)
 					(-- global150)
+					((gInv sel_64: 14) sel_4: (if global150 0 else 1))
 				else
 					(gLb2Messager sel_295: 19 25 15)
 				)

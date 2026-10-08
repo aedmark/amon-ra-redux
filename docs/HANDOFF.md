@@ -12,24 +12,30 @@ Security: [SECURITY.md](SECURITY.md). Changes: [CHANGELOG.md](CHANGELOG.md). Old
 
 ## Current state
 
-_Last updated: 2026-10-07, session 11: P3-01 (Dead Man Walking Prevention) implemented and verified._
+_Last updated: 2026-10-08, session 13: P3-03 (Pacing and Progression Audit) completed and verified._
 
-**Where things stand, in one paragraph:** Phase 1, Phase 2, and P3-01 are implemented. P3-01 adds a guarded Act 5 supply
-audit in Main (Script 0): missing Wire Cutters, Snake Oil, and Cheese are restored, empty snake oil is refilled, and flag 123
-prevents later consumption from being undone. Script 0 compiles as a loose patch, D-005 now records the implemented design,
-and the original interpreter reaches startup under DOSBox-X. All project documentation lives under `docs/`, with the manual
-builder retained under `tools/`.
+**Where things stand, in one paragraph:** Phase 1, Phase 2, and P3-01 through P3-03 are complete. P3-03 audited the
+outline's claimed 14-eavesdrop Act 2 gate and found that it does not exist: authored sequences call Script 26 directly,
+while `global111` is a later scene scheduler that is not read by the act-break controller. D-017 preserves those save and
+story semantics rather than introducing a conflicting knowledge counter. The underlying passive-pacing concern remains
+scheduled as post-bugfix milestone P5-01, which will add player-driven museum investigations around Act 2's essential
+conversations. P3-02's Snake Oil patches remain compiled and uncommitted alongside these documentation changes. All
+project documentation lives under `docs/`, with the manual builder retained under `tools/`.
 
-**Verified** (2026-10-07, Linux workspace)
+**Verified** (2026-10-08, Linux workspace)
 
 | Suite | Result |
 | --- | --- |
+| P3-03 progression reference audit | **Pass: all `global111` reads/writes and all Script 26 callers traced; no Act 2 knowledge-count gate exists** |
+| P3-02 Script compilation | **Pass: 15.SCR/15.HEP and 610.SCR/610.HEP emitted by SCI Companion** |
+| P3-02 View 61 structure | **Pass: cursor loop retains one cel; inventory and toolbar loops each expose full cel 0 and empty cel 1** |
+| P3-02 refill audit | **Pass: full/empty guards precede a one-action refill and one-step jar depletion** |
 | P3-01 Script 0 compilation | **Pass: 0.SCR and 0.HEP emitted by SCI Companion** |
 | P3-01 state audit | **Pass: items 10/14/16 repaired once at Act 5; empty global150 restored; guard flag 123 unused elsewhere** |
 | P2-07 script compilation | **Pass: 90.SCR and 93.SCR emitted by SCI Companion** |
 | P2-07 MSG/ownership audit | **Pass: eight intended dagger reactions present; both O'Reilly verb-22 paths remove item 11** |
 | `python3 tools/check_docs.py` | **Pass: 0 errors, 0 warnings** |
-| `python3 tools/manual.py check ...` | **Pass: 5 sections, 29 entries, 0 errors** |
+| `python3 tools/manual.py check ...` | **Pass: 6 sections, 30 entries, 0 errors** |
 | `python3 tools/manual.py build ...` | **Pass: compiled docs/manual/manual.html** |
 | P2-06 script compilation | **Pass: 240.SCR, 330.SCR, 335.SCR, and 350.SCR emitted by SCI Companion** |
 | P2-06 flag-use audit | **Pass: relationship flag 122 is set only by Act 1 Steve Talk/Ask and tested only by the three intended museum paths** |
@@ -49,31 +55,78 @@ builder retained under `tools/`.
 - **P2-06 Steve Continuity:** Museum romance sequences require Laura to have spoken with Steve in Act 1; otherwise their relationship remains professional.
 - **P2-07 Dagger Reactions and Custody:** Accessible suspects recognize the authentic recovered dagger; handing it to O'Reilly removes it from inventory in either museum actor context.
 - **P3-01 Act 5 Supply Safety:** A one-time central audit repairs missing cutters, oil, and cheese for new or existing Act 5 saves without recreating consumed items.
+- **P3-02 Snake Oil Feedback:** Empty bottles visibly switch to a red-X cel; the Room 610 jar provides three guarded one-action refills through a larger hotspot.
+- **P3-03 Progression Audit:** Authored act transitions and the later `global111` scene scheduler are preserved; Act 2's genuine passive-pacing problem is retained as post-bugfix content milestone P5-01.
 - **Tooling Automation:** `tools/compile.py` compiles single scripts (including extension-agnostic target lookup in SysListView32); `tools/compile_all.exe` executes multi-pass builds.
-- **Documentation Architecture:** `docs/ROADMAP.md`, `DECISIONS.md` (D-009 through D-015), `docs/manual/`, and `docs/manual/manual.html` synchronized.
+- **Documentation Architecture:** `docs/ROADMAP.md`, `DECISIONS.md` (D-009 through D-018), `docs/manual/`, and `docs/manual/manual.html` synchronized.
 
 **Not verified**
 
 - End-to-end multi-act playthrough regression testing in DOSBox-X.
-- Direct in-game traversal of the P2-04 historical dialogue, P2-05 first-contact branches, both P2-06 Steve relationship branches, the P2-07 dagger hand-off, and P3-01 entry with deliberately missing supplies; the automated DOSBox-X check is a startup smoke, not an input-driven playthrough.
+- Direct in-game traversal of the P2-04 historical dialogue, P2-05 first-contact branches, both P2-06 Steve relationship branches, the P2-07 dagger hand-off, P3-01 entry with deliberately missing supplies, and P3-02 bottle depletion/refill transitions; the automated DOSBox-X check is a startup smoke, not an input-driven playthrough.
 
 **Gotchas for the next session**
 
 - Keep loose patch files in `LB2/` strictly uppercase (`.SCR`, `.HEP`, `.MSG`).
 - The dialogue chronology is late 1926; the design outline's “Spring 1926” wording is contradicted by multiple in-game date anchors (D-012).
 - In `RotundaRgn.sc` (Script 93), `Actor` instances must not define extraneous property `name` (already covered by `sel_20`).
-- If a mapped source is absent from SCI Companion's resource list, a temporary numbered loose resource makes it selectable; compile the real source, then retain only the compiler-emitted patch. Script 240 also required removal of the invalid decompiler-only `name` property before compilation.
+- Script 15's decompiled inventory instances likewise carried invalid `name` pseudo-properties; these were removed because `sel_20` already supplies their labels.
+- If a mapped source is absent from SCI Companion's resource list, a temporary numbered loose resource makes it selectable; compile the real source, then retain only the compiler-emitted patch. Scripts 15 and 240 required this bootstrap.
 
 ## Next steps (in order)
 
-1. Exercise P2-04 through P2-07 and P3-01 branches from deterministic saves in DOSBox-X using `./tools/run_dosbox.sh`.
-2. Implement P3-02 (Snake Oil Refill Mechanic & Inventory Feedback Overhaul).
+1. Exercise P2-04 through P2-07 and P3-01/P3-02 branches from deterministic saves in DOSBox-X using `./tools/run_dosbox.sh`.
+2. Implement P3-04 (Unfair Death Warnings & Secret Passage Look Mechanic).
 
 ## Open questions for maintainers
 
-None currently open. Q-001 and Q-002 have been resolved by D-007 and D-008.
+None currently open. Q-001 and Q-002 have been resolved by D-007, D-017, and D-018.
 
 ## Session log
+
+### Session 13: 2026-10-08: P3-03 Pacing & Progression Audit
+
+**Contributor:** Codex
+
+**Goal:** Verify the claimed 14-eavesdrop Act 2 gate and replace it only if the source supported that progression model.
+
+**Done:**
+- Traced every `global111` reference and every direct Script 26 act-break call in the source tree.
+- Confirmed that Act transitions are launched by authored story sequences and that the Act 2-to-3 transition follows the Pippin discovery/report sequence in Room 454.
+- Confirmed that `global111` schedules later door-listening and character scenes across Rooms 510, 560, and 630; Script 22 and Room 610 can set it directly to 15, and Script 26 never reads it.
+- Rejected the proposed synthetic knowledge bitmask because it would create a second progression model, skip authored scenes, and reinterpret existing saves.
+- Superseded D-008 with D-017, marked P3-03 complete as a source-backed scope correction, and synchronized the architecture, roadmap, changelog, and manual.
+- Following maintainer clarification, preserved the actual design goal as P5-01: a post-bugfix Act 2 content milestone adding compact museum puzzles and more natural routing through the essential dialogue/eavesdropping flow (D-018).
+
+**Changed:** `docs/ROADMAP.md`, `docs/ARCHITECTURE.md`, `docs/DECISIONS.md`, `docs/CHANGELOG.md`, `docs/manual/amon-ra.manual.json`, `docs/manual/manual.html`, `docs/HANDOFF.md`, `docs/archive/SESSION_LOG_2026_10.md`.
+
+**Decisions:** D-017 (Preserve authored act transitions and scene-scheduler semantics; supersedes D-008) and D-018 (Stage Act 2 interactive content after core bug fixes).
+
+**Verified:** Complete static progression-reference audit; documentation/manual validation; DOSBox-X original-interpreter startup smoke. No game binary changed for P3-03.
+
+**Next session should start with:** P3-04 (Unfair Death Warnings & Secret Passage Look Mechanic).
+
+### Session 12: 2026-10-08: P3-02 Snake Oil Refill & Inventory Feedback
+
+**Contributor:** Codex
+
+**Goal:** Make snake oil charge state visible and make the laboratory refill interaction direct, guarded, and easy to target.
+
+**Done:**
+- Corrected the outline's resource assumptions: Snake Oil is owned by Script 15, and its refill jar is in Room 610 rather than Room 510.
+- Added a reproducible loose View 61 patch with a red-X empty cel for the inventory and toolbar loops, driven directly by `global150`.
+- Replaced the jar's four-application refill bug with one-action logic that rejects a full bottle or empty jar and consumes exactly one of three jar portions.
+- Enlarged the jar interaction rectangle and confirmed the original handler already had no grape prerequisite.
+- Removed 23 invalid decompiler-only `name` properties exposed by the first Script 15 rebuild, then compiled Scripts 15 and 610.
+- Recorded D-016, synchronized the manual, and smoke-tested the loose patch set under DOSBox-X.
+
+**Changed:** `LB2/src/LBIconItem.sc`, `LB2/src/rm610.sc`, `LB2/15.SCR`, `LB2/15.HEP`, `LB2/61.V56`, `LB2/610.SCR`, `tools/build_snake_oil_view.py`, `docs/ROADMAP.md`, `docs/ARCHITECTURE.md`, `docs/DECISIONS.md`, `docs/CHANGELOG.md`, `docs/manual/amon-ra.manual.json`, `docs/manual/manual.html`, `docs/HANDOFF.md`, `docs/archive/SESSION_LOG_2026_10.md`.
+
+**Decisions:** D-016 (Use charge state as the Snake Oil UI source of truth).
+
+**Verified:** SCI Companion compilation of Scripts 15 and 610; structural decode of all five View 61 cels; static guard/depletion audit; DOSBox-X original-interpreter startup smoke; documentation/manual validation. Direct save-based refill traversal remains a manual regression test.
+
+**Next session should start with:** P3-03 (Pacing, Act Length & Diegetic Knowledge Rebalance).
 
 ### Session 11: 2026-10-07: P3-01 Dead Man Walking Prevention
 
@@ -274,61 +327,3 @@ None currently open. Q-001 and Q-002 have been resolved by D-007 and D-008.
 **Verified:** `python3 tools/compile.py rm335`, `python3 tools/compile.py RotundaRgn`, `python3 tools/check_docs.py` (0 errors), `python3 tools/manual.py check` (0 errors), `manual.py build` (104 KB).
 
 **Next session should start with:** P2-02 (Pocket Watch Confrontation Timing & Armor Room Lockout Adjustment in room 440).
-
-### Session 3: 2026-10-07: Phase 1 Overhaul Completion & Multi-Pass Convergence
-
-**Contributor:** Antigravity
-
-**Goal:** Implement and verify all Phase 1 items (P1-01 through P1-06) covering interrogation UI, save/load, pixel hunts, memory bug, animation/scaling glitches, and art preservation.
-
-**Done:**
-- P1-01: Interrogation UI streamlined with direct tab pre-selection (People tab / last active tab) and double-click to confirm inquiry in `LB2/src/NotebookItem.sc` (Script 20).
-- P1-02: Unrestricted save/load enabled across all screens by protecting settings/save icon 7 in `LB2/src/IconI.sc` (Script 937), `LB2/src/Main.sc` (Script 0), `LB2/src/LBRoom.sc` (Script 17), and eliminating icon disables in chase and corpse rooms (Scripts 525, 560, 565, 610).
-- P1-03: Expanded clickable hitboxes for skeleton key glint on painting in `rm500.sc` (Script 500), staggered intercom buttons in `Button.sc` (Script 562), poetry book in `MyFeature.sc` (Script 650), museum dagger in `rm400.sc` (Script 400), and Ernie's corpse hairs in `rm420.sc` (Script 420); enabled Look and Magnifier interactions.
-- P1-04: Fixed Act 2 About screen memory check error in `Main.sc` (Script 0) sel_613 by removing false `(== global123 2)` (`gAct == 2`) lockout.
-- P1-05: Fixed character door clipping for Countess in `sCountessMeeting.sc` (Script 441) and Olympia in `rm600.sc` (Script 600); corrected Laura and pursuer scaling in chase rooms (`rm500.sc`, `rm510.sc`) and rotunda headdress rooms (`rm350.sc`, `rm355.sc`, `rm360.sc`, `rm370.sc`); eliminated Steve cutscene collision overlap in `rm350.sc`.
-- P1-06: Verified 256-color art deco asset preservation and immutable base archives (`LB2/RESOURCE.000`, `LB2/RESOURCE.MAP`) with identical MD5 checksums against vanilla.
-- Automated multi-pass compilation across all 219 scripts in SCI Companion under Wine to resolve self-referencing cross-script dependencies and symbol tables (`996.voc`).
-- Synchronized 3x manual scheme sources (`docs/manual/amon-ra.manual.json`) and rebuilt `docs/manual/manual.html`.
-
-**Changed:** `LB2/src/Main.sc`, `LB2/src/LBRoom.sc`, `LB2/src/NotebookItem.sc`, `LB2/src/rm350.sc`, `LB2/src/rm355.sc`, `LB2/src/rm360.sc`, `LB2/src/rm370.sc`, `LB2/src/rm400.sc`, `LB2/src/rm420.sc`, `LB2/src/sCountessMeeting.sc`, `LB2/src/rm500.sc`, `LB2/src/rm510.sc`, `LB2/src/rm525.sc`, `LB2/src/rm560.sc`, `LB2/src/Button.sc`, `LB2/src/rm565.sc`, `LB2/src/rm600.sc`, `LB2/src/rm610.sc`, `LB2/src/MyFeature.sc`, `LB2/src/IconI.sc`, `docs/ROADMAP.md`, `docs/manual/amon-ra.manual.json`, `docs/manual/manual.html`, `docs/HANDOFF.md`.
-
-**Decisions:** D-001 (Floppy base v1.000 preserved), D-002 (Loose patch overrides), D-003 (Interrogation streamlining), D-004 (Unrestricted save/load).
-
-**Verified:** `python3 tools/check_docs.py` (0 errors, 0 warnings); `python3 tools/manual.py check` (5 sections, 29 entries, 0 errors); `manual.py build` (103 KB compiled standalone manual); 3-pass compilation of all 219 scripts in SCI Companion; MD5 verification of base archives.
-
-**Not verified:** Full playthrough regression from start to end in DOSBox-X.
-
-**Problems / surprises:** Wine ERROR_ALREADY_EXISTS (183) during script compilation due to case-insensitive rename collisions resolved by automated pre-compile purging and uppercase promotion.
-
-**Corrections:** Self-referencing script dependencies resolved via 3-pass compile all.
-
-**Left undone:** Phase 2 (P2-01 through P2-07) narrative coherence and dialogue accessibility.
-
-**Next session should start with:** Phase 2 implementation starting with P2-01 (inaccessible plot info and notebook fallback triggers for Najir, Miklo, Countess) and P2-02 (pocket watch confrontation timing in Armor Room).
-
-### Session 2: 2026-10-07: Voiceover Policy and Diegetic Act 2 Pacing Integration
-
-**Contributor:** Antigravity
-
-**Goal:** Incorporate maintainer feedback regarding voiceover omission (D-007) and diegetic knowledge progression (D-008).
-
-**Done:** Recorded D-007 (omitting insensitive CD audio tracks, text-first with future voiceover hooks) and D-008
-(diegetic knowledge threshold and contextual museum puzzles); updated P2-03 and P3-03 in `docs/ROADMAP.md`,
-`docs/ARCHITECTURE.md`, `docs/manual/amon-ra.manual.json`, and rebuilt `docs/manual/manual.html`.
-
-**Changed:** `docs/DECISIONS.md`, `docs/ROADMAP.md`, `docs/ARCHITECTURE.md`, `docs/HANDOFF.md`, `docs/manual/manual.html`.
-
-**Decisions:** D-007 (Text-first, omit CD voices, future voice hooks), D-008 (Diegetic knowledge gating for Act 2).
-
-**Verified:** `tools/check_docs.py` passes (0 errors, 0 warnings); `manual.py check` passes (0 errors, 0 warnings).
-
-**Not verified:** In-engine script compilation.
-
-**Problems / surprises:** None.
-
-**Corrections:** None.
-
-**Left undone:** P1-01 through P4-06 implementation.
-
-**Next session should start with:** Decompiling target scripts in SCI Companion and executing P1-04 and P1-03 fixes.

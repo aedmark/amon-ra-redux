@@ -5,7 +5,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c8133cd5-1c34-4cfa-b350-4968ec65328c" name="Changes" comment="m">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LB2/610.SCR" beforeDir="false" afterPath="$PROJECT_DIR$/LB2/610.SCR" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LB2/src/LBIconItem.sc" beforeDir="false" afterPath="$PROJECT_DIR$/LB2/src/LBIconItem.sc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LB2/src/rm610.sc" beforeDir="false" afterPath="$PROJECT_DIR$/LB2/src/rm610.sc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/ARCHITECTURE.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/ARCHITECTURE.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/CHANGELOG.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/CHANGELOG.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/DECISIONS.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/DECISIONS.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/HANDOFF.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/HANDOFF.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/ROADMAP.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/ROADMAP.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/archive/SESSION_LOG_2026_10.md" beforeDir="false" afterPath="$PROJECT_DIR$/docs/archive/SESSION_LOG_2026_10.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/manual/amon-ra.manual.json" beforeDir="false" afterPath="$PROJECT_DIR$/docs/manual/amon-ra.manual.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/docs/manual/manual.html" beforeDir="false" afterPath="$PROJECT_DIR$/docs/manual/manual.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -134,7 +146,15 @@
       <option name="project" value="LOCAL" />
       <updated>1791401837608</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="m">
+      <option name="closed" value="true" />
+      <created>1791430671117</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1791430671117</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">

@@ -296,7 +296,6 @@
 		sel_37 5
 		sel_14 2
 		sel_213 6
-		name "Claim Ticket"
 	)
 )
 
@@ -365,7 +364,6 @@
 		sel_37 16
 		sel_14 2
 		sel_213 9
-		name "Desk Key"
 	)
 )
 
@@ -378,7 +376,6 @@
 		sel_37 11
 		sel_14 2
 		sel_213 27
-		name "Press Pass"
 	)
 )
 
@@ -391,7 +388,6 @@
 		sel_37 17
 		sel_14 2
 		sel_213 26
-		name "Pocket Watch"
 	)
 )
 
@@ -404,7 +400,6 @@
 		sel_37 18
 		sel_14 2
 		sel_213 30
-		name "Skeleton Key"
 	)
 )
 
@@ -429,7 +424,6 @@
 		sel_37 21
 		sel_14 2
 		sel_213 38
-		name "Wire Cutters"
 	)
 )
 
@@ -442,7 +436,6 @@
 		sel_37 22
 		sel_14 2
 		sel_213 8
-		name "Dagger of Ra"
 	)
 )
 
@@ -455,7 +448,6 @@
 		sel_37 23
 		sel_14 2
 		sel_213 40
-		name "Work Boot"
 	)
 )
 
@@ -468,7 +460,6 @@
 		sel_37 24
 		sel_14 2
 		sel_213 31
-		name "Smelling Salts"
 	)
 )
 
@@ -482,7 +473,16 @@
 		sel_14 2
 		sel_213 33
 		sel_166 520
-		name "Snake Oil"
+	)
+
+	(method (sel_110)
+		(= sel_4 (if global150 0 else 1))
+		(super sel_110:)
+	)
+
+	(method (sel_216)
+		(= sel_4 (if global150 0 else 1))
+		(super sel_216: &rest)
 	)
 	
 	(method (sel_300 param1)
@@ -559,7 +559,6 @@
 		sel_37 29
 		sel_14 2
 		sel_213 10
-		name "Dinosaur Bone"
 	)
 )
 
@@ -572,7 +571,6 @@
 		sel_37 30
 		sel_14 2
 		sel_213 32
-		name "Snake Lasso"
 	)
 )
 
@@ -585,7 +583,6 @@
 		sel_37 31
 		sel_14 2
 		sel_213 23
-		name "Ankh Medallion"
 	)
 )
 
@@ -599,7 +596,6 @@
 		sel_37 32
 		sel_14 2
 		sel_213 25
-		name "Pippin's Notepad"
 	)
 	
 	(method (sel_300 param1)
@@ -638,7 +634,6 @@
 		sel_37 8
 		sel_14 2
 		sel_213 21
-		name "Magnifying Glass"
 	)
 )
 
@@ -651,7 +646,6 @@
 		sel_37 33
 		sel_14 2
 		sel_213 20
-		name "Light Bulb"
 	)
 )
 
@@ -664,7 +658,6 @@
 		sel_37 34
 		sel_14 2
 		sel_213 37
-		name "Watney's File"
 	)
 )
 
@@ -677,7 +670,6 @@
 		sel_37 35
 		sel_14 2
 		sel_213 35
-		name "Animal Hairs"
 	)
 )
 
@@ -702,7 +694,6 @@
 		sel_37 37
 		sel_14 2
 		sel_213 28
-		name "Red Hair"
 	)
 )
 
@@ -715,7 +706,6 @@
 		sel_37 38
 		sel_14 2
 		sel_213 36
-		name "Water Glass"
 	)
 )
 
@@ -729,7 +719,6 @@
 		sel_37 39
 		sel_14 2
 		sel_213 3
-		name "Carbon Paper"
 	)
 )
 
@@ -742,7 +731,6 @@
 		sel_37 40
 		sel_14 2
 		sel_213 41
-		name "Yvette's Shoe"
 	)
 )
 
@@ -767,7 +755,6 @@
 		sel_37 42
 		sel_14 2
 		sel_213 11
-		name "Evening Gown"
 	)
 )
 

@@ -13,6 +13,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - Verification harness integrating Wine-based SCI Companion and DOSBox-X.
 
 ### Changed
+- Audited P3-03's pacing premise and preserved the game's authored event-driven act transitions after confirming that no 14-eavesdrop Act 2 gate exists; routed the genuine passive-pacing concern into post-bugfix milestone P5-01 for new museum investigation mechanics around the essential conversations (D-017, D-018).
+- Reworked snake oil feedback and refilling: empty bottles now show a red-X inventory/toolbar cel, the Room 610 laboratory jar refills in one guarded action, full bottles and empty jars are rejected, and the jar has a larger click target (P3-02, D-016).
 - Added a one-time, save-compatible Act 5 supply audit that restores missing Wire Cutters, Snake Oil, and Cheese and refills an empty oil bottle without recreating items after use (P3-01, D-005).
 - Reworked the accessible cast's recovered-dagger reactions and made either O'Reilly actor remove the Dagger of Amon Ra from Laura's inventory when accepting it as evidence (P2-07, D-015).
 - Gated Steve and Laura's museum romance sequences behind an Act 1 conversation flag, preserving professional continuity when Laura previously ignored Steve (P2-06, D-014).
