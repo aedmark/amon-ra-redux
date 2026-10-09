@@ -726,7 +726,6 @@
 		sel_2 641
 		sel_14 16385
 		sel_244 12
-		name "ernie&Yvette"
 	)
 )
 

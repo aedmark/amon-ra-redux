@@ -1,6 +1,7 @@
 ;;; Sierra Script 1.0 - (do not remove this comment)
 (script# 998)
 (include sci.sh)
+(define sel_4103 4103)
 (use Main)
 (use Print)
 (use PolyPath)
@@ -799,7 +800,7 @@
 			)
 			(= temp2 (- (proc999_6 temp6 2) sel_1))
 			(= temp3 (- (proc999_6 temp6 3) sel_0))
-			(Memory memFREE temp6)
+			(Memory 3 temp6)
 		)
 		(cond 
 			((or temp2 temp3) (self sel_312: PolyPath (+ sel_1 temp2) (+ sel_0 temp3)))

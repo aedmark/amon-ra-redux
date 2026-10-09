@@ -538,7 +538,7 @@
 			(Print
 				sel_32: gLb2WinSel_109
 				sel_153: sel_1 sel_0
-				sel_203: 1 sel_30 sel_30
+				sel_203: 1 sel_30: sel_30
 				sel_77: (if sel_540 sel_20 else 0)
 				sel_198: param1
 				sel_206: sel_2 temp0 sel_4 0 0

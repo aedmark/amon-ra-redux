@@ -385,7 +385,6 @@
 		sel_0 155
 		sel_203 1
 		sel_26 15
-		name "O'Riley"
 	)
 	
 	(method (sel_110)

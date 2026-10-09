@@ -15,7 +15,6 @@
 		sel_0 50
 		sel_537 150
 		sel_26 15
-		name "Lesbian Flapper"
 	)
 	
 	(method (sel_110)

@@ -1,0 +1,4 @@
+*.sc text eol=lf
+*.SCR binary
+*.HEP binary
+*.MSG binary

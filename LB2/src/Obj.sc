@@ -1,6 +1,9 @@
 ;;; Sierra Script 1.0 - (do not remove this comment)
 (script# 999)
 (include sci.sh)
+(define sel_4098 4098)
+(define sel_4100 4100)
+(define sel_4103 4103)
 (use Main)
 (use Print)
 

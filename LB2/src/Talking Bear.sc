@@ -15,7 +15,6 @@
 		sel_0 0
 		sel_537 150
 		sel_26 15
-		name "Talking Bear"
 	)
 	
 	(method (sel_110)

@@ -882,7 +882,7 @@
     {
       "id": "phase-4-mystery-grading",
       "title": "Phase 4: Mystery, Grading, and Ending Logic",
-      "description": "Phase 4 fixes the detective grading system and endgame logic: clarifying Wattney Little clues, rewarding logical deduction for planted red herrings, aligning hint book claims with internal code, decoupling quiz answers from dagger ownership, and standardizing grading point divisors.",
+      "description": "Phase 4 fixes the detective grading system and endgame logic: clarifying Wattney Little clues, rewarding logical deduction for planted red herrings, aligning hint book claims with internal code, decoupling quiz answers from dagger ownership, standardizing grading point divisors, and separating required case findings from bonus museum inquiries.",
       "entries": [
         {
           "id": "p4-01-wattney-little-accessibility",
@@ -1087,28 +1087,28 @@
         {
           "id": "p4-06-non-essential-quiz-questions",
           "title": "P4-06: Non-Essential Quiz Questions Delineation",
-          "summary": "Delineates required murder questions from optional trivia (Art Theft, High Priest) in inquest scoring.",
+          "summary": "Labels required case findings separately from outcome-neutral art-theft and High Priest bonus questions.",
           "tags": [
             "inquest",
             "scoring",
             "clarity",
             "p4"
           ],
-          "what": "Clearly distinguishes core murder inquest questions from non-essential secondary trivia (such as Art Theft or High Priest identities) and eliminates points for non-essential questions that do not affect the ending.",
+          "what": "Audits all sixteen questions in the actual Script 750 inquest, labels questions 1 through 11 as required case findings, and isolates the art-theft and High Priest questions 12 through 16 in a bonus state machine that cannot alter either verdict flag.",
           "how": [
-            "In Script 700 questionnaire UI, group questions into 'Coroner's Homicide Inquest' (required) and 'Department of Antiquities Inquiries' (optional bonus).",
-            "Adjust scoring accumulator so ending tier determination depends strictly on solving the homicides.",
-            "Display clear feedback explaining which questions determine detective rank."
+            "Display a required-case notice before question 1 explaining that questions 1 through 11 determine the coroner's conclusions about the murders and dagger theft.",
+            "Move questions 12 through 16 into Script 750's dedicated sBonusQuestions state and display a bonus-museum notice before they begin.",
+            "Preserve the original answer menus, feedback, and conditional skips while ensuring the bonus state contains no writes to murder flag local4 or theft-answer flag local5."
           ],
-          "why": "Conflating secondary lore trivia with murder culpability confused players regarding what evidence was truly vital to completing the case.",
+          "why": "The optional questions were already outcome-neutral, but sharing one state machine with required theft questions and providing no UI distinction made secondary lore appear capable of lowering Laura's final result.",
           "evidence": [
             {
-              "label": "Inquest Dialogue Script",
-              "target": "LB2/700.SCR"
+              "label": "Inquest Source",
+              "target": "LB2/src/rm750.sc"
             },
             {
-              "label": "Endgame Evaluation Script",
-              "target": "LB2/720.SCR"
+              "label": "Compiled Inquest Patch",
+              "target": "LB2/750.SCR"
             }
           ],
           "related": [

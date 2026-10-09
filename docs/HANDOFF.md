@@ -12,19 +12,22 @@ Security: [SECURITY.md](SECURITY.md). Changes: [CHANGELOG.md](CHANGELOG.md). Old
 
 ## Current state
 
-_Last updated: 2026-10-09, session 21: P4-05 (Grading and Scoring System Standardization) completed and verified._
+_Last updated: 2026-10-09, session 23: pre–Phase 5 full-game playtest checklist established._
 
-**Where things stand, in one paragraph:** Phase 1 through Phase 3 and P4-01 through P4-04 are committed and pushed
-through `9785700`; P4-05 is complete but uncommitted. Script 26 now grades cumulative points against Redux's attainable
-act maxima `5/13/38/48/51`, replacing vanilla's inflated later divisors. The ungraded introduction no longer selects the
-zero-percent band or advances the first F-message counter. P4-02's three coroner-review points remain post-grade awards,
-bringing the final raw maximum from 51 to 54. D-026 records the audited score model. Act 2's passive-pacing concern remains
-scheduled as post-bugfix milestone P5-01.
+**Where things stand, in one paragraph:** Phase 1 through Phase 3 and P4-01 through P4-05 are committed and pushed
+through `4c79bcf`; P4-06 is complete but uncommitted. Script 750 now announces questions 1–11 as required case findings
+and runs optional art-theft and High Priest questions 12–16 in a separately announced `sBonusQuestions` state machine.
+The audit confirms that only questions 1–9 can change murder correctness and only questions 10–11 can change theft-answer
+correctness; the bonus state cannot alter either verdict flag. D-027 records the boundary. All planned bug-fix phases are
+complete. The maintainer is now running the game to completion in DOSBox-X; `docs/PLAYTEST_CHECKLIST.md` is the Phase 5
+entry gate and currently tracks observations PLAY-001 through PLAY-008 from the run through the start of Act 2.
 
 **Verified** (2026-10-09, Linux workspace)
 
 | Suite | Result |
 | --- | --- |
+| P4-06 Script compilation | **Pass: 750.SCR/750.HEP emitted by SCI Companion** |
+| P4-06 verdict isolation audit | **Pass: Q1–9 own murder writes, Q10–11 own theft writes, Q12–16 bonus state owns neither** |
 | P4-05 Script compilation | **Pass: 26.SCR/26.HEP emitted by SCI Companion** |
 | P4-05 score audit | **Pass: attainable cumulative maxima 5/13/38/48/51; final raw maximum 54; Act 0 excluded from grade-band counters** |
 | P4-04 Script compilation | **Pass: 750.SCR emitted by SCI Companion** |
@@ -64,17 +67,14 @@ scheduled as post-bugfix milestone P5-01.
 - **P3-04 Fair-Play Stairwell:** Crossing the eastern-tower stairwell threshold in darkness now stops Laura safely and repeats the existing warning; replacing the bulb retains the original traversal.
 - **P3-05 Flexible Act 1:** The press pass now exposes the dirty taxi and claim ticket; docks, baseball, and Ziggy remain optional, independently completable paths.
 - **P3-06 Stable Museum Conversations:** The selected wandering NPC holds position for dialogue and resumes its prior route afterward; O'Reilly stays available past 10:15 in Acts 3 and 4.
-- **P4-01 Watney Evidence Access:** Room 560's bookcase exposes the existing police-file inset through a broad fallback target; inspecting or taking the file registers its contents and Watney's notebook identity.
-- **P4-02 Planted-Evidence Credit:** Room 454 persists footprint inspection; Script 750 recognizes the Ankh, Pippin's appointment notepad, and the footprint/Yvette-shoe comparison as evidence chains and awards one-time insight credit.
-- **P4-03 Hint-Book Alignment:** Script 750's best-evidence gate requires Sierra's complete 13-item checklist and accepts durable discovery state for the surrendered dagger, consumed carbon paper, and inspected police file.
-- **P4-04 Physical Dagger Outcome:** Coroner feedback still reflects quiz answers, while the newspaper, ending route, and epilogue cards derive dagger recovery from item 11 or acquisition bit 155.
 - **P4-05 Accurate Act Grades:** Script 26 uses attainable cumulative point maxima and leaves the introduction ungraded, preserving the first authored response in every grade band.
-- **Tooling Automation:** `tools/compile.py` compiles single scripts (including extension-agnostic target lookup in SysListView32); `tools/compile_all.exe` executes multi-pass builds.
-- **Documentation Architecture:** `docs/ROADMAP.md`, `DECISIONS.md` (D-009 through D-026), `docs/manual/`, and `docs/manual/manual.html` synchronized.
+- **P4-06 Clear Inquest Scope:** Script 750 labels questions 1–11 as required findings and questions 12–16 as bonus museum inquiries, with optional answers structurally isolated from verdict state.
+- **Documentation Architecture:** `docs/ROADMAP.md`, `DECISIONS.md` (D-009 through D-028), `docs/manual/`, `docs/manual/manual.html`, and the full-game playtest checklist synchronized.
 
 **Not verified**
 
 - End-to-end multi-act playthrough regression testing in DOSBox-X.
+- Direct in-game traversal of both P4-06 section notices and confirmation that varied bonus answers leave the final result unchanged.
 - Direct in-game P4-05 verification at every act maximum and percentage-band boundary.
 - Direct in-game traversal of P4-04's four murder/recovery outcomes, including the surrendered-dagger path.
 - Direct in-game confirmation of the P4-03 maximum outcome and one-at-a-time failure cases from the Act 6 save.
@@ -92,15 +92,78 @@ scheduled as post-bugfix milestone P5-01.
 
 ## Next steps (in order)
 
-1. Exercise the P4-01 bookcase, exposed-file Look, and Take paths from a deterministic Room 560 save in DOSBox-X.
-2. Exercise the P4-02 footprint inspection and evidence-review branches from deterministic Room 454 and Room 750 saves in DOSBox-X.
-3. Begin P4-06 (Non-Essential Quiz Questions Delineation).
+1. Continue the clean DOSBox-X run through the checklist, marking checkpoints and adding stable `PLAY-nnn` findings with deterministic saves.
+2. After the ending, audit and consolidate PLAY-001 through the final finding into permanent roadmap work; resolve or schedule regressions before Phase 5.
+3. Begin P5-01's Act 2 schedule, room, clue, score, and message-resource design inventory only after the playtest gate closes.
 
 ## Open questions for maintainers
 
 None currently open. Q-001 and Q-002 have been resolved by D-007, D-017, and D-018.
 
 ## Session log
+
+### Session 24: 2026-10-09: Compile-All Recovery and Hybrid Version Diagnosis
+
+**Contributor:** Claude and maintainer
+
+**Goal:** Diagnose hundreds of Compile All errors (undeclared `msgGET`/`palSET_INTENSITY`/`fi*`/`snd*` constants, script numbers above 999) and confirm no patch work was lost.
+
+**Done:**
+- Traced the errors to SCI Companion's map-format setting: format 1.0 drops the `SCI_1_1` defines and caps script numbers at 999. Identified the floppy as a hybrid (SCI1.1 scripts, SCI1-style 6-byte `RESOURCE.MAP`).
+- Found that a resource rebuild under format 1.1 had replaced the base archive with a volume containing only loose-file resources (451 entries against 1,075), losing `0.FON` and all views, pics, and sounds. The maintainer restored the original archive.
+- Reapplied the 13 `.sc` source fixes (name properties, `--UNKNOWN-PROP-NAME--`, `View`→`Actor` in rm310, RTRandCycle call, Obj/View/Timer selector defines) that had been wrongly reverted; Compile All is now clean.
+- Verified all 207 previously tracked `.SCR`/`.HEP` pairs and all `.MSG` files survive; compiled output differs only by small offset shifts. Nine scripts now compile and ship as new overrides (310, 640, 770, 928, 999, 1888, 1895, 1904, 1906).
+- Added `tools/uppercase_patches.py` to restore uppercase patch names after Compile All.
+
+**Changed:** `tools/uppercase_patches.py`, `LB2/src/*.sc` (13 files), recompiled `LB2/*.SCR`/`*.HEP`, `LB2/game.ini`, `docs/DECISIONS.md`, `docs/ARCHITECTURE.md`, `docs/TESTING.md`, `docs/HANDOFF.md`.
+
+**Decisions:** D-028.
+
+**Verified:** Compile All reports no errors (maintainer). Not verified: in-game behavior of the nine new overrides and the recompiled 450, 720, 973, and 998. `LB2/MESSAGE.MAP` was restored and matches `LB2_vanilla/` and git.
+
+**Next session should start with:** Regression-play rooms 310, 640, 770, and the O'Riley and Lo Fat characters; then continue the full-game run. `.gitattributes` now pins `.sc` to LF and treats `.SCR`/`.HEP`/`.MSG` as binary; run `tools/uppercase_patches.py` after every Compile All.
+
+### Session 23: 2026-10-09: Pre–Phase 5 Full-Game Playtest Checklist
+
+**Contributor:** Codex and maintainer
+
+**Goal:** Capture a clean end-to-end DOSBox-X run and triage all observed bugs, quirks, continuity problems, and content opportunities before beginning Phase 5.
+
+**Done:**
+- Added an act-by-act checklist covering saves, state restoration, score, inventory, music, notebook acquisition, topic completion, proximity dialogue, all shipped fixes, inquest outcomes, and the ending.
+- Recorded the maintainer's first eight observations as stable PLAY-001 through PLAY-008 findings without prematurely choosing implementations.
+- Preserved the guiding constraint that new diegetic introductions and interjections must expose or explain existing content rather than isolate it behind new prerequisites.
+- Made completion and triage of the full-game run an explicit Phase 5 entry gate and linked the checklist from the documentation and testing indexes.
+
+**Changed:** `docs/PLAYTEST_CHECKLIST.md`, `docs/README.md`, `docs/ROADMAP.md`, `docs/TESTING.md`, `docs/HANDOFF.md`, `docs/archive/SESSION_LOG_2026_10.md`.
+
+**Decisions:** No architectural decision; findings remain observations until post-playthrough source and resource audits.
+
+**Verified:** Documentation validation. Gameplay findings remain intentionally open pending reproduction and triage from the maintainer's DOSBox-X saves.
+
+**Next session should start with:** Continue the full-game run and append new `PLAY-nnn` findings; do not begin P5-01 implementation until the gate closes.
+
+### Session 22: 2026-10-09: P4-06 Non-Essential Quiz Questions Delineation
+
+**Contributor:** Codex
+
+**Goal:** Make the inquest distinguish required case findings from optional museum lore and guarantee that bonus answers cannot reduce the ending result.
+
+**Done:**
+- Audited all sixteen Script 750 questions and corrected the outline's provisional Script 700/720 ownership.
+- Confirmed questions 1–9 alone control murder correctness, questions 10–11 alone control theft-answer correctness, and questions 12–16 already supply feedback without score or verdict writes.
+- Added a required-case notice before question 1 explaining that questions 1–11 determine the coroner's conclusions.
+- Moved the unchanged art-theft, High Priest, and museum-accomplice flow into `sBonusQuestions`, preceded by an explicit notice that questions 12–16 are optional and do not affect Laura's final case result.
+- Preserved all authored answer menus, feedback messages, and conditional skips while structurally excluding both verdict flags from the bonus state.
+- Compiled Script 750, recorded D-027, and synchronized the roadmap, architecture, changelog, test plan, handoff, and manual.
+
+**Changed:** `LB2/src/rm750.sc`, `LB2/750.SCR`, `LB2/750.HEP`, `docs/ROADMAP.md`, `docs/ARCHITECTURE.md`, `docs/DECISIONS.md`, `docs/CHANGELOG.md`, `docs/TESTING.md`, `docs/manual/amon-ra.manual.json`, `docs/manual/manual.html`, `docs/HANDOFF.md`, `docs/archive/SESSION_LOG_2026_10.md`.
+
+**Decisions:** D-027 (Isolate bonus museum questions from inquest verdict state).
+
+**Verified:** SCI Companion compilation of Script 750; static all-question, verdict-write, score-write, and transition audit; DOSBox-X original-interpreter startup smoke; documentation/manual validation; unchanged base archive hashes. Direct save-based traversal of both section notices and bonus-answer variants remains a manual regression test.
+
+**Next session should start with:** P5-01 Act 2 interactive-content design inventory.
 
 ### Session 21: 2026-10-09: P4-05 Grading and Scoring System Standardization
 
@@ -252,68 +315,3 @@ None currently open. Q-001 and Q-002 have been resolved by D-007, D-017, and D-0
 **Verified:** SCI Companion compilation of Script 250 with 0 errors and 0 warnings; static global124, taxi-state, inventory-route, and optional-content audit; DOSBox-X original-interpreter startup smoke; documentation/manual validation. Direct save-based traversal from press-pass acquisition through the early dirty taxi and gown remains a manual regression test.
 
 **Next session should start with:** P3-06 (NPC Wander Mechanic Stabilization).
-
-### Session 14: 2026-10-08: P3-04 Unfair Death Warnings
-
-**Contributor:** Codex
-
-**Goal:** Replace the outline's unannounced secret-passage death with a source-backed, diegetic warning while preserving the intended puzzle solution.
-
-**Done:**
-- Traced the actual hazard to Script 530's eastern-tower stairwell rather than the outline's proposed Rooms 420/450.
-- Confirmed that flag 32 represents the blown-out stairwell bulb, item 23 is its replacement, and the Act 5 lantern intentionally switches off below room 730.
-- Redirected the unsafe dark boundary from `sFallStairs` to `sWarnDarkStairs`, which freezes input, moves Laura back to y=165, reuses the existing dark-passage Look tuple 11/1/2, and restores control.
-- Preserved the original lit traversal and retained the now-unreachable fall sequence as legacy code.
-- Synchronized the architecture, roadmap, decision log, changelog, handoff, and compiled manual.
-
-**Changed:** `LB2/src/ScrewInBulb.sc`, `LB2/530.SCR`, `LB2/530.HEP`, `docs/ROADMAP.md`, `docs/ARCHITECTURE.md`, `docs/DECISIONS.md`, `docs/CHANGELOG.md`, `docs/manual/amon-ra.manual.json`, `docs/manual/manual.html`, `docs/HANDOFF.md`, `docs/archive/SESSION_LOG_2026_10.md`.
-
-**Decisions:** D-019 (Reuse the stairwell's existing darkness state and warning text).
-
-**Verified:** SCI Companion compilation of Script 530 with 0 errors and 0 warnings; static boundary, message-tuple, and solution-state audit; DOSBox-X original-interpreter startup smoke; documentation/manual validation. Direct save-based traversal of the dark and repaired-bulb paths remains a manual regression test.
-
-**Next session should start with:** P3-05 (Act 1 Progression Trigger Simplification).
-
-### Session 13: 2026-10-08: P3-03 Pacing & Progression Audit
-
-**Contributor:** Codex
-
-**Goal:** Verify the claimed 14-eavesdrop Act 2 gate and replace it only if the source supported that progression model.
-
-**Done:**
-- Traced every `global111` reference and every direct Script 26 act-break call in the source tree.
-- Confirmed that Act transitions are launched by authored story sequences and that the Act 2-to-3 transition follows the Pippin discovery/report sequence in Room 454.
-- Confirmed that `global111` schedules later door-listening and character scenes across Rooms 510, 560, and 630; Script 22 and Room 610 can set it directly to 15, and Script 26 never reads it.
-- Rejected the proposed synthetic knowledge bitmask because it would create a second progression model, skip authored scenes, and reinterpret existing saves.
-- Superseded D-008 with D-017, marked P3-03 complete as a source-backed scope correction, and synchronized the architecture, roadmap, changelog, and manual.
-- Following maintainer clarification, preserved the actual design goal as P5-01: a post-bugfix Act 2 content milestone adding compact museum puzzles and more natural routing through the essential dialogue/eavesdropping flow (D-018).
-
-**Changed:** `docs/ROADMAP.md`, `docs/ARCHITECTURE.md`, `docs/DECISIONS.md`, `docs/CHANGELOG.md`, `docs/manual/amon-ra.manual.json`, `docs/manual/manual.html`, `docs/HANDOFF.md`, `docs/archive/SESSION_LOG_2026_10.md`.
-
-**Decisions:** D-017 (Preserve authored act transitions and scene-scheduler semantics; supersedes D-008) and D-018 (Stage Act 2 interactive content after core bug fixes).
-
-**Verified:** Complete static progression-reference audit; documentation/manual validation; DOSBox-X original-interpreter startup smoke. No game binary changed for P3-03.
-
-**Next session should start with:** P3-04 (Unfair Death Warnings & Secret Passage Look Mechanic).
-
-### Session 12: 2026-10-08: P3-02 Snake Oil Refill & Inventory Feedback
-
-**Contributor:** Codex
-
-**Goal:** Make snake oil charge state visible and make the laboratory refill interaction direct, guarded, and easy to target.
-
-**Done:**
-- Corrected the outline's resource assumptions: Snake Oil is owned by Script 15, and its refill jar is in Room 610 rather than Room 510.
-- Added a reproducible loose View 61 patch with a red-X empty cel for the inventory and toolbar loops, driven directly by `global150`.
-- Replaced the jar's four-application refill bug with one-action logic that rejects a full bottle or empty jar and consumes exactly one of three jar portions.
-- Enlarged the jar interaction rectangle and confirmed the original handler already had no grape prerequisite.
-- Removed 23 invalid decompiler-only `name` properties exposed by the first Script 15 rebuild, then compiled Scripts 15 and 610.
-- Recorded D-016, synchronized the manual, and smoke-tested the loose patch set under DOSBox-X.
-
-**Changed:** `LB2/src/LBIconItem.sc`, `LB2/src/rm610.sc`, `LB2/15.SCR`, `LB2/15.HEP`, `LB2/61.V56`, `LB2/610.SCR`, `tools/build_snake_oil_view.py`, `docs/ROADMAP.md`, `docs/ARCHITECTURE.md`, `docs/DECISIONS.md`, `docs/CHANGELOG.md`, `docs/manual/amon-ra.manual.json`, `docs/manual/manual.html`, `docs/HANDOFF.md`, `docs/archive/SESSION_LOG_2026_10.md`.
-
-**Decisions:** D-016 (Use charge state as the Snake Oil UI source of truth).
-
-**Verified:** SCI Companion compilation of Scripts 15 and 610; structural decode of all five View 61 cels; static guard/depletion audit; DOSBox-X original-interpreter startup smoke; documentation/manual validation. Direct save-based refill traversal remains a manual regression test.
-
-**Next session should start with:** P3-03 (Pacing, Act Length & Diegetic Knowledge Rebalance).

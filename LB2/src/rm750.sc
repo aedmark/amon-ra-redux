@@ -161,6 +161,13 @@
 	(method (sel_144 theSel_29)
 		(switch (= sel_29 theSel_29)
 			(0
+				(if (== local0 1)
+					(Print
+						sel_30: 0
+						sel_198: {REQUIRED CASE FINDINGS\n\nQuestions 1 through 11 determine the coroner's conclusions about the murders and the theft of the Dagger of Amon Ra.}
+						sel_110:
+					)
+				)
 				(gLb2Messager sel_295: 1 0 0 local0 self)
 			)
 			(1
@@ -264,6 +271,41 @@
 						(++ local0)
 						(= sel_136 1)
 					)
+				)
+			)
+			(3
+				(if (>= local0 12)
+					(= sel_65 sBonusQuestions)
+					(self sel_111:)
+				else
+					(self sel_144: 1)
+				)
+			)
+		)
+	)
+)
+
+(instance sBonusQuestions of Script
+	(properties
+		sel_20 {sBonusQuestions}
+	)
+
+	(method (sel_144 theSel_29)
+		(switch (= sel_29 theSel_29)
+			(0
+				(Print
+					sel_30: 0
+					sel_198: {BONUS MUSEUM INQUIRIES\n\nQuestions 12 through 16 concern the art-theft ring and the High Priest. They are optional and do not affect Laura's final case result.}
+					sel_110:
+				)
+				(= sel_136 1)
+			)
+			(1
+				(gLb2Messager sel_295: 1 0 0 local0 self)
+			)
+			(2
+				(localproc_013c)
+				(switch local0
 					(12
 						(if (!= local1 11)
 							(= local0 15)

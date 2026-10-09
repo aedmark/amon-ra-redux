@@ -20,7 +20,6 @@
 		sel_26 15
 		sel_549 100
 		sel_550 -37
-		name "Lo Fat"
 	)
 	
 	(method (sel_110)
