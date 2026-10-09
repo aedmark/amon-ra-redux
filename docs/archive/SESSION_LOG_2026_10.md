@@ -2,6 +2,28 @@
 
 Archived verbatim from `docs/HANDOFF.md` when its live session log exceeded ten entries.
 
+### Session 8: 2026-10-07: P2-05 Contextual Dialogue Logic & Acquaintance Checks
+
+**Contributor:** Codex
+
+**Goal:** Prevent Laura from addressing museum characters by name before a formal introduction and use DOSBox-X for runtime testing.
+
+**Done:**
+- Audited the rotunda introductions and found six existing acquaintance flags: Pippin 110, Dr. Smith 111, Countess 112, Yvette 113, O'Riley 114, and Rameses 115.
+- Added first-contact Talk routing to `aPippin.sc`, `aRameses.sc`, and the Countess, O'Riley, Dr. Smith, and Yvette actors in `MuseumRgn.sc`. An unset acquaintance flag now selects condition 80; existing dialogue remains unchanged once the flag is set.
+- Added loose `1882.MSG`, `1883.MSG`, and `1888.MSG` overrides. Only the first two condition-80 text records in each module change: Laura opens neutrally, then Pippin, Smith, or O'Riley identifies himself.
+- Recompiled Scripts 35, 36, and 90 with SCI Companion and normalized the loose patch names to uppercase.
+- Replaced the active regression-testing documentation with the checked-in DOSBox-X workflow and recorded D-013.
+- Synchronized the 3x manual and rebuilt `docs/manual/manual.html`.
+
+**Changed:** `LB2/src/aPippin.sc`, `LB2/src/aRameses.sc`, `LB2/src/MuseumRgn.sc`, `LB2/35.SCR`, `LB2/36.SCR`, `LB2/90.SCR`, `LB2/1882.MSG`, `LB2/1883.MSG`, `LB2/1888.MSG`, `docs/ROADMAP.md`, `docs/ARCHITECTURE.md`, `docs/DECISIONS.md`, `docs/CHANGELOG.md`, `docs/TESTING.md`, `docs/manual/amon-ra.manual.json`, `docs/manual/manual.html`, `docs/HANDOFF.md`.
+
+**Decisions:** D-013 (Reuse museum acquaintance flags for formal introductions).
+
+**Verified:** SCI Companion compilation of Scripts 35, 36, and 90; structural parsing of all three message overrides; headless DOSBox-X startup; documentation/manual validation; unchanged base archive hashes.
+
+**Next session should start with:** P2-06 (Steve & Laura Character Consistency).
+
 ### Session 7: 2026-10-07: P2-04 Narrative Anachronism Corrections
 
 **Contributor:** Codex

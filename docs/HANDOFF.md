@@ -12,19 +12,22 @@ Security: [SECURITY.md](SECURITY.md). Changes: [CHANGELOG.md](CHANGELOG.md). Old
 
 ## Current state
 
-_Last updated: 2026-10-08, session 17: P4-01 (Watney Little Evidence Discovery) completed and verified._
+_Last updated: 2026-10-08, session 18: P4-02 (Evidence Validity, Red Herrings & Inquest Credit) completed and verified._
 
-**Where things stand, in one paragraph:** Phase 1, Phase 2, and Phase 3 are complete, their combined work is committed
-and pushed as `af2ddcf`, and Phase 4 has begun. P4-01 corrects the outline's resource assumptions: Watney's police file
-is hidden in a special book in Room 560, not a Room 420 desk dossier. Script 560 now exposes that
-inset through an enlarged volume hotspot or the full bookcase and records canonical clues 793 and 272 on inspection as
-well as Take. D-022 records the reuse of the authored evidence path. The P4-01 source, compiled patch, and documentation
-are complete but uncommitted. Act 2's passive-pacing concern remains scheduled as post-bugfix milestone P5-01.
+**Where things stand, in one paragraph:** Phase 1, Phase 2, and Phase 3 are complete, P4-01 is committed and pushed as
+`1fba5be`, and P4-02 is complete but uncommitted. The actual coroner questionnaire is Script 750, not the outline's
+Scripts 700/720; Pippin's notepad is the appointment schedule, while Yvette's carbon paper is unrelated. Script 454 now
+persists inspection of the bloody high-heel footprint through point bit 179. After question 16, Script 750 independently
+recognizes the Ankh, appointment notepad, and footprint/Yvette-shoe chains, explains why each is not dispositive, and
+awards idempotent insight points 180..182. D-023 records the canonical evidence mapping and deliberately leaves ending
+tier changes to P4-03 through P4-06. Act 2's passive-pacing concern remains scheduled as post-bugfix milestone P5-01.
 
 **Verified** (2026-10-08, Linux workspace)
 
 | Suite | Result |
 | --- | --- |
+| P4-02 Script compilation | **Pass: 454.SCR/454.HEP and 750.SCR/750.HEP emitted by SCI Companion** |
+| P4-02 evidence-state audit | **Pass: unique bits 179..182; items 20/21/30 map to Ankh/notepad/shoe; carbon paper item 29 is not treated as a schedule** |
 | P4-01 Script compilation | **Pass: 560.SCR/560.HEP emitted by SCI Companion** |
 | P4-01 evidence-path audit | **Pass: 36x38 special-volume target, full-bookcase Look/Hand/Magnifier fallback, and inspection/Take registration of clues 793 and 272** |
 | P3-06 Script compilation | **Pass: 90.SCR/90.HEP and 22.SCR/22.HEP emitted by SCI Companion with 0 errors and 0 warnings** |
@@ -68,12 +71,14 @@ are complete but uncommitted. Act 2's passive-pacing concern remains scheduled a
 - **P3-05 Flexible Act 1:** The press pass now exposes the dirty taxi and claim ticket; docks, baseball, and Ziggy remain optional, independently completable paths.
 - **P3-06 Stable Museum Conversations:** The selected wandering NPC holds position for dialogue and resumes its prior route afterward; O'Reilly stays available past 10:15 in Acts 3 and 4.
 - **P4-01 Watney Evidence Access:** Room 560's bookcase exposes the existing police-file inset through a broad fallback target; inspecting or taking the file registers its contents and Watney's notebook identity.
+- **P4-02 Planted-Evidence Credit:** Room 454 persists footprint inspection; Script 750 recognizes the Ankh, Pippin's appointment notepad, and the footprint/Yvette-shoe comparison as evidence chains and awards one-time insight credit.
 - **Tooling Automation:** `tools/compile.py` compiles single scripts (including extension-agnostic target lookup in SysListView32); `tools/compile_all.exe` executes multi-pass builds.
-- **Documentation Architecture:** `docs/ROADMAP.md`, `DECISIONS.md` (D-009 through D-021), `docs/manual/`, and `docs/manual/manual.html` synchronized.
+- **Documentation Architecture:** `docs/ROADMAP.md`, `DECISIONS.md` (D-009 through D-023), `docs/manual/`, and `docs/manual/manual.html` synchronized.
 
 **Not verified**
 
 - End-to-end multi-act playthrough regression testing in DOSBox-X.
+- Direct in-game traversal of the P4-02 footprint inspection and all three Script 750 evidence-review branches from the Act 6 save.
 - Direct Room 560 observation of the enlarged book/bookcase discovery path and pre-Take notebook updates for P4-01.
 - Direct in-game traversal of the P2-04 historical dialogue, P2-05 first-contact branches, both P2-06 Steve relationship branches, the P2-07 dagger hand-off, P3-01 entry with deliberately missing supplies, P3-02 bottle depletion/refill transitions, both P3-04 stairwell paths, P3-05's early dirty-taxi/claim-ticket route, and P3-06 moving-NPC conversations plus O'Reilly's post-10:15 Act 3–4 availability; the automated DOSBox-X check is a startup smoke, not an input-driven playthrough.
 
@@ -88,13 +93,35 @@ are complete but uncommitted. Act 2's passive-pacing concern remains scheduled a
 ## Next steps (in order)
 
 1. Exercise the P4-01 bookcase, exposed-file Look, and Take paths from a deterministic Room 560 save in DOSBox-X.
-2. Begin P4-02 (Evidence Validity, Red Herrings & Inquest Credit).
+2. Exercise the P4-02 footprint inspection and evidence-review branches from deterministic Room 454 and Room 750 saves in DOSBox-X.
+3. Begin P4-03 (Hint Book Contradictions & Best Ending Alignment).
 
 ## Open questions for maintainers
 
 None currently open. Q-001 and Q-002 have been resolved by D-007, D-017, and D-018.
 
 ## Session log
+
+### Session 18: 2026-10-08: P4-02 Evidence Validity, Red Herrings & Inquest Credit
+
+**Contributor:** Codex
+
+**Goal:** Make the inquest recognize planted physical evidence and reward careful investigation using the game's canonical resources.
+
+**Done:**
+- Traced the complete questionnaire and final evaluation to Script 750, correcting the outline's proposed Scripts 700/720.
+- Identified Pippin's notepad (item 21/clue 790) as the appointment schedule; confirmed that carbon paper item 29/clue 798 instead contains an unrelated fencing message.
+- Made opening Room 454's authored bloody high-heel footprint inset persist discovery through unused point bit 179.
+- Added a post-question Script 750 review that independently recognizes the Ankh, Pippin's appointment notepad, and the footprint paired with Yvette's shoe, explains their evidentiary limits, and awards one-time point bits 180..182.
+- Preserved questionnaire correctness and ending-tier logic for P4-03 through P4-06, then compiled both scripts and synchronized the roadmap, architecture, decision log, changelog, test plan, handoff, and manual.
+
+**Changed:** `LB2/src/rm454.sc`, `LB2/src/rm750.sc`, `LB2/454.SCR`, `LB2/454.HEP`, `LB2/750.SCR`, `LB2/750.HEP`, `docs/ROADMAP.md`, `docs/ARCHITECTURE.md`, `docs/DECISIONS.md`, `docs/CHANGELOG.md`, `docs/TESTING.md`, `docs/manual/amon-ra.manual.json`, `docs/manual/manual.html`, `docs/HANDOFF.md`, `docs/archive/SESSION_LOG_2026_10.md`.
+
+**Decisions:** D-023 (Reconcile canonical planted evidence in Script 750).
+
+**Verified:** SCI Companion compilation of Scripts 454 and 750; static evidence-identity, ownership, and unique point-bit audit; DOSBox-X original-interpreter startup smoke; documentation/manual validation; unchanged base archive hashes. Direct save-based traversal of the footprint and evidence-review branches remains a manual regression test.
+
+**Next session should start with:** P4-03 (Hint Book Contradictions & Best Ending Alignment).
 
 ### Session 17: 2026-10-08: P4-01 Watney Little Evidence Discovery
 
@@ -286,25 +313,3 @@ None currently open. Q-001 and Q-002 have been resolved by D-007, D-017, and D-0
 **Verified:** SCI Companion compilation with zero errors or warnings; static flag-use audit; DOSBox-X original-interpreter startup smoke; documentation/manual validation; unchanged base archive hashes. Direct traversal of both relationship branches remains a manual save-based regression test.
 
 **Next session should start with:** P2-07 (Dagger Discovery Reactions & Inventory Hand-off).
-
-### Session 8: 2026-10-07: P2-05 Contextual Dialogue Logic & Acquaintance Checks
-
-**Contributor:** Codex
-
-**Goal:** Prevent Laura from addressing museum characters by name before a formal introduction and use DOSBox-X for runtime testing.
-
-**Done:**
-- Audited the rotunda introductions and found six existing acquaintance flags: Pippin 110, Dr. Smith 111, Countess 112, Yvette 113, O'Riley 114, and Rameses 115.
-- Added first-contact Talk routing to `aPippin.sc`, `aRameses.sc`, and the Countess, O'Riley, Dr. Smith, and Yvette actors in `MuseumRgn.sc`. An unset acquaintance flag now selects condition 80; existing dialogue remains unchanged once the flag is set.
-- Added loose `1882.MSG`, `1883.MSG`, and `1888.MSG` overrides. Only the first two condition-80 text records in each module change: Laura opens neutrally, then Pippin, Smith, or O'Riley identifies himself.
-- Recompiled Scripts 35, 36, and 90 with SCI Companion and normalized the loose patch names to uppercase.
-- Replaced the active regression-testing documentation with the checked-in DOSBox-X workflow and recorded D-013.
-- Synchronized the 3x manual and rebuilt `docs/manual/manual.html`.
-
-**Changed:** `LB2/src/aPippin.sc`, `LB2/src/aRameses.sc`, `LB2/src/MuseumRgn.sc`, `LB2/35.SCR`, `LB2/36.SCR`, `LB2/90.SCR`, `LB2/1882.MSG`, `LB2/1883.MSG`, `LB2/1888.MSG`, `docs/ROADMAP.md`, `docs/ARCHITECTURE.md`, `docs/DECISIONS.md`, `docs/CHANGELOG.md`, `docs/TESTING.md`, `docs/manual/amon-ra.manual.json`, `docs/manual/manual.html`, `docs/HANDOFF.md`.
-
-**Decisions:** D-013 (Reuse museum acquaintance flags for formal introductions).
-
-**Verified:** SCI Companion compilation of Scripts 35, 36, and 90; structural parsing of all three message overrides; headless DOSBox-X startup; documentation/manual validation; unchanged base archive hashes.
-
-**Next session should start with:** P2-06 (Steve & Laura Character Consistency).

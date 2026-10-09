@@ -901,6 +901,7 @@
 	)
 	
 	(method (sel_110)
+		(gGame sel_87: 1 179)
 		(super sel_110: &rest)
 		(gNarrator sel_1: 10 sel_0: 140)
 	)

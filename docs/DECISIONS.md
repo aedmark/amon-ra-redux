@@ -244,6 +244,14 @@ Improve access through the authored Room 560 book and clue records instead of in
 - **Decision:** Preserve the existing item, message, score, and clue identities. Expand the special volume's rectangle to 36x38 pixels and route Look, Hand, or Magnifier on the larger bookcase feature to the same closed-book inset while item 24 remains uncollected. On Look at the exposed file, idempotently add clues 793 and 272 before showing the original description; retain the original Take path as a second registration route. Do not add speculative dialogue or new save-state fields.
 - **Consequences:** Resolves P4-01 through a prominent environmental interaction and two independent clue-registration paths. Existing saves remain compatible, repeated inspection cannot duplicate notebook entries, and the later inquest receives the same canonical evidence IDs as the vanilla Take path.
 
+## D-023 Reconcile Canonical Planted Evidence in Script 750
+
+Recognize the game's real evidence identities at the inquest and award idempotent insight credit without changing questionnaire answers or ending tiers.
+
+- **Context:** The P4-02 outline named Scripts 700/720, “Yvette's schedule,” and multiple footprints. Source and message audits found that the complete coroner questionnaire and outcome evaluation live in Script 750. Inventory item 21 is Pippin's notepad and reveals appointments for Yvette, Tut, and Carrington after charcoal treatment; item 29 is carbon paper containing an unrelated message about Ernie's fencing job. Room 454's bloody high-heel footprint had authored visual and description resources but no persistent discovery state. The Ankh is item 20/clue 789 and Yvette's shoe is item 30/clue 799.
+- **Decision:** Record opening Room 454's footprint inset through unused score bit 179. After the sixteenth inquest question, review three evidence chains independently: Ankh item 20, appointment-notepad item 21, and footprint bit 179 paired with shoe item 30. Use the existing score-bit mechanism to award one point per recognized chain through unused bits 180..182, making repeat entry idempotent. Explain in coroner text that the items contribute timeline or framing evidence but do not by themselves establish guilt. Do not relabel the carbon paper, change murder-answer correctness, or alter final outcome tiers; those remain scoped to P4-03 through P4-06.
+- **Consequences:** Resolves P4-02 in the actual owning scripts, preserves old saves and inventory semantics, and turns the previously ephemeral footprint into durable investigative state. Saves created before the patch can still receive Ankh and notepad credit; footprint comparison credit requires inspecting the footprint under the patched script. The three new score events must be included when P4-05 standardizes the final denominator.
+
 ---
 
 ## Open questions

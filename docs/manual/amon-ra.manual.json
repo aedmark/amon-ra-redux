@@ -926,24 +926,32 @@
             "red-herrings",
             "p4"
           ],
-          "what": "Reconciles physical evidence planted by perpetrators (such as the Ankh medallion, Yvette's appointment schedule, and multiple footprints) so players who discover them receive credit for thorough investigation rather than point deductions.",
+          "what": "Reconciles three canonical physical-evidence chains at the actual Script 750 inquest: the Ankh medallion, Pippin's appointment notepad, and the bloody high-heel footprint paired with Yvette's shoe. The source audit corrects the outline's mistaken identification of the carbon paper as Yvette's schedule.",
           "how": {
-            "lead": "Modifies coroner inquest evaluation in Script 700 / Script 720:",
+            "lead": "Records the previously ephemeral footprint in Script 454 and adds a post-question evidence review to Script 750:",
             "points": [
-              "Acknowledge planted physical evidence in coroner dialogue as deliberate framing attempts.",
-              "Award investigative insight points when player identifies the false leads as plant operations.",
-              "Eliminate scoring penalties for presenting verified physical items collected during play."
+              "Opening the footprint inset sets unused, persistent score bit 179 without creating a duplicate inventory object or clue entry.",
+              "After question 16, independently recognize Ankh item 20, appointment-notepad item 21, and footprint bit 179 together with shoe item 30.",
+              "Explain that each clue contributes timeline or framing evidence rather than proving guilt, and award idempotent insight points through unused bits 180, 181, and 182."
             ]
           },
-          "why": "Penalizing players for discovering physical clues that the game explicitly placed at crime scenes feels arbitrary and contradicts good mystery game design.",
+          "why": "Thorough investigation should help the player distinguish planted evidence from a verdict. Reusing canonical item identities and the existing point-bit mechanism preserves save and inventory behavior while making the coroner respond to what Laura actually discovered.",
           "evidence": [
             {
-              "label": "Coroner Inquest Script",
-              "target": "LB2/700.SCR"
+              "label": "Pippin Crime Scene Source",
+              "target": "LB2/src/rm454.sc"
             },
             {
-              "label": "Ending Scoring Script",
-              "target": "LB2/720.SCR"
+              "label": "Compiled Pippin Crime Scene Patch",
+              "target": "LB2/454.SCR"
+            },
+            {
+              "label": "Coroner Inquest Source",
+              "target": "LB2/src/rm750.sc"
+            },
+            {
+              "label": "Compiled Coroner Inquest Patch",
+              "target": "LB2/750.SCR"
             }
           ],
           "related": [

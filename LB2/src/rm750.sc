@@ -278,6 +278,45 @@
 				(if (> local0 16) (= sel_136 1) else (self sel_144: 1))
 			)
 			(4
+				(= sel_65 sEvidenceReview)
+				(self sel_111:)
+			)
+		)
+	)
+)
+
+(instance sEvidenceReview of Script
+	(properties
+		sel_20 {sEvidenceReview}
+	)
+
+	(method (sel_144 theSel_29)
+		(switch (= sel_29 theSel_29)
+			(0
+				(if (gEgo sel_238: 20)
+					(gGame sel_87: 1 180)
+					(Print
+						sel_30: 0
+						sel_198: {The Ankh medallion's initials point rather neatly at Dr. Smith, Miss Bow--too neatly. In light of the case you have established, I will record it as a deliberate attempt to frame him, not as proof of his guilt.}
+						sel_110:
+					)
+				)
+				(if (gEgo sel_238: 21)
+					(gGame sel_87: 1 181)
+					(Print
+						sel_30: 0
+						sel_198: {Pippin's appointment list is useful timeline evidence. It tells us who was expected in the Egyptian Room, but an appointment alone proves neither presence nor guilt. Your care in preserving it deserves credit.}
+						sel_110:
+					)
+				)
+				(if (and (proc0_2 179) (gEgo sel_238: 30))
+					(gGame sel_87: 1 182)
+					(Print
+						sel_30: 0
+						sel_198: {The bloody high-heeled footprint at Pippin's body and the woman's shoe form a conspicuous trail toward Yvette. Against the other evidence, that trail looks planted. You were right to document both clues without mistaking them for a verdict.}
+						sel_110:
+					)
+				)
 				(= sel_65 sAfterQuestions)
 				(self sel_111:)
 			)
