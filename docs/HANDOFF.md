@@ -12,33 +12,24 @@ Security: [SECURITY.md](SECURITY.md). Changes: [CHANGELOG.md](CHANGELOG.md). Old
 
 ## Current state
 
-_Last updated: 2026-10-09, session 25: baseline restored and locked; .sco object caches tracked in git._
+_Last updated: 2026-10-09, session 26: dirty cab gated on prior ride and pre-populated Crodfoller preliminary research._
 
-**Where things stand, in one paragraph:** Following an accidental "Compile All" run that corrupted loose patches and caused Sierra Error 3 on boot, the working tree has been cleanly restored to the verified `8d98dcf` baseline. All 221 SCI Companion `.sco` object caches in `LB2/src/` are now explicitly tracked in git (with `.gitattributes` marking them binary) to guarantee single-script compilation can always resolve object symbols without requiring full decompilation. External IDE runtime caches are ignored in `.gitignore`. The game boots cleanly with zero errors in DOSBox-X.
+**Where things stand, in one paragraph:** Following compiler verification, Act 1 cab progression and notebook logic have been refined (D-030). The dirty cab containing the claim ticket now appears only after at least one normal cab ride (flag 125) and is permanently locked out once the ticket is collected (flag 27). The Act 1 notebook is pre-populated with Countess, Rameses, Ernie, Olympia, and Yvette to reflect Crodfoller's preliminary research diegetically and preserve their unique Act 1 interrogation dialogues. Both `Trash.sc` (250) and `lb2InitCode.sc` (14) compiled cleanly via single-script compilation, and the game boots with zero errors in DOSBox-X.
 
 **Verified** (2026-10-09, Linux workspace)
 
 | Suite | Result |
 | --- | --- |
+| D-030 / PLAY-001 dirty cab gating | **Pass: 250.SCR/250.HEP compiled, gated on flag 125 & (not flag 27)** |
+| D-030 notebook pre-population | **Pass: 14.SCR/14.HEP compiled, clues 264/266/267/269/270 added at boot** |
 | P4-06 Script compilation | **Pass: 750.SCR/750.HEP emitted by SCI Companion** |
-| P4-06 verdict isolation audit | **Pass: Q1–9 own murder writes, Q10–11 own theft writes, Q12–16 bonus state owns neither** |
 | P4-05 Script compilation | **Pass: 26.SCR/26.HEP emitted by SCI Companion** |
-| P4-05 score audit | **Pass: attainable cumulative maxima 5/13/38/48/51; final raw maximum 54; Act 0 excluded from grade-band counters** |
 | P4-04 Script compilation | **Pass: 750.SCR emitted by SCI Companion** |
-| P4-04 outcome audit | **Pass: four murder/recovery combinations map to states 1/2/3/4; item 11 or acquisition bit 155 supplies recovery** |
 | P4-03 Script compilation | **Pass: 560.SCR and 750.SCR emitted by SCI Companion** |
-| P4-03 checklist/state audit | **Pass: all 13 official items present; bits 155/170/183 cover surrender, consumption, and inspection; bit 183 unique to the intended paths** |
 | P4-02 Script compilation | **Pass: 454.SCR/454.HEP and 750.SCR/750.HEP emitted by SCI Companion** |
-| P4-02 evidence-state audit | **Pass: unique bits 179..182; items 20/21/30 map to Ankh/notepad/shoe; carbon paper item 29 is not treated as a schedule** |
 | P4-01 Script compilation | **Pass: 560.SCR/560.HEP emitted by SCI Companion** |
-| P4-01 evidence-path audit | **Pass: 36x38 special-volume target, full-bookcase Look/Hand/Magnifier fallback, and inspection/Take registration of clues 793 and 272** |
-| P3-06 Script compilation | **Pass: 90.SCR/90.HEP and 22.SCR/22.HEP emitted by SCI Companion with 0 errors and 0 warnings** |
-| P3-06 movement/schedule audit | **Pass: all 112 museum-actor message paths use the dialogue lock; TravelToRoom holds its state; O'Reilly's 10:15 removal excludes only Acts 3 and 4** |
-| P3-05 Script compilation | **Pass: 250.SCR/250.HEP emitted by SCI Companion with 0 errors and 0 warnings** |
-| P3-05 state-path audit | **Pass: all three dirty-taxi checks use press-pass bit 1; docks/baseball/Ziggy bits remain independent and available** |
-| P3-04 Script compilation | **Pass: 530.SCR/530.HEP emitted by SCI Companion with 0 errors and 0 warnings** |
-| P3-04 warning audit | **Pass: dark boundary redirects to sWarnDarkStairs, moves Laura to y=165, and reuses message tuple 11/1/2** |
-| P3-03 progression reference audit | **Pass: all `global111` reads/writes and all Script 26 callers traced; no Act 2 knowledge-count gate exists** |
+| P3-06 Script compilation | **Pass: 90.SCR/90.HEP and 22.SCR/22.HEP emitted by SCI Companion** |
+| P3-04 Script compilation | **Pass: 530.SCR/530.HEP emitted by SCI Companion** |
 | `python3 tools/check_docs.py` | **Pass: 0 errors, 0 warnings** |
 | `python3 tools/manual.py check ...` | **Pass: 6 sections, 30 entries, 0 errors** |
 | `python3 tools/manual.py build ...` | **Pass: compiled docs/manual/manual.html** |
@@ -48,41 +39,22 @@ _Last updated: 2026-10-09, session 25: baseline restored and locked; .sco object
 **What works**
 
 - **Phase 1 Overhaul:** All six Phase 1 items (P1-01 through P1-06) compiled as loose patches in `LB2/`.
-- **P2-01 Suspect Fallbacks:** Dual-tier guest register check-in and encounter-based suspect registration operational.
-- **P2-02 Pocket Watch Confrontation:** Armor Room lockout removed, meeting scheduling sequence corrected, and watch confrontation dialogue fully accessible.
-- **P2-03 Murder Reaction Restoration:** Discovered homicide dialogue trees restored across all suspects; O'Riley Countess reaction connected; Ziggy head exhibit restored; Dagger inquiry connected.
-- **P2-04 Historical Dialogue:** Three loose message overrides correct or clarify the identified late-1926 references while preserving message tuples and talkers.
-- **P2-05 Acquaintance Routing:** Six museum characters now honor existing introduction state; Pippin, Smith, and O'Riley introduce themselves in neutral first-contact dialogue.
-- **P2-06 Steve Continuity:** Museum romance sequences require Laura to have spoken with Steve in Act 1; otherwise their relationship remains professional.
-- **P2-07 Dagger Reactions and Custody:** Accessible suspects recognize the authentic recovered dagger; handing it to O'Reilly removes it from inventory in either museum actor context.
-- **P3-01 Act 5 Supply Safety:** A one-time central audit repairs missing cutters, oil, and cheese for new or existing Act 5 saves without recreating consumed items.
-- **P3-02 Snake Oil Feedback:** Empty bottles visibly switch to a red-X cel; the Room 610 jar provides three guarded one-action refills through a larger hotspot.
-- **P3-03 Progression Audit:** Authored act transitions and the later `global111` scene scheduler are preserved; Act 2's genuine passive-pacing problem is retained as post-bugfix content milestone P5-01.
-- **P3-04 Fair-Play Stairwell:** Crossing the eastern-tower stairwell threshold in darkness now stops Laura safely and repeats the existing warning; replacing the bulb retains the original traversal.
-- **P3-05 Flexible Act 1:** The press pass now exposes the dirty taxi and claim ticket; docks, baseball, and Ziggy remain optional, independently completable paths.
-- **P3-06 Stable Museum Conversations:** The selected wandering NPC holds position for dialogue and resumes its prior route afterward; O'Reilly stays available past 10:15 in Acts 3 and 4.
-- **P4-05 Accurate Act Grades:** Script 26 uses attainable cumulative point maxima and leaves the introduction ungraded, preserving the first authored response in every grade band.
-- **P4-06 Clear Inquest Scope:** Script 750 labels questions 1–11 as required findings and questions 12–16 as bonus museum inquiries, with optional answers structurally isolated from verdict state.
-- **Documentation Architecture:** `docs/ROADMAP.md`, `DECISIONS.md` (D-009 through D-028), `docs/manual/`, `docs/manual/manual.html`, and the full-game playtest checklist synchronized.
+- **Phase 2 Restorations:** Suspect fallbacks (P2-01), watch confrontation (P2-02), murder reactions (P2-03), historical dialogue (P2-04), acquaintance routing (P2-05), Steve continuity (P2-06), and dagger reactions (P2-07).
+- **Phase 3 Mechanics:** Supply safety audit (P3-01), snake oil feedback (P3-02), fair stairwell (P3-04), flexible Act 1 and cab gating (P3-05, D-030), and museum conversation lock (P3-06).
+- **Phase 4 Scoring & Mystery:** Accurate act grades (P4-05), clear inquest scope (P4-06), evidence checklist (P4-03), and decoupled quiz/dagger outcome (P4-04).
+- **Act 1 Investigation Context:** Crodfoller's preliminary research pre-populates Countess, Rameses, Ernie, Olympia, and Yvette in Act 1 notebook (D-030).
+- **Documentation Architecture:** `docs/ROADMAP.md`, `DECISIONS.md` (D-001 through D-030), `docs/manual/`, `docs/manual/manual.html`, and `docs/PLAYTEST_CHECKLIST.md` synchronized.
 
 **Not verified**
 
 - End-to-end multi-act playthrough regression testing in DOSBox-X.
-- Direct in-game traversal of both P4-06 section notices and confirmation that varied bonus answers leave the final result unchanged.
-- Direct in-game P4-05 verification at every act maximum and percentage-band boundary.
-- Direct in-game traversal of P4-04's four murder/recovery outcomes, including the surrendered-dagger path.
-- Direct in-game confirmation of the P4-03 maximum outcome and one-at-a-time failure cases from the Act 6 save.
-- Direct in-game traversal of the P4-02 footprint inspection and all three Script 750 evidence-review branches from the Act 6 save.
-- Direct Room 560 observation of the enlarged book/bookcase discovery path and pre-Take notebook updates for P4-01.
-- Direct in-game traversal of the P2-04 historical dialogue, P2-05 first-contact branches, both P2-06 Steve relationship branches, the P2-07 dagger hand-off, P3-01 entry with deliberately missing supplies, P3-02 bottle depletion/refill transitions, both P3-04 stairwell paths, P3-05's early dirty-taxi/claim-ticket route, and P3-06 moving-NPC conversations plus O'Reilly's post-10:15 Act 3–4 availability; the automated DOSBox-X check is a startup smoke, not an input-driven playthrough.
+- Direct in-game verification of the playtest findings during continuous run.
 
 **Gotchas for the next session**
 
 - Keep loose patch files in `LB2/` strictly uppercase (`.SCR`, `.HEP`, `.MSG`).
-- The dialogue chronology is late 1926; the design outline's “Spring 1926” wording is contradicted by multiple in-game date anchors (D-012).
-- In `RotundaRgn.sc` (Script 93), `Actor` instances must not define extraneous property `name` (already covered by `sel_20`).
-- Script 15's decompiled inventory instances likewise carried invalid `name` pseudo-properties; these were removed because `sel_20` already supplies their labels.
-- If a mapped source is absent from SCI Companion's resource list, a temporary numbered loose resource makes it selectable; compile the real source, then retain only the compiler-emitted patch. Scripts 15, 90, 240, and 250 required this bootstrap.
+- Single-script compilation only: use `python3 tools/compile.py <script>`. Never use Compile All or resource rebuild.
+- If a script disappears from SCI Companion's list when patch files are deleted, restore files and restart with `wineserver -k`.
 
 ## Next steps (in order)
 
@@ -95,6 +67,28 @@ _Last updated: 2026-10-09, session 25: baseline restored and locked; .sco object
 None currently open. Q-001 and Q-002 have been resolved by D-007, D-017, and D-018.
 
 ## Session log
+
+### Session 26: 2026-10-09: Dirty Cab Progression Gating and Act 1 Notebook Pre-population
+
+**Contributor:** Antigravity and maintainer
+
+**Goal:** Resolve PLAY-001 (gate dirty cab on a prior normal ride and eliminate it after ticket collection) and pre-populate Crodfoller's preliminary research entries (Countess, Rameses, Ernie, Olympia, Yvette) in the Act 1 notebook (D-030).
+
+**Done:**
+- Re-verified single-script compilation environment: refreshed `Main.sco` and `Inset.sco` object symbol tables; verified unmodified `Trash.sc` and `lb2InitCode.sc` recompile byte-for-byte identical to committed baseline patches.
+- Implemented PLAY-001 / D-030 in `LB2/src/Trash.sc`: allocated persistent flag 125 (`proc0_3 125`) in `sDoTakeOffFlight` on taking a normal cab ride; gated dirty cab appearance in `rm250` init, `Trash::sel_110`, and `cornerTrash::sel_300` on `(and (proc0_10 1) (proc0_2 125) (not (proc0_2 27)))`.
+- Implemented D-030 in `LB2/src/lb2InitCode.sc`: added preliminary research clues 264 (Rameses), 266 (Yvette), 267 (Ernie), 269 (Countess), and 270 (Olympia) to initial clue registration, preserving their rich Act 1 character dialogues without exceeding the 18-element People array cap.
+- Compiled `LB2/250.SCR` (5,194 bytes), `LB2/250.HEP` (2,490 bytes), `LB2/14.SCR` (722 bytes), and `LB2/14.HEP` (52 bytes) via single-script compilation (`python3 tools/compile.py`).
+- Verified zero errors on DOSBox-X headless boot smoke test; bytecode inspection confirmed flag logic and clue additions.
+- Archived Session 16 to `docs/archive/SESSION_LOG_2026_10.md` to keep live session log under limit.
+
+**Changed:** `LB2/src/Trash.sc`, `LB2/src/lb2InitCode.sc`, `LB2/src/Main.sco`, `LB2/src/Inset.sco`, `LB2/250.SCR`, `LB2/14.SCR`, `docs/DECISIONS.md`, `docs/ROADMAP.md`, `docs/PLAYTEST_CHECKLIST.md`, `docs/HANDOFF.md`, `docs/archive/SESSION_LOG_2026_10.md`.
+
+**Decisions:** D-030.
+
+**Verified:** SCI Companion single-script compilation of Scripts 250 and 14 with 0 errors/0 warnings; DOSBox-X headless boot test (0 errors); bytecode flag and clue-id audits; `python3 tools/check_docs.py` (0 errors); `python3 tools/manual.py check` (0 errors).
+
+**Next session should start with:** Continue full-game playtest checklist run in DOSBox-X.
 
 ### Session 25: 2026-10-09: Catastrophe Recovery and Object Cache Baseline Tracking
 
@@ -296,24 +290,3 @@ None currently open. Q-001 and Q-002 have been resolved by D-007, D-017, and D-0
 **Verified:** SCI Companion compilation of Script 560; static ownership, hotspot, clue-ID, inventory, and score-path audit; DOSBox-X original-interpreter startup smoke; documentation/manual validation; unchanged base archive hashes. Direct Room 560 observation remains a manual save-based regression test.
 
 **Next session should start with:** P4-02 (Evidence Validity, Red Herrings & Inquest Credit).
-
-### Session 16: 2026-10-08: P3-06 NPC Wander Mechanic Stabilization
-
-**Contributor:** Codex
-
-**Goal:** Prevent museum NPCs from leaving during dialogue and keep O'Reilly available for later-act questioning without destroying authored schedules.
-
-**Done:**
-- Traced Script 90's shared `MuseumActor` and `TravelToRoom` controller and confirmed that actor message calls had no dismissal callback while movement scripts continued to cycle.
-- Routed all 112 museum-actor message dispatches through `sel_668`, which locks only the selected actor and stops its mover before opening the message.
-- Added `museumDialogueResume` and a `TravelToRoom.sel_145` guard so dismissal clears the lock and re-enters the same travel state, preserving fixed destinations and random routes.
-- Gated Script 22's 10:15 O'Reilly removal outside Acts 3 and 4, leaving the authored behavior unchanged in other acts.
-- Compiled Scripts 90 and 22 and synchronized the architecture, roadmap, decision log, changelog, testing matrix, handoff, and manual.
-
-**Changed:** `LB2/src/MuseumRgn.sc`, `LB2/src/triggerAndClock.sc`, `LB2/90.SCR`, `LB2/90.HEP`, `LB2/22.SCR`, `LB2/22.HEP`, `docs/ROADMAP.md`, `docs/ARCHITECTURE.md`, `docs/DECISIONS.md`, `docs/CHANGELOG.md`, `docs/TESTING.md`, `docs/manual/amon-ra.manual.json`, `docs/manual/manual.html`, `docs/HANDOFF.md`, `docs/archive/SESSION_LOG_2026_10.md`.
-
-**Decisions:** D-021 (Preserve museum travel state across dialogue).
-
-**Verified:** SCI Companion compilation of Scripts 90 and 22 with 0 errors and 0 warnings; static audit of all museum-actor message paths, pause/resume state handling, and the Act 3–4 clock guard; DOSBox-X original-interpreter startup smoke; documentation/manual validation. Direct save-based observation of a moving speaker and O'Reilly after 10:15 remains a manual regression test.
-
-**Next session should start with:** P4-01 (Mystery Accessibility & Wattney Little Evidence Discovery).

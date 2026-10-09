@@ -40,7 +40,7 @@
 		(User sel_347: 1)
 		(laura sel_4: (if (gEgo sel_584?) 1 else 0) sel_317:)
 		(license sel_110:)
-		(if (proc0_10 1)
+		(if (and (proc0_10 1) (proc0_2 125) (not (proc0_2 27)))
 			(trash1 sel_110:)
 			(trash2 sel_110:)
 			(trash3 sel_110:)
@@ -404,6 +404,7 @@
 	(method (sel_144 theSel_29 &tmp [temp0 50])
 		(switch (= sel_29 theSel_29)
 			(0
+				(proc0_3 125)
 				(gGame sel_587:)
 				(User sel_347: 1)
 				(= sel_136 1)
@@ -913,7 +914,7 @@
 	)
 	
 	(method (sel_110)
-		(if (proc0_10 1)
+		(if (and (proc0_10 1) (proc0_2 125) (not (proc0_2 27)))
 			(gLb2MDH sel_129: self)
 			(gLb2KDH sel_129: self)
 		)
@@ -1059,7 +1060,7 @@
 			(4
 				(cond 
 					((proc0_2 27) (gLb2Messager sel_295: 2 4 4))
-					((proc0_10 1) (gLb2Messager sel_295: 2 4 2))
+					((and (proc0_10 1) (proc0_2 125) (not (proc0_2 27))) (gLb2Messager sel_295: 2 4 2))
 					((gEgo sel_584?) (gLb2Messager sel_295: 2 4 4))
 					((gEgo sel_238: 0) (gLb2Messager sel_295: 2 4 4))
 					(else (gLb2Messager sel_295: 2 4 4))

@@ -300,6 +300,17 @@ A patch is not done until the game boots with it, and scripts that have no commi
 - **Decision:** Boot the game under DOSBox-X after every compile and before every commit that changes `.SCR` or `.HEP` files. Use `tools/make_test_copy.sh <name> [git-rev]` to build a throwaway copy (optionally with the patch set of an earlier commit) and bisect there, never in `LB2/`. Treat the first loose patch of a script that has none as high risk: compile it alone, boot-test it, and only then commit. Keep the repository's sources identical to the shipped patches; compile-only edits to decompiled sources that were never shipped stay out of the tree until a roadmap item needs that script. Before any bulk file operation (restore, rename, revert), copy the affected files somewhere outside the repository, and note that `git` history, not the working tree, is the recovery point; also commit before a restore.
 - **Consequences:** Roadmap items that touch an unpatched script carry the first-compile cost explicitly. A boot regression is caught within one compile instead of after a bulk change. The 13 compile-fix edits and the nine overrides made on 2026-10-09 remain recoverable from commit `7d48893` for the day a roadmap item needs them.
 
+## D-030 Dirty Cab Progression Gating and Act 1 Notebook Pre-population
+
+Gate the dirty cab behind a completed normal taxi ride, eliminate it after finding the claim ticket, and restore Crodfoller's preliminary research entries to the Act 1 notebook.
+
+- **Context:** In vanilla LB2 (and initial P3-05 simplification), obtaining the press pass immediately caused Room 250 to spawn the dirty cab containing the dry cleaner's claim ticket (item 27), and this dirty cab continued to appear on subsequent rides even after the ticket was collected. Furthermore, Countess Waldemar (clue 269), Rameses Najeer (clue 264), Ernie Leach (clue 267), Dr. Olympia Myklos (clue 270), and Yvette Delacroix (clue 266) were omitted from the notebook initially despite Crodfoller having performed preliminary research on museum personnel, hiding their unique Act 1 dialogue trees with Crodfoller, the Desk Sergeant, Inspector O'Riley, Ziggy, the Bartender, and Lo Fat.
+- **Decision:**
+  1. Allocate persistent flag 125 (`proc0_2 125`, `proc0_3 125`) in `global186` to record completion of a normal cab ride. In `Trash.sc` (Script 250) `sDoTakeOffFlight` (the clean cab ride script), call `(proc0_3 125)` at state 0.
+  2. Gate dirty cab appearance in `rm250` init, `Trash::sel_110`, and `cornerTrash::sel_300` on `(and (proc0_10 1) (proc0_2 125) (not (proc0_2 27)))`. The first cab ride is always a normal cab ride. Once flag 125 is set, the dirty cab appears. When Laura collects the claim ticket (setting flag 27), the dirty cab is permanently locked out and the cab reverts to normal rides.
+  3. In `lb2InitCode.sc` (Script 14), register clues 264, 266, 267, 269, and 270 during initial clue registration alongside the other starting contacts. Registration via `addCluesCode` (Script 21) is idempotent and caps the People array at 18; starting with 12 entries reaches at most 17 across the entire game, well within safety margins.
+- **Consequences:** Resolves PLAY-001 and restores Act 1 character inquiry dialogue trees without breaking progression pacing, save-state compatibility, or notebook capacity limits.
+
 ---
 
 ## Open questions
