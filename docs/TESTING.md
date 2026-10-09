@@ -33,6 +33,10 @@ distinct verification boundaries:
 5. Boot-test (D-029): `./tools/run_dosbox.sh`. The intro must appear; a black screen or an "Oops! Error n" dialog means the patch set is bad even when the compile reported success.
 6. Only then commit.
 
+**Before step 1:** SCI Companion's "Compile modified scripts before run" option must be off (registry `CompileModifiedScriptsBeforeRun=0`). With it on, pressing Run silently recompiles every script whose source is newer than its patch and overwrites the committed files. Launch the game only with `./tools/run_dosbox.sh`.
+
+**Compile output must match the committed layout.** After compiling an unmodified script, its `.SCR`/`.HEP` should be byte-identical to the committed files (compare with `git show HEAD:LB2/N.HEP | cmp - LB2/N.HEP`). A larger heap (extra entry per object) means the SCI Companion version setting or `.sco` caches are wrong; such patches crash the game (D-028, HANDOFF blocker).
+
 To find a bad patch, build a throwaway copy with `tools/make_test_copy.sh <name> [git-rev]` and boot it with the command it prints. Delete or swap patches inside the copy and re-boot. Useful controls: a copy built from the last known-good commit (proves the archive and environment are healthy), then the working tree minus a suspect group. A headless run cannot show the game screen, and screenshot capture with ImageMagick `import` did not work in this environment, so the maintainer reports what the window shows.
 
 ## Interactive DOSBox-X workflow

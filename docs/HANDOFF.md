@@ -124,7 +124,11 @@ None currently open. Q-001 and Q-002 have been resolved by D-007, D-017, and D-0
 
 **Also added:** `tools/make_test_copy.sh` (throwaway boot-test copies, optional git revision), the Compile and boot workflow in `docs/TESTING.md`, D-029, a corrected contributor workflow, and the triage gameplan in `docs/PLAYTEST_CHECKLIST.md`.
 
-**Next session should start with:** Play to the inquest to verify P4-06 (Script 750). Use `python3 tools/compile.py <script>` for any further change and boot the game before committing. Never use Compile All.
+**Compile environment is currently unusable (open blocker, 2026-10-09):** every script compiled by the present SCI Companion setup is incompatible with the shipped patches. Compiling the unmodified `Trash.sc` gives `250.SCR` 5,138 bytes and `250.HEP` 2,602 bytes against the committed 5,136 and 2,490: each object gains an extra heap entry (header count `1e` to `1f`). Booting such a build ends in "Oops! Error 4" (entering the taxi) or a nonsense missing-resource error. The same pattern appears in the Compile All build. Without the restored `LB2/src/*.sco` object caches a compile writes nothing. Do not compile anything until the original SCI Companion version/object-format setting is recovered; it is not in `game.ini` or the Wine registry and is likely in SCI Companion's game-version dialog. The `.sco` set in `LB2/src` dates from the 11:34 Compile All run (a backup copy of it was taken at 12:00 on this machine; no earlier set exists). Also, SCI Companion's "Compile modified scripts before run" option (registry `CompileModifiedScriptsBeforeRun`) recompiles scripts on every Run and silently replaced `0.SCR`/`250.SCR`; the maintainer turned it off. Launch the game only with `./tools/run_dosbox.sh`.
+
+**Drafted fix waiting on the compiler (PLAY-001/002):** in `Trash.sc` (Script 250) change both `(if (proc0_10 1)` tests that select the dirty taxi (the `rm250` init and the trash hotspot's `sel_110`) to `(if (and (proc0_10 1) (not (proc0_2 27)))`. Flag 27 is set when the claim ticket is taken, so the dirty cab then never reappears. Compile only script 250, boot-test, and play the taxi both before and after taking the ticket.
+
+**Next session should start with:** Recover the compile environment (see the blocker above), then play to the inquest to verify P4-06 (Script 750). Use `python3 tools/compile.py <script>` for any further change and boot the game before committing. Never use Compile All.
 
 ### Session 23: 2026-10-09: Pre–Phase 5 Full-Game Playtest Checklist
 
