@@ -43,7 +43,7 @@ The project builds upon the DOS Floppy v1.000 release (D-001) using a modular lo
 | Component | Files / Scope | Role |
 | --- | --- | --- |
 | **Base Assets** | `LB2/RESOURCE.000`, `LB2/RESOURCE.MAP`, `LB2/VERSION` | Immutable v1.000 floppy media providing uncompressed 256-color art deco backgrounds and baseline audio drivers. |
-| **SCI Companion** | `/home/gordonk/PycharmProjects/SCICompanion/Release/SCICompanion.exe` | Win32 MFC IDE executed under Wine to decompile bytecode, edit message tables, inspect polygon barriers, and recompile scripts. |
+| **SCI Companion** | `SCICompanion/Release/SCICompanion.exe` | Win32 MFC IDE executed under Wine to decompile bytecode, edit message tables, inspect polygon barriers, and recompile scripts. |
 | **Loose Patch Store** | `LB2/*.SCR`, `LB2/*.HEP`, `LB2/*.MSG` | High-priority drop-in script chunks overriding buggy procedures without modifying `RESOURCE.000`. |
 | **Testing Harness** | `./tools/run_dosbox.sh` | DOSBox-X execution of Sierra's original interpreter with the checked-in sound, mount, and startup configuration for deterministic save-state verification. |
 | **3x Manual System** | `docs/manual/` | Portable What/How/Why specification validated against `manual.schema.json` and compiled to standalone `docs/manual/manual.html`. |

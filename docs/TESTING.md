@@ -24,6 +24,17 @@ distinct verification boundaries:
 | **DOSBox-X Smoke** | Original interpreter startup | `./tools/run_dosbox.sh` | Mounts `LB2/` as drive C and launches `SCIDHUV.EXE` with loose patches active. |
 | **DOSBox-X Headless Smoke** | Automated startup | `SDL_VIDEODRIVER=dummy SDL_AUDIODRIVER=dummy timeout --signal=INT 10 ./tools/run_dosbox.sh -silent` | Initializes DOSBox-X and the configured game environment without a desktop window. |
 
+## Compile and boot workflow
+
+1. Start SCI Companion under Wine with the game loaded: `wine SCICompanion/Release/SCICompanion.exe 'Z:\home\gordonk\PycharmProjects\amon-ra-redux\LB2\game.ini'`. Its map-format setting must stay at 1.1 (D-028).
+2. Copy the script's current `N.SCR`/`N.HEP` somewhere outside the repository: `tools/compile.py` deletes them first and does not restore them if the helper fails.
+3. Compile one script: `python3 tools/compile.py rm750` (name or `.sc` base name). It drives the GUI through `tools/compile_any.exe`, renames the lowercase output to uppercase, and prints the output sizes. If the script is missing from the helper's list (`wine tools/list_scripts.exe`), restart SCI Companion; it drops a script when its patch files vanish and does not re-add it.
+4. Stop SCI Companion with `wineserver -k` so it cannot touch `LB2/` again.
+5. Boot-test (D-029): `./tools/run_dosbox.sh`. The intro must appear; a black screen or an "Oops! Error n" dialog means the patch set is bad even when the compile reported success.
+6. Only then commit.
+
+To find a bad patch, build a throwaway copy with `tools/make_test_copy.sh <name> [git-rev]` and boot it with the command it prints. Delete or swap patches inside the copy and re-boot. Useful controls: a copy built from the last known-good commit (proves the archive and environment are healthy), then the working tree minus a suspect group. A headless run cannot show the game screen, and screenshot capture with ImageMagick `import` did not work in this environment, so the maintainer reports what the window shows.
+
 ## Interactive DOSBox-X workflow
 
 Run `./tools/run_dosbox.sh`. The checked-in configuration mounts `LB2/` as C: and starts `scidhuv`, so SCI executes

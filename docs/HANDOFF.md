@@ -12,15 +12,14 @@ Security: [SECURITY.md](SECURITY.md). Changes: [CHANGELOG.md](CHANGELOG.md). Old
 
 ## Current state
 
-_Last updated: 2026-10-09, session 23: pre–Phase 5 full-game playtest checklist established._
+_Last updated: 2026-10-09, session 24: compile toolchain recovered; maintainer is running the full-game playtest._
 
-**Where things stand, in one paragraph:** Phase 1 through Phase 3 and P4-01 through P4-05 are committed and pushed
-through `4c79bcf`; P4-06 is complete but uncommitted. Script 750 now announces questions 1–11 as required case findings
-and runs optional art-theft and High Priest questions 12–16 in a separately announced `sBonusQuestions` state machine.
-The audit confirms that only questions 1–9 can change murder correctness and only questions 10–11 can change theft-answer
-correctness; the bonus state cannot alter either verdict flag. D-027 records the boundary. All planned bug-fix phases are
-complete. The maintainer is now running the game to completion in DOSBox-X; `docs/PLAYTEST_CHECKLIST.md` is the Phase 5
-entry gate and currently tracks observations PLAY-001 through PLAY-008 from the run through the start of Act 2.
+**Where things stand, in one paragraph:** Phase 1 through Phase 4 are committed and pushed. The shipped patch set is the
+`4c79bcf` set plus P4-06's Script 750, verified to boot and to recompile identically (session 24). Script 750 labels
+questions 1–11 as required case findings and runs optional questions 12–16 in a separate `sBonusQuestions` state that
+cannot change either verdict flag (D-027). The maintainer is playing the game to completion; the triage gameplan for
+PLAY-001 to PLAY-008 is in `docs/PLAYTEST_CHECKLIST.md`. Read D-028 and D-029 before touching the toolchain: never
+Compile All or rebuild resources, compile one script at a time, boot-test every compile.
 
 **Verified** (2026-10-09, Linux workspace)
 
@@ -122,6 +121,8 @@ None currently open. Q-001 and Q-002 have been resolved by D-007, D-017, and D-0
 **Verified:** The patch set committed here boots in DOSBox-X (maintainer). A fresh single-script compile of `rm750` under Wine (`tools/compile.py`) reproduces the committed `750.SCR`/`750.HEP` byte for byte. Not verified: P4-06 in the inquest itself.
 
 **Gotchas:** `tools/compile.py` deletes the existing `N.SCR`/`N.HEP` before compiling and does not restore them if the helper fails, so back them up first. SCI Companion (started with `wine SCICompanion/Release/SCICompanion.exe 'Z:\...\LB2\game.ini'`) drops a script from its list when its patch files vanish and does not re-add it; restart it after restoring files. Stop it with `wineserver -k` when finished.
+
+**Also added:** `tools/make_test_copy.sh` (throwaway boot-test copies, optional git revision), the Compile and boot workflow in `docs/TESTING.md`, D-029, a corrected contributor workflow, and the triage gameplan in `docs/PLAYTEST_CHECKLIST.md`.
 
 **Next session should start with:** Play to the inquest to verify P4-06 (Script 750). Use `python3 tools/compile.py <script>` for any further change and boot the game before committing. Never use Compile All.
 

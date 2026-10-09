@@ -109,6 +109,30 @@ together afterward.
 - [ ] Final score and ranks/messages are internally consistent; no optional museum-trivia answer reduces the result.
 - [ ] Credits and return-to-game/exit behavior complete without a hang or corrupted display.
 
+## Triage gameplan
+
+Prepared during the run so triage can start the moment the playthrough ends. Everything below is read-only analysis;
+nothing in `LB2/` changes until the run closes and the maintainer picks items.
+
+**Ground rules (D-028, D-029):** group fixes by owning script so each script is compiled once; compile one script at a
+time with `tools/compile.py`; boot-test before every commit; use `tools/make_test_copy.sh` to bisect. A script with no
+committed loose patch (today: 310, 640, 770, 928, 999, 1888, 1895, 1904, 1906) is a first-time compile and carries
+boot risk; a script already in the shipped set (for example 250, 21, 20, 13, 0) is an ordinary edit.
+
+| Finding | Owning script(s) | Patch exists? | First read-only lead | Proposed approach |
+| --- | --- | --- | --- | --- |
+| PLAY-001, PLAY-002 | 250 (`rm250`, `Trash.sc`: `sNoPressPassC`, `sNoPressPassD`, `sHasPressPass`, `s1stTimeInDirtyTaxi`) | Yes (D-020) | D-020 gates the dirty taxi on press-pass bit 1 but the dirty-taxi room entry may still replay `s1stTimeInDirtyTaxi` every visit, and the cabbie's recognition scripts may not test the same bit. | Trace entry and exit paths for both cabs with the claim ticket held (bit and inventory); add a one-time guard on the existing bits, no new flag. Lowest risk; do first. |
+| PLAY-003 | 310 (`rm310`, speakeasy), plus the bathroom and Lo Fat street rooms (to be located) | **No** for 310 | In `rm310` the music resource is picked by `(DoSound sndGET_POLYPHONY)`: 310 when it returns 32, otherwise 314. The DOSBox-X config sets `mididevice=default` and the log reports `MIDI:Opened device:none`, so the sound driver's polyphony, not a missing call, may decide whether anything plays. | First, with no code change: check `RESOURCE.CFG`, boot with each configured sound device, and confirm whether the other rooms also depend on the driver. Only if the music call is genuinely missing, patch the three rooms. |
+| PLAY-004 | 310 and its message resource | **No** | `barfly1` and `barfly2` are plain `View` instances with no dedicated verb handler, so they fall back to a shared response. | Add two distinct Look/Talk messages as a loose `.MSG` plus a minimal handler. First-time compile of 310 (source needs the `View`→`Actor` edit and other fixes from `7d48893`). Do it with PLAY-003 in a single 310 compile. |
+| PLAY-005, PLAY-007, PLAY-008 | 21 (`addCluesCode`), 20 (`NotebookItem`), 13 (`aboutCode`), 0 (`Main`) and every caller that adds a People/Things clue (rooms in the 2xx–4xx range, the museum region script 90) | Yes for 21/20/13/0; callers vary | Clues live in packed arrays `global202`, `global220`, `global228`, `global263` and are added by clue ID through `addCluesCode`. | Build a table of every add call (script, line, trigger, entry). Compare each People/Things add against a diegetic reason. Decide per entry: delay the add, add an introduction scene, or keep. For PLAY-008, find the topic-complete flag read by the notebook screen and where later acts clear it. Medium risk because of caller count; touch only callers whose trigger is wrong. |
+| PLAY-006 | `.MSG` resources (1882–1892 already loose) and the museum conversation handlers | MSG yes; scripts mostly | Additive interjections need new message tuples plus a hook that fires when the asked-about character is within range. | Defer to the Phase 5 content sweep. Prototype Pippin/Carrington first to prove the hook, then roll out. |
+
+**Sequence:** (1) PLAY-001/002; (2) PLAY-003 config test, then the combined script 310 compile for PLAY-003/004;
+(3) the notebook audit table (PLAY-005/007/008) and its fixes; (4) PLAY-006 inside P5-01. After each step, regression-run
+the relevant Save checkpoint from [TESTING.md](TESTING.md).
+
+**New findings from the run** are added to the register below; assign each to a row here when it is triaged.
+
 ## Findings register
 
 These are observations from the current run, not yet implementation decisions. Preserve existing content and prefer
