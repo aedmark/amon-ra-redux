@@ -119,9 +119,11 @@ None currently open. Q-001 and Q-002 have been resolved by D-007, D-017, and D-0
 
 **Decisions:** D-028.
 
-**Verified:** The patch set committed here boots in DOSBox-X (maintainer). Not verified: the Compile All build of 750 in the inquest. It is 72 bytes larger in its `.HEP` than the earlier single-script build.
+**Verified:** The patch set committed here boots in DOSBox-X (maintainer). A fresh single-script compile of `rm750` under Wine (`tools/compile.py`) reproduces the committed `750.SCR`/`750.HEP` byte for byte. Not verified: P4-06 in the inquest itself.
 
-**Next session should start with:** Recompile script 750 alone with `python3 tools/compile.py rm750` (SCI Companion must be running under Wine with the game open), boot the game, then play to the inquest to verify P4-06. Never use Compile All.
+**Gotchas:** `tools/compile.py` deletes the existing `N.SCR`/`N.HEP` before compiling and does not restore them if the helper fails, so back them up first. SCI Companion (started with `wine SCICompanion/Release/SCICompanion.exe 'Z:\...\LB2\game.ini'`) drops a script from its list when its patch files vanish and does not re-add it; restart it after restoring files. Stop it with `wineserver -k` when finished.
+
+**Next session should start with:** Play to the inquest to verify P4-06 (Script 750). Use `python3 tools/compile.py <script>` for any further change and boot the game before committing. Never use Compile All.
 
 ### Session 23: 2026-10-09: Pre–Phase 5 Full-Game Playtest Checklist
 
