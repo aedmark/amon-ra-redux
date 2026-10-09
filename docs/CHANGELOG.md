@@ -13,6 +13,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - Verification harness integrating Wine-based SCI Companion and DOSBox-X.
 
 ### Changed
+- Decoupled dagger recovery from theft-quiz correctness at the epilogue boundary, so the newspaper, ending route, and character outcome cards recognize a dagger Laura retained or surrendered to O'Reilly (P4-04, D-025).
 - Aligned the Super Sleuth evidence gate with Sierra's complete 13-item hint-book checklist, retaining discovery credit for a surrendered dagger, read carbon paper, and an inspected police file (P4-03, D-024).
 - Added an inquest evidence review for the Ankh, Pippin's appointment notepad, and the bloody high-heel footprint/Yvette shoe comparison; the coroner now identifies these as possible framing evidence and awards one-time investigative insight credit (P4-02, D-023).
 - Made Watney Little's police file discoverable from Room 560's full bookcase as well as an enlarged special-volume hotspot, and record both the file and Watney notebook clues when the exposed file is inspected (P4-01, D-022).

@@ -1017,21 +1017,25 @@
             "quiz-logic",
             "p4"
           ],
-          "what": "Fixes the logic bug that falsely claimed Laura lost the Dagger of Amon Ra in the ending newspaper if the player answered theft questions incorrectly, even when Laura physically held or handed in the dagger.",
-          "how": [
-            "In Script 720 (Ending epilogue), inspect flag evaluation for newspaper headline generation.",
-            "Decouple headline string selection from quizScore variable; instead, bind it directly to (ego has: iDagger) or fGivenDaggerToOReilly.",
-            "Only report the dagger as missing if Laura genuinely failed to recover the artifact in Act 5."
-          ],
-          "why": "Failing an interrogation quiz question should not magically retroactively delete an item physically present in Laura's possession.",
+          "what": "Fixes the Script 750 outcome bug that falsely claimed Laura lost the Dagger of Amon Ra when she answered theft questions incorrectly, even when she physically retained it or handed it to O'Reilly.",
+          "how": {
+            "lead": "Separates quiz feedback from the physical history used by the epilogue:",
+            "points": [
+              "Keep the original four-state quiz result while the coroner evaluates Laura's murder and theft answers.",
+              "Treat inventory item 11 or durable acquisition bit 155 as proof that Laura recovered the authentic dagger.",
+              "At the epilogue boundary, preserve whether the murder case was solved but replace the theft-answer dimension with physical recovery.",
+              "Use the normalized state for newspaper art, outcome routing, and all 19 condition-indexed character cards in Script 785."
+            ]
+          },
+          "why": "Questionnaire accuracy should determine the coroner's assessment, not retroactively change whether Laura recovered or surrendered a physical artifact.",
           "evidence": [
             {
-              "label": "Epilogue Script",
-              "target": "LB2/720.SCR"
+              "label": "Inquest and Epilogue Source",
+              "target": "LB2/src/rm750.sc"
             },
             {
-              "label": "Inventory Script",
-              "target": "LB2/20.SCR"
+              "label": "Compiled Inquest and Epilogue Patch",
+              "target": "LB2/750.SCR"
             }
           ],
           "related": [

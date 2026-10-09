@@ -67,10 +67,14 @@
 	)
 )
 
+(procedure (localproc_hasRecoveredDagger)
+	(return (or (gEgo sel_238: 11) (proc0_2 155)))
+)
+
 (procedure (localproc_hasBestEvidence)
 	(return
 		(and
-			(or (gEgo sel_238: 11) (proc0_2 155))
+			(localproc_hasRecoveredDagger)
 			(or (gEgo sel_238: 24) (proc0_2 183))
 			(gEgo sel_238: 20)
 			(gEgo sel_238: 27)
@@ -83,6 +87,16 @@
 			(gEgo sel_238: 17)
 			(gEgo sel_238: 31)
 			(gEgo sel_238: 25)
+		)
+	)
+)
+
+(procedure (localproc_epilogueOutcome)
+	(return
+		(if (proc999_5 global126 1 4)
+			(if (localproc_hasRecoveredDagger) 1 else 4)
+		else
+			(if (localproc_hasRecoveredDagger) 2 else 3)
 		)
 	)
 )
@@ -441,7 +455,13 @@
 				(paper sel_110: sel_102:)
 				(headline
 					sel_110:
-					sel_3: (if (proc999_5 global126 2 4) 2 else global126)
+					sel_3:
+						(if
+							(proc999_5 (localproc_epilogueOutcome) 2 4)
+							2
+						else
+							(localproc_epilogueOutcome)
+						)
 					sel_102:
 				)
 				(global2 sel_417: 780)
@@ -464,6 +484,7 @@
 				(= sel_137 4)
 			)
 			(12
+				(= global126 (localproc_epilogueOutcome))
 				(global2
 					sel_399:
 					(switch global126

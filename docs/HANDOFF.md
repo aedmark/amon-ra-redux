@@ -12,20 +12,21 @@ Security: [SECURITY.md](SECURITY.md). Changes: [CHANGELOG.md](CHANGELOG.md). Old
 
 ## Current state
 
-_Last updated: 2026-10-08, session 19: P4-03 (Hint Book Contradictions & Best Ending Alignment) completed and verified._
+_Last updated: 2026-10-08, session 20: P4-04 (Quiz / Dagger Possession Logic Decoupling) completed and verified._
 
-**Where things stand, in one paragraph:** Phase 1 through Phase 3 are complete; P4-01 and P4-02 are committed and pushed
-through `3fc64b6`, and P4-03 is complete but uncommitted. Script 750 now tests Sierra's full 13-item evidence list for the
-best outcome instead of vanilla's five-condition subset. Dagger acquisition bit 155 and carbon-paper read bit 170 preserve
-credit after those items leave inventory; Room 560 records police-file inspection in non-scoring bit 183 so Look and Take
-both qualify. Correct murder and theft answers and `global126` meanings remain unchanged for P4-04/P4-06. D-024 records
-the decision and cites the owner-supplied OneShortEye analysis plus Sierra's official hint book. Act 2's passive-pacing
-concern remains scheduled as post-bugfix milestone P5-01.
+**Where things stand, in one paragraph:** Phase 1 through Phase 3 are complete; P4-01 through P4-03 are committed and
+pushed through `81cf653`, and P4-04 is complete but uncommitted. Script 750 preserves the coroner's quiz assessment, then
+normalizes `global126` at the epilogue boundary from murder-case success plus actual dagger recovery (inventory item 11 or
+acquisition bit 155). The newspaper, intermediate ending route, and all 19 Script 785 character cards now recognize a
+dagger Laura retained or surrendered even when theft answers were wrong. D-025 records the four-state mapping. Act 2's
+passive-pacing concern remains scheduled as post-bugfix milestone P5-01.
 
 **Verified** (2026-10-08, Linux workspace)
 
 | Suite | Result |
 | --- | --- |
+| P4-04 Script compilation | **Pass: 750.SCR emitted by SCI Companion** |
+| P4-04 outcome audit | **Pass: four murder/recovery combinations map to states 1/2/3/4; item 11 or acquisition bit 155 supplies recovery** |
 | P4-03 Script compilation | **Pass: 560.SCR and 750.SCR emitted by SCI Companion** |
 | P4-03 checklist/state audit | **Pass: all 13 official items present; bits 155/170/183 cover surrender, consumption, and inspection; bit 183 unique to the intended paths** |
 | P4-02 Script compilation | **Pass: 454.SCR/454.HEP and 750.SCR/750.HEP emitted by SCI Companion** |
@@ -42,8 +43,6 @@ concern remains scheduled as post-bugfix milestone P5-01.
 | P3-02 Script compilation | **Pass: 15.SCR/15.HEP and 610.SCR/610.HEP emitted by SCI Companion** |
 | P3-02 View 61 structure | **Pass: cursor loop retains one cel; inventory and toolbar loops each expose full cel 0 and empty cel 1** |
 | P3-02 refill audit | **Pass: full/empty guards precede a one-action refill and one-step jar depletion** |
-| P3-01 Script 0 compilation | **Pass: 0.SCR and 0.HEP emitted by SCI Companion** |
-| P3-01 state audit | **Pass: items 10/14/16 repaired once at Act 5; empty global150 restored; guard flag 123 unused elsewhere** |
 | `python3 tools/check_docs.py` | **Pass: 0 errors, 0 warnings** |
 | `python3 tools/manual.py check ...` | **Pass: 6 sections, 30 entries, 0 errors** |
 | `python3 tools/manual.py build ...` | **Pass: compiled docs/manual/manual.html** |
@@ -69,12 +68,14 @@ concern remains scheduled as post-bugfix milestone P5-01.
 - **P4-01 Watney Evidence Access:** Room 560's bookcase exposes the existing police-file inset through a broad fallback target; inspecting or taking the file registers its contents and Watney's notebook identity.
 - **P4-02 Planted-Evidence Credit:** Room 454 persists footprint inspection; Script 750 recognizes the Ankh, Pippin's appointment notepad, and the footprint/Yvette-shoe comparison as evidence chains and awards one-time insight credit.
 - **P4-03 Hint-Book Alignment:** Script 750's best-evidence gate requires Sierra's complete 13-item checklist and accepts durable discovery state for the surrendered dagger, consumed carbon paper, and inspected police file.
+- **P4-04 Physical Dagger Outcome:** Coroner feedback still reflects quiz answers, while the newspaper, ending route, and epilogue cards derive dagger recovery from item 11 or acquisition bit 155.
 - **Tooling Automation:** `tools/compile.py` compiles single scripts (including extension-agnostic target lookup in SysListView32); `tools/compile_all.exe` executes multi-pass builds.
-- **Documentation Architecture:** `docs/ROADMAP.md`, `DECISIONS.md` (D-009 through D-024), `docs/manual/`, and `docs/manual/manual.html` synchronized.
+- **Documentation Architecture:** `docs/ROADMAP.md`, `DECISIONS.md` (D-009 through D-025), `docs/manual/`, and `docs/manual/manual.html` synchronized.
 
 **Not verified**
 
 - End-to-end multi-act playthrough regression testing in DOSBox-X.
+- Direct in-game traversal of P4-04's four murder/recovery outcomes, including the surrendered-dagger path.
 - Direct in-game confirmation of the P4-03 maximum outcome and one-at-a-time failure cases from the Act 6 save.
 - Direct in-game traversal of the P4-02 footprint inspection and all three Script 750 evidence-review branches from the Act 6 save.
 - Direct Room 560 observation of the enlarged book/bookcase discovery path and pre-Take notebook updates for P4-01.
@@ -92,13 +93,35 @@ concern remains scheduled as post-bugfix milestone P5-01.
 
 1. Exercise the P4-01 bookcase, exposed-file Look, and Take paths from a deterministic Room 560 save in DOSBox-X.
 2. Exercise the P4-02 footprint inspection and evidence-review branches from deterministic Room 454 and Room 750 saves in DOSBox-X.
-3. Begin P4-04 (Quiz / Dagger Possession Logic Decoupling).
+3. Begin P4-05 (Grading and Scoring System Standardization).
 
 ## Open questions for maintainers
 
 None currently open. Q-001 and Q-002 have been resolved by D-007, D-017, and D-018.
 
 ## Session log
+
+### Session 20: 2026-10-08: P4-04 Quiz / Dagger Possession Logic Decoupling
+
+**Contributor:** Codex
+
+**Goal:** Stop theft-quiz answers from retroactively changing whether Laura recovered the Dagger of Amon Ra.
+
+**Done:**
+- Traced the actual ending controller to Script 750 rather than the outline's proposed Script 720.
+- Confirmed that `global126` combines murder-case success with theft-answer correctness and that downstream epilogue content misuses the latter as physical dagger state.
+- Added a shared recovery predicate accepting inventory item 11 or durable acquisition bit 155, covering both retained and surrendered custody.
+- Preserved the original quiz result through the coroner's feedback, then normalized the four-way outcome at the epilogue boundary from murder success plus physical recovery.
+- Routed the newspaper art, intermediate ending scenes, and all 19 Script 785 character cards through the normalized state without changing message resources.
+- Compiled Script 750, recorded D-025, and synchronized the roadmap, architecture, changelog, test plan, handoff, and manual.
+
+**Changed:** `LB2/src/rm750.sc`, `LB2/750.SCR`, `docs/ROADMAP.md`, `docs/ARCHITECTURE.md`, `docs/DECISIONS.md`, `docs/CHANGELOG.md`, `docs/TESTING.md`, `docs/manual/amon-ra.manual.json`, `docs/manual/manual.html`, `docs/HANDOFF.md`, `docs/archive/SESSION_LOG_2026_10.md`.
+
+**Decisions:** D-025 (Normalize physical dagger state at the epilogue boundary).
+
+**Verified:** SCI Companion compilation of Script 750; static four-state outcome, recovery-bit, and downstream route audit; DOSBox-X original-interpreter startup smoke; documentation/manual validation; unchanged base archive hashes. Direct save-based traversal of the four outcome combinations remains a manual regression test.
+
+**Next session should start with:** P4-05 (Grading and Scoring System Standardization).
 
 ### Session 19: 2026-10-08: P4-03 Hint Book Contradictions & Best Ending Alignment
 
@@ -291,24 +314,3 @@ None currently open. Q-001 and Q-002 have been resolved by D-007, D-017, and D-0
 **Verified:** SCI Companion compilation of Script 0; static inventory-index, charge-counter, and flag-use audit; DOSBox-X original-interpreter startup smoke; documentation/manual validation. Direct save-based entry with deliberately missing items remains a manual regression test.
 
 **Next session should start with:** P3-02 (Snake Oil Refill Mechanic & Inventory Feedback Overhaul).
-
-### Session 10: 2026-10-07: P2-07 Dagger Discovery Reactions & Inventory Hand-off
-
-**Contributor:** Codex
-
-**Goal:** Make the museum cast recognize the recovered Dagger of Amon Ra and transfer physical custody to O'Reilly.
-
-**Done:**
-- Audited archived message modules 1882..1892 and identified eight accessible verb-22 reactions, most of which incorrectly described the recovered dagger as a gift-shop replica.
-- Added loose overrides for modules 1884, 1885, 1887, and 1889..1892, and updated the existing 1888 override without disturbing its P2-05 introduction edits.
-- Added character-specific recognition dialogue for Countess, Yvette, Steve, O'Reilly, Heimlich, Ziggy, Rameses, and Olympia.
-- Updated both O'Reilly actor contexts in Scripts 90 and 93 to dispatch the ordinary dagger dialogue and then remove inventory item 11 with `(gEgo sel_351: 11)`.
-- Compiled Scripts 90 and 93, recorded D-015, synchronized the manual, and smoke-tested the loose patch set under DOSBox-X.
-
-**Changed:** `LB2/src/MuseumRgn.sc`, `LB2/src/RotundaRgn.sc`, `LB2/90.SCR`, `LB2/93.SCR`, `LB2/1884.MSG`, `LB2/1885.MSG`, `LB2/1887.MSG`, `LB2/1888.MSG`, `LB2/1889.MSG`, `LB2/1890.MSG`, `LB2/1891.MSG`, `LB2/1892.MSG`, `docs/ROADMAP.md`, `docs/ARCHITECTURE.md`, `docs/DECISIONS.md`, `docs/CHANGELOG.md`, `docs/manual/amon-ra.manual.json`, `docs/manual/manual.html`, `docs/HANDOFF.md`.
-
-**Decisions:** D-015 (Treat the recovered dagger as physical evidence).
-
-**Verified:** SCI Companion compilation of Scripts 90 and 93; exact-string audit of all eight message overrides; static ownership-path review; DOSBox-X original-interpreter startup smoke; documentation/manual validation; unchanged base archive hashes. Direct save-based traversal of the hand-off remains a manual regression test.
-
-**Next session should start with:** Phase 2 deterministic-save branch testing, then P3-01 (Dead Man Walking Prevention for Act 5 critical items).
