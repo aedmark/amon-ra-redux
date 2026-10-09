@@ -2,3 +2,4 @@
 *.SCR binary
 *.HEP binary
 *.MSG binary
+*.sco binary

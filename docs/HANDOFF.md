@@ -12,14 +12,9 @@ Security: [SECURITY.md](SECURITY.md). Changes: [CHANGELOG.md](CHANGELOG.md). Old
 
 ## Current state
 
-_Last updated: 2026-10-09, session 24: compile toolchain recovered; maintainer is running the full-game playtest._
+_Last updated: 2026-10-09, session 25: baseline restored and locked; .sco object caches tracked in git._
 
-**Where things stand, in one paragraph:** Phase 1 through Phase 4 are committed and pushed. The shipped patch set is the
-`4c79bcf` set plus P4-06's Script 750, verified to boot and to recompile identically (session 24). Script 750 labels
-questions 1–11 as required case findings and runs optional questions 12–16 in a separate `sBonusQuestions` state that
-cannot change either verdict flag (D-027). The maintainer is playing the game to completion; the triage gameplan for
-PLAY-001 to PLAY-008 is in `docs/PLAYTEST_CHECKLIST.md`. Read D-028 and D-029 before touching the toolchain: never
-Compile All or rebuild resources, compile one script at a time, boot-test every compile.
+**Where things stand, in one paragraph:** Following an accidental "Compile All" run that corrupted loose patches and caused Sierra Error 3 on boot, the working tree has been cleanly restored to the verified `8d98dcf` baseline. All 221 SCI Companion `.sco` object caches in `LB2/src/` are now explicitly tracked in git (with `.gitattributes` marking them binary) to guarantee single-script compilation can always resolve object symbols without requiring full decompilation. External IDE runtime caches are ignored in `.gitignore`. The game boots cleanly with zero errors in DOSBox-X.
 
 **Verified** (2026-10-09, Linux workspace)
 
@@ -100,6 +95,27 @@ Compile All or rebuild resources, compile one script at a time, boot-test every 
 None currently open. Q-001 and Q-002 have been resolved by D-007, D-017, and D-018.
 
 ## Session log
+
+### Session 25: 2026-10-09: Catastrophe Recovery and Object Cache Baseline Tracking
+
+**Contributor:** Antigravity and maintainer
+
+**Goal:** Recover from a broken "Compile All" attempt in SCI Companion that corrupted loose patches and caused Sierra Error 3 on boot; establish a permanent, restorable baseline in git including all 221 `.sco` object cache files.
+
+**Done:**
+- Preserved the broken state on safety backup branch `catastrophe-2026-10-09`.
+- Restored working tree and `master` branch to the verified `8d98dcf` baseline (retaining P4-05, P4-06, and PLAY-001..PLAY-009).
+- Restored the 104 verified loose patch files in `LB2/` and confirmed MD5 integrity of base game archives (`RESOURCE.000`, `RESOURCE.MAP`, `RESOURCE.MSG`, `MESSAGE.MAP`).
+- Configured `.gitattributes` to mark `*.sco binary` and `*.sc text eol=lf`.
+- Updated `.gitignore` to un-ignore `*.sco` so object caches are versioned and permanent, while ignoring external SCI Companion IDE runtime binaries/caches.
+- Normalized line endings on `LB2/src/Class_255_0.sc` and `LB2/src/SRDialog.sc`.
+- Verified clean startup in DOSBox-X (0 errors) and validated docs and manual.
+
+**Changed:** `.gitattributes`, `.gitignore`, `LB2/src/*.sco`, `LB2/src/Class_255_0.sc`, `LB2/src/SRDialog.sc`, `docs/HANDOFF.md`.
+
+**Verified:** DOSBox-X headless boot test passed (0 errors); `python3 tools/check_docs.py` (0 errors); `python3 tools/manual.py check` (0 errors); base archive MD5 match.
+
+**Next session should start with:** Continue full-game playtest and address PLAY-001..PLAY-009 triage using single-script compilation (`python3 tools/compile.py <script>`).
 
 ### Session 24: 2026-10-09: Compile-All Recovery and Hybrid Version Diagnosis
 
@@ -301,24 +317,3 @@ None currently open. Q-001 and Q-002 have been resolved by D-007, D-017, and D-0
 **Verified:** SCI Companion compilation of Scripts 90 and 22 with 0 errors and 0 warnings; static audit of all museum-actor message paths, pause/resume state handling, and the Act 3–4 clock guard; DOSBox-X original-interpreter startup smoke; documentation/manual validation. Direct save-based observation of a moving speaker and O'Reilly after 10:15 remains a manual regression test.
 
 **Next session should start with:** P4-01 (Mystery Accessibility & Wattney Little Evidence Discovery).
-
-### Session 15: 2026-10-08: P3-05 Act 1 Progression Trigger Simplification
-
-**Contributor:** Codex
-
-**Goal:** Remove arbitrary Act 1 prerequisites from the dirty-taxi and evening-gown route while preserving essential credentials and authored side content.
-
-**Done:**
-- Traced Script 22's `global124` bits and confirmed the press pass, docks visit, baseball trade, and Ziggy conversation are independent events rather than an ordered chain.
-- Identified Script 250's `(proc0_10 16 1)` complete-low-nibble test as the actual bottleneck: it withheld the dirty taxi and its gown claim ticket until all four errands were complete.
-- Changed the three coordinated taxi-state checks to persistent press-pass bit 1, retaining the dirty-taxi scene, claim ticket, Lo Fat gown exchange, and dressed Act 1 transition.
-- Preserved the docks, baseball, and Ziggy paths as optional content with their original clues, character context, clock progression, and rewards.
-- Compiled Script 250 and synchronized the architecture, roadmap, decision log, changelog, handoff, and manual.
-
-**Changed:** `LB2/src/Trash.sc`, `LB2/250.SCR`, `LB2/250.HEP`, `docs/ROADMAP.md`, `docs/ARCHITECTURE.md`, `docs/DECISIONS.md`, `docs/CHANGELOG.md`, `docs/TESTING.md`, `docs/manual/amon-ra.manual.json`, `docs/manual/manual.html`, `docs/HANDOFF.md`, `docs/archive/SESSION_LOG_2026_10.md`.
-
-**Decisions:** D-020 (Make the press pass the Act 1 taxi milestone).
-
-**Verified:** SCI Companion compilation of Script 250 with 0 errors and 0 warnings; static global124, taxi-state, inventory-route, and optional-content audit; DOSBox-X original-interpreter startup smoke; documentation/manual validation. Direct save-based traversal from press-pass acquisition through the early dirty taxi and gown remains a manual regression test.
-
-**Next session should start with:** P3-06 (NPC Wander Mechanic Stabilization).

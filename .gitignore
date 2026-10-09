@@ -10,8 +10,8 @@
 /LB2/README
 /LB2_vanilla/
 
-# SCI Companion compiled object caches
-*.sco
+# SCI Companion compiled object caches (tracked as baseline)
+# *.sco
 
 # Scratch & temporary logs
 /dumps/*.txt
@@ -22,5 +22,17 @@
 tools/*.exe
 tools/*.dll
 
+# SCI Companion IDE binary & runtime caches
+SCICompanion/*.exe
+SCICompanion/Customization/
+SCICompanion/Decompiler/
+SCICompanion/Help/
+SCICompanion/Objects/
+SCICompanion/Plugins/
+SCICompanion/Samples/
+SCICompanion/TemplateGame/
+SCICompanion/TestFiles/
+SCICompanion/include/
+ 
 # PDF outline
 /Dagger of Amon Ra Modernization.pdf
