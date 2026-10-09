@@ -12,19 +12,21 @@ Security: [SECURITY.md](SECURITY.md). Changes: [CHANGELOG.md](CHANGELOG.md). Old
 
 ## Current state
 
-_Last updated: 2026-10-08, session 16: P3-06 (NPC Wander Mechanic Stabilization) completed and verified._
+_Last updated: 2026-10-08, session 17: P4-01 (Watney Little Evidence Discovery) completed and verified._
 
-**Where things stand, in one paragraph:** Phase 1, Phase 2, and Phase 3 are complete. Script 90 now pauses only the
-selected museum actor's existing `TravelToRoom` state while dialogue is open and resumes that exact state on dismissal;
-Script 22 preserves O'Reilly after 10:15 in Acts 3 and 4. D-021 records the route-preservation design. P3-04 through
-P3-06 remain compiled and uncommitted together with their documentation changes. Act 2's passive-pacing concern remains
-scheduled as post-bugfix milestone P5-01. All project documentation lives under `docs/`, with the manual builder
-retained under `tools/`.
+**Where things stand, in one paragraph:** Phase 1, Phase 2, and Phase 3 are complete, their combined work is committed
+and pushed as `af2ddcf`, and Phase 4 has begun. P4-01 corrects the outline's resource assumptions: Watney's police file
+is hidden in a special book in Room 560, not a Room 420 desk dossier. Script 560 now exposes that
+inset through an enlarged volume hotspot or the full bookcase and records canonical clues 793 and 272 on inspection as
+well as Take. D-022 records the reuse of the authored evidence path. The P4-01 source, compiled patch, and documentation
+are complete but uncommitted. Act 2's passive-pacing concern remains scheduled as post-bugfix milestone P5-01.
 
 **Verified** (2026-10-08, Linux workspace)
 
 | Suite | Result |
 | --- | --- |
+| P4-01 Script compilation | **Pass: 560.SCR/560.HEP emitted by SCI Companion** |
+| P4-01 evidence-path audit | **Pass: 36x38 special-volume target, full-bookcase Look/Hand/Magnifier fallback, and inspection/Take registration of clues 793 and 272** |
 | P3-06 Script compilation | **Pass: 90.SCR/90.HEP and 22.SCR/22.HEP emitted by SCI Companion with 0 errors and 0 warnings** |
 | P3-06 movement/schedule audit | **Pass: all 112 museum-actor message paths use the dialogue lock; TravelToRoom holds its state; O'Reilly's 10:15 removal excludes only Acts 3 and 4** |
 | P3-05 Script compilation | **Pass: 250.SCR/250.HEP emitted by SCI Companion with 0 errors and 0 warnings** |
@@ -65,12 +67,14 @@ retained under `tools/`.
 - **P3-04 Fair-Play Stairwell:** Crossing the eastern-tower stairwell threshold in darkness now stops Laura safely and repeats the existing warning; replacing the bulb retains the original traversal.
 - **P3-05 Flexible Act 1:** The press pass now exposes the dirty taxi and claim ticket; docks, baseball, and Ziggy remain optional, independently completable paths.
 - **P3-06 Stable Museum Conversations:** The selected wandering NPC holds position for dialogue and resumes its prior route afterward; O'Reilly stays available past 10:15 in Acts 3 and 4.
+- **P4-01 Watney Evidence Access:** Room 560's bookcase exposes the existing police-file inset through a broad fallback target; inspecting or taking the file registers its contents and Watney's notebook identity.
 - **Tooling Automation:** `tools/compile.py` compiles single scripts (including extension-agnostic target lookup in SysListView32); `tools/compile_all.exe` executes multi-pass builds.
 - **Documentation Architecture:** `docs/ROADMAP.md`, `DECISIONS.md` (D-009 through D-021), `docs/manual/`, and `docs/manual/manual.html` synchronized.
 
 **Not verified**
 
 - End-to-end multi-act playthrough regression testing in DOSBox-X.
+- Direct Room 560 observation of the enlarged book/bookcase discovery path and pre-Take notebook updates for P4-01.
 - Direct in-game traversal of the P2-04 historical dialogue, P2-05 first-contact branches, both P2-06 Steve relationship branches, the P2-07 dagger hand-off, P3-01 entry with deliberately missing supplies, P3-02 bottle depletion/refill transitions, both P3-04 stairwell paths, P3-05's early dirty-taxi/claim-ticket route, and P3-06 moving-NPC conversations plus O'Reilly's post-10:15 Act 3–4 availability; the automated DOSBox-X check is a startup smoke, not an input-driven playthrough.
 
 **Gotchas for the next session**
@@ -83,14 +87,35 @@ retained under `tools/`.
 
 ## Next steps (in order)
 
-1. Exercise P2-04 through P2-07 and P3-01 through P3-06 branches from deterministic saves in DOSBox-X using `./tools/run_dosbox.sh`.
-2. Begin P4-01 (Mystery Accessibility & Wattney Little Evidence Discovery).
+1. Exercise the P4-01 bookcase, exposed-file Look, and Take paths from a deterministic Room 560 save in DOSBox-X.
+2. Begin P4-02 (Evidence Validity, Red Herrings & Inquest Credit).
 
 ## Open questions for maintainers
 
 None currently open. Q-001 and Q-002 have been resolved by D-007, D-017, and D-018.
 
 ## Session log
+
+### Session 17: 2026-10-08: P4-01 Watney Little Evidence Discovery
+
+**Contributor:** Codex
+
+**Goal:** Make Watney Little's narratively essential police file and notebook evidence discoverable without a pixel hunt.
+
+**Done:**
+- Audited the roadmap premise and traced the real file path to the special book and insets in Room 560; Room 420 and Script 13 are unrelated.
+- Confirmed that inventory item 24's original Take path already adds file-content clue 793 and Watney People clue 272.
+- Expanded the special volume hotspot from 11x15 to 36x38 pixels and routed Look, Hand, or Magnifier on the full bookcase to the same inset until the file is acquired.
+- Added idempotent clue 793 and 272 registration when the exposed file is inspected, while retaining the original Take, point, and inventory behavior.
+- Compiled Script 560 and synchronized the architecture, roadmap, decision log, changelog, testing matrix, handoff, and manual.
+
+**Changed:** `LB2/src/rm560.sc`, `LB2/560.SCR`, `LB2/560.HEP`, `docs/ROADMAP.md`, `docs/ARCHITECTURE.md`, `docs/DECISIONS.md`, `docs/CHANGELOG.md`, `docs/TESTING.md`, `docs/manual/amon-ra.manual.json`, `docs/manual/manual.html`, `docs/HANDOFF.md`, `docs/archive/SESSION_LOG_2026_10.md`.
+
+**Decisions:** D-022 (Expose Watney's existing police-file path).
+
+**Verified:** SCI Companion compilation of Script 560; static ownership, hotspot, clue-ID, inventory, and score-path audit; DOSBox-X original-interpreter startup smoke; documentation/manual validation; unchanged base archive hashes. Direct Room 560 observation remains a manual save-based regression test.
+
+**Next session should start with:** P4-02 (Evidence Validity, Red Herrings & Inquest Credit).
 
 ### Session 16: 2026-10-08: P3-06 NPC Wander Mechanic Stabilization
 
@@ -283,26 +308,3 @@ None currently open. Q-001 and Q-002 have been resolved by D-007, D-017, and D-0
 **Verified:** SCI Companion compilation of Scripts 35, 36, and 90; structural parsing of all three message overrides; headless DOSBox-X startup; documentation/manual validation; unchanged base archive hashes.
 
 **Next session should start with:** P2-06 (Steve & Laura Character Consistency).
-
-### Session 7: 2026-10-07: P2-04 Narrative Anachronism Corrections
-
-**Contributor:** Codex
-
-**Goal:** Implement P2-04 by auditing the complete SCI message corpus and correcting or clarifying dialogue that conflicts with the game's 1926 setting.
-
-**Done:**
-- Parsed all 103 archived message modules and located the four obsolete target strings in modules 250, 270, and 310.
-- Established from in-game evidence that the story occurs late in 1926: Rocco's license was renewed September 5, characters call the year almost over, and Lindbergh's flight is advertised for the following spring.
-- Added `LB2/250.MSG`, clarifying the historically real 1926 New York-London exchange as an experimental two-way radiotelephone conversation rather than the 1927 commercial service.
-- Added `LB2/270.MSG`, replacing the 1945 Pippi Longstocking misunderstanding and its follow-up with period-valid references to Pip from Dickens' *Great Expectations*.
-- Added `LB2/310.MSG`, identifying *The Sun Also Rises* as Hemingway's newly published novel while retaining Ziggy's claim that he saw it before publication.
-- Recorded D-012, marked P2-04 complete, synchronized the 3x manual source, and rebuilt `docs/manual/manual.html`.
-- Audited the effective resource layer (archived messages plus loose overrides): 103 modules, 5,888 records, zero obsolete target strings.
-
-**Changed:** `LB2/250.MSG`, `LB2/270.MSG`, `LB2/310.MSG`, `docs/ROADMAP.md`, `docs/ARCHITECTURE.md`, `docs/DECISIONS.md`, `docs/CHANGELOG.md`, `docs/manual/amon-ra.manual.json`, `docs/manual/manual.html`, `docs/HANDOFF.md`.
-
-**Decisions:** D-012 (Late-1926 historical dialogue corrections).
-
-**Verified:** Message structure and effective-string audit (103 modules / 5,888 records / 0 obsolete strings), ScummVM detection, docs validation, 3x manual validation/build, and unchanged base archive hashes. Headless ScummVM startup produces the same pre-existing invalid-selector fault with and without the three new message patches.
-
-**Next session should start with:** P2-05 (Contextual Dialogue Logic & Acquaintance Checks).

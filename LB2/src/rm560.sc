@@ -563,6 +563,18 @@
 		sel_213 16
 		sel_302 16
 	)
+
+	(method (sel_300 param1)
+		(if
+			(and
+				(not (gEgo sel_238: 24))
+				(proc999_5 param1 1 4 8)
+			)
+			(global2 sel_146: sGetBook)
+		else
+			(super sel_300: param1 &rest)
+		)
+	)
 )
 
 (instance genericBookshelf of Feature
@@ -633,10 +645,10 @@
 		sel_0 115
 		sel_55 90
 		sel_213 22
-		sel_6 90
-		sel_7 229
-		sel_8 105
-		sel_9 240
+		sel_6 84
+		sel_7 212
+		sel_8 122
+		sel_9 248
 		sel_302 64
 		sel_303 214
 		sel_304 155
@@ -838,6 +850,8 @@
 				(if (gEgo sel_238: 24)
 					(gLb2Messager sel_295: sel_213 1 9)
 				else
+					((ScriptID 21 0) sel_57: 793)
+					((ScriptID 21 0) sel_57: 272)
 					(gLb2Messager sel_295: sel_213 1 8)
 				)
 			)

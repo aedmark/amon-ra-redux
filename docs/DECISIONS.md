@@ -236,6 +236,14 @@ Pause the selected museum actor's existing route for the lifetime of a message i
 - **Decision:** Route all Script 90 museum-actor messages through a shared wrapper. It sets an actor-local lock, stops the active mover, and assigns `museumDialogueResume` as the message callback. `TravelToRoom` does not advance while locked; on dismissal, the callback clears the lock and re-enters the same travel state so its original fixed or random destination survives. Gate O'Reilly's 10:15 removal out only when `global123` is 3 or 4, preserving the authored behavior in other acts.
 - **Consequences:** Resolves P3-06 without new globals, save-state fields, room-table rewrites, or a museum-wide freeze. The speaking NPC remains present throughout dialogue, other NPCs continue their schedules, and O'Reilly remains reachable for the restored Act 3–4 questioning. Direct DOSBox-X observation from deterministic Act 3 and Act 4 saves remains the behavioral regression test.
 
+## D-022 Expose Watney's Existing Police-File Path
+
+Improve access through the authored Room 560 book and clue records instead of inventing a second file or dialogue trail.
+
+- **Context:** The P4-01 outline identifies Watney Little's police file as narratively essential but does not name a room. The provisional manual incorrectly placed a desk dossier in Room 420 and proposed new O'Reilly or Yvette dialogue. Source audit found the complete existing path in Room 560: an 11x15-pixel special volume opens insets 562/1, the exposed file grants inventory item 24, and Take already records Things clue 793 and People clue 272. Room 420 and Script 13 do not participate. Before the change, merely looking at the exposed file recorded neither clue.
+- **Decision:** Preserve the existing item, message, score, and clue identities. Expand the special volume's rectangle to 36x38 pixels and route Look, Hand, or Magnifier on the larger bookcase feature to the same closed-book inset while item 24 remains uncollected. On Look at the exposed file, idempotently add clues 793 and 272 before showing the original description; retain the original Take path as a second registration route. Do not add speculative dialogue or new save-state fields.
+- **Consequences:** Resolves P4-01 through a prominent environmental interaction and two independent clue-registration paths. Existing saves remain compatible, repeated inspection cannot duplicate notebook entries, and the later inquest receives the same canonical evidence IDs as the vanilla Take path.
+
 ---
 
 ## Open questions

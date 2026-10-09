@@ -83,6 +83,7 @@ The project builds upon the DOS Floppy v1.000 release (D-001) using a modular lo
 
 ### 7. Coroner Inquest & Scoring Logic (`Script 700`, `Script 720`, `Script 780`)
 - **Vanilla Flow:** Quiz scoring errors retroactively forced the epilogue to report the Dagger was lost even if Laura retained it. Act score divisors were inconsistent and uninitialized grade indices flashed startup F grades.
+- **Watney Evidence Discovery (P4-01, D-022):** Script 560 owns the police-file path: its bookcase opens a closed-book inset, whose concealed file is inventory item 24. The special volume's rectangle is expanded from 11x15 to 36x38 pixels, and the full bookcase accepts Look, Hand, or Magnifier as a discovery fallback until the file is acquired. Looking at the exposed file idempotently adds clue 793 (its contents) and clue 272 (Watney's People entry); the original Take path still adds both clues, awards its authored point, and grants the item.
 - **Modernized Flow (P4-04, P4-05, P4-06, D-006):** Physical dagger ownership is decoupled from questionnaire score. The total point denominator is standardized, and homicide inquest questions are delineated from optional museum trivia.
 
 ## Invariants and boundaries

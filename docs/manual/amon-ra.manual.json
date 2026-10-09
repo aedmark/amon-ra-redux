@@ -894,21 +894,21 @@
             "wattney-little",
             "p4"
           ],
-          "what": "Ensures that clues revealing the existence of conspirator Wattney Little and the contents of his police file are discoverable through prominent environmental features and dialogue rather than pixel hunting.",
+          "what": "Makes the existing Room 560 police-file path reveal Watney Little and the file's contents through a prominent environmental interaction rather than a tiny book hotspot.",
           "how": [
-            "In Room 420 (Carrington's office), enlarge the desk dossier hotspot and add a clear visual prompt.",
-            "Add dialogue hint in Act 3 from O'Reilly or Yvette mentioning a fugitive matching Little's description.",
-            "Register 'Wattney Little' in notebook upon inspecting the file, unlocking related coroner inquest questions."
+            "Correct the outline's resource assumptions: Script 560 owns the evidence path, where a special book in the room's bookcase opens the inset containing inventory item 24; Room 420 and Script 13 are not involved.",
+            "Expand the special volume's hotspot from 11x15 to 36x38 pixels and let Look, Hand, or Magnifier on the full bookcase open the same inset until the file is acquired.",
+            "When the exposed file is inspected, idempotently register Things clue 793 for its contents and People clue 272 for Watney; retain the original Take path as a second registration route and preserve its item and score effects."
           ],
-          "why": "Wattney Little is essential to understanding the full conspiracy; obscuring his existence behind a single sub-pixel hotspot deprives thorough players of solving the crime.",
+          "why": "Watney Little is essential to understanding the full conspiracy. Reusing Sierra's authored inset and canonical clue IDs makes the evidence fair to discover without adding contradictory dialogue or parallel state.",
           "evidence": [
             {
-              "label": "Carrington Office Script",
-              "target": "LB2/420.SCR"
+              "label": "Room 560 Source",
+              "target": "LB2/src/rm560.sc"
             },
             {
-              "label": "Notebook Script",
-              "target": "LB2/13.SCR"
+              "label": "Compiled Room 560 Patch",
+              "target": "LB2/560.SCR"
             }
           ],
           "related": [
