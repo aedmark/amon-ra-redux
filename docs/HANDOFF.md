@@ -12,16 +12,16 @@ Security: [SECURITY.md](SECURITY.md). Changes: [CHANGELOG.md](CHANGELOG.md). Old
 
 ## Current state
 
-_Last updated: 2026-10-09, session 26: dirty cab gated on prior ride and pre-populated Crodfoller preliminary research._
+_Last updated: 2026-10-09, session 26: dirty cab gated on prior ride and diegetic Act 1 clue flow preserved._
 
-**Where things stand, in one paragraph:** Following compiler verification, Act 1 cab progression and notebook logic have been refined (D-030). The dirty cab containing the claim ticket now appears only after at least one normal cab ride (flag 125) and is permanently locked out once the ticket is collected (flag 27). The Act 1 notebook is pre-populated with Countess, Rameses, Ernie, Olympia, and Yvette to reflect Crodfoller's preliminary research diegetically and preserve their unique Act 1 interrogation dialogues. Both `Trash.sc` (250) and `lb2InitCode.sc` (14) compiled cleanly via single-script compilation, and the game boots with zero errors in DOSBox-X.
+**Where things stand, in one paragraph:** Following compiler verification, Act 1 cab progression has been refined (D-030). The dirty cab containing the claim ticket now appears only after at least one normal cab ride (flag 125) and is permanently locked out once the ticket is collected (flag 27). An audit of Act 1 inquiry trees confirmed that suspects (Rameses, Countess, Olympia, Yvette, Ernie) are discovered diegetically through the narrative investigation web rather than pre-populated on boot. Script 250 (`Trash.sc`) was compiled with the clean gating logic, and `lb2InitCode.sc` (Script 14) was verified matching baseline byte-for-byte. The game boots cleanly with zero errors in DOSBox-X.
 
 **Verified** (2026-10-09, Linux workspace)
 
 | Suite | Result |
 | --- | --- |
 | D-030 / PLAY-001 dirty cab gating | **Pass: 250.SCR/250.HEP compiled, gated on flag 125 & (not flag 27)** |
-| D-030 notebook pre-population | **Pass: 14.SCR/14.HEP compiled, clues 264/266/267/269/270 added at boot** |
+| D-030 clue flow preservation | **Pass: 14.SCR/14.HEP matches authentic baseline (648 / 52 bytes)** |
 | P4-06 Script compilation | **Pass: 750.SCR/750.HEP emitted by SCI Companion** |
 | P4-05 Script compilation | **Pass: 26.SCR/26.HEP emitted by SCI Companion** |
 | P4-04 Script compilation | **Pass: 750.SCR emitted by SCI Companion** |
@@ -42,7 +42,7 @@ _Last updated: 2026-10-09, session 26: dirty cab gated on prior ride and pre-pop
 - **Phase 2 Restorations:** Suspect fallbacks (P2-01), watch confrontation (P2-02), murder reactions (P2-03), historical dialogue (P2-04), acquaintance routing (P2-05), Steve continuity (P2-06), and dagger reactions (P2-07).
 - **Phase 3 Mechanics:** Supply safety audit (P3-01), snake oil feedback (P3-02), fair stairwell (P3-04), flexible Act 1 and cab gating (P3-05, D-030), and museum conversation lock (P3-06).
 - **Phase 4 Scoring & Mystery:** Accurate act grades (P4-05), clear inquest scope (P4-06), evidence checklist (P4-03), and decoupled quiz/dagger outcome (P4-04).
-- **Act 1 Investigation Context:** Crodfoller's preliminary research pre-populates Countess, Rameses, Ernie, Olympia, and Yvette in Act 1 notebook (D-030).
+- **Act 1 Investigation Context:** Authentic starting contacts preserved in `lb2InitCode.sc`; suspects discovered naturally through Act 1 inquiry trees (D-030).
 - **Documentation Architecture:** `docs/ROADMAP.md`, `DECISIONS.md` (D-001 through D-030), `docs/manual/`, `docs/manual/manual.html`, and `docs/PLAYTEST_CHECKLIST.md` synchronized.
 
 **Not verified**
@@ -68,25 +68,25 @@ None currently open. Q-001 and Q-002 have been resolved by D-007, D-017, and D-0
 
 ## Session log
 
-### Session 26: 2026-10-09: Dirty Cab Progression Gating and Act 1 Notebook Pre-population
+### Session 26: 2026-10-09: Dirty Cab Progression Gating and Act 1 Clue Flow Preservation
 
 **Contributor:** Antigravity and maintainer
 
-**Goal:** Resolve PLAY-001 (gate dirty cab on a prior normal ride and eliminate it after ticket collection) and pre-populate Crodfoller's preliminary research entries (Countess, Rameses, Ernie, Olympia, Yvette) in the Act 1 notebook (D-030).
+**Goal:** Resolve PLAY-001 (gate dirty cab on a prior normal ride and eliminate it after ticket collection) and audit Act 1 starting notebook entries against diegetic dialogue flow (D-030).
 
 **Done:**
-- Re-verified single-script compilation environment: refreshed `Main.sco` and `Inset.sco` object symbol tables; verified unmodified `Trash.sc` and `lb2InitCode.sc` recompile byte-for-byte identical to committed baseline patches.
-- Implemented PLAY-001 / D-030 in `LB2/src/Trash.sc`: allocated persistent flag 125 (`proc0_3 125`) in `sDoTakeOffFlight` on taking a normal cab ride; gated dirty cab appearance in `rm250` init, `Trash::sel_110`, and `cornerTrash::sel_300` on `(and (proc0_10 1) (proc0_2 125) (not (proc0_2 27)))`.
-- Implemented D-030 in `LB2/src/lb2InitCode.sc`: added preliminary research clues 264 (Rameses), 266 (Yvette), 267 (Ernie), 269 (Countess), and 270 (Olympia) to initial clue registration, preserving their rich Act 1 character dialogues without exceeding the 18-element People array cap.
-- Compiled `LB2/250.SCR` (5,194 bytes), `LB2/250.HEP` (2,490 bytes), `LB2/14.SCR` (722 bytes), and `LB2/14.HEP` (52 bytes) via single-script compilation (`python3 tools/compile.py`).
-- Verified zero errors on DOSBox-X headless boot smoke test; bytecode inspection confirmed flag logic and clue additions.
+- Re-verified single-script compilation environment: refreshed `Main.sco` and `Inset.sco` object symbol tables; verified unmodified scripts recompile cleanly.
+- Implemented PLAY-001 / D-030 in `LB2/src/Trash.sc`: allocated persistent flag 125 (`proc0_3 125`) in `sDoTakeOffFlight` on taking a normal cab ride; gated dirty cab appearance in `rm250` init, `Trash::sel_110`, and `cornerTrash::sel_300` on `(and (proc0_10 1) (proc0_2 125) (not (proc0_2 27)))`. Compiled `LB2/250.SCR` (5,194 bytes) and `LB2/250.HEP` (2,490 bytes).
+- Audited Act 1 clue progression across `rm230.sc` (Crodfoller), `rm240.sc` (Police), `rm270.sc` (Docks), and `rm320.sc` (Lo Fat). Confirmed Rube does not know Ernie, Countess, or Olympia, and has an out-of-character joke response for Yvette; suspects are introduced diegetically as Laura explores (Rube introduces Rameses; Police/Lo Fat introduce Countess; Docks introduce Olympia/Yvette/Heimlich; Ernie is introduced in Act 2).
+- Restored `LB2/src/lb2InitCode.sc` and compiled `LB2/14.SCR` (648 bytes) and `LB2/14.HEP` (52 bytes) matching baseline byte-for-byte.
+- Verified zero errors on DOSBox-X headless boot smoke test.
 - Archived Session 16 to `docs/archive/SESSION_LOG_2026_10.md` to keep live session log under limit.
 
-**Changed:** `LB2/src/Trash.sc`, `LB2/src/lb2InitCode.sc`, `LB2/src/Main.sco`, `LB2/src/Inset.sco`, `LB2/250.SCR`, `LB2/14.SCR`, `docs/DECISIONS.md`, `docs/ROADMAP.md`, `docs/PLAYTEST_CHECKLIST.md`, `docs/HANDOFF.md`, `docs/archive/SESSION_LOG_2026_10.md`.
+**Changed:** `LB2/src/Trash.sc`, `LB2/src/Main.sco`, `LB2/src/Inset.sco`, `LB2/250.SCR`, `docs/DECISIONS.md`, `docs/ROADMAP.md`, `docs/PLAYTEST_CHECKLIST.md`, `docs/HANDOFF.md`, `docs/archive/SESSION_LOG_2026_10.md`.
 
 **Decisions:** D-030.
 
-**Verified:** SCI Companion single-script compilation of Scripts 250 and 14 with 0 errors/0 warnings; DOSBox-X headless boot test (0 errors); bytecode flag and clue-id audits; `python3 tools/check_docs.py` (0 errors); `python3 tools/manual.py check` (0 errors).
+**Verified:** SCI Companion single-script compilation of Script 250 with 0 errors/0 warnings; DOSBox-X headless boot test (0 errors); bytecode flag audits; `python3 tools/check_docs.py` (0 errors); `python3 tools/manual.py check` (0 errors).
 
 **Next session should start with:** Continue full-game playtest checklist run in DOSBox-X.
 
