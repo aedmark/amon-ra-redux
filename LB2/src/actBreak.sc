@@ -17,10 +17,10 @@
 	local1
 	local2
 	local3 =  5
-	local4 =  12
-	local5 =  43
-	local6 =  58
-	local7 =  61
+	local4 =  13
+	local5 =  38
+	local6 =  48
+	local7 =  51
 	local8
 )
 (instance actBreak of LBRoom
@@ -58,12 +58,14 @@
 			)
 		)
 		(super sel_110: &rest)
-		(cond 
-			((and (< -1 local8) (< local8 21)) (= local1 2) (= local2 global131) (++ global131))
-			((and (< 20 local8) (< local8 41)) (= local1 3) (= local2 global132) (++ global132))
-			((and (< 40 local8) (< local8 61)) (= local1 4) (= local2 global133) (++ global133))
-			((and (< 60 local8) (< local8 81)) (= local1 5) (= local2 global134) (++ global134))
-			((and (< 80 local8) (< local8 101)) (= local1 6) (= local2 global135) (++ global135))
+		(if global123
+			(cond
+				((and (< -1 local8) (< local8 21)) (= local1 2) (= local2 global131) (++ global131))
+				((and (< 20 local8) (< local8 41)) (= local1 3) (= local2 global132) (++ global132))
+				((and (< 40 local8) (< local8 61)) (= local1 4) (= local2 global133) (++ global133))
+				((and (< 60 local8) (< local8 81)) (= local1 5) (= local2 global134) (++ global134))
+				((and (< 80 local8) (< local8 101)) (= local1 6) (= local2 global135) (++ global135))
+			)
 		)
 		(actView sel_110: sel_4: global123)
 		(gSel_608 sel_40: 30 sel_99: 1 sel_3: -1 sel_39:)

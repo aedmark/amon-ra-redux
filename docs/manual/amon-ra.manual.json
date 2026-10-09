@@ -1053,24 +1053,29 @@
             "bug-fix",
             "p4"
           ],
-          "what": "Standardizes the point denominator used in grade calculations across all acts so percentage ranks accurately reflect player accomplishments, and fixes the bug displaying an initial F grade at the start of the game.",
+          "what": "Makes Script 26 grade each act against the cumulative points actually attainable by that break and prevents the ungraded introduction from consuming the first F-band narrator response.",
           "how": {
-            "lead": "Modifies scoring calculations in Script 0 and Script 780:",
+            "lead": "Aligns the act-break calculation with the complete point-event audit:",
             "points": [
-              "Establish a consistent total possible points constant (TOTAL_POINTS) referenced by all act divisors.",
-              "Recalculate grade brackets (A, B, C, D, F) based on true percentage of achievable points.",
-              "Initialize currentGrade variable to unranked / null at game launch in Script 0 init, suppressing false startup F notifications."
+              "Replace vanilla cumulative divisors 5, 12, 43, 58, and 61 with Redux maxima 5, 13, 38, 48, and 51; the extra point from Act 2 onward is P4-02's documented footprint.",
+              "Keep the authored F/D/C/B/A boundaries at 0–20, 21–40, 41–60, 61–80, and 81–100 percent.",
+              "Skip grade-band selection while global123 is zero so the introduction neither displays nor consumes a grade message.",
+              "Treat the three coroner-review awards as post-grade points, producing a final raw maximum of 54 without claiming they were available at the Act 5 break."
             ]
           },
-          "why": "Erroneous math penalized players unfairly regardless of thoroughness, and flashing an F grade upon starting a fresh game was bewildering and demotivating.",
+          "why": "Vanilla divides perfect Act 3–5 scores by totals the player cannot reach, capping a flawless run at 86%, 81%, and 81%. It also advances the first F-message counter during the ungraded introduction because an unset local percentage reads as zero.",
           "evidence": [
             {
-              "label": "Global Score Keeper",
-              "target": "LB2/0.SCR"
+              "label": "Act-Break Grading Source",
+              "target": "LB2/src/actBreak.sc"
             },
             {
-              "label": "Final Grade Script",
-              "target": "LB2/780.SCR"
+              "label": "Compiled Act-Break Patch",
+              "target": "LB2/26.SCR"
+            },
+            {
+              "label": "Research References",
+              "target": "docs/reference/README.md"
             }
           ],
           "related": [

@@ -12,19 +12,21 @@ Security: [SECURITY.md](SECURITY.md). Changes: [CHANGELOG.md](CHANGELOG.md). Old
 
 ## Current state
 
-_Last updated: 2026-10-08, session 20: P4-04 (Quiz / Dagger Possession Logic Decoupling) completed and verified._
+_Last updated: 2026-10-09, session 21: P4-05 (Grading and Scoring System Standardization) completed and verified._
 
-**Where things stand, in one paragraph:** Phase 1 through Phase 3 are complete; P4-01 through P4-03 are committed and
-pushed through `81cf653`, and P4-04 is complete but uncommitted. Script 750 preserves the coroner's quiz assessment, then
-normalizes `global126` at the epilogue boundary from murder-case success plus actual dagger recovery (inventory item 11 or
-acquisition bit 155). The newspaper, intermediate ending route, and all 19 Script 785 character cards now recognize a
-dagger Laura retained or surrendered even when theft answers were wrong. D-025 records the four-state mapping. Act 2's
-passive-pacing concern remains scheduled as post-bugfix milestone P5-01.
+**Where things stand, in one paragraph:** Phase 1 through Phase 3 and P4-01 through P4-04 are committed and pushed
+through `9785700`; P4-05 is complete but uncommitted. Script 26 now grades cumulative points against Redux's attainable
+act maxima `5/13/38/48/51`, replacing vanilla's inflated later divisors. The ungraded introduction no longer selects the
+zero-percent band or advances the first F-message counter. P4-02's three coroner-review points remain post-grade awards,
+bringing the final raw maximum from 51 to 54. D-026 records the audited score model. Act 2's passive-pacing concern remains
+scheduled as post-bugfix milestone P5-01.
 
-**Verified** (2026-10-08, Linux workspace)
+**Verified** (2026-10-09, Linux workspace)
 
 | Suite | Result |
 | --- | --- |
+| P4-05 Script compilation | **Pass: 26.SCR/26.HEP emitted by SCI Companion** |
+| P4-05 score audit | **Pass: attainable cumulative maxima 5/13/38/48/51; final raw maximum 54; Act 0 excluded from grade-band counters** |
 | P4-04 Script compilation | **Pass: 750.SCR emitted by SCI Companion** |
 | P4-04 outcome audit | **Pass: four murder/recovery combinations map to states 1/2/3/4; item 11 or acquisition bit 155 supplies recovery** |
 | P4-03 Script compilation | **Pass: 560.SCR and 750.SCR emitted by SCI Companion** |
@@ -40,9 +42,6 @@ passive-pacing concern remains scheduled as post-bugfix milestone P5-01.
 | P3-04 Script compilation | **Pass: 530.SCR/530.HEP emitted by SCI Companion with 0 errors and 0 warnings** |
 | P3-04 warning audit | **Pass: dark boundary redirects to sWarnDarkStairs, moves Laura to y=165, and reuses message tuple 11/1/2** |
 | P3-03 progression reference audit | **Pass: all `global111` reads/writes and all Script 26 callers traced; no Act 2 knowledge-count gate exists** |
-| P3-02 Script compilation | **Pass: 15.SCR/15.HEP and 610.SCR/610.HEP emitted by SCI Companion** |
-| P3-02 View 61 structure | **Pass: cursor loop retains one cel; inventory and toolbar loops each expose full cel 0 and empty cel 1** |
-| P3-02 refill audit | **Pass: full/empty guards precede a one-action refill and one-step jar depletion** |
 | `python3 tools/check_docs.py` | **Pass: 0 errors, 0 warnings** |
 | `python3 tools/manual.py check ...` | **Pass: 6 sections, 30 entries, 0 errors** |
 | `python3 tools/manual.py build ...` | **Pass: compiled docs/manual/manual.html** |
@@ -69,12 +68,14 @@ passive-pacing concern remains scheduled as post-bugfix milestone P5-01.
 - **P4-02 Planted-Evidence Credit:** Room 454 persists footprint inspection; Script 750 recognizes the Ankh, Pippin's appointment notepad, and the footprint/Yvette-shoe comparison as evidence chains and awards one-time insight credit.
 - **P4-03 Hint-Book Alignment:** Script 750's best-evidence gate requires Sierra's complete 13-item checklist and accepts durable discovery state for the surrendered dagger, consumed carbon paper, and inspected police file.
 - **P4-04 Physical Dagger Outcome:** Coroner feedback still reflects quiz answers, while the newspaper, ending route, and epilogue cards derive dagger recovery from item 11 or acquisition bit 155.
+- **P4-05 Accurate Act Grades:** Script 26 uses attainable cumulative point maxima and leaves the introduction ungraded, preserving the first authored response in every grade band.
 - **Tooling Automation:** `tools/compile.py` compiles single scripts (including extension-agnostic target lookup in SysListView32); `tools/compile_all.exe` executes multi-pass builds.
-- **Documentation Architecture:** `docs/ROADMAP.md`, `DECISIONS.md` (D-009 through D-025), `docs/manual/`, and `docs/manual/manual.html` synchronized.
+- **Documentation Architecture:** `docs/ROADMAP.md`, `DECISIONS.md` (D-009 through D-026), `docs/manual/`, and `docs/manual/manual.html` synchronized.
 
 **Not verified**
 
 - End-to-end multi-act playthrough regression testing in DOSBox-X.
+- Direct in-game P4-05 verification at every act maximum and percentage-band boundary.
 - Direct in-game traversal of P4-04's four murder/recovery outcomes, including the surrendered-dagger path.
 - Direct in-game confirmation of the P4-03 maximum outcome and one-at-a-time failure cases from the Act 6 save.
 - Direct in-game traversal of the P4-02 footprint inspection and all three Script 750 evidence-review branches from the Act 6 save.
@@ -93,13 +94,36 @@ passive-pacing concern remains scheduled as post-bugfix milestone P5-01.
 
 1. Exercise the P4-01 bookcase, exposed-file Look, and Take paths from a deterministic Room 560 save in DOSBox-X.
 2. Exercise the P4-02 footprint inspection and evidence-review branches from deterministic Room 454 and Room 750 saves in DOSBox-X.
-3. Begin P4-05 (Grading and Scoring System Standardization).
+3. Begin P4-06 (Non-Essential Quiz Questions Delineation).
 
 ## Open questions for maintainers
 
 None currently open. Q-001 and Q-002 have been resolved by D-007, D-017, and D-018.
 
 ## Session log
+
+### Session 21: 2026-10-09: P4-05 Grading and Scoring System Standardization
+
+**Contributor:** Codex
+
+**Goal:** Grade Laura against points actually attainable at each act break and stop the introduction from consuming an F response.
+
+**Done:**
+- Traced all grading math and message-band selection to Script 26, correcting the outline's provisional Scripts 0/780 ownership.
+- Cross-checked every score flag against the point audit linked by the owner-supplied OneShortEye video.
+- Established vanilla cumulative maxima `5/12/37/47/50` and Redux maxima `5/13/38/48/51` after P4-02's Act 2 footprint point.
+- Replaced Script 26's inflated `5/12/43/58/61` divisors with the attainable Redux values while preserving the authored percentage bands.
+- Skipped grade-band selection at `global123 == 0`, preventing the ungraded introduction from advancing the first F-message counter.
+- Kept P4-02's three coroner-review awards post-grade and documented the complete raw maximum of 54.
+- Compiled Script 26, recorded D-026, indexed the published point audit, and synchronized the roadmap, architecture, changelog, test plan, handoff, and manual.
+
+**Changed:** `LB2/src/actBreak.sc`, `LB2/26.SCR`, `LB2/26.HEP`, `docs/ROADMAP.md`, `docs/ARCHITECTURE.md`, `docs/DECISIONS.md`, `docs/CHANGELOG.md`, `docs/TESTING.md`, `docs/reference/README.md`, `docs/manual/amon-ra.manual.json`, `docs/manual/manual.html`, `docs/HANDOFF.md`, `docs/archive/SESSION_LOG_2026_10.md`.
+
+**Decisions:** D-026 (Grade against attainable cumulative points).
+
+**Verified:** SCI Companion compilation of Script 26; static point-event, divisor, grade-band, and startup-counter audit; DOSBox-X original-interpreter startup smoke; documentation/manual validation; unchanged base archive hashes. Direct save-based traversal of all act and band boundaries remains a manual regression test.
+
+**Next session should start with:** P4-06 (Non-Essential Quiz Questions Delineation).
 
 ### Session 20: 2026-10-08: P4-04 Quiz / Dagger Possession Logic Decoupling
 
@@ -293,24 +317,3 @@ None currently open. Q-001 and Q-002 have been resolved by D-007, D-017, and D-0
 **Verified:** SCI Companion compilation of Scripts 15 and 610; structural decode of all five View 61 cels; static guard/depletion audit; DOSBox-X original-interpreter startup smoke; documentation/manual validation. Direct save-based refill traversal remains a manual regression test.
 
 **Next session should start with:** P3-03 (Pacing, Act Length & Diegetic Knowledge Rebalance).
-
-### Session 11: 2026-10-07: P3-01 Dead Man Walking Prevention
-
-**Contributor:** Codex
-
-**Goal:** Prevent Act 5 from becoming unwinnable when Wire Cutters, Snake Oil, or Cheese were missed or exhausted earlier.
-
-**Done:**
-- Traced all three items through their inventory indices, acquisition paths, charge state, finale consumption, and the `actBreak` transition into `global123 == 5`.
-- Corrected the original architectural assumption that Room 510 was a basement cache; it is a museum gallery and is not a reliable recovery boundary.
-- Added a one-time supply audit to Main's central room-transition handler. Missing inventory items 10, 14, and 16 are granted, empty `global150` is restored to four charges, and unused flag 123 records completion.
-- Kept the audit idempotent so existing Act 5 saves are repaired while snake oil and cheese remain consumed after their finale puzzles.
-- Compiled Script 0, synchronized D-005 and the manual, and smoke-tested the loose patch set under DOSBox-X.
-
-**Changed:** `LB2/src/Main.sc`, `LB2/0.SCR`, `docs/ROADMAP.md`, `docs/ARCHITECTURE.md`, `docs/DECISIONS.md`, `docs/CHANGELOG.md`, `docs/manual/amon-ra.manual.json`, `docs/manual/manual.html`, `docs/HANDOFF.md`, `docs/archive/SESSION_LOG_2026_10.md`.
-
-**Decisions:** D-005 (Softlock prevention through a guarded Act 5 supply audit).
-
-**Verified:** SCI Companion compilation of Script 0; static inventory-index, charge-counter, and flag-use audit; DOSBox-X original-interpreter startup smoke; documentation/manual validation. Direct save-based entry with deliberately missing items remains a manual regression test.
-
-**Next session should start with:** P3-02 (Snake Oil Refill Mechanic & Inventory Feedback Overhaul).
