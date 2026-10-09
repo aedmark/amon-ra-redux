@@ -969,21 +969,37 @@
             "super-sleuth",
             "p4"
           ],
-          "what": "Corrects internal code logic for achieving the highest 'Super Sleuth' ending so requirements match narrative sense and Sierra's published hint book, ensuring missable items (Red Hair, Bifocals) and critical evidence (Police File) are evaluated fairly.",
-          "how": [
-            "Audit ending qualification method in Script 700 and 720.",
-            "Harmonize the required evidence checklist with actual clue availability.",
-            "Explicitly check for Police File discovery as a positive qualification for highest rank."
-          ],
-          "why": "Discrepancies between internal code checks and Sierra's published hints caused confusion for decades, preventing dedicated sleuths from earning the best ending.",
+          "what": "Aligns Script 750's highest-outcome evidence gate with Sierra's published 13-item checklist instead of vanilla's five-condition subset, while preserving credit for evidence Laura legitimately discovered and no longer carries.",
+          "how": {
+            "lead": "Centralizes one best-evidence predicate used by every final-outcome branch:",
+            "points": [
+              "Require the Dagger, Watney's police file, Ankh, red hair, pocket watch, wire cutters, carbon paper, bifocals, Pippin's notepad, Yvette's shoe, garter, grapes, and warthog hair.",
+              "Accept dagger acquisition bit 155 after surrender and carbon-paper read bit 170 after the paper is consumed.",
+              "Record a Look or Take of the exposed police file with non-scoring bit 183, while retained item 24 also satisfies the requirement.",
+              "Leave murder-answer, theft-answer, and final outcome meanings unchanged for P4-04 and P4-06."
+            ]
+          },
+          "why": "Vanilla labels five checks as all evidence, but three are progression items, making red hair and bifocals the only meaningful missable gates while eight officially listed objects are ignored. The complete hint-book list makes the best ending reflect the investigation the published guidance asks players to perform.",
           "evidence": [
             {
-              "label": "Inquest Evaluation Script",
-              "target": "LB2/700.SCR"
+              "label": "Room 560 Source",
+              "target": "LB2/src/rm560.sc"
             },
             {
-              "label": "Ending Controller",
-              "target": "LB2/720.SCR"
+              "label": "Compiled Room 560 Patch",
+              "target": "LB2/560.SCR"
+            },
+            {
+              "label": "Inquest Evaluation Source",
+              "target": "LB2/src/rm750.sc"
+            },
+            {
+              "label": "Compiled Inquest Patch",
+              "target": "LB2/750.SCR"
+            },
+            {
+              "label": "Research References",
+              "target": "docs/reference/README.md"
             }
           ],
           "related": [

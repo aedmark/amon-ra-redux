@@ -850,6 +850,7 @@
 				(if (gEgo sel_238: 24)
 					(gLb2Messager sel_295: sel_213 1 9)
 				else
+					(gGame sel_87: 0 183)
 					((ScriptID 21 0) sel_57: 793)
 					((ScriptID 21 0) sel_57: 272)
 					(gLb2Messager sel_295: sel_213 1 8)
@@ -867,6 +868,7 @@
 					(gLb2Messager sel_295: sel_213 4 9)
 				else
 					(gEgo sel_350: 24)
+					(gGame sel_87: 0 183)
 					((ScriptID 21 0) sel_57: 793)
 					((ScriptID 21 0) sel_57: 272)
 					(gGame sel_87: 1 172)

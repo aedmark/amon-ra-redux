@@ -67,6 +67,26 @@
 	)
 )
 
+(procedure (localproc_hasBestEvidence)
+	(return
+		(and
+			(or (gEgo sel_238: 11) (proc0_2 155))
+			(or (gEgo sel_238: 24) (proc0_2 183))
+			(gEgo sel_238: 20)
+			(gEgo sel_238: 27)
+			(gEgo sel_238: 7)
+			(gEgo sel_238: 10)
+			(or (gEgo sel_238: 29) (proc0_2 170))
+			(gEgo sel_238: 26)
+			(gEgo sel_238: 21)
+			(gEgo sel_238: 30)
+			(gEgo sel_238: 17)
+			(gEgo sel_238: 31)
+			(gEgo sel_238: 25)
+		)
+	)
+)
+
 (instance rm750 of LBRoom
 	(properties
 		sel_20 {rm750}
@@ -335,22 +355,15 @@
 				(cond 
 					(
 						(and
-							(gEgo sel_238: 31)
-							(gEgo sel_238: 26)
-							(gEgo sel_238: 27)
-							(gEgo sel_238: 10)
+							(localproc_hasBestEvidence)
 							local4
 							local5
-							(gEgo sel_238: 11)
 						)
 						(= local3 2)
 					)
 					(
 						(and
-							(gEgo sel_238: 31)
-							(gEgo sel_238: 26)
-							(gEgo sel_238: 27)
-							(gEgo sel_238: 10)
+							(localproc_hasBestEvidence)
 							local4
 						)
 						(= local3 1)
@@ -362,22 +375,15 @@
 				(cond 
 					(
 						(and
-							(gEgo sel_238: 31)
-							(gEgo sel_238: 26)
-							(gEgo sel_238: 27)
-							(gEgo sel_238: 10)
+							(localproc_hasBestEvidence)
 							local4
 							local5
-							(gEgo sel_238: 11)
 						)
 						(= global126 1)
 					)
 					(
 						(and
-							(gEgo sel_238: 31)
-							(gEgo sel_238: 26)
-							(gEgo sel_238: 27)
-							(gEgo sel_238: 10)
+							(localproc_hasBestEvidence)
 							local4
 						)
 						(= global126 4)

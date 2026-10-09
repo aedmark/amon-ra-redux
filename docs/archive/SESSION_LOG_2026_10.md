@@ -2,6 +2,27 @@
 
 Archived verbatim from `docs/HANDOFF.md` when its live session log exceeded ten entries.
 
+### Session 9: 2026-10-07: P2-06 Steve & Laura Character Consistency
+
+**Contributor:** Codex
+
+**Goal:** Make Steve and Laura's museum romance conditional on the player establishing a personal connection in Act 1.
+
+**Done:**
+- Audited the Act 1 Steve conversation and the museum arrival/reunion sequences, then reserved previously unused relationship flag 122.
+- Set flag 122 from both `sTalkSteve` and `sAskSteve` in Script 240.
+- Gated the automatic kiss, embrace, and reunion paths in Scripts 330, 335, and 350 behind that flag while preserving ordinary room initialization when it is unset.
+- Removed an invalid decompiler-only `name` property from `local_Steve`, compiled all four affected scripts, and normalized the loose patches to uppercase.
+- Recorded D-014, synchronized the manual, and kept all documentation under `docs/` after removing the project-local 3x symlink.
+
+**Changed:** `LB2/src/rm240.sc`, `LB2/src/rm330.sc`, `LB2/src/rm335.sc`, `LB2/src/rm350.sc`, `LB2/240.SCR`, `LB2/240.HEP`, `LB2/330.SCR`, `LB2/335.SCR`, `LB2/350.SCR`, `docs/ROADMAP.md`, `docs/ARCHITECTURE.md`, `docs/DECISIONS.md`, `docs/CHANGELOG.md`, `docs/manual/amon-ra.manual.json`, `docs/manual/manual.html`, `docs/HANDOFF.md`.
+
+**Decisions:** D-014 (Gate Steve romance sequences on Act 1 conversation).
+
+**Verified:** SCI Companion compilation with zero errors or warnings; static flag-use audit; DOSBox-X original-interpreter startup smoke; documentation/manual validation; unchanged base archive hashes. Direct traversal of both relationship branches remains a manual save-based regression test.
+
+**Next session should start with:** P2-07 (Dagger Discovery Reactions & Inventory Hand-off).
+
 ### Session 8: 2026-10-07: P2-05 Contextual Dialogue Logic & Acquaintance Checks
 
 **Contributor:** Codex

@@ -13,6 +13,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - Verification harness integrating Wine-based SCI Companion and DOSBox-X.
 
 ### Changed
+- Aligned the Super Sleuth evidence gate with Sierra's complete 13-item hint-book checklist, retaining discovery credit for a surrendered dagger, read carbon paper, and an inspected police file (P4-03, D-024).
 - Added an inquest evidence review for the Ankh, Pippin's appointment notepad, and the bloody high-heel footprint/Yvette shoe comparison; the coroner now identifies these as possible framing evidence and awards one-time investigative insight credit (P4-02, D-023).
 - Made Watney Little's police file discoverable from Room 560's full bookcase as well as an enlarged special-volume hotspot, and record both the file and Watney notebook clues when the exposed file is inspected (P4-01, D-022).
 - Paused museum NPC travel for the full lifetime of their dialogue and resumed the same route afterward; kept O'Reilly available past 10:15 in Acts 3 and 4 for follow-up questioning (P3-06, D-021).

@@ -12,20 +12,22 @@ Security: [SECURITY.md](SECURITY.md). Changes: [CHANGELOG.md](CHANGELOG.md). Old
 
 ## Current state
 
-_Last updated: 2026-10-08, session 18: P4-02 (Evidence Validity, Red Herrings & Inquest Credit) completed and verified._
+_Last updated: 2026-10-08, session 19: P4-03 (Hint Book Contradictions & Best Ending Alignment) completed and verified._
 
-**Where things stand, in one paragraph:** Phase 1, Phase 2, and Phase 3 are complete, P4-01 is committed and pushed as
-`1fba5be`, and P4-02 is complete but uncommitted. The actual coroner questionnaire is Script 750, not the outline's
-Scripts 700/720; Pippin's notepad is the appointment schedule, while Yvette's carbon paper is unrelated. Script 454 now
-persists inspection of the bloody high-heel footprint through point bit 179. After question 16, Script 750 independently
-recognizes the Ankh, appointment notepad, and footprint/Yvette-shoe chains, explains why each is not dispositive, and
-awards idempotent insight points 180..182. D-023 records the canonical evidence mapping and deliberately leaves ending
-tier changes to P4-03 through P4-06. Act 2's passive-pacing concern remains scheduled as post-bugfix milestone P5-01.
+**Where things stand, in one paragraph:** Phase 1 through Phase 3 are complete; P4-01 and P4-02 are committed and pushed
+through `3fc64b6`, and P4-03 is complete but uncommitted. Script 750 now tests Sierra's full 13-item evidence list for the
+best outcome instead of vanilla's five-condition subset. Dagger acquisition bit 155 and carbon-paper read bit 170 preserve
+credit after those items leave inventory; Room 560 records police-file inspection in non-scoring bit 183 so Look and Take
+both qualify. Correct murder and theft answers and `global126` meanings remain unchanged for P4-04/P4-06. D-024 records
+the decision and cites the owner-supplied OneShortEye analysis plus Sierra's official hint book. Act 2's passive-pacing
+concern remains scheduled as post-bugfix milestone P5-01.
 
 **Verified** (2026-10-08, Linux workspace)
 
 | Suite | Result |
 | --- | --- |
+| P4-03 Script compilation | **Pass: 560.SCR and 750.SCR emitted by SCI Companion** |
+| P4-03 checklist/state audit | **Pass: all 13 official items present; bits 155/170/183 cover surrender, consumption, and inspection; bit 183 unique to the intended paths** |
 | P4-02 Script compilation | **Pass: 454.SCR/454.HEP and 750.SCR/750.HEP emitted by SCI Companion** |
 | P4-02 evidence-state audit | **Pass: unique bits 179..182; items 20/21/30 map to Ankh/notepad/shoe; carbon paper item 29 is not treated as a schedule** |
 | P4-01 Script compilation | **Pass: 560.SCR/560.HEP emitted by SCI Companion** |
@@ -42,15 +44,9 @@ tier changes to P4-03 through P4-06. Act 2's passive-pacing concern remains sche
 | P3-02 refill audit | **Pass: full/empty guards precede a one-action refill and one-step jar depletion** |
 | P3-01 Script 0 compilation | **Pass: 0.SCR and 0.HEP emitted by SCI Companion** |
 | P3-01 state audit | **Pass: items 10/14/16 repaired once at Act 5; empty global150 restored; guard flag 123 unused elsewhere** |
-| P2-07 script compilation | **Pass: 90.SCR and 93.SCR emitted by SCI Companion** |
-| P2-07 MSG/ownership audit | **Pass: eight intended dagger reactions present; both O'Reilly verb-22 paths remove item 11** |
 | `python3 tools/check_docs.py` | **Pass: 0 errors, 0 warnings** |
 | `python3 tools/manual.py check ...` | **Pass: 6 sections, 30 entries, 0 errors** |
 | `python3 tools/manual.py build ...` | **Pass: compiled docs/manual/manual.html** |
-| P2-06 script compilation | **Pass: 240.SCR, 330.SCR, 335.SCR, and 350.SCR emitted by SCI Companion** |
-| P2-06 flag-use audit | **Pass: relationship flag 122 is set only by Act 1 Steve Talk/Ask and tested only by the three intended museum paths** |
-| P2-05 script compilation | **Pass: 35.SCR, 36.SCR, and 90.SCR emitted by SCI Companion** |
-| P2-05 MSG structure audit | **Pass: modules 1882, 1883, and 1888 parse with only six intended text records changed** |
 | DOSBox-X headless startup | **Pass: original interpreter environment initialized with loose patches mounted** |
 | Base Game Archive MD5 Integrity | **Pass: RESOURCE.000 and RESOURCE.MAP match vanilla bit-for-bit** |
 
@@ -72,12 +68,14 @@ tier changes to P4-03 through P4-06. Act 2's passive-pacing concern remains sche
 - **P3-06 Stable Museum Conversations:** The selected wandering NPC holds position for dialogue and resumes its prior route afterward; O'Reilly stays available past 10:15 in Acts 3 and 4.
 - **P4-01 Watney Evidence Access:** Room 560's bookcase exposes the existing police-file inset through a broad fallback target; inspecting or taking the file registers its contents and Watney's notebook identity.
 - **P4-02 Planted-Evidence Credit:** Room 454 persists footprint inspection; Script 750 recognizes the Ankh, Pippin's appointment notepad, and the footprint/Yvette-shoe comparison as evidence chains and awards one-time insight credit.
+- **P4-03 Hint-Book Alignment:** Script 750's best-evidence gate requires Sierra's complete 13-item checklist and accepts durable discovery state for the surrendered dagger, consumed carbon paper, and inspected police file.
 - **Tooling Automation:** `tools/compile.py` compiles single scripts (including extension-agnostic target lookup in SysListView32); `tools/compile_all.exe` executes multi-pass builds.
-- **Documentation Architecture:** `docs/ROADMAP.md`, `DECISIONS.md` (D-009 through D-023), `docs/manual/`, and `docs/manual/manual.html` synchronized.
+- **Documentation Architecture:** `docs/ROADMAP.md`, `DECISIONS.md` (D-009 through D-024), `docs/manual/`, and `docs/manual/manual.html` synchronized.
 
 **Not verified**
 
 - End-to-end multi-act playthrough regression testing in DOSBox-X.
+- Direct in-game confirmation of the P4-03 maximum outcome and one-at-a-time failure cases from the Act 6 save.
 - Direct in-game traversal of the P4-02 footprint inspection and all three Script 750 evidence-review branches from the Act 6 save.
 - Direct Room 560 observation of the enlarged book/bookcase discovery path and pre-Take notebook updates for P4-01.
 - Direct in-game traversal of the P2-04 historical dialogue, P2-05 first-contact branches, both P2-06 Steve relationship branches, the P2-07 dagger hand-off, P3-01 entry with deliberately missing supplies, P3-02 bottle depletion/refill transitions, both P3-04 stairwell paths, P3-05's early dirty-taxi/claim-ticket route, and P3-06 moving-NPC conversations plus O'Reilly's post-10:15 Act 3–4 availability; the automated DOSBox-X check is a startup smoke, not an input-driven playthrough.
@@ -94,13 +92,35 @@ tier changes to P4-03 through P4-06. Act 2's passive-pacing concern remains sche
 
 1. Exercise the P4-01 bookcase, exposed-file Look, and Take paths from a deterministic Room 560 save in DOSBox-X.
 2. Exercise the P4-02 footprint inspection and evidence-review branches from deterministic Room 454 and Room 750 saves in DOSBox-X.
-3. Begin P4-03 (Hint Book Contradictions & Best Ending Alignment).
+3. Begin P4-04 (Quiz / Dagger Possession Logic Decoupling).
 
 ## Open questions for maintainers
 
 None currently open. Q-001 and Q-002 have been resolved by D-007, D-017, and D-018.
 
 ## Session log
+
+### Session 19: 2026-10-08: P4-03 Hint Book Contradictions & Best Ending Alignment
+
+**Contributor:** Codex
+
+**Goal:** Make the best-ending evidence gate match Sierra's published investigation requirements instead of vanilla's accidental subset.
+
+**Done:**
+- Audited the owner-supplied OneShortEye issue analysis, Sierra's official hint book, and all Script 750 outcome branches.
+- Confirmed that vanilla's “all evidence” check included only dagger, grapes, wire cutters, bifocals, and red hair, while the hint book names 13 objects.
+- Added a shared Script 750 predicate for all 13 objects and used it consistently in both local result and `global126` outcome selection.
+- Preserved evidence credit after dagger surrender and carbon-paper consumption through existing bits 155 and 170.
+- Added non-scoring Room 560 discovery bit 183 so inspecting or taking Watney's police file satisfies the published requirement.
+- Compiled Scripts 560 and 750, recorded D-024, added the research-source index, and synchronized the roadmap, architecture, changelog, test plan, handoff, and manual.
+
+**Changed:** `LB2/src/rm560.sc`, `LB2/src/rm750.sc`, `LB2/560.SCR`, `LB2/750.SCR`, `docs/ROADMAP.md`, `docs/ARCHITECTURE.md`, `docs/DECISIONS.md`, `docs/CHANGELOG.md`, `docs/TESTING.md`, `docs/reference/README.md`, `docs/manual/amon-ra.manual.json`, `docs/manual/manual.html`, `docs/HANDOFF.md`, `docs/archive/SESSION_LOG_2026_10.md`.
+
+**Decisions:** D-024 (Use Sierra's complete evidence checklist for the best ending).
+
+**Verified:** SCI Companion compilation of Scripts 560 and 750; static 13-item checklist and durable-state audit; DOSBox-X original-interpreter startup smoke; documentation/manual validation; unchanged base archive hashes. Direct save-based traversal of the full positive and negative ending matrix remains a manual regression test.
+
+**Next session should start with:** P4-04 (Quiz / Dagger Possession Logic Decoupling).
 
 ### Session 18: 2026-10-08: P4-02 Evidence Validity, Red Herrings & Inquest Credit
 
@@ -292,24 +312,3 @@ None currently open. Q-001 and Q-002 have been resolved by D-007, D-017, and D-0
 **Verified:** SCI Companion compilation of Scripts 90 and 93; exact-string audit of all eight message overrides; static ownership-path review; DOSBox-X original-interpreter startup smoke; documentation/manual validation; unchanged base archive hashes. Direct save-based traversal of the hand-off remains a manual regression test.
 
 **Next session should start with:** Phase 2 deterministic-save branch testing, then P3-01 (Dead Man Walking Prevention for Act 5 critical items).
-
-### Session 9: 2026-10-07: P2-06 Steve & Laura Character Consistency
-
-**Contributor:** Codex
-
-**Goal:** Make Steve and Laura's museum romance conditional on the player establishing a personal connection in Act 1.
-
-**Done:**
-- Audited the Act 1 Steve conversation and the museum arrival/reunion sequences, then reserved previously unused relationship flag 122.
-- Set flag 122 from both `sTalkSteve` and `sAskSteve` in Script 240.
-- Gated the automatic kiss, embrace, and reunion paths in Scripts 330, 335, and 350 behind that flag while preserving ordinary room initialization when it is unset.
-- Removed an invalid decompiler-only `name` property from `local_Steve`, compiled all four affected scripts, and normalized the loose patches to uppercase.
-- Recorded D-014, synchronized the manual, and kept all documentation under `docs/` after removing the project-local 3x symlink.
-
-**Changed:** `LB2/src/rm240.sc`, `LB2/src/rm330.sc`, `LB2/src/rm335.sc`, `LB2/src/rm350.sc`, `LB2/240.SCR`, `LB2/240.HEP`, `LB2/330.SCR`, `LB2/335.SCR`, `LB2/350.SCR`, `docs/ROADMAP.md`, `docs/ARCHITECTURE.md`, `docs/DECISIONS.md`, `docs/CHANGELOG.md`, `docs/manual/amon-ra.manual.json`, `docs/manual/manual.html`, `docs/HANDOFF.md`.
-
-**Decisions:** D-014 (Gate Steve romance sequences on Act 1 conversation).
-
-**Verified:** SCI Companion compilation with zero errors or warnings; static flag-use audit; DOSBox-X original-interpreter startup smoke; documentation/manual validation; unchanged base archive hashes. Direct traversal of both relationship branches remains a manual save-based regression test.
-
-**Next session should start with:** P2-07 (Dagger Discovery Reactions & Inventory Hand-off).
