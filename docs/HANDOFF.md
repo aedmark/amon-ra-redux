@@ -110,18 +110,18 @@ None currently open. Q-001 and Q-002 have been resolved by D-007, D-017, and D-0
 
 **Done:**
 - Traced the errors to SCI Companion's map-format setting: format 1.0 drops the `SCI_1_1` defines and caps script numbers at 999. Identified the floppy as a hybrid (SCI1.1 scripts, SCI1-style 6-byte `RESOURCE.MAP`).
-- Found that a resource rebuild under format 1.1 had replaced the base archive with a volume containing only loose-file resources (451 entries against 1,075), losing `0.FON` and all views, pics, and sounds. The maintainer restored the original archive.
-- Reapplied the 13 `.sc` source fixes (name properties, `--UNKNOWN-PROP-NAME--`, `View`→`Actor` in rm310, RTRandCycle call, Obj/View/Timer selector defines) that had been wrongly reverted; Compile All is now clean.
-- Verified all 207 previously tracked `.SCR`/`.HEP` pairs and all `.MSG` files survive; compiled output differs only by small offset shifts. Nine scripts now compile and ship as new overrides (310, 640, 770, 928, 999, 1888, 1895, 1904, 1906).
-- Added `tools/uppercase_patches.py` to restore uppercase patch names after Compile All.
+- Found that a resource rebuild under format 1.1 had replaced the base archive with a volume containing only loose-file resources (451 entries against 1,075), losing `0.FON` and all views, pics, and sounds. The maintainer restored the original archive and `MESSAGE.MAP`.
+- Got Compile All to finish by editing 13 decompiled sources (commit `7d48893`), then found its output does not boot: the game stalls on a black screen. Tested copies: the `4c79bcf` patch set boots; the Compile All set does not, with or without the nine newly loose scripts or recompiled 450/720/973/998.
+- Reverted all patches to the `4c79bcf` set and removed the nine new overrides (310, 640, 770, 928, 999, 1888, 1895, 1904, 1906). Reverted the 13 compile-fix sources; only `rm750.sc` (P4-06) differs from `4c79bcf`. Kept the Compile All build of `750.SCR`/`750.HEP`; a copy with that pair and the `4c79bcf` patches boots.
+- Added `tools/uppercase_patches.py`, `.gitattributes` (LF for `.sc`, binary for patches), and D-028.
 
-**Changed:** `tools/uppercase_patches.py`, `LB2/src/*.sc` (13 files), recompiled `LB2/*.SCR`/`*.HEP`, `LB2/game.ini`, `docs/DECISIONS.md`, `docs/ARCHITECTURE.md`, `docs/TESTING.md`, `docs/HANDOFF.md`.
+**Changed:** `LB2/*.SCR`/`*.HEP` (reverted to `4c79bcf` except 750), `LB2/src/rm750.sc`, `tools/uppercase_patches.py`, `.gitattributes`, `docs/DECISIONS.md`, `docs/ARCHITECTURE.md`, `docs/TESTING.md`, `docs/HANDOFF.md`.
 
 **Decisions:** D-028.
 
-**Verified:** Compile All reports no errors (maintainer). Not verified: in-game behavior of the nine new overrides and the recompiled 450, 720, 973, and 998. `LB2/MESSAGE.MAP` was restored and matches `LB2_vanilla/` and git.
+**Verified:** The patch set committed here boots in DOSBox-X (maintainer). Not verified: the Compile All build of 750 in the inquest. It is 72 bytes larger in its `.HEP` than the earlier single-script build.
 
-**Next session should start with:** Regression-play rooms 310, 640, 770, and the O'Riley and Lo Fat characters; then continue the full-game run. `.gitattributes` now pins `.sc` to LF and treats `.SCR`/`.HEP`/`.MSG` as binary; run `tools/uppercase_patches.py` after every Compile All.
+**Next session should start with:** Recompile script 750 alone with `python3 tools/compile.py rm750` (SCI Companion must be running under Wine with the game open), boot the game, then play to the inquest to verify P4-06. Never use Compile All.
 
 ### Session 23: 2026-10-09: Pre–Phase 5 Full-Game Playtest Checklist
 

@@ -359,18 +359,99 @@
 	)
 	
 	(method (sel_300 param1)
-		(switch param1
-			(1 (gLb2Messager sel_295: 4 1 (if (proc0_2 38) 2 else 1)))
-			(4
-				(cond
-					((proc0_2 38) (gLb2Messager sel_295: 4 4 2))
-					((global2 sel_142?))
-					((MuseumRgn sel_646?) (global2 sel_146: sBreakIt))
-					(else (return 1))
-				)
-			)
-			(8 (gLb2Messager sel_295: 4 8 (if (proc0_2 38) 2 else 1)))
-			(else (super sel_300: param1 &rest))
+		(asm
+			lsp      param1
+			dup     
+			ldi      1
+			eq?     
+			bnt      code_0807
+			pushi    295
+			pushi    3
+			pushi    4
+			pushi    1
+			pushi    1
+			pushi    38
+			callb    proc0_2,  2
+			bnt      code_07ff
+			ldi      2
+code_07ff:
+			push    
+			lag      gLb2Messager
+			send     10
+			jmp      code_0887
+code_0807:
+			dup     
+			ldi      4
+			eq?     
+			bnt      code_0851
+			pushi    1
+			pushi    38
+			callb    proc0_2,  2
+			bnt      code_0826
+			pushi    #sel_295
+			pushi    3
+			pushi    4
+			dup     
+			pushi    2
+			lag      gLb2Messager
+			send     10
+			jmp      code_0887
+code_0826:
+			pushi    #sel_142
+			pushi    0
+			lag      global2
+			send     4
+			not     
+			bnt      code_0887
+			pushi    #sel_646
+			pushi    0
+			class    MuseumRgn
+			send     4
+			bnt      code_084b
+			pushi    #sel_146
+			pushi    1
+			lofsa    sBreakIt
+			push    
+			lag      global2
+			send     6
+			jmp      code_0887
+code_084b:
+			ldi      1
+			ret     
+			jmp      code_0887
+code_0851:
+			dup     
+			ldi      8
+			eq?     
+			bnt      code_087f
+			pushi    1
+			pushi    38
+			callb    proc0_2,  2
+			bnt      code_086f
+			pushi    #sel_295
+			pushi    3
+			pushi    4
+			pushi    8
+			pushi    2
+			lag      gLb2Messager
+			send     10
+			jmp      code_0887
+code_086f:
+			pushi    #sel_295
+			pushi    3
+			pushi    4
+			pushi    8
+			pushi    1
+			lag      gLb2Messager
+			send     10
+			jmp      code_0887
+code_087f:
+			class    1358
+			pToa     --UNKNOWN-PROP-NAME--
+			lap      param1
+code_0887:
+			toss    
+			ret     
 		)
 	)
 )
@@ -431,18 +512,99 @@
 	)
 	
 	(method (sel_300 param1)
-		(switch param1
-			(1 (gLb2Messager sel_295: 4 1 (if (proc0_2 38) 2 else 1)))
-			(4
-				(cond
-					((proc0_2 38) (gLb2Messager sel_295: 4 4 2))
-					((global2 sel_142?))
-					((MuseumRgn sel_646?) (global2 sel_146: sBreakIt))
-					(else (return 1))
-				)
-			)
-			(8 (gLb2Messager sel_295: 4 8 (if (proc0_2 38) 2 else 1)))
-			(else (super sel_300: param1 &rest))
+		(asm
+			lsp      param1
+			dup     
+			ldi      1
+			eq?     
+			bnt      code_08ab
+			pushi    295
+			pushi    3
+			pushi    4
+			pushi    1
+			pushi    1
+			pushi    38
+			callb    proc0_2,  2
+			bnt      code_08a3
+			ldi      2
+code_08a3:
+			push    
+			lag      gLb2Messager
+			send     10
+			jmp      code_092c
+code_08ab:
+			dup     
+			ldi      4
+			eq?     
+			bnt      code_08f5
+			pushi    1
+			pushi    38
+			callb    proc0_2,  2
+			bnt      code_08ca
+			pushi    #sel_295
+			pushi    3
+			pushi    4
+			dup     
+			pushi    2
+			lag      gLb2Messager
+			send     10
+			jmp      code_092c
+code_08ca:
+			pushi    #sel_142
+			pushi    0
+			lag      global2
+			send     4
+			not     
+			bnt      code_092c
+			pushi    #sel_646
+			pushi    0
+			class    MuseumRgn
+			send     4
+			bnt      code_08ef
+			pushi    #sel_146
+			pushi    1
+			lofsa    sBreakIt
+			push    
+			lag      global2
+			send     6
+			jmp      code_092c
+code_08ef:
+			ldi      1
+			ret     
+			jmp      code_092c
+code_08f5:
+			dup     
+			ldi      8
+			eq?     
+			bnt      code_0924
+			pushi    1
+			pushi    38
+			callb    proc0_2,  2
+			bnt      code_0914
+			pushi    #sel_295
+			pushi    3
+			pushi    4
+			pushi    8
+			pushi    2
+			lag      gLb2Messager
+			send     10
+			jmp      code_092c
+code_0914:
+			pushi    #sel_295
+			pushi    3
+			pushi    4
+			pushi    8
+			pushi    1
+			lag      gLb2Messager
+			send     10
+			jmp      code_092c
+code_0924:
+			class    1358
+			pToa     --UNKNOWN-PROP-NAME--
+			lap      param1
+code_092c:
+			toss    
+			ret     
 		)
 	)
 )

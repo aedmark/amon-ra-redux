@@ -1,7 +1,6 @@
 ;;; Sierra Script 1.0 - (do not remove this comment)
 (script# 973)
 (include sci.sh)
-(define sel_4103 4103)
 (use Main)
 (use Obj)
 

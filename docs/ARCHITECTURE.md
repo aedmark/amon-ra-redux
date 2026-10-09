@@ -96,5 +96,5 @@ The project builds upon the DOS Floppy v1.000 release (D-001) using a modular lo
 2. **Floppy Visual Preservation:** No dithered or downgraded CD background graphics may replace the original 256-color hand-painted brushstroke assets (P1-06).
 3. **Voiceover Policy:** Original CD voice tracks remain excluded; talker hooks remain clean for prospective voice talent (D-007).
 4. **Save Compatibility:** Save files (`LB2SG.*`) must deserialize safely across patched rooms without pointer corruption.
-5. **Hybrid Version Handling (D-028):** The floppy has SCI1.1 scripts but an SCI1-style 6-byte `RESOURCE.MAP`. Compile with SCI Companion's map format at 1.1, never run a resource rebuild, and run `tools/uppercase_patches.py` after each compile because Wine writes lowercase patch names.
+5. **Hybrid Version Handling (D-028):** The floppy has SCI1.1 scripts but an SCI1-style 6-byte `RESOURCE.MAP`. Compile with SCI Companion's map format at 1.1, one script at a time via `tools/compile.py`; never run Compile All or a resource rebuild, and boot the game after every compile.
 6. **Toolchain Portability:** Development workflow must remain fully operational under Linux using Wine for SCI Companion and DOSBox-X for original-interpreter regression testing.

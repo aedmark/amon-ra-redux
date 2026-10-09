@@ -48,8 +48,9 @@ For `P4-05`, retain a save immediately before each Script 26 act break. With eve
 
 ## Known limitations
 
-- **Never rebuild resources (D-028).** Compile All is safe. Any SCI Companion rebuild or repack replaces `RESOURCE.000`/`RESOURCE.MAP` with a 5-byte-map volume holding only loose files. A healthy base is `RESOURCE.000` 5,035,964 bytes and `RESOURCE.MAP` 6,489 bytes (compare `LB2_vanilla/`).
-- Compile All writes lowercase patch names under Wine. Run `python3 tools/uppercase_patches.py` afterwards; it never overwrites and reports skipped files.
+- **Never rebuild resources and never Compile All (D-028).** A rebuild replaces `RESOURCE.000`/`RESOURCE.MAP` with a 5-byte-map volume holding only loose files (healthy base: `RESOURCE.000` 5,035,964 bytes, `RESOURCE.MAP` 6,489 bytes; compare `LB2_vanilla/`). Compile All regenerates every patch and produced a build that stalls on a black screen at boot. Compile single scripts with `tools/compile.py` and boot the game before committing.
+- A successful compile does not prove the game boots. After every compile, run `./tools/run_dosbox.sh` and confirm the intro appears.
+- SCI Companion under Wine writes lowercase patch names; `tools/compile.py` renames them, and `python3 tools/uppercase_patches.py` fixes stragglers without overwriting.
 - Headless DOSBox-X startup verifies initialization but does not traverse dialogue or animation branches; deterministic
   save-state playback and manual interaction remain necessary for behavioral verification.
 - DOSBox-X reproduces the original interpreter environment but offers less direct SCI object/flag introspection than a

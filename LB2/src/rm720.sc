@@ -150,6 +150,7 @@
 (instance sO_RileyEnters of Script
 	(properties
 		sel_20 {sO'RileyEnters}
+		name "sO'RileyEnters"
 	)
 	
 	(method (sel_144 theSel_29)
@@ -481,7 +482,7 @@
 				(sFX sel_170:)
 				(proc0_3 65)
 				((global2 sel_259?)
-					sel_81: ((global2 sel_259?) sel_64: 0)
+					sel_81: ((global2 sel_259?) sel_64: 0) --UNKNOWN-PROP-NAME--
 				)
 				((ScriptID 2720 0) sel_57: (global2 sel_259?))
 				(steve sel_313:)
@@ -523,7 +524,7 @@
 				(steve sel_63: -1 sel_313:)
 				(proc0_3 121)
 				((global2 sel_259?)
-					sel_81: ((global2 sel_259?) sel_64: 0)
+					sel_81: ((global2 sel_259?) sel_64: 0) --UNKNOWN-PROP-NAME--
 				)
 				((ScriptID 2720 0) sel_57: (global2 sel_259?))
 				(gLb2Messager sel_295: 21 2 5)
@@ -825,6 +826,7 @@
 		sel_3 5
 		sel_60 15
 		sel_14 16400
+		name "o'Riley"
 	)
 )
 

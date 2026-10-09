@@ -130,7 +130,7 @@
 			(sel_411
 				(gEgo sel_1: 195)
 				(= temp3
-					(if (== (DoSound 3) 32) 310 else 314)
+					(if (== (DoSound sndGET_POLYPHONY) 32) 310 else 314)
 				)
 			)
 			(else 
@@ -410,7 +410,7 @@
 	)
 )
 
-(instance bartender of Actor
+(instance bartender of View
 	(properties
 		sel_20 {bartender}
 		sel_1 47
@@ -623,7 +623,7 @@
 	)
 )
 
-(instance woman2 of Actor
+(instance woman2 of View
 	(properties
 		sel_20 {woman2}
 		sel_1 236
