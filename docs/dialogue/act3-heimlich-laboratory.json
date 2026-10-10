@@ -1,0 +1,9 @@
+{
+  "module": 610,
+  "character": "Wolf Heimlich's laboratory warnings",
+  "voice": "Direct, commanding, and severe without faux-German spelling.",
+  "entries": [
+    {"tuple": [28, 0, 5, 1, 18], "text": "Miss Bow! This laboratory contains dangerous chemicals and is closed to the public. Leave at once!"},
+    {"tuple": [28, 0, 6, 1, 18], "text": "I will not warn you again. Leave this laboratory immediately!"}
+  ]
+}

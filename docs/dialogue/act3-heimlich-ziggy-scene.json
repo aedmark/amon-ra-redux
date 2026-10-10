@@ -1,0 +1,33 @@
+{
+  "module": 1490,
+  "character": "Wolf Heimlich and Detective O'Riley after Ziggy's murder",
+  "voice": "Wolf is severe and coercive; O'Riley is patronizing and territorial without stage-Irish spelling or torture-parody shorthand.",
+  "entries": [
+    {"tuple": [1, 0, 1, 1, 18], "text": "What is going on in here?"},
+    {"tuple": [1, 0, 1, 2, 19], "text": "I'd say you have some explaining to do, young lady. Why were you screaming?"},
+    {"tuple": [1, 0, 1, 3, 2], "text": "I... found... Mr. Ziggy's head."},
+    {"tuple": [1, 0, 1, 4, 18], "text": "You have an unfortunate habit of finding bodies, Miss Bow. We should return to my office and question you properly."},
+    {"tuple": [1, 0, 1, 5, 19], "text": "Easy, Wolf. The young lady has just found a man's head. Give her a moment before you begin your inquisition."},
+    {"tuple": [1, 0, 1, 6, 2], "text": "Thank you, Mr. O'Riley."},
+    {"tuple": [1, 0, 1, 7, 19], "text": "Don't thank me, Miss Bow. I'm not saying you didn't kill him. I'm merely keeping Heimlich from frightening the answers out of you."},
+    {"tuple": [1, 0, 1, 8, 18], "text": "I will get results. Let me question her alone."},
+    {"tuple": [1, 0, 1, 9, 19], "text": "I know you're eager to help, Wolf, but I can question the lady without your assistance."},
+    {"tuple": [1, 0, 1, 10, 18], "text": "And if she lies? You would never know. Your methods are too lenient."},
+    {"tuple": [1, 0, 1, 11, 2], "text": "I just walked in and found his head. That's all."},
+    {"tuple": [1, 0, 1, 12, 19], "text": "Heimlich has a point, Miss Bow. It's curious that you keep reaching murder scenes before anyone else. How do you account for that?"},
+    {"tuple": [1, 0, 1, 13, 2], "text": "Just lucky, I guess."},
+    {"tuple": [1, 0, 1, 14, 19], "text": "You seem a bit small to saw through a man's neck. That is one point in your favor."},
+    {"tuple": [1, 0, 1, 15, 2], "text": "Thanks."},
+    {"tuple": [1, 0, 1, 16, 18], "text": "She could have had help. Or perhaps you underestimate her."},
+    {"tuple": [1, 0, 1, 17, 19], "text": "Or perhaps you're pinning the murders on her so you can catch a culprit and save your job."},
+    {"tuple": [1, 0, 1, 18, 18], "text": "My position is secure, Detective."},
+    {"tuple": [1, 0, 1, 19, 19], "text": "Is it, now? A security chief who lets thieves carry off the exhibits and overlooks several murders beneath his nose? I'd reconsider your methods if I were running this museum."},
+    {"tuple": [1, 0, 1, 20, 18], "text": "This is neither the time nor place to debate my methods. We have a suspect to question."},
+    {"tuple": [1, 0, 1, 21, 19], "text": "Correction: we have a murder scene to investigate. We can question Miss Bow after she's had time to recover."},
+    {"tuple": [1, 0, 1, 22, 2], "text": "Thank you again, sir."},
+    {"tuple": [1, 0, 1, 23, 19], "text": "You've got a strong stomach, I'll grant you. One scream and you've already got your head together again, so to speak. Don't try to leave the museum."},
+    {"tuple": [1, 0, 1, 24, 2], "text": "I can't leave. I'm locked in."},
+    {"tuple": [1, 0, 1, 25, 19], "text": "Good. One less problem to manage."},
+    {"tuple": [1, 0, 1, 26, 19], "text": "Come along, Wolf. We have work to do. Let's fetch the crime-scene tools."}
+  ]
+}

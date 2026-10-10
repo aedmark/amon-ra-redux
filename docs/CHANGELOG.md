@@ -13,6 +13,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - Verification harness integrating Wine-based SCI Companion and DOSBox-X.
 
 ### Changed
+- Continued the period-dialogue pass into Act 3: gave Rameses and Heimlich consistent approved voices across private conversations, intercom scenes, laboratory warnings, and the Ziggy and Ernie murder discoveries; grounded Heimlich's Heidelberg scars in academic fencing and cleaned one missed Act 2 gift-shop exchange (P2-08, D-031).
 - Completed the Act 1/2 period-dialogue closure sweep: rewrote the sandwich vendor, cabbie, Pippin/Tut confrontation, museum check-in, all fourteen party conversations, and Carter murder scene; removed the remaining `Andrea Doria`, `Ruhmkorf`, and ethnic-slur text; and corrected Carrington's misassigned reply (P2-08, D-031).
 - Began the act-by-act period dialogue pass with Act 1: rewrote Lo Fat, Sgt. O'Flaherty, and Detective O'Riley to replace phonetic ethnic caricature with distinct, readable voices while preserving clues, jokes, period characterization, and O'Riley's deliberately antagonistic bluster (P2-08, D-031).
 - Split the coroner questionnaire into clearly labeled required case findings (questions 1–11) and bonus museum inquiries (questions 12–16); optional art-theft and High Priest answers are structurally isolated from verdict and ending state (P4-06, D-027).

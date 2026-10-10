@@ -1,0 +1,26 @@
+{
+  "module": 1560,
+  "character": "Rameses Najeer and Yvette Delacroix",
+  "voice": "Rameses remains precise, reserved, and visibly flustered while Yvette uses polished, deliberate flirtation; standard spelling replaces phonetic accents without changing her leverage, his marriage, or the cult-room clue.",
+  "entries": [
+    {"tuple": [1, 38, 1, 1, 28], "text": "...Come a little closer, Monsieur Najeer. I want to show you something."},
+    {"tuple": [1, 38, 1, 2, 27], "text": "And what would that be, Miss Delacroix?"},
+    {"tuple": [1, 38, 1, 3, 28], "text": "Look at the palm of my hand."},
+    {"tuple": [1, 38, 1, 4, 27], "text": "It is a lovely palm, certainly, but what am I supposed to see?"},
+    {"tuple": [1, 38, 1, 5, 28], "text": "Do you see this line, Monsieur? It is my love line."},
+    {"tuple": [1, 38, 1, 6, 27], "text": "Good Lord, Miss Delacroix. It runs all the way up your arm and disappears beneath your sleeve."},
+    {"tuple": [1, 38, 1, 7, 28], "text": "Would you like to see where it ends, Rameses?"},
+    {"tuple": [1, 38, 1, 8, 27], "text": "I... Well, that is... I am not quite sure how to answer."},
+    {"tuple": [1, 38, 1, 9, 28], "text": "Have you ever been to Paris, Rameses?"},
+    {"tuple": [1, 38, 1, 10, 27], "text": "No. I cannot say that I have."},
+    {"tuple": [1, 38, 1, 11, 28], "text": "Then you have never seen the Eiffel Tower?"},
+    {"tuple": [1, 38, 1, 12, 27], "text": "No..."},
+    {"tuple": [1, 38, 1, 13, 28], "text": "Then by all means, let me show you."},
+    {"tuple": [1, 38, 1, 14, 27], "text": "Miss Delacroix, please. I am a married man. Oh, dear."},
+    {"tuple": [1, 38, 1, 15, 28], "text": "Have you forgotten who let you into the museum, Rameses? Who showed you the secret room for your little ceremonies? You have not forgotten, have you?"},
+    {"tuple": [1, 38, 1, 16, 27], "text": "No, I have not, but--"},
+    {"tuple": [1, 38, 1, 17, 28], "text": "Then you will let me give you the grand tour of the tower, yes?"},
+    {"tuple": [1, 38, 1, 18, 27], "text": "We will have to go somewhere else. I do not feel safe here."},
+    {"tuple": [1, 38, 1, 19, 28], "text": "Lead the way, Monsieur."}
+  ]
+}

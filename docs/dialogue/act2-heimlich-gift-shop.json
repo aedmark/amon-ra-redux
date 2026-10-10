@@ -1,0 +1,10 @@
+{
+  "module": 400,
+  "character": "Wolf Heimlich in the museum gift shop",
+  "voice": "Terse, formal, and threatening through authority rather than faux-German spelling or gratuitous violence.",
+  "entries": [
+    {"tuple": [33, 8, 0, 1, 18], "text": "Miss Bow! The gift shop is closed. You should not be here!"},
+    {"tuple": [33, 8, 0, 3, 18], "text": "Unlocked? My assistant will answer for that negligence."},
+    {"tuple": [33, 8, 0, 4, 18], "text": "Return to the party at once, or I will escort you out myself."}
+  ]
+}

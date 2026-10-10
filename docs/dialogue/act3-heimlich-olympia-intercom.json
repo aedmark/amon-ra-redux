@@ -1,0 +1,14 @@
+{
+  "module": 562,
+  "character": "Wolf Heimlich and Olympia Myklos over the intercom",
+  "voice": "Wolf is rigid but vain beneath Olympia's morbidity and flirtation; both remain intelligible and characterful without national caricature.",
+  "entries": [
+    {"tuple": [54, 4, 1, 2, 25], "text": "Oh, I do love your scars, Wolfie. Show them to me again."},
+    {"tuple": [54, 4, 1, 3, 18], "text": "You may admire them as long as you like, my dear."},
+    {"tuple": [54, 4, 1, 4, 25], "text": "My. Very impressive!"},
+    {"tuple": [54, 4, 1, 5, 18], "text": "Yes. And I have brought you a new bone for your collection."},
+    {"tuple": [54, 4, 1, 6, 25], "text": "Such a large one, too! Where did you find it?"},
+    {"tuple": [54, 4, 1, 7, 18], "text": "I have carried it for years. It is yours now, Olympia. Do with it as you please."},
+    {"tuple": [54, 4, 1, 8, 25], "text": "I am impressed by your generosity, Wolfie."}
+  ]
+}

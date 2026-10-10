@@ -12,14 +12,15 @@ Security: [SECURITY.md](SECURITY.md). Changes: [CHANGELOG.md](CHANGELOG.md). Old
 
 ## Current state
 
-_Last updated: 2026-10-10, session 34: P2-08 effective-layer closure audit._
+_Last updated: 2026-10-10, session 35: Act 3 Rameses and Heimlich dialogue pass._
 
-**Where things stand, in one paragraph:** P2-08 is complete after an effective-layer closure audit of all 5,888 message records exposed room- and cutscene-specific dialogue outside the character-topic modules. Act 1 now includes readable sandwich-vendor and cabbie voices; Act 2 now covers the Pippin/Tut confrontation, museum entry, all fourteen party conversations, and Carter's immediate murder scene in addition to the character modules and deferred reactions. All nine original `Andrea Doria` references, the remaining `Ruhmkorf` spellings, two uses of an ethnic slur, two Carrington spelling errors, and Carrington's misassigned reply are corrected. Twenty-six tuple manifests account for 1,025 reviewed entries across 2,726 records, with only four documented talker-ID repairs (D-031).
+**Where things stand, in one paragraph:** The reviewed period-dialogue pass now extends into Act 3. Rameses retains his precise, reserved wit in the Yvette and Olympia scenes; Heimlich remains rigid, militant, vain, and threatening across Olympia conversations, laboratory warnings, and the Ziggy and Ernie discoveries without faux-German spelling or Nazi-parody shorthand. The pass also closes one missed Act 2 gift-shop exchange. Nine new tuple manifests govern 117 reviewed records across eight message modules while preserving every tuple, talker, reference field, untargeted line, clue, and scheduler route (D-031).
 
 **Verified** (2026-10-10, Linux workspace)
 
 | Suite | Result |
 | --- | --- |
+| P2-08 Act 3 Rameses and Heimlich | **Pass: 423 records across modules 400, 562, 610, 1440, 1490, 1500, 1560, and 1600 structurally compared; 117 reviewed records current; all routing metadata and untargeted text preserved** |
 | P2-08 effective-layer closure | **Pass: 2,726 records across 26 target modules structurally compared; 1,025 manifest entries current; only four documented talker IDs changed; Act 1/2 obsolete wording scan has 0 target hits** |
 | P2-08 party and cutscene dialogue | **Pass: modules 120, 335, 340, and 355 preserve all 237 records and routing metadata; 103 reviewed entries apply idempotently** |
 | P2-08 Act 1 adjacent voices | **Pass: modules 210, 250, 240, and 260 preserve all routing metadata; vendor, cabbie, Steve, and slur-cleanup manifests apply idempotently** |
@@ -56,6 +57,7 @@ _Last updated: 2026-10-10, session 34: P2-08 effective-layer closure audit._
 - **Act 1 Investigation Context:** Authentic starting contacts preserved in `lb2InitCode.sc`; suspects discovered naturally through Act 1 inquiry trees (D-030).
 - **Act 1 Dialogue:** Lo Fat, Sgt. O'Flaherty, O'Riley, Ziggy, the sandwich vendor, and the cabbie use distinct, readable period voices without altering dialogue logic (P2-08, D-031).
 - **Act 2 Dialogue:** Rameses, Heimlich, Yvette, O'Riley, Ziggy, and Tut Smith use distinct, readable period characterization across character topics, the museum entry, all fourteen party conversations, the immediate Carter murder scene, deferred reactions, and adjacent cleanup lines (P2-08, D-031).
+- **Act 3 Dialogue:** Rameses and Heimlich retain their approved voices through private conversations, intercom scenes, laboratory warnings, and the Ziggy and Ernie murder discoveries; adjacent Olympia and O'Riley lines read consistently (P2-08, D-031).
 - **Documentation Architecture:** `docs/ROADMAP.md`, `DECISIONS.md` (D-001 through D-031), `docs/manual/`, `docs/manual/manual.html`, and `docs/PLAYTEST_CHECKLIST.md` synchronized.
 
 **Not verified**
@@ -71,15 +73,36 @@ _Last updated: 2026-10-10, session 34: P2-08 effective-layer closure audit._
 
 ## Next steps (in order)
 
-1. Resume the clean DOSBox-X playthrough and note any dialogue that reads poorly in context.
-2. Triage and resolve or schedule every remaining `PLAY-nnn` finding.
-3. Begin P5-01 only after the playtest gate closes.
+1. Continue the Act 3 dialogue audit with the next character, retaining maintainer review before each applied rewrite.
+2. Resume the clean DOSBox-X playthrough and note any dialogue that reads poorly in context.
+3. Triage and resolve or schedule every remaining `PLAY-nnn` finding, then begin P5-01 after the playtest gate closes.
 
 ## Open questions for maintainers
 
 None currently open. Q-001 and Q-002 have been resolved by D-007, D-017, and D-018.
 
 ## Session log
+
+### Session 35: 2026-10-10: Act 3 Rameses and Heimlich Dialogue Pass
+
+**Contributor:** Codex and maintainer
+
+**Goal:** Carry Rameses and Wolf Heimlich's approved Act 2 voices into their Act 3 room, intercom, and murder-discovery scenes without changing mystery progression.
+
+**Done:**
+- Reworked Rameses's complete private exchanges with Yvette and Olympia, preserving the secret-room leverage, marriage, Eiffel Tower joke, Toledo sword, foot tattoos, and Egyptian sun-symbol clues.
+- Reworked Heimlich's Olympia intercom and office scenes, historically grounded his Heidelberg scars in academic fencing, and retained his ambition, morbidity, romantic vanity, and implied danger.
+- Reworked the Ziggy and Ernie discovery scenes with readable Heimlich and O'Riley voices while preserving Laura's suspicion, every murder clue, the security rivalry, and the grape/flask exchange.
+- Replaced two laboratory warnings and closed the missed Act 2 gift-shop exchange.
+- Added nine tuple-addressed manifests and loose overrides for modules 400, 562, 610, 1440, 1490, 1500, 1560, and 1600.
+
+**Changed:** `LB2/400.MSG`, `LB2/562.MSG`, `LB2/610.MSG`, `LB2/1440.MSG`, `LB2/1490.MSG`, `LB2/1500.MSG`, `LB2/1560.MSG`, `LB2/1600.MSG`, nine manifests under `docs/dialogue/`, and synchronized roadmap, decision, changelog, handoff, and manual documentation.
+
+**Decisions:** D-031.
+
+**Verified:** All 423 records structurally compared against archived resources; 117 reviewed tuples current and idempotent; all tuple/talker/reference metadata and untargeted text preserved; documentation/manual validation and DOSBox-X startup smoke pass.
+
+**Next session should start with:** Continue the Act 3 character audit after maintainer review of the next draft.
 
 ### Session 34: 2026-10-10: P2-08 Effective-Layer Closure Audit
 
@@ -278,24 +301,3 @@ None currently open. Q-001 and Q-002 have been resolved by D-007, D-017, and D-0
 **Verified:** SCI Companion single-script compilation of Script 250 with 0 errors/0 warnings; DOSBox-X headless boot test (0 errors); bytecode flag audits; `python3 tools/check_docs.py` (0 errors); `python3 tools/manual.py check` (0 errors).
 
 **Next session should start with:** Continue full-game playtest checklist run in DOSBox-X.
-
-### Session 25: 2026-10-09: Catastrophe Recovery and Object Cache Baseline Tracking
-
-**Contributor:** Antigravity and maintainer
-
-**Goal:** Recover from a broken "Compile All" attempt in SCI Companion that corrupted loose patches and caused Sierra Error 3 on boot; establish a permanent, restorable baseline in git including all 221 `.sco` object cache files.
-
-**Done:**
-- Preserved the broken state on safety backup branch `catastrophe-2026-10-09`.
-- Restored working tree and `master` branch to the verified `8d98dcf` baseline (retaining P4-05, P4-06, and PLAY-001..PLAY-009).
-- Restored the 104 verified loose patch files in `LB2/` and confirmed MD5 integrity of base game archives (`RESOURCE.000`, `RESOURCE.MAP`, `RESOURCE.MSG`, `MESSAGE.MAP`).
-- Configured `.gitattributes` to mark `*.sco binary` and `*.sc text eol=lf`.
-- Updated `.gitignore` to un-ignore `*.sco` so object caches are versioned and permanent, while ignoring external SCI Companion IDE runtime binaries/caches.
-- Normalized line endings on `LB2/src/Class_255_0.sc` and `LB2/src/SRDialog.sc`.
-- Verified clean startup in DOSBox-X (0 errors) and validated docs and manual.
-
-**Changed:** `.gitattributes`, `.gitignore`, `LB2/src/*.sco`, `LB2/src/Class_255_0.sc`, `LB2/src/SRDialog.sc`, `docs/HANDOFF.md`.
-
-**Verified:** DOSBox-X headless boot test passed (0 errors); `python3 tools/check_docs.py` (0 errors); `python3 tools/manual.py check` (0 errors); base archive MD5 match.
-
-**Next session should start with:** Continue full-game playtest and address PLAY-001..PLAY-009 triage using single-script compilation (`python3 tools/compile.py <script>`).

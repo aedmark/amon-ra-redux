@@ -1,0 +1,23 @@
+{
+  "module": 1500,
+  "character": "Wolf Heimlich and Detective O'Riley after Ernie's murder",
+  "voice": "Wolf is suspicious, severe, and disciplined; O'Riley remains patronizing without stage-Irish spelling.",
+  "entries": [
+    {"tuple": [1, 0, 0, 1, 19], "text": "What happened, Miss Bow?"},
+    {"tuple": [1, 0, 0, 2, 2], "text": "Ernie is dead!"},
+    {"tuple": [1, 0, 0, 3, 18], "text": "So. You have finally come to confess."},
+    {"tuple": [1, 0, 0, 4, 2], "text": "Confess? No, I'm reporting a murder!"},
+    {"tuple": [1, 0, 0, 5, 18], "text": "And once again, you were the first to find the body?"},
+    {"tuple": [1, 0, 0, 6, 2], "text": "Well, I guess so..."},
+    {"tuple": [1, 0, 0, 7, 18], "text": "A remarkable coincidence. You will come to my office and answer questions. I have had enough of your evasions."},
+    {"tuple": [1, 0, 0, 8, 19], "text": "Calm down, Heimlich. If there's any questioning to be done, I'll be the one doing it."},
+    {"tuple": [1, 0, 0, 9, 19], "text": "Where did you find the body, Miss Bow?"},
+    {"tuple": [1, 0, 0, 10, 2], "text": "The Mastodon room. He's hanging from some Mastodon tusks."},
+    {"tuple": [1, 0, 0, 11, 18], "text": "He is probably sleeping at his post."},
+    {"tuple": [1, 0, 0, 12, 2], "text": "No, I'm sure he's dead."},
+    {"tuple": [1, 0, 0, 13, 19], "text": "I'll have a look. If I need to question you, I'll find you later."},
+    {"tuple": [3, 0, 0, 1, 18], "text": "You smell like a brewery, Detective. Either you have been drinking, or those grapes have finally fermented."},
+    {"tuple": [3, 0, 0, 2, 19], "text": "A man needs a pull from his flask now and then, doesn't he?"},
+    {"tuple": [3, 0, 0, 3, 18], "text": "I require no alcohol. It impairs both judgment and reflexes."}
+  ]
+}

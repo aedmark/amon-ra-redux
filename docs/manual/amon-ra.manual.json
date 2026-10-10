@@ -658,7 +658,7 @@
             "character",
             "p2"
           ],
-          "what": "Rewrites culturally stereotyped dialogue throughout Acts 1 and 2 without erasing identity, clues, jokes, period attitudes, or characterization. The completed pass covers Lo Fat, Sgt. O'Flaherty, Detective O'Riley, Ziggy, Rameses Najeer, Wolf Heimlich, Yvette Delacroix, Dr. Ptahsheptut Smith, the sandwich vendor, and the cabbie, plus room-specific party conversations, murder reactions, and adjacent lines that repeated the same caricatures.",
+          "what": "Rewrites culturally stereotyped dialogue throughout Acts 1 and 2 and continues the same reviewed voices into Act 3 without erasing identity, clues, jokes, period attitudes, or characterization. The pass covers Lo Fat, Sgt. O'Flaherty, Detective O'Riley, Ziggy, Rameses Najeer, Wolf Heimlich, Yvette Delacroix, Dr. Ptahsheptut Smith, the sandwich vendor, and the cabbie, plus room-specific conversations, murder reactions, and adjacent lines that repeated the same caricatures.",
           "how": {
             "lead": "Uses reviewed tuple-addressed manifests and loose message overrides:",
             "points": [
@@ -674,6 +674,7 @@
               "Correct Ziggy's anachronistic Seabiscuit tip and the diary response erroneously assigned to Laura while preserving every clue, callback, joke, and interrogation route.",
               "Present Tut Smith as an educated, imposing Cairo Museum envoy whose forceful repatriation case, vanity, sexism, and suspicious threats define him instead of pulp cliches about camels, snake charmers, amputations, and mystical vengeance.",
               "Apply the approved voices to the Pippin/Tut confrontation, museum check-in, all fourteen museum-party conversations, the immediate Carter murder scene, and every deferred murder reaction; clean isolated Pippin, Countess, Steve, Carrington, Olympia, and Laura lines that reintroduced the discarded caricatures.",
+              "Carry Rameses and Heimlich into Act 3 private conversations, intercom scenes, laboratory warnings, and the Ziggy and Ernie murder discoveries; ground Heimlich's Heidelberg scars in period academic fencing while preserving every clue and suspicion.",
               "Replace all nine original references to the anachronistic Andrea Doria, correct Rameses I chronology and Egyptological terminology, remove two uses of an ethnic slur, and repair four demonstrably wrong talker IDs.",
               "Apply text by exact noun, verb, condition, sequence, and talker tuple with tools/dialogue.py; preserve routing and reference metadata except where a manifest explicitly repairs an erroneous talker ID."
             ]
@@ -783,6 +784,26 @@
             {
               "label": "Act 1 Cabbie Cleanup",
               "target": "docs/dialogue/act1-cabbie.json"
+            },
+            {
+              "label": "Act 3 Rameses and Yvette",
+              "target": "docs/dialogue/act3-rameses-yvette.json"
+            },
+            {
+              "label": "Act 3 Rameses and Olympia",
+              "target": "docs/dialogue/act3-rameses-olympia.json"
+            },
+            {
+              "label": "Act 3 Heimlich and Olympia",
+              "target": "docs/dialogue/act3-heimlich-olympia-office.json"
+            },
+            {
+              "label": "Act 3 Ziggy Murder Scene",
+              "target": "docs/dialogue/act3-heimlich-ziggy-scene.json"
+            },
+            {
+              "label": "Act 3 Ernie Murder Scene",
+              "target": "docs/dialogue/act3-heimlich-ernie-scene.json"
             }
           ],
           "related": [

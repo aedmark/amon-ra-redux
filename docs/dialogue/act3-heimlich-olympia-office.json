@@ -1,0 +1,21 @@
+{
+  "module": 1600,
+  "character": "Wolf Heimlich and Olympia Myklos in Carrington's office",
+  "voice": "Mutually flirtatious and morbid, with Wolf's menace grounded in possessive authority rather than national caricature.",
+  "entries": [
+    {"tuple": [1, 38, 4, 1, 25], "text": "Oh, Wolfie, I'm so glad you agreed to meet me here."},
+    {"tuple": [1, 38, 4, 2, 18], "text": "You know I cannot resist you, Olympia."},
+    {"tuple": [1, 38, 4, 3, 25], "text": "Oh, Wolf, you're so strong. Lift me onto the desk, will you?"},
+    {"tuple": [1, 38, 4, 4, 18], "text": "Anything you ask, my dear. I would lie, steal, even kill for you."},
+    {"tuple": [1, 38, 4, 5, 25], "text": "Wolfie, you give me the chills. Please, frighten me some more."},
+    {"tuple": [1, 38, 4, 6, 18], "text": "Very well, if it pleases you."},
+    {"tuple": [1, 38, 4, 7, 25], "text": "More than anything. Who else will die tonight?"},
+    {"tuple": [1, 38, 4, 8, 18], "text": "The Countess. She prowls these galleries as though she owns them and ignores every rule I set. One day, her carelessness will be the death of her."},
+    {"tuple": [1, 38, 4, 9, 25], "text": "The Countess? Do you think she is in danger? Didn't she go home after the party?"},
+    {"tuple": [1, 38, 4, 10, 18], "text": "Someone admits her after hours. If I catch her trespassing again, there will be consequences."},
+    {"tuple": [1, 38, 4, 11, 25], "text": "Perhaps I'll be lucky this time. Perhaps I could discover her body!"},
+    {"tuple": [1, 38, 4, 12, 18], "text": "Perhaps. Accidents can be arranged."},
+    {"tuple": [1, 38, 4, 13, 25], "text": "That's one of the things I love about you, Wolfie. You have a wonderful sense of humor."},
+    {"tuple": [1, 38, 4, 14, 18], "text": "Thank you. Yours is equally... distinctive."}
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "module": 1600,
+  "character": "Rameses Najeer and Olympia Myklos",
+  "voice": "Rameses remains educated, formal, and anxious while Olympia stays cheerfully morbid; standard spelling replaces the written lisp without changing the Toledo sword, coercive tattoo reveal, or Egyptian sun-symbol clue.",
+  "entries": [
+    {"tuple": [1, 38, 3, 1, 27], "text": "Now, Dr. Myklos, what was it you wanted?"},
+    {"tuple": [1, 38, 3, 2, 25], "text": "I saw you admiring the swords on some of the armor displays, so I thought you might like to see this beautiful specimen of Mr. Heimlich's."},
+    {"tuple": [1, 38, 3, 3, 27], "text": "Oh! Thank you, I suppose. It is quite beautiful. Was it forged in Toledo?"},
+    {"tuple": [1, 38, 3, 4, 25], "text": "Yes, it was. Wol--Mr. Heimlich keeps it very sharp, as you can see. It's--STOP!"},
+    {"tuple": [1, 38, 3, 5, 27], "text": "What? What is it, Doctor?"},
+    {"tuple": [1, 38, 3, 6, 25], "text": "Mr. Heimlich has been having trouble with the mounting of that sword, Mr. Najeer. If you touched it, it would probably fall from the wall and kill you."},
+    {"tuple": [1, 38, 3, 7, 27], "text": "Good heavens... How can I thank you, Dr. Myklos? You seem to have saved my life."},
+    {"tuple": [1, 38, 3, 8, 25], "text": "Let me think. Do you have any scars or tattoos, Mr. Najeer?"},
+    {"tuple": [1, 38, 3, 9, 27], "text": "Well, yes. I suppose I do. A foolish indulgence from my impulsive youth."},
+    {"tuple": [1, 38, 3, 10, 25], "text": "Please let me see it, Mr. Najeer. It would make me very happy."},
+    {"tuple": [1, 38, 3, 11, 27], "text": "Dr. Myklos, this is rather embarrassing. I would prefer not to."},
+    {"tuple": [1, 38, 3, 12, 25], "text": "Are you forgetting that I just saved you from almost certain beheading?"},
+    {"tuple": [1, 38, 3, 13, 27], "text": "*Sigh* Very well. I will show you. One moment, please, while I remove my shoes."},
+    {"tuple": [1, 38, 3, 14, 25], "text": "Your shoes! How exciting!"},
+    {"tuple": [1, 38, 3, 15, 27], "text": "There. But look quickly. What if someone comes in?"},
+    {"tuple": [1, 38, 3, 16, 25], "text": "How beautiful! Egyptian sun symbols, yes?"},
+    {"tuple": [1, 38, 3, 17, 27], "text": "Yes. May I put my shoes back on now, please?"},
+    {"tuple": [1, 38, 3, 18, 25], "text": "Oh, if you must. I've never seen tattoos on the soles of someone's feet before. Did it hurt very much? Did you bleed?"},
+    {"tuple": [1, 38, 3, 19, 27], "text": "Yes. Quite a lot."}
+  ]
+}
