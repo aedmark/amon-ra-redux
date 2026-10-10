@@ -12,14 +12,15 @@ Security: [SECURITY.md](SECURITY.md). Changes: [CHANGELOG.md](CHANGELOG.md). Old
 
 ## Current state
 
-_Last updated: 2026-10-10, session 38: Act 4 dialogue closure._
+_Last updated: 2026-10-10, session 40: P5-00 source migration planning._
 
-**Where things stand, in one paragraph:** The reviewed period-dialogue pass is complete through Act 4. The compact Act 4 layer preserves Olympia's intentional fascination with Steve's dock scars and Steve's forged-painting discovery while polishing Laura and Steve's reunion. Heimlich's last mock-German murder/Dagger reactions, water-glass aside, and lantern gibberish now use his established controlled authority. Earlier cross-act work already covered Act 4's Yvette, O'Riley, Olympia, Rameses, and murder-reaction material. The effective-layer scan now isolates three written-lisp records in ending modules 710 and 715 for the Act 5 audit (D-031).
+**Where things stand, in one paragraph:** The reviewed period-dialogue pass is complete through Act 5 and the ending, with its message overrides, manifests, and synchronized documentation still awaiting the requested checkpoint commit. The maintainer supplied a much better decompilation for the exact DOS floppy v1.000 release. Comparison found the same 221-script inventory but reduced 40,878 anonymous selector references and four unknown-property placeholders to zero. P5-00 now has a staged migration runbook in `docs/SOURCE_MIGRATION_PLAN.md`; execute it before P5-01 so all future mechanics are built on readable sources without risking the verified loose patches.
 
 **Verified** (2026-10-10, Linux workspace)
 
 | Suite | Result |
 | --- | --- |
+| P2-08 Act 5 and ending closure | **Pass: 169 records across modules 710, 715, 730, 750, and 770 structurally compared; 64 intended text changes; all tuple/talker/reference metadata and untargeted text preserved** |
 | P2-08 Act 4 closure | **Pass: 255 records across modules 600, 1510, and 1889 structurally compared; 19 intended text changes; all tuple/talker/reference metadata and untargeted text preserved** |
 | P2-08 Act 3 final closure | **Pass: 626 records across 10 touched modules structurally compared; 155 reviewed records current and idempotent; all routing metadata and untargeted text preserved** |
 | P2-08 Act 3 O'Riley closure | **Pass: 91 records across modules 454 and 1550 structurally compared; 7 reviewed records current and idempotent; all routing metadata and untargeted text preserved** |
@@ -63,6 +64,7 @@ _Last updated: 2026-10-10, session 38: Act 4 dialogue closure._
 - **Act 2 Dialogue:** Rameses, Heimlich, Yvette, O'Riley, Ziggy, and Tut Smith use distinct, readable period characterization across character topics, the museum entry, all fourteen party conversations, the Carter murder scene, Pippin discovery, deferred reactions, and adjacent cleanup lines (P2-08, D-031).
 - **Act 3 Dialogue:** Rameses, Heimlich, Yvette, O'Riley, Ziggy, Ernie, the Countess, Tut Smith, and Olympia retain their approved voices through private conversations, intercom scenes, laboratory warnings, relationships, office interruptions, evidence confrontations, alibi interviews, grief interviews, and murder discoveries (P2-08, D-031).
 - **Act 4 Dialogue:** Laura, Steve, Olympia, and Heimlich retain their established character beats through the reunion, forged-painting discovery, murder/Dagger reactions, and lantern warning without residual mock-German spelling (P2-08, D-031).
+- **Act 5 Dialogue:** Rameses's Society confrontation and riddle, Tut's inquest testimony, Steve's already-clean escape dialogue, and O'Riley's jailhouse threat preserve the ending while removing the final phonetic caricatures (P2-08, D-031).
 - **Documentation Architecture:** `docs/ROADMAP.md`, `DECISIONS.md` (D-001 through D-031), `docs/manual/`, `docs/manual/manual.html`, and `docs/PLAYTEST_CHECKLIST.md` synchronized.
 
 **Not verified**
@@ -72,21 +74,46 @@ _Last updated: 2026-10-10, session 38: Act 4 dialogue closure._
 
 **Gotchas for the next session**
 
+- Commit and push the pending Act 5 dialogue closure and this migration plan before changing `LB2/src/`.
+- Follow `docs/SOURCE_MIGRATION_PLAN.md` for P5-00. Do not overlay isolated upstream `.sc` or `.sco` files onto the current baseline.
+- The pinned upstream archive showed no obvious license/notice file; document attribution and resolve redistribution terms before pushing imported sources.
 - Keep loose patch files in `LB2/` strictly uppercase (`.SCR`, `.HEP`, `.MSG`).
 - Single-script compilation only: use `python3 tools/compile.py <script>`. Never use Compile All or resource rebuild.
 - If a script disappears from SCI Companion's list when patch files are deleted, restore files and restart with `wineserver -k`.
 
 ## Next steps (in order)
 
-1. Begin the Act 5/ending dialogue inventory with Rameses's three already identified written-lisp records in modules 710 and 715, retaining maintainer review for any material characterization change.
-2. Resume the clean DOSBox-X playthrough and note any dialogue that reads poorly in context.
-3. Triage and resolve or schedule every remaining `PLAY-nnn` finding, then begin P5-01 after the playtest gate closes.
+1. At the 8:01 PM usage reset, run the preflight in `docs/SOURCE_MIGRATION_PLAN.md`, verify the pending Act 5 closure, then commit and push the clean checkpoint.
+2. Execute P5-00 on an isolated migration branch and temporary game copy; preserve all verified loose binaries until each replayed source passes compilation and DOSBox-X testing.
+3. Resume the clean DOSBox-X playthrough, triage every remaining `PLAY-nnn` finding, and begin P5-01 only after both gates close.
 
 ## Open questions for maintainers
 
 None currently open. Q-001 and Q-002 have been resolved by D-007, D-017, and D-018.
 
 ## Session log
+
+### Session 39: 2026-10-10: Act 5 and Ending Dialogue Closure
+
+**Contributor:** Codex and maintainer
+
+**Goal:** Complete the period-dialogue audit through the Society of Amon Ra confrontation, escape, inquest, and jail epilogue without changing the ending structure.
+
+**Done:**
+- Reworked every Rameses and adjacent Laura line in modules 710 and 715, removing the written lisp while preserving capture, threat, sacrifice failure, both riddles, successful escape, and the alternate Dagger death.
+- Made Rameses acknowledge Laura's historically correct point that ancient Egyptians did not practice human sacrifice, defining the dangerous rite as the modern society's invention rather than authentic Egyptology.
+- Reworked Tut Smith's inquest testimony as a clear eyewitness account and dignified demand for justice, retaining restrained faith in Amon Ra without camel, sand, or mystical-revenge cliches.
+- Reworked O'Riley's six-line jailhouse threat in his established vindictive voice without stage-Irish spelling.
+- Corrected `herpetology` and `hieroglyphs` in the escape tunnel while preserving the authored danger-comedy; left Steve's already-clean escape dialogue and the deliberately absurd mummy-storage exhibit jokes intact.
+- Scanned the complete effective message layer and found zero remaining faux-German, faux-French, stage-Irish, or written-lisp targets.
+
+**Changed:** `LB2/710.MSG`, `LB2/715.MSG`, `LB2/730.MSG`, `LB2/750.MSG`, `LB2/770.MSG`, five manifests under `docs/dialogue/`, and synchronized roadmap, decision, changelog, handoff, and manual documentation.
+
+**Decisions:** D-031.
+
+**Verified:** All 169 records across the five touched modules structurally compared; 64 intended text changes; every tuple/talker/reference field and untargeted line preserved; all manifests apply idempotently; complete effective-layer target scan clear.
+
+**Next session should start with:** Review the Act 5 wording in context during the clean DOSBox-X playthrough, then return to playtest triage and the P5-01 entry gate.
 
 ### Session 38: 2026-10-10: Act 4 Dialogue Closure
 
@@ -280,27 +307,3 @@ None currently open. Q-001 and Q-002 have been resolved by D-007, D-017, and D-0
 **Verified:** All 172 message tuple/talker records retain identical metadata; exactly 111 Yvette, two Laura, and one narrator texts changed; all 13 explicit later reaction records remain outside the manifest; documentation/manual validation and build pass.
 
 **Next session should start with:** Maintainer review of Yvette, followed by O'Riley only after approval.
-
-### Session 29: 2026-10-10: Act 2 Rameses and Heimlich Dialogue Passes
-
-**Contributor:** Codex and maintainer
-
-**Goal:** Give Rameses Najeer and Wolf Heimlich readable, period-appropriate individual voices without changing their clues, relationships, or dramatic functions.
-
-**Done:**
-- Audited module 1891 and separated 94 routine records from 18 explicit later murder-reaction records.
-- Replaced the written lisp with precise standard spelling and characterized Rameses as a reserved accountant, devoted family man, and informed advocate for Egyptian cultural repatriation.
-- Replaced recurring cobra, pyramid, laundry, and “wilds of Egypt” cliches with character-based humor while preserving his established interests and suspicions.
-- Corrected the Dr. Smith topic response from “Mister Najeer” to “Dr. Smith.”
-- Added `docs/dialogue/act2-rameses.json` and applied it idempotently to `LB2/1891.MSG`.
-- Reworked Heimlich's 109 routine records with standard spelling and a terse, authoritarian security voice while preserving his militance, Heidelberg duelling scars, museum obsession, paranoia, and grief over his mother's stolen paintings.
-- Replaced constant execution threats and German-superiority gags with credible ejection, arrest, restraint, and implied-menace language; retained the goose-step animation as the upper limit of the caricature.
-- Removed the anachronistic “Heimlich Death Maneuver” reference and added `docs/dialogue/act2-heimlich.json`, applied idempotently to `LB2/1889.MSG`.
-
-**Changed:** `LB2/1889.MSG`, `LB2/1891.MSG`, `docs/dialogue/act2-heimlich.json`, `docs/dialogue/act2-rameses.json`, and synchronized roadmap, decision, handoff, and manual documentation.
-
-**Decisions:** D-031.
-
-**Verified:** Modules 1889 and 1891 retain identical message tuple/talker metadata; exactly 109 Heimlich and 94 Rameses approved-scope texts changed; all 4 Heimlich and 18 Rameses later reaction records remain outside the manifests; no targeted caricature spelling remains in either routine scope; documentation/manual validation and build pass; DOSBox-X original-interpreter startup smoke passes with both loose overrides active.
-
-**Next session should start with:** Maintainer review of Heimlich, followed by Yvette only after approval.

@@ -2,6 +2,30 @@
 
 Archived verbatim from `docs/HANDOFF.md` when its live session log exceeded ten entries.
 
+### Session 29: 2026-10-10: Act 2 Rameses and Heimlich Dialogue Passes
+
+**Contributor:** Codex and maintainer
+
+**Goal:** Give Rameses Najeer and Wolf Heimlich readable, period-appropriate individual voices without changing their clues, relationships, or dramatic functions.
+
+**Done:**
+- Audited module 1891 and separated 94 routine records from 18 explicit later murder-reaction records.
+- Replaced the written lisp with precise standard spelling and characterized Rameses as a reserved accountant, devoted family man, and informed advocate for Egyptian cultural repatriation.
+- Replaced recurring cobra, pyramid, laundry, and “wilds of Egypt” cliches with character-based humor while preserving his established interests and suspicions.
+- Corrected the Dr. Smith topic response from “Mister Najeer” to “Dr. Smith.”
+- Added `docs/dialogue/act2-rameses.json` and applied it idempotently to `LB2/1891.MSG`.
+- Reworked Heimlich's 109 routine records with standard spelling and a terse, authoritarian security voice while preserving his militance, Heidelberg duelling scars, museum obsession, paranoia, and grief over his mother's stolen paintings.
+- Replaced constant execution threats and German-superiority gags with credible ejection, arrest, restraint, and implied-menace language; retained the goose-step animation as the upper limit of the caricature.
+- Removed the anachronistic “Heimlich Death Maneuver” reference and added `docs/dialogue/act2-heimlich.json`, applied idempotently to `LB2/1889.MSG`.
+
+**Changed:** `LB2/1889.MSG`, `LB2/1891.MSG`, `docs/dialogue/act2-heimlich.json`, `docs/dialogue/act2-rameses.json`, and synchronized roadmap, decision, handoff, and manual documentation.
+
+**Decisions:** D-031.
+
+**Verified:** Modules 1889 and 1891 retain identical message tuple/talker metadata; exactly 109 Heimlich and 94 Rameses approved-scope texts changed; all 4 Heimlich and 18 Rameses later reaction records remain outside the manifests; no targeted caricature spelling remains in either routine scope; documentation/manual validation and build pass; DOSBox-X original-interpreter startup smoke passes with both loose overrides active.
+
+**Next session should start with:** Maintainer review of Heimlich, followed by Yvette only after approval.
+
 ### Session 28: 2026-10-10: Act 1 Period Dialogue De-Caricature Pass
 
 **Contributor:** Codex and maintainer

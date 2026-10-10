@@ -1,0 +1,48 @@
+{
+  "module": 715,
+  "character": "Rameses Najeer's sacrifice, riddle, escape, and Dagger confrontation",
+  "voice": "Educated, exact, and ominously ceremonial without a written lisp; Laura's correct objection separates ancient Egyptian history from the modern society's invented rite.",
+  "entries": [
+    {"tuple": [1, 0, 0, 1, 2], "text": "You don't really intend to kill me, do you?"},
+    {"tuple": [1, 0, 0, 2, 27], "text": "Of course not."},
+    {"tuple": [1, 0, 0, 3, 2], "text": "Whew! What a relief."},
+    {"tuple": [1, 0, 0, 4, 27], "text": "Kill is such an ugly word. You are to be sacrificed to Amon Ra."},
+    {"tuple": [1, 0, 0, 5, 2], "text": "Can we discuss this?"},
+    {"tuple": [1, 0, 0, 6, 27], "text": "There is nothing to discuss. You should be honored to serve so distinguished a purpose."},
+    {"tuple": [1, 0, 0, 7, 27], "text": "In our society's rites, the chosen once fought for such a privilege."},
+    {"tuple": [1, 0, 0, 8, 2], "text": "Wait. Ancient Egyptians did not practice human sacrifice!"},
+    {"tuple": [1, 0, 0, 9, 27], "text": "Quite right. You know something of ancient Egyptian history, Miss Bow."},
+    {"tuple": [1, 0, 0, 10, 2], "text": "I've learned a few things."},
+    {"tuple": [1, 0, 0, 11, 27], "text": "Perhaps we should test the extent of that knowledge."},
+    {"tuple": [1, 0, 0, 12, 2], "text": "Do I have any other choice?"},
+    {"tuple": [1, 0, 0, 13, 27], "text": "You may submit to a test or to the ceremony. The choice is yours."},
+    {"tuple": [1, 0, 0, 14, 2], "text": "I'm beginning to like this idea. What sort of test?"},
+    {"tuple": [1, 0, 0, 15, 27], "text": "Amon Ra may yet intervene on your behalf. Our rules require us to spare anyone who can answer his riddle."},
+    {"tuple": [1, 0, 0, 16, 2], "text": "Wonderful."},
+    {"tuple": [1, 0, 0, 17, 27], "text": "You must answer the riddle in hieroglyphs."},
+    {"tuple": [1, 0, 0, 18, 2], "text": "I was afraid it would be something like that. All right, what's the riddle?"},
+    {"tuple": [1, 0, 0, 19, 27], "text": "It has two parts."},
+    {"tuple": [1, 0, 0, 20, 27], "text": "What is the room you leave without entering?"},
+
+    {"tuple": [1, 0, 1, 1, 27], "text": "I regret that you are wrong. It seems Amon Ra has chosen you for the ceremony."},
+    {"tuple": [1, 0, 1, 2, 99], "text": "No! Wait! Mmmph! Mmmph!"},
+
+    {"tuple": [1, 0, 2, 1, 27], "text": "Correct. Now the second riddle: What is the room you enter without leaving?"},
+
+    {"tuple": [1, 0, 3, 1, 27], "text": "Most impressive. No one before you has solved it. Amon Ra evidently commands us to spare you. Will you swear never to reveal this place?"},
+    {"tuple": [1, 0, 3, 2, 2], "text": "Of course!"},
+    {"tuple": [1, 0, 3, 3, 27], "text": "Then you may go. May Amon Ra guide your steps."},
+    {"tuple": [1, 0, 3, 4, 2], "text": "Thank you! Now I only have to outrun the person chasing me."},
+    {"tuple": [1, 0, 3, 5, 27], "text": "Who is pursuing you? Do you believe they will find this chamber?"},
+    {"tuple": [1, 0, 3, 6, 2], "text": "I'm not sure who it is, but I believe it's the person who stole the Dagger of Amon Ra. And I'm certain they'll find their way in here."},
+    {"tuple": [1, 0, 3, 7, 27], "text": "If that is true, they will not leave this chamber alive. Take the hidden passage behind the altar. Go--and remember your oath!"},
+
+    {"tuple": [2, 22, 0, 1, 2], "text": "Does this look familiar?"},
+    {"tuple": [2, 22, 0, 2, 27], "text": "It is... the Dagger of Amon Ra!"},
+    {"tuple": [2, 22, 0, 3, 2], "text": "That's right. I--"},
+    {"tuple": [2, 22, 0, 4, 27], "text": "You are the thief! You will answer to Amon Ra!"},
+    {"tuple": [2, 22, 0, 5, 2], "text": "Wait! You don't understand! I--"},
+    {"tuple": [2, 22, 0, 6, 27], "text": "Your death will be slow and painful, blasphemer!"},
+    {"tuple": [2, 22, 0, 7, 2], "text": "Mmmph! Mmmph!"}
+  ]
+}

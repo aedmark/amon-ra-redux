@@ -13,6 +13,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - Verification harness integrating Wine-based SCI Companion and DOSBox-X.
 
 ### Changed
+- Completed the Act 5 and ending dialogue audit: removed Rameses's written lisp from the full Society of Amon Ra confrontation, distinguished its invented sacrifice rite from ancient Egyptian history, restored Tut Smith's dignified inquest testimony, and gave O'Riley a readable final jailhouse threat (P2-08, D-031).
 - Completed the compact Act 4 dialogue audit: polished Laura and Steve's reunion without removing Olympia's intentional interest in Steve's dock scars or Steve's forged-painting discovery, and replaced Heimlich's last mock-German exclamations and lantern gibberish with his established controlled authority (P2-08, D-031).
 - Completed the Act 3 dialogue audit with Ziggy and Ernie's intercom dispute, the Countess's full criminal confrontation, Tut Smith's alibi interview, Olympia's remaining snake-oil and private-office scenes, and Ernie's incidental ejections; retained the Countess's camp, Olympia's morbidity, Steve's intentional scars continuity, and every clue and route while removing residual phonetic caricature and excessive typographic shouting (P2-08, D-031).
 - Closed Detective O'Riley's reviewed Act 3 dialogue with a brazen “police business” cover when Laura catches him with Yvette, and cleaned his missed Pippin murder-scene interrogation without changing the discovery sequence (P2-08, D-031).

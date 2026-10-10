@@ -1,0 +1,9 @@
+{
+  "module": 730,
+  "character": "Act 5 tunnel terminology",
+  "voice": "Preserve the narrator's danger-comedy while correcting two terminology errors.",
+  "entries": [
+    {"tuple": [1, 1, 11, 1, 99], "text": "This is a tunnel with hieroglyphs carved into the walls."},
+    {"tuple": [7, 1, 2, 1, 99], "text": "If your herpetology does not fail you, you are fairly certain these are king cobras!"}
+  ]
+}

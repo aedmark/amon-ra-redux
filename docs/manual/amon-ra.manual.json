@@ -658,7 +658,7 @@
             "character",
             "p2"
           ],
-          "what": "Rewrites culturally stereotyped dialogue throughout Acts 1 and 2 and continues the same reviewed voices through Acts 3 and 4 without erasing identity, clues, jokes, period attitudes, or characterization. The pass covers Lo Fat, Sgt. O'Flaherty, Detective O'Riley, Ziggy, Rameses Najeer, Wolf Heimlich, Yvette Delacroix, Dr. Ptahsheptut Smith, the sandwich vendor, and the cabbie, plus room-specific conversations, murder reactions, and adjacent lines that repeated the same caricatures.",
+          "what": "Rewrites culturally stereotyped dialogue throughout the full game without erasing identity, clues, jokes, period attitudes, or characterization. The pass covers Lo Fat, Sgt. O'Flaherty, Detective O'Riley, Ziggy, Rameses Najeer, Wolf Heimlich, Yvette Delacroix, Dr. Ptahsheptut Smith, the sandwich vendor, and the cabbie, plus room-specific conversations, murder reactions, ending testimony, and adjacent lines that repeated the same caricatures.",
           "how": {
             "lead": "Uses reviewed tuple-addressed manifests and loose message overrides:",
             "points": [
@@ -679,6 +679,7 @@
               "Close O'Riley's reviewed Act 3 material with readable corrupt swagger when Laura catches him with Yvette, and clean the missed Pippin discovery interrogation without changing its accusation, witness question, or confinement order.",
               "Complete Act 3 with Ziggy and Ernie's intercom dispute, the Countess's evidence confrontations, Tut Smith's alibi interview, Olympia's snake-oil and private-office scenes, and Ernie's incidental ejections; preserve the Countess's camp, Olympia's morbidity, Steve's scars continuity, and every clue-bearing admission.",
               "Complete Act 4's compact dialogue layer by polishing Laura and Steve's reunion while preserving Olympia's intentional fascination with Steve's dock scars and Steve's forged-painting discovery; replace Heimlich's remaining mock-German reactions and lantern warning with his established controlled authority.",
+              "Complete Act 5 and the ending by giving Rameses precise, dangerous speech throughout the Society of Amon Ra encounter, explicitly distinguishing the society's invented sacrifice rite from ancient Egyptian history, restoring Tut's dignity as O'Riley's eyewitness, and removing stage-Irish spelling from O'Riley's jailhouse threat.",
               "Replace all nine original references to the anachronistic Andrea Doria, correct Rameses I chronology and Egyptological terminology, remove two uses of an ethnic slur, and repair four demonstrably wrong talker IDs.",
               "Apply text by exact noun, verb, condition, sequence, and talker tuple with tools/dialogue.py; preserve routing and reference metadata except where a manifest explicitly repairs an erroneous talker ID."
             ]
@@ -832,6 +833,22 @@
             {
               "label": "Act 4 Heimlich Lantern Warning",
               "target": "docs/dialogue/act4-heimlich-lantern.json"
+            },
+            {
+              "label": "Act 5 Rameses Cult Discovery",
+              "target": "docs/dialogue/act5-rameses-cult-discovery.json"
+            },
+            {
+              "label": "Act 5 Rameses Riddle",
+              "target": "docs/dialogue/act5-rameses-riddle.json"
+            },
+            {
+              "label": "Act 5 Tut Inquest Testimony",
+              "target": "docs/dialogue/act5-tut-inquest.json"
+            },
+            {
+              "label": "Act 5 O'Riley Jailhouse Threat",
+              "target": "docs/dialogue/act5-oriley-jail.json"
             }
           ],
           "related": [

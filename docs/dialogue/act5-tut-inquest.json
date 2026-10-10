@@ -1,0 +1,14 @@
+{
+  "module": 750,
+  "character": "Dr. Ptahsheptut Smith's inquest testimony",
+  "voice": "A dignified and forceful eyewitness who demands justice for the dead, retaining restrained religious conviction without pulp-Egyptian insults or desert cliches.",
+  "entries": [
+    {"tuple": [7, 0, 0, 1, 2], "text": "I have one final piece of evidence to present, Mr. Coroner. An eyewitness would only come forward if I established my case against Mr. O'Riley. Now that I have, allow me to introduce Dr. Ptahsheptut Smith of the Cairo Museum."},
+    {"tuple": [7, 0, 9, 1, 21], "text": "Dr. Smith, your testimony will be protected."},
+    {"tuple": [7, 0, 9, 2, 9], "text": "Thank you. I was in the Egyptian ceremonial chamber beneath the museum when Detective O'Riley killed two members of our society. I saw him shoot them without mercy when they tried to stop him from pursuing Miss Bow."},
+    {"tuple": [7, 0, 9, 3, 9], "text": "We delayed him, but we could not stop him. His hood slipped back as he fired, and I saw his face clearly. That man must not be allowed to escape justice."},
+    {"tuple": [7, 0, 9, 4, 21], "text": "Will you testify in court to what you witnessed, Dr. Smith?"},
+    {"tuple": [7, 0, 9, 5, 9], "text": "I will. My dead companions deserve justice. O'Riley may answer to your court in this life; Amon Ra may judge what remains."},
+    {"tuple": [7, 0, 9, 6, 21], "text": "The disposition of his spirit is beyond my office, Dr. Smith, but your testimony will help us answer for the dead. Thank you for coming forward."}
+  ]
+}

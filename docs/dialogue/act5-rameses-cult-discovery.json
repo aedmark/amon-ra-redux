@@ -1,0 +1,22 @@
+{
+  "module": 710,
+  "character": "Rameses Najeer confronts Laura in the hidden Society of Amon Ra chamber",
+  "voice": "Precise, grave, and formally threatening without a written lisp; the society is presented as a modern secret order rather than authentic ancient Egyptian practice.",
+  "entries": [
+    {"tuple": [1, 0, 0, 1, 99], "text": "Ominous chanting echoes through the chamber as Laura stumbles upon a secret ceremony..."},
+    {"tuple": [1, 0, 0, 2, 2], "text": "Oh, my goodness!"},
+    {"tuple": [1, 0, 0, 3, 2], "text": "Ah... excuse me. I was looking for the ladies' lounge?"},
+
+    {"tuple": [1, 0, 1, 1, 27], "text": "You are coming with us, Miss Bow."},
+    {"tuple": [1, 0, 1, 2, 2], "text": "Um... I think you're making a mistake."},
+    {"tuple": [1, 0, 1, 3, 27], "text": "You have seen too much. We cannot allow you to leave."},
+    {"tuple": [1, 0, 1, 4, 2], "text": "Not to worry! I won't remember this room, or you, or anything at all. Really! I have a terrible memory. I can scarcely remember my own name."},
+    {"tuple": [1, 0, 1, 5, 27], "text": "I regret that you found us. The Society of Amon Ra must remain secret. Too many powerful people have too much at stake."},
+    {"tuple": [1, 0, 1, 6, 2], "text": "A secret society devoted to Amon Ra? In the museum basement?"},
+    {"tuple": [1, 0, 1, 7, 27], "text": "This chamber was forgotten when the original museum was rebuilt. We are safe here, provided no outsider discovers us."},
+    {"tuple": [1, 0, 1, 8, 2], "text": "My lips are sealed. If you want to chant and hold little meetings down here, that's your business."},
+    {"tuple": [1, 0, 1, 9, 27], "text": "You cannot be trusted, Miss Bow. You are a newspaper reporter. Release you, and we may decorate tomorrow's front page."},
+    {"tuple": [1, 0, 1, 10, 2], "text": "But people will miss me! They'll search the museum!"},
+    {"tuple": [1, 0, 1, 11, 27], "text": "The police will never find this chamber--or your body."}
+  ]
+}

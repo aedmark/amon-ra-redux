@@ -14,6 +14,7 @@ that owns the change.
 | `docs/DECISIONS.md` | Why was a durable architectural choice made? | An architectural choice is made or superseded; questions asked. |
 | `docs/TESTING.md` | How is behavior verified and what remains unproved? | Test commands, test cases, or DOSBox-X recipes change. |
 | `docs/PLAYTEST_CHECKLIST.md` | What should the maintainer verify during the pre–Phase 5 full-game run, and what was observed? | A playthrough checkpoint passes, a quirk is found, or a finding is triaged. |
+| `docs/SOURCE_MIGRATION_PLAN.md` | How will P5-00 replace the decompilation baseline without losing Redux fixes? | The pinned source, replay inventory, migration sequence, or acceptance evidence changes. |
 | `docs/SECURITY.md` | What assets are sensitive and how are vulnerabilities handled? | Trust boundaries, asset policies, or disclosure paths change. |
 | `docs/CONTRIBUTING.md` | How does a contribution move from idea to patch? | Development workflow, branching, or pull-request rules change. |
 | `docs/CHANGELOG.md` | What changed for players and users? | A playable release, patch build, or feature lands. |

@@ -1,0 +1,13 @@
+{
+  "module": 770,
+  "character": "Detective O'Riley's jailhouse threat",
+  "voice": "Bitter, vindictive, and theatrical without stage-Irish spelling.",
+  "entries": [
+    {"tuple": [1, 0, 0, 1, 19], "text": "This is all that meddling reporter's fault..."},
+    {"tuple": [1, 0, 0, 2, 19], "text": "Laura Bow. Damn her."},
+    {"tuple": [1, 0, 0, 3, 19], "text": "She thinks she can turn me in and walk away?"},
+    {"tuple": [1, 0, 0, 4, 19], "text": "She'll learn otherwise."},
+    {"tuple": [1, 0, 0, 5, 19], "text": "Do you hear me, Laura Bow? You'll pay for this..."},
+    {"tuple": [1, 0, 0, 6, 19], "text": "If it's the last thing I do!"}
+  ]
+}
