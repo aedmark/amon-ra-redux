@@ -78,7 +78,7 @@
     {"tuple": [1, 39, 0, 1, 18], "text": "I have no use for that."},
     {"tuple": [1, 43, 0, 1, 18], "text": "What do you take me for, some sort of firebug?"},
     {"tuple": [1, 27, 0, 1, 18], "text": "No, thank you. I never eat while on duty."},
-    {"tuple": [1, 22, 0, 1, 18], "text": "Mein Gott--that is no replica. It is the real Dagger. Take it to Detective O'Riley at once, Miss Bow."},
+    {"tuple": [1, 22, 0, 1, 18], "text": "That is no replica. It is the genuine Dagger. Take it to Detective O'Riley at once, Miss Bow."},
     {"tuple": [1, 4, 0, 1, 18], "text": "Hands off, Miss Bow. My person is not one of the exhibits."},
     {"tuple": [1, 28, 0, 1, 18], "text": "If this is a bribe or an improper proposition, I am not interested."},
     {"tuple": [1, 41, 0, 1, 18], "text": "No, thank you. Detective O'Riley may live on grapes; I do not."},
@@ -95,7 +95,7 @@
     {"tuple": [1, 2, 0, 2, 18], "text": "Good evening, Miss Bow. I trust you will not be staying long."},
     {"tuple": [1, 2, 0, 4, 18], "text": "Do not linger in the halls, and do not touch the exhibits. I will know if anything has been disturbed."},
     {"tuple": [1, 35, 0, 1, 18], "text": "What am I supposed to do with that? I have plenty of hair."},
-    {"tuple": [1, 38, 0, 1, 18], "text": "I have my own water glass, danke."},
+    {"tuple": [1, 38, 0, 1, 18], "text": "I have my own water glass, thank you."},
     {"tuple": [1, 34, 0, 1, 18], "text": "Give it to Detective O'Riley. I do not want it."},
     {"tuple": [1, 21, 0, 1, 18], "text": "Be careful with those. You might damage one of the exhibits."},
     {"tuple": [1, 44, 0, 1, 18], "text": "I have my own supply, thank you."},
@@ -114,7 +114,7 @@
     {"tuple": [3, 0, 92, 1, 18], "text": "You are in my office, Miss Bow. If one object has been disturbed, I will know. Out."},
     {"tuple": [1, 6, 69, 1, 18], "text": "Carrington was a good man, and I will miss him. When I find the coward who impaled him on that porcupine, they will answer to me."},
     {"tuple": [1, 6, 71, 1, 18], "text": "Ernie was a decent man. When I find the coward who drowned him, I will see that justice is done."},
-    {"tuple": [1, 6, 73, 1, 18], "text": "Fraulein Delacroix was charming and possessed many admirable qualities. Her killer will learn what it means to face me."},
+    {"tuple": [1, 6, 73, 1, 18], "text": "Miss Delacroix was charming and possessed many admirable qualities. Her killer will answer to me."},
     {"tuple": [1, 6, 74, 1, 18], "text": "That irritating little civilian reminded me of a yapping dog, always following Dr. Carrington. I never trusted him. I suspected he was an art thief--and now someone has silenced him."}
   ]
 }

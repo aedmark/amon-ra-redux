@@ -1,0 +1,24 @@
+{
+  "module": 1510,
+  "character": "Laura, Steve, and Olympia's Act 4 reunion",
+  "voice": "Lightly flirtatious and natural, preserving Olympia's fascination with Steve's dock scars and Steve's discovery of the forged paintings.",
+  "entries": [
+    {"tuple": [1, 0, 1, 1, 2], "text": "Steve... I mean, Mr. Dorian!"},
+    {"tuple": [1, 0, 1, 2, 12], "text": "Miss Bow!"},
+    {"tuple": [1, 0, 1, 3, 25], "text": "Thank you for showing me your scars, Steve. They are quite remarkable!"},
+
+    {"tuple": [1, 0, 3, 1, 2], "text": "I haven't seen you in some time, Mr. Dorian."},
+    {"tuple": [1, 0, 3, 2, 12], "text": "Well, uh... I keep getting carried off."},
+    {"tuple": [1, 0, 3, 3, 2], "text": "Carried off?"},
+    {"tuple": [1, 0, 3, 4, 12], "text": "First Miss Delacroix took me away from the party to show me the Old Masters Gallery. Then Dr. Myklos learned I'd worked on the docks and insisted on seeing my scars. She's an unusual lady."},
+    {"tuple": [1, 0, 3, 5, 2], "text": "You don't seem especially troubled by all the attention."},
+    {"tuple": [1, 0, 3, 6, 12], "text": "I'd rather have spent the time with you."},
+    {"tuple": [1, 0, 3, 7, 2], "text": "I should think a big, strong man like you could escape if he really wanted to."},
+    {"tuple": [1, 0, 3, 8, 12], "text": "I hate to be rude, and I did find you in the end."},
+    {"tuple": [1, 0, 3, 9, 2], "text": "Have you heard about the murders?"},
+    {"tuple": [1, 0, 3, 10, 12], "text": "The murders? Yes, someone mentioned them."},
+    {"tuple": [1, 0, 3, 11, 2], "text": "You seem distracted."},
+    {"tuple": [1, 0, 3, 12, 12], "text": "I've got news for you, too. I think some of the paintings in the Old Masters Gallery are forgeries. The paint is still wet on some of them!"},
+    {"tuple": [1, 0, 3, 13, 2], "text": "Yes, but I hardly think that--"}
+  ]
+}

@@ -12,14 +12,15 @@ Security: [SECURITY.md](SECURITY.md). Changes: [CHANGELOG.md](CHANGELOG.md). Old
 
 ## Current state
 
-_Last updated: 2026-10-10, session 37: Act 3 dialogue closure._
+_Last updated: 2026-10-10, session 38: Act 4 dialogue closure._
 
-**Where things stand, in one paragraph:** The reviewed period-dialogue pass is complete through Act 3. Rameses, Heimlich, Yvette, O'Riley, Ziggy, Ernie, Countess Waldorf-Carlton, Tut Smith, and Olympia retain distinct approved voices across every substantive Act 3 scene. Twenty-four Act 3/closure tuple manifests govern 400 reviewed records across fourteen message modules while preserving every tuple, talker, reference field, untargeted line, clue, and scheduler route (D-031). The effective-layer closure scan found no remaining target phonetic caricature in Act 3; two Heimlich lines in later material are explicitly queued for the Act 4 audit.
+**Where things stand, in one paragraph:** The reviewed period-dialogue pass is complete through Act 4. The compact Act 4 layer preserves Olympia's intentional fascination with Steve's dock scars and Steve's forged-painting discovery while polishing Laura and Steve's reunion. Heimlich's last mock-German murder/Dagger reactions, water-glass aside, and lantern gibberish now use his established controlled authority. Earlier cross-act work already covered Act 4's Yvette, O'Riley, Olympia, Rameses, and murder-reaction material. The effective-layer scan now isolates three written-lisp records in ending modules 710 and 715 for the Act 5 audit (D-031).
 
 **Verified** (2026-10-10, Linux workspace)
 
 | Suite | Result |
 | --- | --- |
+| P2-08 Act 4 closure | **Pass: 255 records across modules 600, 1510, and 1889 structurally compared; 19 intended text changes; all tuple/talker/reference metadata and untargeted text preserved** |
 | P2-08 Act 3 final closure | **Pass: 626 records across 10 touched modules structurally compared; 155 reviewed records current and idempotent; all routing metadata and untargeted text preserved** |
 | P2-08 Act 3 O'Riley closure | **Pass: 91 records across modules 454 and 1550 structurally compared; 7 reviewed records current and idempotent; all routing metadata and untargeted text preserved** |
 | P2-08 Act 3 Yvette | **Pass: 342 records across modules 562, 610, 640, 1510, 1550, and 1560 structurally compared; 130 reviewed scene records current; all routing metadata and untargeted text preserved** |
@@ -61,6 +62,7 @@ _Last updated: 2026-10-10, session 37: Act 3 dialogue closure._
 - **Act 1 Dialogue:** Lo Fat, Sgt. O'Flaherty, O'Riley, Ziggy, the sandwich vendor, and the cabbie use distinct, readable period voices without altering dialogue logic (P2-08, D-031).
 - **Act 2 Dialogue:** Rameses, Heimlich, Yvette, O'Riley, Ziggy, and Tut Smith use distinct, readable period characterization across character topics, the museum entry, all fourteen party conversations, the Carter murder scene, Pippin discovery, deferred reactions, and adjacent cleanup lines (P2-08, D-031).
 - **Act 3 Dialogue:** Rameses, Heimlich, Yvette, O'Riley, Ziggy, Ernie, the Countess, Tut Smith, and Olympia retain their approved voices through private conversations, intercom scenes, laboratory warnings, relationships, office interruptions, evidence confrontations, alibi interviews, grief interviews, and murder discoveries (P2-08, D-031).
+- **Act 4 Dialogue:** Laura, Steve, Olympia, and Heimlich retain their established character beats through the reunion, forged-painting discovery, murder/Dagger reactions, and lantern warning without residual mock-German spelling (P2-08, D-031).
 - **Documentation Architecture:** `docs/ROADMAP.md`, `DECISIONS.md` (D-001 through D-031), `docs/manual/`, `docs/manual/manual.html`, and `docs/PLAYTEST_CHECKLIST.md` synchronized.
 
 **Not verified**
@@ -76,7 +78,7 @@ _Last updated: 2026-10-10, session 37: Act 3 dialogue closure._
 
 ## Next steps (in order)
 
-1. Begin the Act 4 dialogue inventory with the two already identified Heimlich stragglers in module 1889, retaining maintainer review for any material characterization change.
+1. Begin the Act 5/ending dialogue inventory with Rameses's three already identified written-lisp records in modules 710 and 715, retaining maintainer review for any material characterization change.
 2. Resume the clean DOSBox-X playthrough and note any dialogue that reads poorly in context.
 3. Triage and resolve or schedule every remaining `PLAY-nnn` finding, then begin P5-01 after the playtest gate closes.
 
@@ -85,6 +87,27 @@ _Last updated: 2026-10-10, session 37: Act 3 dialogue closure._
 None currently open. Q-001 and Q-002 have been resolved by D-007, D-017, and D-018.
 
 ## Session log
+
+### Session 38: 2026-10-10: Act 4 Dialogue Closure
+
+**Contributor:** Codex and maintainer
+
+**Goal:** Carry the approved character voices through Act 4 and distinguish its actual phase-gated dialogue from shared museum and ending resources.
+
+**Done:**
+- Mapped Act 4 through its `global123 == 4` scene gates instead of treating every late-numbered message module as Act 4 content.
+- Confirmed that the earlier cross-act passes already cover the substantive Yvette, O'Riley, Olympia, Rameses, and murder-reaction dialogue used during Act 4.
+- Lightly polished Laura and Steve's reunion while preserving Olympia's fascination with Steve's dock scars, the flirtation, and Steve's discovery that paintings in the Old Masters Gallery are wet forgeries.
+- Replaced Heimlich's last mock-German Yvette-murder and Dagger reactions, his water-glass aside, and the room-600 lantern gibberish with his established severe, controlled voice.
+- Scanned the complete effective message layer and isolated the remaining written-lisp hits to three Rameses records in ending modules 710 and 715, outside Act 4.
+
+**Changed:** `LB2/600.MSG`, `LB2/1510.MSG`, `LB2/1889.MSG`, two Act 4 manifests under `docs/dialogue/`, the existing Heimlich manifest, and synchronized roadmap, decision, changelog, handoff, and manual documentation.
+
+**Decisions:** D-031.
+
+**Verified:** All 255 records across the three touched modules structurally compared; 19 intended text changes; every tuple/talker/reference field and untargeted line preserved; all relevant manifests apply idempotently; effective-layer caricature scan clear through Act 4.
+
+**Next session should start with:** Begin Act 5/ending review with Rameses's three known written-lisp records in modules 710 and 715, then audit the remaining ending cast and room-local messages.
 
 ### Session 37: 2026-10-10: Act 3 Dialogue Closure
 
@@ -281,25 +304,3 @@ None currently open. Q-001 and Q-002 have been resolved by D-007, D-017, and D-0
 **Verified:** Modules 1889 and 1891 retain identical message tuple/talker metadata; exactly 109 Heimlich and 94 Rameses approved-scope texts changed; all 4 Heimlich and 18 Rameses later reaction records remain outside the manifests; no targeted caricature spelling remains in either routine scope; documentation/manual validation and build pass; DOSBox-X original-interpreter startup smoke passes with both loose overrides active.
 
 **Next session should start with:** Maintainer review of Heimlich, followed by Yvette only after approval.
-
-### Session 28: 2026-10-10: Act 1 Period Dialogue De-Caricature Pass
-
-**Contributor:** Codex and maintainer
-
-**Goal:** Rewrite Lo Fat, Sgt. O'Flaherty, and Detective O'Riley without erasing their identities, period setting, clues, humour, or dramatic roles.
-
-**Done:**
-- Inventoried every Act 1 spoken record for the three characters directly from modules 270, 290, and 295.
-- Reworked Lo Fat with polished grammar, dry charm, and a light British-English cadence; reviewed all 86 spoken records and cleaned six adjacent narrator records that repeated the caricature.
-- Reworked 49 of O'Flaherty's 64 lines, retaining restrained Irish-American idiom while removing phonetic stage-Irish spelling; also removed the anachronistic “in like Flynn” phrase.
-- Reworked all 11 O'Riley office lines into readable but deliberately blustering and patronizing dialogue, retaining his period sexism as villain characterization.
-- Added tuple-addressed JSON manifests under `docs/dialogue/` and the idempotent `tools/dialogue.py` patcher.
-- Added loose message overrides `LB2/290.MSG` and `LB2/295.MSG`; updated the existing `LB2/270.MSG` override.
-
-**Changed:** `LB2/270.MSG`, `LB2/290.MSG`, `LB2/295.MSG`, `docs/dialogue/`, `tools/dialogue.py`, and project documentation/manual files.
-
-**Decisions:** D-031.
-
-**Verified:** Exact manifest-to-message text audit; unique tuple audit; unchanged talker/reference metadata against archived modules; DOSBox-X headless startup; documentation/manual validation and build.
-
-**Next session should start with:** Continue P2-08 with the next act's character inventory after the maintainer identifies the desired cast.

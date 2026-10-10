@@ -2,6 +2,28 @@
 
 Archived verbatim from `docs/HANDOFF.md` when its live session log exceeded ten entries.
 
+### Session 28: 2026-10-10: Act 1 Period Dialogue De-Caricature Pass
+
+**Contributor:** Codex and maintainer
+
+**Goal:** Rewrite Lo Fat, Sgt. O'Flaherty, and Detective O'Riley without erasing their identities, period setting, clues, humour, or dramatic roles.
+
+**Done:**
+- Inventoried every Act 1 spoken record for the three characters directly from modules 270, 290, and 295.
+- Reworked Lo Fat with polished grammar, dry charm, and a light British-English cadence; reviewed all 86 spoken records and cleaned six adjacent narrator records that repeated the caricature.
+- Reworked 49 of O'Flaherty's 64 lines, retaining restrained Irish-American idiom while removing phonetic stage-Irish spelling; also removed the anachronistic “in like Flynn” phrase.
+- Reworked all 11 O'Riley office lines into readable but deliberately blustering and patronizing dialogue, retaining his period sexism as villain characterization.
+- Added tuple-addressed JSON manifests under `docs/dialogue/` and the idempotent `tools/dialogue.py` patcher.
+- Added loose message overrides `LB2/290.MSG` and `LB2/295.MSG`; updated the existing `LB2/270.MSG` override.
+
+**Changed:** `LB2/270.MSG`, `LB2/290.MSG`, `LB2/295.MSG`, `docs/dialogue/`, `tools/dialogue.py`, and project documentation/manual files.
+
+**Decisions:** D-031.
+
+**Verified:** Exact manifest-to-message text audit; unique tuple audit; unchanged talker/reference metadata against archived modules; DOSBox-X headless startup; documentation/manual validation and build.
+
+**Next session should start with:** Continue P2-08 with the next act's character inventory after the maintainer identifies the desired cast.
+
 ### Session 27: 2026-10-10: Act 1 Diegetic Clue Flow Verification and Script/Message Mapping
 
 **Contributor:** Antigravity and maintainer

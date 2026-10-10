@@ -1,0 +1,8 @@
+{
+  "module": 600,
+  "character": "Wolf Heimlich's lantern warning",
+  "voice": "Immediate and authoritarian without mock-German gibberish.",
+  "entries": [
+    {"tuple": [7, 0, 0, 1, 18], "text": "What is the meaning of this? There is no emergency here. Keep your hands off that lantern!"}
+  ]
+}
