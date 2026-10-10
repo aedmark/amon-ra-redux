@@ -2,6 +2,27 @@
 
 Archived verbatim from `docs/HANDOFF.md` when its live session log exceeded ten entries.
 
+### Session 17: 2026-10-08: P4-01 Watney Little Evidence Discovery
+
+**Contributor:** Codex
+
+**Goal:** Make Watney Little's narratively essential police file and notebook evidence discoverable without a pixel hunt.
+
+**Done:**
+- Audited the roadmap premise and traced the real file path to the special book and insets in Room 560; Room 420 and Script 13 are unrelated.
+- Confirmed that inventory item 24's original Take path already adds file-content clue 793 and Watney People clue 272.
+- Expanded the special volume hotspot from 11x15 to 36x38 pixels and routed Look, Hand, or Magnifier on the full bookcase to the same inset until the file is acquired.
+- Added idempotent clue 793 and 272 registration when the exposed file is inspected, while retaining the original Take, point, and inventory behavior.
+- Compiled Script 560 and synchronized the architecture, roadmap, decision log, changelog, testing matrix, handoff, and manual.
+
+**Changed:** `LB2/src/rm560.sc`, `LB2/560.SCR`, `LB2/560.HEP`, `docs/ROADMAP.md`, `docs/ARCHITECTURE.md`, `docs/DECISIONS.md`, `docs/CHANGELOG.md`, `docs/TESTING.md`, `docs/manual/amon-ra.manual.json`, `docs/manual/manual.html`, `docs/HANDOFF.md`, `docs/archive/SESSION_LOG_2026_10.md`.
+
+**Decisions:** D-022 (Expose Watney's existing police-file path).
+
+**Verified:** SCI Companion compilation of Script 560; static ownership, hotspot, clue-ID, inventory, and score-path audit; DOSBox-X original-interpreter startup smoke; documentation/manual validation; unchanged base archive hashes. Direct Room 560 observation remains a manual save-based regression test.
+
+**Next session should start with:** P4-02 (Evidence Validity, Red Herrings & Inquest Credit).
+
 ### Session 16: 2026-10-08: P3-06 NPC Wander Mechanic Stabilization
 
 **Contributor:** Codex

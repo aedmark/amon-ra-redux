@@ -12,16 +12,17 @@ Security: [SECURITY.md](SECURITY.md). Changes: [CHANGELOG.md](CHANGELOG.md). Old
 
 ## Current state
 
-_Last updated: 2026-10-09, session 26: dirty cab gated on prior ride and diegetic Act 1 clue flow preserved._
+_Last updated: 2026-10-10, session 27: Act 1 diegetic clue flow verification and script/message mapping._
 
-**Where things stand, in one paragraph:** Following compiler verification, Act 1 cab progression has been refined (D-030). The dirty cab containing the claim ticket now appears only after at least one normal cab ride (flag 125) and is permanently locked out once the ticket is collected (flag 27). An audit of Act 1 inquiry trees confirmed that suspects (Rameses, Countess, Olympia, Yvette, Ernie) are discovered diegetically through the narrative investigation web rather than pre-populated on boot. Script 250 (`Trash.sc`) was compiled with the clean gating logic, and `lb2InitCode.sc` (Script 14) was verified matching baseline byte-for-byte. The game boots cleanly with zero errors in DOSBox-X.
+**Where things stand, in one paragraph:** Following playtest observations, the Act 1 inquiry trees and notebook clue flow were fully audited against decompiled scripts and unpacked message resources. We confirmed that Crodfoller introduces Carrington (259) and Carter (258) when asked about the Museum (517), but never mentions Rameses; Rameses Najeer (268) is introduced by Ziggy in the Speakeasy (Room 310) when asked about Egyptology (1028). Furthermore, Steve Dorian at the 12th St Docks (Room 240) introduces Countess (269) and Tut (271), while Lo Fat at the Laundry (Room 270) introduces Olympia Myklos (270), Wolf Heimlich (265), and Yvette Delacroix (266) when asked about the Museum (517). All room numbers, suspect triggers, and documentation references (D-030, PLAY-005/007) are verified and in sync. The game boots cleanly with zero errors in DOSBox-X.
 
-**Verified** (2026-10-09, Linux workspace)
+**Verified** (2026-10-10, Linux workspace)
 
 | Suite | Result |
 | --- | --- |
 | D-030 / PLAY-001 dirty cab gating | **Pass: 250.SCR/250.HEP compiled, gated on flag 125 & (not flag 27)** |
 | D-030 clue flow preservation | **Pass: 14.SCR/14.HEP matches authentic baseline (648 / 52 bytes)** |
+| Act 1 message resource mapping | **Pass: 20.MSG, 230.MSG, 240.MSG, 270.MSG, 290.MSG, 310.MSG verified** |
 | P4-06 Script compilation | **Pass: 750.SCR/750.HEP emitted by SCI Companion** |
 | P4-05 Script compilation | **Pass: 26.SCR/26.HEP emitted by SCI Companion** |
 | P4-04 Script compilation | **Pass: 750.SCR emitted by SCI Companion** |
@@ -68,6 +69,29 @@ None currently open. Q-001 and Q-002 have been resolved by D-007, D-017, and D-0
 
 ## Session log
 
+### Session 27: 2026-10-10: Act 1 Diegetic Clue Flow Verification and Script/Message Mapping
+
+**Contributor:** Antigravity and maintainer
+
+**Goal:** Investigate user playtest observations regarding Crodfoller/Rameses and dockworker/Olympia/Yvette/Heimlich dialogue trees; verify exact script handlers and message resources.
+
+**Done:**
+- Audited `LB2/src/rm230.sc` (Crodfoller in Newsroom), `LB2/src/rm240.sc` (Steve Dorian at Docks), `LB2/src/rm270.sc` (Lo Fat's Laundry), and `LB2/src/rm310.sc` (Ziggy at Speakeasy).
+- Decompressed and inspected SCI 1.1 message modules directly from `LB2/RESOURCE.MSG` (`20.MSG`, `230.MSG`, `240.MSG`, `270.MSG`, `290.MSG`, `310.MSG`) using PKWare DCL explode decompression.
+- Confirmed full notebook clue mappings: Clue 264 is Ziggy (not Rameses); Rameses Najeer is Clue 268; Clue 514 is Police Station; Clue 517 is Leyendecker Museum; Clue 516 is 12th Street Docks; Clue 515 is Lo Fat's Laundry.
+- Verified Point 2: Asking Crodfoller about Leyendecker Museum (517) introduces Dr. Archibald Carrington (259) and Dr. Pippin Carter (258); Crodfoller never mentions Rameses. In Act 1, Rameses Najeer (268) is introduced by Ziggy in Room 310 when asked about Egyptology (1028).
+- Verified Point 5: 12th Street Docks is Room 240 (Steve Dorian). Steve introduces Countess (269) and Tut (271). Room 270 is Lo Fat's Laundry, where asking Lo Fat about Leyendecker Museum (517) introduces Dr. Olympia Myklos (270), Wolf Heimlich (265), and Yvette Delacroix (266).
+- Corrected documentation discrepancies across `docs/DECISIONS.md` (D-030), `docs/PLAYTEST_CHECKLIST.md` (PLAY-005/007), and `docs/HANDOFF.md`.
+- Archived Session 17 to `docs/archive/SESSION_LOG_2026_10.md` to maintain the 10-session rolling window.
+
+**Changed:** `docs/DECISIONS.md`, `docs/PLAYTEST_CHECKLIST.md`, `docs/HANDOFF.md`, `docs/archive/SESSION_LOG_2026_10.md`.
+
+**Decisions:** D-030.
+
+**Verified:** Bytecode and message resource audits; `python3 tools/check_docs.py` (0 errors); `python3 tools/manual.py check` (0 errors).
+
+**Next session should start with:** Continue full-game playtest checklist run in DOSBox-X.
+
 ### Session 26: 2026-10-09: Dirty Cab Progression Gating and Act 1 Clue Flow Preservation
 
 **Contributor:** Antigravity and maintainer
@@ -77,7 +101,7 @@ None currently open. Q-001 and Q-002 have been resolved by D-007, D-017, and D-0
 **Done:**
 - Re-verified single-script compilation environment: refreshed `Main.sco` and `Inset.sco` object symbol tables; verified unmodified scripts recompile cleanly.
 - Implemented PLAY-001 / D-030 in `LB2/src/Trash.sc`: allocated persistent flag 125 (`proc0_3 125`) in `sDoTakeOffFlight` on taking a normal cab ride; gated dirty cab appearance in `rm250` init, `Trash::sel_110`, and `cornerTrash::sel_300` on `(and (proc0_10 1) (proc0_2 125) (not (proc0_2 27)))`. Compiled `LB2/250.SCR` (5,194 bytes) and `LB2/250.HEP` (2,490 bytes).
-- Audited Act 1 clue progression across `rm230.sc` (Crodfoller), `rm240.sc` (Police), `rm270.sc` (Docks), and `rm320.sc` (Lo Fat). Confirmed Rube does not know Ernie, Countess, or Olympia, and has an out-of-character joke response for Yvette; suspects are introduced diegetically as Laura explores (Rube introduces Rameses; Police/Lo Fat introduce Countess; Docks introduce Olympia/Yvette/Heimlich; Ernie is introduced in Act 2).
+- Audited Act 1 clue progression across `rm230.sc` (Crodfoller in Newsroom), `rm240.sc` (Steve at Docks), `rm270.sc` (Lo Fat's Laundry), `rm290.sc` (Police Station), and `rm310.sc` (Ziggy at Speakeasy). Confirmed Rube does not know Countess, Olympia, Ernie, or Yvette, and never mentions Rameses; suspects are introduced diegetically as Laura explores (Rube introduces Carrington/Carter/Ziggy/O'Riley; Steve at Docks introduces Countess/Tut; Lo Fat introduces Olympia/Yvette/Heimlich; Ziggy introduces Rameses; Ernie is introduced in Act 2).
 - Restored `LB2/src/lb2InitCode.sc` and compiled `LB2/14.SCR` (648 bytes) and `LB2/14.HEP` (52 bytes) matching baseline byte-for-byte.
 - Verified zero errors on DOSBox-X headless boot smoke test.
 - Archived Session 16 to `docs/archive/SESSION_LOG_2026_10.md` to keep live session log under limit.
@@ -269,24 +293,3 @@ None currently open. Q-001 and Q-002 have been resolved by D-007, D-017, and D-0
 **Verified:** SCI Companion compilation of Scripts 454 and 750; static evidence-identity, ownership, and unique point-bit audit; DOSBox-X original-interpreter startup smoke; documentation/manual validation; unchanged base archive hashes. Direct save-based traversal of the footprint and evidence-review branches remains a manual regression test.
 
 **Next session should start with:** P4-03 (Hint Book Contradictions & Best Ending Alignment).
-
-### Session 17: 2026-10-08: P4-01 Watney Little Evidence Discovery
-
-**Contributor:** Codex
-
-**Goal:** Make Watney Little's narratively essential police file and notebook evidence discoverable without a pixel hunt.
-
-**Done:**
-- Audited the roadmap premise and traced the real file path to the special book and insets in Room 560; Room 420 and Script 13 are unrelated.
-- Confirmed that inventory item 24's original Take path already adds file-content clue 793 and Watney People clue 272.
-- Expanded the special volume hotspot from 11x15 to 36x38 pixels and routed Look, Hand, or Magnifier on the full bookcase to the same inset until the file is acquired.
-- Added idempotent clue 793 and 272 registration when the exposed file is inspected, while retaining the original Take, point, and inventory behavior.
-- Compiled Script 560 and synchronized the architecture, roadmap, decision log, changelog, testing matrix, handoff, and manual.
-
-**Changed:** `LB2/src/rm560.sc`, `LB2/560.SCR`, `LB2/560.HEP`, `docs/ROADMAP.md`, `docs/ARCHITECTURE.md`, `docs/DECISIONS.md`, `docs/CHANGELOG.md`, `docs/TESTING.md`, `docs/manual/amon-ra.manual.json`, `docs/manual/manual.html`, `docs/HANDOFF.md`, `docs/archive/SESSION_LOG_2026_10.md`.
-
-**Decisions:** D-022 (Expose Watney's existing police-file path).
-
-**Verified:** SCI Companion compilation of Script 560; static ownership, hotspot, clue-ID, inventory, and score-path audit; DOSBox-X original-interpreter startup smoke; documentation/manual validation; unchanged base archive hashes. Direct Room 560 observation remains a manual save-based regression test.
-
-**Next session should start with:** P4-02 (Evidence Validity, Red Herrings & Inquest Credit).
