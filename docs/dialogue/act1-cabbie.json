@@ -1,0 +1,20 @@
+{
+  "module": 250,
+  "character": "Taxi driver",
+  "voice": "A surly, lecherous New York cabbie using readable working-class slang without dense phonetic spelling.",
+  "entries": [
+    {"tuple": [4, 4, 7, 1, 14], "text": "Hey, toots, you can touch me any time. If you want, I know a cheap little hotel. The manager's a friend of mine. We could use a room for a couple of hours, if you know what I mean."},
+    {"tuple": [4, 11, 7, 1, 14], "text": "All right, toots, where can I take you?"},
+    {"tuple": [4, 2, 7, 1, 14], "text": "I don't talk to passengers."},
+    {"tuple": [1, 0, 7, 2, 14], "text": "I cleaned it out two years ago! You got a problem with that?"},
+    {"tuple": [1, 0, 7, 5, 14], "text": "Thanks for the critique of my lifestyle, miss. Now get out of my cab!"},
+    {"tuple": [1, 0, 7, 6, 14], "text": "I'll give you a ride if you have the dough, or if you can prove you're a reporter."},
+    {"tuple": [1, 0, 9, 1, 14], "text": "If you have money, I'll give you a ride. If you're a reporter, I'll give you a ride. Otherwise, get out of my cab!"},
+    {"tuple": [1, 0, 9, 2, 14], "text": "Prove it."},
+    {"tuple": [1, 0, 9, 3, 14], "text": "Let's face it, toots. You don't have what you need for a lift in my cab. Beat it!"},
+    {"tuple": [17, 14, 7, 1, 14], "text": "Lady, you're already in New York. Where do you want to go? I haven't got all day."},
+    {"tuple": [12, 6, 7, 1, 14], "text": "Look, lady, I'm paid to drive you around town. I'm not paid to talk to passengers."},
+    {"tuple": [12, 14, 7, 1, 14], "text": "What are you, some kind of tourist? I don't know what you're talking about. Tell me where you want to go!"},
+    {"tuple": [11, 6, 7, 1, 14], "text": "I know where it is, but that's all. I never leave my taxi, so I've never been inside."}
+  ]
+}

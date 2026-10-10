@@ -1,0 +1,8 @@
+{
+  "module": 10,
+  "character": "Notebook clue label cleanup",
+  "voice": "Period-neutral identification replacing a ship that did not enter service until 1953.",
+  "entries": [
+    {"tuple": [2, 0, 0, 1, 97], "text": "  Ocean Liner "}
+  ]
+}

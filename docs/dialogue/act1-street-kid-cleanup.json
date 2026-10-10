@@ -1,0 +1,9 @@
+{
+  "module": 260,
+  "character": "Street kid adjacent cleanup",
+  "voice": "Retain energetic period street slang while replacing an ethnic slur used as a synonym for cheating.",
+  "entries": [
+    {"tuple": [18, 7, 0, 8, 32], "text": "Hey, what a swindle! Now how are we going to murderize these ants?"},
+    {"tuple": [17, 2, 12, 4, 32], "text": "So what? This isn't a real Babe Ruth signature. Ruth doesn't close the loop at the bottom of the first B, and he whorls the first stroke of the R. You got taken."}
+  ]
+}

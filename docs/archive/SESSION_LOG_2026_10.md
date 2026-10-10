@@ -545,3 +545,32 @@ D-004 (Unrestricted save/load), D-005 (Softlock prevention), D-006 (Inquest scor
 **Left undone:** P1-01 through P4-06 implementation.
 
 **Next session should start with:** Decompiling target scripts in SCI Companion and executing P1-04 and P1-03 fixes.
+
+### Session 24: 2026-10-09: Compile-All Recovery and Hybrid Version Diagnosis
+
+**Contributor:** Claude and maintainer
+
+**Goal:** Diagnose hundreds of Compile All errors (undeclared `msgGET`/`palSET_INTENSITY`/`fi*`/`snd*` constants, script numbers above 999) and confirm no patch work was lost.
+
+**Done:**
+- Traced the errors to SCI Companion's map-format setting: format 1.0 drops the `SCI_1_1` defines and caps script numbers at 999. Identified the floppy as a hybrid (SCI1.1 scripts, SCI1-style 6-byte `RESOURCE.MAP`).
+- Found that a resource rebuild under format 1.1 had replaced the base archive with a volume containing only loose-file resources (451 entries against 1,075), losing `0.FON` and all views, pics, and sounds. The maintainer restored the original archive and `MESSAGE.MAP`.
+- Got Compile All to finish by editing 13 decompiled sources (commit `7d48893`), then found its output does not boot: the game stalls on a black screen. Tested copies: the `4c79bcf` patch set boots; the Compile All set does not, with or without the nine newly loose scripts or recompiled 450/720/973/998.
+- Reverted all patches to the `4c79bcf` set and removed the nine new overrides (310, 640, 770, 928, 999, 1888, 1895, 1904, 1906). Reverted the 13 compile-fix sources; only `rm750.sc` (P4-06) differs from `4c79bcf`. Kept the Compile All build of `750.SCR`/`750.HEP`; a copy with that pair and the `4c79bcf` patches boots.
+- Added `tools/uppercase_patches.py`, `.gitattributes` (LF for `.sc`, binary for patches), and D-028.
+
+**Changed:** `LB2/*.SCR`/`*.HEP` (reverted to `4c79bcf` except 750), `LB2/src/rm750.sc`, `tools/uppercase_patches.py`, `.gitattributes`, `docs/DECISIONS.md`, `docs/ARCHITECTURE.md`, `docs/TESTING.md`, `docs/HANDOFF.md`.
+
+**Decisions:** D-028.
+
+**Verified:** The patch set committed here boots in DOSBox-X (maintainer). A fresh single-script compile of `rm750` under Wine (`tools/compile.py`) reproduces the committed `750.SCR`/`750.HEP` byte for byte. Not verified: P4-06 in the inquest itself.
+
+**Gotchas:** `tools/compile.py` deletes the existing `N.SCR`/`N.HEP` before compiling and does not restore them if the helper fails, so back them up first. SCI Companion (started with `wine SCICompanion/Release/SCICompanion.exe 'Z:\...\LB2\game.ini'`) drops a script from its list when its patch files vanish and does not re-add it; restart it after restoring files. Stop it with `wineserver -k` when finished.
+
+**Also added:** `tools/make_test_copy.sh` (throwaway boot-test copies, optional git revision), the Compile and boot workflow in `docs/TESTING.md`, D-029, a corrected contributor workflow, and the triage gameplan in `docs/PLAYTEST_CHECKLIST.md`.
+
+**Compile environment is currently unusable (open blocker, 2026-10-09):** every script compiled by the present SCI Companion setup is incompatible with the shipped patches. Compiling the unmodified `Trash.sc` gives `250.SCR` 5,138 bytes and `250.HEP` 2,602 bytes against the committed 5,136 and 2,490: each object gains an extra heap entry (header count `1e` to `1f`). Booting such a build ends in "Oops! Error 4" (entering the taxi) or a nonsense missing-resource error. The same pattern appears in the Compile All build. Without the restored `LB2/src/*.sco` object caches a compile writes nothing. Do not compile anything until the original SCI Companion version/object-format setting is recovered; it is not in `game.ini` or the Wine registry and is likely in SCI Companion's game-version dialog. The `.sco` set in `LB2/src` dates from the 11:34 Compile All run (a backup copy of it was taken at 12:00 on this machine; no earlier set exists). Also, SCI Companion's "Compile modified scripts before run" option (registry `CompileModifiedScriptsBeforeRun`) recompiles scripts on every Run and silently replaced `0.SCR`/`250.SCR`; the maintainer turned it off. Launch the game only with `./tools/run_dosbox.sh`.
+
+**Drafted fix waiting on the compiler (PLAY-001/002):** in `Trash.sc` (Script 250) change both `(if (proc0_10 1)` tests that select the dirty taxi (the `rm250` init and the trash hotspot's `sel_110`) to `(if (and (proc0_10 1) (not (proc0_2 27)))`. Flag 27 is set when the claim ticket is taken, so the dirty cab then never reappears. Compile only script 250, boot-test, and play the taxi both before and after taking the ticket.
+
+**Next session should start with:** Recover the compile environment (see the blocker above), then play to the inquest to verify P4-06 (Script 750). Use `python3 tools/compile.py <script>` for any further change and boot the game before committing. Never use Compile All.

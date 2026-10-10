@@ -1,0 +1,10 @@
+{
+  "module": 15,
+  "character": "Inventory terminology cleanup",
+  "voice": "Correct Heinrich Daniel Ruhmkorff's name while preserving the lantern and induction-coil descriptions.",
+  "entries": [
+    {"tuple": [19, 1, 0, 1, 99], "text": "A Ruhmkorff coil lantern with a hand crank on the base."},
+    {"tuple": [19, 8, 0, 2, 99], "text": "Ruhmkorff's coil consists of copper wire insulated by a silk covering, surrounded by another coil of fine insulated wire in which a momentary current is induced when current passes through the inner coil from a voltaic battery charged by a hand crank."},
+    {"tuple": [19, 8, 0, 4, 99], "text": "Heinrich Daniel Ruhmkorff, an able instrument maker, greatly improved the induction coil. In 1864, he received France's Volta Prize for his work with electricity."}
+  ]
+}

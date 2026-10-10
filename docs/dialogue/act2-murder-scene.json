@@ -1,0 +1,18 @@
+{
+  "module": 355,
+  "character": "Detective O'Riley and Wolf Heimlich after Carter's murder",
+  "voice": "O'Riley remains patronizing and territorial while Heimlich remains militant and severe; both use readable speech rather than national caricature.",
+  "entries": [
+    {"tuple": [1, 0, 0, 2, 19], "text": "Don't trouble your little head about it, lass."},
+    {"tuple": [1, 0, 0, 4, 18], "text": "This is an official murder investigation, Miss Bow. Do not interfere."},
+    {"tuple": [1, 0, 0, 6, 19], "text": "Dr. Carter died because someone stuck a gift-shop dagger in his chest. What more do you need to know?"},
+    {"tuple": [1, 0, 0, 8, 19], "text": "Someone who didn't like him. There's my professional opinion."},
+    {"tuple": [1, 0, 0, 10, 19], "text": "If you think you can do better--"},
+    {"tuple": [1, 0, 0, 12, 18], "text": "Excellent. Now the amateurs are involved."},
+    {"tuple": [1, 0, 0, 14, 19], "text": "Stay out of my way, lass, and don't destroy the evidence."},
+    {"tuple": [1, 0, 0, 16, 19], "text": "Hmmph!"},
+    {"tuple": [1, 0, 0, 17, 18], "text": "Quite."},
+    {"tuple": [3, 0, 0, 1, 19], "text": "You cannot play the game without studying the Egyptian gods. I've half a mind to arrest you for wasting my time."},
+    {"tuple": [3, 0, 0, 2, 18], "text": "The detective may arrest you. I will conduct the interrogation."}
+  ]
+}

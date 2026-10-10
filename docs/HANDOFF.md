@@ -12,15 +12,17 @@ Security: [SECURITY.md](SECURITY.md). Changes: [CHANGELOG.md](CHANGELOG.md). Old
 
 ## Current state
 
-_Last updated: 2026-10-10, session 33: P2-08 final dialogue sweep._
+_Last updated: 2026-10-10, session 34: P2-08 effective-layer closure audit._
 
-**Where things stand, in one paragraph:** P2-08 is complete. Act 1 and Act 2 dialogue now use distinct, readable period voices for Lo Fat, Sgt. O'Flaherty, O'Riley, Rameses, Heimlich, Yvette, Ziggy, and Tut Smith without relying on phonetic ethnicity or national caricature. Tut is an educated, forceful Cairo Museum repatriation advocate whose vanity, sexism, and suspicious threats remain intact. Every previously deferred murder reaction now follows its approved character voice, and isolated Pippin, Countess, Steve, Olympia, and Laura lines no longer reintroduce the discarded stereotypes. Five Andrea Doria references, Rameses I chronology, Egyptological terminology, and three erroneous talker IDs are corrected. Tuple-addressed manifests account exactly for every changed record across 11 message modules while preserving all other routing and reference metadata (D-031).
+**Where things stand, in one paragraph:** P2-08 is complete after an effective-layer closure audit of all 5,888 message records exposed room- and cutscene-specific dialogue outside the character-topic modules. Act 1 now includes readable sandwich-vendor and cabbie voices; Act 2 now covers the Pippin/Tut confrontation, museum entry, all fourteen party conversations, and Carter's immediate murder scene in addition to the character modules and deferred reactions. All nine original `Andrea Doria` references, the remaining `Ruhmkorf` spellings, two uses of an ethnic slur, two Carrington spelling errors, and Carrington's misassigned reply are corrected. Twenty-six tuple manifests account for 1,025 reviewed entries across 2,726 records, with only four documented talker-ID repairs (D-031).
 
 **Verified** (2026-10-10, Linux workspace)
 
 | Suite | Result |
 | --- | --- |
-| P2-08 completed dialogue pass | **Pass: 1,424 records across 11 target modules exactly accounted for; only three documented talker IDs changed; obsolete wording scan has 0 hits** |
+| P2-08 effective-layer closure | **Pass: 2,726 records across 26 target modules structurally compared; 1,025 manifest entries current; only four documented talker IDs changed; Act 1/2 obsolete wording scan has 0 target hits** |
+| P2-08 party and cutscene dialogue | **Pass: modules 120, 335, 340, and 355 preserve all 237 records and routing metadata; 103 reviewed entries apply idempotently** |
+| P2-08 Act 1 adjacent voices | **Pass: modules 210, 250, 240, and 260 preserve all routing metadata; vendor, cabbie, Steve, and slur-cleanup manifests apply idempotently** |
 | P2-08 Tut and adjacent cleanup | **Pass: 96 manifest records match module 1883; all 121 records parse; Pippin/Countess/Steve/Olympia cleanup manifests apply idempotently** |
 | P2-08 Ziggy cross-act rewrite | **Pass: 31 manifest records match module 310 and 89 match module 1890; all 186 records parse; only the documented diary-response talker ID changed** |
 | P2-08 Act 2 O'Riley rewrite | **Pass: 136 manifest records match module 1888; all 185 records parse; one clue-question talker ID corrected** |
@@ -40,7 +42,7 @@ _Last updated: 2026-10-10, session 33: P2-08 final dialogue sweep._
 | P3-06 Script compilation | **Pass: 90.SCR/90.HEP and 22.SCR/22.HEP emitted by SCI Companion** |
 | P3-04 Script compilation | **Pass: 530.SCR/530.HEP emitted by SCI Companion** |
 | `python3 tools/check_docs.py` | **Pass: 0 errors, 0 warnings** |
-| `python3 tools/manual.py check ...` | **Pass: 6 sections, 30 entries, 0 errors** |
+| `python3 tools/manual.py check ...` | **Pass: 6 sections, 31 entries, 0 errors** |
 | `python3 tools/manual.py build ...` | **Pass: compiled docs/manual/manual.html** |
 | DOSBox-X headless startup | **Pass: original interpreter environment initialized with loose patches mounted** |
 | Base Game Archive MD5 Integrity | **Pass: RESOURCE.000 and RESOURCE.MAP match vanilla bit-for-bit** |
@@ -52,8 +54,8 @@ _Last updated: 2026-10-10, session 33: P2-08 final dialogue sweep._
 - **Phase 3 Mechanics:** Supply safety audit (P3-01), snake oil feedback (P3-02), fair stairwell (P3-04), flexible Act 1 and cab gating (P3-05, D-030), and museum conversation lock (P3-06).
 - **Phase 4 Scoring & Mystery:** Accurate act grades (P4-05), clear inquest scope (P4-06), evidence checklist (P4-03), and decoupled quiz/dagger outcome (P4-04).
 - **Act 1 Investigation Context:** Authentic starting contacts preserved in `lb2InitCode.sc`; suspects discovered naturally through Act 1 inquiry trees (D-030).
-- **Act 1 Dialogue:** Lo Fat, Sgt. O'Flaherty, O'Riley, and Ziggy rewritten as distinct, readable period characters without altering dialogue logic (P2-08, D-031).
-- **Act 2 Dialogue:** Rameses, Heimlich, Yvette, O'Riley, Ziggy, and Tut Smith use distinct, readable period characterization; all murder reactions and adjacent cleanup lines are complete (P2-08, D-031).
+- **Act 1 Dialogue:** Lo Fat, Sgt. O'Flaherty, O'Riley, Ziggy, the sandwich vendor, and the cabbie use distinct, readable period voices without altering dialogue logic (P2-08, D-031).
+- **Act 2 Dialogue:** Rameses, Heimlich, Yvette, O'Riley, Ziggy, and Tut Smith use distinct, readable period characterization across character topics, the museum entry, all fourteen party conversations, the immediate Carter murder scene, deferred reactions, and adjacent cleanup lines (P2-08, D-031).
 - **Documentation Architecture:** `docs/ROADMAP.md`, `DECISIONS.md` (D-001 through D-031), `docs/manual/`, `docs/manual/manual.html`, and `docs/PLAYTEST_CHECKLIST.md` synchronized.
 
 **Not verified**
@@ -78,6 +80,28 @@ _Last updated: 2026-10-10, session 33: P2-08 final dialogue sweep._
 None currently open. Q-001 and Q-002 have been resolved by D-007, D-017, and D-018.
 
 ## Session log
+
+### Session 34: 2026-10-10: P2-08 Effective-Layer Closure Audit
+
+**Contributor:** Codex and maintainer
+
+**Goal:** Reopen P2-08 after a full effective-message audit found dialogue outside the previously reviewed character-topic modules.
+
+**Done:**
+- Parsed all 103 effective message modules and 5,888 records, overlaying every loose patch on the archived resource layer.
+- Rewrote the module 120 Pippin/Tut confrontation, module 335 Heimlich check-in, all fourteen module 340 party conversations, and the module 355 Carter murder scene in the established character voices.
+- Reworked the Act 1 sandwich vendor and cabbie without removing their rapid sales patter, impatience, lechery, or New York character.
+- Removed the four remaining `Andrea Doria` records, completing all nine original occurrences; corrected three remaining `Ruhmkorf` spellings and the underlying instrument-maker history.
+- Replaced two uses of an ethnic slur in the street-kid scene, corrected two Carrington spelling errors, and assigned Carrington's interrupted response to talker 11 instead of narrator 99.
+- Added twelve closure manifests and loose message overrides while preserving the immutable resource archives.
+
+**Changed:** Message modules 10, 15, 120, 210, 240, 250, 260, 335, 340, 355, 630, and 1886; twelve manifests under `docs/dialogue/`; and synchronized roadmap, decision, changelog, handoff, and manual documentation.
+
+**Decisions:** D-031 remains the governing decision. P2-08 is closed only after auditing both character-topic and room/cutscene message modules.
+
+**Verified:** Exact structural comparison of 2,726 records across all 26 P2-08 modules; 1,025 manifest entries current and idempotent; all noun/verb/condition/sequence/reference metadata preserved; exactly four documented talker-ID repairs; all 5,888 effective records parse; no targeted Act 1/2 caricature or listed factual strings remain; documentation/manual checks and DOSBox-X original-interpreter startup smoke pass.
+
+**Next session should start with:** Resume the DOSBox-X playthrough and review the party conversations in context before beginning the later-act dialogue pass or P5-01.
 
 ### Session 33: 2026-10-10: P2-08 Final Dialogue Sweep
 
@@ -275,32 +299,3 @@ None currently open. Q-001 and Q-002 have been resolved by D-007, D-017, and D-0
 **Verified:** DOSBox-X headless boot test passed (0 errors); `python3 tools/check_docs.py` (0 errors); `python3 tools/manual.py check` (0 errors); base archive MD5 match.
 
 **Next session should start with:** Continue full-game playtest and address PLAY-001..PLAY-009 triage using single-script compilation (`python3 tools/compile.py <script>`).
-
-### Session 24: 2026-10-09: Compile-All Recovery and Hybrid Version Diagnosis
-
-**Contributor:** Claude and maintainer
-
-**Goal:** Diagnose hundreds of Compile All errors (undeclared `msgGET`/`palSET_INTENSITY`/`fi*`/`snd*` constants, script numbers above 999) and confirm no patch work was lost.
-
-**Done:**
-- Traced the errors to SCI Companion's map-format setting: format 1.0 drops the `SCI_1_1` defines and caps script numbers at 999. Identified the floppy as a hybrid (SCI1.1 scripts, SCI1-style 6-byte `RESOURCE.MAP`).
-- Found that a resource rebuild under format 1.1 had replaced the base archive with a volume containing only loose-file resources (451 entries against 1,075), losing `0.FON` and all views, pics, and sounds. The maintainer restored the original archive and `MESSAGE.MAP`.
-- Got Compile All to finish by editing 13 decompiled sources (commit `7d48893`), then found its output does not boot: the game stalls on a black screen. Tested copies: the `4c79bcf` patch set boots; the Compile All set does not, with or without the nine newly loose scripts or recompiled 450/720/973/998.
-- Reverted all patches to the `4c79bcf` set and removed the nine new overrides (310, 640, 770, 928, 999, 1888, 1895, 1904, 1906). Reverted the 13 compile-fix sources; only `rm750.sc` (P4-06) differs from `4c79bcf`. Kept the Compile All build of `750.SCR`/`750.HEP`; a copy with that pair and the `4c79bcf` patches boots.
-- Added `tools/uppercase_patches.py`, `.gitattributes` (LF for `.sc`, binary for patches), and D-028.
-
-**Changed:** `LB2/*.SCR`/`*.HEP` (reverted to `4c79bcf` except 750), `LB2/src/rm750.sc`, `tools/uppercase_patches.py`, `.gitattributes`, `docs/DECISIONS.md`, `docs/ARCHITECTURE.md`, `docs/TESTING.md`, `docs/HANDOFF.md`.
-
-**Decisions:** D-028.
-
-**Verified:** The patch set committed here boots in DOSBox-X (maintainer). A fresh single-script compile of `rm750` under Wine (`tools/compile.py`) reproduces the committed `750.SCR`/`750.HEP` byte for byte. Not verified: P4-06 in the inquest itself.
-
-**Gotchas:** `tools/compile.py` deletes the existing `N.SCR`/`N.HEP` before compiling and does not restore them if the helper fails, so back them up first. SCI Companion (started with `wine SCICompanion/Release/SCICompanion.exe 'Z:\...\LB2\game.ini'`) drops a script from its list when its patch files vanish and does not re-add it; restart it after restoring files. Stop it with `wineserver -k` when finished.
-
-**Also added:** `tools/make_test_copy.sh` (throwaway boot-test copies, optional git revision), the Compile and boot workflow in `docs/TESTING.md`, D-029, a corrected contributor workflow, and the triage gameplan in `docs/PLAYTEST_CHECKLIST.md`.
-
-**Compile environment is currently unusable (open blocker, 2026-10-09):** every script compiled by the present SCI Companion setup is incompatible with the shipped patches. Compiling the unmodified `Trash.sc` gives `250.SCR` 5,138 bytes and `250.HEP` 2,602 bytes against the committed 5,136 and 2,490: each object gains an extra heap entry (header count `1e` to `1f`). Booting such a build ends in "Oops! Error 4" (entering the taxi) or a nonsense missing-resource error. The same pattern appears in the Compile All build. Without the restored `LB2/src/*.sco` object caches a compile writes nothing. Do not compile anything until the original SCI Companion version/object-format setting is recovered; it is not in `game.ini` or the Wine registry and is likely in SCI Companion's game-version dialog. The `.sco` set in `LB2/src` dates from the 11:34 Compile All run (a backup copy of it was taken at 12:00 on this machine; no earlier set exists). Also, SCI Companion's "Compile modified scripts before run" option (registry `CompileModifiedScriptsBeforeRun`) recompiles scripts on every Run and silently replaced `0.SCR`/`250.SCR`; the maintainer turned it off. Launch the game only with `./tools/run_dosbox.sh`.
-
-**Drafted fix waiting on the compiler (PLAY-001/002):** in `Trash.sc` (Script 250) change both `(if (proc0_10 1)` tests that select the dirty taxi (the `rm250` init and the trash hotspot's `sel_110`) to `(if (and (proc0_10 1) (not (proc0_2 27)))`. Flag 27 is set when the claim ticket is taken, so the dirty cab then never reappears. Compile only script 250, boot-test, and play the taxi both before and after taking the ticket.
-
-**Next session should start with:** Recover the compile environment (see the blocker above), then play to the inquest to verify P4-06 (Script 750). Use `python3 tools/compile.py <script>` for any further change and boot the game before committing. Never use Compile All.

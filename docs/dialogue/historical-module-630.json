@@ -1,0 +1,8 @@
+{
+  "module": 630,
+  "character": "Carrington trunk description",
+  "voice": "Period-neutral steamship identification replacing a vessel launched decades after the 1926 setting.",
+  "entries": [
+    {"tuple": [1, 1, 0, 1, 99], "text": "The trunk's nametag identifies it as Carrington's personal luggage. Beside it is a sticker bearing the emblem of a North Atlantic steamship line."}
+  ]
+}

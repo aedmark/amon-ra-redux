@@ -1,0 +1,24 @@
+{
+  "module": 210,
+  "character": "Sandwich vendor",
+  "voice": "A fast-talking, impatient New York street vendor whose comic sales obsession does not depend on mock-Italian spelling.",
+  "entries": [
+    {"tuple": [3, 6, 7, 1, 24], "text": "What do I look like, the Answer Man? I don't know anything except corned-beef sandwiches, and I have one right here!"},
+    {"tuple": [3, 6, 4, 1, 24], "text": "Never met the fellow. I'm too busy meeting customers and selling sandwiches. Corned-beef sandwiches!"},
+    {"tuple": [3, 6, 5, 1, 24], "text": "Sorry, lady, never been there. Do you want a sandwich or not? Hot corned beef!"},
+    {"tuple": [3, 6, 8, 1, 24], "text": "It is a nice, fresh, hot corned-beef sandwich. You asked for it; you eat it!"},
+    {"tuple": [3, 6, 6, 1, 24], "text": "I don't know anything about it, lady. What I know is that I have a fine hot corned-beef sandwich here. Do you want one or not?"},
+    {"tuple": [3, 10, 0, 2, 24], "text": "Mamma mia, another coupon! I'm going to go broke. What a crummy idea, advertising in the newspaper."},
+    {"tuple": [3, 10, 0, 3, 24], "text": "Take your sandwich and get out of here before I change my mind."},
+    {"tuple": [3, 4, 0, 1, 24], "text": "Keep your hands off, lady."},
+    {"tuple": [3, 15, 0, 1, 24], "text": "You bought the corned-beef sandwich; you eat the corned-beef sandwich!"},
+    {"tuple": [3, 2, 3, 1, 24], "text": "Hot corned beef! Get your hot corned-beef sandwich!"},
+    {"tuple": [3, 2, 3, 3, 24], "text": "Lean corned beef? This is the leanest corned beef in the city--maybe in the country. So lean the cow kept tipping over. You want a sandwich, lady?"},
+    {"tuple": [3, 2, 1, 1, 24], "text": "Hot corned beef! Get your hot corned-beef sandwich!"},
+    {"tuple": [3, 2, 1, 3, 24], "text": "Of course it smells wonderful. It is a nice hot corned-beef sandwich. Do you want one?"},
+    {"tuple": [3, 2, 1, 5, 24], "text": "All right! Hot corned beef here! Corned-beef sandwiches!"},
+    {"tuple": [3, 2, 2, 1, 24], "text": "Hot corned beef! Get your hot corned-beef sandwich!"},
+    {"tuple": [3, 2, 2, 3, 24], "text": "Lady, if you want to smell the corned beef, you have to buy a sandwich. Are you buying or not?"},
+    {"tuple": [3, 2, 2, 5, 24], "text": "Then stand somewhere else. You're blocking the customers. Hot corned beef here!"}
+  ]
+}

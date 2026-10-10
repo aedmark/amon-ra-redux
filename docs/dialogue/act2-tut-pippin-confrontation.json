@@ -1,0 +1,20 @@
+{
+  "module": 120,
+  "character": "Dr. Ptahsheptut Smith and Dr. Pippin Carter",
+  "voice": "A sharp dispute over repatriation between an educated Egyptian advocate and an arrogant colonial archaeologist, with hostility grounded in their positions rather than ethnic caricature.",
+  "entries": [
+    {"tuple": [1, 0, 0, 1, 9], "text": "There is still time to correct this grievous mistake, Dr. Carter. The Dagger of Amon Ra must be returned to Egypt."},
+    {"tuple": [1, 0, 0, 2, 10], "text": "Stay out of my way, or I will thrash you within an inch of your life."},
+    {"tuple": [1, 0, 0, 3, 9], "text": "Surely we can settle this without resorting to threats."},
+    {"tuple": [1, 0, 0, 4, 10], "text": "Who are you to tell me what I may do with my own property?"},
+    {"tuple": [1, 0, 0, 5, 9], "text": "Your property? By what authority do you make that claim?"},
+    {"tuple": [1, 0, 0, 6, 10], "text": "The Egyptian Antiquities Service authorized the excavation and division of finds. If you object, take the matter up with your own government."},
+    {"tuple": [1, 0, 0, 7, 9], "text": "I am making every effort to remain diplomatic, Dr. Carter. I suggest you do the same."},
+    {"tuple": [1, 0, 0, 8, 10], "text": "This is not a matter for diplomacy. It is a matter of accepting the facts."},
+    {"tuple": [1, 0, 0, 9, 9], "text": "My acceptance is not the only issue. Many in Egypt are furious, and some may take drastic measures if their appeals continue to be ignored."},
+    {"tuple": [1, 0, 0, 10, 10], "text": "Are you threatening me, you pompous little man?"},
+    {"tuple": [1, 0, 0, 11, 9], "text": "I am warning you that people will defend their country when its national treasures are carried away."},
+    {"tuple": [1, 0, 0, 12, 10], "text": "Anyone who lays a finger on my exhibit, or threatens me, will find himself in deep trouble. Do I make myself clear?"},
+    {"tuple": [1, 0, 0, 13, 9], "text": "Perfectly clear, Dr. Carter."}
+  ]
+}

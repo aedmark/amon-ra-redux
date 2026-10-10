@@ -1,0 +1,94 @@
+{
+  "module": 340,
+  "character": "Act 2 museum-party ensemble",
+  "voice": "Fourteen clue-bearing eavesdropping conversations in the established P2-08 voices, preserving flirtation, prejudice, vanity, suspicion, and plot information without phonetic ethnicity or national caricature.",
+  "entries": [
+    {"tuple": [8, 0, 0, 2, 27], "text": "Countess, I hardly think that is likely. Secret societies of the kind you describe have not existed for hundreds of years."},
+    {"tuple": [8, 0, 0, 4, 27], "text": "I am only expressing my opinion, madam. I certainly do not claim expertise in secret societies."},
+    {"tuple": [8, 0, 0, 5, 29], "text": "QUITE so. My theory is as GOOD as anyone's, DARLING, and it comes from a RELIABLE source."},
+    {"tuple": [8, 0, 0, 6, 27], "text": "Oh? Who might that be?"},
+    {"tuple": [8, 0, 0, 8, 27], "text": "There is a first time for everything, Countess. I still find your theory far-fetched."},
+    {"tuple": [8, 0, 0, 10, 2], "text": "What? Oh...I definitely think it is worth considering, Countess."},
+
+    {"tuple": [10, 0, 0, 1, 6], "text": "...so that is the arrangement, Countess."},
+    {"tuple": [10, 0, 0, 3, 6], "text": "No argument from me. The walls have ears around here--and so do certain reporters, if you follow me."},
+    {"tuple": [10, 0, 0, 5, 6], "text": "Certainly, toots."},
+
+    {"tuple": [5, 0, 0, 16, 9], "text": "The matter is not settled merely because you wish it so, Detective."},
+    {"tuple": [5, 0, 0, 17, 19], "text": "What's that supposed to be, some kind of diplomatic answer?"},
+
+    {"tuple": [13, 0, 0, 1, 10], "text": "There I was above the excavation in the Valley of the Kings, with our foreman Mahmoud reviewing the day's survey, when a shout rose from the workers below."},
+    {"tuple": [13, 0, 0, 7, 28], "text": "Magnifique! A remarkable achievement, Dr. Carter."},
+    {"tuple": [13, 0, 0, 8, 6], "text": "And that is when you lifted it, correct?"},
+    {"tuple": [13, 0, 0, 9, 10], "text": "I did not 'lift' it, you irritating little man. I brought it from the temple and presented it to the workers, who gathered around to admire the discovery and congratulate me."},
+    {"tuple": [13, 0, 0, 10, 27], "text": "That is difficult to believe, Dr. Carter. Egyptian workers have conducted archaeological digs with great pride for many years. I doubt they would exaggerate their admiration to such an extent."},
+    {"tuple": [13, 0, 0, 12, 27], "text": "No, I was not there."},
+    {"tuple": [13, 0, 0, 13, 10], "text": "Precisely. And when were you last in Egypt, Mr. Najeer? You speak with remarkable confidence for a man who has been away so long."},
+    {"tuple": [13, 0, 0, 14, 27], "text": "It has been several years."},
+    {"tuple": [13, 0, 0, 19, 28], "text": "If you will excuse me, I see someone with whom I must speak."},
+
+    {"tuple": [14, 0, 0, 1, 6], "text": "Yvette is quite a woman, is she not?"},
+    {"tuple": [14, 0, 0, 2, 27], "text": "Yes. Miss Delacroix possesses a remarkable confidence. My wife has always preferred more conventional surroundings."},
+    {"tuple": [14, 0, 0, 3, 11], "text": "Miss Delacroix does have a gift for turning unusual surroundings to her advantage. I have found conversation with her unexpectedly memorable."},
+    {"tuple": [14, 0, 0, 5, 6], "text": "We Americans do produce a memorable phrase now and then."},
+
+    {"tuple": [7, 0, 0, 1, 10], "text": "I TOLD you to stop BOTHERING me, you tiresome bureaucrat!"},
+
+    {"tuple": [9, 0, 0, 1, 28], "text": "Countess, I understand you were married to the museum's previous president."},
+    {"tuple": [9, 0, 0, 2, 29], "text": "Yes, DARLING, that is correct. Sterling Waldorf-Carlton was SUCH a charming man, and SO wealthy. My heart is an empty VOID without him."},
+    {"tuple": [9, 0, 0, 6, 28], "text": "It is difficult to lose someone you love. You were married only a short time, were you not?"},
+    {"tuple": [9, 0, 0, 7, 29], "text": "Yes. I had only TWO short but charming months of MARRIED life with Sterling before he DIED."},
+    {"tuple": [9, 0, 0, 8, 28], "text": "And how long had you known him before the marriage?"},
+    {"tuple": [9, 0, 0, 9, 29], "text": "We met only one CHARMING month before deciding to marry. It was LOVE at first sight."},
+    {"tuple": [9, 0, 0, 11, 29], "text": "I had been in this country only a few WEEKS when I met Sterling aboard an offshore casino ship. Drinking and gambling are quite LEGAL there, you know, and ALL the right people attend. Sterling simply SWEPT me off my feet."},
+    {"tuple": [9, 0, 0, 12, 28], "text": "Then Sterling must have carried a very large broom."},
+    {"tuple": [9, 0, 0, 15, 29], "text": "The MONEY does not MATTER, darling. There is an annoying PROBLEM with the estate. Sterling was changing his WILL when he died--to leave me MORE money, perhaps. I am SURE my ATTORNEY will settle it."},
+
+    {"tuple": [4, 0, 0, 1, 28], "text": "Ryan, I am finding it very difficult to keep my hands off you."},
+    {"tuple": [4, 0, 0, 3, 28], "text": "They are not important. YOU are the most powerful man here, my Ryan."},
+    {"tuple": [4, 0, 0, 5, 28], "text": "The doctor is old and weak. You are young...and strong."},
+
+    {"tuple": [6, 0, 0, 1, 28], "text": "Archaeology is such a MASCULINE profession. Breaking into ancient tombs with a sledgehammer, forcing open treasure chambers, handling gold artifacts... It is all very STIMULATING, no?"},
+    {"tuple": [6, 0, 0, 3, 28], "text": "And it must be such a burden to bear this greatness. With so much pressure to perform, you must be perfect at all times."},
+    {"tuple": [6, 0, 0, 5, 28], "text": "Your problems are quite obvious, Dr. Carter."},
+    {"tuple": [6, 0, 0, 7, 28], "text": "But the Tutankhamen discovery is nothing beside YOUR achievement, surely."},
+    {"tuple": [6, 0, 0, 11, 28], "text": "I would LOVE to hear more about your work, Dr. Carter. Perhaps later tonight?"},
+    {"tuple": [6, 0, 0, 13, 28], "text": "Oh, yes. Everyone will be here tonight, will they not? There is much to prepare before your exhibit opens tomorrow."},
+    {"tuple": [6, 0, 0, 15, 28], "text": "That sounds wonderful. Perhaps you would come to my office then?"},
+    {"tuple": [6, 0, 0, 17, 28], "text": "It is very gracious of you to spare the time."},
+    {"tuple": [6, 0, 0, 19, 28], "text": "How shall I repay such courtesy? I know how busy you are, Dr. Carter."},
+
+    {"tuple": [11, 0, 0, 1, 28], "text": "I admire a man who speaks with confidence and knows precisely what he wants."},
+    {"tuple": [11, 0, 0, 2, 27], "text": "My household is orderly because my wife and I understand our responsibilities to one another."},
+    {"tuple": [11, 0, 0, 3, 9], "text": "Do not mistake Mr. Najeer's domestic opinions for those of an entire civilization. Egypt has contained many ideas over many centuries."},
+    {"tuple": [11, 0, 0, 4, 28], "text": "And are Egyptian men equally confident in more private matters?"},
+    {"tuple": [11, 0, 0, 5, 27], "text": "Speaking for myself, I make it my business to be knowledgeable in every matter that concerns me."},
+    {"tuple": [11, 0, 0, 6, 9], "text": "I have certainly heard no complaints regarding my own...abilities, Miss Delacroix."},
+    {"tuple": [11, 0, 0, 7, 27], "text": "Miss Bow! I did not see you standing there."},
+    {"tuple": [11, 0, 0, 9, 28], "text": "A turkey leg sounds excellent. I will accompany you, Dr. Smith."},
+
+    {"tuple": [12, 0, 0, 1, 28], "text": "You are interested in great art, are you not? Then come with me this evening. I will give you a private tour of the Old Masters Gallery."},
+    {"tuple": [12, 0, 0, 3, 28], "text": "I promise you will not be wasting your time. You will enjoy it very much."},
+    {"tuple": [12, 0, 0, 5, 28], "text": "You ARE studying art at the university, no?"},
+    {"tuple": [12, 0, 0, 7, 28], "text": "Then it is settled. I will give you the private tour shortly."},
+    {"tuple": [12, 0, 0, 9, 28], "text": "There is no need to thank me yet. I expect to enjoy it as much as you will."},
+
+    {"tuple": [2, 0, 0, 2, 28], "text": "The food is adequate. I eat very little; one must take care of one's figure."},
+    {"tuple": [2, 0, 0, 9, 28], "text": "Merci, Miss Bow. And your gown is...a little out of date, but charming nonetheless."},
+
+    {"tuple": [3, 0, 0, 1, 19], "text": "Well, well. Look what trouble dragged in."},
+    {"tuple": [3, 0, 0, 2, 6], "text": "Careful, O'Riley. I do not care for the way you say that."},
+    {"tuple": [3, 0, 0, 4, 6], "text": "Only by low-class individuals, O'Riley. Are you not worried about being seen with me?"},
+    {"tuple": [3, 0, 0, 6, 6], "text": "I am a great patron of the arts. That is the sort of refined gentleman I am."},
+    {"tuple": [3, 0, 0, 8, 6], "text": "Of course I do."},
+    {"tuple": [3, 0, 0, 10, 6], "text": "Ah...is that the Countess over there? I must speak with her."},
+
+    {"tuple": [1, 0, 0, 1, 6], "text": "Well, you have become quite the society dame. I almost failed to recognize you with your clothes on."},
+    {"tuple": [1, 0, 0, 2, 28], "text": "Excusez-moi. Do I know you, sir?"},
+    {"tuple": [1, 0, 0, 3, 6], "text": "Ziggy. Surely you remember me. Or are we pretending otherwise?"},
+    {"tuple": [1, 0, 0, 4, 28], "text": "You must be joking. Perhaps you have confused me with someone else."},
+    {"tuple": [1, 0, 0, 5, 6], "text": "I am not joking. You are Yvette Delacroix. I would recognize you anywhere."},
+    {"tuple": [1, 0, 0, 6, 28], "text": "I am sure I do not know what you mean, Mr. Ziggy."},
+    {"tuple": [1, 0, 0, 7, 6], "text": "Ah. You are worried one of these high-hats will hear us. I understand. We can speak later."}
+  ]
+}

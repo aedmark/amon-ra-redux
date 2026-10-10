@@ -1,0 +1,12 @@
+{
+  "module": 335,
+  "character": "Wolf Heimlich at museum check-in",
+  "voice": "Terse, formal, and suspicious, preserving Heimlich's rigid authority without faux-German spelling.",
+  "entries": [
+    {"tuple": [3, 4, 7, 1, 18], "text": "Excuse me, Miss Bow, but this affair is by invitation only. Your papers, please."},
+    {"tuple": [6, 4, 0, 1, 18], "text": "Please, Miss Bow. We scarcely know one another."},
+    {"tuple": [6, 11, 0, 1, 18], "text": "Thank you, Miss Bow. I will return this pass when you leave. Enjoy your evening."},
+    {"tuple": [6, 2, 0, 1, 18], "text": "I have no time to talk, Miss Bow. I am the Chief of Security. The responsibility requires my full attention."},
+    {"tuple": [6, 2, 7, 1, 18], "text": "This affair is by invitation only, Miss Bow. Your papers, please."}
+  ]
+}

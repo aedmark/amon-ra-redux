@@ -1,0 +1,10 @@
+{
+  "module": 1886,
+  "character": "Dr. Archibald Carrington adjacent cleanup",
+  "voice": "Correct two spelling errors and assign Carrington's interrupted line to Carrington rather than the narrator.",
+  "entries": [
+    {"tuple": [1, 6, 38, 1, 11], "text": "There's a wonderful piece of archaeological history. It grieves me to imagine it in some unaesthetic Philistine's unwashed hands."},
+    {"tuple": [1, 6, 68, 1, 11], "text": "I try to avoid people's personal affairs, Miss Bow. I find them infinitely distasteful."},
+    {"tuple": [1, 6, 34, 4, 99], "set_talker": 11, "text": "...Miss Bow, I'm certain there is something I should be doing. I've enjoyed our chat, but please excuse me."}
+  ]
+}
