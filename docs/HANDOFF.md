@@ -12,14 +12,15 @@ Security: [SECURITY.md](SECURITY.md). Changes: [CHANGELOG.md](CHANGELOG.md). Old
 
 ## Current state
 
-_Last updated: 2026-10-10, session 29: Act 2 Rameses and Heimlich dialogue passes._
+_Last updated: 2026-10-10, session 30: Act 2 Yvette dialogue pass._
 
-**Where things stand, in one paragraph:** P2-08's act-by-act dialogue pass is underway. Act 1 is complete. Act 2 now has reviewed routine-dialogue passes for Rameses Najeer (94 records in module 1891) and Wolf Heimlich (109 records in module 1889). Rameses speaks as a precise, reserved accountant and informed advocate for Egyptian cultural repatriation; Heimlich remains a militant, paranoid, darkly comic security chief grounded in period duelling culture and personal shame rather than faux-German spelling or premature Nazi parody. Rameses's Dr. Smith self-reference error and Heimlich's anachronistic “Heimlich Death Maneuver” are corrected. Their explicit later murder-reaction records remain untouched for their respective act review. Tuple-addressed manifests reproduce every approved rewrite through `tools/dialogue.py`, and all tuple/talker/reference metadata remains unchanged (D-031).
+**Where things stand, in one paragraph:** P2-08's act-by-act dialogue pass is underway. Act 1 is complete. Act 2 now has reviewed routine-dialogue passes for Rameses Najeer (94 records in module 1891), Wolf Heimlich (109 records in module 1889), and Yvette Delacroix (111 records in module 1885 plus three adjacent lines). Rameses is a precise accountant and advocate for Egyptian cultural repatriation; Heimlich remains militant and paranoid without premature Nazi parody; Yvette is fluent, socially perceptive, ambitious, and knowingly sensual without faux-French spelling or broken grammar. Yvette's Steve exchange now foreshadows their later encounter instead of recounting it prematurely. Explicit later murder-reaction records and the later Sterling-diary talker-ID error remain untouched for their respective act review. Tuple-addressed manifests reproduce every approved rewrite through `tools/dialogue.py`, and all tuple/talker/reference metadata remains unchanged (D-031).
 
 **Verified** (2026-10-10, Linux workspace)
 
 | Suite | Result |
 | --- | --- |
+| P2-08 Act 2 Yvette rewrite | **Pass: 114 manifest records match module 1885; all 172 tuple/talker records preserved; 13 later reaction records unchanged** |
 | P2-08 Act 2 Heimlich rewrite | **Pass: 109 manifest records match module 1889; all 187 tuple/talker records preserved; 4 later reaction records unchanged** |
 | P2-08 Act 2 Rameses rewrite | **Pass: 94 manifest records match module 1891; all 144 tuple/talker records preserved; 18 later reaction records unchanged** |
 | P2-08 Act 1 message rewrites | **Pass: modules 270/290/295 structurally parsed; exact tuple/talker/reference metadata preserved** |
@@ -48,7 +49,7 @@ _Last updated: 2026-10-10, session 29: Act 2 Rameses and Heimlich dialogue passe
 - **Phase 4 Scoring & Mystery:** Accurate act grades (P4-05), clear inquest scope (P4-06), evidence checklist (P4-03), and decoupled quiz/dagger outcome (P4-04).
 - **Act 1 Investigation Context:** Authentic starting contacts preserved in `lb2InitCode.sc`; suspects discovered naturally through Act 1 inquiry trees (D-030).
 - **Act 1 Dialogue:** Lo Fat, Sgt. O'Flaherty, and O'Riley rewritten as distinct, readable period characters without altering dialogue logic (P2-08, D-031).
-- **Act 2 Dialogue:** Rameses and Heimlich routine dialogue rewritten as distinct, readable period characterization; later murder reactions deliberately deferred (P2-08, D-031).
+- **Act 2 Dialogue:** Rameses, Heimlich, and Yvette routine dialogue rewritten as distinct, readable period characterization; later murder reactions deliberately deferred (P2-08, D-031).
 - **Documentation Architecture:** `docs/ROADMAP.md`, `DECISIONS.md` (D-001 through D-031), `docs/manual/`, `docs/manual/manual.html`, and `docs/PLAYTEST_CHECKLIST.md` synchronized.
 
 **Not verified**
@@ -64,8 +65,8 @@ _Last updated: 2026-10-10, session 29: Act 2 Rameses and Heimlich dialogue passe
 
 ## Next steps (in order)
 
-1. Obtain maintainer review of Heimlich's applied Act 2 wording; revise before beginning the next character if requested.
-2. Continue P2-08 in the approved order: Yvette, O'Riley, Ziggy, then Tut and adjacent-speaker cleanup, with separate maintainer review for each character.
+1. Obtain maintainer review of Yvette's applied Act 2 wording; revise before beginning the next character if requested.
+2. Continue P2-08 in the approved order: O'Riley, Ziggy, then Tut and adjacent-speaker cleanup, with separate maintainer review for each character.
 3. Resume the clean DOSBox-X playthrough and begin P5-01 only after the dialogue and playtest gates close.
 
 ## Open questions for maintainers
@@ -73,6 +74,27 @@ _Last updated: 2026-10-10, session 29: Act 2 Rameses and Heimlich dialogue passe
 None currently open. Q-001 and Q-002 have been resolved by D-007, D-017, and D-018.
 
 ## Session log
+
+### Session 30: 2026-10-10: Act 2 Yvette Dialogue Pass
+
+**Contributor:** Codex and maintainer
+
+**Goal:** Preserve Yvette Delacroix's intelligence, ambition, sexual confidence, and mystery-relevant relationships while removing faux-French spelling, broken grammar, and reflexive promiscuity jokes.
+
+**Done:**
+- Reworked all 111 routine Yvette records in module 1885 with fluent English, selective French vocabulary, poised social observation, and deliberate rather than accidental innuendo.
+- Preserved the plot-bearing implications of her work as a speakeasy hostess and her relationships with Sterling, Carrington, O'Riley, Lo Fat, Pippin, and Steve.
+- Rewrote the Steve topic and its adjacent Laura response to foreshadow their later encounter rather than report it prematurely.
+- Cleaned Laura's adjacent speakeasy question and replaced the narrator's jealous “mousy and naive” comparison with a direct description of Yvette's elegance and self-possession.
+- Added `docs/dialogue/act2-yvette.json` and applied it idempotently to `LB2/1885.MSG`; deferred the later Sterling-diary talker-ID error and explicit murder reactions.
+
+**Changed:** `LB2/1885.MSG`, `docs/dialogue/act2-yvette.json`, and synchronized roadmap, decision, handoff, and manual documentation.
+
+**Decisions:** D-031.
+
+**Verified:** All 172 message tuple/talker records retain identical metadata; exactly 111 Yvette, two Laura, and one narrator texts changed; all 13 explicit later reaction records remain outside the manifest; documentation/manual validation and build pass.
+
+**Next session should start with:** Maintainer review of Yvette, followed by O'Riley only after approval.
 
 ### Session 29: 2026-10-10: Act 2 Rameses and Heimlich Dialogue Passes
 
@@ -279,25 +301,3 @@ None currently open. Q-001 and Q-002 have been resolved by D-007, D-017, and D-0
 **Verified:** SCI Companion compilation of Script 26; static point-event, divisor, grade-band, and startup-counter audit; DOSBox-X original-interpreter startup smoke; documentation/manual validation; unchanged base archive hashes. Direct save-based traversal of all act and band boundaries remains a manual regression test.
 
 **Next session should start with:** P4-06 (Non-Essential Quiz Questions Delineation).
-
-### Session 20: 2026-10-08: P4-04 Quiz / Dagger Possession Logic Decoupling
-
-**Contributor:** Codex
-
-**Goal:** Stop theft-quiz answers from retroactively changing whether Laura recovered the Dagger of Amon Ra.
-
-**Done:**
-- Traced the actual ending controller to Script 750 rather than the outline's proposed Script 720.
-- Confirmed that `global126` combines murder-case success with theft-answer correctness and that downstream epilogue content misuses the latter as physical dagger state.
-- Added a shared recovery predicate accepting inventory item 11 or durable acquisition bit 155, covering both retained and surrendered custody.
-- Preserved the original quiz result through the coroner's feedback, then normalized the four-way outcome at the epilogue boundary from murder success plus physical recovery.
-- Routed the newspaper art, intermediate ending scenes, and all 19 Script 785 character cards through the normalized state without changing message resources.
-- Compiled Script 750, recorded D-025, and synchronized the roadmap, architecture, changelog, test plan, handoff, and manual.
-
-**Changed:** `LB2/src/rm750.sc`, `LB2/750.SCR`, `docs/ROADMAP.md`, `docs/ARCHITECTURE.md`, `docs/DECISIONS.md`, `docs/CHANGELOG.md`, `docs/TESTING.md`, `docs/manual/amon-ra.manual.json`, `docs/manual/manual.html`, `docs/HANDOFF.md`, `docs/archive/SESSION_LOG_2026_10.md`.
-
-**Decisions:** D-025 (Normalize physical dagger state at the epilogue boundary).
-
-**Verified:** SCI Companion compilation of Script 750; static four-state outcome, recovery-bit, and downstream route audit; DOSBox-X original-interpreter startup smoke; documentation/manual validation; unchanged base archive hashes. Direct save-based traversal of the four outcome combinations remains a manual regression test.
-
-**Next session should start with:** P4-05 (Grading and Scoring System Standardization).

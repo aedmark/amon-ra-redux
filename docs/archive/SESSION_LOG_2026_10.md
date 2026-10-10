@@ -431,6 +431,28 @@ Archived verbatim from `docs/HANDOFF.md` when its live session log exceeded ten 
 
 **Next session should start with:** P4-04 (Quiz / Dagger Possession Logic Decoupling).
 
+### Session 20: 2026-10-08: P4-04 Quiz / Dagger Possession Logic Decoupling
+
+**Contributor:** Codex
+
+**Goal:** Stop theft-quiz answers from retroactively changing whether Laura recovered the Dagger of Amon Ra.
+
+**Done:**
+- Traced the actual ending controller to Script 750 rather than the outline's proposed Script 720.
+- Confirmed that `global126` combines murder-case success with theft-answer correctness and that downstream epilogue content misuses the latter as physical dagger state.
+- Added a shared recovery predicate accepting inventory item 11 or durable acquisition bit 155, covering both retained and surrendered custody.
+- Preserved the original quiz result through the coroner's feedback, then normalized the four-way outcome at the epilogue boundary from murder success plus physical recovery.
+- Routed the newspaper art, intermediate ending scenes, and all 19 Script 785 character cards through the normalized state without changing message resources.
+- Compiled Script 750, recorded D-025, and synchronized the roadmap, architecture, changelog, test plan, handoff, and manual.
+
+**Changed:** `LB2/src/rm750.sc`, `LB2/750.SCR`, `docs/ROADMAP.md`, `docs/ARCHITECTURE.md`, `docs/DECISIONS.md`, `docs/CHANGELOG.md`, `docs/TESTING.md`, `docs/manual/amon-ra.manual.json`, `docs/manual/manual.html`, `docs/HANDOFF.md`, `docs/archive/SESSION_LOG_2026_10.md`.
+
+**Decisions:** D-025 (Normalize physical dagger state at the epilogue boundary).
+
+**Verified:** SCI Companion compilation of Script 750; static four-state outcome, recovery-bit, and downstream route audit; DOSBox-X original-interpreter startup smoke; documentation/manual validation; unchanged base archive hashes. Direct save-based traversal of the four outcome combinations remains a manual regression test.
+
+**Next session should start with:** P4-05 (Grading and Scoring System Standardization).
+
 ### Session 1: 2026-10-07: Dev Plan & Modernization Roadmap Creation
 
 **Contributor:** Antigravity

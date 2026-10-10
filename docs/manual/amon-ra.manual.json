@@ -658,7 +658,7 @@
             "character",
             "p2"
           ],
-          "what": "Rewrites culturally stereotyped dialogue act by act without erasing identity, clues, jokes, period attitudes, or characterization. Act 1 covers Lo Fat, Sgt. O'Flaherty, and Detective O'Riley. Act 2 continues with Rameses Najeer's and Wolf Heimlich's routine dialogue; later murder reactions remain reserved for their respective act review.",
+          "what": "Rewrites culturally stereotyped dialogue act by act without erasing identity, clues, jokes, period attitudes, or characterization. Act 1 covers Lo Fat, Sgt. O'Flaherty, and Detective O'Riley. Act 2 continues with Rameses Najeer's, Wolf Heimlich's, and Yvette Delacroix's routine dialogue; later murder reactions remain reserved for their respective act review.",
           "how": {
             "lead": "Uses reviewed tuple-addressed manifests and loose message overrides:",
             "points": [
@@ -667,6 +667,7 @@
               "Keep O'Riley blustering, sexist, and deliberately theatrical because those qualities serve his antagonistic role, but make every sentence intelligible.",
               "Give Rameses precise, reserved speech rooted in his work, family, historical knowledge, and repatriation argument; remove the written lisp and exoticizing cliches without diminishing his Egyptian identity.",
               "Keep Heimlich militant, suspicious, and devoted to museum security while replacing faux-German spelling, ethnic-superiority jokes, and premature Nazi parody with terse period characterization.",
+              "Give Yvette fluent, poised, knowingly sensual dialogue that preserves her ambition, intelligence, strategic relationships, and mystery-relevant history without making broken English or French promiscuity the joke.",
               "Apply text by exact noun, verb, condition, sequence, and talker tuple with tools/dialogue.py; preserve all routing and reference metadata."
             ]
           },
@@ -703,6 +704,14 @@
             {
               "label": "Heimlich Dialogue Manifest",
               "target": "docs/dialogue/act2-heimlich.json"
+            },
+            {
+              "label": "Yvette Dialogue",
+              "target": "LB2/1885.MSG"
+            },
+            {
+              "label": "Yvette Dialogue Manifest",
+              "target": "docs/dialogue/act2-yvette.json"
             }
           ],
           "related": [
