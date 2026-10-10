@@ -409,6 +409,28 @@ Archived verbatim from `docs/HANDOFF.md` when its live session log exceeded ten 
 
 **Next session should start with:** P4-03 (Hint Book Contradictions & Best Ending Alignment).
 
+### Session 19: 2026-10-08: P4-03 Hint Book Contradictions & Best Ending Alignment
+
+**Contributor:** Codex
+
+**Goal:** Make the best-ending evidence gate match Sierra's published investigation requirements instead of vanilla's accidental subset.
+
+**Done:**
+- Audited the owner-supplied OneShortEye issue analysis, Sierra's official hint book, and all Script 750 outcome branches.
+- Confirmed that vanilla's “all evidence” check included only dagger, grapes, wire cutters, bifocals, and red hair, while the hint book names 13 objects.
+- Added a shared Script 750 predicate for all 13 objects and used it consistently in both local result and `global126` outcome selection.
+- Preserved evidence credit after dagger surrender and carbon-paper consumption through existing bits 155 and 170.
+- Added non-scoring Room 560 discovery bit 183 so inspecting or taking Watney's police file satisfies the published requirement.
+- Compiled Scripts 560 and 750, recorded D-024, added the research-source index, and synchronized the roadmap, architecture, changelog, test plan, handoff, and manual.
+
+**Changed:** `LB2/src/rm560.sc`, `LB2/src/rm750.sc`, `LB2/560.SCR`, `LB2/750.SCR`, `docs/ROADMAP.md`, `docs/ARCHITECTURE.md`, `docs/DECISIONS.md`, `docs/CHANGELOG.md`, `docs/TESTING.md`, `docs/reference/README.md`, `docs/manual/amon-ra.manual.json`, `docs/manual/manual.html`, `docs/HANDOFF.md`, `docs/archive/SESSION_LOG_2026_10.md`.
+
+**Decisions:** D-024 (Use Sierra's complete evidence checklist for the best ending).
+
+**Verified:** SCI Companion compilation of Scripts 560 and 750; static 13-item checklist and durable-state audit; DOSBox-X original-interpreter startup smoke; documentation/manual validation; unchanged base archive hashes. Direct save-based traversal of the full positive and negative ending matrix remains a manual regression test.
+
+**Next session should start with:** P4-04 (Quiz / Dagger Possession Logic Decoupling).
+
 ### Session 1: 2026-10-07: Dev Plan & Modernization Roadmap Creation
 
 **Contributor:** Antigravity

@@ -658,13 +658,15 @@
             "character",
             "p2"
           ],
-          "what": "Rewrites culturally stereotyped dialogue act by act without erasing identity, clues, jokes, period attitudes, or characterization. Act 1 covers Lo Fat, Sgt. O'Flaherty, and Detective O'Riley.",
+          "what": "Rewrites culturally stereotyped dialogue act by act without erasing identity, clues, jokes, period attitudes, or characterization. Act 1 covers Lo Fat, Sgt. O'Flaherty, and Detective O'Riley. Act 2 continues with Rameses Najeer's and Wolf Heimlich's routine dialogue; later murder reactions remain reserved for their respective act review.",
           "how": {
             "lead": "Uses reviewed tuple-addressed manifests and loose message overrides:",
             "points": [
               "Give Lo Fat polished grammar, dry humour, and a light British-English cadence while retaining his garment knowledge, baseball interest, flirtation, and clue disclosures.",
               "Give Sgt. O'Flaherty readable Irish-American rhythm and idiom without stage-Irish phonetic spelling, while retaining his hunger, obstruction, and speakeasy hint.",
               "Keep O'Riley blustering, sexist, and deliberately theatrical because those qualities serve his antagonistic role, but make every sentence intelligible.",
+              "Give Rameses precise, reserved speech rooted in his work, family, historical knowledge, and repatriation argument; remove the written lisp and exoticizing cliches without diminishing his Egyptian identity.",
+              "Keep Heimlich militant, suspicious, and devoted to museum security while replacing faux-German spelling, ethnic-superiority jokes, and premature Nazi parody with terse period characterization.",
               "Apply text by exact noun, verb, condition, sequence, and talker tuple with tools/dialogue.py; preserve all routing and reference metadata."
             ]
           },
@@ -685,6 +687,22 @@
             {
               "label": "Act 1 Dialogue Manifests",
               "target": "docs/dialogue/act1-lo-fat.json"
+            },
+            {
+              "label": "Rameses Dialogue",
+              "target": "LB2/1891.MSG"
+            },
+            {
+              "label": "Rameses Dialogue Manifest",
+              "target": "docs/dialogue/act2-rameses.json"
+            },
+            {
+              "label": "Heimlich Dialogue",
+              "target": "LB2/1889.MSG"
+            },
+            {
+              "label": "Heimlich Dialogue Manifest",
+              "target": "docs/dialogue/act2-heimlich.json"
             }
           ],
           "related": [

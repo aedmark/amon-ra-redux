@@ -12,14 +12,16 @@ Security: [SECURITY.md](SECURITY.md). Changes: [CHANGELOG.md](CHANGELOG.md). Old
 
 ## Current state
 
-_Last updated: 2026-10-10, session 28: Act 1 period dialogue de-caricature pass._
+_Last updated: 2026-10-10, session 29: Act 2 Rameses and Heimlich dialogue passes._
 
-**Where things stand, in one paragraph:** P2-08's act-by-act dialogue pass is underway, with Act 1 complete. Lo Fat's 86 spoken records now use polished grammar, dry wit, and a light British-English cadence; Sgt. O'Flaherty's 64 records retain restrained Irish-American rhythm without stage-Irish spelling; and O'Riley's 11-line office scene remains intentionally blustering, sexist, and theatrical while becoming readable. Tuple-addressed manifests in `docs/dialogue/` reproduce loose overrides 270, 290, and 295 through `tools/dialogue.py`; all clue disclosures, talkers, references, and progression routing are unchanged (D-031). The game initializes cleanly in DOSBox-X.
+**Where things stand, in one paragraph:** P2-08's act-by-act dialogue pass is underway. Act 1 is complete. Act 2 now has reviewed routine-dialogue passes for Rameses Najeer (94 records in module 1891) and Wolf Heimlich (109 records in module 1889). Rameses speaks as a precise, reserved accountant and informed advocate for Egyptian cultural repatriation; Heimlich remains a militant, paranoid, darkly comic security chief grounded in period duelling culture and personal shame rather than faux-German spelling or premature Nazi parody. Rameses's Dr. Smith self-reference error and Heimlich's anachronistic “Heimlich Death Maneuver” are corrected. Their explicit later murder-reaction records remain untouched for their respective act review. Tuple-addressed manifests reproduce every approved rewrite through `tools/dialogue.py`, and all tuple/talker/reference metadata remains unchanged (D-031).
 
 **Verified** (2026-10-10, Linux workspace)
 
 | Suite | Result |
 | --- | --- |
+| P2-08 Act 2 Heimlich rewrite | **Pass: 109 manifest records match module 1889; all 187 tuple/talker records preserved; 4 later reaction records unchanged** |
+| P2-08 Act 2 Rameses rewrite | **Pass: 94 manifest records match module 1891; all 144 tuple/talker records preserved; 18 later reaction records unchanged** |
 | P2-08 Act 1 message rewrites | **Pass: modules 270/290/295 structurally parsed; exact tuple/talker/reference metadata preserved** |
 | D-030 / PLAY-001 dirty cab gating | **Pass: 250.SCR/250.HEP compiled, gated on flag 125 & (not flag 27)** |
 | D-030 clue flow preservation | **Pass: 14.SCR/14.HEP matches authentic baseline (648 / 52 bytes)** |
@@ -46,6 +48,7 @@ _Last updated: 2026-10-10, session 28: Act 1 period dialogue de-caricature pass.
 - **Phase 4 Scoring & Mystery:** Accurate act grades (P4-05), clear inquest scope (P4-06), evidence checklist (P4-03), and decoupled quiz/dagger outcome (P4-04).
 - **Act 1 Investigation Context:** Authentic starting contacts preserved in `lb2InitCode.sc`; suspects discovered naturally through Act 1 inquiry trees (D-030).
 - **Act 1 Dialogue:** Lo Fat, Sgt. O'Flaherty, and O'Riley rewritten as distinct, readable period characters without altering dialogue logic (P2-08, D-031).
+- **Act 2 Dialogue:** Rameses and Heimlich routine dialogue rewritten as distinct, readable period characterization; later murder reactions deliberately deferred (P2-08, D-031).
 - **Documentation Architecture:** `docs/ROADMAP.md`, `DECISIONS.md` (D-001 through D-031), `docs/manual/`, `docs/manual/manual.html`, and `docs/PLAYTEST_CHECKLIST.md` synchronized.
 
 **Not verified**
@@ -61,15 +64,39 @@ _Last updated: 2026-10-10, session 28: Act 1 period dialogue de-caricature pass.
 
 ## Next steps (in order)
 
-1. Continue the clean DOSBox-X run through the checklist, marking checkpoints and adding stable `PLAY-nnn` findings with deterministic saves.
-2. After the ending, audit and consolidate PLAY-001 through the final finding into permanent roadmap work; resolve or schedule regressions before Phase 5.
-3. Begin P5-01's Act 2 schedule, room, clue, score, and message-resource design inventory only after the playtest gate closes.
+1. Obtain maintainer review of Heimlich's applied Act 2 wording; revise before beginning the next character if requested.
+2. Continue P2-08 in the approved order: Yvette, O'Riley, Ziggy, then Tut and adjacent-speaker cleanup, with separate maintainer review for each character.
+3. Resume the clean DOSBox-X playthrough and begin P5-01 only after the dialogue and playtest gates close.
 
 ## Open questions for maintainers
 
 None currently open. Q-001 and Q-002 have been resolved by D-007, D-017, and D-018.
 
 ## Session log
+
+### Session 29: 2026-10-10: Act 2 Rameses and Heimlich Dialogue Passes
+
+**Contributor:** Codex and maintainer
+
+**Goal:** Give Rameses Najeer and Wolf Heimlich readable, period-appropriate individual voices without changing their clues, relationships, or dramatic functions.
+
+**Done:**
+- Audited module 1891 and separated 94 routine records from 18 explicit later murder-reaction records.
+- Replaced the written lisp with precise standard spelling and characterized Rameses as a reserved accountant, devoted family man, and informed advocate for Egyptian cultural repatriation.
+- Replaced recurring cobra, pyramid, laundry, and “wilds of Egypt” cliches with character-based humor while preserving his established interests and suspicions.
+- Corrected the Dr. Smith topic response from “Mister Najeer” to “Dr. Smith.”
+- Added `docs/dialogue/act2-rameses.json` and applied it idempotently to `LB2/1891.MSG`.
+- Reworked Heimlich's 109 routine records with standard spelling and a terse, authoritarian security voice while preserving his militance, Heidelberg duelling scars, museum obsession, paranoia, and grief over his mother's stolen paintings.
+- Replaced constant execution threats and German-superiority gags with credible ejection, arrest, restraint, and implied-menace language; retained the goose-step animation as the upper limit of the caricature.
+- Removed the anachronistic “Heimlich Death Maneuver” reference and added `docs/dialogue/act2-heimlich.json`, applied idempotently to `LB2/1889.MSG`.
+
+**Changed:** `LB2/1889.MSG`, `LB2/1891.MSG`, `docs/dialogue/act2-heimlich.json`, `docs/dialogue/act2-rameses.json`, and synchronized roadmap, decision, handoff, and manual documentation.
+
+**Decisions:** D-031.
+
+**Verified:** Modules 1889 and 1891 retain identical message tuple/talker metadata; exactly 109 Heimlich and 94 Rameses approved-scope texts changed; all 4 Heimlich and 18 Rameses later reaction records remain outside the manifests; no targeted caricature spelling remains in either routine scope; documentation/manual validation and build pass; DOSBox-X original-interpreter startup smoke passes with both loose overrides active.
+
+**Next session should start with:** Maintainer review of Heimlich, followed by Yvette only after approval.
 
 ### Session 28: 2026-10-10: Act 1 Period Dialogue De-Caricature Pass
 
@@ -274,25 +301,3 @@ None currently open. Q-001 and Q-002 have been resolved by D-007, D-017, and D-0
 **Verified:** SCI Companion compilation of Script 750; static four-state outcome, recovery-bit, and downstream route audit; DOSBox-X original-interpreter startup smoke; documentation/manual validation; unchanged base archive hashes. Direct save-based traversal of the four outcome combinations remains a manual regression test.
 
 **Next session should start with:** P4-05 (Grading and Scoring System Standardization).
-
-### Session 19: 2026-10-08: P4-03 Hint Book Contradictions & Best Ending Alignment
-
-**Contributor:** Codex
-
-**Goal:** Make the best-ending evidence gate match Sierra's published investigation requirements instead of vanilla's accidental subset.
-
-**Done:**
-- Audited the owner-supplied OneShortEye issue analysis, Sierra's official hint book, and all Script 750 outcome branches.
-- Confirmed that vanilla's “all evidence” check included only dagger, grapes, wire cutters, bifocals, and red hair, while the hint book names 13 objects.
-- Added a shared Script 750 predicate for all 13 objects and used it consistently in both local result and `global126` outcome selection.
-- Preserved evidence credit after dagger surrender and carbon-paper consumption through existing bits 155 and 170.
-- Added non-scoring Room 560 discovery bit 183 so inspecting or taking Watney's police file satisfies the published requirement.
-- Compiled Scripts 560 and 750, recorded D-024, added the research-source index, and synchronized the roadmap, architecture, changelog, test plan, handoff, and manual.
-
-**Changed:** `LB2/src/rm560.sc`, `LB2/src/rm750.sc`, `LB2/560.SCR`, `LB2/750.SCR`, `docs/ROADMAP.md`, `docs/ARCHITECTURE.md`, `docs/DECISIONS.md`, `docs/CHANGELOG.md`, `docs/TESTING.md`, `docs/reference/README.md`, `docs/manual/amon-ra.manual.json`, `docs/manual/manual.html`, `docs/HANDOFF.md`, `docs/archive/SESSION_LOG_2026_10.md`.
-
-**Decisions:** D-024 (Use Sierra's complete evidence checklist for the best ending).
-
-**Verified:** SCI Companion compilation of Scripts 560 and 750; static 13-item checklist and durable-state audit; DOSBox-X original-interpreter startup smoke; documentation/manual validation; unchanged base archive hashes. Direct save-based traversal of the full positive and negative ending matrix remains a manual regression test.
-
-**Next session should start with:** P4-04 (Quiz / Dagger Possession Logic Decoupling).
