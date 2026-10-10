@@ -1,0 +1,13 @@
+{
+  "module": 1882,
+  "character": "Dr. Pippin Carter (adjacent cleanup)",
+  "voice": "Preserve Carter's vanity, elitism, and hostility while removing collateral ethnic caricature and factual anachronisms.",
+  "entries": [
+    {"tuple": [1, 6, 22, 1, 10], "text": "That is where I arrived after crossing from England. I accompanied the Egyptian exhibit, and apparently Dr. Carrington was aboard the same steamship, though I never encountered him during the voyage."},
+    {"tuple": [1, 6, 7, 1, 10], "text": "Lo Fat runs one of the local laundries. A remarkably well-read fellow, though he enjoys letting customers underestimate him."},
+    {"tuple": [1, 6, 13, 1, 10], "text": "Of course I know Rameses. There were several. Rameses I founded the Nineteenth Dynasty, though his brief reign was overshadowed by Rameses II."},
+    {"tuple": [1, 6, 13, 2, 10], "text": "During his long reign, Rameses II commissioned immense building projects whose marks remain across Egypt."},
+    {"tuple": [1, 6, 16, 3, 10], "text": "Stay clear of Smith. He has called me a thief in public and threatened me in private. The man is a dangerous zealot."},
+    {"tuple": [1, 6, 11, 1, 10], "text": "Miss Delacroix is shamelessly flirtatious. Naturally she has made advances toward me; naturally I have resisted them."}
+  ]
+}

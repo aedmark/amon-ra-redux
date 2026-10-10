@@ -1,0 +1,13 @@
+{
+  "module": 1892,
+  "character": "Dr. Olympia Myklos (adjacent cleanup)",
+  "voice": "Preserve Olympia's macabre scientific enthusiasm while removing cultural cruelty and isolated phonetic spelling.",
+  "entries": [
+    {"tuple": [1, 6, 60, 1, 25], "text": "Activated charcoal can absorb certain poisons. Ordinary charcoal is less useful, though considerably more dramatic when set alight."},
+    {"tuple": [1, 6, 65, 2, 25], "text": "Yes. I have studied ancient Egyptian funerary practices since I was a girl. Their care for the dead reveals an extraordinary amount about the living."},
+    {"tuple": [1, 6, 62, 1, 25], "text": "These are hieroglyphs, my dear. Egyptian writing joined sound, symbol, and image with remarkable elegance. A single sign could represent a sound, a word, or an idea."},
+    {"tuple": [1, 6, 16, 1, 25], "text": "Dr. Smith is a respected Egyptologist. He cares deeply about Egypt's dead and insists they be treated as people rather than specimens. I think he is a good man."},
+    {"tuple": [1, 39, 0, 1, 25], "text": "You are very kind, but I already have a large supply of carbon paper. I enjoy making tombstone rubbings, you see."},
+    {"tuple": [1, 26, 0, 1, 25], "text": "Oh, a Ruhmkorff lantern! These are marvelous for spelunking. Have you ever explored caves, Miss Bow?"}
+  ]
+}

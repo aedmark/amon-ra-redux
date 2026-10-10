@@ -96,6 +96,25 @@
     {"tuple": [1, 21, 0, 1, 27], "text": "Be careful with those. They look dangerous."},
     {"tuple": [1, 44, 0, 1, 27], "text": "No, thank you. I have no need for wire."},
     {"tuple": [1, 23, 0, 1, 27], "text": "No offense, Miss Bow, but that is disgusting."},
-    {"tuple": [1, 40, 0, 1, 27], "text": "Miss Bow, what would my wife say?"}
+    {"tuple": [1, 40, 0, 1, 27], "text": "Miss Bow, what would my wife say?"},
+    {"tuple": [1, 6, 69, 1, 27], "text": "I have heard a great deal about Mr. Carrington, though we spoke only once or twice. He seemed cultured and charming."},
+    {"tuple": [1, 6, 69, 3, 27], "text": "No! I spoke with him briefly at the party. Tell me it is not true."},
+    {"tuple": [1, 6, 69, 4, 2], "text": "Yes, it is true. Someone impaled his body on a stuffed porcupine."},
+    {"tuple": [1, 6, 69, 5, 27], "text": "Shocking. Simply shocking."},
+    {"tuple": [1, 6, 69, 7, 27], "text": "It was not me, if that is what you mean. I would guess the murderer was the same person who stole the Dagger."},
+    {"tuple": [1, 6, 69, 9, 27], "text": "I cannot prove it, but the connection seems reasonable. Perhaps that nervous Ziggy fellow knew something."},
+    {"tuple": [1, 6, 71, 1, 27], "text": "I did not know Mr. Leach well, but he seemed a decent, hardworking fellow."},
+    {"tuple": [1, 6, 71, 3, 27], "text": "How terrible. The museum staff are dying one after another."},
+    {"tuple": [1, 6, 71, 5, 27], "text": "Not a thing, Miss Bow. I am only an accountant."},
+    {"tuple": [1, 6, 72, 1, 27], "text": "Carter defiled the tombs of my ancestors for his own glory. He cared very little about right and wrong when a discovery might bear his name. Conduct like that eventually brings consequences."},
+    {"tuple": [1, 6, 72, 3, 27], "text": "Oh...that is right. I had forgotten."},
+    {"tuple": [1, 6, 72, 5, 27], "text": "Hate is a strong word. We had an academic difference of opinion."},
+    {"tuple": [1, 6, 72, 7, 27], "text": "I sometimes become carried away, but it was merely a manner of speech."},
+    {"tuple": [1, 6, 72, 9, 27], "text": "I do not care for your attitude, young lady. You have a very suspicious nature."},
+    {"tuple": [1, 6, 73, 1, 27], "text": "Miss Delacroix is a charming and very friendly young woman."},
+    {"tuple": [1, 6, 73, 3, 27], "text": "No. What is the world coming to? One cannot spend a night in a museum without a murderer roaming the halls."},
+    {"tuple": [1, 6, 73, 5, 27], "text": "No. I did not know her very well."},
+    {"tuple": [1, 6, 73, 7, 27], "text": "I do not know when it happened, but I have spent the entire night in the basement."},
+    {"tuple": [1, 6, 73, 9, 27], "text": "I did not expect the Spanish Inquisition. You are not a police officer, so I refuse to answer any more questions about Miss Delacroix."}
   ]
 }

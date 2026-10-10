@@ -2,6 +2,48 @@
 
 Archived verbatim from `docs/HANDOFF.md` when its live session log exceeded ten entries.
 
+### Session 23: 2026-10-09: Pre–Phase 5 Full-Game Playtest Checklist
+
+**Contributor:** Codex and maintainer
+
+**Goal:** Capture a clean end-to-end DOSBox-X run and triage all observed bugs, quirks, continuity problems, and content opportunities before beginning Phase 5.
+
+**Done:**
+- Added an act-by-act checklist covering saves, state restoration, score, inventory, music, notebook acquisition, topic completion, proximity dialogue, all shipped fixes, inquest outcomes, and the ending.
+- Recorded the maintainer's first eight observations as stable PLAY-001 through PLAY-008 findings without prematurely choosing implementations.
+- Preserved the guiding constraint that new diegetic introductions and interjections must expose or explain existing content rather than isolate it behind new prerequisites.
+- Made completion and triage of the full-game run an explicit Phase 5 entry gate and linked the checklist from the documentation and testing indexes.
+
+**Changed:** `docs/PLAYTEST_CHECKLIST.md`, `docs/README.md`, `docs/ROADMAP.md`, `docs/TESTING.md`, `docs/HANDOFF.md`, `docs/archive/SESSION_LOG_2026_10.md`.
+
+**Decisions:** No architectural decision; findings remain observations until post-playthrough source and resource audits.
+
+**Verified:** Documentation validation. Gameplay findings remain intentionally open pending reproduction and triage from the maintainer's DOSBox-X saves.
+
+**Next session should start with:** Continue the full-game run and append new `PLAY-nnn` findings; do not begin P5-01 implementation until the gate closes.
+
+### Session 22: 2026-10-09: P4-06 Non-Essential Quiz Questions Delineation
+
+**Contributor:** Codex
+
+**Goal:** Make the inquest distinguish required case findings from optional museum lore and guarantee that bonus answers cannot reduce the ending result.
+
+**Done:**
+- Audited all sixteen Script 750 questions and corrected the outline's provisional Script 700/720 ownership.
+- Confirmed questions 1–9 alone control murder correctness, questions 10–11 alone control theft-answer correctness, and questions 12–16 already supply feedback without score or verdict writes.
+- Added a required-case notice before question 1 explaining that questions 1–11 determine the coroner's conclusions.
+- Moved the unchanged art-theft, High Priest, and museum-accomplice flow into `sBonusQuestions`, preceded by an explicit notice that questions 12–16 are optional and do not affect Laura's final case result.
+- Preserved all authored answer menus, feedback messages, and conditional skips while structurally excluding both verdict flags from the bonus state.
+- Compiled Script 750, recorded D-027, and synchronized the roadmap, architecture, changelog, test plan, handoff, and manual.
+
+**Changed:** `LB2/src/rm750.sc`, `LB2/750.SCR`, `LB2/750.HEP`, `docs/ROADMAP.md`, `docs/ARCHITECTURE.md`, `docs/DECISIONS.md`, `docs/CHANGELOG.md`, `docs/TESTING.md`, `docs/manual/amon-ra.manual.json`, `docs/manual/manual.html`, `docs/HANDOFF.md`, `docs/archive/SESSION_LOG_2026_10.md`.
+
+**Decisions:** D-027 (Isolate bonus museum questions from inquest verdict state).
+
+**Verified:** SCI Companion compilation of Script 750; static all-question, verdict-write, score-write, and transition audit; DOSBox-X original-interpreter startup smoke; documentation/manual validation; unchanged base archive hashes. Direct save-based traversal of both section notices and bonus-answer variants remains a manual regression test.
+
+**Next session should start with:** P5-01 Act 2 interactive-content design inventory.
+
 ### Session 17: 2026-10-08: P4-01 Watney Little Evidence Discovery
 
 **Contributor:** Codex
@@ -452,6 +494,29 @@ Archived verbatim from `docs/HANDOFF.md` when its live session log exceeded ten 
 **Verified:** SCI Companion compilation of Script 750; static four-state outcome, recovery-bit, and downstream route audit; DOSBox-X original-interpreter startup smoke; documentation/manual validation; unchanged base archive hashes. Direct save-based traversal of the four outcome combinations remains a manual regression test.
 
 **Next session should start with:** P4-05 (Grading and Scoring System Standardization).
+
+### Session 21: 2026-10-09: P4-05 Grading and Scoring System Standardization
+
+**Contributor:** Codex
+
+**Goal:** Grade Laura against points actually attainable at each act break and stop the introduction from consuming an F response.
+
+**Done:**
+- Traced all grading math and message-band selection to Script 26, correcting the outline's provisional Scripts 0/780 ownership.
+- Cross-checked every score flag against the point audit linked by the owner-supplied OneShortEye video.
+- Established vanilla cumulative maxima `5/12/37/47/50` and Redux maxima `5/13/38/48/51` after P4-02's Act 2 footprint point.
+- Replaced Script 26's inflated `5/12/43/58/61` divisors with the attainable Redux values while preserving the authored percentage bands.
+- Skipped grade-band selection at `global123 == 0`, preventing the ungraded introduction from advancing the first F-message counter.
+- Kept P4-02's three coroner-review awards post-grade and documented the complete raw maximum of 54.
+- Compiled Script 26, recorded D-026, indexed the published point audit, and synchronized the roadmap, architecture, changelog, test plan, handoff, and manual.
+
+**Changed:** `LB2/src/actBreak.sc`, `LB2/26.SCR`, `LB2/26.HEP`, `docs/ROADMAP.md`, `docs/ARCHITECTURE.md`, `docs/DECISIONS.md`, `docs/CHANGELOG.md`, `docs/TESTING.md`, `docs/reference/README.md`, `docs/manual/amon-ra.manual.json`, `docs/manual/manual.html`, `docs/HANDOFF.md`, `docs/archive/SESSION_LOG_2026_10.md`.
+
+**Decisions:** D-026 (Grade against attainable cumulative points).
+
+**Verified:** SCI Companion compilation of Script 26; static point-event, divisor, grade-band, and startup-counter audit; DOSBox-X original-interpreter startup smoke; documentation/manual validation; unchanged base archive hashes. Direct save-based traversal of all act and band boundaries remains a manual regression test.
+
+**Next session should start with:** P4-06 (Non-Essential Quiz Questions Delineation).
 
 ### Session 1: 2026-10-07: Dev Plan & Modernization Roadmap Creation
 

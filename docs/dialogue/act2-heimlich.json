@@ -111,6 +111,10 @@
     {"tuple": [3, 0, 89, 1, 18], "text": "This laboratory contains dangerous chemicals and specimens. You should not be here. Move."},
     {"tuple": [3, 0, 90, 1, 18], "text": "This is a private laboratory, Miss Bow. If you have disturbed one of Dr. Myklos's experiments, there will be consequences. Leave."},
     {"tuple": [3, 0, 91, 1, 18], "text": "What are you doing in Ernie Leach's private office? There is no newspaper story here. Get out--now."},
-    {"tuple": [3, 0, 92, 1, 18], "text": "You are in my office, Miss Bow. If one object has been disturbed, I will know. Out."}
+    {"tuple": [3, 0, 92, 1, 18], "text": "You are in my office, Miss Bow. If one object has been disturbed, I will know. Out."},
+    {"tuple": [1, 6, 69, 1, 18], "text": "Carrington was a good man, and I will miss him. When I find the coward who impaled him on that porcupine, they will answer to me."},
+    {"tuple": [1, 6, 71, 1, 18], "text": "Ernie was a decent man. When I find the coward who drowned him, I will see that justice is done."},
+    {"tuple": [1, 6, 73, 1, 18], "text": "Fraulein Delacroix was charming and possessed many admirable qualities. Her killer will learn what it means to face me."},
+    {"tuple": [1, 6, 74, 1, 18], "text": "That irritating little civilian reminded me of a yapping dog, always following Dr. Carrington. I never trusted him. I suspected he was an art thief--and now someone has silenced him."}
   ]
 }

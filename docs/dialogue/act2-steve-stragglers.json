@@ -1,0 +1,9 @@
+{
+  "module": 1887,
+  "character": "Steve Dorian (anachronism cleanup)",
+  "voice": "Preserve Steve's direct dockworker recollections while removing the 1950s steamship mistakenly named in the 1926 story.",
+  "entries": [
+    {"tuple": [1, 6, 4, 1, 12], "text": "I don't know anyone that important, Miss Bow. Wait--I saw him on the docks after his ship came in from England. He had the biggest, heaviest trunk I've ever seen, and it smelled strange."},
+    {"tuple": [1, 6, 38, 1, 12], "text": "The Dagger is supposed to be beautiful beyond belief. It is too bad we cannot see it. I helped unload the crate from the steamship, but Dr. Carter would not let anyone open it."}
+  ]
+}

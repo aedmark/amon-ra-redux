@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Apply tuple-addressed dialogue text replacements to SCI message patches."""
+"""Apply tuple-addressed dialogue replacements to SCI message patches."""
 
 from __future__ import annotations
 
@@ -40,21 +40,30 @@ def apply_manifest(message_path: Path, manifest_path: Path) -> tuple[int, int]:
     for entry in manifest["entries"]:
         key = tuple(entry["tuple"])
         record_length, count, records = load_records(payload)
-        matches = [(index, record) for index, record in enumerate(records) if record[:5] == key]
+        replacement_talker = entry.get("set_talker")
+        replacement_key = key[:-1] + (replacement_talker,) if replacement_talker is not None else key
+        matches = [
+            (index, record)
+            for index, record in enumerate(records)
+            if record[:5] == key or (replacement_talker is not None and record[:5] == replacement_key)
+        ]
         if len(matches) != 1:
             raise ValueError(f"expected one record for tuple {key}, found {len(matches)}")
 
-        _, record = matches[0]
+        record_index, record = matches[0]
         text_offset = record[5]
         text_end = payload.index(b"\0", text_offset)
         old_bytes = payload[text_offset:text_end]
         new_bytes = entry["text"].encode("cp437")
-        if old_bytes == new_bytes:
+        talker_current = record[4]
+        if old_bytes == new_bytes and (replacement_talker is None or talker_current == replacement_talker):
             continue
 
         delta = len(new_bytes) - len(old_bytes)
         payload = payload[:text_offset] + new_bytes + payload[text_end:]
         mutable = bytearray(payload)
+        if replacement_talker is not None:
+            mutable[8 + record_index * record_length + 4] = replacement_talker
         for index in range(count):
             offset_position = 8 + index * record_length + 5
             other_offset = struct.unpack_from("<H", mutable, offset_position)[0]

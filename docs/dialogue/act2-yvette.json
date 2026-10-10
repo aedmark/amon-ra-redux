@@ -116,6 +116,20 @@
     {"tuple": [1, 38, 0, 1, 28], "text": "I prefer a wineglass unless I am listening at doors. I am joking, Miss Bow--mostly."},
     {"tuple": [1, 34, 0, 1, 28], "text": "I have no use for that. Try Detective O'Riley if you wish to return it."},
     {"tuple": [1, 21, 0, 1, 28], "text": "What is that fabric caught in the cutters? Did someone carry them in a pocket?"},
-    {"tuple": [1, 44, 0, 1, 28], "text": "Merci, but I have no need for the wire."}
+    {"tuple": [1, 44, 0, 1, 28], "text": "Merci, but I have no need for the wire."},
+    {"tuple": [1, 6, 69, 1, 28], "text": "Dr. Carrington was a strange man. Only recently he invited me into his office for a long...conversation."},
+    {"tuple": [1, 6, 69, 3, 28], "text": "At first we discussed the museum and my intention to become president. He laughed until he understood I was serious. Then we spent the night in his office...getting to know one another."},
+    {"tuple": [1, 6, 69, 5, 28], "text": "He was magnificent. He seemed much younger that night, and by morning I believed I had advanced my career as well."},
+    {"tuple": [1, 6, 69, 7, 28], "text": "The next day, Archie pretended scarcely to know me. He kept none of his promises."},
+    {"tuple": [1, 6, 69, 9, 28], "text": "He was a man who wanted what he wanted. I was foolish enough to trust him."},
+    {"tuple": [1, 6, 71, 1, 28], "text": "Oh, my poor Ernie. Icepick had him killed."},
+    {"tuple": [1, 6, 71, 3, 28], "text": "No--he was killed by a man called Icepick. Icepick threatened him over gambling debts."},
+    {"tuple": [1, 6, 71, 5, 28], "text": "Ernie told me himself."},
+    {"tuple": [1, 6, 72, 1, 28], "text": "Poor Monsieur Pippin. We had spoken very little until tonight, when he finally found time for me. We were to meet after the party and become better acquainted."},
+    {"tuple": [1, 6, 68, 16, 2], "set_talker": 28, "text": "Dr. Carrington had been here only a short time, but...I do not think I should say more."},
+    {"tuple": [1, 6, 93, 1, 28], "text": "I see that Pippin planned to meet Dr. Smith this evening. That surprises me, since he hated the man."},
+    {"tuple": [1, 6, 93, 2, 28], "text": "The notepad mentions me as well. We intended to speak privately, but Pippin never appeared. I waited in the Egyptian exhibit for fifteen minutes, then left."},
+    {"tuple": [1, 6, 93, 4, 28], "text": "It is a frightening thought. It makes me nervous even to consider it."},
+    {"tuple": [1, 6, 93, 6, 28], "text": "I saw Dr. Smith pass when I arrived, though I did not know where he was going. I saw no one else."}
   ]
 }

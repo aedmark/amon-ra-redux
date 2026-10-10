@@ -1,0 +1,18 @@
+{
+  "module": 1884,
+  "character": "Countess Waldorf-Carlton (adjacent cleanup)",
+  "voice": "Retain her affected emphasis, condescension, and social performance without phonetic upper-class spelling.",
+  "entries": [
+    {"tuple": [1, 6, 47, 1, 29], "text": "Why, isn't that one of those DARLING little Egyptian trinkets?"},
+    {"tuple": [1, 6, 62, 1, 29], "text": "Oh, could that be some of that CUTE little Egyptian writing? How CHARMING!"},
+    {"tuple": [1, 6, 25, 1, 29], "text": "New York is simply CHARMING, Miss Bow. It has so much culture...for an American city."},
+    {"tuple": [1, 33, 0, 1, 29], "text": "You ARE an odd girl, Miss Bow. But so CHARMING."},
+    {"tuple": [1, 40, 0, 1, 29], "text": "It is CHARMING, dear girl, but it is not MINE."},
+    {"tuple": [1, 6, 4, 2, 2], "text": "That is odd. Mr. Dorian said you met Dr. Carrington in a taxi when he arrived by steamship from England."},
+    {"tuple": [1, 6, 2, 1, 29], "text": "I have not had the pleasure of meeting him, but he sounds simply CHARMING. I imagine a man who runs a newspaper must be quite wealthy, mmmm?"},
+    {"tuple": [1, 6, 4, 3, 29], "text": "Well, so what if I did? I mean, yes, I met him that night. Our families are old allies from the Wars of the Roses. I felt obliged to greet him upon his arrival. Noblesse oblige, you understand."},
+    {"tuple": [1, 6, 33, 1, 29], "text": "Well, isn't that CHARMING! A little reporter!"},
+    {"tuple": [1, 6, 13, 1, 29], "text": "Oh, he is a DARLING little man. Simply DARLING."},
+    {"tuple": [1, 6, 8, 1, 29], "text": "What a LOVELY boy. He has such CHARMING manners, and he is SO handsome, mmmmm?"}
+  ]
+}

@@ -12,17 +12,21 @@ Security: [SECURITY.md](SECURITY.md). Changes: [CHANGELOG.md](CHANGELOG.md). Old
 
 ## Current state
 
-_Last updated: 2026-10-10, session 30: Act 2 Yvette dialogue pass._
+_Last updated: 2026-10-10, session 33: P2-08 final dialogue sweep._
 
-**Where things stand, in one paragraph:** P2-08's act-by-act dialogue pass is underway. Act 1 is complete. Act 2 now has reviewed routine-dialogue passes for Rameses Najeer (94 records in module 1891), Wolf Heimlich (109 records in module 1889), and Yvette Delacroix (111 records in module 1885 plus three adjacent lines). Rameses is a precise accountant and advocate for Egyptian cultural repatriation; Heimlich remains militant and paranoid without premature Nazi parody; Yvette is fluent, socially perceptive, ambitious, and knowingly sensual without faux-French spelling or broken grammar. Yvette's Steve exchange now foreshadows their later encounter instead of recounting it prematurely. Explicit later murder-reaction records and the later Sterling-diary talker-ID error remain untouched for their respective act review. Tuple-addressed manifests reproduce every approved rewrite through `tools/dialogue.py`, and all tuple/talker/reference metadata remains unchanged (D-031).
+**Where things stand, in one paragraph:** P2-08 is complete. Act 1 and Act 2 dialogue now use distinct, readable period voices for Lo Fat, Sgt. O'Flaherty, O'Riley, Rameses, Heimlich, Yvette, Ziggy, and Tut Smith without relying on phonetic ethnicity or national caricature. Tut is an educated, forceful Cairo Museum repatriation advocate whose vanity, sexism, and suspicious threats remain intact. Every previously deferred murder reaction now follows its approved character voice, and isolated Pippin, Countess, Steve, Olympia, and Laura lines no longer reintroduce the discarded stereotypes. Five Andrea Doria references, Rameses I chronology, Egyptological terminology, and three erroneous talker IDs are corrected. Tuple-addressed manifests account exactly for every changed record across 11 message modules while preserving all other routing and reference metadata (D-031).
 
 **Verified** (2026-10-10, Linux workspace)
 
 | Suite | Result |
 | --- | --- |
-| P2-08 Act 2 Yvette rewrite | **Pass: 114 manifest records match module 1885; all 172 tuple/talker records preserved; 13 later reaction records unchanged** |
-| P2-08 Act 2 Heimlich rewrite | **Pass: 109 manifest records match module 1889; all 187 tuple/talker records preserved; 4 later reaction records unchanged** |
-| P2-08 Act 2 Rameses rewrite | **Pass: 94 manifest records match module 1891; all 144 tuple/talker records preserved; 18 later reaction records unchanged** |
+| P2-08 completed dialogue pass | **Pass: 1,424 records across 11 target modules exactly accounted for; only three documented talker IDs changed; obsolete wording scan has 0 hits** |
+| P2-08 Tut and adjacent cleanup | **Pass: 96 manifest records match module 1883; all 121 records parse; Pippin/Countess/Steve/Olympia cleanup manifests apply idempotently** |
+| P2-08 Ziggy cross-act rewrite | **Pass: 31 manifest records match module 310 and 89 match module 1890; all 186 records parse; only the documented diary-response talker ID changed** |
+| P2-08 Act 2 O'Riley rewrite | **Pass: 136 manifest records match module 1888; all 185 records parse; one clue-question talker ID corrected** |
+| P2-08 Act 2 Yvette rewrite | **Pass: 128 manifest records match module 1885; all 172 records parse; one diary-answer talker ID corrected** |
+| P2-08 Act 2 Heimlich rewrite | **Pass: 113 manifest records match module 1889; all 132 tuple/talker records preserved** |
+| P2-08 Act 2 Rameses rewrite | **Pass: 113 manifest records match module 1891; all 144 tuple/talker records preserved** |
 | P2-08 Act 1 message rewrites | **Pass: modules 270/290/295 structurally parsed; exact tuple/talker/reference metadata preserved** |
 | D-030 / PLAY-001 dirty cab gating | **Pass: 250.SCR/250.HEP compiled, gated on flag 125 & (not flag 27)** |
 | D-030 clue flow preservation | **Pass: 14.SCR/14.HEP matches authentic baseline (648 / 52 bytes)** |
@@ -44,12 +48,12 @@ _Last updated: 2026-10-10, session 30: Act 2 Yvette dialogue pass._
 **What works**
 
 - **Phase 1 Overhaul:** All six Phase 1 items (P1-01 through P1-06) compiled as loose patches in `LB2/`.
-- **Phase 2 Restorations:** Suspect fallbacks (P2-01), watch confrontation (P2-02), murder reactions (P2-03), historical dialogue (P2-04), acquaintance routing (P2-05), Steve continuity (P2-06), and dagger reactions (P2-07).
+- **Phase 2 Narrative:** Suspect fallbacks (P2-01), watch confrontation (P2-02), murder reactions (P2-03), historical dialogue (P2-04), acquaintance routing (P2-05), Steve continuity (P2-06), dagger reactions (P2-07), and period dialogue de-caricature (P2-08) are complete.
 - **Phase 3 Mechanics:** Supply safety audit (P3-01), snake oil feedback (P3-02), fair stairwell (P3-04), flexible Act 1 and cab gating (P3-05, D-030), and museum conversation lock (P3-06).
 - **Phase 4 Scoring & Mystery:** Accurate act grades (P4-05), clear inquest scope (P4-06), evidence checklist (P4-03), and decoupled quiz/dagger outcome (P4-04).
 - **Act 1 Investigation Context:** Authentic starting contacts preserved in `lb2InitCode.sc`; suspects discovered naturally through Act 1 inquiry trees (D-030).
-- **Act 1 Dialogue:** Lo Fat, Sgt. O'Flaherty, and O'Riley rewritten as distinct, readable period characters without altering dialogue logic (P2-08, D-031).
-- **Act 2 Dialogue:** Rameses, Heimlich, and Yvette routine dialogue rewritten as distinct, readable period characterization; later murder reactions deliberately deferred (P2-08, D-031).
+- **Act 1 Dialogue:** Lo Fat, Sgt. O'Flaherty, O'Riley, and Ziggy rewritten as distinct, readable period characters without altering dialogue logic (P2-08, D-031).
+- **Act 2 Dialogue:** Rameses, Heimlich, Yvette, O'Riley, Ziggy, and Tut Smith use distinct, readable period characterization; all murder reactions and adjacent cleanup lines are complete (P2-08, D-031).
 - **Documentation Architecture:** `docs/ROADMAP.md`, `DECISIONS.md` (D-001 through D-031), `docs/manual/`, `docs/manual/manual.html`, and `docs/PLAYTEST_CHECKLIST.md` synchronized.
 
 **Not verified**
@@ -65,15 +69,79 @@ _Last updated: 2026-10-10, session 30: Act 2 Yvette dialogue pass._
 
 ## Next steps (in order)
 
-1. Obtain maintainer review of Yvette's applied Act 2 wording; revise before beginning the next character if requested.
-2. Continue P2-08 in the approved order: O'Riley, Ziggy, then Tut and adjacent-speaker cleanup, with separate maintainer review for each character.
-3. Resume the clean DOSBox-X playthrough and begin P5-01 only after the dialogue and playtest gates close.
+1. Resume the clean DOSBox-X playthrough and note any dialogue that reads poorly in context.
+2. Triage and resolve or schedule every remaining `PLAY-nnn` finding.
+3. Begin P5-01 only after the playtest gate closes.
 
 ## Open questions for maintainers
 
 None currently open. Q-001 and Q-002 have been resolved by D-007, D-017, and D-018.
 
 ## Session log
+
+### Session 33: 2026-10-10: P2-08 Final Dialogue Sweep
+
+**Contributor:** Codex and maintainer
+
+**Goal:** Complete P2-08 with Tut Smith, deferred murder reactions, adjacent-speaker corrections, and isolated lines that reintroduced caricature or anachronism.
+
+**Done:**
+- Reworked all 87 Tut Smith spoken records, plus nine paired Laura responses, as an educated and imposing Cairo Museum envoy: fiercely committed to repatriation, vain, patriarchal, and suspicious without pulp-Egyptian cliches.
+- Preserved Tut's motive, threats, Yvette proposals, evasive Rameses connection, ankh loss, Dagger claim, and later reactions while replacing camel, snake-charmer, amputation, racial-superiority, and mystical-native jokes.
+- Rewrote all deferred murder reactions for Rameses, Heimlich, Yvette, and O'Riley in their approved voices, including Laura's line mocking Rameses's lisp.
+- Cleaned adjacent Pippin, Countess, Steve, and Olympia lines; retained their vanity, class prejudice, morbidity, and plot information without collateral ethnic caricature.
+- Replaced all five impossible 1926 references to the `Andrea Doria`, corrected Rameses I chronology, and fixed `hieroglyphs` and `Ruhmkorff` terminology.
+- Corrected three talker-ID errors: Ziggy's diary advice, Yvette's diary answer, and Laura's clue question to O'Riley.
+
+**Changed:** Message modules 1882–1885, 1887–1892, and 310; character and straggler manifests in `docs/dialogue/`; `tools/dialogue.py`; and synchronized roadmap, decision, handoff, and manual documentation.
+
+**Decisions:** D-031. P2-08 is complete.
+
+**Verified:** Exact comparison accounts for all 1,424 records across the 11 target modules; all unmanifested text is byte-identical to `HEAD`; all routing/reference metadata is unchanged except the three documented talker IDs; every manifest reapplies idempotently; obsolete caricature/anachronism scan reports zero hits; documentation/manual checks and DOSBox-X startup smoke pass.
+
+**Next session should start with:** Resume the clean DOSBox-X playthrough and record any dialogue that needs contextual adjustment before P5-01.
+
+### Session 32: 2026-10-10: Ziggy Cross-Act Dialogue Pass
+
+**Contributor:** Codex and maintainer
+
+**Goal:** Give Ziggy one readable voice across both acts, preserving his criminal connections and comedy while replacing cartoon-Brooklyn eye-dialect with a nervous Peter Lorre-inspired cadence.
+
+**Done:**
+- Reworked all 30 Ziggy spoken records in Room 310 and all 85 in module 1890 as one continuous characterization: soft-spoken, ingratiating, evasive, and suddenly precise when threatened.
+- Retained selective period slang including “Philly,” “sawbuck,” “lifted,” “copper,” and “stoolie,” along with the Hemingway bluff, Rameses riddle, police arrangement, Countess anxiety, fencing offers, carbon-paper clue, and Yvette history.
+- Replaced the anachronistic Seabiscuit/Hialeah tip with a fictional Belmont runner and recast generalized remarks about Egyptians as personal irritation with Rameses's riddles.
+- Repaired the diary answer that was written in Ziggy's voice but assigned Laura's talker ID; rewrote Laura's pronunciation-dependent John Bow exchange and both narrator descriptions.
+- Added `docs/dialogue/act1-ziggy.json` and `docs/dialogue/act2-ziggy.json`; extended `tools/dialogue.py` with idempotent, explicit `set_talker` support for the one metadata correction.
+
+**Changed:** `LB2/310.MSG`, `LB2/1890.MSG`, `tools/dialogue.py`, both Ziggy manifests, and synchronized roadmap, decision, handoff, and manual documentation.
+
+**Decisions:** D-031.
+
+**Verified:** Both manifests apply idempotently; all 72 records in module 310 and 114 in module 1890 parse; text changes are confined to the 120 manifest entries; only the documented diary-response talker ID changes; documentation/manual validation and DOSBox-X startup smoke pass.
+
+**Next session should start with:** Maintainer review of Ziggy, then Tut and adjacent-speaker cleanup.
+
+### Session 31: 2026-10-10: Act 2 O'Riley Dialogue Pass
+
+**Contributor:** Codex and maintainer
+
+**Goal:** Keep Detective O'Riley a swaggering, sexist, corrupt, and prejudiced antagonist while removing leprechaun vocabulary and repetitive stage-Irish eye-dialect.
+
+**Done:**
+- Reviewed all 97 routine O'Riley records in module 1888, rewriting 96 and retaining one already-clean response verbatim.
+- Preserved his dismissive burglary investigation, grapes clue, evidence handoff, class prejudice, sexism, xenophobia, homophobia, and Laura's authored rebuttals because these expose his character and support the mystery.
+- Replaced “begorrah,” pots-of-gold jokes, sainted-mother language, `me` for `my`, and repetitive “lassie/wee” signaling with readable Irish-American rhythm, police slang, and the occasional restrained “lass.”
+- Replaced the narrator's generic Irish-red-hair description with a direct observation of O'Riley's proprietary swagger.
+- Added `docs/dialogue/act2-oriley.json` and applied it idempotently to `LB2/1888.MSG`; deferred all 38 explicit later murder-reaction records.
+
+**Changed:** `LB2/1888.MSG`, `docs/dialogue/act2-oriley.json`, and synchronized roadmap, decision, handoff, and manual documentation.
+
+**Decisions:** D-031.
+
+**Verified:** All 185 message tuple/talker records retain identical metadata; all 98 manifest texts match; exactly 96 O'Riley and one narrator text changed; all 38 explicit later reaction records remain outside the manifest; documentation/manual validation and build pass.
+
+**Next session should start with:** Maintainer review of O'Riley, followed by Ziggy only after approval.
 
 ### Session 30: 2026-10-10: Act 2 Yvette Dialogue Pass
 
@@ -236,68 +304,3 @@ None currently open. Q-001 and Q-002 have been resolved by D-007, D-017, and D-0
 **Drafted fix waiting on the compiler (PLAY-001/002):** in `Trash.sc` (Script 250) change both `(if (proc0_10 1)` tests that select the dirty taxi (the `rm250` init and the trash hotspot's `sel_110`) to `(if (and (proc0_10 1) (not (proc0_2 27)))`. Flag 27 is set when the claim ticket is taken, so the dirty cab then never reappears. Compile only script 250, boot-test, and play the taxi both before and after taking the ticket.
 
 **Next session should start with:** Recover the compile environment (see the blocker above), then play to the inquest to verify P4-06 (Script 750). Use `python3 tools/compile.py <script>` for any further change and boot the game before committing. Never use Compile All.
-
-### Session 23: 2026-10-09: Pre–Phase 5 Full-Game Playtest Checklist
-
-**Contributor:** Codex and maintainer
-
-**Goal:** Capture a clean end-to-end DOSBox-X run and triage all observed bugs, quirks, continuity problems, and content opportunities before beginning Phase 5.
-
-**Done:**
-- Added an act-by-act checklist covering saves, state restoration, score, inventory, music, notebook acquisition, topic completion, proximity dialogue, all shipped fixes, inquest outcomes, and the ending.
-- Recorded the maintainer's first eight observations as stable PLAY-001 through PLAY-008 findings without prematurely choosing implementations.
-- Preserved the guiding constraint that new diegetic introductions and interjections must expose or explain existing content rather than isolate it behind new prerequisites.
-- Made completion and triage of the full-game run an explicit Phase 5 entry gate and linked the checklist from the documentation and testing indexes.
-
-**Changed:** `docs/PLAYTEST_CHECKLIST.md`, `docs/README.md`, `docs/ROADMAP.md`, `docs/TESTING.md`, `docs/HANDOFF.md`, `docs/archive/SESSION_LOG_2026_10.md`.
-
-**Decisions:** No architectural decision; findings remain observations until post-playthrough source and resource audits.
-
-**Verified:** Documentation validation. Gameplay findings remain intentionally open pending reproduction and triage from the maintainer's DOSBox-X saves.
-
-**Next session should start with:** Continue the full-game run and append new `PLAY-nnn` findings; do not begin P5-01 implementation until the gate closes.
-
-### Session 22: 2026-10-09: P4-06 Non-Essential Quiz Questions Delineation
-
-**Contributor:** Codex
-
-**Goal:** Make the inquest distinguish required case findings from optional museum lore and guarantee that bonus answers cannot reduce the ending result.
-
-**Done:**
-- Audited all sixteen Script 750 questions and corrected the outline's provisional Script 700/720 ownership.
-- Confirmed questions 1–9 alone control murder correctness, questions 10–11 alone control theft-answer correctness, and questions 12–16 already supply feedback without score or verdict writes.
-- Added a required-case notice before question 1 explaining that questions 1–11 determine the coroner's conclusions.
-- Moved the unchanged art-theft, High Priest, and museum-accomplice flow into `sBonusQuestions`, preceded by an explicit notice that questions 12–16 are optional and do not affect Laura's final case result.
-- Preserved all authored answer menus, feedback messages, and conditional skips while structurally excluding both verdict flags from the bonus state.
-- Compiled Script 750, recorded D-027, and synchronized the roadmap, architecture, changelog, test plan, handoff, and manual.
-
-**Changed:** `LB2/src/rm750.sc`, `LB2/750.SCR`, `LB2/750.HEP`, `docs/ROADMAP.md`, `docs/ARCHITECTURE.md`, `docs/DECISIONS.md`, `docs/CHANGELOG.md`, `docs/TESTING.md`, `docs/manual/amon-ra.manual.json`, `docs/manual/manual.html`, `docs/HANDOFF.md`, `docs/archive/SESSION_LOG_2026_10.md`.
-
-**Decisions:** D-027 (Isolate bonus museum questions from inquest verdict state).
-
-**Verified:** SCI Companion compilation of Script 750; static all-question, verdict-write, score-write, and transition audit; DOSBox-X original-interpreter startup smoke; documentation/manual validation; unchanged base archive hashes. Direct save-based traversal of both section notices and bonus-answer variants remains a manual regression test.
-
-**Next session should start with:** P5-01 Act 2 interactive-content design inventory.
-
-### Session 21: 2026-10-09: P4-05 Grading and Scoring System Standardization
-
-**Contributor:** Codex
-
-**Goal:** Grade Laura against points actually attainable at each act break and stop the introduction from consuming an F response.
-
-**Done:**
-- Traced all grading math and message-band selection to Script 26, correcting the outline's provisional Scripts 0/780 ownership.
-- Cross-checked every score flag against the point audit linked by the owner-supplied OneShortEye video.
-- Established vanilla cumulative maxima `5/12/37/47/50` and Redux maxima `5/13/38/48/51` after P4-02's Act 2 footprint point.
-- Replaced Script 26's inflated `5/12/43/58/61` divisors with the attainable Redux values while preserving the authored percentage bands.
-- Skipped grade-band selection at `global123 == 0`, preventing the ungraded introduction from advancing the first F-message counter.
-- Kept P4-02's three coroner-review awards post-grade and documented the complete raw maximum of 54.
-- Compiled Script 26, recorded D-026, indexed the published point audit, and synchronized the roadmap, architecture, changelog, test plan, handoff, and manual.
-
-**Changed:** `LB2/src/actBreak.sc`, `LB2/26.SCR`, `LB2/26.HEP`, `docs/ROADMAP.md`, `docs/ARCHITECTURE.md`, `docs/DECISIONS.md`, `docs/CHANGELOG.md`, `docs/TESTING.md`, `docs/reference/README.md`, `docs/manual/amon-ra.manual.json`, `docs/manual/manual.html`, `docs/HANDOFF.md`, `docs/archive/SESSION_LOG_2026_10.md`.
-
-**Decisions:** D-026 (Grade against attainable cumulative points).
-
-**Verified:** SCI Companion compilation of Script 26; static point-event, divisor, grade-band, and startup-counter audit; DOSBox-X original-interpreter startup smoke; documentation/manual validation; unchanged base archive hashes. Direct save-based traversal of all act and band boundaries remains a manual regression test.
-
-**Next session should start with:** P4-06 (Non-Essential Quiz Questions Delineation).

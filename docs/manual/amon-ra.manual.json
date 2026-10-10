@@ -658,7 +658,7 @@
             "character",
             "p2"
           ],
-          "what": "Rewrites culturally stereotyped dialogue act by act without erasing identity, clues, jokes, period attitudes, or characterization. Act 1 covers Lo Fat, Sgt. O'Flaherty, and Detective O'Riley. Act 2 continues with Rameses Najeer's, Wolf Heimlich's, and Yvette Delacroix's routine dialogue; later murder reactions remain reserved for their respective act review.",
+          "what": "Rewrites culturally stereotyped dialogue throughout Acts 1 and 2 without erasing identity, clues, jokes, period attitudes, or characterization. The completed pass covers Lo Fat, Sgt. O'Flaherty, Detective O'Riley, Ziggy, Rameses Najeer, Wolf Heimlich, Yvette Delacroix, and Dr. Ptahsheptut Smith, plus deferred murder reactions and adjacent lines that repeated the same caricatures.",
           "how": {
             "lead": "Uses reviewed tuple-addressed manifests and loose message overrides:",
             "points": [
@@ -668,7 +668,13 @@
               "Give Rameses precise, reserved speech rooted in his work, family, historical knowledge, and repatriation argument; remove the written lisp and exoticizing cliches without diminishing his Egyptian identity.",
               "Keep Heimlich militant, suspicious, and devoted to museum security while replacing faux-German spelling, ethnic-superiority jokes, and premature Nazi parody with terse period characterization.",
               "Give Yvette fluent, poised, knowingly sensual dialogue that preserves her ambition, intelligence, strategic relationships, and mystery-relevant history without making broken English or French promiscuity the joke.",
-              "Apply text by exact noun, verb, condition, sequence, and talker tuple with tools/dialogue.py; preserve all routing and reference metadata."
+              "Keep O'Riley swaggering, sexist, corrupt, xenophobic, and antagonistic while replacing leprechaun vocabulary and dense stage-Irish spelling with readable Irish-American rhythm and police slang.",
+              "Give Ziggy a continuous Peter Lorre-inspired voice across Acts 1 and 2: nervous, insinuating, ingratiating, and self-protective, with selective underworld slang rather than cartoon-Brooklyn phonetics.",
+              "Correct Ziggy's anachronistic Seabiscuit tip and the diary response erroneously assigned to Laura while preserving every clue, callback, joke, and interrogation route.",
+              "Present Tut Smith as an educated, imposing Cairo Museum envoy whose forceful repatriation case, vanity, sexism, and suspicious threats define him instead of pulp cliches about camels, snake charmers, amputations, and mystical vengeance.",
+              "Bring every deferred murder reaction into the approved Rameses, Heimlich, Yvette, and O'Riley voices, then clean isolated Pippin, Countess, Steve, Olympia, and Laura lines that reintroduced the discarded caricatures.",
+              "Replace all five references to the anachronistic Andrea Doria, correct Rameses I chronology and Egyptological terminology, and repair three demonstrably wrong talker IDs.",
+              "Apply text by exact noun, verb, condition, sequence, and talker tuple with tools/dialogue.py; preserve routing and reference metadata except where a manifest explicitly repairs an erroneous talker ID."
             ]
           },
           "why": "Ethnic spelling should not substitute for character. Distinct voices can remain historically grounded and dramatically useful without making cultural identity itself the joke.",
@@ -712,6 +718,54 @@
             {
               "label": "Yvette Dialogue Manifest",
               "target": "docs/dialogue/act2-yvette.json"
+            },
+            {
+              "label": "O'Riley Dialogue",
+              "target": "LB2/1888.MSG"
+            },
+            {
+              "label": "O'Riley Dialogue Manifest",
+              "target": "docs/dialogue/act2-oriley.json"
+            },
+            {
+              "label": "Ziggy Speakeasy Dialogue",
+              "target": "LB2/310.MSG"
+            },
+            {
+              "label": "Ziggy Museum Dialogue",
+              "target": "LB2/1890.MSG"
+            },
+            {
+              "label": "Act 1 Ziggy Dialogue Manifest",
+              "target": "docs/dialogue/act1-ziggy.json"
+            },
+            {
+              "label": "Act 2 Ziggy Dialogue Manifest",
+              "target": "docs/dialogue/act2-ziggy.json"
+            },
+            {
+              "label": "Tut Smith Dialogue",
+              "target": "LB2/1883.MSG"
+            },
+            {
+              "label": "Tut Smith Dialogue Manifest",
+              "target": "docs/dialogue/act2-tut.json"
+            },
+            {
+              "label": "Pippin Adjacent Cleanup",
+              "target": "docs/dialogue/act2-pippin-stragglers.json"
+            },
+            {
+              "label": "Countess Adjacent Cleanup",
+              "target": "docs/dialogue/act2-countess-stragglers.json"
+            },
+            {
+              "label": "Steve Anachronism Cleanup",
+              "target": "docs/dialogue/act2-steve-stragglers.json"
+            },
+            {
+              "label": "Olympia Adjacent Cleanup",
+              "target": "docs/dialogue/act2-olympia-stragglers.json"
             }
           ],
           "related": [
