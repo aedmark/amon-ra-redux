@@ -13,6 +13,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - Verification harness integrating Wine-based SCI Companion and DOSBox-X.
 
 ### Changed
+- Began the act-by-act period dialogue pass with Act 1: rewrote Lo Fat, Sgt. O'Flaherty, and Detective O'Riley to replace phonetic ethnic caricature with distinct, readable voices while preserving clues, jokes, period characterization, and O'Riley's deliberately antagonistic bluster (P2-08, D-031).
 - Split the coroner questionnaire into clearly labeled required case findings (questions 1–11) and bonus museum inquiries (questions 12–16); optional art-theft and High Priest answers are structurally isolated from verdict and ending state (P4-06, D-027).
 - Corrected cumulative act-grade divisors to attainable Redux point totals (`5/13/38/48/51`) and stopped the ungraded introduction from consuming the first F-grade narrator message (P4-05, D-026).
 - Decoupled dagger recovery from theft-quiz correctness at the epilogue boundary, so the newspaper, ending route, and character outcome cards recognize a dagger Laura retained or surrendered to O'Reilly (P4-04, D-025).

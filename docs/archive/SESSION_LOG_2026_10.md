@@ -388,6 +388,27 @@ Archived verbatim from `docs/HANDOFF.md` when its live session log exceeded ten 
 
 **Next session should start with:** Decompiling target scripts in SCI Companion and executing P1-04 and P1-03 fixes.
 
+### Session 18: 2026-10-08: P4-02 Evidence Validity, Red Herrings & Inquest Credit
+
+**Contributor:** Codex
+
+**Goal:** Make the inquest recognize planted physical evidence and reward careful investigation using the game's canonical resources.
+
+**Done:**
+- Traced the complete questionnaire and final evaluation to Script 750, correcting the outline's proposed Scripts 700/720.
+- Identified Pippin's notepad (item 21/clue 790) as the appointment schedule; confirmed that carbon paper item 29/clue 798 instead contains an unrelated fencing message.
+- Made opening Room 454's authored bloody high-heel footprint inset persist discovery through unused point bit 179.
+- Added a post-question Script 750 review that independently recognizes the Ankh, Pippin's appointment notepad, and the footprint paired with Yvette's shoe, explains their evidentiary limits, and awards one-time point bits 180..182.
+- Preserved questionnaire correctness and ending-tier logic for P4-03 through P4-06, then compiled both scripts and synchronized the roadmap, architecture, decision log, changelog, test plan, handoff, and manual.
+
+**Changed:** `LB2/src/rm454.sc`, `LB2/src/rm750.sc`, `LB2/454.SCR`, `LB2/454.HEP`, `LB2/750.SCR`, `LB2/750.HEP`, `docs/ROADMAP.md`, `docs/ARCHITECTURE.md`, `docs/DECISIONS.md`, `docs/CHANGELOG.md`, `docs/TESTING.md`, `docs/manual/amon-ra.manual.json`, `docs/manual/manual.html`, `docs/HANDOFF.md`, `docs/archive/SESSION_LOG_2026_10.md`.
+
+**Decisions:** D-023 (Reconcile canonical planted evidence in Script 750).
+
+**Verified:** SCI Companion compilation of Scripts 454 and 750; static evidence-identity, ownership, and unique point-bit audit; DOSBox-X original-interpreter startup smoke; documentation/manual validation; unchanged base archive hashes. Direct save-based traversal of the footprint and evidence-review branches remains a manual regression test.
+
+**Next session should start with:** P4-03 (Hint Book Contradictions & Best Ending Alignment).
+
 ### Session 1: 2026-10-07: Dev Plan & Modernization Roadmap Creation
 
 **Contributor:** Antigravity

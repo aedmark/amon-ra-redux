@@ -12,14 +12,15 @@ Security: [SECURITY.md](SECURITY.md). Changes: [CHANGELOG.md](CHANGELOG.md). Old
 
 ## Current state
 
-_Last updated: 2026-10-10, session 27: Act 1 diegetic clue flow verification and script/message mapping._
+_Last updated: 2026-10-10, session 28: Act 1 period dialogue de-caricature pass._
 
-**Where things stand, in one paragraph:** Following playtest observations, the Act 1 inquiry trees and notebook clue flow were fully audited against decompiled scripts and unpacked message resources. We confirmed that Crodfoller introduces Carrington (259) and Carter (258) when asked about the Museum (517), but never mentions Rameses; Rameses Najeer (268) is introduced by Ziggy in the Speakeasy (Room 310) when asked about Egyptology (1028). Furthermore, Steve Dorian at the 12th St Docks (Room 240) introduces Countess (269) and Tut (271), while Lo Fat at the Laundry (Room 270) introduces Olympia Myklos (270), Wolf Heimlich (265), and Yvette Delacroix (266) when asked about the Museum (517). All room numbers, suspect triggers, and documentation references (D-030, PLAY-005/007) are verified and in sync. The game boots cleanly with zero errors in DOSBox-X.
+**Where things stand, in one paragraph:** P2-08's act-by-act dialogue pass is underway, with Act 1 complete. Lo Fat's 86 spoken records now use polished grammar, dry wit, and a light British-English cadence; Sgt. O'Flaherty's 64 records retain restrained Irish-American rhythm without stage-Irish spelling; and O'Riley's 11-line office scene remains intentionally blustering, sexist, and theatrical while becoming readable. Tuple-addressed manifests in `docs/dialogue/` reproduce loose overrides 270, 290, and 295 through `tools/dialogue.py`; all clue disclosures, talkers, references, and progression routing are unchanged (D-031). The game initializes cleanly in DOSBox-X.
 
 **Verified** (2026-10-10, Linux workspace)
 
 | Suite | Result |
 | --- | --- |
+| P2-08 Act 1 message rewrites | **Pass: modules 270/290/295 structurally parsed; exact tuple/talker/reference metadata preserved** |
 | D-030 / PLAY-001 dirty cab gating | **Pass: 250.SCR/250.HEP compiled, gated on flag 125 & (not flag 27)** |
 | D-030 clue flow preservation | **Pass: 14.SCR/14.HEP matches authentic baseline (648 / 52 bytes)** |
 | Act 1 message resource mapping | **Pass: 20.MSG, 230.MSG, 240.MSG, 270.MSG, 290.MSG, 310.MSG verified** |
@@ -44,7 +45,8 @@ _Last updated: 2026-10-10, session 27: Act 1 diegetic clue flow verification and
 - **Phase 3 Mechanics:** Supply safety audit (P3-01), snake oil feedback (P3-02), fair stairwell (P3-04), flexible Act 1 and cab gating (P3-05, D-030), and museum conversation lock (P3-06).
 - **Phase 4 Scoring & Mystery:** Accurate act grades (P4-05), clear inquest scope (P4-06), evidence checklist (P4-03), and decoupled quiz/dagger outcome (P4-04).
 - **Act 1 Investigation Context:** Authentic starting contacts preserved in `lb2InitCode.sc`; suspects discovered naturally through Act 1 inquiry trees (D-030).
-- **Documentation Architecture:** `docs/ROADMAP.md`, `DECISIONS.md` (D-001 through D-030), `docs/manual/`, `docs/manual/manual.html`, and `docs/PLAYTEST_CHECKLIST.md` synchronized.
+- **Act 1 Dialogue:** Lo Fat, Sgt. O'Flaherty, and O'Riley rewritten as distinct, readable period characters without altering dialogue logic (P2-08, D-031).
+- **Documentation Architecture:** `docs/ROADMAP.md`, `DECISIONS.md` (D-001 through D-031), `docs/manual/`, `docs/manual/manual.html`, and `docs/PLAYTEST_CHECKLIST.md` synchronized.
 
 **Not verified**
 
@@ -68,6 +70,28 @@ _Last updated: 2026-10-10, session 27: Act 1 diegetic clue flow verification and
 None currently open. Q-001 and Q-002 have been resolved by D-007, D-017, and D-018.
 
 ## Session log
+
+### Session 28: 2026-10-10: Act 1 Period Dialogue De-Caricature Pass
+
+**Contributor:** Codex and maintainer
+
+**Goal:** Rewrite Lo Fat, Sgt. O'Flaherty, and Detective O'Riley without erasing their identities, period setting, clues, humour, or dramatic roles.
+
+**Done:**
+- Inventoried every Act 1 spoken record for the three characters directly from modules 270, 290, and 295.
+- Reworked Lo Fat with polished grammar, dry charm, and a light British-English cadence; reviewed all 86 spoken records and cleaned six adjacent narrator records that repeated the caricature.
+- Reworked 49 of O'Flaherty's 64 lines, retaining restrained Irish-American idiom while removing phonetic stage-Irish spelling; also removed the anachronistic “in like Flynn” phrase.
+- Reworked all 11 O'Riley office lines into readable but deliberately blustering and patronizing dialogue, retaining his period sexism as villain characterization.
+- Added tuple-addressed JSON manifests under `docs/dialogue/` and the idempotent `tools/dialogue.py` patcher.
+- Added loose message overrides `LB2/290.MSG` and `LB2/295.MSG`; updated the existing `LB2/270.MSG` override.
+
+**Changed:** `LB2/270.MSG`, `LB2/290.MSG`, `LB2/295.MSG`, `docs/dialogue/`, `tools/dialogue.py`, and project documentation/manual files.
+
+**Decisions:** D-031.
+
+**Verified:** Exact manifest-to-message text audit; unique tuple audit; unchanged talker/reference metadata against archived modules; DOSBox-X headless startup; documentation/manual validation and build.
+
+**Next session should start with:** Continue P2-08 with the next act's character inventory after the maintainer identifies the desired cast.
 
 ### Session 27: 2026-10-10: Act 1 Diegetic Clue Flow Verification and Script/Message Mapping
 
@@ -272,24 +296,3 @@ None currently open. Q-001 and Q-002 have been resolved by D-007, D-017, and D-0
 **Verified:** SCI Companion compilation of Scripts 560 and 750; static 13-item checklist and durable-state audit; DOSBox-X original-interpreter startup smoke; documentation/manual validation; unchanged base archive hashes. Direct save-based traversal of the full positive and negative ending matrix remains a manual regression test.
 
 **Next session should start with:** P4-04 (Quiz / Dagger Possession Logic Decoupling).
-
-### Session 18: 2026-10-08: P4-02 Evidence Validity, Red Herrings & Inquest Credit
-
-**Contributor:** Codex
-
-**Goal:** Make the inquest recognize planted physical evidence and reward careful investigation using the game's canonical resources.
-
-**Done:**
-- Traced the complete questionnaire and final evaluation to Script 750, correcting the outline's proposed Scripts 700/720.
-- Identified Pippin's notepad (item 21/clue 790) as the appointment schedule; confirmed that carbon paper item 29/clue 798 instead contains an unrelated fencing message.
-- Made opening Room 454's authored bloody high-heel footprint inset persist discovery through unused point bit 179.
-- Added a post-question Script 750 review that independently recognizes the Ankh, Pippin's appointment notepad, and the footprint paired with Yvette's shoe, explains their evidentiary limits, and awards one-time point bits 180..182.
-- Preserved questionnaire correctness and ending-tier logic for P4-03 through P4-06, then compiled both scripts and synchronized the roadmap, architecture, decision log, changelog, test plan, handoff, and manual.
-
-**Changed:** `LB2/src/rm454.sc`, `LB2/src/rm750.sc`, `LB2/454.SCR`, `LB2/454.HEP`, `LB2/750.SCR`, `LB2/750.HEP`, `docs/ROADMAP.md`, `docs/ARCHITECTURE.md`, `docs/DECISIONS.md`, `docs/CHANGELOG.md`, `docs/TESTING.md`, `docs/manual/amon-ra.manual.json`, `docs/manual/manual.html`, `docs/HANDOFF.md`, `docs/archive/SESSION_LOG_2026_10.md`.
-
-**Decisions:** D-023 (Reconcile canonical planted evidence in Script 750).
-
-**Verified:** SCI Companion compilation of Scripts 454 and 750; static evidence-identity, ownership, and unique point-bit audit; DOSBox-X original-interpreter startup smoke; documentation/manual validation; unchanged base archive hashes. Direct save-based traversal of the footprint and evidence-review branches remains a manual regression test.
-
-**Next session should start with:** P4-03 (Hint Book Contradictions & Best Ending Alignment).

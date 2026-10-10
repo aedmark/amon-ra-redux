@@ -647,6 +647,50 @@
           "related": [
             "p4-04-quiz-dagger-decoupling"
           ]
+        },
+        {
+          "id": "p2-08-period-dialogue-decaricature",
+          "title": "P2-08: Period Dialogue De-Caricature Pass",
+          "summary": "Replaces phonetic ethnic caricature with distinct, readable character voices while preserving the 1926 setting and dramatic intent.",
+          "tags": [
+            "dialogue",
+            "writing",
+            "character",
+            "p2"
+          ],
+          "what": "Rewrites culturally stereotyped dialogue act by act without erasing identity, clues, jokes, period attitudes, or characterization. Act 1 covers Lo Fat, Sgt. O'Flaherty, and Detective O'Riley.",
+          "how": {
+            "lead": "Uses reviewed tuple-addressed manifests and loose message overrides:",
+            "points": [
+              "Give Lo Fat polished grammar, dry humour, and a light British-English cadence while retaining his garment knowledge, baseball interest, flirtation, and clue disclosures.",
+              "Give Sgt. O'Flaherty readable Irish-American rhythm and idiom without stage-Irish phonetic spelling, while retaining his hunger, obstruction, and speakeasy hint.",
+              "Keep O'Riley blustering, sexist, and deliberately theatrical because those qualities serve his antagonistic role, but make every sentence intelligible.",
+              "Apply text by exact noun, verb, condition, sequence, and talker tuple with tools/dialogue.py; preserve all routing and reference metadata."
+            ]
+          },
+          "why": "Ethnic spelling should not substitute for character. Distinct voices can remain historically grounded and dramatically useful without making cultural identity itself the joke.",
+          "evidence": [
+            {
+              "label": "Lo Fat Dialogue",
+              "target": "LB2/270.MSG"
+            },
+            {
+              "label": "Desk Sergeant Dialogue",
+              "target": "LB2/290.MSG"
+            },
+            {
+              "label": "O'Riley Office Dialogue",
+              "target": "LB2/295.MSG"
+            },
+            {
+              "label": "Act 1 Dialogue Manifests",
+              "target": "docs/dialogue/act1-lo-fat.json"
+            }
+          ],
+          "related": [
+            "p2-03-murder-dialogue-assets",
+            "p2-04-narrative-anachronisms"
+          ]
         }
       ]
     },

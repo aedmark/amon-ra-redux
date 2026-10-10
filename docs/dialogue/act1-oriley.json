@@ -1,0 +1,18 @@
+{
+  "module": 295,
+  "character": "Detective Ryan Hanrahan O'Riley",
+  "voice": "A blustering, patronizing antagonist with a deliberately theatrical Irish-American persona, readable spelling, and pointed period sexism.",
+  "entries": [
+    {"tuple": [13, 0, 0, 1, 19], "text": "Well now, Detective Ryan O'Riley, at your service. What might you be wanting, lass?"},
+    {"tuple": [13, 0, 0, 3, 19], "text": "A reporter? Don't make me laugh. You're a girl. The Tribune hires men."},
+    {"tuple": [13, 0, 0, 5, 19], "text": "I thought that Crodfeather fellow was writing the robbery story."},
+    {"tuple": [13, 0, 0, 7, 19], "text": "It's a technical report, lass. I doubt you'd make much sense of it."},
+    {"tuple": [13, 0, 0, 9, 19], "text": "Persistent little thing, aren't you? Very well. Have a look."},
+    {"tuple": [14, 0, 0, 2, 19], "text": "That's the whole report--for now."},
+    {"tuple": [14, 0, 0, 4, 19], "text": "Proper police work takes time, and I'm a very busy man. I haven't had a chance to follow up on one little burglary..."},
+    {"tuple": [14, 0, 0, 5, 19], "text": "...A museum loses a knife--so what? People are being murdered left and right. Cars are being stolen. Booze is being smuggled into speakeasies..."},
+    {"tuple": [14, 0, 0, 6, 19], "text": "...Pedestrians are being mugged, firebugs are setting half the city ablaze, the corner market is running out of grapes, and I've got a splitting headache!"},
+    {"tuple": [14, 0, 0, 7, 19], "text": "...And who gets every crime in this district? Me! So I don't need some nosy girl reporter barging into my office to tell me my work is vague!"},
+    {"tuple": [14, 0, 0, 9, 19], "text": "If you have more questions, bother the desk sergeant. I've wasted enough time on you."}
+  ]
+}

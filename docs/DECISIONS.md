@@ -318,6 +318,16 @@ Gate the dirty cab behind a completed normal taxi ride, eliminate it after findi
 
 ---
 
+## D-031 Preserve Character and Period While Removing Phonetic Caricature
+
+Rewrite culturally stereotyped dialogue act by act without flattening distinct voices or erasing period-specific characterization.
+
+- **Context:** The floppy text gives Lo Fat broken English despite identifying him as Newark-born, and renders Sgt. O'Flaherty and Detective O'Riley through dense stage-Irish spelling. The result can be difficult to read and makes ethnicity substitute for characterization. The same characters already have stronger individual traits worth preserving: Lo Fat is observant, educated, playful, and knowledgeable about garments and baseball; O'Flaherty is hungry, obstructive, and casually helpful when it suits him; O'Riley is a blustering, sexist antagonist whose theatrical self-presentation foreshadows his villainy.
+- **Decision:** Rewrite spoken text through tuple-addressed loose `.MSG` overrides, never by changing dialogue routing. Give Lo Fat complete grammar, dry wit, and a light British-English cadence. Give O'Flaherty standard spelling with restrained Irish-American rhythm and idiom. Permit O'Riley a more performative caricature because it serves his antagonistic role, but keep every sentence intelligible. Preserve period attitudes when they reveal character, while removing phonetic ethnicity as the joke itself. Clean adjacent narrator text when it repeats the same stereotype. Store reviewed wording in `docs/dialogue/` manifests and apply it with `tools/dialogue.py` so tuple, talker, reference, and progression metadata remain unchanged.
+- **Consequences:** Act 1 modules 270, 290, and 295 retain all clues and triggers while becoming clearer and less demeaning. The approach is reproducible and auditable for later acts. O'Riley remains intentionally unpleasant, and the Irish-American police presence remains historically grounded rather than being erased.
+
+---
+
 ## Open questions
 
 - **Q-001**: Resolved by D-007: Omit insensitive original CD voice tracks; restore murder lines as text messages in

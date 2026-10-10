@@ -19,6 +19,7 @@ that owns the change.
 | `docs/CHANGELOG.md` | What changed for players and users? | A playable release, patch build, or feature lands. |
 | `docs/archive/` | What historical context is no longer active? | Session logs exceed limit in `HANDOFF.md`. |
 | `docs/manual/` | What/How/Why manual source and built manual? | Technical features, fixes, or implementation details change. |
+| `docs/dialogue/` | What exact tuple-addressed wording defines the reviewed dialogue passes? | A character line is approved, revised, or added to an act-level rewrite. |
 | `docs/reference/` | What source material defines the modernization scope? | Reference documents or extracted source text change. |
 
 ## Update triggers
