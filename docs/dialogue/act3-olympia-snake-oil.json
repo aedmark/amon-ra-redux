@@ -1,0 +1,19 @@
+{
+  "module": 1520,
+  "character": "Olympia Myklos and the snake oil",
+  "voice": "Cheerfully morbid, scientifically matter-of-fact, and socially disarming; Steve's scars remain an intentional setup for their following encounter.",
+  "entries": [
+    {"tuple": [1, 0, 1, 1, 25], "text": "Good evening, Miss Bow."},
+    {"tuple": [1, 0, 1, 2, 2], "text": "Oh! You startled me."},
+    {"tuple": [1, 0, 1, 3, 25], "text": "Good. It gets the blood moving, doesn't it?"},
+    {"tuple": [1, 0, 1, 4, 2], "text": "I suppose so."},
+    {"tuple": [1, 0, 1, 5, 25], "text": "I see you found my snake oil."},
+    {"tuple": [1, 0, 1, 6, 2], "text": "I was only looking around."},
+    {"tuple": [1, 0, 1, 7, 25], "text": "I'm sure you meant no harm."},
+    {"tuple": [1, 0, 1, 8, 2], "text": "What is the snake oil for?"},
+    {"tuple": [1, 0, 1, 9, 25], "text": "It repels snakes, of course. It is useful when I work in the basement. I lost several Egyptian cobras down there a few weeks ago, and now and then I encounter one of the little darlings."},
+    {"tuple": [1, 0, 1, 10, 25], "text": "They always want to bite me, but I am sure they mean nothing by it. Snakes are nervous creatures. Ordinarily, I love to watch them kill. My Barney will sink his teeth into anything."},
+    {"tuple": [1, 0, 1, 11, 2], "text": "Charming."},
+    {"tuple": [1, 0, 1, 12, 25], "text": "I must run. I'm meeting that young Steve Dorian; he promised to show me his scars. Until later."}
+  ]
+}

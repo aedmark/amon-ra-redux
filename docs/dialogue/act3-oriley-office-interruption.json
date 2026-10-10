@@ -1,0 +1,9 @@
+{
+  "module": 1550,
+  "character": "Detective O'Riley caught with Yvette",
+  "voice": "Brazenly corrupt and officious, using police authority as an absurd cover without stage-Irish vocabulary.",
+  "entries": [
+    {"tuple": [2, 0, 2, 1, 2], "text": "Oh! Pardon me."},
+    {"tuple": [2, 0, 2, 2, 19], "text": "Move along, Miss Bow. This is police business."}
+  ]
+}

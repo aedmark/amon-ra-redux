@@ -1,0 +1,13 @@
+{
+  "module": 1550,
+  "character": "Olympia Myklos in Carrington's office",
+  "voice": "Composed, morbidly intrigued, and observant while redirecting Laura toward Yvette and Ernie.",
+  "entries": [
+    {"tuple": [1, 0, 1, 1, 25], "text": "Miss Bow, this is a private office."},
+    {"tuple": [1, 0, 1, 2, 2], "text": "Oh! I was only looking around. Have you seen this paper cutter? There appears to be blood on the blade."},
+    {"tuple": [1, 0, 1, 3, 25], "text": "Blood?"},
+    {"tuple": [1, 0, 1, 4, 25], "text": "Oh, that is not blood. You gave me quite a thrill. It is probably red ink. If you're looking for Yvette, I saw her heading down to Ernie's office in the basement. She spends a great deal of time there."},
+    {"tuple": [1, 0, 1, 5, 2], "text": "Perhaps she's fond of Ernie."},
+    {"tuple": [1, 0, 1, 6, 25], "text": "Yvette is fond of everyone, my dear. Now, if you'll excuse me, I have business to attend to."}
+  ]
+}

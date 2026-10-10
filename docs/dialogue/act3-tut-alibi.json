@@ -1,0 +1,32 @@
+{
+  "module": 1450,
+  "character": "Dr. Ptahsheptut Smith's private alibi interview",
+  "voice": "Educated, imposing, guarded, and affronted without pulp exoticism; Laura is direct and increasingly skeptical.",
+  "entries": [
+    {"tuple": [1, 0, 1, 1, 2], "text": "Good evening, Dr. Smith."},
+    {"tuple": [1, 0, 1, 2, 9], "text": "Miss Bow. I did not expect to see you here."},
+    {"tuple": [1, 0, 1, 3, 2], "text": "But I expected you."},
+    {"tuple": [1, 0, 1, 4, 9], "text": "You did? How?"},
+    {"tuple": [1, 0, 1, 5, 2], "text": "That isn't important. Why are you here?"},
+    {"tuple": [1, 0, 1, 6, 9], "text": "I had an appointment with Dr. Carter."},
+    {"tuple": [1, 0, 1, 7, 2], "text": "You know that he is dead."},
+    {"tuple": [1, 0, 1, 8, 9], "text": "Dead? I had not heard."},
+    {"tuple": [1, 0, 1, 9, 2], "text": "He died in this room. I'm surprised the news escaped you."},
+    {"tuple": [1, 0, 1, 10, 9], "text": "I am shocked. I do not know what to say."},
+    {"tuple": [1, 0, 1, 11, 2], "text": "Then tell me where you were at eight o'clock, when he died."},
+    {"tuple": [1, 0, 1, 12, 9], "text": "At the party, of course. You saw me there."},
+    {"tuple": [1, 0, 1, 13, 2], "text": "Not at eight o'clock."},
+    {"tuple": [1, 0, 1, 14, 9], "text": "Then I must have been answering that telephone call."},
+    {"tuple": [1, 0, 1, 15, 2], "text": "What telephone call?"},
+    {"tuple": [1, 0, 1, 16, 9], "text": "Mr. Heimlich said a call was waiting on Dr. Carrington's telephone. When I reached the office, the line was dead, so I returned to the party."},
+    {"tuple": [1, 0, 1, 17, 2], "text": "Was Dr. Carrington in his office?"},
+    {"tuple": [1, 0, 1, 18, 9], "text": "No. He was at the party."},
+    {"tuple": [1, 0, 1, 19, 2], "text": "Did Mr. Heimlich say who was calling?"},
+    {"tuple": [1, 0, 1, 20, 9], "text": "No. He did not take the call, and I do not know who informed him of it."},
+    {"tuple": [1, 0, 1, 21, 2], "text": "You and Dr. Carter argued frequently about the Dagger of Amon Ra."},
+    {"tuple": [1, 0, 1, 22, 9], "text": "We disagreed, yes."},
+    {"tuple": [1, 0, 1, 23, 2], "text": "Did you kill him?"},
+    {"tuple": [1, 0, 1, 24, 9], "text": "Miss Bow, I am appalled that you would ask me such a thing. This interview is over."},
+    {"tuple": [1, 0, 1, 25, 2], "text": "We'll speak again later."}
+  ]
+}

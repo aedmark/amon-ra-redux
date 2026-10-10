@@ -2,6 +2,29 @@
 
 Archived verbatim from `docs/HANDOFF.md` when its live session log exceeded ten entries.
 
+### Session 27: 2026-10-10: Act 1 Diegetic Clue Flow Verification and Script/Message Mapping
+
+**Contributor:** Antigravity and maintainer
+
+**Goal:** Investigate user playtest observations regarding Crodfoller/Rameses and dockworker/Olympia/Yvette/Heimlich dialogue trees; verify exact script handlers and message resources.
+
+**Done:**
+- Audited `LB2/src/rm230.sc` (Crodfoller in Newsroom), `LB2/src/rm240.sc` (Steve Dorian at Docks), `LB2/src/rm270.sc` (Lo Fat's Laundry), and `LB2/src/rm310.sc` (Ziggy at Speakeasy).
+- Decompressed and inspected SCI 1.1 message modules directly from `LB2/RESOURCE.MSG` (`20.MSG`, `230.MSG`, `240.MSG`, `270.MSG`, `290.MSG`, `310.MSG`) using PKWare DCL explode decompression.
+- Confirmed full notebook clue mappings: Clue 264 is Ziggy (not Rameses); Rameses Najeer is Clue 268; Clue 514 is Police Station; Clue 517 is Leyendecker Museum; Clue 516 is 12th Street Docks; Clue 515 is Lo Fat's Laundry.
+- Verified Point 2: Asking Crodfoller about Leyendecker Museum (517) introduces Dr. Archibald Carrington (259) and Dr. Pippin Carter (258); Crodfoller never mentions Rameses. In Act 1, Rameses Najeer (268) is introduced by Ziggy in Room 310 when asked about Egyptology (1028).
+- Verified Point 5: 12th Street Docks is Room 240 (Steve Dorian). Steve introduces Countess (269) and Tut (271). Room 270 is Lo Fat's Laundry, where asking Lo Fat about Leyendecker Museum (517) introduces Dr. Olympia Myklos (270), Wolf Heimlich (265), and Yvette Delacroix (266).
+- Corrected documentation discrepancies across `docs/DECISIONS.md` (D-030), `docs/PLAYTEST_CHECKLIST.md` (PLAY-005/007), and `docs/HANDOFF.md`.
+- Archived Session 17 to `docs/archive/SESSION_LOG_2026_10.md` to maintain the 10-session rolling window.
+
+**Changed:** `docs/DECISIONS.md`, `docs/PLAYTEST_CHECKLIST.md`, `docs/HANDOFF.md`, `docs/archive/SESSION_LOG_2026_10.md`.
+
+**Decisions:** D-030.
+
+**Verified:** Bytecode and message resource audits; `python3 tools/check_docs.py` (0 errors); `python3 tools/manual.py check` (0 errors).
+
+**Next session should start with:** Continue full-game playtest checklist run in DOSBox-X.
+
 ### Session 26: 2026-10-09: Dirty Cab Progression Gating and Act 1 Clue Flow Preservation
 
 **Contributor:** Antigravity and maintainer

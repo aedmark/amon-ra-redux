@@ -1,0 +1,17 @@
+{
+  "module": 562,
+  "character": "Ziggy and Ernie Leach over the intercom",
+  "voice": "Ziggy is nervous, insinuating, and ingratiating in the approved Peter Lorre-inspired voice; Ernie is terse, working-class, and physically confident.",
+  "entries": [
+    {"tuple": [54, 4, 4, 1, 99], "text": "The intercom crackles and you overhear a conversation:"},
+    {"tuple": [54, 4, 4, 2, 23], "text": "I'm telling you, pal, you're not supposed to be down here."},
+    {"tuple": [54, 4, 4, 3, 6], "text": "Nothing personal, my friend, but Archie said I could look the place over."},
+    {"tuple": [54, 4, 4, 4, 23], "text": "He didn't say anything to me. Neither did Mr. Heimlich, and he's chief of security."},
+    {"tuple": [54, 4, 4, 5, 6], "text": "Easy, my friend. There's no reason to get excited. You can trust me."},
+    {"tuple": [54, 4, 4, 6, 23], "text": "I trust you about as far as I can throw you."},
+    {"tuple": [54, 4, 4, 7, 6], "text": "Please, my friend--there's no need for physical violence."},
+    {"tuple": [54, 4, 4, 8, 23], "text": "You've got ten seconds to get out of my sight."},
+    {"tuple": [54, 4, 4, 9, 6], "text": "Such a temper. But I had finished my little inspection anyway. Until next time."},
+    {"tuple": [54, 4, 4, 10, 23], "text": "Not if I can help it."}
+  ]
+}

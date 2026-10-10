@@ -1,0 +1,17 @@
+{
+  "module": 640,
+  "character": "Ernie Leach's office ejections",
+  "voice": "Blunt, overworked, and physically confident without repetitive pig-Latin shouting.",
+  "entries": [
+    {"tuple": [27, 0, 4, 1, 23], "text": "Are you deaf? Read my lips: get out."},
+    {"tuple": [27, 0, 3, 1, 23], "text": "Can't a man get any privacy in his own office? I've got enough trouble already, so go bother somebody else."},
+    {"tuple": [27, 0, 6, 1, 23], "text": "Miss Bow, I've got enough trouble already. Unless you need something, please leave me alone."},
+    {"tuple": [27, 0, 8, 1, 23], "text": "This is a private office, Miss Bow. Please leave."},
+    {"tuple": [27, 0, 8, 2, 2], "text": "Oh, I'm sorry, Mr. Leach. I thought this was a storage room. I'll leave."},
+    {"tuple": [27, 0, 9, 1, 23], "text": "Miss Bow, I've warned you. This is my private office. Understand?"},
+    {"tuple": [27, 0, 9, 2, 2], "text": "I was helping Olympia look for her ferret. Yes, that's it. Here, little ferret!"},
+    {"tuple": [27, 0, 9, 3, 23], "text": "The ferret isn't here. Get out."},
+    {"tuple": [27, 0, 10, 1, 23], "text": "Miss Bow! Do I need to call security to throw you out?"},
+    {"tuple": [27, 0, 10, 2, 2], "text": "I'll see you later!"}
+  ]
+}

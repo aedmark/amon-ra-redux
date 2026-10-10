@@ -1,0 +1,12 @@
+{
+  "module": 454,
+  "character": "Detective O'Riley at Pippin Carter's murder scene",
+  "voice": "Callous, accusatory, and professionally controlling without stage-Irish vocabulary or eye dialect.",
+  "entries": [
+    {"tuple": [13, 0, 0, 1, 19], "text": "Quite a scream, Miss Bow. Did you kill him?"},
+    {"tuple": [13, 0, 0, 2, 2], "text": "No! I... just walked in and found him."},
+    {"tuple": [13, 0, 0, 3, 19], "text": "That explains the scream. Did you see the murderer?"},
+    {"tuple": [13, 0, 0, 4, 2], "text": "No."},
+    {"tuple": [13, 0, 0, 5, 19], "text": "All right. We'll speak again when you've collected yourself. And don't try to leave the building."}
+  ]
+}
