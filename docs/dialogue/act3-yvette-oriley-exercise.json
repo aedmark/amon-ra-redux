@@ -1,0 +1,16 @@
+{
+  "module": 562,
+  "character": "Yvette Delacroix and Detective O'Riley over the intercom",
+  "voice": "Yvette is fluent, playful, and knowingly suggestive; O'Riley remains boastful without stage-Irish spelling.",
+  "entries": [
+    {"tuple": [54, 4, 3, 1, 99], "text": "The intercom crackles and you overhear a conversation:"},
+    {"tuple": [54, 4, 3, 2, 28], "text": "Oh, my love, how do you manage to do it so many times?"},
+    {"tuple": [54, 4, 3, 3, 19], "text": "A man has to do what a man has to do."},
+    {"tuple": [54, 4, 3, 4, 28], "text": "And you do it so well!"},
+    {"tuple": [54, 4, 3, 5, 19], "text": "Keep your voice down, Yvette. Someone might hear us."},
+    {"tuple": [54, 4, 3, 6, 28], "text": "Let them hear, mon amour. We have only one life to enjoy."},
+    {"tuple": [54, 4, 3, 7, 19], "text": "I do at least fifty every day to stay in shape."},
+    {"tuple": [54, 4, 3, 8, 28], "text": "Fifty! My. And what do you call this movement?"},
+    {"tuple": [54, 4, 3, 9, 19], "text": "Sit-ups. I also do fifty push-ups each day. Then I run a few miles."}
+  ]
+}

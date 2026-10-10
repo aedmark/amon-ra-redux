@@ -1,0 +1,20 @@
+{
+  "module": 1560,
+  "character": "Yvette Delacroix and Dr. Ptahsheptut Smith",
+  "voice": "Yvette uses charm and leverage deliberately; Smith remains proud and guarded, with both speaking fluent English.",
+  "entries": [
+    {"tuple": [1, 38, 2, 1, 28], "text": "Dr. Smith, I appreciate your help so much."},
+    {"tuple": [1, 38, 2, 2, 9], "text": "Well, I do not particularly appreciate giving it. I have things to do, Miss Delacroix. Important things."},
+    {"tuple": [1, 38, 2, 3, 28], "text": "Surely you can spare enough time to help me move my desk."},
+    {"tuple": [1, 38, 2, 4, 9], "text": "Oh, I suppose. Why do you want to move it?"},
+    {"tuple": [1, 38, 2, 5, 28], "text": "There is a terrible stain on the rug. I do not want it to show, and the desk need not move far."},
+    {"tuple": [1, 38, 2, 6, 9], "text": "All right... Ah! It is heavy! Ow!"},
+    {"tuple": [1, 38, 2, 7, 28], "text": "Oh, I am so sorry. Did you hurt yourself?"},
+    {"tuple": [1, 38, 2, 8, 9], "text": "Yes! Oh, no, I am bleeding. You owe me one, Miss Delacroix."},
+    {"tuple": [1, 38, 2, 9, 28], "text": "Of course, Dr. Smith. I will do anything you ask. Anything. I let you into the museum, and I kept your secret, did I not?"},
+    {"tuple": [1, 38, 2, 10, 9], "text": "Yes, I suppose you did. And I am sorry about bleeding on your carpet. At least it will blend with the old stain. What is that, anyway?"},
+    {"tuple": [1, 38, 2, 11, 28], "text": "It is only strawberry jam. *giggle*"},
+    {"tuple": [1, 38, 2, 12, 9], "text": "I am sure I do not want to know, Yvette."},
+    {"tuple": [1, 38, 2, 13, 28], "text": "Probably not, Dr. Smith. Now, let us go to your place."}
+  ]
+}

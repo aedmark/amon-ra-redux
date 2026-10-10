@@ -1,0 +1,33 @@
+{
+  "module": 1550,
+  "character": "Yvette Delacroix after Ernie's death",
+  "voice": "Sexually confident but genuinely grief-stricken, with fluent speech and an isolated clue-bearing idiom mistake rather than constant caricature.",
+  "entries": [
+    {"tuple": [3, 0, 0, 1, 2], "text": "Oh, dear!"},
+    {"tuple": [3, 0, 0, 2, 12], "text": "Miss Bow!"},
+    {"tuple": [3, 0, 0, 3, 28], "text": "Mon Dieu!"},
+    {"tuple": [3, 0, 0, 4, 12], "text": "I can explain this!"},
+    {"tuple": [3, 0, 0, 5, 2], "text": "I bet you can, Mr. Dorian."},
+    {"tuple": [3, 0, 0, 6, 12], "text": "I'm just rubbing her neck!"},
+    {"tuple": [3, 0, 0, 7, 28], "text": "Yes, and he does it very well!"},
+    {"tuple": [3, 0, 0, 8, 2], "text": "I'll leave you two alone."},
+    {"tuple": [3, 0, 0, 9, 12], "text": "Miss Bow! Wait!"},
+
+    {"tuple": [4, 0, 0, 1, 28], "text": "Ernie was a wonderful man. I truly loved him."},
+    {"tuple": [4, 0, 0, 2, 2], "text": "You and Ernie? I thought you were interested in Steve."},
+    {"tuple": [4, 0, 0, 3, 28], "text": "I did love him. Ernie was the first man I ever truly loved. I was trying to find him extra work so he could earn more money."},
+    {"tuple": [4, 0, 0, 4, 2], "text": "Why did he need extra money? He had a good job here, didn't he?"},
+    {"tuple": [4, 0, 0, 5, 28], "text": "It was his gambling. Icepick killed Ernie over his debts!"},
+    {"tuple": [4, 0, 0, 6, 2], "text": "Ernie wasn't killed with an icepick."},
+    {"tuple": [4, 0, 0, 7, 28], "text": "No. Icepick is... how do you say it? A loan fish?"},
+    {"tuple": [4, 0, 0, 8, 2], "text": "Loan fish? Oh! You mean Icepick is the name of a loan shark?"},
+    {"tuple": [4, 0, 0, 9, 28], "text": "Yes. Icepick is an evil man."},
+    {"tuple": [4, 0, 0, 10, 2], "text": "You're sure he's the one who killed Ernie?"},
+    {"tuple": [4, 0, 0, 11, 28], "text": "Ernie was afraid of Icepick. He told me about him this evening."},
+    {"tuple": [4, 0, 0, 12, 2], "text": "Hmm. Very curious. I'm surprised you had time to see Ernie tonight."},
+    {"tuple": [4, 0, 0, 13, 28], "text": "Why does that surprise you?"},
+    {"tuple": [4, 0, 0, 14, 2], "text": "Because you've been spending so much time with Mr. Dorian."},
+    {"tuple": [4, 0, 0, 15, 28], "text": "Steve? He is attractive, certainly, but we are only friends. Ernie was the man I loved. What will I do without him?"},
+    {"tuple": [4, 0, 0, 16, 2], "text": "I can see you're upset. I'll leave you alone."}
+  ]
+}

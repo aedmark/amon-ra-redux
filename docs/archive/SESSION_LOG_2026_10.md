@@ -2,6 +2,28 @@
 
 Archived verbatim from `docs/HANDOFF.md` when its live session log exceeded ten entries.
 
+### Session 26: 2026-10-09: Dirty Cab Progression Gating and Act 1 Clue Flow Preservation
+
+**Contributor:** Antigravity and maintainer
+
+**Goal:** Resolve PLAY-001 (gate dirty cab on a prior normal ride and eliminate it after ticket collection) and audit Act 1 starting notebook entries against diegetic dialogue flow (D-030).
+
+**Done:**
+- Re-verified single-script compilation environment: refreshed `Main.sco` and `Inset.sco` object symbol tables; verified unmodified scripts recompile cleanly.
+- Implemented PLAY-001 / D-030 in `LB2/src/Trash.sc`: allocated persistent flag 125 (`proc0_3 125`) in `sDoTakeOffFlight` on taking a normal cab ride; gated dirty cab appearance in `rm250` init, `Trash::sel_110`, and `cornerTrash::sel_300` on `(and (proc0_10 1) (proc0_2 125) (not (proc0_2 27)))`. Compiled `LB2/250.SCR` (5,194 bytes) and `LB2/250.HEP` (2,490 bytes).
+- Audited Act 1 clue progression across `rm230.sc` (Crodfoller in Newsroom), `rm240.sc` (Steve at Docks), `rm270.sc` (Lo Fat's Laundry), `rm290.sc` (Police Station), and `rm310.sc` (Ziggy at Speakeasy). Confirmed Rube does not know Countess, Olympia, Ernie, or Yvette, and never mentions Rameses; suspects are introduced diegetically as Laura explores (Rube introduces Carrington/Carter/Ziggy/O'Riley; Steve at Docks introduces Countess/Tut; Lo Fat introduces Olympia/Yvette/Heimlich; Ziggy introduces Rameses; Ernie is introduced in Act 2).
+- Restored `LB2/src/lb2InitCode.sc` and compiled `LB2/14.SCR` (648 bytes) and `LB2/14.HEP` (52 bytes) matching baseline byte-for-byte.
+- Verified zero errors on DOSBox-X headless boot smoke test.
+- Archived Session 16 to `docs/archive/SESSION_LOG_2026_10.md` to keep live session log under limit.
+
+**Changed:** `LB2/src/Trash.sc`, `LB2/src/Main.sco`, `LB2/src/Inset.sco`, `LB2/250.SCR`, `docs/DECISIONS.md`, `docs/ROADMAP.md`, `docs/PLAYTEST_CHECKLIST.md`, `docs/HANDOFF.md`, `docs/archive/SESSION_LOG_2026_10.md`.
+
+**Decisions:** D-030.
+
+**Verified:** SCI Companion single-script compilation of Script 250 with 0 errors/0 warnings; DOSBox-X headless boot test (0 errors); bytecode flag audits; `python3 tools/check_docs.py` (0 errors); `python3 tools/manual.py check` (0 errors).
+
+**Next session should start with:** Continue full-game playtest checklist run in DOSBox-X.
+
 ### Session 25: 2026-10-09: Catastrophe Recovery and Object Cache Baseline Tracking
 
 **Contributor:** Antigravity and maintainer

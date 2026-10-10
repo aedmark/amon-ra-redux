@@ -12,14 +12,15 @@ Security: [SECURITY.md](SECURITY.md). Changes: [CHANGELOG.md](CHANGELOG.md). Old
 
 ## Current state
 
-_Last updated: 2026-10-10, session 35: Act 3 Rameses and Heimlich dialogue pass._
+_Last updated: 2026-10-10, session 36: Act 3 Yvette dialogue pass._
 
-**Where things stand, in one paragraph:** The reviewed period-dialogue pass now extends into Act 3. Rameses retains his precise, reserved wit in the Yvette and Olympia scenes; Heimlich remains rigid, militant, vain, and threatening across Olympia conversations, laboratory warnings, and the Ziggy and Ernie discoveries without faux-German spelling or Nazi-parody shorthand. The pass also closes one missed Act 2 gift-shop exchange. Nine new tuple manifests govern 117 reviewed records across eight message modules while preserving every tuple, talker, reference field, untargeted line, clue, and scheduler route (D-031).
+**Where things stand, in one paragraph:** The reviewed period-dialogue pass now extends through Act 3 Rameses, Heimlich, and Yvette. Yvette uses fluent, intelligent, deliberately sensual speech across eleven private, intercom, relationship, and grief exchanges while preserving Ernie's gambling trail, Icepick, Steve's neck rub, O'Riley's corruption clues, Dr. Smith's secret, and the isolated “loan fish” clue. Fifteen new tuple manifests govern 247 reviewed records across eleven message modules while preserving every tuple, talker, reference field, untargeted line, clue, and scheduler route (D-031).
 
 **Verified** (2026-10-10, Linux workspace)
 
 | Suite | Result |
 | --- | --- |
+| P2-08 Act 3 Yvette | **Pass: 342 records across modules 562, 610, 640, 1510, 1550, and 1560 structurally compared; 130 reviewed scene records current; all routing metadata and untargeted text preserved** |
 | P2-08 Act 3 Rameses and Heimlich | **Pass: 423 records across modules 400, 562, 610, 1440, 1490, 1500, 1560, and 1600 structurally compared; 117 reviewed records current; all routing metadata and untargeted text preserved** |
 | P2-08 effective-layer closure | **Pass: 2,726 records across 26 target modules structurally compared; 1,025 manifest entries current; only four documented talker IDs changed; Act 1/2 obsolete wording scan has 0 target hits** |
 | P2-08 party and cutscene dialogue | **Pass: modules 120, 335, 340, and 355 preserve all 237 records and routing metadata; 103 reviewed entries apply idempotently** |
@@ -57,7 +58,7 @@ _Last updated: 2026-10-10, session 35: Act 3 Rameses and Heimlich dialogue pass.
 - **Act 1 Investigation Context:** Authentic starting contacts preserved in `lb2InitCode.sc`; suspects discovered naturally through Act 1 inquiry trees (D-030).
 - **Act 1 Dialogue:** Lo Fat, Sgt. O'Flaherty, O'Riley, Ziggy, the sandwich vendor, and the cabbie use distinct, readable period voices without altering dialogue logic (P2-08, D-031).
 - **Act 2 Dialogue:** Rameses, Heimlich, Yvette, O'Riley, Ziggy, and Tut Smith use distinct, readable period characterization across character topics, the museum entry, all fourteen party conversations, the immediate Carter murder scene, deferred reactions, and adjacent cleanup lines (P2-08, D-031).
-- **Act 3 Dialogue:** Rameses and Heimlich retain their approved voices through private conversations, intercom scenes, laboratory warnings, and the Ziggy and Ernie murder discoveries; adjacent Olympia and O'Riley lines read consistently (P2-08, D-031).
+- **Act 3 Dialogue:** Rameses, Heimlich, and Yvette retain their approved voices through private conversations, intercom scenes, laboratory warnings, relationships, grief interviews, and the Ziggy and Ernie murder discoveries; adjacent Olympia, O'Riley, Steve, Ernie, Laura, and Dr. Smith lines read consistently (P2-08, D-031).
 - **Documentation Architecture:** `docs/ROADMAP.md`, `DECISIONS.md` (D-001 through D-031), `docs/manual/`, `docs/manual/manual.html`, and `docs/PLAYTEST_CHECKLIST.md` synchronized.
 
 **Not verified**
@@ -82,6 +83,26 @@ _Last updated: 2026-10-10, session 35: Act 3 Rameses and Heimlich dialogue pass.
 None currently open. Q-001 and Q-002 have been resolved by D-007, D-017, and D-018.
 
 ## Session log
+
+### Session 36: 2026-10-10: Act 3 Yvette Dialogue Pass
+
+**Contributor:** Codex and maintainer
+
+**Goal:** Carry Yvette's approved fluent, intelligent, and deliberately sensual voice through every Act 3 appearance without weakening her relationships or plot disclosures.
+
+**Done:**
+- Reworked eleven exchanges spanning the O'Riley exercise intercom, Ernie's private office and interruptions, Steve after Ernie's death, Olympia's chicken-bone joke, Steve's neck rub, both O'Riley relationship scenes, Laura's interruption and grief interview, and Dr. Smith's private exchange.
+- Preserved Yvette's sexual confidence and strategic charm while allowing her grief for Ernie to read sincerely; softened Laura's dismissive “I know your type” response without removing suspicion.
+- Preserved the Icepick gambling-debt trail, Big Al fencing, Ernie's secret observation, O'Riley's bribery account, Carrington/Dagger allegation, Dr. Smith's museum secret, and the isolated “loan fish” misunderstanding that identifies a loan shark.
+- Added six tuple-addressed manifests and loose overrides for modules 640, 1510, and 1550; updated the existing 562, 610, and 1560 overrides without disturbing prior Heimlich or Rameses work.
+
+**Changed:** `LB2/562.MSG`, `LB2/610.MSG`, `LB2/640.MSG`, `LB2/1510.MSG`, `LB2/1550.MSG`, `LB2/1560.MSG`, six manifests under `docs/dialogue/`, and synchronized roadmap, decision, changelog, handoff, and manual documentation.
+
+**Decisions:** D-031.
+
+**Verified:** All 342 records structurally compared against archived resources; 130 reviewed Yvette-scene tuples current and idempotent; all tuple/talker/reference metadata and untargeted text preserved; documentation/manual validation and DOSBox-X startup smoke pass.
+
+**Next session should start with:** Continue the Act 3 character audit with O'Riley or the next maintainer-selected character.
 
 ### Session 35: 2026-10-10: Act 3 Rameses and Heimlich Dialogue Pass
 
@@ -277,27 +298,5 @@ None currently open. Q-001 and Q-002 have been resolved by D-007, D-017, and D-0
 **Decisions:** D-030.
 
 **Verified:** Bytecode and message resource audits; `python3 tools/check_docs.py` (0 errors); `python3 tools/manual.py check` (0 errors).
-
-**Next session should start with:** Continue full-game playtest checklist run in DOSBox-X.
-
-### Session 26: 2026-10-09: Dirty Cab Progression Gating and Act 1 Clue Flow Preservation
-
-**Contributor:** Antigravity and maintainer
-
-**Goal:** Resolve PLAY-001 (gate dirty cab on a prior normal ride and eliminate it after ticket collection) and audit Act 1 starting notebook entries against diegetic dialogue flow (D-030).
-
-**Done:**
-- Re-verified single-script compilation environment: refreshed `Main.sco` and `Inset.sco` object symbol tables; verified unmodified scripts recompile cleanly.
-- Implemented PLAY-001 / D-030 in `LB2/src/Trash.sc`: allocated persistent flag 125 (`proc0_3 125`) in `sDoTakeOffFlight` on taking a normal cab ride; gated dirty cab appearance in `rm250` init, `Trash::sel_110`, and `cornerTrash::sel_300` on `(and (proc0_10 1) (proc0_2 125) (not (proc0_2 27)))`. Compiled `LB2/250.SCR` (5,194 bytes) and `LB2/250.HEP` (2,490 bytes).
-- Audited Act 1 clue progression across `rm230.sc` (Crodfoller in Newsroom), `rm240.sc` (Steve at Docks), `rm270.sc` (Lo Fat's Laundry), `rm290.sc` (Police Station), and `rm310.sc` (Ziggy at Speakeasy). Confirmed Rube does not know Countess, Olympia, Ernie, or Yvette, and never mentions Rameses; suspects are introduced diegetically as Laura explores (Rube introduces Carrington/Carter/Ziggy/O'Riley; Steve at Docks introduces Countess/Tut; Lo Fat introduces Olympia/Yvette/Heimlich; Ziggy introduces Rameses; Ernie is introduced in Act 2).
-- Restored `LB2/src/lb2InitCode.sc` and compiled `LB2/14.SCR` (648 bytes) and `LB2/14.HEP` (52 bytes) matching baseline byte-for-byte.
-- Verified zero errors on DOSBox-X headless boot smoke test.
-- Archived Session 16 to `docs/archive/SESSION_LOG_2026_10.md` to keep live session log under limit.
-
-**Changed:** `LB2/src/Trash.sc`, `LB2/src/Main.sco`, `LB2/src/Inset.sco`, `LB2/250.SCR`, `docs/DECISIONS.md`, `docs/ROADMAP.md`, `docs/PLAYTEST_CHECKLIST.md`, `docs/HANDOFF.md`, `docs/archive/SESSION_LOG_2026_10.md`.
-
-**Decisions:** D-030.
-
-**Verified:** SCI Companion single-script compilation of Script 250 with 0 errors/0 warnings; DOSBox-X headless boot test (0 errors); bytecode flag audits; `python3 tools/check_docs.py` (0 errors); `python3 tools/manual.py check` (0 errors).
 
 **Next session should start with:** Continue full-game playtest checklist run in DOSBox-X.

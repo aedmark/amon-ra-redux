@@ -13,6 +13,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - Verification harness integrating Wine-based SCI Companion and DOSBox-X.
 
 ### Changed
+- Extended Yvette's fluent, intelligent, and deliberately sensual voice through eleven Act 3 exchanges while preserving her genuine grief for Ernie, Steve's neck rub, the O'Riley corruption clues, Icepick's gambling-debt trail, Dr. Smith's secret, and the clue-bearing “loan fish” misunderstanding (P2-08, D-031).
 - Continued the period-dialogue pass into Act 3: gave Rameses and Heimlich consistent approved voices across private conversations, intercom scenes, laboratory warnings, and the Ziggy and Ernie murder discoveries; grounded Heimlich's Heidelberg scars in academic fencing and cleaned one missed Act 2 gift-shop exchange (P2-08, D-031).
 - Completed the Act 1/2 period-dialogue closure sweep: rewrote the sandwich vendor, cabbie, Pippin/Tut confrontation, museum check-in, all fourteen party conversations, and Carter murder scene; removed the remaining `Andrea Doria`, `Ruhmkorf`, and ethnic-slur text; and corrected Carrington's misassigned reply (P2-08, D-031).
 - Began the act-by-act period dialogue pass with Act 1: rewrote Lo Fat, Sgt. O'Flaherty, and Detective O'Riley to replace phonetic ethnic caricature with distinct, readable voices while preserving clues, jokes, period characterization, and O'Riley's deliberately antagonistic bluster (P2-08, D-031).

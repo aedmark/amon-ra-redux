@@ -1,0 +1,11 @@
+{
+  "module": 640,
+  "character": "Yvette Delacroix and Ernie Leach when interrupted",
+  "voice": "Yvette remains sexually confident and amused; Ernie is brusque without threatening to spank Laura.",
+  "entries": [
+    {"tuple": [27, 0, 1, 1, 28], "text": "Good Lord!"},
+    {"tuple": [27, 0, 1, 2, 23], "text": "Hey, you nosy dame! Can't you see we're busy? Scram!"},
+    {"tuple": [27, 0, 2, 1, 23], "text": "Do I have to throw you out? Scram!"},
+    {"tuple": [27, 0, 2, 2, 28], "text": "Perhaps she would like to join us?"}
+  ]
+}
