@@ -728,3 +728,23 @@ D-004 (Unrestricted save/load), D-005 (Softlock prevention), D-006 (Inquest scor
 **Drafted fix waiting on the compiler (PLAY-001/002):** in `Trash.sc` (Script 250) change both `(if (proc0_10 1)` tests that select the dirty taxi (the `rm250` init and the trash hotspot's `sel_110`) to `(if (and (proc0_10 1) (not (proc0_2 27)))`. Flag 27 is set when the claim ticket is taken, so the dirty cab then never reappears. Compile only script 250, boot-test, and play the taxi both before and after taking the ticket.
 
 **Next session should start with:** Recover the compile environment (see the blocker above), then play to the inquest to verify P4-06 (Script 750). Use `python3 tools/compile.py <script>` for any further change and boot the game before committing. Never use Compile All.
+### Session 32: 2026-10-10: Ziggy Cross-Act Dialogue Pass
+
+**Contributor:** Codex and maintainer
+
+**Goal:** Give Ziggy one readable voice across both acts, preserving his criminal connections and comedy while replacing cartoon-Brooklyn eye-dialect with a nervous Peter Lorre-inspired cadence.
+
+**Done:**
+- Reworked all 30 Ziggy spoken records in Room 310 and all 85 in module 1890 as one continuous characterization: soft-spoken, ingratiating, evasive, and suddenly precise when threatened.
+- Retained selective period slang including “Philly,” “sawbuck,” “lifted,” “copper,” and “stoolie,” along with the Hemingway bluff, Rameses riddle, police arrangement, Countess anxiety, fencing offers, carbon-paper clue, and Yvette history.
+- Replaced the anachronistic Seabiscuit/Hialeah tip with a fictional Belmont runner and recast generalized remarks about Egyptians as personal irritation with Rameses's riddles.
+- Repaired the diary answer that was written in Ziggy's voice but assigned Laura's talker ID; rewrote Laura's pronunciation-dependent John Bow exchange and both narrator descriptions.
+- Added `docs/dialogue/act1-ziggy.json` and `docs/dialogue/act2-ziggy.json`; extended `tools/dialogue.py` with idempotent, explicit `set_talker` support for the one metadata correction.
+
+**Changed:** `LB2/310.MSG`, `LB2/1890.MSG`, `tools/dialogue.py`, both Ziggy manifests, and synchronized roadmap, decision, handoff, and manual documentation.
+
+**Decisions:** D-031.
+
+**Verified:** Both manifests apply idempotently; all 72 records in module 310 and 114 in module 1890 parse; text changes are confined to the 120 manifest entries; only the documented diary-response talker ID changes; documentation/manual validation and DOSBox-X startup smoke pass.
+
+**Next session should start with:** Maintainer review of Ziggy, then Tut and adjacent-speaker cleanup.

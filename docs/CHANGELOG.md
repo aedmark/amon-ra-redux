@@ -13,6 +13,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - Verification harness integrating Wine-based SCI Companion and DOSBox-X.
 
 ### Changed
+- Restored the speakeasy's randomized music rotation and seamless bathroom-return continuity, replaced the skull-and-crossbones act-grade backdrop with the native gold Art Deco frame, and gave Ziggy truthful Act 1 replies about Yvette and the Countess (PLAY-003, PLAY-010, PLAY-011).
 - Completed the Act 6 dialogue audit by giving the coroner a dry, exacting professional voice throughout the final inquest, replacing dated language and needlessly hysterical accusations while preserving all sixteen questions, evidence checks, jokes, verdicts, and ending routes (P2-08, D-031).
 - Migrated all 221 compiler-facing scripts to a coherent Sluicebox-annotated baseline reconstructed from the effective Redux resources, preserving every compiled fix while replacing opaque global/object/procedure names and documenting selector-vocabulary constraints and provenance (P5-00, D-032).
 - Completed the Act 5 and ending dialogue audit: removed Rameses's written lisp from the full Society of Amon Ra confrontation, distinguished its invented sacrifice rite from ancient Egyptian history, restored Tut Smith's dignified inquest testimony, and gave O'Riley a readable final jailhouse threat (P2-08, D-031).

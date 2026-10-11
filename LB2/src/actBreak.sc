@@ -131,7 +131,6 @@
 			)
 			(7
 				(titleView sel_111:)
-				(gCurRoom sel_417: 780 10)
 				(= sel_137 2)
 			)
 			(8

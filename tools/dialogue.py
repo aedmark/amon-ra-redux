@@ -25,6 +25,38 @@ def load_records(payload: bytes) -> tuple[int, int, list[tuple[int, int, int, in
     return record_length, count, records
 
 
+def add_record(
+    payload: bytes,
+    key: tuple[int, int, int, int, int],
+    text: str,
+    reference: tuple[int, int, int],
+) -> bytes:
+    record_length, count, records = load_records(payload)
+    if record_length != 10:
+        raise ValueError("adding records is only supported for SCI 1.1 message resources")
+    if len(key) != 5 or len(reference) != 3:
+        raise ValueError("message tuple must have five fields and reference must have three")
+
+    table_end = 8 + count * record_length
+    text_bytes = text.encode("cp437") + b"\0"
+    new_text_offset = len(payload) + record_length
+    if new_text_offset > 0xFFFF:
+        raise ValueError("message text offset exceeds SCI 1.1 limit")
+
+    mutable = bytearray(payload)
+    for index in range(count):
+        offset_position = 8 + index * record_length + 5
+        old_offset = struct.unpack_from("<H", mutable, offset_position)[0]
+        struct.pack_into("<H", mutable, offset_position, old_offset + record_length)
+
+    record = bytes(key) + struct.pack("<H", new_text_offset) + bytes(reference)
+    mutable[table_end:table_end] = record
+    mutable.extend(text_bytes)
+    struct.pack_into("<H", mutable, 4, len(mutable) - 6)
+    struct.pack_into("<H", mutable, 6, count + 1)
+    return bytes(mutable)
+
+
 def apply_manifest(message_path: Path, manifest_path: Path) -> tuple[int, int]:
     manifest = json.loads(manifest_path.read_text(encoding="utf-8"))
     if message_path.stem.isdigit() and int(message_path.stem) != manifest["module"]:
@@ -47,6 +79,11 @@ def apply_manifest(message_path: Path, manifest_path: Path) -> tuple[int, int]:
             for index, record in enumerate(records)
             if record[:5] == key or (replacement_talker is not None and record[:5] == replacement_key)
         ]
+        if not matches and entry.get("add"):
+            reference = tuple(entry.get("reference", [0x7F, 0x20, 0x7F]))
+            payload = add_record(payload, replacement_key, entry["text"], reference)
+            changed += 1
+            continue
         if len(matches) != 1:
             raise ValueError(f"expected one record for tuple {key}, found {len(matches)}")
 

@@ -93,6 +93,12 @@
 		(264
 			(gMessager sel_295: 1 6 3)
 		)
+		(266
+			(gMessager sel_295: 1 6 36)
+		)
+		(269
+			(gMessager sel_295: 1 6 37)
+		)
 		(-1 0)
 		(else
 			(cond
@@ -129,6 +135,7 @@
 			sel_110:
 			sel_585: (if (gEgo sel_584:) 831 else 830)
 		)
+		(= temp3 (if (== (DoSound sndGET_POLYPHONY) 32) 310 else 314))
 		(switch gPrevRoomNum
 			(sel_409
 				(gEgo sel_1: 236 sel_0: 107 sel_349: 0 sel_253: 180)
@@ -137,7 +144,6 @@
 			)
 			(sel_411
 				(gEgo sel_1: 195)
-				(= temp3 (if (== (DoSound sndGET_POLYPHONY) 32) 310 else 314))
 			)
 			(else
 				(gEgo sel_153: 160 160)
@@ -147,16 +153,16 @@
 		(super sel_110:)
 		(LoadMany rsVIEW 311 317 312 313 314 315 318 831 830)
 		(LoadMany rsSOUND 310 311 312 314)
-		(if (== gPrevRoomNum sel_411)
+		(if (!= gPrevRoomNum sel_409)
 			(switch (Random 0 2)
 				(0
-					(Actions sel_110: 1 temp3 311 1312)
+					(WrapMusic sel_110: 1 temp3 311 1312)
 				)
 				(1
-					(Actions sel_110: 1 311 temp3 1312)
+					(WrapMusic sel_110: 1 311 temp3 1312)
 				)
 				(2
-					(Actions sel_110: 1 1312 temp3 311)
+					(WrapMusic sel_110: 1 1312 temp3 311)
 				)
 			)
 		)

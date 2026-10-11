@@ -26,6 +26,8 @@
     {"tuple": [1, 6, 35, 1, 6], "text": "You mean this speakeasy? Best in town. I know because I have visited all the competition."},
     {"tuple": [1, 6, 14, 1, 6], "text": "The name rings a bell. I believe he works on the docks."},
     {"tuple": [1, 6, 3, 1, 6], "text": "That's me. Were you planning to make something of it?"},
+    {"tuple": [1, 6, 36, 1, 6], "add": true, "text": "Yvette? A charming girl. We knew each other before she joined the museum. She is respectable now, and I am much too discreet to say more."},
+    {"tuple": [1, 6, 37, 1, 6], "add": true, "text": "The Countess? A very distinguished lady. Also a very dangerous one. If she asks, we have never met."},
     {"tuple": [1, 4, 0, 1, 6], "text": "Do not touch me, toots."},
     {"tuple": [1, 2, 6, 2, 6], "text": "Who sent you?"},
     {"tuple": [1, 2, 8, 1, 6], "text": "Crodfoller? He's an old pal of mine. What do you want to know?"},

@@ -123,15 +123,18 @@ boot risk; a script already in the shipped set (for example 250, 21, 20, 13, 0) 
 | --- | --- | --- | --- | --- |
 | PLAY-001 | 250 (`rm250`, `Trash.sc`) | Yes (D-020, D-030) | Gated dirty cab on prior normal ride (flag 125) and uncollected ticket (`not (proc0_2 27)`). | Resolved in Session 26 (D-030). |
 | PLAY-002 | 250 (`Trash.sc`) | Yes | Trace cabbie recognition states. | Low risk; identify existing recognition state. |
-| PLAY-003 | 310 (`rm310`, speakeasy), plus the bathroom and Lo Fat street rooms (to be located) | **No** for 310 | In `rm310` the music resource is picked by `(DoSound sndGET_POLYPHONY)`: 310 when it returns 32, otherwise 314. The DOSBox-X config sets `mididevice=default` and the log reports `MIDI:Opened device:none`, so the sound driver's polyphony, not a missing call, may decide whether anything plays. | First, with no code change: check `RESOURCE.CFG`, boot with each configured sound device, and confirm whether the other rooms also depend on the driver. Only if the music call is genuinely missing, patch the three rooms. |
+| PLAY-003 | 310 (`rm310`, speakeasy), 320 (bathroom), and 270 (Lo Fat's laundry) | Yes | The floppy room contains a rotating synthesized program: sound 311, sound 1312, and either sound 310 or lower-polyphony alternative 314, shuffled by `WrapMusic`. The CD edition rotates two songs, including a live recording of “I Want to Marry an Archaeologist.” Source reconstruction had misidentified the intended `WrapMusic` receiver as `Actions`. | Resolved: restored `WrapMusic`, initialized the randomized rotation on street entry and restore, and preserved it across a bathroom visit so the interrupted song resumes rather than restarts. Maintainer verified both songs rotate and the bathroom transition works naturally in DOSBox-X. |
 | PLAY-004 | 310 and its message resource | **No** | `barfly1` and `barfly2` are plain `View` instances with no dedicated verb handler, so they fall back to a shared response. | Add two distinct Look/Talk messages as a loose `.MSG` plus a minimal handler. First-time compile of 310 (source needs the `View`→`Actor` edit and other fixes from `7d48893`). Do it with PLAY-003 in a single 310 compile. |
 | PLAY-005, PLAY-007, PLAY-008 | 21 (`addCluesCode`), 20 (`NotebookItem`), 14 (`lb2InitCode`), 13 (`aboutCode`), 0 (`Main`) | Yes | Clues live in packed arrays `global202`, `global220`, `global228`, `global263` and are added by clue ID through `addCluesCode`. | Source audit confirms Act 1 diegetically introduces suspects through investigation (Crodfoller→Carrington/Carter/Ziggy/O'Riley; Steve at Docks→Countess/Tut; Lo Fat→Olympia/Yvette/Heimlich; Ziggy→Rameses; D-030). Remaining entries: map exact clue-add triggers for Watney and Tut. For PLAY-008, find topic-complete flag. |
 | PLAY-006 | `.MSG` resources (1882–1892 already loose) and the museum conversation handlers | MSG yes; scripts mostly | Additive interjections need new message tuples plus a hook that fires when the asked-about character is within range. | Defer to the Phase 5 content sweep. Prototype Pippin/Carrington first to prove the hook, then roll out. |
 
 | PLAY-009 | 18 (`rm18`, loose patch `18.SCR`), callers `rm230` (`sDoTalking` to room 18, `sCopyProBack` on return), `rm355`, `rm420` | Yes | Room 18 is a hieroglyph card-flip quiz. It runs in Acts 1, 3, and 5 (it returns to rooms 230, 355, and 420 chosen by `global123`) and ends by setting or clearing flag 34 (`local29`, hard-wired to 1, so any click already passes). Flag 34 is read by `rm230` `sCopyProBack` (a failed check sends Laura to the death room with `global145` 3), by `rm355` line 36 (`sPartysOver` against `sIllegal`), and by `rm420` line 56. | Keep flag 34 always set but never show the screen: make room 18's init set flag 34 and immediately change to the act's return room (230, 355, or 420). Leave the callers and the Crodfoller reaction messages alone. One edit to Script 18, which is already a shipped patch, so it is an ordinary edit once the compiler is sound. |
+| PLAY-010 | 26 (`actBreak`) | Yes | `sBreakIt` state 7 always drew picture 780 immediately before the grade narration, applying its skull-and-crossbones presentation even to upbeat feedback. | Resolved: removed the picture-780 swap so grade text remains on picture 26's neutral gold Art Deco Act frame. Score bands, messages, timing, and transitions are unchanged. |
+| PLAY-011 | 310 (`rm310`) and `310.MSG` | Yes | Ziggy's Act 1 inquiry dispatcher lacked cases for clue 266 (Yvette) and 269 (Countess), so both fell through to “Never heard the name.” | Resolved: explicit routes acknowledge his prior acquaintance with Yvette and nervous familiarity with the Countess without exposing their later plot revelations. The two new message records are manifest-backed and Script 310 compiles cleanly. |
 
-**Sequence:** (1) PLAY-002; (2) PLAY-003 config test, then the combined script 310 compile for PLAY-003/004;
-(3) the notebook audit table (PLAY-007/008) and its fixes; (4) PLAY-006 inside P5-01. After each step, regression-run
+**Sequence:** (1) PLAY-002; (2) inspect a neutral Act Break presentation for PLAY-010; (3) the combined Script 310
+pass for PLAY-003/004/011, followed by the Room 270/320 music retest; (4) the notebook audit table (PLAY-007/008)
+and its fixes; (5) PLAY-006 inside P5-01. After each step, regression-run
 the relevant Save checkpoint from [TESTING.md](TESTING.md).
 
 **New findings from the run** are added to the register below; assign each to a row here when it is triaged.
@@ -145,13 +148,15 @@ diegetic discovery or additive reactions over moving old dialogue behind a new p
 | --- | --- | --- | --- |
 | PLAY-001 | 1 | The dirty cab should only appear after a first normal cab ride, and never reappear once the claim ticket is taken. | Resolved (D-030): gated on `(and (proc0_10 1) (proc0_2 125) (not (proc0_2 27)))`; clean ride sets flag 125 in `Trash.sc`. |
 | PLAY-002 | 1 | After Laura shows the press pass once, the cabbie should remember her. | Observed; identify existing recognition state before allocating anything new. |
-| PLAY-003 | 1 | Music is absent in the speakeasy, its bathroom, and outside Lo Fat's laundry. | Observed; compare room music initialization and restore behavior. |
+| PLAY-003 | 1 | Music is absent in the speakeasy, its bathroom, and outside Lo Fat's laundry. The CD speakeasy rotates two songs, including a live recording of “I Want to Marry an Archaeologist”; determine the intended floppy equivalent. | Resolved for the speakeasy and bathroom: maintainer verified both songs rotate and bathroom return resumes without restarting. The separate Room 270 observation remains available for focused retesting. |
 | PLAY-004 | 1 | The two men at the speakeasy bar need distinct interaction messages. | Observed; inventory existing nouns/messages before adding text. |
 | PLAY-005 | 2 | Yvette is absent from the notebook People list; establish whether this is intentional and audit every other lost entry. | Audited: introduced in Act 1 at Lo Fat's Laundry (rm270) or Act 2 at museum (D-030). |
 | PLAY-006 | 2+ | Nearby characters should sometimes interject when asked about one another, beginning with Pippin's snide response when Laura asks Carrington about him. | Content sweep candidate; additive dialogue must not isolate existing content. |
 | PLAY-007 | 2 | Ernie, Tut, Olympia, and Watney Little appear in the notebook before Laura meets them or learns their names. | Audited: Rameses, Countess, Olympia, Yvette, Tut have Act 1 diegetic routes; Ernie and Watney remain for Act 2 diegetic checks (D-030). |
 | PLAY-008 | All | Discussed notebook topics should show completion and reopen only when new dialogue becomes available. | System audit needed across topic flags and later-act unlocks. |
 | PLAY-009 | 1, 3, 5 | The copy-protection screen after the intro, on first talking to Crodfoller, should be removed entirely rather than merely neutralized. | Analyzed; fix drafted, blocked on the compile environment. See the gameplan row. |
+| PLAY-010 | 1 | The upbeat “perky demeanor” act-grade text is presented against a skull-and-crossbones frame. | Resolved: grade narration now retains picture 26's neutral gold Art Deco frame. |
+| PLAY-011 | 1 | Asking Ziggy about Yvette or the Countess makes him claim he has never heard of either, contradicting his later dialogue and relationships. | Resolved: Ziggy now gives discreet, plot-safe acknowledgements for both women. |
 
 ## New finding template
 
@@ -161,4 +166,3 @@ and regression testing.
 | ID | Act | Observation / desired behavior | Triage status |
 | --- | --- | --- | --- |
 | PLAY-nnn |  |  | Observed; save `__`, room `__`, time `__`, score `__`. |
-

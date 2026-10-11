@@ -12,14 +12,15 @@ Security: [SECURITY.md](SECURITY.md). Changes: [CHANGELOG.md](CHANGELOG.md). Old
 
 ## Current state
 
-_Last updated: 2026-10-10, session 42: Act 6 final-inquest dialogue closure._
+_Last updated: 2026-10-10, session 43: Act 1 playtest fixes._
 
-**Where things stand, in one paragraph:** P5-00 is complete on `codex/p5-00-sluicebox-baseline`, and the dialogue rewrite now runs through Act 6. The coroner's complete final inquest uses a dry, exacting professional voice without changing any question, evidence gate, verdict, or ending route. `LB2/src/` remains the coherent 221-script Sluicebox-annotated reconstruction of the effective Redux resources. The project is ready for the maintainer's clean-playthrough gate before P5-01.
+**Where things stand, in one paragraph:** P5-00 and the dialogue rewrite through Act 6 are complete on `codex/p5-00-sluicebox-baseline`. The current Act 1 playtest pass restored the speakeasy's native music rotation and bathroom continuity, replaced the misleading skull-and-crossbones grade backdrop with the neutral Act frame, and fixed Ziggy's false denials of knowing Yvette and the Countess. `LB2/src/` remains the coherent 221-script Sluicebox-annotated reconstruction of the effective Redux resources. Continue the maintainer's clean-playthrough gate before P5-01.
 
 **Verified** (2026-10-10, Linux workspace)
 
 | Suite | Result |
 | --- | --- |
+| PLAY-003/010/011 Act 1 follow-up | **Pass: music rotation and bathroom continuity maintainer-verified; Scripts 26/310 compile; two new Ziggy tuples parse and reapply idempotently** |
 | P2-08 Act 6 final inquest | **Pass: all 77 module-750 records structurally compared; exactly 28 approved text changes; all tuple/talker/reference metadata and ending routes preserved** |
 | P5-00 coherent source inventory | **Pass: 221 `.sc` + 221 `.sco`; no nested duplicate tree or unknown-property placeholders** |
 | P5-00 isolated compilation | **Pass: representative and blocker scripts at 0 errors/0 warnings; disposable Compile All captured no errors** |
@@ -95,6 +96,18 @@ _Last updated: 2026-10-10, session 42: Act 6 final-inquest dialogue closure._
 None currently open. Q-001 and Q-002 have been resolved by D-007, D-017, and D-018.
 
 ## Session log
+
+### Session 43: 2026-10-10: Act 1 Playtest Music, Grade Frame, and Ziggy Continuity
+
+**Contributor:** Codex and maintainer
+
+**Goal:** Resolve the first three concrete regressions found during the clean Act 1 playthrough.
+
+**Done:** Restored Script 310's native randomized music wrapper and preserved its current song across the bathroom cue; retained picture 26's neutral gold Art Deco frame for all act-grade narration instead of drawing picture 780; and added explicit, plot-safe Act 1 replies when Laura asks Ziggy about Yvette or the Countess. Extended the tuple-manifest tool with idempotent SCI 1.1 record insertion so the two additive messages remain reproducible.
+
+**Verified:** Maintainer confirmed both speakeasy songs rotate and bathroom return no longer restarts the song; Script 310 compiled at 0 errors/0 warnings; Script 26 emitted updated loose patches; both additive message tuples parse and the manifest reapplies with zero changes; immutable base archives retain their vanilla hashes.
+
+**Next session should start with:** Continue the Act 1 playthrough and retest the neutral grade frame plus both new Ziggy inquiry replies.
 
 ### Session 42: 2026-10-10: Act 6 Final-Inquest Dialogue Closure
 
@@ -275,24 +288,3 @@ None currently open. Q-001 and Q-002 have been resolved by D-007, D-017, and D-0
 **Verified:** Exact comparison accounts for all 1,424 records across the 11 target modules; all unmanifested text is byte-identical to `HEAD`; all routing/reference metadata is unchanged except the three documented talker IDs; every manifest reapplies idempotently; obsolete caricature/anachronism scan reports zero hits; documentation/manual checks and DOSBox-X startup smoke pass.
 
 **Next session should start with:** Resume the clean DOSBox-X playthrough and record any dialogue that needs contextual adjustment before P5-01.
-
-### Session 32: 2026-10-10: Ziggy Cross-Act Dialogue Pass
-
-**Contributor:** Codex and maintainer
-
-**Goal:** Give Ziggy one readable voice across both acts, preserving his criminal connections and comedy while replacing cartoon-Brooklyn eye-dialect with a nervous Peter Lorre-inspired cadence.
-
-**Done:**
-- Reworked all 30 Ziggy spoken records in Room 310 and all 85 in module 1890 as one continuous characterization: soft-spoken, ingratiating, evasive, and suddenly precise when threatened.
-- Retained selective period slang including “Philly,” “sawbuck,” “lifted,” “copper,” and “stoolie,” along with the Hemingway bluff, Rameses riddle, police arrangement, Countess anxiety, fencing offers, carbon-paper clue, and Yvette history.
-- Replaced the anachronistic Seabiscuit/Hialeah tip with a fictional Belmont runner and recast generalized remarks about Egyptians as personal irritation with Rameses's riddles.
-- Repaired the diary answer that was written in Ziggy's voice but assigned Laura's talker ID; rewrote Laura's pronunciation-dependent John Bow exchange and both narrator descriptions.
-- Added `docs/dialogue/act1-ziggy.json` and `docs/dialogue/act2-ziggy.json`; extended `tools/dialogue.py` with idempotent, explicit `set_talker` support for the one metadata correction.
-
-**Changed:** `LB2/310.MSG`, `LB2/1890.MSG`, `tools/dialogue.py`, both Ziggy manifests, and synchronized roadmap, decision, handoff, and manual documentation.
-
-**Decisions:** D-031.
-
-**Verified:** Both manifests apply idempotently; all 72 records in module 310 and 114 in module 1890 parse; text changes are confined to the 120 manifest entries; only the documented diary-response talker ID changes; documentation/manual validation and DOSBox-X startup smoke pass.
-
-**Next session should start with:** Maintainer review of Ziggy, then Tut and adjacent-speaker cleanup.
