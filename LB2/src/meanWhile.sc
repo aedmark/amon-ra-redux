@@ -1,13 +1,14 @@
 ;;; Sierra Script 1.0 - (do not remove this comment)
+;;; Decompiled by sluicebox
 (script# 521)
 (include sci.sh)
 (use Main)
-(use LBRoom)
+(use eRS)
 (use Scaler)
 (use StopWalk)
-(use Cycle)
-(use View)
-(use Obj)
+(use Motion)
+(use Actor)
+(use System)
 
 (public
 	meanWhile 0
@@ -17,7 +18,7 @@
 	(properties
 		sel_20 {meanWhile}
 	)
-	
+
 	(method (sel_110)
 		(self sel_414: 90)
 		(super sel_110: &rest)
@@ -63,35 +64,35 @@
 	(properties
 		sel_20 {sMeanWhile}
 	)
-	
-	(method (sel_144 theSel_29)
-		(switch (= sel_29 theSel_29)
+
+	(method (sel_144 param1)
+		(switch (= sel_29 param1)
 			(0
-				(global2 sel_408: 780)
-				(DrawPic 780 dpOPEN_PIXELATION)
+				(gCurRoom sel_408: 780)
+				(DrawPic 780 9)
 				(gGame sel_587:)
 				(= sel_136 2)
 			)
 			(1
-				(DrawPic 780 dpOPEN_SCROLL_RIGHT)
-				(Display {Meanwhile...} 100 100 85 102 14 105 0)
+				(DrawPic 780 11)
+				(Display {Meanwhile...} dsCOORD 100 85 dsCOLOR 14 dsFONT 0)
 				(= sel_137 5)
 			)
 			(2
-				(DrawPic 780 dpOPEN_SCROLL_RIGHT)
+				(DrawPic 780 11)
 				(= sel_136 1)
 			)
 			(3
-				(proc0_3 92)
-				(global2 sel_408: 520 sel_405: 520)
-				(global2 sel_408: 520)
-				(DrawPic 520 dpOPEN_PIXELATION)
+				(SetFlag 92)
+				(gCurRoom sel_408: 520 sel_405: 520)
+				(gCurRoom sel_408: 520)
+				(DrawPic 520 9)
 				(WrapMusic sel_168: 1)
 				(gGameMusic2 sel_40: 520 sel_99: 1 sel_3: -1 sel_39:)
-				(if (not (proc0_2 49))
+				(if (not (IsFlag 49))
 					(rosettaCloth sel_110: sel_311: 4 1 8)
 				)
-				(if (not (proc0_2 48))
+				(if (not (IsFlag 48))
 					(snakeOil sel_110: sel_311: 1 8)
 				)
 				(deadCountess sel_110: sel_317:)
@@ -109,15 +110,10 @@
 				(= sel_139 60)
 			)
 			(5
-				(olympia
-					sel_2: 523
-					sel_155: 4
-					sel_156: 0
-					sel_161: End self
-				)
+				(olympia sel_2: 523 sel_155: 4 sel_156: 0 sel_161: End self)
 			)
 			(6
-				(gLb2Messager sel_295: 55 0 1 1 self 520)
+				(gMessager sel_295: 55 0 1 1 self 520)
 			)
 			(7
 				(olympia
@@ -132,19 +128,16 @@
 				(= sel_139 60)
 			)
 			(9
-				(gLb2Messager sel_295: 55 0 1 2 self 520)
+				(gMessager sel_295: 55 0 1 2 self 520)
 			)
 			(10
-				(olympia
-					sel_2: 523
-					sel_155: 5
-					sel_156: 0
-					sel_161: End self
-				)
+				(olympia sel_2: 523 sel_155: 5 sel_156: 0 sel_161: End self)
 			)
-			(11 (= sel_139 60))
+			(11
+				(= sel_139 60)
+			)
 			(12
-				(gLb2Messager sel_295: 55 0 4 0 self 520)
+				(gMessager sel_295: 55 0 4 0 self 520)
 			)
 			(13
 				(olympia
@@ -160,9 +153,11 @@
 				(= sel_137 10)
 			)
 			(15
-				(if sel_137 (= sel_137 0))
+				(if sel_137
+					(= sel_137 0)
+				)
 				(WrapMusic sel_168: 0)
-				(global2 sel_399: gGSel_40)
+				(gCurRoom sel_399: gPrevRoomNum)
 			)
 		)
 	)

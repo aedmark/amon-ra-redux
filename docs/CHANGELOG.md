@@ -13,6 +13,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - Verification harness integrating Wine-based SCI Companion and DOSBox-X.
 
 ### Changed
+- Migrated all 221 compiler-facing scripts to a coherent Sluicebox-annotated baseline reconstructed from the effective Redux resources, preserving every compiled fix while replacing opaque global/object/procedure names and documenting selector-vocabulary constraints and provenance (P5-00, D-032).
 - Completed the Act 5 and ending dialogue audit: removed Rameses's written lisp from the full Society of Amon Ra confrontation, distinguished its invented sacrifice rite from ancient Egyptian history, restored Tut Smith's dignified inquest testimony, and gave O'Riley a readable final jailhouse threat (P2-08, D-031).
 - Completed the compact Act 4 dialogue audit: polished Laura and Steve's reunion without removing Olympia's intentional interest in Steve's dock scars or Steve's forged-painting discovery, and replaced Heimlich's last mock-German exclamations and lantern gibberish with his established controlled authority (P2-08, D-031).
 - Completed the Act 3 dialogue audit with Ziggy and Ernie's intercom dispute, the Countess's full criminal confrontation, Tut Smith's alibi interview, Olympia's remaining snake-oil and private-office scenes, and Ernie's incidental ejections; retained the Countess's camp, Olympia's morbidity, Steve's intentional scars continuity, and every clue and route while removing residual phonetic caricature and excessive typographic shouting (P2-08, D-031).

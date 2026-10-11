@@ -1,9 +1,10 @@
 ;;; Sierra Script 1.0 - (do not remove this comment)
+;;; Decompiled by sluicebox
 (script# 1889)
 (include sci.sh)
 (use Main)
-(use RTRandCycle)
-(use View)
+(use Talker)
+(use Actor)
 
 (public
 	Heimlich 18
@@ -21,12 +22,10 @@
 		sel_549 110
 		sel_550 12
 	)
-	
+
 	(method (sel_110)
-		(= sel_30 gSel_30)
-		(super
-			sel_110: heimlichBust heimlichEyes heimlichMouth &rest
-		)
+		(= sel_30 gUserFont)
+		(super sel_110: heimlichBust heimlichEyes heimlichMouth &rest)
 	)
 )
 

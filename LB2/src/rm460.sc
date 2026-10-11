@@ -1,19 +1,20 @@
 ;;; Sierra Script 1.0 - (do not remove this comment)
+;;; Decompiled by sluicebox
 (script# 460)
 (include sci.sh)
 (use Main)
 (use Door)
-(use LBRoom)
+(use eRS)
 (use PursuitRgn)
 (use PChase)
 (use PolyPath)
 (use Polygon)
-(use CueObj)
-(use n958)
+(use Feature)
+(use LoadMany)
 (use Sound)
-(use Cycle)
-(use View)
-(use Obj)
+(use Motion)
+(use Actor)
+(use System)
 
 (public
 	rm460 0
@@ -22,11 +23,12 @@
 (local
 	local0
 	local1
-	[theSel_87 44] = [83 148 64 168 297 169 296 154 246 154 246 138 217 141 229 146 230 157 189 157 187 146 187 138 162 139 174 150 160 160 104 152 144 141 102 146 103 120 72 120 92 123 96 146]
-	[theSel_87_2 30] = [70 160 64 168 297 169 296 154 246 154 246 138 217 141 229 146 230 157 189 157 187 146 187 138 162 139 174 150 160 160]
-	[theSel_87_3 46] = [83 148 64 168 297 169 296 154 270 154 280 119 269 141 217 141 229 146 230 157 189 157 187 146 187 138 162 139 174 150 160 160 119 155 144 141 102 146 103 120 72 120 92 123 96 146]
-	[theSel_87_4 30] = [73 156 64 168 297 169 296 154 274 154 277 120 267 139 217 141 229 146 230 157 189 157 187 146 187 138 162 139 170 156]
+	[local2 44] = [83 148 64 168 297 169 296 154 246 154 246 138 217 141 229 146 230 157 189 157 187 146 187 138 162 139 174 150 160 160 104 152 144 141 102 146 103 120 72 120 92 123 96 146]
+	[local46 30] = [70 160 64 168 297 169 296 154 246 154 246 138 217 141 229 146 230 157 189 157 187 146 187 138 162 139 174 150 160 160]
+	[local76 46] = [83 148 64 168 297 169 296 154 270 154 280 119 269 141 217 141 229 146 230 157 189 157 187 146 187 138 162 139 174 150 160 160 119 155 144 141 102 146 103 120 72 120 92 123 96 146]
+	[local122 30] = [73 156 64 168 297 169 296 154 274 154 277 120 267 139 217 141 229 146 230 157 189 157 187 146 187 138 162 139 170 156]
 )
+
 (instance rm460 of LBRoom
 	(properties
 		sel_20 {rm460}
@@ -36,26 +38,26 @@
 		sel_412 448
 		sel_108 20
 	)
-	
+
 	(method (sel_110)
-		(proc958_0 128 460 462 461 858 423 424)
-		(proc958_0 132 462 460)
+		(LoadMany rsVIEW 460 462 461 858 423 424)
+		(LoadMany rsSOUND 462 460)
 		(self sel_414: 94)
 		(gEgo sel_110: sel_320: 165 sel_585: 426)
-		(switch gGSel_40
+		(switch gPrevRoomNum
 			(sel_412
 				(gEgo sel_1: 84 sel_0: 122 sel_349: 0 sel_253: 135)
 				(shoveCrate sel_1: 261)
 				(self sel_146: sEnter)
-				(global2 sel_395: (poly460a sel_110: sel_117:))
+				(gCurRoom sel_395: (poly460a sel_110: sel_117:))
 				(crane sel_110: sel_313:)
 				(moverCrate sel_110: sel_313: sel_311: 4)
 			)
 			(sel_410
 				(gEgo sel_153: 105 135 sel_349: 0 sel_253: 135)
-				(cond 
-					((proc0_2 103)
-						(global2 sel_395: (poly460d sel_110: sel_117:))
+				(cond
+					((IsFlag 103)
+						(gCurRoom sel_395: (poly460d sel_110: sel_117:))
 						(crane sel_110: sel_313: sel_4: (crane sel_246:))
 						(moverCrate
 							sel_110:
@@ -68,8 +70,8 @@
 							sel_311: 4
 						)
 					)
-					((proc0_2 102)
-						(global2 sel_395: (poly460d sel_110: sel_117:))
+					((IsFlag 102)
+						(gCurRoom sel_395: (poly460d sel_110: sel_117:))
 						(crane sel_110: sel_313: sel_4: (crane sel_246:))
 						(moverCrate
 							sel_110:
@@ -79,14 +81,14 @@
 						)
 					)
 					(else
-						(global2 sel_395: (poly460c sel_110: sel_117:))
+						(gCurRoom sel_395: (poly460c sel_110: sel_117:))
 						(crane sel_110: sel_313:)
 						(moverCrate sel_110: sel_313: sel_311: 4)
 					)
 				)
 				(shoveCrate sel_1: 281)
 			)
-			(else 
+			(else
 				(gEgo sel_153: 211 160)
 				(gGame sel_588:)
 			)
@@ -108,12 +110,12 @@
 		(darkCrates sel_110: sel_311: 1 4 8)
 		(PursuitRgn sel_669:)
 	)
-	
+
 	(method (sel_403)
-		(if (global2 sel_142?)
-			((global2 sel_142?) sel_65: sDie)
+		(if (gCurRoom sel_142:)
+			((gCurRoom sel_142:) sel_65: sDie)
 		else
-			(global2 sel_146: sDie)
+			(gCurRoom sel_146: sDie)
 		)
 	)
 )
@@ -122,9 +124,9 @@
 	(properties
 		sel_20 {sEnter}
 	)
-	
-	(method (sel_144 theSel_29)
-		(switch (= sel_29 theSel_29)
+
+	(method (sel_144 param1)
+		(switch (= sel_29 param1)
 			(0
 				(gGame sel_587:)
 				(= sel_136 1)
@@ -144,23 +146,23 @@
 	(properties
 		sel_20 {sDie}
 	)
-	
-	(method (sel_144 theSel_29)
-		(switch (= sel_29 theSel_29)
+
+	(method (sel_144 param1)
+		(switch (= sel_29 param1)
 			(0
 				(gGame sel_587:)
 				(gEgo sel_312: PolyPath 211 160 self)
 			)
 			(1
-				(oriley
-					sel_110:
-					sel_320: 165
-					sel_312: PolyPath 100 140 self
-				)
-				(gSel_608 sel_40: 3 sel_99: 1 sel_3: 1 sel_39:)
+				(oriley sel_110: sel_320: 165 sel_312: PolyPath 100 140 self)
+				(gGameMusic1 sel_40: 3 sel_99: 1 sel_3: 1 sel_39:)
 			)
 			(2
-				(if (proc0_2 102) (= sel_136 1) else (self sel_144: 4))
+				(if (IsFlag 102)
+					(= sel_136 1)
+				else
+					(self sel_144: 4)
+				)
 			)
 			(3
 				(oriley sel_2: 424 sel_161: Fwd)
@@ -178,18 +180,20 @@
 			(5
 				(oriley sel_2: 424)
 				(oriley sel_4: 0)
-				(proc0_5 gEgo oriley)
-				(proc0_5 oriley gEgo)
+				(Face gEgo oriley)
+				(Face oriley gEgo)
 				(= sel_136 4)
 			)
-			(6 (oriley sel_161: End self))
+			(6
+				(oriley sel_161: End self)
+			)
 			(7
 				(thudSound sel_39:)
 				(gEgo sel_2: 858 sel_161: End self)
 			)
 			(8
-				(= global145 0)
-				(global2 sel_399: 99)
+				(= global145 0) ; "You came in thinking like a journalist, and you left with a skull full of mush."
+				(gCurRoom sel_399: 99)
 				(self sel_111:)
 			)
 		)
@@ -200,17 +204,17 @@
 	(properties
 		sel_20 {sMoveCrate}
 	)
-	
+
 	(method (sel_57)
 		(super sel_57:)
-		(if (and local1 (== (shoveCrate sel_1?) 281))
+		(if (and local1 (== (shoveCrate sel_1:) 281))
 			(gGameMusic2 sel_167:)
 			(= local1 0)
 		)
 	)
-	
-	(method (sel_144 theSel_29)
-		(switch (= sel_29 theSel_29)
+
+	(method (sel_144 param1)
+		(switch (= sel_29 param1)
 			(0
 				(PursuitRgn sel_669:)
 				(= local0 1)
@@ -234,14 +238,14 @@
 			)
 			(3 0)
 			(4
-				((global2 sel_259?) sel_119: 111 sel_125:)
+				((gCurRoom sel_259:) sel_119: 111 sel_125:)
 				(= sel_136 1)
 			)
 			(5
 				(shoveCrate sel_313:)
-				(global2
+				(gCurRoom
 					sel_395:
-						(if (proc0_2 102)
+						(if (IsFlag 102)
 							(poly460d sel_110: sel_117:)
 						else
 							(poly460c sel_110: sel_117:)
@@ -251,7 +255,7 @@
 				(= sel_136 1)
 			)
 			(6
-				(gEgo sel_312: MoveTo (gEgo sel_1?) 140 self)
+				(gEgo sel_312: MoveTo (gEgo sel_1:) 140 self)
 			)
 			(7
 				(gGame sel_588:)
@@ -265,9 +269,9 @@
 	(properties
 		sel_20 {sCutRope}
 	)
-	
-	(method (sel_144 theSel_29)
-		(switch (= sel_29 theSel_29)
+
+	(method (sel_144 param1)
+		(switch (= sel_29 param1)
 			(0
 				(gGame sel_587:)
 				(PursuitRgn sel_669:)
@@ -306,7 +310,7 @@
 			(4
 				(gGame sel_588:)
 				(moverCrate sel_313:)
-				(proc0_3 103)
+				(SetFlag 103)
 				(self sel_111:)
 			)
 		)
@@ -317,9 +321,9 @@
 	(properties
 		sel_20 {sSwingIt}
 	)
-	
-	(method (sel_144 theSel_29)
-		(switch (= sel_29 theSel_29)
+
+	(method (sel_144 param1)
+		(switch (= sel_29 param1)
 			(0
 				(PursuitRgn sel_669:)
 				(gGame sel_587:)
@@ -327,7 +331,7 @@
 				(gEgo sel_312: MoveTo 153 148 self)
 			)
 			(1
-				(proc0_5 gEgo crane)
+				(Face gEgo crane)
 				(= sel_136 1)
 			)
 			(2
@@ -344,12 +348,12 @@
 			(3 0)
 			(4 0)
 			(5
-				((global2 sel_259?) sel_119: 111)
-				((global2 sel_259?) sel_125:)
+				((gCurRoom sel_259:) sel_119: 111)
+				((gCurRoom sel_259:) sel_125:)
 				(= sel_136 1)
 			)
 			(6
-				(global2
+				(gCurRoom
 					sel_395:
 						(if local0
 							(poly460d sel_110: sel_117:)
@@ -364,7 +368,7 @@
 				(gGame sel_588:)
 				(crane sel_313:)
 				(moverCrate sel_313:)
-				(proc0_3 102)
+				(SetFlag 102)
 				(gEgo sel_63: -1)
 				(self sel_111:)
 			)
@@ -403,24 +407,24 @@
 		sel_3 4
 		sel_14 16384
 	)
-	
+
 	(method (sel_300 param1)
 		(switch param1
 			(21
-				(if (proc0_2 102)
-					(global2 sel_146: sCutRope)
+				(if (IsFlag 102)
+					(gCurRoom sel_146: sCutRope)
 				else
-					(gLb2Messager sel_295: 18 22 1)
+					(gMessager sel_295: 18 22 1)
 				)
 			)
 			(22
-				(if (proc0_2 102)
-					(global2 sel_146: sCutRope)
+				(if (IsFlag 102)
+					(gCurRoom sel_146: sCutRope)
 				else
-					(gLb2Messager sel_295: 18 22 1)
+					(gMessager sel_295: 18 22 1)
 				)
 			)
-			(else 
+			(else
 				(super sel_300: param1 &rest)
 			)
 		)
@@ -439,17 +443,17 @@
 		sel_60 11
 		sel_14 16
 	)
-	
+
 	(method (sel_300 param1)
 		(switch param1
 			(4
-				(if (and (not (== gGSel_40 660)) (not local0))
-					(global2 sel_146: sMoveCrate)
+				(if (and (not (== gPrevRoomNum 660)) (not local0))
+					(gCurRoom sel_146: sMoveCrate)
 				else
 					(super sel_300: param1 &rest)
 				)
 			)
-			(else 
+			(else
 				(super sel_300: param1 &rest)
 			)
 		)
@@ -481,17 +485,17 @@
 		sel_60 11
 		sel_14 16400
 	)
-	
+
 	(method (sel_300 param1)
 		(switch param1
 			(4
-				(if (proc0_2 102)
+				(if (IsFlag 102)
 					(super sel_300: param1 &rest)
 				else
-					(global2 sel_146: sSwingIt)
+					(gCurRoom sel_146: sSwingIt)
 				)
 			)
-			(else 
+			(else
 				(super sel_300: param1 &rest)
 			)
 		)
@@ -512,7 +516,7 @@
 		sel_599 0
 		sel_600 0
 	)
-	
+
 	(method (sel_606)
 		(super sel_606: 266 123 290 123 290 134 266 134)
 	)
@@ -692,11 +696,11 @@
 	(properties
 		sel_20 {poly460a}
 	)
-	
+
 	(method (sel_110)
 		(= sel_31 3)
 		(= sel_86 22)
-		(= sel_87 @theSel_87)
+		(= sel_87 @local2)
 	)
 )
 
@@ -704,11 +708,11 @@
 	(properties
 		sel_20 {poly460b}
 	)
-	
+
 	(method (sel_110)
 		(= sel_31 3)
 		(= sel_86 15)
-		(= sel_87 @theSel_87_2)
+		(= sel_87 @local46)
 	)
 )
 
@@ -716,11 +720,11 @@
 	(properties
 		sel_20 {poly460c}
 	)
-	
+
 	(method (sel_110)
 		(= sel_31 3)
 		(= sel_86 23)
-		(= sel_87 @theSel_87_3)
+		(= sel_87 @local76)
 	)
 )
 
@@ -728,11 +732,11 @@
 	(properties
 		sel_20 {poly460d}
 	)
-	
+
 	(method (sel_110)
 		(= sel_31 3)
 		(= sel_86 15)
-		(= sel_87 @theSel_87_4)
+		(= sel_87 @local122)
 	)
 )
 

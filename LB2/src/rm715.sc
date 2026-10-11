@@ -1,12 +1,13 @@
 ;;; Sierra Script 1.0 - (do not remove this comment)
+;;; Decompiled by sluicebox
 (script# 715)
 (include sci.sh)
 (use Main)
-(use LBRoom)
-(use n958)
-(use Cycle)
-(use View)
-(use Obj)
+(use eRS)
+(use LoadMany)
+(use Motion)
+(use Actor)
+(use System)
 
 (public
 	rm715 0
@@ -15,6 +16,7 @@
 (local
 	local0
 )
+
 (instance rm715 of LBRoom
 	(properties
 		sel_20 {rm715}
@@ -23,7 +25,7 @@
 		sel_410 720
 		sel_412 710
 	)
-	
+
 	(method (sel_110)
 		(gEgo
 			sel_584: 1
@@ -33,11 +35,11 @@
 			sel_153: 121 142
 			sel_110:
 		)
-		(proc958_0 132 710 712 713)
-		(proc958_0 128 711 712 713 715 710 714 716)
+		(LoadMany rsSOUND 710 712 713)
+		(LoadMany rsVIEW 711 712 713 715 710 714 716)
 		(super sel_110:)
 		(WrapMusic sel_110: 1 1710 1712 1713)
-		(gIconBar sel_233: 7)
+		(gTheIconBar sel_233: 7)
 		(tut sel_317:)
 		(rameses sel_110:)
 		(sunnie1 sel_110: sel_161: Fwd)
@@ -50,9 +52,9 @@
 		(sunnie8 sel_110: sel_161: Fwd)
 		(sunnie9 sel_110: sel_161: Fwd)
 		(sunnie10 sel_110: sel_161: Fwd)
-		(global2 sel_146: sQuestion)
+		(gCurRoom sel_146: sQuestion)
 	)
-	
+
 	(method (sel_111)
 		(gGameMusic2 sel_170:)
 		(super sel_111: &rest)
@@ -63,14 +65,16 @@
 	(properties
 		sel_20 {sQuestion}
 	)
-	
-	(method (sel_144 theSel_29)
-		(switch (= sel_29 theSel_29)
+
+	(method (sel_144 param1)
+		(switch (= sel_29 param1)
 			(0
 				(gGame sel_587:)
 				(= sel_136 2)
 			)
-			(1 (= sel_139 180))
+			(1
+				(= sel_139 180)
+			)
 			(2
 				(sunnie1 sel_161: End self)
 				(sunnie2 sel_161: End)
@@ -100,41 +104,43 @@
 				(= sel_136 1)
 			)
 			(6
-				(gLb2Messager sel_295: 1)
+				(gMessager sel_295: 1)
 				(= sel_136 1)
 			)
 			(7
-				(global2 sel_422: (ScriptID 20 0))
+				(gCurRoom sel_422: (ScriptID 20 0)) ; inNotebook
 				(= local0 (not (StrCmp @global136 {WOMB})))
 				(= sel_136 1)
 			)
 			(8
-				(gIconBar sel_233: 7)
+				(gTheIconBar sel_233: 7)
 				(if local0
 					(gGame sel_87: 1 156)
 					(= global136 0)
-					(gLb2Messager sel_295: 1 0 2)
+					(gMessager sel_295: 1 0 2)
 					(= sel_136 1)
 				else
-					(global2 sel_146: sDeath)
+					(gCurRoom sel_146: sDeath)
 				)
 			)
 			(9
-				(global2 sel_422: (ScriptID 20 0))
+				(gCurRoom sel_422: (ScriptID 20 0)) ; inNotebook
 				(= local0 (not (StrCmp @global136 {TOMB})))
 				(= sel_136 1)
 			)
 			(10
-				(gIconBar sel_233: 7)
+				(gTheIconBar sel_233: 7)
 				(if local0
 					(gGame sel_87: 1 157)
-					(gLb2Messager sel_295: 1 0 3)
+					(gMessager sel_295: 1 0 3)
 					(= sel_136 1)
 				else
-					(global2 sel_146: sDeath)
+					(gCurRoom sel_146: sDeath)
 				)
 			)
-			(11 (rameses sel_161: End self))
+			(11
+				(rameses sel_161: End self)
+			)
 			(12
 				(rameses sel_313:)
 				(= sel_136 1)
@@ -160,7 +166,7 @@
 			)
 			(17
 				(gEgo sel_349: 2)
-				(global2 sel_399: 720)
+				(gCurRoom sel_399: 720)
 				(self sel_111:)
 			)
 		)
@@ -171,12 +177,14 @@
 	(properties
 		sel_20 {sDeath}
 	)
-	
-	(method (sel_144 theSel_29)
-		(switch (= sel_29 theSel_29)
-			(0 (rameses sel_161: End self))
+
+	(method (sel_144 param1)
+		(switch (= sel_29 param1)
+			(0
+				(rameses sel_161: End self)
+			)
 			(1
-				(gLb2Messager sel_295: 1 0 1 1)
+				(gMessager sel_295: 1 0 1 1)
 				(= sel_136 1)
 			)
 			(2
@@ -190,21 +198,21 @@
 				(rameses sel_63: -1 sel_161: CT 5 1 self)
 			)
 			(5
-				(wrap sel_156: (+ (wrap sel_4?) 1))
+				(wrap sel_156: (+ (wrap sel_4:) 1))
 				(rameses sel_63: 15 sel_161: CT 0 1 self)
 			)
 			(6
 				(rameses sel_63: -1 sel_161: CT 5 1 self)
 			)
 			(7
-				(wrap sel_156: (+ (wrap sel_4?) 1))
+				(wrap sel_156: (+ (wrap sel_4:) 1))
 				(rameses sel_63: 15 sel_161: CT 0 1 self)
 			)
 			(8
 				(rameses sel_63: -1 sel_161: CT 5 1 self)
 			)
 			(9
-				(wrap sel_156: (+ (wrap sel_4?) 1))
+				(wrap sel_156: (+ (wrap sel_4:) 1))
 				(rameses sel_63: 15 sel_161: CT 0 1 self)
 			)
 			(10
@@ -216,13 +224,15 @@
 			)
 			(12
 				(gNarrator sel_1: 59 sel_0: 30)
-				(gLb2Messager sel_295: 1 0 1 2)
+				(gMessager sel_295: 1 0 1 2)
 				(= sel_136 1)
 			)
-			(13 (= sel_139 180))
+			(13
+				(= sel_139 180)
+			)
 			(14
-				(= global145 7)
-				(global2 sel_399: 99)
+				(= global145 7) ; "That about wraps it up for this mystery."
+				(gCurRoom sel_399: 99)
 				(self sel_111:)
 			)
 		)

@@ -12,14 +12,16 @@ Security: [SECURITY.md](SECURITY.md). Changes: [CHANGELOG.md](CHANGELOG.md). Old
 
 ## Current state
 
-_Last updated: 2026-10-10, session 40: P5-00 source migration planning._
+_Last updated: 2026-10-10, session 41: P5-00 source baseline migration._
 
-**Where things stand, in one paragraph:** The reviewed period-dialogue pass is complete through Act 5 and the ending, with its message overrides, manifests, and synchronized documentation still awaiting the requested checkpoint commit. The maintainer supplied a much better decompilation for the exact DOS floppy v1.000 release. Comparison found the same 221-script inventory but reduced 40,878 anonymous selector references and four unknown-property placeholders to zero. P5-00 now has a staged migration runbook in `docs/SOURCE_MIGRATION_PLAN.md`; execute it before P5-01 so all future mechanics are built on readable sources without risking the verified loose patches.
+**Where things stand, in one paragraph:** P5-00 is complete on `codex/p5-00-sluicebox-baseline`. `LB2/src/` now contains a coherent 221-script Sluicebox-annotated reconstruction made from the effective Redux resources, so every compiled Redux fix is retained. Published contextual selector aliases could not compile against one global vocabulary; D-032 therefore keeps stable numeric selectors and preserves the four required SCI metadata names. The isolated full-tree compile captured no errors, repository base archives remain immutable, and P5-01 can begin after the maintainer's clean-playthrough gate.
 
 **Verified** (2026-10-10, Linux workspace)
 
 | Suite | Result |
 | --- | --- |
+| P5-00 coherent source inventory | **Pass: 221 `.sc` + 221 `.sco`; no nested duplicate tree or unknown-property placeholders** |
+| P5-00 isolated compilation | **Pass: representative and blocker scripts at 0 errors/0 warnings; disposable Compile All captured no errors** |
 | P2-08 Act 5 and ending closure | **Pass: 169 records across modules 710, 715, 730, 750, and 770 structurally compared; 64 intended text changes; all tuple/talker/reference metadata and untargeted text preserved** |
 | P2-08 Act 4 closure | **Pass: 255 records across modules 600, 1510, and 1889 structurally compared; 19 intended text changes; all tuple/talker/reference metadata and untargeted text preserved** |
 | P2-08 Act 3 final closure | **Pass: 626 records across 10 touched modules structurally compared; 155 reviewed records current and idempotent; all routing metadata and untargeted text preserved** |
@@ -65,7 +67,8 @@ _Last updated: 2026-10-10, session 40: P5-00 source migration planning._
 - **Act 3 Dialogue:** Rameses, Heimlich, Yvette, O'Riley, Ziggy, Ernie, the Countess, Tut Smith, and Olympia retain their approved voices through private conversations, intercom scenes, laboratory warnings, relationships, office interruptions, evidence confrontations, alibi interviews, grief interviews, and murder discoveries (P2-08, D-031).
 - **Act 4 Dialogue:** Laura, Steve, Olympia, and Heimlich retain their established character beats through the reunion, forged-painting discovery, murder/Dagger reactions, and lantern warning without residual mock-German spelling (P2-08, D-031).
 - **Act 5 Dialogue:** Rameses's Society confrontation and riddle, Tut's inquest testimony, Steve's already-clean escape dialogue, and O'Riley's jailhouse threat preserve the ending while removing the final phonetic caricatures (P2-08, D-031).
-- **Documentation Architecture:** `docs/ROADMAP.md`, `DECISIONS.md` (D-001 through D-031), `docs/manual/`, `docs/manual/manual.html`, and `docs/PLAYTEST_CHECKLIST.md` synchronized.
+- **Source Baseline:** P5-00's Sluicebox-annotated effective reconstruction is active under D-032; normal work remains single-script compilation under D-028.
+- **Documentation Architecture:** `docs/ROADMAP.md`, `DECISIONS.md` (D-001 through D-032), `docs/manual/`, `docs/manual/manual.html`, and `docs/PLAYTEST_CHECKLIST.md` synchronized.
 
 **Not verified**
 
@@ -74,24 +77,36 @@ _Last updated: 2026-10-10, session 40: P5-00 source migration planning._
 
 **Gotchas for the next session**
 
-- Commit and push the pending Act 5 dialogue closure and this migration plan before changing `LB2/src/`.
-- Follow `docs/SOURCE_MIGRATION_PLAN.md` for P5-00. Do not overlay isolated upstream `.sc` or `.sco` files onto the current baseline.
-- The pinned upstream archive showed no obvious license/notice file; document attribution and resolve redistribution terms before pushing imported sources.
+- Do not replace numeric selectors with contextual readable aliases; one selector ID can have several receiver-specific names (D-032).
+- Rebuild the developer vocabulary with `python3 tools/normalize_selector_vocab.py LB2/997.voc LB2/997.voc.tmp`, then replace it only after validation.
 - Keep loose patch files in `LB2/` strictly uppercase (`.SCR`, `.HEP`, `.MSG`).
 - Single-script compilation only: use `python3 tools/compile.py <script>`. Never use Compile All or resource rebuild.
 - If a script disappears from SCI Companion's list when patch files are deleted, restore files and restart with `wineserver -k`.
 
 ## Next steps (in order)
 
-1. At the 8:01 PM usage reset, run the preflight in `docs/SOURCE_MIGRATION_PLAN.md`, verify the pending Act 5 closure, then commit and push the clean checkpoint.
-2. Execute P5-00 on an isolated migration branch and temporary game copy; preserve all verified loose binaries until each replayed source passes compilation and DOSBox-X testing.
-3. Resume the clean DOSBox-X playthrough, triage every remaining `PLAY-nnn` finding, and begin P5-01 only after both gates close.
+1. Resume the clean DOSBox-X playthrough and triage every remaining `PLAY-nnn` finding.
+2. Begin P5-01 design only after the playthrough gate closes, using the migrated compiler-facing source baseline.
 
 ## Open questions for maintainers
 
 None currently open. Q-001 and Q-002 have been resolved by D-007, D-017, and D-018.
 
 ## Session log
+
+### Session 41: 2026-10-10: P5-00 Sluicebox Source Baseline Migration
+
+**Contributor:** Codex and maintainer
+
+**Goal:** Replace the mixed legacy decompilation with a coherent, maintainable 221-script baseline without losing any verified Redux behavior.
+
+**Done:** Verified the pinned `ra-dos-1.000` archive and exact version match; discovered that its contextual selector aliases cannot be represented in one SCI vocabulary; reconstructed the effective Redux resources through Sluicebox's annotation pipeline with stable numeric selector IDs; repaired nine demonstrated decompiler/compiler boundary cases; normalized the selector vocabulary while preserving SCI metadata names; imported all 221 `.sc`/`.sco` pairs and recovered script names; updated compile aliases, provenance, architecture, testing, roadmap, decision, handoff, changelog, and manual documentation.
+
+**Decisions:** D-032.
+
+**Verified:** 221/221 scripts and 2,337/2,337 functions decompiled; targeted blocker scripts compile at zero errors/warnings; isolated Compile All captured no errors; immutable repository archives retain vanilla MD5 hashes; documentation/manual validation and DOSBox-X startup smoke pass.
+
+**Next session should start with:** Finish the maintainer's clean playthrough gate, then begin P5-01 design against the migrated source baseline.
 
 ### Session 39: 2026-10-10: Act 5 and Ending Dialogue Closure
 
@@ -286,24 +301,3 @@ None currently open. Q-001 and Q-002 have been resolved by D-007, D-017, and D-0
 **Verified:** All 185 message tuple/talker records retain identical metadata; all 98 manifest texts match; exactly 96 O'Riley and one narrator text changed; all 38 explicit later reaction records remain outside the manifest; documentation/manual validation and build pass.
 
 **Next session should start with:** Maintainer review of O'Riley, followed by Ziggy only after approval.
-
-### Session 30: 2026-10-10: Act 2 Yvette Dialogue Pass
-
-**Contributor:** Codex and maintainer
-
-**Goal:** Preserve Yvette Delacroix's intelligence, ambition, sexual confidence, and mystery-relevant relationships while removing faux-French spelling, broken grammar, and reflexive promiscuity jokes.
-
-**Done:**
-- Reworked all 111 routine Yvette records in module 1885 with fluent English, selective French vocabulary, poised social observation, and deliberate rather than accidental innuendo.
-- Preserved the plot-bearing implications of her work as a speakeasy hostess and her relationships with Sterling, Carrington, O'Riley, Lo Fat, Pippin, and Steve.
-- Rewrote the Steve topic and its adjacent Laura response to foreshadow their later encounter rather than report it prematurely.
-- Cleaned Laura's adjacent speakeasy question and replaced the narrator's jealous “mousy and naive” comparison with a direct description of Yvette's elegance and self-possession.
-- Added `docs/dialogue/act2-yvette.json` and applied it idempotently to `LB2/1885.MSG`; deferred the later Sterling-diary talker-ID error and explicit murder reactions.
-
-**Changed:** `LB2/1885.MSG`, `docs/dialogue/act2-yvette.json`, and synchronized roadmap, decision, handoff, and manual documentation.
-
-**Decisions:** D-031.
-
-**Verified:** All 172 message tuple/talker records retain identical metadata; exactly 111 Yvette, two Laura, and one narrator texts changed; all 13 explicit later reaction records remain outside the manifest; documentation/manual validation and build pass.
-
-**Next session should start with:** Maintainer review of Yvette, followed by O'Riley only after approval.

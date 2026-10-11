@@ -1,12 +1,13 @@
 ;;; Sierra Script 1.0 - (do not remove this comment)
+;;; Decompiled by sluicebox
 (script# 120)
 (include sci.sh)
 (use Main)
-(use LBRoom)
-(use n958)
-(use Cycle)
-(use View)
-(use Obj)
+(use eRS)
+(use LoadMany)
+(use Motion)
+(use Actor)
+(use System)
 
 (public
 	rm120 0
@@ -18,20 +19,20 @@
 		sel_408 120
 		sel_28 10
 	)
-	
+
 	(method (sel_110)
-		(proc958_0 128 131 121 130)
-		(proc958_0 132 120 121)
+		(LoadMany rsVIEW 131 121 130)
+		(LoadMany rsSOUND 120 121)
 		(self sel_414: 92)
 		(super sel_110:)
 		(person1 sel_110: sel_320: 122)
 		(person2 sel_110: sel_320: 122)
-		(gSel_608 sel_40: 120 sel_99: 1 sel_3: -1 sel_39:)
-		(global2 sel_146: sIntroScript)
+		(gGameMusic1 sel_40: 120 sel_99: 1 sel_3: -1 sel_39:)
+		(gCurRoom sel_146: sIntroScript)
 	)
-	
+
 	(method (sel_111)
-		(gSel_608 sel_170: 0 30 12 1)
+		(gGameMusic1 sel_170: 0 30 12 1)
 		(super sel_111: &rest)
 	)
 )
@@ -40,9 +41,9 @@
 	(properties
 		sel_20 {moveIt}
 	)
-	
-	(method (sel_144 theSel_29)
-		(switch (= sel_29 theSel_29)
+
+	(method (sel_144 param1)
+		(switch (= sel_29 param1)
 			(0
 				(= sel_139 sel_141)
 				(= sel_141 0)
@@ -70,9 +71,9 @@
 	(properties
 		sel_20 {sIntroScript}
 	)
-	
-	(method (sel_144 theSel_29)
-		(switch (= sel_29 theSel_29)
+
+	(method (sel_144 param1)
+		(switch (= sel_29 param1)
 			(0
 				(= sel_136 2)
 				(person1 sel_320:)
@@ -94,7 +95,7 @@
 				(= sel_136 1)
 			)
 			(5
-				(global2 sel_146: sCloseUp)
+				(gCurRoom sel_146: sCloseUp)
 				(self sel_111:)
 			)
 		)
@@ -105,9 +106,9 @@
 	(properties
 		sel_20 {sCloseUp}
 	)
-	
-	(method (sel_144 theSel_29)
-		(switch (= sel_29 theSel_29)
+
+	(method (sel_144 param1)
+		(switch (= sel_29 param1)
 			(0
 				(closeUpView sel_313:)
 				(person1
@@ -132,7 +133,7 @@
 					sel_53: 16
 					sel_161: Walk
 				)
-				((ScriptID 1882 10)
+				((ScriptID 1882 10) ; Pippin
 					sel_203: 1
 					sel_291: 0
 					sel_1: 224
@@ -141,7 +142,7 @@
 					sel_550: 121
 					sel_537: 284
 				)
-				((ScriptID 1883 9)
+				((ScriptID 1883 9) ; TutSmith
 					sel_203: 1
 					sel_291: 0
 					sel_1: 3
@@ -153,7 +154,7 @@
 				(self sel_146: sDisembark self 1)
 			)
 			(1
-				((ScriptID 1887 12)
+				((ScriptID 1887 12) ; Steve
 					sel_203: 1
 					sel_291: 0
 					sel_1: 224
@@ -162,7 +163,7 @@
 					sel_550: 121
 					sel_537: 284
 				)
-				((ScriptID 1886 11)
+				((ScriptID 1886 11) ; Watney
 					sel_203: 1
 					sel_291: 0
 					sel_1: 4
@@ -199,7 +200,7 @@
 				(self sel_146: sDisembark self 0)
 			)
 			(3
-				(global2 sel_399: 140)
+				(gCurRoom sel_399: 140)
 				(self sel_111:)
 			)
 		)
@@ -210,10 +211,12 @@
 	(properties
 		sel_20 {sDisembark}
 	)
-	
-	(method (sel_144 theSel_29)
-		(switch (= sel_29 theSel_29)
-			(0 (= sel_136 2))
+
+	(method (sel_144 param1)
+		(switch (= sel_29 param1)
+			(0
+				(= sel_136 2)
+			)
 			(1
 				(if sel_141
 					(person1 sel_312: MoveTo 168 110)
@@ -231,7 +234,7 @@
 				)
 			)
 			(3
-				(gLb2Messager sel_295: (if sel_141 1 else 2) 0 0 0 self)
+				(gMessager sel_295: (if sel_141 1 else 2) 0 0 0 self)
 			)
 			(4
 				(if sel_141
@@ -258,7 +261,9 @@
 				(person1 sel_111:)
 				(person2 sel_161: Walk sel_312: MoveTo 217 128 self)
 			)
-			(9 (self sel_111:))
+			(9
+				(self sel_111:)
+			)
 		)
 	)
 )

@@ -1,8 +1,9 @@
 ;;; Sierra Script 1.0 - (do not remove this comment)
+;;; Decompiled by sluicebox
 (script# 21)
 (include sci.sh)
 (use Main)
-(use Obj)
+(use System)
 
 (public
 	addCluesCode 0
@@ -13,11 +14,12 @@
 	local0
 	local1
 )
+
 (instance addCluesCode of Code
 	(properties
 		sel_20 {addCluesCode}
 	)
-	
+
 	(method (sel_57 param1 &tmp temp0)
 		(switch (/ param1 256)
 			(1
@@ -37,20 +39,14 @@
 				(= local0 @global263)
 			)
 		)
-		(= temp0 0)
-		(while (< temp0 local1)
-			(if
-				(==
-					(mod (Memory memPEEK (+ local0 (* 2 temp0))) 4096)
-					param1
-				)
+		(for ((= temp0 0)) (< temp0 local1) ((++ temp0))
+			(if (== (mod (Memory memPEEK (+ local0 (* 2 temp0))) 4096) param1)
 				(= temp0 local1)
 			)
 			(if (not (Memory memPEEK (+ local0 (* 2 temp0))))
 				(Memory memPOKE (+ local0 (* 2 temp0)) param1)
 				(= temp0 local1)
 			)
-			(++ temp0)
 		)
 	)
 )
@@ -59,7 +55,7 @@
 	(properties
 		sel_20 {dropCluesCode}
 	)
-	
+
 	(method (sel_57 param1 &tmp temp0 temp1)
 		(switch (/ param1 256)
 			(1
@@ -79,26 +75,18 @@
 				(= local0 @global263)
 			)
 		)
-		(= temp0 0)
-		(while (< temp0 local1)
-			(if
-				(==
-					(mod (Memory memPEEK (+ local0 (* 2 temp0))) 4096)
-					param1
-				)
+		(for ((= temp0 0)) (< temp0 local1) ((++ temp0))
+			(if (== (mod (Memory memPEEK (+ local0 (* 2 temp0))) 4096) param1)
 				(= temp1 temp0)
 				(= temp0 local1)
 			)
-			(++ temp0)
 		)
-		(= temp0 temp1)
-		(while (< temp0 local1)
+		(for ((= temp0 temp1)) (< temp0 local1) ((++ temp0))
 			(Memory
 				memPOKE
 				(+ local0 (* 2 temp0))
 				(Memory memPEEK (+ local0 (* 2 temp0) 2))
 			)
-			(++ temp0)
 		)
 		(Memory memPOKE (+ local0 (* 2 (- local1 1))) 0)
 	)

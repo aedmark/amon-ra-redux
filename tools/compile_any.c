@@ -15,14 +15,22 @@ BOOL CALLBACK EnumWindowsProc(HWND hwnd, LPARAM lParam) {
 }
 
 HWND g_hwndList = NULL;
+#define MAX_LIST_VIEWS 32
+HWND g_hwndLists[MAX_LIST_VIEWS];
+int g_hwndListCounts[MAX_LIST_VIEWS];
+int g_listViewCount = 0;
 BOOL CALLBACK EnumChildWindowsProc(HWND hwnd, LPARAM lParam) {
     char className[256];
     GetClassNameA(hwnd, className, sizeof(className));
     if (strcmp(className, "SysListView32") == 0) {
         int count = SendMessageA(hwnd, LVM_GETITEMCOUNT, 0, 0);
-        if (count > 50) {
-            g_hwndList = hwnd;
-            return FALSE;
+        // The resource explorer and script browser are both SysListView32
+        // controls, and either one may be larger. Retain every candidate and
+        // select the list that actually contains the requested source name.
+        if (g_listViewCount < MAX_LIST_VIEWS) {
+            g_hwndLists[g_listViewCount] = hwnd;
+            g_hwndListCounts[g_listViewCount] = count;
+            g_listViewCount++;
         }
     }
     return TRUE;
@@ -67,8 +75,8 @@ int main(int argc, char **argv) {
     Sleep(300);
 
     EnumChildWindows(hwndMain, EnumChildWindowsProc, 0);
-    if (!g_hwndList) {
-        printf("Scripts SysListView32 (count > 50) not found.\n");
+    if (g_listViewCount == 0) {
+        printf("No SysListView32 controls found.\n");
         return 1;
     }
 
@@ -80,7 +88,6 @@ int main(int argc, char **argv) {
         return 1;
     }
 
-    int count = SendMessageA(g_hwndList, LVM_GETITEMCOUNT, 0, 0);
     void *remoteMem = VirtualAllocEx(hProc, NULL, sizeof(LVITEMA) + 256, MEM_COMMIT, PAGE_READWRITE);
     if (!remoteMem) {
         printf("VirtualAllocEx failed.\n");
@@ -90,33 +97,40 @@ int main(int argc, char **argv) {
     char *remoteText = (char*)remoteMem + sizeof(LVITEMA);
 
     int targetIndex = -1;
-    for (int i = 0; i < count; i++) {
-        LVITEMA item = {0};
-        item.mask = LVIF_TEXT;
-        item.iItem = i;
-        item.pszText = remoteText;
-        item.cchTextMax = 256;
+    for (int listIndex = 0; listIndex < g_listViewCount && targetIndex == -1; listIndex++) {
+        HWND candidate = g_hwndLists[listIndex];
+        int count = g_hwndListCounts[listIndex];
+        for (int i = 0; i < count; i++) {
+            LVITEMA item = {0};
+            item.mask = LVIF_TEXT;
+            item.iItem = i;
+            item.pszText = remoteText;
+            item.cchTextMax = 256;
 
-        WriteProcessMemory(hProc, remoteMem, &item, sizeof(LVITEMA), NULL);
-        SendMessageA(g_hwndList, LVM_GETITEMA, 0, (LPARAM)remoteMem);
+            WriteProcessMemory(hProc, remoteMem, &item, sizeof(LVITEMA), NULL);
+            SendMessageA(candidate, LVM_GETITEMA, 0, (LPARAM)remoteMem);
 
-        char buf[256] = {0};
-        ReadProcessMemory(hProc, remoteText, buf, sizeof(buf) - 1, NULL);
+            char buf[256] = {0};
+            ReadProcessMemory(hProc, remoteText, buf, sizeof(buf) - 1, NULL);
 
-        char targetNoExt[256];
-        strncpy(targetNoExt, target, sizeof(targetNoExt) - 1);
-        char *dot = strstr(targetNoExt, ".sc");
-        if (dot) *dot = 0;
+            char targetNoExt[256];
+            strncpy(targetNoExt, target, sizeof(targetNoExt) - 1);
+            targetNoExt[sizeof(targetNoExt) - 1] = 0;
+            char *dot = strstr(targetNoExt, ".sc");
+            if (dot) *dot = 0;
 
-        if (strcasecmp(buf, target) == 0 || strcasecmp(buf, targetNoExt) == 0) {
-            printf("Found target '%s' at index %d ('%s')\n", target, i, buf);
-            targetIndex = i;
-            break;
+            if (strcasecmp(buf, target) == 0 || strcasecmp(buf, targetNoExt) == 0) {
+                g_hwndList = candidate;
+                printf("Found target '%s' at index %d ('%s') in list %d (%d rows)\n",
+                       target, i, buf, listIndex, count);
+                targetIndex = i;
+                break;
+            }
         }
     }
 
     if (targetIndex == -1) {
-        printf("Target '%s' not found in %d scripts.\n", target, count);
+        printf("Target '%s' not found in %d list views.\n", target, g_listViewCount);
         VirtualFreeEx(hProc, remoteMem, 0, MEM_RELEASE);
         CloseHandle(hProc);
         return 1;

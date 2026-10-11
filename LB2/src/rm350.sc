@@ -1,20 +1,21 @@
 ;;; Sierra Script 1.0 - (do not remove this comment)
+;;; Decompiled by sluicebox
 (script# 350)
 (include sci.sh)
 (use Main)
-(use LBRoom)
+(use eRS)
 (use ExitFeature)
 (use RotundaRgn)
 (use Scaler)
 (use PolyPath)
-(use CueObj)
+(use Feature)
 (use MoveFwd)
-(use n958)
+(use LoadMany)
 (use StopWalk)
 (use Sound)
-(use Cycle)
-(use View)
-(use Obj)
+(use Motion)
+(use Actor)
+(use System)
 
 (public
 	rm350 0
@@ -25,11 +26,10 @@
 (local
 	local0
 )
-(procedure (proc350_2)
-)
 
-(procedure (proc350_23)
-)
+(procedure (proc350_2)) ; UNUSED
+
+(procedure (proc350_23)) ; UNUSED
 
 (instance rm350 of LBRoom
 	(properties
@@ -41,19 +41,21 @@
 		sel_411 335
 		sel_412 360
 	)
-	
+
 	(method (sel_110 &tmp [temp0 5])
 		(gEgo sel_110: sel_585: 831 sel_320: Scaler 95 75 190 120)
-		(if (== global123 5) (proc958_0 128 424))
-		(if (> global123 2)
+		(if (== gAct 5)
+			(LoadMany rsVIEW 424)
+		)
+		(if (> gAct 2)
 			(self sel_414: 90)
 		else
 			(self sel_414: 93)
-			((ScriptID 2350 0) sel_57: (= sel_259 (List sel_109:)))
+			((ScriptID 2350 0) sel_57: (= sel_259 (List sel_109:))) ; poly2350Code
 		)
-		(switch gGSel_40
+		(switch gPrevRoomNum
 			(sel_409
-				(if (== global123 5)
+				(if (== gAct 5)
 					(gEgo
 						sel_1: 275
 						sel_0: 100
@@ -72,17 +74,25 @@
 			(330
 				(self sel_146: sEnterSouth 0 1)
 			)
-			(sel_410 (= sel_28 11))
-			(sel_412 (= sel_28 12))
-			(340 (= sel_28 9))
-			(else 
+			(sel_410
+				(= sel_28 11)
+			)
+			(sel_412
+				(= sel_28 12)
+			)
+			(340 ; testRoom
+				(= sel_28 9)
+			)
+			(else
 				(gEgo sel_153: 70 175)
-				(= global123 2)
+				(= gAct 2)
 				(gGame sel_588:)
 			)
 		)
 		(super sel_110:)
-		(if (not sel_142) (gGame sel_588:))
+		(if (not sel_142)
+			(gGame sel_588:)
+		)
 		(southExitFeature sel_110:)
 		(eastExitFeature sel_110:)
 		(westExitFeature sel_110:)
@@ -95,52 +105,52 @@
 		(arch sel_110:)
 		(column1 sel_110:)
 		(column2 sel_110:)
-		(if (== global123 2)
+		(if (== gAct 2)
 			(partyATP1 sel_110: sel_320: 170 sel_317:)
 			(partyATP2 sel_110: sel_320: 170 sel_317:)
 			(partyATP3 sel_110: sel_320: 170 sel_317:)
 			(partyATP4 sel_110: sel_320: 170 sel_317:)
 		)
-		(cond 
-			((not (== global123 2)))
+		(cond
+			((not (== gAct 2)))
 			(
 				(and
-					(proc0_2 122)
-					(proc0_10 29188)
-					(not (proc0_10 8))
-					(> (gEgo sel_0?) 175)
-					(not (proc999_5 global128 0 1 4 5 9 13))
+					(IsFlag 122)
+					(TimeCheck $7204) ; has 7:30 pm occurred?
+					(not (TimeCheck $0008))
+					(> (gEgo sel_0:) 175)
+					(not (OneOf global128 0 1 4 5 9 13))
 				)
 				(self sel_146: sMeetSteve)
 			)
 			(else
 				(switch global128
 					(0
-						((ScriptID 93 6)
+						((ScriptID 93 6) ; Pippin
 							sel_155: 8
 							sel_156: 4
 							sel_153: 158 179
 							sel_317:
 						)
-						((ScriptID 93 7)
+						((ScriptID 93 7) ; Rameses
 							sel_155: 8
 							sel_156: 5
 							sel_153: 180 179
 							sel_317:
 						)
-						((ScriptID 93 10)
+						((ScriptID 93 10) ; Watney
 							sel_155: 8
 							sel_156: 1
 							sel_153: 192 180
 							sel_317:
 						)
-						((ScriptID 93 11)
+						((ScriptID 93 11) ; Yvette
 							sel_155: 8
 							sel_156: 2
 							sel_153: 166 180
 							sel_317:
 						)
-						((ScriptID 93 12)
+						((ScriptID 93 12) ; Ziggy
 							sel_155: 8
 							sel_156: 0
 							sel_153: 149 182
@@ -148,25 +158,25 @@
 						)
 					)
 					(1
-						((ScriptID 93 6)
+						((ScriptID 93 6) ; Pippin
 							sel_155: 8
 							sel_156: 4
 							sel_153: 158 180
 							sel_317:
 						)
-						((ScriptID 93 7)
+						((ScriptID 93 7) ; Rameses
 							sel_155: 8
 							sel_156: 5
 							sel_153: 180 179
 							sel_317:
 						)
-						((ScriptID 93 10)
+						((ScriptID 93 10) ; Watney
 							sel_155: 8
 							sel_156: 1
 							sel_153: 192 185
 							sel_317:
 						)
-						((ScriptID 93 12)
+						((ScriptID 93 12) ; Ziggy
 							sel_155: 8
 							sel_156: 0
 							sel_153: 149 182
@@ -174,19 +184,19 @@
 						)
 					)
 					(2
-						((ScriptID 93 1)
+						((ScriptID 93 1) ; Countess
 							sel_155: 8
 							sel_156: 3
 							sel_153: 140 182
 							sel_317:
 						)
-						((ScriptID 93 7)
+						((ScriptID 93 7) ; Rameses
 							sel_155: 8
 							sel_156: 1
 							sel_153: 180 182
 							sel_317:
 						)
-						((ScriptID 93 12)
+						((ScriptID 93 12) ; Ziggy
 							sel_155: 8
 							sel_156: 0
 							sel_153: 165 182
@@ -194,19 +204,19 @@
 						)
 					)
 					(3
-						((ScriptID 93 1)
+						((ScriptID 93 1) ; Countess
 							sel_155: 8
 							sel_156: 3
 							sel_153: 140 182
 							sel_317:
 						)
-						((ScriptID 93 7)
+						((ScriptID 93 7) ; Rameses
 							sel_155: 8
 							sel_156: 5
 							sel_153: 180 182
 							sel_317:
 						)
-						((ScriptID 93 12)
+						((ScriptID 93 12) ; Ziggy
 							sel_155: 8
 							sel_156: 0
 							sel_153: 165 182
@@ -214,13 +224,13 @@
 						)
 					)
 					(4
-						((ScriptID 93 1)
+						((ScriptID 93 1) ; Countess
 							sel_155: 8
 							sel_156: 5
 							sel_153: 180 182
 							sel_317:
 						)
-						((ScriptID 93 7)
+						((ScriptID 93 7) ; Rameses
 							sel_155: 8
 							sel_156: 2
 							sel_153: 165 182
@@ -228,13 +238,13 @@
 						)
 					)
 					(5
-						((ScriptID 93 1)
+						((ScriptID 93 1) ; Countess
 							sel_155: 8
 							sel_156: 5
 							sel_153: 180 182
 							sel_317:
 						)
-						((ScriptID 93 12)
+						((ScriptID 93 12) ; Ziggy
 							sel_155: 8
 							sel_156: 0
 							sel_153: 160 182
@@ -242,13 +252,13 @@
 						)
 					)
 					(6
-						((ScriptID 93 7)
+						((ScriptID 93 7) ; Rameses
 							sel_155: 8
 							sel_156: 5
 							sel_153: 180 182
 							sel_317:
 						)
-						((ScriptID 93 9)
+						((ScriptID 93 9) ; Tut
 							sel_155: 8
 							sel_156: 4
 							sel_153: 165 182
@@ -256,13 +266,13 @@
 						)
 					)
 					(7
-						((ScriptID 93 7)
+						((ScriptID 93 7) ; Rameses
 							sel_155: 8
 							sel_156: 5
 							sel_153: 180 182
 							sel_317:
 						)
-						((ScriptID 93 9)
+						((ScriptID 93 9) ; Tut
 							sel_155: 8
 							sel_156: 4
 							sel_153: 165 182
@@ -270,19 +280,19 @@
 						)
 					)
 					(8
-						((ScriptID 93 7)
+						((ScriptID 93 7) ; Rameses
 							sel_155: 8
 							sel_156: 1
 							sel_153: 180 182
 							sel_317:
 						)
-						((ScriptID 93 9)
+						((ScriptID 93 9) ; Tut
 							sel_155: 8
 							sel_156: 4
 							sel_153: 150 182
 							sel_317:
 						)
-						((ScriptID 93 11)
+						((ScriptID 93 11) ; Yvette
 							sel_155: 8
 							sel_156: 2
 							sel_153: 165 180
@@ -290,20 +300,20 @@
 						)
 					)
 					(9
-						((ScriptID 93 7)
+						((ScriptID 93 7) ; Rameses
 							sel_155: 8
 							sel_156: 2
 							sel_153: 165 179
 							sel_317:
 						)
-						((ScriptID 93 9)
+						((ScriptID 93 9) ; Tut
 							sel_155: 8
 							sel_156: 5
 							sel_153: 180 180
 							sel_320: 170
 							sel_317:
 						)
-						((ScriptID 93 11)
+						((ScriptID 93 11) ; Yvette
 							sel_155: 8
 							sel_156: 0
 							sel_153: 155 182
@@ -311,13 +321,13 @@
 						)
 					)
 					(10
-						((ScriptID 93 7)
+						((ScriptID 93 7) ; Rameses
 							sel_155: 8
 							sel_156: 5
 							sel_153: 180 182
 							sel_317:
 						)
-						((ScriptID 93 9)
+						((ScriptID 93 9) ; Tut
 							sel_155: 8
 							sel_156: 4
 							sel_153: 165 182
@@ -325,13 +335,13 @@
 						)
 					)
 					(11
-						((ScriptID 93 7)
+						((ScriptID 93 7) ; Rameses
 							sel_155: 8
 							sel_156: 5
 							sel_153: 180 182
 							sel_317:
 						)
-						((ScriptID 93 9)
+						((ScriptID 93 9) ; Tut
 							sel_155: 8
 							sel_156: 4
 							sel_153: 165 182
@@ -339,13 +349,13 @@
 						)
 					)
 					(12
-						((ScriptID 93 7)
+						((ScriptID 93 7) ; Rameses
 							sel_155: 8
 							sel_156: 1
 							sel_153: 180 182
 							sel_317:
 						)
-						((ScriptID 93 11)
+						((ScriptID 93 11) ; Yvette
 							sel_155: 8
 							sel_156: 0
 							sel_153: 160 182
@@ -353,13 +363,13 @@
 						)
 					)
 					(13
-						((ScriptID 93 8)
+						((ScriptID 93 8) ; Steve
 							sel_155: 8
 							sel_156: 4
 							sel_153: 160 181
 							sel_317:
 						)
-						((ScriptID 93 11)
+						((ScriptID 93 11) ; Yvette
 							sel_155: 8
 							sel_156: 2
 							sel_153: 175 183
@@ -369,55 +379,53 @@
 				)
 			)
 		)
-		(if
-			(and
-				(== gGSel_40 340)
-				(== gSel_40 (RotundaRgn sel_667?))
-			)
-			(while (proc0_1 gEgo 8)
+		(if (and (== gPrevRoomNum 340) (== gCurRoomNum (RotundaRgn sel_667:))) ; testRoom
+			(while (StepOn gEgo 8)
 				(gEgo
-					sel_1: (- (gEgo sel_1?) 1)
-					sel_0: (- (gEgo sel_0?) 1)
+					sel_1: (- (gEgo sel_1:) 1)
+					sel_0: (- (gEgo sel_0:) 1)
 				)
 			)
 		)
 	)
-	
+
 	(method (sel_57)
 		(super sel_57:)
-		(cond 
+		(cond
 			(sel_142)
 			(
 				(and
-					(== global123 2)
-					(proc0_1 gEgo 8)
-					(== gSel_40 (RotundaRgn sel_667?))
+					(== gAct 2)
+					(StepOn gEgo 8)
+					(== gCurRoomNum (RotundaRgn sel_667:))
 				)
 				(RotundaRgn sel_403:)
 			)
-			((proc0_1 gEgo 2) (self sel_146: sExitNorth))
-			((and (proc0_1 gEgo 4) (not (== global123 2))) (self sel_146: sCantLeave))
+			((StepOn gEgo 2)
+				(self sel_146: sExitNorth)
+			)
+			((and (StepOn gEgo 4) (not (== gAct 2)))
+				(self sel_146: sCantLeave)
+			)
 		)
 	)
-	
+
 	(method (sel_111)
 		(super sel_111:)
 		(DisposeScript 2350)
 	)
-	
+
 	(method (sel_300 param1)
 		(if (== param1 4)
-			(gLb2Messager
-				sel_295: sel_213 param1 (if (> global123 2) 5 else 4)
-			)
+			(gMessager sel_295: sel_213 param1 (if (> gAct 2) 5 else 4))
 		else
 			(super sel_300: param1)
 		)
 	)
-	
+
 	(method (sel_399 param1)
 		(if (== param1 sel_411)
-			(DrawPic 780 dpOPEN_FADEPALETTE)
+			(DrawPic 780 10)
 		)
 		(super sel_399: param1)
 	)
@@ -427,15 +435,15 @@
 	(properties
 		sel_20 {sEnterSouth}
 	)
-	
-	(method (sel_144 theSel_29)
-		(switch (= sel_29 theSel_29)
+
+	(method (sel_144 param1)
+		(switch (= sel_29 param1)
 			(0
-				(proc0_3 25)
-				(if (== (gSel_608 sel_40?) 335)
-					(gSel_608 sel_170: 127 5 5 0)
+				(SetFlag 25)
+				(if (== (gGameMusic1 sel_40:) 335)
+					(gGameMusic1 sel_170: 127 5 5 0)
 				else
-					(gSel_608 sel_40: 335 sel_99: 1 sel_155: -1 sel_39:)
+					(gGameMusic1 sel_40: 335 sel_99: 1 sel_155: -1 sel_39:)
 				)
 				(gEgo
 					sel_349: 0
@@ -443,7 +451,7 @@
 					sel_312: PolyPath 100 180 self
 				)
 				(if sel_141
-					((ScriptID 93 8)
+					((ScriptID 93 8) ; Steve
 						sel_110:
 						sel_153: 110 230
 						sel_161: StopWalk -1
@@ -456,17 +464,16 @@
 			(1 0)
 			(2
 				(if sel_141
-					(gEgo sel_352: (= global3 global149))
-					((ScriptID 93 8)
-						sel_15: 0
-						sel_312: PolyPath 330 180 self
-					)
+					(gEgo sel_352: (= gSpeed global149))
+					((ScriptID 93 8) sel_15: 0 sel_312: PolyPath 330 180 self) ; Steve
 				else
 					(= sel_136 1)
 				)
 			)
 			(3
-				(if sel_141 ((ScriptID 93 8) sel_111:))
+				(if sel_141
+					((ScriptID 93 8) sel_111:) ; Steve
+				)
 				(gGame sel_588:)
 				(gEgo sel_585: 831)
 				(self sel_111:)
@@ -479,15 +486,15 @@
 	(properties
 		sel_20 {sExitNorth}
 	)
-	
-	(method (sel_144 theSel_29)
-		(switch (= sel_29 theSel_29)
+
+	(method (sel_144 param1)
+		(switch (= sel_29 param1)
 			(0
 				(gGame sel_587:)
-				(gEgo sel_312: MoveTo 265 (- (gEgo sel_0?) 15) self)
+				(gEgo sel_312: MoveTo 265 (- (gEgo sel_0:) 15) self)
 			)
 			(1
-				(global2 sel_399: (global2 sel_409?))
+				(gCurRoom sel_399: (gCurRoom sel_409:))
 			)
 		)
 	)
@@ -497,15 +504,17 @@
 	(properties
 		sel_20 {sCantLeave}
 	)
-	
-	(method (sel_144 theSel_29)
-		(switch (= sel_29 theSel_29)
+
+	(method (sel_144 param1)
+		(switch (= sel_29 param1)
 			(0
 				(gGame sel_587:)
-				(gEgo sel_312: MoveTo (gEgo sel_1?) 180 self)
+				(gEgo sel_312: MoveTo (gEgo sel_1:) 180 self)
 			)
 			(1
-				(if (not (proc0_3 70)) (gLb2Messager sel_295: 12 1 2))
+				(if (not (SetFlag 70))
+					(gMessager sel_295: 12 1 2)
+				)
 				(gGame sel_588:)
 				(self sel_111:)
 			)
@@ -517,13 +526,13 @@
 	(properties
 		sel_20 {sMeetSteve}
 	)
-	
-	(method (sel_144 theSel_29)
-		(switch (= sel_29 theSel_29)
+
+	(method (sel_144 param1)
+		(switch (= sel_29 param1)
 			(0
 				(gGame sel_587:)
-				(if (< (gEgo sel_1?) 160)
-					((ScriptID 93 8)
+				(if (< (gEgo sel_1:) 160)
+					((ScriptID 93 8) ; Steve
 						sel_161: StopWalk -1
 						sel_153: 240 180
 						sel_3: 1
@@ -532,7 +541,7 @@
 					)
 					(gEgo sel_312: PolyPath 140 180 self)
 				else
-					((ScriptID 93 8)
+					((ScriptID 93 8) ; Steve
 						sel_161: StopWalk -1
 						sel_153: 80 180
 						sel_3: 0
@@ -543,24 +552,27 @@
 				)
 			)
 			(1
-				(proc0_5 gEgo (ScriptID 93 8))
-				(proc0_5 (ScriptID 93 8) gEgo)
+				(Face gEgo (ScriptID 93 8)) ; Steve
+				(Face (ScriptID 93 8) gEgo) ; Steve
 				(= sel_136 2)
 			)
 			(2
-				(gLb2Messager sel_295: 15 0 0 0 self)
+				(gMessager sel_295: 15 0 0 0 self)
 			)
 			(3
-				(gEgo sel_338: 3 2 sel_312: PolyPath (gEgo sel_1?) 240 self)
+				(gEgo
+					sel_338: 3 2
+					sel_312: PolyPath (gEgo sel_1:) 240 self
+				)
 			)
 			(4
-				((ScriptID 93 8)
-					sel_312: PolyPath ((ScriptID 93 8) sel_1?) 250 self
+				((ScriptID 93 8) ; Steve
+					sel_312: PolyPath ((ScriptID 93 8) sel_1:) 250 self ; Steve
 				)
 			)
 			(5
-				((ScriptID 22 0) sel_57: 8)
-				(global2 sel_399: 335)
+				((ScriptID 22 0) sel_57: 8) ; triggerAndClock
+				(gCurRoom sel_399: 335)
 			)
 		)
 	)
@@ -570,9 +582,9 @@
 	(properties
 		sel_20 {sGetWaterGlass}
 	)
-	
-	(method (sel_144 theSel_29)
-		(switch (= sel_29 theSel_29)
+
+	(method (sel_144 param1)
+		(switch (= sel_29 param1)
 			(0
 				(gEgo
 					sel_2: 855
@@ -588,7 +600,7 @@
 					sel_585: 831
 					sel_3: (if (== sel_141 waterGlass3) 6 else 7)
 				)
-				((ScriptID 21 0) sel_57: 797)
+				((ScriptID 21 0) sel_57: 797) ; addCluesCode
 				(self sel_111:)
 			)
 		)
@@ -599,10 +611,12 @@
 	(properties
 		sel_20 {sLauraDies}
 	)
-	
-	(method (sel_144 theSel_29)
-		(switch (= sel_29 theSel_29)
-			(0 (= sel_136 1))
+
+	(method (sel_144 param1)
+		(switch (= sel_29 param1)
+			(0
+				(= sel_136 1)
+			)
 			(1
 				(gEgo sel_312: MoveFwd 80)
 				(oriley
@@ -613,24 +627,21 @@
 					sel_161: StopWalk -1
 					sel_312: MoveFwd 20 self
 				)
-				(gSel_608 sel_40: 3 sel_99: 1 sel_3: 1 sel_39:)
+				(gGameMusic1 sel_40: 3 sel_99: 1 sel_3: 1 sel_39:)
 			)
 			(2
-				(oriley
-					sel_2: 424
-					sel_155: 0
-					sel_156: 0
-					sel_161: End self
-				)
+				(oriley sel_2: 424 sel_155: 0 sel_156: 0 sel_161: End self)
 			)
 			(3
 				(thudSound sel_39:)
 				(gEgo sel_312: 0 sel_2: 858 sel_155: 4 sel_161: End self)
 			)
-			(4 (= sel_139 60))
+			(4
+				(= sel_139 60)
+			)
 			(5
-				(= global145 0)
-				(global2 sel_399: 99)
+				(= global145 0) ; "You came in thinking like a journalist, and you left with a skull full of mush."
+				(gCurRoom sel_399: 99)
 				(self sel_111:)
 			)
 		)
@@ -706,17 +717,19 @@
 		sel_303 61
 		sel_304 168
 	)
-	
+
 	(method (sel_300 param1)
 		(switch param1
 			(4
 				(if (gEgo sel_238: 28)
-					(gLb2Messager sel_295: sel_213 param1 3)
+					(gMessager sel_295: sel_213 param1 3)
 				else
-					(global2 sel_146: sGetWaterGlass 0 self)
+					(gCurRoom sel_146: sGetWaterGlass 0 self)
 				)
 			)
-			(else  (super sel_300: param1))
+			(else
+				(super sel_300: param1)
+			)
 		)
 	)
 )
@@ -735,17 +748,19 @@
 		sel_303 227
 		sel_304 174
 	)
-	
+
 	(method (sel_300 param1)
 		(switch param1
 			(4
 				(if (gEgo sel_238: 28)
-					(gLb2Messager sel_295: sel_213 param1 3)
+					(gMessager sel_295: sel_213 param1 3)
 				else
-					(global2 sel_146: sGetWaterGlass 0 self)
+					(gCurRoom sel_146: sGetWaterGlass 0 self)
 				)
 			)
-			(else  (super sel_300: param1))
+			(else
+				(super sel_300: param1)
+			)
 		)
 	)
 )
@@ -764,17 +779,19 @@
 		sel_303 90
 		sel_304 170
 	)
-	
+
 	(method (sel_300 param1)
 		(switch param1
 			(4
 				(if (gEgo sel_238: 28)
-					(gLb2Messager sel_295: sel_213 param1 3)
+					(gMessager sel_295: sel_213 param1 3)
 				else
-					(global2 sel_146: sGetWaterGlass 0 self)
+					(gCurRoom sel_146: sGetWaterGlass 0 self)
 				)
 			)
-			(else  (super sel_300: param1))
+			(else
+				(super sel_300: param1)
+			)
 		)
 	)
 )
@@ -852,7 +869,7 @@
 		sel_4 15
 		sel_14 16384
 	)
-	
+
 	(method (sel_110)
 		(super sel_110:)
 		(self sel_317:)
@@ -868,7 +885,7 @@
 		sel_2 374
 		sel_14 16384
 	)
-	
+
 	(method (sel_110)
 		(= sel_4
 			(switch (Random 0 8)
@@ -899,7 +916,7 @@
 		sel_2 374
 		sel_14 16384
 	)
-	
+
 	(method (sel_110)
 		(= sel_4
 			(switch (Random 0 5)
@@ -927,7 +944,7 @@
 		sel_2 374
 		sel_14 16384
 	)
-	
+
 	(method (sel_110)
 		(= sel_4
 			(switch (Random 0 4)

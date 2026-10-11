@@ -1,8 +1,9 @@
 ;;; Sierra Script 1.0 - (do not remove this comment)
+;;; Decompiled by sluicebox
 (script# 29)
 (include sci.sh)
 (use Main)
-(use LBRoom)
+(use eRS)
 (use ego)
 (use Print)
 
@@ -15,626 +16,138 @@
 		sel_20 {whereTo}
 		sel_408 780
 	)
-	
+
 	(method (sel_110 &tmp [temp0 10] temp10 temp11)
-		(asm
-			pushi    #sel_110
-			pushi    0
-			super    LBRoom,  4
-			ldi      0
-			sat      temp0
-			ldi      0
-			sat      temp10
-			pushi    #sel_198
-			pushi    7
-			pushi    2
-			pushi    0
-			pushi    4
-			pushi    1
-			pushi    0
-			pushi    0
-			pushi    10
-			pushi    200
-			pushi    4
-			lea      @temp0
-			push    
-			pushi    5
-			pushi    115
-			pushi    0
-			pushi    205
-			pushi    8
-			pushi    105
-			pushi    2
-			pushi    0
-			pushi    0
-			pushi    1
-			pushi    0
-			pushi    18
-			pushi    10
-			pushi    205
-			pushi    8
-			pushi    140
-			pushi    2
-			pushi    0
-			pushi    0
-			pushi    2
-			pushi    100
-			pushi    18
-			pushi    10
-			pushi    205
-			pushi    8
-			pushi    210
-			pushi    2
-			pushi    0
-			pushi    0
-			pushi    3
-			pushi    0
-			pushi    36
-			pushi    10
-			pushi    205
-			pushi    8
-			pushi    260
-			pushi    2
-			pushi    0
-			pushi    0
-			pushi    4
-			pushi    100
-			pushi    36
-			pushi    10
-			pushi    205
-			pushi    8
-			pushi    280
-			pushi    2
-			pushi    0
-			pushi    0
-			pushi    5
-			pushi    0
-			pushi    54
-			pushi    10
-			pushi    205
-			pushi    8
-			pushi    300
-			pushi    2
-			pushi    0
-			pushi    0
-			pushi    6
-			pushi    100
-			pushi    54
-			pushi    10
-			pushi    205
-			pushi    8
-			pushi    65336
-			pushi    2
-			pushi    0
-			pushi    0
-			pushi    7
-			pushi    0
-			pushi    72
-			pushi    10
-			pushi    205
-			pushi    8
-			pushi    250
-			pushi    2
-			pushi    0
-			pushi    0
-			pushi    8
-			pushi    100
-			pushi    72
-			pushi    10
-			pushi    205
-			pushi    8
-			pushi    65236
-			pushi    2
-			pushi    0
-			pushi    0
-			pushi    33
-			pushi    0
-			pushi    90
-			pushi    10
-			pushi    205
-			pushi    8
-			pushi    65436
-			pushi    2
-			pushi    0
-			pushi    0
-			pushi    9
-			pushi    100
-			pushi    90
-			pushi    10
-			pushi    110
-			pushi    0
-			class    Print
-			send     234
-			sat      temp10
-			lat      temp0
-			bnt      code_0108
-			pushi    1
-			lea      @temp0
-			push    
-			callk    ReadNumber,  2
-			sat      temp10
-code_0108:
-			lst      temp10
-			ldi      65436
-			eq?     
-			bnt      code_011a
-			pushi    #sel_76
-			pushi    0
-			lag      gGame
-			send     4
-			ldi      0
-			sat      temp10
-code_011a:
-			lst      temp10
-			ldi      65236
-			eq?     
-			bnt      code_0225
-			pushi    #sel_198
-			pushi    7
-			pushi    2
-			pushi    0
-			pushi    4
-			pushi    3
-			pushi    0
-			pushi    0
-			pushi    10
-			pushi    205
-			pushi    8
-			pushi    1
-			pushi    2
-			pushi    0
-			pushi    3
-			pushi    1
-			pushi    0
-			pushi    20
-			pushi    10
-			pushi    205
-			pushi    8
-			pushi    2
-			pushi    2
-			pushi    0
-			pushi    3
-			pushi    2
-			pushi    0
-			pushi    40
-			pushi    10
-			pushi    205
-			pushi    8
-			pushi    3
-			pushi    2
-			pushi    0
-			pushi    3
-			dup     
-			pushi    0
-			pushi    60
-			pushi    10
-			pushi    205
-			pushi    8
-			pushi    4
-			pushi    2
-			pushi    0
-			pushi    3
-			pushi    4
-			pushi    0
-			pushi    80
-			pushi    10
-			pushi    205
-			pushi    8
-			pushi    5
-			pushi    2
-			pushi    0
-			pushi    3
-			pushi    5
-			pushi    0
-			pushi    100
-			pushi    10
-			pushi    205
-			pushi    8
-			pushi    6
-			pushi    2
-			pushi    0
-			pushi    3
-			pushi    6
-			pushi    0
-			pushi    120
-			pushi    10
-			pushi    110
-			pushi    0
-			class    Print
-			send     142
-			sat      temp10
-			push    
-			dup     
-			ldi      1
-			eq?     
-			bnt      code_01b3
-			ldi      0
-			sag      global123
-			ldi      0
-			sag      global15
-			jmp      code_0215
-code_01b3:
-			dup     
-			ldi      2
-			eq?     
-			bnt      code_01c7
-			pushi    0
-			callb    proc0_13,  0
-			ldi      1
-			sag      global123
-			ldi      5
-			sag      global15
-			jmp      code_0215
-code_01c7:
-			dup     
-			ldi      3
-			eq?     
-			bnt      code_01db
-			pushi    0
-			callb    proc0_14,  0
-			ldi      2
-			sag      global123
-			ldi      12
-			sag      global15
-			jmp      code_0215
-code_01db:
-			dup     
-			ldi      4
-			eq?     
-			bnt      code_01ef
-			pushi    0
-			callb    proc0_15,  0
-			ldi      3
-			sag      global123
-			ldi      43
-			sag      global15
-			jmp      code_0215
-code_01ef:
-			dup     
-			ldi      5
-			eq?     
-			bnt      code_0203
-			pushi    0
-			callb    proc0_16,  0
-			ldi      4
-			sag      global123
-			ldi      58
-			sag      global15
-			jmp      code_0215
-code_0203:
-			dup     
-			ldi      6
-			eq?     
-			bnt      code_0215
-			pushi    0
-			callb    proc0_17,  0
-			ldi      5
-			sag      global123
-			ldi      61
-			sag      global15
-code_0215:
-			toss    
-			ldi      26
-			sat      temp10
-			pushi    #sel_350
-			pushi    2
-			pushi    65535
-			pushi    2
-			class    ego
-			send     8
-code_0225:
-			lst      temp10
-			ldi      65336
-			eq?     
-			bnt      code_0455
-			ldi      65535
-			sat      temp10
-			ldi      0
-			sat      temp11
-code_0236:
-			lst      temp10
-			ldi      65535
-			eq?     
-			bnt      code_0455
-			lat      temp11
-			not     
-			bnt      code_0353
-			pushi    #sel_198
-			pushi    7
-			pushi    2
-			pushi    0
-			pushi    4
-			pushi    2
-			pushi    0
-			pushi    0
-			pushi    10
-			pushi    200
-			pushi    4
-			lea      @temp0
-			push    
-			pushi    5
-			pushi    165
-			pushi    0
-			pushi    205
-			pushi    8
-			pushi    350
-			pushi    2
-			pushi    0
-			pushi    0
-			pushi    10
-			pushi    0
-			pushi    18
-			pushi    10
-			pushi    205
-			pushi    8
-			pushi    420
-			pushi    2
-			pushi    0
-			pushi    0
-			pushi    12
-			pushi    140
-			pushi    18
-			pushi    10
-			pushi    205
-			pushi    8
-			pushi    430
-			pushi    2
-			pushi    0
-			pushi    0
-			pushi    13
-			pushi    0
-			pushi    36
-			pushi    10
-			pushi    205
-			pushi    8
-			pushi    440
-			pushi    2
-			pushi    0
-			pushi    0
-			pushi    14
-			pushi    140
-			pushi    36
-			pushi    10
-			pushi    205
-			pushi    8
-			pushi    450
-			pushi    2
-			pushi    0
-			pushi    0
-			pushi    15
-			pushi    0
-			pushi    54
-			pushi    10
-			pushi    205
-			pushi    8
-			pushi    480
-			pushi    2
-			pushi    0
-			pushi    0
-			pushi    16
-			pushi    140
-			pushi    54
-			pushi    0
-			class    Print
-			send     150
-			pushi    #sel_205
-			pushi    8
-			pushi    490
-			pushi    2
-			pushi    0
-			pushi    0
-			pushi    17
-			pushi    0
-			pushi    72
-			pushi    10
-			pushi    205
-			pushi    8
-			pushi    500
-			pushi    2
-			pushi    0
-			pushi    0
-			pushi    18
-			pushi    140
-			pushi    72
-			pushi    10
-			pushi    205
-			pushi    8
-			pushi    560
-			pushi    2
-			pushi    0
-			pushi    0
-			pushi    19
-			pushi    0
-			pushi    90
-			pushi    10
-			pushi    205
-			pushi    8
-			pushi    520
-			pushi    2
-			pushi    0
-			pushi    0
-			pushi    20
-			pushi    140
-			pushi    90
-			pushi    10
-			pushi    205
-			pushi    8
-			pushi    550
-			pushi    2
-			pushi    0
-			pushi    0
-			pushi    21
-			pushi    0
-			pushi    108
-			pushi    10
-			pushi    205
-			pushi    8
-			pushi    65535
-			pushi    2
-			pushi    0
-			pushi    0
-			pushi    23
-			pushi    140
-			pushi    108
-			pushi    10
-			pushi    110
-			pushi    0
-			class    Print
-			send     124
-			sat      temp10
-			jmp      code_0436
-code_0353:
-			pushi    #sel_198
-			pushi    7
-			pushi    2
-			pushi    0
-			pushi    4
-			pushi    2
-			pushi    0
-			pushi    0
-			pushi    10
-			pushi    200
-			pushi    4
-			lea      @temp0
-			push    
-			pushi    5
-			pushi    165
-			pushi    0
-			pushi    205
-			pushi    8
-			pushi    600
-			pushi    2
-			pushi    0
-			pushi    0
-			pushi    24
-			pushi    0
-			pushi    18
-			pushi    10
-			pushi    205
-			pushi    8
-			pushi    650
-			pushi    2
-			pushi    0
-			pushi    0
-			pushi    25
-			pushi    140
-			pushi    18
-			pushi    10
-			pushi    205
-			pushi    8
-			pushi    610
-			pushi    2
-			pushi    0
-			pushi    0
-			pushi    26
-			pushi    0
-			pushi    36
-			pushi    10
-			pushi    205
-			pushi    8
-			pushi    630
-			pushi    2
-			pushi    0
-			pushi    0
-			pushi    27
-			pushi    140
-			pushi    36
-			pushi    10
-			pushi    205
-			pushi    8
-			pushi    640
-			pushi    2
-			pushi    0
-			pushi    0
-			pushi    32
-			pushi    0
-			pushi    54
-			pushi    10
-			pushi    205
-			pushi    8
-			pushi    730
-			pushi    2
-			pushi    0
-			pushi    0
-			pushi    28
-			pushi    140
-			pushi    54
-			pushi    10
-			pushi    205
-			pushi    8
-			pushi    720
-			pushi    2
-			pushi    0
-			pushi    0
-			pushi    29
-			pushi    0
-			pushi    72
-			pushi    10
-			pushi    205
-			pushi    8
-			pushi    710
-			pushi    2
-			pushi    0
-			pushi    0
-			pushi    30
-			pushi    140
-			pushi    72
-			pushi    10
-			pushi    205
-			pushi    8
-			pushi    700
-			pushi    2
-			pushi    0
-			pushi    0
-			pushi    31
-			pushi    0
-			pushi    90
-			pushi    10
-			pushi    205
-			pushi    8
-			pushi    65535
-			pushi    2
-			pushi    0
-			pushi    0
-			pushi    23
-			pushi    140
-			pushi    90
-			pushi    10
-			pushi    110
-			pushi    0
-			class    Print
-			send     234
-			sat      temp10
-code_0436:
-			lat      temp0
-			bnt      code_0444
-			pushi    1
-			lea      @temp0
-			push    
-			callk    ReadNumber,  2
-			sat      temp10
-code_0444:
-			lst      temp10
-			ldi      65535
-			eq?     
-			bnt      code_0236
-			pushi    1
-			lat      temp11
-			sub     
-			sat      temp11
-			jmp      code_0236
-code_0455:
-			lat      temp10
-			not     
-			bnt      code_045e
-			ldi      105
-			sat      temp10
-code_045e:
-			pushi    #sel_399
-			pushi    1
-			lst      temp10
-			self     6
-			ret     
+		(super sel_110:)
+		(= temp0 0)
+		(= temp10 0)
+		(= temp10
+			(Print
+				sel_198: 2 0 4 1 0 0 10
+				sel_200: @temp0 5 115 0
+				sel_205: 105 2 0 0 1 0 18 10
+				sel_205: 140 2 0 0 2 100 18 10
+				sel_205: 210 2 0 0 3 0 36 10
+				sel_205: 260 2 0 0 4 100 36 10
+				sel_205: 280 2 0 0 5 0 54 10
+				sel_205: 300 2 0 0 6 100 54 10
+				sel_205: -200 2 0 0 7 0 72 10
+				sel_205: 250 2 0 0 8 100 72 10
+				sel_205: -300 2 0 0 33 0 90 10
+				sel_205: -100 2 0 0 9 100 90 10
+				sel_110:
+			)
 		)
+		(if temp0
+			(= temp10 (ReadNumber @temp0))
+		)
+		(if (== temp10 -100)
+			(gGame sel_76:)
+			(= temp10 0)
+		)
+		(if (== temp10 -300)
+			(switch
+				(= temp10
+					(Print
+						sel_198: 2 0 4 3 0 0 10
+						sel_205: 1 2 0 3 1 0 20 10
+						sel_205: 2 2 0 3 2 0 40 10
+						sel_205: 3 2 0 3 3 0 60 10
+						sel_205: 4 2 0 3 4 0 80 10
+						sel_205: 5 2 0 3 5 0 100 10
+						sel_205: 6 2 0 3 6 0 120 10
+						sel_110:
+					)
+				)
+				(1
+					(= gAct 0)
+					(= gScore 0)
+				)
+				(2
+					(proc0_13)
+					(= gAct 1)
+					(= gScore 5)
+				)
+				(3
+					(proc0_14)
+					(= gAct 2)
+					(= gScore 12)
+				)
+				(4
+					(proc0_15)
+					(= gAct 3)
+					(= gScore 43)
+				)
+				(5
+					(proc0_16)
+					(= gAct 4)
+					(= gScore 58)
+				)
+				(6
+					(proc0_17)
+					(= gAct 5)
+					(= gScore 61)
+				)
+			)
+			(= temp10 26)
+			(ego sel_350: -1 2)
+		)
+		(if (== temp10 -200)
+			(= temp10 -1)
+			(= temp11 0)
+			(while (== temp10 -1)
+				(if (not temp11)
+					(Print
+						sel_198: 2 0 4 2 0 0 10
+						sel_200: @temp0 5 165 0
+						sel_205: 350 2 0 0 10 0 18 10
+						sel_205: 420 2 0 0 12 140 18 10
+						sel_205: 430 2 0 0 13 0 36 10
+						sel_205: 440 2 0 0 14 140 36 10
+						sel_205: 450 2 0 0 15 0 54 10
+						sel_205: 480 2 0 0 16 140 54 0
+					)
+					(= temp10
+						(Print
+							sel_205: 490 2 0 0 17 0 72 10
+							sel_205: 500 2 0 0 18 140 72 10
+							sel_205: 560 2 0 0 19 0 90 10
+							sel_205: 520 2 0 0 20 140 90 10
+							sel_205: 550 2 0 0 21 0 108 10
+							sel_205: -1 2 0 0 23 140 108 10
+							sel_110:
+						)
+					)
+				else
+					(= temp10
+						(Print
+							sel_198: 2 0 4 2 0 0 10
+							sel_200: @temp0 5 165 0
+							sel_205: 600 2 0 0 24 0 18 10
+							sel_205: 650 2 0 0 25 140 18 10
+							sel_205: 610 2 0 0 26 0 36 10
+							sel_205: 630 2 0 0 27 140 36 10
+							sel_205: 640 2 0 0 32 0 54 10
+							sel_205: 730 2 0 0 28 140 54 10
+							sel_205: 720 2 0 0 29 0 72 10
+							sel_205: 710 2 0 0 30 140 72 10
+							sel_205: 700 2 0 0 31 0 90 10
+							sel_205: -1 2 0 0 23 140 90 10
+							sel_110:
+						)
+					)
+				)
+				(if temp0
+					(= temp10 (ReadNumber @temp0))
+				)
+				(if (== temp10 -1)
+					(= temp11 (- 1 temp11))
+				)
+			)
+		)
+		(if (not temp10)
+			(= temp10 105)
+		)
+		(self sel_399: temp10)
 	)
 )

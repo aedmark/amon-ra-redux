@@ -1,20 +1,21 @@
 ;;; Sierra Script 1.0 - (do not remove this comment)
+;;; Decompiled by sluicebox
 (script# 480)
 (include sci.sh)
 (use Main)
-(use LBRoom)
+(use eRS)
 (use Inset)
-(use RTRandCycle)
+(use Talker)
 (use Scaler)
 (use RandCycle)
 (use PolyPath)
-(use CueObj)
-(use n958)
+(use Feature)
+(use LoadMany)
 (use Rev)
 (use Sound)
-(use Cycle)
-(use View)
-(use Obj)
+(use Motion)
+(use Actor)
+(use System)
 
 (public
 	rm480 0
@@ -24,8 +25,9 @@
 (local
 	local0
 	local1
-	gEgoSel_53
+	local2
 )
+
 (instance rm480 of LBRoom
 	(properties
 		sel_20 {rm480}
@@ -33,35 +35,35 @@
 		sel_408 480
 		sel_409 430
 	)
-	
+
 	(method (sel_110)
-		(proc958_0 128 423 424 741 426 482 442 483 481 480 831)
-		(proc958_0 132 52 483 480 481 482)
+		(LoadMany rsVIEW 423 424 741 426 482 442 483 481 480 831)
+		(LoadMany rsSOUND 52 483 480 481 482)
 		(gEgo
 			sel_110:
-			sel_585: (if (== global123 5) 426 else 831)
+			sel_585: (if (== gAct 5) 426 else 831)
 			sel_320: Scaler 110 0 190 0
 		)
-		(if (== global123 5)
+		(if (== gAct 5)
 			(self sel_414: 94)
-			(global2 sel_259: (List sel_109:))
-			((ScriptID 2480 0) sel_57: (global2 sel_259?))
+			(gCurRoom sel_259: (List sel_109:))
+			((ScriptID 2480 0) sel_57: (gCurRoom sel_259:)) ; poly2480Code
 		else
 			(self sel_414: 90)
 		)
-		(switch gGSel_40
+		(switch gPrevRoomNum
 			(sel_409
 				(gEgo sel_1: 138 sel_0: 121)
-				(global2 sel_146: sEnterNorth)
+				(gCurRoom sel_146: sEnterNorth)
 			)
 			(740
-				(global2 sel_146: sChaseSequence)
+				(gCurRoom sel_146: sChaseSequence)
 				(lump sel_110:)
 				(rexMouth sel_311: 4 1 sel_110:)
 				(gEgo sel_102:)
 				(steve sel_110: sel_102:)
 			)
-			(else 
+			(else
 				(gEgo sel_153: 160 160)
 				(gGame sel_588:)
 			)
@@ -72,61 +74,73 @@
 		(dino sel_110:)
 		(rexMouth sel_311: 4 1)
 		(rex sel_311: 4 1 sel_110:)
-		(if (not (gEgo sel_238: 18)) (bone sel_110: sel_313:))
+		(if (not (gEgo sel_238: 18))
+			(bone sel_110: sel_313:)
+		)
 		(dinoBones sel_311: 4 1 sel_110:)
 		(gNarrator sel_1: 10 sel_0: 10)
 	)
-	
+
 	(method (sel_57)
 		(super sel_57:)
-		(cond 
-			(
-				(and
-					(== (global2 sel_142?) sChaseSequence)
-					(proc0_1 gEgo 2)
-				)
-				((self sel_142?) sel_145:)
+		(cond
+			((and (== (gCurRoom sel_142:) sChaseSequence) (StepOn gEgo 2))
+				((self sel_142:) sel_145:)
 			)
 			(sel_142)
-			((proc0_1 gEgo 2) (self sel_146: sExitNorth))
-			((proc0_1 gEgo 4) (self sel_146: sAroundTRexCCW))
-			((proc0_1 gEgo 32) (self sel_146: sAroundTRexCW))
-			((proc0_1 gEgo 16) (self sel_146: sAroundDinoCCW))
-			((proc0_1 gEgo 8) (self sel_146: sAroundDinoCW))
+			((StepOn gEgo 2)
+				(self sel_146: sExitNorth)
+			)
+			((StepOn gEgo 4)
+				(self sel_146: sAroundTRexCCW)
+			)
+			((StepOn gEgo 32)
+				(self sel_146: sAroundTRexCW)
+			)
+			((StepOn gEgo 16)
+				(self sel_146: sAroundDinoCCW)
+			)
+			((StepOn gEgo 8)
+				(self sel_146: sAroundDinoCW)
+			)
 		)
 	)
-	
+
 	(method (sel_111)
-		(if local1 (sWrapMusic sel_111: 1))
+		(if local1
+			(sWrapMusic sel_111: 1)
+		)
 		(DisposeScript 2480)
 		(super sel_111:)
 	)
-	
+
 	(method (sel_133 param1)
 		(if
 			(and
-				(gNarrator sel_203?)
+				(gNarrator sel_203:)
 				(or
 					(and
-						(== (param1 sel_31?) 4)
-						(proc999_5 (param1 sel_37?) 27 13)
+						(== (param1 sel_31:) 4)
+						(OneOf (param1 sel_37:) 27 13)
 					)
-					(and (== (param1 sel_31?) 1) (not (param1 sel_61?)))
+					(and (== (param1 sel_31:) 1) (not (param1 sel_61:)))
 				)
 			)
 			(param1 sel_73: 1)
-			(if gSel_201 (gSel_201 sel_111:))
+			(if gModelessDialog
+				(gModelessDialog sel_111:)
+			)
 		else
 			(super sel_133: param1)
 		)
 	)
-	
+
 	(method (sel_403)
-		(if (== global123 5)
-			(if (global2 sel_142?)
-				((global2 sel_142?) sel_65: sCaughtYou)
+		(if (== gAct 5)
+			(if (gCurRoom sel_142:)
+				((gCurRoom sel_142:) sel_65: sCaughtYou)
 			else
-				(global2 sel_146: sCaughtYou)
+				(gCurRoom sel_146: sCaughtYou)
 			)
 		)
 	)
@@ -136,9 +150,9 @@
 	(properties
 		sel_20 {sCaughtYou}
 	)
-	
-	(method (sel_144 theSel_29)
-		(switch (= sel_29 theSel_29)
+
+	(method (sel_144 param1)
+		(switch (= sel_29 param1)
 			(0
 				(oriley
 					sel_110:
@@ -158,14 +172,14 @@
 				(gEgo sel_312: PolyPath 219 179 self)
 			)
 			(3
-				(gSel_608 sel_40: 3 sel_3: 1 sel_99: 1 sel_39:)
+				(gGameMusic1 sel_40: 3 sel_3: 1 sel_99: 1 sel_39:)
 				(oriley sel_312: MoveTo 169 124 self)
 			)
 			(4
 				(oriley sel_312: PolyPath 196 173 self)
 			)
 			(5
-				(proc0_5 gEgo oriley)
+				(Face gEgo oriley)
 				(= sel_136 3)
 			)
 			(6
@@ -176,8 +190,8 @@
 				(gEgo sel_2: 858 sel_161: End self)
 			)
 			(8
-				(= global145 0)
-				(global2 sel_399: 99)
+				(= global145 0) ; "You came in thinking like a journalist, and you left with a skull full of mush."
+				(gCurRoom sel_399: 99)
 			)
 		)
 	)
@@ -187,22 +201,22 @@
 	(properties
 		sel_20 {sChaseSequence}
 	)
-	
+
 	(method (sel_57)
-		(if (and (== (self sel_29?) 12) local0)
+		(if (and (== (self sel_29:) 12) local0)
 			(gGame sel_587:)
 			(self sel_145:)
 		)
 		(super sel_57:)
 	)
-	
-	(method (sel_144 theSel_29)
-		(switch (= sel_29 theSel_29)
+
+	(method (sel_144 param1)
+		(switch (= sel_29 param1)
 			(0
-				(proc958_0 128 482)
+				(LoadMany rsVIEW 482)
 				(Load rsSOUND 480)
 				(gGameMusic2 sel_167:)
-				(gSel_608 sel_40: 482 sel_3: -1 sel_99: 1 sel_39:)
+				(gGameMusic1 sel_40: 482 sel_3: -1 sel_99: 1 sel_39:)
 				(gGame sel_587:)
 				(= sel_136 1)
 			)
@@ -211,7 +225,7 @@
 				(noise sel_40: 480 sel_99: 5 sel_39:)
 			)
 			(2
-				(if (proc0_2 46)
+				(if (IsFlag 46)
 					(self sel_146: sRatsFall self)
 				else
 					(= sel_136 1)
@@ -235,7 +249,7 @@
 			)
 			(5
 				(gEgo sel_155: 0 sel_161: End self)
-				(= gEgoSel_53 (gEgo sel_53?))
+				(= local2 (gEgo sel_53:))
 			)
 			(6
 				(gEgo
@@ -259,7 +273,7 @@
 				(steve sel_312: MoveTo 179 160 self)
 			)
 			(10
-				(gEgo sel_585: 426 sel_352: gEgoSel_53)
+				(gEgo sel_585: 426 sel_352: local2)
 				(signButton sel_303: 296 sel_304: 189 sel_311: 4 1)
 				(steve sel_153: 179 160 sel_161: End self)
 			)
@@ -287,21 +301,21 @@
 	(properties
 		sel_20 {sOrileyCaught}
 	)
-	
+
 	(method (sel_57)
 		(if
 			(and
-				(== (localSound sel_40?) 483)
-				(== (localSound sel_165?) -1)
-				(== (self sel_29?) 15)
+				(== (localSound sel_40:) 483)
+				(== (localSound sel_165:) -1)
+				(== (self sel_29:) 15)
 			)
 			(self sel_145:)
 		)
 		(super sel_57:)
 	)
-	
-	(method (sel_144 theSel_29)
-		(switch (= sel_29 theSel_29)
+
+	(method (sel_144 param1)
+		(switch (= sel_29 param1)
 			(0
 				(gGame sel_87: 1 138)
 				(rexMouth sel_161: End self)
@@ -318,7 +332,7 @@
 				(= sel_136 1)
 			)
 			(4
-				(gSel_608 sel_167:)
+				(gGameMusic1 sel_167:)
 				(oriley sel_155: 0 sel_312: MoveTo 181 121 self)
 				(rexMouth sel_161: End self)
 			)
@@ -335,7 +349,9 @@
 			(7
 				(oriley sel_161: CT 3 -1 self)
 			)
-			(8 (oriley sel_161: End self))
+			(8
+				(oriley sel_161: End self)
+			)
 			(9
 				(= sel_137 2)
 				(steve sel_316: 1)
@@ -343,22 +359,26 @@
 			(10
 				(gEgo sel_312: PolyPath 169 141 self)
 			)
-			(11 (= sel_137 1))
+			(11
+				(= sel_137 1)
+			)
 			(12
 				(gEgo sel_2: 483 sel_3: 13 sel_4: 0 sel_161: End self)
 			)
-			(13 (= sel_137 3))
+			(13
+				(= sel_137 3)
+			)
 			(14
-				((ScriptID 22 0) sel_57: 2)
+				((ScriptID 22 0) sel_57: 2) ; triggerAndClock
 				(gGame sel_87: 1 151)
-				(gSel_561 sel_119: 102)
-				(global2 sel_417: 485)
+				(gCast sel_119: 102)
+				(gCurRoom sel_417: 485)
 				(= sel_137 5)
 			)
 			(15 0)
 			(16
 				(WrapMusic sel_168: 0)
-				(global2 sel_399: 26)
+				(gCurRoom sel_399: 26)
 			)
 		)
 	)
@@ -368,12 +388,12 @@
 	(properties
 		sel_20 {sKillThem}
 	)
-	
-	(method (sel_144 theSel_29)
-		(switch (= sel_29 theSel_29)
+
+	(method (sel_144 param1)
+		(switch (= sel_29 param1)
 			(0
 				(gGame sel_587:)
-				(gSel_608 sel_40: 3 sel_3: 1 sel_99: 1 sel_39:)
+				(gGameMusic1 sel_40: 3 sel_3: 1 sel_99: 1 sel_39:)
 				(= sel_136 1)
 			)
 			(1
@@ -383,7 +403,9 @@
 				(oriley sel_155: 1 sel_153: 186 141 sel_216:)
 				(= sel_136 1)
 			)
-			(3 (oriley sel_161: End self))
+			(3
+				(oriley sel_161: End self)
+			)
 			(4
 				(noise sel_40: 52 sel_99: 5 sel_3: 1 sel_39:)
 				(oriley sel_155: 5 sel_153: 177 143 sel_161: End self)
@@ -399,24 +421,33 @@
 				)
 			)
 			(6
-				(gSel_608 sel_170:)
-				(cond 
-					((<= (gEgo sel_1?) 131) (oriley sel_155: 5))
-					(
-					(and (<= (gEgo sel_1?) 172) (>= (gEgo sel_0?) 161)) (oriley sel_155: 5))
-					(
-					(and (> (gEgo sel_1?) 172) (>= (gEgo sel_0?) 159)) (oriley sel_155: 6))
-					((> (gEgo sel_1?) 320) (oriley sel_155: 6))
-					(
-					(and (>= (gEgo sel_1?) 180) (<= (gEgo sel_0?) 141)) (oriley sel_155: 7))
-					(else (oriley sel_155: 8))
+				(gGameMusic1 sel_170:)
+				(cond
+					((<= (gEgo sel_1:) 131)
+						(oriley sel_155: 5)
+					)
+					((and (<= (gEgo sel_1:) 172) (>= (gEgo sel_0:) 161))
+						(oriley sel_155: 5)
+					)
+					((and (> (gEgo sel_1:) 172) (>= (gEgo sel_0:) 159))
+						(oriley sel_155: 6)
+					)
+					((> (gEgo sel_1:) 320)
+						(oriley sel_155: 6)
+					)
+					((and (>= (gEgo sel_1:) 180) (<= (gEgo sel_0:) 141))
+						(oriley sel_155: 7)
+					)
+					(else
+						(oriley sel_155: 8)
+					)
 				)
 				(oriley sel_161: End self)
 				(noise sel_40: 52 sel_99: 5 sel_3: 1 sel_39:)
 			)
 			(7
-				(= global145 10)
-				(global2 sel_399: 99)
+				(= global145 10) ; "You'll get nowhere with that holier-than-thou attitude."
+				(gCurRoom sel_399: 99)
 			)
 		)
 	)
@@ -426,9 +457,9 @@
 	(properties
 		sel_20 {sGetDinoBoneFromInset}
 	)
-	
-	(method (sel_144 theSel_29)
-		(switch (= sel_29 theSel_29)
+
+	(method (sel_144 param1)
+		(switch (= sel_29 param1)
 			(0
 				(inBone sel_111:)
 				(bone sel_111:)
@@ -437,7 +468,7 @@
 			(1
 				(gGame sel_87: 1 139)
 				(gEgo sel_350: 18)
-				((ScriptID 21 0) sel_57: 787)
+				((ScriptID 21 0) sel_57: 787) ; addCluesCode
 				(self sel_111:)
 			)
 		)
@@ -448,9 +479,9 @@
 	(properties
 		sel_20 {sGetDinoBone}
 	)
-	
-	(method (sel_144 theSel_29)
-		(switch (= sel_29 theSel_29)
+
+	(method (sel_144 param1)
+		(switch (= sel_29 param1)
 			(0
 				(gGame sel_587:)
 				(= sel_136 1)
@@ -459,7 +490,9 @@
 				(gEgo sel_2: 481 sel_155: 0 sel_4: 0 sel_161: CT 2 1 self)
 				(bone sel_111:)
 			)
-			(2 (gEgo sel_161: End self))
+			(2
+				(gEgo sel_161: End self)
+			)
 			(3
 				(gEgo sel_2: 831 sel_3: 7)
 				(= sel_136 1)
@@ -467,10 +500,10 @@
 			(4
 				(gGame sel_588:)
 				(gEgo
-					sel_585: (if (== global123 5) 426 else 831)
+					sel_585: (if (== gAct 5) 426 else 831)
 					sel_350: 18
 				)
-				((ScriptID 21 0) sel_57: 787)
+				((ScriptID 21 0) sel_57: 787) ; addCluesCode
 				(gGame sel_87: 1 139)
 				(self sel_111:)
 			)
@@ -482,12 +515,12 @@
 	(properties
 		sel_20 {sRexTalks}
 	)
-	
-	(method (sel_144 theSel_29)
-		(switch (= sel_29 theSel_29)
+
+	(method (sel_144 param1)
+		(switch (= sel_29 param1)
 			(0
 				(gUser sel_237: 0)
-				(gGame sel_197: global21)
+				(gGame sel_197: gWaitCursor)
 				(gEgo sel_253: 0)
 				(rexMouth sel_110:)
 				(= sel_137 2)
@@ -496,7 +529,7 @@
 				(gGame sel_87: 1 138)
 				(rexMouth sel_161: RandCycle)
 				(gNarrator sel_203: 1)
-				(gLb2Messager sel_295: 5 4 2 0 self)
+				(gMessager sel_295: 5 4 2 0 self)
 				(noise sel_40: 480 sel_99: 5 sel_39:)
 				(gEgo sel_312: PolyPath 255 184 self)
 			)
@@ -518,9 +551,9 @@
 	(properties
 		sel_20 {sRatsFall}
 	)
-	
-	(method (sel_144 theSel_29)
-		(switch (= sel_29 theSel_29)
+
+	(method (sel_144 param1)
+		(switch (= sel_29 param1)
 			(0
 				(rat1 sel_110:)
 				(= sel_136 1)
@@ -540,11 +573,7 @@
 			)
 			(3 0)
 			(4
-				(rat1
-					sel_155: 1
-					sel_153: 204 93
-					sel_312: MoveTo 185 157 self
-				)
+				(rat1 sel_155: 1 sel_153: 204 93 sel_312: MoveTo 185 157 self)
 				(rat2
 					sel_155: 8
 					sel_4: 1
@@ -561,7 +590,9 @@
 					sel_312: MoveTo 219 200 self
 				)
 			)
-			(7 (= sel_137 1))
+			(7
+				(= sel_137 1)
+			)
 			(8
 				(rat1 sel_111:)
 				(rat2 sel_111:)
@@ -575,9 +606,9 @@
 	(properties
 		sel_20 {sEnterNorth}
 	)
-	
-	(method (sel_144 theSel_29)
-		(switch (= sel_29 theSel_29)
+
+	(method (sel_144 param1)
+		(switch (= sel_29 param1)
 			(0
 				(gGame sel_587:)
 				(= sel_136 1)
@@ -597,9 +628,9 @@
 	(properties
 		sel_20 {sExitNorth}
 	)
-	
-	(method (sel_144 theSel_29)
-		(switch (= sel_29 theSel_29)
+
+	(method (sel_144 param1)
+		(switch (= sel_29 param1)
 			(0
 				(gGame sel_587:)
 				(= sel_136 1)
@@ -610,13 +641,13 @@
 			(2
 				(if
 					(and
-						(== global123 3)
-						(proc0_10 -20222 1)
-						(not (proc0_2 72))
+						(== gAct 3)
+						(TimeCheck $b102 1) ; can 11:15 pm occur?
+						(not (IsFlag 72))
 					)
-					(global2 sel_399: 435)
+					(gCurRoom sel_399: 435)
 				else
-					(global2 sel_399: (global2 sel_409?))
+					(gCurRoom sel_399: (gCurRoom sel_409:))
 				)
 			)
 		)
@@ -627,9 +658,9 @@
 	(properties
 		sel_20 {sAroundTRexCCW}
 	)
-	
-	(method (sel_144 theSel_29)
-		(switch (= sel_29 theSel_29)
+
+	(method (sel_144 param1)
+		(switch (= sel_29 param1)
 			(0
 				(gGame sel_587:)
 				(= sel_136 3)
@@ -652,9 +683,9 @@
 	(properties
 		sel_20 {sAroundTRexCW}
 	)
-	
-	(method (sel_144 theSel_29)
-		(switch (= sel_29 theSel_29)
+
+	(method (sel_144 param1)
+		(switch (= sel_29 param1)
 			(0
 				(gGame sel_587:)
 				(= sel_136 3)
@@ -677,9 +708,9 @@
 	(properties
 		sel_20 {sAroundDinoCCW}
 	)
-	
-	(method (sel_144 theSel_29)
-		(switch (= sel_29 theSel_29)
+
+	(method (sel_144 param1)
+		(switch (= sel_29 param1)
 			(0
 				(gGame sel_587:)
 				(= sel_136 3)
@@ -703,9 +734,9 @@
 	(properties
 		sel_20 {sAroundDinoCW}
 	)
-	
-	(method (sel_144 theSel_29)
-		(switch (= sel_29 theSel_29)
+
+	(method (sel_144 param1)
+		(switch (= sel_29 param1)
 			(0
 				(gGame sel_587:)
 				(= sel_136 3)
@@ -729,14 +760,14 @@
 	(properties
 		sel_20 {sLookBones}
 	)
-	
-	(method (sel_144 theSel_29)
-		(switch (= sel_29 theSel_29)
+
+	(method (sel_144 param1)
+		(switch (= sel_29 param1)
 			(0
-				(gLb2Messager sel_295: 7 1 0 0 self)
+				(gMessager sel_295: 7 1 0 0 self)
 			)
 			(1
-				(global2 sel_422: inBone)
+				(gCurRoom sel_422: inBone)
 				(self sel_111:)
 			)
 		)
@@ -767,7 +798,7 @@
 		sel_3 1
 		sel_14 16384
 	)
-	
+
 	(method (sel_300 param1)
 		(dinoBones sel_300: &rest)
 	)
@@ -787,24 +818,36 @@
 		sel_303 56
 		sel_304 152
 	)
-	
+
 	(method (sel_300 param1)
 		(switch param1
 			(1
-				(cond 
-					((gEgo sel_238: 18) (gLb2Messager sel_295: 7 1 1))
-					((== (global2 sel_142?) sChaseSequence) (gLb2Messager sel_295: 9 1 5))
-					(else (global2 sel_146: sLookBones))
+				(cond
+					((gEgo sel_238: 18)
+						(gMessager sel_295: 7 1 1)
+					)
+					((== (gCurRoom sel_142:) sChaseSequence)
+						(gMessager sel_295: 9 1 5)
+					)
+					(else
+						(gCurRoom sel_146: sLookBones)
+					)
 				)
 			)
 			(4
-				(cond 
-					((gEgo sel_238: 18) (gLb2Messager sel_295: 7 4 1))
-					((== (global2 sel_142?) sChaseSequence) (gLb2Messager sel_295: 9 4 5))
-					(else (global2 sel_146: sGetDinoBone))
+				(cond
+					((gEgo sel_238: 18)
+						(gMessager sel_295: 7 4 1)
+					)
+					((== (gCurRoom sel_142:) sChaseSequence)
+						(gMessager sel_295: 9 4 5)
+					)
+					(else
+						(gCurRoom sel_146: sGetDinoBone)
+					)
 				)
 			)
-			(else 
+			(else
 				(super sel_300: param1 &rest)
 			)
 		)
@@ -821,13 +864,13 @@
 		sel_214 15
 		sel_213 10
 	)
-	
+
 	(method (sel_300 param1)
 		(switch param1
 			(4
-				(global2 sel_146: sGetDinoBoneFromInset)
+				(gCurRoom sel_146: sGetDinoBoneFromInset)
 			)
-			(else 
+			(else
 				(super sel_300: param1 &rest)
 			)
 		)
@@ -914,17 +957,17 @@
 		sel_303 258
 		sel_304 181
 	)
-	
+
 	(method (sel_300 param1)
 		(switch param1
 			(4
-				(if (== (global2 sel_142?) sChaseSequence)
+				(if (== (gCurRoom sel_142:) sChaseSequence)
 					(= local0 1)
 				else
-					(global2 sel_146: sRexTalks)
+					(gCurRoom sel_146: sRexTalks)
 				)
 			)
-			(else 
+			(else
 				(super sel_300: param1 &rest)
 			)
 		)
@@ -975,9 +1018,9 @@
 		sel_203 1
 		sel_26 15
 	)
-	
+
 	(method (sel_110)
-		(= sel_30 gSel_30)
+		(= sel_30 gUserFont)
 		(super sel_110: &rest)
 	)
 )
@@ -992,7 +1035,7 @@
 	(properties
 		sel_20 {sWrapMusic}
 	)
-	
+
 	(method (sel_110)
 		(= sel_608 localSound)
 		(super sel_110: &rest)

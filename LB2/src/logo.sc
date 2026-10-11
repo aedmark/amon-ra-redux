@@ -1,12 +1,13 @@
 ;;; Sierra Script 1.0 - (do not remove this comment)
+;;; Decompiled by sluicebox
 (script# 105)
 (include sci.sh)
 (use Main)
-(use LBRoom)
-(use n958)
-(use Cycle)
-(use View)
-(use Obj)
+(use eRS)
+(use LoadMany)
+(use Motion)
+(use Actor)
+(use System)
 
 (public
 	logo 0
@@ -18,17 +19,17 @@
 		sel_408 105
 		sel_28 10
 	)
-	
+
 	(method (sel_110)
-		(proc958_0 128 108)
-		(proc958_0 129 780)
-		(proc958_0 132 105)
+		(LoadMany rsVIEW 108)
+		(LoadMany rsPIC 780)
+		(LoadMany rsSOUND 105)
 		(self sel_414: 92)
-		(global2 sel_417: 780)
+		(gCurRoom sel_417: 780)
 		(super sel_110:)
 		(sparkle sel_110:)
 		(gUser sel_237: 0 sel_347: 0)
-		(gSel_608 sel_40: 105 sel_99: 1 sel_3: 1 sel_39:)
+		(gGameMusic1 sel_40: 105 sel_99: 1 sel_3: 1 sel_39:)
 		(self sel_146: sRunIt)
 	)
 )
@@ -37,17 +38,17 @@
 	(properties
 		sel_20 {sRunIt}
 	)
-	
+
 	(method (sel_57)
 		(Palette palANIMATE 95 224 1)
 		(super sel_57: &rest)
 	)
-	
-	(method (sel_144 theSel_29)
-		(switch (= sel_29 theSel_29)
+
+	(method (sel_144 param1)
+		(switch (= sel_29 param1)
 			(0
 				(Palette palSET_INTENSITY 0 254 0)
-				(global2 sel_417: 105 10)
+				(gCurRoom sel_417: 105 10)
 				(= sel_136 1)
 			)
 			(1
@@ -55,7 +56,7 @@
 				(= sel_137 6)
 			)
 			(2
-				(if (== (gSel_608 sel_165?) 20)
+				(if (== (gGameMusic1 sel_165:) 20)
 					(sparkle sel_161: End self)
 				else
 					(-- sel_29)
@@ -63,7 +64,7 @@
 				)
 			)
 			(3
-				(if (== (gSel_608 sel_165?) 30)
+				(if (== (gGameMusic1 sel_165:) 30)
 					(sparkle
 						sel_1: 60
 						sel_0: 145
@@ -79,8 +80,8 @@
 			(4
 				(if
 					(and
-						(== (sparkle sel_4?) (sparkle sel_246:))
-						(== (gSel_608 sel_165?) -1)
+						(== (sparkle sel_4:) (sparkle sel_246:))
+						(== (gGameMusic1 sel_165:) -1)
 					)
 					(sparkle sel_111:)
 					(= sel_136 1)
@@ -90,7 +91,7 @@
 				)
 			)
 			(5
-				(global2 sel_399: 100)
+				(gCurRoom sel_399: 100)
 				(self sel_111:)
 			)
 		)

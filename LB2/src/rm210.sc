@@ -1,21 +1,22 @@
 ;;; Sierra Script 1.0 - (do not remove this comment)
+;;; Decompiled by sluicebox
 (script# 210)
 (include sci.sh)
 (use Main)
 (use Door)
-(use LBRoom)
+(use eRS)
 (use ExitFeature)
 (use Inset)
 (use Scaler)
 (use PolyPath)
 (use Polygon)
-(use CueObj)
-(use n958)
+(use Feature)
+(use LoadMany)
 (use Path)
 (use Sound)
-(use Cycle)
-(use View)
-(use Obj)
+(use Motion)
+(use Actor)
+(use System)
 
 (public
 	rm210 0
@@ -26,6 +27,7 @@
 	[local5 5] = [150 167 519 167 -32768]
 	[local10 5] = [127 172 370 172 -32768]
 )
+
 (instance rm210 of LBRoom
 	(properties
 		sel_20 {rm210}
@@ -36,27 +38,23 @@
 		sel_107 150
 		sel_108 112
 	)
-	
+
 	(method (sel_110)
-		(proc958_0 128 214 210 284 212 213 852 803)
-		(proc958_0 132 190 40 252)
+		(LoadMany rsVIEW 214 210 284 212 213 852 803)
+		(LoadMany rsSOUND 190 40 252)
 		(self sel_414: 91)
 		(gEgo sel_585: 803 sel_110:)
-		(switch gGSel_40
+		(switch gPrevRoomNum
 			(sel_409
 				(gEgo sel_349: 0 sel_253: 180 sel_320: 0 sel_585: 803)
 			)
 			(sel_411
-				(global2 sel_146: sOverControl)
+				(gCurRoom sel_146: sOverControl)
 			)
-			(else 
+			(else
 				(gEgo sel_1: 150 sel_0: 187)
-				(taxi
-					sel_320: Scaler 105 0 190 112
-					sel_110:
-					sel_153: 190 195
-				)
-				(global2 sel_146: sOutCab)
+				(taxi sel_320: Scaler 105 0 190 112 sel_110: sel_153: 190 195)
+				(gCurRoom sel_146: sOutCab)
 			)
 		)
 		(super sel_110:)
@@ -99,7 +97,23 @@
 				)
 				((Polygon sel_109:)
 					sel_31: 2
-					sel_110: 0 189 0 187 154 187 154 182 177 182 177 187 194 187 194 189
+					sel_110:
+						0
+						189
+						0
+						187
+						154
+						187
+						154
+						182
+						177
+						182
+						177
+						187
+						194
+						187
+						194
+						189
 					sel_117:
 				)
 		)
@@ -113,7 +127,7 @@
 					)
 			)
 			(luigi sel_311: 4 2 6 10 sel_110: sel_161: Fwd)
-			(gSel_608 sel_40: 190 sel_3: -1 sel_99: 1 sel_39:)
+			(gGameMusic1 sel_40: 190 sel_3: -1 sel_99: 1 sel_39:)
 		)
 		(frontDoor sel_110:)
 		(taxiSign sel_311: 4 sel_317:)
@@ -172,9 +186,9 @@
 		(tree sel_110:)
 		(southExitFeature sel_110:)
 	)
-	
+
 	(method (sel_111)
-		(gSel_608 sel_170:)
+		(gGameMusic1 sel_170:)
 		(DisposeScript 983)
 		(super sel_111:)
 	)
@@ -184,9 +198,9 @@
 	(properties
 		sel_20 {sOverControl}
 	)
-	
-	(method (sel_144 theSel_29)
-		(switch (= sel_29 theSel_29)
+
+	(method (sel_144 param1)
+		(switch (= sel_29 param1)
 			(0
 				(gGame sel_587:)
 				(gEgo sel_1: 134 sel_0: 185)
@@ -207,22 +221,22 @@
 	(properties
 		sel_20 {sOutCab}
 	)
-	
-	(method (sel_144 theSel_29)
-		(switch (= sel_29 theSel_29)
+
+	(method (sel_144 param1)
+		(switch (= sel_29 param1)
 			(0
 				(gGame sel_587:)
 				(= sel_136 1)
 			)
 			(1
-				((ScriptID 91 1) sel_168:)
+				((ScriptID 91 1) sel_168:) ; streetSounds
 				(gGameMusic2 sel_173: 2 224 2000)
 				(gEgo sel_153: 147 185)
 				(taxi sel_155: 4 sel_312: MoveTo 105 227 self)
 				(gGameMusic2 sel_170:)
 			)
 			(2
-				((ScriptID 91 1) sel_168: 0)
+				((ScriptID 91 1) sel_168: 0) ; streetSounds
 				(gGame sel_588:)
 				(taxi sel_111:)
 				(self sel_111:)
@@ -235,17 +249,15 @@
 	(properties
 		sel_20 {sMoveMan1}
 	)
-	
-	(method (sel_144 theSel_29)
-		(switch (= sel_29 theSel_29)
+
+	(method (sel_144 param1)
+		(switch (= sel_29 param1)
 			(0
-				(man1
-					sel_155: 1
-					sel_153: 194 175
-					sel_312: MoveTo 163 173 self
-				)
+				(man1 sel_155: 1 sel_153: 194 175 sel_312: MoveTo 163 173 self)
 			)
-			(1 (= sel_137 (Random 3 12)))
+			(1
+				(= sel_137 (Random 3 12))
+			)
 			(2
 				(man1
 					sel_153: -10 188
@@ -254,7 +266,10 @@
 					sel_312: MoveTo 198 176 self
 				)
 			)
-			(3 (= sel_29 -1) (= sel_136 1))
+			(3
+				(= sel_29 -1)
+				(= sel_136 1)
+			)
 		)
 	)
 )
@@ -263,10 +278,12 @@
 	(properties
 		sel_20 {sMovePerson2}
 	)
-	
-	(method (sel_144 theSel_29)
-		(switch (= sel_29 theSel_29)
-			(0 (= sel_137 (Random 5 10)))
+
+	(method (sel_144 param1)
+		(switch (= sel_29 param1)
+			(0
+				(= sel_137 (Random 5 10))
+			)
 			(1
 				(person2
 					sel_155: 8
@@ -278,7 +295,10 @@
 			(2
 				(person2 sel_3: 9 sel_312: MoveTo -20 189 self)
 			)
-			(3 (= sel_29 -1) (= sel_136 1))
+			(3
+				(= sel_29 -1)
+				(= sel_136 1)
+			)
 		)
 	)
 )
@@ -287,25 +307,22 @@
 	(properties
 		sel_20 {sMovePerson3}
 	)
-	
-	(method (sel_144 theSel_29)
-		(switch (= sel_29 theSel_29)
+
+	(method (sel_144 param1)
+		(switch (= sel_29 param1)
 			(0
-				(person3
-					sel_3: 4
-					sel_153: 209 176
-					sel_312: MoveTo 170 172 self
-				)
+				(person3 sel_3: 4 sel_153: 209 176 sel_312: MoveTo 170 172 self)
 			)
-			(1 (= sel_137 (Random 1 6)))
+			(1
+				(= sel_137 (Random 1 6))
+			)
 			(2
-				(person3
-					sel_3: 3
-					sel_153: -10 185
-					sel_312: MoveTo 208 176 self
-				)
+				(person3 sel_3: 3 sel_153: -10 185 sel_312: MoveTo 208 176 self)
 			)
-			(3 (= sel_29 -1) (= sel_136 1))
+			(3
+				(= sel_29 -1)
+				(= sel_136 1)
+			)
 		)
 	)
 )
@@ -314,9 +331,9 @@
 	(properties
 		sel_20 {sMovePerson8}
 	)
-	
-	(method (sel_144 theSel_29)
-		(switch (= sel_29 theSel_29)
+
+	(method (sel_144 param1)
+		(switch (= sel_29 param1)
 			(0
 				(person8
 					sel_3: 12
@@ -324,15 +341,16 @@
 					sel_312: MoveTo 158 173 self
 				)
 			)
-			(1 (= sel_137 (Random 5 10)))
-			(2
-				(person8
-					sel_153: -5 189
-					sel_3: 11
-					sel_312: MoveTo 202 176 self
-				)
+			(1
+				(= sel_137 (Random 5 10))
 			)
-			(3 (= sel_29 -1) (= sel_136 1))
+			(2
+				(person8 sel_153: -5 189 sel_3: 11 sel_312: MoveTo 202 176 self)
+			)
+			(3
+				(= sel_29 -1)
+				(= sel_136 1)
+			)
 		)
 	)
 )
@@ -341,31 +359,27 @@
 	(properties
 		sel_20 {sHailTaxi}
 	)
-	
-	(method (sel_144 theSel_29)
-		(switch (= sel_29 theSel_29)
+
+	(method (sel_144 param1)
+		(switch (= sel_29 param1)
 			(0
 				(gGameMusic2 sel_40: 252 sel_3: -1 sel_99: 1 sel_39: 20)
 				(gGame sel_587:)
-				((ScriptID 91 1) sel_168:)
+				((ScriptID 91 1) sel_168:) ; streetSounds
 				(= sel_136 1)
 			)
 			(1
 				(gEgo
 					sel_2: 852
 					sel_3: 1
-					sel_153: (- (gEgo sel_1?) 2) (- (gEgo sel_0?) 1)
+					sel_153: (- (gEgo sel_1:) 2) (- (gEgo sel_0:) 1)
 					sel_320: Scaler 102 0 190 112
 					sel_161: End self
 				)
 				(noise sel_40: 97 sel_39:)
 			)
 			(2
-				(taxi
-					sel_110:
-					sel_320: Scaler 116 0 190 112
-					sel_153: 378 181
-				)
+				(taxi sel_110: sel_320: Scaler 116 0 190 112 sel_153: 378 181)
 				(gGameMusic2 sel_173: 2 224 2000 sel_170: 127 5 5 0)
 				(= sel_136 1)
 			)
@@ -373,7 +387,11 @@
 				(taxi
 					sel_155: 4
 					sel_51: 4
-					sel_312: MoveTo (+ (taxiSign sel_1?) 25) (+ (taxiSign sel_0?) 10) self
+					sel_312:
+						MoveTo
+						(+ (taxiSign sel_1:) 25)
+						(+ (taxiSign sel_0:) 10)
+						self
 				)
 			)
 			(4
@@ -395,7 +413,7 @@
 			(8
 				(gGameMusic2 sel_173: 2 224 0)
 				(noise sel_40: 40 sel_99: 5 sel_39: self)
-				(if (gSel_561 sel_122: luigi)
+				(if (gCast sel_122: luigi)
 					(luigi sel_146: 0 sel_317:)
 				)
 			)
@@ -403,10 +421,16 @@
 				(gEgo
 					sel_2: 803
 					sel_155: 4
-					sel_312: MoveTo (+ (gEgo sel_1?) 17) (gEgo sel_0?) self
+					sel_312:
+						MoveTo
+						(+ (gEgo sel_1:) 17)
+						(gEgo sel_0:)
+						self
 				)
 			)
-			(10 (global2 sel_399: 250))
+			(10
+				(gCurRoom sel_399: 250)
+			)
 		)
 	)
 )
@@ -415,33 +439,28 @@
 	(properties
 		sel_20 {sGetSandwich}
 	)
-	
-	(method (sel_144 theSel_29)
-		(switch (= sel_29 theSel_29)
+
+	(method (sel_144 param1)
+		(switch (= sel_29 param1)
 			(0
 				(gGame sel_587:)
 				(= sel_136 1)
 			)
 			(1
-				(gLb2Messager sel_295: 3 10 0 1 self)
+				(gMessager sel_295: 3 10 0 1 self)
 				(luigi sel_153: 221 179 sel_161: 0)
 			)
 			(2
-				(gLb2Messager sel_295: 3 10 0 2 self)
+				(gMessager sel_295: 3 10 0 2 self)
 			)
 			(3
-				(luigi
-					sel_3: 1
-					sel_153: 217 180
-					sel_244: 10
-					sel_161: End self
-				)
+				(luigi sel_3: 1 sel_153: 217 180 sel_244: 10 sel_161: End self)
 			)
 			(4
-				(gLb2Messager sel_295: 3 10 0 3 self)
+				(gMessager sel_295: 3 10 0 3 self)
 			)
 			(5
-				(global2 sel_422: sandwichI self)
+				(gCurRoom sel_422: sandwichI self)
 			)
 			(6
 				(luigi sel_3: 0 sel_153: 221 179 sel_161: Fwd)
@@ -456,13 +475,13 @@
 	(properties
 		sel_20 {sGetSandwichInset}
 	)
-	
-	(method (sel_144 theSel_29)
-		(switch (= sel_29 theSel_29)
+
+	(method (sel_144 param1)
+		(switch (= sel_29 param1)
 			(0
 				(gEgo sel_351: 0)
-				((ScriptID 21 1) sel_57: 769)
-				((ScriptID 21 0) sel_57: 772)
+				((ScriptID 21 1) sel_57: 769) ; dropCluesCode
+				((ScriptID 21 0) sel_57: 772) ; addCluesCode
 				(sandwichI sel_111:)
 				(luigi sel_3: 0 sel_153: 217 180 sel_161: Fwd)
 				(= sel_136 2)
@@ -486,50 +505,67 @@
 		sel_2 214
 		sel_14 16384
 	)
-	
+
 	(method (sel_110)
 		(cart
-			sel_153: (- (self sel_1?) 13) (+ (self sel_0?) 5)
+			sel_153: (- (self sel_1:) 13) (+ (self sel_0:) 5)
 			sel_110:
 			sel_313:
 		)
 		(super sel_110:)
 	)
-	
+
 	(method (sel_111)
 		(cart sel_111:)
 		(super sel_111:)
 	)
-	
+
 	(method (sel_300 param1 &tmp temp0)
 		(switch param1
 			(10
-				(global2 sel_146: sGetSandwich)
+				(gCurRoom sel_146: sGetSandwich)
 			)
 			(2
-				(cond 
-					(
-					(and (not (gEgo sel_238: 0)) (not (proc0_2 28))) (proc0_3 28) (gLb2Messager sel_295: 3 2 1 0))
-					((not (gEgo sel_238: 0)) (gLb2Messager sel_295: 3 2 2 0))
-					((gEgo sel_238: 0) (gLb2Messager sel_295: 3 2 3 0))
+				(cond
+					((and (not (gEgo sel_238: 0)) (not (IsFlag 28)))
+						(SetFlag 28)
+						(gMessager sel_295: 3 2 1 0)
+					)
+					((not (gEgo sel_238: 0))
+						(gMessager sel_295: 3 2 2 0)
+					)
+					((gEgo sel_238: 0)
+						(gMessager sel_295: 3 2 3 0)
+					)
 				)
 			)
 			(6
-				(cond 
+				(cond
 					(
 						(and
-							(<= 256 (= temp0 (global2 sel_422: (ScriptID 20 0))))
+							(<=
+								256
+								(= temp0 (gCurRoom sel_422: (ScriptID 20 0))) ; inNotebook
+							)
 							(<= temp0 409)
 						)
-						(gLb2Messager sel_295: 3 6 4)
+						(gMessager sel_295: 3 6 4)
 					)
-					((and (<= 512 temp0) (<= temp0 665)) (gLb2Messager sel_295: 3 6 5))
-					((== temp0 772) (gLb2Messager sel_295: 3 6 8))
-					((and (<= 768 temp0) (<= temp0 921)) (gLb2Messager sel_295: 3 6 6))
-					((and (<= 1024 temp0) (<= temp0 1177)) (gLb2Messager sel_295: 3 6 7))
+					((and (<= 512 temp0) (<= temp0 665))
+						(gMessager sel_295: 3 6 5)
+					)
+					((== temp0 772)
+						(gMessager sel_295: 3 6 8)
+					)
+					((and (<= 768 temp0) (<= temp0 921))
+						(gMessager sel_295: 3 6 6)
+					)
+					((and (<= 1024 temp0) (<= temp0 1177))
+						(gMessager sel_295: 3 6 7)
+					)
 				)
 			)
-			(else 
+			(else
 				(super sel_300: param1 &rest)
 			)
 		)
@@ -556,18 +592,18 @@
 		sel_570 1
 		sel_213 2
 	)
-	
+
 	(method (sel_110)
 		(super sel_110: &rest)
 		(gGame sel_588:)
 	)
-	
+
 	(method (sel_300 param1)
 		(switch param1
 			(4
-				(global2 sel_146: sGetSandwichInset)
+				(gCurRoom sel_146: sGetSandwichInset)
 			)
-			(else 
+			(else
 				(super sel_300: param1 &rest)
 			)
 		)
@@ -603,11 +639,13 @@
 		sel_4 2
 		sel_14 16385
 	)
-	
+
 	(method (sel_300 param1)
 		(switch param1
-			(4 (global2 sel_146: sHailTaxi))
-			(else 
+			(4
+				(gCurRoom sel_146: sHailTaxi)
+			)
+			(else
 				(super sel_300: param1 &rest)
 			)
 		)
@@ -634,7 +672,7 @@
 		sel_2 212
 		sel_14 16384
 	)
-	
+
 	(method (sel_145)
 		(man1 sel_146: sMoveMan1)
 	)
@@ -650,7 +688,7 @@
 		sel_3 2
 		sel_14 16384
 	)
-	
+
 	(method (sel_145)
 		(person2 sel_146: sMovePerson2)
 	)
@@ -666,7 +704,7 @@
 		sel_3 3
 		sel_14 16384
 	)
-	
+
 	(method (sel_145)
 		(person3 sel_146: sMovePerson3)
 	)
@@ -683,7 +721,7 @@
 		sel_60 11
 		sel_14 16400
 	)
-	
+
 	(method (sel_145)
 		(person4 sel_153: 140 165 sel_312: person4Path self)
 	)
@@ -693,7 +731,7 @@
 	(properties
 		sel_20 {person4Path}
 	)
-	
+
 	(method (sel_64 param1)
 		(return [local0 param1])
 	)
@@ -710,7 +748,7 @@
 		sel_60 11
 		sel_14 16400
 	)
-	
+
 	(method (sel_145)
 		(person6 sel_153: 150 167 sel_312: person6Path self)
 	)
@@ -720,7 +758,7 @@
 	(properties
 		sel_20 {person6Path}
 	)
-	
+
 	(method (sel_64 param1)
 		(return [local5 param1])
 	)
@@ -736,7 +774,7 @@
 		sel_3 11
 		sel_14 16384
 	)
-	
+
 	(method (sel_145)
 		(person8 sel_146: sMovePerson8)
 	)
@@ -753,7 +791,7 @@
 		sel_60 14
 		sel_14 16400
 	)
-	
+
 	(method (sel_145)
 		(car sel_111:)
 	)
@@ -770,13 +808,9 @@
 		sel_4 3
 		sel_14 16384
 	)
-	
+
 	(method (sel_145)
-		(car2
-			sel_153: 127 172
-			sel_4: (Random 0 4)
-			sel_312: car2Path self
-		)
+		(car2 sel_153: 127 172 sel_4: (Random 0 4) sel_312: car2Path self)
 	)
 )
 
@@ -784,7 +818,7 @@
 	(properties
 		sel_20 {car2Path}
 	)
-	
+
 	(method (sel_64 param1)
 		(return [local10 param1])
 	)

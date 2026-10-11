@@ -1,9 +1,10 @@
 ;;; Sierra Script 1.0 - (do not remove this comment)
+;;; Decompiled by sluicebox
 (script# 2440)
 (include sci.sh)
 (use MuseumPoints)
 (use Polygon)
-(use Obj)
+(use System)
 
 (public
 	poly2440Code 0
@@ -11,17 +12,18 @@
 )
 
 (local
-	[theSel_87 34] = [0 0 319 0 319 170 264 163 254 156 209 148 215 140 264 124 242 127 216 137 200 144 172 140 139 96 100 139 76 146 6 147 0 189]
-	[theSel_87_2 8] = [29 177 102 167 102 182 34 188]
-	[theSel_87_3 8] = [111 145 134 145 133 153 112 152]
-	[theSel_87_4 8] = [131 158 175 158 175 167 126 166]
-	[theSel_87_5 8] = [201 189 210 182 263 184 274 189]
+	[local0 34] = [0 0 319 0 319 170 264 163 254 156 209 148 215 140 264 124 242 127 216 137 200 144 172 140 139 96 100 139 76 146 6 147 0 189]
+	[local34 8] = [29 177 102 167 102 182 34 188]
+	[local42 8] = [111 145 134 145 133 153 112 152]
+	[local50 8] = [131 158 175 158 175 167 126 166]
+	[local58 8] = [201 189 210 182 263 184 274 189]
 )
+
 (instance poly2440Code of Code
 	(properties
 		sel_20 {poly2440Code}
 	)
-	
+
 	(method (sel_57 param1)
 		(param1
 			sel_118:
@@ -38,11 +40,11 @@
 	(properties
 		sel_20 {poly2440a}
 	)
-	
+
 	(method (sel_110)
 		(= sel_31 2)
 		(= sel_86 17)
-		(= sel_87 @theSel_87)
+		(= sel_87 @local0)
 	)
 )
 
@@ -50,11 +52,11 @@
 	(properties
 		sel_20 {poly2440b}
 	)
-	
+
 	(method (sel_110)
 		(= sel_31 2)
 		(= sel_86 4)
-		(= sel_87 @theSel_87_2)
+		(= sel_87 @local34)
 	)
 )
 
@@ -62,11 +64,11 @@
 	(properties
 		sel_20 {poly2440c}
 	)
-	
+
 	(method (sel_110)
 		(= sel_31 2)
 		(= sel_86 4)
-		(= sel_87 @theSel_87_3)
+		(= sel_87 @local42)
 	)
 )
 
@@ -74,11 +76,11 @@
 	(properties
 		sel_20 {poly2440d}
 	)
-	
+
 	(method (sel_110)
 		(= sel_31 2)
 		(= sel_86 4)
-		(= sel_87 @theSel_87_4)
+		(= sel_87 @local50)
 	)
 )
 
@@ -86,11 +88,11 @@
 	(properties
 		sel_20 {poly2440e}
 	)
-	
+
 	(method (sel_110)
 		(= sel_31 2)
 		(= sel_86 4)
-		(= sel_87 @theSel_87_5)
+		(= sel_87 @local58)
 	)
 )
 

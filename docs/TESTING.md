@@ -63,7 +63,7 @@ For `P4-05`, retain a save immediately before each Script 26 act break. With eve
 
 ## Known limitations
 
-- **Never rebuild resources and never Compile All (D-028).** A rebuild replaces `RESOURCE.000`/`RESOURCE.MAP` with a 5-byte-map volume holding only loose files (healthy base: `RESOURCE.000` 5,035,964 bytes, `RESOURCE.MAP` 6,489 bytes; compare `LB2_vanilla/`). Compile All regenerates every patch and produced a build that stalls on a black screen at boot. Compile single scripts with `tools/compile.py` and boot the game before committing.
+- **Never rebuild resources and never Compile All against `LB2/` (D-028).** A rebuild replaces `RESOURCE.000`/`RESOURCE.MAP` with a 5-byte-map volume holding only loose files (healthy base: `RESOURCE.000` 5,035,964 bytes, `RESOURCE.MAP` 6,489 bytes; compare `LB2_vanilla/`). Compile All regenerates every patch and previously produced a build that stalls on a black screen at boot. Compile single scripts with `tools/compile.py` and boot the game before committing. P5-00's one full-tree compatibility check ran only in a disposable `/tmp` copy and its rebuilt archives were discarded.
 - A successful compile does not prove the game boots. After every compile, run `./tools/run_dosbox.sh` and confirm the intro appears.
 - SCI Companion under Wine writes lowercase patch names; `tools/compile.py` renames them, and `python3 tools/uppercase_patches.py` fixes stragglers without overwriting.
 - Headless DOSBox-X startup verifies initialization but does not traverse dialogue or animation branches; deterministic

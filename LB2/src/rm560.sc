@@ -1,19 +1,20 @@
 ;;; Sierra Script 1.0 - (do not remove this comment)
+;;; Decompiled by sluicebox
 (script# 560)
 (include sci.sh)
 (use Main)
 (use Door)
-(use LBRoom)
+(use eRS)
 (use Inset)
 (use Scaler)
 (use PolyPath)
-(use CueObj)
-(use n958)
+(use Feature)
+(use LoadMany)
 (use Timer)
 (use Sound)
-(use Cycle)
-(use View)
-(use Obj)
+(use Motion)
+(use Actor)
+(use System)
 
 (public
 	rm560 0
@@ -25,6 +26,7 @@
 	local1
 	local2
 )
+
 (instance rm560 of LBRoom
 	(properties
 		sel_20 {rm560}
@@ -33,53 +35,47 @@
 		sel_412 550
 		sel_107 0
 	)
-	
+
 	(method (sel_110)
-		(proc958_0 128 560 561 562 563 564 814 831)
-		(proc958_0 132 560 561 558 562 564 566 565 44 45 721 567)
-		(gEgo
-			sel_110:
-			sel_585: 831
-			sel_316:
-			sel_320: Scaler 130 0 190 0
-		)
+		(LoadMany rsVIEW 560 561 562 563 564 814 831)
+		(LoadMany rsSOUND 560 561 558 562 564 566 565 44 45 721 567)
+		(gEgo sel_110: sel_585: 831 sel_316: sel_320: Scaler 130 0 190 0)
 		(self sel_414: 90)
-		(switch gGSel_40
+		(switch gPrevRoomNum
 			(sel_409
-				(global2 sel_146: sEnterTunnel)
+				(gCurRoom sel_146: sEnterTunnel)
 			)
 			(sel_412
 				(gEgo sel_349: 0 sel_253: 270)
-				(if (proc999_5 global111 1 7)
+				(if (OneOf global111 1 7)
 					(++ global111)
 					(westDoor sel_590: 1)
 					(waterPrompt sel_162: waterPrompt 5)
 				)
 				(if
 					(or
-						(> global123 3)
-						(and (== global123 3) (proc0_10 -15612 1))
+						(> gAct 3)
+						(and (== gAct 3) (TimeCheck $c304 1)) ; can 12:45 am occur?
 					)
-					(proc0_5 gEgo deadWatney)
+					(Face gEgo deadWatney)
 					(gGame sel_87: 1 171)
 				)
 			)
-			(565 0 (gGame sel_588:))
-			(else 
+			(565
+				0
+				(gGame sel_588:)
+			)
+			(else
 				(gEgo sel_153: 20 180)
 				(gGame sel_588:)
 			)
 		)
 		(super sel_110:)
-		(if (== gGSel_40 sel_409)
+		(if (== gPrevRoomNum sel_409)
 			(Palette palSET_INTENSITY 0 255 100)
 		)
 		(gGameMusic2 sel_40: 565 sel_3: -1 sel_99: 1 sel_39:)
-		(if
-			(or
-				(> global123 3)
-				(and (== global123 3) (proc0_10 -15612 1))
-			)
+		(if (or (> gAct 3) (and (== gAct 3) (TimeCheck $c304 1))) ; can 12:45 am occur?
 			(deskClock sel_317:)
 			(deadWatney sel_317:)
 		else
@@ -92,7 +88,7 @@
 		(phone sel_317: sel_311: 4 1 8)
 		(safePic sel_110: sel_313: sel_311: 4 1 8)
 		(westDoor sel_110:)
-		(if (!= gGSel_40 sel_409)
+		(if (!= gPrevRoomNum sel_409)
 			(secretDoor sel_110: sel_313:)
 		)
 		(genericMask sel_110:)
@@ -114,33 +110,28 @@
 		(nightSky sel_110:)
 		(buildingBig sel_110:)
 		(buildingPointed sel_110:)
-		(if
-			(and
-				(== gGSel_40 565)
-				(== global123 3)
-				(not (proc0_10 -15612))
-			)
-			((ScriptID 22 0) sel_57: -15612)
-			((ScriptID 90 1) sel_619: 0 sel_620: -1)
+		(if (and (== gPrevRoomNum 565) (== gAct 3) (not (TimeCheck $c304))) ; has 12:45 am occurred?
+			((ScriptID 22 0) sel_57: -15612) ; triggerAndClock
+			((ScriptID 90 1) sel_619: 0 sel_620: -1) ; aCountess
 		)
 	)
-	
+
 	(method (sel_57)
 		(super sel_57:)
 		(if
 			(and
 				local0
-				(!= (gEgo sel_1?) 93)
-				(!= (gEgo sel_0?) 149)
-				(!= ((ScriptID 32 0) sel_620?) gSel_40)
+				(!= (gEgo sel_1:) 93)
+				(!= (gEgo sel_0:) 149)
+				(!= ((ScriptID 32 0) sel_620:) gCurRoomNum) ; aHeimlich
 			)
 			(= local0 0)
 			(self sel_146: sDumpSafe)
 		)
 	)
-	
+
 	(method (sel_111)
-		(proc958_0 0 561 562)
+		(LoadMany 0 561 562)
 		(gGameMusic2 sel_170:)
 		(super sel_111: &rest)
 	)
@@ -166,28 +157,30 @@
 		sel_599 0
 		sel_600 0
 	)
-	
+
 	(method (sel_110)
 		(super sel_110:)
 		(self sel_311: 4 38)
 	)
-	
+
 	(method (sel_605)
 		(switch global111
 			(2
-				(gLb2Messager sel_295: 1 38 1 0 0 1560)
+				(gMessager sel_295: 1 38 1 0 0 1560)
 				(++ global111)
 				(= sel_590 0)
 			)
 			(8
-				(gLb2Messager sel_295: 1 38 2 0 0 1560)
+				(gMessager sel_295: 1 38 2 0 0 1560)
 				(++ global111)
 				(= sel_590 0)
 			)
-			(else  (super sel_605: &rest))
+			(else
+				(super sel_605: &rest)
+			)
 		)
 	)
-	
+
 	(method (sel_606)
 		(super sel_606: 0 142 23 136 31 147 0 153)
 	)
@@ -217,16 +210,16 @@
 		sel_60 6
 		sel_14 16
 	)
-	
+
 	(method (sel_300 param1)
 		(switch param1
 			(4
-				(proc0_5 gEgo safePic)
-				((ScriptID 561 0) sel_110:)
+				(Face gEgo safePic)
+				((ScriptID 561 0) sel_110:) ; safePicture
 				(= local0 1)
 				(self sel_102:)
 			)
-			(else 
+			(else
 				(super sel_300: param1 &rest)
 			)
 		)
@@ -242,20 +235,22 @@
 		sel_60 11
 		sel_14 16400
 	)
-	
+
 	(method (sel_300 param1)
 		(switch param1
 			(1
 				(gGame sel_587:)
-				(proc0_5 gEgo deadWatney)
-				(global2 sel_399: 565)
+				(Face gEgo deadWatney)
+				(gCurRoom sel_399: 565)
 			)
 			(8
 				(gGame sel_587:)
-				(proc0_5 gEgo deadWatney)
-				(global2 sel_399: 565)
+				(Face gEgo deadWatney)
+				(gCurRoom sel_399: 565)
 			)
-			(else  (super sel_300: param1))
+			(else
+				(super sel_300: param1)
+			)
 		)
 	)
 )
@@ -289,12 +284,18 @@
 		sel_60 11
 		sel_14 16
 	)
-	
+
 	(method (sel_300 param1)
 		(switch param1
-			(1 (global2 sel_422: inClock))
-			(8 (global2 sel_422: inClock))
-			(else  (super sel_300: param1))
+			(1
+				(gCurRoom sel_422: inClock)
+			)
+			(8
+				(gCurRoom sel_422: inClock)
+			)
+			(else
+				(super sel_300: param1)
+			)
 		)
 	)
 )
@@ -313,16 +314,16 @@
 		sel_60 12
 		sel_14 16
 	)
-	
+
 	(method (sel_300 param1)
 		(switch param1
 			(1
-				(global2 sel_422: (ScriptID 562 0))
+				(gCurRoom sel_422: (ScriptID 562 0)) ; theIntercom
 			)
 			(8
-				(global2 sel_422: (ScriptID 562 0))
+				(gCurRoom sel_422: (ScriptID 562 0)) ; theIntercom
 			)
-			(else 
+			(else
 				(super sel_300: param1 &rest)
 			)
 		)
@@ -343,12 +344,18 @@
 		sel_60 12
 		sel_14 16
 	)
-	
+
 	(method (sel_300 param1)
 		(switch param1
-			(1 (global2 sel_422: inPhone))
-			(8 (global2 sel_422: inPhone))
-			(else  (super sel_300: param1))
+			(1
+				(gCurRoom sel_422: inPhone)
+			)
+			(8
+				(gCurRoom sel_422: inPhone)
+			)
+			(else
+				(super sel_300: param1)
+			)
 		)
 	)
 )
@@ -366,16 +373,18 @@
 		sel_60 12
 		sel_14 16
 	)
-	
+
 	(method (sel_300 param1)
 		(switch param1
 			(1
-				(global2 sel_422: inPhonelist)
+				(gCurRoom sel_422: inPhonelist)
 			)
 			(8
-				(global2 sel_422: inPhonelist)
+				(gCurRoom sel_422: inPhonelist)
 			)
-			(else  (super sel_300: param1))
+			(else
+				(super sel_300: param1)
+			)
 		)
 	)
 )
@@ -394,18 +403,20 @@
 		sel_60 12
 		sel_14 16
 	)
-	
+
 	(method (sel_300 param1)
 		(switch param1
 			(1
 				(++ local2)
-				(global2 sel_422: inCalendar)
+				(gCurRoom sel_422: inCalendar)
 			)
 			(8
 				(++ local2)
-				(global2 sel_422: inCalendar)
+				(gCurRoom sel_422: inCalendar)
 			)
-			(else  (super sel_300: param1))
+			(else
+				(super sel_300: param1)
+			)
 		)
 	)
 )
@@ -415,43 +426,43 @@
 		sel_20 {genericMask}
 		sel_0 2
 	)
-	
+
 	(method (sel_218 param1)
 		(if (super sel_218: param1)
-			(cond 
+			(cond
 				(
 					(and
-						(<= 34 gSel_1)
-						(<= gSel_1 50)
-						(<= 63 gSel_0)
-						(<= gSel_0 87)
+						(<= 34 gMouseX)
+						(<= gMouseX 50)
+						(<= 63 gMouseY)
+						(<= gMouseY 87)
 					)
 					(= sel_213 4)
 				)
 				(
 					(and
-						(<= 34 gSel_1)
-						(<= gSel_1 50)
-						(<= 94 gSel_0)
-						(<= gSel_0 126)
+						(<= 34 gMouseX)
+						(<= gMouseX 50)
+						(<= 94 gMouseY)
+						(<= gMouseY 126)
 					)
 					(= sel_213 5)
 				)
 				(
 					(and
-						(<= 265 gSel_1)
-						(<= gSel_1 282)
-						(<= 71 gSel_0)
-						(<= gSel_0 97)
+						(<= 265 gMouseX)
+						(<= gMouseX 282)
+						(<= 71 gMouseY)
+						(<= gMouseY 97)
 					)
 					(= sel_213 6)
 				)
 				(
 					(and
-						(<= 265 gSel_1)
-						(<= gSel_1 281)
-						(<= 101 gSel_0)
-						(<= gSel_0 127)
+						(<= 265 gMouseX)
+						(<= gMouseX 281)
+						(<= 101 gMouseY)
+						(<= gMouseY 127)
 					)
 					(= sel_213 7)
 				)
@@ -534,24 +545,26 @@
 		sel_303 78
 		sel_304 145
 	)
-	
+
 	(method (sel_300 param1)
 		(switch param1
 			(1
-				(if (or (gEgo sel_238: 33) (proc0_2 35))
-					(gLb2Messager sel_295: 15 1)
+				(if (or (gEgo sel_238: 33) (IsFlag 35))
+					(gMessager sel_295: 15 1)
 				else
-					(global2 sel_422: inCharcoal)
+					(gCurRoom sel_422: inCharcoal)
 				)
 			)
 			(4
-				(if (or (gEgo sel_238: 33) (proc0_2 35))
-					(gLb2Messager sel_295: 15 4 10)
+				(if (or (gEgo sel_238: 33) (IsFlag 35))
+					(gMessager sel_295: 15 4 10)
 				else
-					(gLb2Messager sel_295: 15 4 11)
+					(gMessager sel_295: 15 4 11)
 				)
 			)
-			(else  (super sel_300: param1))
+			(else
+				(super sel_300: param1)
+			)
 		)
 	)
 )
@@ -565,12 +578,8 @@
 	)
 
 	(method (sel_300 param1)
-		(if
-			(and
-				(not (gEgo sel_238: 24))
-				(proc999_5 param1 1 4 8)
-			)
-			(global2 sel_146: sGetBook)
+		(if (and (not (gEgo sel_238: 24)) (OneOf param1 1 4 8))
+			(gCurRoom sel_146: sGetBook)
 		else
 			(super sel_300: param1 &rest)
 		)
@@ -584,52 +593,52 @@
 		sel_303 184
 		sel_304 169
 	)
-	
+
 	(method (sel_218 param1)
 		(if (super sel_218: param1)
-			(cond 
+			(cond
 				(
 					(and
-						(<= 185 gSel_1)
-						(<= gSel_1 201)
-						(<= 80 gSel_0)
-						(<= gSel_0 92)
+						(<= 185 gMouseX)
+						(<= gMouseX 201)
+						(<= 80 gMouseY)
+						(<= gMouseY 92)
 					)
 					(= sel_213 17)
 				)
 				(
 					(and
-						(<= 203 gSel_1)
-						(<= gSel_1 241)
-						(<= 75 gSel_0)
-						(<= gSel_0 89)
+						(<= 203 gMouseX)
+						(<= gMouseX 241)
+						(<= 75 gMouseY)
+						(<= gMouseY 89)
 					)
 					(= sel_213 18)
 				)
 				(
 					(and
-						(<= 184 gSel_1)
-						(<= gSel_1 201)
-						(<= 94 gSel_0)
-						(<= gSel_0 107)
+						(<= 184 gMouseX)
+						(<= gMouseX 201)
+						(<= 94 gMouseY)
+						(<= gMouseY 107)
 					)
 					(= sel_213 19)
 				)
 				(
 					(and
-						(<= 203 gSel_1)
-						(<= gSel_1 240)
-						(<= 90 gSel_0)
-						(<= gSel_0 106)
+						(<= 203 gMouseX)
+						(<= gMouseX 240)
+						(<= 90 gMouseY)
+						(<= gMouseY 106)
 					)
 					(= sel_213 20)
 				)
 				(
 					(and
-						(<= 203 gSel_1)
-						(<= gSel_1 239)
-						(<= 108 gSel_0)
-						(<= gSel_0 120)
+						(<= 203 gMouseX)
+						(<= gMouseX 239)
+						(<= 108 gMouseY)
+						(<= gMouseY 120)
 					)
 					(= sel_213 21)
 				)
@@ -653,11 +662,15 @@
 		sel_303 214
 		sel_304 155
 	)
-	
+
 	(method (sel_300 param1)
 		(switch param1
-			(4 (global2 sel_146: sGetBook))
-			(else  (super sel_300: param1))
+			(4
+				(gCurRoom sel_146: sGetBook)
+			)
+			(else
+				(super sel_300: param1)
+			)
 		)
 	)
 )
@@ -680,54 +693,45 @@
 		sel_20 {genericStars}
 		sel_0 20
 	)
-	
+
 	(method (sel_218 param1)
-		(return
-			(if
-				(and
-					(<= 113 gSel_1)
-					(<= gSel_1 216)
-					(<= 4 gSel_0)
-					(<= gSel_0 41)
-				)
-				(if
-				(& (OnControl 4 (param1 sel_1?) (param1 sel_0?)) $1000)
-					(= sel_213 24)
-					(return 1)
-				)
-				(if
-				(& (OnControl 4 (param1 sel_1?) (param1 sel_0?)) $2000)
-					(= sel_213 25)
-					(return 1)
-				)
-				(if
-				(& (OnControl 4 (param1 sel_1?) (param1 sel_0?)) $8000)
-					(= sel_213 26)
-					(return 1)
-				)
-				(if
-				(& (OnControl 4 (param1 sel_1?) (param1 sel_0?)) $4000)
-					(= sel_213 27)
-					(return 1)
-				)
-				(if
-				(& (OnControl 4 (param1 sel_1?) (param1 sel_0?)) $0800)
-					(= sel_213 28)
-					(return 1)
-				)
-				(if
-				(& (OnControl 4 (param1 sel_1?) (param1 sel_0?)) $0400)
-					(= sel_213 29)
-					(return 1)
-				)
-				(if
-				(& (OnControl 4 (param1 sel_1?) (param1 sel_0?)) $0200)
-					(= sel_213 30)
-					(return 1)
-				)
-			else
-				0
+		(if
+			(and
+				(<= 113 gMouseX)
+				(<= gMouseX 216)
+				(<= 4 gMouseY)
+				(<= gMouseY 41)
 			)
+			(if (& (OnControl CONTROL (param1 sel_1:) (param1 sel_0:)) $1000)
+				(= sel_213 24)
+				(return 1)
+			)
+			(if (& (OnControl CONTROL (param1 sel_1:) (param1 sel_0:)) $2000)
+				(= sel_213 25)
+				(return 1)
+			)
+			(if (& (OnControl CONTROL (param1 sel_1:) (param1 sel_0:)) $8000)
+				(= sel_213 26)
+				(return 1)
+			)
+			(if (& (OnControl CONTROL (param1 sel_1:) (param1 sel_0:)) $4000)
+				(= sel_213 27)
+				(return 1)
+			)
+			(if (& (OnControl CONTROL (param1 sel_1:) (param1 sel_0:)) $0800)
+				(= sel_213 28)
+				(return 1)
+			)
+			(if (& (OnControl CONTROL (param1 sel_1:) (param1 sel_0:)) $0400)
+				(= sel_213 29)
+				(return 1)
+			)
+			(if (& (OnControl CONTROL (param1 sel_1:) (param1 sel_0:)) $0200)
+				(= sel_213 30)
+				(return 1)
+			)
+		else
+			0
 		)
 	)
 )
@@ -811,13 +815,15 @@
 		sel_570 1
 		sel_213 47
 	)
-	
+
 	(method (sel_300 param1)
 		(switch param1
 			(4
-				(global2 sel_422: inBookOpen)
+				(gCurRoom sel_422: inBookOpen)
 			)
-			(else  (super sel_300: param1))
+			(else
+				(super sel_300: param1)
+			)
 		)
 	)
 )
@@ -833,49 +839,55 @@
 		sel_570 1
 		sel_213 48
 	)
-	
+
 	(method (sel_110)
 		(super sel_110: &rest)
-		(if (not (gEgo sel_238: 24)) (file sel_110:))
+		(if (not (gEgo sel_238: 24))
+			(file sel_110:)
+		)
 	)
-	
+
 	(method (sel_111)
-		(if (IsObject file) (file sel_111: sel_81:))
+		(if (IsObject file)
+			(file sel_111: sel_81:)
+		)
 		(super sel_111:)
 	)
-	
+
 	(method (sel_300 param1)
 		(switch param1
 			(1
 				(if (gEgo sel_238: 24)
-					(gLb2Messager sel_295: sel_213 1 9)
+					(gMessager sel_295: sel_213 1 9)
 				else
 					(gGame sel_87: 0 183)
-					((ScriptID 21 0) sel_57: 793)
-					((ScriptID 21 0) sel_57: 272)
-					(gLb2Messager sel_295: sel_213 1 8)
+					((ScriptID 21 0) sel_57: 793) ; addCluesCode
+					((ScriptID 21 0) sel_57: 272) ; addCluesCode
+					(gMessager sel_295: sel_213 1 8)
 				)
 			)
 			(8
 				(if (gEgo sel_238: 24)
-					(gLb2Messager sel_295: sel_213 8 9)
+					(gMessager sel_295: sel_213 8 9)
 				else
-					(gLb2Messager sel_295: sel_213 8 8)
+					(gMessager sel_295: sel_213 8 8)
 				)
 			)
 			(4
 				(if (gEgo sel_238: 24)
-					(gLb2Messager sel_295: sel_213 4 9)
+					(gMessager sel_295: sel_213 4 9)
 				else
 					(gEgo sel_350: 24)
 					(gGame sel_87: 0 183)
-					((ScriptID 21 0) sel_57: 793)
-					((ScriptID 21 0) sel_57: 272)
+					((ScriptID 21 0) sel_57: 793) ; addCluesCode
+					((ScriptID 21 0) sel_57: 272) ; addCluesCode
 					(gGame sel_87: 1 172)
 					(file sel_111:)
 				)
 			)
-			(else  (super sel_300: param1))
+			(else
+				(super sel_300: param1)
+			)
 		)
 	)
 )
@@ -891,7 +903,7 @@
 		sel_60 14
 		sel_14 16
 	)
-	
+
 	(method (sel_300 param1)
 		(inBookOpen sel_300: param1 &rest)
 	)
@@ -907,14 +919,16 @@
 		sel_570 1
 		sel_213 45
 	)
-	
+
 	(method (sel_300 param1)
 		(switch param1
 			(4
-				(global2 sel_146: sGetCoal)
+				(gCurRoom sel_146: sGetCoal)
 				(self sel_111:)
 			)
-			(else  (super sel_300: param1))
+			(else
+				(super sel_300: param1)
+			)
 		)
 	)
 )
@@ -928,9 +942,11 @@
 		sel_570 1
 		sel_213 52
 	)
-	
+
 	(method (sel_110)
-		(if (proc0_2 3) (self sel_4: 1 sel_213: 53))
+		(if (IsFlag 3)
+			(self sel_4: 1 sel_213: 53)
+		)
 		(super sel_110: &rest)
 	)
 )
@@ -958,13 +974,15 @@
 		sel_570 1
 		sel_213 49
 	)
-	
+
 	(method (sel_300 param1)
 		(switch param1
 			(4
-				(global2 sel_422: inPhoneOpen)
+				(gCurRoom sel_422: inPhoneOpen)
 			)
-			(else  (super sel_300: param1))
+			(else
+				(super sel_300: param1)
+			)
 		)
 	)
 )
@@ -980,18 +998,22 @@
 		sel_570 1
 		sel_213 50
 	)
-	
+
 	(method (sel_300 param1)
 		(switch param1
-			(1 (gLb2Messager sel_295: 50 1))
+			(1
+				(gMessager sel_295: 50 1)
+			)
 			(8
 				(if local2
-					(gLb2Messager sel_295: sel_213 param1 6)
+					(gMessager sel_295: sel_213 param1 6)
 				else
-					(gLb2Messager sel_295: sel_213 param1 7)
+					(gMessager sel_295: sel_213 param1 7)
 				)
 			)
-			(else  (super sel_300: param1))
+			(else
+				(super sel_300: param1)
+			)
 		)
 	)
 )
@@ -1006,14 +1028,16 @@
 		sel_570 1
 		sel_213 51
 	)
-	
+
 	(method (sel_300 param1)
 		(switch param1
 			(1
 				(gGame sel_87: 1 173)
-				(gLb2Messager sel_295: 51 1)
+				(gMessager sel_295: 51 1)
 			)
-			(else  (super sel_300: param1))
+			(else
+				(super sel_300: param1)
+			)
 		)
 	)
 )
@@ -1022,9 +1046,9 @@
 	(properties
 		sel_20 {sGetCoal}
 	)
-	
-	(method (sel_144 theSel_29)
-		(switch (= sel_29 theSel_29)
+
+	(method (sel_144 param1)
+		(switch (= sel_29 param1)
 			(0
 				(gGame sel_587:)
 				(gEgo sel_585: 831 sel_312: PolyPath 79 143 self)
@@ -1044,14 +1068,16 @@
 				(gGame sel_87: 1 175)
 				(= sel_136 3)
 			)
-			(3 (gEgo sel_161: Beg self))
+			(3
+				(gEgo sel_161: Beg self)
+			)
 			(4
 				(gEgo sel_585: 831 sel_3: 1 sel_153: 79 143)
 				(= sel_136 1)
 			)
 			(5
 				(gEgo sel_350: 33)
-				((ScriptID 21 0) sel_57: 802)
+				((ScriptID 21 0) sel_57: 802) ; addCluesCode
 				(gGame sel_588:)
 				(self sel_111:)
 			)
@@ -1063,9 +1089,9 @@
 	(properties
 		sel_20 {sGetBook}
 	)
-	
-	(method (sel_144 theSel_29)
-		(switch (= sel_29 theSel_29)
+
+	(method (sel_144 param1)
+		(switch (= sel_29 param1)
 			(0
 				(gGame sel_587:)
 				(gEgo sel_585: 831 sel_312: PolyPath 214 155 self)
@@ -1084,14 +1110,18 @@
 					sel_161: End self
 				)
 			)
-			(3 (= sel_139 30))
+			(3
+				(= sel_139 30)
+			)
 			(4
 				(sFX sel_40: 566 sel_99: 5 sel_3: 1 sel_39:)
 				(gEgo sel_161: Beg self)
 			)
-			(5 (= sel_139 60))
+			(5
+				(= sel_139 60)
+			)
 			(6
-				(global2 sel_422: inBookClosed)
+				(gCurRoom sel_422: inBookClosed)
 				(gEgo sel_585: 831 sel_3: 0 sel_153: 214 155)
 				(= sel_136 1)
 			)
@@ -1107,17 +1137,13 @@
 	(properties
 		sel_20 {sDumpSafe}
 	)
-	
-	(method (sel_144 theSel_29)
-		(switch (= sel_29 theSel_29)
+
+	(method (sel_144 param1)
+		(switch (= sel_29 param1)
 			(0
-				(if
-					(==
-						((ScriptID 561 1) sel_4?)
-						((ScriptID 561 1) sel_246:)
-					)
+				(if (== ((ScriptID 561 1) sel_4:) ((ScriptID 561 1) sel_246:)) ; safeDoor, safeDoor
 					(gGame sel_587:)
-					((ScriptID 561 1) sel_63: 5 sel_161: Beg self)
+					((ScriptID 561 1) sel_63: 5 sel_161: Beg self) ; safeDoor
 					(= local1 1)
 				else
 					(= sel_136 1)
@@ -1133,8 +1159,8 @@
 				)
 			)
 			(2
-				(if (!= ((ScriptID 561 0) sel_4?) 0)
-					((ScriptID 561 0) sel_161: Beg self)
+				(if (!= ((ScriptID 561 0) sel_4:) 0) ; safePicture
+					((ScriptID 561 0) sel_161: Beg self) ; safePicture
 					(sFX sel_40: 45 sel_99: 5 sel_3: 1 sel_39:)
 				else
 					(= sel_136 1)
@@ -1142,7 +1168,7 @@
 			)
 			(3
 				(safePic sel_216:)
-				((ScriptID 561 0) sel_111:)
+				((ScriptID 561 0) sel_111:) ; safePicture
 				(= sel_136 2)
 			)
 			(4
@@ -1158,14 +1184,16 @@
 	(properties
 		sel_20 {sEnterTunnel}
 	)
-	
-	(method (sel_144 theSel_29)
-		(switch (= sel_29 theSel_29)
+
+	(method (sel_144 param1)
+		(switch (= sel_29 param1)
 			(0
 				(secretDoor sel_110:)
 				(= sel_136 2)
 			)
-			(1 (= sel_137 3))
+			(1
+				(= sel_137 3)
+			)
 			(2
 				(gEgo sel_1: 306 sel_0: 147 sel_63: 5 sel_253: 180)
 				(sFX sel_40: 721 sel_99: 5 sel_3: 1 sel_39:)
@@ -1193,9 +1221,9 @@
 	(properties
 		sel_20 {waterPrompt}
 	)
-	
+
 	(method (sel_145)
-		(gLb2Messager sel_295: 79)
+		(gMessager sel_295: 79)
 	)
 )
 

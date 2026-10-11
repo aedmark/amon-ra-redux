@@ -1,19 +1,20 @@
 ;;; Sierra Script 1.0 - (do not remove this comment)
+;;; Decompiled by sluicebox
 (script# 450)
 (include sci.sh)
 (use Main)
-(use LBRoom)
+(use eRS)
 (use ExitFeature)
 (use MuseumRgn)
 (use Scaler)
 (use PolyPath)
-(use CueObj)
+(use Feature)
 (use MoveFwd)
-(use n958)
+(use LoadMany)
 (use Sound)
-(use Cycle)
-(use View)
-(use Obj)
+(use Motion)
+(use Actor)
+(use System)
 
 (public
 	rm450 0
@@ -22,6 +23,7 @@
 (local
 	local0
 )
+
 (instance rm450 of LBRoom
 	(properties
 		sel_20 {rm450}
@@ -32,59 +34,59 @@
 		sel_107 172
 		sel_108 21
 	)
-	
+
 	(method (sel_110)
-		(proc958_0 128 454 423 452 858 424)
-		(proc958_0 132 450 600)
-		(proc958_0 130 2450)
+		(LoadMany rsVIEW 454 423 452 858 424)
+		(LoadMany rsSOUND 450 600)
+		(LoadMany rsSCRIPT 2450)
 		(gEgo
 			sel_110:
-			sel_585: (if (== global123 5) 426 else 831)
+			sel_585: (if (== gAct 5) 426 else 831)
 			sel_320: Scaler 131 30 190 21
 		)
-		(if (== global123 5)
+		(if (== gAct 5)
 			(self sel_414: 94)
-			(global2 sel_259: (List sel_109:))
-			((ScriptID 2450 0) sel_57: (global2 sel_259?))
+			(gCurRoom sel_259: (List sel_109:))
+			((ScriptID 2450 0) sel_57: (gCurRoom sel_259:)) ; poly2450Code
 		else
 			(self sel_414: 90)
 		)
-		(switch gGSel_40
+		(switch gPrevRoomNum
 			(sel_412
 				(gGame sel_588:)
 				(= sel_28 12)
 				(if
 					(and
-						(proc0_2 35)
-						(== global123 3)
-						(not (proc0_10 -24319 0))
+						(IsFlag 35)
+						(== gAct 3)
+						(not (TimeCheck $a101 0)) ; has 10:15 pm occurred?
 					)
-					((ScriptID 90 15) sel_137: 2)
+					((ScriptID 90 15) sel_137: 2) ; meetingTimer
 				)
 			)
 			(sel_411
 				(= sel_28 100)
 				(gEgo sel_1: 160 sel_0: 350)
 				(self sel_146: sComeOnIn)
-				(if (and (== global123 5) (proc0_2 90))
+				(if (and (== gAct 5) (IsFlag 90))
 					(self sel_403:)
 				)
 			)
-			(else 
+			(else
 				(gGame sel_588:)
 				(gEgo sel_1: 160 sel_0: 160)
 			)
 		)
 		(super sel_110:)
-		(if (and (!= gGSel_40 sel_412) (< global123 5))
-			(if (== global123 2)
-				(gSel_608 sel_168:)
+		(if (and (!= gPrevRoomNum sel_412) (< gAct 5))
+			(if (== gAct 2)
+				(gGameMusic1 sel_168:)
 			else
-				(WrapMusic sel_168:)
+					(WrapMusic sel_168:)
 			)
 			(gGameMusic2 sel_40: 450 sel_99: 1 sel_3: -1 sel_39:)
 		)
-		(if (proc0_2 38)
+		(if (IsFlag 38)
 			(shatteredGlass sel_110: sel_313: sel_311: 1 4 8)
 		else
 			(glass sel_110: sel_313: sel_311: 1 4 8)
@@ -101,46 +103,54 @@
 		(westExitFeature sel_110:)
 		(southExitFeature sel_110:)
 	)
-	
+
 	(method (sel_57)
 		(super sel_57:)
-		(cond 
+		(cond
 			(sel_142)
-			((proc0_1 gEgo 16) (self sel_146: sEgoLeaveSouth))
+			((StepOn gEgo 16)
+				(self sel_146: sEgoLeaveSouth)
+			)
 		)
 	)
-	
+
+	(method (sel_403)
+		(cond
+			((gEgo sel_142:)
+				((gEgo sel_142:)
+					sel_65: (if (== gAct 5) sDie else sLauraTutMeeting)
+				)
+			)
+			((gCurRoom sel_142:)
+				((gCurRoom sel_142:)
+					sel_65: (if (== gAct 5) sDie else sLauraTutMeeting)
+				)
+			)
+			(else
+				(gCurRoom
+					sel_146: (if (== gAct 5) sDie else sLauraTutMeeting)
+				)
+			)
+		)
+	)
+
 	(method (sel_111)
 		(DisposeScript 2450)
 		(super sel_111: &rest)
 	)
-	
+
 	(method (sel_399 param1)
-		(cond 
-			((and (== param1 sel_411) (== global123 2)) (gGameMusic2 sel_170: 1) (gSel_608 sel_168: 0))
-			((and (== param1 sel_411) (< global123 5)) (gGameMusic2 sel_170: 1) (WrapMusic sel_168: 0))
+		(cond
+			((and (== param1 sel_411) (== gAct 2))
+				(gGameMusic2 sel_170: 1)
+				(gGameMusic1 sel_168: 0)
+			)
+			((and (== param1 sel_411) (< gAct 5))
+				(gGameMusic2 sel_170: 1)
+					(WrapMusic sel_168: 0)
+			)
 		)
 		(super sel_399: param1)
-	)
-	
-	(method (sel_403)
-		(cond 
-			((gEgo sel_142?)
-				((gEgo sel_142?)
-					sel_65: (if (== global123 5) sDie else sLauraTutMeeting)
-				)
-			)
-			((global2 sel_142?)
-				((global2 sel_142?)
-					sel_65: (if (== global123 5) sDie else sLauraTutMeeting)
-				)
-			)
-			(else
-				(global2
-					sel_146: (if (== global123 5) sDie else sLauraTutMeeting)
-				)
-			)
-		)
 	)
 )
 
@@ -148,9 +158,9 @@
 	(properties
 		sel_20 {sComeOnIn}
 	)
-	
-	(method (sel_144 theSel_29)
-		(switch (= sel_29 theSel_29)
+
+	(method (sel_144 param1)
+		(switch (= sel_29 param1)
 			(0
 				(gGame sel_587:)
 				(= sel_136 1)
@@ -162,11 +172,11 @@
 			(2
 				(if
 					(and
-						(proc0_2 35)
-						(== global123 3)
-						(not (proc0_10 -24319 0))
+						(IsFlag 35)
+						(== gAct 3)
+						(not (TimeCheck $a101 0)) ; has 10:15 pm occurred?
 					)
-					((ScriptID 90 15) sel_137: 2)
+					((ScriptID 90 15) sel_137: 2) ; meetingTimer
 				)
 				(gGame sel_588:)
 				(self sel_111:)
@@ -179,9 +189,9 @@
 	(properties
 		sel_20 {sEgoLeaveSouth}
 	)
-	
-	(method (sel_144 theSel_29)
-		(switch (= sel_29 theSel_29)
+
+	(method (sel_144 param1)
+		(switch (= sel_29 param1)
 			(0
 				(gGame sel_587:)
 				(gEgo sel_55: 180)
@@ -190,7 +200,9 @@
 			(1
 				(gEgo sel_312: MoveFwd 75 self)
 			)
-			(2 (global2 sel_399: 448))
+			(2
+				(gCurRoom sel_399: 448)
+			)
 		)
 	)
 )
@@ -199,22 +211,24 @@
 	(properties
 		sel_20 {sLauraTutMeeting}
 	)
-	
+
 	(method (sel_57)
 		(super sel_57:)
-		(if (and (== sel_29 0) (not (global2 sel_365:)))
+		(if (and (== sel_29 0) (not (gCurRoom sel_365:)))
 			(self sel_145:)
 		)
 	)
-	
-	(method (sel_144 theSel_29)
-		(switch (= sel_29 theSel_29)
-			(0 (gGame sel_587:))
+
+	(method (sel_144 param1)
+		(switch (= sel_29 param1)
+			(0
+				(gGame sel_587:)
+			)
 			(1
-				(if (== ((ScriptID 90 4) sel_620?) 450)
-					((ScriptID 90 4) sel_619: 0 sel_146: 0)
+				(if (== ((ScriptID 90 4) sel_620:) 450) ; aTut
+					((ScriptID 90 4) sel_619: 0 sel_146: 0) ; aTut
 				else
-					((ScriptID 90 4)
+					((ScriptID 90 4) ; aTut
 						sel_182: 450
 						sel_2: 821
 						sel_1: 190
@@ -224,29 +238,31 @@
 				(= sel_136 2)
 			)
 			(2
-				((ScriptID 90 4) sel_312: PolyPath 190 160 self)
+				((ScriptID 90 4) sel_312: PolyPath 190 160 self) ; aTut
 			)
 			(3
 				(gEgo sel_312: PolyPath 160 160 self)
 			)
 			(4
-				(proc0_5 gEgo (ScriptID 90 4))
-				(proc0_5 (ScriptID 90 4) gEgo)
+				(Face gEgo (ScriptID 90 4)) ; aTut
+				(Face (ScriptID 90 4) gEgo) ; aTut
 				(= sel_136 4)
 			)
-			(5 (= sel_136 1))
+			(5
+				(= sel_136 1)
+			)
 			(6
-				(gLb2Messager sel_295: 1 0 1 0 self 1450)
+				(gMessager sel_295: 1 0 1 0 self 1450)
 			)
 			(7
-				((ScriptID 90 4)
+				((ScriptID 90 4) ; aTut
 					sel_664:
-						(if (!= ((ScriptID 90 4) sel_652?) 450)
-							((ScriptID 90 4) sel_652?)
+						(if (!= ((ScriptID 90 4) sel_652:) 450) ; aTut
+							((ScriptID 90 4) sel_652:) ; aTut
 						else
 							454
 						)
-						(ScriptID 90 4)
+						(ScriptID 90 4) ; aTut
 				)
 				(gGame sel_588:)
 				(self sel_111:)
@@ -259,9 +275,9 @@
 	(properties
 		sel_20 {sDie}
 	)
-	
-	(method (sel_144 theSel_29)
-		(switch (= sel_29 theSel_29)
+
+	(method (sel_144 param1)
+		(switch (= sel_29 param1)
 			(0
 				(gGame sel_587:)
 				(gEgo sel_312: PolyPath 160 160 self)
@@ -273,23 +289,25 @@
 					sel_161: Walk
 					sel_312: PolyPath 190 170 self
 				)
-				(gSel_608 sel_40: 3 sel_99: 1 sel_3: 1 sel_39:)
+				(gGameMusic1 sel_40: 3 sel_99: 1 sel_3: 1 sel_39:)
 			)
 			(2
 				(oriley sel_2: 424)
 				(oriley sel_4: 0)
-				(proc0_5 gEgo oriley)
-				(proc0_5 oriley gEgo)
+				(Face gEgo oriley)
+				(Face oriley gEgo)
 				(= sel_136 4)
 			)
-			(3 (oriley sel_161: End self))
+			(3
+				(oriley sel_161: End self)
+			)
 			(4
 				(thudSound sel_39:)
 				(gEgo sel_2: 858 sel_161: End self)
 			)
 			(5
-				(= global145 0)
-				(global2 sel_399: 99)
+				(= global145 0) ; "You came in thinking like a journalist, and you left with a skull full of mush."
+				(gCurRoom sel_399: 99)
 				(self sel_111:)
 			)
 		)
@@ -300,17 +318,17 @@
 	(properties
 		sel_20 {sBreakIt}
 	)
-	
+
 	(method (sel_57)
 		(super sel_57:)
-		(if (and (not local0) (== (glass sel_4?) 5))
+		(if (and (not local0) (== (glass sel_4:) 5))
 			(nGlass sel_39:)
 			(= local0 1)
 		)
 	)
-	
-	(method (sel_144 theSel_29)
-		(switch (= sel_29 theSel_29)
+
+	(method (sel_144 param1)
+		(switch (= sel_29 param1)
 			(0
 				(gGame sel_587:)
 				(gEgo sel_2: 452 sel_3: 2 sel_4: 0 sel_161: CT 2 1 self)
@@ -321,13 +339,13 @@
 			)
 			(2 0)
 			(3
-				(gLb2Messager sel_295: 4 4 1 0 self)
+				(gMessager sel_295: 4 4 1 0 self)
 			)
 			(4
 				(glass sel_111:)
 				(shatteredGlass sel_110: sel_313: sel_311: 1 4 8)
-				(proc0_3 38)
-				(gEgo sel_585: (if (== global123 5) 426 else 831))
+				(SetFlag 38)
+				(gEgo sel_585: (if (== gAct 5) 426 else 831))
 				(gEgo sel_3: 5)
 				(gGame sel_588:)
 				(self sel_111:)
@@ -357,101 +375,36 @@
 		sel_60 12
 		sel_14 16400
 	)
-	
+
 	(method (sel_300 param1)
-		(asm
-			lsp      param1
-			dup     
-			ldi      1
-			eq?     
-			bnt      code_0807
-			pushi    295
-			pushi    3
-			pushi    4
-			pushi    1
-			pushi    1
-			pushi    38
-			callb    proc0_2,  2
-			bnt      code_07ff
-			ldi      2
-code_07ff:
-			push    
-			lag      gLb2Messager
-			send     10
-			jmp      code_0887
-code_0807:
-			dup     
-			ldi      4
-			eq?     
-			bnt      code_0851
-			pushi    1
-			pushi    38
-			callb    proc0_2,  2
-			bnt      code_0826
-			pushi    #sel_295
-			pushi    3
-			pushi    4
-			dup     
-			pushi    2
-			lag      gLb2Messager
-			send     10
-			jmp      code_0887
-code_0826:
-			pushi    #sel_142
-			pushi    0
-			lag      global2
-			send     4
-			not     
-			bnt      code_0887
-			pushi    #sel_646
-			pushi    0
-			class    MuseumRgn
-			send     4
-			bnt      code_084b
-			pushi    #sel_146
-			pushi    1
-			lofsa    sBreakIt
-			push    
-			lag      global2
-			send     6
-			jmp      code_0887
-code_084b:
-			ldi      1
-			ret     
-			jmp      code_0887
-code_0851:
-			dup     
-			ldi      8
-			eq?     
-			bnt      code_087f
-			pushi    1
-			pushi    38
-			callb    proc0_2,  2
-			bnt      code_086f
-			pushi    #sel_295
-			pushi    3
-			pushi    4
-			pushi    8
-			pushi    2
-			lag      gLb2Messager
-			send     10
-			jmp      code_0887
-code_086f:
-			pushi    #sel_295
-			pushi    3
-			pushi    4
-			pushi    8
-			pushi    1
-			lag      gLb2Messager
-			send     10
-			jmp      code_0887
-code_087f:
-			class    1358
-			pToa     --UNKNOWN-PROP-NAME--
-			lap      param1
-code_0887:
-			toss    
-			ret     
+		(switch param1
+			(1
+				(gMessager sel_295: 4 1 (and (IsFlag 38) 2))
+			)
+			(4
+				(cond
+					((IsFlag 38)
+						(gMessager sel_295: 4 4 2)
+					)
+					((not (gCurRoom sel_142:))
+						(if (MuseumRgn sel_646:)
+							(gCurRoom sel_146: sBreakIt)
+						else
+							(return 1)
+						)
+					)
+				)
+			)
+			(8
+				(if (IsFlag 38)
+					(gMessager sel_295: 4 8 2)
+				else
+					(gMessager sel_295: 4 8 1)
+				)
+			)
+			(else
+				(super sel_300: param1 &rest)
+			)
 		)
 	)
 )
@@ -510,101 +463,36 @@ code_0887:
 		sel_303 58
 		sel_304 164
 	)
-	
+
 	(method (sel_300 param1)
-		(asm
-			lsp      param1
-			dup     
-			ldi      1
-			eq?     
-			bnt      code_08ab
-			pushi    295
-			pushi    3
-			pushi    4
-			pushi    1
-			pushi    1
-			pushi    38
-			callb    proc0_2,  2
-			bnt      code_08a3
-			ldi      2
-code_08a3:
-			push    
-			lag      gLb2Messager
-			send     10
-			jmp      code_092c
-code_08ab:
-			dup     
-			ldi      4
-			eq?     
-			bnt      code_08f5
-			pushi    1
-			pushi    38
-			callb    proc0_2,  2
-			bnt      code_08ca
-			pushi    #sel_295
-			pushi    3
-			pushi    4
-			dup     
-			pushi    2
-			lag      gLb2Messager
-			send     10
-			jmp      code_092c
-code_08ca:
-			pushi    #sel_142
-			pushi    0
-			lag      global2
-			send     4
-			not     
-			bnt      code_092c
-			pushi    #sel_646
-			pushi    0
-			class    MuseumRgn
-			send     4
-			bnt      code_08ef
-			pushi    #sel_146
-			pushi    1
-			lofsa    sBreakIt
-			push    
-			lag      global2
-			send     6
-			jmp      code_092c
-code_08ef:
-			ldi      1
-			ret     
-			jmp      code_092c
-code_08f5:
-			dup     
-			ldi      8
-			eq?     
-			bnt      code_0924
-			pushi    1
-			pushi    38
-			callb    proc0_2,  2
-			bnt      code_0914
-			pushi    #sel_295
-			pushi    3
-			pushi    4
-			pushi    8
-			pushi    2
-			lag      gLb2Messager
-			send     10
-			jmp      code_092c
-code_0914:
-			pushi    #sel_295
-			pushi    3
-			pushi    4
-			pushi    8
-			pushi    1
-			lag      gLb2Messager
-			send     10
-			jmp      code_092c
-code_0924:
-			class    1358
-			pToa     --UNKNOWN-PROP-NAME--
-			lap      param1
-code_092c:
-			toss    
-			ret     
+		(switch param1
+			(1
+				(gMessager sel_295: 4 1 (and (IsFlag 38) 2))
+			)
+			(4
+				(cond
+					((IsFlag 38)
+						(gMessager sel_295: 4 4 2)
+					)
+					((not (gCurRoom sel_142:))
+						(if (MuseumRgn sel_646:)
+							(gCurRoom sel_146: sBreakIt)
+						else
+							(return 1)
+						)
+					)
+				)
+			)
+			(8
+				(if (IsFlag 38)
+					(gMessager sel_295: 4 8 2)
+				else
+					(gMessager sel_295: 4 8 1)
+				)
+			)
+			(else
+				(super sel_300: param1 &rest)
+			)
 		)
 	)
 )

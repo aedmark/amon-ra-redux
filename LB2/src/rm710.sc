@@ -1,16 +1,17 @@
 ;;; Sierra Script 1.0 - (do not remove this comment)
+;;; Decompiled by sluicebox
 (script# 710)
 (include sci.sh)
 (use Main)
-(use LBRoom)
-(use RTRandCycle)
+(use eRS)
+(use Talker)
 (use PolyPath)
-(use n958)
+(use LoadMany)
 (use StopWalk)
 (use Sound)
-(use Cycle)
-(use View)
-(use Obj)
+(use Motion)
+(use Actor)
+(use System)
 
 (public
 	rm710 0
@@ -24,10 +25,10 @@
 		sel_408 710
 		sel_412 700
 	)
-	
+
 	(method (sel_110)
-		(global2 sel_259: (List sel_109:))
-		((ScriptID 2710 0) sel_57: (global2 sel_259?))
+		(gCurRoom sel_259: (List sel_109:))
+		((ScriptID 2710 0) sel_57: (gCurRoom sel_259:)) ; poly2710Code
 		(gEgo
 			sel_110:
 			sel_585: 831
@@ -38,8 +39,8 @@
 			sel_63: 10
 			sel_153: 63 155
 		)
-		(proc958_0 132 710 712 713 714 715 716)
-		(proc958_0 128 710 714 717 716 994)
+		(LoadMany rsSOUND 710 712 713 714 715 716)
+		(LoadMany rsVIEW 710 714 717 716 994)
 		(Load rsMESSAGE 710)
 		(Load rsFONT 69)
 		(super sel_110:)
@@ -51,9 +52,9 @@
 		(rameses sel_110: sel_161: StopWalk -1)
 		(bugsWithMeat sel_110: sel_155: 0 sel_161: Walk)
 		(ferret sel_110: sel_155: 5 sel_161: Walk)
-		(global2 sel_146: sEnterRoom)
+		(gCurRoom sel_146: sEnterRoom)
 	)
-	
+
 	(method (sel_111)
 		(DisposeScript 2710)
 		(super sel_111: &rest)
@@ -64,12 +65,12 @@
 	(properties
 		sel_20 {sEnterRoom}
 	)
-	
-	(method (sel_144 theSel_29)
-		(switch (= sel_29 theSel_29)
+
+	(method (sel_144 param1)
+		(switch (= sel_29 param1)
 			(0
 				(gGame sel_587:)
-				((ScriptID 22 0) sel_57: 1)
+				((ScriptID 22 0) sel_57: 1) ; triggerAndClock
 				(= sel_139 180)
 			)
 			(1
@@ -77,7 +78,7 @@
 			)
 			(2
 				(gEgo sel_63: -1)
-				(gLb2Messager sel_295: 1 0 0 1)
+				(gMessager sel_295: 1 0 0 1)
 				(= sel_136 1)
 			)
 			(3
@@ -88,8 +89,8 @@
 			(5
 				(WrapMusic sel_111:)
 				(wrapMusic2 sel_111: 1)
-				(proc958_0 132 636 637)
-				(proc958_0 128 635 632)
+				(LoadMany rsSOUND 636 637)
+				(LoadMany rsVIEW 635 632)
 				(Load rsPIC 716)
 				(= sel_139 60)
 			)
@@ -109,7 +110,7 @@
 				(= sel_136 35)
 			)
 			(8
-				(gLb2Messager sel_295: 1 0 0 2)
+				(gMessager sel_295: 1 0 0 2)
 				(sFXBeetles sel_39: 0 sel_170: 127 25 10 0)
 				(= sel_136 1)
 			)
@@ -127,12 +128,7 @@
 				(rameses sel_155: 3 sel_156: 2 sel_161: CT 6 1 self)
 			)
 			(12
-				(rameses
-					sel_2: 716
-					sel_155: 0
-					sel_156: 0
-					sel_161: End self
-				)
+				(rameses sel_2: 716 sel_155: 0 sel_156: 0 sel_161: End self)
 			)
 			(13
 				(tut sel_313:)
@@ -141,28 +137,32 @@
 			)
 			(14
 				(gGameMusic2 sel_40: 711 sel_99: 1 sel_3: -1 sel_39:)
-				(gSel_561 sel_119: 102)
-				(global2 sel_417: 716 9 sel_408: 716)
+				(gCast sel_119: 102)
+				(gCurRoom sel_417: 716 9 sel_408: 716)
 				(= sel_136 1)
 			)
-			(15 (= sel_139 120))
+			(15
+				(= sel_139 120)
+			)
 			(16
-				(gLb2Messager sel_295: 1 0 1)
+				(gMessager sel_295: 1 0 1)
 				(= sel_136 1)
 			)
-			(17 (= sel_139 120))
+			(17
+				(= sel_139 120)
+			)
 			(18
-				(gSel_561 sel_119: 216)
+				(gCast sel_119: 216)
 				(gEgo sel_111:)
 				(tut sel_111:)
 				(rameses sel_111:)
 				(sunnie1 sel_156: 0)
 				(sunnie2 sel_156: 0)
-				(global2 sel_417: 710 9 sel_408: 716)
+				(gCurRoom sel_417: 710 9 sel_408: 716)
 				(= sel_139 120)
 			)
 			(19
-				(global2 sel_399: 715)
+				(gCurRoom sel_399: 715)
 				(self sel_111:)
 			)
 		)
@@ -177,9 +177,9 @@
 		sel_2 717
 		sel_14 16385
 	)
-	
+
 	(method (sel_145)
-		(gLb2Messager sel_295: 1 0 0 3)
+		(gMessager sel_295: 1 0 0 3)
 		(self sel_2: 716 sel_155: 1 sel_156: 0 sel_161: End)
 	)
 )
@@ -228,14 +228,9 @@
 		sel_14 16385
 		sel_244 12
 	)
-	
+
 	(method (sel_145)
-		(self
-			sel_2: 716
-			sel_155: 2
-			sel_156: 0
-			sel_161: End sEnterRoom
-		)
+		(self sel_2: 716 sel_155: 2 sel_156: 0 sel_161: End sEnterRoom)
 	)
 )
 
@@ -249,14 +244,9 @@
 		sel_14 16385
 		sel_244 12
 	)
-	
+
 	(method (sel_145)
-		(self
-			sel_2: 716
-			sel_155: 3
-			sel_156: 0
-			sel_161: End sEnterRoom
-		)
+		(self sel_2: 716 sel_155: 3 sel_156: 0 sel_161: End sEnterRoom)
 	)
 )
 
@@ -272,12 +262,10 @@
 		sel_549 20
 		sel_550 60
 	)
-	
+
 	(method (sel_110)
-		(= sel_30 gSel_30)
-		(super
-			sel_110: ramesesBust ramesesEyes ramesesMouth &rest
-		)
+		(= sel_30 gUserFont)
+		(super sel_110: ramesesBust ramesesEyes ramesesMouth &rest)
 	)
 )
 
@@ -319,9 +307,9 @@
 		sel_26 15
 		sel_550 50
 	)
-	
+
 	(method (sel_110)
-		(= sel_30 gSel_30)
+		(= sel_30 gUserFont)
 		(super sel_110: lauraBust lauraEyes lauraMouth &rest)
 	)
 )
@@ -374,7 +362,7 @@
 	(properties
 		sel_20 {wrapMusic2}
 	)
-	
+
 	(method (sel_110)
 		(= sel_608 sWrap)
 		(super sel_110: &rest)

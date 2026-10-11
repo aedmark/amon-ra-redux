@@ -1,11 +1,12 @@
 ;;; Sierra Script 1.0 - (do not remove this comment)
+;;; Decompiled by sluicebox
 (script# 93)
 (include sci.sh)
 (use Main)
 (use n027)
 (use Game)
-(use View)
-(use Obj)
+(use Actor)
+(use System)
 
 (public
 	RotundaRgn 0
@@ -23,23 +24,15 @@
 	Ziggy 12
 )
 
-(procedure (proc93_2)
-)
+(procedure (proc93_2)) ; UNUSED
 
 (class RotundaRgn of Rgn
 	(properties
 		sel_20 {RotundaRgn}
-		sel_142 0
-		sel_40 0
-		sel_214 -1
-		sel_213 0
-		sel_135 0
-		sel_406 0
-		sel_407 0
 		sel_667 0
 		sel_668 0
 	)
-	
+
 	(method (sel_110)
 		(super sel_110:)
 		(= sel_667
@@ -72,31 +65,28 @@
 		(Yvette sel_305: 20 sel_311: 2 6)
 		(Ziggy sel_305: 20 sel_311: 2 6)
 	)
-	
+
 	(method (sel_399 param1)
-		(= sel_406
-			(proc999_5 param1 335 340 350 355 360 370 400)
-		)
+		(= sel_406 (OneOf param1 335 340 350 355 360 370 400))
 		(= sel_407 0)
-		(cond 
-			((not (== global123 2)))
-			((proc999_5 param1 335 400 420) (gSel_608 sel_170: 50 5 5 0))
-			((== param1 340) (gSel_608 sel_170: 100 5 5 0))
-		)
-		(if
-			(and
-				(& $7204 global124)
-				(not (proc0_2 71))
-				(== param1 360)
+		(cond
+			((not (== gAct 2)))
+			((OneOf param1 335 400 420)
+				(gGameMusic1 sel_170: 50 5 5 0)
 			)
-			(proc0_3 71)
+			((== param1 340)
+				(gGameMusic1 sel_170: 100 5 5 0)
+			)
+		)
+		(if (and (& $7204 gMustDos) (not (IsFlag 71)) (== param1 360))
+			(SetFlag 71)
 		)
 		(super sel_399: param1)
 	)
-	
+
 	(method (sel_403)
-		(= sel_668 gSel_40)
-		(global2 sel_399: 340)
+		(= sel_668 gCurRoomNum)
+		(gCurRoom sel_399: 340)
 	)
 )
 
@@ -108,27 +98,27 @@
 		sel_2 813
 		sel_14 16384
 	)
-	
+
 	(method (sel_300 param1 param2 &tmp temp0 temp1 temp2)
-		(if (proc999_5 param1 1 2)
-			((ScriptID 21 0) sel_57: 269)
+		(if (OneOf param1 1 2)
+			((ScriptID 21 0) sel_57: 269) ; addCluesCode
 		)
-		(cond 
+		(cond
 			((== param1 2)
-				(if (not (proc0_3 112))
-					(gLb2Messager sel_295: sel_213 param1 80 0 0 sel_214)
+				(if (not (SetFlag 112))
+					(gMessager sel_295: sel_213 param1 80 0 0 sel_214)
 				else
 					(super sel_300: param1)
 				)
 			)
-			((proc999_5 param1 6 14)
+			((OneOf param1 6 14)
 				(if
 					(==
 						(= temp0
 							(if (== argc 2)
 								param2
 							else
-								(global2 sel_422: (ScriptID 20 0))
+								(gCurRoom sel_422: (ScriptID 20 0)) ; inNotebook
 							)
 						)
 						-1
@@ -138,23 +128,36 @@
 				(= temp2 (& temp0 $00ff))
 				(= temp1
 					(switch (& temp0 $ff00)
-						(256 (+ temp2 1))
-						(512 (+ temp2 18))
-						(768 (+ temp2 26))
-						(1024 (+ temp2 61))
+						(256
+							(+ temp2 1)
+						)
+						(512
+							(+ temp2 18)
+						)
+						(768
+							(+ temp2 26)
+						)
+						(1024
+							(+ temp2 61)
+						)
 					)
 				)
-				(cond 
-					(
-					(not (Message msgGET sel_214 sel_213 6 temp1 1)) (gLb2Messager sel_295: sel_213 6 81 0 0 sel_214))
-					((proc27_0 0 [global296 (- temp1 2)]) (gLb2Messager sel_295: sel_213 6 1 0 0 sel_214))
+				(cond
+					((not (Message msgGET sel_214 sel_213 6 temp1 1))
+						(gMessager sel_295: sel_213 6 81 0 0 sel_214)
+					)
+					((proc27_0 0 [global296 (- temp1 2)])
+						(gMessager sel_295: sel_213 6 1 0 0 sel_214)
+					)
 					(else
-						(gLb2Messager sel_295: sel_213 6 temp1 0 0 sel_214)
+						(gMessager sel_295: sel_213 6 temp1 0 0 sel_214)
 						(proc27_1 0 @[global296 (- temp1 2)])
 					)
 				)
 			)
-			(else (super sel_300: param1))
+			(else
+				(super sel_300: param1)
+			)
 		)
 	)
 )
@@ -167,19 +170,19 @@
 		sel_2 814
 		sel_14 16384
 	)
-	
+
 	(method (sel_300 param1 param2 &tmp temp0 temp1 temp2)
-		(if (proc999_5 param1 1 2)
-			((ScriptID 21 0) sel_57: 265)
+		(if (OneOf param1 1 2)
+			((ScriptID 21 0) sel_57: 265) ; addCluesCode
 		)
-		(if (proc999_5 param1 6 14)
+		(if (OneOf param1 6 14)
 			(if
 				(==
 					(= temp0
 						(if (== argc 2)
 							param2
 						else
-							(global2 sel_422: (ScriptID 20 0))
+							(gCurRoom sel_422: (ScriptID 20 0)) ; inNotebook
 						)
 					)
 					-1
@@ -189,18 +192,29 @@
 			(= temp2 (& temp0 $00ff))
 			(= temp1
 				(switch (& temp0 $ff00)
-					(256 (+ temp2 1))
-					(512 (+ temp2 18))
-					(768 (+ temp2 26))
-					(1024 (+ temp2 61))
+					(256
+						(+ temp2 1)
+					)
+					(512
+						(+ temp2 18)
+					)
+					(768
+						(+ temp2 26)
+					)
+					(1024
+						(+ temp2 61)
+					)
 				)
 			)
-			(cond 
-				(
-				(not (Message msgGET sel_214 sel_213 6 temp1 1)) (gLb2Messager sel_295: sel_213 6 81 0 0 sel_214))
-				((proc27_0 2 [global296 (- temp1 2)]) (gLb2Messager sel_295: sel_213 6 1 0 0 sel_214))
+			(cond
+				((not (Message msgGET sel_214 sel_213 6 temp1 1))
+					(gMessager sel_295: sel_213 6 81 0 0 sel_214)
+				)
+				((proc27_0 2 [global296 (- temp1 2)])
+					(gMessager sel_295: sel_213 6 1 0 0 sel_214)
+				)
 				(else
-					(gLb2Messager sel_295: sel_213 6 temp1 0 0 sel_214)
+					(gMessager sel_295: sel_213 6 temp1 0 0 sel_214)
 					(proc27_1 2 @[global296 (- temp1 2)])
 				)
 			)
@@ -218,19 +232,19 @@
 		sel_2 820
 		sel_14 16384
 	)
-	
+
 	(method (sel_300 param1 param2 &tmp temp0 temp1 temp2)
-		(if (proc999_5 param1 1 2)
-			((ScriptID 21 0) sel_57: 270)
+		(if (OneOf param1 1 2)
+			((ScriptID 21 0) sel_57: 270) ; addCluesCode
 		)
-		(if (proc999_5 param1 6 14)
+		(if (OneOf param1 6 14)
 			(if
 				(==
 					(= temp0
 						(if (== argc 2)
 							param2
 						else
-							(global2 sel_422: (ScriptID 20 0))
+							(gCurRoom sel_422: (ScriptID 20 0)) ; inNotebook
 						)
 					)
 					-1
@@ -240,18 +254,29 @@
 			(= temp2 (& temp0 $00ff))
 			(= temp1
 				(switch (& temp0 $ff00)
-					(256 (+ temp2 1))
-					(512 (+ temp2 18))
-					(768 (+ temp2 26))
-					(1024 (+ temp2 61))
+					(256
+						(+ temp2 1)
+					)
+					(512
+						(+ temp2 18)
+					)
+					(768
+						(+ temp2 26)
+					)
+					(1024
+						(+ temp2 61)
+					)
 				)
 			)
-			(cond 
-				(
-				(not (Message msgGET sel_214 sel_213 6 temp1 1)) (gLb2Messager sel_295: sel_213 6 81 0 0 sel_214))
-				((proc27_0 3 [global296 (- temp1 2)]) (gLb2Messager sel_295: sel_213 6 1 0 0 sel_214))
+			(cond
+				((not (Message msgGET sel_214 sel_213 6 temp1 1))
+					(gMessager sel_295: sel_213 6 81 0 0 sel_214)
+				)
+				((proc27_0 3 [global296 (- temp1 2)])
+					(gMessager sel_295: sel_213 6 1 0 0 sel_214)
+				)
 				(else
-					(gLb2Messager sel_295: sel_213 6 temp1 0 0 sel_214)
+					(gMessager sel_295: sel_213 6 temp1 0 0 sel_214)
 					(proc27_1 3 @[global296 (- temp1 2)])
 				)
 			)
@@ -269,10 +294,10 @@
 		sel_2 819
 		sel_14 16384
 	)
-	
+
 	(method (sel_300 param1 param2 &tmp temp0 temp1 temp2)
-		(if (proc999_5 param1 1 2)
-			((ScriptID 21 0) sel_57: 260)
+		(if (OneOf param1 1 2)
+			((ScriptID 21 0) sel_57: 260) ; addCluesCode
 		)
 		(if (== param1 22)
 			(super sel_300: param1)
@@ -281,22 +306,22 @@
 			)
 			(return)
 		)
-		(cond 
+		(cond
 			((== param1 2)
-				(if (not (proc0_3 114))
-					(gLb2Messager sel_295: sel_213 param1 80 0 0 sel_214)
+				(if (not (SetFlag 114))
+					(gMessager sel_295: sel_213 param1 80 0 0 sel_214)
 				else
 					(super sel_300: param1)
 				)
 			)
-			((proc999_5 param1 6 14)
+			((OneOf param1 6 14)
 				(if
 					(==
 						(= temp0
 							(if (== argc 2)
 								param2
 							else
-								(global2 sel_422: (ScriptID 20 0))
+								(gCurRoom sel_422: (ScriptID 20 0)) ; inNotebook
 							)
 						)
 						-1
@@ -306,129 +331,159 @@
 				(= temp2 (& temp0 $00ff))
 				(= temp1
 					(switch (& temp0 $ff00)
-						(256 (+ temp2 1))
-						(512 (+ temp2 18))
-						(768 (+ temp2 26))
-						(1024 (+ temp2 61))
+						(256
+							(+ temp2 1)
+						)
+						(512
+							(+ temp2 18)
+						)
+						(768
+							(+ temp2 26)
+						)
+						(1024
+							(+ temp2 61)
+						)
 					)
 				)
 				(switch temp0
 					(258
-						(cond 
-							((proc0_2 134)
+						(cond
+							((IsFlag 134)
 								(if (proc27_0 4 global364)
-									(gLb2Messager sel_295: sel_213 6 1 0 0 sel_214)
+									(gMessager sel_295: sel_213 6 1 0 0 sel_214)
 								else
-									(gLb2Messager sel_295: sel_213 6 72 0 0 sel_214)
+									(gMessager sel_295: sel_213 6 72 0 0 sel_214)
 									(proc27_1 4 @global364)
 								)
 							)
-							((proc27_0 4 global297) (gLb2Messager sel_295: sel_213 6 1 0 0 sel_214))
+							((proc27_0 4 global297)
+								(gMessager sel_295: sel_213 6 1 0 0 sel_214)
+							)
 							(else
-								(gLb2Messager sel_295: sel_213 6 3 0 0 sel_214)
+								(gMessager sel_295: sel_213 6 3 0 0 sel_214)
 								(proc27_1 4 @global297)
 							)
 						)
 					)
 					(259
-						(cond 
-							((or (proc0_2 171) (proc0_2 12))
+						(cond
+							((or (IsFlag 171) (IsFlag 12))
 								(if (proc27_0 4 global363)
-									(gLb2Messager sel_295: sel_213 6 1 0 0 sel_214)
+									(gMessager sel_295: sel_213 6 1 0 0 sel_214)
 								else
-									(gLb2Messager sel_295: sel_213 6 69 0 0 sel_214)
+									(gMessager sel_295: sel_213 6 69 0 0 sel_214)
 									(proc27_1 4 @global363)
 								)
 							)
-							((proc27_0 4 global298) (gLb2Messager sel_295: sel_213 6 1 0 0 sel_214))
+							((proc27_0 4 global298)
+								(gMessager sel_295: sel_213 6 1 0 0 sel_214)
+							)
 							(else
-								(gLb2Messager sel_295: sel_213 6 4 0 0 sel_214)
+								(gMessager sel_295: sel_213 6 4 0 0 sel_214)
 								(proc27_1 4 @global298)
 							)
 						)
 					)
 					(264
-						(cond 
-							((or (proc0_2 143) (proc0_2 72))
+						(cond
+							((or (IsFlag 143) (IsFlag 72))
 								(if (proc27_0 4 global366)
-									(gLb2Messager sel_295: sel_213 6 1 0 0 sel_214)
+									(gMessager sel_295: sel_213 6 1 0 0 sel_214)
 								else
-									(gLb2Messager sel_295: sel_213 6 74 0 0 sel_214)
+									(gMessager sel_295: sel_213 6 74 0 0 sel_214)
 									(proc27_1 4 @global366)
 								)
 							)
-							((proc27_0 4 global303) (gLb2Messager sel_295: sel_213 6 1 0 0 sel_214))
+							((proc27_0 4 global303)
+								(gMessager sel_295: sel_213 6 1 0 0 sel_214)
+							)
 							(else
-								(gLb2Messager sel_295: sel_213 6 9 0 0 sel_214)
+								(gMessager sel_295: sel_213 6 9 0 0 sel_214)
 								(proc27_1 4 @global303)
 							)
 						)
 					)
 					(266
-						(cond 
-							((or (proc0_2 161) (proc0_2 68))
+						(cond
+							((or (IsFlag 161) (IsFlag 68))
 								(if (proc27_0 4 global367)
-									(gLb2Messager sel_295: sel_213 6 1 0 0 sel_214)
+									(gMessager sel_295: sel_213 6 1 0 0 sel_214)
 								else
-									(gLb2Messager sel_295: sel_213 6 73 0 0 sel_214)
+									(gMessager sel_295: sel_213 6 73 0 0 sel_214)
 									(proc27_1 4 @global367)
 								)
 							)
-							((proc27_0 4 global305) (gLb2Messager sel_295: sel_213 6 1 0 0 sel_214))
+							((proc27_0 4 global305)
+								(gMessager sel_295: sel_213 6 1 0 0 sel_214)
+							)
 							(else
-								(gLb2Messager sel_295: sel_213 6 11 0 0 sel_214)
+								(gMessager sel_295: sel_213 6 11 0 0 sel_214)
 								(proc27_1 4 @global305)
 							)
 						)
 					)
 					(267
-						(cond 
-							((or (proc0_2 158) (proc0_2 67))
+						(cond
+							((or (IsFlag 158) (IsFlag 67))
 								(if (proc27_0 4 global365)
-									(gLb2Messager sel_295: sel_213 6 1 0 0 sel_214)
+									(gMessager sel_295: sel_213 6 1 0 0 sel_214)
 								else
-									(gLb2Messager sel_295: sel_213 6 71 0 0 sel_214)
+									(gMessager sel_295: sel_213 6 71 0 0 sel_214)
 									(proc27_1 4 @global365)
 								)
 							)
-							((proc27_0 4 global306) (gLb2Messager sel_295: sel_213 6 1 0 0 sel_214))
+							((proc27_0 4 global306)
+								(gMessager sel_295: sel_213 6 1 0 0 sel_214)
+							)
 							(else
-								(gLb2Messager sel_295: sel_213 6 12 0 0 sel_214)
+								(gMessager sel_295: sel_213 6 12 0 0 sel_214)
 								(proc27_1 4 @global306)
 							)
 						)
 					)
 					(780
-						(cond 
-							((or (proc0_2 155) (proc0_2 22) (gEgo sel_238: 11))
+						(cond
+							(
+								(or
+									(IsFlag 155)
+									(IsFlag 22)
+									(gEgo sel_238: 11)
+								)
 								(if (proc27_0 4 global368)
-									(gLb2Messager sel_295: sel_213 6 1 0 0 sel_214)
+									(gMessager sel_295: sel_213 6 1 0 0 sel_214)
 								else
-									(gLb2Messager sel_295: sel_213 6 75 0 0 sel_214)
+									(gMessager sel_295: sel_213 6 75 0 0 sel_214)
 									(proc27_1 4 @global368)
 								)
 							)
-							((proc27_0 4 global332) (gLb2Messager sel_295: sel_213 6 1 0 0 sel_214))
+							((proc27_0 4 global332)
+								(gMessager sel_295: sel_213 6 1 0 0 sel_214)
+							)
 							(else
-								(gLb2Messager sel_295: sel_213 6 38 0 0 sel_214)
+								(gMessager sel_295: sel_213 6 38 0 0 sel_214)
 								(proc27_1 4 @global332)
 							)
 						)
 					)
-					(else 
-						(cond 
-							(
-							(not (Message msgGET sel_214 sel_213 6 temp1 1)) (gLb2Messager sel_295: sel_213 6 81 0 0 sel_214))
-							((proc27_0 4 [global296 (- temp1 2)]) (gLb2Messager sel_295: sel_213 6 1 0 0 sel_214))
+					(else
+						(cond
+							((not (Message msgGET sel_214 sel_213 6 temp1 1))
+								(gMessager sel_295: sel_213 6 81 0 0 sel_214)
+							)
+							((proc27_0 4 [global296 (- temp1 2)])
+								(gMessager sel_295: sel_213 6 1 0 0 sel_214)
+							)
 							(else
-								(gLb2Messager sel_295: sel_213 6 temp1 0 0 sel_214)
+								(gMessager sel_295: sel_213 6 temp1 0 0 sel_214)
 								(proc27_1 4 @[global296 (- temp1 2)])
 							)
 						)
 					)
 				)
 			)
-			(else (super sel_300: param1))
+			(else
+				(super sel_300: param1)
+			)
 		)
 	)
 )
@@ -441,27 +496,27 @@
 		sel_2 822
 		sel_14 16384
 	)
-	
+
 	(method (sel_300 param1 param2 &tmp temp0 temp1 temp2)
-		(if (proc999_5 param1 1 2)
-			((ScriptID 21 0) sel_57: 258)
+		(if (OneOf param1 1 2)
+			((ScriptID 21 0) sel_57: 258) ; addCluesCode
 		)
-		(cond 
+		(cond
 			((== param1 2)
-				(if (not (proc0_3 110))
-					(gLb2Messager sel_295: sel_213 param1 80 0 0 sel_214)
+				(if (not (SetFlag 110))
+					(gMessager sel_295: sel_213 param1 80 0 0 sel_214)
 				else
 					(super sel_300: param1)
 				)
 			)
-			((proc999_5 param1 6 14)
+			((OneOf param1 6 14)
 				(if
 					(==
 						(= temp0
 							(if (== argc 2)
 								param2
 							else
-								(global2 sel_422: (ScriptID 20 0))
+								(gCurRoom sel_422: (ScriptID 20 0)) ; inNotebook
 							)
 						)
 						-1
@@ -471,23 +526,36 @@
 				(= temp2 (& temp0 $00ff))
 				(= temp1
 					(switch (& temp0 $ff00)
-						(256 (+ temp2 1))
-						(512 (+ temp2 18))
-						(768 (+ temp2 26))
-						(1024 (+ temp2 61))
+						(256
+							(+ temp2 1)
+						)
+						(512
+							(+ temp2 18)
+						)
+						(768
+							(+ temp2 26)
+						)
+						(1024
+							(+ temp2 61)
+						)
 					)
 				)
-				(cond 
-					(
-					(not (Message msgGET sel_214 sel_213 6 temp1 1)) (gLb2Messager sel_295: sel_213 6 81 0 0 sel_214))
-					((proc27_0 5 [global296 (- temp1 2)]) (gLb2Messager sel_295: sel_213 6 1 0 0 sel_214))
+				(cond
+					((not (Message msgGET sel_214 sel_213 6 temp1 1))
+						(gMessager sel_295: sel_213 6 81 0 0 sel_214)
+					)
+					((proc27_0 5 [global296 (- temp1 2)])
+						(gMessager sel_295: sel_213 6 1 0 0 sel_214)
+					)
 					(else
-						(gLb2Messager sel_295: sel_213 6 temp1 0 0 sel_214)
+						(gMessager sel_295: sel_213 6 temp1 0 0 sel_214)
 						(proc27_1 5 @[global296 (- temp1 2)])
 					)
 				)
 			)
-			(else (super sel_300: param1))
+			(else
+				(super sel_300: param1)
+			)
 		)
 	)
 )
@@ -500,27 +568,27 @@
 		sel_2 823
 		sel_14 16384
 	)
-	
+
 	(method (sel_300 param1 param2 &tmp temp0 temp1 temp2)
-		(if (proc999_5 param1 1 2)
-			((ScriptID 21 0) sel_57: 268)
+		(if (OneOf param1 1 2)
+			((ScriptID 21 0) sel_57: 268) ; addCluesCode
 		)
-		(cond 
+		(cond
 			((== param1 2)
-				(if (not (proc0_3 115))
-					(gLb2Messager sel_295: sel_213 param1 80 0 0 sel_214)
+				(if (not (SetFlag 115))
+					(gMessager sel_295: sel_213 param1 80 0 0 sel_214)
 				else
 					(super sel_300: param1)
 				)
 			)
-			((proc999_5 param1 6 14)
+			((OneOf param1 6 14)
 				(if
 					(==
 						(= temp0
 							(if (== argc 2)
 								param2
 							else
-								(global2 sel_422: (ScriptID 20 0))
+								(gCurRoom sel_422: (ScriptID 20 0)) ; inNotebook
 							)
 						)
 						-1
@@ -530,23 +598,36 @@
 				(= temp2 (& temp0 $00ff))
 				(= temp1
 					(switch (& temp0 $ff00)
-						(256 (+ temp2 1))
-						(512 (+ temp2 18))
-						(768 (+ temp2 26))
-						(1024 (+ temp2 61))
+						(256
+							(+ temp2 1)
+						)
+						(512
+							(+ temp2 18)
+						)
+						(768
+							(+ temp2 26)
+						)
+						(1024
+							(+ temp2 61)
+						)
 					)
 				)
-				(cond 
-					(
-					(not (Message msgGET sel_214 sel_213 6 temp1 1)) (gLb2Messager sel_295: sel_213 6 81 0 0 sel_214))
-					((proc27_0 6 [global296 (- temp1 2)]) (gLb2Messager sel_295: sel_213 6 1 0 0 sel_214))
+				(cond
+					((not (Message msgGET sel_214 sel_213 6 temp1 1))
+						(gMessager sel_295: sel_213 6 81 0 0 sel_214)
+					)
+					((proc27_0 6 [global296 (- temp1 2)])
+						(gMessager sel_295: sel_213 6 1 0 0 sel_214)
+					)
 					(else
-						(gLb2Messager sel_295: sel_213 6 temp1 0 0 sel_214)
+						(gMessager sel_295: sel_213 6 temp1 0 0 sel_214)
 						(proc27_1 6 @[global296 (- temp1 2)])
 					)
 				)
 			)
-			(else (super sel_300: param1))
+			(else
+				(super sel_300: param1)
+			)
 		)
 	)
 )
@@ -560,10 +641,10 @@
 		sel_14 16384
 		sel_103 1
 	)
-	
+
 	(method (sel_300 param1 param2 &tmp temp0 temp1 temp2)
-		(if (proc999_5 param1 1 2)
-			((ScriptID 21 0) sel_57: 263)
+		(if (OneOf param1 1 2)
+			((ScriptID 21 0) sel_57: 263) ; addCluesCode
 		)
 		(if (== param1 6)
 			(if
@@ -572,7 +653,7 @@
 						(if (== argc 2)
 							param2
 						else
-							(global2 sel_422: (ScriptID 20 0))
+							(gCurRoom sel_422: (ScriptID 20 0)) ; inNotebook
 						)
 					)
 					-1
@@ -582,18 +663,29 @@
 			(= temp2 (& temp0 $00ff))
 			(= temp1
 				(switch (& temp0 $ff00)
-					(256 (+ temp2 1))
-					(512 (+ temp2 18))
-					(768 (+ temp2 26))
-					(1024 (+ temp2 61))
+					(256
+						(+ temp2 1)
+					)
+					(512
+						(+ temp2 18)
+					)
+					(768
+						(+ temp2 26)
+					)
+					(1024
+						(+ temp2 61)
+					)
 				)
 			)
-			(cond 
-				(
-				(not (Message msgGET sel_214 sel_213 6 temp1 1)) (gLb2Messager sel_295: sel_213 6 81 0 0 sel_214))
-				((proc27_0 10 [global296 (- temp1 2)]) (gLb2Messager sel_295: sel_213 6 1 0 0 sel_214))
+			(cond
+				((not (Message msgGET sel_214 sel_213 6 temp1 1))
+					(gMessager sel_295: sel_213 6 81 0 0 sel_214)
+				)
+				((proc27_0 10 [global296 (- temp1 2)])
+					(gMessager sel_295: sel_213 6 1 0 0 sel_214)
+				)
 				(else
-					(gLb2Messager sel_295: sel_213 6 temp1 0 0 sel_214)
+					(gMessager sel_295: sel_213 6 temp1 0 0 sel_214)
 					(proc27_1 10 @[global296 (- temp1 2)])
 				)
 			)
@@ -611,27 +703,27 @@
 		sel_2 821
 		sel_14 16384
 	)
-	
+
 	(method (sel_300 param1 param2 &tmp temp0 temp1 temp2)
-		(if (proc999_5 param1 1 2)
-			((ScriptID 21 0) sel_57: 271)
+		(if (OneOf param1 1 2)
+			((ScriptID 21 0) sel_57: 271) ; addCluesCode
 		)
-		(cond 
+		(cond
 			((== param1 2)
-				(if (not (proc0_3 111))
-					(gLb2Messager sel_295: sel_213 param1 80 0 0 sel_214)
+				(if (not (SetFlag 111))
+					(gMessager sel_295: sel_213 param1 80 0 0 sel_214)
 				else
 					(super sel_300: param1)
 				)
 			)
-			((proc999_5 param1 6 14)
+			((OneOf param1 6 14)
 				(if
 					(==
 						(= temp0
 							(if (== argc 2)
 								param2
 							else
-								(global2 sel_422: (ScriptID 20 0))
+								(gCurRoom sel_422: (ScriptID 20 0)) ; inNotebook
 							)
 						)
 						-1
@@ -641,23 +733,36 @@
 				(= temp2 (& temp0 $00ff))
 				(= temp1
 					(switch (& temp0 $ff00)
-						(256 (+ temp2 1))
-						(512 (+ temp2 18))
-						(768 (+ temp2 26))
-						(1024 (+ temp2 61))
+						(256
+							(+ temp2 1)
+						)
+						(512
+							(+ temp2 18)
+						)
+						(768
+							(+ temp2 26)
+						)
+						(1024
+							(+ temp2 61)
+						)
 					)
 				)
-				(cond 
-					(
-					(not (Message msgGET sel_214 sel_213 6 temp1 1)) (gLb2Messager sel_295: sel_213 6 81 0 0 sel_214))
-					((proc27_0 7 [global296 (- temp1 2)]) (gLb2Messager sel_295: sel_213 6 1 0 0 sel_214))
+				(cond
+					((not (Message msgGET sel_214 sel_213 6 temp1 1))
+						(gMessager sel_295: sel_213 6 81 0 0 sel_214)
+					)
+					((proc27_0 7 [global296 (- temp1 2)])
+						(gMessager sel_295: sel_213 6 1 0 0 sel_214)
+					)
 					(else
-						(gLb2Messager sel_295: sel_213 6 temp1 0 0 sel_214)
+						(gMessager sel_295: sel_213 6 temp1 0 0 sel_214)
 						(proc27_1 7 @[global296 (- temp1 2)])
 					)
 				)
 			)
-			(else (super sel_300: param1))
+			(else
+				(super sel_300: param1)
+			)
 		)
 	)
 )
@@ -670,10 +775,10 @@
 		sel_2 815
 		sel_14 16384
 	)
-	
+
 	(method (sel_300 param1 param2 &tmp temp0 temp1 temp2)
-		(if (proc999_5 param1 1 2)
-			((ScriptID 21 0) sel_57: 272)
+		(if (OneOf param1 1 2)
+			((ScriptID 21 0) sel_57: 272) ; addCluesCode
 		)
 		(if (== param1 6)
 			(if
@@ -682,7 +787,7 @@
 						(if (== argc 2)
 							param2
 						else
-							(global2 sel_422: (ScriptID 20 0))
+							(gCurRoom sel_422: (ScriptID 20 0)) ; inNotebook
 						)
 					)
 					-1
@@ -692,18 +797,29 @@
 			(= temp2 (& temp0 $00ff))
 			(= temp1
 				(switch (& temp0 $ff00)
-					(256 (+ temp2 1))
-					(512 (+ temp2 18))
-					(768 (+ temp2 26))
-					(1024 (+ temp2 61))
+					(256
+						(+ temp2 1)
+					)
+					(512
+						(+ temp2 18)
+					)
+					(768
+						(+ temp2 26)
+					)
+					(1024
+						(+ temp2 61)
+					)
 				)
 			)
-			(cond 
-				(
-				(not (Message msgGET sel_214 sel_213 6 temp1 1)) (gLb2Messager sel_295: sel_213 6 81 0 0 sel_214))
-				((proc27_0 8 [global296 (- temp1 2)]) (gLb2Messager sel_295: sel_213 6 1 0 0 sel_214))
+			(cond
+				((not (Message msgGET sel_214 sel_213 6 temp1 1))
+					(gMessager sel_295: sel_213 6 81 0 0 sel_214)
+				)
+				((proc27_0 8 [global296 (- temp1 2)])
+					(gMessager sel_295: sel_213 6 1 0 0 sel_214)
+				)
 				(else
-					(gLb2Messager sel_295: sel_213 6 temp1 0 0 sel_214)
+					(gMessager sel_295: sel_213 6 temp1 0 0 sel_214)
 					(proc27_1 8 @[global296 (- temp1 2)])
 				)
 			)
@@ -722,27 +838,27 @@
 		sel_14 16384
 		sel_103 1
 	)
-	
+
 	(method (sel_300 param1 param2 &tmp temp0 temp1 temp2)
-		(if (proc999_5 param1 1 2)
-			((ScriptID 21 0) sel_57: 266)
+		(if (OneOf param1 1 2)
+			((ScriptID 21 0) sel_57: 266) ; addCluesCode
 		)
-		(cond 
+		(cond
 			((== param1 2)
-				(if (not (proc0_3 113))
-					(gLb2Messager sel_295: sel_213 param1 80 0 0 sel_214)
+				(if (not (SetFlag 113))
+					(gMessager sel_295: sel_213 param1 80 0 0 sel_214)
 				else
-					(gLb2Messager sel_295: sel_213 param1 28 0 0 sel_214)
+					(gMessager sel_295: sel_213 param1 28 0 0 sel_214)
 				)
 			)
-			((proc999_5 param1 6 14)
+			((OneOf param1 6 14)
 				(if
 					(==
 						(= temp0
 							(if (== argc 2)
 								param2
 							else
-								(global2 sel_422: (ScriptID 20 0))
+								(gCurRoom sel_422: (ScriptID 20 0)) ; inNotebook
 							)
 						)
 						-1
@@ -752,52 +868,67 @@
 				(= temp2 (& temp0 $00ff))
 				(= temp1
 					(switch (& temp0 $ff00)
-						(256 (+ temp2 1))
-						(512 (+ temp2 18))
-						(768 (+ temp2 26))
-						(1024 (+ temp2 61))
+						(256
+							(+ temp2 1)
+						)
+						(512
+							(+ temp2 18)
+						)
+						(768
+							(+ temp2 26)
+						)
+						(1024
+							(+ temp2 61)
+						)
 					)
 				)
 				(switch temp0
 					(267
-						(cond 
-							((proc0_2 158)
+						(cond
+							((IsFlag 158)
 								(if (proc27_0 9 global365)
-									(gLb2Messager sel_295: sel_213 6 1 0 0 sel_214)
+									(gMessager sel_295: sel_213 6 1 0 0 sel_214)
 								else
-									(gLb2Messager sel_295: sel_213 6 71 0 0 sel_214)
+									(gMessager sel_295: sel_213 6 71 0 0 sel_214)
 									(proc27_1 9 @global365)
 								)
 							)
-							((proc27_0 9 global306) (gLb2Messager sel_295: sel_213 6 1 0 0 sel_214))
+							((proc27_0 9 global306)
+								(gMessager sel_295: sel_213 6 1 0 0 sel_214)
+							)
 							(else
-								(gLb2Messager sel_295: sel_213 6 12 0 0 sel_214)
+								(gMessager sel_295: sel_213 6 12 0 0 sel_214)
 								(proc27_1 9 @global306)
 							)
 						)
 					)
 					(263
 						(if (proc27_0 9 global302)
-							(gLb2Messager sel_295: sel_213 6 1 0 0 sel_214)
+							(gMessager sel_295: sel_213 6 1 0 0 sel_214)
 						else
-							(gLb2Messager sel_295: sel_213 6 8 0 0 sel_214)
+							(gMessager sel_295: sel_213 6 8 0 0 sel_214)
 							(proc27_1 9 @global302)
 						)
 					)
-					(else 
-						(cond 
-							(
-							(not (Message msgGET sel_214 sel_213 6 temp1 1)) (gLb2Messager sel_295: sel_213 6 81 0 0 sel_214))
-							((proc27_0 9 [global296 (- temp1 2)]) (gLb2Messager sel_295: sel_213 6 1 0 0 sel_214))
+					(else
+						(cond
+							((not (Message msgGET sel_214 sel_213 6 temp1 1))
+								(gMessager sel_295: sel_213 6 81 0 0 sel_214)
+							)
+							((proc27_0 9 [global296 (- temp1 2)])
+								(gMessager sel_295: sel_213 6 1 0 0 sel_214)
+							)
 							(else
-								(gLb2Messager sel_295: sel_213 6 temp1 0 0 sel_214)
+								(gMessager sel_295: sel_213 6 temp1 0 0 sel_214)
 								(proc27_1 9 @[global296 (- temp1 2)])
 							)
 						)
 					)
 				)
 			)
-			(else (super sel_300: param1))
+			(else
+				(super sel_300: param1)
+			)
 		)
 	)
 )
@@ -810,19 +941,19 @@
 		sel_2 816
 		sel_14 16384
 	)
-	
+
 	(method (sel_300 param1 param2 &tmp temp0 temp1 temp2)
-		(if (proc999_5 param1 1 2)
-			((ScriptID 21 0) sel_57: 264)
+		(if (OneOf param1 1 2)
+			((ScriptID 21 0) sel_57: 264) ; addCluesCode
 		)
-		(if (proc999_5 param1 6 14)
+		(if (OneOf param1 6 14)
 			(if
 				(==
 					(= temp0
 						(if (== argc 2)
 							param2
 						else
-							(global2 sel_422: (ScriptID 20 0))
+							(gCurRoom sel_422: (ScriptID 20 0)) ; inNotebook
 						)
 					)
 					-1
@@ -832,18 +963,29 @@
 			(= temp2 (& temp0 $00ff))
 			(= temp1
 				(switch (& temp0 $ff00)
-					(256 (+ temp2 1))
-					(512 (+ temp2 18))
-					(768 (+ temp2 26))
-					(1024 (+ temp2 61))
+					(256
+						(+ temp2 1)
+					)
+					(512
+						(+ temp2 18)
+					)
+					(768
+						(+ temp2 26)
+					)
+					(1024
+						(+ temp2 61)
+					)
 				)
 			)
-			(cond 
-				(
-				(not (Message msgGET sel_214 sel_213 6 temp1 1)) (gLb2Messager sel_295: sel_213 6 81 0 0 sel_214))
-				((proc27_0 11 [global296 (- temp1 2)]) (gLb2Messager sel_295: sel_213 6 1 0 0 sel_214))
+			(cond
+				((not (Message msgGET sel_214 sel_213 6 temp1 1))
+					(gMessager sel_295: sel_213 6 81 0 0 sel_214)
+				)
+				((proc27_0 11 [global296 (- temp1 2)])
+					(gMessager sel_295: sel_213 6 1 0 0 sel_214)
+				)
 				(else
-					(gLb2Messager sel_295: sel_213 6 temp1 0 0 sel_214)
+					(gMessager sel_295: sel_213 6 temp1 0 0 sel_214)
 					(proc27_1 11 @[global296 (- temp1 2)])
 				)
 			)

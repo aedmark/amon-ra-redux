@@ -1,17 +1,18 @@
 ;;; Sierra Script 1.0 - (do not remove this comment)
+;;; Decompiled by sluicebox
 (script# 400)
 (include sci.sh)
 (use Main)
-(use LBRoom)
+(use eRS)
 (use ExitFeature)
 (use Inset)
 (use Scaler)
 (use PolyPath)
-(use CueObj)
+(use Feature)
 (use StopWalk)
-(use Cycle)
-(use View)
-(use Obj)
+(use Motion)
+(use Actor)
+(use System)
 
 (public
 	rm400 0
@@ -25,22 +26,18 @@
 		sel_412 370
 		sel_108 50
 	)
-	
+
 	(method (sel_110 &tmp [temp0 30])
 		(self sel_414: 93)
-		((ScriptID 2400 0) sel_57: (= sel_259 (List sel_109:)))
-		(gEgo
-			sel_0: 180
-			sel_110:
-			sel_585: 831
-			sel_320: Scaler 125 30 190 50
-		)
+		((ScriptID 2400 0) sel_57: (= sel_259 (List sel_109:))) ; poly2400Code
+		(gEgo sel_0: 180 sel_110: sel_585: 831 sel_320: Scaler 125 30 190 50)
 		(super sel_110:)
-		(cond 
-			(
-			(or (> global123 2) (not (& $7204 global124))) (realDagger sel_110: sel_311: 4 1 8))
-			((not (proc0_2 71))
-				((ScriptID 93 3)
+		(cond
+			((or (> gAct 2) (not (& $7204 gMustDos)))
+				(realDagger sel_110: sel_311: 4 1 8)
+			)
+			((not (IsFlag 71))
+				((ScriptID 93 3) ; Heimlich
 					sel_110:
 					sel_153: 70 185
 					sel_155: 8
@@ -49,7 +46,9 @@
 				)
 				(sel_142 sel_65: sHeimlichShoos2)
 			)
-			(else (daggerGone sel_110:))
+			(else
+				(daggerGone sel_110:)
+			)
 		)
 		(westExitFeature sel_110:)
 		(cashRegister sel_110: sel_311: 4)
@@ -68,15 +67,15 @@
 		(rightShelves sel_110: sel_311: 4 1)
 		(smallPicture sel_110: sel_311: 1)
 	)
-	
+
 	(method (sel_111)
 		(DisposeScript 2400)
 		(super sel_111:)
 	)
-	
+
 	(method (sel_399)
 		(gGameMusic2 sel_167:)
-		(gSel_608 sel_168: 0 sel_170: 127 5 5 0)
+		(gGameMusic1 sel_168: 0 sel_170: 127 5 5 0)
 		(super sel_399: &rest)
 	)
 )
@@ -85,21 +84,23 @@
 	(properties
 		sel_20 {sHeimlichShoos}
 	)
-	
-	(method (sel_144 theSel_29)
-		(switch (= sel_29 theSel_29)
-			(0 (= sel_136 1))
+
+	(method (sel_144 param1)
+		(switch (= sel_29 param1)
+			(0
+				(= sel_136 1)
+			)
 			(1
 				(gGame sel_587:)
 				(= sel_139 30)
 			)
 			(2
-				((ScriptID 22 0) sel_57: 29188 self)
+				((ScriptID 22 0) sel_57: 29188 self) ; triggerAndClock
 			)
 			(3
-				(gSel_608 sel_168: 1)
+				(gGameMusic1 sel_168: 1)
 				(gGameMusic2 sel_40: 19 sel_99: 1 sel_155: 1 sel_39:)
-				((ScriptID 93 3)
+				((ScriptID 93 3) ; Heimlich
 					sel_110:
 					sel_161: StopWalk -1
 					sel_320: 160
@@ -108,26 +109,26 @@
 				)
 			)
 			(4
-				((ScriptID 93 3) sel_155: 8 sel_156: 6)
+				((ScriptID 93 3) sel_155: 8 sel_156: 6) ; Heimlich
 				(= sel_139 30)
 			)
 			(5
-				(gLb2Messager sel_295: 33 8 0 0 self)
+				(gMessager sel_295: 33 8 0 0 self)
 			)
 			(6
 				(gEgo sel_312: PolyPath 80 165 self)
 			)
 			(7
-				((ScriptID 93 3) sel_156: 3)
+				((ScriptID 93 3) sel_156: 3) ; Heimlich
 				(gEgo sel_312: PolyPath 40 180 self)
 			)
 			(8
-				((ScriptID 93 3) sel_156: 7)
+				((ScriptID 93 3) sel_156: 7) ; Heimlich
 				(gEgo sel_312: PolyPath -50 180 self)
 			)
 			(9
 				(gEgo sel_349: 4)
-				(global2 sel_399: 370)
+				(gCurRoom sel_399: 370)
 			)
 		)
 	)
@@ -137,22 +138,24 @@
 	(properties
 		sel_20 {sHeimlichShoos2}
 	)
-	
-	(method (sel_144 theSel_29)
-		(switch (= sel_29 theSel_29)
+
+	(method (sel_144 param1)
+		(switch (= sel_29 param1)
 			(0
 				(gGame sel_587:)
-				(gSel_608 sel_168: 1)
+				(gGameMusic1 sel_168: 1)
 				(gGameMusic2 sel_40: 19 sel_99: 1 sel_155: 1 sel_39:)
 				(= sel_136 2)
 			)
 			(1
-				(gLb2Messager sel_295: 3 0 82 0 self 1889)
+				(gMessager sel_295: 3 0 82 0 self 1889)
 			)
 			(2
-				(gEgo sel_312: PolyPath -50 (gEgo sel_0?) self)
+				(gEgo sel_312: PolyPath -50 (gEgo sel_0:) self)
 			)
-			(3 (global2 sel_399: 370))
+			(3
+				(gCurRoom sel_399: 370)
+			)
 		)
 	)
 )
@@ -174,24 +177,30 @@
 		sel_0 50
 		sel_560 1
 	)
-	
+
 	(method (sel_110)
 		(super sel_110: &rest)
-		(if sel_141 (stamp sel_110:))
+		(if sel_141
+			(stamp sel_110:)
+		)
 		(daggerFeature sel_110: sel_141)
 		(proc0_8 1)
 	)
-	
+
 	(method (sel_111)
 		(proc0_8 0)
 		(daggerFeature sel_111:)
-		(if (not sel_141) (global2 sel_146: sHeimlichShoos))
+		(if (not sel_141)
+			(gCurRoom sel_146: sHeimlichShoos)
+		)
 		(super sel_111:)
 	)
-	
+
 	(method (sel_300 param1)
 		(switch param1
-			(13 (self sel_111:))
+			(13
+				(self sel_111:)
+			)
 		)
 	)
 )
@@ -203,7 +212,7 @@
 		sel_0 85
 		sel_2 401
 	)
-	
+
 	(method (sel_300 param1)
 		(daggerFeature sel_300: param1)
 	)
@@ -216,19 +225,23 @@
 		sel_0 100
 		sel_302 4
 	)
-	
+
 	(method (sel_110 param1)
 		(= sel_213 (if param1 7 else 8))
 		(super sel_110: &rest)
 	)
-	
+
 	(method (sel_300 param1)
 		(switch param1
-			(13 (inPittsburgh sel_300: 13))
-			(8
-				(gLb2Messager sel_295: sel_213 8)
+			(13
+				(inPittsburgh sel_300: 13)
 			)
-			(else  (super sel_300: param1))
+			(8
+				(gMessager sel_295: sel_213 8)
+			)
+			(else
+				(super sel_300: param1)
+			)
 		)
 	)
 )
@@ -317,10 +330,10 @@
 		sel_303 254
 		sel_304 141
 	)
-	
+
 	(method (sel_300 param1)
 		(if (== param1 8)
-			(global2 sel_422: inPittsburgh 0 1)
+			(gCurRoom sel_422: inPittsburgh 0 1)
 		else
 			(super sel_300: param1)
 		)
@@ -341,15 +354,15 @@
 		sel_303 249
 		sel_304 109
 	)
-	
+
 	(method (sel_300 param1)
 		(if
 			(and
 				(or (== param1 8) (== param1 1))
-				(== global123 2)
-				(not (& global124 $7204))
+				(== gAct 2)
+				(not (& gMustDos $7204))
 			)
-			(global2 sel_422: inPittsburgh)
+			(gCurRoom sel_422: inPittsburgh)
 		else
 			(super sel_300: param1)
 		)

@@ -1,9 +1,10 @@
 ;;; Sierra Script 1.0 - (do not remove this comment)
+;;; Decompiled by sluicebox
 (script# 1900)
 (include sci.sh)
 (use Main)
-(use RTRandCycle)
-(use View)
+(use Talker)
+(use Actor)
 
 (public
 	Irmgaard 15
@@ -20,11 +21,11 @@
 		sel_549 10
 		sel_550 10
 	)
-	
+
 	(method (sel_110)
-		(= sel_2 (if (== gSel_40 155) 1156 else 828))
-		(= sel_30 gSel_30)
-		(if (== gSel_40 155)
+		(= sel_2 (if (== gCurRoomNum 155) 1156 else 828))
+		(= sel_30 gUserFont)
+		(if (== gCurRoomNum 155)
 			(= sel_291 0)
 			(= sel_545 irmgaardBust)
 			(= sel_546 irmgaardEyes)

@@ -1,16 +1,17 @@
 ;;; Sierra Script 1.0 - (do not remove this comment)
+;;; Decompiled by sluicebox
 (script# 335)
 (include sci.sh)
 (use Main)
 (use Door)
-(use LBRoom)
+(use eRS)
 (use ExitFeature)
 (use Scaler)
 (use PolyPath)
-(use CueObj)
+(use Feature)
 (use StopWalk)
-(use Cycle)
-(use Obj)
+(use Motion)
+(use System)
 
 (public
 	rm335 0
@@ -24,37 +25,41 @@
 		sel_409 350
 		sel_411 330
 	)
-	
+
 	(method (sel_110)
 		(gEgo
 			sel_110:
-			sel_585: (if (gEgo sel_584?) 831 else 830)
+			sel_585: (if (gEgo sel_584:) 831 else 830)
 			sel_320: Scaler 100 75 190 160
 		)
 		(self sel_414: 90 93)
-		(switch gGSel_40
+		(switch gPrevRoomNum
 			(sel_409
 				(Palette palSET_INTENSITY 0 255 60)
-				(if (and (proc0_10 8) (proc0_2 122) (not (proc0_2 133)))
+				(if (and (TimeCheck $0008) (IsFlag 122) (not (IsFlag 133)))
 					(frontDoor sel_4: 255 sel_29: 2 sel_599: 2 sel_596: 0)
 					(self sel_146: sOffToSmooch)
 				else
 					(frontDoor sel_595: 1)
 					(gEgo
-						sel_153: (frontDoor sel_597?) (frontDoor sel_598?)
+						sel_153: (frontDoor sel_597:) (frontDoor sel_598:)
 						sel_349: 0
 					)
 				)
 			)
 			(sel_411
 				(self sel_146: sEnterSouth)
-				(cond 
-					((!= global123 2))
-					((proc0_2 25) (gSel_608 sel_40: 335 sel_99: 1 sel_155: -1 sel_39: 50))
-					(else (gSel_608 sel_40: 19 sel_99: 1 sel_155: -1 sel_39:))
+				(cond
+					((!= gAct 2))
+					((IsFlag 25)
+						(gGameMusic1 sel_40: 335 sel_99: 1 sel_155: -1 sel_39: 50)
+					)
+					(else
+						(gGameMusic1 sel_40: 19 sel_99: 1 sel_155: -1 sel_39:)
+					)
 				)
 			)
-			(else 
+			(else
 				(gEgo sel_153: 150 180)
 				(gGame sel_588:)
 			)
@@ -66,11 +71,11 @@
 		(banner sel_110: sel_311: 4 8)
 		(glass sel_110:)
 		(column sel_110:)
-		(if (and (== global123 2) (not (proc0_2 25)))
-			((ScriptID 32 0)
+		(if (and (== gAct 2) (not (IsFlag 25)))
+			((ScriptID 32 0) ; aHeimlich
 				sel_110:
 				sel_2: 341
-				sel_620: gSel_40
+				sel_620: gCurRoomNum
 				sel_153: 131 173 0
 				sel_155: 0
 				sel_299: doorActions
@@ -79,12 +84,12 @@
 				sel_311: 4 11 2 6
 			)
 		else
-			(frontDoor sel_590: (!= global123 2))
+			(frontDoor sel_590: (!= gAct 2))
 		)
 	)
-	
+
 	(method (sel_399)
-		(gSel_608 sel_170:)
+		(gGameMusic1 sel_170:)
 		(super sel_399: &rest)
 	)
 )
@@ -93,9 +98,9 @@
 	(properties
 		sel_20 {sEnterSouth}
 	)
-	
-	(method (sel_144 theSel_29)
-		(switch (= sel_29 theSel_29)
+
+	(method (sel_144 param1)
+		(switch (= sel_29 param1)
 			(0
 				(gEgo sel_153: 165 240 sel_312: PolyPath 165 185 self)
 			)
@@ -111,36 +116,40 @@
 	(properties
 		sel_20 {sExitNorth}
 	)
-	
-	(method (sel_144 theSel_29)
-		(switch (= sel_29 theSel_29)
+
+	(method (sel_144 param1)
+		(switch (= sel_29 param1)
 			(0
 				(gGame sel_587:)
 				(frontDoor sel_143: self sel_189:)
 			)
 			(1
 				(gEgo
-					sel_312: PolyPath (frontDoor sel_597?) (frontDoor sel_598?) self
+					sel_312:
+						PolyPath
+						(frontDoor sel_597:)
+						(frontDoor sel_598:)
+						self
 				)
 			)
 			(2
-				(DrawPic 780 dpOPEN_FADEPALETTE)
-				(gSel_561 sel_119: 102)
+				(DrawPic 780 10)
+				(gCast sel_119: 102)
 				(= sel_136 2)
 			)
 			(3
 				(Palette palSET_INTENSITY 0 255 100)
-				((ScriptID 21 0) sel_57: 263)
-				((ScriptID 21 0) sel_57: 264)
-				((ScriptID 21 0) sel_57: 265)
-				((ScriptID 21 0) sel_57: 266)
-				((ScriptID 21 0) sel_57: 267)
-				((ScriptID 21 0) sel_57: 268)
-				((ScriptID 21 0) sel_57: 269)
-				((ScriptID 21 0) sel_57: 270)
-				((ScriptID 21 0) sel_57: 271)
-				((ScriptID 21 0) sel_57: 272)
-				(global2 sel_399: (global2 sel_409?))
+				((ScriptID 21 0) sel_57: 263) ; addCluesCode
+				((ScriptID 21 0) sel_57: 264) ; addCluesCode
+				((ScriptID 21 0) sel_57: 265) ; addCluesCode
+				((ScriptID 21 0) sel_57: 266) ; addCluesCode
+				((ScriptID 21 0) sel_57: 267) ; addCluesCode
+				((ScriptID 21 0) sel_57: 268) ; addCluesCode
+				((ScriptID 21 0) sel_57: 269) ; addCluesCode
+				((ScriptID 21 0) sel_57: 270) ; addCluesCode
+				((ScriptID 21 0) sel_57: 271) ; addCluesCode
+				((ScriptID 21 0) sel_57: 272) ; addCluesCode
+				(gCurRoom sel_399: (gCurRoom sel_409:))
 			)
 		)
 	)
@@ -150,43 +159,41 @@
 	(properties
 		sel_20 {sGiveInvite}
 	)
-	
-	(method (sel_144 theSel_29)
-		(switch (= sel_29 theSel_29)
+
+	(method (sel_144 param1)
+		(switch (= sel_29 param1)
 			(0
 				(gGame sel_587:)
-				((ScriptID 32 0)
-					sel_155: 0
-					sel_244: 6
-					sel_161: CT 8 1 self
-				)
+				((ScriptID 32 0) sel_155: 0 sel_244: 6 sel_161: CT 8 1 self) ; aHeimlich
 			)
-			(1 (= sel_139 15))
+			(1
+				(= sel_139 15)
+			)
 			(2
-				((ScriptID 32 0) sel_161: End self)
+				((ScriptID 32 0) sel_161: End self) ; aHeimlich
 			)
 			(3
-				((ScriptID 32 0) sel_156: 0)
+				((ScriptID 32 0) sel_156: 0) ; aHeimlich
 				(= sel_136 2)
 			)
 			(4
-				(gLb2Messager sel_295: 6 11 0 0 self)
+				(gMessager sel_295: 6 11 0 0 self)
 			)
 			(5
-				(proc0_3 23)
+				(SetFlag 23)
 				(gEgo sel_351: 6)
-				((ScriptID 21 1) sel_57: 775)
-				((ScriptID 22 0) sel_57: 28673)
-				((ScriptID 21 0) sel_57: 263)
-				((ScriptID 21 0) sel_57: 264)
-				((ScriptID 21 0) sel_57: 265)
-				((ScriptID 21 0) sel_57: 266)
-				((ScriptID 21 0) sel_57: 267)
-				((ScriptID 21 0) sel_57: 268)
-				((ScriptID 21 0) sel_57: 269)
-				((ScriptID 21 0) sel_57: 270)
-				((ScriptID 21 0) sel_57: 271)
-				((ScriptID 21 0) sel_57: 272)
+				((ScriptID 21 1) sel_57: 775) ; dropCluesCode
+				((ScriptID 22 0) sel_57: 28673) ; triggerAndClock
+				((ScriptID 21 0) sel_57: 263) ; addCluesCode
+				((ScriptID 21 0) sel_57: 264) ; addCluesCode
+				((ScriptID 21 0) sel_57: 265) ; addCluesCode
+				((ScriptID 21 0) sel_57: 266) ; addCluesCode
+				((ScriptID 21 0) sel_57: 267) ; addCluesCode
+				((ScriptID 21 0) sel_57: 268) ; addCluesCode
+				((ScriptID 21 0) sel_57: 269) ; addCluesCode
+				((ScriptID 21 0) sel_57: 270) ; addCluesCode
+				((ScriptID 21 0) sel_57: 271) ; addCluesCode
+				((ScriptID 21 0) sel_57: 272) ; addCluesCode
 				(gGame sel_588:)
 				(self sel_111:)
 			)
@@ -198,9 +205,9 @@
 	(properties
 		sel_20 {sOffToSmooch}
 	)
-	
-	(method (sel_144 theSel_29)
-		(switch (= sel_29 theSel_29)
+
+	(method (sel_144 param1)
+		(switch (= sel_29 param1)
 			(0
 				(gEgo sel_153: 153 160 sel_312: PolyPath 160 250 self)
 				(= sel_136 1)
@@ -211,14 +218,16 @@
 				(= sel_139 15)
 			)
 			(2
-				((ScriptID 93 8)
+				((ScriptID 93 8) ; Steve
 					sel_110:
 					sel_161: StopWalk -1
 					sel_153: 153 160
 					sel_312: PolyPath 130 260
 				)
 			)
-			(3 (global2 sel_399: 330))
+			(3
+				(gCurRoom sel_399: 330)
+			)
 		)
 	)
 )
@@ -237,17 +246,25 @@
 		sel_599 0
 		sel_600 0
 	)
-	
+
 	(method (sel_300 param1)
 		(switch param1
 			(4
-				(cond 
-					((not (gEgo sel_584?)) (gLb2Messager sel_295: sel_213 4 6))
-					((not (proc0_2 23)) (gLb2Messager sel_295: sel_213 4 7))
-					(else (global2 sel_146: sExitNorth))
+				(cond
+					((not (gEgo sel_584:))
+						(gMessager sel_295: sel_213 4 6)
+					)
+					((not (IsFlag 23))
+						(gMessager sel_295: sel_213 4 7)
+					)
+					(else
+						(gCurRoom sel_146: sExitNorth)
+					)
 				)
 			)
-			(else  (super sel_300: param1))
+			(else
+				(super sel_300: param1)
+			)
 		)
 	)
 )
@@ -302,7 +319,7 @@
 		sel_9 142
 		sel_301 40
 	)
-	
+
 	(method (sel_300 param1)
 		(if (== param1 4)
 			(frontDoor sel_300: param1)
@@ -327,24 +344,30 @@
 	(properties
 		sel_20 {doorActions}
 	)
-	
+
 	(method (sel_300 param1)
-		(return
-			(switch param1
-				(1 (gLb2Messager sel_295: 6 1))
-				(4 (gLb2Messager sel_295: 6 4))
-				(11
-					(global2 sel_146: sGiveInvite)
+		(switch param1
+			(1
+				(gMessager sel_295: 6 1)
+			)
+			(4
+				(gMessager sel_295: 6 4)
+			)
+			(11
+				(gCurRoom sel_146: sGiveInvite)
+			)
+			(2
+				(if (gEgo sel_238: 6)
+					(gMessager sel_295: 6 2 7)
+				else
+					(gMessager sel_295: 6 2)
 				)
-				(2
-					(if (gEgo sel_238: 6)
-						(gLb2Messager sel_295: 6 2 7)
-					else
-						(gLb2Messager sel_295: 6 2)
-					)
-				)
-				(6 (gLb2Messager sel_295: 6 2))
-				(else  (return 0))
+			)
+			(6
+				(gMessager sel_295: 6 2)
+			)
+			(else
+				(return 0)
 			)
 		)
 	)

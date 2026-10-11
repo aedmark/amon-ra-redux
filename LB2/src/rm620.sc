@@ -1,14 +1,15 @@
 ;;; Sierra Script 1.0 - (do not remove this comment)
+;;; Decompiled by sluicebox
 (script# 620)
 (include sci.sh)
 (use Main)
-(use LBRoom)
+(use eRS)
 (use Inset)
-(use n958)
+(use LoadMany)
 (use Sound)
-(use Cycle)
-(use View)
-(use Obj)
+(use Motion)
+(use Actor)
+(use System)
 
 (public
 	rm620 0
@@ -19,13 +20,12 @@
 	local1
 	local2
 )
-(procedure (localproc_145d param1)
-	(return
-		(if (< global129 6)
-			(return (- 320 param1))
-		else
-			(return param1)
-		)
+
+(procedure (localproc_0 param1)
+	(if (< global129 6)
+		(return (- 320 param1))
+	else
+		(return param1)
 	)
 )
 
@@ -34,20 +34,23 @@
 		sel_20 {rm620}
 		sel_408 620
 	)
-	
+
 	(method (sel_110)
-		(if (gTimers sel_122: (ScriptID 90 15))
-			((ScriptID 90 15) sel_42: self)
+		(if (gTimers sel_122: (ScriptID 90 15)) ; meetingTimer
+			((ScriptID 90 15) sel_42: self) ; meetingTimer
 		)
 		(gEgo sel_110: sel_585: 622)
-		(proc958_0 128 621 622)
-		(proc958_0 132 611 612 615)
-		(if (< global129 6) (= sel_28 16384) (= local2 1))
+		(LoadMany rsVIEW 621 622)
+		(LoadMany rsSOUND 611 612 615)
+		(if (< global129 6)
+			(= sel_28 16384)
+			(= local2 1)
+		)
 		(super sel_110:)
 		(churning
 			sel_110:
-			sel_155: (+ (churning sel_3?) local2)
-			sel_1: (localproc_145d (churning sel_1?))
+			sel_155: (+ (churning sel_3:) local2)
+			sel_1: (localproc_0 (churning sel_1:))
 			sel_161: Fwd
 		)
 		(self sel_414: 90)
@@ -136,19 +139,21 @@
 				(animal1 sel_110: sel_155: 8 sel_156: 11 sel_153: 163 131)
 				(animal2 sel_110: sel_155: 8 sel_156: 12 sel_153: 113 107)
 			)
-			(else  (= local1 1))
+			(else
+				(= local1 1)
+			)
 		)
 		(self sel_146: sSearchVat)
 	)
-	
+
 	(method (sel_145)
-		((ScriptID 90 15) sel_162: self 10 0 0 global125)
+		((ScriptID 90 15) sel_162: self 10 0 0 gClockTimeMustDos) ; meetingTimer
 	)
-	
+
 	(method (sel_399)
-		(if (gTimers sel_122: (ScriptID 90 15))
+		(if (gTimers sel_122: (ScriptID 90 15)) ; meetingTimer
 			(= sel_135 0)
-			((ScriptID 90 15) sel_42: (ScriptID 90 15))
+			((ScriptID 90 15) sel_42: (ScriptID 90 15)) ; meetingTimer, meetingTimer
 		)
 		(super sel_399: &rest)
 	)
@@ -158,7 +163,7 @@
 	(properties
 		sel_20 {sSearchVat}
 	)
-	
+
 	(method (sel_57)
 		(super sel_57:)
 		(switch global129
@@ -455,15 +460,15 @@
 		)
 		(= local0 (mod (++ local0) local1))
 	)
-	
-	(method (sel_144 theSel_29)
-		(switch (= sel_29 theSel_29)
+
+	(method (sel_144 param1)
+		(switch (= sel_29 param1)
 			(0
 				(gGame sel_587:)
 				(gEgo
 					sel_155: (- 1 local2)
 					sel_156: 0
-					sel_153: (localproc_145d 201) 98
+					sel_153: (localproc_0 201) 98
 					sel_63: 13
 					sel_161: End self
 				)
@@ -475,13 +480,19 @@
 			(2
 				(gEgo sel_155: (- 5 local2) sel_156: 0 sel_161: End self)
 			)
-			(3 (gEgo sel_161: Beg self))
-			(4 (= sel_139 45))
-			(5 (gEgo sel_161: End self))
+			(3
+				(gEgo sel_161: Beg self)
+			)
+			(4
+				(= sel_139 45)
+			)
+			(5
+				(gEgo sel_161: End self)
+			)
 			(6
 				(sFX sel_167:)
-				(if (proc0_2 21)
-					(global2 sel_146: sFallInVat)
+				(if (IsFlag 21)
+					(gCurRoom sel_146: sFallInVat)
 				else
 					(= sel_139 45)
 				)
@@ -494,21 +505,20 @@
 					sel_155: 12
 					sel_312:
 						MoveTo
-						(if local2 (- (net sel_1?) 53) else (net sel_1?))
-						(- (net sel_0?) 90)
+						(if local2
+							(- (net sel_1:) 53)
+						else
+							(net sel_1:)
+						)
+						(- (net sel_0:) 90)
 						self
 				)
-				(if
-					(and
-						(== global129 13)
-						(not (proc0_2 22))
-						(== global123 3)
-					)
+				(if (and (== global129 13) (not (IsFlag 22)) (== gAct 3))
 					(dagger
 						sel_110:
 						sel_155: 12
 						sel_156: 1
-						sel_312: MoveTo (dagger sel_1?) (- (dagger sel_0?) 90)
+						sel_312: MoveTo (dagger sel_1:) (- (dagger sel_0:) 90)
 					)
 				)
 			)
@@ -519,68 +529,67 @@
 				(= sel_139 60)
 			)
 			(9
-				(if
-					(and
-						(== global129 13)
-						(not (proc0_2 22))
-						(== global123 3)
-					)
-					(global2 sel_146: sFoundDagger)
+				(if (and (== global129 13) (not (IsFlag 22)) (== gAct 3))
+					(gCurRoom sel_146: sFoundDagger)
 				else
 					(switch global129
 						(1
-							(gLb2Messager sel_295: 2 0 2)
+							(gMessager sel_295: 2 0 2)
 						)
 						(2
-							(gLb2Messager sel_295: 3 0 2)
+							(gMessager sel_295: 3 0 2)
 						)
 						(3
-							(gLb2Messager sel_295: 4 0 2)
+							(gMessager sel_295: 4 0 2)
 						)
 						(4
-							(gLb2Messager sel_295: 5 0 2)
+							(gMessager sel_295: 5 0 2)
 						)
 						(5
-							(gLb2Messager sel_295: 6 0 2)
+							(gMessager sel_295: 6 0 2)
 						)
 						(6
-							(gLb2Messager sel_295: 7 0 2)
+							(gMessager sel_295: 7 0 2)
 						)
 						(7
-							(gLb2Messager sel_295: 8 0 2)
+							(gMessager sel_295: 8 0 2)
 						)
 						(8
-							(gLb2Messager sel_295: 9 0 2)
+							(gMessager sel_295: 9 0 2)
 						)
 						(9
-							(gLb2Messager sel_295: 10 0 2)
+							(gMessager sel_295: 10 0 2)
 						)
 						(10
-							(gLb2Messager sel_295: 11 0 2)
+							(gMessager sel_295: 11 0 2)
 						)
 						(11
-							(gLb2Messager sel_295: 12 0 2)
+							(gMessager sel_295: 12 0 2)
 						)
 						(12
-							(gLb2Messager sel_295: 13 0 2)
+							(gMessager sel_295: 13 0 2)
 						)
 						(13
-							(if (proc0_2 155)
-								(gLb2Messager sel_295: 15 0 7)
+							(if (IsFlag 155)
+								(gMessager sel_295: 15 0 7)
 							else
-								(gLb2Messager sel_295: 15 0 8)
+								(gMessager sel_295: 15 0 8)
 							)
 						)
 						(14
-							(gLb2Messager sel_295: 14 0 2)
+							(gMessager sel_295: 14 0 2)
 						)
 					)
-					(if (proc0_2 20) (proc0_3 21) else (proc0_3 20))
+					(if (IsFlag 20)
+						(SetFlag 21)
+					else
+						(SetFlag 20)
+					)
 					(= sel_136 1)
 				)
 			)
 			(10
-				(global2 sel_399: 610)
+				(gCurRoom sel_399: 610)
 				(self sel_111:)
 			)
 		)
@@ -591,63 +600,67 @@
 	(properties
 		sel_20 {sFoundDagger}
 	)
-	
-	(method (sel_144 theSel_29)
-		(switch (= sel_29 theSel_29)
+
+	(method (sel_144 param1)
+		(switch (= sel_29 param1)
 			(0
 				(gGameMusic2 sel_167:)
 				(sFX sel_40: 616 sel_3: -1 sel_99: 1 sel_39:)
-				(proc958_0 128 1898 108)
-				(gLb2Messager sel_295: 1 0 1 1 self)
+				(LoadMany rsVIEW 1898 108)
+				(gMessager sel_295: 1 0 1 1 self)
 			)
 			(1
-				(gLb2Messager sel_295: 1 0 1 2 self)
+				(gMessager sel_295: 1 0 1 2 self)
 			)
 			(2
-				(gLb2Messager sel_295: 1 0 1 3 self)
+				(gMessager sel_295: 1 0 1 3 self)
 			)
 			(3
-				(gLb2Messager sel_295: 1 0 1 4 self)
+				(gMessager sel_295: 1 0 1 4 self)
 			)
 			(4
-				(gLb2Messager sel_295: 1 0 1 5 self)
+				(gMessager sel_295: 1 0 1 5 self)
 			)
 			(5
-				(gLb2Messager sel_295: 1 0 1 6 self)
+				(gMessager sel_295: 1 0 1 6 self)
 			)
 			(6
-				(gLb2Messager sel_295: 1 0 1 7 self)
+				(gMessager sel_295: 1 0 1 7 self)
 			)
 			(7
 				(sFX sel_40: 615 sel_3: 1 sel_99: 1 sel_39: self)
-				(global2 sel_28: 9 sel_417: 785)
-				(global2 sel_422: inDagger)
+				(gCurRoom sel_28: 9 sel_417: 785)
+				(gCurRoom sel_422: inDagger)
 				(= sel_136 10)
 			)
 			(8
-				(gLb2Messager sel_295: 1 0 1 8)
+				(gMessager sel_295: 1 0 1 8)
 			)
 			(9
-				(global2 sel_417: (global2 sel_408?))
+				(gCurRoom sel_417: (gCurRoom sel_408:))
 				(inDagger sel_111:)
 				(= sel_136 5)
 			)
 			(10
 				(dagger sel_111:)
 				(gEgo sel_350: 11)
-				((ScriptID 21 0) sel_57: 780)
-				(proc0_3 22)
-				(proc0_3 155)
+				((ScriptID 21 0) sel_57: 780) ; addCluesCode
+				(SetFlag 22)
+				(SetFlag 155)
 				(gGame sel_87: 1 155)
-				((ScriptID 22 0) sel_57: 128)
+				((ScriptID 22 0) sel_57: 128) ; triggerAndClock
 				(= sel_136 1)
 			)
 			(11
-				(if (proc0_10 8512)
-					(global2 sel_399: 26)
+				(if (TimeCheck $2140) ; has 2:15 am occurred?
+					(gCurRoom sel_399: 26)
 				else
-					(if (proc0_2 20) (proc0_3 21) else (proc0_3 20))
-					(global2 sel_399: 610)
+					(if (IsFlag 20)
+						(SetFlag 21)
+					else
+						(SetFlag 20)
+					)
+					(gCurRoom sel_399: 610)
 				)
 				(self sel_111:)
 			)
@@ -659,11 +672,11 @@
 	(properties
 		sel_20 {sFallInVat}
 	)
-	
-	(method (sel_144 theSel_29)
-		(switch (= sel_29 theSel_29)
+
+	(method (sel_144 param1)
+		(switch (= sel_29 param1)
 			(0
-				(gLb2Messager sel_295: 1 0 3)
+				(gMessager sel_295: 1 0 3)
 				(= sel_139 45)
 			)
 			(1
@@ -677,7 +690,7 @@
 				(gEgo
 					sel_63: 10
 					sel_161: 0
-					sel_312: MoveTo (localproc_145d 181) 142 self
+					sel_312: MoveTo (localproc_0 181) 142 self
 				)
 			)
 			(4
@@ -688,9 +701,9 @@
 				(= sel_139 120)
 			)
 			(6
-				(= global145 5)
+				(= global145 5) ; "You're in a heck of a pickle now!"
 				(gGameMusic2 sel_170:)
-				(global2 sel_399: 99)
+				(gCurRoom sel_399: 99)
 				(self sel_111:)
 			)
 		)
@@ -701,12 +714,18 @@
 	(properties
 		sel_20 {sSparkle}
 	)
-	
-	(method (sel_144 theSel_29)
-		(switch (= sel_29 theSel_29)
-			(0 (= sel_139 180))
-			(1 (spark sel_161: End self))
-			(2 (self sel_111:))
+
+	(method (sel_144 param1)
+		(switch (= sel_29 param1)
+			(0
+				(= sel_139 180)
+			)
+			(1
+				(spark sel_161: End self)
+			)
+			(2
+				(self sel_111:)
+			)
 		)
 	)
 )
@@ -829,7 +848,7 @@
 		sel_0 3
 		sel_560 1
 	)
-	
+
 	(method (sel_110)
 		(super sel_110: &rest)
 		(spark sel_110:)

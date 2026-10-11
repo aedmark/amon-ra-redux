@@ -1,19 +1,20 @@
 ;;; Sierra Script 1.0 - (do not remove this comment)
+;;; Decompiled by sluicebox
 (script# 740)
 (include sci.sh)
 (use Main)
-(use LBRoom)
-(use RTRandCycle)
+(use eRS)
+(use Talker)
 (use PChase)
 (use Osc)
 (use PolyPath)
-(use CueObj)
-(use n958)
+(use Feature)
+(use LoadMany)
 (use Sound)
 (use Jump)
-(use Cycle)
-(use View)
-(use Obj)
+(use Motion)
+(use Actor)
+(use System)
 
 (public
 	rm740 0
@@ -28,6 +29,7 @@
 	local5
 	local6
 )
+
 (instance rm740 of LBRoom
 	(properties
 		sel_20 {rm740}
@@ -36,23 +38,18 @@
 		sel_409 480
 		sel_412 730
 	)
-	
+
 	(method (sel_110)
-		(global2 sel_259: (List sel_109:))
-		((ScriptID 2740 0) sel_57: (global2 sel_259?))
-		(gEgo
-			sel_110:
-			sel_585: 732
-			sel_316: 1
-			sel_299: egoActions
-		)
+		(gCurRoom sel_259: (List sel_109:))
+		((ScriptID 2740 0) sel_57: (gCurRoom sel_259:)) ; poly2740Code
+		(gEgo sel_110: sel_585: 732 sel_316: 1 sel_299: egoActions)
 		(gGame sel_587:)
-		(proc958_0 128 734 742 812 745)
-		(proc958_0 132 736 52)
+		(LoadMany rsVIEW 734 742 812 745)
+		(LoadMany rsSOUND 736 52)
 		(Palette palSET_INTENSITY 0 255 0)
 		(super sel_110:)
 		(sFXRats sel_39:)
-		(gIconBar sel_233: 7)
+		(gTheIconBar sel_233: 7)
 		(= local0 1)
 		(steve sel_110:)
 		(rat1 sel_110: sel_161: RTRandCycle)
@@ -64,67 +61,73 @@
 		(wall sel_110:)
 		(furnaceExit sel_110:)
 		(tRexExit sel_110:)
-		(gLb2DH sel_118: self)
-		(gLb2WH sel_118: self)
+		(gDirectionHandler sel_118: self)
+		(gWalkHandler sel_118: self)
 		(self sel_146: sEnterSouth)
 	)
-	
+
 	(method (sel_57)
 		(super sel_57:)
 		(if local0
-			(Palette palSET_INTENSITY 0 255 (= local1 (+ local1 2)))
+			(Palette palSET_INTENSITY 0 255 (+= local1 2))
 			(if (>= local1 100)
 				(= local0 0)
 				(steve sel_146: sGunShots)
 			)
 		)
-		(cond 
+		(cond
 			(sel_142)
-			((proc0_1 gEgo 2) (self sel_146: sBurnEm))
-			((proc0_1 gEgo 4) (self sel_146: sGoTRex))
-			(
-			(and (> (gEgo sel_1?) 211) (== (gEgo sel_2?) 732)) (gEgo sel_2: 745 sel_244: 6 sel_53: 6 sel_51: 3))
-			(
-			(and (< (gEgo sel_1?) 212) (== (gEgo sel_2?) 745)) (gEgo sel_2: 732 sel_244: 4 sel_53: 4 sel_51: 2))
-		)
-	)
-	
-	(method (sel_111)
-		(proc958_0 0 930 991)
-		(gLb2DH sel_81: self)
-		(gLb2WH sel_81: self)
-		(DisposeScript 2740)
-		(gSel_608 sel_170:)
-		(super sel_111:)
-	)
-	
-	(method (sel_133 param1)
-		(return
-			(cond 
-				(
-					(and
-						(& (param1 sel_31?) $0040)
-						(== (gIconBar sel_207?) (gIconBar sel_228?))
-						(or
-							(== (param1 sel_37?) 7)
-							(== (param1 sel_37?) 8)
-							(== (param1 sel_37?) 6)
-						)
-					)
-					(param1 sel_73: 1)
-				)
-				((& (param1 sel_31?) $1000)
-					(if (< gSel_1 (gEgo sel_1?))
-						(param1 sel_73: 1)
-					else
-						(return 0)
-					)
-				)
-				(else (return 0))
+			((StepOn gEgo 2)
+				(self sel_146: sBurnEm)
+			)
+			((StepOn gEgo 4)
+				(self sel_146: sGoTRex)
+			)
+			((and (> (gEgo sel_1:) 211) (== (gEgo sel_2:) 732))
+				(gEgo sel_2: 745 sel_244: 6 sel_53: 6 sel_51: 3)
+			)
+			((and (< (gEgo sel_1:) 212) (== (gEgo sel_2:) 745))
+				(gEgo sel_2: 732 sel_244: 4 sel_53: 4 sel_51: 2)
 			)
 		)
 	)
-	
+
+	(method (sel_111)
+		(LoadMany 0 930 991)
+		(gDirectionHandler sel_81: self)
+		(gWalkHandler sel_81: self)
+		(DisposeScript 2740)
+		(gGameMusic1 sel_170:)
+		(super sel_111:)
+	)
+
+	(method (sel_133 param1)
+		(cond
+			(
+				(and
+					(& (param1 sel_31:) $0040)
+					(== (gTheIconBar sel_207:) (gTheIconBar sel_228:))
+					(or
+						(== (param1 sel_37:) 7)
+						(== (param1 sel_37:) 8)
+						(== (param1 sel_37:) 6)
+					)
+				)
+				(param1 sel_73: 1)
+			)
+			((& (param1 sel_31:) $1000)
+				(if (< gMouseX (gEgo sel_1:))
+					(param1 sel_73: 1)
+				else
+					(return 0)
+				)
+			)
+			(else
+				(return 0)
+			)
+		)
+	)
+
 	(method (sel_145)
 		(gGameMusic2 sel_40: 16 sel_3: -1 sel_99: 1 sel_39:)
 	)
@@ -134,18 +137,22 @@
 	(properties
 		sel_20 {sGunShots}
 	)
-	
-	(method (sel_144 theSel_29)
-		(switch (= sel_29 theSel_29)
+
+	(method (sel_144 param1)
+		(switch (= sel_29 param1)
 			(0
 				(sFX sel_40: 52 sel_99: 5 sel_39: self)
 			)
-			(1 (= sel_139 30))
-			(2 (sFX sel_39: self))
+			(1
+				(= sel_139 30)
+			)
+			(2
+				(sFX sel_39: self)
+			)
 			(3
-				(gLb2Messager sel_295: 8 0 0 0 global2)
+				(gMessager sel_295: 8 0 0 0 gCurRoom)
 				(gGame sel_588:)
-				(gIconBar sel_233: 7)
+				(gTheIconBar sel_233: 7)
 				(self sel_111:)
 			)
 		)
@@ -156,9 +163,9 @@
 	(properties
 		sel_20 {sEnterSouth}
 	)
-	
-	(method (sel_144 theSel_29)
-		(switch (= sel_29 theSel_29)
+
+	(method (sel_144 param1)
+		(switch (= sel_29 param1)
 			(0
 				(steve
 					sel_155: 0
@@ -191,9 +198,9 @@
 	(properties
 		sel_20 {sBurnEm}
 	)
-	
-	(method (sel_144 theSel_29)
-		(switch (= sel_29 theSel_29)
+
+	(method (sel_144 param1)
+		(switch (= sel_29 param1)
 			(0
 				(gGame sel_587:)
 				(gEgo
@@ -214,7 +221,11 @@
 					sel_53: 3
 					sel_52: 4
 					sel_161: 0
-					sel_312: MoveTo (gEgo sel_1?) (+ (gEgo sel_0?) 15) self
+					sel_312:
+						MoveTo
+						(gEgo sel_1:)
+						(+ (gEgo sel_0:) 15)
+						self
 				)
 			)
 			(2
@@ -230,26 +241,32 @@
 					sel_63: 5
 					sel_53: 3
 					sel_52: 4
-					sel_312: MoveTo (steve sel_1?) (+ (steve sel_0?) 40) self
+					sel_312: MoveTo (steve sel_1:) (+ (steve sel_0:) 40) self
 				)
 			)
-			(5 (= sel_139 120))
+			(5
+				(= sel_139 120)
+			)
 			(6
-				(gSel_608 sel_40: 736 sel_99: 1 sel_3: 1 sel_39:)
+				(gGameMusic1 sel_40: 736 sel_99: 1 sel_3: 1 sel_39:)
 				(furnaceExit sel_161: Osc 1 self)
 			)
-			(7 (= sel_139 120))
+			(7
+				(= sel_139 120)
+			)
 			(8
-				(gSel_608 sel_40: 736 sel_99: 1 sel_3: 1 sel_39:)
+				(gGameMusic1 sel_40: 736 sel_99: 1 sel_3: 1 sel_39:)
 				(furnaceExit sel_161: CT 4 1 self)
 			)
 			(9
 				(furnaceExit sel_161: Beg self)
 			)
-			(10 (= sel_137 3))
+			(10
+				(= sel_137 3)
+			)
 			(11
-				(= global145 2)
-				(global2 sel_399: 99)
+				(= global145 2) ; "If you can't stand the heat, stay out of the furnace!"
+				(gCurRoom sel_399: 99)
 				(self sel_111:)
 			)
 		)
@@ -260,9 +277,9 @@
 	(properties
 		sel_20 {sGoTRex}
 	)
-	
-	(method (sel_144 theSel_29)
-		(switch (= sel_29 theSel_29)
+
+	(method (sel_144 param1)
+		(switch (= sel_29 param1)
 			(0
 				(gGame sel_587:)
 				(gEgo
@@ -283,7 +300,7 @@
 					sel_155: 2
 					sel_244: 10
 					sel_161: End self
-					sel_312: MoveTo (gEgo sel_1?) (- (gEgo sel_0?) 2)
+					sel_312: MoveTo (gEgo sel_1:) (- (gEgo sel_0:) 2)
 				)
 			)
 			(3
@@ -291,7 +308,7 @@
 				(= sel_136 2)
 			)
 			(4
-				(global2 sel_399: (global2 sel_409?))
+				(gCurRoom sel_399: (gCurRoom sel_409:))
 				(self sel_111:)
 			)
 		)
@@ -302,21 +319,31 @@
 	(properties
 		sel_20 {sRat3Movement}
 	)
-	
-	(method (sel_144 theSel_29)
-		(switch (= sel_29 theSel_29)
-			(0 (= sel_137 2))
+
+	(method (sel_144 param1)
+		(switch (= sel_29 param1)
+			(0
+				(= sel_137 2)
+			)
 			(1
 				(rat3
 					sel_3: 1
 					sel_161: Walk
 					sel_244: 6
-					sel_312: MoveTo (- (rat3 sel_1?) 30) (+ (rat3 sel_0?) 16) self
+					sel_312:
+						MoveTo
+						(- (rat3 sel_1:) 30)
+						(+ (rat3 sel_0:) 16)
+						self
 				)
 			)
 			(2
 				(rat3
-					sel_312: MoveTo (+ (rat3 sel_1?) 30) (- (rat3 sel_0?) 16) self
+					sel_312:
+						MoveTo
+						(+ (rat3 sel_1:) 30)
+						(- (rat3 sel_0:) 16)
+						self
 				)
 			)
 			(3
@@ -332,20 +359,28 @@
 	(properties
 		sel_20 {sRat4Movement}
 	)
-	
-	(method (sel_144 theSel_29)
-		(switch (= sel_29 theSel_29)
+
+	(method (sel_144 param1)
+		(switch (= sel_29 param1)
 			(0
 				(rat4
 					sel_3: 1
 					sel_161: Walk
 					sel_244: 6
-					sel_312: MoveTo (- (rat4 sel_1?) 36) (+ (rat4 sel_0?) 21) self
+					sel_312:
+						MoveTo
+						(- (rat4 sel_1:) 36)
+						(+ (rat4 sel_0:) 21)
+						self
 				)
 			)
 			(1
 				(rat4
-					sel_312: MoveTo (+ (rat4 sel_1?) 36) (- (rat4 sel_0?) 21) self
+					sel_312:
+						MoveTo
+						(+ (rat4 sel_1:) 36)
+						(- (rat4 sel_0:) 21)
+						self
 				)
 			)
 			(2
@@ -361,20 +396,28 @@
 	(properties
 		sel_20 {sRat5Movement}
 	)
-	
-	(method (sel_144 theSel_29)
-		(switch (= sel_29 theSel_29)
+
+	(method (sel_144 param1)
+		(switch (= sel_29 param1)
 			(0
 				(rat5
 					sel_3: 1
 					sel_161: Walk
 					sel_244: 6
-					sel_312: MoveTo (- (rat5 sel_1?) 40) (+ (rat5 sel_0?) 22) self
+					sel_312:
+						MoveTo
+						(- (rat5 sel_1:) 40)
+						(+ (rat5 sel_0:) 22)
+						self
 				)
 			)
 			(1
 				(rat5
-					sel_312: MoveTo (+ (rat5 sel_1?) 40) (- (rat5 sel_0?) 22) self
+					sel_312:
+						MoveTo
+						(+ (rat5 sel_1:) 40)
+						(- (rat5 sel_0:) 22)
+						self
 				)
 			)
 			(2
@@ -422,9 +465,9 @@
 	(properties
 		sel_20 {sKillLaura}
 	)
-	
-	(method (sel_144 theSel_29)
-		(switch (= sel_29 theSel_29)
+
+	(method (sel_144 param1)
+		(switch (= sel_29 param1)
 			(0
 				(gGame sel_587:)
 				(gGameMusic2 sel_40: 3 sel_3: 1 sel_99: 1 sel_39:)
@@ -434,7 +477,7 @@
 				(rat3
 					sel_155: 9
 					sel_63: 15
-					sel_312: MoveTo (rat3 sel_1?) (- (rat3 sel_0?) 24) self
+					sel_312: MoveTo (rat3 sel_1:) (- (rat3 sel_0:) 24) self
 				)
 				(rat4 sel_155: 3 sel_161: Fwd sel_312: 0)
 				(rat5 sel_155: 3 sel_161: Fwd sel_312: 0)
@@ -449,7 +492,7 @@
 				)
 				(rat3
 					sel_155: 10
-					sel_312: MoveTo (rat3 sel_1?) (+ (rat3 sel_0?) 24) self
+					sel_312: MoveTo (rat3 sel_1:) (+ (rat3 sel_0:) 24) self
 				)
 			)
 			(2
@@ -468,15 +511,15 @@
 	(properties
 		sel_20 {sKillSteve}
 	)
-	
-	(method (sel_144 theSel_29)
-		(switch (= sel_29 theSel_29)
+
+	(method (sel_144 param1)
+		(switch (= sel_29 param1)
 			(0
 				(= local6 1)
 				(rat1 sel_155: 3 sel_161: Fwd sel_312: 0)
 				(rat2 sel_155: 3 sel_161: Fwd sel_312: 0)
 				(rat3
-					sel_312: MoveTo (- (rat3 sel_1?) 7) (+ (rat3 sel_0?) 4) self
+					sel_312: MoveTo (- (rat3 sel_1:) 7) (+ (rat3 sel_0:) 4) self
 				)
 				(rat4 sel_155: 3 sel_161: Fwd sel_312: 0)
 				(rat5 sel_155: 3 sel_161: Fwd sel_312: 0)
@@ -485,7 +528,7 @@
 				(rat3
 					sel_155: 9
 					sel_63: 15
-					sel_312: MoveTo (rat3 sel_1?) (- (rat3 sel_0?) 18) self
+					sel_312: MoveTo (rat3 sel_1:) (- (rat3 sel_0:) 18) self
 				)
 			)
 			(2
@@ -499,7 +542,7 @@
 				)
 				(rat3
 					sel_155: 10
-					sel_312: MoveTo (rat3 sel_1?) (+ (rat3 sel_0?) 18) self
+					sel_312: MoveTo (rat3 sel_1:) (+ (rat3 sel_0:) 18) self
 				)
 			)
 			(3
@@ -507,8 +550,8 @@
 				(gGameMusic2 sel_170: self)
 			)
 			(4
-				(= global145 8)
-				(global2 sel_399: 99)
+				(= global145 8) ; "You have a gnawing feeling you've made a horrible mistake. Rats!"
+				(gCurRoom sel_399: 99)
 				(self sel_111:)
 			)
 		)
@@ -519,24 +562,24 @@
 	(properties
 		sel_20 {sRatsEatCheese}
 	)
-	
-	(method (sel_144 theSel_29)
-		(switch (= sel_29 theSel_29)
+
+	(method (sel_144 param1)
+		(switch (= sel_29 param1)
 			(0
 				(gGame sel_587:)
 				(rat1 sel_155: 3 sel_161: Fwd sel_312: 0)
 				(rat2 sel_155: 3 sel_161: Fwd sel_312: 0)
-				(if (rat3 sel_142?)
+				(if (rat3 sel_142:)
 					(rat3 sel_146: sRat3Return)
 				else
 					(rat3 sel_155: 3 sel_161: Fwd sel_312: 0)
 				)
-				(if (rat4 sel_142?)
+				(if (rat4 sel_142:)
 					(rat4 sel_146: sRat4Return)
 				else
 					(rat4 sel_155: 3 sel_161: Fwd sel_312: 0)
 				)
-				(if (rat5 sel_142?)
+				(if (rat5 sel_142:)
 					(rat5 sel_146: sRat5Return)
 				else
 					(rat5 sel_155: 3 sel_161: Fwd sel_312: 0)
@@ -553,17 +596,17 @@
 				(gEgo sel_161: Beg)
 				(cheese
 					sel_110:
-					sel_153: (+ (gEgo sel_1?) 30) (- (gEgo sel_0?) 31)
-					sel_312: JumpTo (- (rat2 sel_1?) 2) (+ (rat2 sel_0?) 1) self
+					sel_153: (+ (gEgo sel_1:) 30) (- (gEgo sel_0:) 31)
+					sel_312: JumpTo (- (rat2 sel_1:) 2) (+ (rat2 sel_0:) 1) self
 				)
 			)
 			(2
 				(gEgo sel_351: 16)
-				((ScriptID 21 1) sel_57: 785)
+				((ScriptID 21 1) sel_57: 785) ; dropCluesCode
 				(= sel_139 90)
 			)
 			(3
-				(gLb2Messager sel_295: 4 27)
+				(gMessager sel_295: 4 27)
 				(cheese sel_111:)
 				(gEgo sel_2: 732 sel_155: 0 sel_156: 0)
 				(rat1
@@ -606,9 +649,9 @@
 	(properties
 		sel_20 {sRat3Return}
 	)
-	
-	(method (sel_144 theSel_29)
-		(switch (= sel_29 theSel_29)
+
+	(method (sel_144 param1)
+		(switch (= sel_29 param1)
 			(0
 				(rat3 sel_312: MoveTo 177 111 self)
 			)
@@ -624,9 +667,9 @@
 	(properties
 		sel_20 {sRat4Return}
 	)
-	
-	(method (sel_144 theSel_29)
-		(switch (= sel_29 theSel_29)
+
+	(method (sel_144 param1)
+		(switch (= sel_29 param1)
 			(0
 				(rat4 sel_312: MoveTo 187 101 self)
 			)
@@ -642,9 +685,9 @@
 	(properties
 		sel_20 {sRat5Return}
 	)
-	
-	(method (sel_144 theSel_29)
-		(switch (= sel_29 theSel_29)
+
+	(method (sel_144 param1)
+		(switch (= sel_29 param1)
 			(0
 				(rat5 sel_312: MoveTo 195 101 self)
 			)
@@ -660,9 +703,9 @@
 	(properties
 		sel_20 {sRatsEnterFurnace}
 	)
-	
-	(method (sel_144 theSel_29)
-		(switch (= sel_29 theSel_29)
+
+	(method (sel_144 param1)
+		(switch (= sel_29 param1)
 			(0
 				(gGame sel_587:)
 				(rat1 sel_155: 3 sel_161: Fwd sel_312: 0)
@@ -682,7 +725,7 @@
 				(gEgo sel_161: Beg)
 				(cheese
 					sel_110:
-					sel_153: (+ (gEgo sel_1?) 30) (- (gEgo sel_0?) 31)
+					sel_153: (+ (gEgo sel_1:) 30) (- (gEgo sel_0:) 31)
 					sel_53: 6
 					sel_63: 5
 					sel_312: JumpTo 245 108 self
@@ -691,12 +734,8 @@
 			(2
 				(cheese sel_111:)
 				(gEgo sel_2: 732 sel_155: 0 sel_161: Walk sel_351: 16)
-				((ScriptID 21 1) sel_57: 785)
-				(rat1
-					sel_155: 0
-					sel_161: Walk
-					sel_312: MoveTo 194 105 self
-				)
+				((ScriptID 21 1) sel_57: 785) ; dropCluesCode
+				(rat1 sel_155: 0 sel_161: Walk sel_312: MoveTo 194 105 self)
 			)
 			(3
 				(rat1 sel_155: 4 sel_312: MoveTo 211 104 self)
@@ -709,22 +748,14 @@
 			)
 			(6
 				(rat1 sel_111:)
-				(rat2
-					sel_155: 0
-					sel_161: Walk
-					sel_312: MoveTo 190 107 self
-				)
+				(rat2 sel_155: 0 sel_161: Walk sel_312: MoveTo 190 107 self)
 			)
 			(7
 				(rat2 sel_161: Fwd sel_63: 5 sel_312: JumpTo 238 117 self)
 			)
 			(8
 				(rat2 sel_111:)
-				(rat3
-					sel_155: 0
-					sel_161: Walk
-					sel_312: MoveTo 194 105 self
-				)
+				(rat3 sel_155: 0 sel_161: Walk sel_312: MoveTo 194 105 self)
 			)
 			(9
 				(rat3 sel_155: 4 sel_312: MoveTo 228 98 self)
@@ -742,11 +773,7 @@
 			)
 			(12
 				(rat3 sel_111:)
-				(rat4
-					sel_155: 0
-					sel_161: Walk
-					sel_312: MoveTo 194 105 self
-				)
+				(rat4 sel_155: 0 sel_161: Walk sel_312: MoveTo 194 105 self)
 			)
 			(13
 				(rat4 sel_155: 4 sel_312: MoveTo 211 104 self)
@@ -763,11 +790,7 @@
 			)
 			(17
 				(rat4 sel_111:)
-				(rat5
-					sel_155: 0
-					sel_161: Walk
-					sel_312: MoveTo 190 107 self
-				)
+				(rat5 sel_155: 0 sel_161: Walk sel_312: MoveTo 190 107 self)
 			)
 			(18
 				(rat5
@@ -781,7 +804,7 @@
 			(19
 				(rat5 sel_111:)
 				(sFXRats sel_170:)
-				(gLb2Messager sel_295: 7 0 8)
+				(gMessager sel_295: 7 0 8)
 				(= local2 1)
 				(gGame sel_588:)
 				(self sel_111:)
@@ -794,9 +817,9 @@
 	(properties
 		sel_20 {sRatsEnterRex}
 	)
-	
-	(method (sel_144 theSel_29)
-		(switch (= sel_29 theSel_29)
+
+	(method (sel_144 param1)
+		(switch (= sel_29 param1)
 			(0
 				(gGame sel_587:)
 				(rat1 sel_155: 3 sel_161: Fwd sel_312: 0)
@@ -816,7 +839,7 @@
 				(gEgo sel_161: Beg)
 				(cheese
 					sel_110:
-					sel_153: (+ (gEgo sel_1?) 30) (- (gEgo sel_0?) 31)
+					sel_153: (+ (gEgo sel_1:) 30) (- (gEgo sel_0:) 31)
 					sel_53: 6
 					sel_63: 5
 					sel_312: JumpTo 295 105 self
@@ -825,12 +848,8 @@
 			(2
 				(cheese sel_111:)
 				(gEgo sel_2: 732 sel_155: 0 sel_161: Walk sel_351: 16)
-				((ScriptID 21 1) sel_57: 785)
-				(rat1
-					sel_155: 0
-					sel_161: Walk
-					sel_312: MoveTo 194 105 self
-				)
+				((ScriptID 21 1) sel_57: 785) ; dropCluesCode
+				(rat1 sel_155: 0 sel_161: Walk sel_312: MoveTo 194 105 self)
 			)
 			(3
 				(rat1 sel_155: 4 sel_312: MoveTo 266 103 self)
@@ -843,22 +862,14 @@
 			)
 			(6
 				(rat1 sel_111:)
-				(rat2
-					sel_155: 0
-					sel_161: Walk
-					sel_312: MoveTo 190 107 self
-				)
+				(rat2 sel_155: 0 sel_161: Walk sel_312: MoveTo 190 107 self)
 			)
 			(7
 				(rat2 sel_161: Fwd sel_63: 5 sel_312: JumpTo 291 112 self)
 			)
 			(8
 				(rat2 sel_111:)
-				(rat3
-					sel_155: 0
-					sel_161: Walk
-					sel_312: MoveTo 194 105 self
-				)
+				(rat3 sel_155: 0 sel_161: Walk sel_312: MoveTo 194 105 self)
 			)
 			(9
 				(rat3 sel_155: 4 sel_312: MoveTo 266 103 self)
@@ -879,11 +890,7 @@
 			)
 			(13
 				(rat3 sel_111:)
-				(rat4
-					sel_155: 0
-					sel_161: Walk
-					sel_312: MoveTo 194 105 self
-				)
+				(rat4 sel_155: 0 sel_161: Walk sel_312: MoveTo 194 105 self)
 			)
 			(14
 				(rat4 sel_155: 4 sel_312: MoveTo 271 103 self)
@@ -900,11 +907,7 @@
 			)
 			(18
 				(rat4 sel_111:)
-				(rat5
-					sel_155: 0
-					sel_161: Walk
-					sel_312: MoveTo 190 107 self
-				)
+				(rat5 sel_155: 0 sel_161: Walk sel_312: MoveTo 190 107 self)
 			)
 			(19
 				(rat5
@@ -918,11 +921,11 @@
 			(20
 				(rat5 sel_111:)
 				(sFXRats sel_170:)
-				(gLb2Messager sel_295: 7 0 9)
+				(gMessager sel_295: 7 0 9)
 				(= local2 1)
-				(proc0_3 46)
+				(SetFlag 46)
 				(gGame sel_588:)
-				(gIconBar sel_233: 7)
+				(gTheIconBar sel_233: 7)
 				(self sel_111:)
 			)
 		)
@@ -933,13 +936,13 @@
 	(properties
 		sel_20 {egoActions}
 	)
-	
+
 	(method (sel_300 param1)
 		(switch param1
 			(27
-				(gLb2Messager sel_295: 6 27)
+				(gMessager sel_295: 6 27)
 			)
-			(else  0)
+			(else 0)
 		)
 	)
 )
@@ -953,43 +956,38 @@
 		sel_2 733
 		sel_14 16384
 	)
-	
+
 	(method (sel_57)
 		(super sel_57:)
-		(cond 
+		(cond
 			(sel_142)
-			(
-			(and (> (self sel_1?) 211) (== (self sel_2?) 733))
-				(self
-					sel_2: 812
-					sel_244: 6
-					sel_53: 6
-					sel_51: 3
-					sel_103: 1
-				)
+			((and (> (self sel_1:) 211) (== (self sel_2:) 733))
+				(self sel_2: 812 sel_244: 6 sel_53: 6 sel_51: 3 sel_103: 1)
 			)
 		)
 	)
-	
+
 	(method (sel_300 param1)
 		(switch param1
 			(1
-				(gLb2Messager sel_295: 1 1 27 0 0 1887)
+				(gMessager sel_295: 1 1 27 0 0 1887)
 			)
 			(4
-				(gLb2Messager sel_295: 1 4 27 0 0 1887)
+				(gMessager sel_295: 1 4 27 0 0 1887)
 			)
 			(8
-				(gLb2Messager sel_295: 1 8 27 0 0 1887)
+				(gMessager sel_295: 1 8 27 0 0 1887)
 			)
 			(2
 				(if local2
-					(gLb2Messager sel_295: 5 2 7)
+					(gMessager sel_295: 5 2 7)
 				else
 					(switch local4
-						(0 (gLb2Messager sel_295: 5 2))
-						(else 
-							(gLb2Messager sel_295: 5 2 6)
+						(0
+							(gMessager sel_295: 5 2)
+						)
+						(else
+							(gMessager sel_295: 5 2 6)
 						)
 					)
 					(++ local4)
@@ -997,10 +995,12 @@
 			)
 			(27
 				(gEgo sel_351: 16)
-				((ScriptID 21 1) sel_57: 785)
-				(gLb2Messager sel_295: 5 27)
+				((ScriptID 21 1) sel_57: 785) ; dropCluesCode
+				(gMessager sel_295: 5 27)
 			)
-			(else  (super sel_300: param1))
+			(else
+				(super sel_300: param1)
+			)
 		)
 	)
 )
@@ -1028,7 +1028,7 @@
 		sel_244 18
 		sel_53 4
 	)
-	
+
 	(method (sel_300)
 		(rat3 sel_300: &rest)
 	)
@@ -1046,7 +1046,7 @@
 		sel_244 18
 		sel_53 4
 	)
-	
+
 	(method (sel_300)
 		(rat3 sel_300: &rest)
 	)
@@ -1064,50 +1064,52 @@
 		sel_244 18
 		sel_53 4
 	)
-	
+
 	(method (sel_57)
 		(super sel_57:)
-		(cond 
+		(cond
 			(sel_142)
 			(
 				(and
 					(< (self sel_255: gEgo) 5)
-					(== (gEgo sel_2?) 732)
+					(== (gEgo sel_2:) 732)
 					(not local5)
 				)
-				(global2 sel_146: sKillLaura)
+				(gCurRoom sel_146: sKillLaura)
 			)
 			(
 				(and
 					(< (self sel_255: steve) 10)
-					(== (steve sel_2?) 733)
+					(== (steve sel_2:) 733)
 					(not local6)
 				)
-				(global2 sel_146: sKillSteve)
+				(gCurRoom sel_146: sKillSteve)
 			)
 		)
 	)
-	
+
 	(method (sel_300 param1)
 		(switch param1
 			(1
 				(switch local3
 					(0
-						(gLb2Messager sel_295: 4 1 3)
+						(gMessager sel_295: 4 1 3)
 					)
 					(1
-						(gLb2Messager sel_295: 4 1 4)
+						(gMessager sel_295: 4 1 4)
 					)
-					(else 
-						(gLb2Messager sel_295: 4 1 5)
+					(else
+						(gMessager sel_295: 4 1 5)
 					)
 				)
 				(++ local3)
 			)
 			(27
-				(global2 sel_146: sRatsEatCheese)
+				(gCurRoom sel_146: sRatsEatCheese)
 			)
-			(else  (super sel_300: param1))
+			(else
+				(super sel_300: param1)
+			)
 		)
 	)
 )
@@ -1124,7 +1126,7 @@
 		sel_244 18
 		sel_53 4
 	)
-	
+
 	(method (sel_300)
 		(rat3 sel_300: &rest)
 	)
@@ -1142,7 +1144,7 @@
 		sel_244 18
 		sel_53 4
 	)
-	
+
 	(method (sel_300)
 		(rat3 sel_300: &rest)
 	)
@@ -1157,24 +1159,26 @@
 		sel_2 744
 		sel_14 16385
 	)
-	
+
 	(method (sel_300 param1)
 		(switch param1
 			(1
-				(if (< (gEgo sel_1?) 202)
-					(gLb2Messager sel_295: 3 1 1)
+				(if (< (gEgo sel_1:) 202)
+					(gMessager sel_295: 3 1 1)
 				else
-					(gLb2Messager sel_295: 3 1 2)
+					(gMessager sel_295: 3 1 2)
 				)
 			)
 			(27
 				(if local2
 					(super sel_300: param1)
 				else
-					(global2 sel_146: sRatsEnterFurnace)
+					(gCurRoom sel_146: sRatsEnterFurnace)
 				)
 			)
-			(else  (super sel_300: param1))
+			(else
+				(super sel_300: param1)
+			)
 		)
 	)
 )
@@ -1190,24 +1194,26 @@
 		sel_8 103
 		sel_9 304
 	)
-	
+
 	(method (sel_300 param1)
 		(switch param1
 			(1
-				(if (< (gEgo sel_1?) 202)
-					(gLb2Messager sel_295: 2 1 1)
+				(if (< (gEgo sel_1:) 202)
+					(gMessager sel_295: 2 1 1)
 				else
-					(gLb2Messager sel_295: 2 1 2)
+					(gMessager sel_295: 2 1 2)
 				)
 			)
 			(27
 				(if local2
 					(super sel_300: param1)
 				else
-					(global2 sel_146: sRatsEnterRex)
+					(gCurRoom sel_146: sRatsEnterRex)
 				)
 			)
-			(else  (super sel_300: param1))
+			(else
+				(super sel_300: param1)
+			)
 		)
 	)
 )
@@ -1218,17 +1224,19 @@
 		sel_0 1
 		sel_302 8
 	)
-	
+
 	(method (sel_300 param1)
 		(switch param1
 			(27
 				(if local2
 					(super sel_300: param1)
 				else
-					(global2 sel_146: sRatsEatCheese)
+					(gCurRoom sel_146: sRatsEatCheese)
 				)
 			)
-			(else  (super sel_300: param1))
+			(else
+				(super sel_300: param1)
+			)
 		)
 	)
 )

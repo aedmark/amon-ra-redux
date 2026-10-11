@@ -1,11 +1,12 @@
 ;;; Sierra Script 1.0 - (do not remove this comment)
+;;; Decompiled by sluicebox
 (script# 24)
 (include sci.sh)
 (use Main)
 (use Slider)
-(use IconI)
+(use IconBar)
 (use GameControls)
-(use SysWindow)
+(use Window)
 
 (public
 	lb2GameControls 0
@@ -16,7 +17,7 @@
 	(properties
 		sel_20 {lb2GameControls}
 	)
-	
+
 	(method (sel_110)
 		(= gGameControls self)
 		(self
@@ -41,15 +42,15 @@
 		)
 		(super sel_110: &rest)
 	)
-	
+
 	(method (sel_111)
 		(super sel_111:)
-		(gGame sel_197: gWalkCursor)
+		(gGame sel_197: gNormalCursor)
 		(DisposeScript 934)
 		(DisposeScript 978)
 		(DisposeScript 24)
 	)
-	
+
 	(method (sel_216)
 		(gGame sel_197: 999)
 		(super sel_216: &rest)
@@ -60,24 +61,16 @@
 	(properties
 		sel_20 {gcWin}
 	)
-	
+
 	(method (sel_189 &tmp temp0 [temp1 4] temp5 [temp6 20])
 		(= sel_31 128)
 		(= sel_193 (/ (- 200 (+ (CelHigh 995 1 1) 6)) 2))
 		(= sel_194 (/ (- 320 (+ 191 (CelWide 995 0 1))) 2))
 		(= sel_195
-			(+
-				(CelHigh 995 1 1)
-				6
-				(/ (- 200 (+ (CelHigh 995 1 1) 6)) 2)
-			)
+			(+ (CelHigh 995 1 1) 6 (/ (- 200 (+ (CelHigh 995 1 1) 6)) 2))
 		)
 		(= sel_196
-			(+
-				191
-				(CelWide 995 0 1)
-				(/ (- 320 (+ 191 (CelWide 995 0 1))) 2)
-			)
+			(+ 191 (CelWide 995 0 1) (/ (- 320 (+ 191 (CelWide 995 0 1))) 2))
 		)
 		(= sel_11 (- sel_194 6))
 		(= sel_10 (- sel_193 6))
@@ -87,51 +80,42 @@
 		(super sel_189:)
 		(= temp0 (GetPort))
 		(SetPort 0)
-		(Graph
-			grFILL_BOX
-			sel_193
-			sel_194
-			sel_195
-			sel_196
-			3
-			global151
-			15
-		)
+		(Graph grFILL_BOX sel_193 sel_194 sel_195 sel_196 3 global151 15)
 		(Graph grDRAW_LINE 33 49 33 269 global171 15)
-		(Graph grDRAW_LINE 34 50 34 268 gSel_212 15)
+		(Graph grDRAW_LINE 34 50 34 268 global168 15)
 		(Graph grDRAW_LINE 35 51 35 267 global170 15)
 		(Graph grDRAW_LINE 33 49 166 49 global171 15)
-		(Graph grDRAW_LINE 34 50 165 50 gSel_212 15)
+		(Graph grDRAW_LINE 34 50 165 50 global168 15)
 		(Graph grDRAW_LINE 35 51 164 51 global170 15)
 		(Graph grDRAW_LINE 166 49 166 269 global171 15)
-		(Graph grDRAW_LINE 165 50 165 268 gSel_212 15)
+		(Graph grDRAW_LINE 165 50 165 268 global168 15)
 		(Graph grDRAW_LINE 164 51 164 267 global170 15)
 		(Graph grDRAW_LINE 33 269 166 269 global171 15)
-		(Graph grDRAW_LINE 34 268 165 268 gSel_212 15)
+		(Graph grDRAW_LINE 34 268 165 268 global168 15)
 		(Graph grDRAW_LINE 35 267 164 267 global170 15)
-		(DrawCel 995 0 6 155 (proc0_11 42 45 45 45 45) temp5)
-		(DrawCel 995 1 1 56 39 temp5)
-		(DrawCel 995 1 0 146 73 temp5)
-		(DrawCel 995 1 0 186 73 temp5)
-		(DrawCel 995 1 0 226 73 temp5)
-		(DrawCel 995 0 4 116 (proc0_11 58 60 60 60 60) temp5)
+		(DrawCel 995 0 6 155 (Localize 42 45 45 45 45) temp5) ; UNINIT
+		(DrawCel 995 1 1 56 39 temp5) ; UNINIT
+		(DrawCel 995 1 0 146 73 temp5) ; UNINIT
+		(DrawCel 995 1 0 186 73 temp5) ; UNINIT
+		(DrawCel 995 1 0 226 73 temp5) ; UNINIT
+		(DrawCel 995 0 4 116 (Localize 58 60 60 60 60) temp5) ; UNINIT
 		(DrawCel
 			995
 			0
 			3
-			(proc0_11 145 154 154 154 154)
-			(proc0_11 134 60 60 60 60)
-			temp5
+			(Localize 145 154 154 154 154)
+			(Localize 134 60 60 60 60)
+			temp5 ; UNINIT
 		)
 		(DrawCel
 			995
 			0
 			2
-			(proc0_11 178 198 198 198 198)
-			(proc0_11 58 60 60 60 60)
-			temp5
+			(Localize 178 198 198 198 198)
+			(Localize 58 60 60 60 60)
+			temp5 ; UNINIT
 		)
-		(DrawCel 995 0 5 238 (proc0_11 134 60 60 60 60) temp5)
+		(DrawCel 995 0 5 238 (Localize 134 60 60 60 60) temp5) ; UNINIT
 		(Graph grUPDATE_BOX sel_10 sel_11 sel_12 sel_13 1)
 		(SetPort temp0)
 	)
@@ -153,9 +137,11 @@
 		sel_520 1
 		sel_521 5
 	)
-	
+
 	(method (sel_57 param1)
-		(if argc (gGame sel_321: param1))
+		(if argc
+			(gGame sel_321: param1)
+		)
 		(gGame sel_321:)
 	)
 )
@@ -192,14 +178,17 @@
 		sel_511 995
 		sel_520 15
 	)
-	
+
 	(method (sel_57 param1)
-		(if argc (gEgo sel_352: param1) (= global3 param1))
-		(gEgo sel_53?)
+		(if argc
+			(gEgo sel_352: param1)
+			(= gSpeed param1)
+		)
+		(gEgo sel_53:)
 	)
-	
+
 	(method (sel_216)
-		(if (not (gUser sel_343?))
+		(if (not (gUser sel_343:))
 			(= sel_14 132)
 			(= sel_512 9)
 		else
@@ -208,12 +197,13 @@
 		)
 		(super sel_216: &rest)
 	)
-	
-	(method (sel_219)
-	)
-	
+
+	(method (sel_219))
+
 	(method (sel_181)
-		(if (gUser sel_343?) (super sel_181: &rest))
+		(if (gUser sel_343:)
+			(super sel_181: &rest)
+		)
 	)
 )
 
@@ -233,10 +223,12 @@
 		sel_520 24
 		sel_521 1
 	)
-	
+
 	(method (sel_57 param1)
-		(if argc (= global94 param1))
-		(return global94)
+		(if argc
+			(= gTextSpeed param1)
+		)
+		(return gTextSpeed)
 	)
 )
 

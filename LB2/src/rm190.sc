@@ -1,15 +1,16 @@
 ;;; Sierra Script 1.0 - (do not remove this comment)
+;;; Decompiled by sluicebox
 (script# 190)
 (include sci.sh)
 (use Main)
 (use Door)
-(use LBRoom)
+(use eRS)
 (use PolyPath)
 (use Polygon)
-(use n958)
-(use Cycle)
-(use View)
-(use Obj)
+(use LoadMany)
+(use Motion)
+(use Actor)
+(use System)
 
 (public
 	rm190 0
@@ -22,9 +23,9 @@
 		sel_107 400
 		sel_108 143
 	)
-	
+
 	(method (sel_110)
-		(proc958_0 128 809 210 284 212 213)
+		(LoadMany rsVIEW 809 210 284 212 213)
 		(self sel_414: 92)
 		(gEgo sel_585: 803 sel_110:)
 		(super sel_110:)
@@ -89,11 +90,11 @@
 			sel_312: MoveTo 330 184
 		)
 		(car sel_110: sel_155: 0 sel_312: MoveTo 370 181)
-		(global2 sel_146: sIntroCartoon)
+		(gCurRoom sel_146: sIntroCartoon)
 	)
-	
+
 	(method (sel_111)
-		(gSel_608 sel_170: 0 30 12 1)
+		(gGameMusic1 sel_170: 0 30 12 1)
 		(gGameMusic2 sel_170: 0 30 12 1)
 		(super sel_111: &rest)
 	)
@@ -103,20 +104,19 @@
 	(properties
 		sel_20 {sIntroCartoon}
 	)
-	
+
 	(method (sel_57)
 		(super sel_57:)
-		(if
-		(and (== (gSel_608 sel_40?) 94) (== sel_29 7))
+		(if (and (== (gGameMusic1 sel_40:) 94) (== sel_29 7))
 			(self sel_145:)
 		)
 	)
-	
-	(method (sel_144 theSel_29)
-		(switch (= sel_29 theSel_29)
+
+	(method (sel_144 param1)
+		(switch (= sel_29 param1)
 			(0
 				(gEgo sel_3: 7 sel_1: 71 sel_0: 185)
-				((ScriptID 1881 2) sel_203: 1)
+				((ScriptID 1881 2) sel_203: 1) ; Laura
 				(= sel_136 1)
 			)
 			(1
@@ -137,15 +137,21 @@
 				)
 			)
 			(4
-				(gLb2Messager sel_295: 1 0 0 0 self)
+				(gMessager sel_295: 1 0 0 0 self)
 			)
-			(5 (gEgo sel_161: End self))
+			(5
+				(gEgo sel_161: End self)
+			)
 			(6
 				(gEgo sel_585: 803)
 				(gEgo sel_312: PolyPath 40 175 self)
 			)
-			(7 (frontDoor sel_161: End))
-			(8 (global2 sel_399: 220))
+			(7
+				(frontDoor sel_161: End)
+			)
+			(8
+				(gCurRoom sel_399: 220)
+			)
 		)
 	)
 )

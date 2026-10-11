@@ -1,31 +1,33 @@
 ;;; Sierra Script 1.0 - (do not remove this comment)
+;;; Decompiled by sluicebox
 (script# 454)
 (include sci.sh)
 (use Main)
-(use LBRoom)
+(use eRS)
 (use ExitFeature)
 (use Inset)
 (use PChase)
 (use Scaler)
 (use PolyPath)
-(use CueObj)
+(use Feature)
 (use MoveFwd)
-(use n958)
+(use LoadMany)
 (use StopWalk)
 (use Sound)
-(use Cycle)
-(use View)
-(use Obj)
+(use Motion)
+(use Actor)
+(use System)
 
 (public
 	rm454 0
 )
 
 (local
-	local0 =  100
+	local0 = 100
 	local1
 	local2
 )
+
 (instance rm454 of LBRoom
 	(properties
 		sel_20 {rm454}
@@ -35,12 +37,12 @@
 		sel_410 450
 		sel_108 20
 	)
-	
+
 	(method (sel_110)
-		(proc958_0 128 423 451 858 424 454)
-		(proc958_0 132 1 451 452 453 450)
-		(proc958_0 130 2450)
-		(switch gGSel_40
+		(LoadMany rsVIEW 423 451 858 424 454)
+		(LoadMany rsSOUND 1 451 452 453 450)
+		(LoadMany rsSCRIPT 2450)
+		(switch gPrevRoomNum
 			(666
 				(gGame sel_587:)
 				(gGameMusic2 sel_40: 450 sel_99: 1 sel_3: -1 sel_39:)
@@ -55,7 +57,7 @@
 					sel_110:
 				)
 				(lid1 sel_110: sel_313: sel_311: 1 4 2 6 sel_63: 7)
-				(global2 sel_146: sEnterTunnel)
+				(gCurRoom sel_146: sEnterTunnel)
 			)
 			(455
 				(gGame sel_587:)
@@ -69,9 +71,9 @@
 					sel_4: (gEgo sel_246:)
 					sel_110:
 				)
-				(global2 sel_146: sFinishIt)
+				(gCurRoom sel_146: sFinishIt)
 			)
-			(456
+			(456 ; magRosetta
 				(= sel_28 100)
 				(gGame sel_588:)
 				(gEgo
@@ -82,39 +84,43 @@
 				)
 				(lid1 sel_110: sel_313: sel_311: 1 4 2 6 sel_63: 7)
 			)
-			(else 
+			(else
 				(gEgo
 					sel_110:
 					sel_153: 160 160
 					sel_320: Scaler 131 30 190 21
-					sel_585: (if (== global123 5) 426 else 831)
+					sel_585: (if (== gAct 5) 426 else 831)
 				)
 				(lid1 sel_110: sel_313: sel_311: 1 4 2 6 sel_63: 7)
 				(gGame sel_588:)
 			)
 		)
-		(if (== global123 5)
-			(cond 
-				((< global87 5) (= local2 85))
-				((< global87 10) (= local2 60))
-				((<= global87 15) (= local2 35))
+		(if (== gAct 5)
+			(cond
+				((< gHowFast 5)
+					(= local2 85)
+				)
+				((< gHowFast 10)
+					(= local2 60)
+				)
+				((<= gHowFast 15)
+					(= local2 35)
+				)
 			)
-			(if (not (HaveMouse)) (= local2 (* 2 local2)))
+			(if (not (HaveMouse))
+				(= local2 (* 2 local2))
+			)
 			(self sel_414: 94)
-			(global2 sel_259: (List sel_109:))
-			((ScriptID 2454 0) sel_57: (global2 sel_259?))
+			(gCurRoom sel_259: (List sel_109:))
+			((ScriptID 2454 0) sel_57: (gCurRoom sel_259:)) ; poly2454Code
 		else
 			(self sel_414: 90)
 		)
 		(super sel_110:)
-		(if
-			(or
-				(and (== global123 2) (proc0_10 -32480 1))
-				(> global123 2)
-			)
+		(if (or (and (== gAct 2) (TimeCheck $8120 1)) (> gAct 2)) ; can 8:15 pm occur?
 			(blood sel_110: sel_311: 1 4 8 sel_313: sel_4: global127)
 			(footprint sel_110: sel_313: sel_311: 1 4 8)
-			(if (and (== global123 2) (proc0_10 -32480 1))
+			(if (and (== gAct 2) (TimeCheck $8120 1)) ; can 8:15 pm occur?
 				(deadPippin sel_110: sel_313: sel_63: 6)
 			)
 			(if (not (gEgo sel_238: 20))
@@ -139,30 +145,25 @@
 		(pyramid2 sel_110:)
 		(eastExitFeature sel_110:)
 	)
-	
+
 	(method (sel_111)
 		(DisposeScript 2454)
 		(super sel_111: &rest)
 	)
-	
+
 	(method (sel_399 param1)
-		(if
-			(and
-				(< global127 6)
-				(== global123 2)
-				(proc0_10 -32480 1)
-			)
+		(if (and (< global127 6) (== gAct 2) (TimeCheck $8120 1)) ; can 8:15 pm occur?
 			(++ global127)
 		)
 		(super sel_399: param1)
 	)
-	
+
 	(method (sel_403)
-		(if (== global123 5)
-			(if (global2 sel_142?)
-				((global2 sel_142?) sel_65: sDie)
+		(if (== gAct 5)
+			(if (gCurRoom sel_142:)
+				((gCurRoom sel_142:) sel_65: sDie)
 			else
-				(global2 sel_146: sDie)
+				(gCurRoom sel_146: sDie)
 			)
 		)
 	)
@@ -172,16 +173,25 @@
 	(properties
 		sel_20 {sEnterTunnel}
 	)
-	
-	(method (sel_144 theSel_29)
-		(switch (= sel_29 theSel_29)
-			(0 (= sel_136 2))
+
+	(method (sel_144 param1)
+		(switch (= sel_29 param1)
+			(0
+				(= sel_136 2)
+			)
 			(1
 				(secretDoor1
-					sel_312: MoveTo (- (secretDoor1 sel_1?) 10) (secretDoor1 sel_0?)
+					sel_312:
+						MoveTo
+						(- (secretDoor1 sel_1:) 10)
+						(secretDoor1 sel_0:)
 				)
 				(secretDoor2
-					sel_312: MoveTo (+ (secretDoor2 sel_1?) 8) (secretDoor2 sel_0?) self
+					sel_312:
+						MoveTo
+						(+ (secretDoor2 sel_1:) 8)
+						(secretDoor2 sel_0:)
+						self
 				)
 			)
 			(2
@@ -189,10 +199,17 @@
 			)
 			(3
 				(secretDoor1
-					sel_312: MoveTo (+ (secretDoor1 sel_1?) 10) (secretDoor1 sel_0?)
+					sel_312:
+						MoveTo
+						(+ (secretDoor1 sel_1:) 10)
+						(secretDoor1 sel_0:)
 				)
 				(secretDoor2
-					sel_312: MoveTo (- (secretDoor2 sel_1?) 8) (secretDoor2 sel_0?) self
+					sel_312:
+						MoveTo
+						(- (secretDoor2 sel_1:) 8)
+						(secretDoor2 sel_0:)
+						self
 				)
 			)
 			(4
@@ -207,9 +224,9 @@
 	(properties
 		sel_20 {sDie}
 	)
-	
-	(method (sel_144 theSel_29)
-		(switch (= sel_29 theSel_29)
+
+	(method (sel_144 param1)
+		(switch (= sel_29 param1)
 			(0
 				(gGame sel_587:)
 				(gEgo sel_312: PolyPath 180 160 self)
@@ -221,23 +238,25 @@
 					sel_161: Walk
 					sel_312: PChase gEgo 22 self
 				)
-				(gSel_608 sel_40: 3 sel_99: 1 sel_3: 1 sel_39:)
+				(gGameMusic1 sel_40: 3 sel_99: 1 sel_3: 1 sel_39:)
 			)
 			(2
 				(oriley sel_2: 424)
 				(oriley sel_4: 0)
-				(proc0_5 gEgo oriley)
-				(proc0_5 oriley gEgo)
+				(Face gEgo oriley)
+				(Face oriley gEgo)
 				(= sel_136 4)
 			)
-			(3 (oriley sel_161: End self))
+			(3
+				(oriley sel_161: End self)
+			)
 			(4
 				(thudSound sel_39:)
 				(gEgo sel_2: 858 sel_161: End self)
 			)
 			(5
-				(= global145 0)
-				(global2 sel_399: 99)
+				(= global145 0) ; "You came in thinking like a journalist, and you left with a skull full of mush."
+				(gCurRoom sel_399: 99)
 				(self sel_111:)
 			)
 		)
@@ -248,9 +267,9 @@
 	(properties
 		sel_20 {sOpenRedCoffin}
 	)
-	
-	(method (sel_144 theSel_29)
-		(switch (= sel_29 theSel_29)
+
+	(method (sel_144 param1)
+		(switch (= sel_29 param1)
 			(0
 				(gGame sel_587:)
 				(lid1 sel_102:)
@@ -265,9 +284,7 @@
 				(nCreak sel_40: 452 sel_39:)
 			)
 			(1
-				(gLb2Messager
-					sel_295: 6 4 (if (== global123 5) 1 else 2) 0 self
-				)
+				(gMessager sel_295: 6 4 (if (== gAct 5) 1 else 2) 0 self)
 			)
 			(2
 				(gEgo sel_161: Beg self)
@@ -288,17 +305,26 @@
 	(properties
 		sel_20 {sHandleTheCase}
 	)
-	
-	(method (sel_144 theSel_29)
-		(switch (= sel_29 theSel_29)
+
+	(method (sel_144 param1)
+		(switch (= sel_29 param1)
 			(0
-				(if sel_141 (= global115 1) else (= global115 0))
+				(if sel_141
+					(= global115 1)
+				else
+					(= global115 0)
+				)
 				(gGame sel_587:)
 				(lid2 sel_102:)
 				(gEgo
 					sel_2: 454
 					sel_3: 3
-					sel_4: (if sel_141 0 else (gEgo sel_246:))
+					sel_4:
+						(if sel_141
+							0
+						else
+							(gEgo sel_246:)
+						)
 					sel_153: 184 122
 					sel_244: 6
 					sel_161: (if sel_141 End else Beg) self
@@ -306,14 +332,18 @@
 				(nCreak sel_40: (if sel_141 452 else 453) sel_39:)
 			)
 			(1
-				(if (not sel_141) (nCreak sel_40: 455 sel_39:))
+				(if (not sel_141)
+					(nCreak sel_40: 455 sel_39:)
+				)
 				(lid2 sel_4: (if sel_141 3 else 2) sel_313: sel_216:)
 				(gEgo sel_585: 831)
 				(gEgo sel_253: 0)
 				(= sel_137 3)
 			)
 			(2
-				(if (!= global123 5) (gGame sel_588:))
+				(if (!= gAct 5)
+					(gGame sel_588:)
+				)
 				(self sel_111:)
 			)
 		)
@@ -324,9 +354,9 @@
 	(properties
 		sel_20 {sORileyComes}
 	)
-	
-	(method (sel_144 theSel_29)
-		(switch (= sel_29 theSel_29)
+
+	(method (sel_144 param1)
+		(switch (= sel_29 param1)
 			(0
 				(oriley
 					sel_110:
@@ -335,13 +365,15 @@
 					sel_312: PolyPath 300 172 self
 				)
 			)
-			(1 (= sel_137 4))
+			(1
+				(= sel_137 4)
+			)
 			(2
 				(oriley sel_312: PolyPath 340 172 self)
 			)
 			(3
-				((ScriptID 94 1) sel_162: (ScriptID 94 1) local2)
-				(proc0_3 47)
+				((ScriptID 94 1) sel_162: (ScriptID 94 1) local2) ; pursuitTimer, pursuitTimer
+				(SetFlag 47)
 				(self sel_111:)
 			)
 		)
@@ -352,14 +384,16 @@
 	(properties
 		sel_20 {sHide}
 	)
-	
-	(method (sel_144 theSel_29)
-		(switch (= sel_29 theSel_29)
+
+	(method (sel_144 param1)
+		(switch (= sel_29 param1)
 			(0
-				(gSel_608 sel_40: 17 sel_99: 1 sel_3: -1 sel_39:)
+				(gGameMusic1 sel_40: 17 sel_99: 1 sel_3: -1 sel_39:)
 				(gGame sel_587:)
-				(proc0_3 90)
-				(if (proc0_2 39) ((ScriptID 94 1) sel_111: sel_81:))
+				(SetFlag 90)
+				(if (IsFlag 39)
+					((ScriptID 94 1) sel_111: sel_81:) ; pursuitTimer
+				)
 				(if global115
 					(= sel_136 1)
 				else
@@ -387,7 +421,7 @@
 			)
 			(4
 				(nCreak sel_40: 455 sel_39:)
-				(if (proc0_2 39)
+				(if (IsFlag 39)
 					(self sel_146: sORileyComes self)
 				else
 					(= sel_139 120)
@@ -403,15 +437,19 @@
 				(= sel_137 3)
 			)
 			(7
-				(if (proc0_2 39)
-					(gLb2Messager sel_295: 16 0 0 0 self)
+				(if (IsFlag 39)
+					(gMessager sel_295: 16 0 0 0 self)
 					(gGameMusic2 sel_40: 444 sel_99: 5 sel_3: 1 sel_39:)
 				else
 					(= sel_136 1)
 				)
 				(gEgo sel_216:)
 				(gEgo
-					sel_312: MoveTo (gEgo sel_1?) (+ (gEgo sel_0?) 10) self
+					sel_312:
+						MoveTo
+						(gEgo sel_1:)
+						(+ (gEgo sel_0:) 10)
+						self
 				)
 			)
 			(8
@@ -427,9 +465,9 @@
 	(properties
 		sel_20 {sGetAnkh}
 	)
-	
-	(method (sel_144 theSel_29)
-		(switch (= sel_29 theSel_29)
+
+	(method (sel_144 param1)
+		(switch (= sel_29 param1)
 			(0
 				(gGame sel_587:)
 				(gEgo sel_2: 451 sel_3: 4 sel_4: 0 sel_161: CT 5 1 self)
@@ -441,7 +479,7 @@
 			)
 			(2
 				(gEgo sel_585: 831)
-				((ScriptID 21 0) sel_57: 789)
+				((ScriptID 21 0) sel_57: 789) ; addCluesCode
 				(gGame sel_588:)
 				(self sel_111:)
 			)
@@ -453,20 +491,22 @@
 	(properties
 		sel_20 {sFinishIt}
 	)
-	
+
 	(method (sel_57)
 		(if (and local1 local0)
 			(Palette palSET_INTENSITY 0 255 (-- local0))
-			(if (not local0) (self sel_145:))
+			(if (not local0)
+				(self sel_145:)
+			)
 		)
 		(super sel_57:)
 	)
-	
-	(method (sel_144 theSel_29)
-		(switch (= sel_29 theSel_29)
+
+	(method (sel_144 param1)
+		(switch (= sel_29 param1)
 			(0
 				(gGame sel_587:)
-				(gSel_608 sel_40: 450 sel_99: 1 sel_3: -1 sel_39:)
+				(gGameMusic1 sel_40: 450 sel_99: 1 sel_3: -1 sel_39:)
 				(= sel_136 2)
 			)
 			(1
@@ -476,31 +516,35 @@
 			(2
 				(oriley sel_161: StopWalk -1 sel_312: PChase gEgo 22 self)
 			)
-			(3 (= sel_136 5))
+			(3
+				(= sel_136 5)
+			)
 			(4
 				(lid1 sel_110: sel_313: sel_4: 1)
 				(gEgo
 					sel_585: 831
 					sel_320: Scaler 131 30 190 21
-					sel_312: PolyPath (gEgo sel_1?) (+ (gEgo sel_0?) 10)
+					sel_312: PolyPath (gEgo sel_1:) (+ (gEgo sel_0:) 10)
 				)
-				(proc0_5 gEgo oriley)
+				(Face gEgo oriley)
 				(= sel_136 5)
 			)
 			(5
-				((ScriptID 22 0) sel_57: -32480)
+				((ScriptID 22 0) sel_57: -32480) ; triggerAndClock
 				(= sel_137 10)
 			)
 			(6
-				(gLb2Messager sel_295: 13 0 0 0 self)
+				(gMessager sel_295: 13 0 0 0 self)
 			)
 			(7
 				(= local1 1)
-				(gIconBar sel_233: 7)
-				(gSel_608 sel_40: 454 sel_99: 1 sel_3: 1 sel_39: self)
+				(gTheIconBar sel_233: 7)
+				(gGameMusic1 sel_40: 454 sel_99: 1 sel_3: 1 sel_39: self)
 			)
 			(8 0)
-			(9 (global2 sel_399: 26))
+			(9
+				(gCurRoom sel_399: 26)
+			)
 		)
 	)
 )
@@ -509,9 +553,9 @@
 	(properties
 		sel_20 {sUhOh}
 	)
-	
-	(method (sel_144 theSel_29)
-		(switch (= sel_29 theSel_29)
+
+	(method (sel_144 param1)
+		(switch (= sel_29 param1)
 			(0
 				(gGame sel_587:)
 				(lid1 sel_102:)
@@ -535,7 +579,7 @@
 			(3 0)
 			(4
 				(lid1 sel_4: 1 sel_313: sel_216:)
-				(global2 sel_399: 455)
+				(gCurRoom sel_399: 455)
 			)
 		)
 	)
@@ -589,17 +633,17 @@
 		sel_3 5
 		sel_14 16384
 	)
-	
+
 	(method (sel_300 param1 param2)
 		(switch param1
 			(4
-				(if (and (== global123 2) (proc0_10 -32480 1))
-					(global2 sel_146: sUhOh)
+				(if (and (== gAct 2) (TimeCheck $8120 1)) ; can 8:15 pm occur?
+					(gCurRoom sel_146: sUhOh)
 				else
-					(global2 sel_146: sOpenRedCoffin)
+					(gCurRoom sel_146: sOpenRedCoffin)
 				)
 			)
-			(else 
+			(else
 				(super sel_300: param1 param2 &rest)
 			)
 		)
@@ -617,18 +661,26 @@
 		sel_4 2
 		sel_14 16384
 	)
-	
+
 	(method (sel_300 param1)
 		(switch param1
 			(4
-				(cond 
-					(global115 (global2 sel_146: sHandleTheCase 0 0))
-					((and (== global123 5) (not (proc0_2 90))) (global2 sel_146: sHide))
-					((== global123 5) (gLb2Messager sel_295: 15 4 1))
-					(else (global2 sel_146: sHandleTheCase 0 1))
+				(cond
+					(global115
+						(gCurRoom sel_146: sHandleTheCase 0 0)
+					)
+					((and (== gAct 5) (not (IsFlag 90)))
+						(gCurRoom sel_146: sHide)
+					)
+					((== gAct 5)
+						(gMessager sel_295: 15 4 1)
+					)
+					(else
+						(gCurRoom sel_146: sHandleTheCase 0 1)
+					)
 				)
 			)
-			(else 
+			(else
 				(super sel_300: param1 &rest)
 			)
 		)
@@ -657,13 +709,13 @@
 		sel_3 3
 		sel_14 16384
 	)
-	
+
 	(method (sel_300 param1 param2)
 		(switch param1
 			(8
-				(global2 sel_422: inFootPrint)
+				(gCurRoom sel_422: inFootPrint)
 			)
-			(else 
+			(else
 				(super sel_300: param1 param2 &rest)
 			)
 		)
@@ -683,15 +735,17 @@
 		sel_4 1
 		sel_14 16384
 	)
-	
+
 	(method (sel_300 param1 param2)
 		(switch param1
 			(8
 				(gGame sel_87: 1 136)
-				(global2 sel_422: inAnkh)
+				(gCurRoom sel_422: inAnkh)
 			)
-			(4 (global2 sel_146: sGetAnkh))
-			(else 
+			(4
+				(gCurRoom sel_146: sGetAnkh)
+			)
+			(else
 				(super sel_300: param1 param2 &rest)
 			)
 		)
@@ -755,24 +809,22 @@
 		sel_303 96
 		sel_304 135
 	)
-	
+
 	(method (sel_300 param1 &tmp temp0)
 		(switch param1
 			(8
-				(if (== global123 5)
-					(gLb2Messager sel_295: 17)
+				(if (== gAct 5)
+					(gMessager sel_295: 17)
 				else
 					(gGame sel_87: 1 137)
-					((ScriptID 21 0) sel_57: 1025)
-					(= temp0 1)
-					(while (< temp0 14)
-						((ScriptID 21 0) sel_57: (+ temp0 1088))
-						(++ temp0)
+					((ScriptID 21 0) sel_57: 1025) ; addCluesCode
+					(for ((= temp0 1)) (< temp0 14) ((++ temp0))
+						((ScriptID 21 0) sel_57: (+ temp0 1088)) ; addCluesCode
 					)
-					(global2 sel_399: 456)
+					(gCurRoom sel_399: 456)
 				)
 			)
-			(else 
+			(else
 				(super sel_300: param1 &rest)
 			)
 		)
@@ -790,17 +842,23 @@
 		sel_303 181
 		sel_304 127
 	)
-	
+
 	(method (sel_300 param1)
 		(switch param1
 			(4
-				(cond 
-					((and (== global123 5) (not (proc0_2 90))) (global2 sel_146: sHide))
-					((== global123 5) (gLb2Messager sel_295: 15 4 1))
-					(else (super sel_300: param1 &rest))
+				(cond
+					((and (== gAct 5) (not (IsFlag 90)))
+						(gCurRoom sel_146: sHide)
+					)
+					((== gAct 5)
+						(gMessager sel_295: 15 4 1)
+					)
+					(else
+						(super sel_300: param1 &rest)
+					)
 				)
 			)
-			(else 
+			(else
 				(super sel_300: param1 &rest)
 			)
 		)
@@ -818,17 +876,17 @@
 		sel_303 249
 		sel_304 129
 	)
-	
+
 	(method (sel_300 param1 param2)
 		(switch param1
 			(4
-				(if (and (== global123 2) (proc0_10 -32480 1))
-					(global2 sel_146: sUhOh)
+				(if (and (== gAct 2) (TimeCheck $8120 1)) ; can 8:15 pm occur?
+					(gCurRoom sel_146: sUhOh)
 				else
 					(super sel_300: param1 param2 &rest)
 				)
 			)
-			(else 
+			(else
 				(super sel_300: param1 param2 &rest)
 			)
 		)
@@ -865,24 +923,24 @@
 		sel_570 1
 		sel_213 1
 	)
-	
+
 	(method (sel_110)
 		(super sel_110: &rest)
 		(gNarrator sel_1: 10 sel_0: 140)
 	)
-	
+
 	(method (sel_111)
 		(gNarrator sel_1: -1 sel_0: -1)
 		(super sel_111:)
 	)
-	
+
 	(method (sel_300 param1)
 		(switch param1
 			(4
 				(self sel_111:)
-				(global2 sel_146: sGetAnkh)
+				(gCurRoom sel_146: sGetAnkh)
 			)
-			(else 
+			(else
 				(super sel_300: param1 &rest)
 			)
 		)
@@ -899,13 +957,13 @@
 		sel_570 1
 		sel_213 3
 	)
-	
+
 	(method (sel_110)
 		(gGame sel_87: 1 179)
 		(super sel_110: &rest)
 		(gNarrator sel_1: 10 sel_0: 140)
 	)
-	
+
 	(method (sel_111)
 		(gNarrator sel_1: -1 sel_0: -1)
 		(super sel_111:)

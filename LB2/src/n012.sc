@@ -1,4 +1,5 @@
 ;;; Sierra Script 1.0 - (do not remove this comment)
+;;; Decompiled by sluicebox
 (script# 12)
 (include sci.sh)
 (use Main)
@@ -26,7 +27,7 @@
 		(= global165 (Palette palFIND_COLOR 27 151 27))
 		(= global166 (Palette palFIND_COLOR 71 223 71))
 		(= global167 (Palette palFIND_COLOR 135 235 135))
-		(= gSel_212 (Palette palFIND_COLOR 23 23 119))
+		(= global168 (Palette palFIND_COLOR 23 23 119))
 		(= global169 (Palette palFIND_COLOR 35 35 187))
 		(= global170 (Palette palFIND_COLOR 71 71 223))
 		(= global171 (Palette palFIND_COLOR 135 135 235))
@@ -34,7 +35,7 @@
 		(= global173 (Palette palFIND_COLOR 223 71 223))
 		(= global174 (Palette palFIND_COLOR 71 223 223))
 		(= global175 (Palette palFIND_COLOR 135 235 235))
-		(= gSel_212_2 (Palette palFIND_COLOR 143 107 56))
+		(= global177 (Palette palFIND_COLOR 143 107 56))
 		(= global176 15)
 	else
 		(= global151 0)
@@ -54,7 +55,7 @@
 		(= global165 2)
 		(= global166 10)
 		(= global167 10)
-		(= gSel_212 1)
+		(= global168 1)
 		(= global169 1)
 		(= global170 9)
 		(= global171 9)

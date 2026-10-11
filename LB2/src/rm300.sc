@@ -1,21 +1,22 @@
 ;;; Sierra Script 1.0 - (do not remove this comment)
+;;; Decompiled by sluicebox
 (script# 300)
 (include sci.sh)
 (use Main)
 (use Door)
-(use LBRoom)
+(use eRS)
 (use ExitFeature)
 (use Print)
-(use RTRandCycle)
+(use Talker)
 (use Scaler)
 (use PolyPath)
 (use Polygon)
-(use CueObj)
-(use n958)
+(use Feature)
+(use LoadMany)
 (use Sound)
-(use Cycle)
-(use View)
-(use Obj)
+(use Motion)
+(use Actor)
+(use System)
 
 (public
 	rm300 0
@@ -25,8 +26,9 @@
 (local
 	local0
 	local1
-	gEgoSel_53
+	local2
 )
+
 (instance rm300 of LBRoom
 	(properties
 		sel_20 {rm300}
@@ -36,28 +38,28 @@
 		sel_411 260
 		sel_107 167
 	)
-	
+
 	(method (sel_110)
-		(proc958_0 128 303 301 852 304 284)
-		(proc958_0 132 94 40)
+		(LoadMany rsVIEW 303 301 852 304 284)
+		(LoadMany rsSOUND 94 40)
 		(self sel_414: 91)
 		(gEgo
 			sel_110:
-			sel_585: (if (gEgo sel_584?) 831 else 830)
+			sel_585: (if (gEgo sel_584:) 831 else 830)
 			sel_320: Scaler 90 110 167 125
 		)
-		(switch gGSel_40
+		(switch gPrevRoomNum
 			(sel_409
 				(gEgo sel_349: 0 sel_253: 180)
-				(gSel_608 sel_170:)
+				(gGameMusic1 sel_170:)
 			)
 			(sel_411
 				(gEgo sel_1: 230 sel_0: 200)
-				(global2 sel_146: sOverControl)
+				(gCurRoom sel_146: sOverControl)
 			)
-			(else 
+			(else
 				(taxi sel_320: 199 sel_110: sel_153: 269 199)
-				(global2 sel_146: sOutCab)
+				(gCurRoom sel_146: sOutCab)
 			)
 		)
 		(super sel_110:)
@@ -125,9 +127,11 @@
 		(streetLight sel_110:)
 		(southExitFeature sel_110:)
 	)
-	
+
 	(method (sel_399 param1)
-		(if (== param1 310) (gSel_608 sel_170:))
+		(if (== param1 310)
+			(gGameMusic1 sel_170:)
+		)
 		(super sel_399: param1)
 	)
 )
@@ -136,12 +140,12 @@
 	(properties
 		sel_20 {sOverControl}
 	)
-	
-	(method (sel_144 theSel_29)
-		(switch (= sel_29 theSel_29)
+
+	(method (sel_144 param1)
+		(switch (= sel_29 param1)
 			(0
 				(gGame sel_587:)
-				(gEgo sel_312: PolyPath (gEgo sel_1?) 170 self)
+				(gEgo sel_312: PolyPath (gEgo sel_1:) 170 self)
 			)
 			(1
 				(gGame sel_588:)
@@ -155,9 +159,9 @@
 	(properties
 		sel_20 {sOutCab}
 	)
-	
-	(method (sel_144 theSel_29)
-		(switch (= sel_29 theSel_29)
+
+	(method (sel_144 param1)
+		(switch (= sel_29 param1)
 			(0
 				(gGame sel_587:)
 				(gEgo sel_1: 241 sel_0: 179)
@@ -181,11 +185,11 @@
 	(properties
 		sel_20 {sMugTimer}
 	)
-	
-	(method (sel_144 theSel_29)
-		(switch (= sel_29 theSel_29)
+
+	(method (sel_144 param1)
+		(switch (= sel_29 param1)
 			(0
-				(if (gEgo sel_584?)
+				(if (gEgo sel_584:)
 					(self sel_111:)
 				else
 					(= sel_137 240)
@@ -202,12 +206,14 @@
 	(properties
 		sel_20 {sMuggerKills}
 	)
-	
-	(method (sel_144 theSel_29)
-		(switch (= sel_29 theSel_29)
-			(0 (= sel_137 1))
+
+	(method (sel_144 param1)
+		(switch (= sel_29 param1)
+			(0
+				(= sel_137 1)
+			)
 			(1
-				(if (global2 sel_142?)
+				(if (gCurRoom sel_142:)
 					(self sel_111:)
 				else
 					(gGame sel_587:)
@@ -215,14 +221,20 @@
 				)
 			)
 			(2
-				(cond 
-					((proc0_1 gEgo 2) (gEgo sel_312: PolyPath 101 169 self))
-					((> (gEgo sel_1?) 300) (gEgo sel_312: PolyPath 280 165 self))
-					(else (= sel_136 1))
+				(cond
+					((StepOn gEgo 2)
+						(gEgo sel_312: PolyPath 101 169 self)
+					)
+					((> (gEgo sel_1:) 300)
+						(gEgo sel_312: PolyPath 280 165 self)
+					)
+					(else
+						(= sel_136 1)
+					)
 				)
 			)
 			(3
-				(proc0_5 gEgo mugger)
+				(Face gEgo mugger)
 				(noise sel_40: 163 sel_3: -1 sel_99: 1 sel_39:)
 				(= sel_136 5)
 			)
@@ -239,14 +251,18 @@
 			)
 			(5
 				(mugger
-					sel_312: PolyPath (+ (gEgo sel_1?) 22) (+ (gEgo sel_0?) 3) self
+					sel_312:
+						PolyPath
+						(+ (gEgo sel_1:) 22)
+						(+ (gEgo sel_0:) 3)
+						self
 				)
 			)
 			(6
 				(mugger
 					sel_155: 1
 					sel_4: 0
-					sel_153: (- (mugger sel_1?) 5) (- (mugger sel_0?) 1)
+					sel_153: (- (mugger sel_1:) 5) (- (mugger sel_0:) 1)
 					sel_244: 12
 					sel_53: 12
 					sel_161: End self
@@ -254,24 +270,26 @@
 				(noise sel_167:)
 				(sFX sel_40: 3 sel_39:)
 			)
-			(7 (= sel_137 1))
+			(7
+				(= sel_137 1)
+			)
 			(8
 				(gEgo
 					sel_2: 303
 					sel_3: 2
-					sel_153: (gEgo sel_1?) (- (gEgo sel_0?) 3)
+					sel_153: (gEgo sel_1:) (- (gEgo sel_0:) 3)
 					sel_244: 12
 					sel_53: 12
 					sel_161: End self
 				)
 			)
 			(9
-				(gLb2Messager sel_295: 1 0 0 0 self)
+				(gMessager sel_295: 1 0 0 0 self)
 				(gEgo sel_59: 0)
 			)
 			(10
-				(= global145 12)
-				(global2 sel_399: 99)
+				(= global145 12) ; "In big cities, a person gets mugged every few minutes. Don't let that person be YOU."
+				(gCurRoom sel_399: 99)
 			)
 		)
 	)
@@ -281,14 +299,16 @@
 	(properties
 		sel_20 {sGivePass}
 	)
-	
-	(method (sel_144 theSel_29)
-		(switch (= sel_29 theSel_29)
+
+	(method (sel_144 param1)
+		(switch (= sel_29 param1)
 			(0
 				(gGame sel_587:)
 				(= sel_136 1)
 			)
-			(1 (= sel_137 1))
+			(1
+				(= sel_137 1)
+			)
 			(2
 				(gEgo sel_351: 6)
 				(gEgo
@@ -301,18 +321,20 @@
 				)
 			)
 			(3
-				(gLb2Messager sel_295: 3 11 0 0 self)
+				(gMessager sel_295: 3 11 0 0 self)
 			)
 			(4
 				(gEgo
 					sel_153: 79 159
-					sel_585: (if (gEgo sel_584?) 831 else 830)
+					sel_585: (if (gEgo sel_584:) 831 else 830)
 				)
 				(= sel_136 1)
 			)
 			(5
 				(gGame sel_588:)
-				(if (mugger sel_142?) ((mugger sel_142?) sel_111:))
+				(if (mugger sel_142:)
+					((mugger sel_142:) sel_111:)
+				)
 				(gGame sel_587:)
 				(mugger sel_146: sMuggerKills)
 				(self sel_111:)
@@ -325,9 +347,9 @@
 	(properties
 		sel_20 {sHailCab}
 	)
-	
-	(method (sel_144 theSel_29)
-		(switch (= sel_29 theSel_29)
+
+	(method (sel_144 param1)
+		(switch (= sel_29 param1)
 			(0
 				(gGameMusic2 sel_40: 252 sel_3: -1 sel_99: 1 sel_39: 20)
 				(gGame sel_587:)
@@ -339,19 +361,23 @@
 			)
 			(2
 				(gEgo
-					sel_2: (if (gEgo sel_584?) 304 else 852)
-					sel_155: (if (gEgo sel_584?) 2 else 0)
-					sel_153: (- (gEgo sel_1?) 2) (- (gEgo sel_0?) 1)
+					sel_2: (if (gEgo sel_584:) 304 else 852)
+					sel_155: (if (gEgo sel_584:) 2 else 0)
+					sel_153: (- (gEgo sel_1:) 2) (- (gEgo sel_0:) 1)
 					sel_320: Scaler 105 0 190 0
 					sel_161: End self
 				)
-				(gSel_608 sel_40: 97 sel_3: 1 sel_99: 1 sel_39:)
+				(gGameMusic1 sel_40: 97 sel_3: 1 sel_99: 1 sel_39:)
 			)
 			(3
 				(gGameMusic2 sel_173: 2 224 2000 sel_170: 127 5 5 0)
 				(taxi
 					sel_155: 5
-					sel_312: MoveTo (+ (taxiSign sel_1?) 10) (+ (taxiSign sel_0?) 25) self
+					sel_312:
+						MoveTo
+						(+ (taxiSign sel_1:) 10)
+						(+ (taxiSign sel_0:) 25)
+						self
 				)
 			)
 			(4
@@ -378,7 +404,9 @@
 				(gEgo sel_585: 830 sel_102:)
 				(= sel_136 1)
 			)
-			(10 (global2 sel_399: 250))
+			(10
+				(gCurRoom sel_399: 250)
+			)
 		)
 	)
 )
@@ -387,12 +415,12 @@
 	(properties
 		sel_20 {sEnterBar}
 	)
-	
-	(method (sel_144 theSel_29)
-		(switch (= sel_29 theSel_29)
+
+	(method (sel_144 param1)
+		(switch (= sel_29 param1)
 			(0
 				(gGame sel_587:)
-				(= gEgoSel_53 (gEgo sel_53?))
+				(= local2 (gEgo sel_53:))
 				(= sel_136 1)
 			)
 			(1
@@ -400,7 +428,7 @@
 					sel_2: 301
 					sel_3: 0
 					sel_4: 0
-					sel_153: (+ (gEgo sel_1?) 10) (gEgo sel_0?)
+					sel_153: (+ (gEgo sel_1:) 10) (gEgo sel_0:)
 					sel_352: 6
 					sel_161: CT 5 1 self
 				)
@@ -409,20 +437,26 @@
 				(sFX sel_40: 297 sel_39:)
 				(gEgo sel_161: CT 6 1 self)
 			)
-			(3 (gEgo sel_161: CT 2 -1 self))
-			(4 (gEgo sel_161: CT 5 1 self))
-			(5 (gEgo sel_161: CT 6 1 self))
+			(3
+				(gEgo sel_161: CT 2 -1 self)
+			)
+			(4
+				(gEgo sel_161: CT 5 1 self)
+			)
+			(5
+				(gEgo sel_161: CT 6 1 self)
+			)
 			(6
 				(gEgo
 					sel_3: 6
-					sel_153: (- (gEgo sel_1?) 10) (gEgo sel_0?)
-					sel_352: gEgoSel_53
-					sel_585: (if (gEgo sel_584?) 831 else 830)
+					sel_153: (- (gEgo sel_1:) 10) (gEgo sel_0:)
+					sel_352: local2
+					sel_585: (if (gEgo sel_584:) 831 else 830)
 				)
 				(= sel_136 5)
 			)
 			(7
-				(gLb2Messager sel_295: 3 4 0 1 self)
+				(gMessager sel_295: 3 4 0 1 self)
 			)
 			(8
 				(switch
@@ -433,18 +467,24 @@
 						sel_205: 3 14 0 0 3 5 56
 						sel_110:
 					)
-					(1 (= sel_136 1))
+					(1
+						(= sel_136 1)
+					)
 					(2
-						(gLb2Messager sel_295: 3 4 0 5 self)
+						(gMessager sel_295: 3 4 0 5 self)
 					)
 					(3
 						(= local0 1)
-						(gLb2Messager sel_295: 3 4 0 6 self)
+						(gMessager sel_295: 3 4 0 6 self)
 					)
-					(else  (= sel_136 1))
+					(else
+						(= sel_136 1)
+					)
 				)
 			)
-			(9 (= sel_136 1))
+			(9
+				(= sel_136 1)
+			)
 			(10
 				(if local0
 					(sel_42 sel_146: sAskEnterBar)
@@ -461,30 +501,30 @@
 	(properties
 		sel_20 {sAskEnterBar}
 	)
-	
-	(method (sel_144 theSel_29)
-		(switch (= sel_29 theSel_29)
+
+	(method (sel_144 param1)
+		(switch (= sel_29 param1)
 			(0
 				(= sel_141 0)
 				(if local0
-					(switch (global2 sel_422: (ScriptID 20 0))
+					(switch (gCurRoom sel_422: (ScriptID 20 0)) ; inNotebook
 						(1029
-							(gLb2Messager sel_295: 3 4 0 7 self)
+							(gMessager sel_295: 3 4 0 7 self)
 							(= sel_141 1)
 						)
-						(else 
-							(gLb2Messager sel_295: 3 4 0 8 self)
+						(else
+							(gMessager sel_295: 3 4 0 8 self)
 							(= local0 0)
 						)
 					)
 				else
-					(gLb2Messager sel_295: 3 4 0 8 self)
+					(gMessager sel_295: 3 4 0 8 self)
 					(= local0 0)
 				)
 			)
 			(1
 				(if (== sel_141 1)
-					(gLb2Messager sel_295: 3 4 0 9 self)
+					(gMessager sel_295: 3 4 0 9 self)
 				else
 					(= sel_136 1)
 				)
@@ -493,7 +533,7 @@
 				(if (== sel_141 1)
 					(= local1 1)
 					(= global116 1024)
-					(= gGUserSel_237 (= gGUserSel_347 1))
+					(= global108 (= global109 1))
 					(frontDoor sel_300: 4)
 				else
 					(gGame sel_588:)
@@ -529,46 +569,48 @@
 		sel_599 0
 		sel_600 0
 	)
-	
+
 	(method (sel_300 param1)
 		(switch param1
 			(4
 				(if local1
 					(super sel_300: param1 &rest)
 				else
-					(global2 sel_146: sEnterBar)
+					(gCurRoom sel_146: sEnterBar)
 				)
 			)
 			(11
-				(global2 sel_146: sGivePass)
+				(gCurRoom sel_146: sGivePass)
 			)
 			(6
 				(if local0
 					(gGame sel_587:)
-					(global2 sel_146: sAskEnterBar)
+					(gCurRoom sel_146: sAskEnterBar)
 				else
-					(global2 sel_146: sEnterBar)
+					(gCurRoom sel_146: sEnterBar)
 				)
 			)
 			(14
 				(if local0
 					(gGame sel_587:)
-					(global2 sel_146: sAskEnterBar)
+					(gCurRoom sel_146: sAskEnterBar)
 				else
-					(global2 sel_146: sEnterBar)
+					(gCurRoom sel_146: sEnterBar)
 				)
 			)
-			(else 
+			(else
 				(super sel_300: param1 &rest)
 			)
 		)
 	)
-	
+
 	(method (sel_145)
 		(super sel_145: &rest)
-		(if (gEgo sel_584?) (global2 sel_146: sHailCab))
+		(if (gEgo sel_584:)
+			(gCurRoom sel_146: sHailCab)
+		)
 	)
-	
+
 	(method (sel_606)
 		(super sel_606: 77 146 109 148 109 157 77 154)
 	)
@@ -599,11 +641,13 @@
 		sel_4 1
 		sel_14 16384
 	)
-	
+
 	(method (sel_300 param1)
 		(switch param1
-			(4 (global2 sel_146: sHailCab))
-			(else 
+			(4
+				(gCurRoom sel_146: sHailCab)
+			)
+			(else
 				(super sel_300: param1 &rest)
 			)
 		)
@@ -738,9 +782,9 @@
 		sel_537 150
 		sel_26 15
 	)
-	
+
 	(method (sel_110)
-		(= sel_30 gSel_30)
+		(= sel_30 gUserFont)
 		(super sel_110: &rest)
 	)
 )

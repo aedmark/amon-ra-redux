@@ -1,21 +1,22 @@
 ;;; Sierra Script 1.0 - (do not remove this comment)
+;;; Decompiled by sluicebox
 (script# 290)
 (include sci.sh)
 (use Main)
 (use Door)
-(use LBRoom)
+(use eRS)
 (use ExitFeature)
-(use RTRandCycle)
+(use Talker)
 (use Scaler)
 (use PolyPath)
 (use Polygon)
-(use CueObj)
+(use Feature)
 (use MoveFwd)
-(use n958)
+(use LoadMany)
 (use Sound)
-(use Cycle)
-(use View)
-(use Obj)
+(use Motion)
+(use Actor)
+(use System)
 
 (public
 	rm290 0
@@ -24,9 +25,10 @@
 
 (local
 	local0
-	local1 =  1
+	local1 = 1
 	local2
 )
+
 (instance rm290 of LBRoom
 	(properties
 		sel_20 {rm290}
@@ -35,20 +37,20 @@
 		sel_409 295
 		sel_411 280
 	)
-	
+
 	(method (sel_110)
-		(proc958_0 128 290 291 293 292)
-		(proc958_0 132 292 280)
+		(LoadMany rsVIEW 290 291 293 292)
+		(LoadMany rsSOUND 292 280)
 		(gEgo sel_110: sel_585: 830 sel_320: Scaler 137 0 190 0)
-		(switch gGSel_40
+		(switch gPrevRoomNum
 			(sel_409
 				(gEgo sel_349: 0 sel_253: 180)
 			)
 			(sel_411
 				(gEgo sel_153: 160 230)
-				(global2 sel_146: sComeInSouth)
+				(gCurRoom sel_146: sComeInSouth)
 			)
-			(else 
+			(else
 				(gEgo sel_153: 140 173)
 				(gGame sel_588:)
 			)
@@ -107,13 +109,9 @@
 					sel_117:
 				)
 		)
-		(officeDoor sel_110: sel_590: (proc0_2 43))
+		(officeDoor sel_110: sel_590: (IsFlag 43))
 		(happyWanderer sel_110: sel_146: sWander)
-		(sergeant
-			sel_110:
-			sel_311: 1 6 2 4 7 8
-			sel_146: sMoveSergeant
-		)
+		(sergeant sel_110: sel_311: 1 6 2 4 7 8 sel_146: sMoveSergeant)
 		(southExitFeature sel_110:)
 		(southExitFeature2 sel_110:)
 		(files sel_110:)
@@ -126,15 +124,17 @@
 		(poster6 sel_110:)
 		(pole sel_110:)
 	)
-	
+
 	(method (sel_57)
-		(cond 
+		(cond
 			(sel_142)
-			((proc0_1 gEgo 16) (self sel_146: sEgoLeaveSouth))
+			((StepOn gEgo 16)
+				(self sel_146: sEgoLeaveSouth)
+			)
 		)
 		(super sel_57: &rest)
 	)
-	
+
 	(method (sel_111)
 		(super sel_111: &rest)
 	)
@@ -144,9 +144,9 @@
 	(properties
 		sel_20 {sEgoLeaveSouth}
 	)
-	
-	(method (sel_144 theSel_29)
-		(switch (= sel_29 theSel_29)
+
+	(method (sel_144 param1)
+		(switch (= sel_29 param1)
 			(0
 				(gGame sel_587:)
 				(gEgo sel_55: 180)
@@ -155,7 +155,9 @@
 			(1
 				(gEgo sel_312: MoveFwd 80 self)
 			)
-			(2 (global2 sel_399: 280))
+			(2
+				(gCurRoom sel_399: 280)
+			)
 		)
 	)
 )
@@ -164,9 +166,9 @@
 	(properties
 		sel_20 {sComeInSouth}
 	)
-	
-	(method (sel_144 theSel_29)
-		(switch (= sel_29 theSel_29)
+
+	(method (sel_144 param1)
+		(switch (= sel_29 param1)
 			(0
 				(gGame sel_587:)
 				(= sel_136 1)
@@ -186,15 +188,15 @@
 	(properties
 		sel_20 {sKnock}
 	)
-	
-	(method (sel_144 theSel_29)
-		(switch (= sel_29 theSel_29)
+
+	(method (sel_144 param1)
+		(switch (= sel_29 param1)
 			(0
 				(gGame sel_587:)
 				(knockSound sel_39: self)
 			)
 			(1
-				(gLb2Messager sel_295: 3 4 0 0 self)
+				(gMessager sel_295: 3 4 0 0 self)
 			)
 			(2
 				(= local2 1)
@@ -209,22 +211,17 @@
 	(properties
 		sel_20 {sMoveSergeant}
 	)
-	
+
 	(method (sel_57)
-		(if
-			(and
-				(not local0)
-				(sergeant sel_245?)
-				(== (sergeant sel_4?) 3)
-			)
+		(if (and (not local0) (sergeant sel_245:) (== (sergeant sel_4:) 3))
 			(shuffleSound sel_39: sergeant)
 			(= local0 1)
 		)
 		(super sel_57:)
 	)
-	
-	(method (sel_144 theSel_29)
-		(switch (= sel_29 theSel_29)
+
+	(method (sel_144 param1)
+		(switch (= sel_29 param1)
 			(0
 				(sergeant sel_161: Fwd)
 				(= sel_137 (Random 1 6))
@@ -233,7 +230,9 @@
 				(sergeant sel_161: 0)
 				(= sel_137 (Random 2 4))
 			)
-			(2 (self sel_110:))
+			(2
+				(self sel_110:)
+			)
 		)
 	)
 )
@@ -242,22 +241,19 @@
 	(properties
 		sel_20 {sGiveSandwich}
 	)
-	
-	(method (sel_144 theSel_29)
-		(switch (= sel_29 theSel_29)
+
+	(method (sel_144 param1)
+		(switch (= sel_29 param1)
 			(0
 				(gGame sel_587:)
 				(gEgo sel_312: PolyPath 252 152 self)
 			)
-			(1 (proc0_5 gEgo sergeant self))
+			(1
+				(Face gEgo sergeant self)
+			)
 			(2
 				(sergeant sel_146: 0)
-				(sergeant
-					sel_3: 1
-					sel_4: 0
-					sel_244: 10
-					sel_161: CT 8 1 self
-				)
+				(sergeant sel_3: 1 sel_4: 0 sel_244: 10 sel_161: CT 8 1 self)
 				(gEgo
 					sel_2: 292
 					sel_153: 240 152
@@ -267,7 +263,9 @@
 					sel_161: CT 4 1 self
 				)
 			)
-			(3 (gLb2Messager sel_295: 2 15))
+			(3
+				(gMessager sel_295: 2 15)
+			)
 			(4
 				(gEgo sel_161: End self)
 				(sergeant sel_161: End self)
@@ -275,8 +273,8 @@
 			(5 0)
 			(6
 				(sergeant sel_3: 0 sel_146: sMoveSergeant)
-				(proc0_3 7)
-				((ScriptID 21 1) sel_57: 772)
+				(SetFlag 7)
+				((ScriptID 21 1) sel_57: 772) ; dropCluesCode
 				(gEgo sel_351: 3)
 				(gEgo sel_585: 830)
 				(gEgo sel_3: 7 sel_153: 254 152 sel_253: 315)
@@ -291,23 +289,23 @@
 	(properties
 		sel_20 {sWander}
 	)
-	
-	(method (sel_144 theSel_29)
-		(switch (= sel_29 theSel_29)
-			(0 (= sel_137 (Random 3 20)))
+
+	(method (sel_144 param1)
+		(switch (= sel_29 param1)
+			(0
+				(= sel_137 (Random 3 20))
+			)
 			(1
 				(sel_42 sel_161: Walk sel_312: MoveTo 154 122 self)
 			)
-			(2 (= sel_139 (Random 30 240)))
+			(2
+				(= sel_139 (Random 30 240))
+			)
 			(3
 				(sel_42 sel_155: 2 sel_4: 0 sel_161: End self)
 			)
 			(4
-				(sel_42
-					sel_155: 1
-					sel_161: Walk
-					sel_312: MoveTo -20 141 self
-				)
+				(sel_42 sel_155: 1 sel_161: Walk sel_312: MoveTo -20 141 self)
 			)
 			(5
 				(sel_42 sel_111:)
@@ -338,24 +336,30 @@
 		sel_304 152
 		sel_2 291
 	)
-	
+
 	(method (sel_300 param1 param2 &tmp temp0 temp1 temp2)
 		(switch param1
 			(15
-				(global2 sel_146: sGiveSandwich)
+				(gCurRoom sel_146: sGiveSandwich)
 			)
 			(2
-				(cond 
-					((proc0_2 7) (= temp1 73))
-					(local1 (= temp1 78))
-					(else (= temp1 79))
+				(cond
+					((IsFlag 7)
+						(= temp1 73)
+					)
+					(local1
+						(= temp1 78)
+					)
+					(else
+						(= temp1 79)
+					)
 				)
-				(gLb2Messager sel_295: 2 2 temp1)
+				(gMessager sel_295: 2 2 temp1)
 				(= local1 0)
 			)
 			(6
-				(if (not (proc0_2 7))
-					(gLb2Messager sel_295: 2 6 70)
+				(if (not (IsFlag 7))
+					(gMessager sel_295: 2 6 70)
 				else
 					(if
 						(==
@@ -363,7 +367,7 @@
 								(if (== argc 2)
 									param2
 								else
-									(global2 sel_422: (ScriptID 20 0))
+									(gCurRoom sel_422: (ScriptID 20 0)) ; inNotebook
 								)
 							)
 							-1
@@ -373,43 +377,53 @@
 					(= temp2 (& temp0 $00ff))
 					(= temp1
 						(switch (& temp0 $ff00)
-							(256 (+ temp2 1))
-							(512 (+ temp2 18))
-							(768 (+ temp2 26))
-							(1024 (+ temp2 61))
+							(256
+								(+ temp2 1)
+							)
+							(512
+								(+ temp2 18)
+							)
+							(768
+								(+ temp2 26)
+							)
+							(1024
+								(+ temp2 61)
+							)
 						)
 					)
 					(switch temp0
 						(260
-							(if (officeDoor sel_590?)
-								(gLb2Messager sel_295: 2 6 71)
+							(if (officeDoor sel_590:)
+								(gMessager sel_295: 2 6 71)
 							else
-								(gLb2Messager sel_295: 2 6 5)
+								(gMessager sel_295: 2 6 5)
 							)
 						)
 						(520
-							(gLb2Messager sel_295: 2 6 26)
-							((ScriptID 21 0) sel_57: 1029)
+							(gMessager sel_295: 2 6 26)
+							((ScriptID 21 0) sel_57: 1029) ; addCluesCode
 						)
 						(264
-							(gLb2Messager sel_295: 2 6 9)
-							((ScriptID 21 1) sel_57: 518)
-							((ScriptID 21 0) sel_57: 520)
+							(gMessager sel_295: 2 6 9)
+							((ScriptID 21 1) sel_57: 518) ; dropCluesCode
+							((ScriptID 21 0) sel_57: 520) ; addCluesCode
 						)
-						(else 
-							(if (Message msgGET gSel_40 sel_213 6 temp1 1)
-								(gLb2Messager sel_295: sel_213 6 temp1)
+						(else
+							(if (Message msgGET gCurRoomNum sel_213 6 temp1 1)
+								(gMessager sel_295: sel_213 6 temp1)
 							else
-								(gLb2Messager sel_295: sel_213 6 43)
+								(gMessager sel_295: sel_213 6 43)
 							)
 						)
 					)
 				)
 			)
-			(else  (super sel_300: param1))
+			(else
+				(super sel_300: param1)
+			)
 		)
 	)
-	
+
 	(method (sel_145)
 		(= local0 0)
 		(super sel_145:)
@@ -431,22 +445,29 @@
 		sel_599 0
 		sel_600 0
 	)
-	
+
 	(method (sel_300 param1)
 		(switch param1
 			(4
-				(cond 
-					(local2 (super sel_300: param1 &rest))
-					((not (self sel_590?)) (gEgo sel_146: sKnock))
-					(else (proc0_5 gEgo officeDoor) (super sel_300: param1 &rest))
+				(cond
+					(local2
+						(super sel_300: param1 &rest)
+					)
+					((not (self sel_590:))
+						(gEgo sel_146: sKnock)
+					)
+					(else
+						(Face gEgo officeDoor)
+						(super sel_300: param1 &rest)
+					)
 				)
 			)
-			(else 
+			(else
 				(super sel_300: param1 &rest)
 			)
 		)
 	)
-	
+
 	(method (sel_606)
 		(super sel_606: 12 112 55 112 54 121 15 122)
 	)
@@ -457,9 +478,9 @@
 		sel_20 {theWanderer}
 		sel_26 15
 	)
-	
+
 	(method (sel_110)
-		(= sel_30 gSel_30)
+		(= sel_30 gUserFont)
 		(super sel_110: &rest)
 	)
 )
@@ -510,11 +531,13 @@
 		sel_8 79
 		sel_9 101
 	)
-	
+
 	(method (sel_300 param1 param2)
 		(switch param1
-			(4 (poster1 sel_300: 4))
-			(else 
+			(4
+				(poster1 sel_300: 4)
+			)
+			(else
 				(super sel_300: param1 param2 &rest)
 			)
 		)
@@ -531,11 +554,13 @@
 		sel_8 85
 		sel_9 79
 	)
-	
+
 	(method (sel_300 param1 param2)
 		(switch param1
-			(4 (poster1 sel_300: 4))
-			(else 
+			(4
+				(poster1 sel_300: 4)
+			)
+			(else
 				(super sel_300: param1 param2 &rest)
 			)
 		)
@@ -552,11 +577,13 @@
 		sel_8 106
 		sel_9 81
 	)
-	
+
 	(method (sel_300 param1 param2)
 		(switch param1
-			(4 (poster1 sel_300: 4))
-			(else 
+			(4
+				(poster1 sel_300: 4)
+			)
+			(else
 				(super sel_300: param1 param2 &rest)
 			)
 		)
@@ -573,11 +600,13 @@
 		sel_8 114
 		sel_9 94
 	)
-	
+
 	(method (sel_300 param1 param2)
 		(switch param1
-			(4 (poster1 sel_300: 4))
-			(else 
+			(4
+				(poster1 sel_300: 4)
+			)
+			(else
 				(super sel_300: param1 param2 &rest)
 			)
 		)
@@ -594,11 +623,13 @@
 		sel_8 137
 		sel_9 95
 	)
-	
+
 	(method (sel_300 param1 param2)
 		(switch param1
-			(4 (poster1 sel_300: 4))
-			(else 
+			(4
+				(poster1 sel_300: 4)
+			)
+			(else
 				(super sel_300: param1 param2 &rest)
 			)
 		)

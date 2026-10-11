@@ -1,15 +1,16 @@
 ;;; Sierra Script 1.0 - (do not remove this comment)
+;;; Decompiled by sluicebox
 (script# 780)
 (include sci.sh)
 (use Main)
-(use LBRoom)
+(use eRS)
 (use Inset)
-(use n958)
+(use LoadMany)
 (use Sound)
 (use Jump)
-(use Cycle)
-(use View)
-(use Obj)
+(use Motion)
+(use Actor)
+(use System)
 
 (public
 	rm780 0
@@ -22,25 +23,22 @@
 	[local3 9]
 	local12
 )
-(procedure (localproc_0044)
+
+(procedure (localproc_0)
 	(= local2 0)
-	(= local1 0)
-	(while (< local1 (creditTitle sel_246:))
+	(for ((= local1 0)) (< local1 (creditTitle sel_246:)) ((++ local1))
 		(= [local3 local1] (creditName sel_2: 791 sel_109:))
 		([local3 local1] sel_155: local0 sel_156: (+ local1 1))
 		(++ local2)
-		(++ local1)
 	)
 )
 
-(procedure (localproc_0089)
+(procedure (localproc_1)
 	(= local2 0)
-	(= local1 0)
-	(while (< local1 (creditTitle sel_246:))
+	(for ((= local1 0)) (< local1 (creditTitle sel_246:)) ((++ local1))
 		(= [local3 local1] (creditName sel_2: 8000 sel_109:))
 		([local3 local1] sel_155: local0 sel_156: (+ local1 1))
 		(++ local2)
-		(++ local1)
 	)
 )
 
@@ -50,18 +48,16 @@
 		sel_408 780
 		sel_28 10
 	)
-	
+
 	(method (sel_110)
-		(proc958_0 128 792 791)
-		(proc958_0 132 795)
+		(LoadMany rsVIEW 792 791)
+		(LoadMany rsSOUND 795)
 		(super sel_110:)
-		(wrapMusic
-			sel_110: 1 795 1312 (if (== global106 32) 310 else 314) 311
-		)
+		(wrapMusic sel_110: 1 795 1312 (if (== global106 32) 310 else 314) 311)
 		(gGame sel_587:)
-		(gIconBar sel_233:)
+		(gTheIconBar sel_233:)
 		(gGame sel_197: 996 1)
-		(if (== (gGame sel_84?) 1)
+		(if (== (gGame sel_84:) 1)
 			(self sel_146: runCredits)
 		else
 			(self sel_146: runCreditsFor)
@@ -73,12 +69,12 @@
 	(properties
 		sel_20 {runCredits}
 	)
-	
-	(method (sel_144 theSel_29 &tmp [temp0 100])
-		(switch (= sel_29 theSel_29)
+
+	(method (sel_144 param1 &tmp [temp0 100])
+		(switch (= sel_29 param1)
 			(0
 				(creditTitle sel_2: 791 sel_155: local0 sel_110: sel_317:)
-				(localproc_0044)
+				(localproc_0)
 				(creditProp sel_110: sel_216: sel_4: 0 sel_161: 0)
 				(switch local0
 					(0
@@ -121,7 +117,7 @@
 						(creditProp sel_155: 11 sel_1: 46 sel_0: 175)
 					)
 				)
-				(if (== (creditProp sel_3?) 7)
+				(if (== (creditProp sel_3:) 7)
 					(volleyBall sel_110: sel_1: 43 sel_0: 124 sel_102:)
 					(sunnyTwo sel_110: sel_216:)
 				else
@@ -131,9 +127,7 @@
 				(= sel_136 1)
 			)
 			(1
-				(= local12
-					(if (proc999_5 local0 5 6 7 8 9 11 12) 90 else 40)
-				)
+				(= local12 (if (OneOf local0 5 6 7 8 9 11 12) 90 else 40))
 				(= local1 0)
 				([local3 local1] sel_110:)
 				(= sel_136 1)
@@ -146,19 +140,23 @@
 				(= sel_136 1)
 			)
 			(3
-				(if (>= (+ local1 1) local2) (= sel_29 4) else 0)
+				(if (>= (+ local1 1) local2)
+					(= sel_29 4)
+				else
+					0
+				)
 			)
 			(4
 				([local3 local1] sel_317:)
 				(++ local1)
 				(if (== local0 6)
-					(= local12 (+ local12 40))
+					(+= local12 40)
 				else
 					(= local12
 						(switch local0
 							(12 150)
 							(11 150)
-							(else 
+							(else
 								(+ (/ 164 local2) local12)
 							)
 						)
@@ -177,7 +175,9 @@
 						(creditProp sel_161: End)
 						(= sel_139 300)
 					)
-					(2 (= sel_139 300))
+					(2
+						(= sel_139 300)
+					)
 					(3
 						(creditProp sel_161: End)
 						(= sel_139 300)
@@ -217,8 +217,8 @@
 			)
 			(6
 				(creditProp sel_111:)
-				(global2 sel_417: 780)
-				(gSel_561 sel_119: 111)
+				(gCurRoom sel_417: 780)
+				(gCast sel_119: 111)
 				(if (< local0 12)
 					(++ local0)
 					(self sel_144: -1)
@@ -228,13 +228,15 @@
 				)
 			)
 			(7
-				(global2 sel_422: daggerInset self)
+				(gCurRoom sel_422: daggerInset self)
 			)
 			(8
 				(creditSound sel_170: 0 30 12 1)
 				(= sel_137 3)
 			)
-			(9 (= global4 1))
+			(9
+				(= gQuit 1)
+			)
 		)
 	)
 )
@@ -243,18 +245,13 @@
 	(properties
 		sel_20 {runCreditsFor}
 	)
-	
-	(method (sel_144 theSel_29 &tmp [temp0 100])
-		(switch (= sel_29 theSel_29)
+
+	(method (sel_144 param1 &tmp [temp0 100])
+		(switch (= sel_29 param1)
 			(0
 				(gGame sel_197: 996 1)
-				(creditTitle
-					sel_2: 8000
-					sel_155: local0
-					sel_110:
-					sel_317:
-				)
-				(localproc_0089)
+				(creditTitle sel_2: 8000 sel_155: local0 sel_110: sel_317:)
+				(localproc_1)
 				(= sel_136 1)
 			)
 			(1
@@ -271,19 +268,25 @@
 				(= sel_136 1)
 			)
 			(3
-				(if (>= (+ local1 1) local2) (= sel_29 4) else 0)
+				(if (>= (+ local1 1) local2)
+					(= sel_29 4)
+				else
+					0
+				)
 			)
 			(4
 				([local3 local1] sel_317:)
 				(++ local1)
-				(= local12 (+ local12 30))
+				(+= local12 30)
 				(= sel_29 1)
 				(self sel_145:)
 			)
-			(5 (= sel_137 5))
+			(5
+				(= sel_137 5)
+			)
 			(6
-				(global2 sel_417: 780)
-				(gSel_561 sel_119: 111)
+				(gCurRoom sel_417: 780)
+				(gCast sel_119: 111)
 				(if (< local0 3)
 					(++ local0)
 					(self sel_144: -1)
@@ -305,9 +308,9 @@
 	(properties
 		sel_20 {sPlay}
 	)
-	
-	(method (sel_144 theSel_29)
-		(switch (= sel_29 theSel_29)
+
+	(method (sel_144 param1)
+		(switch (= sel_29 param1)
 			(0
 				(volleyBall sel_216: sel_161: Fwd)
 				(creditProp sel_161: End self)
@@ -328,7 +331,9 @@
 				(sunnyTwo sel_161: End self)
 				(volleyBall sel_111:)
 			)
-			(7 (self sel_111:))
+			(7
+				(self sel_111:)
+			)
 		)
 	)
 )
@@ -383,7 +388,7 @@
 	(properties
 		sel_20 {wrapMusic}
 	)
-	
+
 	(method (sel_110)
 		(= sel_608 creditSound)
 		(super sel_110: &rest)
@@ -404,7 +409,7 @@
 		sel_2 401
 		sel_4 1
 	)
-	
+
 	(method (sel_300)
 		(daggerInset sel_300: &rest)
 	)
@@ -415,14 +420,14 @@
 		sel_20 {daggerInset}
 		sel_408 401
 	)
-	
+
 	(method (sel_110)
 		(super sel_110: &rest)
 		(daggerEnd sel_110:)
 		(gGame sel_588:)
-		(gIconBar sel_177:)
+		(gTheIconBar sel_177:)
 	)
-	
+
 	(method (sel_133 param1)
 		(gGame sel_587:)
 		(param1 sel_73: 1)

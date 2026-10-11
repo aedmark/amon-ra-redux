@@ -1,8 +1,9 @@
 ;;; Sierra Script 1.0 - (do not remove this comment)
+;;; Decompiled by sluicebox
 (script# 11)
 (include sci.sh)
-(use n958)
-(use Obj)
+(use LoadMany)
+(use System)
 
 (public
 	disposeCode 0
@@ -12,9 +13,9 @@
 	(properties
 		sel_20 {disposeCode}
 	)
-	
+
 	(method (sel_57)
-		(proc958_0
+		(LoadMany
 			0
 			1880
 			1881

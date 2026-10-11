@@ -1,14 +1,15 @@
 ;;; Sierra Script 1.0 - (do not remove this comment)
+;;; Decompiled by sluicebox
 (script# 110)
 (include sci.sh)
 (use Main)
-(use LBRoom)
+(use eRS)
 (use PolyPath)
 (use Polygon)
-(use n958)
-(use Cycle)
-(use View)
-(use Obj)
+(use LoadMany)
+(use Motion)
+(use Actor)
+(use System)
 
 (public
 	rm110 0
@@ -20,13 +21,13 @@
 		sel_408 110
 		sel_28 10
 	)
-	
+
 	(method (sel_110)
-		(proc958_0 128 151 110 111 112 113)
-		(proc958_0 132 110 112)
+		(LoadMany rsVIEW 151 110 111 112 113)
+		(LoadMany rsSOUND 110 112)
 		(self sel_414: 92)
 		(super sel_110:)
-		(global2
+		(gCurRoom
 			sel_395:
 				((Polygon sel_109:)
 					sel_31: 2
@@ -61,15 +62,10 @@
 		(badGuy sel_110:)
 		(inTrunk sel_110:)
 		(lid sel_110:)
-		(gSel_608
-			sel_40: 110
-			sel_99: 1
-			sel_3: -1
-			sel_39: sCartoon
-		)
-		(cond 
-			((> global87 12) 0)
-			((> global87 8)
+		(gGameMusic1 sel_40: 110 sel_99: 1 sel_3: -1 sel_39: sCartoon)
+		(cond
+			((> gHowFast 12) 0)
+			((> gHowFast 8)
 				(creditTitle sel_338: 7 7)
 				(creditName sel_338: 7 7)
 				(badGuy sel_53: 4 sel_244: 4)
@@ -88,13 +84,21 @@
 	(properties
 		sel_20 {sCartoon}
 	)
-	
-	(method (sel_144 theSel_29)
-		(switch (= sel_29 theSel_29)
-			(0 (= sel_137 2))
-			(1 (thedoor sel_161: End self))
-			(2 (= sel_139 120))
-			(3 (thedoor sel_161: Beg self))
+
+	(method (sel_144 param1)
+		(switch (= sel_29 param1)
+			(0
+				(= sel_137 2)
+			)
+			(1
+				(thedoor sel_161: End self)
+			)
+			(2
+				(= sel_139 120)
+			)
+			(3
+				(thedoor sel_161: Beg self)
+			)
 			(4
 				(badGuy
 					sel_155: 0
@@ -116,11 +120,13 @@
 				(gNarrator sel_1: 20 sel_0: 160 sel_203: 1)
 			)
 			(6
-				(gSel_608 sel_40: 112 sel_99: 1 sel_3: 1 sel_39: sCartoon)
-				(gLb2Messager sel_295: 1 0 0 0)
+				(gGameMusic1 sel_40: 112 sel_99: 1 sel_3: 1 sel_39: sCartoon)
+				(gMessager sel_295: 1 0 0 0)
 				(badGuy sel_161: CT 9 -1 self)
 			)
-			(7 (badGuy sel_161: End self))
+			(7
+				(badGuy sel_161: End self)
+			)
 			(8
 				(badGuy sel_161: CT 11 -1)
 				(= sel_139 30)
@@ -130,7 +136,9 @@
 				(= sel_139 120)
 			)
 			(10
-				(if gSel_201 (gSel_201 sel_111:))
+				(if gModelessDialog
+					(gModelessDialog sel_111:)
+				)
 				(gNarrator sel_111:)
 				(badGuy sel_3: 2 sel_4: 0 sel_161: End self)
 			)
@@ -162,14 +170,11 @@
 					sel_312: PolyPath 234 93 self
 				)
 			)
-			(14 (mirror sel_111:))
+			(14
+				(mirror sel_111:)
+			)
 			(15
-				(badGuy
-					sel_3: 2
-					sel_4: 0
-					sel_153: 234 91
-					sel_161: End self
-				)
+				(badGuy sel_3: 2 sel_4: 0 sel_153: 234 91 sel_161: End self)
 			)
 			(16
 				(inTrunk sel_3: 0 sel_153: 247 64 sel_63: 4 sel_216:)
@@ -204,23 +209,31 @@
 					sel_312: PolyPath 300 257 self
 				)
 			)
-			(20 (= sel_137 3))
+			(20
+				(= sel_137 3)
+			)
 			(21
 				(badGuy sel_111:)
 				(creditTitle sel_110: sel_312: MoveTo 53 124 self)
 				(creditName sel_110: sel_312: MoveTo 110 152 self)
 			)
 			(22 0)
-			(23 (= sel_137 4))
+			(23
+				(= sel_137 4)
+			)
 			(24
 				(creditTitle sel_312: MoveTo 383 124 self)
 				(creditName sel_312: MoveTo 383 152 self)
 			)
 			(25 0)
 			(26
-				(if (== (gSel_608 sel_165?) -1) (= sel_136 1))
+				(if (== (gGameMusic1 sel_165:) -1)
+					(= sel_136 1)
+				)
 			)
-			(27 (global2 sel_399: 120))
+			(27
+				(gCurRoom sel_399: 120)
+			)
 		)
 	)
 )

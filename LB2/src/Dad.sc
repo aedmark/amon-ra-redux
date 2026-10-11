@@ -1,9 +1,10 @@
 ;;; Sierra Script 1.0 - (do not remove this comment)
+;;; Decompiled by sluicebox
 (script# 1880)
 (include sci.sh)
 (use Main)
-(use RTRandCycle)
-(use View)
+(use Talker)
+(use Actor)
 
 (public
 	Dad 1
@@ -21,9 +22,9 @@
 		sel_549 105
 		sel_550 12
 	)
-	
+
 	(method (sel_110)
-		(= sel_30 gSel_30)
+		(= sel_30 gUserFont)
 		(super sel_110: dadBust dadEyes dadMouth &rest)
 	)
 )

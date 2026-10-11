@@ -1,22 +1,23 @@
 ;;; Sierra Script 1.0 - (do not remove this comment)
+;;; Decompiled by sluicebox
 (script# 280)
 (include sci.sh)
 (use Main)
 (use Door)
-(use LBRoom)
+(use eRS)
 (use ExitFeature)
 (use Inset)
-(use RTRandCycle)
+(use Talker)
 (use Scaler)
 (use PolyPath)
 (use Polygon)
-(use CueObj)
-(use n958)
+(use Feature)
+(use LoadMany)
 (use StopWalk)
 (use Sound)
-(use Cycle)
-(use View)
-(use Obj)
+(use Motion)
+(use Actor)
+(use System)
 
 (public
 	rm280 0
@@ -34,26 +35,26 @@
 		sel_411 210
 		sel_107 155
 	)
-	
+
 	(method (sel_110)
-		(proc958_0 128 285 284 852 281 830 283)
-		(proc958_0 132 40 97 281 280 252)
+		(LoadMany rsVIEW 285 284 852 281 830 283)
+		(LoadMany rsSOUND 40 97 281 280 252)
 		(self sel_414: 91)
 		(gEgo sel_110: sel_585: 830 sel_320: Scaler 90 20 190 0)
-		(switch gGSel_40
+		(switch gPrevRoomNum
 			(sel_409
 				(gEgo sel_349: 0 sel_253: 180)
 			)
 			(sel_411
-				(global2 sel_146: sUpCurb)
+				(gCurRoom sel_146: sUpCurb)
 			)
-			(else 
-				(global2 sel_146: sOutCab)
+			(else
+				(gCurRoom sel_146: sOutCab)
 			)
 		)
 		(super sel_110:)
-		(gSel_608 sel_40: 280 sel_99: 1 sel_3: 1 sel_39:)
-		(global2
+		(gGameMusic1 sel_40: 280 sel_99: 1 sel_3: 1 sel_39:)
+		(gCurRoom
 			sel_395:
 				((Polygon sel_109:)
 					sel_31: 2
@@ -122,12 +123,12 @@
 					sel_117:
 				)
 		)
-		(if (proc0_2 8)
+		(if (IsFlag 8)
 			(if
 				(not
 					(if (or (gEgo sel_238: 0) (gEgo sel_238: 3))
 					else
-						(proc0_2 7)
+						(IsFlag 7)
 					)
 				)
 				(newsPaper sel_110: sel_311: 1 4 8)
@@ -149,10 +150,10 @@
 		(taxiSign sel_110:)
 		(taxi sel_110: sel_320: 200)
 	)
-	
+
 	(method (sel_111)
 		(carSound sel_111:)
-		(gSel_608 sel_170: 0 30 12 1)
+		(gGameMusic1 sel_170: 0 30 12 1)
 		(super sel_111: &rest)
 	)
 )
@@ -161,14 +162,18 @@
 	(properties
 		sel_20 {sPutUpInset}
 	)
-	
-	(method (sel_144 theSel_29)
-		(switch (= sel_29 theSel_29)
-			(0 (= sel_136 2))
-			(1
-				(gLb2Messager sel_295: (if sel_141 3 else 14) 1 0 0 self)
+
+	(method (sel_144 param1)
+		(switch (= sel_29 param1)
+			(0
+				(= sel_136 2)
 			)
-			(2 (self sel_111:))
+			(1
+				(gMessager sel_295: (if sel_141 3 else 14) 1 0 0 self)
+			)
+			(2
+				(self sel_111:)
+			)
 		)
 	)
 )
@@ -177,9 +182,9 @@
 	(properties
 		sel_20 {sUpCurb}
 	)
-	
-	(method (sel_144 theSel_29)
-		(switch (= sel_29 theSel_29)
+
+	(method (sel_144 param1)
+		(switch (= sel_29 param1)
 			(0
 				(gGame sel_587:)
 				(gEgo sel_312: PolyPath 164 170 self)
@@ -196,9 +201,9 @@
 	(properties
 		sel_20 {sOutCab}
 	)
-	
-	(method (sel_144 theSel_29)
-		(switch (= sel_29 theSel_29)
+
+	(method (sel_144 param1)
+		(switch (= sel_29 param1)
 			(0
 				(gGame sel_587:)
 				(gEgo sel_1: 209 sel_0: 172)
@@ -223,25 +228,27 @@
 	(properties
 		sel_20 {sDrunkWakes}
 	)
-	
-	(method (sel_144 theSel_29)
-		(switch (= sel_29 theSel_29)
+
+	(method (sel_144 param1)
+		(switch (= sel_29 param1)
 			(0
 				(gGame sel_587:)
-				(proc0_3 8)
+				(SetFlag 8)
 				(gEgo sel_312: PolyPath 56 182 self)
 			)
-			(1 (proc0_5 gEgo drunk self))
+			(1
+				(Face gEgo drunk self)
+			)
 			(2
 				(gNarrator sel_1: 15 sel_0: 15)
-				(gLb2Messager sel_295: 2 4 1 1)
+				(gMessager sel_295: 2 4 1 1)
 				(gEgo sel_2: 283 sel_3: 1 sel_4: 0 sel_161: End self)
 			)
 			(3
 				(drunk sel_146: 0 sel_244: 10 sel_161: End self)
 			)
 			(4
-				(gLb2Messager sel_295: 2 4 1 2)
+				(gMessager sel_295: 2 4 1 2)
 				(gEgo sel_161: Beg self)
 			)
 			(5
@@ -258,28 +265,32 @@
 	(properties
 		sel_20 {sGetNewsPaper}
 	)
-	
-	(method (sel_144 theSel_29)
-		(switch (= sel_29 theSel_29)
+
+	(method (sel_144 param1)
+		(switch (= sel_29 param1)
 			(0
 				(gGame sel_587:)
 				(gEgo sel_2: 281 sel_3: 0 sel_4: 0 sel_161: CT 2 1 self)
 				(newsPaper sel_111:)
 			)
-			(1 (gEgo sel_161: End self))
+			(1
+				(gEgo sel_161: End self)
+			)
 			(2
 				(gGame sel_588:)
 				(gEgo sel_350: 0)
-				((ScriptID 21 0) sel_57: 769)
+				((ScriptID 21 0) sel_57: 769) ; addCluesCode
 				(gEgo
 					sel_2: 830
 					sel_3: 1
 					sel_4: 1
 					sel_161: StopWalk -1
-					sel_312: MoveTo (+ (gEgo sel_1?) 5) (gEgo sel_0?) self
+					sel_312: MoveTo (+ (gEgo sel_1:) 5) (gEgo sel_0:) self
 				)
 			)
-			(3 (self sel_111:))
+			(3
+				(self sel_111:)
+			)
 		)
 	)
 )
@@ -288,19 +299,25 @@
 	(properties
 		sel_20 {sSnore}
 	)
-	
-	(method (sel_144 theSel_29)
-		(switch (= sel_29 theSel_29)
-			(0 (= sel_139 30))
+
+	(method (sel_144 param1)
+		(switch (= sel_29 param1)
+			(0
+				(= sel_139 30)
+			)
 			(1
 				(drunk sel_161: CT 2 1)
 				(carSound sel_40: 281 sel_99: 5 sel_3: 1 sel_39: self)
 			)
-			(2 (= sel_139 30))
+			(2
+				(= sel_139 30)
+			)
 			(3
 				(drunk sel_161: CT 0 -1 self)
 			)
-			(4 (self sel_110:))
+			(4
+				(self sel_110:)
+			)
 		)
 	)
 )
@@ -309,17 +326,17 @@
 	(properties
 		sel_20 {sHailCab}
 	)
-	
-	(method (sel_144 theSel_29)
-		(switch (= sel_29 theSel_29)
+
+	(method (sel_144 param1)
+		(switch (= sel_29 param1)
 			(0
 				(gGame sel_587:)
 				(gGameMusic2 sel_40: 252 sel_99: 1 sel_3: -1 sel_39: 20)
 				(gEgo
 					sel_312:
 						PolyPath
-						(- (taxiSign sel_1?) 20)
-						(+ (taxiSign sel_0?) 2)
+						(- (taxiSign sel_1:) 20)
+						(+ (taxiSign sel_0:) 2)
 						self
 				)
 			)
@@ -327,10 +344,10 @@
 				(gEgo
 					sel_2: 852
 					sel_3: 0
-					sel_153: (- (gEgo sel_1?) 2) (gEgo sel_0?)
+					sel_153: (- (gEgo sel_1:) 2) (gEgo sel_0:)
 					sel_161: End self
 				)
-				(gSel_608 sel_40: 97 sel_99: 1 sel_3: 1 sel_39:)
+				(gGameMusic1 sel_40: 97 sel_99: 1 sel_3: 1 sel_39:)
 			)
 			(2
 				(gGameMusic2 sel_173: 2 224 2000 sel_170: 127 5 5 0)
@@ -358,7 +375,9 @@
 				(gEgo sel_102:)
 				(= sel_139 30)
 			)
-			(8 (global2 sel_399: 250))
+			(8
+				(gCurRoom sel_399: 250)
+			)
 		)
 	)
 )
@@ -379,7 +398,7 @@
 		sel_599 0
 		sel_600 0
 	)
-	
+
 	(method (sel_606)
 		(super sel_606: 116 121 145 118 146 125 117 128)
 	)
@@ -397,20 +416,22 @@
 		sel_14 16384
 		sel_244 30
 	)
-	
+
 	(method (sel_300 param1)
 		(switch param1
 			(4
-				(if (not (proc0_2 8))
-					(global2 sel_146: sDrunkWakes)
+				(if (not (IsFlag 8))
+					(gCurRoom sel_146: sDrunkWakes)
 				else
-					(gLb2Messager sel_295: 2 4 2)
+					(gMessager sel_295: 2 4 2)
 				)
 			)
 			(6
-				(gLb2Messager sel_295: 2 6 4)
+				(gMessager sel_295: 2 6 4)
 			)
-			(else  (super sel_300: param1))
+			(else
+				(super sel_300: param1)
+			)
 		)
 	)
 )
@@ -439,19 +460,19 @@
 		sel_3 1
 		sel_14 16384
 	)
-	
+
 	(method (sel_300 param1)
 		(switch param1
 			(4
-				(global2 sel_422: paperInset)
+				(gCurRoom sel_422: paperInset)
 			)
 			(1
-				(global2 sel_422: paperInset)
+				(gCurRoom sel_422: paperInset)
 			)
 			(8
-				(global2 sel_422: paperInset)
+				(gCurRoom sel_422: paperInset)
 			)
-			(else 
+			(else
 				(super sel_300: param1 &rest)
 			)
 		)
@@ -471,11 +492,15 @@
 		sel_60 12
 		sel_14 16400
 	)
-	
+
 	(method (sel_300 param1)
 		(switch param1
-			(4 (global2 sel_146: sHailCab))
-			(else  (super sel_300: param1))
+			(4
+				(gCurRoom sel_146: sHailCab)
+			)
+			(else
+				(super sel_300: param1)
+			)
 		)
 	)
 )
@@ -494,7 +519,7 @@
 		sel_303 131
 		sel_304 131
 	)
-	
+
 	(method (sel_300 param1)
 		(frontDoor sel_300: param1)
 	)
@@ -516,13 +541,13 @@
 		sel_213 9
 		sel_302 64
 	)
-	
+
 	(method (sel_300 param1)
 		(switch param1
 			(6
-				(gLb2Messager sel_295: 9 6 4)
+				(gMessager sel_295: 9 6 4)
 			)
-			(else 
+			(else
 				(super sel_300: param1 &rest)
 			)
 		)
@@ -536,13 +561,13 @@
 		sel_213 16
 		sel_302 128
 	)
-	
+
 	(method (sel_300 param1)
 		(switch param1
 			(6
-				(gLb2Messager sel_295: 16 6 4)
+				(gMessager sel_295: 16 6 4)
 			)
-			(else 
+			(else
 				(super sel_300: param1 &rest)
 			)
 		)
@@ -607,27 +632,27 @@
 		sel_570 1
 		sel_213 11
 	)
-	
+
 	(method (sel_110)
 		(super sel_110: &rest)
 		(self sel_146: sPutUpInset 0 0)
 	)
-	
+
 	(method (sel_300 param1)
 		(switch param1
 			(4
 				(self sel_111:)
-				(global2 sel_422: inCoupon)
+				(gCurRoom sel_422: inCoupon)
 			)
 			(8
 				(self sel_111:)
-				(global2 sel_422: inCoupon)
+				(gCurRoom sel_422: inCoupon)
 			)
 			(1
 				(self sel_111:)
-				(global2 sel_422: inCoupon)
+				(gCurRoom sel_422: inCoupon)
 			)
-			(else 
+			(else
 				(super sel_300: param1 &rest)
 			)
 		)
@@ -643,21 +668,25 @@
 		sel_570 1
 		sel_213 3
 	)
-	
+
 	(method (sel_110)
 		(super sel_110: &rest)
 		(self sel_146: sPutUpInset 0 1)
 	)
-	
+
 	(method (sel_300 param1)
 		(switch param1
 			(4
 				(self sel_111:)
-				(global2 sel_146: sGetNewsPaper)
+				(gCurRoom sel_146: sGetNewsPaper)
 			)
-			(8 (gLb2Messager sel_295: 3 1))
-			(1 (gLb2Messager sel_295: 3 1))
-			(else 
+			(8
+				(gMessager sel_295: 3 1)
+			)
+			(1
+				(gMessager sel_295: 3 1)
+			)
+			(else
 				(super sel_300: param1 &rest)
 			)
 		)
@@ -690,9 +719,9 @@
 		sel_20 {Drunk}
 		sel_26 15
 	)
-	
+
 	(method (sel_110)
-		(= sel_30 gSel_30)
+		(= sel_30 gUserFont)
 		(= sel_540 1)
 		(super sel_110: &rest)
 	)

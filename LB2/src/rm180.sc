@@ -1,14 +1,15 @@
 ;;; Sierra Script 1.0 - (do not remove this comment)
+;;; Decompiled by sluicebox
 (script# 180)
 (include sci.sh)
 (use Main)
-(use LBRoom)
+(use eRS)
 (use PolyPath)
 (use Polygon)
-(use n958)
-(use Cycle)
-(use View)
-(use Obj)
+(use LoadMany)
+(use Motion)
+(use Actor)
+(use System)
 
 (public
 	rm180 0
@@ -22,10 +23,10 @@
 		sel_107 145
 		sel_108 126
 	)
-	
+
 	(method (sel_110)
-		(proc958_0 128 151 181 185)
-		(proc958_0 132 94 180)
+		(LoadMany rsVIEW 151 181 185)
+		(LoadMany rsSOUND 94 180)
 		(self sel_414: 92)
 		(gEgo
 			sel_2: 185
@@ -38,7 +39,7 @@
 			sel_110:
 		)
 		(super sel_110:)
-		(global2
+		(gCurRoom
 			sel_395:
 				((Polygon sel_109:)
 					sel_31: 2
@@ -51,24 +52,9 @@
 		(WrapMusic sel_110: 0 180 94)
 		(nyCar1 sel_110: sel_146: sCarGo1)
 		(p1 sel_110: sel_146: sP1Walk)
-		(p2
-			sel_110:
-			sel_155: 1
-			sel_161: Walk
-			sel_312: PolyPath 31 220
-		)
-		(p3
-			sel_110:
-			sel_155: 2
-			sel_161: Walk
-			sel_312: PolyPath 137 172
-		)
-		(p4
-			sel_110:
-			sel_155: 4
-			sel_161: Walk
-			sel_312: PolyPath 206 206
-		)
+		(p2 sel_110: sel_155: 1 sel_161: Walk sel_312: PolyPath 31 220)
+		(p3 sel_110: sel_155: 2 sel_161: Walk sel_312: PolyPath 137 172)
+		(p4 sel_110: sel_155: 4 sel_161: Walk sel_312: PolyPath 206 206)
 		(self sel_146: sCartoon)
 	)
 )
@@ -77,20 +63,22 @@
 	(properties
 		sel_20 {sCartoon}
 	)
-	
-	(method (sel_144 theSel_29)
-		(switch (= sel_29 theSel_29)
+
+	(method (sel_144 param1)
+		(switch (= sel_29 param1)
 			(0
 				(gEgo sel_161: Walk sel_312: PolyPath 224 168 self)
 			)
 			(1
-				((ScriptID 1881 2) sel_203: 1)
-				(gLb2Messager sel_295: 1 0 0 0 self)
+				((ScriptID 1881 2) sel_203: 1) ; Laura
+				(gMessager sel_295: 1 0 0 0 self)
 			)
 			(2
 				(gEgo sel_155: 6 sel_312: PolyPath 245 168 self)
 			)
-			(3 (= sel_137 2))
+			(3
+				(= sel_137 2)
+			)
 			(4
 				(gEgo sel_111:)
 				(creditTitle
@@ -107,7 +95,9 @@
 				)
 			)
 			(5 0)
-			(6 (= sel_137 3))
+			(6
+				(= sel_137 3)
+			)
 			(7
 				(creditTitle sel_312: MoveTo 48 -20 self)
 				(creditName sel_312: MoveTo 62 210 self)
@@ -128,15 +118,17 @@
 				)
 			)
 			(10 0)
-			(11 (= sel_137 3))
+			(11
+				(= sel_137 3)
+			)
 			(12
 				(creditTitle sel_312: MoveTo 465 102 self)
 				(creditName sel_312: MoveTo 456 138 self)
 			)
 			(13 0)
 			(14
-				(global2 sel_399: 190)
-				(gGame sel_197: gWalkCursor)
+				(gCurRoom sel_399: 190)
+				(gGame sel_197: gNormalCursor)
 				(self sel_111:)
 			)
 		)
@@ -147,9 +139,9 @@
 	(properties
 		sel_20 {sCarGo1}
 	)
-	
-	(method (sel_144 theSel_29)
-		(switch (= sel_29 theSel_29)
+
+	(method (sel_144 param1)
+		(switch (= sel_29 param1)
 			(0
 				(nyCar1 sel_312: MoveTo -25 168 self)
 			)
@@ -173,22 +165,14 @@
 	(properties
 		sel_20 {sP1Walk}
 	)
-	
-	(method (sel_144 theSel_29)
-		(switch (= sel_29 theSel_29)
+
+	(method (sel_144 param1)
+		(switch (= sel_29 param1)
 			(0
-				(p1
-					sel_155: 0
-					sel_161: Walk
-					sel_312: PolyPath 136 170 self
-				)
+				(p1 sel_155: 0 sel_161: Walk sel_312: PolyPath 136 170 self)
 			)
 			(1
-				(p1
-					sel_155: 3
-					sel_153: 158 170
-					sel_312: PolyPath 220 220 self
-				)
+				(p1 sel_155: 3 sel_153: 158 170 sel_312: PolyPath 220 220 self)
 			)
 			(2
 				(p1 sel_111:)

@@ -328,6 +328,27 @@ Rewrite culturally stereotyped dialogue act by act without flattening distinct v
 
 ---
 
+## D-032 Use Sluicebox Annotations with Stable Numeric Selectors
+
+Adopt a compiler-facing source reconstruction from the effective Redux resources rather than importing the published
+`ra-dos-1.000` text verbatim.
+
+- **Context:** The pinned Sluicebox publication is an exact 221-script version match and dramatically improves symbol
+  recovery, but its readable selector aliases are contextual. A single numeric selector ID can be printed as several
+  names depending on the receiver, which SCI's global `vocab.997` cannot represent. Direct import produced hundreds of
+  false selector/property errors. Conversely, a plain numeric decompile compiled but discarded valuable annotations.
+- **Decision:** Run Sluicebox's annotation pipeline on the effective Redux loose-patch layer while emitting verified
+  numeric selector IDs. Keep readable recovered globals, object names, procedures, control flow, and comments. Normalize
+  `vocab.997` to `sel_N` while preserving IDs 4098 `-propDict-`, 4100 `-classScript-`, 4102 `-super-`, and 4103 `-info-`,
+  which SCI Companion requires for direct metadata access. Repair only demonstrated decompiler/compiler boundary cases
+  and record them in source. Treat the published tree as a pinned reference, not as directly compilable input.
+- **Consequences:** All 221 script/source-object pairs are coherent and include the already-compiled Redux behavior, so
+  the 42-script manual replay is unnecessary. Selector calls remain numeric, but the rest of the tree gains Sluicebox's
+  substantially better names and structure. A disposable isolated Compile All is allowed only as a migration
+  diagnostic; normal repository work remains single-script compilation under D-028.
+
+---
+
 ## Open questions
 
 - **Q-001**: Resolved by D-007: Omit insensitive original CD voice tracks; restore murder lines as text messages in

@@ -1,19 +1,20 @@
 ;;; Sierra Script 1.0 - (do not remove this comment)
+;;; Decompiled by sluicebox
 (script# 720)
 (include sci.sh)
 (use Main)
-(use LBRoom)
+(use eRS)
 (use Osc)
 (use PolyPath)
-(use CueObj)
-(use n958)
+(use Feature)
+(use LoadMany)
 (use StopWalk)
 (use Timer)
 (use Sound)
-(use Cycle)
-(use InvI)
-(use View)
-(use Obj)
+(use Motion)
+(use Inventory)
+(use Actor)
+(use System)
 
 (public
 	rm720 0
@@ -23,6 +24,7 @@
 	local0
 	local1
 )
+
 (instance rm720 of LBRoom
 	(properties
 		sel_20 {rm720}
@@ -32,18 +34,18 @@
 		sel_412 715
 		sel_108 -10
 	)
-	
+
 	(method (sel_110 &tmp temp0)
-		(global2 sel_259: (List sel_109:))
-		((ScriptID 2720 0) sel_57: (global2 sel_259?))
+		(gCurRoom sel_259: (List sel_109:))
+		((ScriptID 2720 0) sel_57: (gCurRoom sel_259:)) ; poly2720Code
 		(gEgo sel_110: sel_585: 831 sel_320: 145)
 		(self sel_146: sEnterWest)
 		(Load rsVIEW 722)
-		(proc958_0 132 48 721 722 723 736 17)
+		(LoadMany rsSOUND 48 721 722 723 736 17)
 		((= temp0 (Inv sel_64: 15)) sel_4: 0)
 		(temp0 sel_33: 84)
 		(super sel_110:)
-		(gSel_608 sel_40: 720 sel_99: 1 sel_3: -1 sel_39:)
+		(gGameMusic1 sel_40: 720 sel_99: 1 sel_3: -1 sel_39:)
 		(steve sel_110:)
 		(stone sel_110:)
 		(maintDoor sel_110: sel_311: 4)
@@ -70,28 +72,35 @@
 		(light2 sel_110:)
 		(furnaceGrate sel_110:)
 	)
-	
-	(method (sel_111)
-		(if (gLb2WH sel_122: tunnel) (gLb2WH sel_81: tunnel))
-		(DisposeScript 2720)
-		(gSel_608 sel_170:)
-		(super sel_111:)
-	)
-	
+
 	(method (sel_145)
-		(cond 
-			((self sel_142?) (rileyTimer sel_162: self 10) (self sel_135: rileyTimer))
+		(cond
+			((self sel_142:)
+				(rileyTimer sel_162: self 10)
+				(self sel_135: rileyTimer)
+			)
 			(local0
 				(gGameMusic2 sel_40: 3 sel_3: 1 sel_99: 1 sel_39:)
 				(self sel_146: sO_RileyEnters)
 			)
-			(else (self sel_146: sGunShots))
+			(else
+				(self sel_146: sGunShots)
+			)
 		)
 	)
-	
+
 	(method (sel_399)
 		(rileyTimer sel_111: sel_81:)
 		(super sel_399: &rest)
+	)
+
+	(method (sel_111)
+		(if (gWalkHandler sel_122: tunnel)
+			(gWalkHandler sel_81: tunnel)
+		)
+		(DisposeScript 2720)
+		(gGameMusic1 sel_170:)
+		(super sel_111:)
 	)
 )
 
@@ -99,18 +108,22 @@
 	(properties
 		sel_20 {sGunShots}
 	)
-	
-	(method (sel_144 theSel_29)
-		(switch (= sel_29 theSel_29)
+
+	(method (sel_144 param1)
+		(switch (= sel_29 param1)
 			(0
 				(sFX sel_40: 52 sel_3: 1 sel_99: 5 sel_39: self)
 			)
-			(1 (= sel_139 30))
-			(2 (sFX sel_39: self))
+			(1
+				(= sel_139 30)
+			)
+			(2
+				(sFX sel_39: self)
+			)
 			(3
-				(gLb2Messager sel_295: 22)
-				(rileyTimer sel_162: global2 30)
-				(global2 sel_135: rileyTimer)
+				(gMessager sel_295: 22)
+				(rileyTimer sel_162: gCurRoom 30)
+				(gCurRoom sel_135: rileyTimer)
 				(gGameMusic2 sel_40: 17 sel_3: -1 sel_99: 1 sel_39:)
 				(Load rsSOUND 3)
 				(= local0 1)
@@ -124,9 +137,9 @@
 	(properties
 		sel_20 {sEnterWest}
 	)
-	
-	(method (sel_144 theSel_29)
-		(switch (= sel_29 theSel_29)
+
+	(method (sel_144 param1)
+		(switch (= sel_29 param1)
 			(0
 				(gGame sel_587:)
 				(gEgo
@@ -137,8 +150,8 @@
 				)
 			)
 			(1
-				(rileyTimer sel_162: global2 0 2)
-				(global2 sel_135: rileyTimer)
+				(rileyTimer sel_162: gCurRoom 0 2)
+				(gCurRoom sel_135: rileyTimer)
 				(gEgo sel_585: 831 sel_3: 6)
 				(gGame sel_588:)
 				(self sel_111:)
@@ -150,11 +163,10 @@
 (instance sO_RileyEnters of Script
 	(properties
 		sel_20 {sO'RileyEnters}
-		name "sO'RileyEnters"
 	)
-	
-	(method (sel_144 theSel_29)
-		(switch (= sel_29 theSel_29)
+
+	(method (sel_144 param1)
+		(switch (= sel_29 param1)
 			(0
 				(gGame sel_587:)
 				(o_Riley
@@ -163,8 +175,12 @@
 					sel_161: Walk
 					sel_312: MoveTo 62 189 self
 				)
-				(if (< (gEgo sel_1?) 120)
-					(gEgo sel_244: 4 sel_53: 4 sel_312: PolyPath 142 165 self)
+				(if (< (gEgo sel_1:) 120)
+					(gEgo
+						sel_244: 4
+						sel_53: 4
+						sel_312: PolyPath 142 165 self
+					)
 				else
 					(= sel_136 1)
 				)
@@ -173,7 +189,9 @@
 			(2
 				(o_Riley sel_63: -1)
 				(gEgo sel_244: 6 sel_53: 6 sel_253: 270 self)
-				(if (== (steve sel_2?) 812) (steve sel_253: 270))
+				(if (== (steve sel_2:) 812)
+					(steve sel_253: 270)
+				)
 			)
 			(3
 				(o_Riley sel_155: 5 sel_156: 0 sel_161: End self)
@@ -199,26 +217,32 @@
 				)
 			)
 			(8
-				(cond 
+				(cond
 					(
 						(or
-							(== (steve sel_2?) 812)
+							(== (steve sel_2:) 812)
 							(and
-								(== (steve sel_2?) 722)
-								(== (steve sel_3?) 0)
-								(== (steve sel_4?) 7)
+								(== (steve sel_2:) 722)
+								(== (steve sel_3:) 0)
+								(== (steve sel_4:) 7)
 							)
 						)
 						(self sel_146: sKillSteve self)
 					)
-					((== (steve sel_2?) 721) (self sel_146: sKillCoalSteve self))
-					((== (steve sel_2?) 722) (self sel_146: sKillNailSteve self))
+					((== (steve sel_2:) 721)
+						(self sel_146: sKillCoalSteve self)
+					)
+					((== (steve sel_2:) 722)
+						(self sel_146: sKillNailSteve self)
+					)
 				)
 			)
-			(9 (= sel_139 120))
+			(9
+				(= sel_139 120)
+			)
 			(10
-				(= global145 10)
-				(global2 sel_399: 99)
+				(= global145 10) ; "You'll get nowhere with that holier-than-thou attitude."
+				(gCurRoom sel_399: 99)
 				(self sel_111:)
 			)
 		)
@@ -229,9 +253,9 @@
 	(properties
 		sel_20 {sKillSteve}
 	)
-	
-	(method (sel_144 theSel_29)
-		(switch (= sel_29 theSel_29)
+
+	(method (sel_144 param1)
+		(switch (= sel_29 param1)
 			(0
 				(o_Riley sel_155: 6 sel_156: 0 sel_161: CT 1 1 self)
 			)
@@ -252,7 +276,9 @@
 					sel_161: End self
 				)
 			)
-			(4 (self sel_111:))
+			(4
+				(self sel_111:)
+			)
 		)
 	)
 )
@@ -261,48 +287,18 @@
 	(properties
 		sel_20 {sKillCoalSteve}
 	)
-	
-	(method (sel_144 theSel_29)
-		(switch (= sel_29 theSel_29)
-			(0
-				(o_Riley
-					sel_155: 7
-					sel_161: Walk
-					sel_312: MoveTo (- (steve sel_1?) 40) (+ (steve sel_0?) 20) self
-				)
-			)
-			(1
-				(o_Riley sel_155: 5 sel_156: 0 sel_161: End self)
-			)
-			(2
-				(o_Riley sel_155: 6 sel_156: 0 sel_161: CT 1 1 self)
-			)
-			(3
-				(sFX sel_40: 52 sel_3: 1 sel_99: 5 sel_39:)
-				(o_Riley sel_161: CT 1 1 self)
-			)
-			(4
-				(sFX sel_39:)
-				(o_Riley sel_161: CT 0 1 self)
-			)
-			(5 (steve sel_161: Osc 1 self))
-			(6 (self sel_111:))
-		)
-	)
-)
 
-(instance sKillNailSteve of Script
-	(properties
-		sel_20 {sKillNailSteve}
-	)
-	
-	(method (sel_144 theSel_29)
-		(switch (= sel_29 theSel_29)
+	(method (sel_144 param1)
+		(switch (= sel_29 param1)
 			(0
 				(o_Riley
 					sel_155: 7
 					sel_161: Walk
-					sel_312: MoveTo (- (steve sel_1?) 50) (+ (steve sel_0?) 20) self
+					sel_312:
+						MoveTo
+						(- (steve sel_1:) 40)
+						(+ (steve sel_0:) 20)
+						self
 				)
 			)
 			(1
@@ -320,14 +316,58 @@
 				(o_Riley sel_161: CT 0 1 self)
 			)
 			(5
-				(steve sel_156: (- (steve sel_4?) 1))
+				(steve sel_161: Osc 1 self)
+			)
+			(6
+				(self sel_111:)
+			)
+		)
+	)
+)
+
+(instance sKillNailSteve of Script
+	(properties
+		sel_20 {sKillNailSteve}
+	)
+
+	(method (sel_144 param1)
+		(switch (= sel_29 param1)
+			(0
+				(o_Riley
+					sel_155: 7
+					sel_161: Walk
+					sel_312:
+						MoveTo
+						(- (steve sel_1:) 50)
+						(+ (steve sel_0:) 20)
+						self
+				)
+			)
+			(1
+				(o_Riley sel_155: 5 sel_156: 0 sel_161: End self)
+			)
+			(2
+				(o_Riley sel_155: 6 sel_156: 0 sel_161: CT 1 1 self)
+			)
+			(3
+				(sFX sel_40: 52 sel_3: 1 sel_99: 5 sel_39:)
+				(o_Riley sel_161: CT 1 1 self)
+			)
+			(4
+				(sFX sel_39:)
+				(o_Riley sel_161: CT 0 1 self)
+			)
+			(5
+				(steve sel_156: (- (steve sel_4:) 1))
 				(= sel_139 20)
 			)
 			(6
-				(steve sel_156: (+ (steve sel_4?) 1))
+				(steve sel_156: (+ (steve sel_4:) 1))
 				(= sel_139 20)
 			)
-			(7 (self sel_111:))
+			(7
+				(self sel_111:)
+			)
 		)
 	)
 )
@@ -336,9 +376,9 @@
 	(properties
 		sel_20 {sBurnBabyBurn}
 	)
-	
-	(method (sel_144 theSel_29)
-		(switch (= sel_29 theSel_29)
+
+	(method (sel_144 param1)
+		(switch (= sel_29 param1)
 			(0
 				(gGame sel_587:)
 				(gEgo
@@ -361,10 +401,12 @@
 				(flames sel_161: Beg)
 				(gEgo sel_155: 5 sel_156: 0 sel_244: 13 sel_161: End self)
 			)
-			(4 (= sel_139 120))
+			(4
+				(= sel_139 120)
+			)
 			(5
-				(= global145 2)
-				(global2 sel_399: 99)
+				(= global145 2) ; "If you can't stand the heat, stay out of the furnace!"
+				(gCurRoom sel_399: 99)
 				(self sel_111:)
 			)
 		)
@@ -375,20 +417,15 @@
 	(properties
 		sel_20 {sRemoveCoal}
 	)
-	
-	(method (sel_144 theSel_29)
-		(switch (= sel_29 theSel_29)
+
+	(method (sel_144 param1)
+		(switch (= sel_29 param1)
 			(0
 				(gGame sel_587:)
 				(gEgo sel_312: PolyPath 279 172 self)
 			)
 			(1
-				(gEgo
-					sel_2: 721
-					sel_155: 0
-					sel_156: 0
-					sel_161: CT 2 1 self
-				)
+				(gEgo sel_2: 721 sel_155: 0 sel_156: 0 sel_161: CT 2 1 self)
 			)
 			(2
 				(coalOnFace sel_111:)
@@ -408,9 +445,9 @@
 	(properties
 		sel_20 {sAwaken}
 	)
-	
-	(method (sel_144 theSel_29)
-		(switch (= sel_29 theSel_29)
+
+	(method (sel_144 param1)
+		(switch (= sel_29 param1)
 			(0
 				(gGame sel_587:)
 				(smellHere sel_111:)
@@ -419,31 +456,28 @@
 			(1
 				(gEgo sel_2: 721 sel_155: 0 sel_156: 0 sel_161: End self)
 			)
-			(2 (steve sel_161: Osc 1 self))
-			(3 (= sel_139 60))
-			(4
-				(gEgo
-					sel_585: 831
-					sel_3: 0
-					sel_312: PolyPath 237 165 self
-				)
+			(2
+				(steve sel_161: Osc 1 self)
 			)
-			(5 (gEgo sel_253: 90 self))
+			(3
+				(= sel_139 60)
+			)
+			(4
+				(gEgo sel_585: 831 sel_3: 0 sel_312: PolyPath 237 165 self)
+			)
+			(5
+				(gEgo sel_253: 90 self)
+			)
 			(6
-				(steve
-					sel_155: 2
-					sel_156: 0
-					sel_244: 12
-					sel_161: End self
-				)
+				(steve sel_155: 2 sel_156: 0 sel_244: 12 sel_161: End self)
 			)
 			(7
 				(gGame sel_588:)
-				(gIconBar sel_233: 0)
+				(gTheIconBar sel_233: 0)
 				(= sel_137 (if (HaveMouse) 6 else 12))
 			)
 			(8
-				(global2 sel_146: sStepOnNail)
+				(gCurRoom sel_146: sStepOnNail)
 				(self sel_111:)
 			)
 		)
@@ -454,9 +488,9 @@
 	(properties
 		sel_20 {sStepOnNail}
 	)
-	
-	(method (sel_144 theSel_29)
-		(switch (= sel_29 theSel_29)
+
+	(method (sel_144 param1)
+		(switch (= sel_29 param1)
 			(0
 				(steve
 					sel_2: 722
@@ -466,7 +500,9 @@
 					sel_161: End self
 				)
 			)
-			(1 (= sel_139 45))
+			(1
+				(= sel_139 45)
+			)
 			(2
 				(gEgo sel_253: 135)
 				(steve
@@ -480,13 +516,13 @@
 			(3)
 			(4
 				(sFX sel_170:)
-				(proc0_3 65)
-				((global2 sel_259?)
-					sel_81: ((global2 sel_259?) sel_64: 0) --UNKNOWN-PROP-NAME--
+				(SetFlag 65)
+				((gCurRoom sel_259:)
+					sel_81: ((gCurRoom sel_259:) sel_64: 0)
 				)
-				((ScriptID 2720 0) sel_57: (global2 sel_259?))
+				((ScriptID 2720 0) sel_57: (gCurRoom sel_259:)) ; poly2720Code
 				(steve sel_313:)
-				(gIconBar sel_177: 0)
+				(gTheIconBar sel_177: 0)
 				(self sel_111:)
 			)
 		)
@@ -497,14 +533,16 @@
 	(properties
 		sel_20 {sGetUp}
 	)
-	
-	(method (sel_144 theSel_29)
-		(switch (= sel_29 theSel_29)
+
+	(method (sel_144 param1)
+		(switch (= sel_29 param1)
 			(0
 				(gGame sel_587:)
 				(steve sel_155: 3 sel_156: 0 sel_161: End self)
 			)
-			(1 (= sel_139 30))
+			(1
+				(= sel_139 30)
+			)
 			(2
 				(steve
 					sel_2: 722
@@ -522,12 +560,12 @@
 				(sFX sel_167:)
 				(= local1 1)
 				(steve sel_63: -1 sel_313:)
-				(proc0_3 121)
-				((global2 sel_259?)
-					sel_81: ((global2 sel_259?) sel_64: 0) --UNKNOWN-PROP-NAME--
+				(SetFlag 121)
+				((gCurRoom sel_259:)
+					sel_81: ((gCurRoom sel_259:) sel_64: 0)
 				)
-				((ScriptID 2720 0) sel_57: (global2 sel_259?))
-				(gLb2Messager sel_295: 21 2 5)
+				((ScriptID 2720 0) sel_57: (gCurRoom sel_259:)) ; poly2720Code
+				(gMessager sel_295: 21 2 5)
 				(gGame sel_588:)
 				(self sel_111:)
 			)
@@ -539,9 +577,9 @@
 	(properties
 		sel_20 {sSteveHelp}
 	)
-	
-	(method (sel_144 theSel_29)
-		(switch (= sel_29 theSel_29)
+
+	(method (sel_144 param1)
+		(switch (= sel_29 param1)
 			(0
 				(steve
 					sel_2: 724
@@ -573,9 +611,9 @@
 	(properties
 		sel_20 {sPushStone}
 	)
-	
-	(method (sel_144 theSel_29)
-		(switch (= sel_29 theSel_29)
+
+	(method (sel_144 param1)
+		(switch (= sel_29 param1)
 			(0
 				(gGame sel_587:)
 				(gEgo sel_312: PolyPath 240 154 self)
@@ -589,10 +627,14 @@
 					sel_161: CT 4 1 self
 				)
 			)
-			(2 (= sel_139 60))
-			(3 (gEgo sel_161: Beg self))
+			(2
+				(= sel_139 60)
+			)
+			(3
+				(gEgo sel_161: Beg self)
+			)
 			(4
-				(gLb2Messager sel_295: 5 4 4)
+				(gMessager sel_295: 5 4 4)
 				(gEgo sel_585: 831 sel_3: 3)
 				(gGame sel_588:)
 				(self sel_111:)
@@ -605,9 +647,9 @@
 	(properties
 		sel_20 {sMoveStone}
 	)
-	
-	(method (sel_144 theSel_29)
-		(switch (= sel_29 theSel_29)
+
+	(method (sel_144 param1)
+		(switch (= sel_29 param1)
 			(0
 				(gGame sel_587:)
 				(gEgo sel_312: PolyPath 240 151 self)
@@ -629,7 +671,7 @@
 					sel_244: 12
 					sel_161: Osc 1
 				)
-				(stone sel_312: MoveTo 176 (stone sel_0?) self)
+				(stone sel_312: MoveTo 176 (stone sel_0:) self)
 				(sFX sel_40: 721 sel_99: 5 sel_39:)
 			)
 			(3
@@ -648,7 +690,7 @@
 					sel_313:
 					sel_161: StopWalk -1
 				)
-				(gLb2WH sel_129: tunnel)
+				(gWalkHandler sel_129: tunnel)
 				(gGame sel_588:)
 				(self sel_111:)
 			)
@@ -660,14 +702,16 @@
 	(properties
 		sel_20 {sEnterTunnel}
 	)
-	
-	(method (sel_144 theSel_29)
-		(switch (= sel_29 theSel_29)
+
+	(method (sel_144 param1)
+		(switch (= sel_29 param1)
 			(0
 				(gGame sel_587:)
 				(gEgo sel_312: PolyPath 251 146 self)
 			)
-			(1 (gEgo sel_253: 0 self))
+			(1
+				(gEgo sel_253: 0 self)
+			)
 			(2
 				(gEgo sel_2: 721 sel_155: 8 sel_156: 0 sel_161: End self)
 			)
@@ -687,12 +731,7 @@
 				(steve sel_155: -1 sel_312: PolyPath 254 148 self)
 			)
 			(5
-				(steve
-					sel_2: 721
-					sel_155: 10
-					sel_156: 0
-					sel_161: End self
-				)
+				(steve sel_2: 721 sel_155: 10 sel_156: 0 sel_161: End self)
 			)
 			(6
 				(steve
@@ -707,7 +746,7 @@
 			)
 			(7
 				(steve sel_102:)
-				(global2 sel_399: (global2 sel_409?))
+				(gCurRoom sel_399: (gCurRoom sel_409:))
 				(self sel_111:)
 			)
 		)
@@ -731,28 +770,34 @@
 		sel_60 12
 		sel_14 16401
 	)
-	
+
 	(method (sel_300 param1)
 		(switch param1
 			(1
-				(cond 
-					((and (== sel_3 1) (== sel_2 721)) (gLb2Messager sel_295: 21 1 1))
-					((and (== sel_3 2) (== sel_2 722)) (gLb2Messager sel_295: 21 1 2))
-					(else (super sel_300: param1))
+				(cond
+					((and (== sel_3 1) (== sel_2 721))
+						(gMessager sel_295: 21 1 1)
+					)
+					((and (== sel_3 2) (== sel_2 722))
+						(gMessager sel_295: 21 1 2)
+					)
+					(else
+						(super sel_300: param1)
+					)
 				)
 			)
 			(27
 				(if local1
 					(gEgo sel_351: 16)
-					((ScriptID 21 1) sel_57: 785)
-					(gLb2Messager sel_295: 21 27)
+					((ScriptID 21 1) sel_57: 785) ; dropCluesCode
+					(gMessager sel_295: 21 27)
 				)
 			)
 			(23
 				(if (and (== sel_3 2) (== sel_2 721))
 					(gEgo sel_351: 12)
-					((ScriptID 21 1) sel_57: 781)
-					(global2 sel_146: sGetUp)
+					((ScriptID 21 1) sel_57: 781) ; dropCluesCode
+					(gCurRoom sel_146: sGetUp)
 				else
 					(super sel_300: param1)
 				)
@@ -762,12 +807,12 @@
 					(or
 						(== sel_2 812)
 						(and
-							(== (steve sel_2?) 722)
-							(== (steve sel_3?) 0)
-							(== (steve sel_4?) 7)
+							(== (steve sel_2:) 722)
+							(== (steve sel_3:) 0)
+							(== (steve sel_4:) 7)
 						)
 					)
-					(gLb2Messager sel_295: 21 8)
+					(gMessager sel_295: 21 8)
 				else
 					(super sel_300: param1)
 				)
@@ -784,12 +829,12 @@
 					(or
 						(== sel_2 812)
 						(and
-							(== (steve sel_2?) 722)
-							(== (steve sel_3?) 0)
-							(== (steve sel_4?) 7)
+							(== (steve sel_2:) 722)
+							(== (steve sel_3:) 0)
+							(== (steve sel_4:) 7)
 						)
 					)
-					(gLb2Messager sel_295: 21 6 7)
+					(gMessager sel_295: 21 6 7)
 				else
 					(super sel_300: param1)
 				)
@@ -799,22 +844,24 @@
 					(or
 						(== sel_2 812)
 						(and
-							(== (steve sel_2?) 722)
-							(== (steve sel_3?) 0)
-							(== (steve sel_4?) 7)
+							(== (steve sel_2:) 722)
+							(== (steve sel_3:) 0)
+							(== (steve sel_4:) 7)
 						)
 					)
-					(gLb2Messager sel_295: 21 2 8)
+					(gMessager sel_295: 21 2 8)
 				else
 					(super sel_300: param1)
 				)
 			)
-			(else  (super sel_300: param1))
+			(else
+				(super sel_300: param1)
+			)
 		)
 	)
-	
+
 	(method (sel_145)
-		(gLb2Messager sel_295: 21 4 1)
+		(gMessager sel_295: 21 4 1)
 	)
 )
 
@@ -826,7 +873,6 @@
 		sel_3 5
 		sel_60 15
 		sel_14 16400
-		name "o'Riley"
 	)
 )
 
@@ -841,17 +887,23 @@
 		sel_60 8
 		sel_14 17
 	)
-	
+
 	(method (sel_300 param1)
 		(switch param1
 			(4
-				(cond 
-					((and local1 (== sel_1 224)) (global2 sel_146: sMoveStone))
+				(cond
+					((and local1 (== sel_1 224))
+						(gCurRoom sel_146: sMoveStone)
+					)
 					((and local1 (!= sel_1 224)) 0)
-					(else (global2 sel_146: sPushStone))
+					(else
+						(gCurRoom sel_146: sPushStone)
+					)
 				)
 			)
-			(else  (super sel_300: param1))
+			(else
+				(super sel_300: param1)
+			)
 		)
 	)
 )
@@ -868,13 +920,15 @@
 		sel_60 11
 		sel_14 17
 	)
-	
+
 	(method (sel_300 param1)
 		(switch param1
 			(4
-				(global2 sel_146: sBurnBabyBurn)
+				(gCurRoom sel_146: sBurnBabyBurn)
 			)
-			(else  (super sel_300: param1))
+			(else
+				(super sel_300: param1)
+			)
 		)
 	)
 )
@@ -912,16 +966,18 @@
 		sel_8 139
 		sel_9 301
 	)
-	
+
 	(method (sel_300 param1)
 		(switch param1
 			(1
-				(gLb2Messager sel_295: 21 1 1)
+				(gMessager sel_295: 21 1 1)
 			)
 			(4
-				(global2 sel_146: sRemoveCoal)
+				(gCurRoom sel_146: sRemoveCoal)
 			)
-			(else  (super sel_300: param1))
+			(else
+				(super sel_300: param1)
+			)
 		)
 	)
 )
@@ -937,17 +993,21 @@
 		sel_303 297
 		sel_304 134
 	)
-	
+
 	(method (sel_300 param1)
 		(switch param1
 			(1
-				(gLb2Messager sel_295: 21 1 1)
+				(gMessager sel_295: 21 1 1)
 			)
 			(4
 				(gEgo sel_312: PolyPath 279 172 steve)
 			)
-			(24 (global2 sel_146: sAwaken))
-			(else  (super sel_300: param1))
+			(24
+				(gCurRoom sel_146: sAwaken)
+			)
+			(else
+				(super sel_300: param1)
+			)
 		)
 	)
 )
@@ -1052,16 +1112,18 @@
 		sel_303 255
 		sel_304 135
 	)
-	
+
 	(method (sel_300 param1)
 		(switch param1
 			(3
-				(global2 sel_146: sEnterTunnel)
+				(gCurRoom sel_146: sEnterTunnel)
 			)
 			(4
-				(global2 sel_146: sEnterTunnel)
+				(gCurRoom sel_146: sEnterTunnel)
 			)
-			(else  (super sel_300: param1))
+			(else
+				(super sel_300: param1)
+			)
 		)
 	)
 )
@@ -1146,14 +1208,16 @@
 		sel_9 35
 		sel_301 40
 	)
-	
+
 	(method (sel_300 param1)
 		(switch param1
 			(4
 				(sFXLocked sel_39:)
-				(gLb2Messager sel_295: 20 4)
+				(gMessager sel_295: 20 4)
 			)
-			(else  (super sel_300: param1))
+			(else
+				(super sel_300: param1)
+			)
 		)
 	)
 )

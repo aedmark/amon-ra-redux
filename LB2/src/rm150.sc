@@ -1,12 +1,13 @@
 ;;; Sierra Script 1.0 - (do not remove this comment)
+;;; Decompiled by sluicebox
 (script# 150)
 (include sci.sh)
 (use Main)
-(use LBRoom)
-(use n958)
-(use Cycle)
-(use View)
-(use Obj)
+(use eRS)
+(use LoadMany)
+(use Motion)
+(use Actor)
+(use System)
 
 (public
 	rm150 0
@@ -18,13 +19,13 @@
 		sel_408 150
 		sel_28 10
 	)
-	
+
 	(method (sel_110)
-		(proc958_0 128 151 150)
-		(proc958_0 132 150)
+		(LoadMany rsVIEW 151 150)
+		(LoadMany rsSOUND 150)
 		(self sel_414: 92)
 		(super sel_110:)
-		(gSel_608 sel_40: 150 sel_99: 1 sel_3: -1 sel_39:)
+		(gGameMusic1 sel_40: 150 sel_99: 1 sel_3: -1 sel_39:)
 		(lauraTrain sel_110:)
 		(self sel_146: sCartoon)
 	)
@@ -34,9 +35,9 @@
 	(properties
 		sel_20 {sCartoon}
 	)
-	
-	(method (sel_144 theSel_29)
-		(switch (= sel_29 theSel_29)
+
+	(method (sel_144 param1)
+		(switch (= sel_29 param1)
 			(0
 				(lauraTrain sel_312: MoveTo -245 56 self)
 				(= sel_137 2)
@@ -46,13 +47,17 @@
 				(creditName sel_110: sel_312: MoveTo 35 151 self)
 			)
 			(2 0)
-			(3 (= sel_137 3))
+			(3
+				(= sel_137 3)
+			)
 			(4
 				(creditTitle sel_312: MoveTo -232 107 self)
 				(creditName sel_312: MoveTo -250 151 self)
 			)
 			(5 0)
-			(6 (= sel_137 3))
+			(6
+				(= sel_137 3)
+			)
 			(7
 				(creditTitle
 					sel_153: 333 130
@@ -66,7 +71,9 @@
 				)
 			)
 			(8 0)
-			(9 (= sel_137 3))
+			(9
+				(= sel_137 3)
+			)
 			(10
 				(creditTitle
 					sel_153: -236 119
@@ -80,7 +87,9 @@
 				)
 			)
 			(11 0)
-			(12 (= sel_137 3))
+			(12
+				(= sel_137 3)
+			)
 			(13
 				(creditTitle sel_312: MoveTo -246 119 self)
 				(creditName sel_312: MoveTo -145 146 self)
@@ -88,7 +97,7 @@
 			(14 0)
 			(15 0)
 			(16
-				(global2 sel_399: 155)
+				(gCurRoom sel_399: 155)
 				(self sel_111:)
 			)
 		)

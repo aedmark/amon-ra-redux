@@ -2,6 +2,27 @@
 
 Archived verbatim from `docs/HANDOFF.md` when its live session log exceeded ten entries.
 
+### Session 30: 2026-10-10: Act 2 Yvette Dialogue Pass
+
+**Contributor:** Codex and maintainer
+
+**Goal:** Preserve Yvette Delacroix's intelligence, ambition, sexual confidence, and mystery-relevant relationships while removing faux-French spelling, broken grammar, and reflexive promiscuity jokes.
+
+**Done:**
+- Reworked all 111 routine Yvette records in module 1885 with fluent English, selective French vocabulary, poised social observation, and deliberate rather than accidental innuendo.
+- Preserved the plot-bearing implications of her work as a speakeasy hostess and her relationships with Sterling, Carrington, O'Riley, Lo Fat, Pippin, and Steve.
+- Rewrote the Steve topic and its adjacent Laura response to foreshadow their later encounter rather than report it prematurely.
+- Cleaned Laura's adjacent speakeasy question and replaced the narrator's jealous “mousy and naive” comparison with a direct description of Yvette's elegance and self-possession.
+- Added `docs/dialogue/act2-yvette.json` and applied it idempotently to `LB2/1885.MSG`; deferred the later Sterling-diary talker-ID error and explicit murder reactions.
+
+**Changed:** `LB2/1885.MSG`, `docs/dialogue/act2-yvette.json`, and synchronized roadmap, decision, handoff, and manual documentation.
+
+**Decisions:** D-031.
+
+**Verified:** All 172 message tuple/talker records retain identical metadata; exactly 111 Yvette, two Laura, and one narrator texts changed; all 13 explicit later reaction records remain outside the manifest; documentation/manual validation and build pass.
+
+**Next session should start with:** Maintainer review of Yvette, followed by O'Riley only after approval.
+
 ### Session 29: 2026-10-10: Act 2 Rameses and Heimlich Dialogue Passes
 
 **Contributor:** Codex and maintainer

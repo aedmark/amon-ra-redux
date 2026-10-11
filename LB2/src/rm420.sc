@@ -1,21 +1,22 @@
 ;;; Sierra Script 1.0 - (do not remove this comment)
+;;; Decompiled by sluicebox
 (script# 420)
 (include sci.sh)
 (use Main)
-(use LBRoom)
+(use eRS)
 (use ExitFeature)
 (use Inset)
 (use PChase)
 (use Scaler)
 (use PolyPath)
-(use CueObj)
+(use Feature)
 (use MoveFwd)
-(use n958)
+(use LoadMany)
 (use Timer)
 (use Sound)
-(use Cycle)
-(use View)
-(use Obj)
+(use Motion)
+(use Actor)
+(use System)
 
 (public
 	rm420 0
@@ -23,8 +24,9 @@
 
 (local
 	local0
-	theGLb2DoVerbCode
+	local1
 )
+
 (instance rm420 of LBRoom
 	(properties
 		sel_20 {rm420}
@@ -34,31 +36,27 @@
 		sel_412 500
 		sel_107 0
 	)
-	
+
 	(method (sel_110)
 		(gGame sel_587:)
-		(proc958_0 128 420 423 424 426 831)
-		(if
-			(or
-				(> global123 3)
-				(and (== global123 3) (proc0_10 8512 1))
-			)
-			(proc958_0 129 556 429)
-			(proc958_0 132 3 80 6 84)
+		(LoadMany rsVIEW 420 423 424 426 831)
+		(if (or (> gAct 3) (and (== gAct 3) (TimeCheck $2140 1))) ; can 2:15 am occur?
+			(LoadMany rsPIC 556 429)
+			(LoadMany rsSOUND 3 80 6 84)
 		)
 		(Load rsSOUND 19)
 		(gEgo
 			sel_110:
-			sel_585: (if (== global123 5) 426 else 831)
+			sel_585: (if (== gAct 5) 426 else 831)
 			sel_320: Scaler 100 0 190 0
 		)
-		(if (== global123 5)
-			(if (proc0_2 34)
+		(if (== gAct 5)
+			(if (IsFlag 34)
 				(gGame sel_588:)
-				(gSel_608 sel_40: 16 sel_99: 1 sel_155: -1 sel_39:)
+				(gGameMusic1 sel_40: 16 sel_99: 1 sel_155: -1 sel_39:)
 				(self sel_414: 94)
-				(global2 sel_259: (List sel_109:))
-				((ScriptID 2420 0) sel_57: (global2 sel_259?))
+				(gCurRoom sel_259: (List sel_109:))
+				((ScriptID 2420 0) sel_57: (gCurRoom sel_259:)) ; poly2420Code
 				(oriley sel_110: sel_320: 165 sel_161: Walk)
 			else
 				(self sel_146: sCopyFail)
@@ -66,7 +64,7 @@
 		else
 			(self sel_414: 90)
 		)
-		(switch gGSel_40
+		(switch gPrevRoomNum
 			(sel_409
 				(self sel_146: sEnterNorth)
 			)
@@ -74,10 +72,10 @@
 				(if
 					(and
 						(or
-							(> global123 3)
-							(and (== global123 3) (proc0_10 8512 1))
+							(> gAct 3)
+							(and (== gAct 3) (TimeCheck $2140 1)) ; can 2:15 am occur?
 						)
-						(not (proc0_2 67))
+						(not (IsFlag 67))
 					)
 					(self sel_146: sLookitDeadErnie 0 1)
 				else
@@ -92,28 +90,26 @@
 				(gEgo sel_153: 264 164)
 				(gEgo sel_253: 180)
 			)
-			(else 
+			(else
 				(gEgo sel_153: 185 160)
 				(gGame sel_588:)
 			)
 		)
 		(super sel_110:)
 		(= local0
-			(cond 
-				((< global87 5) 85)
-				((< global87 10) 60)
-				((<= global87 15) 35)
+			(cond
+				((< gHowFast 5) 85)
+				((< gHowFast 10) 60)
+				((<= gHowFast 15) 35)
 			)
 		)
-		(if (not (HaveMouse)) (= local0 (* 2 local0)))
-		(if (and (== global123 5) (!= sel_142 sCopyFail))
+		(if (not (HaveMouse))
+			(= local0 (* 2 local0))
+		)
+		(if (and (== gAct 5) (!= sel_142 sCopyFail))
 			(oRileyTimer sel_163: 300 oRileyTimer)
 		)
-		(if
-			(or
-				(> global123 3)
-				(and (== global123 3) (proc0_10 8512 1))
-			)
+		(if (or (> gAct 3) (and (== gAct 3) (TimeCheck $2140 1))) ; can 2:15 am occur?
 			(ernie sel_317: sel_311: 4 1 8)
 		)
 		(southExitFeature sel_110:)
@@ -126,59 +122,52 @@
 		(rightPic sel_110:)
 		(mastodon sel_110:)
 	)
-	
+
 	(method (sel_57)
 		(super sel_57:)
-		(cond 
+		(cond
 			(sel_142)
-			((proc0_1 gEgo 2) (self sel_146: sExitNorth))
-			((proc0_1 gEgo 4)
+			((StepOn gEgo 2)
+				(self sel_146: sExitNorth)
+			)
+			((StepOn gEgo 4)
 				(gGame sel_587:)
 				(gEgo sel_349: 4)
-				(global2 sel_399: (global2 sel_412?))
+				(gCurRoom sel_399: (gCurRoom sel_412:))
 			)
 		)
 	)
-	
+
 	(method (sel_399 param1)
-		(switch global123
+		(switch gAct
 			(2
 				(if (== param1 350)
-					(if (gGameMusic2 sel_90?)
+					(if (gGameMusic2 sel_90:)
 						(gGameMusic2 sel_167:)
-						(gSel_608 sel_168: 0)
+						(gGameMusic1 sel_168: 0)
 					)
-					(gSel_608 sel_170: 127 5 5 0)
+					(gGameMusic1 sel_170: 127 5 5 0)
 				)
 			)
 			(3
-				(if
-					(and
-						(== param1 430)
-						(proc0_10 -20222 1)
-						(not (proc0_2 72))
-					)
+				(if (and (== param1 430) (TimeCheck $b102 1) (not (IsFlag 72))) ; can 11:15 pm occur?
 					(= param1 435)
 				)
 			)
 			(5
-				((ScriptID 94 1) sel_162: (ScriptID 94 1) local0)
+				((ScriptID 94 1) sel_162: (ScriptID 94 1) local0) ; pursuitTimer, pursuitTimer
 				(DisposeScript 2420)
 			)
 		)
 		(super sel_399: param1)
 	)
-	
+
 	(method (sel_403)
-		(if (== global123 5)
-			(if
-				(and
-					(global2 sel_142?)
-					(not (== (global2 sel_142?) sDie))
-				)
-				((global2 sel_142?) sel_65: sDie)
+		(if (== gAct 5)
+			(if (and (gCurRoom sel_142:) (not (== (gCurRoom sel_142:) sDie)))
+				((gCurRoom sel_142:) sel_65: sDie)
 			else
-				(global2 sel_146: sDie)
+				(gCurRoom sel_146: sDie)
 			)
 		)
 	)
@@ -190,11 +179,11 @@
 		sel_0 155
 		sel_2 423
 	)
-	
+
 	(method (sel_145)
-		(if (not (global2 sel_142?))
+		(if (not (gCurRoom sel_142:))
 			(gGame sel_587:)
-			(global2 sel_146: sDie)
+			(gCurRoom sel_146: sDie)
 		)
 	)
 )
@@ -212,20 +201,24 @@
 		sel_60 15
 		sel_14 16400
 	)
-	
+
 	(method (sel_300 param1)
 		(gGame sel_87: 1 158)
 		(switch param1
 			(1
-				(if (== global123 5)
-					(gLb2Messager sel_295: 27)
+				(if (== gAct 5)
+					(gMessager sel_295: 27)
 				else
-					(gIconBar sel_233: 7)
-					(global2 sel_146: sDeadErnie)
+					(gTheIconBar sel_233: 7)
+					(gCurRoom sel_146: sDeadErnie)
 				)
 			)
-			(8 (self sel_300: 1))
-			(else  (super sel_300: param1))
+			(8
+				(self sel_300: 1)
+			)
+			(else
+				(super sel_300: param1)
+			)
 		)
 	)
 )
@@ -316,15 +309,15 @@
 		sel_408 429
 		sel_560 1
 	)
-	
+
 	(method (sel_110)
 		(super sel_110: &rest)
-		(proc0_3 67)
-		(proc0_3 158)
-		(= theGLb2DoVerbCode gLb2DoVerbCode)
-		(= gLb2DoVerbCode exitDoVerbCode)
+		(SetFlag 67)
+		(SetFlag 158)
+		(= local1 gDoVerbCode)
+		(= gDoVerbCode exitDoVerbCode)
 		(proc0_8 1)
-		(gLb2WH sel_129: self)
+		(gWalkHandler sel_129: self)
 		(feSuspenders sel_110:)
 		(feShirt sel_110:)
 		(feTusks sel_110:)
@@ -340,18 +333,20 @@
 		(feMouth sel_110:)
 		(feHead sel_110:)
 	)
-	
+
 	(method (sel_111)
-		(= gLb2DoVerbCode theGLb2DoVerbCode)
-		(gLb2WH sel_81: self)
-		(gIconBar sel_177: 7)
+		(= gDoVerbCode local1)
+		(gWalkHandler sel_81: self)
+		(gTheIconBar sel_177: 7)
 		(super sel_111:)
 	)
-	
+
 	(method (sel_300 param1)
 		(switch param1
-			(13 (inDeadErnie sel_111:))
-			(else 
+			(13
+				(inDeadErnie sel_111:)
+			)
+			(else
 				(super sel_300: param1 &rest)
 			)
 		)
@@ -362,7 +357,7 @@
 	(properties
 		sel_20 {exitDoVerbCode}
 	)
-	
+
 	(method (sel_57 param1 param2)
 		(if (== param1 13)
 			(inDeadErnie sel_111:)
@@ -390,7 +385,7 @@
 		sel_301 40
 		sel_302 8192
 	)
-	
+
 	(method (sel_300 param1)
 		(switch param1
 			(1
@@ -405,7 +400,9 @@
 					(inDeadErnie sel_422: inWartHairs)
 				)
 			)
-			(else  (super sel_300: param1))
+			(else
+				(super sel_300: param1)
+			)
 		)
 	)
 )
@@ -540,18 +537,18 @@
 		sel_570 1
 		sel_213 10
 	)
-	
+
 	(method (sel_300 param1)
-		(return
-			(switch param1
-				(4
-					(gGame sel_87: 1 159)
-					(gEgo sel_350: 25)
-					((ScriptID 21 0) sel_57: 794)
-					(self sel_111:)
-					(return 1)
-				)
-				(else  (super sel_300: param1))
+		(switch param1
+			(4
+				(gGame sel_87: 1 159)
+				(gEgo sel_350: 25)
+				((ScriptID 21 0) sel_57: 794) ; addCluesCode
+				(self sel_111:)
+				(return 1)
+			)
+			(else
+				(super sel_300: param1)
 			)
 		)
 	)
@@ -561,15 +558,15 @@
 	(properties
 		sel_20 {sExitNorth}
 	)
-	
-	(method (sel_144 theSel_29)
-		(switch (= sel_29 theSel_29)
+
+	(method (sel_144 param1)
+		(switch (= sel_29 param1)
 			(0
 				(gGame sel_587:)
 				(gEgo sel_253: 0 sel_312: MoveFwd 20 self)
 			)
 			(1
-				(global2 sel_399: (global2 sel_409?))
+				(gCurRoom sel_399: (gCurRoom sel_409:))
 			)
 		)
 	)
@@ -579,9 +576,9 @@
 	(properties
 		sel_20 {sLookitDeadErnie}
 	)
-	
-	(method (sel_144 theSel_29)
-		(switch (= sel_29 theSel_29)
+
+	(method (sel_144 param1)
+		(switch (= sel_29 param1)
 			(0
 				(if sel_141
 					(gEgo sel_312: PolyPath 280 185 self)
@@ -590,12 +587,14 @@
 				)
 			)
 			(1
-				(proc0_5 gEgo ernie)
+				(Face gEgo ernie)
 				(= sel_139 120)
 			)
 			(2
 				(ernie sel_300: 1)
-				(if sel_141 (gGame sel_588:))
+				(if sel_141
+					(gGame sel_588:)
+				)
 				(self sel_111:)
 			)
 		)
@@ -606,45 +605,43 @@
 	(properties
 		sel_20 {sEnterNorth}
 	)
-	
-	(method (sel_144 theSel_29)
-		(switch (= sel_29 theSel_29)
+
+	(method (sel_144 param1)
+		(switch (= sel_29 param1)
 			(0
-				(gEgo
-					sel_153: 300 140
-					sel_253: 180
-					sel_312: MoveFwd 20 self
-				)
-				(if
-				(and (== global123 2) (not (proc0_10 -32480 1)))
-					((ScriptID 32 0)
+				(gEgo sel_153: 300 140 sel_253: 180 sel_312: MoveFwd 20 self)
+				(if (and (== gAct 2) (not (TimeCheck $8120 1))) ; can 8:15 pm occur?
+					((ScriptID 32 0) ; aHeimlich
 						sel_110:
 						sel_2: 814
-						sel_620: gSel_40
+						sel_620: gCurRoomNum
 						sel_153: 154 179
 						sel_155: 8
 						sel_156: 6
 						sel_213: 1
 					)
-					(gSel_608 sel_168:)
+					(gGameMusic1 sel_168:)
 					(gGameMusic2 sel_40: 19 sel_99: 1 sel_155: 1 sel_39:)
 				)
 			)
 			(1
-				(cond 
-					(
-					(and (== global123 2) (not (proc0_10 -32480 1))) (global2 sel_146: sHeimlichShoos))
+				(cond
+					((and (== gAct 2) (not (TimeCheck $8120 1))) ; can 8:15 pm occur?
+						(gCurRoom sel_146: sHeimlichShoos)
+					)
 					(
 						(and
 							(or
-								(> global123 3)
-								(and (== global123 3) (proc0_10 8512 1))
+								(> gAct 3)
+								(and (== gAct 3) (TimeCheck $2140 1)) ; can 2:15 am occur?
 							)
-							(not (proc0_2 67))
+							(not (IsFlag 67))
 						)
 						(self sel_146: sLookitDeadErnie self)
 					)
-					(else (= sel_136 1))
+					(else
+						(= sel_136 1)
+					)
 				)
 			)
 			(2
@@ -659,24 +656,20 @@
 	(properties
 		sel_20 {sEnterWest}
 	)
-	
-	(method (sel_144 theSel_29)
-		(switch (= sel_29 theSel_29)
+
+	(method (sel_144 param1)
+		(switch (= sel_29 param1)
 			(0
-				(gEgo
-					sel_153: 2 150
-					sel_253: 135
-					sel_312: MoveFwd 20 self
-				)
+				(gEgo sel_153: 2 150 sel_253: 135 sel_312: MoveFwd 20 self)
 			)
 			(1
 				(if
 					(and
 						(or
-							(> global123 3)
-							(and (== global123 3) (proc0_10 8512 1))
+							(> gAct 3)
+							(and (== gAct 3) (TimeCheck $2140 1)) ; can 2:15 am occur?
 						)
-						(not (proc0_2 67))
+						(not (IsFlag 67))
 					)
 					(self sel_146: sLookitDeadErnie self)
 				else
@@ -695,41 +688,41 @@
 	(properties
 		sel_20 {sDeadErnie}
 	)
-	
-	(method (sel_144 theSel_29)
-		(switch (= sel_29 theSel_29)
+
+	(method (sel_144 param1)
+		(switch (= sel_29 param1)
 			(0
 				(WrapMusic sel_168:)
-				(if (proc0_2 67)
+				(if (IsFlag 67)
 					(fooSound sel_40: 6 sel_3: -1 sel_99: 1 sel_39:)
 					(= sel_136 1)
 				else
-					(proc0_3 67)
-					(proc0_3 158)
-					(gSel_561 sel_119: 102)
+					(SetFlag 67)
+					(SetFlag 158)
+					(gCast sel_119: 102)
 					(DrawPic 556)
-					(gSel_563 sel_119: 111 sel_125:)
+					(gAddToPics sel_119: 111 sel_125:)
 					(wrapMusic sel_110: -1 3 6)
 					(sFX sel_40: 84 sel_99: 5 sel_3: 1 sel_39:)
 					(= sel_139 180)
 				)
 			)
 			(1
-				(global2 sel_422: inDeadErnie self)
+				(gCurRoom sel_422: inDeadErnie self)
 			)
 			(2
-				(gSel_561 sel_119: 216)
+				(gCast sel_119: 216)
 				(ernie sel_317:)
 				(= sel_136 2)
 			)
 			(3
 				(fooSound sel_170: 0 12 30 1)
-				(if (gSounds sel_122: (wrapMusic sel_608?))
+				(if (gSounds sel_122: (wrapMusic sel_608:))
 					(wrapMusic sel_111: 1)
 				)
 				(WrapMusic sel_168: 0)
-				(if (and (== global123 3) (not (proc0_10 8512)))
-					((ScriptID 22 0) sel_57: 8512)
+				(if (and (== gAct 3) (not (TimeCheck $2140))) ; has 2:15 am occurred?
+					((ScriptID 22 0) sel_57: 8512) ; triggerAndClock
 				)
 				(proc0_8 0)
 				(self sel_111:)
@@ -742,20 +735,22 @@
 	(properties
 		sel_20 {sHeimlichShoos}
 	)
-	
-	(method (sel_144 theSel_29)
-		(switch (= sel_29 theSel_29)
+
+	(method (sel_144 param1)
+		(switch (= sel_29 param1)
 			(0
 				(gGame sel_587:)
 				(= sel_139 60)
 			)
 			(1
-				(gLb2Messager sel_295: 3 0 83 0 self 1889)
+				(gMessager sel_295: 3 0 83 0 self 1889)
 			)
 			(2
 				(gEgo sel_312: PolyPath 300 142 self)
 			)
-			(3 (sel_42 sel_146: sExitNorth))
+			(3
+				(sel_42 sel_146: sExitNorth)
+			)
 		)
 	)
 )
@@ -764,17 +759,17 @@
 	(properties
 		sel_20 {sDie}
 	)
-	
-	(method (sel_144 theSel_29)
-		(switch (= sel_29 theSel_29)
+
+	(method (sel_144 param1)
+		(switch (= sel_29 param1)
 			(0
 				(gGame sel_587:)
 				(oriley sel_2: 424)
-				(proc0_5 gEgo oriley)
+				(Face gEgo oriley)
 				(= sel_136 1)
 			)
 			(1
-				(gSel_608 sel_40: 3 sel_99: 1 sel_3: 1 sel_39:)
+				(gGameMusic1 sel_40: 3 sel_99: 1 sel_3: 1 sel_39:)
 				(= sel_136 4)
 			)
 			(2
@@ -784,14 +779,16 @@
 				(sFX sel_40: 80 sel_99: 5 sel_3: 1 sel_39:)
 				(gEgo
 					sel_2: 858
-					sel_153: (+ (gEgo sel_1?) 13) (gEgo sel_0?)
+					sel_153: (+ (gEgo sel_1:) 13) (gEgo sel_0:)
 					sel_161: End self
 				)
 			)
-			(4 (= sel_137 4))
+			(4
+				(= sel_137 4)
+			)
 			(5
-				(= global145 0)
-				(global2 sel_399: 99)
+				(= global145 0) ; "You came in thinking like a journalist, and you left with a skull full of mush."
+				(gCurRoom sel_399: 99)
 				(self sel_111:)
 			)
 		)
@@ -802,20 +799,22 @@
 	(properties
 		sel_20 {sCopyFail}
 	)
-	
-	(method (sel_144 theSel_29)
-		(switch (= sel_29 theSel_29)
+
+	(method (sel_144 param1)
+		(switch (= sel_29 param1)
 			(0
 				(gGame sel_587:)
 				(= sel_136 2)
 			)
 			(1
-				(gLb2Messager sel_295: 26 0 0 0 self)
+				(gMessager sel_295: 26 0 0 0 self)
 			)
-			(2 (= sel_137 5))
+			(2
+				(= sel_137 5)
+			)
 			(3
-				(= global145 3)
-				(global2 sel_399: 99)
+				(= global145 3) ; "The first three rules of journalism: research, research, research."
+				(gCurRoom sel_399: 99)
 			)
 		)
 	)
@@ -838,7 +837,7 @@
 	(properties
 		sel_20 {oRileyTimer}
 	)
-	
+
 	(method (sel_145)
 		(oriley sel_312: PChase gEgo 20 oriley)
 	)
@@ -848,7 +847,7 @@
 	(properties
 		sel_20 {wrapMusic}
 	)
-	
+
 	(method (sel_110)
 		(= sel_608 fooSound)
 		(super sel_110: &rest)

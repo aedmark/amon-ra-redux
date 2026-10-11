@@ -1,8 +1,9 @@
 ;;; Sierra Script 1.0 - (do not remove this comment)
+;;; Decompiled by sluicebox
 (script# 456)
 (include sci.sh)
 (use Main)
-(use CueObj)
+(use Feature)
 (use Game)
 
 (public
@@ -14,24 +15,24 @@
 		sel_20 {magRosetta}
 		sel_408 780
 	)
-	
+
 	(method (sel_110)
-		(if (gTimers sel_122: (ScriptID 90 15))
-			((ScriptID 90 15) sel_42: self)
+		(if (gTimers sel_122: (ScriptID 90 15)) ; meetingTimer
+			((ScriptID 90 15) sel_42: self) ; meetingTimer
 		)
 		(self sel_414: 90)
 		(super sel_110:)
 		(bigRosetta sel_110:)
 	)
-	
+
 	(method (sel_145)
-		((ScriptID 90 15) sel_162: self 10 0 0 global125)
+		((ScriptID 90 15) sel_162: self 10 0 0 gClockTimeMustDos) ; meetingTimer
 	)
-	
+
 	(method (sel_399)
-		(if (gTimers sel_122: (ScriptID 90 15))
+		(if (gTimers sel_122: (ScriptID 90 15)) ; meetingTimer
 			(= sel_135 0)
-			((ScriptID 90 15) sel_42: (ScriptID 90 15))
+			((ScriptID 90 15) sel_42: (ScriptID 90 15)) ; meetingTimer, meetingTimer
 		)
 		(gGameMusic2 sel_170: 127 20 20 0)
 		(super sel_399: &rest)
@@ -47,44 +48,43 @@
 		sel_8 145
 		sel_9 210
 	)
-	
+
 	(method (sel_110)
-		(gLb2KDH sel_129: self)
-		(gLb2MDH sel_129: self)
+		(gKeyDownHandler sel_129: self)
+		(gMouseDownHandler sel_129: self)
 		(gGameMusic2 sel_170: 80 20 20 0)
-		(gIconBar sel_233: 7)
+		(gTheIconBar sel_233: 7)
 		(super sel_110: &rest)
-		(gIconBar sel_207: (gIconBar sel_64: 1) sel_233:)
-		(if (== gGSel_40 454)
-			(DrawPic 455 dpOPEN_NO_TRANSITION)
+		(gTheIconBar sel_207: (gTheIconBar sel_64: 1) sel_233:)
+		(if (== gPrevRoomNum 454)
+			(DrawPic 455 100)
 		else
-			(DrawPic 521 dpOPEN_NO_TRANSITION)
+			(DrawPic 521 100)
 		)
 		(gGame sel_197: 996)
-		(if (== gGSel_40 454)
+		(if (== gPrevRoomNum 454)
 			(SetCursor 2 79 55 239 144 86 0 0 456 53)
 		else
 			(SetCursor 2 79 55 239 144 86 0 0 527 53)
 		)
-		(Animate (gSel_561 sel_24?) 0)
+		(Animate (gCast sel_24:) 0)
 	)
-	
+
 	(method (sel_111)
-		(gLb2KDH sel_81: self)
-		(gLb2MDH sel_81: self)
+		(gKeyDownHandler sel_81: self)
+		(gMouseDownHandler sel_81: self)
 		(super sel_111: &rest)
-		(gIconBar sel_177: 7)
-		(global2 sel_399: gGSel_40)
+		(gTheIconBar sel_177: 7)
+		(gCurRoom sel_399: gPrevRoomNum)
 	)
-	
+
 	(method (sel_133 param1)
-		(if
-		(or (== (param1 sel_31?) 1) (== (param1 sel_31?) 4))
+		(if (or (== (param1 sel_31:) 1) (== (param1 sel_31:) 4))
 			(SetCursor -1)
-			(gGame sel_197: ((gIconBar sel_207?) sel_33?) 1)
+			(gGame sel_197: ((gTheIconBar sel_207:) sel_33:) 1)
 			(param1 sel_73: 1)
 			(self sel_111:)
-			(gIconBar sel_177:)
+			(gTheIconBar sel_177:)
 		)
 	)
 )

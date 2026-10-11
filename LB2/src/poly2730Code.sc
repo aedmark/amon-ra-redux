@@ -1,9 +1,10 @@
 ;;; Sierra Script 1.0 - (do not remove this comment)
+;;; Decompiled by sluicebox
 (script# 2730)
 (include sci.sh)
 (use MuseumPoints)
 (use Polygon)
-(use Obj)
+(use System)
 
 (public
 	poly2730Code 0
@@ -11,14 +12,15 @@
 )
 
 (local
-	[theSel_87 10] = [0 189 0 0 319 0 319 22 38 189]
-	[theSel_87_2 6] = [51 189 319 30 319 189]
+	[local0 10] = [0 189 0 0 319 0 319 22 38 189]
+	[local10 6] = [51 189 319 30 319 189]
 )
+
 (instance poly2730Code of Code
 	(properties
 		sel_20 {poly2730Code}
 	)
-	
+
 	(method (sel_57 param1)
 		(param1
 			sel_118: (poly2730a sel_110: sel_117:) (poly2730b sel_110: sel_117:)
@@ -30,11 +32,11 @@
 	(properties
 		sel_20 {poly2730a}
 	)
-	
+
 	(method (sel_110)
 		(= sel_31 2)
 		(= sel_86 5)
-		(= sel_87 @theSel_87)
+		(= sel_87 @local0)
 	)
 )
 
@@ -42,11 +44,11 @@
 	(properties
 		sel_20 {poly2730b}
 	)
-	
+
 	(method (sel_110)
 		(= sel_31 2)
 		(= sel_86 3)
-		(= sel_87 @theSel_87_2)
+		(= sel_87 @local10)
 	)
 )
 

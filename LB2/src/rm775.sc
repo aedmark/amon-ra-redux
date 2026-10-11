@@ -1,15 +1,16 @@
 ;;; Sierra Script 1.0 - (do not remove this comment)
+;;; Decompiled by sluicebox
 (script# 775)
 (include sci.sh)
 (use Main)
-(use LBRoom)
+(use eRS)
 (use Inset)
-(use RTRandCycle)
+(use Talker)
 (use PolyPath)
 (use Polygon)
-(use n958)
-(use View)
-(use Obj)
+(use LoadMany)
+(use Actor)
+(use System)
 
 (public
 	rm775 0
@@ -18,33 +19,50 @@
 
 (local
 	local0
-	local1 =  100
+	local1 = 100
 )
+
 (instance rm775 of LBRoom
 	(properties
 		sel_20 {rm775}
 		sel_408 120
 		sel_28 10
 	)
-	
+
 	(method (sel_110)
-		(proc958_0 128 123 121 1125 125)
-		(proc958_0 132 121 120)
+		(LoadMany rsVIEW 123 121 1125 125)
+		(LoadMany rsSOUND 121 120)
 		(gEgo sel_110: sel_585: sel_320: 167 sel_153: 240 160)
 		(super sel_110:)
-		(gIconBar sel_233:)
+		(gTheIconBar sel_233:)
 		(gGame sel_197: 996)
 		(self
 			sel_395:
 				((Polygon sel_109:)
 					sel_31: 3
-					sel_110: 84 154 83 176 183 176 241 168 241 149 199 149 126 149 91 154
+					sel_110:
+						84
+						154
+						83
+						176
+						183
+						176
+						241
+						168
+						241
+						149
+						199
+						149
+						126
+						149
+						91
+						154
 					sel_117:
 				)
 		)
-		(gSel_608 sel_40: 332 sel_99: 1 sel_3: -1 sel_39:)
+		(gGameMusic1 sel_40: 332 sel_99: 1 sel_3: -1 sel_39:)
 		(steve sel_110: sel_320: 158)
-		(global2 sel_146: sTalkSteve)
+		(gCurRoom sel_146: sTalkSteve)
 	)
 )
 
@@ -52,37 +70,41 @@
 	(properties
 		sel_20 {sTalkSteve}
 	)
-	
+
 	(method (sel_57)
 		(if (and local0 local1)
 			(Palette palSET_INTENSITY 0 255 (-- local1))
-			(if (not local1) (self sel_145:))
+			(if (not local1)
+				(self sel_145:)
+			)
 		)
 		(super sel_57:)
 	)
-	
-	(method (sel_144 theSel_29)
-		(switch (= sel_29 theSel_29)
+
+	(method (sel_144 param1)
+		(switch (= sel_29 param1)
 			(0
 				(gGame sel_587:)
 				(gEgo sel_312: PolyPath 197 155 self)
-				((ScriptID 1881 2)
+				((ScriptID 1881 2) ; Laura
 					sel_1: 203
 					sel_0: 17
 					sel_549: -180
 					sel_550: 0
 				)
 			)
-			(1 (proc0_5 gEgo steve self))
+			(1
+				(Face gEgo steve self)
+			)
 			(2
 				(togetherView sel_110: sel_63: 14)
 				(= sel_136 4)
 			)
 			(3
-				(gLb2Messager sel_295: 1 0 0 0 self)
+				(gMessager sel_295: 1 0 0 0 self)
 			)
 			(4
-				(global2 sel_422: inDagger)
+				(gCurRoom sel_422: inDagger)
 				(= sel_137 4)
 			)
 			(5
@@ -90,18 +112,20 @@
 				(= sel_136 2)
 			)
 			(6
-				(gLb2Messager sel_295: 1 0 1 0 self)
+				(gMessager sel_295: 1 0 1 0 self)
 			)
 			(7
-				(gLb2Messager sel_295: 1 0 2 0 self)
-				(gSel_608 sel_40: 334 sel_99: 1 sel_3: 1 sel_39: self)
+				(gMessager sel_295: 1 0 2 0 self)
+				(gGameMusic1 sel_40: 334 sel_99: 1 sel_3: 1 sel_39: self)
 			)
-			(8 (= local0 1))
+			(8
+				(= local0 1)
+			)
 			(9 0)
 			(10
 				(togetherView sel_102:)
 				(= sel_136 4)
-				(global2 sel_399: 785)
+				(gCurRoom sel_399: 785)
 				(self sel_111:)
 			)
 		)
@@ -131,9 +155,9 @@
 		sel_549 81
 		sel_550 -90
 	)
-	
+
 	(method (sel_110)
-		(= sel_30 gSel_30)
+		(= sel_30 gUserFont)
 		(super sel_110: tSteveBust tSteveEyes tSteveMouth &rest)
 	)
 )

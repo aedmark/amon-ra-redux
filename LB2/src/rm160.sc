@@ -1,45 +1,47 @@
 ;;; Sierra Script 1.0 - (do not remove this comment)
+;;; Decompiled by sluicebox
 (script# 160)
 (include sci.sh)
 (use Main)
-(use LBRoom)
-(use MessageObj)
+(use eRS)
+(use Conversation)
 (use PolyPath)
-(use n958)
+(use LoadMany)
 (use StopWalk)
-(use Cycle)
-(use View)
-(use Obj)
+(use Motion)
+(use Actor)
+(use System)
 
 (public
 	rm160 0
 )
 
 (local
-	[local0 41] = [-1 1 0 0 1 0 0 0 -1 1 0 0 2 0 0 0 -1 1 0 0 3 0 0 0 -1 1 0 0 4 0 0 0 -1 1 0 0 5]
-	[local41 25] = [-1 1 0 0 8 0 0 0 -1 1 0 0 9 0 0 0 -1 1 0 0 10]
-	[local66 17] = [-1 1 0 0 11 0 0 0 -1 1 0 0 12]
+	[local0 41] = [-1 1 0 0 1 0 0 0 -1 1 0 0 2 0 0 0 -1 1 0 0 3 0 0 0 -1 1 0 0 4 0 0 0 -1 1 0 0 5 0 0 0 0]
+	[local41 25] = [-1 1 0 0 8 0 0 0 -1 1 0 0 9 0 0 0 -1 1 0 0 10 0 0 0 0]
+	[local66 17] = [-1 1 0 0 11 0 0 0 -1 1 0 0 12 0 0 0 0]
 )
+
 (instance rm160 of LBRoom
 	(properties
 		sel_20 {rm160}
 		sel_408 160
 		sel_28 10
 	)
-	
+
 	(method (sel_110)
-		(proc958_0 128 163 826 162 161 160)
-		(proc958_0 132 160 161 162 163)
+		(LoadMany rsVIEW 163 826 162 161 160)
+		(LoadMany rsSOUND 160 161 162 163)
 		(gEgo sel_110: sel_585:)
 		(self sel_414: 92)
 		(super sel_110:)
 		(thief sel_110:)
-		(gSel_608 sel_40: 160 sel_99: 1 sel_3: -1 sel_39:)
+		(gGameMusic1 sel_40: 160 sel_99: 1 sel_3: -1 sel_39:)
 		(self sel_146: sCartoon)
 	)
-	
+
 	(method (sel_111)
-		(gSel_608 sel_170: 0 30 12 1)
+		(gGameMusic1 sel_170: 0 30 12 1)
 		(super sel_111: &rest)
 	)
 )
@@ -48,9 +50,9 @@
 	(properties
 		sel_20 {sCartoon}
 	)
-	
-	(method (sel_144 theSel_29)
-		(switch (= sel_29 theSel_29)
+
+	(method (sel_144 param1)
+		(switch (= sel_29 param1)
 			(0
 				(gEgo
 					sel_2: 160
@@ -82,11 +84,7 @@
 				)
 			)
 			(3
-				(trainLady
-					sel_110:
-					sel_161: Walk
-					sel_312: MoveTo 140 125 self
-				)
+				(trainLady sel_110: sel_161: Walk sel_312: MoveTo 140 125 self)
 			)
 			(4
 				(trainLady sel_102:)
@@ -97,15 +95,15 @@
 					sel_153: 128 167
 					sel_161: End self
 				)
-				((ScriptID 1881 2) sel_203: 1)
-				((ScriptID 1900 15) sel_203: 1)
+				((ScriptID 1881 2) sel_203: 1) ; Laura
+				((ScriptID 1900 15) sel_203: 1) ; Irmgaard
 			)
 			(5
 				(myConv sel_558: @local0 sel_110: self)
 				(thief sel_146: sStealIt)
 			)
 			(6
-				(if (thief sel_142?)
+				(if (thief sel_142:)
 					(-- sel_29)
 					(= sel_136 2)
 				else
@@ -135,9 +133,11 @@
 				(trainLady sel_111:)
 				(gEgo sel_161: Beg self)
 			)
-			(9 (gEgo sel_161: End self))
+			(9
+				(gEgo sel_161: End self)
+			)
 			(10
-				(gLb2Messager sel_295: 1 0 0 6 self)
+				(gMessager sel_295: 1 0 0 6 self)
 			)
 			(11
 				(thief
@@ -152,7 +152,7 @@
 				)
 			)
 			(12
-				(gLb2Messager sel_295: 1 0 0 7 self)
+				(gMessager sel_295: 1 0 0 7 self)
 				(gGameMusic2 sel_40: 163 sel_99: 1 sel_3: -1 sel_39:)
 			)
 			(13
@@ -162,8 +162,8 @@
 					sel_161: StopWalk -1
 					sel_312: PolyPath 37 176 self
 				)
-				((ScriptID 1881 2) sel_203: 1)
-				((ScriptID 1901 16) sel_203: 1)
+				((ScriptID 1881 2) sel_203: 1) ; Laura
+				((ScriptID 1901 16) sel_203: 1) ; Bum
 			)
 			(14
 				(thief sel_111:)
@@ -182,7 +182,7 @@
 				(gGameMusic2 sel_40: 164 sel_99: 1 sel_3: 1 sel_39: self)
 			)
 			(16
-				(gLb2Messager sel_295: 1 0 0 13 self)
+				(gMessager sel_295: 1 0 0 13 self)
 				(gEgo
 					sel_2: 162
 					sel_3: 1
@@ -195,7 +195,7 @@
 			(18 0)
 			(19
 				(gEgo sel_244: 6)
-				(global2 sel_399: 180)
+				(gCurRoom sel_399: 180)
 				(self sel_111:)
 			)
 		)
@@ -206,9 +206,9 @@
 	(properties
 		sel_20 {sStealIt}
 	)
-	
-	(method (sel_144 theSel_29)
-		(switch (= sel_29 theSel_29)
+
+	(method (sel_144 param1)
+		(switch (= sel_29 param1)
 			(0
 				(thief
 					sel_161: Walk
@@ -219,12 +219,7 @@
 				(gGameMusic2 sel_40: 161 sel_99: 1 sel_3: 1 sel_39:)
 			)
 			(1
-				(thief
-					sel_3: 2
-					sel_4: 1
-					sel_153: 83 168
-					sel_161: End self
-				)
+				(thief sel_3: 2 sel_4: 1 sel_153: 83 168 sel_161: End self)
 				(bag sel_111:)
 			)
 			(2
@@ -239,7 +234,9 @@
 					sel_312: PolyPath -20 167 self
 				)
 			)
-			(3 (self sel_111:))
+			(3
+				(self sel_111:)
+			)
 		)
 	)
 )
@@ -266,7 +263,7 @@
 		sel_244 8
 		sel_53 8
 	)
-	
+
 	(method (sel_145)
 		(super sel_145:)
 		(sCartoon sel_145:)

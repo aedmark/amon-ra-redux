@@ -5,9 +5,17 @@ the source migration changes the maintainability of the project, not the behavio
 
 ## Objective
 
-Replace the selector-heavy SCI Companion decompilation in `LB2/src/` with the substantially more readable
-Sluicebox decompilation for the exact DOS floppy v1.000 release, then replay every Redux source fix onto that baseline
-without changing the already verified loose patches until their replacements pass compilation and DOSBox-X tests.
+Replace the old SCI Companion decompilation in `LB2/src/` with a coherent Sluicebox-annotated reconstruction for the
+exact DOS floppy v1.000 release while preserving the already verified Redux bytecode behavior.
+
+## Executed result
+
+P5-00 completed with one necessary change to the proposed method. The published readable sources use contextual names
+for reused numeric selectors; those aliases cannot coexist in SCI's single global selector vocabulary and therefore do
+not compile as a coherent tree. Sluicebox was instead run against the effective Redux resources with annotations enabled
+and a numeric-selector writer. This reconstructed the already-patched behavior directly, so no Redux delta was lost to
+manual replay. The result retains readable globals, objects, procedures, control flow, and comments, with numeric
+selectors plus four reserved metadata names. See D-032 and `docs/SOURCE_PROVENANCE.md`.
 
 Upstream source:
 
@@ -25,7 +33,7 @@ The current and proposed baselines each contain 221 `.sc` and 221 `.sco` files. 
 
 | Measurement | Current baseline | Pinned Sluicebox baseline |
 | --- | ---: | ---: |
-| `sel_NNN` references | 40,878 | 0 |
+| `sel_NNN` references | 40,878 | 0 in the reference tree; contextual and non-compilable |
 | Distinct `sel_NNN` names | 567 | 0 |
 | `--UNKNOWN-PROP-NAME--` placeholders | 4 | 0 |
 | Declared classes | 114 | 114 |
@@ -42,7 +50,8 @@ evidence, not as proof that the complete tree compiles unchanged in this project
 ## Non-negotiable invariants
 
 1. Never modify `LB2/RESOURCE.000` or `LB2/RESOURCE.MAP`.
-2. Never use Compile All or rebuild resources.
+2. Never use Compile All or rebuild resources against repository `LB2/`. P5-00 used Compile All once in a disposable
+   `/tmp` copy as a compatibility diagnostic and discarded its rebuilt archives.
 3. Keep the current uppercase loose `.SCR`, `.HEP`, `.MSG`, and other patch resources in place until replacements are
    individually compiled and verified.
 4. Use DOSBox-X with the original interpreter for runtime testing; do not substitute ScummVM.
@@ -166,8 +175,8 @@ Commit after each bounded batch. A failed batch must be revertible without distu
 The migration is complete only when all of the following are true:
 
 - The 42-script ledger is complete, and the historical audit found no omitted Redux source patch.
-- The source tree contains zero `sel_NNN` references and zero `--UNKNOWN-PROP-NAME--` placeholders unless a newly
-  documented compiler necessity proves otherwise.
+- The source tree contains zero unknown-property placeholders. Numeric `sel_NNN` references are the documented
+  compiler necessity established by D-032; SCI's four metadata selectors retain their reserved names.
 - Every replayed script compiles individually with zero errors and warnings.
 - Current `.MSG`, view, save, configuration, and manual assets are unchanged except for separately documented work.
 - `RESOURCE.000` and `RESOURCE.MAP` still match their recorded vanilla MD5 hashes.

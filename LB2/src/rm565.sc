@@ -1,19 +1,20 @@
 ;;; Sierra Script 1.0 - (do not remove this comment)
+;;; Decompiled by sluicebox
 (script# 565)
 (include sci.sh)
 (use Main)
 (use Door)
-(use LBRoom)
+(use eRS)
 (use Inset)
 (use Scaler)
 (use PolyPath)
-(use CueObj)
-(use n958)
+(use Feature)
+(use LoadMany)
 (use StopWalk)
 (use Sound)
-(use Cycle)
-(use View)
-(use Obj)
+(use Motion)
+(use Actor)
+(use System)
 
 (public
 	rm565 0
@@ -22,40 +23,36 @@
 (local
 	local0
 	local1
-	theGLb2DoVerbCode
-	theGSel_561
+	local2
+	local3
 )
+
 (instance rm565 of LBRoom
 	(properties
 		sel_20 {rm565}
 		sel_409 666
 		sel_412 550
 	)
-	
+
 	(method (sel_110)
-		(gEgo
-			sel_110:
-			sel_585: 831
-			sel_316:
-			sel_320: Scaler 130 0 190 0
-		)
-		(proc958_0 128 560 561 562 563 564 565 831)
-		(proc958_0 132 2 6 721)
-		(proc958_0 129 465 565)
+		(gEgo sel_110: sel_585: 831 sel_316: sel_320: Scaler 130 0 190 0)
+		(LoadMany rsVIEW 560 561 562 563 564 565 831)
+		(LoadMany rsSOUND 2 6 721)
+		(LoadMany rsPIC 465 565)
 		(self sel_414: 90)
-		(switch gGSel_40
+		(switch gPrevRoomNum
 			(sel_409
-				(global2 sel_146: sEnterTunnel)
+				(gCurRoom sel_146: sEnterTunnel)
 			)
 			(sel_412
 				(gEgo sel_1: 8 sel_0: 150)
 			)
 		)
 		(super sel_110:)
-		(if (proc0_2 66)
-			(global2 sel_146: sDeadWatney)
+		(if (IsFlag 66)
+			(gCurRoom sel_146: sDeadWatney)
 		else
-			(global2 sel_408: 560 sel_417: 560)
+			(gCurRoom sel_408: 560 sel_417: 560)
 			(deskClock sel_317:)
 			(deadWatney sel_317:)
 			(calendar sel_317:)
@@ -64,7 +61,7 @@
 			(phone sel_317:)
 			(safePic sel_110: sel_313:)
 			(xWestDoor sel_110:)
-			(if (== gGSel_40 sel_409)
+			(if (== gPrevRoomNum sel_409)
 				(Palette palSET_INTENSITY 0 255 100)
 				(self sel_146: sEnterTunnel)
 			else
@@ -73,7 +70,7 @@
 			)
 		)
 	)
-	
+
 	(method (sel_111)
 		(DisposeScript 2565)
 		(super sel_111: &rest)
@@ -212,13 +209,15 @@
 		sel_301 40
 		sel_302 16384
 	)
-	
+
 	(method (sel_300 param1)
 		(switch param1
 			(8
-				(global2 sel_422: inFeCpBlood)
+				(gCurRoom sel_422: inFeCpBlood)
 			)
-			(else  (super sel_300: param1))
+			(else
+				(super sel_300: param1)
+			)
 		)
 	)
 )
@@ -359,9 +358,9 @@
 	(properties
 		sel_20 {sEgoEnter}
 	)
-	
-	(method (sel_144 theSel_29)
-		(switch (= sel_29 theSel_29)
+
+	(method (sel_144 param1)
+		(switch (= sel_29 param1)
 			(0
 				(gGame sel_587:)
 				(= sel_136 2)
@@ -374,8 +373,8 @@
 				(= sel_139 60)
 			)
 			(3
-				(proc0_5 gEgo deadWatney)
-				(global2 sel_146: sDeadWatney)
+				(Face gEgo deadWatney)
+				(gCurRoom sel_146: sDeadWatney)
 			)
 		)
 	)
@@ -385,15 +384,17 @@
 	(properties
 		sel_20 {sEnterTunnel}
 	)
-	
-	(method (sel_144 theSel_29)
-		(switch (= sel_29 theSel_29)
+
+	(method (sel_144 param1)
+		(switch (= sel_29 param1)
 			(0
 				(gGame sel_587:)
 				(secretDoor sel_110:)
 				(= sel_136 2)
 			)
-			(1 (= sel_137 3))
+			(1
+				(= sel_137 3)
+			)
 			(2
 				(gEgo sel_1: 306 sel_0: 147 sel_63: 5 sel_253: 180)
 				(sFX sel_40: 721 sel_99: 5 sel_155: 1 sel_39:)
@@ -411,13 +412,13 @@
 			(5 0)
 			(6
 				(gEgo sel_161: StopWalk -1)
-				(proc0_5 gEgo deadWatney)
+				(Face gEgo deadWatney)
 				(= sel_137 2)
 			)
 			(7
 				(secretDoor sel_313:)
 				(sFX sel_167:)
-				(global2 sel_146: sDeadWatney)
+				(gCurRoom sel_146: sDeadWatney)
 				(self sel_111:)
 			)
 		)
@@ -428,20 +429,20 @@
 	(properties
 		sel_20 {sDeadWatney}
 	)
-	
-	(method (sel_144 theSel_29)
-		(switch (= sel_29 theSel_29)
+
+	(method (sel_144 param1)
+		(switch (= sel_29 param1)
 			(0
-				(gSel_561 sel_119: 102)
+				(gCast sel_119: 102)
 				(gGame sel_197: 1 1)
-				(if (proc0_2 66)
+				(if (IsFlag 66)
 					(gGameMusic2 sel_168: 1)
 					(= local0 1)
 					(fooSound sel_40: 6 sel_3: -1 sel_99: 1 sel_39:)
 					(= sel_136 1)
 				else
-					(proc0_3 66)
-					(global2 sel_408: 465 sel_417: 465)
+					(SetFlag 66)
+					(gCurRoom sel_408: 465 sel_417: 465)
 					(sFX sel_40: 84 sel_99: 5 sel_3: 1 sel_39:)
 					(wrapMusic sel_110: -1 2 6)
 					(= local1 1)
@@ -449,16 +450,20 @@
 				)
 			)
 			(1
-				(gSel_563 sel_119: 111 sel_119: 81 sel_125:)
+				(gAddToPics sel_119: 111 sel_119: 81 sel_125:)
 				(gGame sel_588:)
 				(self sel_146: sCUDeadWatney self)
 			)
 			(2
 				(fooSound sel_170: 0 12 30 1)
-				(if local1 (wrapMusic sel_111: 1))
-				(if local0 (gGameMusic2 sel_168: 0))
+				(if local1
+					(wrapMusic sel_111: 1)
+				)
+				(if local0
+					(gGameMusic2 sel_168: 0)
+				)
 				(proc0_8 0)
-				(global2 sel_399: 560)
+				(gCurRoom sel_399: 560)
 			)
 		)
 	)
@@ -468,21 +473,21 @@
 	(properties
 		sel_20 {sCUDeadWatney}
 	)
-	
-	(method (sel_144 theSel_29)
-		(switch (= sel_29 theSel_29)
+
+	(method (sel_144 param1)
+		(switch (= sel_29 param1)
 			(0
-				(= theGSel_561 gSel_561)
-				(gSel_561 sel_119: 111 sel_119: 81)
-				(theGSel_561 sel_119: 102)
-				(global2 sel_408: 565)
+				(= local3 gCast)
+				(gCast sel_119: 111 sel_119: 81)
+				(local3 sel_119: 102)
+				(gCurRoom sel_408: 565)
 				(DrawPic 565)
-				(Animate (theGSel_561 sel_24?) 0)
-				(global2 sel_214: 560)
-				(= theGLb2DoVerbCode gLb2DoVerbCode)
-				(= gLb2DoVerbCode exitDoVerbCode)
+				(Animate (local3 sel_24:) 0)
+				(gCurRoom sel_214: 560)
+				(= local2 gDoVerbCode)
+				(= gDoVerbCode exitDoVerbCode)
 				(proc0_8 1)
-				(gLb2WH sel_129: self)
+				(gWalkHandler sel_129: self)
 				(bloodDrip sel_110: sel_244: 12 sel_161: Fwd)
 				(feCpBlood sel_110:)
 				(feQuills sel_110:)
@@ -499,12 +504,14 @@
 				(feDesk sel_110:)
 			)
 			(1
-				(if (global2 sel_365:) ((global2 sel_365:) sel_111: 0))
-				(gSel_561 sel_119: 111)
-				(= gSel_561 theGSel_561)
-				(gLb2WH sel_81: self)
-				(gIconBar sel_177: 7)
-				(= gLb2DoVerbCode theGLb2DoVerbCode)
+				(if (gCurRoom sel_365:)
+					((gCurRoom sel_365:) sel_111: 0)
+				)
+				(gCast sel_119: 111)
+				(= gCast local3)
+				(gWalkHandler sel_81: self)
+				(gTheIconBar sel_177: 7)
+				(= gDoVerbCode local2)
 				(self sel_111:)
 			)
 		)
@@ -522,11 +529,13 @@
 		sel_214 560
 		sel_213 74
 	)
-	
+
 	(method (sel_300 param1)
 		(switch param1
-			(13 (sCUDeadWatney sel_145:))
-			(else 
+			(13
+				(sCUDeadWatney sel_145:)
+			)
+			(else
 				(super sel_300: param1 &rest)
 			)
 		)
@@ -537,7 +546,7 @@
 	(properties
 		sel_20 {wrapMusic}
 	)
-	
+
 	(method (sel_110)
 		(= sel_608 fooSound)
 		(super sel_110: &rest)
@@ -561,7 +570,7 @@
 	(properties
 		sel_20 {exitDoVerbCode}
 	)
-	
+
 	(method (sel_57 param1 param2)
 		(if (== param1 13)
 			(sCUDeadWatney sel_145:)

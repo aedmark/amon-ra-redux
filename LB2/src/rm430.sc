@@ -1,20 +1,21 @@
 ;;; Sierra Script 1.0 - (do not remove this comment)
+;;; Decompiled by sluicebox
 (script# 430)
 (include sci.sh)
 (use Main)
 (use Door)
-(use LBRoom)
+(use eRS)
 (use PursuitRgn)
 (use PChase)
 (use PolyPath)
-(use CueObj)
+(use Feature)
 (use MoveFwd)
-(use n958)
+(use LoadMany)
 (use Timer)
 (use Sound)
-(use Cycle)
-(use View)
-(use Obj)
+(use Motion)
+(use Actor)
+(use System)
 
 (public
 	rm430 0
@@ -31,23 +32,23 @@
 		sel_107 185
 		sel_108 20
 	)
-	
+
 	(method (sel_110)
-		(proc958_0 128 430 432 423 431 858 424)
-		(proc958_0 132 430)
+		(LoadMany rsVIEW 430 432 423 431 858 424)
+		(LoadMany rsSOUND 430)
 		(gEgo
 			sel_110:
-			sel_585: (if (== global123 5) 426 else 831)
+			sel_585: (if (== gAct 5) 426 else 831)
 			sel_320: 125
 		)
-		(if (== global123 5)
+		(if (== gAct 5)
 			(self sel_414: 94)
-			(global2 sel_259: (List sel_109:))
-			((ScriptID 2430 0) sel_57: (global2 sel_259?))
+			(gCurRoom sel_259: (List sel_109:))
+			((ScriptID 2430 0) sel_57: (gCurRoom sel_259:)) ; poly2430Code
 		else
 			(self sel_414: 90)
 		)
-		(switch gGSel_40
+		(switch gPrevRoomNum
 			(435
 				((Timer sel_109:) sel_162: self 3)
 			)
@@ -62,27 +63,27 @@
 				(gEgo sel_1: 51 sel_0: 121)
 				(self sel_146: sEnterWest)
 			)
-			(else 
+			(else
 				(gEgo sel_153: 160 160)
 				(gGame sel_588:)
 			)
 		)
 		(super sel_110:)
-		(if
-			(or
-				(> global123 3)
-				(and (== global123 3) (proc0_10 -20222 1))
-			)
+		(if (or (> gAct 3) (and (== gAct 3) (TimeCheck $b102 1))) ; can 11:15 pm occur?
 			(skewer sel_110: sel_317: sel_311: 1 8)
-			(if (not (proc0_2 44)) (wireEnd sel_110:))
+			(if (not (IsFlag 44))
+				(wireEnd sel_110:)
+			)
 		else
 			(pterodactyl sel_110: sel_317:)
 		)
-		(if (proc0_2 45) (doorWire sel_110:))
+		(if (IsFlag 45)
+			(doorWire sel_110:)
+		)
 		(ceiling sel_110:)
 		(westDoor sel_110: sel_313: sel_594: westDoor2)
 		(eastDoor
-			sel_595: (if (proc0_2 99) 0 else 1)
+			sel_595: (if (IsFlag 99) 0 else 1)
 			sel_110:
 			sel_313:
 			sel_594: eastDoor2
@@ -90,7 +91,7 @@
 		(westDoor2 sel_110: sel_313: sel_311: 4)
 		(eastDoor2
 			sel_110:
-			sel_4: (if (proc0_2 99) 0 else 9)
+			sel_4: (if (IsFlag 99) 0 else 9)
 			sel_313:
 			sel_311: 4
 		)
@@ -100,39 +101,49 @@
 		(babies sel_110:)
 		(struth sel_110:)
 	)
-	
+
 	(method (sel_57)
 		(super sel_57:)
-		(cond 
+		(cond
 			(sel_142)
-			((proc0_1 gEgo 2) (global2 sel_146: sExitEast))
-			((proc0_1 gEgo 4) (global2 sel_146: sExitWest))
-			((proc0_1 gEgo 8) (self sel_399: sel_409))
+			((StepOn gEgo 2)
+				(gCurRoom sel_146: sExitEast)
+			)
+			((StepOn gEgo 4)
+				(gCurRoom sel_146: sExitWest)
+			)
+			((StepOn gEgo 8)
+				(self sel_399: sel_409)
+			)
 		)
 	)
-	
+
 	(method (sel_111)
 		(DisposeScript 2430)
 		(super sel_111: &rest)
 	)
-	
+
 	(method (sel_145)
-		(if
-		(and (== global123 3) (not (proc0_10 -20222)))
-			((ScriptID 22 0) sel_57: -20222)
+		(if (and (== gAct 3) (not (TimeCheck $b102))) ; has 11:15 pm occurred?
+			((ScriptID 22 0) sel_57: -20222) ; triggerAndClock
 		)
-		(cond 
-			((proc0_2 63) (global2 sel_146: sGetThatWire) (proc0_4 63))
-			((!= (global2 sel_142?) sDie) (gGame sel_588:))
+		(cond
+			((IsFlag 63)
+				(gCurRoom sel_146: sGetThatWire)
+				(ClearFlag 63)
+			)
+			((!= (gCurRoom sel_142:) sDie)
+				(gGame sel_588:)
+			)
 		)
 	)
-	
+
 	(method (sel_403)
-		(if (== global123 5)
-			(if (global2 sel_142?)
-				((global2 sel_142?) sel_65: sDie)
+		(if (== gAct 5)
+			(if (gCurRoom sel_142:)
+				((gCurRoom sel_142:) sel_65: sDie)
 			else
-				(global2 sel_146: sDie)
+				(gCurRoom sel_146: sDie)
 			)
 		)
 	)
@@ -142,9 +153,9 @@
 	(properties
 		sel_20 {sDie}
 	)
-	
-	(method (sel_144 theSel_29)
-		(switch (= sel_29 theSel_29)
+
+	(method (sel_144 param1)
+		(switch (= sel_29 param1)
 			(0
 				(gGame sel_587:)
 				(eastDoor sel_590: 0)
@@ -152,9 +163,9 @@
 			)
 			(1
 				(gGame sel_587:)
-				(gGame sel_197: global21)
+				(gGame sel_197: gWaitCursor)
 				(gEgo sel_312: PolyPath 160 160)
-				(if (== (eastDoor sel_29?) 0)
+				(if (== (eastDoor sel_29:) 0)
 					(doorWire sel_111:)
 					(eastDoor sel_143: self sel_189:)
 					(gGameMusic2 sel_40: 444 sel_99: 5 sel_3: 1 sel_39:)
@@ -164,14 +175,16 @@
 				)
 			)
 			(2
-				(if (== (eastDoor sel_29?) 0) (splinters sel_317:))
+				(if (== (eastDoor sel_29:) 0)
+					(splinters sel_317:)
+				)
 				(oriley
 					sel_110:
 					sel_320: 125
 					sel_161: Walk
 					sel_312: MoveTo 281 134 self
 				)
-				(gSel_608 sel_40: 3 sel_99: 1 sel_3: 1 sel_39:)
+				(gGameMusic1 sel_40: 3 sel_99: 1 sel_3: 1 sel_39:)
 			)
 			(3
 				(oriley sel_312: PChase gEgo 22 self)
@@ -179,18 +192,20 @@
 			(4
 				(oriley sel_2: 424)
 				(oriley sel_4: 0)
-				(proc0_5 gEgo oriley)
-				(proc0_5 oriley gEgo)
+				(Face gEgo oriley)
+				(Face oriley gEgo)
 				(= sel_136 4)
 			)
-			(5 (oriley sel_161: End self))
+			(5
+				(oriley sel_161: End self)
+			)
 			(6
 				(thudSound sel_39:)
 				(gEgo sel_2: 858 sel_161: End self)
 			)
 			(7
-				(= global145 0)
-				(global2 sel_399: 99)
+				(= global145 0) ; "You came in thinking like a journalist, and you left with a skull full of mush."
+				(gCurRoom sel_399: 99)
 				(self sel_111:)
 			)
 		)
@@ -201,26 +216,26 @@
 	(properties
 		sel_20 {sWireItShut}
 	)
-	
-	(method (sel_144 theSel_29)
-		(switch (= sel_29 theSel_29)
+
+	(method (sel_144 param1)
+		(switch (= sel_29 param1)
 			(0
 				(gGame sel_587:)
 				(PursuitRgn sel_669:)
 				(eastDoor sel_316: sel_314:)
-				(proc0_3 45)
+				(SetFlag 45)
 				(= sel_136 1)
 			)
 			(1
 				(gGame sel_587:)
-				(if (!= (eastDoor sel_29?) 0)
+				(if (!= (eastDoor sel_29:) 0)
 					(gEgo sel_312: PolyPath 274 131 self)
 				else
 					(= sel_136 1)
 				)
 			)
 			(2
-				(if (!= (eastDoor sel_29?) 0)
+				(if (!= (eastDoor sel_29:) 0)
 					(eastDoor sel_360:)
 					(= sel_139 90)
 				else
@@ -252,9 +267,9 @@
 	(properties
 		sel_20 {sGetThatWire}
 	)
-	
-	(method (sel_144 theSel_29)
-		(switch (= sel_29 theSel_29)
+
+	(method (sel_144 param1)
+		(switch (= sel_29 param1)
 			(0
 				(gGame sel_587:)
 				(gEgo sel_312: PolyPath 43 141 self)
@@ -268,13 +283,13 @@
 				(gGameMusic2 sel_40: 430 sel_99: 5 sel_3: 1 sel_39:)
 			)
 			(3
-				(gEgo sel_585: (if (== global123 5) 426 else 831))
+				(gEgo sel_585: (if (== gAct 5) 426 else 831))
 				(gEgo sel_312: MoveTo 62 144 self)
 			)
 			(4
-				(proc0_3 44)
+				(SetFlag 44)
 				(gEgo sel_350: 34)
-				((ScriptID 21 0) sel_57: 803)
+				((ScriptID 21 0) sel_57: 803) ; addCluesCode
 				(gGame sel_588:)
 				(self sel_111:)
 			)
@@ -286,9 +301,9 @@
 	(properties
 		sel_20 {sEnterEast}
 	)
-	
-	(method (sel_144 theSel_29)
-		(switch (= sel_29 theSel_29)
+
+	(method (sel_144 param1)
+		(switch (= sel_29 param1)
 			(0
 				(gGame sel_587:)
 				(= sel_136 1)
@@ -313,19 +328,15 @@
 	(properties
 		sel_20 {sEnterWest}
 	)
-	
-	(method (sel_144 theSel_29)
-		(switch (= sel_29 theSel_29)
+
+	(method (sel_144 param1)
+		(switch (= sel_29 param1)
 			(0
 				(gGame sel_587:)
 				(= sel_136 1)
 			)
 			(1
-				(gEgo
-					sel_349: 0
-					sel_253: 90
-					sel_312: PolyPath 100 133 self
-				)
+				(gEgo sel_349: 0 sel_253: 90 sel_312: PolyPath 100 133 self)
 			)
 			(2
 				(gGame sel_588:)
@@ -339,16 +350,16 @@
 	(properties
 		sel_20 {sExitEast}
 	)
-	
-	(method (sel_144 theSel_29)
-		(switch (= sel_29 theSel_29)
+
+	(method (sel_144 param1)
+		(switch (= sel_29 param1)
 			(0
 				(gGame sel_587:)
-				(gEgo sel_55: 90 sel_312: MoveTo 320 (gEgo sel_0?) self)
+				(gEgo sel_55: 90 sel_312: MoveTo 320 (gEgo sel_0:) self)
 			)
 			(1
 				(gEgo sel_349: 2)
-				(global2 sel_399: (global2 sel_410?))
+				(gCurRoom sel_399: (gCurRoom sel_410:))
 				(self sel_111:)
 			)
 		)
@@ -359,16 +370,16 @@
 	(properties
 		sel_20 {sExitWest}
 	)
-	
-	(method (sel_144 theSel_29)
-		(switch (= sel_29 theSel_29)
+
+	(method (sel_144 param1)
+		(switch (= sel_29 param1)
 			(0
 				(gGame sel_587:)
-				(gEgo sel_55: 270 sel_312: MoveTo 27 (gEgo sel_0?) self)
+				(gEgo sel_55: 270 sel_312: MoveTo 27 (gEgo sel_0:) self)
 			)
 			(1
 				(gEgo sel_349: 4)
-				(global2 sel_399: (global2 sel_412?))
+				(gCurRoom sel_399: (gCurRoom sel_412:))
 				(self sel_111:)
 			)
 		)
@@ -406,7 +417,7 @@
 		sel_3 1
 		sel_4 4
 	)
-	
+
 	(method (sel_300 param1)
 		(westDoor sel_300: param1)
 	)
@@ -425,7 +436,7 @@
 		sel_60 9
 		sel_14 16
 	)
-	
+
 	(method (sel_300 param1)
 		(eastDoor sel_300: param1)
 	)
@@ -471,12 +482,16 @@
 		sel_60 15
 		sel_14 20496
 	)
-	
+
 	(method (sel_300 param1)
 		(switch param1
-			(1 (global2 sel_399: 435))
-			(8 (global2 sel_399: 435))
-			(else 
+			(1
+				(gCurRoom sel_399: 435)
+			)
+			(8
+				(gCurRoom sel_399: 435)
+			)
+			(else
 				(super sel_300: param1 &rest)
 			)
 		)
@@ -504,18 +519,18 @@
 		sel_8 20
 		sel_9 320
 	)
-	
+
 	(method (sel_300 param1)
 		(switch param1
 			(1
-				(gLb2Messager
+				(gMessager
 					sel_295:
 						21
 						1
 						(if
 							(or
-								(> global123 3)
-								(and (== global123 3) (proc0_10 -20222 1))
+								(> gAct 3)
+								(and (== gAct 3) (TimeCheck $b102 1)) ; can 11:15 pm occur?
 							)
 							2
 						else
@@ -523,7 +538,7 @@
 						)
 				)
 			)
-			(else 
+			(else
 				(super sel_300: param1 &rest)
 			)
 		)
@@ -616,31 +631,35 @@
 		sel_597 319
 		sel_598 115
 	)
-	
+
 	(method (sel_300 param1)
 		(switch param1
 			(44
-				(if (== global123 5)
-					(global2 sel_146: sWireItShut)
+				(if (== gAct 5)
+					(gCurRoom sel_146: sWireItShut)
 				else
 					(super sel_300: param1 &rest)
 				)
 			)
 			(4
-				(if (== sel_29 0) (proc0_4 99) else (proc0_3 99))
+				(if (== sel_29 0)
+					(ClearFlag 99)
+				else
+					(SetFlag 99)
+				)
 				(super sel_300: param1 &rest)
 			)
-			(else 
+			(else
 				(super sel_300: param1 &rest)
 			)
 		)
 	)
-	
+
 	(method (sel_145)
 		(super sel_145:)
 		(eastDoor2 sel_313:)
 	)
-	
+
 	(method (sel_606)
 		(super sel_606: 292 110 319 123 319 133 309 137 280 122)
 	)
@@ -663,12 +682,12 @@
 		sel_597 31
 		sel_598 127
 	)
-	
+
 	(method (sel_145)
 		(super sel_145:)
 		(westDoor2 sel_313:)
 	)
-	
+
 	(method (sel_606)
 		(super sel_606: 47 126 66 113 85 120 68 132)
 	)

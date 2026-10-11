@@ -1,15 +1,16 @@
 ;;; Sierra Script 1.0 - (do not remove this comment)
+;;; Decompiled by sluicebox
 (script# 91)
 (include sci.sh)
 (use Main)
-(use CueObj)
+(use Feature)
 (use MoveFwd)
-(use n958)
+(use LoadMany)
 (use Sound)
-(use Cycle)
+(use Motion)
 (use Game)
-(use View)
-(use Obj)
+(use Actor)
+(use System)
 
 (public
 	streetRgn 0
@@ -22,42 +23,42 @@
 	local2
 	local3
 )
+
 (instance streetRgn of Rgn
 	(properties
 		sel_20 {streetRgn}
 	)
-	
+
 	(method (sel_110)
 		(Load rsVIEW 853)
-		(proc958_0 132 96 94 81)
+		(LoadMany rsSOUND 96 94 81)
 		(leftFeature sel_110:)
 		(rightFeature sel_110:)
 		(car sel_155: 3 sel_156: 3 sel_51: 6 sel_53: 3 sel_102:)
-		(if (not (streetSounds sel_90?))
+		(if (not (streetSounds sel_90:))
 			(streetSounds sel_39:)
 		)
 		(super sel_110:)
 	)
-	
+
 	(method (sel_57)
-		(cond 
-			((global2 sel_142?))
-			(
-			(and (== local0 1) (== local1 1) (proc0_1 gEgo 4)) (global2 sel_146: sLeaveNow))
-			(
-				(and
-					(not (if (== local0 1) (== local1 1)))
-					(proc0_1 gEgo 4)
-				)
-				(global2 sel_146: sRunOver)
+		(cond
+			((gCurRoom sel_142:))
+			((and (== local0 1) (== local1 1) (StepOn gEgo 4))
+				(gCurRoom sel_146: sLeaveNow)
 			)
-			((proc0_1 gEgo 256) (global2 sel_146: sHitEdgeScreen))
+			((and (not (and (== local0 1) (== local1 1))) (StepOn gEgo 4))
+				(gCurRoom sel_146: sRunOver)
+			)
+			((StepOn gEgo 256)
+				(gCurRoom sel_146: sHitEdgeScreen)
+			)
 		)
 		(super sel_57:)
 	)
-	
+
 	(method (sel_399 param1)
-		(= sel_406 (proc999_5 param1 280 210 260 300))
+		(= sel_406 (OneOf param1 280 210 260 300))
 		(= sel_407 0)
 	)
 )
@@ -66,9 +67,9 @@
 	(properties
 		sel_20 {sLeaveNow}
 	)
-	
-	(method (sel_144 theSel_29)
-		(switch (= sel_29 theSel_29)
+
+	(method (sel_144 param1)
+		(switch (= sel_29 param1)
 			(0
 				(gGame sel_587:)
 				(gEgo sel_55: 180)
@@ -78,7 +79,7 @@
 				(gEgo sel_312: MoveFwd 65 self)
 			)
 			(2
-				(global2 sel_399: (global2 sel_411?))
+				(gCurRoom sel_399: (gCurRoom sel_411:))
 			)
 		)
 	)
@@ -88,25 +89,29 @@
 	(properties
 		sel_20 {sRunOver}
 	)
-	
+
 	(method (sel_57)
-		(cond 
-			(
-			(and (< (car sel_255: gEgo) 160) (not local2)) (mRunOver sel_40: 96 sel_3: -1 sel_39:) (= local2 1))
-			(
-			(and (< (car sel_255: gEgo) 100) (not local3)) (mRunOver sel_40: 81 sel_3: 1 sel_39:) (= local3 1))
+		(cond
+			((and (< (car sel_255: gEgo) 160) (not local2))
+				(mRunOver sel_40: 96 sel_3: -1 sel_39:)
+				(= local2 1)
+			)
+			((and (< (car sel_255: gEgo) 100) (not local3))
+				(mRunOver sel_40: 81 sel_3: 1 sel_39:)
+				(= local3 1)
+			)
 		)
 		(super sel_57:)
 	)
-	
-	(method (sel_144 theSel_29)
-		(switch (= sel_29 theSel_29)
+
+	(method (sel_144 param1)
+		(switch (= sel_29 param1)
 			(0
 				(gGame sel_587:)
 				(streetSounds sel_167:)
-				(if (== gSel_40 280)
-					((ScriptID 280 1) sel_111:)
-					((ScriptID 280 2) sel_146: 0)
+				(if (== gCurRoomNum 280)
+					((ScriptID 280 1) sel_111:) ; carSound
+					((ScriptID 280 2) sel_146: 0) ; drunk
 				)
 				(gEgo sel_63: 13)
 				(car sel_110:)
@@ -114,11 +119,15 @@
 			)
 			(1
 				(car
-					sel_312: MoveTo (+ (gEgo sel_1?) 55) (- (gEgo sel_0?) 1) self
+					sel_312:
+						MoveTo
+						(+ (gEgo sel_1:) 55)
+						(- (gEgo sel_0:) 1)
+						self
 				)
 			)
 			(2
-				(switch gSel_40
+				(switch gCurRoomNum
 					(210
 						(car sel_312: MoveTo 160 225)
 					)
@@ -137,20 +146,22 @@
 			(3
 				(gEgo
 					sel_2: 853
-					sel_3: (if (== (gEgo sel_2?) 803) 1 else 0)
+					sel_3: (if (== (gEgo sel_2:) 803) 1 else 0)
 					sel_4: 0
-					sel_153: (- (gEgo sel_1?) 19) (- (gEgo sel_0?) 1)
+					sel_153: (- (gEgo sel_1:) 19) (- (gEgo sel_0:) 1)
 					sel_244: 8
 					sel_161: End self
 				)
 			)
 			(4
 				(= sel_137 7)
-				(if (gEgo sel_59?) (gEgo sel_155: 0))
+				(if (gEgo sel_59:)
+					(gEgo sel_155: 0)
+				)
 			)
 			(5
-				(= global145 9)
-				(global2 sel_399: 99)
+				(= global145 9) ; "If you don't look both ways, you'll be dead in no time flat!"
+				(gCurRoom sel_399: 99)
 			)
 		)
 	)
@@ -160,15 +171,15 @@
 	(properties
 		sel_20 {sHitEdgeScreen}
 	)
-	
-	(method (sel_144 theSel_29)
-		(switch (= sel_29 theSel_29)
+
+	(method (sel_144 param1)
+		(switch (= sel_29 param1)
 			(0
 				(gGame sel_587:)
-				(gLb2Messager sel_295: 4 3 0 0 self 91)
+				(gMessager sel_295: 4 3 0 0 self 91)
 			)
 			(1
-				(if (> (gEgo sel_55?) 180)
+				(if (> (gEgo sel_55:) 180)
 					(gEgo sel_253: 90)
 				else
 					(gEgo sel_253: 270)
@@ -193,14 +204,16 @@
 		sel_9 20
 		sel_301 40
 	)
-	
+
 	(method (sel_300 param1)
 		(switch param1
 			(1
 				(= local0 1)
-				(gLb2Messager sel_295: 1 1 0 0 0 91)
+				(gMessager sel_295: 1 1 0 0 0 91)
 			)
-			(else  (super sel_300: param1))
+			(else
+				(super sel_300: param1)
+			)
 		)
 	)
 )
@@ -216,14 +229,16 @@
 		sel_9 320
 		sel_301 40
 	)
-	
+
 	(method (sel_300 param1)
 		(switch param1
 			(1
 				(= local1 1)
-				(gLb2Messager sel_295: 2 1 0 0 0 91)
+				(gMessager sel_295: 2 1 0 0 0 91)
 			)
-			(else  (super sel_300: param1))
+			(else
+				(super sel_300: param1)
+			)
 		)
 	)
 )

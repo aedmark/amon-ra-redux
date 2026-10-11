@@ -1,9 +1,9 @@
 ;;; Sierra Script 1.0 - (do not remove this comment)
+;;; Decompiled by sluicebox
 (script# 989)
 (include sci.sh)
 (use Main)
-(use Obj)
-
+(use System)
 
 (class Sound of Obj
 	(properties
@@ -24,113 +24,116 @@
 		sel_42 0
 		sel_166 0
 	)
-	
+
 	(method (sel_109 param1)
-		((super sel_109:)
-			sel_166: (if argc param1 else 0)
-			sel_117:
-		)
+		((super sel_109:) sel_166: (if argc param1 else 0) sel_117:)
 	)
-	
+
 	(method (sel_110)
 		(= sel_165 (= sel_14 0))
 		(gSounds sel_118: self)
-		(if
-			(not
-				(if (DoSound sndGET_AUDIO_CAPABILITY) (& sel_99 $0004))
-			)
+		(if (not (and (DoSound sndGET_AUDIO_CAPABILITY) (& sel_99 $0004)))
 			(DoSound sndINIT self)
 		)
 	)
-	
+
 	(method (sel_111)
 		(gSounds sel_81: self)
-		(if sel_41 (DoSound sndDISPOSE self) (= sel_41 0))
+		(if sel_41
+			(DoSound sndDISPOSE self)
+			(= sel_41 0)
+		)
 		(super sel_111:)
 	)
-	
-	(method (sel_39 theSel_42 &tmp theParamTotal)
-		(= theParamTotal argc)
-		(if (and argc (IsObject [theSel_42 (- argc 1)]))
-			(= sel_42 [theSel_42 (= theParamTotal (- argc 1))])
+
+	(method (sel_39 param1 &tmp temp0)
+		(= temp0 argc)
+		(if (and argc (IsObject [param1 (- argc 1)]))
+			(= sel_42 [param1 (= temp0 (- argc 1))])
 		else
 			(= sel_42 0)
 		)
 		(self sel_110:)
-		(if (not sel_3) (= sel_3 1))
-		(if theParamTotal
-			(= sel_94 theSel_42)
+		(if (not sel_3)
+			(= sel_3 1)
+		)
+		(if temp0
+			(= sel_94 param1)
 		else
 			(= sel_94 127)
 		)
-		(if
-		(and (DoSound sndGET_AUDIO_CAPABILITY) (& sel_99 $0004))
-			(DoAudio 2 sel_40)
+		(if (and (DoSound sndGET_AUDIO_CAPABILITY) (& sel_99 $0004))
+			(DoAudio audPLAY sel_40)
 		else
 			(DoSound sndPLAY self 0)
 		)
 	)
-	
+
 	(method (sel_167)
-		(cond 
-			(
-			(and (DoSound sndGET_AUDIO_CAPABILITY) (& sel_99 $0004)) (DoAudio 3))
-			(sel_90 (DoSound sndUPDATE_CUES self) (DoSound sndSTOP self))
+		(cond
+			((and (DoSound sndGET_AUDIO_CAPABILITY) (& sel_99 $0004))
+				(DoAudio audSTOP)
+			)
+			(sel_90
+				(DoSound sndUPDATE_CUES self)
+				(DoSound sndSTOP self)
+			)
 		)
 	)
-	
+
 	(method (sel_168 param1)
-		(if (not argc) (= param1 1))
-		(DoSound
-			sndPAUSE
-			(if (self sel_115: Sound) self else 0)
-			param1
+		(if (not argc)
+			(= param1 1)
 		)
+		(DoSound sndPAUSE (if (self sel_115: Sound) self else 0) param1)
 	)
-	
+
 	(method (sel_169 param1)
-		(if (not argc) (= param1 1))
+		(if (not argc)
+			(= param1 1)
+		)
 		(DoSound sndSET_HOLD self param1)
 	)
-	
+
 	(method (sel_125)
 		(DoSound sndSET_HOLD self 0)
 	)
-	
-	(method (sel_170 theSel_42 param2 param3 param4 &tmp theParamTotal)
-		(if
-		(and (DoSound sndGET_AUDIO_CAPABILITY) (& sel_99 $0004))
-			(DoAudio 3)
+
+	(method (sel_170 param1 param2 param3 param4 &tmp temp0)
+		(if (and (DoSound sndGET_AUDIO_CAPABILITY) (& sel_99 $0004))
+			(DoAudio audSTOP)
 		else
-			(= theParamTotal argc)
-			(if (and argc (IsObject [theSel_42 (- argc 1)]))
-				(= sel_42 [theSel_42 (= theParamTotal (- argc 1))])
+			(= temp0 argc)
+			(if (and argc (IsObject [param1 (- argc 1)]))
+				(= sel_42 [param1 (= temp0 (- argc 1))])
 			)
-			(if theParamTotal
-				(DoSound sndFADE self theSel_42 param2 param3 param4)
+			(if temp0
+				(DoSound sndFADE self param1 param2 param3 param4)
 			else
 				(DoSound sndFADE self 0 25 10 1)
 			)
 		)
 	)
-	
+
 	(method (sel_171 param1)
-		(if (not argc) (= param1 1))
-		(DoSound sndDUMMY self param1)
+		(if (not argc)
+			(= param1 1)
+		)
+		(DoSound 13 self param1) ; Mute
 	)
-	
+
 	(method (sel_172 param1)
 		(DoSound sndSET_VOLUME self param1)
 	)
-	
+
 	(method (sel_63 param1)
 		(DoSound sndSET_PRIORITY self param1)
 	)
-	
+
 	(method (sel_155 param1)
 		(DoSound sndSET_LOOP self param1)
 	)
-	
+
 	(method (sel_173 param1 param2 param3 param4)
 		(if (and (<= 1 param1) (<= param1 15))
 			(if (< param2 128)
@@ -140,48 +143,55 @@
 			)
 		)
 	)
-	
+
 	(method (sel_174)
-		(if
-		(and (DoSound sndGET_AUDIO_CAPABILITY) (& sel_99 $0004))
-			(if (and (!= sel_165 -1) (== (DoAudio 6) -1))
+		(if (and (DoSound sndGET_AUDIO_CAPABILITY) (& sel_99 $0004))
+			(if (and (!= sel_165 -1) (== (DoAudio audPOSITION) -1))
 				(= sel_165 -1)
 				(= sel_14 0)
-				(if (IsObject sel_42) (sel_42 sel_145: self))
+				(if (IsObject sel_42)
+					(sel_42 sel_145: self)
+				)
 			)
 		else
-			(if sel_90 (DoSound sndUPDATE_CUES self))
+			(if sel_90
+				(DoSound sndUPDATE_CUES self)
+			)
 			(if sel_14
 				(= sel_165 sel_14)
 				(= sel_14 0)
-				(if (IsObject sel_42) (sel_42 sel_145: self))
+				(if (IsObject sel_42)
+					(sel_42 sel_145: self)
+				)
 			)
 		)
 	)
-	
+
 	(method (sel_175 param1)
 		(if (or (not sel_166) (== sel_166 param1))
 			(self sel_111:)
 		)
 	)
-	
-	(method (sel_176 theSel_42 &tmp theParamTotal)
-		(= theParamTotal argc)
-		(if (and argc (IsObject [theSel_42 (- argc 1)]))
-			(= sel_42 [theSel_42 (= theParamTotal (- argc 1))])
+
+	(method (sel_176 param1 &tmp temp0)
+		(= temp0 argc)
+		(if (and argc (IsObject [param1 (- argc 1)]))
+			(= sel_42 [param1 (= temp0 (- argc 1))])
 		else
 			(= sel_42 0)
 		)
 		(self sel_110:)
-		(if (not sel_3) (= sel_3 1))
-		(if theParamTotal
-			(= sel_94 theSel_42)
+		(if (not sel_3)
+			(= sel_3 1)
+		)
+		(if temp0
+			(= sel_94 param1)
 		else
 			(= sel_94 127)
 		)
 		(DoSound sndPLAY self 1)
 	)
-	
+
 	(method (sel_144)
 		(DoSound sndUPDATE self)
 	)

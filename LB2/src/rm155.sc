@@ -1,14 +1,15 @@
 ;;; Sierra Script 1.0 - (do not remove this comment)
+;;; Decompiled by sluicebox
 (script# 155)
 (include sci.sh)
 (use Main)
-(use LBRoom)
-(use RTRandCycle)
+(use eRS)
+(use Talker)
 (use RandCycle)
-(use n958)
-(use Cycle)
-(use View)
-(use Obj)
+(use LoadMany)
+(use Motion)
+(use Actor)
+(use System)
 
 (public
 	rm155 0
@@ -21,9 +22,9 @@
 		sel_408 155
 		sel_28 10
 	)
-	
+
 	(method (sel_110)
-		(proc958_0 128 1155 156 157 155)
+		(LoadMany rsVIEW 1155 156 157 155)
 		(self sel_414: 92)
 		(super sel_110:)
 		(gGameMusic2 sel_40: 151 sel_99: 1 sel_3: -1 sel_39:)
@@ -36,11 +37,11 @@
 		(fan sel_110: sel_161: Fwd)
 		(trees1 sel_110: sel_146: sMoveTrees1)
 		(trees2 sel_110: sel_146: sMoveTrees2)
-		(global2 sel_146: sCartoon)
+		(gCurRoom sel_146: sCartoon)
 	)
-	
+
 	(method (sel_111)
-		(gSel_608 sel_170: 0 30 12 1)
+		(gGameMusic1 sel_170: 0 30 12 1)
 		(gGameMusic2 sel_170: 0 30 12 1)
 		(super sel_111: &rest)
 	)
@@ -50,19 +51,19 @@
 	(properties
 		sel_20 {sCartoon}
 	)
-	
-	(method (sel_144 theSel_29)
-		(switch (= sel_29 theSel_29)
+
+	(method (sel_144 param1)
+		(switch (= sel_29 param1)
 			(0
-				((ScriptID 1900 15) sel_203: 1)
+				((ScriptID 1900 15) sel_203: 1) ; Irmgaard
 				(Laura sel_203: 1)
 				(= sel_139 60)
 			)
 			(1
-				(gLb2Messager sel_295: 1 0 0 0 self)
+				(gMessager sel_295: 1 0 0 0 self)
 			)
 			(2
-				(global2 sel_399: 160)
+				(gCurRoom sel_399: 160)
 				(self sel_111:)
 			)
 		)
@@ -73,9 +74,9 @@
 	(properties
 		sel_20 {sMoveTrees1}
 	)
-	
-	(method (sel_144 theSel_29)
-		(switch (= sel_29 theSel_29)
+
+	(method (sel_144 param1)
+		(switch (= sel_29 param1)
 			(0
 				(trees1
 					sel_155: 2
@@ -96,9 +97,9 @@
 	(properties
 		sel_20 {sMoveTrees2}
 	)
-	
-	(method (sel_144 theSel_29)
-		(switch (= sel_29 theSel_29)
+
+	(method (sel_144 param1)
+		(switch (= sel_29 param1)
 			(0
 				(trees2
 					sel_155: 2
@@ -173,9 +174,9 @@
 		sel_549 10
 		sel_550 10
 	)
-	
+
 	(method (sel_110)
-		(= sel_30 gSel_30)
+		(= sel_30 gUserFont)
 		(super sel_110: lauraBust lauraEyes lauraMouth &rest)
 	)
 )

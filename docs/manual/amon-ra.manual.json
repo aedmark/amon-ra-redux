@@ -76,11 +76,12 @@
             "lead": "The developer launches SCI Companion via Wine using the pre-compiled binary:",
             "points": [
               "Execution command: wine /home/gordonk/PycharmProjects/SCICompanion/Release/SCICompanion.exe LB2/RESOURCE.MAP.",
-              "Scripts are decompiled into source/ directories with symbol recovery driven by Decompiler.ini and selector vocabularies.",
+              "The 221-script compiler-facing baseline is reconstructed with Sluicebox annotations; globals, objects, procedures, control flow, and comments are readable while stable numeric selector IDs avoid contextual-alias collisions.",
+              "The developer selector vocabulary uses sel_N names except for SCI metadata IDs 4098, 4100, 4102, and 4103; tools/normalize_selector_vocab.py rebuilds it deterministically.",
               "Recompiled scripts emit paired .SCR (code chunk) and .HEP (heap object definitions) back into the game directory for immediate execution."
             ]
           },
-          "why": "SCI Companion provides high-level control-flow recovery (reconstructing while loops, if-else branches, and switch-cases) rather than raw assembly disassembly, dramatically reducing reverse-engineering overhead and preventing bytecode syntax bugs.",
+          "why": "Sluicebox provides high-level control-flow and symbol recovery, while SCI Companion remains the authoritative compiler. Stable numeric selectors preserve runtime IDs that a single global vocabulary cannot express with Sluicebox's contextual aliases.",
           "evidence": [
             {
               "label": "SCI Companion Binary",

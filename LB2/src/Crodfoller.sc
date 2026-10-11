@@ -1,9 +1,10 @@
 ;;; Sierra Script 1.0 - (do not remove this comment)
+;;; Decompiled by sluicebox
 (script# 1896)
 (include sci.sh)
 (use Main)
-(use RTRandCycle)
-(use View)
+(use Talker)
+(use Actor)
 
 (public
 	Crodfoller 7
@@ -20,12 +21,10 @@
 		sel_26 15
 		sel_549 -200
 	)
-	
+
 	(method (sel_110)
-		(= sel_30 gSel_30)
-		(super
-			sel_110: crodfollerBust crodfollerEyes crodfollerMouth &rest
-		)
+		(= sel_30 gUserFont)
+		(super sel_110: crodfollerBust crodfollerEyes crodfollerMouth &rest)
 	)
 )
 

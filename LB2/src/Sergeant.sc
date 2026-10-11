@@ -1,8 +1,9 @@
 ;;; Sierra Script 1.0 - (do not remove this comment)
+;;; Decompiled by sluicebox
 (script# 1897)
 (include sci.sh)
 (use Main)
-(use RTRandCycle)
+(use Talker)
 
 (public
 	Sergeant 5
@@ -16,9 +17,9 @@
 		sel_537 150
 		sel_26 15
 	)
-	
+
 	(method (sel_110)
-		(= sel_30 gSel_30)
+		(= sel_30 gUserFont)
 		(= sel_540 1)
 		(super sel_110: &rest)
 	)

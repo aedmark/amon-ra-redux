@@ -1,15 +1,16 @@
 ;;; Sierra Script 1.0 - (do not remove this comment)
+;;; Decompiled by sluicebox
 (script# 455)
 (include sci.sh)
 (use Main)
-(use LBRoom)
+(use eRS)
 (use Inset)
-(use CueObj)
-(use n958)
+(use Feature)
+(use LoadMany)
 (use Sound)
-(use Cycle)
-(use View)
-(use Obj)
+(use Motion)
+(use Actor)
+(use System)
 
 (public
 	rm455 0
@@ -20,27 +21,31 @@
 		sel_20 {rm455}
 		sel_408 555
 	)
-	
+
 	(method (sel_110)
-		(proc958_0 128 470 563)
-		(proc958_0 132 6)
+		(LoadMany rsVIEW 470 563)
+		(LoadMany rsSOUND 6)
 		(super sel_110:)
 		(gGame sel_87: 1 134)
 		(self sel_146: sFindPippin)
 	)
-	
+
 	(method (sel_111)
 		(screamAndLook sel_170: 0 12 30 1)
 		(super sel_111:)
 	)
-	
+
 	(method (sel_300 param1)
 		(switch param1
-			(13 (sFindPippin sel_145:))
-			(else  (super sel_300: param1))
+			(13
+				(sFindPippin sel_145:)
+			)
+			(else
+				(super sel_300: param1)
+			)
 		)
 	)
-	
+
 	(method (sel_399 param1)
 		(proc0_8 0)
 		(screamAndLook sel_170: 0 12 30 1)
@@ -53,9 +58,9 @@
 	(properties
 		sel_20 {sFindPippin}
 	)
-	
-	(method (sel_144 theSel_29)
-		(switch (= sel_29 theSel_29)
+
+	(method (sel_144 param1)
+		(switch (= sel_29 param1)
 			(0
 				(gGameMusic2 sel_40: 82 sel_99: 5 sel_3: 1 sel_39:)
 				(wrapMusic sel_110: -1 1 6)
@@ -64,8 +69,8 @@
 			(1
 				(gGame sel_588:)
 				(proc0_8 1)
-				(global2 sel_417: 470)
-				(global2 sel_408: 470)
+				(gCurRoom sel_417: 470)
+				(gCurRoom sel_408: 470)
 				(drip sel_110: sel_161: Fwd)
 				(pipMummy sel_110:)
 				(leftEye sel_110:)
@@ -83,7 +88,9 @@
 				(shirt sel_110:)
 				(flower sel_110:)
 			)
-			(2 (global2 sel_399: 454))
+			(2
+				(gCurRoom sel_399: 454)
+			)
 		)
 	)
 )
@@ -96,11 +103,15 @@
 		sel_213 2
 		sel_2 470
 	)
-	
+
 	(method (sel_300 param1)
 		(switch param1
-			(13 (sFindPippin sel_145:))
-			(else  (super sel_300: param1))
+			(13
+				(sFindPippin sel_145:)
+			)
+			(else
+				(super sel_300: param1)
+			)
 		)
 	)
 )
@@ -113,11 +124,15 @@
 		sel_213 13
 		sel_302 -32768
 	)
-	
+
 	(method (sel_300 param1)
 		(switch param1
-			(13 (sFindPippin sel_145:))
-			(else  (super sel_300: param1))
+			(13
+				(sFindPippin sel_145:)
+			)
+			(else
+				(super sel_300: param1)
+			)
 		)
 	)
 )
@@ -130,11 +145,15 @@
 		sel_213 14
 		sel_302 2
 	)
-	
+
 	(method (sel_300 param1)
 		(switch param1
-			(13 (sFindPippin sel_145:))
-			(else  (super sel_300: param1))
+			(13
+				(sFindPippin sel_145:)
+			)
+			(else
+				(super sel_300: param1)
+			)
 		)
 	)
 )
@@ -147,11 +166,15 @@
 		sel_213 8
 		sel_302 4
 	)
-	
+
 	(method (sel_300 param1)
 		(switch param1
-			(13 (sFindPippin sel_145:))
-			(else  (super sel_300: param1))
+			(13
+				(sFindPippin sel_145:)
+			)
+			(else
+				(super sel_300: param1)
+			)
 		)
 	)
 )
@@ -164,11 +187,15 @@
 		sel_213 11
 		sel_302 8
 	)
-	
+
 	(method (sel_300 param1)
 		(switch param1
-			(13 (sFindPippin sel_145:))
-			(else  (super sel_300: param1))
+			(13
+				(sFindPippin sel_145:)
+			)
+			(else
+				(super sel_300: param1)
+			)
 		)
 	)
 )
@@ -181,11 +208,15 @@
 		sel_213 9
 		sel_302 16
 	)
-	
+
 	(method (sel_300 param1)
 		(switch param1
-			(13 (sFindPippin sel_145:))
-			(else  (super sel_300: param1))
+			(13
+				(sFindPippin sel_145:)
+			)
+			(else
+				(super sel_300: param1)
+			)
 		)
 	)
 )
@@ -198,11 +229,15 @@
 		sel_213 10
 		sel_302 32
 	)
-	
+
 	(method (sel_300 param1)
 		(switch param1
-			(13 (sFindPippin sel_145:))
-			(else  (super sel_300: param1))
+			(13
+				(sFindPippin sel_145:)
+			)
+			(else
+				(super sel_300: param1)
+			)
 		)
 	)
 )
@@ -215,11 +250,15 @@
 		sel_213 3
 		sel_302 64
 	)
-	
+
 	(method (sel_300 param1)
 		(switch param1
-			(13 (sFindPippin sel_145:))
-			(else  (super sel_300: param1))
+			(13
+				(sFindPippin sel_145:)
+			)
+			(else
+				(super sel_300: param1)
+			)
 		)
 	)
 )
@@ -232,11 +271,15 @@
 		sel_213 6
 		sel_302 128
 	)
-	
+
 	(method (sel_300 param1)
 		(switch param1
-			(13 (sFindPippin sel_145:))
-			(else  (super sel_300: param1))
+			(13
+				(sFindPippin sel_145:)
+			)
+			(else
+				(super sel_300: param1)
+			)
 		)
 	)
 )
@@ -249,11 +292,15 @@
 		sel_213 1
 		sel_302 256
 	)
-	
+
 	(method (sel_300 param1)
 		(switch param1
-			(13 (sFindPippin sel_145:))
-			(else  (super sel_300: param1))
+			(13
+				(sFindPippin sel_145:)
+			)
+			(else
+				(super sel_300: param1)
+			)
 		)
 	)
 )
@@ -266,32 +313,36 @@
 		sel_213 7
 		sel_302 512
 	)
-	
+
 	(method (sel_300 param1)
 		(switch param1
 			(1
 				(if (gEgo sel_238: 21)
-					(gLb2Messager sel_295: 7 1 2)
+					(gMessager sel_295: 7 1 2)
 				else
-					(gLb2Messager sel_295: 7 1 1)
+					(gMessager sel_295: 7 1 1)
 				)
 			)
 			(8
 				(if (gEgo sel_238: 21)
-					(gLb2Messager sel_295: 7 8 2)
+					(gMessager sel_295: 7 8 2)
 				else
-					(gLb2Messager sel_295: 7 8 1)
+					(gMessager sel_295: 7 8 1)
 				)
 			)
 			(4
 				(if (gEgo sel_238: 21)
-					(gLb2Messager sel_295: 7 4 2)
+					(gMessager sel_295: 7 4 2)
 				else
-					(global2 sel_422: inNotepad)
+					(gCurRoom sel_422: inNotepad)
 				)
 			)
-			(13 (sFindPippin sel_145:))
-			(else  (super sel_300: param1))
+			(13
+				(sFindPippin sel_145:)
+			)
+			(else
+				(super sel_300: param1)
+			)
 		)
 	)
 )
@@ -304,11 +355,15 @@
 		sel_213 12
 		sel_302 1024
 	)
-	
+
 	(method (sel_300 param1)
 		(switch param1
-			(13 (sFindPippin sel_145:))
-			(else  (super sel_300: param1))
+			(13
+				(sFindPippin sel_145:)
+			)
+			(else
+				(super sel_300: param1)
+			)
 		)
 	)
 )
@@ -321,11 +376,15 @@
 		sel_213 16
 		sel_302 2048
 	)
-	
+
 	(method (sel_300 param1)
 		(switch param1
-			(13 (sFindPippin sel_145:))
-			(else  (super sel_300: param1))
+			(13
+				(sFindPippin sel_145:)
+			)
+			(else
+				(super sel_300: param1)
+			)
 		)
 	)
 )
@@ -338,11 +397,15 @@
 		sel_213 4
 		sel_302 4096
 	)
-	
+
 	(method (sel_300 param1)
 		(switch param1
-			(13 (sFindPippin sel_145:))
-			(else  (super sel_300: param1))
+			(13
+				(sFindPippin sel_145:)
+			)
+			(else
+				(super sel_300: param1)
+			)
 		)
 	)
 )
@@ -355,11 +418,15 @@
 		sel_213 15
 		sel_302 8192
 	)
-	
+
 	(method (sel_300 param1)
 		(switch param1
-			(13 (sFindPippin sel_145:))
-			(else  (super sel_300: param1))
+			(13
+				(sFindPippin sel_145:)
+			)
+			(else
+				(super sel_300: param1)
+			)
 		)
 	)
 )
@@ -372,11 +439,15 @@
 		sel_213 5
 		sel_302 16384
 	)
-	
+
 	(method (sel_300 param1)
 		(switch param1
-			(13 (sFindPippin sel_145:))
-			(else  (super sel_300: param1))
+			(13
+				(sFindPippin sel_145:)
+			)
+			(else
+				(super sel_300: param1)
+			)
 		)
 	)
 )
@@ -391,27 +462,27 @@
 		sel_0 79
 		sel_570 1
 	)
-	
+
 	(method (sel_110)
 		(super sel_110: &rest)
-		(gLb2Messager sel_295: 7 4 1)
+		(gMessager sel_295: 7 4 1)
 	)
-	
+
 	(method (sel_300 param1)
 		(switch param1
 			(4
 				(self sel_111:)
 				(gGame sel_87: 1 135)
-				((ScriptID 21 0) sel_57: 790)
+				((ScriptID 21 0) sel_57: 790) ; addCluesCode
 				(gEgo sel_350: 21)
 			)
 			(1
-				(gLb2Messager sel_295: 45 1 0 0 0 15)
+				(gMessager sel_295: 45 1 0 0 0 15)
 			)
 			(8
-				(gLb2Messager sel_295: 45 8 0 0 0 15)
+				(gMessager sel_295: 45 8 0 0 0 15)
 			)
-			(else 
+			(else
 				(super sel_300: param1 &rest)
 			)
 		)
@@ -422,7 +493,7 @@
 	(properties
 		sel_20 {wrapMusic}
 	)
-	
+
 	(method (sel_110)
 		(= sel_608 screamAndLook)
 		(super sel_110: &rest)

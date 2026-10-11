@@ -1,19 +1,20 @@
 ;;; Sierra Script 1.0 - (do not remove this comment)
+;;; Decompiled by sluicebox
 (script# 330)
 (include sci.sh)
 (use Main)
-(use LBRoom)
+(use eRS)
 (use Inset)
-(use RTRandCycle)
+(use Talker)
 (use PolyPath)
 (use Polygon)
-(use CueObj)
+(use Feature)
 (use MoveFwd)
-(use n958)
+(use LoadMany)
 (use Sound)
-(use Cycle)
-(use View)
-(use Obj)
+(use Motion)
+(use Actor)
+(use System)
 
 (public
 	rm330 0
@@ -22,8 +23,9 @@
 )
 
 (local
-	local0 =  1
+	local0 = 1
 )
+
 (instance rm330 of LBRoom
 	(properties
 		sel_20 {rm330}
@@ -35,55 +37,57 @@
 		sel_107 400
 		sel_108 78
 	)
-	
+
 	(method (sel_110)
-		(proc958_0 128 1410 1411 330 331 213)
-		(proc958_0 132 332 330 40)
-		(proc958_0 129 415 410)
-		(gEgo
-			sel_585: (if (gEgo sel_584?) 831 else 830)
-			sel_110:
-		)
-		(switch gGSel_40
+		(LoadMany rsVIEW 1410 1411 330 331 213)
+		(LoadMany rsSOUND 332 330 40)
+		(LoadMany rsPIC 415 410)
+		(gEgo sel_585: (if (gEgo sel_584:) 831 else 830) sel_110:)
+		(switch gPrevRoomNum
 			(sel_409
-				(gEgo sel_153: 158 146 sel_14: (| (gEgo sel_14?) $4000))
+				(gEgo sel_153: 158 146 sel_14: (| (gEgo sel_14:) $4000))
 				(if
 					(not
-						(if (and (== global123 2) (proc0_10 8) (proc0_2 122))
-							(not (proc0_2 133))
+						(and
+							(== gAct 2)
+							(TimeCheck $0008)
+							(IsFlag 122)
+							(not (IsFlag 133))
 						)
 					)
-					(gSel_608 sel_40: 330 sel_99: 1 sel_3: 1 sel_39:)
+					(gGameMusic1 sel_40: 330 sel_99: 1 sel_3: 1 sel_39:)
 				)
 				(if
 					(and
-						(== global123 2)
-						(proc0_10 8)
-						(proc0_2 122)
-						(not (proc0_2 133))
+						(== gAct 2)
+						(TimeCheck $0008)
+						(IsFlag 122)
+						(not (IsFlag 133))
 					)
 					(steve sel_110: sel_3: 1 sel_161: Walk)
 					(gEgo sel_320: 179)
-					(global2 sel_146: sKissAndHug)
+					(gCurRoom sel_146: sKissAndHug)
 				else
 					(gGame sel_588:)
 					(gEgo sel_320: 179)
 				)
 			)
-			(else 
-				(gSel_608 sel_40: 330 sel_99: 1 sel_3: 1 sel_39:)
+			(else
+				(gGameMusic1 sel_40: 330 sel_99: 1 sel_3: 1 sel_39:)
 				(gEgo sel_153: 178 136)
 				(gEgo sel_320: 179)
-				(if (gEgo sel_584?)
+				(if (gEgo sel_584:)
 					(taxi sel_153: 196 161 sel_110: sel_313:)
-					(global2 sel_146: sTaxiLeave)
+					(gCurRoom sel_146: sTaxiLeave)
 					(gGame sel_587:)
 				else
 					(gGame sel_588:)
 				)
 			)
 		)
-		(if (> global123 1) (Palette palSET_INTENSITY 0 255 60))
+		(if (> gAct 1)
+			(Palette palSET_INTENSITY 0 255 60)
+		)
 		(super sel_110:)
 		(gGameMusic2 sel_40: 333 sel_99: 1 sel_3: -1 sel_39:)
 		(self
@@ -145,38 +149,44 @@
 		(bigWindow sel_110:)
 		(sidewalk sel_110:)
 		(steps sel_110:)
-		(if (< global123 2) (taxi sel_110: sel_313:))
+		(if (< gAct 2)
+			(taxi sel_110: sel_313:)
+		)
 		(street sel_110:)
 		(fountain1 sel_110: sel_161: Fwd)
 		(fountain2 sel_110: sel_161: Fwd)
 	)
-	
+
 	(method (sel_57)
 		(super sel_57:)
-		(cond 
+		(cond
 			(sel_142)
-			((proc0_1 gEgo 256) (global2 sel_146: sHitEdgeScreen))
+			((StepOn gEgo 256)
+				(gCurRoom sel_146: sHitEdgeScreen)
+			)
 		)
 	)
-	
+
 	(method (sel_111)
 		(carSound sel_111:)
-		(gSel_608 sel_170: 0 30 12 1)
+		(gGameMusic1 sel_170: 0 30 12 1)
 		(gGameMusic2 sel_170: 0 30 12 1)
 		(super sel_111: &rest)
 	)
-	
+
 	(method (sel_300 param1)
 		(switch param1
 			(1
 				(if local0
-					(gLb2Messager sel_295: 7 1 1)
+					(gMessager sel_295: 7 1 1)
 					(= local0 0)
 				else
-					(gLb2Messager sel_295: 7 1 2)
+					(gMessager sel_295: 7 1 2)
 				)
 			)
-			(else  (super sel_300: param1))
+			(else
+				(super sel_300: param1)
+			)
 		)
 	)
 )
@@ -185,15 +195,15 @@
 	(properties
 		sel_20 {sHitEdgeScreen}
 	)
-	
-	(method (sel_144 theSel_29)
-		(switch (= sel_29 theSel_29)
+
+	(method (sel_144 param1)
+		(switch (= sel_29 param1)
 			(0
 				(gGame sel_587:)
-				(gLb2Messager sel_295: 4 3 0 0 self 91)
+				(gMessager sel_295: 4 3 0 0 self 91)
 			)
 			(1
-				(if (> (gEgo sel_55?) 180)
+				(if (> (gEgo sel_55:) 180)
 					(gEgo sel_253: 90)
 				else
 					(gEgo sel_253: 270)
@@ -212,9 +222,9 @@
 	(properties
 		sel_20 {sTaxiLeave}
 	)
-	
-	(method (sel_144 theSel_29)
-		(switch (= sel_29 theSel_29)
+
+	(method (sel_144 param1)
+		(switch (= sel_29 param1)
 			(0
 				(gGame sel_587:)
 				(taxi sel_312: MoveTo 369 125 self)
@@ -231,9 +241,9 @@
 	(properties
 		sel_20 {sInTaxi}
 	)
-	
-	(method (sel_144 theSel_29)
-		(switch (= sel_29 theSel_29)
+
+	(method (sel_144 param1)
+		(switch (= sel_29 param1)
 			(0
 				(gGame sel_587:)
 				(gEgo sel_312: PolyPath 146 151 self)
@@ -249,7 +259,9 @@
 				(gEgo sel_102:)
 				(= sel_136 2)
 			)
-			(4 (global2 sel_399: 250))
+			(4
+				(gCurRoom sel_399: 250)
+			)
 		)
 	)
 )
@@ -258,41 +270,41 @@
 	(properties
 		sel_20 {sKissAndHug}
 	)
-	
-	(method (sel_144 theSel_29)
-		(switch (= sel_29 theSel_29)
+
+	(method (sel_144 param1)
+		(switch (= sel_29 param1)
 			(0
 				(gGame sel_587:)
 				(gEgo sel_312: PolyPath 58 150 self)
 			)
 			(1
-				(proc0_5 gEgo steve)
-				(proc0_5 steve gEgo)
+				(Face gEgo steve)
+				(Face steve gEgo)
 				(= sel_137 4)
 			)
 			(2
 				(gGame sel_87: 1 133)
-				(global2 sel_408: 780 sel_422: closeUp self)
+				(gCurRoom sel_408: 780 sel_422: closeUp self)
 			)
 			(3
-				(gSel_561 sel_119: 102)
+				(gCast sel_119: 102)
 				(= sel_136 2)
 			)
 			(4
-				(global2 sel_417: 330)
+				(gCurRoom sel_417: 330)
 				(Palette palSET_INTENSITY 0 255 60)
-				(gSel_561 sel_119: 216)
+				(gCast sel_119: 216)
 				(steve sel_155: 0)
 				(gEgo sel_312: PolyPath 158 146 self)
 			)
 			(5
-				(DrawPic 780 dpOPEN_FADEPALETTE)
-				(gSel_561 sel_119: 102)
+				(DrawPic 780 10)
+				(gCast sel_119: 102)
 				(= sel_136 2)
 			)
 			(6
 				(Palette palSET_INTENSITY 0 255 100)
-				(global2 sel_399: 350)
+				(gCurRoom sel_399: 350)
 				(self sel_111:)
 			)
 		)
@@ -303,18 +315,20 @@
 	(properties
 		sel_20 {sCloseUp}
 	)
-	
-	(method (sel_144 theSel_29)
-		(switch (= sel_29 theSel_29)
-			(0 (= sel_136 2))
+
+	(method (sel_144 param1)
+		(switch (= sel_29 param1)
+			(0
+				(= sel_136 2)
+			)
 			(1
-				(gSel_608 sel_40: 332 sel_99: 1 sel_3: -1 sel_39:)
-				(gLb2Messager sel_295: 6 0 0 0 self 330)
+				(gGameMusic1 sel_40: 332 sel_99: 1 sel_3: -1 sel_39:)
+				(gMessager sel_295: 6 0 0 0 self 330)
 				(gGameMusic2 sel_170: 0 12 30 0)
 			)
 			(2
 				(DrawPic 415 -32758)
-				(gSel_608 sel_40: 334 sel_99: 1 sel_3: 1 sel_39:)
+				(gGameMusic1 sel_40: 334 sel_99: 1 sel_3: 1 sel_39:)
 				(= sel_137 4)
 			)
 			(3
@@ -322,7 +336,7 @@
 				(= sel_139 30)
 			)
 			(4
-				(gLb2Messager sel_295: 12 0 0 0 self 330)
+				(gMessager sel_295: 12 0 0 0 self 330)
 			)
 			(5
 				(gGameMusic2 sel_170: 127 12 30 0)
@@ -345,11 +359,15 @@
 		sel_14 16400
 		sel_53 0
 	)
-	
+
 	(method (sel_300 param1)
 		(switch param1
-			(4 (global2 sel_146: sInTaxi))
-			(else  (super sel_300: param1))
+			(4
+				(gCurRoom sel_146: sInTaxi)
+			)
+			(else
+				(super sel_300: param1)
+			)
 		)
 	)
 )
@@ -362,11 +380,11 @@
 		sel_2 331
 		sel_14 16384
 	)
-	
+
 	(method (sel_57)
-		(= sel_4 (gEgo sel_4?))
-		(= sel_1 (- (gEgo sel_1?) 2))
-		(= sel_0 (- (gEgo sel_0?) 4))
+		(= sel_4 (gEgo sel_4:))
+		(= sel_1 (- (gEgo sel_1:) 2))
+		(= sel_0 (- (gEgo sel_0:) 4))
 		(super sel_57: &rest)
 	)
 )
@@ -380,13 +398,15 @@
 		sel_2 330
 		sel_14 16384
 	)
-	
+
 	(method (sel_300 param1)
 		(switch param1
 			(6
-				(gLb2Messager sel_295: 4 6 3)
+				(gMessager sel_295: 4 6 3)
 			)
-			(else  (super sel_300: param1))
+			(else
+				(super sel_300: param1)
+			)
 		)
 	)
 )
@@ -401,13 +421,15 @@
 		sel_3 1
 		sel_14 16384
 	)
-	
+
 	(method (sel_300 param1)
 		(switch param1
 			(6
-				(gLb2Messager sel_295: 4 6 3)
+				(gMessager sel_295: 4 6 3)
 			)
-			(else  (super sel_300: param1))
+			(else
+				(super sel_300: param1)
+			)
 		)
 	)
 )
@@ -425,9 +447,9 @@
 		sel_549 15
 		sel_550 120
 	)
-	
+
 	(method (sel_110)
-		(= sel_30 gSel_30)
+		(= sel_30 gUserFont)
 		(super sel_110: lauraBust lauraEyes lauraMouth &rest)
 	)
 )
@@ -474,9 +496,9 @@
 		sel_549 15
 		sel_550 120
 	)
-	
+
 	(method (sel_110)
-		(= sel_30 gSel_30)
+		(= sel_30 gUserFont)
 		(super sel_110: steveBust steveEyes steveMouth &rest)
 	)
 )
@@ -570,13 +592,15 @@
 		sel_8 110
 		sel_9 92
 	)
-	
+
 	(method (sel_300 param1)
 		(switch param1
 			(6
-				(gLb2Messager sel_295: 3 6 3)
+				(gMessager sel_295: 3 6 3)
 			)
-			(else  (super sel_300: param1))
+			(else
+				(super sel_300: param1)
+			)
 		)
 	)
 )
@@ -651,7 +675,7 @@
 		sel_28 -32758
 		sel_560 1
 	)
-	
+
 	(method (sel_110)
 		(super sel_110: &rest)
 		(self sel_146: sCloseUp)
