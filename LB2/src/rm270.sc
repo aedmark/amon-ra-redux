@@ -439,9 +439,7 @@
 						(if local9
 							(gMessager sel_295: 1 6 23)
 							(= local9 0)
-							((ScriptID 21 0) sel_57: 270) ; addCluesCode
 							((ScriptID 21 0) sel_57: 266) ; addCluesCode
-							((ScriptID 21 0) sel_57: 265) ; addCluesCode
 						else
 							(gMessager sel_295: 1 6 85)
 						)

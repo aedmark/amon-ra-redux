@@ -1,0 +1,16 @@
+{
+  "module": 335,
+  "character": "Benefit register",
+  "voice": "Concise diegetic reference establishing the names of legitimate benefit guests and museum staff.",
+  "entries": [
+    {
+      "tuple": [6, 1, 0, 1, 99],
+      "text": "A tall, imposing gentleman guards the door in a severe military uniform. A leather-bound register rests on the podium beside him."
+    },
+    {
+      "tuple": [17, 1, 0, 1, 99],
+      "add": true,
+      "text": "A leather-bound register lists Steve Dorian, Wolf Heimlich, Yvette Delacroix, Rameses Najeer, Countess Lavinia Waldorf-Carlton, Dr. Olympia Myklos, and Dr. Ptahsheptut 'Tut' Smith among the evening's guests and museum staff. Dr. Pippin Carter and Dr. Archibald Carrington III are also expected. Ziggy's name is conspicuously absent."
+    }
+  ]
+}

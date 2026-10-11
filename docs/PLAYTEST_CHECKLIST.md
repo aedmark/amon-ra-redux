@@ -48,11 +48,13 @@ together afterward.
 
 ## Act 2: museum party
 
-- [ ] Record the complete People and Things lists immediately on arrival, before talking, looking, or reading anything.
-- [ ] Ernie, Tut, Olympia, and Watney Little do not appear until a specific diegetic discovery introduces each name.
+- [ ] Record the People and Things lists immediately on arrival; check-in alone must not grant an omniscient cast list.
+- [ ] Heimlich's entrance description points out the leather-bound benefit register.
+- [ ] Reading the register with Look, Hand, or Magnifier records Steve, Heimlich, Yvette, Rameses, Countess, Olympia, and Tut, with no duplicate entries on repeat inspection.
+- [ ] Ziggy, Ernie, and Watney Little are absent from the register; Ernie enters after his personal introduction and Watney only after evidence or explicit identification.
 - [ ] Determine whether Yvette's absence from the initial People list is intentional; compare her acquisition path with
   every other museum character and record any other missing or premature entries.
-- [ ] The guest register and first encounters provide fallback introductions without replacing authored content.
+- [ ] The guest register and first encounters provide fallback introductions without replacing authored content or exposing Carrington's true identity.
 - [ ] Pippin, Dr. Smith, Countess, Yvette, O'Reilly, and Rameses introduce themselves naturally if Laura missed the
   rotunda introductions; no one is addressed by name prematurely.
 - [ ] Steve's museum greeting matches whether Laura spoke with him in Act 1.

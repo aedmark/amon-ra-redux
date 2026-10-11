@@ -12,14 +12,16 @@ Security: [SECURITY.md](SECURITY.md). Changes: [CHANGELOG.md](CHANGELOG.md). Old
 
 ## Current state
 
-_Last updated: 2026-10-10, session 43: Act 1 playtest fixes._
+_Last updated: 2026-10-11, session 45: diegetic benefit register and identity flow._
 
-**Where things stand, in one paragraph:** P5-00 and the dialogue rewrite through Act 6 are complete on `codex/p5-00-sluicebox-baseline`. The current Act 1 playtest pass restored the speakeasy's native music rotation and bathroom continuity, replaced the misleading skull-and-crossbones grade backdrop with the neutral Act frame, and fixed Ziggy's false denials of knowing Yvette and the Countess. `LB2/src/` remains the coherent 221-script Sluicebox-annotated reconstruction of the effective Redux resources. Continue the maintainer's clean-playthrough gate before P5-01.
+**Where things stand, in one paragraph:** Alpha v0.01 is public in the SQH Discord from `master`. During the maintainer's playthrough, P2-01's invisible all-cast check-in grant was replaced with an inspectable Room 335 benefit register. Lo Fat now names only Yvette while foreshadowing Heimlich and Olympia, Ernie retains his personal introduction, Ziggy remains an unsigned interloper, and Watney stays concealed behind Carrington's identity until evidence exposes him. Scripts 270, 335, and 93 compile, their message manifests are idempotent, and the immutable base archives retain their vanilla hashes. Runtime register placement and interaction still require the maintainer's DOSBox-X save test.
 
-**Verified** (2026-10-10, Linux workspace)
+**Verified** (2026-10-11, Linux workspace)
 
 | Suite | Result |
 | --- | --- |
+| P2-01 identity-flow refinement | **Compile/static pass: explicit register records clues 263, 265, 266, 268..271; Lo Fat records only Yvette; disguised Carrington cannot add Watney 272** |
+| Public alpha test plan | **Published: Markdown guide plus a self-contained Neocities-ready page with direct v0.01 download, persistent checklist, spoiler-separated regression targets, and report template** |
 | PLAY-003/010/011 Act 1 follow-up | **Pass: music rotation and bathroom continuity maintainer-verified; Scripts 26/310 compile; two new Ziggy tuples parse and reapply idempotently** |
 | P2-08 Act 6 final inquest | **Pass: all 77 module-750 records structurally compared; exactly 28 approved text changes; all tuple/talker/reference metadata and ending routes preserved** |
 | P5-00 coherent source inventory | **Pass: 221 `.sc` + 221 `.sco`; no nested duplicate tree or unknown-property placeholders** |
@@ -71,7 +73,7 @@ _Last updated: 2026-10-10, session 43: Act 1 playtest fixes._
 - **Act 5 Dialogue:** Rameses's Society confrontation and riddle, Tut's inquest testimony, Steve's already-clean escape dialogue, and O'Riley's jailhouse threat preserve the ending while removing the final phonetic caricatures (P2-08, D-031).
 - **Act 6 Dialogue:** The coroner conducts the complete final inquest in a dry, exacting professional voice; every question, evidence check, joke, verdict, and ending route remains intact (P2-08, D-031).
 - **Source Baseline:** P5-00's Sluicebox-annotated effective reconstruction is active under D-032; normal work remains single-script compilation under D-028.
-- **Documentation Architecture:** `docs/ROADMAP.md`, `DECISIONS.md` (D-001 through D-032), `docs/manual/`, `docs/manual/manual.html`, and `docs/PLAYTEST_CHECKLIST.md` synchronized.
+- **Documentation Architecture:** `docs/ROADMAP.md`, `DECISIONS.md` (D-001 through D-033), `docs/manual/`, `docs/manual/manual.html`, and `docs/PLAYTEST_CHECKLIST.md` synchronized.
 
 **Not verified**
 
@@ -83,19 +85,47 @@ _Last updated: 2026-10-10, session 43: Act 1 playtest fixes._
 - Do not replace numeric selectors with contextual readable aliases; one selector ID can have several receiver-specific names (D-032).
 - Rebuild the developer vocabulary with `python3 tools/normalize_selector_vocab.py LB2/997.voc LB2/997.voc.tmp`, then replace it only after validation.
 - Keep loose patch files in `LB2/` strictly uppercase (`.SCR`, `.HEP`, `.MSG`).
+- Before any SCI Companion GUI action, inspect the active window and verify the loaded archive/project identity; if it is ambiguous, ask the maintainer rather than closing, reloading, or choosing a window by inference.
 - Single-script compilation only: use `python3 tools/compile.py <script>`. Never use Compile All or resource rebuild.
 - If a script disappears from SCI Companion's list when patch files are deleted, restore files and restart with `wineserver -k`.
 
 ## Next steps (in order)
 
-1. Resume the clean DOSBox-X playthrough and triage every remaining `PLAY-nnn` finding.
-2. Begin P5-01 design only after the playthrough gate closes, using the migrated compiler-facing source baseline.
+1. From the Act 2 entrance save, verify Heimlich's register description, the register hotspot with Look/Hand/Magnifier, its seven intended notebook entries, and the absence of Ziggy, Ernie, and Watney.
+2. Resume the clean DOSBox-X playthrough and triage every remaining `PLAY-nnn` finding.
+3. Begin P5-01 design only after the playthrough gate closes, using the migrated compiler-facing source baseline.
 
 ## Open questions for maintainers
 
 None currently open. Q-001 and Q-002 have been resolved by D-007, D-017, and D-018.
 
 ## Session log
+
+### Session 45: 2026-10-11: Diegetic Benefit Register and Identity Flow
+
+**Contributor:** Codex and maintainer
+
+**Goal:** Stop Act 2 check-in from granting an omniscient cast list while preserving fair access to character topics.
+
+**Done:** Added an inspectable leather-bound register beside Heimlich in Room 335. Look, Hand, and Magnifier record only Steve, Heimlich, Yvette, Rameses, Countess, Olympia, and Tut; the text identifies Pippin and the apparent Carrington without exposing Watney. Removed the automatic check-in batches and the disguised Watney actor's clue-272 encounter hook. Reworked Lo Fat's museum discussion so he foreshadows Heimlich and Olympia without names or clues while still naming Yvette and preserving her Act 1 inquiry branches. Added tuple-addressed register and Lo Fat manifests and synchronized roadmap, ADR, architecture, testing, changelog, manual, and public/internal playtest guidance.
+
+**Decisions:** D-009 refined; D-033.
+
+**Verified:** Maintainer compiled Scripts 270, 335, and 93; lowercase Wine outputs were normalized to tracked uppercase names. Message manifests reapply idempotently. Static source audit confirms the intended clue set and Watney exclusion. `RESOURCE.000` and `RESOURCE.MAP` retain vanilla MD5 hashes, and the original interpreter completes its headless startup smoke. Runtime hotspot placement remains to be checked in DOSBox-X.
+
+**Next session should start with:** Test the entrance register from the Act 2 save, including repeat inspection and notebook contents, then continue the clean playthrough.
+
+### Session 44: 2026-10-11: Public Alpha Playtesting Guide
+
+**Contributor:** Codex and maintainer
+
+**Goal:** Give SQH Discord alpha testers a clear, public-facing way to test v0.01 and submit useful reports.
+
+**Done:** Added `docs/ALPHA_PLAYTESTING.md` with reference-environment guidance, save-handling advice, universal quality checks, spoiler-light act coverage, a collapsible focused regression checklist, a standard Discord/GitHub report template, and examples of high-value alternate-route testing. Added `docs/alpha-playtest.html`, a one-file Art Deco page ready for Neocities with a direct v0.01 download, device-local checklist progress, responsive and print layouts, accessible controls, spoiler separation, and a copyable report form. Linked both artifacts from the project and documentation indexes and distinguished them from the internal triage checklist.
+
+**Verified:** Documentation consistency check passes with the new public guide and links.
+
+**Next session should start with:** Collect public alpha reports, reproduce them in DOSBox-X, and assign stable `PLAY-nnn` IDs in the internal checklist.
 
 ### Session 43: 2026-10-10: Act 1 Playtest Music, Grade Frame, and Ziggy Continuity
 
@@ -244,47 +274,3 @@ None currently open. Q-001 and Q-002 have been resolved by D-007, D-017, and D-0
 **Verified:** All 423 records structurally compared against archived resources; 117 reviewed tuples current and idempotent; all tuple/talker/reference metadata and untargeted text preserved; documentation/manual validation and DOSBox-X startup smoke pass.
 
 **Next session should start with:** Continue the Act 3 character audit after maintainer review of the next draft.
-
-### Session 34: 2026-10-10: P2-08 Effective-Layer Closure Audit
-
-**Contributor:** Codex and maintainer
-
-**Goal:** Reopen P2-08 after a full effective-message audit found dialogue outside the previously reviewed character-topic modules.
-
-**Done:**
-- Parsed all 103 effective message modules and 5,888 records, overlaying every loose patch on the archived resource layer.
-- Rewrote the module 120 Pippin/Tut confrontation, module 335 Heimlich check-in, all fourteen module 340 party conversations, and the module 355 Carter murder scene in the established character voices.
-- Reworked the Act 1 sandwich vendor and cabbie without removing their rapid sales patter, impatience, lechery, or New York character.
-- Removed the four remaining `Andrea Doria` records, completing all nine original occurrences; corrected three remaining `Ruhmkorf` spellings and the underlying instrument-maker history.
-- Replaced two uses of an ethnic slur in the street-kid scene, corrected two Carrington spelling errors, and assigned Carrington's interrupted response to talker 11 instead of narrator 99.
-- Added twelve closure manifests and loose message overrides while preserving the immutable resource archives.
-
-**Changed:** Message modules 10, 15, 120, 210, 240, 250, 260, 335, 340, 355, 630, and 1886; twelve manifests under `docs/dialogue/`; and synchronized roadmap, decision, changelog, handoff, and manual documentation.
-
-**Decisions:** D-031 remains the governing decision. P2-08 is closed only after auditing both character-topic and room/cutscene message modules.
-
-**Verified:** Exact structural comparison of 2,726 records across all 26 P2-08 modules; 1,025 manifest entries current and idempotent; all noun/verb/condition/sequence/reference metadata preserved; exactly four documented talker-ID repairs; all 5,888 effective records parse; no targeted Act 1/2 caricature or listed factual strings remain; documentation/manual checks and DOSBox-X original-interpreter startup smoke pass.
-
-**Next session should start with:** Resume the DOSBox-X playthrough and review the party conversations in context before beginning the later-act dialogue pass or P5-01.
-
-### Session 33: 2026-10-10: P2-08 Final Dialogue Sweep
-
-**Contributor:** Codex and maintainer
-
-**Goal:** Complete P2-08 with Tut Smith, deferred murder reactions, adjacent-speaker corrections, and isolated lines that reintroduced caricature or anachronism.
-
-**Done:**
-- Reworked all 87 Tut Smith spoken records, plus nine paired Laura responses, as an educated and imposing Cairo Museum envoy: fiercely committed to repatriation, vain, patriarchal, and suspicious without pulp-Egyptian cliches.
-- Preserved Tut's motive, threats, Yvette proposals, evasive Rameses connection, ankh loss, Dagger claim, and later reactions while replacing camel, snake-charmer, amputation, racial-superiority, and mystical-native jokes.
-- Rewrote all deferred murder reactions for Rameses, Heimlich, Yvette, and O'Riley in their approved voices, including Laura's line mocking Rameses's lisp.
-- Cleaned adjacent Pippin, Countess, Steve, and Olympia lines; retained their vanity, class prejudice, morbidity, and plot information without collateral ethnic caricature.
-- Replaced all five impossible 1926 references to the `Andrea Doria`, corrected Rameses I chronology, and fixed `hieroglyphs` and `Ruhmkorff` terminology.
-- Corrected three talker-ID errors: Ziggy's diary advice, Yvette's diary answer, and Laura's clue question to O'Riley.
-
-**Changed:** Message modules 1882–1885, 1887–1892, and 310; character and straggler manifests in `docs/dialogue/`; `tools/dialogue.py`; and synchronized roadmap, decision, handoff, and manual documentation.
-
-**Decisions:** D-031. P2-08 is complete.
-
-**Verified:** Exact comparison accounts for all 1,424 records across the 11 target modules; all unmanifested text is byte-identical to `HEAD`; all routing/reference metadata is unchanged except the three documented talker IDs; every manifest reapplies idempotently; obsolete caricature/anachronism scan reports zero hits; documentation/manual checks and DOSBox-X startup smoke pass.
-
-**Next session should start with:** Resume the clean DOSBox-X playthrough and record any dialogue that needs contextual adjustment before P5-01.

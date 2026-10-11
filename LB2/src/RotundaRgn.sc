@@ -777,9 +777,6 @@
 	)
 
 	(method (sel_300 param1 param2 &tmp temp0 temp1 temp2)
-		(if (OneOf param1 1 2)
-			((ScriptID 21 0) sel_57: 272) ; addCluesCode
-		)
 		(if (== param1 6)
 			(if
 				(==

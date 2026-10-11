@@ -26,7 +26,7 @@ distinct verification boundaries:
 
 ## Compile and boot workflow
 
-1. Start SCI Companion under Wine with the game loaded: `wine SCICompanion/Release/SCICompanion.exe 'Z:\home\gordonk\PycharmProjects\amon-ra-redux\LB2\game.ini'`. Its map-format setting must stay at 1.1 (D-028).
+1. Start SCI Companion under Wine by opening the working archive explicitly: `wine SCICompanion/SCICompanion.exe 'Z:\home\gordonk\PycharmProjects\amon-ra-redux\LB2\RESOURCE.MAP'`. Do not pass `game.ini`, and do not open the browse-only copy. Its hybrid settings remain SCI 1.0 map, SCI 1.1 package/compression, and VGA 1.1 View/Pic (D-028).
 2. Copy the script's current `N.SCR`/`N.HEP` somewhere outside the repository: `tools/compile.py` deletes them first and does not restore them if the helper fails.
 3. Compile one script: `python3 tools/compile.py rm750` (name or `.sc` base name). It drives the GUI through `tools/compile_any.exe`, renames the lowercase output to uppercase, and prints the output sizes. If the script is missing from the helper's list (`wine tools/list_scripts.exe`), restart SCI Companion; it drops a script when its patch files vanish and does not re-add it.
 4. Stop SCI Companion with `wineserver -k` so it cannot touch `LB2/` again.
@@ -47,13 +47,15 @@ each target branch and record the observed dialogue, inventory, room transition,
 
 For the complete exploratory run that gates Phase 5, use [PLAYTEST_CHECKLIST.md](PLAYTEST_CHECKLIST.md). It tracks broad
 act-by-act behavior and assigns stable `PLAY-nnn` IDs to observations before they are consolidated into roadmap work.
+Public alpha testers should instead use [ALPHA_PLAYTESTING.md](ALPHA_PLAYTESTING.md), which provides spoiler-light and
+spoiler-heavy checklists plus a standardized report template without internal implementation instructions.
 
 ## Save state test checkpoints
 
 To ensure regression coverage without manual playthroughs:
 
 1. **Save 01 (Act 1 Transition):** Keep one save before taking the press pass and one immediately afterward, without visiting the docks, trading the baseball, or questioning Ziggy. Verify that the clean taxi is used before the pass, the dirty taxi and claim ticket become available after it, Lo Fat exchanges the ticket for the gown, and a dressed taxi ride from Room 300 starts Act 2 (`P3-05`, `P2-06`).
-2. **Save 02 (Act 2 Museum Party):** In room 230; verifies `P1-01` interrogation, `P1-04` About screen, and `P2-01` fallback notebook triggers.
+2. **Save 02 (Act 2 Museum Party):** Before presenting the press pass, confirm Heimlich's Look mentions the leather-bound register. Inspect its separate hotspot with Look, Hand, and Magnifier; each route must show the roster and idempotently add Steve, Heimlich, Yvette, Rameses, Countess, Olympia, and Tut. Confirm Ziggy, Ernie, and Watney are not added. Meet Ernie normally in Room 355, and confirm looking at or speaking to disguised Carrington never adds Watney. This save also verifies `P1-01`, `P1-04`, and `P2-01`.
 3. **Save 03 (Act 3 Armor Room):** Room 440 prior to Countess meeting; verifies `P1-03` key glint hitbox and `P2-02` pocket watch confrontation. Also start Talk and several Ask responses with a museum NPC while that actor is en route: the actor must remain in place until the final message is dismissed, then continue the same route. Advance through 10:15 and confirm O'Reilly remains available (`P3-06`).
 4. **Save 04 (Act 4 Secret Passage and Carrington Office):** In Room 420, verify the `P3-04` darkness warning gate; in Room 560 before acquiring inventory item 24, verify that Look/Hand/Magnifier on the bookcase opens the special volume, the enlarged volume hotspot remains usable, and looking at the exposed file registers clues 793 and 272 before Take (`P4-01`). At Pippin's Room 454 scene, inspect the bloody high-heel footprint so point bit 179 persists for the inquest (`P4-02`). Repeat the moving-NPC dialogue check and confirm O'Reilly remains available after 10:15 (`P3-06`).
 5. **Save 05 (Act 5 Chase Entrance):** Room 500; verifies `P1-02` save/load availability, `P3-01` emergency backups, and `P3-02` snake oil bottle.

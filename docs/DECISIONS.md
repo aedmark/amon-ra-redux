@@ -99,23 +99,18 @@ with contextual puzzles and investigative activities.
 
 ## D-009 Inaccessible Plot Information & Notebook Fallback Triggers
 
-Establish a two-tier fallback trigger mechanism ensuring all Act 2 suspects and staff are recorded in Laura's notebook.
+Establish encounter-based fallback triggers so optional Act 1 routes cannot permanently lock later interrogation topics.
 
 - **Context:** In vanilla LB2, suspect clues 263..272 (Steve, Ziggy, Heimlich, Yvette, Ernie, Rameses, Countess, Olympia,
-  Tut, Watney) were only recorded during optional Act 1 dialogues (e.g., Lo Fat's laundry in room 270; clue 271 was
-  omitted entirely by Sierra outside debug scripts). Missing these conversations permanently locked players out of
-  questioning gala attendees about these key figures in Act 2. Sierra recognized this deficiency by manually granting
-  clues 263..272 in debug warp `proc0_13` in `Main.sc`.
-- **Decision:** Implement a dual-tier fallback mechanism:
-  1. **Diegetic Check-in Fallback (`LB2/src/rm335.sc` / Script 335):** When Laura presents her press pass to Ernie Leach
-     at the museum benefit desk (`sGiveInvite` state 5, or passing into the rotunda in `sExitNorth` state 3), the game
-     diegetically simulates consulting the benefit guest register and invokes `((ScriptID 21 0) doit: 263..272)`.
-     Because `addCluesCode` (Script 21) is idempotent, existing clues are preserved without duplication.
-  2. **Direct Visual/Conversational Encounter Fallback (`LB2/src/RotundaRgn.sc` / Script 93):** Intercept Look (verb 1)
-     and Talk (verb 2) in `doVerb` (`sel_300:`) across all 11 rotunda characters (Countess, Heimlich, Olympia, O'Riley,
-     Pippin, Rameses, Steve, Tut, Watney, Yvette, Ziggy) to ensure examining or speaking with any character registers
-     their clue immediately.
-- **Consequences:** Eliminates the Act 2 suspect inquiry lockout while maintaining immersion and vanilla story flow.
+  Tut, Watney) depended on uneven optional routes, and clue 271 was absent outside debug scripts. The first implementation
+  granted the entire range invisibly at benefit check-in and on every direct encounter. That prevented lockouts but also
+  told Laura names she had not learned, most seriously revealing Watney while he was still posing as Carrington.
+- **Decision:** Preserve idempotent direct Look/Talk registration for characters Laura can identify, but never translate
+  the disguised Carrington actor into Watney clue 272. Replace the invisible check-in batch with the physical register
+  specified by D-033. Preserve authored personal introductions, including Ernie's Room 355 introduction, and use the
+  Room 560 police file or later explicit identification for Watney.
+- **Consequences:** Later questions remain reachable without turning the notebook into an omniscient cast list. Identity
+  acquisition now follows what Laura has actually read, heard, or observed.
 
 ## D-010 Pocket Watch Confrontation Timing & Armor Room Lockout Adjustment
 
@@ -307,7 +302,7 @@ Gate the dirty cab behind a completed normal taxi ride, eliminate it after findi
 - **Context:** In vanilla LB2 (and initial P3-05 simplification), obtaining the press pass immediately caused Room 250 to spawn the dirty cab containing the dry cleaner's claim ticket (item 27), and this dirty cab continued to appear on subsequent rides even after the ticket was collected. Separately, an audit of Act 1 inquiry trees was conducted to see whether museum suspects should start in Laura's notebook. Source inspection revealed that `rm230.sc` (Crodfoller) has no handler for Ernie Leach (clue 267 falls to generic fallback), has explicit lines stating he does not know Countess Waldemar (clue 269) or Dr. Olympia Myklos (clue 270), and has an out-of-context joke response for Yvette Delacroix (clue 266). Instead, Act 1 features an intentional diegetic discovery chain:
   - **Newsroom (Room 230 / Crodfoller):** Asking about the Leyendecker Museum (517) introduces Dr. Archibald Carrington (259) and Dr. Pippin Carter (258); asking about Burglary (1027) introduces Ziggy (264) and Det. Ryan O'Riley (260). Crodfoller explicitly does not know Countess, Olympia, Ernie, or Yvette, and never mentions Rameses.
   - **12th Street Docks (Room 240 / Steve Dorian):** Asking Steve about Carrington (259) introduces Countess Waldorf-Carlton (269); asking about Carter (258) introduces Dr. "Tut" Smith (271).
-  - **Lo Fat's Laundry (Room 270 / Lo Fat):** Asking Lo Fat about the Leyendecker Museum (517) introduces Dr. Olympia Myklos (270), Wolf Heimlich (265), and Yvette Delacroix (266).
+  - **Lo Fat's Laundry (Room 270 / Lo Fat):** Asking Lo Fat about the Leyendecker Museum (517) foreshadows the museum's severe security chief and black-clad woman doctor without naming them, then explicitly introduces Yvette Delacroix (266) so her Act 1 inquiry branches remain reachable.
   - **12th Street Speakeasy (Room 310 / Ziggy):** Asking Ziggy about Egyptology (1028) introduces Rameses Najeer (268).
   - **Act 2 Museum:** Ernie Leach (267) is introduced in the basement (Room 355); Rameses Najeer (268) can also be discovered from the guest register (Room 335) or Rotunda. Pre-populating them on boot bypassed this investigation flow.
 - **Decision:**
@@ -346,6 +341,28 @@ Adopt a compiler-facing source reconstruction from the effective Redux resources
   the 42-script manual replay is unnecessary. Selector calls remain numeric, but the rest of the tree gains Sluicebox's
   substantially better names and structure. A disposable isolated Compile All is allowed only as a migration
   diagnostic; normal repository work remains single-script compilation under D-028.
+
+---
+
+## D-033 Make the Benefit Register an Explicit Identity Source
+
+Use an inspectable entrance prop and restrained Act 1 foreshadowing to distinguish knowing of a person from learning a
+name.
+
+- **Context:** P2-01's invisible check-in grant claimed Laura had consulted a guest register that the player could not
+  see or use. Lo Fat simultaneously named Heimlich, Olympia, and Yvette and unlocked all three notebook entries, making
+  the later register redundant. Watney and Ernie require special handling: Watney attends under Carrington's stolen
+  identity, while Ernie already has a clear authored introduction. Ziggy has other Act 1 discovery routes and would not
+  plausibly sign the museum's register.
+- **Decision:** Add a leather-bound `benefitRegister` Feature beside Heimlich in Room 335, advertised by Heimlich's Look
+  description and readable with Look, Hand, or Magnifier. Reading its explicit guest/staff text idempotently adds clues
+  263, 265, 266, and 268..271: Steve, Heimlich, Yvette, Rameses, Countess, Olympia, and Tut. It names Pippin and the man
+  registered as Dr. Archibald Carrington III but does not add Ziggy (264), Ernie (267), or Watney (272). In Room 270,
+  Lo Fat describes the severe security chief and black-clad woman doctor without naming them; he continues to name
+  Yvette and add clue 266 so the authored Act 1 Yvette questions remain available.
+- **Consequences:** The player chooses to consult the register, legitimate attendees gain a fair fallback introduction,
+  Ziggy's absence becomes an in-character detail, Ernie retains his greeting, and Watney remains an investigative thread
+  until evidence exposes him. Existing clue IDs and addCluesCode idempotence preserve save compatibility.
 
 ---
 

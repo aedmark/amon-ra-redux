@@ -8,6 +8,9 @@ in the modernization design specification.
 
 ## Documentation and roadmap
 
+- **Alpha Playtesting Guide:** See [docs/ALPHA_PLAYTESTING.md](docs/ALPHA_PLAYTESTING.md) for public setup guidance,
+  spoiler-light and focused checklists, and the bug-report template. A self-contained
+  [Neocities-ready checklist](docs/alpha-playtest.html) is also available.
 - **Interactive 3x Manual:** Open [docs/manual/manual.html](docs/manual/manual.html) in any browser for complete What/How/Why specifications for every fix.
 - **Modernization Roadmap:** See [docs/ROADMAP.md](docs/ROADMAP.md) for phased development tracking with permanent item IDs.
 - **Engine Architecture:** See [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) for SCI 1.1 patch architecture and subsystem design.

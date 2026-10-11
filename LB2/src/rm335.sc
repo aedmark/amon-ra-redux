@@ -9,6 +9,7 @@
 (use Scaler)
 (use PolyPath)
 (use Feature)
+(use Actor)
 (use StopWalk)
 (use Motion)
 (use System)
@@ -72,6 +73,7 @@
 		(glass sel_110:)
 		(column sel_110:)
 		(if (and (== gAct 2) (not (IsFlag 25)))
+			(benefitPodium sel_110: sel_311: 1 4 8)
 			((ScriptID 32 0) ; aHeimlich
 				sel_110:
 				sel_2: 341
@@ -139,16 +141,6 @@
 			)
 			(3
 				(Palette palSET_INTENSITY 0 255 100)
-				((ScriptID 21 0) sel_57: 263) ; addCluesCode
-				((ScriptID 21 0) sel_57: 264) ; addCluesCode
-				((ScriptID 21 0) sel_57: 265) ; addCluesCode
-				((ScriptID 21 0) sel_57: 266) ; addCluesCode
-				((ScriptID 21 0) sel_57: 267) ; addCluesCode
-				((ScriptID 21 0) sel_57: 268) ; addCluesCode
-				((ScriptID 21 0) sel_57: 269) ; addCluesCode
-				((ScriptID 21 0) sel_57: 270) ; addCluesCode
-				((ScriptID 21 0) sel_57: 271) ; addCluesCode
-				((ScriptID 21 0) sel_57: 272) ; addCluesCode
 				(gCurRoom sel_399: (gCurRoom sel_409:))
 			)
 		)
@@ -184,16 +176,6 @@
 				(gEgo sel_351: 6)
 				((ScriptID 21 1) sel_57: 775) ; dropCluesCode
 				((ScriptID 22 0) sel_57: 28673) ; triggerAndClock
-				((ScriptID 21 0) sel_57: 263) ; addCluesCode
-				((ScriptID 21 0) sel_57: 264) ; addCluesCode
-				((ScriptID 21 0) sel_57: 265) ; addCluesCode
-				((ScriptID 21 0) sel_57: 266) ; addCluesCode
-				((ScriptID 21 0) sel_57: 267) ; addCluesCode
-				((ScriptID 21 0) sel_57: 268) ; addCluesCode
-				((ScriptID 21 0) sel_57: 269) ; addCluesCode
-				((ScriptID 21 0) sel_57: 270) ; addCluesCode
-				((ScriptID 21 0) sel_57: 271) ; addCluesCode
-				((ScriptID 21 0) sel_57: 272) ; addCluesCode
 				(gGame sel_588:)
 				(self sel_111:)
 			)
@@ -337,6 +319,39 @@
 		sel_213 8
 		sel_301 40
 		sel_302 16384
+	)
+)
+
+(instance benefitPodium of View
+	(properties
+		sel_20 {benefitPodium}
+		sel_1 190
+		sel_0 174
+		sel_2 335
+		sel_3 0
+		sel_4 0
+		sel_14 16384
+		sel_213 17
+		sel_6 126
+		sel_7 177
+		sel_8 175
+		sel_9 202
+		sel_301 40
+	)
+
+	(method (sel_300 param1)
+		(if (OneOf param1 1 4 8)
+			((ScriptID 21 0) sel_57: 263) ; Steve
+			((ScriptID 21 0) sel_57: 265) ; Heimlich
+			((ScriptID 21 0) sel_57: 266) ; Yvette
+			((ScriptID 21 0) sel_57: 268) ; Rameses
+			((ScriptID 21 0) sel_57: 269) ; Countess
+			((ScriptID 21 0) sel_57: 270) ; Olympia
+			((ScriptID 21 0) sel_57: 271) ; Tut
+			(gMessager sel_295: sel_213 1)
+		else
+			(super sel_300: param1)
+		)
 	)
 )
 

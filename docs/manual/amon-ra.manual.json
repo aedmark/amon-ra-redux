@@ -385,20 +385,21 @@
         {
           "id": "p2-01-notebook-fallback-triggers",
           "title": "P2-01: Inaccessible Plot Information & Notebook Fallback Triggers",
-          "summary": "Adds secondary triggers for key suspects (Najir, Miklo, Countess) so missed Act 1 dialogue does not lock out interrogations.",
+          "summary": "Makes character-name acquisition player-visible and preserves later interrogation access without revealing hidden identities.",
           "tags": [
             "narrative",
             "notebook",
             "interrogation",
             "p2"
           ],
-          "what": "Ensures that key suspect names (Najir, Miklo, Countess) are added to Laura's notebook in Act 2 even if the player failed to trigger specific optional conversations in Act 1.",
+          "what": "Provides an inspectable benefit register and honest encounter fallbacks so Laura records names she has actually learned without losing later interrogation topics.",
           "how": [
-            "At museum benefit check-in (Script 335 / rm335.sc sGiveInvite state 5 and sExitNorth state 3), simulate consulting the guest register and register clues 263..272 (Steve, Ziggy, Heimlich, Yvette, Ernie, Rameses, Countess, Olympia, Tut, Watney) via addCluesCode (Script 21).",
-            "In RotundaRgn.sc (Script 93), intercept Look and Talk verbs in doVerb (sel_300:) across all 11 rotunda characters to ensure examining or speaking to any character registers their notebook entry immediately.",
-            "Rely on addCluesCode idempotence to guarantee no duplicate notebook entries are ever created."
+            "Expose a leather-bound benefit register beside Heimlich in Script 335; Look, Hand, or Magnifier displays the roster and records Steve, Heimlich, Yvette, Rameses, Countess, Olympia, and Tut through their canonical clue IDs.",
+            "Exclude Ziggy, who did not sign; preserve Ernie's authored personal introduction; and list the impostor only as Dr. Archibald Carrington III so the register never adds Watney clue 272.",
+            "Retain direct Look/Talk fallbacks for characters Laura can identify, reserve Watney for his police file or explicit later identification, and rely on addCluesCode idempotence to prevent duplicates.",
+            "Let Lo Fat explicitly name and unlock Yvette in Act 1 while describing Heimlich and Olympia without names or notebook entries."
           ],
-          "why": "Missing a single optional dialogue branch in Act 1 permanently locked players out of questioning museum guests about key figures in subsequent acts, creating an unfair narrative dead-end.",
+          "why": "The original optional routes could lock useful questions, but silently granting the entire cast made Laura omniscient and spoiled Watney's imposture. Visible, character-specific discovery preserves both access and mystery.",
           "evidence": [
             {
               "label": "Museum Entrance Check-in",

@@ -99,13 +99,13 @@
 			(Display
 				(Localize
 					{LADEN}
-					{CONTINUE SAVED GAME}
-					{CONTINUE SAVED GAME}
-					{CONTINUE SAVED GAME}
-					{CONTINUE SAVED GAME}
+					{RESUME CASE}
+					{RESUME CASE}
+					{RESUME CASE}
+					{RESUME CASE}
 				)
 				dsCOORD
-				(Localize 216 170 170 170 170)
+				(Localize 216 190 190 190 190)
 				123
 				dsFONT
 				61
@@ -115,13 +115,13 @@
 			(Display
 				(Localize
 					{LADEN}
-					{CONTINUE SAVED GAME}
-					{CONTINUE SAVED GAME}
-					{CONTINUE SAVED GAME}
-					{CONTINUE SAVED GAME}
+					{RESUME CASE}
+					{RESUME CASE}
+					{RESUME CASE}
+					{RESUME CASE}
 				)
 				dsCOORD
-				(Localize 216 170 170 170 170)
+				(Localize 216 190 190 190 190)
 				123
 				dsFONT
 				60

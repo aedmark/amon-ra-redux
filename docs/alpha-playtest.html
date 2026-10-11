@@ -1,0 +1,762 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Public alpha playtesting checklist for The Dagger of Amon Ra: Redux.">
+  <meta name="theme-color" content="#17120d">
+  <title>Amon Ra: Redux Alpha Playtesting Guide</title>
+  <style>
+    :root {
+      --ink: #17120d;
+      --paper: #f0e4c5;
+      --paper-deep: #d9c794;
+      --gold: #c89a3d;
+      --gold-light: #f0cd74;
+      --teal: #174f4b;
+      --teal-light: #286f68;
+      --wine: #6d2430;
+      --muted: #76694f;
+      --shadow: rgba(23, 18, 13, .24);
+      --measure: 76rem;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      background:
+        linear-gradient(135deg, rgba(200, 154, 61, .05) 25%, transparent 25%) 0 0 / 28px 28px,
+        linear-gradient(315deg, rgba(200, 154, 61, .04) 25%, transparent 25%) 0 0 / 28px 28px,
+        #17120d;
+      font-family: Georgia, "Times New Roman", serif;
+      line-height: 1.55;
+    }
+
+    a { color: inherit; }
+
+    a:focus-visible,
+    button:focus-visible,
+    input:focus-visible,
+    summary:focus-visible {
+      outline: 3px solid var(--gold-light);
+      outline-offset: 4px;
+    }
+
+    .top-rule {
+      height: 8px;
+      background: repeating-linear-gradient(90deg, var(--gold) 0 48px, var(--teal) 48px 96px, var(--wine) 96px 144px);
+    }
+
+    header {
+      position: relative;
+      overflow: hidden;
+      color: var(--paper);
+      text-align: center;
+      padding: 4.5rem 1.25rem 4rem;
+      border-bottom: 1px solid rgba(240, 205, 116, .45);
+    }
+
+    header::before,
+    header::after {
+      content: "";
+      position: absolute;
+      width: 15rem;
+      height: 15rem;
+      border: 1px solid rgba(200, 154, 61, .3);
+      transform: rotate(45deg);
+      top: -8rem;
+    }
+
+    header::before { left: -7rem; }
+    header::after { right: -7rem; }
+
+    .eyebrow,
+    h1,
+    h2,
+    h3,
+    .button,
+    .progress-label,
+    summary {
+      font-family: "Trebuchet MS", "Gill Sans", Arial, sans-serif;
+      text-transform: uppercase;
+      letter-spacing: .12em;
+    }
+
+    .eyebrow {
+      margin: 0 0 .85rem;
+      color: var(--gold-light);
+      font-size: .78rem;
+      font-weight: 800;
+    }
+
+    h1 {
+      max-width: 18ch;
+      margin: 0 auto;
+      font-size: clamp(2rem, 7vw, 5.2rem);
+      line-height: .90;
+      text-wrap: balance;
+      text-shadow: 0 4px 24px #000;
+    }
+
+    .subtitle {
+      max-width: 48rem;
+      margin: 1.4rem auto 0;
+      color: #d8cdb4;
+      font-size: clamp(1rem, 2vw, 1.25rem);
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: .8rem;
+      margin-top: 2rem;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 3rem;
+      padding: .78rem 1.2rem;
+      border: 1px solid var(--gold);
+      color: var(--ink);
+      background: var(--gold-light);
+      box-shadow: 4px 4px 0 var(--wine);
+      font-size: .78rem;
+      font-weight: 900;
+      line-height: 1.2;
+      text-decoration: none;
+      cursor: pointer;
+      transition: transform .15s ease, box-shadow .15s ease, background .15s ease;
+    }
+
+    .button:hover {
+      background: #ffe196;
+      transform: translate(-1px, -1px);
+      box-shadow: 6px 6px 0 var(--wine);
+    }
+
+    .button.secondary {
+      color: var(--paper);
+      background: transparent;
+      box-shadow: none;
+    }
+
+    .button.secondary:hover { background: rgba(240, 228, 197, .08); }
+
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: rgba(23, 18, 13, .96);
+      border-bottom: 1px solid rgba(200, 154, 61, .5);
+      backdrop-filter: blur(10px);
+    }
+
+    nav ul {
+      display: flex;
+      gap: .25rem;
+      max-width: var(--measure);
+      margin: 0 auto;
+      padding: .55rem 1rem;
+      overflow-x: auto;
+      list-style: none;
+    }
+
+    nav a {
+      display: block;
+      padding: .45rem .7rem;
+      color: #d8cdb4;
+      font-family: "Trebuchet MS", Arial, sans-serif;
+      font-size: .72rem;
+      font-weight: 800;
+      letter-spacing: .08em;
+      text-decoration: none;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    nav a:hover { color: var(--gold-light); }
+
+    main {
+      max-width: var(--measure);
+      margin: 0 auto;
+      background: var(--paper);
+      box-shadow: 0 0 60px #000;
+    }
+
+    section { padding: clamp(2.5rem, 7vw, 5.5rem) clamp(1.15rem, 5vw, 4rem); }
+    section + section { border-top: 1px solid rgba(118, 105, 79, .45); }
+
+    h2 {
+      margin: 0 0 1rem;
+      color: var(--teal);
+      font-size: clamp(1.55rem, 4vw, 2.65rem);
+      line-height: 1.1;
+    }
+
+    h2::after {
+      content: "";
+      display: block;
+      width: 5rem;
+      height: 5px;
+      margin-top: .75rem;
+      background: linear-gradient(90deg, var(--wine) 0 30%, var(--gold) 30% 70%, var(--teal) 70%);
+    }
+
+    h3 {
+      margin: 2rem 0 .75rem;
+      color: var(--wine);
+      font-size: 1rem;
+      line-height: 1.25;
+    }
+
+    .lead {
+      max-width: 60rem;
+      margin: 0;
+      font-size: 1.12rem;
+    }
+
+    .notice-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+
+    .notice {
+      padding: 1.25rem;
+      border-top: 5px solid var(--gold);
+      background: rgba(255, 255, 255, .35);
+      box-shadow: 0 8px 24px var(--shadow);
+    }
+
+    .notice strong {
+      display: block;
+      margin-bottom: .35rem;
+      color: var(--teal);
+      font-family: "Trebuchet MS", Arial, sans-serif;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+    }
+
+    .notice p { margin: 0; }
+
+    .progress-panel {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      gap: 1rem;
+      margin: 2rem 0 0;
+      padding: 1rem 1.2rem;
+      color: var(--paper);
+      background: var(--teal);
+      border: 1px solid #0c3532;
+    }
+
+    .progress-label { font-size: .75rem; font-weight: 900; }
+    .progress-value { font-family: "Trebuchet MS", Arial, sans-serif; font-weight: 900; }
+
+    .progress-track {
+      grid-column: 1 / -1;
+      height: .6rem;
+      overflow: hidden;
+      background: #0c3532;
+      border: 1px solid rgba(240, 228, 197, .25);
+    }
+
+    .progress-bar {
+      width: 0;
+      height: 100%;
+      background: linear-gradient(90deg, var(--gold), var(--gold-light));
+      transition: width .25s ease;
+    }
+
+    .checklist {
+      display: grid;
+      gap: .55rem;
+      margin: 1.15rem 0 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .checklist label {
+      display: grid;
+      grid-template-columns: 1.35rem 1fr;
+      gap: .7rem;
+      align-items: start;
+      padding: .72rem .8rem;
+      border-left: 3px solid transparent;
+      background: rgba(255, 255, 255, .34);
+      cursor: pointer;
+      transition: background .15s ease, border-color .15s ease;
+    }
+
+    .checklist label:hover { border-color: var(--gold); background: rgba(255, 255, 255, .65); }
+
+    .checklist input {
+      width: 1.1rem;
+      height: 1.1rem;
+      margin: .18rem 0 0;
+      accent-color: var(--teal);
+    }
+
+    .checklist label:has(input:checked) {
+      color: var(--muted);
+      background: rgba(23, 79, 75, .08);
+      text-decoration: line-through;
+      text-decoration-thickness: 1px;
+    }
+
+    .act-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 1rem;
+      margin-top: 1.5rem;
+    }
+
+    .act-card {
+      padding: 1.15rem;
+      border: 1px solid rgba(118, 105, 79, .45);
+      background: rgba(255, 255, 255, .2);
+    }
+
+    .act-card h3 { margin-top: 0; }
+
+    details {
+      margin-top: 1.6rem;
+      border: 1px solid var(--gold);
+      background: #e7d8b2;
+    }
+
+    summary {
+      padding: 1rem 1.15rem;
+      color: var(--paper);
+      background: var(--wine);
+      font-size: .82rem;
+      font-weight: 900;
+      cursor: pointer;
+    }
+
+    .spoiler-inner { padding: .25rem 1.15rem 1.4rem; }
+
+    .report-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(18rem, .95fr);
+      gap: 1.5rem;
+      margin-top: 1.5rem;
+    }
+
+    .report-box {
+      padding: 1.2rem;
+      color: #efe5cc;
+      background: var(--ink);
+      border: 1px solid var(--gold);
+    }
+
+    pre {
+      margin: 0;
+      overflow-x: auto;
+      white-space: pre-wrap;
+      font: .86rem/1.55 "Courier New", monospace;
+    }
+
+    .report-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .65rem;
+      margin-top: 1rem;
+    }
+
+    .tips {
+      margin: 0;
+      padding-left: 1.25rem;
+    }
+
+    .tips li + li { margin-top: .55rem; }
+
+    .reset {
+      color: var(--wine);
+      background: transparent;
+      border: 0;
+      font: 700 .82rem Georgia, serif;
+      text-decoration: underline;
+      cursor: pointer;
+    }
+
+    footer {
+      padding: 2.5rem 1.25rem;
+      color: #bfb39a;
+      text-align: center;
+      border-top: 1px solid rgba(200, 154, 61, .45);
+    }
+
+    footer p { max-width: 52rem; margin: .45rem auto; }
+    footer a { color: var(--gold-light); }
+
+    .status {
+      min-height: 1.4em;
+      margin: .6rem 0 0;
+      color: var(--teal);
+      font-weight: 700;
+    }
+
+    @media (max-width: 760px) {
+      header { padding-top: 3.3rem; }
+      .notice-grid, .act-grid, .report-layout { grid-template-columns: 1fr; }
+      nav { position: static; }
+      .progress-panel { grid-template-columns: 1fr; }
+      .progress-value { grid-row: 2; }
+      .progress-track { grid-row: 3; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { transition: none !important; }
+    }
+
+    @media print {
+      body, main { background: #fff; box-shadow: none; }
+      header { color: #000; background: #fff; padding: 1.5rem; border-bottom: 2px solid #000; }
+      header::before, header::after, nav, .hero-actions, .progress-panel, .report-actions, .reset { display: none; }
+      .subtitle, .eyebrow { color: #000; }
+      section { padding: 1.3rem 0; break-inside: avoid; }
+      details { break-inside: auto; }
+      details > * { display: block; }
+    }
+  </style>
+</head>
+<body>
+  <div class="top-rule" aria-hidden="true"></div>
+  <header id="top">
+    <p class="eyebrow">Public field test · Alpha v0.01</p>
+    <h1>The Dagger of Amon Ra: Redux</h1>
+    <p class="subtitle">Help us test a careful modernization of Sierra's classic mystery from the newsroom to the final verdict.</p>
+    <div class="hero-actions">
+      <a class="button" href="LB2-Redux-v0.01.zip" download>Download Alpha v0.01</a>
+      <a class="button secondary" href="#report">Report a finding</a>
+    </div>
+  </header>
+
+  <nav aria-label="Page sections">
+    <ul>
+      <li><a href="#briefing">Briefing</a></li>
+      <li><a href="#essentials">Essentials</a></li>
+      <li><a href="#acts">Act guide</a></li>
+      <li><a href="#deep-test">Deep test</a></li>
+      <li><a href="#report">Report</a></li>
+    </ul>
+  </nav>
+
+  <main>
+    <section id="briefing">
+      <p class="eyebrow">Your assignment</p>
+      <h2>Play naturally. Notice everything.</h2>
+      <p class="lead">This alpha repairs bugs, softlocks, interface friction, clue logic, scoring, and dialogue while preserving the original mystery, artwork, puzzles, and character arcs. Reports from partial runs are welcome. A strange line, abrupt song, tiny hotspot, visual glitch, or moment of confusion can be every bit as useful as a crash.</p>
+
+      <div class="notice-grid">
+        <article class="notice">
+          <strong>Fresh case</strong>
+          <p>Extract v0.01 to a new directory and start a new game. This build was created from the vanilla LB2 1.00 source files and sluicebox decomps.</p>
+        </article>
+        <article class="notice">
+          <strong>Reference setup</strong>
+          <p>DOSBox-X is the reference environment for now. ScummVM reports are useful too, but please label them clearly.</p>
+        </article>
+        <article class="notice">
+          <strong>Protect the evidence</strong>
+          <p>Keep rotating saves. If something breaks, preserve the save that reproduces it and attach the matching <code>LB2SG.*</code> files.</p>
+        </article>
+      </div>
+
+      <div class="progress-panel" aria-live="polite">
+        <span class="progress-label">Your investigation progress</span>
+        <span class="progress-value" id="progressValue">0 of 0 checks</span>
+        <div class="progress-track" role="progressbar" aria-label="Checklist progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+          <div class="progress-bar" id="progressBar"></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="essentials">
+      <p class="eyebrow">For every playthrough</p>
+      <h2>Core checks</h2>
+      <ul class="checklist">
+        <li><label><input type="checkbox">The game starts without a black screen, Sierra error, or missing-resource message.</label></li>
+        <li><label><input type="checkbox">A new game reaches the newsroom and responds normally to mouse and keyboard input.</label></li>
+        <li><label><input type="checkbox">Save, restore, restart, and quit work wherever the interface makes them available.</label></li>
+        <li><label><input type="checkbox">Restoring preserves the room, score, inventory, notebook, music, clock, and character positions.</label></li>
+        <li><label><input type="checkbox">Characters do not vanish during conversations, walk through scenery, or block progress.</label></li>
+        <li><label><input type="checkbox">Room exits, close-ups, dialogue windows, and the icon bar open and close cleanly.</label></li>
+        <li><label><input type="checkbox">Music starts, changes, and resumes naturally across rooms and after restoring.</label></li>
+        <li><label><input type="checkbox">Inventory items are not duplicated, lost early, or restored after their intended use.</label></li>
+        <li><label><input type="checkbox">Points are awarded once, survive restore, and produce believable act grades.</label></li>
+        <li><label><input type="checkbox">Dialogue is clear, period-appropriate, and consistent with what Laura currently knows.</label></li>
+        <li><label><input type="checkbox">Required clues remain discoverable without following one exact walkthrough route.</label></li>
+        <li><label><input type="checkbox">The game reaches the credits without a crash or unwinnable state.</label></li>
+      </ul>
+    </section>
+
+    <section id="acts">
+      <p class="eyebrow">Spoiler-light route</p>
+      <h2>Playthrough guide</h2>
+      <p class="lead">Use these prompts for a natural first run. They identify systems worth exercising without revealing individual solutions.</p>
+
+      <div class="act-grid">
+        <article class="act-card">
+          <h3>Prologue &amp; Act 1</h3>
+          <ul class="checklist">
+            <li><label><input type="checkbox">Explore, use About, save and restore, and try optional errands in different orders.</label></li>
+            <li><label><input type="checkbox">Watch taxi recognition, the dirty cab, the claim ticket, and later travel closely.</label></li>
+            <li><label><input type="checkbox">Visit the speakeasy repeatedly and enter and leave its bathroom during a song.</label></li>
+            <li><label><input type="checkbox">Ask Ziggy about every available person, especially Yvette and the Countess.</label></li>
+            <li><label><input type="checkbox">Confirm the act grade appears against an appropriate neutral frame.</label></li>
+          </ul>
+        </article>
+
+        <article class="act-card">
+          <h3>Act 2 · Museum party</h3>
+          <ul class="checklist">
+            <li><label><input type="checkbox">Record which People and Things appear in the notebook immediately.</label></li>
+            <li><label><input type="checkbox">Meet people in an unusual order and watch for names Laura has not learned.</label></li>
+            <li><label><input type="checkbox">Ask about people standing nearby and note responses that feel unnaturally isolated.</label></li>
+            <li><label><input type="checkbox">Confirm characters stay through conversations, then resume moving normally.</label></li>
+            <li><label><input type="checkbox">Report unclear next steps or long stretches with nothing interactive to do.</label></li>
+          </ul>
+        </article>
+
+        <article class="act-card">
+          <h3>Acts 3 &amp; 4</h3>
+          <ul class="checklist">
+            <li><label><input type="checkbox">Revisit people after discoveries and look for missing or premature reactions.</label></li>
+            <li><label><input type="checkbox">Check whether time-sensitive people and confrontations remain available.</label></li>
+            <li><label><input type="checkbox">Use ordinary Look and the Magnifying Glass on small or reflective clues.</label></li>
+            <li><label><input type="checkbox">Report deaths or traps that occur without a fair warning.</label></li>
+            <li><label><input type="checkbox">Examine bookshelves, files, footprints, and evidence before taking anything.</label></li>
+          </ul>
+        </article>
+
+        <article class="act-card">
+          <h3>Act 5</h3>
+          <ul class="checklist">
+            <li><label><input type="checkbox">Confirm an earlier missed or used item cannot make the game unwinnable.</label></li>
+            <li><label><input type="checkbox">Exercise every sensible state of the snake-oil refill puzzle.</label></li>
+            <li><label><input type="checkbox">Save and restore during the chase and other dangerous sequences.</label></li>
+            <li><label><input type="checkbox">Show recovered evidence to several people before surrendering it.</label></li>
+          </ul>
+        </article>
+
+        <article class="act-card">
+          <h3>Act 6 &amp; ending</h3>
+          <ul class="checklist">
+            <li><label><input type="checkbox">Confirm required case questions and bonus museum questions are distinguished.</label></li>
+            <li><label><input type="checkbox">Miss some bonus answers and verify the murder verdict still follows the evidence.</label></li>
+            <li><label><input type="checkbox">Check that newspaper, ending, cards, score, and grade agree with the case.</label></li>
+            <li><label><input type="checkbox">Let the credits finish and confirm the game exits or returns cleanly.</label></li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section id="deep-test">
+      <p class="eyebrow">For dedicated sleuths</p>
+      <h2>Focused regression test</h2>
+      <p class="lead">This section names puzzles, clues, and ending conditions. Open it only if you are deliberately testing the machinery behind the mystery.</p>
+
+      <details>
+        <summary>Reveal substantial spoilers</summary>
+        <div class="spoiler-inner">
+          <h3>Prologue &amp; Act 1</h3>
+          <ul class="checklist">
+            <li><label><input type="checkbox">About opens without a false memory warning.</label></li>
+            <li><label><input type="checkbox">Speaking with Steve records the personal path; skipping him produces the professional greeting later.</label></li>
+            <li><label><input type="checkbox">After seeing the press pass once, the cabbie remembers Laura.</label></li>
+            <li><label><input type="checkbox">The dirty cab appears only after a normal ride and acquisition of the press pass.</label></li>
+            <li><label><input type="checkbox">The docks, baseball trade, and Ziggy conversation remain optional for obtaining the gown.</label></li>
+            <li><label><input type="checkbox">After taking the claim ticket, taxi travel never requires entering the dirty cab again.</label></li>
+            <li><label><input type="checkbox">Lo Fat accepts the ticket, supplies the gown, and the dressed taxi trip begins Act 2.</label></li>
+            <li><label><input type="checkbox">Both speakeasy songs rotate; the bathroom interrupts and then resumes the current song without restarting it.</label></li>
+            <li><label><input type="checkbox">The street outside Lo Fat's laundry has its intended music.</label></li>
+            <li><label><input type="checkbox">The two men at the speakeasy bar have distinct Look and Talk feedback.</label></li>
+            <li><label><input type="checkbox">Ziggy acknowledges Yvette and the Countess without exposing later revelations.</label></li>
+            <li><label><input type="checkbox">The Act 1 grade uses the gold Art Deco frame, not skull-and-crossbones artwork.</label></li>
+          </ul>
+
+          <h3>Act 2 · Museum party</h3>
+          <ul class="checklist">
+            <li><label><input type="checkbox">Check-in alone does not fill the notebook; reading the entrance register adds its named guests and staff.</label></li>
+            <li><label><input type="checkbox">Ziggy, Ernie, and Watney are absent from the register; Ernie introduces himself and Watney remains hidden behind Carrington's identity.</label></li>
+            <li><label><input type="checkbox">Lo Fat names Yvette in Act 1 but only foreshadows the severe security chief and black-clad woman doctor.</label></li>
+            <li><label><input type="checkbox">Pippin, Smith, Countess, Yvette, O'Riley, and Rameses introduce themselves when earlier meetings were missed.</label></li>
+            <li><label><input type="checkbox">Steve's greeting reflects whether Laura spoke with him in Act 1.</label></li>
+            <li><label><input type="checkbox">Asking Carrington about nearby Pippin produces a believable exchange.</label></li>
+            <li><label><input type="checkbox">Completed notebook topics reopen only when genuinely new information exists.</label></li>
+            <li><label><input type="checkbox">Walking characters pause throughout dialogue and resume the same route afterward.</label></li>
+            <li><label><input type="checkbox">Essential conversations remain available without a hidden conversation counter.</label></li>
+            <li><label><input type="checkbox">Reporting Pippin's body reaches Act 3 without unrelated optional conversations.</label></li>
+            <li><label><input type="checkbox">A complete run can earn the full Act 2 grade.</label></li>
+          </ul>
+
+          <h3>Act 3</h3>
+          <ul class="checklist">
+            <li><label><input type="checkbox">The skeleton-key glint is discoverable with Look and the Magnifying Glass.</label></li>
+            <li><label><input type="checkbox">The Countess remains available for the intended Armor Room meeting.</label></li>
+            <li><label><input type="checkbox">The pocket-watch confrontation remains possible after 1:45.</label></li>
+            <li><label><input type="checkbox">Murder reactions appear only after Laura learns of the corresponding death.</label></li>
+            <li><label><input type="checkbox">O'Riley remains available after 10:15 for follow-up questions.</label></li>
+            <li><label><input type="checkbox">Notebook completion and reopened topics reflect genuinely new dialogue.</label></li>
+            <li><label><input type="checkbox">A complete run can earn the full Act 3 grade.</label></li>
+          </ul>
+
+          <h3>Act 4</h3>
+          <ul class="checklist">
+            <li><label><input type="checkbox">The dark eastern stairwell gives a repeatable warning instead of killing Laura at the threshold.</label></li>
+            <li><label><input type="checkbox">Replacing the bulb makes the stairwell traversable.</label></li>
+            <li><label><input type="checkbox">Watney's police file is discoverable through the Room 560 bookcase and enlarged volume target.</label></li>
+            <li><label><input type="checkbox">Looking at the exposed file records its contents and Watney's People entry before Take.</label></li>
+            <li><label><input type="checkbox">Inspecting Pippin's bloody high-heel footprint preserves it for the inquest.</label></li>
+            <li><label><input type="checkbox">Homicide reactions, including O'Riley's Countess response, remain reachable.</label></li>
+            <li><label><input type="checkbox">A complete run can earn the full Act 4 grade.</label></li>
+          </ul>
+
+          <h3>Act 5</h3>
+          <ul class="checklist">
+            <li><label><input type="checkbox">Entry restores genuinely missing wire cutters, snake oil, or cheese once, without duplication.</label></li>
+            <li><label><input type="checkbox">The empty oil bottle looks empty and the laboratory jar refills it in one action.</label></li>
+            <li><label><input type="checkbox">The jar allows three refills and rejects a full bottle or depleted jar.</label></li>
+            <li><label><input type="checkbox">Intended consumption does not cause the safety check to recreate an item.</label></li>
+            <li><label><input type="checkbox">The recovered dagger receives character-specific reactions.</label></li>
+            <li><label><input type="checkbox">Giving the dagger to O'Riley removes it but preserves recovery credit.</label></li>
+            <li><label><input type="checkbox">A complete run can earn the full Act 5 grade.</label></li>
+          </ul>
+
+          <h3>Act 6 &amp; ending</h3>
+          <ul class="checklist">
+            <li><label><input type="checkbox">Questions 1–11 are required case findings; 12–16 are bonus museum inquiries.</label></li>
+            <li><label><input type="checkbox">Bonus answers affect only their own feedback, not the verdict or ending.</label></li>
+            <li><label><input type="checkbox">The Ankh, appointment notepad, and footprint/shoe comparison each receive one acknowledgement.</label></li>
+            <li><label><input type="checkbox">A surrendered dagger, consumed carbon paper, and inspected police file retain evidence credit.</label></li>
+            <li><label><input type="checkbox">Test murders solved/dagger recovered and as many of the other three combinations as practical.</label></li>
+            <li><label><input type="checkbox">The newspaper, ending route, and character cards agree with the tested combination.</label></li>
+            <li><label><input type="checkbox">Final scores and ranks are consistent; optional trivia cannot lower the verdict.</label></li>
+          </ul>
+        </div>
+      </details>
+    </section>
+
+    <section id="report">
+      <p class="eyebrow">File your report</p>
+      <h2>Preserve the scene</h2>
+      <p class="lead">Post in the SQH Discord release thread or open a GitHub issue. One problem per report is ideal. For a crash, include the exact Sierra error. For music, name the rooms and whether the song stopped, restarted, resumed, or never began.</p>
+
+      <div class="report-layout">
+        <div>
+          <div class="report-box">
+            <pre id="reportTemplate">Alpha build: v0.01
+Environment: DOSBox-X version / ScummVM version / other
+Operating system:
+Act and location:
+In-game clock and score:
+
+What happened:
+What I expected:
+Steps to reproduce:
+Does it happen after restoring? Always / sometimes / once
+
+Attachments: save files, screenshot, video, log
+Anything unusual: old save, alternate route, skipped conversation, custom MIDI, etc.</pre>
+          </div>
+          <div class="report-actions">
+            <button class="button" type="button" id="copyReport">Copy report template</button>
+            <a class="button secondary" style="color:var(--ink); border-color:var(--ink)" href="https://github.com/aedmark/amon-ra-redux/issues/new">Open GitHub issue</a>
+          </div>
+          <p class="status" id="copyStatus" role="status"></p>
+        </div>
+
+        <div>
+          <h3>Especially valuable tests</h3>
+          <ul class="tips">
+            <li>Take a legitimate route that a walkthrough does not recommend.</li>
+            <li>Restore before an act transition and choose a different action order.</li>
+            <li>Skip optional conversations and confirm the mystery still works.</li>
+            <li>Show evidence to every plausible character.</li>
+            <li>Test low, middle, and perfect-score act grades.</li>
+            <li>Mix correct and incorrect answers during the final inquest.</li>
+            <li>Report anything that feels <em>off</em>, even if it is not technically broken.</li>
+          </ul>
+          <p><button class="reset" type="button" id="resetChecks">Reset all checklist marks on this device</button></p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p><strong>Thank you for helping make this the careful, definitive version this remarkable game deserves.</strong></p>
+    <p>Amon Ra: Redux is a nonprofit fan project and is not affiliated with or endorsed by Sierra On-Line or the current rights holders.</p>
+    <p><a href="https://github.com/aedmark/amon-ra-redux">Source and project documentation</a> · <a href="#top">Return to top</a></p>
+  </footer>
+
+  <script>
+    (() => {
+      const storageKey = "amon-ra-redux-alpha-v001-checks";
+      const checks = [...document.querySelectorAll('.checklist input[type="checkbox"]')];
+      const progressValue = document.getElementById('progressValue');
+      const progressBar = document.getElementById('progressBar');
+      const progressTrack = document.querySelector('.progress-track');
+
+      checks.forEach((check, index) => {
+        check.dataset.checkId = String(index);
+      });
+
+      function loadChecks() {
+        try {
+          const saved = JSON.parse(localStorage.getItem(storageKey) || '[]');
+          checks.forEach((check, index) => { check.checked = saved.includes(index); });
+        } catch (_) {
+          localStorage.removeItem(storageKey);
+        }
+      }
+
+      function updateProgress(save = true) {
+        const completed = checks.filter(check => check.checked).length;
+        const percent = checks.length ? Math.round((completed / checks.length) * 100) : 0;
+        progressValue.textContent = `${completed} of ${checks.length} checks · ${percent}%`;
+        progressBar.style.width = `${percent}%`;
+        progressTrack.setAttribute('aria-valuenow', String(percent));
+        if (save) {
+          const selected = checks.flatMap((check, index) => check.checked ? [index] : []);
+          localStorage.setItem(storageKey, JSON.stringify(selected));
+        }
+      }
+
+      checks.forEach(check => check.addEventListener('change', () => updateProgress()));
+
+      document.getElementById('resetChecks').addEventListener('click', () => {
+        if (!window.confirm('Clear every checkmark saved on this device?')) return;
+        checks.forEach(check => { check.checked = false; });
+        localStorage.removeItem(storageKey);
+        updateProgress(false);
+      });
+
+      document.getElementById('copyReport').addEventListener('click', async () => {
+        const text = document.getElementById('reportTemplate').textContent;
+        const status = document.getElementById('copyStatus');
+        try {
+          await navigator.clipboard.writeText(text);
+          status.textContent = 'Report template copied.';
+        } catch (_) {
+          status.textContent = 'Copy was blocked. Select the template above and copy it manually.';
+        }
+      });
+
+      loadChecks();
+      updateProgress(false);
+    })();
+  </script>
+</body>
+</html>

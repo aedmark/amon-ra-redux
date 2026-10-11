@@ -748,3 +748,46 @@ D-004 (Unrestricted save/load), D-005 (Softlock prevention), D-006 (Inquest scor
 **Verified:** Both manifests apply idempotently; all 72 records in module 310 and 114 in module 1890 parse; text changes are confined to the 120 manifest entries; only the documented diary-response talker ID changes; documentation/manual validation and DOSBox-X startup smoke pass.
 
 **Next session should start with:** Maintainer review of Ziggy, then Tut and adjacent-speaker cleanup.
+### Session 33: 2026-10-10: P2-08 Final Dialogue Sweep
+
+**Contributor:** Codex and maintainer
+
+**Goal:** Complete P2-08 with Tut Smith, deferred murder reactions, adjacent-speaker corrections, and isolated lines that reintroduced caricature or anachronism.
+
+**Done:**
+- Reworked all 87 Tut Smith spoken records, plus nine paired Laura responses, as an educated and imposing Cairo Museum envoy: fiercely committed to repatriation, vain, patriarchal, and suspicious without pulp-Egyptian cliches.
+- Preserved Tut's motive, threats, Yvette proposals, evasive Rameses connection, ankh loss, Dagger claim, and later reactions while replacing camel, snake-charmer, amputation, racial-superiority, and mystical-native jokes.
+- Rewrote all deferred murder reactions for Rameses, Heimlich, Yvette, and O'Riley in their approved voices, including Laura's line mocking Rameses's lisp.
+- Cleaned adjacent Pippin, Countess, Steve, and Olympia lines; retained their vanity, class prejudice, morbidity, and plot information without collateral ethnic caricature.
+- Replaced all five impossible 1926 references to the `Andrea Doria`, corrected Rameses I chronology, and fixed `hieroglyphs` and `Ruhmkorff` terminology.
+- Corrected three talker-ID errors: Ziggy's diary advice, Yvette's diary answer, and Laura's clue question to O'Riley.
+
+**Changed:** Message modules 1882–1885, 1887–1892, and 310; character and straggler manifests in `docs/dialogue/`; `tools/dialogue.py`; and synchronized roadmap, decision, handoff, and manual documentation.
+
+**Decisions:** D-031. P2-08 is complete.
+
+**Verified:** Exact comparison accounts for all 1,424 records across the 11 target modules; all unmanifested text is byte-identical to `HEAD`; all routing/reference metadata is unchanged except the three documented talker IDs; every manifest reapplies idempotently; obsolete caricature/anachronism scan reports zero hits; documentation/manual checks and DOSBox-X startup smoke pass.
+
+**Next session should start with:** Resume the clean DOSBox-X playthrough and record any dialogue that needs contextual adjustment before P5-01.
+
+### Session 34: 2026-10-10: P2-08 Effective-Layer Closure Audit
+
+**Contributor:** Codex and maintainer
+
+**Goal:** Reopen P2-08 after a full effective-message audit found dialogue outside the previously reviewed character-topic modules.
+
+**Done:**
+- Parsed all 103 effective message modules and 5,888 records, overlaying every loose patch on the archived resource layer.
+- Rewrote the module 120 Pippin/Tut confrontation, module 335 Heimlich check-in, all fourteen module 340 party conversations, and the module 355 Carter murder scene in the established character voices.
+- Reworked the Act 1 sandwich vendor and cabbie without removing their rapid sales patter, impatience, lechery, or New York character.
+- Removed the four remaining `Andrea Doria` records, completing all nine original occurrences; corrected three remaining `Ruhmkorf` spellings and the underlying instrument-maker history.
+- Replaced two uses of an ethnic slur in the street-kid scene, corrected two Carrington spelling errors, and assigned Carrington's interrupted response to talker 11 instead of narrator 99.
+- Added twelve closure manifests and loose message overrides while preserving the immutable resource archives.
+
+**Changed:** Message modules 10, 15, 120, 210, 240, 250, 260, 335, 340, 355, 630, and 1886; twelve manifests under `docs/dialogue/`; and synchronized roadmap, decision, changelog, handoff, and manual documentation.
+
+**Decisions:** D-031 remains the governing decision. P2-08 is closed only after auditing both character-topic and room/cutscene message modules.
+
+**Verified:** Exact structural comparison of 2,726 records across all 26 P2-08 modules; 1,025 manifest entries current and idempotent; all noun/verb/condition/sequence/reference metadata preserved; exactly four documented talker-ID repairs; all 5,888 effective records parse; no targeted Act 1/2 caricature or listed factual strings remain; documentation/manual checks and DOSBox-X original-interpreter startup smoke pass.
+
+**Next session should start with:** Resume the DOSBox-X playthrough and review the party conversations in context before beginning the later-act dialogue pass or P5-01.
