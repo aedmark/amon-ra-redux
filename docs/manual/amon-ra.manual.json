@@ -681,6 +681,7 @@
               "Complete Act 3 with Ziggy and Ernie's intercom dispute, the Countess's evidence confrontations, Tut Smith's alibi interview, Olympia's snake-oil and private-office scenes, and Ernie's incidental ejections; preserve the Countess's camp, Olympia's morbidity, Steve's scars continuity, and every clue-bearing admission.",
               "Complete Act 4's compact dialogue layer by polishing Laura and Steve's reunion while preserving Olympia's intentional fascination with Steve's dock scars and Steve's forged-painting discovery; replace Heimlich's remaining mock-German reactions and lantern warning with his established controlled authority.",
               "Complete Act 5 and the ending by giving Rameses precise, dangerous speech throughout the Society of Amon Ra encounter, explicitly distinguishing the society's invented sacrifice rite from ancient Egyptian history, restoring Tut's dignity as O'Riley's eyewitness, and removing stage-Irish spelling from O'Riley's jailhouse threat.",
+              "Complete Act 6 by giving the coroner a dry, exacting professional voice throughout the final inquest, replacing dated language and unsupported accusations while preserving all sixteen questions, evidence checks, jokes, verdicts, and ending routes.",
               "Replace all nine original references to the anachronistic Andrea Doria, correct Rameses I chronology and Egyptological terminology, remove two uses of an ethnic slur, and repair four demonstrably wrong talker IDs.",
               "Apply text by exact noun, verb, condition, sequence, and talker tuple with tools/dialogue.py; preserve routing and reference metadata except where a manifest explicitly repairs an erroneous talker ID."
             ]
@@ -850,6 +851,14 @@
             {
               "label": "Act 5 O'Riley Jailhouse Threat",
               "target": "docs/dialogue/act5-oriley-jail.json"
+            },
+            {
+              "label": "Act 6 Final Inquest Dialogue",
+              "target": "LB2/750.MSG"
+            },
+            {
+              "label": "Act 6 Coroner Dialogue Manifest",
+              "target": "docs/dialogue/act6-coroner-inquest.json"
             }
           ],
           "related": [

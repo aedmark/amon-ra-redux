@@ -2,6 +2,27 @@
 
 Archived verbatim from `docs/HANDOFF.md` when its live session log exceeded ten entries.
 
+### Session 31: 2026-10-10: Act 2 O'Riley Dialogue Pass
+
+**Contributor:** Codex and maintainer
+
+**Goal:** Keep Detective O'Riley a swaggering, sexist, corrupt, and prejudiced antagonist while removing leprechaun vocabulary and repetitive stage-Irish eye-dialect.
+
+**Done:**
+- Reviewed all 97 routine O'Riley records in module 1888, rewriting 96 and retaining one already-clean response verbatim.
+- Preserved his dismissive burglary investigation, grapes clue, evidence handoff, class prejudice, sexism, xenophobia, homophobia, and Laura's authored rebuttals because these expose his character and support the mystery.
+- Replaced “begorrah,” pots-of-gold jokes, sainted-mother language, `me` for `my`, and repetitive “lassie/wee” signaling with readable Irish-American rhythm, police slang, and the occasional restrained “lass.”
+- Replaced the narrator's generic Irish-red-hair description with a direct observation of O'Riley's proprietary swagger.
+- Added `docs/dialogue/act2-oriley.json` and applied it idempotently to `LB2/1888.MSG`; deferred all 38 explicit later murder-reaction records.
+
+**Changed:** `LB2/1888.MSG`, `docs/dialogue/act2-oriley.json`, and synchronized roadmap, decision, handoff, and manual documentation.
+
+**Decisions:** D-031.
+
+**Verified:** All 185 message tuple/talker records retain identical metadata; all 98 manifest texts match; exactly 96 O'Riley and one narrator text changed; all 38 explicit later reaction records remain outside the manifest; documentation/manual validation and build pass.
+
+**Next session should start with:** Maintainer review of O'Riley, followed by Ziggy only after approval.
+
 ### Session 30: 2026-10-10: Act 2 Yvette Dialogue Pass
 
 **Contributor:** Codex and maintainer

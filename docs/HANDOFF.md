@@ -12,14 +12,15 @@ Security: [SECURITY.md](SECURITY.md). Changes: [CHANGELOG.md](CHANGELOG.md). Old
 
 ## Current state
 
-_Last updated: 2026-10-10, session 41: P5-00 source baseline migration._
+_Last updated: 2026-10-10, session 42: Act 6 final-inquest dialogue closure._
 
-**Where things stand, in one paragraph:** P5-00 is complete on `codex/p5-00-sluicebox-baseline`. `LB2/src/` now contains a coherent 221-script Sluicebox-annotated reconstruction made from the effective Redux resources, so every compiled Redux fix is retained. Published contextual selector aliases could not compile against one global vocabulary; D-032 therefore keeps stable numeric selectors and preserves the four required SCI metadata names. The isolated full-tree compile captured no errors, repository base archives remain immutable, and P5-01 can begin after the maintainer's clean-playthrough gate.
+**Where things stand, in one paragraph:** P5-00 is complete on `codex/p5-00-sluicebox-baseline`, and the dialogue rewrite now runs through Act 6. The coroner's complete final inquest uses a dry, exacting professional voice without changing any question, evidence gate, verdict, or ending route. `LB2/src/` remains the coherent 221-script Sluicebox-annotated reconstruction of the effective Redux resources. The project is ready for the maintainer's clean-playthrough gate before P5-01.
 
 **Verified** (2026-10-10, Linux workspace)
 
 | Suite | Result |
 | --- | --- |
+| P2-08 Act 6 final inquest | **Pass: all 77 module-750 records structurally compared; exactly 28 approved text changes; all tuple/talker/reference metadata and ending routes preserved** |
 | P5-00 coherent source inventory | **Pass: 221 `.sc` + 221 `.sco`; no nested duplicate tree or unknown-property placeholders** |
 | P5-00 isolated compilation | **Pass: representative and blocker scripts at 0 errors/0 warnings; disposable Compile All captured no errors** |
 | P2-08 Act 5 and ending closure | **Pass: 169 records across modules 710, 715, 730, 750, and 770 structurally compared; 64 intended text changes; all tuple/talker/reference metadata and untargeted text preserved** |
@@ -67,6 +68,7 @@ _Last updated: 2026-10-10, session 41: P5-00 source baseline migration._
 - **Act 3 Dialogue:** Rameses, Heimlich, Yvette, O'Riley, Ziggy, Ernie, the Countess, Tut Smith, and Olympia retain their approved voices through private conversations, intercom scenes, laboratory warnings, relationships, office interruptions, evidence confrontations, alibi interviews, grief interviews, and murder discoveries (P2-08, D-031).
 - **Act 4 Dialogue:** Laura, Steve, Olympia, and Heimlich retain their established character beats through the reunion, forged-painting discovery, murder/Dagger reactions, and lantern warning without residual mock-German spelling (P2-08, D-031).
 - **Act 5 Dialogue:** Rameses's Society confrontation and riddle, Tut's inquest testimony, Steve's already-clean escape dialogue, and O'Riley's jailhouse threat preserve the ending while removing the final phonetic caricatures (P2-08, D-031).
+- **Act 6 Dialogue:** The coroner conducts the complete final inquest in a dry, exacting professional voice; every question, evidence check, joke, verdict, and ending route remains intact (P2-08, D-031).
 - **Source Baseline:** P5-00's Sluicebox-annotated effective reconstruction is active under D-032; normal work remains single-script compilation under D-028.
 - **Documentation Architecture:** `docs/ROADMAP.md`, `DECISIONS.md` (D-001 through D-032), `docs/manual/`, `docs/manual/manual.html`, and `docs/PLAYTEST_CHECKLIST.md` synchronized.
 
@@ -93,6 +95,20 @@ _Last updated: 2026-10-10, session 41: P5-00 source baseline migration._
 None currently open. Q-001 and Q-002 have been resolved by D-007, D-017, and D-018.
 
 ## Session log
+
+### Session 42: 2026-10-10: Act 6 Final-Inquest Dialogue Closure
+
+**Contributor:** Codex and maintainer
+
+**Goal:** Finish the act-by-act dialogue rewrite with the coroner's complete final interrogation before beginning the clean playthrough.
+
+**Done:** Recast the coroner as a dry, formal, exacting professional; replaced the dated “mental deficiency” answer; removed repetitive shouting and unsupported suggestions that Laura herself committed the murders; sharpened weak, partial, and successful verdicts; retained the rubbish-bin hint and fence-installer joke; and left all sixteen questions, answer routing, evidence gates, Tut testimony, verdicts, and ending states unchanged.
+
+**Decisions:** D-031.
+
+**Verified:** All 77 records in module 750 structurally compared; exactly 28 approved text tuples changed; all tuple/talker/reference metadata preserved; the Act 6 manifest reapplies idempotently.
+
+**Next session should start with:** Run the clean DOSBox-X playthrough, including every final-inquest outcome required by `docs/TESTING.md`.
 
 ### Session 41: 2026-10-10: P5-00 Sluicebox Source Baseline Migration
 
@@ -280,24 +296,3 @@ None currently open. Q-001 and Q-002 have been resolved by D-007, D-017, and D-0
 **Verified:** Both manifests apply idempotently; all 72 records in module 310 and 114 in module 1890 parse; text changes are confined to the 120 manifest entries; only the documented diary-response talker ID changes; documentation/manual validation and DOSBox-X startup smoke pass.
 
 **Next session should start with:** Maintainer review of Ziggy, then Tut and adjacent-speaker cleanup.
-
-### Session 31: 2026-10-10: Act 2 O'Riley Dialogue Pass
-
-**Contributor:** Codex and maintainer
-
-**Goal:** Keep Detective O'Riley a swaggering, sexist, corrupt, and prejudiced antagonist while removing leprechaun vocabulary and repetitive stage-Irish eye-dialect.
-
-**Done:**
-- Reviewed all 97 routine O'Riley records in module 1888, rewriting 96 and retaining one already-clean response verbatim.
-- Preserved his dismissive burglary investigation, grapes clue, evidence handoff, class prejudice, sexism, xenophobia, homophobia, and Laura's authored rebuttals because these expose his character and support the mystery.
-- Replaced “begorrah,” pots-of-gold jokes, sainted-mother language, `me` for `my`, and repetitive “lassie/wee” signaling with readable Irish-American rhythm, police slang, and the occasional restrained “lass.”
-- Replaced the narrator's generic Irish-red-hair description with a direct observation of O'Riley's proprietary swagger.
-- Added `docs/dialogue/act2-oriley.json` and applied it idempotently to `LB2/1888.MSG`; deferred all 38 explicit later murder-reaction records.
-
-**Changed:** `LB2/1888.MSG`, `docs/dialogue/act2-oriley.json`, and synchronized roadmap, decision, handoff, and manual documentation.
-
-**Decisions:** D-031.
-
-**Verified:** All 185 message tuple/talker records retain identical metadata; all 98 manifest texts match; exactly 96 O'Riley and one narrator text changed; all 38 explicit later reaction records remain outside the manifest; documentation/manual validation and build pass.
-
-**Next session should start with:** Maintainer review of O'Riley, followed by Ziggy only after approval.
