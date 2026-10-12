@@ -19,7 +19,7 @@ that owns the change.
 | `docs/SOURCE_MIGRATION_PLAN.md` | How will P5-00 replace the decompilation baseline without losing Redux fixes? | The pinned source, replay inventory, migration sequence, or acceptance evidence changes. |
 | `docs/SOURCE_PROVENANCE.md` | Where did the compiler-facing source baseline come from, and what terms were found? | Source tools, pinned inputs, hashes, or redistribution findings change. |
 | `docs/SECURITY.md` | What assets are sensitive and how are vulnerabilities handled? | Trust boundaries, asset policies, or disclosure paths change. |
-| `docs/CONTRIBUTING.md` | How does a contribution move from idea to patch? | Development workflow, branching, or pull-request rules change. |
+| `docs/CONTRIBUTING.md` | How does a contribution move from idea to patch, and what references must be checked before changing SCI objects? | Development workflow, reference-first investigation rules, branching, or pull-request rules change. |
 | `docs/CHANGELOG.md` | What changed for players and users? | A playable release, patch build, or feature lands. |
 | `docs/archive/` | What historical context is no longer active? | Session logs exceed limit in `HANDOFF.md`. |
 | `docs/manual/` | What/How/Why manual source and built manual? | Technical features, fixes, or implementation details change. |
@@ -31,5 +31,6 @@ that owns the change.
 - If you change engine loading rules or patch distribution: update `docs/ARCHITECTURE.md` and `docs/DECISIONS.md`.
 - If you start or complete a task: update `docs/ROADMAP.md` and `docs/HANDOFF.md`.
 - If you change verification procedures or DOSBox-X commands: update `docs/TESTING.md`.
+- If an SCI object or interaction fix reveals a reusable engine lesson: update the reference-first workflow in `docs/CONTRIBUTING.md`, record durable policy in `docs/DECISIONS.md`, and add the concrete runtime case to `docs/TESTING.md`.
 - If the full-game run finds or clears an issue: update `docs/PLAYTEST_CHECKLIST.md`; promote confirmed work to a permanent roadmap ID during triage.
 - Run `python3 tools/check_docs.py` before completing any session.

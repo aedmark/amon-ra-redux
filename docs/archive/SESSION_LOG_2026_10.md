@@ -791,3 +791,68 @@ D-004 (Unrestricted save/load), D-005 (Softlock prevention), D-006 (Inquest scor
 **Verified:** Exact structural comparison of 2,726 records across all 26 P2-08 modules; 1,025 manifest entries current and idempotent; all noun/verb/condition/sequence/reference metadata preserved; exactly four documented talker-ID repairs; all 5,888 effective records parse; no targeted Act 1/2 caricature or listed factual strings remain; documentation/manual checks and DOSBox-X original-interpreter startup smoke pass.
 
 **Next session should start with:** Resume the DOSBox-X playthrough and review the party conversations in context before beginning the later-act dialogue pass or P5-01.
+
+### Session 35: 2026-10-10: Act 3 Rameses and Heimlich Dialogue Pass
+
+**Contributor:** Codex and maintainer
+
+**Goal:** Carry Rameses and Wolf Heimlich's approved Act 2 voices into their Act 3 room, intercom, and murder-discovery scenes without changing mystery progression.
+
+**Done:**
+- Reworked Rameses's complete private exchanges with Yvette and Olympia, preserving the secret-room leverage, marriage, Eiffel Tower joke, Toledo sword, foot tattoos, and Egyptian sun-symbol clues.
+- Reworked Heimlich's Olympia intercom and office scenes, historically grounded his Heidelberg scars in academic fencing, and retained his ambition, morbidity, romantic vanity, and implied danger.
+- Reworked the Ziggy and Ernie discovery scenes with readable Heimlich and O'Riley voices while preserving Laura's suspicion, every murder clue, the security rivalry, and the grape/flask exchange.
+- Replaced two laboratory warnings and closed the missed Act 2 gift-shop exchange.
+- Added nine tuple-addressed manifests and loose overrides for modules 400, 562, 610, 1440, 1490, 1500, 1560, and 1600.
+
+**Changed:** `LB2/400.MSG`, `LB2/562.MSG`, `LB2/610.MSG`, `LB2/1440.MSG`, `LB2/1490.MSG`, `LB2/1500.MSG`, `LB2/1560.MSG`, `LB2/1600.MSG`, nine manifests under `docs/dialogue/`, and synchronized roadmap, decision, changelog, handoff, and manual documentation.
+
+**Decisions:** D-031.
+
+**Verified:** All 423 records structurally compared against archived resources; 117 reviewed tuples current and idempotent; all tuple/talker/reference metadata and untargeted text preserved; documentation/manual validation and DOSBox-X startup smoke pass.
+
+**Next session should start with:** Continue the Act 3 character audit after maintainer review of the next draft.
+
+### Session 36: 2026-10-10: Act 3 Yvette Dialogue Pass
+
+**Contributor:** Codex and maintainer
+
+**Goal:** Carry Yvette's approved fluent, intelligent, and deliberately sensual voice through every Act 3 appearance without weakening her relationships or plot disclosures.
+
+**Done:**
+- Reworked eleven exchanges spanning the O'Riley exercise intercom, Ernie's private office and interruptions, Steve after Ernie's death, Olympia's chicken-bone joke, Steve's neck rub, both O'Riley relationship scenes, Laura's interruption and grief interview, and Dr. Smith's private exchange.
+- Preserved Yvette's sexual confidence and strategic charm while allowing her grief for Ernie to read sincerely; softened Laura's dismissive “I know your type” response without removing suspicion.
+- Preserved the Icepick gambling-debt trail, Big Al fencing, Ernie's secret observation, O'Riley's bribery account, Carrington/Dagger allegation, Dr. Smith's museum secret, and the isolated “loan fish” misunderstanding that identifies a loan shark.
+- Added six tuple-addressed manifests and loose overrides for modules 640, 1510, and 1550; updated the existing 562, 610, and 1560 overrides without disturbing prior Heimlich or Rameses work.
+
+**Changed:** `LB2/562.MSG`, `LB2/610.MSG`, `LB2/640.MSG`, `LB2/1510.MSG`, `LB2/1550.MSG`, `LB2/1560.MSG`, six manifests under `docs/dialogue/`, and synchronized roadmap, decision, changelog, handoff, and manual documentation.
+
+**Decisions:** D-031.
+
+**Verified:** All 342 records structurally compared against archived resources; 130 reviewed Yvette-scene tuples current and idempotent; all tuple/talker/reference metadata and untargeted text preserved; documentation/manual validation and DOSBox-X startup smoke pass.
+
+**Next session should start with:** Continue the Act 3 character audit with O'Riley or the next maintainer-selected character.
+
+### Session 37: 2026-10-10: Act 3 Dialogue Closure
+
+**Contributor:** Codex and maintainer
+
+**Goal:** Close O'Riley's remaining Act 3 dialogue, repair missed earlier-act stragglers, and complete every remaining substantive Act 3 character review before moving to Act 4.
+
+**Done:**
+- Replaced O'Riley's final untouched Act 3 dismissal with a brazen “police business” cover when Laura catches him with Yvette.
+- Reworked the missed Pippin murder-discovery interrogation, preserving O'Riley's immediate accusation, his question about the murderer, and his order that Laura remain in the building while removing “banshee,” “lass,” and repeated stage-Irish “then.”
+- Added separate tuple manifests for modules 454 and 1550; deferred the six module-770 jail-yard threats to the ending audit.
+- Reworked Ziggy and Ernie's intercom dispute in their approved voices and removed the final unreviewed use of cartoon-Brooklyn phonetics from Ziggy's Act 3 material.
+- Reworked all 75 records in the Countess's confrontation, diary, pocket-watch, and nervous-talk branches; preserved her camp, entitlement, criminal vanity, threats, and self-incrimination while replacing incessant typographic shouting with grand diction.
+- Reworked Tut Smith's 25-record alibi interview, Olympia's remaining snake-oil and private-office scenes, and Ernie's incidental office ejections without changing any clue or scheduler route.
+- Verified that Olympia's reference to Steve's scars is intentional continuity, corroborated by their following encounter and Steve's own explanation; preserved it unchanged in meaning.
+- Closed two missed earlier-act lines for Ziggy and the street kid, then scanned the complete effective message layer. Only two target hits remain, both Heimlich lines belonging to later material and queued for Act 4.
+
+**Changed:** `LB2/260.MSG`, `LB2/310.MSG`, `LB2/454.MSG`, `LB2/562.MSG`, `LB2/640.MSG`, `LB2/1440.MSG`, `LB2/1450.MSG`, `LB2/1520.MSG`, `LB2/1550.MSG`, `LB2/1600.MSG`, nine new manifests and two extended manifests under `docs/dialogue/`, and synchronized roadmap, decision, changelog, handoff, and manual documentation.
+
+**Decisions:** D-031.
+
+**Verified:** All 626 records across the ten touched modules structurally compared; 155 reviewed tuples current and idempotent; all tuple/talker/reference metadata and untargeted text preserved; effective-layer target scan clear through Act 3; documentation/manual validation and DOSBox-X startup smoke pass.
+
+**Next session should start with:** Begin Act 4 with Heimlich's two identified module-1889 stragglers, then inventory the remaining cast by effective scene ownership.

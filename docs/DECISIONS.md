@@ -366,6 +366,32 @@ name.
 
 ---
 
+## D-034 Use a Reference-First Workflow for Interactive SCI Objects
+
+Consult the engine documentation, local base classes, and established game objects before introducing room-local
+interaction machinery.
+
+- **Context:** Room 335's benefit podium combined a new sprite, hotspot bounds, approach coordinates, barred geometry,
+  save restoration, stateful messages, and clue writes. Iterating directly on the symptom led to rejected custom
+  `CueObj`/exact-position dispatch prototypes, including one that re-entered the shared cue and produced Error 2 with
+  palette corruption. SCI Companion already documents the standard SCI 1.1 object pattern, and this source tree contains
+  many working examples of `approachVerbs`, `approachX`/`approachY`, `doVerb()`, superclass fallback, and collision
+  boundaries.
+- **Decision:** For interactive object work, begin with SCI Companion's
+  [Interacting with Objects](https://scicompanion.com/Documentation/Tutorial/AddingObjects.html) guidance, then inspect
+  the project copies of `Feature.sc`, `PApproach.sc`, and `Polygon.sc` as applicable. Compare at least two established
+  same-class room objects before changing behavior. Treat sprite placement, click bounds, approach destination, and
+  walkable geometry as separate concerns. Preserve the standard object approach/dispatch path unless source evidence
+  shows it cannot represent the requirement. Any custom selector override, cue manipulation, per-cycle mutation, or
+  dispatcher requires documented justification and must be tested both after a walk-in approach and as an immediate
+  repeat from the exact approach point.
+- **Consequences:** Future sessions have an explicit starting point and should reuse proven engine behavior before
+  inventing local state machines. Reviews can ask which documentation, base classes, and reference objects were checked.
+  Repeat-action testing becomes mandatory for stateful hotspots, reducing transient fallback messages, cue re-entry,
+  palette corruption, and interpreter errors.
+
+---
+
 ## Open questions
 
 - **Q-001**: Resolved by D-007: Omit insensitive original CD voice tracks; restore murder lines as text messages in

@@ -73,7 +73,13 @@
 		(glass sel_110:)
 		(column sel_110:)
 		(if (and (== gAct 2) (not (IsFlag 25)))
-			(benefitPodium sel_110: sel_311: 1 4 8)
+			(benefitPodium
+				sel_110:
+				sel_63: 12
+				sel_303: 186
+				sel_304: 180
+				sel_311: 1 4 8
+			)
 			((ScriptID 32 0) ; aHeimlich
 				sel_110:
 				sel_2: 341
@@ -93,6 +99,15 @@
 	(method (sel_399)
 		(gGameMusic1 sel_170:)
 		(super sel_399: &rest)
+	)
+
+	(method (sel_57)
+		(if (and (== gAct 2) (not (IsFlag 25)))
+			; RestoreGame can replace these with values from an old save.
+			(benefitPodium sel_303: 186 sel_304: 180)
+			((ScriptID 2335 0) sel_57: (gCurRoom sel_259:) 1) ; poly2335Code
+		)
+		(super sel_57:)
 	)
 )
 
@@ -330,13 +345,16 @@
 		sel_2 335
 		sel_3 0
 		sel_4 0
-		sel_14 16384
+		sel_60 12
+		sel_14 16400
 		sel_213 17
-		sel_6 126
-		sel_7 177
-		sel_8 175
-		sel_9 202
+		sel_6 148
+		sel_7 182
+		sel_8 174
+		sel_9 198
 		sel_301 40
+		sel_303 186
+		sel_304 180
 	)
 
 	(method (sel_300 param1)
@@ -348,7 +366,23 @@
 			((ScriptID 21 0) sel_57: 269) ; Countess
 			((ScriptID 21 0) sel_57: 270) ; Olympia
 			((ScriptID 21 0) sel_57: 271) ; Tut
-			(gMessager sel_295: sel_213 1)
+			(switch param1
+				(4
+					(if (not (IsFlag 124))
+						(SetFlag 124)
+						(gMessager sel_295: sel_213 4 0)
+					else
+						(gMessager sel_295: sel_213 4 1)
+					)
+				)
+				(else
+					(if (not (IsFlag 124))
+						(gMessager sel_295: sel_213 1 0)
+					else
+						(gMessager sel_295: sel_213 1 1)
+					)
+				)
+			)
 		else
 			(super sel_300: param1)
 		)

@@ -9,6 +9,28 @@ Guidelines for contributing to *The Dagger of Amon Ra: Redux*.
 3. Base floppy files are located in `LB2/`. Never overwrite `RESOURCE.000`, `RESOURCE.MAP`, `RESOURCE.MSG`, or `MESSAGE.MAP`; pristine copies live in `LB2_vanilla/`. Never run Compile All or any resource rebuild in SCI Companion (D-028).
 4. Run `python3 tools/check_docs.py` to confirm documentation consistency.
 
+## Reference-first SCI object workflow
+
+Before editing an interactive room object, establish the engine's ordinary pattern before designing a room-local
+workaround (D-034).
+
+1. Read the applicable official SCI Companion documentation. For props, hotspots, approach verbs, and custom
+   `doVerb()` handling, begin with [Interacting with Objects](https://scicompanion.com/Documentation/Tutorial/AddingObjects.html).
+2. Inspect the local base-class implementation that actually ships with this project. Object-approach work normally
+   starts with `LB2/src/Feature.sc`, `LB2/src/PApproach.sc`, and, when collision is involved,
+   `LB2/src/Polygon.sc`.
+3. Search `LB2/src/rm*.sc` for at least two established objects of the same class and interaction shape. Compare their
+   initialization order, `approachVerbs`, `approachX`/`approachY`, bounds, signal/priority, `doVerb()` implementation,
+   superclass fallback, and polygon relationship.
+4. Keep visual placement, clickable bounds, approach destination, and walkable geometry separate. A sprite position or
+   interaction rectangle is not a collision barrier, and an approach point must remain outside any barred polygon.
+5. Prefer the framework's standard `Feature`/`View`/`Prop` approach and interaction state. Add a selector override,
+   `CueObj` manipulation, per-cycle mutation, or custom dispatcher only when source inspection proves the standard path
+   cannot express the behavior; document that proof and the reference objects in `docs/HANDOFF.md`.
+6. Test both movement branches: interact from far enough away to invoke `PApproach`, then repeat each verb without
+   moving from the exact approach point. Exercise every state transition twice and check for transient fallback text,
+   palette changes, freezes, and interpreter errors.
+
 ## Workflow
 
 1. Select an open task from `docs/ROADMAP.md` (e.g. `P1-01`).

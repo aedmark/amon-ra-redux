@@ -10,8 +10,11 @@ linked below, not in an agent's private memory.
 
 1. Read `docs/HANDOFF.md` for current state, active tasks, and gotchas.
 2. Read the relevant roadmap item in `docs/ROADMAP.md` and parts of `docs/ARCHITECTURE.md` and `docs/TESTING.md`.
-3. Verify claims using DOSBox-X and SCI Companion.
-4. Scope changes strictly to the task at hand.
+3. Before changing an interactive SCI room object, follow the reference-first workflow in
+   `docs/CONTRIBUTING.md`: read SCI Companion's applicable documentation, inspect the local base-class scripts, and
+   compare established same-class hotspots before adding custom dispatch or cue logic (D-034).
+4. Verify claims using DOSBox-X and SCI Companion.
+5. Scope changes strictly to the task at hand.
 
 ## While working
 

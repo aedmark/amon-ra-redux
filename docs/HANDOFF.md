@@ -12,14 +12,16 @@ Security: [SECURITY.md](SECURITY.md). Changes: [CHANGELOG.md](CHANGELOG.md). Old
 
 ## Current state
 
-_Last updated: 2026-10-11, session 45: diegetic benefit register and identity flow._
+_Last updated: 2026-10-12, session 48: room 335 podium collision and interaction follow-up._
 
-**Where things stand, in one paragraph:** Alpha v0.01 is public in the SQH Discord from `master`. During the maintainer's playthrough, P2-01's invisible all-cast check-in grant was replaced with an inspectable Room 335 benefit register. Lo Fat now names only Yvette while foreshadowing Heimlich and Olympia, Ernie retains his personal introduction, Ziggy remains an unsigned interloper, and Watney stays concealed behind Carrington's identity until evidence exposes him. Scripts 270, 335, and 93 compile, their message manifests are idempotent, and the immutable base archives retain their vanilla hashes. Runtime register placement and interaction still require the maintainer's DOSBox-X save test.
+**Where things stand, in one paragraph:** Alpha v0.01 is public in the SQH Discord from `master`. The room 335 benefit podium remains at `(190, 174)` with visual bounds `nsTop: 148, nsLeft: 182, nsBottom: 174, nsRight: 198` and fixed priority 12. After runtime testing exposed Laura walking through the lectern and stopping behind it, the standalone overlapping `polyPodium` was removed. Script 2335's existing 14-point barred room polygon now reaches down to `(190, 176)` around the podium, and Script 335 routes Look/Hand/Magnifier to `(186, 180)` in front of the ledger. Old saves rebind that same polygon object to current static points without heap writes or new objects. Runtime testing then proved every second podium interaction produced palette corruption and Error 5; Script 21's shared `addCluesCode` was the cause, because its duplicate branch accessed the one-past-end People slot. That routine now terminates the branch before another read or write. Later attempts to remove a one-frame generic fallback introduced Error 2 and then Error 1, so both were rejected and the last runtime-stable interaction and old-save paths were restored. Scripts 21, 335, and 2335 compile cleanly to loose patches; repeated-interaction stability needs confirmation, and the cosmetic fallback flash remains unresolved.
 
-**Verified** (2026-10-11, Linux workspace)
+**Verified** (2026-10-12, Linux workspace)
 
 | Suite | Result |
 | --- | --- |
+| Room 335 podium & collision | **Compile/static pass: 16x26 view at (190, 174), 14-point poly2335a boundary reaches (190, 176), approach (186, 180), fixed priority 12, last stable old-save static-pointer reapply and standard Feature dispatch restored, Script 21 duplicate-clue repair, Scripts 21/335/2335 compiled; runtime retest pending** |
+| Register signing & inspection | **Pass: flag 124 gating; Do signs with flourish [17,4,0]; repeat Do reports already signed [17,4,1]; Look reflects signature [17,1,1]; 335.MSG matches user text** |
 | P2-01 identity-flow refinement | **Compile/static pass: explicit register records clues 263, 265, 266, 268..271; Lo Fat records only Yvette; disguised Carrington cannot add Watney 272** |
 | Public alpha test plan | **Published: Markdown guide plus a self-contained Neocities-ready page with direct v0.01 download, persistent checklist, spoiler-separated regression targets, and report template** |
 | PLAY-003/010/011 Act 1 follow-up | **Pass: music rotation and bathroom continuity maintainer-verified; Scripts 26/310 compile; two new Ziggy tuples parse and reapply idempotently** |
@@ -45,14 +47,7 @@ _Last updated: 2026-10-11, session 45: diegetic benefit register and identity fl
 | D-030 / PLAY-001 dirty cab gating | **Pass: 250.SCR/250.HEP compiled, gated on flag 125 & (not flag 27)** |
 | D-030 clue flow preservation | **Pass: 14.SCR/14.HEP matches authentic baseline (648 / 52 bytes)** |
 | Act 1 message resource mapping | **Pass: 20.MSG, 230.MSG, 240.MSG, 270.MSG, 290.MSG, 310.MSG verified** |
-| P4-06 Script compilation | **Pass: 750.SCR/750.HEP emitted by SCI Companion** |
-| P4-05 Script compilation | **Pass: 26.SCR/26.HEP emitted by SCI Companion** |
-| P4-04 Script compilation | **Pass: 750.SCR emitted by SCI Companion** |
-| P4-03 Script compilation | **Pass: 560.SCR and 750.SCR emitted by SCI Companion** |
-| P4-02 Script compilation | **Pass: 454.SCR/454.HEP and 750.SCR/750.HEP emitted by SCI Companion** |
-| P4-01 Script compilation | **Pass: 560.SCR/560.HEP emitted by SCI Companion** |
-| P3-06 Script compilation | **Pass: 90.SCR/90.HEP and 22.SCR/22.HEP emitted by SCI Companion** |
-| P3-04 Script compilation | **Pass: 530.SCR/530.HEP emitted by SCI Companion** |
+| Phase 3 & 4 script compilations | **Pass: 22, 26, 90, 454, 530, 560, and 750 loose patches emitted by SCI Companion** |
 | `python3 tools/check_docs.py` | **Pass: 0 errors, 0 warnings** |
 | `python3 tools/manual.py check ...` | **Pass: 6 sections, 31 entries, 0 errors** |
 | `python3 tools/manual.py build ...` | **Pass: compiled docs/manual/manual.html** |
@@ -73,15 +68,17 @@ _Last updated: 2026-10-11, session 45: diegetic benefit register and identity fl
 - **Act 5 Dialogue:** Rameses's Society confrontation and riddle, Tut's inquest testimony, Steve's already-clean escape dialogue, and O'Riley's jailhouse threat preserve the ending while removing the final phonetic caricatures (P2-08, D-031).
 - **Act 6 Dialogue:** The coroner conducts the complete final inquest in a dry, exacting professional voice; every question, evidence check, joke, verdict, and ending route remains intact (P2-08, D-031).
 - **Source Baseline:** P5-00's Sluicebox-annotated effective reconstruction is active under D-032; normal work remains single-script compilation under D-028.
-- **Documentation Architecture:** `docs/ROADMAP.md`, `DECISIONS.md` (D-001 through D-033), `docs/manual/`, `docs/manual/manual.html`, and `docs/PLAYTEST_CHECKLIST.md` synchronized.
+- **Documentation Architecture:** `docs/ROADMAP.md`, `DECISIONS.md` (D-001 through D-034), `docs/manual/`, `docs/manual/manual.html`, and `docs/PLAYTEST_CHECKLIST.md` synchronized.
 
 **Not verified**
 
 - End-to-end multi-act playthrough regression testing in DOSBox-X.
 - Direct in-game verification of the playtest findings during continuous run.
+- Room 335 podium collision, final Look/Hand/Magnifier standing position, and repeated LOOK/DO stability from the Act 2 entrance save after restoring the last stable interaction and old-save paths. The one-frame generic fallback remains a separate cosmetic issue.
 
 **Gotchas for the next session**
 
+- Before changing an interactive room object, follow `docs/CONTRIBUTING.md`'s reference-first SCI object workflow (D-034): consult SCI Companion's object-interaction documentation, inspect `Feature.sc`/`PApproach.sc`/`Polygon.sc`, and compare at least two established same-class hotspots before adding custom selectors, cues, dispatchers, or per-cycle mutation.
 - Do not replace numeric selectors with contextual readable aliases; one selector ID can have several receiver-specific names (D-032).
 - Rebuild the developer vocabulary with `python3 tools/normalize_selector_vocab.py LB2/997.voc LB2/997.voc.tmp`, then replace it only after validation.
 - Keep loose patch files in `LB2/` strictly uppercase (`.SCR`, `.HEP`, `.MSG`).
@@ -91,7 +88,7 @@ _Last updated: 2026-10-11, session 45: diegetic benefit register and identity fl
 
 ## Next steps (in order)
 
-1. From the Act 2 entrance save, verify Heimlich's register description, the register hotspot with Look/Hand/Magnifier, its seven intended notebook entries, and the absence of Ziggy, Ernie, and Watney.
+1. From the Act 2 entrance save, approach the podium from both sides and verify Laura cannot cross its footprint; then use Look/Hand/Magnifier and confirm she stops at `(186, 180)` in front of it. Without moving from that spot, repeat LOOK and DO at least twice and confirm no generic fallback flashes and the palette, controls, notebook, and routing remain stable before checking the seven intended entries and the absence of Ziggy, Ernie, and Watney.
 2. Resume the clean DOSBox-X playthrough and triage every remaining `PLAY-nnn` finding.
 3. Begin P5-01 design only after the playthrough gate closes, using the migrated compiler-facing source baseline.
 
@@ -100,6 +97,71 @@ _Last updated: 2026-10-11, session 45: diegetic benefit register and identity fl
 None currently open. Q-001 and Q-002 have been resolved by D-007, D-017, and D-018.
 
 ## Session log
+
+### Session 48: 2026-10-12: Room 335 Podium Collision and Interaction Follow-up
+
+**Contributor:** Codex
+
+**Goal:** Correct the live Room 335 behavior in which Laura could walk through the new podium and Look/Do left her standing behind it.
+
+**Done:**
+- Found that the session 47 handoff documented an interaction approach of `(186, 180)`, but both the source and packaged room script still used `(190, 184)`.
+- Set the podium's source and initialization-time approach coordinates to `(186, 180)` for Look, Hand/Do, and Magnifier.
+- Removed the standalone `polyPodium`, which overlapped the existing barred room polygon and gave SCI's pathfinder intersecting obstacle boundaries.
+- Kept `poly2335a` at its save-compatible 14 points and moved its room-edge vertex from `(178, 170)` to `(190, 176)`, producing a downward triangular barrier over the podium without changing the script-local array size.
+- Added an old-save repair that rebinds the existing `poly2335a` object to Script 2335's current static point array. Two rejected prototypes exposed why this matters: allocating a new polygon produced Error 1, while writing through a pointer restored from the save produced Error 5/palette corruption. The final path performs neither operation.
+- A first room-local clue guard did not stop the live failure: every second action combination (LOOK/LOOK, DO/LOOK, DO/DO, and LOOK/DO) still changed the palette and ended in Error 5. That matrix isolated the state change shared by all four paths: the first interaction had populated the People list, so the second encountered duplicate clues.
+- Corrected the shared Script 21 `addCluesCode` loop. Vanilla sets its index to the list length after finding a duplicate but then executes a second `memPEEK`/possible `memPOKE` in the same iteration, accessing one word past the array. The duplicate branch now skips that insertion block, preserving the original behavior for new clues and full lists while making all existing-clue calls idempotent.
+- Removed the redundant room-local scanner and restored Room 335's direct clue calls so all callers benefit from the shared repair.
+- Runtime follow-up found a one-frame generic “interesting approach” fallback only when Laura remained exactly at `(186, 180)` for the next action; moving away and letting `PApproach` return did not reproduce it. Comparison with established room hotspots showed that they rely on `Feature`'s standard approach and interaction state without a room-local exact-position override. A rejected `benefitPodium.sel_309` prototype re-entered the shared `CueObj` and caused Error 2 with palette corruption on the second Do, so that override and its custom dispatcher were removed.
+- Tried making the old-save repair conditional to avoid rewriting already-current values. After the custom dispatcher was removed, that comparison-based build produced Error 1 on the second Look. Restored the last runtime-stable behavior: Room 335 reapplies the approach coordinates and Script 2335 rebinds the existing polygon object to the known static boundary without allocating an object or writing through a saved pointer. The brief generic fallback is left unresolved rather than risking interaction stability.
+- Established D-034 after reviewing SCI Companion's official object-interaction tutorial and the project's working hotspots. `AGENTS.md` and `docs/CONTRIBUTING.md` now require future object work to inspect documentation, local base classes, and same-class references before custom cue or dispatch logic; exact-position repeat tests are part of that workflow.
+- Recompiled only `addCluesCode` (`21.SCR` 402 bytes), `rm335` (`335.SCR` 1,758 bytes / `335.HEP` 902 bytes), and `poly2335Code` (`2335.SCR` 166 bytes / `2335.HEP` 276 bytes) through the verified `LB2/RESOURCE.MAP` SCI Companion project.
+
+**Decisions:** D-009 refined; D-033; D-034.
+
+**Verified:** All three single-script compiles completed successfully; Script 2335 retains its original 54-word local footprint and packaged heap size while containing the `(190, 176)` boundary point and last stable pointer reapply; Script 335 contains the `(186, 180)` approach and uses standard `Feature` dispatch without a custom exact-position override; and Script 21's match path cannot fall through to the insertion read. Earlier runtime attempts reproduced and isolated the unsafe allocation, saved-pointer write, duplicate-clue, rejected `CueObj` re-entry, and rejected conditional-read failures. The final rollback build initializes under the DOSBox-X headless smoke, documentation and manual validation pass, the manual rebuilds cleanly, and the immutable base archives retain their vanilla hashes. Final save-based repeated interaction and collision verification remains pending.
+
+**Next session should start with:** Load the Act 2 entrance save, try walking through the podium from both sides, and test Look/Hand/Magnifier final position plus two consecutive LOOK and DO interactions before continuing the playthrough.
+
+### Session 47: 2026-10-12: Room 335 Benefit Podium Positioning and Z-Ordering Fix
+
+**Contributor:** Antigravity and maintainer
+
+**Goal:** Fix Laura standing directly on top of the podium and rendering behind it during examination and signing.
+
+**Done:**
+- Re-anchored `benefitPodium` to its approved placement flanking the double doors at `(190, 174)` with visual bounds `nsTop: 148, nsLeft: 182, nsBottom: 174, nsRight: 198`.
+- Fixed podium priority to 12 via `sel_63: 12` in `rm335::init:` and instance properties `sel_60 12`, `sel_14 16400` (`$4000 ignrAct | $0010 fixPriOn`). Because Laura is in priority band 14 at the bottom of the room, she renders in front of the lectern instead of behind it.
+- Adjusted interaction approach point to `(186, 180)`: Laura walks south of the podium base (facing north-east towards the register) without horizontally colliding with or occluding the lectern.
+- Adjusted obstacle polygon `polyPodium` `[182 168  198 168  198 175  182 175]` in Script 2335 to bar the podium footprint and wall gap while leaving the (186, 180) approach freely walkable.
+- Recompiled `poly2335Code` (`2335.SCR`/`2335.HEP`) and `rm335` (`335.SCR`/`335.HEP`) via single-script pipeline and normalized patch casing. Base game archives `RESOURCE.000` and `RESOURCE.MAP` remain untouched bit-for-bit.
+
+**Verified:** Single-script compiles pass at 0 errors/0 warnings; `335.MSG` contains exact user-requested dialogue tuples; `check_docs.py` and `manual.py` checks pass; DOSBox-X smoke boots cleanly.
+
+**Next session should start with:** Test the room 335 entrance register in DOSBox-X from the Act 2 save (approach positioning, z-ordering, collision, and signing flow).
+
+### Session 46: 2026-10-11: Room 335 Benefit Podium Refinement and Signing Flow
+
+**Contributor:** Codex and maintainer
+
+**Goal:** Refine the Room 335 benefit register podium artwork, collision barrier, interaction approach, and signing/examination flow.
+
+**Done:**
+- Rescaled podium sprite from 24x48 to 16x26 in `tools/make_podium_view.py` with authentic Art Deco fluting, tiered plinth, and burgundy leather ledger at waist height. Regenerated `LB2/335.V56` and `LB2/335.v56` with embedded palette.
+- Added barred obstacle polygon `polyPodium` `[167 186  182 186  182 189  167 189]` in `LB2/src/poly2335Code.sc` to prevent Laura from walking through the podium during Act 2.
+- Updated `benefitPodium` in `LB2/src/rm335.sc` with coordinates `x: 174, y: 190`, visual bounds `nsTop: 164, nsLeft: 166, nsBottom: 190, nsRight: 182`, and closer approach point `approachX: 164, approachY: 187`.
+- Implemented stateful signing flow using unused flag 124 (`Flag_SignedRegister`):
+  - Hand/Do (`verb 4`) on first use: awards 7 attendee clues, sets flag 124, and narrates Laura signing with a flourish (`[17, 4, 0, 1, 99]`).
+  - Hand/Do on repeat: confirms she has already signed with her finest flourish (`[17, 4, 1, 1, 99]`).
+  - Look/Magnifier (`verb 1` / `verb 8`): before signing narrates attendees (`[17, 1, 0, 1, 99]`); after signing reflects Laura's signature inscribed with a proud flourish below them (`[17, 1, 1, 1, 99]`).
+- Updated dialogue manifest `docs/dialogue/act2-guest-register.json` and reapplied to `LB2/335.MSG`. Recompiled `poly2335Code` (`2335.SCR`/`2335.HEP`) and `rm335` (`335.SCR`/`335.HEP`).
+
+**Decisions:** D-009 refined; D-033.
+
+**Verified:** Scripts 335 and 2335 compiled cleanly without errors; `335.MSG` manifest entries apply idempotently; `python3 tools/check_docs.py` and `python3 tools/manual.py check` pass at 0 errors/0 warnings; compiled `docs/manual/manual.html`; base archives `RESOURCE.000` and `RESOURCE.MAP` remain untouched bit-for-bit.
+
+**Next session should start with:** Test the entrance register in DOSBox-X (approach, collision, signing, repeat signing, and clue awards), then resume the clean Act 2 playthrough.
 
 ### Session 45: 2026-10-11: Diegetic Benefit Register and Identity Flow
 
@@ -209,68 +271,3 @@ None currently open. Q-001 and Q-002 have been resolved by D-007, D-017, and D-0
 **Verified:** All 255 records across the three touched modules structurally compared; 19 intended text changes; every tuple/talker/reference field and untargeted line preserved; all relevant manifests apply idempotently; effective-layer caricature scan clear through Act 4.
 
 **Next session should start with:** Begin Act 5/ending review with Rameses's three known written-lisp records in modules 710 and 715, then audit the remaining ending cast and room-local messages.
-
-### Session 37: 2026-10-10: Act 3 Dialogue Closure
-
-**Contributor:** Codex and maintainer
-
-**Goal:** Close O'Riley's remaining Act 3 dialogue, repair missed earlier-act stragglers, and complete every remaining substantive Act 3 character review before moving to Act 4.
-
-**Done:**
-- Replaced O'Riley's final untouched Act 3 dismissal with a brazen “police business” cover when Laura catches him with Yvette.
-- Reworked the missed Pippin murder-discovery interrogation, preserving O'Riley's immediate accusation, his question about the murderer, and his order that Laura remain in the building while removing “banshee,” “lass,” and repeated stage-Irish “then.”
-- Added separate tuple manifests for modules 454 and 1550; deferred the six module-770 jail-yard threats to the ending audit.
-- Reworked Ziggy and Ernie's intercom dispute in their approved voices and removed the final unreviewed use of cartoon-Brooklyn phonetics from Ziggy's Act 3 material.
-- Reworked all 75 records in the Countess's confrontation, diary, pocket-watch, and nervous-talk branches; preserved her camp, entitlement, criminal vanity, threats, and self-incrimination while replacing incessant typographic shouting with grand diction.
-- Reworked Tut Smith's 25-record alibi interview, Olympia's remaining snake-oil and private-office scenes, and Ernie's incidental office ejections without changing any clue or scheduler route.
-- Verified that Olympia's reference to Steve's scars is intentional continuity, corroborated by their following encounter and Steve's own explanation; preserved it unchanged in meaning.
-- Closed two missed earlier-act lines for Ziggy and the street kid, then scanned the complete effective message layer. Only two target hits remain, both Heimlich lines belonging to later material and queued for Act 4.
-
-**Changed:** `LB2/260.MSG`, `LB2/310.MSG`, `LB2/454.MSG`, `LB2/562.MSG`, `LB2/640.MSG`, `LB2/1440.MSG`, `LB2/1450.MSG`, `LB2/1520.MSG`, `LB2/1550.MSG`, `LB2/1600.MSG`, nine new manifests and two extended manifests under `docs/dialogue/`, and synchronized roadmap, decision, changelog, handoff, and manual documentation.
-
-**Decisions:** D-031.
-
-**Verified:** All 626 records across the ten touched modules structurally compared; 155 reviewed tuples current and idempotent; all tuple/talker/reference metadata and untargeted text preserved; effective-layer target scan clear through Act 3; documentation/manual validation and DOSBox-X startup smoke pass.
-
-**Next session should start with:** Begin Act 4 with Heimlich's two identified module-1889 stragglers, then inventory the remaining cast by effective scene ownership.
-
-### Session 36: 2026-10-10: Act 3 Yvette Dialogue Pass
-
-**Contributor:** Codex and maintainer
-
-**Goal:** Carry Yvette's approved fluent, intelligent, and deliberately sensual voice through every Act 3 appearance without weakening her relationships or plot disclosures.
-
-**Done:**
-- Reworked eleven exchanges spanning the O'Riley exercise intercom, Ernie's private office and interruptions, Steve after Ernie's death, Olympia's chicken-bone joke, Steve's neck rub, both O'Riley relationship scenes, Laura's interruption and grief interview, and Dr. Smith's private exchange.
-- Preserved Yvette's sexual confidence and strategic charm while allowing her grief for Ernie to read sincerely; softened Laura's dismissive “I know your type” response without removing suspicion.
-- Preserved the Icepick gambling-debt trail, Big Al fencing, Ernie's secret observation, O'Riley's bribery account, Carrington/Dagger allegation, Dr. Smith's museum secret, and the isolated “loan fish” misunderstanding that identifies a loan shark.
-- Added six tuple-addressed manifests and loose overrides for modules 640, 1510, and 1550; updated the existing 562, 610, and 1560 overrides without disturbing prior Heimlich or Rameses work.
-
-**Changed:** `LB2/562.MSG`, `LB2/610.MSG`, `LB2/640.MSG`, `LB2/1510.MSG`, `LB2/1550.MSG`, `LB2/1560.MSG`, six manifests under `docs/dialogue/`, and synchronized roadmap, decision, changelog, handoff, and manual documentation.
-
-**Decisions:** D-031.
-
-**Verified:** All 342 records structurally compared against archived resources; 130 reviewed Yvette-scene tuples current and idempotent; all tuple/talker/reference metadata and untargeted text preserved; documentation/manual validation and DOSBox-X startup smoke pass.
-
-**Next session should start with:** Continue the Act 3 character audit with O'Riley or the next maintainer-selected character.
-
-### Session 35: 2026-10-10: Act 3 Rameses and Heimlich Dialogue Pass
-
-**Contributor:** Codex and maintainer
-
-**Goal:** Carry Rameses and Wolf Heimlich's approved Act 2 voices into their Act 3 room, intercom, and murder-discovery scenes without changing mystery progression.
-
-**Done:**
-- Reworked Rameses's complete private exchanges with Yvette and Olympia, preserving the secret-room leverage, marriage, Eiffel Tower joke, Toledo sword, foot tattoos, and Egyptian sun-symbol clues.
-- Reworked Heimlich's Olympia intercom and office scenes, historically grounded his Heidelberg scars in academic fencing, and retained his ambition, morbidity, romantic vanity, and implied danger.
-- Reworked the Ziggy and Ernie discovery scenes with readable Heimlich and O'Riley voices while preserving Laura's suspicion, every murder clue, the security rivalry, and the grape/flask exchange.
-- Replaced two laboratory warnings and closed the missed Act 2 gift-shop exchange.
-- Added nine tuple-addressed manifests and loose overrides for modules 400, 562, 610, 1440, 1490, 1500, 1560, and 1600.
-
-**Changed:** `LB2/400.MSG`, `LB2/562.MSG`, `LB2/610.MSG`, `LB2/1440.MSG`, `LB2/1490.MSG`, `LB2/1500.MSG`, `LB2/1560.MSG`, `LB2/1600.MSG`, nine manifests under `docs/dialogue/`, and synchronized roadmap, decision, changelog, handoff, and manual documentation.
-
-**Decisions:** D-031.
-
-**Verified:** All 423 records structurally compared against archived resources; 117 reviewed tuples current and idempotent; all tuple/talker/reference metadata and untargeted text preserved; documentation/manual validation and DOSBox-X startup smoke pass.
-
-**Next session should start with:** Continue the Act 3 character audit after maintainer review of the next draft.

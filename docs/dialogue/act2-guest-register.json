@@ -1,7 +1,7 @@
 {
   "module": 335,
   "character": "Benefit register",
-  "voice": "Concise diegetic reference establishing the names of legitimate benefit guests and museum staff.",
+  "voice": "Diegetic guestbook established in second-person narration listing attendees and reflecting Laura's signature.",
   "entries": [
     {
       "tuple": [6, 1, 0, 1, 99],
@@ -10,7 +10,22 @@
     {
       "tuple": [17, 1, 0, 1, 99],
       "add": true,
-      "text": "A leather-bound register lists Steve Dorian, Wolf Heimlich, Yvette Delacroix, Rameses Najeer, Countess Lavinia Waldorf-Carlton, Dr. Olympia Myklos, and Dr. Ptahsheptut 'Tut' Smith among the evening's guests and museum staff. Dr. Pippin Carter and Dr. Archibald Carrington III are also expected. Ziggy's name is conspicuously absent."
+      "text": "The leather-bound guestbook reads: 'Steve Dorian, Yvette Delacroix, Rameses Najeer, and Dr. Olympia Myklos' among others in the registry of the evening's guests."
+    },
+    {
+      "tuple": [17, 1, 1, 1, 99],
+      "add": true,
+      "text": "The leather-bound guestbook reads: 'Steve Dorian, Yvette Delacroix, Rameses Najeer, and Dr. Olympia Myklos' among others in the registry of the evening's guests.  Right below them, inscribed with unmistakable pride, is you: 'Laura Bow.'"
+    },
+    {
+      "tuple": [17, 4, 0, 1, 99],
+      "add": true,
+      "text": "Taking up the pen, you sign the guestbook with a flourish: 'Laura Bow.'"
+    },
+    {
+      "tuple": [17, 4, 1, 1, 99],
+      "add": true,
+      "text": "You have already signed the guest register; once is enough."
     }
   ]
 }
