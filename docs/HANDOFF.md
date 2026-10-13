@@ -78,6 +78,7 @@ _Last updated: 2026-10-12, session 51: alpha v0.02 packaged._
 
 **Gotchas for the next session**
 
+- Edit message text through `docs/dialogue/*.json` manifests and `python3 tools/dialogue.py LB2/<n>.MSG <manifest>`, not SCI Companion's message editor. Saving there under Wine deleted `LB2/335.MSG` and wrote an empty lowercase `335.msg` plus an empty `LB2/msg/335.shm`. A lowercase twin beside an uppercase patch also leaves DOSBox's case-insensitive lookup ambiguous.
 - Before changing an interactive room object, follow `docs/CONTRIBUTING.md`'s reference-first SCI object workflow (D-034): consult SCI Companion's object-interaction documentation, inspect `Feature.sc`/`PApproach.sc`/`Polygon.sc`, and compare at least two established same-class hotspots before adding custom selectors, cues, dispatchers, or per-cycle mutation.
 - Do not replace numeric selectors with contextual readable aliases; one selector ID can have several receiver-specific names (D-032).
 - Rebuild the developer vocabulary with `python3 tools/normalize_selector_vocab.py LB2/997.voc LB2/997.voc.tmp`, then replace it only after validation.
@@ -108,6 +109,7 @@ None currently open. Q-001 and Q-002 have been resolved by D-007, D-017, and D-0
 - `docs/PLAYTEST_CHECKLIST.md`: added the multi-slot save invariant, the “Resume Case” title button, and the podium collision, approach, signing, and exact-position repeat matrix.
 - `docs/ALPHA_PLAYTESTING.md` and `docs/alpha-playtest.html`: moved to v0.02, added a What's new section (Markdown), matching register and save-slot checks, a v0.02 download link and report template, and a new checklist storage key so v0.01 checkmarks do not carry over.
 - `docs/CHANGELOG.md`: split into `[0.02-alpha]` (register/podium, Lo Fat foreshadowing, Resume Case, Script 21 duplicate-clue fix, repeat-flash fix, save slots) and `[0.01-alpha]`.
+- Revised the register and Heimlich lines per the maintainer (manifests `act2-guest-register.json`, `act2-heimlich-entry.json`, reapplied idempotently to `335.MSG`) and rebuilt the zip with them.
 - Built `LB2/LB2-Redux-v0.02.zip` with the v0.01 layout (game files at the root plus `src/`), excluding all `LB2SG.*` saves and zip files: 946 files, 7,073,540 bytes.
 
 **Verified:** Zip integrity test passes; extracted `RESOURCE.000`/`RESOURCE.MAP` match the vanilla MD5s; extracted Scripts 21, 335, 990, and 2335 match `HEAD`; the extracted copy completes the headless DOSBox-X startup smoke; documentation check passes.

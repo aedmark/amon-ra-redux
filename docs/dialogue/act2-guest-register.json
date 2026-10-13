@@ -4,28 +4,58 @@
   "voice": "Diegetic guestbook established in second-person narration listing attendees and reflecting Laura's signature.",
   "entries": [
     {
-      "tuple": [6, 1, 0, 1, 99],
+      "tuple": [
+        6,
+        1,
+        0,
+        1,
+        99
+      ],
       "text": "A tall, imposing gentleman guards the door in a severe military uniform. A leather-bound register rests on the podium beside him."
     },
     {
-      "tuple": [17, 1, 0, 1, 99],
+      "tuple": [
+        17,
+        1,
+        0,
+        1,
+        99
+      ],
       "add": true,
-      "text": "The leather-bound guestbook reads: 'Steve Dorian, Yvette Delacroix, Rameses Najeer, and Dr. Olympia Myklos' among others in the registry of the evening's guests."
+      "text": "You scan the guestbook and make note of several important-sounding names of some guests you might encounter this evening."
     },
     {
-      "tuple": [17, 1, 1, 1, 99],
+      "tuple": [
+        17,
+        1,
+        1,
+        1,
+        99
+      ],
       "add": true,
-      "text": "The leather-bound guestbook reads: 'Steve Dorian, Yvette Delacroix, Rameses Najeer, and Dr. Olympia Myklos' among others in the registry of the evening's guests.  Right below them, inscribed with unmistakable pride, is you: 'Laura Bow.'"
+      "text": "Your name has now been immortalized into the guestbook."
     },
     {
-      "tuple": [17, 4, 0, 1, 99],
+      "tuple": [
+        17,
+        4,
+        0,
+        1,
+        99
+      ],
       "add": true,
-      "text": "Taking up the pen, you sign the guestbook with a flourish: 'Laura Bow.'"
+      "text": "Taking up the pen, you sign the guestbook with a flourish."
     },
     {
-      "tuple": [17, 4, 1, 1, 99],
+      "tuple": [
+        17,
+        4,
+        1,
+        1,
+        99
+      ],
       "add": true,
-      "text": "You have already signed the guest register; once is enough."
+      "text": "As much as you would like to believe, adding your name to the register a second time won't make you twice as popular."
     }
   ]
 }
