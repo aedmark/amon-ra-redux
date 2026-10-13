@@ -19,6 +19,8 @@ together afterward.
 ## Whole-game invariants
 
 - [ ] Save and restore work from ordinary rooms, inset views, conversations, danger sequences, and the inquest.
+- [ ] Consecutive new saves each receive their own slot (`LB2SG.000`, `.001`, …) and all restore; none overwrites another
+  unless Replace is chosen (Script 990).
 - [ ] Restoring a save preserves act, room, clock, score, inventory, notebook entries, NPC schedules, and music state.
 - [ ] Every visible person and meaningful prop gives a specific or contextually appropriate response to Look, Talk,
   Hand, and relevant inventory items; repeated generic responses are noted.
@@ -35,6 +37,7 @@ together afterward.
 ## Prologue and Act 1
 
 - [ ] About screen opens without a false memory warning.
+- [ ] The title screen's restore option reads “Resume Case” and opens the restore dialog.
 - [ ] Save/load remains available throughout the introduction and Act 1.
 - [ ] Speaking with Steve records the personal relationship path; skipping him retains the professional path later.
 - [ ] Showing the press pass once permanently establishes Laura's identity with the cabbie.
@@ -51,6 +54,11 @@ together afterward.
 - [ ] Record the People and Things lists immediately on arrival; check-in alone must not grant an omniscient cast list.
 - [ ] Heimlich's entrance description points out the leather-bound benefit register.
 - [ ] Reading the register with Look, Hand, or Magnifier records Steve, Heimlich, Yvette, Rameses, Countess, Olympia, and Tut, with no duplicate entries on repeat inspection.
+- [ ] Laura routes around the podium from both sides; Look, Hand, and Magnifier stop her in front of it at about
+  `(186, 180)`.
+- [ ] Hand signs once (flag 124); repeat Hand reports the existing signature; Look reflects it.
+- [ ] Without moving, repeat LOOK/LOOK, DO/LOOK, LOOK/DO, DO/DO, and a Magnifier repeat: only the register response
+  appears, with no generic flash, palette change, freeze, or Error 5 (D-035, D-036).
 - [ ] Ziggy, Ernie, and Watney Little are absent from the register; Ernie enters after his personal introduction and Watney only after evidence or explicit identification.
 - [ ] Determine whether Yvette's absence from the initial People list is intentional; compare her acquisition path with
   every other museum character and record any other missing or premature entries.

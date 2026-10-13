@@ -2,6 +2,20 @@
 
 Archived verbatim from `docs/HANDOFF.md` when its live session log exceeded ten entries.
 
+### Session 41: 2026-10-10: P5-00 Sluicebox Source Baseline Migration
+
+**Contributor:** Codex and maintainer
+
+**Goal:** Replace the mixed legacy decompilation with a coherent, maintainable 221-script baseline without losing any verified Redux behavior.
+
+**Done:** Verified the pinned `ra-dos-1.000` archive and exact version match; discovered that its contextual selector aliases cannot be represented in one SCI vocabulary; reconstructed the effective Redux resources through Sluicebox's annotation pipeline with stable numeric selector IDs; repaired nine demonstrated decompiler/compiler boundary cases; normalized the selector vocabulary while preserving SCI metadata names; imported all 221 `.sc`/`.sco` pairs and recovered script names; updated compile aliases, provenance, architecture, testing, roadmap, decision, handoff, changelog, and manual documentation.
+
+**Decisions:** D-032.
+
+**Verified:** 221/221 scripts and 2,337/2,337 functions decompiled; targeted blocker scripts compile at zero errors/warnings; isolated Compile All captured no errors; immutable repository archives retain vanilla MD5 hashes; documentation/manual validation and DOSBox-X startup smoke pass.
+
+**Next session should start with:** Finish the maintainer's clean playthrough gate, then begin P5-01 design against the migrated source baseline.
+
 ### Session 39: 2026-10-10: Act 5 and Ending Dialogue Closure
 
 **Contributor:** Codex and maintainer

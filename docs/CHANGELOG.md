@@ -6,6 +6,23 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+Nothing yet.
+
+## [0.02-alpha] - 2026-10-12
+
+### Changed
+- Replaced the invisible Act 2 all-cast notebook grant with an inspectable benefit register on a podium beside Heimlich. Reading it records only legitimate guests and staff; Ziggy never signed, Ernie keeps his natural introduction, and Watney stays hidden behind Carrington's identity until evidence exposes him. Hand signs Laura's name once; later Looks reflect her signature (P2-01, D-009, D-033).
+- The podium blocks ordinary walking, and Look, Hand, and Magnifier stop Laura in front of it. Old saves receive the current room boundary safely (D-033, D-034).
+- Lo Fat now foreshadows Heimlich and Olympia without naming them while preserving Yvette's explicit Act 1 introduction and related inquiry dialogue (P2-01).
+- The title screen's restore option now reads “Resume Case.”
+
+### Fixed
+- Repeated register inspections no longer corrupt the People list or crash with Error 5 when rediscovering existing clues (shared Script 21 clue insertion).
+- Repeating Look or Hand while Laura stands at the podium shows only the guestbook response, with no flash of a generic message (D-035, D-036).
+- Saving a new game no longer overwrites the previous saved game; each save receives its own slot (Script 990).
+
+## [0.01-alpha] - 2026-10-11
+
 ### Added
 - Comprehensive 4-phase modernization roadmap covering all 24 items from the design outline (`docs/ROADMAP.md`).
 - Machine-readable 3x Documentation Scheme data source (`amon-ra.manual.json`) and compiled standalone HTML (`docs/manual/manual.html`).
@@ -13,7 +30,6 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - Verification harness integrating Wine-based SCI Companion and DOSBox-X.
 
 ### Changed
-- Replaced the invisible Act 2 all-cast notebook grant with an inspectable benefit register: legitimate guests and staff are recorded only when Laura reads it, Ziggy never signed, Ernie retains his natural introduction, and Watney remains hidden behind Carrington's identity until evidence exposes him. The podium now blocks ordinary walking, Look/Hand/Magnifier stop Laura in front of it, old saves receive the current static boundary safely, repeated inspections no longer corrupt the People list while rediscovering existing clues, and unsupported follow-up dispatches cannot flash the global fallback before the guestbook response, and repeating Look or Hand while Laura stands at the podium shows only the guestbook response. Saving a new game no longer overwrites the previous saved game. Lo Fat now foreshadows Heimlich and Olympia without naming them while preserving Yvette's explicit Act 1 introduction and related inquiry dialogue (P2-01, D-033, D-035, D-036).
 - Restored the speakeasy's randomized music rotation and seamless bathroom-return continuity, replaced the skull-and-crossbones act-grade backdrop with the native gold Art Deco frame, and gave Ziggy truthful Act 1 replies about Yvette and the Countess (PLAY-003, PLAY-010, PLAY-011).
 - Completed the Act 6 dialogue audit by giving the coroner a dry, exacting professional voice throughout the final inquest, replacing dated language and needlessly hysterical accusations while preserving all sixteen questions, evidence checks, jokes, verdicts, and ending routes (P2-08, D-031).
 - Migrated all 221 compiler-facing scripts to a coherent Sluicebox-annotated baseline reconstructed from the effective Redux resources, preserving every compiled fix while replacing opaque global/object/procedure names and documenting selector-vocabulary constraints and provenance (P5-00, D-032).

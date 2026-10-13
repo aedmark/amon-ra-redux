@@ -12,9 +12,9 @@ Security: [SECURITY.md](SECURITY.md). Changes: [CHANGELOG.md](CHANGELOG.md). Old
 
 ## Current state
 
-_Last updated: 2026-10-12, session 50: room 335 podium repeat flash fixed; save slots fixed._
+_Last updated: 2026-10-12, session 51: alpha v0.02 packaged._
 
-**Where things stand, in one paragraph:** Alpha v0.01 is public in the SQH Discord from `master`. The room 335 benefit podium remains at `(190, 174)` with visual bounds `nsTop: 148, nsLeft: 182, nsBottom: 174, nsRight: 198` and fixed priority 12. Script 2335's existing 14-point barred room polygon reaches `(190, 176)` around the podium, and Script 335 routes Look/Hand/Magnifier to `(186, 180)` in front of the ledger. Old saves rebind that same polygon object to current static points without heap writes or new objects. Script 21's duplicate-clue repair prevents the prior Error 5 memory corruption. The remaining one-frame “interesting approach” flash was traced to the global fallback for an unsupported verb dispatch occurring before the valid podium dispatch on exact-position repeats. The podium now handles its three intended verbs normally and locally consumes any unsupported dispatch instead of forwarding it to the global narrator (D-035). The flash persisted, and occurred only on the engine's immediate-dispatch ending, when Laura was already in place. The podium now sets `sightAngle` -1 and `approachDist` 4, so repeats take the same deferred `CueObj` path as a fresh approach (D-036). The maintainer confirmed in DOSBox-X that repeat LOOK and DO show only the guestbook response. Saved games no longer overwrite slot 0 (Script 990 fix).
+**Where things stand, in one paragraph:** Alpha v0.01 is public in the SQH Discord; alpha v0.02 (`LB2/LB2-Redux-v0.02.zip`, built from `master` at `43b1fbc`) is packaged and its tester guides are updated, pending publication. The room 335 benefit podium remains at `(190, 174)` with visual bounds `nsTop: 148, nsLeft: 182, nsBottom: 174, nsRight: 198` and fixed priority 12. Script 2335's existing 14-point barred room polygon reaches `(190, 176)` around the podium, and Script 335 routes Look/Hand/Magnifier to `(186, 180)` in front of the ledger. Old saves rebind that same polygon object to current static points without heap writes or new objects. Script 21's duplicate-clue repair prevents the prior Error 5 memory corruption. The remaining one-frame “interesting approach” flash was traced to the global fallback for an unsupported verb dispatch occurring before the valid podium dispatch on exact-position repeats. The podium now handles its three intended verbs normally and locally consumes any unsupported dispatch instead of forwarding it to the global narrator (D-035). The flash persisted, and occurred only on the engine's immediate-dispatch ending, when Laura was already in place. The podium now sets `sightAngle` -1 and `approachDist` 4, so repeats take the same deferred `CueObj` path as a fresh approach (D-036). The maintainer confirmed in DOSBox-X that repeat LOOK and DO show only the guestbook response. Saved games no longer overwrite slot 0 (Script 990 fix).
 
 **Verified** (2026-10-12, Linux workspace)
 
@@ -23,7 +23,7 @@ _Last updated: 2026-10-12, session 50: room 335 podium repeat flash fixed; save 
 | Room 335 podium & collision | **Compile/static pass: 16x26 view at (190, 174), 14-point poly2335a boundary reaches (190, 176), approach (186, 180), fixed priority 12, stable old-save static-pointer reapply, Script 21 duplicate-clue repair, and object-local unsupported-dispatch guard; Scripts 21/335/2335 compiled; runtime retest pending** |
 | Register signing & inspection | **Pass: flag 124 gating; Do signs with flourish [17,4,0]; repeat Do reports already signed [17,4,1]; Look reflects signature [17,1,1]; 335.MSG matches user text** |
 | P2-01 identity-flow refinement | **Compile/static pass: explicit register records clues 263, 265, 266, 268..271; Lo Fat records only Yvette; disguised Carrington cannot add Watney 272** |
-| Public alpha test plan | **Published: Markdown guide plus a self-contained Neocities-ready page with direct v0.01 download, persistent checklist, spoiler-separated regression targets, and report template** |
+| Public alpha test plan | **Updated for v0.02: Markdown guide, Neocities page (download link, fresh checklist storage key, v0.02 report template), What's new section, and register/save-slot checks; v0.02 zip built from `43b1fbc` (946 files, no saves), vanilla archive MD5s and committed patches verified, extracted copy boots** |
 | PLAY-003/010/011 Act 1 follow-up | **Pass: music rotation and bathroom continuity maintainer-verified; Scripts 26/310 compile; two new Ziggy tuples parse and reapply idempotently** |
 | P2-08 Act 6 final inquest | **Pass: all 77 module-750 records structurally compared; exactly 28 approved text changes; all tuple/talker/reference metadata and ending routes preserved** |
 | P5-00 coherent source inventory | **Pass: 221 `.sc` + 221 `.sco`; no nested duplicate tree or unknown-property placeholders** |
@@ -97,6 +97,22 @@ _Last updated: 2026-10-12, session 50: room 335 podium repeat flash fixed; save 
 None currently open. Q-001 and Q-002 have been resolved by D-007, D-017, and D-018.
 
 ## Session log
+
+### Session 51: 2026-10-12: Alpha v0.02 Playtest Package
+
+**Contributor:** Claude Code
+
+**Goal:** Update the playtest checklists for the post-v0.01 changes and package alpha v0.02.
+
+**Done:**
+- `docs/PLAYTEST_CHECKLIST.md`: added the multi-slot save invariant, the “Resume Case” title button, and the podium collision, approach, signing, and exact-position repeat matrix.
+- `docs/ALPHA_PLAYTESTING.md` and `docs/alpha-playtest.html`: moved to v0.02, added a What's new section (Markdown), matching register and save-slot checks, a v0.02 download link and report template, and a new checklist storage key so v0.01 checkmarks do not carry over.
+- `docs/CHANGELOG.md`: split into `[0.02-alpha]` (register/podium, Lo Fat foreshadowing, Resume Case, Script 21 duplicate-clue fix, repeat-flash fix, save slots) and `[0.01-alpha]`.
+- Built `LB2/LB2-Redux-v0.02.zip` with the v0.01 layout (game files at the root plus `src/`), excluding all `LB2SG.*` saves and zip files: 946 files, 7,073,540 bytes.
+
+**Verified:** Zip integrity test passes; extracted `RESOURCE.000`/`RESOURCE.MAP` match the vanilla MD5s; extracted Scripts 21, 335, 990, and 2335 match `HEAD`; the extracted copy completes the headless DOSBox-X startup smoke; documentation check passes.
+
+**Next session should start with:** Publish v0.02 (zip and updated `alpha-playtest.html`) when the maintainer is ready, then collect reports.
 
 ### Session 50: 2026-10-12: Room 335 Podium Repeat Flash and Save Slots
 
@@ -255,17 +271,3 @@ None currently open. Q-001 and Q-002 have been resolved by D-007, D-017, and D-0
 **Verified:** All 77 records in module 750 structurally compared; exactly 28 approved text tuples changed; all tuple/talker/reference metadata preserved; the Act 6 manifest reapplies idempotently.
 
 **Next session should start with:** Run the clean DOSBox-X playthrough, including every final-inquest outcome required by `docs/TESTING.md`.
-
-### Session 41: 2026-10-10: P5-00 Sluicebox Source Baseline Migration
-
-**Contributor:** Codex and maintainer
-
-**Goal:** Replace the mixed legacy decompilation with a coherent, maintainable 221-script baseline without losing any verified Redux behavior.
-
-**Done:** Verified the pinned `ra-dos-1.000` archive and exact version match; discovered that its contextual selector aliases cannot be represented in one SCI vocabulary; reconstructed the effective Redux resources through Sluicebox's annotation pipeline with stable numeric selector IDs; repaired nine demonstrated decompiler/compiler boundary cases; normalized the selector vocabulary while preserving SCI metadata names; imported all 221 `.sc`/`.sco` pairs and recovered script names; updated compile aliases, provenance, architecture, testing, roadmap, decision, handoff, changelog, and manual documentation.
-
-**Decisions:** D-032.
-
-**Verified:** 221/221 scripts and 2,337/2,337 functions decompiled; targeted blocker scripts compile at zero errors/warnings; isolated Compile All captured no errors; immutable repository archives retain vanilla MD5 hashes; documentation/manual validation and DOSBox-X startup smoke pass.
-
-**Next session should start with:** Finish the maintainer's clean playthrough gate, then begin P5-01 design against the migrated source baseline.

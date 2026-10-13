@@ -10,10 +10,10 @@ only crashes.
 
 ## Before you begin
 
-- Use the build named `LB2-Redux-v0.01.zip` and keep an untouched backup.
+- Use the build named `LB2-Redux-v0.02.zip` and keep an untouched backup.
 - Extract it into a fresh directory. Do not mix its files with another Redux build, the CD edition, or an existing
   modded installation.
-- Start a new game for the most useful test. Old Sierra saves may contain state that bypasses a fix.
+- Start a new game for the most useful test. Old Sierra saves, including v0.01 saves, may contain state that bypasses a fix.
 - DOSBox-X is the reference environment. Reports from ScummVM are welcome, but identify them as ScummVM results.
 - Keep several rotating saves, especially near the end of each act and immediately before anything goes wrong.
 - Do not overwrite the save that reproduces a bug. Attach the complete matching `LB2SG.*` save set when possible.
@@ -21,11 +21,21 @@ only crashes.
 If launching manually in DOSBox-X, mount the extracted game directory as drive C and run `SCIDHUV.EXE`. Repository
 users can run `./tools/run_dosbox.sh` from the project root.
 
+## What's new in v0.02
+
+- Act 2's check-in no longer hands Laura the whole cast list. A leather-bound benefit register on a podium beside
+  Heimlich records the guests and staff when Laura reads it, and Hand lets her sign it.
+- Lo Fat foreshadows two museum figures instead of naming them outright.
+- Saving a new game no longer overwrites your previous save. If you tested v0.01, your saves may have been
+  overwritten silently; please re-check save and restore with several slots.
+- The title screen's restore option now reads “Resume Case.”
+
 ## What every tester should watch for
 
 - [ ] The game starts without a black screen, Sierra error dialog, or missing-resource message.
 - [ ] A new game reaches the newsroom and responds normally to mouse and keyboard input.
 - [ ] Save, restore, restart, and quit work wherever the interface makes them available.
+- [ ] Several saves made in a row each keep their own slot; none replaces an earlier save unless you choose Replace.
 - [ ] Restoring a save preserves the room, score, inventory, notebook, music, clock, and character positions.
 - [ ] No character disappears during a conversation, walks through scenery, or blocks progression.
 - [ ] Room exits, enlarged close-ups, dialogue windows, and the icon bar open and close cleanly.
@@ -51,6 +61,8 @@ Use this section if you want to play naturally without being told where every cl
 ### Act 2
 
 - [ ] Note which People and Things appear in the notebook immediately upon arrival.
+- [ ] Find the benefit register and try every action on it, more than once, both after walking up and while standing
+  right in front of it.
 - [ ] Meet characters in an unusual order and watch for anyone Laura names before learning who they are.
 - [ ] Ask characters about people standing nearby and note any response that feels unnaturally isolated.
 - [ ] Confirm characters remain present until a conversation ends, then resume moving normally.
@@ -102,6 +114,11 @@ Use this section if you want to play naturally without being told where every cl
 ### Act 2: museum party
 
 - [ ] Check-in alone does not fill the notebook; reading the entrance register adds its named guests and staff, while Ziggy, Ernie, and Watney remain absent.
+- [ ] Laura cannot walk through or behind the register podium from either side.
+- [ ] Look, Hand, and the Magnifying Glass walk Laura to stand in front of the podium before the response.
+- [ ] Hand signs the register once; repeating it says she already signed, and Look then mentions her signature.
+- [ ] Repeating Look and Hand without moving shows only the register response, with no brief generic message first,
+  no palette change, freeze, or error, and no duplicate People entries.
 - [ ] Lo Fat names Yvette in Act 1 but only foreshadows the severe security chief and black-clad woman doctor.
 - [ ] Ernie enters after introducing himself, and Watney Little appears only after Laura discovers evidence or hears an explicit identification.
 - [ ] Pippin, Dr. Smith, the Countess, Yvette, O'Riley, and Rameses introduce themselves if their earlier introduction
@@ -168,7 +185,7 @@ existing report first, but add your save or reproduction details when they provi
 Please use this template:
 
 ```text
-Alpha build: v0.01
+Alpha build: v0.02
 Environment: DOSBox-X version / ScummVM version / other
 Operating system:
 Act and location:

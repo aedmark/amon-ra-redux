@@ -10,6 +10,8 @@
 /LB2/README
 /LB2_vanilla/
 /LB2/CD/
+/LB2/LB2SG.*
+/LB2/*.zip
 
 # SCI Companion compiled object caches (tracked as baseline)
 # *.sco
