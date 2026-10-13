@@ -78,7 +78,7 @@ _Last updated: 2026-10-12, session 51: alpha v0.02 packaged._
 
 **Gotchas for the next session**
 
-- Edit message text through `docs/dialogue/*.json` manifests and `python3 tools/dialogue.py LB2/<n>.MSG <manifest>`, not SCI Companion's message editor. Saving there under Wine deleted `LB2/335.MSG` and wrote an empty lowercase `335.msg` plus an empty `LB2/msg/335.shm`. A lowercase twin beside an uppercase patch also leaves DOSBox's case-insensitive lookup ambiguous.
+- Edit message text through `docs/dialogue/*.json` manifests and `python3 tools/dialogue.py LB2/<n>.MSG <manifest>`, not SCI Companion's message editor. SCI Companion can read but not write message resources at version `0xD53` or older: upstream `Message.cpp` implements only `MessageWriteTo_4000` and asserts "not implemented" for older formats, so a save writes a 4-byte header with no records. Every LB2 message resource is older (`0x0C29`–`0x0D0C`). Confirmed on the case-insensitive workspace (D-037).
 - Before changing an interactive room object, follow `docs/CONTRIBUTING.md`'s reference-first SCI object workflow (D-034): consult SCI Companion's object-interaction documentation, inspect `Feature.sc`/`PApproach.sc`/`Polygon.sc`, and compare at least two established same-class hotspots before adding custom selectors, cues, dispatchers, or per-cycle mutation.
 - Do not replace numeric selectors with contextual readable aliases; one selector ID can have several receiver-specific names (D-032).
 - Rebuild the developer vocabulary with `python3 tools/normalize_selector_vocab.py LB2/997.voc LB2/997.voc.tmp`, then replace it only after validation.

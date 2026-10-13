@@ -463,7 +463,7 @@ filesystem, so SCI Companion's own Save and Compile work without post-processing
   rewrote `335.scr`/`335.hep` in place byte-identically. Clones on a case-sensitive filesystem reintroduce the Wine
   collision, so the case-insensitive workspace is a requirement. exFAT lacks Unix permissions (`core.fileMode false`),
   symlinks (the unused `.venv` stays off the drive), and journaling (eject cleanly and push often). D-028's one-script
-  rule still stands. The message editor's save still needs a retest on this workspace.
+  rule still stands. SCI Companion's message editor cannot save LB2 message resources at all: upstream implements writing only for format 4000+, and LB2's are `0x0C29`–`0x0D0C`. Message edits stay on `tools/dialogue.py` manifests.
 
 ---
 
