@@ -37,3 +37,8 @@ SCICompanion/include/
  
 # PDF outline
 /Dagger of Amon Ra Modernization.pdf
+
+# IDE and Python tooling artifacts (never commit)
+.idea/
+__pycache__/
+*.pyc

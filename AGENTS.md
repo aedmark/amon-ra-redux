@@ -23,6 +23,8 @@ linked below, not in an agent's private memory.
 - Apply fixes as loose `.SCR`, `.HEP`, and `.MSG` files in `LB2/`.
 - Record architectural choices in `docs/DECISIONS.md`.
 - Keep 3x manual sources (`docs/manual/amon-ra.manual.json`) in sync with code fixes.
+- Never stage or commit IDE or tooling artifacts: `.idea/`, `__pycache__/`, `*.pyc`. Stage files by explicit path, not `git add -A`.
+- Commit saved games (`LB2/LB2SG.*`) only when the maintainer asks; they are personal test saves.
 
 ## Finishing a change
 
