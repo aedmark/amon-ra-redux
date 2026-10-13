@@ -444,6 +444,29 @@ takes the same deferred `CueObj` path as an interaction after walking up.
 
 ---
 
+## D-037 Lowercase Loose Patches on a Case-Insensitive Workspace
+
+Track loose patches under the lowercase names SCI Companion writes, and keep the working copy on a case-insensitive
+filesystem, so SCI Companion's own Save and Compile work without post-processing.
+
+- **Context:** SCI Companion runs under Wine and writes lowercase patch names (`335.scr`, `335.msg`). On the
+  case-sensitive ext4 checkout this collided with the tracked uppercase files. Wine resolves names case-insensitively,
+  so a save deleted `335.MSG` and left an empty `335.msg`, and compiles failed with `ERROR_ALREADY_EXISTS` (183) unless
+  `tools/compile.py` deleted the patch first. That deletion in turn dropped scripts from SCI Companion's list. The
+  uppercase convention had no engine requirement: the interpreter, DOSBox-X, and ScummVM are case-insensitive.
+- **Decision:** Move the working copy to the maintainer's exFAT drive, which is case-insensitive and case-preserving.
+  Rename all 466 tracked loose `.SCR`/`.HEP`/`.MSG`/`.V56` patches to lowercase as pure renames. `tools/compile.py`
+  no longer deletes or renames files; it only triggers SCI Companion and confirms the outputs were rewritten.
+  `tools/uppercase_patches.py` is removed. Remove the stale `SCICompanion/docs` folder, which collided with
+  `SCICompanion/Docs` on a case-insensitive filesystem.
+- **Consequences:** Pressing Compile in SCI Companion produces exactly the tracked names; a test recompile of `rm335`
+  rewrote `335.scr`/`335.hep` in place byte-identically. Clones on a case-sensitive filesystem reintroduce the Wine
+  collision, so the case-insensitive workspace is a requirement. exFAT lacks Unix permissions (`core.fileMode false`),
+  symlinks (the unused `.venv` stays off the drive), and journaling (eject cleanly and push often). D-028's one-script
+  rule still stands. The message editor's save still needs a retest on this workspace.
+
+---
+
 ## Open questions
 
 - **Q-001**: Resolved by D-007: Omit insensitive original CD voice tracks; restore murder lines as text messages in

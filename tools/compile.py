@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 tools/compile.py - Recompile an SCI script using SCI Companion under Wine
-and ensure uppercase loose patch overrides are created in LB2/.
+and report the lowercase loose patch overrides written to LB2/ (D-037).
 """
 
 import sys
@@ -52,17 +52,14 @@ def compile_script(target):
     name = SCRIPT_MAP.get(target.lower(), target)
     if name.endswith(".sc"):
         name = name[:-3]
-    
+
     script_num = get_script_number(name)
     print(f"[*] Compiling script '{name}' (script number {script_num})...")
 
-    # Clean existing patch files and bak files for this script before compiling
-    # to avoid Wine MoveFile ERROR_ALREADY_EXISTS (183)
-    if script_num is not None:
-        for ext in [".scr", ".SCR", ".hep", ".HEP", ".scr.bak", ".hep.bak"]:
-            fpath = f"LB2/{script_num}{ext}"
-            if os.path.exists(fpath):
-                os.remove(fpath)
+    # SCI Companion writes lowercase patch names (D-037). On a case-insensitive
+    # workspace it replaces the existing files in place, so nothing is deleted first.
+    outputs = [f"LB2/{script_num}.scr", f"LB2/{script_num}.hep"] if script_num is not None else []
+    before = {p: os.path.getmtime(p) if os.path.exists(p) else None for p in outputs}
 
     # Ensure compile_any.exe exists
     exe_path = "tools/compile_any.exe"
@@ -72,38 +69,24 @@ def compile_script(target):
     # Call compile_any.exe
     cmd = ["wine", exe_path, name]
     res = subprocess.run(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
+    print(res.stdout)
     if res.returncode != 0:
-        print(f"[-] Compilation trigger failed: {res.stderr}")
+        print(f"[-] Compilation trigger failed: {res.stderr.strip()[-500:]}")
         return False
 
-    print(res.stdout)
+    ok = True
+    for path in outputs:
+        if not os.path.exists(path):
+            print(f"[-] Missing output {path}")
+            ok = False
+        elif before[path] is not None and os.path.getmtime(path) == before[path]:
+            print(f"[-] {path} was not rewritten")
+            ok = False
+        else:
+            print(f"[+] {path} ({os.path.getsize(path)} bytes)")
 
-    # Check generated files in LB2/
-    if script_num is not None:
-        scr_lower = f"LB2/{script_num}.scr"
-        hep_lower = f"LB2/{script_num}.hep"
-        scr_bak = f"LB2/{script_num}.scr.bak"
-        hep_bak = f"LB2/{script_num}.hep.bak"
-        scr_upper = f"LB2/{script_num}.SCR"
-        hep_upper = f"LB2/{script_num}.HEP"
-
-        # If bak file was created because move failed, use bak file
-        if os.path.exists(scr_bak) and not os.path.exists(scr_lower):
-            shutil.move(scr_bak, scr_upper)
-            print(f"[+] Moved {scr_bak} -> {scr_upper} ({os.path.getsize(scr_upper)} bytes)")
-        elif os.path.exists(scr_lower):
-            shutil.move(scr_lower, scr_upper)
-            print(f"[+] Moved {scr_lower} -> {scr_upper} ({os.path.getsize(scr_upper)} bytes)")
-
-        if os.path.exists(hep_bak) and not os.path.exists(hep_lower):
-            shutil.move(hep_bak, hep_upper)
-            print(f"[+] Moved {hep_bak} -> {hep_upper} ({os.path.getsize(hep_upper)} bytes)")
-        elif os.path.exists(hep_lower):
-            shutil.move(hep_lower, hep_upper)
-            print(f"[+] Moved {hep_lower} -> {hep_upper} ({os.path.getsize(hep_upper)} bytes)")
-
-    print(f"[+] Compilation of {name} completed successfully.")
-    return True
+    print(f"[{'+' if ok else '-'}] Compilation of {name} {'completed' if ok else 'FAILED'}.")
+    return ok
 
 if __name__ == "__main__":
     if len(sys.argv) < 2:

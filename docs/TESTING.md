@@ -28,7 +28,7 @@ distinct verification boundaries:
 
 1. Start SCI Companion under Wine by opening the working archive explicitly: `wine SCICompanion/SCICompanion.exe 'Z:\home\gordonk\PycharmProjects\amon-ra-redux\LB2\RESOURCE.MAP'`. Do not pass `game.ini`, and do not open the browse-only copy. Its hybrid settings remain SCI 1.0 map, SCI 1.1 package/compression, and VGA 1.1 View/Pic (D-028).
 2. Copy the script's current `N.SCR`/`N.HEP` somewhere outside the repository: `tools/compile.py` deletes them first and does not restore them if the helper fails.
-3. Compile one script: `python3 tools/compile.py rm750` (name or `.sc` base name). It drives the GUI through `tools/compile_any.exe`, renames the lowercase output to uppercase, and prints the output sizes. If the script is missing from the helper's list (`wine tools/list_scripts.exe`), restart SCI Companion; it drops a script when its patch files vanish and does not re-add it.
+3. Compile one script: `python3 tools/compile.py rm750` (name or `.sc` base name). It drives the GUI through `tools/compile_any.exe` and confirms that the lowercase `.scr`/`.hep` were rewritten in place (D-037); pressing Compile in SCI Companion is equivalent. If the script is missing from the helper's list (`wine tools/list_scripts.exe`), restart SCI Companion; it drops a script when its patch files vanish and does not re-add it.
 4. Stop SCI Companion with `wineserver -k` so it cannot touch `LB2/` again.
 5. Boot-test (D-029): `./tools/run_dosbox.sh`. The intro must appear; a black screen or an "Oops! Error n" dialog means the patch set is bad even when the compile reported success.
 6. Only then commit.
@@ -67,7 +67,7 @@ For `P4-05`, retain a save immediately before each Script 26 act break. With eve
 
 - **Never rebuild resources and never Compile All against `LB2/` (D-028).** A rebuild replaces `RESOURCE.000`/`RESOURCE.MAP` with a 5-byte-map volume holding only loose files (healthy base: `RESOURCE.000` 5,035,964 bytes, `RESOURCE.MAP` 6,489 bytes; compare `LB2_vanilla/`). Compile All regenerates every patch and previously produced a build that stalls on a black screen at boot. Compile single scripts with `tools/compile.py` and boot the game before committing. P5-00's one full-tree compatibility check ran only in a disposable `/tmp` copy and its rebuilt archives were discarded.
 - A successful compile does not prove the game boots. After every compile, run `./tools/run_dosbox.sh` and confirm the intro appears.
-- SCI Companion under Wine writes lowercase patch names; `tools/compile.py` renames them, and `python3 tools/uppercase_patches.py` fixes stragglers without overwriting.
+- SCI Companion under Wine writes lowercase patch names, which are the tracked names (D-037). Keep the working copy on a case-insensitive filesystem so a save replaces the existing patch instead of creating a case twin.
 - Headless DOSBox-X startup verifies initialization but does not traverse dialogue or animation branches; deterministic
   save-state playback and manual interaction remain necessary for behavioral verification.
 - DOSBox-X reproduces the original interpreter environment but offers less direct SCI object/flag introspection than a

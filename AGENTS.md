@@ -20,7 +20,8 @@ linked below, not in an agent's private memory.
 
 - Reference roadmap item IDs (`P<phase>-<nn>`) and decision IDs (`D-<nnn>`).
 - Preserve immutable base game archives (`LB2/RESOURCE.000`, `LB2/RESOURCE.MAP`).
-- Apply fixes as loose `.SCR`, `.HEP`, and `.MSG` files in `LB2/`.
+- Apply fixes as loose lowercase `.scr`, `.hep`, and `.msg` files in `LB2/`, the names SCI Companion writes (D-037).
+- Work from a case-insensitive filesystem (the maintainer's exFAT drive). On case-sensitive ext4, SCI Companion under Wine deletes or clobbers patches whose names differ only by case.
 - Record architectural choices in `docs/DECISIONS.md`.
 - Keep 3x manual sources (`docs/manual/amon-ra.manual.json`) in sync with code fixes.
 - Never stage or commit IDE or tooling artifacts: `.idea/`, `__pycache__/`, `*.pyc`. Stage files by explicit path, not `git add -A`.
