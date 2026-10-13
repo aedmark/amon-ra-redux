@@ -392,6 +392,58 @@ interaction machinery.
 
 ---
 
+## D-035 Consume Unsupported Podium Dispatches at the Object Boundary
+
+Keep the Room 335 benefit podium's valid verbs on the engine path while preventing an extra unsupported dispatch from
+reaching the game's generic narrator fallback.
+
+- **Context:** Runtime testing showed that after Laura approached the podium once, repeating an action without moving
+  briefly displayed “While this is an interesting approach, it serves no practical purpose.” before the correct
+  guestbook response. Moving away and approaching again avoided the flash. The exact text is module 0's verb-47
+  catch-all, selected by `proc0_6` only when a verb not recognized by the global fallback reaches it. LOOK, DO, and
+  Magnifier already reached the podium's correct messages; custom `CueObj` and exact-position dispatch prototypes had
+  previously caused Error 2, palette corruption, and follow-on instability.
+- **Decision:** Preserve `Feature` event handling, `PApproach`, `CueObj`, the approach coordinates, old-save repairs,
+  and all clue writes. `benefitPodium.sel_300` handles LOOK, DO, and Magnifier exactly as before, but returns handled for
+  every unsupported dispatch instead of calling the superclass/global fallback. This adds no object, state, selector
+  override, cue manipulation, or save data.
+- **Consequences:** The extra follow-up dispatch cannot expose module 0's generic message, while the three supported
+  interactions keep their established movement and response behavior. Unsupported actions on this decorative register
+  are silent rather than receiving a generic narrator quip. The change is isolated to Script 335 and must retain the
+  exact-position repeat matrix in `docs/TESTING.md`.
+
+---
+
+## D-036 Route Room 335 Podium Repeats Through the Deferred CueObj Path
+
+Use the engine's standard `sightAngle` and `approachDist` properties so a repeat interaction from the approach point
+takes the same deferred `CueObj` path as an interaction after walking up.
+
+- **Context:** After D-035, the maintainer still saw a brief generic message before the guestbook response whenever
+  Laura repeated LOOK or DO without leaving the podium's approach point. Walking up and moving away first never
+  flashed. `Feature::handleEvent` (Script 950) has two endings. After a `PApproach` walk, `CueObj` turns Laura, waits
+  three cycles, and calls `doVerb` from `gTheDoits`. When Laura is already within `approachDist` and facing within
+  `sightAngle`, it calls `CueObj changeState: 3` immediately, so `doVerb` and the message display run inside
+  `User::handleEvent`. Only this immediate ending flashed.
+  - Setting `approachDist` to 4 alone did not remove the flash.
+  - Trace builds that logged every `gMessager say:`, `gDoVerbCode` fallback, room `doVerb`, and podium `doVerb`
+    recorded exactly one podium dispatch and one `335:17,verb` message per click, with no generic message call. Every
+    trace build also stopped the flash, so the defect is timing- or layout-sensitive. The exact draw source was not
+    isolated.
+- **Decision:** Set `benefitPodium`'s `sightAngle` (`sel_301`) to -1 and its `approachDist` (`sel_305`) to 4. Apply both
+  in the instance properties, the room's podium init, and the room's existing per-frame old-save reapply. Because
+  -1 is never "already facing", `facingMe` calls `faceOn`, which queues `CueObj` instead of dispatching inside
+  the event handler. D-035's local consumption of unsupported verbs is retained.
+- **Consequences:** No custom cue, dispatcher, or state is added (D-034).
+  - A repeat reply arrives three cycles after the click; no visible delay was reported.
+  - The first approach may stop up to 4 px short of `(186, 180)`, still in front of the podium and outside the barred
+    polygon.
+  - The maintainer confirmed in DOSBox-X that repeat LOOK and DO show only the guestbook response.
+  - If a similar flash appears on another hotspot's immediate-dispatch path, apply the same property pattern before
+    adding code.
+
+---
+
 ## Open questions
 
 - **Q-001**: Resolved by D-007: Omit insensitive original CD voice tracks; restore murder lines as text messages in

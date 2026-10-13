@@ -12,15 +12,15 @@ Security: [SECURITY.md](SECURITY.md). Changes: [CHANGELOG.md](CHANGELOG.md). Old
 
 ## Current state
 
-_Last updated: 2026-10-12, session 48: room 335 podium collision and interaction follow-up._
+_Last updated: 2026-10-12, session 50: room 335 podium repeat flash fixed; save slots fixed._
 
-**Where things stand, in one paragraph:** Alpha v0.01 is public in the SQH Discord from `master`. The room 335 benefit podium remains at `(190, 174)` with visual bounds `nsTop: 148, nsLeft: 182, nsBottom: 174, nsRight: 198` and fixed priority 12. After runtime testing exposed Laura walking through the lectern and stopping behind it, the standalone overlapping `polyPodium` was removed. Script 2335's existing 14-point barred room polygon now reaches down to `(190, 176)` around the podium, and Script 335 routes Look/Hand/Magnifier to `(186, 180)` in front of the ledger. Old saves rebind that same polygon object to current static points without heap writes or new objects. Runtime testing then proved every second podium interaction produced palette corruption and Error 5; Script 21's shared `addCluesCode` was the cause, because its duplicate branch accessed the one-past-end People slot. That routine now terminates the branch before another read or write. Later attempts to remove a one-frame generic fallback introduced Error 2 and then Error 1, so both were rejected and the last runtime-stable interaction and old-save paths were restored. Scripts 21, 335, and 2335 compile cleanly to loose patches; repeated-interaction stability needs confirmation, and the cosmetic fallback flash remains unresolved.
+**Where things stand, in one paragraph:** Alpha v0.01 is public in the SQH Discord from `master`. The room 335 benefit podium remains at `(190, 174)` with visual bounds `nsTop: 148, nsLeft: 182, nsBottom: 174, nsRight: 198` and fixed priority 12. Script 2335's existing 14-point barred room polygon reaches `(190, 176)` around the podium, and Script 335 routes Look/Hand/Magnifier to `(186, 180)` in front of the ledger. Old saves rebind that same polygon object to current static points without heap writes or new objects. Script 21's duplicate-clue repair prevents the prior Error 5 memory corruption. The remaining one-frame “interesting approach” flash was traced to the global fallback for an unsupported verb dispatch occurring before the valid podium dispatch on exact-position repeats. The podium now handles its three intended verbs normally and locally consumes any unsupported dispatch instead of forwarding it to the global narrator (D-035). The flash persisted, and occurred only on the engine's immediate-dispatch ending, when Laura was already in place. The podium now sets `sightAngle` -1 and `approachDist` 4, so repeats take the same deferred `CueObj` path as a fresh approach (D-036). The maintainer confirmed in DOSBox-X that repeat LOOK and DO show only the guestbook response. Saved games no longer overwrite slot 0 (Script 990 fix).
 
 **Verified** (2026-10-12, Linux workspace)
 
 | Suite | Result |
 | --- | --- |
-| Room 335 podium & collision | **Compile/static pass: 16x26 view at (190, 174), 14-point poly2335a boundary reaches (190, 176), approach (186, 180), fixed priority 12, last stable old-save static-pointer reapply and standard Feature dispatch restored, Script 21 duplicate-clue repair, Scripts 21/335/2335 compiled; runtime retest pending** |
+| Room 335 podium & collision | **Compile/static pass: 16x26 view at (190, 174), 14-point poly2335a boundary reaches (190, 176), approach (186, 180), fixed priority 12, stable old-save static-pointer reapply, Script 21 duplicate-clue repair, and object-local unsupported-dispatch guard; Scripts 21/335/2335 compiled; runtime retest pending** |
 | Register signing & inspection | **Pass: flag 124 gating; Do signs with flourish [17,4,0]; repeat Do reports already signed [17,4,1]; Look reflects signature [17,1,1]; 335.MSG matches user text** |
 | P2-01 identity-flow refinement | **Compile/static pass: explicit register records clues 263, 265, 266, 268..271; Lo Fat records only Yvette; disguised Carrington cannot add Watney 272** |
 | Public alpha test plan | **Published: Markdown guide plus a self-contained Neocities-ready page with direct v0.01 download, persistent checklist, spoiler-separated regression targets, and report template** |
@@ -68,13 +68,13 @@ _Last updated: 2026-10-12, session 48: room 335 podium collision and interaction
 - **Act 5 Dialogue:** Rameses's Society confrontation and riddle, Tut's inquest testimony, Steve's already-clean escape dialogue, and O'Riley's jailhouse threat preserve the ending while removing the final phonetic caricatures (P2-08, D-031).
 - **Act 6 Dialogue:** The coroner conducts the complete final inquest in a dry, exacting professional voice; every question, evidence check, joke, verdict, and ending route remains intact (P2-08, D-031).
 - **Source Baseline:** P5-00's Sluicebox-annotated effective reconstruction is active under D-032; normal work remains single-script compilation under D-028.
-- **Documentation Architecture:** `docs/ROADMAP.md`, `DECISIONS.md` (D-001 through D-034), `docs/manual/`, `docs/manual/manual.html`, and `docs/PLAYTEST_CHECKLIST.md` synchronized.
+- **Documentation Architecture:** `docs/ROADMAP.md`, `DECISIONS.md` (D-001 through D-036), `docs/manual/`, `docs/manual/manual.html`, and `docs/PLAYTEST_CHECKLIST.md` synchronized.
 
 **Not verified**
 
 - End-to-end multi-act playthrough regression testing in DOSBox-X.
 - Direct in-game verification of the playtest findings during continuous run.
-- Room 335 podium collision, final Look/Hand/Magnifier standing position, and repeated LOOK/DO stability from the Act 2 entrance save after restoring the last stable interaction and old-save paths. The one-frame generic fallback remains a separate cosmetic issue.
+- Room 335 podium collision from both sides and the Magnifier repeat (LOOK and DO repeats are maintainer-verified).
 
 **Gotchas for the next session**
 
@@ -88,7 +88,7 @@ _Last updated: 2026-10-12, session 48: room 335 podium collision and interaction
 
 ## Next steps (in order)
 
-1. From the Act 2 entrance save, approach the podium from both sides and verify Laura cannot cross its footprint; then use Look/Hand/Magnifier and confirm she stops at `(186, 180)` in front of it. Without moving from that spot, repeat LOOK and DO at least twice and confirm no generic fallback flashes and the palette, controls, notebook, and routing remain stable before checking the seven intended entries and the absence of Ziggy, Ernie, and Watney.
+1. Check the podium's collision from both sides and a Magnifier repeat.
 2. Resume the clean DOSBox-X playthrough and triage every remaining `PLAY-nnn` finding.
 3. Begin P5-01 design only after the playthrough gate closes, using the migrated compiler-facing source baseline.
 
@@ -97,6 +97,47 @@ _Last updated: 2026-10-12, session 48: room 335 podium collision and interaction
 None currently open. Q-001 and Q-002 have been resolved by D-007, D-017, and D-018.
 
 ## Session log
+
+### Session 50: 2026-10-12: Room 335 Podium Repeat Flash and Save Slots
+
+**Contributor:** Claude Code
+
+**Goal:** Stop the brief generic message that still appeared before the guestbook response when Laura repeated LOOK or DO from where she stopped.
+
+**Done:**
+- Set `approachDist` (`sel_305`) to 4. This alone did not fix the flash.
+- Ran silent trace builds. They logged every `gMessager say:`, every `gDoVerbCode` fallback, room `doVerb`, and podium `doVerb`, and the banner Look dumped the log. Each repeat logged exactly one podium dispatch and one `335:17,verb` message. Every trace build also hid the flash, so the defect is timing- or layout-sensitive and only on the immediate-dispatch ending of `Feature::handleEvent`.
+- Fixed it by setting `sightAngle` (`sel_301`) to -1, so `facingMe` always queues the deferred `CueObj` path that a fresh approach uses. Applied it in the instance properties, room init, and the per-frame old-save reapply (D-036). D-035's guard is retained. The trace code is removed. `335.SCR` is 1,778 bytes; `335.HEP` is 902 bytes. The maintainer confirmed no flash on repeat LOOK and DO.
+
+- Fixed saved-game slot reuse in Script 990 (`LB2/src/Save.sc`): the decompiled free-slot search and duplicate-name search had lost their `break`s, so every new save took slot 0 and overwrote the previous one. Both loops now break on a match; `990.SCR` recompiled (2,564 bytes). Restored the maintainer's overwritten Test2 save from `HEAD` as slot 1.
+
+**Gotchas:**
+- Trace code in this game: `Printf` takes a buffer first (`(Printf @buf {fmt} args)`); a missing buffer makes `Format` treat the next argument as a text resource (`1.TEX` soft lock). `&rest` forwards only arguments after a method's named parameters, so a wrapper with named parameters must forward them explicitly. Adding script locals makes saves made inside that room unsafe to restore on the new build.
+- `tools/compile.py` deletes the existing `.SCR`/`.HEP` before invoking SCI Companion. If SCI Companion is not open, or the script is missing from its list, the run fails after the deletion. That removes the script from SCI Companion's list until the files are restored and SCI Companion is restarted. Before compiling, check `wine tools/list_scripts.exe` and confirm the main window is open.
+
+**Decisions:** D-036; D-034 followed.
+
+**Verified:** Scripts 335 and 990 compile; the headless DOSBox-X startup smoke initializes; `RESOURCE.000`/`RESOURCE.MAP` MD5s unchanged; the maintainer confirmed repeat LOOK and DO at the podium show only the guestbook response. New saves now occupy separate slots (`LB2SG.001`–`.005` created during testing).
+
+**Next session should start with:** Resume the clean playthrough.
+
+### Session 49: 2026-10-12: Room 335 Podium Fallback-Flash Guard
+
+**Contributor:** Codex
+
+**Goal:** Remove the one-frame generic narrator message that appeared before the correct guestbook response when Laura repeated an action without leaving the podium approach point.
+
+**Done:**
+- Preserved commit `ec515e0` as the runtime-stable baseline and left its approach, collision, old-save repair, and clue logic unchanged.
+- Traced the exact text to module 0's verb-47 catch-all, emitted by `proc0_6` only after an unsupported verb reaches the global default handler. This proved the flash was an extra invalid dispatch rather than a missing Room 335 message.
+- Kept LOOK, DO, and Magnifier on the standard `Feature`/`CueObj` path. Changed only `benefitPodium.sel_300`'s unsupported-verb branch to return handled locally instead of calling the superclass and global fallback. No custom cue, selector override, dispatcher, or new state was introduced (D-035).
+- Recompiled only `rm335` through the verified `LB2/RESOURCE.MAP` project. The resulting `335.SCR` is 1,752 bytes; `335.HEP` remains 902 bytes and byte-identical to the stable checkpoint.
+
+**Decisions:** D-035; D-034 followed.
+
+**Verified:** Script 335 compiles successfully; the original-interpreter headless startup smoke initializes with the new loose patch; `RESOURCE.000` and `RESOURCE.MAP` retain known MD5 hashes `2d591d9416607beeac48303c6f4fe212` and `330d4a87da2ea2520a316c9f25ab538e`. Runtime confirmation of LOOK/LOOK, DO/LOOK, LOOK/DO, and DO/DO from the exact approach point remains pending.
+
+**Next session should start with:** Run the four exact-position repeat combinations from Save 02 and confirm that only the guestbook response appears, with no flash, palette change, freeze, or interpreter error.
 
 ### Session 48: 2026-10-12: Room 335 Podium Collision and Interaction Follow-up
 
@@ -228,46 +269,3 @@ None currently open. Q-001 and Q-002 have been resolved by D-007, D-017, and D-0
 **Verified:** 221/221 scripts and 2,337/2,337 functions decompiled; targeted blocker scripts compile at zero errors/warnings; isolated Compile All captured no errors; immutable repository archives retain vanilla MD5 hashes; documentation/manual validation and DOSBox-X startup smoke pass.
 
 **Next session should start with:** Finish the maintainer's clean playthrough gate, then begin P5-01 design against the migrated source baseline.
-
-### Session 39: 2026-10-10: Act 5 and Ending Dialogue Closure
-
-**Contributor:** Codex and maintainer
-
-**Goal:** Complete the period-dialogue audit through the Society of Amon Ra confrontation, escape, inquest, and jail epilogue without changing the ending structure.
-
-**Done:**
-- Reworked every Rameses and adjacent Laura line in modules 710 and 715, removing the written lisp while preserving capture, threat, sacrifice failure, both riddles, successful escape, and the alternate Dagger death.
-- Made Rameses acknowledge Laura's historically correct point that ancient Egyptians did not practice human sacrifice, defining the dangerous rite as the modern society's invention rather than authentic Egyptology.
-- Reworked Tut Smith's inquest testimony as a clear eyewitness account and dignified demand for justice, retaining restrained faith in Amon Ra without camel, sand, or mystical-revenge cliches.
-- Reworked O'Riley's six-line jailhouse threat in his established vindictive voice without stage-Irish spelling.
-- Corrected `herpetology` and `hieroglyphs` in the escape tunnel while preserving the authored danger-comedy; left Steve's already-clean escape dialogue and the deliberately absurd mummy-storage exhibit jokes intact.
-- Scanned the complete effective message layer and found zero remaining faux-German, faux-French, stage-Irish, or written-lisp targets.
-
-**Changed:** `LB2/710.MSG`, `LB2/715.MSG`, `LB2/730.MSG`, `LB2/750.MSG`, `LB2/770.MSG`, five manifests under `docs/dialogue/`, and synchronized roadmap, decision, changelog, handoff, and manual documentation.
-
-**Decisions:** D-031.
-
-**Verified:** All 169 records across the five touched modules structurally compared; 64 intended text changes; every tuple/talker/reference field and untargeted line preserved; all manifests apply idempotently; complete effective-layer target scan clear.
-
-**Next session should start with:** Review the Act 5 wording in context during the clean DOSBox-X playthrough, then return to playtest triage and the P5-01 entry gate.
-
-### Session 38: 2026-10-10: Act 4 Dialogue Closure
-
-**Contributor:** Codex and maintainer
-
-**Goal:** Carry the approved character voices through Act 4 and distinguish its actual phase-gated dialogue from shared museum and ending resources.
-
-**Done:**
-- Mapped Act 4 through its `global123 == 4` scene gates instead of treating every late-numbered message module as Act 4 content.
-- Confirmed that the earlier cross-act passes already cover the substantive Yvette, O'Riley, Olympia, Rameses, and murder-reaction dialogue used during Act 4.
-- Lightly polished Laura and Steve's reunion while preserving Olympia's fascination with Steve's dock scars, the flirtation, and Steve's discovery that paintings in the Old Masters Gallery are wet forgeries.
-- Replaced Heimlich's last mock-German Yvette-murder and Dagger reactions, his water-glass aside, and the room-600 lantern gibberish with his established severe, controlled voice.
-- Scanned the complete effective message layer and isolated the remaining written-lisp hits to three Rameses records in ending modules 710 and 715, outside Act 4.
-
-**Changed:** `LB2/600.MSG`, `LB2/1510.MSG`, `LB2/1889.MSG`, two Act 4 manifests under `docs/dialogue/`, the existing Heimlich manifest, and synchronized roadmap, decision, changelog, handoff, and manual documentation.
-
-**Decisions:** D-031.
-
-**Verified:** All 255 records across the three touched modules structurally compared; 19 intended text changes; every tuple/talker/reference field and untargeted line preserved; all relevant manifests apply idempotently; effective-layer caricature scan clear through Act 4.
-
-**Next session should start with:** Begin Act 5/ending review with Rameses's three known written-lisp records in modules 710 and 715, then audit the remaining ending cast and room-local messages.

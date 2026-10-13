@@ -2,6 +2,49 @@
 
 Archived verbatim from `docs/HANDOFF.md` when its live session log exceeded ten entries.
 
+### Session 39: 2026-10-10: Act 5 and Ending Dialogue Closure
+
+**Contributor:** Codex and maintainer
+
+**Goal:** Complete the period-dialogue audit through the Society of Amon Ra confrontation, escape, inquest, and jail epilogue without changing the ending structure.
+
+**Done:**
+- Reworked every Rameses and adjacent Laura line in modules 710 and 715, removing the written lisp while preserving capture, threat, sacrifice failure, both riddles, successful escape, and the alternate Dagger death.
+- Made Rameses acknowledge Laura's historically correct point that ancient Egyptians did not practice human sacrifice, defining the dangerous rite as the modern society's invention rather than authentic Egyptology.
+- Reworked Tut Smith's inquest testimony as a clear eyewitness account and dignified demand for justice, retaining restrained faith in Amon Ra without camel, sand, or mystical-revenge cliches.
+- Reworked O'Riley's six-line jailhouse threat in his established vindictive voice without stage-Irish spelling.
+- Corrected `herpetology` and `hieroglyphs` in the escape tunnel while preserving the authored danger-comedy; left Steve's already-clean escape dialogue and the deliberately absurd mummy-storage exhibit jokes intact.
+- Scanned the complete effective message layer and found zero remaining faux-German, faux-French, stage-Irish, or written-lisp targets.
+
+**Changed:** `LB2/710.MSG`, `LB2/715.MSG`, `LB2/730.MSG`, `LB2/750.MSG`, `LB2/770.MSG`, five manifests under `docs/dialogue/`, and synchronized roadmap, decision, changelog, handoff, and manual documentation.
+
+**Decisions:** D-031.
+
+**Verified:** All 169 records across the five touched modules structurally compared; 64 intended text changes; every tuple/talker/reference field and untargeted line preserved; all manifests apply idempotently; complete effective-layer target scan clear.
+
+**Next session should start with:** Review the Act 5 wording in context during the clean DOSBox-X playthrough, then return to playtest triage and the P5-01 entry gate.
+
+### Session 38: 2026-10-10: Act 4 Dialogue Closure
+
+**Contributor:** Codex and maintainer
+
+**Goal:** Carry the approved character voices through Act 4 and distinguish its actual phase-gated dialogue from shared museum and ending resources.
+
+**Done:**
+- Mapped Act 4 through its `global123 == 4` scene gates instead of treating every late-numbered message module as Act 4 content.
+- Confirmed that the earlier cross-act passes already cover the substantive Yvette, O'Riley, Olympia, Rameses, and murder-reaction dialogue used during Act 4.
+- Lightly polished Laura and Steve's reunion while preserving Olympia's fascination with Steve's dock scars, the flirtation, and Steve's discovery that paintings in the Old Masters Gallery are wet forgeries.
+- Replaced Heimlich's last mock-German Yvette-murder and Dagger reactions, his water-glass aside, and the room-600 lantern gibberish with his established severe, controlled voice.
+- Scanned the complete effective message layer and isolated the remaining written-lisp hits to three Rameses records in ending modules 710 and 715, outside Act 4.
+
+**Changed:** `LB2/600.MSG`, `LB2/1510.MSG`, `LB2/1889.MSG`, two Act 4 manifests under `docs/dialogue/`, the existing Heimlich manifest, and synchronized roadmap, decision, changelog, handoff, and manual documentation.
+
+**Decisions:** D-031.
+
+**Verified:** All 255 records across the three touched modules structurally compared; 19 intended text changes; every tuple/talker/reference field and untargeted line preserved; all relevant manifests apply idempotently; effective-layer caricature scan clear through Act 4.
+
+**Next session should start with:** Begin Act 5/ending review with Rameses's three known written-lisp records in modules 710 and 715, then audit the remaining ending cast and room-local messages.
+
 ### Session 31: 2026-10-10: Act 2 O'Riley Dialogue Pass
 
 **Contributor:** Codex and maintainer

@@ -78,6 +78,8 @@
 				sel_63: 12
 				sel_303: 186
 				sel_304: 180
+				sel_305: 4
+				sel_301: -1
 				sel_311: 1 4 8
 			)
 			((ScriptID 32 0) ; aHeimlich
@@ -104,7 +106,7 @@
 	(method (sel_57)
 		(if (and (== gAct 2) (not (IsFlag 25)))
 			; RestoreGame can replace these with values from an old save.
-			(benefitPodium sel_303: 186 sel_304: 180)
+			(benefitPodium sel_303: 186 sel_304: 180 sel_305: 4 sel_301: -1)
 			((ScriptID 2335 0) sel_57: (gCurRoom sel_259:) 1) ; poly2335Code
 		)
 		(super sel_57:)
@@ -352,9 +354,10 @@
 		sel_7 182
 		sel_8 174
 		sel_9 198
-		sel_301 40
+		sel_301 -1 ; sightAngle: never "already facing", so repeats use the deferred CueObj path
 		sel_303 186
 		sel_304 180
+		sel_305 4 ; approachDist: already standing here skips a redundant re-approach
 	)
 
 	(method (sel_300 param1)
@@ -384,7 +387,9 @@
 				)
 			)
 		else
-			(super sel_300: param1)
+			; Consume the spurious follow-up dispatch produced after an approach.
+			; LOOK, DO, and Magnifier are the podium's only supported verbs.
+			(return 1)
 		)
 	)
 )
