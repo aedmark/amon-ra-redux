@@ -26,6 +26,20 @@
 
 (procedure (proc93_2)) ; UNUSED
 
+; Act 2 is the party itself. A line written only for the party sits at the
+; topic's case + 100 and replaces the general line during Act 2, so a topic
+; whose general line looks back on the party can have a party-time version
+; (PLAY-013, PLAY-015). Topic bookkeeping still uses the general case.
+(procedure (PartyCase theModule theNoun theCase)
+	(return
+		(if (and (== gAct 2) (Message msgGET theModule theNoun 6 (+ theCase 100) 1))
+			(+ theCase 100)
+		else
+			theCase
+		)
+	)
+)
+
 (class RotundaRgn of Rgn
 	(properties
 		name {RotundaRgn}
@@ -150,7 +164,7 @@
 						(gMessager say: noun 6 1 0 0 modNum)
 					)
 					(else
-						(gMessager say: noun 6 temp1 0 0 modNum)
+						(gMessager say: noun 6 (PartyCase modNum noun temp1) 0 0 modNum)
 						(proc27_1 0 @[global296 (- temp1 2)])
 					)
 				)
@@ -214,7 +228,7 @@
 					(gMessager say: noun 6 1 0 0 modNum)
 				)
 				(else
-					(gMessager say: noun 6 temp1 0 0 modNum)
+					(gMessager say: noun 6 (PartyCase modNum noun temp1) 0 0 modNum)
 					(proc27_1 2 @[global296 (- temp1 2)])
 				)
 			)
@@ -276,7 +290,7 @@
 					(gMessager say: noun 6 1 0 0 modNum)
 				)
 				(else
-					(gMessager say: noun 6 temp1 0 0 modNum)
+					(gMessager say: noun 6 (PartyCase modNum noun temp1) 0 0 modNum)
 					(proc27_1 3 @[global296 (- temp1 2)])
 				)
 			)
@@ -474,7 +488,7 @@
 								(gMessager say: noun 6 1 0 0 modNum)
 							)
 							(else
-								(gMessager say: noun 6 temp1 0 0 modNum)
+								(gMessager say: noun 6 (PartyCase modNum noun temp1) 0 0 modNum)
 								(proc27_1 4 @[global296 (- temp1 2)])
 							)
 						)
@@ -548,7 +562,7 @@
 						(gMessager say: noun 6 1 0 0 modNum)
 					)
 					(else
-						(gMessager say: noun 6 temp1 0 0 modNum)
+						(gMessager say: noun 6 (PartyCase modNum noun temp1) 0 0 modNum)
 						(proc27_1 5 @[global296 (- temp1 2)])
 					)
 				)
@@ -620,7 +634,7 @@
 						(gMessager say: noun 6 1 0 0 modNum)
 					)
 					(else
-						(gMessager say: noun 6 temp1 0 0 modNum)
+						(gMessager say: noun 6 (PartyCase modNum noun temp1) 0 0 modNum)
 						(proc27_1 6 @[global296 (- temp1 2)])
 					)
 				)
@@ -685,7 +699,7 @@
 					(gMessager say: noun 6 1 0 0 modNum)
 				)
 				(else
-					(gMessager say: noun 6 temp1 0 0 modNum)
+					(gMessager say: noun 6 (PartyCase modNum noun temp1) 0 0 modNum)
 					(proc27_1 10 @[global296 (- temp1 2)])
 				)
 			)
@@ -755,7 +769,7 @@
 						(gMessager say: noun 6 1 0 0 modNum)
 					)
 					(else
-						(gMessager say: noun 6 temp1 0 0 modNum)
+						(gMessager say: noun 6 (PartyCase modNum noun temp1) 0 0 modNum)
 						(proc27_1 7 @[global296 (- temp1 2)])
 					)
 				)
@@ -816,7 +830,7 @@
 					(gMessager say: noun 6 1 0 0 modNum)
 				)
 				(else
-					(gMessager say: noun 6 temp1 0 0 modNum)
+					(gMessager say: noun 6 (PartyCase modNum noun temp1) 0 0 modNum)
 					(proc27_1 8 @[global296 (- temp1 2)])
 				)
 			)
@@ -916,7 +930,7 @@
 								(gMessager say: noun 6 1 0 0 modNum)
 							)
 							(else
-								(gMessager say: noun 6 temp1 0 0 modNum)
+								(gMessager say: noun 6 (PartyCase modNum noun temp1) 0 0 modNum)
 								(proc27_1 9 @[global296 (- temp1 2)])
 							)
 						)
@@ -982,7 +996,7 @@
 					(gMessager say: noun 6 1 0 0 modNum)
 				)
 				(else
-					(gMessager say: noun 6 temp1 0 0 modNum)
+					(gMessager say: noun 6 (PartyCase modNum noun temp1) 0 0 modNum)
 					(proc27_1 11 @[global296 (- temp1 2)])
 				)
 			)

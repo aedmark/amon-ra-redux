@@ -491,7 +491,10 @@
 		(switch (= state param1)
 			(0
 				(gGame handsOff:)
-				(gEgo setMotion: MoveTo 265 (- (gEgo y:) 15) self)
+				; The doorway's opening tops out at y 57; at this depth Laura is
+				; 37 pixels tall, so walking 15 pixels in put her head over the
+				; lintel. Step to the doorway's centre and leave (PLAY-017).
+				(gEgo setMotion: MoveTo 268 (- (gEgo y:) 1) self)
 			)
 			(1
 				(gCurRoom newRoom: (gCurRoom north:))
@@ -531,24 +534,26 @@
 		(switch (= state param1)
 			(0
 				(gGame handsOff:)
+				; Meet beside the guests at the table rather than among them,
+				; on Laura's side, so neither walks through anyone (PLAY-016).
 				(if (< (gEgo x:) 160)
 					((ScriptID 93 8) ; Steve
 						setCycle: StopWalk -1
-						posn: 240 180
-						loop: 1
+						posn: 30 183
+						loop: 0
 						init:
-						setMotion: PolyPath 185 180
+						setMotion: PolyPath 75 183
 					)
-					(gEgo setMotion: PolyPath 140 180 self)
+					(gEgo setMotion: PolyPath 112 183 self)
 				else
 					((ScriptID 93 8) ; Steve
 						setCycle: StopWalk -1
-						posn: 80 180
-						loop: 0
+						posn: 290 183
+						loop: 1
 						init:
-						setMotion: PolyPath 140 180
+						setMotion: PolyPath 250 183
 					)
-					(gEgo setMotion: PolyPath 185 180 self)
+					(gEgo setMotion: PolyPath 215 183 self)
 				)
 			)
 			(1

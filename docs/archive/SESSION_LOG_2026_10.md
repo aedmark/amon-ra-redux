@@ -2,6 +2,20 @@
 
 Archived verbatim from `docs/HANDOFF.md` when its live session log exceeded ten entries.
 
+### Session 45: 2026-10-11: Diegetic Benefit Register and Identity Flow
+
+**Contributor:** Codex and maintainer
+
+**Goal:** Stop Act 2 check-in from granting an omniscient cast list while preserving fair access to character topics.
+
+**Done:** Added an inspectable leather-bound register beside Heimlich in Room 335. Look, Hand, and Magnifier record only Steve, Heimlich, Yvette, Rameses, Countess, Olympia, and Tut; the text identifies Pippin and the apparent Carrington without exposing Watney. Removed the automatic check-in batches and the disguised Watney actor's clue-272 encounter hook. Reworked Lo Fat's museum discussion so he foreshadows Heimlich and Olympia without names or clues while still naming Yvette and preserving her Act 1 inquiry branches. Added tuple-addressed register and Lo Fat manifests and synchronized roadmap, ADR, architecture, testing, changelog, manual, and public/internal playtest guidance.
+
+**Decisions:** D-009 refined; D-033.
+
+**Verified:** Maintainer compiled Scripts 270, 335, and 93; lowercase Wine outputs were normalized to tracked uppercase names. Message manifests reapply idempotently. Static source audit confirms the intended clue set and Watney exclusion. `RESOURCE.000` and `RESOURCE.MAP` retain vanilla MD5 hashes, and the original interpreter completes its headless startup smoke. Runtime hotspot placement remains to be checked in DOSBox-X.
+
+**Next session should start with:** Test the entrance register from the Act 2 save, including repeat inspection and notebook contents, then continue the clean playthrough.
+
 ### Session 44: 2026-10-11: Public Alpha Playtesting Guide
 
 **Contributor:** Codex and maintainer

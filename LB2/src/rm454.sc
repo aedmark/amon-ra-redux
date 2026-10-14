@@ -736,6 +736,20 @@
 		signal 16384
 	)
 
+	; The 6x6 medallion is hard to click. Extend its target left and up to
+	; 13x14, stopping short of the blood (x 233+), the footprint (y 124+),
+	; Pippin (x 236+), and the doorway (x 219-) (PLAY-018, as in P1-03).
+	(method (onMe param1 param2 &tmp temp0 temp1)
+		(if (IsObject param1)
+			(= temp0 (param1 x:))
+			(= temp1 (param1 y:))
+		else
+			(= temp0 param1)
+			(= temp1 param2)
+		)
+		(return (and (<= 220 temp0 232) (<= 110 temp1 123) 1))
+	)
+
 	(method (doVerb param1 param2)
 		(switch param1
 			(8

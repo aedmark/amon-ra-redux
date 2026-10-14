@@ -53,7 +53,10 @@
 
 	(method (init)
 		(= type 2)
-		(if (OneOf global128 0 1 4 5 9 13)
+		; Party guests stand in front of the table in every Act 2 state, so
+		; the deeper outline must apply throughout Act 2, not only in the
+		; states without Steve's meeting.
+		(if (== gAct 2)
 			(= size 10)
 			(= points @local88)
 		else

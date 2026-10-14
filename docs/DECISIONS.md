@@ -568,6 +568,24 @@ Do not rebuild a committed patch only because it no longer matches a compile of 
 
 ---
 
+## D-042 Give the Act 2 Party Its Own Lines at Case + 100
+
+Let an Act 2 party conversation use its own version of a topic's line without changing which topics exist or how they
+are tracked.
+
+- **Context:** The party actors in RotundaRgn (Script 93, Act 2) and the museum actors in MuseumRgn (Acts 3 and later)
+  share each character's message module, and an Ask topic always maps to the same case. Lines written for after the
+  party, such as Rameses on Ziggy or Yvette's account of Tut and Dr. Carter's murder, therefore also played during
+  the party (PLAY-013, PLAY-015).
+- **Decision:** RotundaRgn's `PartyCase` procedure checks, during Act 2 only, for a message at the topic's case + 100
+  and plays it instead of the general line. The topic's asked-before bookkeeping stays on the general case. All 11
+  party actors' general Ask paths use it, so later party-only lines need only a new message record.
+- **Consequences:** Cases 100 and above are reserved for party versions in the character modules; the highest
+  existing case was 93. Topics that have their own branches in RotundaRgn (for example Yvette on Ernie and Steve) are
+  unaffected.
+
+---
+
 ## Open questions
 
 - **Q-001**: Resolved by D-007: Omit insensitive original CD voice tracks; restore murder lines as text messages in

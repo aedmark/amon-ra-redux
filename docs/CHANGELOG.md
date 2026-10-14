@@ -6,6 +6,17 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+### Changed
+- Looking at the banner outside the museum in Act 1 notes that the party calls for formal evening attire (PLAY-012).
+- At the party, Rameses talks about Ziggy as someone he met that evening, and Yvette's view of Dr. Smith no longer asks whether he killed Dr. Carter before anyone has died (PLAY-013, PLAY-015, D-042).
+- Ziggy now knows Heimlich, who checked his invitation, and Dr. Smith, who stands across from him at the party (PLAY-014).
+- Yvette speaks of Pippin in the present tense until Laura learns of his death (PLAY-015).
+
+### Fixed
+- Party guests at the front rotunda's buffet table block walking, and Steve's 7:30 meeting with Laura happens beside them instead of among them (PLAY-016).
+- Leaving the front rotunda for the Mastodon Room no longer draws Laura's head over the doorway's lintel (PLAY-017).
+- The Ankh near Pippin's body is easier to click (PLAY-018).
+
 ## [0.04-alpha] - 2026-10-14
 
 ### Fixed

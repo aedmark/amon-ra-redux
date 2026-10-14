@@ -314,6 +314,16 @@
 		nsRight 258
 		sightAngle 40
 	)
+
+	(method (doVerb param1)
+		; In Act 1 Laura has no gown yet, so Look also notes that the party
+		; calls for formal attire (PLAY-012).
+		(if (and (== param1 1) (== gAct 1))
+			(gMessager say: noun param1 2)
+		else
+			(super doVerb: param1 &rest)
+		)
+	)
 )
 
 (instance glass of Feature

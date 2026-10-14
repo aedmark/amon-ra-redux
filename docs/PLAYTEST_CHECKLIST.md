@@ -167,6 +167,13 @@ diegetic discovery or additive reactions over moving old dialogue behind a new p
 | PLAY-009 | 1, 3, 5 | The copy-protection screen after the intro, on first talking to Crodfoller, should be removed entirely rather than merely neutralized. | Analyzed; fix drafted, blocked on the compile environment. See the gameplan row. |
 | PLAY-010 | 1 | The upbeat “perky demeanor” act-grade text is presented against a skull-and-crossbones frame. | Resolved: grade narration now retains picture 26's neutral gold Art Deco frame. |
 | PLAY-011 | 1 | Asking Ziggy about Yvette or the Countess makes him claim he has never heard of either, contradicting his later dialogue and relationships. | Resolved: Ziggy now gives discreet, plot-safe acknowledgements for both women. |
+| PLAY-012 | 1 | Looking at the banner at the Leyendecker entrance should remark that the party needs formal attire, and only in Act 1. | Fixed, retest pending: the banner's Look plays new `335.msg (1, 1, 2)` in Act 1; Act 2 keeps the original line. |
+| PLAY-013 | 2 | Asking Rameses about Ziggy at the party talks about the party as if it were over. | Fixed, retest pending: Act 2 plays new `1891.msg (1, 6, 109)` through RotundaRgn's party-line rule (D-042); later acts keep the original. |
+| PLAY-014 | 2 | Ziggy claims not to know Heimlich, who checked his invitation at the door, or Tut Smith, who stands across from him at the party. | Fixed, retest pending: `1890.msg (1, 6, 10)` and `(1, 6, 16)` rewritten so he knows both. Module 1890 is used only from Act 2 on. |
+| PLAY-015 | 2 | Asking Yvette about Pippin in Act 2 treats him as already dead. | Fixed, retest pending: her Pippin line `1885.msg (1, 6, 3)` is present tense again (it plays only before Laura learns of his death). Her Tut conversation `(1, 6, 16)` asks whether Tut killed Dr. Carter; Act 2 now plays new `(1, 6, 116)`, which stops before the murder questions (D-042). |
+| PLAY-016 | 2 | After the 7:30 Steve cutscene in the front rotunda, Steve walks through two guests at the table. | Fixed, retest pending: room 350's table outline now covers the guests throughout Act 2 (Script 2350), and `sMeetSteve` stages the meeting beside the group on Laura's side instead of among the guests. |
+| PLAY-017 | 2 | Leaving the front rotunda north into the Mastodon Room, Laura walks so far into the doorway that her head draws over the lintel. | Fixed, retest pending: `sExitNorth` takes one step to the doorway's centre instead of walking 15 pixels in (the opening tops out at y 57). |
+| PLAY-018 | 2 | The Ankh near Pippin's body needs a bigger hotspot. | Fixed, retest pending: the 6x6 medallion's target grows to 13x14 (`x 220-232, y 110-123`) without overlapping the blood, footprint, Pippin, or doorway. |
 
 ## New finding template
 

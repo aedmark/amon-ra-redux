@@ -12,7 +12,7 @@ Security: [SECURITY.md](SECURITY.md). Changes: [CHANGELOG.md](CHANGELOG.md). Old
 
 ## Current state
 
-_Last updated: 2026-10-14, session 54: museum selectors, class numbering, and the inquest layout (D-040, D-041)._
+_Last updated: 2026-10-14, session 55: Act 1–2 playtest findings PLAY-012 to PLAY-018 (D-042)._
 
 **Where things stand, in one paragraph:** Alpha v0.01 is public in the SQH Discord; alpha v0.02 (`LB2/LB2-Redux-v0.02.zip`, built from `master` at `43b1fbc`) is packaged and its tester guides are updated, pending publication. The room 335 benefit podium remains at `(190, 174)` with visual bounds `nsTop: 148, nsLeft: 182, nsBottom: 174, nsRight: 198` and fixed priority 12. Script 2335's existing 14-point barred room polygon reaches `(190, 176)` around the podium, and Script 335 routes Look/Hand/Magnifier to `(186, 180)` in front of the ledger. Old saves rebind that same polygon object to current static points without heap writes or new objects. Script 21's duplicate-clue repair prevents the prior Error 5 memory corruption. The remaining one-frame “interesting approach” flash was traced to the global fallback for an unsupported verb dispatch occurring before the valid podium dispatch on exact-position repeats. The podium now handles its three intended verbs normally and locally consumes any unsupported dispatch instead of forwarding it to the global narrator (D-035). The flash persisted, and occurred only on the engine's immediate-dispatch ending, when Laura was already in place. The podium now sets `sightAngle` -1 and `approachDist` 4, so repeats take the same deferred `CueObj` path as a fresh approach (D-036). The maintainer confirmed in DOSBox-X that repeat LOOK and DO show only the guestbook response. Saved games no longer overwrite slot 0 (Script 990 fix). Session 54 found that Redux's `Main` numbers `WrapMusic` and `Actions` the reverse of vanilla, which broke Sierra-compiled rooms 450 and 640 and the archive-derived room 310, and that the committed room 750 inquest had every object property shifted one slot; all four now build from corrected source and await a runtime retest (D-040). Drifted patches stay unless their script changes; `Main`'s and `n027`'s indexed compound assignments are rewritten, and `Main` now rebuilds byte-identical to its committed patch (D-041).
 
@@ -91,16 +91,37 @@ _Last updated: 2026-10-14, session 54: museum selectors, class numbering, and th
 
 ## Next steps (in order)
 
-1. Boot and retest session 54's rooms: a museum conversation (Script 90), leaving the speakeasy (310), leaving the Egyptian room south in Act 3 or 4 and using an item on the dagger case (450), room 640's actions, and the full final inquest (750).
-2. Check the podium's collision from both sides and a Magnifier repeat.
-3. Resume the clean DOSBox-X playthrough and triage every remaining `PLAY-nnn` finding.
-4. Begin P5-01 design only after the playthrough gate closes, using the migrated compiler-facing source baseline.
+1. Retest PLAY-012 to PLAY-018 during the fresh playthrough: the Act 1 museum banner, Rameses and Yvette at the party (Ziggy, Pippin, Tut topics), Ziggy on Heimlich and Tut, the 7:30 Steve meeting in the front rotunda, the north doorway to the Mastodon Room, and clicking the Ankh.
+2. Boot and retest session 54's rooms: a museum conversation (Script 90), leaving the speakeasy (310), leaving the Egyptian room south in Act 3 or 4 and using an item on the dagger case (450), room 640's actions, and the full final inquest (750).
+3. Check the podium's collision from both sides and a Magnifier repeat.
+4. Resume the clean DOSBox-X playthrough and triage every remaining `PLAY-nnn` finding.
+5. Begin P5-01 design only after the playthrough gate closes, using the migrated compiler-facing source baseline.
 
 ## Open questions for maintainers
 
 None currently open. Q-001 and Q-002 have been resolved by D-007, D-017, and D-018.
 
 ## Session log
+
+### Session 55: 2026-10-14: Act 1 and 2 Playtest Findings
+
+**Contributor:** Claude Code and maintainer
+
+**Goal:** Fix the maintainer's findings from the last playthrough up to Act 2 before a fresh run.
+
+**Done:**
+- Logged PLAY-012 to PLAY-018 in `docs/PLAYTEST_CHECKLIST.md`.
+- Room 335: the banner's Look plays a new Act 1 line about formal attire (`335.msg (1, 1, 2)`).
+- RotundaRgn (Script 93): `PartyCase` plays a topic's case + 100 during Act 2 when it exists (D-042). Added Rameses on Ziggy `(1, 6, 109)` and Yvette on Tut `(1, 6, 116)`, which stops before the murder questions. Yvette's Pippin line `(1, 6, 3)` is present tense again. Ziggy now knows Heimlich `(1, 6, 10)` and Tut `(1, 6, 16)`.
+- Room 350 (Scripts 350, 2350): the table outline covers the guests throughout Act 2, `sMeetSteve` meets beside the group on Laura's side, and `sExitNorth` no longer walks Laura's head over the lintel.
+- Room 454: the Ankh's click target grows from 6x6 to 13x14 without overlapping nearby objects.
+- Added a scratch renderer for LB2's pictures, views, and control screens (VGA 1.1 cels; SCI1.0 resource map) to check positions against the art; it confirmed the guests, doorway, and Ankh geometry.
+
+**Decisions:** D-042.
+
+**Verified:** Each rebuilt script compared routine by routine with its committed build shows only the intended changes; message files changed only in the listed records; headless DOSBox-X startup; base archive MD5s unchanged; documentation checks. Runtime retest pending.
+
+**Next session should start with:** The maintainer's fresh playthrough, starting with Next steps 1.
 
 ### Session 54: 2026-10-14: Museum Selectors, Class Numbering, and the Inquest Layout
 
@@ -281,17 +302,3 @@ None currently open. Q-001 and Q-002 have been resolved by D-007, D-017, and D-0
 **Verified:** Scripts 335 and 2335 compiled cleanly without errors; `335.MSG` manifest entries apply idempotently; `python3 tools/check_docs.py` and `python3 tools/manual.py check` pass at 0 errors/0 warnings; compiled `docs/manual/manual.html`; base archives `RESOURCE.000` and `RESOURCE.MAP` remain untouched bit-for-bit.
 
 **Next session should start with:** Test the entrance register in DOSBox-X (approach, collision, signing, repeat signing, and clue awards), then resume the clean Act 2 playthrough.
-
-### Session 45: 2026-10-11: Diegetic Benefit Register and Identity Flow
-
-**Contributor:** Codex and maintainer
-
-**Goal:** Stop Act 2 check-in from granting an omniscient cast list while preserving fair access to character topics.
-
-**Done:** Added an inspectable leather-bound register beside Heimlich in Room 335. Look, Hand, and Magnifier record only Steve, Heimlich, Yvette, Rameses, Countess, Olympia, and Tut; the text identifies Pippin and the apparent Carrington without exposing Watney. Removed the automatic check-in batches and the disguised Watney actor's clue-272 encounter hook. Reworked Lo Fat's museum discussion so he foreshadows Heimlich and Olympia without names or clues while still naming Yvette and preserving her Act 1 inquiry branches. Added tuple-addressed register and Lo Fat manifests and synchronized roadmap, ADR, architecture, testing, changelog, manual, and public/internal playtest guidance.
-
-**Decisions:** D-009 refined; D-033.
-
-**Verified:** Maintainer compiled Scripts 270, 335, and 93; lowercase Wine outputs were normalized to tracked uppercase names. Message manifests reapply idempotently. Static source audit confirms the intended clue set and Watney exclusion. `RESOURCE.000` and `RESOURCE.MAP` retain vanilla MD5 hashes, and the original interpreter completes its headless startup smoke. Runtime hotspot placement remains to be checked in DOSBox-X.
-
-**Next session should start with:** Test the entrance register from the Act 2 save, including repeat inspection and notebook contents, then continue the clean playthrough.
