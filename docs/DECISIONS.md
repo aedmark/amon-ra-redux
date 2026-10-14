@@ -556,12 +556,13 @@ Do not rebuild a committed patch only because it no longer matches a compile of 
   a computed index (`(|= [global186 (/ n 16)] ...)`) as `eq`, `toss`, `pprev`, `ssXi`. By SCI Companion's own stack
   model, and by ScummVM's SCI1.1 semantics, that drops the index and writes to the wrong element. Neither model is
   proof of what this hybrid SCI1/SCI1.1 interpreter does, and the sequence has not been run in DOSBox-X, so this is
-  an untested hazard rather than a confirmed bug. `Main`'s `SetFlag` and `ClearFlag` and `n027`'s `proc27_2` contain
-  it; no committed patch does.
+  an untested hazard rather than a confirmed bug. `Main`'s `SetFlag` and `ClearFlag` and `n027`'s `proc27_2` were the
+  only sources that used it, and no committed patch contained it.
 - **Decision:** Keep drifted patches until their script needs a real change, then compare the new build with the
-  committed one before shipping it. Do not rebuild `Main` or `n027` until the sequence is tested in DOSBox-X or
-  their indexed compound assignments are rewritten as a plain assignment (`(= [a i] (| [a i] x))`). Write value-yielding conditionals as `(if c v else 0)`,
-  not `(and c v)`.
+  committed one before shipping it. Write a compound assignment to an array element with a computed index as a plain
+  assignment (`(= [a i] (| [a i] x))`), and a value-yielding conditional as `(if c v else 0)`, not `(and c v)`. The
+  three existing uses are rewritten this way: `Main` now compiles byte-identical to its committed patch, and
+  `n027`'s `proc27_2` matches the archive build (Script 27 still loads from the archive).
 - **Consequences:** The heap-only differences in Scripts 31 to 37 and the codegen differences elsewhere stay. The
   disassembler is a session tool, not part of the repository; a future comparison can reuse the approach.
 

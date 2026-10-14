@@ -35,7 +35,7 @@ distinct verification boundaries:
 
 **Before step 1:** SCI Companion's "Compile modified scripts before run" option must be off (registry `CompileModifiedScriptsBeforeRun=0`). With it on, pressing Run silently recompiles every script whose source is newer than its patch and overwrites the committed files. Launch the game only with `./tools/run_dosbox.sh`.
 
-**Before shipping a rebuilt script that had a drifted committed patch (D-041),** compare the two builds routine by routine rather than byte by byte, and check that every object's property count matches its class. Do not rebuild `Main` or `n027` while they contain indexed compound assignments.
+**Before shipping a rebuilt script that had a drifted committed patch (D-041),** compare the two builds routine by routine rather than byte by byte, and check that every object's property count matches its class. Write compound assignments to array elements with a computed index as plain assignments (D-041).
 
 **Compile output must match the committed layout.** After compiling an unmodified script, its `.SCR`/`.HEP` should be byte-identical to the committed files (compare with `git show HEAD:LB2/N.HEP | cmp - LB2/N.HEP`). A larger heap (extra entry per object) means the SCI Companion version setting or `.sco` caches are wrong; such patches crash the game (D-028, HANDOFF blocker).
 
