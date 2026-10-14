@@ -25,7 +25,7 @@ linked below, not in an agent's private memory.
 - Record architectural choices in `docs/DECISIONS.md`.
 - Keep 3x manual sources (`docs/manual/amon-ra.manual.json`) in sync with code fixes.
 - Never stage or commit IDE or tooling artifacts: `.idea/`, `__pycache__/`, `*.pyc`. Stage files by explicit path, not `git add -A`.
-- Commit saved games (`LB2/LB2SG.*`) only when the maintainer asks; they are personal test saves.
+- Never commit saved games (`LB2/LB2SG.*`). They belong to the maintainer's local save set; `.gitignore` excludes them.
 
 ## Finishing a change
 
