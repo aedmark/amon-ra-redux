@@ -6,6 +6,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+## [0.04-alpha] - 2026-10-14
+
 ### Changed
 - Looking at the banner outside the museum in Act 1 notes that the party calls for formal evening attire (PLAY-012).
 - At the party, Rameses talks about Ziggy as someone he met that evening, and Yvette's view of Dr. Smith no longer asks whether he killed Dr. Carter before anyone has died (PLAY-013, PLAY-015, D-042).
@@ -13,18 +15,14 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 - Yvette speaks of Pippin in the present tense until Laura learns of his death (PLAY-015).
 
 ### Fixed
-- Party guests at the front rotunda's buffet table block walking, and Steve's 7:30 meeting with Laura happens beside them instead of among them (PLAY-016).
-- Leaving the front rotunda for the Mastodon Room no longer draws Laura's head over the doorway's lintel (PLAY-017).
-- The Ankh near Pippin's body is easier to click (PLAY-018).
-
-## [0.04-alpha] - 2026-10-14
-
-### Fixed
 - The coroner's final inquest uses the game's standard object layout again. The previous build placed every inquest object's properties one slot off, which could stop the inquest from advancing and misplace its props (D-040).
 - Leaving the Egyptian room to the south in Acts 3 and 4 pauses the rotating music instead of sending the command to the wrong object (D-040).
 - Leaving the speakeasy stops its rotating music, as in the original game (D-040).
 - Ernie's office (room 640) handles room and Ernie actions with the correct class again (D-040).
 - Using an unhandled item on the Egyptian room's dagger case or its glass gives the standard response instead of running stray code from the original patch (D-040, D-041).
+- Party guests at the front rotunda's buffet table block walking, and Steve's 7:30 meeting with Laura happens beside them instead of among them (PLAY-016).
+- Leaving the front rotunda for the Mastodon Room no longer draws Laura's head over the doorway's lintel (PLAY-017).
+- The Ankh near Pippin's body is easier to click (PLAY-018).
 
 ## [0.03-alpha] - 2026-10-13
 

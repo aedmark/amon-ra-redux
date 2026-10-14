@@ -466,7 +466,7 @@
         </article>
         <article class="notice">
           <strong>New in v0.04</strong>
-          <p>Fixes for the final inquest, the speakeasy and Egyptian Room music, Ernie's office, and the dagger case. These rooms have not had a full playthrough yet, so reports on them are especially welcome.</p>
+          <p>Fixes for the final inquest, the speakeasy and Egyptian Room music, Ernie's office, and the dagger case, plus Act 1 and 2 playtest fixes: party dialogue that treated the evening as over, guests Laura could walk through, the Mastodon Room doorway, and the Ankh. None of these has had a full playthrough yet, so reports on them are especially welcome.</p>
         </article>
         <article class="notice">
           <strong>Reference setup</strong>
@@ -532,6 +532,7 @@
             <li><label><input type="checkbox">Ask about people standing nearby and note responses that feel unnaturally isolated.</label></li>
             <li><label><input type="checkbox">Confirm characters stay through conversations, then resume moving normally.</label></li>
             <li><label><input type="checkbox">Report unclear next steps or long stretches with nothing interactive to do.</label></li>
+            <li><label><input type="checkbox">Ask guests about one another and note any line that treats the party as already over.</label></li>
           </ul>
         </article>
 
@@ -589,6 +590,7 @@
             <li><label><input type="checkbox">Leaving the speakeasy stops its songs; they do not carry on into the next room.</label></li>
             <li><label><input type="checkbox">The street outside Lo Fat's laundry has its intended music.</label></li>
             <li><label><input type="checkbox">The two men at the speakeasy bar have distinct Look and Talk feedback.</label></li>
+            <li><label><input type="checkbox">Looking at the banner outside the museum mentions needing formal attire in Act 1, but not in Act 2.</label></li>
             <li><label><input type="checkbox">Ziggy acknowledges Yvette and the Countess without exposing later revelations.</label></li>
             <li><label><input type="checkbox">The Act 1 grade uses the gold Art Deco frame, not skull-and-crossbones artwork.</label></li>
           </ul>
@@ -607,6 +609,11 @@
             <li><label><input type="checkbox">Completed notebook topics reopen only when genuinely new information exists.</label></li>
             <li><label><input type="checkbox">Walking characters pause throughout dialogue and resume the same route afterward.</label></li>
             <li><label><input type="checkbox">Essential conversations remain available without a hidden conversation counter.</label></li>
+            <li><label><input type="checkbox">At the party, Rameses on Ziggy and Yvette on Pippin and Dr. Smith speak as if the evening is still going and no one has died.</label></li>
+            <li><label><input type="checkbox">Ziggy knows Heimlich and Dr. Smith.</label></li>
+            <li><label><input type="checkbox">Nobody can walk through the guests at the front rotunda's buffet table, including Steve after his 7:30 meeting with Laura.</label></li>
+            <li><label><input type="checkbox">Leaving the front rotunda north into the Mastodon Room, Laura stays inside the doorway rather than drawing over its lintel.</label></li>
+            <li><label><input type="checkbox">The Ankh near Pippin's body is easy to click.</label></li>
             <li><label><input type="checkbox">Reporting Pippin's body reaches Act 3 without unrelated optional conversations.</label></li>
             <li><label><input type="checkbox">A complete run can earn the full Act 2 grade.</label></li>
           </ul>
@@ -716,7 +723,7 @@ Anything unusual: old save, alternate route, skipped conversation, custom MIDI, 
 
   <script>
     (() => {
-      const storageKey = "amon-ra-redux-alpha-v004-checks";
+      const storageKey = "amon-ra-redux-alpha-v004r2-checks";
       const checks = [...document.querySelectorAll('.checklist input[type="checkbox"]')];
       const progressValue = document.getElementById('progressValue');
       const progressBar = document.getElementById('progressBar');

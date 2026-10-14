@@ -29,8 +29,13 @@ users can run `./tools/run_dosbox.sh` from the project root.
 - Leaving the Egyptian Room to the south in Acts 3 and 4 pauses the rotating music correctly.
 - Leaving the speakeasy stops its rotating songs, as in the original game.
 - Ernie's office and the Egyptian Room's dagger case respond correctly to actions and items.
+- In Act 1, the banner outside the museum notes that the party calls for formal attire.
+- At the party, Rameses, Yvette, and Ziggy no longer speak as if the evening were over or Pippin already dead, and
+  Ziggy knows Heimlich and Dr. Smith.
+- Guests at the front rotunda's buffet table can no longer be walked through, the Mastodon Room doorway no longer
+  draws Laura over its lintel, and the Ankh near Pippin's body is easier to click.
 
-None of these rooms has had a full playthrough on v0.04 yet, so reports on them are especially welcome.
+None of these has had a full playthrough on v0.04 yet, so reports on them are especially welcome.
 
 ## What's new in v0.03
 
@@ -86,6 +91,7 @@ Use this section if you want to play naturally without being told where every cl
 - [ ] Confirm characters remain present until a conversation ends, then resume moving normally.
 - [ ] Follow the party and eavesdropping sequence without a walkthrough and report any unclear next step or long stretch
   with nothing interactive to do.
+- [ ] Ask guests about one another and note any line that treats the party as already over.
 
 ### Acts 3 and 4
 
@@ -129,6 +135,7 @@ Use this section if you want to play naturally without being told where every cl
 - [ ] Leaving the speakeasy stops its songs; they do not carry on into the next room.
 - [ ] The street outside Lo Fat's laundry has its intended music.
 - [ ] The two men at the speakeasy bar have distinct Look and Talk feedback.
+- [ ] Looking at the banner outside the museum mentions needing formal attire in Act 1, but not in Act 2.
 - [ ] Ziggy acknowledges knowing Yvette and the Countess without revealing later plot information.
 - [ ] The Act 1 grade uses the gold Art Deco frame rather than a skull-and-crossbones frame.
 
@@ -150,6 +157,14 @@ Use this section if you want to play naturally without being told where every cl
 - [ ] Walking characters pause for the entire conversation and resume the same route afterward.
 - [ ] Essential conversations and eavesdropping scenes remain available in their intended order without a hidden
   conversation counter.
+- [ ] At the party, Rameses on Ziggy and Yvette on Pippin and Dr. Smith speak as if the evening is still going and no
+  one has died.
+- [ ] Ziggy knows Heimlich and Dr. Smith.
+- [ ] Nobody can walk through the guests at the front rotunda's buffet table, including Steve after his 7:30 meeting
+  with Laura.
+- [ ] Leaving the front rotunda north into the Mastodon Room, Laura stays inside the doorway rather than drawing over its
+  lintel.
+- [ ] The Ankh near Pippin's body is easy to click.
 - [ ] Discovering and reporting Pippin's body advances to Act 3 without unrelated optional conversations.
 - [ ] A complete run can earn the full Act 2 grade.
 
