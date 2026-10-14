@@ -26,7 +26,7 @@ distinct verification boundaries:
 
 ## Compile and boot workflow
 
-1. Start SCI Companion under Wine by opening the working archive explicitly: `wine SCICompanion/SCICompanion.exe 'Z:\home\gordonk\PycharmProjects\amon-ra-redux\LB2\RESOURCE.MAP'`. Do not pass `game.ini`, and do not open the browse-only copy. Its hybrid settings remain SCI 1.0 map, SCI 1.1 package/compression, and VGA 1.1 View/Pic (D-028).
+1. Start SCI Companion under Wine by opening the working archive explicitly: `wine "SCI Companion/SCICompanion.exe" 'Z:\run\media\gordonk\Oopy Goopy\amon-ra-redux\LB2\RESOURCE.MAP'`. Do not pass `game.ini`, and do not open the browse-only copy. Its hybrid settings remain SCI 1.0 map, SCI 1.1 package/compression, and VGA 1.1 View/Pic (D-028).
 2. Copy the script's current `N.SCR`/`N.HEP` somewhere outside the repository: `tools/compile.py` deletes them first and does not restore them if the helper fails.
 3. Compile one script: `python3 tools/compile.py rm750` (name or `.sc` base name). It drives the GUI through `tools/compile_any.exe` and confirms that the lowercase `.scr`/`.hep` were rewritten in place (D-037); pressing Compile in SCI Companion is equivalent. If the script is missing from the helper's list (`wine tools/list_scripts.exe`), restart SCI Companion; it drops a script when its patch files vanish and does not re-add it.
 4. Stop SCI Companion with `wineserver -k` so it cannot touch `LB2/` again.

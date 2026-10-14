@@ -12,7 +12,7 @@ Security: [SECURITY.md](SECURITY.md). Changes: [CHANGELOG.md](CHANGELOG.md). Old
 
 ## Current state
 
-_Last updated: 2026-10-12, session 51: alpha v0.02 packaged._
+_Last updated: 2026-10-13, session 52: forked SCI Companion saves LB2 messages; repo cleanup._
 
 **Where things stand, in one paragraph:** Alpha v0.01 is public in the SQH Discord; alpha v0.02 (`LB2/LB2-Redux-v0.02.zip`, built from `master` at `43b1fbc`) is packaged and its tester guides are updated, pending publication. The room 335 benefit podium remains at `(190, 174)` with visual bounds `nsTop: 148, nsLeft: 182, nsBottom: 174, nsRight: 198` and fixed priority 12. Script 2335's existing 14-point barred room polygon reaches `(190, 176)` around the podium, and Script 335 routes Look/Hand/Magnifier to `(186, 180)` in front of the ledger. Old saves rebind that same polygon object to current static points without heap writes or new objects. Script 21's duplicate-clue repair prevents the prior Error 5 memory corruption. The remaining one-frame “interesting approach” flash was traced to the global fallback for an unsupported verb dispatch occurring before the valid podium dispatch on exact-position repeats. The podium now handles its three intended verbs normally and locally consumes any unsupported dispatch instead of forwarding it to the global narrator (D-035). The flash persisted, and occurred only on the engine's immediate-dispatch ending, when Laura was already in place. The podium now sets `sightAngle` -1 and `approachDist` 4, so repeats take the same deferred `CueObj` path as a fresh approach (D-036). The maintainer confirmed in DOSBox-X that repeat LOOK and DO show only the guestbook response. Saved games no longer overwrite slot 0 (Script 990 fix).
 
@@ -68,7 +68,7 @@ _Last updated: 2026-10-12, session 51: alpha v0.02 packaged._
 - **Act 5 Dialogue:** Rameses's Society confrontation and riddle, Tut's inquest testimony, Steve's already-clean escape dialogue, and O'Riley's jailhouse threat preserve the ending while removing the final phonetic caricatures (P2-08, D-031).
 - **Act 6 Dialogue:** The coroner conducts the complete final inquest in a dry, exacting professional voice; every question, evidence check, joke, verdict, and ending route remains intact (P2-08, D-031).
 - **Source Baseline:** P5-00's Sluicebox-annotated effective reconstruction is active under D-032; normal work remains single-script compilation under D-028.
-- **Documentation Architecture:** `docs/ROADMAP.md`, `DECISIONS.md` (D-001 through D-037), `docs/manual/`, `docs/manual/manual.html`, and `docs/PLAYTEST_CHECKLIST.md` synchronized.
+- **Documentation Architecture:** `docs/ROADMAP.md`, `DECISIONS.md` (D-001 through D-038), `docs/manual/`, `docs/manual/manual.html`, and `docs/PLAYTEST_CHECKLIST.md` synchronized.
 
 **Not verified**
 
@@ -78,7 +78,7 @@ _Last updated: 2026-10-12, session 51: alpha v0.02 packaged._
 
 **Gotchas for the next session**
 
-- Edit message text through `docs/dialogue/*.json` manifests and `python3 tools/dialogue.py LB2/<n>.MSG <manifest>`, not SCI Companion's message editor. SCI Companion can read but not write message resources at version `0xD53` or older: upstream `Message.cpp` implements only `MessageWriteTo_4000` and asserts "not implemented" for older formats, so a save writes a 4-byte header with no records. Every LB2 message resource is older (`0x0C29`–`0x0D0C`). Confirmed on the case-insensitive workspace (D-037).
+- Edit message text in SCI Companion's message editor using the fork build in `SCI Companion/` (D-038); it saves LB2's message format in place. Upstream SCI Companion cannot write it (D-037). `docs/dialogue/*.json` manifests are a historical record of the P2-08 rewrites: re-running `tools/dialogue.py` would overwrite later editor changes.
 - Before changing an interactive room object, follow `docs/CONTRIBUTING.md`'s reference-first SCI object workflow (D-034): consult SCI Companion's object-interaction documentation, inspect `Feature.sc`/`PApproach.sc`/`Polygon.sc`, and compare at least two established same-class hotspots before adding custom selectors, cues, dispatchers, or per-cycle mutation.
 - Do not replace numeric selectors with contextual readable aliases; one selector ID can have several receiver-specific names (D-032).
 - Rebuild the developer vocabulary with `python3 tools/normalize_selector_vocab.py LB2/997.voc LB2/997.voc.tmp`, then replace it only after validation.
@@ -98,6 +98,23 @@ _Last updated: 2026-10-12, session 51: alpha v0.02 packaged._
 None currently open. Q-001 and Q-002 have been resolved by D-007, D-017, and D-018.
 
 ## Session log
+
+### Session 52: 2026-10-13: SCI Companion Message Saving and Workspace Cleanup
+
+**Contributor:** Claude Code and maintainer
+
+**Goal:** Make SCI Companion's message editor usable for LB2 and remove the obsolete in-repo SCI Companion copy.
+
+**Done:**
+- Added `MessageWriteTo_3411` and reference-byte preservation to the maintainer's SCI Companion fork (`aedmark/SCICompanion` `04b1aeb0`, with a round-trip unit test); the maintainer built it on Windows and placed the build in the untracked `SCI Companion/` folder.
+- Verified a real editor save: `335.msg` noun 6 verb 8 now reads “He's a man of many scars (and scowls).”, and the file is byte-identical to the original apart from that text (D-038).
+- Removed the tracked `SCICompanion/` folder (docs, templates, tools, and source stubs); `.gitignore` now ignores `/SCI Companion/`. Updated launch commands in `TESTING.md` and `CONTRIBUTING.md`, the tool table in `ARCHITECTURE.md`, and the `AGENTS.md` layout. Tracked `LB2/msg/335.shm`. Recorded the maintainer's move of `SOURCE_MIGRATION_PLAN.md` to `docs/archive/`.
+
+**Decisions:** D-038; D-037 updated.
+
+**Verified:** Byte comparison of the saved `335.msg` against `HEAD` with the single edit applied; documentation and manual checks pass. The new message text has not been viewed in game.
+
+**Next session should start with:** Check the revised Heimlich Magnifier line in game, then decide on readable selector names (plan item B).
 
 ### Session 51: 2026-10-12: Alpha v0.02 Playtest Package
 
@@ -259,17 +276,3 @@ None currently open. Q-001 and Q-002 have been resolved by D-007, D-017, and D-0
 **Verified:** Maintainer confirmed both speakeasy songs rotate and bathroom return no longer restarts the song; Script 310 compiled at 0 errors/0 warnings; Script 26 emitted updated loose patches; both additive message tuples parse and the manifest reapplies with zero changes; immutable base archives retain their vanilla hashes.
 
 **Next session should start with:** Continue the Act 1 playthrough and retest the neutral grade frame plus both new Ziggy inquiry replies.
-
-### Session 42: 2026-10-10: Act 6 Final-Inquest Dialogue Closure
-
-**Contributor:** Codex and maintainer
-
-**Goal:** Finish the act-by-act dialogue rewrite with the coroner's complete final interrogation before beginning the clean playthrough.
-
-**Done:** Recast the coroner as a dry, formal, exacting professional; replaced the dated “mental deficiency” answer; removed repetitive shouting and unsupported suggestions that Laura herself committed the murders; sharpened weak, partial, and successful verdicts; retained the rubbish-bin hint and fence-installer joke; and left all sixteen questions, answer routing, evidence gates, Tut testimony, verdicts, and ending states unchanged.
-
-**Decisions:** D-031.
-
-**Verified:** All 77 records in module 750 structurally compared; exactly 28 approved text tuples changed; all tuple/talker/reference metadata preserved; the Act 6 manifest reapplies idempotently.
-
-**Next session should start with:** Run the clean DOSBox-X playthrough, including every final-inquest outcome required by `docs/TESTING.md`.

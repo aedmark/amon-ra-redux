@@ -463,7 +463,27 @@ filesystem, so SCI Companion's own Save and Compile work without post-processing
   rewrote `335.scr`/`335.hep` in place byte-identically. Clones on a case-sensitive filesystem reintroduce the Wine
   collision, so the case-insensitive workspace is a requirement. exFAT lacks Unix permissions (`core.fileMode false`),
   symlinks (the unused `.venv` stays off the drive), and journaling (eject cleanly and push often). D-028's one-script
-  rule still stands. SCI Companion's message editor cannot save LB2 message resources at all: upstream implements writing only for format 4000+, and LB2's are `0x0C29`–`0x0D0C`. Message edits stay on `tools/dialogue.py` manifests.
+  rule still stands. SCI Companion's message editor cannot save LB2 message resources at all: upstream implements writing only for format 4000+, and LB2's are `0x0C29`–`0x0D0C`. D-038 supersedes this with the fork's writer.
+
+---
+
+## D-038 Edit Messages in the Forked SCI Companion
+
+Make SCI Companion's message editor the source of truth for LB2 message text, using the maintainer's fork.
+
+- **Context:** Upstream SCI Companion reads LB2's message format (versions `0x0C29`–`0x0D0C`) but writes only the
+  4000+ format, so saves produced a 4-byte header with no records (D-037). The maintainer's fork
+  ([aedmark/SCICompanion](https://github.com/aedmark/SCICompanion), commit `04b1aeb0`) adds `MessageWriteTo_3411`
+  and preserves each entry's three reference bytes. A Python model of that layout rebuilt 46 of 49 shipped message
+  files byte-for-byte; `0.msg` and `13.msg` match to their declared end but carry unreferenced trailing bytes that a
+  save drops.
+- **Decision:** Use the fork build in the untracked `SCI Companion/` folder. Edit and save message text there. Keep
+  `docs/dialogue/*.json` and `tools/dialogue.py` as the historical record and audit tool for the P2-08 rewrites, not
+  as the editing path.
+- **Consequences:** A real edit of `335.msg` (6, 8, 0) saved in place under its lowercase name and was byte-identical
+  to the original with only that text changed, including junk reference bytes. Re-applying an old manifest would
+  revert later editor changes. SCI Companion also writes `LB2/msg/<n>.shm` noun and condition name files, which are
+  tracked so names chosen in the editor persist.
 
 ---
 

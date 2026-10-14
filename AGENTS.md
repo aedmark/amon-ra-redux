@@ -38,7 +38,7 @@ linked below, not in an agent's private memory.
 | Path | Purpose |
 | --- | --- |
 | `LB2` | Floppy v1.000 game files and loose patch override directory |
-| `SCICompanion` | SCI Companion source, documentation, and tools |
+| `SCI Companion` | Untracked SCI Companion build from the maintainer's fork (github.com/aedmark/SCICompanion); bundled docs in `Help/` |
 | `docs/manual` | Project-owned 3x manual source, schema, and license |
 | `tools/manual.py` | Standalone 3x manual validator and HTML builder |
 | `docs/ROADMAP.md` | Modernization roadmap with permanent item IDs |

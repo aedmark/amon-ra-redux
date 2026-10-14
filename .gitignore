@@ -26,17 +26,8 @@
 tools/*.exe
 tools/*.dll
 
-# SCI Companion IDE binary & runtime caches
-SCICompanion/*.exe
-SCICompanion/Customization/
-SCICompanion/Decompiler/
-SCICompanion/Help/
-SCICompanion/Objects/
-SCICompanion/Plugins/
-SCICompanion/Samples/
-SCICompanion/TemplateGame/
-SCICompanion/TestFiles/
-SCICompanion/include/
+# SCI Companion build drop (source: github.com/aedmark/SCICompanion)
+/SCI Companion/
  
 # PDF outline
 /Dagger of Amon Ra Modernization.pdf

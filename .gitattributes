@@ -3,3 +3,9 @@
 *.HEP binary
 *.MSG binary
 *.sco binary
+*.scr binary
+*.hep binary
+*.msg binary
+*.v56 binary
+# SCI Companion message noun/condition names; keep its CRLF line endings untouched.
+*.shm -text

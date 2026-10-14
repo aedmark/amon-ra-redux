@@ -34,7 +34,7 @@ workaround (D-034).
 ## Workflow
 
 1. Select an open task from `docs/ROADMAP.md` (e.g. `P1-01`).
-2. Open the game in SCI Companion: `wine SCICompanion/Release/SCICompanion.exe 'Z:\home\gordonk\PycharmProjects\amon-ra-redux\LB2\game.ini'`.
+2. Open the game in SCI Companion: `wine "SCI Companion/SCICompanion.exe" 'Z:\run\media\gordonk\Oopy Goopy\amon-ra-redux\LB2\RESOURCE.MAP'`.
 3. Edit the script source in `LB2/src/` and compile that one script into loose `.SCR` and `.HEP` files with `python3 tools/compile.py <script>`; follow the steps in [TESTING.md](TESTING.md#compile-and-boot-workflow).
 4. Boot the game in DOSBox-X before committing: `./tools/run_dosbox.sh` (D-029).
 5. Update `docs/ROADMAP.md`, `docs/HANDOFF.md`, and 3x manual entries.
