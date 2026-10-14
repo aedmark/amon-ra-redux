@@ -6,6 +6,9 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+### Changed
+- Ziggy is a slippery stool pigeon again: slang, swagger, mangled big words, and come-ons return to all his dialogue, with a light accent instead of the original phonetic spelling (D-043).
+
 ## [0.04-alpha] - 2026-10-14
 
 ### Changed

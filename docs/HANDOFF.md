@@ -12,7 +12,7 @@ Security: [SECURITY.md](SECURITY.md). Changes: [CHANGELOG.md](CHANGELOG.md). Old
 
 ## Current state
 
-_Last updated: 2026-10-14, session 55: Act 1–2 playtest findings PLAY-012 to PLAY-018 (D-042)._
+_Last updated: 2026-10-14, session 56: Ziggy's voice restored (D-043)._
 
 **Where things stand, in one paragraph:** Alpha v0.01 is public in the SQH Discord; alpha v0.02 (`LB2/LB2-Redux-v0.02.zip`, built from `master` at `43b1fbc`) is packaged and its tester guides are updated, pending publication. The room 335 benefit podium remains at `(190, 174)` with visual bounds `nsTop: 148, nsLeft: 182, nsBottom: 174, nsRight: 198` and fixed priority 12. Script 2335's existing 14-point barred room polygon reaches `(190, 176)` around the podium, and Script 335 routes Look/Hand/Magnifier to `(186, 180)` in front of the ledger. Old saves rebind that same polygon object to current static points without heap writes or new objects. Script 21's duplicate-clue repair prevents the prior Error 5 memory corruption. The remaining one-frame “interesting approach” flash was traced to the global fallback for an unsupported verb dispatch occurring before the valid podium dispatch on exact-position repeats. The podium now handles its three intended verbs normally and locally consumes any unsupported dispatch instead of forwarding it to the global narrator (D-035). The flash persisted, and occurred only on the engine's immediate-dispatch ending, when Laura was already in place. The podium now sets `sightAngle` -1 and `approachDist` 4, so repeats take the same deferred `CueObj` path as a fresh approach (D-036). The maintainer confirmed in DOSBox-X that repeat LOOK and DO show only the guestbook response. Saved games no longer overwrite slot 0 (Script 990 fix). Session 54 found that Redux's `Main` numbers `WrapMusic` and `Actions` the reverse of vanilla, which broke Sierra-compiled rooms 450 and 640 and the archive-derived room 310, and that the committed room 750 inquest had every object property shifted one slot; all four now build from corrected source and await a runtime retest (D-040). Drifted patches stay unless their script changes; `Main`'s and `n027`'s indexed compound assignments are rewritten, and `Main` now rebuilds byte-identical to its committed patch (D-041).
 
@@ -91,17 +91,33 @@ _Last updated: 2026-10-14, session 55: Act 1–2 playtest findings PLAY-012 to P
 
 ## Next steps (in order)
 
-1. Retest PLAY-012 to PLAY-018 during the fresh playthrough: the Act 1 museum banner, Rameses and Yvette at the party (Ziggy, Pippin, Tut topics), Ziggy on Heimlich and Tut, the 7:30 Steve meeting in the front rotunda, the north doorway to the Mastodon Room, and clicking the Ankh.
-2. Boot and retest session 54's rooms: a museum conversation (Script 90), leaving the speakeasy (310), leaving the Egyptian room south in Act 3 or 4 and using an item on the dagger case (450), room 640's actions, and the full final inquest (750).
-3. Check the podium's collision from both sides and a Magnifier repeat.
-4. Resume the clean DOSBox-X playthrough and triage every remaining `PLAY-nnn` finding.
-5. Begin P5-01 design only after the playthrough gate closes, using the migrated compiler-facing source baseline.
+1. Read Ziggy's restored dialogue in play (speakeasy and party) and adjust any line in SCI Companion (D-043).
+2. Retest PLAY-012 to PLAY-018 during the fresh playthrough: the Act 1 museum banner, Rameses and Yvette at the party (Ziggy, Pippin, Tut topics), Ziggy on Heimlich and Tut, the 7:30 Steve meeting in the front rotunda, the north doorway to the Mastodon Room, and clicking the Ankh.
+3. Boot and retest session 54's rooms: a museum conversation (Script 90), leaving the speakeasy (310), leaving the Egyptian room south in Act 3 or 4 and using an item on the dagger case (450), room 640's actions, and the full final inquest (750).
+4. Check the podium's collision from both sides and a Magnifier repeat.
+5. Resume the clean DOSBox-X playthrough and triage every remaining `PLAY-nnn` finding.
+6. Begin P5-01 design only after the playthrough gate closes, using the migrated compiler-facing source baseline.
 
 ## Open questions for maintainers
 
 None currently open. Q-001 and Q-002 have been resolved by D-007, D-017, and D-018.
 
 ## Session log
+
+### Session 56: 2026-10-14: Ziggy's Voice
+
+**Contributor:** Claude Code and maintainer
+
+**Goal:** Restore the sleaze the P2-08 rewrite took out of Ziggy.
+
+**Done:**
+- Rewrote all 118 Ziggy lines in `310.msg` (Act 1 speakeasy, 32) and `1890.msg` (Acts 2-6, 86) to the maintainer's brief: light accent, flirting between vanilla and P2-08, full scope (D-043). Manifests `act1-ziggy-voice-2026-10.json` and `act2-ziggy-voice-2026-10.json` record the pass.
+
+**Decisions:** D-043.
+
+**Verified:** Only Ziggy's records changed text; record sets and reference bytes unchanged; documentation checks.
+
+**Next session should start with:** The maintainer's fresh playthrough (Next steps 1-2).
 
 ### Session 55: 2026-10-14: Act 1 and 2 Playtest Findings
 
@@ -280,25 +296,3 @@ None currently open. Q-001 and Q-002 have been resolved by D-007, D-017, and D-0
 **Verified:** Single-script compiles pass at 0 errors/0 warnings; `335.MSG` contains exact user-requested dialogue tuples; `check_docs.py` and `manual.py` checks pass; DOSBox-X smoke boots cleanly.
 
 **Next session should start with:** Test the room 335 entrance register in DOSBox-X from the Act 2 save (approach positioning, z-ordering, collision, and signing flow).
-
-### Session 46: 2026-10-11: Room 335 Benefit Podium Refinement and Signing Flow
-
-**Contributor:** Codex and maintainer
-
-**Goal:** Refine the Room 335 benefit register podium artwork, collision barrier, interaction approach, and signing/examination flow.
-
-**Done:**
-- Rescaled podium sprite from 24x48 to 16x26 in `tools/make_podium_view.py` with authentic Art Deco fluting, tiered plinth, and burgundy leather ledger at waist height. Regenerated `LB2/335.V56` and `LB2/335.v56` with embedded palette.
-- Added barred obstacle polygon `polyPodium` `[167 186  182 186  182 189  167 189]` in `LB2/src/poly2335Code.sc` to prevent Laura from walking through the podium during Act 2.
-- Updated `benefitPodium` in `LB2/src/rm335.sc` with coordinates `x: 174, y: 190`, visual bounds `nsTop: 164, nsLeft: 166, nsBottom: 190, nsRight: 182`, and closer approach point `approachX: 164, approachY: 187`.
-- Implemented stateful signing flow using unused flag 124 (`Flag_SignedRegister`):
-  - Hand/Do (`verb 4`) on first use: awards 7 attendee clues, sets flag 124, and narrates Laura signing with a flourish (`[17, 4, 0, 1, 99]`).
-  - Hand/Do on repeat: confirms she has already signed with her finest flourish (`[17, 4, 1, 1, 99]`).
-  - Look/Magnifier (`verb 1` / `verb 8`): before signing narrates attendees (`[17, 1, 0, 1, 99]`); after signing reflects Laura's signature inscribed with a proud flourish below them (`[17, 1, 1, 1, 99]`).
-- Updated dialogue manifest `docs/dialogue/act2-guest-register.json` and reapplied to `LB2/335.MSG`. Recompiled `poly2335Code` (`2335.SCR`/`2335.HEP`) and `rm335` (`335.SCR`/`335.HEP`).
-
-**Decisions:** D-009 refined; D-033.
-
-**Verified:** Scripts 335 and 2335 compiled cleanly without errors; `335.MSG` manifest entries apply idempotently; `python3 tools/check_docs.py` and `python3 tools/manual.py check` pass at 0 errors/0 warnings; compiled `docs/manual/manual.html`; base archives `RESOURCE.000` and `RESOURCE.MAP` remain untouched bit-for-bit.
-
-**Next session should start with:** Test the entrance register in DOSBox-X (approach, collision, signing, repeat signing, and clue awards), then resume the clean Act 2 playthrough.

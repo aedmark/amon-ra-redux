@@ -2,6 +2,28 @@
 
 Archived verbatim from `docs/HANDOFF.md` when its live session log exceeded ten entries.
 
+### Session 46: 2026-10-11: Room 335 Benefit Podium Refinement and Signing Flow
+
+**Contributor:** Codex and maintainer
+
+**Goal:** Refine the Room 335 benefit register podium artwork, collision barrier, interaction approach, and signing/examination flow.
+
+**Done:**
+- Rescaled podium sprite from 24x48 to 16x26 in `tools/make_podium_view.py` with authentic Art Deco fluting, tiered plinth, and burgundy leather ledger at waist height. Regenerated `LB2/335.V56` and `LB2/335.v56` with embedded palette.
+- Added barred obstacle polygon `polyPodium` `[167 186  182 186  182 189  167 189]` in `LB2/src/poly2335Code.sc` to prevent Laura from walking through the podium during Act 2.
+- Updated `benefitPodium` in `LB2/src/rm335.sc` with coordinates `x: 174, y: 190`, visual bounds `nsTop: 164, nsLeft: 166, nsBottom: 190, nsRight: 182`, and closer approach point `approachX: 164, approachY: 187`.
+- Implemented stateful signing flow using unused flag 124 (`Flag_SignedRegister`):
+  - Hand/Do (`verb 4`) on first use: awards 7 attendee clues, sets flag 124, and narrates Laura signing with a flourish (`[17, 4, 0, 1, 99]`).
+  - Hand/Do on repeat: confirms she has already signed with her finest flourish (`[17, 4, 1, 1, 99]`).
+  - Look/Magnifier (`verb 1` / `verb 8`): before signing narrates attendees (`[17, 1, 0, 1, 99]`); after signing reflects Laura's signature inscribed with a proud flourish below them (`[17, 1, 1, 1, 99]`).
+- Updated dialogue manifest `docs/dialogue/act2-guest-register.json` and reapplied to `LB2/335.MSG`. Recompiled `poly2335Code` (`2335.SCR`/`2335.HEP`) and `rm335` (`335.SCR`/`335.HEP`).
+
+**Decisions:** D-009 refined; D-033.
+
+**Verified:** Scripts 335 and 2335 compiled cleanly without errors; `335.MSG` manifest entries apply idempotently; `python3 tools/check_docs.py` and `python3 tools/manual.py check` pass at 0 errors/0 warnings; compiled `docs/manual/manual.html`; base archives `RESOURCE.000` and `RESOURCE.MAP` remain untouched bit-for-bit.
+
+**Next session should start with:** Test the entrance register in DOSBox-X (approach, collision, signing, repeat signing, and clue awards), then resume the clean Act 2 playthrough.
+
 ### Session 45: 2026-10-11: Diegetic Benefit Register and Identity Flow
 
 **Contributor:** Codex and maintainer

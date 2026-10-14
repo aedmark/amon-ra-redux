@@ -1,0 +1,867 @@
+{
+  "module": 1890,
+  "character": "Ziggy (Acts 2-6)",
+  "voice": "An oily, wheedling stool pigeon and huckster: boastful, self-serving, and quick to flirt with 'toots,' but cowardly and evasive when cornered. Heavy contractions, 1920s slang, and malapropisms; a light touch of accent ('ain't,' 'ya,' 'gonna,' 'dunno,' dropped g's) but no phonetic respellings such as 'dat' or 'hoid.' Flirting sits between vanilla and the P2-08 rewrite. Maintainer direction, 2026-10-14; supersedes the earlier P2-08 Ziggy voice.",
+  "entries": [
+    {
+      "tuple": [
+        0,
+        47,
+        0,
+        1,
+        6
+      ],
+      "text": "I don't handle stolen goods no more, toots. And that ain't very interestin', neither."
+    },
+    {
+      "tuple": [
+        1,
+        2,
+        0,
+        2,
+        6
+      ],
+      "text": "Maybe...or maybe not. What's it worth to ya?"
+    },
+    {
+      "tuple": [
+        1,
+        2,
+        0,
+        4,
+        6
+      ],
+      "text": "Then I ain't got no rumors for ya, toots."
+    },
+    {
+      "tuple": [
+        1,
+        4,
+        0,
+        1,
+        6
+      ],
+      "text": "Thanks, toots! Go on, touch me again!"
+    },
+    {
+      "tuple": [
+        1,
+        6,
+        1,
+        1,
+        6
+      ],
+      "text": "How many times ya gonna ask me? I already told ya everything I know about that."
+    },
+    {
+      "tuple": [
+        1,
+        6,
+        2,
+        1,
+        6
+      ],
+      "text": "Augustini...Augustini...that name rings a bell."
+    },
+    {
+      "tuple": [
+        1,
+        6,
+        2,
+        2,
+        6
+      ],
+      "text": "Oh, yeah, ain't he the concierge over at the Plaza?"
+    },
+    {
+      "tuple": [
+        1,
+        6,
+        4,
+        1,
+        6
+      ],
+      "text": "The new museum prez? Stodgy old guy, but a fine chap. Yeah, that's it, a fine chap. Good man."
+    },
+    {
+      "tuple": [
+        1,
+        6,
+        5,
+        1,
+        6
+      ],
+      "text": "I'll tell ya, most of the cops in this town stink. But O'Riley's different. He knows how to treat a mouthpiece, y'know? I made some good jack keepin' my ears open for him."
+    },
+    {
+      "tuple": [
+        1,
+        6,
+        6,
+        2,
+        6
+      ],
+      "text": "Certainly I have! One of the most up-and-up guys I know. Keeps his nose clean, but he knows how to have a good time."
+    },
+    {
+      "tuple": [
+        1,
+        6,
+        7,
+        1,
+        6
+      ],
+      "text": "Lo Fat? Nah, he ain't in my privyooliged circle of friends and requaintances."
+    },
+    {
+      "tuple": [
+        1,
+        6,
+        8,
+        1,
+        6
+      ],
+      "text": "Steve? Yeah, the dockworker, I know the guy. He ain't in my inner circle, though. Dunno much about the joe."
+    },
+    {
+      "tuple": [
+        1,
+        6,
+        9,
+        2,
+        6
+      ],
+      "text": "Hey, watch your mouth. You're talkin' to him."
+    },
+    {
+      "tuple": [
+        1,
+        6,
+        10,
+        1,
+        6
+      ],
+      "text": "Heimlich? The goon with the scars at the front door? Gave my invitation the once-over like it was a bum check. Friendly as a toll booth, that one."
+    },
+    {
+      "tuple": [
+        1,
+        6,
+        11,
+        1,
+        6
+      ],
+      "text": "Nice workin' girl. I knew her when, y'know? Now she's some big hotshot museum whaddayacallit, but back then, gentlemen paid for her company, if ya catch my drift. She's respectable now, so she'd rather I forgot."
+    },
+    {
+      "tuple": [
+        1,
+        6,
+        12,
+        1,
+        6
+      ],
+      "text": "Ernie Leach? Doesn't ring a bell."
+    },
+    {
+      "tuple": [
+        1,
+        6,
+        12,
+        2,
+        6
+      ],
+      "text": "And here I was thinkin' I knew every leech in town!"
+    },
+    {
+      "tuple": [
+        1,
+        6,
+        13,
+        1,
+        6
+      ],
+      "text": "Rameses? Quiet guy, most of the time. Accountant, I think. Knows his numbers, but boy, his riddles are murder."
+    },
+    {
+      "tuple": [
+        1,
+        6,
+        14,
+        1,
+        6
+      ],
+      "text": "What makes you think I know anything about a dame like her? Sheesh, she wouldn't have nothin' to do with me. I mean, I dunno anything about her. Why ask me?"
+    },
+    {
+      "tuple": [
+        1,
+        6,
+        14,
+        3,
+        6
+      ],
+      "text": "She did? What'd she say? It ain't true. Listen, that old bird couldn't keep a secret if her life depended on it, and I ain't takin' the rap for her."
+    },
+    {
+      "tuple": [
+        1,
+        6,
+        14,
+        4,
+        6
+      ],
+      "text": "Now leave me alone before I call the cops."
+    },
+    {
+      "tuple": [
+        1,
+        6,
+        14,
+        5,
+        6
+      ],
+      "text": "Or somebody."
+    },
+    {
+      "tuple": [
+        1,
+        6,
+        15,
+        1,
+        6
+      ],
+      "text": "That lady's scary. I been avoidin' her."
+    },
+    {
+      "tuple": [
+        1,
+        6,
+        16,
+        1,
+        6
+      ],
+      "text": "Tut Smith? Big fella, real serious about his old relics. With a name like that, I figured it was an alias, a pharaoh on the lam, y'know? But nah, he's the genuine article."
+    },
+    {
+      "tuple": [
+        1,
+        6,
+        17,
+        1,
+        6
+      ],
+      "text": "Never heard of the rat."
+    },
+    {
+      "tuple": [
+        1,
+        6,
+        18,
+        1,
+        6
+      ],
+      "text": "John Bow? Ain't that what they call a stiff when nobody knows his name?"
+    },
+    {
+      "tuple": [
+        1,
+        6,
+        18,
+        3,
+        6
+      ],
+      "text": "Hey, that's an insult, right?"
+    },
+    {
+      "tuple": [
+        1,
+        6,
+        19,
+        1,
+        6
+      ],
+      "text": "Ya mean the newspaper? Not me, sister. I get my news straight from the horse's patootie, if ya catch my drift."
+    },
+    {
+      "tuple": [
+        1,
+        6,
+        20,
+        2,
+        6
+      ],
+      "text": "Yeah, I s'pose you could say that. I'm sorta a freelance detective. I find out things the police can't, then I pass the information along. For a price."
+    },
+    {
+      "tuple": [
+        1,
+        6,
+        20,
+        4,
+        6
+      ],
+      "text": "Oh, yeah. They couldn't do their jobs without me. Swell guys, the cops. Keep me flush. Salts of the earth."
+    },
+    {
+      "tuple": [
+        1,
+        6,
+        21,
+        1,
+        6
+      ],
+      "text": "Laundry...laundry...ohhh, ya mean like washin' your clothes. Nope, I do that myself."
+    },
+    {
+      "tuple": [
+        1,
+        6,
+        22,
+        2,
+        6
+      ],
+      "text": "Not me, lady. Mostly your unsavory types hang around down there."
+    },
+    {
+      "tuple": [
+        1,
+        6,
+        23,
+        1,
+        6
+      ],
+      "text": "Look, nothin' in this joint is what it looks like. Same goes for all these mucky-mucks. Appearances can be deceivin'. Me, do I look like the brother of a famous Broadway producer? No, but I am!"
+    },
+    {
+      "tuple": [
+        1,
+        6,
+        25,
+        1,
+        6
+      ],
+      "text": "Well, y'know, some days it's a rich smeltin' pot, and some days it's a big cesspool. Either way, ya gotta rise to the top, like scum, and keep your feet and your nose clean. That's how I do it, anyway."
+    },
+    {
+      "tuple": [
+        1,
+        6,
+        26,
+        1,
+        6
+      ],
+      "text": "You seen it. I saw ya in there before. It is what it is. Hey, I'm a philosopher!"
+    },
+    {
+      "tuple": [
+        1,
+        6,
+        29,
+        1,
+        6
+      ],
+      "text": "Don't need no notebook. I already know everything."
+    },
+    {
+      "tuple": [
+        1,
+        6,
+        33,
+        1,
+        6
+      ],
+      "text": "Reportin' is somethin' I never had no interest in, though I coulda been a journalist if I'd wanted. Besides, I got a natural respect for confidential sources."
+    },
+    {
+      "tuple": [
+        1,
+        6,
+        34,
+        1,
+        6
+      ],
+      "text": "I could get ya one real cheap, if you're interested."
+    },
+    {
+      "tuple": [
+        1,
+        6,
+        34,
+        3,
+        6
+      ],
+      "text": "Fine! Geez! Can't blame a guy for askin'. Ya don't hafta bite my head off."
+    },
+    {
+      "tuple": [
+        1,
+        6,
+        35,
+        1,
+        6
+      ],
+      "text": "I like 'em. Keys open things, y'know? Lotsa possibilities."
+    },
+    {
+      "tuple": [
+        1,
+        6,
+        36,
+        2,
+        6
+      ],
+      "text": "'Cause there ain't no icebox upstairs? Look, lady, these appeteasers are the bunk, and there's some pretty hungry joes around here. I wouldn't be wavin' no steaks around if I was you."
+    },
+    {
+      "tuple": [
+        1,
+        6,
+        38,
+        1,
+        6
+      ],
+      "text": "Why would I know anything about that? Ya must have me confused with somebody else."
+    },
+    {
+      "tuple": [
+        1,
+        6,
+        40,
+        1,
+        6
+      ],
+      "text": "I got the constitutional of an ox. Never needed smellin' salts. Wouldn't work on me anyways; my schnoz been broke a few times."
+    },
+    {
+      "tuple": [
+        1,
+        6,
+        41,
+        1,
+        6
+      ],
+      "text": "I had an uncle used to sell the stuff. Me, I always figured it was bunk."
+    },
+    {
+      "tuple": [
+        1,
+        6,
+        42,
+        1,
+        6
+      ],
+      "text": "Sorry, lanterns is outta my field of expertises."
+    },
+    {
+      "tuple": [
+        1,
+        6,
+        43,
+        1,
+        6
+      ],
+      "text": "I don't know about no stinkin' cheese."
+    },
+    {
+      "tuple": [
+        1,
+        6,
+        44,
+        2,
+        6
+      ],
+      "text": "Hey, if I knew who THAT belonged to, would I be standin' here jawin' with ya? No sir, not me!"
+    },
+    {
+      "tuple": [
+        1,
+        6,
+        45,
+        1,
+        6
+      ],
+      "text": "What do I look like? An archeometrist?"
+    },
+    {
+      "tuple": [
+        1,
+        6,
+        46,
+        1,
+        6
+      ],
+      "text": "Yeah, sure! Snake lassoes! Yippie-ki-yay, little boa constrictor!"
+    },
+    {
+      "tuple": [
+        1,
+        6,
+        47,
+        2,
+        6
+      ],
+      "text": "Well, Mademoiselle, ankhs is like anxiety or nervousness. Like, \"I'm feelin' a lotta ankhs about goin' back in the slammer.\" See?"
+    },
+    {
+      "tuple": [
+        1,
+        6,
+        47,
+        4,
+        6
+      ],
+      "text": "Think nothin' of it."
+    },
+    {
+      "tuple": [
+        1,
+        6,
+        48,
+        2,
+        6
+      ],
+      "text": "Oh, no, you ain't stickin' that one on ME. I never saw that thing before in my life."
+    },
+    {
+      "tuple": [
+        1,
+        6,
+        49,
+        1,
+        6
+      ],
+      "text": "My peepers ain't never needed one."
+    },
+    {
+      "tuple": [
+        1,
+        6,
+        50,
+        1,
+        6
+      ],
+      "text": "They seem to work good for lightin' porpoises."
+    },
+    {
+      "tuple": [
+        1,
+        6,
+        51,
+        1,
+        6
+      ],
+      "text": "Watney Little's file? I dunno nothin' about it. Nothin' at all. Don't ask me."
+    },
+    {
+      "tuple": [
+        1,
+        6,
+        55,
+        1,
+        6
+      ],
+      "text": "Geez, don't ask me, lady. I ain't touched a drop of THAT stuff in years."
+    },
+    {
+      "tuple": [
+        1,
+        6,
+        60,
+        2,
+        6
+      ],
+      "text": "Glad ya asked. Put your dough on Mudlark in the third at Belmont. He's a mudder."
+    },
+    {
+      "tuple": [
+        1,
+        6,
+        62,
+        1,
+        6
+      ],
+      "text": "Hey, what do I look like, a doctor? All I know is, I keep away from 'em."
+    },
+    {
+      "tuple": [
+        1,
+        6,
+        63,
+        2,
+        6
+      ],
+      "text": "Superb, simply superb. First I make a sawbuck on Tunney in Philly, and now here I am rubbin' elbow grease with the hoity-toity. Thanks for askin'!"
+    },
+    {
+      "tuple": [
+        1,
+        6,
+        64,
+        1,
+        6
+      ],
+      "text": "I know the dagger was heisted. I might even know whodunit, but I ain't talkin'."
+    },
+    {
+      "tuple": [
+        1,
+        6,
+        64,
+        3,
+        6
+      ],
+      "text": "All I got's a suspicion. Nothin' solid. Besides, what've the cops done for ME lately?"
+    },
+    {
+      "tuple": [
+        1,
+        6,
+        64,
+        5,
+        6
+      ],
+      "text": "I'm tryin' to protect ME! Now flit."
+    },
+    {
+      "tuple": [
+        1,
+        6,
+        65,
+        2,
+        6
+      ],
+      "text": "We talked about that before, remember? I told ya that crazy riddle Rameses passed along."
+    },
+    {
+      "tuple": [
+        1,
+        6,
+        68,
+        1,
+        6
+      ],
+      "text": "That diary could be worth somethin' in the right hands. Personal papers can be awful incriminatin'. I'd hang onto it if I was you, but that's all I'm sayin'."
+    },
+    {
+      "tuple": [
+        1,
+        6,
+        69,
+        2,
+        6
+      ],
+      "text": "Nothin' but what that egghead Najeer tells me. He's heavy into the Egypt stuff. Did I tell ya that riddle he gave me?"
+    },
+    {
+      "tuple": [
+        1,
+        6,
+        69,
+        4,
+        6
+      ],
+      "text": "It was somethin' like, \"What is the room you leave without entering?\" and then, \"What is the room you enter without leaving?\""
+    },
+    {
+      "tuple": [
+        1,
+        6,
+        69,
+        5,
+        6
+      ],
+      "text": "Now, that's supposed to be some great Egyptian brain-teaser, but personally, I prefer the one about the travelin' salesman and the farmer's daughter. Heard that one?"
+    },
+    {
+      "tuple": [
+        1,
+        6,
+        70,
+        2,
+        6
+      ],
+      "text": "Hey, hey, hey, little lady! I was at the party the whole time, so don't go makin' any accusertory remarks. I didn't even know the guy. Now buzz off!"
+    },
+    {
+      "tuple": [
+        1,
+        6,
+        71,
+        2,
+        6
+      ],
+      "text": "Sure, the snazzy dude who brought the pigsticker over from Egypt. He's around here somewheres. Kinda a snotty guy, if ya pardon my French."
+    },
+    {
+      "tuple": [
+        1,
+        6,
+        81,
+        1,
+        6
+      ],
+      "text": "Can't help ya with that, toots."
+    },
+    {
+      "tuple": [
+        1,
+        19,
+        0,
+        1,
+        6
+      ],
+      "text": "Tell ya what, toots: you cook it for me first, and I'd be happy to oblige."
+    },
+    {
+      "tuple": [
+        1,
+        21,
+        0,
+        1,
+        6
+      ],
+      "text": "Hey, hang onto those. They could come in handy! I use my snips all the time!"
+    },
+    {
+      "tuple": [
+        1,
+        22,
+        0,
+        1,
+        6
+      ],
+      "text": "Hey, that's the real pigsticker! Don't go pointin' it at me. Take it to the copper, girlie."
+    },
+    {
+      "tuple": [
+        1,
+        25,
+        0,
+        1,
+        6
+      ],
+      "text": "What's this, some kinda Eau de Snake? Don't get any of it on me; it stinks."
+    },
+    {
+      "tuple": [
+        1,
+        26,
+        0,
+        1,
+        6
+      ],
+      "text": "Whaddaya, lookin' for one wise guy? Har har!"
+    },
+    {
+      "tuple": [
+        1,
+        27,
+        0,
+        1,
+        6
+      ],
+      "text": "No thanks. It sticks to the roof of my mouth."
+    },
+    {
+      "tuple": [
+        1,
+        29,
+        0,
+        1,
+        6
+      ],
+      "text": "No thanks, girlie. There ain't much market for big ol' bones."
+    },
+    {
+      "tuple": [
+        1,
+        30,
+        0,
+        1,
+        6
+      ],
+      "text": "Looks like one of them things the jockeys use."
+    },
+    {
+      "tuple": [
+        1,
+        31,
+        0,
+        1,
+        6
+      ],
+      "text": "I ain't takin' anything from YOU, lady. Why, that ankh could be stolen!"
+    },
+    {
+      "tuple": [
+        1,
+        32,
+        0,
+        1,
+        6
+      ],
+      "text": "You keep it, lady. Maybe you can take some NOTES in it!"
+    },
+    {
+      "tuple": [
+        1,
+        33,
+        0,
+        1,
+        6
+      ],
+      "text": "So it's a lightbulb. Whoop-dee-doo."
+    },
+    {
+      "tuple": [
+        1,
+        34,
+        0,
+        1,
+        6
+      ],
+      "text": "No thanks. I never look at nobody else's rap sheet. Professional courtesy, dontcha know."
+    },
+    {
+      "tuple": [
+        1,
+        38,
+        0,
+        1,
+        6
+      ],
+      "text": "No dice, lady. Get your own drink. It's an open bar; every man for himself."
+    },
+    {
+      "tuple": [
+        1,
+        39,
+        0,
+        1,
+        6
+      ],
+      "text": "It ain't mine, but I'll let ya in on a trade secret: there's a way to read what was typed on carbon paper."
+    },
+    {
+      "tuple": [
+        1,
+        39,
+        0,
+        3,
+        6
+      ],
+      "text": "Well, I ain't gonna tell ya exactly, or they'll throw me outta the Stoolie's Union. But it CAN be done!"
+    },
+    {
+      "tuple": [
+        1,
+        43,
+        0,
+        1,
+        6
+      ],
+      "text": "Hey, you ain't supposed to be walkin' around with that thing. You're gonna spoil the barbecue."
+    }
+  ]
+}
