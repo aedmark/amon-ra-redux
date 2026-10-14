@@ -224,7 +224,7 @@
 
     .notice-grid {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(2, 1fr);
       gap: 1rem;
       margin-top: 2rem;
     }
@@ -434,11 +434,11 @@
 <body>
   <div class="top-rule" aria-hidden="true"></div>
   <header id="top">
-    <p class="eyebrow">Public field test · Alpha v0.03</p>
+    <p class="eyebrow">Public field test · Alpha v0.04</p>
     <h1>The Dagger of Amon Ra: Redux</h1>
     <p class="subtitle">Help us test a careful modernization of Sierra's classic mystery from the newsroom to the final verdict.</p>
     <div class="hero-actions">
-      <a class="button" href="LB2-Redux-v0.03.zip" download>Download Alpha v0.03</a>
+      <a class="button" href="LB2-Redux-v0.04.zip" download>Download Alpha v0.04</a>
       <a class="button secondary" href="#report">Report a finding</a>
     </div>
   </header>
@@ -462,7 +462,11 @@
       <div class="notice-grid">
         <article class="notice">
           <strong>Fresh case</strong>
-          <p>Extract v0.03 to a new directory and start a new game; v0.01 saves are not recommended. This build was created from the vanilla LB2 1.00 source files and sluicebox decomps.</p>
+          <p>Extract v0.04 to a new directory and start a new game; saves from earlier alphas are not recommended. This build was created from the vanilla LB2 1.00 source files and sluicebox decomps.</p>
+        </article>
+        <article class="notice">
+          <strong>New in v0.04</strong>
+          <p>Fixes for the final inquest, the speakeasy and Egyptian Room music, Ernie's office, and the dagger case. These rooms have not had a full playthrough yet, so reports on them are especially welcome.</p>
         </article>
         <article class="notice">
           <strong>Reference setup</strong>
@@ -582,6 +586,7 @@
             <li><label><input type="checkbox">After taking the claim ticket, taxi travel never requires entering the dirty cab again.</label></li>
             <li><label><input type="checkbox">Lo Fat accepts the ticket, supplies the gown, and the dressed taxi trip begins Act 2.</label></li>
             <li><label><input type="checkbox">Both speakeasy songs rotate; the bathroom interrupts and then resumes the current song without restarting it.</label></li>
+            <li><label><input type="checkbox">Leaving the speakeasy stops its songs; they do not carry on into the next room.</label></li>
             <li><label><input type="checkbox">The street outside Lo Fat's laundry has its intended music.</label></li>
             <li><label><input type="checkbox">The two men at the speakeasy bar have distinct Look and Talk feedback.</label></li>
             <li><label><input type="checkbox">Ziggy acknowledges Yvette and the Countess without exposing later revelations.</label></li>
@@ -619,6 +624,9 @@
 
           <h3>Act 4</h3>
           <ul class="checklist">
+            <li><label><input type="checkbox">Leaving the Egyptian Room to the south causes no error, and its music pauses and resumes normally.</label></li>
+            <li><label><input type="checkbox">Using an inventory item on the dagger case or its glass gives an ordinary response.</label></li>
+            <li><label><input type="checkbox">In Ernie's office, the desk, toolbox, lasso, wire cutters, and wall stain respond normally, and being caught by Ernie plays out cleanly.</label></li>
             <li><label><input type="checkbox">The dark eastern stairwell gives a repeatable warning instead of killing Laura at the threshold.</label></li>
             <li><label><input type="checkbox">Replacing the bulb makes the stairwell traversable.</label></li>
             <li><label><input type="checkbox">Watney's police file is discoverable through the Room 560 bookcase and enlarged volume target.</label></li>
@@ -641,6 +649,7 @@
 
           <h3>Act 6 &amp; ending</h3>
           <ul class="checklist">
+            <li><label><input type="checkbox">The inquest runs from the opening to the verdict without stalling, with the coroner, Tut, the reporters, and the newspaper in their proper places.</label></li>
             <li><label><input type="checkbox">Questions 1–11 are required case findings; 12–16 are bonus museum inquiries.</label></li>
             <li><label><input type="checkbox">Bonus answers affect only their own feedback, not the verdict or ending.</label></li>
             <li><label><input type="checkbox">The Ankh, appointment notepad, and footprint/shoe comparison each receive one acknowledgement.</label></li>
@@ -661,7 +670,7 @@
       <div class="report-layout">
         <div>
           <div class="report-box">
-            <pre id="reportTemplate">Alpha build: v0.03
+            <pre id="reportTemplate">Alpha build: v0.04
 Environment: DOSBox-X version / ScummVM version / other
 Operating system:
 Act and location:
@@ -707,7 +716,7 @@ Anything unusual: old save, alternate route, skipped conversation, custom MIDI, 
 
   <script>
     (() => {
-      const storageKey = "amon-ra-redux-alpha-v003-checks";
+      const storageKey = "amon-ra-redux-alpha-v004-checks";
       const checks = [...document.querySelectorAll('.checklist input[type="checkbox"]')];
       const progressValue = document.getElementById('progressValue');
       const progressBar = document.getElementById('progressBar');

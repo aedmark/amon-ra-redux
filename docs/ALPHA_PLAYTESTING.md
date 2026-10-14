@@ -10,16 +10,33 @@ only crashes.
 
 ## Before you begin
 
-- Use the build named `LB2-Redux-v0.02.zip` and keep an untouched backup.
+- Use the build named `LB2-Redux-v0.04.zip` and keep an untouched backup.
 - Extract it into a fresh directory. Do not mix its files with another Redux build, the CD edition, or an existing
   modded installation.
-- Start a new game for the most useful test. Old Sierra saves, including v0.01 saves, may contain state that bypasses a fix.
+- Start a new game for the most useful test. Old Sierra saves, including saves from earlier alphas, may contain state
+  that bypasses a fix.
 - DOSBox-X is the reference environment. Reports from ScummVM are welcome, but identify them as ScummVM results.
 - Keep several rotating saves, especially near the end of each act and immediately before anything goes wrong.
 - Do not overwrite the save that reproduces a bug. Attach the complete matching `LB2SG.*` save set when possible.
 
 If launching manually in DOSBox-X, mount the extracted game directory as drive C and run `SCIDHUV.EXE`. Repository
 users can run `./tools/run_dosbox.sh` from the project root.
+
+## What's new in v0.04
+
+- The coroner's final inquest uses the game's standard object layout again. In earlier alphas every inquest object's
+  properties sat one slot off, which could stall the inquest or misplace its props.
+- Leaving the Egyptian Room to the south in Acts 3 and 4 pauses the rotating music correctly.
+- Leaving the speakeasy stops its rotating songs, as in the original game.
+- Ernie's office and the Egyptian Room's dagger case respond correctly to actions and items.
+
+None of these rooms has had a full playthrough on v0.04 yet, so reports on them are especially welcome.
+
+## What's new in v0.03
+
+- Examining Heimlich at the museum door with the Magnifying Glass shows the narrator's description of his scars,
+  followed by his reply.
+- Revised wording for the benefit register and Heimlich's check-in lines.
 
 ## What's new in v0.02
 
@@ -55,6 +72,7 @@ Use this section if you want to play naturally without being told where every cl
 - [ ] Explore freely, use the About screen, save and restore, and try optional errands in different orders.
 - [ ] Pay close attention to taxi recognition, the dirty cab, the claim ticket, and travel after receiving the ticket.
 - [ ] Visit the speakeasy more than once and enter and leave its bathroom while a song is playing.
+- [ ] Leave the speakeasy during a song and listen for whether its music follows Laura out.
 - [ ] Ask Ziggy about every available person, especially Yvette and the Countess.
 - [ ] Confirm the first act grade appears against an appropriate neutral frame.
 
@@ -76,6 +94,7 @@ Use this section if you want to play naturally without being told where every cl
 - [ ] Use both ordinary Look and the Magnifying Glass on small or reflective clues.
 - [ ] Save before dark or dangerous routes and report deaths that occur without a fair warning.
 - [ ] Examine bookshelves, files, footprints, and other evidence before taking anything.
+- [ ] Try your inventory on display cases and museum fixtures, not only on people.
 
 ### Act 5
 
@@ -86,6 +105,7 @@ Use this section if you want to play naturally without being told where every cl
 
 ### Act 6 and ending
 
+- [ ] Play the inquest from the coroner's opening through the verdict and report any point where it stops advancing.
 - [ ] Confirm the inquest clearly distinguishes required case questions from bonus museum questions.
 - [ ] Answer some bonus questions incorrectly and check that the murder verdict still reflects the required evidence.
 - [ ] Check that the newspaper, ending, character cards, score, and final grade agree with what Laura actually solved and
@@ -106,6 +126,7 @@ Use this section if you want to play naturally without being told where every cl
 - [ ] Lo Fat accepts the ticket, supplies the gown, and the dressed taxi trip advances to Act 2.
 - [ ] The speakeasy rotates both songs. Entering the bathroom interrupts the current song; returning resumes it without
   restarting.
+- [ ] Leaving the speakeasy stops its songs; they do not carry on into the next room.
 - [ ] The street outside Lo Fat's laundry has its intended music.
 - [ ] The two men at the speakeasy bar have distinct Look and Talk feedback.
 - [ ] Ziggy acknowledges knowing Yvette and the Countess without revealing later plot information.
@@ -144,6 +165,10 @@ Use this section if you want to play naturally without being told where every cl
 
 ### Act 4
 
+- [ ] Leaving the Egyptian Room to the south causes no error, and its music pauses and resumes normally.
+- [ ] Using an inventory item on the dagger case or its glass gives an ordinary response.
+- [ ] In Ernie's office, the desk, toolbox, lasso, wire cutters, and wall stain respond normally, and being caught by
+  Ernie plays out cleanly.
 - [ ] The dark eastern stairwell stops Laura with a repeatable warning instead of killing her at the threshold.
 - [ ] Replacing the bulb makes the stairwell traversable.
 - [ ] Watney Little's police file can be found through the Room 560 bookcase and its enlarged special-volume target.
@@ -164,6 +189,8 @@ Use this section if you want to play naturally without being told where every cl
 
 ### Act 6 and ending
 
+- [ ] The inquest runs from the opening to the verdict without stalling, with the coroner, Tut, the reporters, and the
+  newspaper in their proper places.
 - [ ] Questions 1–11 are labeled as required case findings; questions 12–16 are labeled as bonus museum inquiries.
 - [ ] Bonus answers change only their own feedback, not the verdict or ending route.
 - [ ] The Ankh, Pippin's appointment notepad, and the bloody footprint/Yvette shoe comparison each receive a separate,
@@ -185,7 +212,7 @@ existing report first, but add your save or reproduction details when they provi
 Please use this template:
 
 ```text
-Alpha build: v0.02
+Alpha build: v0.04
 Environment: DOSBox-X version / ScummVM version / other
 Operating system:
 Act and location:

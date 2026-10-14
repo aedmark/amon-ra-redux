@@ -114,9 +114,11 @@ None currently open. Q-001 and Q-002 have been resolved by D-007, D-017, and D-0
 - Rebuilt the 30 other drifted scripts in place, compared each with the committed build using a normalizing disassembler, and restored every committed patch. Differences are codegen except for the findings in D-040 and D-041.
 - Fixed and rebuilt room 310 (`WrapMusic dispose:`), room 450 (class 47 for `WrapMusic`, value-preserving message case, standard `super doVerb:`), room 640 (`of Actions`; now a loose patch), and room 750 (object property blocks from `7d48893`, un-shifted `state`/`cycles`/`seconds`/`font`) (D-040).
 
+- Built `LB2/LB2-Redux-v0.04.zip` from `38a7830` with v0.03's layout (game files at the root plus `msg/` and `src/`), excluding `LB2SG.*` saves (v0.03 had shipped the maintainer's saves) and older zips: 949 files, 7,094,814 bytes. Moved `docs/alpha-playtest.html` to v0.04 with a "New in v0.04" card, checks for the five changed rooms, a v0.04 report template, and a fresh checklist storage key.
+
 **Decisions:** D-040, D-041.
 
-**Verified:** Script 90, 310, 450, 640, and 750 builds compared routine by routine against the committed, archive, and Sierra patch builds; 750's object sizes, property values, and slot writes match vanilla. Headless DOSBox-X startup; base archive MD5s unchanged; documentation and manual checks. Runtime retest pending.
+**Verified:** v0.04 zip integrity test, vanilla archive MD5s, changed patches equal to `HEAD`, and headless startup of the extracted copy. Script 90, 310, 450, 640, and 750 builds compared routine by routine against the committed, archive, and Sierra patch builds; 750's object sizes, property values, and slot writes match vanilla. Headless DOSBox-X startup; base archive MD5s unchanged; documentation and manual checks. Runtime retest pending.
 
 **Next session should start with:** The maintainer's retest of rooms 90, 310, 450, 640, and 750 (Next steps 1).
 
