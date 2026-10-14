@@ -9,6 +9,7 @@ import os
 import re
 import subprocess
 import shutil
+import time
 
 SCRIPT_MAP = {
     "0": "Main",
@@ -66,6 +67,10 @@ def compile_script(target):
     if not os.path.exists(exe_path) and os.path.exists("tools/compile_any.c"):
         subprocess.run(["i686-w64-mingw32-gcc", "-o", exe_path, "tools/compile_any.c"], check=True)
 
+    # Leave a window the maintainer already had open; close the one we open.
+    was_open = subprocess.run(["wine", exe_path, "--is-open", name],
+                              stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL).returncode == 0
+
     # Call compile_any.exe
     cmd = ["wine", exe_path, name]
     res = subprocess.run(cmd, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True)
@@ -73,6 +78,13 @@ def compile_script(target):
     if res.returncode != 0:
         print(f"[-] Compilation trigger failed: {res.stderr.strip()[-500:]}")
         return False
+
+    # SCI Companion can finish writing the patches after compile_any returns.
+    deadline = time.time() + 30
+    while time.time() < deadline and any(
+            not os.path.exists(p) or os.path.getmtime(p) == before[p] for p in outputs):
+        time.sleep(0.5)
+    time.sleep(1)
 
     ok = True
     for path in outputs:
@@ -84,6 +96,10 @@ def compile_script(target):
             ok = False
         else:
             print(f"[+] {path} ({os.path.getsize(path)} bytes)")
+
+    if ok and not was_open:
+        subprocess.run(["wine", exe_path, "--close", name],
+                       stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 
     print(f"[{'+' if ok else '-'}] Compilation of {name} {'completed' if ok else 'FAILED'}.")
     return ok

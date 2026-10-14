@@ -777,7 +777,7 @@
 	)
 )
 
-(instance roomActions of WrapMusic
+(instance roomActions of Actions
 	(properties
 		name {roomActions}
 	)
@@ -793,7 +793,7 @@
 	)
 )
 
-(instance ernieActions of WrapMusic
+(instance ernieActions of Actions
 	(properties
 		name {ernieActions}
 	)

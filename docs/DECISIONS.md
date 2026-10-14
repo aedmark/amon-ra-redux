@@ -501,15 +501,69 @@ Replace the `sel_N` placeholders with one readable name per selector ID, keeping
 - **Decision:** Store the mapping in `tools/selector_names.json` and apply it with `tools/name_selectors.py`, which
   rewrites `997.voc` and every `src/*.sc` without touching IDs or line endings. Selector 343 is `theControls` because
   the Sierra name `controls` collides with the `controls` instance in `Game.sc` and changed `Rm`'s bytecode. Selectors
-  667 and 668 keep their vanilla names (`convRoom`, `convReturn`) even though Redux's P3-06 conversation lock reuses them
-  for a museum-actor flag and method; giving those uses their own names requires new selector IDs and is a separate
-  change. This supersedes D-032's numeric-selector rule.
+  667 and 668 keep their vanilla names (`convRoom`, `convReturn`, used by `RotundaRgn`). Redux's P3-06 conversation lock
+  had reused them for a museum-actor flag and method; those uses now have their own selectors, 681 `inConversation` and
+  682 `sayAndHold`, added past the vanilla range (session 54). This supersedes D-032's numeric-selector rule.
 - **Consequences:** Every script SCI Companion compiled from the renamed source is byte-identical to the same script
   compiled from the `sel_N` source with the same `.sco` class files (full two-pass rebuild plus targeted reruns). The
   12 scripts absent from SCI Companion's script list were not rebuilt and are unchanged. The rebuild also showed that
   committed patches for 34 scripts (including `Main`, `Game`, `Actor`, `User`, `Feature`, `Sound`, and rooms 18, 250,
-  330, 450, 610, 720, 730, and 750) cannot be reproduced from the current source; the playtested patches remain in place
-  and a future edit to one of those scripts will also carry those latent source differences.
+  330, 450, 610, 720, 730, and 750) cannot be reproduced from the current source. D-041 records what those differences
+  turned out to be.
+
+---
+
+## D-040 Keep Redux's Class Numbering and Rebuild the Scripts That Assumed Vanilla's
+
+Treat SCI Companion's class numbers as authoritative, and rebuild from source any loaded script still compiled with
+Sierra's numbers for the classes Redux renumbered.
+
+- **Context:** Script 0 defines `WrapMusic`, `Actions`, and `LB2`. Vanilla numbers `WrapMusic` 127 and `Actions` 47;
+  the Redux `Main` patch and `Main.sco` number them the other way round (47 and 127). Every script SCI Companion
+  compiles uses the Redux numbers, so they are consistent with each other. Scripts compiled by Sierra are not. A scan
+  of every script the game loads (loose patch if present, otherwise the archive) found three affected rooms: room 450's
+  committed patch, which is Sierra's own floppy patch, sent `WrapMusic pause:` to `Actions` when Laura left south in
+  Acts 3 and 4; room 640, still loaded from the archive, gave `roomActions` and `ernieActions` the `WrapMusic` class;
+  and room 310's patch, decompiled from the archive through the Redux class table, disposed `Actions` instead of
+  stopping `WrapMusic` when Laura left. The same mislabelling put `of WrapMusic` on room 640's instances in source.
+  The committed room 750 patch was broken in a different way: every object carried its name twice, so each property
+  sat one slot to the right of where the engine's classes read it. Its state scripts wrote the engine's `start` and
+  `lastSeconds` instead of `state` and `seconds`, its props took a string pointer as `x`, and the inquest could not
+  advance. The Sluicebox source reproduced that shift as `client {name}`, `start`, and `lastSeconds`.
+- **Decision:** Keep the Redux numbering; renumbering `Main` would force a rebuild of about 30 playtested patches.
+  Correct `rm310.sc` (`WrapMusic dispose:`), `rm640.sc` (`of Actions`), and `rm450.sc`, and ship builds of all three
+  from source. Restore `rm750.sc`'s object property blocks from the pre-Sluicebox source (`7d48893`) and un-shift its
+  property references. Check each build against Sierra's with the 47/127 swap mapped: 310 differs only in the dispose,
+  640's objects match the archive exactly, and 450 differs only in codegen plus the two items D-041 describes; 750
+  matches vanilla's object layout and slot usage and the committed logic once its shift is undone.
+- **Consequences:** Room 640 now ships as a loose patch; 12 scripts still load from the archive (12, 27, 770, 928,
+  932, 958, 982, 999, 1888, 1895, 1904, 1906), and none of them references class 47 or 127. Any
+  future patch to a script that is still Sierra-compiled must be built from source, or checked for classes 47 and 127,
+  before it ships. Rooms 310, 450, 640, and 750 need a runtime retest.
+
+---
+
+## D-041 Leave Drifted Patches Alone, and Avoid Two SCI Companion Codegen Hazards
+
+Do not rebuild a committed patch only because it no longer matches a compile of its source.
+
+- **Context:** D-039's rebuild left 34 committed patches that differ from a fresh compile. A normalizing SCI1.1
+  disassembler compared each pair routine by routine. Almost every difference is equivalent code: Sierra's compiler
+  threads jumps and reuses the accumulator, while SCI Companion chains jumps, uses `lofss`, `push1`, and `pushi N`
+  instead of `dup`, and reloads values. The committed 450 and 720 are byte-identical to Sierra's own floppy patches.
+  Two real hazards appeared. SCI Companion compiles `(and a b)` to a boolean, so `(and (IsFlag 38) 2)` yields 1, not
+  2; room 450's message case relied on the 2. It also compiles a compound assignment to an array element with
+  a computed index (`(|= [global186 (/ n 16)] ...)`) as `eq`, `toss`, `pprev`, `ssXi`. By SCI Companion's own stack
+  model, and by ScummVM's SCI1.1 semantics, that drops the index and writes to the wrong element. Neither model is
+  proof of what this hybrid SCI1/SCI1.1 interpreter does, and the sequence has not been run in DOSBox-X, so this is
+  an untested hazard rather than a confirmed bug. `Main`'s `SetFlag` and `ClearFlag` and `n027`'s `proc27_2` contain
+  it; no committed patch does.
+- **Decision:** Keep drifted patches until their script needs a real change, then compare the new build with the
+  committed one before shipping it. Do not rebuild `Main` or `n027` until the sequence is tested in DOSBox-X or
+  their indexed compound assignments are rewritten as a plain assignment (`(= [a i] (| [a i] x))`). Write value-yielding conditionals as `(if c v else 0)`,
+  not `(and c v)`.
+- **Consequences:** The heap-only differences in Scripts 31 to 37 and the codegen differences elsewhere stay. The
+  disassembler is a session tool, not part of the repository; a future comparison can reuse the approach.
 
 ---
 

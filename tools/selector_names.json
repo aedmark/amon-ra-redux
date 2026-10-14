@@ -561,5 +561,7 @@
  "677": "pushButton",
  "678": "legalX",
  "679": "legalY",
- "680": "findLegalPoint"
+ "680": "findLegalPoint",
+ "681": "inConversation",
+ "682": "sayAndHold"
 }

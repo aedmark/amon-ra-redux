@@ -238,7 +238,7 @@
 		(if (== param1 320)
 			(gGameMusic1 fade: 80 10 12 0)
 		else
-			(Actions dispose:)
+			(WrapMusic dispose:)
 		)
 		(super newRoom: param1)
 	)

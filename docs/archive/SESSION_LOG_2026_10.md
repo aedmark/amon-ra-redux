@@ -2,6 +2,18 @@
 
 Archived verbatim from `docs/HANDOFF.md` when its live session log exceeded ten entries.
 
+### Session 44: 2026-10-11: Public Alpha Playtesting Guide
+
+**Contributor:** Codex and maintainer
+
+**Goal:** Give SQH Discord alpha testers a clear, public-facing way to test v0.01 and submit useful reports.
+
+**Done:** Added `docs/ALPHA_PLAYTESTING.md` with reference-environment guidance, save-handling advice, universal quality checks, spoiler-light act coverage, a collapsible focused regression checklist, a standard Discord/GitHub report template, and examples of high-value alternate-route testing. Added `docs/alpha-playtest.html`, a one-file Art Deco page ready for Neocities with a direct v0.01 download, device-local checklist progress, responsive and print layouts, accessible controls, spoiler separation, and a copyable report form. Linked both artifacts from the project and documentation indexes and distinguished them from the internal triage checklist.
+
+**Verified:** Documentation consistency check passes with the new public guide and links.
+
+**Next session should start with:** Collect public alpha reports, reproduce them in DOSBox-X, and assign stable `PLAY-nnn` IDs in the internal checklist.
+
 ### Session 43: 2026-10-10: Act 1 Playtest Music, Grade Frame, and Ziggy Continuity
 
 **Contributor:** Codex and maintainer

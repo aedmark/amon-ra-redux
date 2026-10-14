@@ -109,14 +109,8 @@
 (instance rm750 of LBRoom
 	(properties
 		name {rm750}
-		script {rm750}
-		modNum 0
-		noun -1
-		style 750
-		horizon 10
-		theControls 15
-		vanishingX 0
-		vanishingY 160
+		picture 750
+		style 10
 	)
 
 	(method (init)
@@ -144,16 +138,13 @@
 (instance sBeforeAsking of Script
 	(properties
 		name {sBeforeAsking}
-		client {sBeforeAsking}
-		state 0
-		start -1
 	)
 
 	(method (changeState param1)
-		(switch (= start param1)
+		(switch (= state param1)
 			(0
 				(gGame handsOff:)
-				(= seconds 2)
+				(= cycles 2)
 			)
 			(1
 				(gGame setCursor: 999)
@@ -170,13 +161,10 @@
 (instance sFirstFive of Script
 	(properties
 		name {sFirstFive}
-		client {sFirstFive}
-		state 0
-		start -1
 	)
 
 	(method (changeState param1)
-		(switch (= start param1)
+		(switch (= state param1)
 			(0
 				(if (== local0 1)
 					(Print
@@ -207,7 +195,7 @@
 				(if (< (++ local0) 6)
 					(self changeState: 0)
 				else
-					(= seconds 2)
+					(= cycles 2)
 				)
 			)
 			(2
@@ -226,16 +214,13 @@
 (instance sSixToNine of Script
 	(properties
 		name {sSixToNine}
-		client {sSixToNine}
-		state 0
-		start -1
 	)
 
 	(method (changeState param1)
-		(switch (= start param1)
+		(switch (= state param1)
 			(0
 				(= local0 6)
-				(= seconds 1)
+				(= cycles 1)
 			)
 			(1
 				(gMessager say: 1 0 0 local0 self)
@@ -267,7 +252,7 @@
 				(if (< local0 10)
 					(self changeState: 1)
 				else
-					(= seconds 1)
+					(= cycles 1)
 				)
 			)
 			(3
@@ -275,7 +260,7 @@
 				(if (and (!= local2 9) (!= local2 10))
 					(= local4 0)
 				)
-				(= seconds 1)
+				(= cycles 1)
 			)
 			(4
 				(= next sTenOn)
@@ -288,16 +273,13 @@
 (instance sTenOn of Script
 	(properties
 		name {sTenOn}
-		client {sTenOn}
-		state 0
-		start -1
 	)
 
 	(method (changeState param1)
-		(switch (= start param1)
+		(switch (= state param1)
 			(0
 				(= local0 10)
-				(= seconds 1)
+				(= cycles 1)
 			)
 			(1
 				(gMessager say: 1 0 0 local0 self)
@@ -312,14 +294,14 @@
 						else
 							(++ local0)
 						)
-						(= seconds 1)
+						(= cycles 1)
 					)
 					(11
 						(if (!= local1 9)
 							(= local5 0)
 						)
 						(++ local0)
-						(= seconds 1)
+						(= cycles 1)
 					)
 				)
 			)
@@ -338,13 +320,10 @@
 (instance sBonusQuestions of Script
 	(properties
 		name {sBonusQuestions}
-		client {sBonusQuestions}
-		state 0
-		start -1
 	)
 
 	(method (changeState param1)
-		(switch (= start param1)
+		(switch (= state param1)
 			(0
 				(Print
 					font: 0
@@ -352,7 +331,7 @@
 						{BONUS MUSEUM INQUIRIES\n\nQuestions 12 through 16 concern the art-theft ring and the High Priest. They are optional and do not affect Laura's final case result.}
 					init:
 				)
-				(= seconds 1)
+				(= cycles 1)
 			)
 			(1
 				(gMessager say: 1 0 0 local0 self)
@@ -406,7 +385,7 @@
 			)
 			(3
 				(if (> local0 16)
-					(= seconds 1)
+					(= cycles 1)
 				else
 					(self changeState: 1)
 				)
@@ -422,13 +401,10 @@
 (instance sEvidenceReview of Script
 	(properties
 		name {sEvidenceReview}
-		client {sEvidenceReview}
-		state 0
-		start -1
 	)
 
 	(method (changeState param1)
-		(switch (= start param1)
+		(switch (= state param1)
 			(0
 				(if (gEgo has: 20)
 					(gGame points: 1 180)
@@ -467,13 +443,10 @@
 (instance sAfterQuestions of Script
 	(properties
 		name {sAfterQuestions}
-		client {sAfterQuestions}
-		state 0
-		start -1
 	)
 
 	(method (changeState param1 &tmp [temp0 100])
-		(switch (= start param1)
+		(switch (= state param1)
 			(0
 				(cond
 					((and (localproc_3) local4 local5)
@@ -534,7 +507,7 @@
 					)
 					(else
 						(gGameMusic2 number: 752 flags: 5 loop: 1 play:)
-						(= lastSeconds 4)
+						(= seconds 4)
 					)
 				)
 			)
@@ -550,7 +523,7 @@
 			)
 			(7
 				(reporterHeads setCel: 0 setLoop: 4 setCycle: Fwd)
-				(= lastSeconds 4)
+				(= seconds 4)
 			)
 			(8
 				(paper init: hide:)
@@ -566,7 +539,7 @@
 				)
 				(gCurRoom drawPic: 780)
 				(gCast eachElementDo: 102)
-				(= seconds 2)
+				(= cycles 2)
 				(gGameMusic1 fade: 0 12 30 1)
 			)
 			(9
@@ -577,11 +550,11 @@
 			(10
 				(gCurRoom drawPic: 760 100)
 				(paper hide:)
-				(= seconds 1)
+				(= cycles 1)
 			)
 			(11
 				(headline show:)
-				(= lastSeconds 4)
+				(= seconds 4)
 			)
 			(12
 				(= global126 (localproc_4))
@@ -603,191 +576,85 @@
 (instance tut of Actor
 	(properties
 		name {tut}
-		x {tut}
-		y -60
-		z 113
-		modNum 0
-		nsTop -1
-		sightAngle 0
-		actions 26505
-		onMeCheck 0
-		approachX 26505
-		yStep 0
-		view 2
-		loop 753
-		scaleX 0
-		cycleSpeed 128
-		script 6
-		illegalBits 0
-		xLast -32768
-		xStep 0
-		origStep 3
-		moveSpeed 770
-		blocks 6
+		x -60
+		y 113
+		view 753
 	)
 )
 
 (instance reporterHeads of Prop
 	(properties
 		name {reporterHeads}
-		x {reporterHeads}
-		y 61
-		z 73
-		modNum 0
-		nsTop -1
-		sightAngle 0
-		actions 26505
-		onMeCheck 0
-		approachX 26505
-		yStep 0
-		view 2
-		loop 752
-		cel 1
-		lsTop 16384
-		scaleX 0
-		cycleSpeed 128
-		script 6
+		x 61
+		y 73
+		view 752
+		loop 1
+		signal 16384
 	)
 )
 
 (instance paper of Prop
 	(properties
 		name {paper}
-		x {paper}
-		y 154
-		z 96
-		modNum 0
-		nsTop -1
-		sightAngle 0
-		actions 26505
-		onMeCheck 0
-		approachX 26505
-		yStep 0
-		view 2
-		loop 760
-		scaleX 0
-		cycleSpeed 128
-		script 6
+		x 154
+		y 96
+		view 760
 	)
 )
 
 (instance r_arm of Prop
 	(properties
 		name {r\_arm}
-		x {r\_arm}
-		y 255
-		z 91
-		modNum 0
-		nsTop -1
-		sightAngle 0
-		actions 26505
-		onMeCheck 0
-		approachX 26505
-		yStep 0
-		view 2
-		loop 752
-		cel 5
-		scaleX 0
-		cycleSpeed 128
-		script 6
+		x 255
+		y 91
+		view 752
+		loop 5
 	)
 )
 
 (instance l_arm of Prop
 	(properties
 		name {l\_arm}
-		x {l\_arm}
-		y 280
-		z 90
-		modNum 0
-		nsTop -1
-		sightAngle 0
-		actions 26505
-		onMeCheck 0
-		approachX 26505
-		yStep 0
-		view 2
-		loop 752
-		cel 6
-		scaleX 0
-		cycleSpeed 128
-		script 6
+		x 280
+		y 90
+		view 752
+		loop 6
 	)
 )
 
 (instance reporters of View
 	(properties
 		name {reporters}
-		x {reporters}
-		y 62
-		z 72
-		modNum 0
-		nsTop -1
-		sightAngle 0
-		actions 26505
-		onMeCheck 0
-		approachX 26505
-		yStep 0
-		view 2
-		loop 752
-		signal 0
-		lsTop 257
-		scaleX 0
+		x 62
+		y 72
+		view 752
 	)
 )
 
 (instance headline of View
 	(properties
 		name {headline}
-		x {headline}
-		y 33
-		z 59
-		modNum 0
-		nsTop -1
-		sightAngle 0
-		actions 26505
-		onMeCheck 0
-		approachX 26505
-		yStep 0
-		view 2
-		loop 760
-		signal 0
-		lsTop 257
-		scaleX 0
+		x 33
+		y 59
+		view 760
 	)
 )
 
 (instance Coroner of Talker
 	(properties
 		name {Coroner}
-		x {Coroner}
+		x 0
 		y 0
-		modNum 0
-		nsTop -1
-		sightAngle 0
-		actions 26505
-		onMeCheck 0
-		approachX 26505
-		yStep 0
-		view 2
-		loop 1750
-		cel 3
-		scaleX 0
-		cycleSpeed 128
-		script 6
-		disposeWhenDone 0
-		ticks 1
-		talkWidth 0
-		keepWindow 150
-		back 0
-		curVolume 15
+		view 1750
+		loop 3
+		talkWidth 150
+		back 15
+		textX 10
 		textY 10
-		useFrame 10
-		blinkSpeed 0
 	)
 
 	(method (init)
-		(= cueVal gUserFont)
+		(= font gUserFont)
 		(super init: coronerBust coronerEyes coronerMouth &rest)
 	)
 )
@@ -795,62 +662,26 @@
 (instance coronerBust of Prop
 	(properties
 		name {coronerBust}
-		x {coronerBust}
-		modNum 0
-		nsTop -1
-		sightAngle 0
-		actions 26505
-		onMeCheck 0
-		approachX 26505
-		yStep 0
-		view 2
-		loop 1750
-		cel 1
-		scaleX 0
-		cycleSpeed 128
-		script 6
+		view 1750
+		loop 1
 	)
 )
 
 (instance coronerEyes of Prop
 	(properties
 		name {coronerEyes}
-		x {coronerEyes}
-		modNum 0
-		nsTop -1
-		nsLeft 77
-		nsBottom 263
-		sightAngle 0
-		actions 26505
-		onMeCheck 0
-		approachX 26505
-		yStep 0
-		view 2
-		loop 1750
-		cel 2
-		scaleX 0
-		cycleSpeed 128
-		script 6
+		nsTop 77
+		nsLeft 263
+		view 1750
+		loop 2
 	)
 )
 
 (instance coronerMouth of Prop
 	(properties
 		name {coronerMouth}
-		x {coronerMouth}
-		modNum 0
-		nsTop -1
-		nsLeft 80
-		nsBottom 264
-		sightAngle 0
-		actions 26505
-		onMeCheck 0
-		approachX 26505
-		yStep 0
-		view 2
-		loop 1750
-		scaleX 0
-		cycleSpeed 128
-		script 6
+		nsTop 80
+		nsLeft 264
+		view 1750
 	)
 )

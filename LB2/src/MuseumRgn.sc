@@ -756,11 +756,11 @@
 		destX 0
 		destY 0
 		waitCount 0
-		convRoom 0
+		inConversation 0
 	)
 
-	(method (convReturn param1 param2 param3 param4 param5)
-		(= convRoom 1)
+	(method (sayAndHold param1 param2 param3 param4 param5)
+		(= inConversation 1)
 		(museumDialogueResume client: self)
 		(self setMotion: 0)
 		(gMessager
@@ -1091,7 +1091,7 @@
 	(method (doVerb param1 param2 &tmp temp0 temp1 temp2)
 		(if (== param1 2)
 			(if (not (SetFlag 112))
-				(self convReturn: noun param1 80 0 0 modNum)
+				(self sayAndHold: noun param1 80 0 0 modNum)
 			else
 				(super doVerb: param1)
 			)
@@ -1133,17 +1133,17 @@
 					(cond
 						((IsFlag 134)
 							(if (proc27_0 0 global364)
-								(self convReturn: noun 6 1 0 0 modNum)
+								(self sayAndHold: noun 6 1 0 0 modNum)
 							else
-								(self convReturn: noun 6 72 0 0 modNum)
+								(self sayAndHold: noun 6 72 0 0 modNum)
 								(proc27_1 0 @global364)
 							)
 						)
 						((proc27_0 0 global297)
-							(self convReturn: noun 6 1 0 0 modNum)
+							(self sayAndHold: noun 6 1 0 0 modNum)
 						)
 						(else
-							(self convReturn: noun 6 3 0 0 modNum)
+							(self sayAndHold: noun 6 3 0 0 modNum)
 							(proc27_1 0 @global297)
 						)
 					)
@@ -1152,17 +1152,17 @@
 					(cond
 						((or (IsFlag 143) (IsFlag 72))
 							(if (proc27_0 0 global366)
-								(self convReturn: noun 6 1 0 0 modNum)
+								(self sayAndHold: noun 6 1 0 0 modNum)
 							else
-								(self convReturn: noun 6 74 0 0 modNum)
+								(self sayAndHold: noun 6 74 0 0 modNum)
 								(proc27_1 0 @global366)
 							)
 						)
 						((proc27_0 0 global303)
-							(self convReturn: noun 6 1 0 0 modNum)
+							(self sayAndHold: noun 6 1 0 0 modNum)
 						)
 						(else
-							(self convReturn: noun 6 9 0 0 modNum)
+							(self sayAndHold: noun 6 9 0 0 modNum)
 							(proc27_1 0 @global303)
 						)
 					)
@@ -1171,17 +1171,17 @@
 					(cond
 						((or (IsFlag 158) (IsFlag 67))
 							(if (proc27_0 0 global365)
-								(self convReturn: noun 6 1 0 0 modNum)
+								(self sayAndHold: noun 6 1 0 0 modNum)
 							else
-								(self convReturn: noun 6 71 0 0 modNum)
+								(self sayAndHold: noun 6 71 0 0 modNum)
 								(proc27_1 0 @global365)
 							)
 						)
 						((proc27_0 0 global306)
-							(self convReturn: noun 6 1 0 0 modNum)
+							(self sayAndHold: noun 6 1 0 0 modNum)
 						)
 						(else
-							(self convReturn: noun 6 12 0 0 modNum)
+							(self sayAndHold: noun 6 12 0 0 modNum)
 							(proc27_1 0 @global306)
 						)
 					)
@@ -1189,13 +1189,13 @@
 				(else
 					(cond
 						((not (Message msgGET modNum noun 6 temp1 1))
-							(self convReturn: noun 6 81 0 0 modNum)
+							(self sayAndHold: noun 6 81 0 0 modNum)
 						)
 						((proc27_0 0 [global296 (- temp1 2)])
-							(self convReturn: noun 6 1 0 0 modNum)
+							(self sayAndHold: noun 6 1 0 0 modNum)
 						)
 						(else
-							(self convReturn: noun 6 temp1 0 0 modNum)
+							(self sayAndHold: noun 6 temp1 0 0 modNum)
 							(proc27_1 0 @[global296 (- temp1 2)])
 						)
 					)
@@ -1302,17 +1302,17 @@
 					(cond
 						((IsFlag 134)
 							(if (proc27_0 3 global364)
-								(self convReturn: noun 6 1 0 0 modNum)
+								(self sayAndHold: noun 6 1 0 0 modNum)
 							else
-								(self convReturn: noun 6 72 0 0 modNum)
+								(self sayAndHold: noun 6 72 0 0 modNum)
 								(proc27_1 3 @global364)
 							)
 						)
 						((proc27_0 3 global297)
-							(self convReturn: noun 6 1 0 0 modNum)
+							(self sayAndHold: noun 6 1 0 0 modNum)
 						)
 						(else
-							(self convReturn: noun 6 3 0 0 modNum)
+							(self sayAndHold: noun 6 3 0 0 modNum)
 							(proc27_1 3 @global297)
 						)
 					)
@@ -1321,17 +1321,17 @@
 					(cond
 						((or (IsFlag 171) (IsFlag 12))
 							(if (proc27_0 3 global363)
-								(self convReturn: noun 6 1 0 0 modNum)
+								(self sayAndHold: noun 6 1 0 0 modNum)
 							else
-								(self convReturn: noun 6 69 0 0 modNum)
+								(self sayAndHold: noun 6 69 0 0 modNum)
 								(proc27_1 3 @global363)
 							)
 						)
 						((proc27_0 3 global298)
-							(self convReturn: noun 6 1 0 0 modNum)
+							(self sayAndHold: noun 6 1 0 0 modNum)
 						)
 						(else
-							(self convReturn: noun 6 4 0 0 modNum)
+							(self sayAndHold: noun 6 4 0 0 modNum)
 							(proc27_1 3 @global298)
 						)
 					)
@@ -1340,17 +1340,17 @@
 					(cond
 						((or (IsFlag 143) (IsFlag 72))
 							(if (proc27_0 3 global366)
-								(self convReturn: noun 6 1 0 0 modNum)
+								(self sayAndHold: noun 6 1 0 0 modNum)
 							else
-								(self convReturn: noun 6 74 0 0 modNum)
+								(self sayAndHold: noun 6 74 0 0 modNum)
 								(proc27_1 3 @global366)
 							)
 						)
 						((proc27_0 3 global303)
-							(self convReturn: noun 6 1 0 0 modNum)
+							(self sayAndHold: noun 6 1 0 0 modNum)
 						)
 						(else
-							(self convReturn: noun 6 9 0 0 modNum)
+							(self sayAndHold: noun 6 9 0 0 modNum)
 							(proc27_1 3 @global303)
 						)
 					)
@@ -1359,17 +1359,17 @@
 					(cond
 						((or (IsFlag 161) (IsFlag 68))
 							(if (proc27_0 3 global367)
-								(self convReturn: noun 6 1 0 0 modNum)
+								(self sayAndHold: noun 6 1 0 0 modNum)
 							else
-								(self convReturn: noun 6 73 0 0 modNum)
+								(self sayAndHold: noun 6 73 0 0 modNum)
 								(proc27_1 3 @global367)
 							)
 						)
 						((proc27_0 3 global305)
-							(self convReturn: noun 6 1 0 0 modNum)
+							(self sayAndHold: noun 6 1 0 0 modNum)
 						)
 						(else
-							(self convReturn: noun 6 11 0 0 modNum)
+							(self sayAndHold: noun 6 11 0 0 modNum)
 							(proc27_1 3 @global305)
 						)
 					)
@@ -1378,17 +1378,17 @@
 					(cond
 						((or (IsFlag 158) (IsFlag 67))
 							(if (proc27_0 3 global365)
-								(self convReturn: noun 6 1 0 0 modNum)
+								(self sayAndHold: noun 6 1 0 0 modNum)
 							else
-								(self convReturn: noun 6 71 0 0 modNum)
+								(self sayAndHold: noun 6 71 0 0 modNum)
 								(proc27_1 3 @global365)
 							)
 						)
 						((proc27_0 3 global306)
-							(self convReturn: noun 6 1 0 0 modNum)
+							(self sayAndHold: noun 6 1 0 0 modNum)
 						)
 						(else
-							(self convReturn: noun 6 12 0 0 modNum)
+							(self sayAndHold: noun 6 12 0 0 modNum)
 							(proc27_1 3 @global306)
 						)
 					)
@@ -1396,13 +1396,13 @@
 				(else
 					(cond
 						((not (Message msgGET modNum noun 6 temp1 1))
-							(self convReturn: noun 6 81 0 0 modNum)
+							(self sayAndHold: noun 6 81 0 0 modNum)
 						)
 						((proc27_0 3 [global296 (- temp1 2)])
-							(self convReturn: noun 6 1 0 0 modNum)
+							(self sayAndHold: noun 6 1 0 0 modNum)
 						)
 						(else
-							(self convReturn: noun 6 temp1 0 0 modNum)
+							(self sayAndHold: noun 6 temp1 0 0 modNum)
 							(proc27_1 3 @[global296 (- temp1 2)])
 						)
 					)
@@ -1485,7 +1485,7 @@
 	(method (doVerb param1 param2 &tmp temp0 temp1 temp2)
 		(if (== param1 2)
 			(if (not (SetFlag 114))
-				(self convReturn: noun param1 80 0 0 modNum)
+				(self sayAndHold: noun param1 80 0 0 modNum)
 			else
 				(super doVerb: param1)
 			)
@@ -1534,17 +1534,17 @@
 					(cond
 						((IsFlag 134)
 							(if (proc27_0 4 global364)
-								(self convReturn: noun 6 1 0 0 modNum)
+								(self sayAndHold: noun 6 1 0 0 modNum)
 							else
-								(self convReturn: noun 6 72 0 0 modNum)
+								(self sayAndHold: noun 6 72 0 0 modNum)
 								(proc27_1 4 @global364)
 							)
 						)
 						((proc27_0 4 global297)
-							(self convReturn: noun 6 1 0 0 modNum)
+							(self sayAndHold: noun 6 1 0 0 modNum)
 						)
 						(else
-							(self convReturn: noun 6 3 0 0 modNum)
+							(self sayAndHold: noun 6 3 0 0 modNum)
 							(proc27_1 4 @global297)
 						)
 					)
@@ -1553,17 +1553,17 @@
 					(cond
 						((or (IsFlag 171) (IsFlag 12))
 							(if (proc27_0 4 global363)
-								(self convReturn: noun 6 1 0 0 modNum)
+								(self sayAndHold: noun 6 1 0 0 modNum)
 							else
-								(self convReturn: noun 6 69 0 0 modNum)
+								(self sayAndHold: noun 6 69 0 0 modNum)
 								(proc27_1 4 @global363)
 							)
 						)
 						((proc27_0 4 global298)
-							(self convReturn: noun 6 1 0 0 modNum)
+							(self sayAndHold: noun 6 1 0 0 modNum)
 						)
 						(else
-							(self convReturn: noun 6 4 0 0 modNum)
+							(self sayAndHold: noun 6 4 0 0 modNum)
 							(proc27_1 4 @global298)
 						)
 					)
@@ -1572,17 +1572,17 @@
 					(cond
 						((or (IsFlag 143) (IsFlag 72))
 							(if (proc27_0 4 global366)
-								(self convReturn: noun 6 1 0 0 modNum)
+								(self sayAndHold: noun 6 1 0 0 modNum)
 							else
-								(self convReturn: noun 6 74 0 0 modNum)
+								(self sayAndHold: noun 6 74 0 0 modNum)
 								(proc27_1 4 @global366)
 							)
 						)
 						((proc27_0 4 global303)
-							(self convReturn: noun 6 1 0 0 modNum)
+							(self sayAndHold: noun 6 1 0 0 modNum)
 						)
 						(else
-							(self convReturn: noun 6 9 0 0 modNum)
+							(self sayAndHold: noun 6 9 0 0 modNum)
 							(proc27_1 4 @global303)
 						)
 					)
@@ -1591,17 +1591,17 @@
 					(cond
 						((or (IsFlag 161) (IsFlag 68))
 							(if (proc27_0 4 global367)
-								(self convReturn: noun 6 1 0 0 modNum)
+								(self sayAndHold: noun 6 1 0 0 modNum)
 							else
-								(self convReturn: noun 6 73 0 0 modNum)
+								(self sayAndHold: noun 6 73 0 0 modNum)
 								(proc27_1 4 @global367)
 							)
 						)
 						((proc27_0 4 global305)
-							(self convReturn: noun 6 1 0 0 modNum)
+							(self sayAndHold: noun 6 1 0 0 modNum)
 						)
 						(else
-							(self convReturn: noun 6 11 0 0 modNum)
+							(self sayAndHold: noun 6 11 0 0 modNum)
 							(proc27_1 4 @global305)
 						)
 					)
@@ -1610,17 +1610,17 @@
 					(cond
 						((or (IsFlag 158) (IsFlag 67))
 							(if (proc27_0 4 global365)
-								(self convReturn: noun 6 1 0 0 modNum)
+								(self sayAndHold: noun 6 1 0 0 modNum)
 							else
-								(self convReturn: noun 6 71 0 0 modNum)
+								(self sayAndHold: noun 6 71 0 0 modNum)
 								(proc27_1 4 @global365)
 							)
 						)
 						((proc27_0 4 global306)
-							(self convReturn: noun 6 1 0 0 modNum)
+							(self sayAndHold: noun 6 1 0 0 modNum)
 						)
 						(else
-							(self convReturn: noun 6 12 0 0 modNum)
+							(self sayAndHold: noun 6 12 0 0 modNum)
 							(proc27_1 4 @global306)
 						)
 					)
@@ -1629,17 +1629,17 @@
 					(cond
 						((or (IsFlag 69) (IsFlag 165) (IsFlag 166))
 							(if (proc27_0 4 global365)
-								(self convReturn: noun 6 1 0 0 modNum)
+								(self sayAndHold: noun 6 1 0 0 modNum)
 							else
-								(self convReturn: noun 6 70 0 0 modNum)
+								(self sayAndHold: noun 6 70 0 0 modNum)
 								(proc27_1 4 @global365)
 							)
 						)
 						((proc27_0 4 global308)
-							(self convReturn: noun 6 1 0 0 modNum)
+							(self sayAndHold: noun 6 1 0 0 modNum)
 						)
 						(else
-							(self convReturn: noun 6 14 0 0 modNum)
+							(self sayAndHold: noun 6 14 0 0 modNum)
 							(proc27_1 4 @global308)
 						)
 					)
@@ -1648,17 +1648,17 @@
 					(cond
 						((or (IsFlag 155) (IsFlag 22) (gEgo has: 11))
 							(if (proc27_0 4 global368)
-								(self convReturn: noun 6 1 0 0 modNum)
+								(self sayAndHold: noun 6 1 0 0 modNum)
 							else
-								(self convReturn: noun 6 75 0 0 modNum)
+								(self sayAndHold: noun 6 75 0 0 modNum)
 								(proc27_1 4 @global368)
 							)
 						)
 						((proc27_0 4 global332)
-							(self convReturn: noun 6 1 0 0 modNum)
+							(self sayAndHold: noun 6 1 0 0 modNum)
 						)
 						(else
-							(self convReturn: noun 6 38 0 0 modNum)
+							(self sayAndHold: noun 6 38 0 0 modNum)
 							(proc27_1 4 @global332)
 						)
 					)
@@ -1666,13 +1666,13 @@
 				(else
 					(cond
 						((not (Message msgGET modNum noun 6 temp1 1))
-							(self convReturn: noun 6 81 0 0 modNum)
+							(self sayAndHold: noun 6 81 0 0 modNum)
 						)
 						((proc27_0 4 [global296 (- temp1 2)])
-							(self convReturn: noun 6 1 0 0 modNum)
+							(self sayAndHold: noun 6 1 0 0 modNum)
 						)
 						(else
-							(self convReturn: noun 6 temp1 0 0 modNum)
+							(self sayAndHold: noun 6 temp1 0 0 modNum)
 							(proc27_1 4 @[global296 (- temp1 2)])
 						)
 					)
@@ -1696,7 +1696,7 @@
 	(method (doVerb param1 param2 &tmp temp0 temp1 temp2)
 		(if (== param1 2)
 			(if (not (SetFlag 111))
-				(self convReturn: noun param1 80 0 0 modNum)
+				(self sayAndHold: noun param1 80 0 0 modNum)
 			else
 				(super doVerb: param1)
 			)
@@ -1738,17 +1738,17 @@
 					(cond
 						((IsFlag 134)
 							(if (proc27_0 7 global364)
-								(self convReturn: noun 6 1 0 0 modNum)
+								(self sayAndHold: noun 6 1 0 0 modNum)
 							else
-								(self convReturn: noun 6 72 0 0 modNum)
+								(self sayAndHold: noun 6 72 0 0 modNum)
 								(proc27_1 7 @global364)
 							)
 						)
 						((proc27_0 7 global297)
-							(self convReturn: noun 6 1 0 0 modNum)
+							(self sayAndHold: noun 6 1 0 0 modNum)
 						)
 						(else
-							(self convReturn: noun 6 3 0 0 modNum)
+							(self sayAndHold: noun 6 3 0 0 modNum)
 							(proc27_1 7 @global297)
 						)
 					)
@@ -1757,17 +1757,17 @@
 					(cond
 						((or (IsFlag 161) (IsFlag 68))
 							(if (proc27_0 7 global367)
-								(self convReturn: noun 6 1 0 0 modNum)
+								(self sayAndHold: noun 6 1 0 0 modNum)
 							else
-								(self convReturn: noun 6 73 0 0 modNum)
+								(self sayAndHold: noun 6 73 0 0 modNum)
 								(proc27_1 7 @global367)
 							)
 						)
 						((proc27_0 7 global305)
-							(self convReturn: noun 6 1 0 0 modNum)
+							(self sayAndHold: noun 6 1 0 0 modNum)
 						)
 						(else
-							(self convReturn: noun 6 11 0 0 modNum)
+							(self sayAndHold: noun 6 11 0 0 modNum)
 							(proc27_1 7 @global305)
 						)
 					)
@@ -1775,13 +1775,13 @@
 				(else
 					(cond
 						((not (Message msgGET modNum noun 6 temp1 1))
-							(self convReturn: noun 6 81 0 0 modNum)
+							(self sayAndHold: noun 6 81 0 0 modNum)
 						)
 						((proc27_0 7 [global296 (- temp1 2)])
-							(self convReturn: noun 6 1 0 0 modNum)
+							(self sayAndHold: noun 6 1 0 0 modNum)
 						)
 						(else
-							(self convReturn: noun 6 temp1 0 0 modNum)
+							(self sayAndHold: noun 6 temp1 0 0 modNum)
 							(proc27_1 7 @[global296 (- temp1 2)])
 						)
 					)
@@ -1878,17 +1878,17 @@
 					(cond
 						((IsFlag 134)
 							(if (proc27_0 8 global364)
-								(self convReturn: noun 6 1 0 0 modNum)
+								(self sayAndHold: noun 6 1 0 0 modNum)
 							else
-								(self convReturn: noun 6 72 0 0 modNum)
+								(self sayAndHold: noun 6 72 0 0 modNum)
 								(proc27_1 8 @global364)
 							)
 						)
 						((proc27_0 8 global297)
-							(self convReturn: noun 6 1 0 0 modNum)
+							(self sayAndHold: noun 6 1 0 0 modNum)
 						)
 						(else
-							(self convReturn: noun 6 3 0 0 modNum)
+							(self sayAndHold: noun 6 3 0 0 modNum)
 							(proc27_1 8 @global297)
 						)
 					)
@@ -1896,13 +1896,13 @@
 				(else
 					(cond
 						((not (Message msgGET modNum noun 6 temp1 1))
-							(self convReturn: noun 6 81 0 0 modNum)
+							(self sayAndHold: noun 6 81 0 0 modNum)
 						)
 						((proc27_0 8 [global296 (- temp1 2)])
-							(self convReturn: noun 6 1 0 0 modNum)
+							(self sayAndHold: noun 6 1 0 0 modNum)
 						)
 						(else
-							(self convReturn: noun 6 temp1 0 0 modNum)
+							(self sayAndHold: noun 6 temp1 0 0 modNum)
 							(proc27_1 8 @[global296 (- temp1 2)])
 						)
 					)
@@ -1967,9 +1967,9 @@
 		(cond
 			((== param1 2)
 				(if (not (SetFlag 113))
-					(self convReturn: noun param1 80 0 0 modNum)
+					(self sayAndHold: noun param1 80 0 0 modNum)
 				else
-					(self convReturn: noun param1 27 0 0 modNum)
+					(self sayAndHold: noun param1 27 0 0 modNum)
 				)
 			)
 			((OneOf param1 6 14)
@@ -2008,17 +2008,17 @@
 						(cond
 							((or (IsFlag 158) (IsFlag 67))
 								(if (proc27_0 9 global365)
-									(self convReturn: noun 6 1 0 0 modNum)
+									(self sayAndHold: noun 6 1 0 0 modNum)
 								else
-									(self convReturn: noun 6 71 0 0 modNum)
+									(self sayAndHold: noun 6 71 0 0 modNum)
 									(proc27_1 9 @global365)
 								)
 							)
 							((proc27_0 9 global306)
-								(self convReturn: noun 6 1 0 0 modNum)
+								(self sayAndHold: noun 6 1 0 0 modNum)
 							)
 							(else
-								(self convReturn: noun 6 12 0 0 modNum)
+								(self sayAndHold: noun 6 12 0 0 modNum)
 								(proc27_1 9 @global306)
 							)
 						)
@@ -2027,17 +2027,17 @@
 						(cond
 							((or (IsFlag 171) (IsFlag 12))
 								(if (proc27_0 9 global363)
-									(self convReturn: noun 6 1 0 0 modNum)
+									(self sayAndHold: noun 6 1 0 0 modNum)
 								else
-									(self convReturn: noun 6 69 0 0 modNum)
+									(self sayAndHold: noun 6 69 0 0 modNum)
 									(proc27_1 9 @global363)
 								)
 							)
 							((proc27_0 9 global298)
-								(self convReturn: noun 6 1 0 0 modNum)
+								(self sayAndHold: noun 6 1 0 0 modNum)
 							)
 							(else
-								(self convReturn: noun 6 4 0 0 modNum)
+								(self sayAndHold: noun 6 4 0 0 modNum)
 								(proc27_1 9 @global298)
 							)
 						)
@@ -2046,39 +2046,39 @@
 						(cond
 							((IsFlag 134)
 								(if (proc27_0 9 global364)
-									(self convReturn: noun 6 1 0 0 modNum)
+									(self sayAndHold: noun 6 1 0 0 modNum)
 								else
-									(self convReturn: noun 6 72 0 0 modNum)
+									(self sayAndHold: noun 6 72 0 0 modNum)
 									(proc27_1 9 @global364)
 								)
 							)
 							((proc27_0 9 global297)
-								(self convReturn: noun 6 1 0 0 modNum)
+								(self sayAndHold: noun 6 1 0 0 modNum)
 							)
 							(else
-								(self convReturn: noun 6 3 0 0 modNum)
+								(self sayAndHold: noun 6 3 0 0 modNum)
 								(proc27_1 9 @global297)
 							)
 						)
 					)
 					(263
 						(if (proc27_0 9 global302)
-							(self convReturn: noun 6 1 0 0 modNum)
+							(self sayAndHold: noun 6 1 0 0 modNum)
 						else
-							(self convReturn: noun 6 24 0 0 modNum)
+							(self sayAndHold: noun 6 24 0 0 modNum)
 							(proc27_1 9 @global302)
 						)
 					)
 					(else
 						(cond
 							((not (Message msgGET modNum noun 6 temp1 1))
-								(self convReturn: noun 6 81 0 0 modNum)
+								(self sayAndHold: noun 6 81 0 0 modNum)
 							)
 							((proc27_0 9 [global296 (- temp1 2)])
-								(self convReturn: noun 6 1 0 0 modNum)
+								(self sayAndHold: noun 6 1 0 0 modNum)
 							)
 							(else
-								(self convReturn: noun 6 temp1 0 0 modNum)
+								(self sayAndHold: noun 6 temp1 0 0 modNum)
 								(proc27_1 9 @[global296 (- temp1 2)])
 							)
 						)
@@ -2134,13 +2134,13 @@
 			)
 			(cond
 				((not (Message msgGET modNum noun 6 temp1 1))
-					(self convReturn: noun 6 81 0 0 modNum)
+					(self sayAndHold: noun 6 81 0 0 modNum)
 				)
 				((proc27_0 11 [global296 (- temp1 2)])
-					(self convReturn: noun 6 1 0 0 modNum)
+					(self sayAndHold: noun 6 1 0 0 modNum)
 				)
 				(else
-					(self convReturn: noun 6 temp1 0 0 modNum)
+					(self sayAndHold: noun 6 temp1 0 0 modNum)
 					(proc27_1 11 @[global296 (- temp1 2)])
 				)
 			)
@@ -2205,7 +2205,7 @@
 	)
 
 	(method (cue)
-		(if (client convRoom:)
+		(if (client inConversation:)
 			(return)
 		else
 			(super cue: &rest)
@@ -2665,7 +2665,7 @@
 		(= temp0 client)
 		(= client 0)
 		(if (IsObject temp0)
-			(temp0 convRoom: 0)
+			(temp0 inConversation: 0)
 			(if (IsObject (= temp1 (temp0 script:)))
 				(temp1 changeState: (temp1 state:))
 			)

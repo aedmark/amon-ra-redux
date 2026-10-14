@@ -27,13 +27,15 @@ distinct verification boundaries:
 ## Compile and boot workflow
 
 1. Start SCI Companion under Wine by opening the working archive explicitly: `wine "SCI Companion/SCICompanion.exe" 'Z:\run\media\gordonk\Oopy Goopy\amon-ra-redux\LB2\RESOURCE.MAP'`. Do not pass `game.ini`, and do not open the browse-only copy. Its hybrid settings remain SCI 1.0 map, SCI 1.1 package/compression, and VGA 1.1 View/Pic (D-028).
-2. Copy the script's current `N.SCR`/`N.HEP` somewhere outside the repository: `tools/compile.py` deletes them first and does not restore them if the helper fails.
-3. Compile one script: `python3 tools/compile.py rm750` (name or `.sc` base name). It drives the GUI through `tools/compile_any.exe` and confirms that the lowercase `.scr`/`.hep` were rewritten in place (D-037); pressing Compile in SCI Companion is equivalent. If the script is missing from the helper's list (`wine tools/list_scripts.exe`), restart SCI Companion; it drops a script when its patch files vanish and does not re-add it.
+2. If SCI Companion was running before a `997.voc` change (for example a new selector), restart it; it reads the vocabulary only at startup.
+3. Compile one script: `python3 tools/compile.py rm750` (name or `.sc` base name). It drives the GUI through `tools/compile_any.exe`, waits until the lowercase `.scr`/`.hep` have been rewritten in place (D-037), and then closes the script window it opened; a window that was already open stays open. Pressing Compile in SCI Companion is equivalent. `wine tools/compile_any.exe --is-open <script>` and `--close <script>` expose the same check and close; `--close` only matches a window titled exactly with the script's file name. If the script is missing from the helper's list (`wine tools/list_scripts.exe`), restart SCI Companion; it drops a script when its patch files vanish and does not re-add it.
 4. Stop SCI Companion with `wineserver -k` so it cannot touch `LB2/` again.
 5. Boot-test (D-029): `./tools/run_dosbox.sh`. The intro must appear; a black screen or an "Oops! Error n" dialog means the patch set is bad even when the compile reported success.
 6. Only then commit.
 
 **Before step 1:** SCI Companion's "Compile modified scripts before run" option must be off (registry `CompileModifiedScriptsBeforeRun=0`). With it on, pressing Run silently recompiles every script whose source is newer than its patch and overwrites the committed files. Launch the game only with `./tools/run_dosbox.sh`.
+
+**Before shipping a rebuilt script that had a drifted committed patch (D-041),** compare the two builds routine by routine rather than byte by byte, and check that every object's property count matches its class. Do not rebuild `Main` or `n027` while they contain indexed compound assignments.
 
 **Compile output must match the committed layout.** After compiling an unmodified script, its `.SCR`/`.HEP` should be byte-identical to the committed files (compare with `git show HEAD:LB2/N.HEP | cmp - LB2/N.HEP`). A larger heap (extra entry per object) means the SCI Companion version setting or `.sco` caches are wrong; such patches crash the game (D-028, HANDOFF blocker).
 

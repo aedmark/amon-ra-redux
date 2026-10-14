@@ -9,6 +9,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 ### Changed
 - Examining Heimlich at the museum door with the Magnifying Glass now shows the narrator's description of his scars, followed by his irritated reply. The description was previously unreachable.
 
+### Fixed
+- The coroner's final inquest uses the game's standard object layout again. The previous build placed every inquest object's properties one slot off, which could stop the inquest from advancing and misplace its props (D-040).
+- Leaving the Egyptian room to the south in Acts 3 and 4 pauses the rotating music instead of sending the command to the wrong object (D-040).
+- Leaving the speakeasy stops its rotating music, as in the original game (D-040).
+- Room 640's room and Ernie action handlers use the correct class again (D-040).
+- Using an unhandled item on the Egyptian room's dagger case or its glass gives the standard response instead of running stray code from the original patch (D-040, D-041).
+
 ## [0.02-alpha] - 2026-10-12
 
 ### Changed

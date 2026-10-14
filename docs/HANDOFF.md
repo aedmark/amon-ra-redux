@@ -12,9 +12,9 @@ Security: [SECURITY.md](SECURITY.md). Changes: [CHANGELOG.md](CHANGELOG.md). Old
 
 ## Current state
 
-_Last updated: 2026-10-13, session 53: readable selector names (D-039)._
+_Last updated: 2026-10-14, session 54: museum selectors, class numbering, and the inquest layout (D-040, D-041)._
 
-**Where things stand, in one paragraph:** Alpha v0.01 is public in the SQH Discord; alpha v0.02 (`LB2/LB2-Redux-v0.02.zip`, built from `master` at `43b1fbc`) is packaged and its tester guides are updated, pending publication. The room 335 benefit podium remains at `(190, 174)` with visual bounds `nsTop: 148, nsLeft: 182, nsBottom: 174, nsRight: 198` and fixed priority 12. Script 2335's existing 14-point barred room polygon reaches `(190, 176)` around the podium, and Script 335 routes Look/Hand/Magnifier to `(186, 180)` in front of the ledger. Old saves rebind that same polygon object to current static points without heap writes or new objects. Script 21's duplicate-clue repair prevents the prior Error 5 memory corruption. The remaining one-frame “interesting approach” flash was traced to the global fallback for an unsupported verb dispatch occurring before the valid podium dispatch on exact-position repeats. The podium now handles its three intended verbs normally and locally consumes any unsupported dispatch instead of forwarding it to the global narrator (D-035). The flash persisted, and occurred only on the engine's immediate-dispatch ending, when Laura was already in place. The podium now sets `sightAngle` -1 and `approachDist` 4, so repeats take the same deferred `CueObj` path as a fresh approach (D-036). The maintainer confirmed in DOSBox-X that repeat LOOK and DO show only the guestbook response. Saved games no longer overwrite slot 0 (Script 990 fix).
+**Where things stand, in one paragraph:** Alpha v0.01 is public in the SQH Discord; alpha v0.02 (`LB2/LB2-Redux-v0.02.zip`, built from `master` at `43b1fbc`) is packaged and its tester guides are updated, pending publication. The room 335 benefit podium remains at `(190, 174)` with visual bounds `nsTop: 148, nsLeft: 182, nsBottom: 174, nsRight: 198` and fixed priority 12. Script 2335's existing 14-point barred room polygon reaches `(190, 176)` around the podium, and Script 335 routes Look/Hand/Magnifier to `(186, 180)` in front of the ledger. Old saves rebind that same polygon object to current static points without heap writes or new objects. Script 21's duplicate-clue repair prevents the prior Error 5 memory corruption. The remaining one-frame “interesting approach” flash was traced to the global fallback for an unsupported verb dispatch occurring before the valid podium dispatch on exact-position repeats. The podium now handles its three intended verbs normally and locally consumes any unsupported dispatch instead of forwarding it to the global narrator (D-035). The flash persisted, and occurred only on the engine's immediate-dispatch ending, when Laura was already in place. The podium now sets `sightAngle` -1 and `approachDist` 4, so repeats take the same deferred `CueObj` path as a fresh approach (D-036). The maintainer confirmed in DOSBox-X that repeat LOOK and DO show only the guestbook response. Saved games no longer overwrite slot 0 (Script 990 fix). Session 54 found that Redux's `Main` numbers `WrapMusic` and `Actions` the reverse of vanilla, which broke Sierra-compiled rooms 450 and 640 and the archive-derived room 310, and that the committed room 750 inquest had every object property shifted one slot; all four now build from corrected source and await a runtime retest (D-040). Drifted patches stay unless their script changes, and `Main`/`n027` must not be rebuilt as-is (D-041).
 
 **Verified** (2026-10-12, Linux workspace)
 
@@ -82,7 +82,8 @@ _Last updated: 2026-10-13, session 53: readable selector names (D-039)._
 - Before changing an interactive room object, follow `docs/CONTRIBUTING.md`'s reference-first SCI object workflow (D-034): consult SCI Companion's object-interaction documentation, inspect `Feature.sc`/`PApproach.sc`/`Polygon.sc`, and compare at least two established same-class hotspots before adding custom selectors, cues, dispatchers, or per-cycle mutation.
 - Selectors have readable names (D-039). Change a name only in `tools/selector_names.json`, rerun `python3 tools/name_selectors.py LB2`, restart SCI Companion (it reads `997.voc` only at startup), and recompile to confirm byte-identical output. Never give a selector the same name as an instance, class, or procedure used inside a method (`controls` vs. selector 343 changed `Game`'s bytecode).
 - SCI Companion resolves classes from other scripts through their `.sco` files. Compile a class's defining script before scripts that use changed classes (`Interface` before `Dialog`); several committed `.sco` files predate the current source.
-- Batch compiles: `compile_any.exe` leaves each script window open, which slows SCI Companion until saves lag and the GUI times out. SCI Companion ignores a game path given on its command line and reopens the last game.
+- `tools/compile.py` closes the script window it opened once the patches are written, so batch compiles no longer pile up windows. SCI Companion ignores a game path given on its command line and reopens the last game, and reads `997.voc` only at startup.
+- Class numbers: Redux's `Main` has `WrapMusic` 47 and `Actions` 127, the reverse of vanilla. A Sierra-compiled or archive-decompiled script that names either class needs checking before it ships (D-040). SCI Companion turns `(and c v)` into a boolean and miscompiles indexed compound assignments; never rebuild `Main` or `n027` as-is (D-041).
 - Loose patch files in `LB2/` are lowercase (`.scr`, `.hep`, `.msg`, `.v56`), matching SCI Companion's output, and the working copy lives on a case-insensitive exFAT drive (D-037). `core.fileMode` is false there because exFAT has no Unix permissions; case-only renames need `git mv -f` plus a two-step rename on disk.
 - Before any SCI Companion GUI action, inspect the active window and verify the loaded archive/project identity; if it is ambiguous, ask the maintainer rather than closing, reloading, or choosing a window by inference.
 - Single-script compilation only: use `python3 tools/compile.py <script>`. Never use Compile All or resource rebuild.
@@ -90,15 +91,34 @@ _Last updated: 2026-10-13, session 53: readable selector names (D-039)._
 
 ## Next steps (in order)
 
-1. Check the podium's collision from both sides and a Magnifier repeat.
-2. Resume the clean DOSBox-X playthrough and triage every remaining `PLAY-nnn` finding.
-3. Begin P5-01 design only after the playthrough gate closes, using the migrated compiler-facing source baseline.
+1. Boot and retest session 54's rooms: a museum conversation (Script 90), leaving the speakeasy (310), leaving the Egyptian room south in Act 3 or 4 and using an item on the dagger case (450), room 640's actions, and the full final inquest (750).
+2. Check the podium's collision from both sides and a Magnifier repeat.
+3. Resume the clean DOSBox-X playthrough and triage every remaining `PLAY-nnn` finding.
+4. Begin P5-01 design only after the playthrough gate closes, using the migrated compiler-facing source baseline.
 
 ## Open questions for maintainers
 
 None currently open. Q-001 and Q-002 have been resolved by D-007, D-017, and D-018.
 
 ## Session log
+
+### Session 54: 2026-10-14: Museum Selectors, Class Numbering, and the Inquest Layout
+
+**Contributor:** Claude Code and maintainer
+
+**Goal:** Finish session 53's deferred items: separate the museum lock from vanilla selectors 667/668, explain the 34 drifted patches, and stop batch compiles from leaving script windows open.
+
+**Done:**
+- Gave the P3-06 museum lock its own selectors, 681 `inConversation` and 682 `sayAndHold` (`selector_names.json`, `997.voc`, `MuseumRgn.sc`); rebuilt Script 90, which matches the committed build except for the selector IDs (D-039).
+- `compile_any` gained `--is-open` and `--close`; `compile.py` waits for the patches and closes the window it opened.
+- Rebuilt the 30 other drifted scripts in place, compared each with the committed build using a normalizing disassembler, and restored every committed patch. Differences are codegen except for the findings in D-040 and D-041.
+- Fixed and rebuilt room 310 (`WrapMusic dispose:`), room 450 (class 47 for `WrapMusic`, value-preserving message case, standard `super doVerb:`), room 640 (`of Actions`; now a loose patch), and room 750 (object property blocks from `7d48893`, un-shifted `state`/`cycles`/`seconds`/`font`) (D-040).
+
+**Decisions:** D-040, D-041.
+
+**Verified:** Script 90, 310, 450, 640, and 750 builds compared routine by routine against the committed, archive, and Sierra patch builds; 750's object sizes, property values, and slot writes match vanilla. Headless DOSBox-X startup; base archive MD5s unchanged; documentation and manual checks. Runtime retest pending.
+
+**Next session should start with:** The maintainer's retest of rooms 90, 310, 450, 640, and 750 (Next steps 1).
 
 ### Session 53: 2026-10-13: Readable Selector Names
 
@@ -272,15 +292,3 @@ None currently open. Q-001 and Q-002 have been resolved by D-007, D-017, and D-0
 **Verified:** Maintainer compiled Scripts 270, 335, and 93; lowercase Wine outputs were normalized to tracked uppercase names. Message manifests reapply idempotently. Static source audit confirms the intended clue set and Watney exclusion. `RESOURCE.000` and `RESOURCE.MAP` retain vanilla MD5 hashes, and the original interpreter completes its headless startup smoke. Runtime hotspot placement remains to be checked in DOSBox-X.
 
 **Next session should start with:** Test the entrance register from the Act 2 save, including repeat inspection and notebook contents, then continue the clean playthrough.
-
-### Session 44: 2026-10-11: Public Alpha Playtesting Guide
-
-**Contributor:** Codex and maintainer
-
-**Goal:** Give SQH Discord alpha testers a clear, public-facing way to test v0.01 and submit useful reports.
-
-**Done:** Added `docs/ALPHA_PLAYTESTING.md` with reference-environment guidance, save-handling advice, universal quality checks, spoiler-light act coverage, a collapsible focused regression checklist, a standard Discord/GitHub report template, and examples of high-value alternate-route testing. Added `docs/alpha-playtest.html`, a one-file Art Deco page ready for Neocities with a direct v0.01 download, device-local checklist progress, responsive and print layouts, accessible controls, spoiler separation, and a copyable report form. Linked both artifacts from the project and documentation indexes and distinguished them from the internal triage checklist.
-
-**Verified:** Documentation consistency check passes with the new public guide and links.
-
-**Next session should start with:** Collect public alpha reports, reproduce them in DOSBox-X, and assign stable `PLAY-nnn` IDs in the internal checklist.

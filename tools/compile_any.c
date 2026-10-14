@@ -50,15 +50,36 @@ BOOL CALLBACK EnumListBoxProc(HWND hwnd, LPARAM lParam) {
     return TRUE;
 }
 
+// Script editors are MDI children titled with the file name. Only an exact
+// title match is closed.
+HWND FindScriptWindow(HWND hwndMain, const char *target) {
+    HWND mdi = FindWindowExA(hwndMain, NULL, "MDIClient", NULL);
+    if (!mdi) return NULL;
+    for (HWND child = GetWindow(mdi, GW_CHILD); child; child = GetWindow(child, GW_HWNDNEXT)) {
+        char title[256] = {0};
+        GetWindowTextA(child, title, sizeof(title));
+        if (strcasecmp(title, target) == 0) return child;
+    }
+    return NULL;
+}
+
 int main(int argc, char **argv) {
+    // --is-open <script>: exit 0 if its editor window is open, 2 if not.
+    // --close <script>: close its unmodified editor window, if open.
+    const char *mode = NULL;
+    if (argc >= 3 && (strcmp(argv[1], "--is-open") == 0 || strcmp(argv[1], "--close") == 0)) {
+        mode = argv[1];
+        argv++;
+        argc--;
+    }
     if (argc < 2) {
-        printf("Usage: %s <script_name> (e.g. Button.sc or MyFeature or rm500)\n", argv[0]);
+        printf("Usage: %s [--is-open|--close] <script_name> (e.g. Button.sc or MyFeature or rm500)\n", argv[0]);
         return 1;
     }
 
     char target[256];
-    strncpy(target, argv[1], sizeof(target) - 1);
-    target[sizeof(target) - 1] = 0;
+    strncpy(target, argv[1], sizeof(target) - 5);
+    target[sizeof(target) - 5] = 0;
     if (strstr(target, ".sc") == NULL) {
         strcat(target, ".sc");
     }
@@ -68,6 +89,16 @@ int main(int argc, char **argv) {
     if (!hwndMain) {
         printf("Main window not found.\n");
         return 1;
+    }
+
+    if (mode) {
+        HWND child = FindScriptWindow(hwndMain, target);
+        if (strcmp(mode, "--is-open") == 0) return child ? 0 : 2;
+        if (child) {
+            SendMessageA(child, WM_CLOSE, 0, 0);
+            printf("Closed '%s'.\n", target);
+        }
+        return 0;
     }
 
     // Switch to scripts tab

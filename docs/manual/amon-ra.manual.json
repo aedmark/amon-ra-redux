@@ -1075,7 +1075,8 @@
             "points": [
               "Route every museum-actor message through a wrapper that locks the selected actor and stops its active mover.",
               "Prevent TravelToRoom from advancing while locked; on dismissal, clear the lock and re-enter its current state so the same fixed or random route resumes.",
-              "Skip O'Reilly's 10:15 removal while global123 is Act 3 or Act 4, retaining the original removal behavior in other acts."
+              "Skip O'Reilly's 10:15 removal while global123 is Act 3 or Act 4, retaining the original removal behavior in other acts.",
+              "Give the lock flag and the locking say method their own selectors (681 inConversation, 682 sayAndHold) instead of reusing vanilla's Rotunda conversation selectors 667 and 668 (D-039)."
             ]
           },
           "why": "Having suspects walk away off-screen in the middle of crucial testimony breaks immersion and wastes player time tracking them down again.",
@@ -1320,7 +1321,8 @@
           "how": [
             "Display a required-case notice before question 1 explaining that questions 1 through 11 determine the coroner's conclusions about the murders and dagger theft.",
             "Move questions 12 through 16 into Script 750's dedicated sBonusQuestions state and display a bonus-museum notice before they begin.",
-            "Preserve the original answer menus, feedback, and conditional skips while ensuring the bonus state contains no writes to murder flag local4 or theft-answer flag local5."
+            "Preserve the original answer menus, feedback, and conditional skips while ensuring the bonus state contains no writes to murder flag local4 or theft-answer flag local5.",
+            "Keep every inquest object on the vanilla property layout so each state script writes the engine's own state, cycles, seconds, and next slots; an earlier build duplicated each object's name into the next slot, which shifted every property and stopped the inquest scripts from advancing (D-040)."
           ],
           "why": "The optional questions were already outcome-neutral, but sharing one state machine with required theft questions and providing no UI distinction made secondary lore appear capable of lowering Laura's final result.",
           "evidence": [
