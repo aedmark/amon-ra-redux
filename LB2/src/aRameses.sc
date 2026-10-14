@@ -12,20 +12,20 @@
 
 (instance aRameses of MuseumActor
 	(properties
-		sel_20 {aRameses}
-		sel_213 1
-		sel_214 1891
-		sel_648 823
-		sel_620 370
+		name {aRameses}
+		noun 1
+		modNum 1891
+		originalView 823
+		room 370
 	)
 
-	(method (sel_300 param1 param2 &tmp temp0 temp1 temp2)
+	(method (doVerb param1 param2 &tmp temp0 temp1 temp2)
 		(switch param1
 			(2
 				(if (not (SetFlag 115))
-					(gMessager sel_295: sel_213 param1 80 0 0 sel_214)
+					(gMessager say: noun param1 80 0 0 modNum)
 				else
-					(super sel_300: param1)
+					(super doVerb: param1)
 				)
 			)
 			(6
@@ -35,7 +35,7 @@
 							(if (== argc 2)
 								param2
 							else
-								(gCurRoom sel_422: (ScriptID 20 0)) ; inNotebook
+								(gCurRoom setInset: (ScriptID 20 0)) ; inNotebook
 							)
 						)
 						-1
@@ -64,17 +64,17 @@
 						(cond
 							((IsFlag 134)
 								(if (proc27_0 6 global364)
-									(gMessager sel_295: sel_213 6 1 0 0 sel_214)
+									(gMessager say: noun 6 1 0 0 modNum)
 								else
-									(gMessager sel_295: sel_213 6 72 0 0 sel_214)
+									(gMessager say: noun 6 72 0 0 modNum)
 									(proc27_1 6 @global364)
 								)
 							)
 							((proc27_0 6 global297)
-								(gMessager sel_295: sel_213 6 1 0 0 sel_214)
+								(gMessager say: noun 6 1 0 0 modNum)
 							)
 							(else
-								(gMessager sel_295: sel_213 6 3 0 0 sel_214)
+								(gMessager say: noun 6 3 0 0 modNum)
 								(proc27_1 6 @global297)
 							)
 						)
@@ -83,17 +83,17 @@
 						(cond
 							((or (IsFlag 171) (IsFlag 12))
 								(if (proc27_0 6 global363)
-									(gMessager sel_295: sel_213 6 1 0 0 sel_214)
+									(gMessager say: noun 6 1 0 0 modNum)
 								else
-									(gMessager sel_295: sel_213 6 69 0 0 sel_214)
+									(gMessager say: noun 6 69 0 0 modNum)
 									(proc27_1 6 @global363)
 								)
 							)
 							((proc27_0 6 global298)
-								(gMessager sel_295: sel_213 6 1 0 0 sel_214)
+								(gMessager say: noun 6 1 0 0 modNum)
 							)
 							(else
-								(gMessager sel_295: sel_213 6 4 0 0 sel_214)
+								(gMessager say: noun 6 4 0 0 modNum)
 								(proc27_1 6 @global298)
 							)
 						)
@@ -102,17 +102,17 @@
 						(cond
 							((or (IsFlag 161) (IsFlag 68))
 								(if (proc27_0 6 global367)
-									(gMessager sel_295: sel_213 6 1 0 0 sel_214)
+									(gMessager say: noun 6 1 0 0 modNum)
 								else
-									(gMessager sel_295: sel_213 6 73 0 0 sel_214)
+									(gMessager say: noun 6 73 0 0 modNum)
 									(proc27_1 6 @global367)
 								)
 							)
 							((proc27_0 6 global305)
-								(gMessager sel_295: sel_213 6 1 0 0 sel_214)
+								(gMessager say: noun 6 1 0 0 modNum)
 							)
 							(else
-								(gMessager sel_295: sel_213 6 11 0 0 sel_214)
+								(gMessager say: noun 6 11 0 0 modNum)
 								(proc27_1 6 @global305)
 							)
 						)
@@ -121,31 +121,31 @@
 						(cond
 							((or (IsFlag 158) (IsFlag 67))
 								(if (proc27_0 6 global365)
-									(gMessager sel_295: sel_213 6 1 0 0 sel_214)
+									(gMessager say: noun 6 1 0 0 modNum)
 								else
-									(gMessager sel_295: sel_213 6 71 0 0 sel_214)
+									(gMessager say: noun 6 71 0 0 modNum)
 									(proc27_1 6 @global365)
 								)
 							)
 							((proc27_0 6 global306)
-								(gMessager sel_295: sel_213 6 1 0 0 sel_214)
+								(gMessager say: noun 6 1 0 0 modNum)
 							)
 							(else
-								(gMessager sel_295: sel_213 6 12 0 0 sel_214)
+								(gMessager say: noun 6 12 0 0 modNum)
 								(proc27_1 6 @global306)
 							)
 						)
 					)
 					(else
 						(cond
-							((not (Message msgGET sel_214 sel_213 6 temp1 1))
-								(gMessager sel_295: sel_213 6 81 0 0 sel_214)
+							((not (Message msgGET modNum noun 6 temp1 1))
+								(gMessager say: noun 6 81 0 0 modNum)
 							)
 							((proc27_0 6 [global296 (- temp1 2)])
-								(gMessager sel_295: sel_213 6 1 0 0 sel_214)
+								(gMessager say: noun 6 1 0 0 modNum)
 							)
 							(else
-								(gMessager sel_295: sel_213 6 temp1 0 0 sel_214)
+								(gMessager say: noun 6 temp1 0 0 modNum)
 								(proc27_1 6 @[global296 (- temp1 2)])
 							)
 						)
@@ -153,7 +153,7 @@
 				)
 			)
 			(else
-				(super sel_300: param1)
+				(super doVerb: param1)
 			)
 		)
 	)

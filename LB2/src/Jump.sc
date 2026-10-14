@@ -7,131 +7,131 @@
 
 (class Jump of Motion
 	(properties
-		sel_20 {Jump}
-		sel_1 20000
-		sel_0 20000
-		sel_285 0
-		sel_286 3
-		sel_51 20000
-		sel_52 0
-		sel_14 0
-		sel_15 0
-		sel_287 1
-		sel_288 1
+		name {Jump}
+		x 20000
+		y 20000
+		gx 0
+		gy 3
+		xStep 20000
+		yStep 0
+		signal 0
+		illegalBits 0
+		waitApogeeX 1
+		waitApogeeY 1
 	)
 
-	(method (sel_110 param1 param2 &tmp temp0)
-		(= sel_42 param1)
+	(method (init param1 param2 &tmp temp0)
+		(= client param1)
 		(if (== argc 2)
-			(= sel_143 param2)
+			(= caller param2)
 		)
-		(= sel_15 (sel_42 sel_15:))
-		(= sel_14 (sel_42 sel_14:))
-		(sel_42 sel_15: 0 sel_63:)
-		(if (== sel_51 20000)
-			(= sel_51
+		(= illegalBits (client illegalBits:))
+		(= signal (client signal:))
+		(client illegalBits: 0 setPri:)
+		(if (== xStep 20000)
+			(= xStep
 				(cond
 					(
 						(or
-							(> (= temp0 (sel_42 sel_55:)) 330)
+							(> (= temp0 (client heading:)) 330)
 							(< temp0 30)
 							(and (< 150 temp0) (< temp0 210))
 						)
 						0
 					)
 					((< temp0 180)
-						(sel_42 sel_51:)
+						(client xStep:)
 					)
 					(else
-						(- (sel_42 sel_51:))
+						(- (client xStep:))
 					)
 				)
 			)
 		)
-		(if (not (and sel_287 (< (* sel_51 sel_285) 0)))
-			(= sel_287 0)
+		(if (not (and waitApogeeX (< (* xStep gx) 0)))
+			(= waitApogeeX 0)
 		)
-		(if (not (and sel_288 (< (* sel_52 sel_286) 0)))
-			(= sel_288 0)
+		(if (not (and waitApogeeY (< (* yStep gy) 0)))
+			(= waitApogeeY 0)
 		)
-		(= sel_45 gGameTime)
-		(self sel_289:)
+		(= b-moveCnt gGameTime)
+		(self setTest:)
 	)
 
-	(method (sel_57 &tmp temp0 temp1)
-		(if (>= (Abs (- gGameTime sel_45)) (sel_42 sel_53:))
-			(= sel_45 gGameTime)
-			(= sel_249 (sel_42 sel_1:))
-			(= sel_250 (sel_42 sel_0:))
-			(sel_42 sel_1: (+ sel_249 sel_51) sel_0: (+ sel_250 sel_52))
-			(= temp0 sel_51)
-			(= temp1 sel_52)
-			(+= sel_51 sel_285)
-			(+= sel_52 sel_286)
+	(method (doit &tmp temp0 temp1)
+		(if (>= (Abs (- gGameTime b-moveCnt)) (client moveSpeed:))
+			(= b-moveCnt gGameTime)
+			(= xLast (client x:))
+			(= yLast (client y:))
+			(client x: (+ xLast xStep) y: (+ yLast yStep))
+			(= temp0 xStep)
+			(= temp1 yStep)
+			(+= xStep gx)
+			(+= yStep gy)
 			(if
 				(and
-					(not sel_287)
-					(!= sel_1 20000)
-					(<= 0 (* sel_43 (- (sel_42 sel_1:) sel_1)))
+					(not waitApogeeX)
+					(!= x 20000)
+					(<= 0 (* dx (- (client x:) x)))
 				)
-				(sel_42 sel_1: sel_1)
-				(self sel_97:)
+				(client x: x)
+				(self moveDone:)
 				(return)
 			)
 			(if
 				(and
-					(not sel_288)
-					(!= sel_0 20000)
-					(<= 0 (* sel_44 (- (sel_42 sel_0:) sel_0)))
+					(not waitApogeeY)
+					(!= y 20000)
+					(<= 0 (* dy (- (client y:) y)))
 				)
-				(sel_42 sel_0: sel_0)
-				(self sel_97:)
+				(client y: y)
+				(self moveDone:)
 				(return)
 			)
-			(if (<= (* temp0 sel_51) 0)
-				(= sel_287 0)
-				(self sel_289:)
+			(if (<= (* temp0 xStep) 0)
+				(= waitApogeeX 0)
+				(self setTest:)
 			)
-			(if (<= (* temp1 sel_52) 0)
-				(= sel_288 0)
-				(self sel_289:)
+			(if (<= (* temp1 yStep) 0)
+				(= waitApogeeY 0)
+				(self setTest:)
 			)
 		)
 	)
 
-	(method (sel_97)
-		(sel_42 sel_15: sel_15 sel_14: sel_14)
-		(if sel_143
+	(method (moveDone)
+		(client illegalBits: illegalBits signal: signal)
+		(if caller
 			(= gDoMotionCue 1)
-			(= sel_240 1)
+			(= completed 1)
 		)
 	)
 
-	(method (sel_243)
-		(sel_42 sel_56: 0)
-		(if (and sel_240 (IsObject sel_143))
-			(sel_143 sel_145:)
+	(method (motionCue)
+		(client mover: 0)
+		(if (and completed (IsObject caller))
+			(caller cue:)
 		)
-		(self sel_111:)
+		(self dispose:)
 	)
 
-	(method (sel_289)
-		(= sel_43
+	(method (setTest)
+		(= dx
 			(if
 				(or
-					(> (sel_42 sel_1:) sel_1)
-					(and (== (sel_42 sel_1:) sel_1) (> sel_51 0))
+					(> (client x:) x)
+					(and (== (client x:) x) (> xStep 0))
 				)
 				-1
 			else
 				1
 			)
 		)
-		(= sel_44
+		(= dy
 			(if
 				(or
-					(> (sel_42 sel_0:) sel_0)
-					(and (== (sel_42 sel_0:) sel_0) (> sel_52 0))
+					(> (client y:) y)
+					(and (== (client y:) y) (> yStep 0))
 				)
 				-1
 			else
@@ -143,45 +143,45 @@
 
 (class JumpTo of Jump
 	(properties
-		sel_20 {JumpTo}
+		name {JumpTo}
 	)
 
-	(method (sel_110 param1 param2 param3 param4 &tmp temp0 temp1 [temp2 52])
-		(= sel_42 param1)
-		(= sel_1 param2)
-		(= sel_0 param3)
-		(if (and (== sel_1 (param1 sel_1:)) (== sel_0 (param1 sel_0:)))
-			(= sel_15 (sel_42 sel_15:))
-			(= sel_14 (sel_42 sel_14:))
-			(self sel_97:)
+	(method (init param1 param2 param3 param4 &tmp temp0 temp1 [temp2 52])
+		(= client param1)
+		(= x param2)
+		(= y param3)
+		(if (and (== x (param1 x:)) (== y (param1 y:)))
+			(= illegalBits (client illegalBits:))
+			(= signal (client signal:))
+			(self moveDone:)
 			(return)
 		)
-		(= temp0 (- sel_1 (param1 sel_1:)))
-		(= temp1 (- sel_0 (param1 sel_0:)))
-		(SetJump self temp0 temp1 sel_286)
+		(= temp0 (- x (param1 x:)))
+		(= temp1 (- y (param1 y:)))
+		(SetJump self temp0 temp1 gy)
 		(if (not temp0)
-			(= sel_1 20000)
+			(= x 20000)
 		)
 		(if (not temp1)
-			(= sel_0 20000)
+			(= y 20000)
 		)
 		(switch argc
 			(3
-				(super sel_110: param1)
+				(super init: param1)
 			)
 			(4
-				(super sel_110: param1 param4)
+				(super init: param1 param4)
 			)
 		)
 	)
 
-	(method (sel_97)
-		(if (!= sel_1 20000)
-			(sel_42 sel_1: sel_1)
+	(method (moveDone)
+		(if (!= x 20000)
+			(client x: x)
 		)
-		(if (!= sel_0 20000)
-			(sel_42 sel_0: sel_0)
+		(if (!= y 20000)
+			(client y: y)
 		)
-		(super sel_97:)
+		(super moveDone:)
 	)
 )

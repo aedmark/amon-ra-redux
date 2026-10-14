@@ -11,17 +11,17 @@
 
 (instance Bum of Talker
 	(properties
-		sel_20 {Bum}
-		sel_2 828
-		sel_3 1
-		sel_537 150
-		sel_26 15
-		sel_549 10
-		sel_550 10
+		name {Bum}
+		view 828
+		loop 1
+		talkWidth 150
+		back 15
+		textX 10
+		textY 10
 	)
 
-	(method (sel_110)
-		(= sel_30 gUserFont)
-		(super sel_110: &rest)
+	(method (init)
+		(= font gUserFont)
+		(super init: &rest)
 	)
 )

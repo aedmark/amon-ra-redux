@@ -26,57 +26,57 @@
 
 (instance rm660 of LBRoom
 	(properties
-		sel_20 {rm660}
-		sel_408 660
-		sel_411 460
+		name {rm660}
+		picture 660
+		south 460
 	)
 
-	(method (sel_110)
+	(method (init)
 		(LoadMany rsVIEW 660 423 661 858 424)
 		(LoadMany rsSOUND 662 661 660)
 		(LoadMany rsSCRIPT 94 2660)
 		(if (== gAct 5)
-			(self sel_414: 94)
-			(gCurRoom sel_259: (List sel_109:))
-			((ScriptID 2660 0) sel_57: (gCurRoom sel_259:)) ; poly2660Code
+			(self setRegions: 94)
+			(gCurRoom obstacles: (List new:))
+			((ScriptID 2660 0) doit: (gCurRoom obstacles:)) ; poly2660Code
 		else
-			(self sel_414: 90)
-			(MuseumRgn sel_645:)
+			(self setRegions: 90)
+			(MuseumRgn loadPolyList:)
 		)
-		(gEgo sel_110: sel_320: 125 sel_585: 426)
-		(super sel_110:)
-		(crank sel_110: sel_313:)
-		(wall1 sel_110: sel_313:)
-		(wall2 sel_110: sel_313:)
-		(walls sel_110:)
-		(floor sel_110:)
-		(ceiling sel_110:)
-		(trash sel_110:)
-		(southExitFeature sel_110:)
-		(self sel_146: sEnterElevator)
+		(gEgo init: setScale: 125 normalize: 426)
+		(super init:)
+		(crank init: stopUpd:)
+		(wall1 init: stopUpd:)
+		(wall2 init: stopUpd:)
+		(walls init:)
+		(floor init:)
+		(ceiling init:)
+		(trash init:)
+		(southExitFeature init:)
+		(self setScript: sEnterElevator)
 	)
 
-	(method (sel_57)
+	(method (doit)
 		(cond
-			(sel_142)
+			(script)
 			((StepOn gEgo 16)
-				(gEgo sel_349: 3)
+				(gEgo edgeHit: 3)
 			)
 		)
-		(super sel_57:)
+		(super doit:)
 	)
 
-	(method (sel_111)
+	(method (dispose)
 		(DisposeScript 2660)
-		(super sel_111: &rest)
+		(super dispose: &rest)
 	)
 
-	(method (sel_403)
+	(method (notify)
 		(if (== gAct 5)
-			(if (gCurRoom sel_142:)
-				((gCurRoom sel_142:) sel_65: sDie)
+			(if (gCurRoom script:)
+				((gCurRoom script:) next: sDie)
 			else
-				(gCurRoom sel_146: sDie)
+				(gCurRoom setScript: sDie)
 			)
 		)
 	)
@@ -84,42 +84,42 @@
 
 (instance sDie of Script
 	(properties
-		sel_20 {sDie}
+		name {sDie}
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
-				(gGame sel_587:)
-				(gGameMusic1 sel_40: 3 sel_99: 1 sel_3: 1 sel_39:)
-				(gEgo sel_312: MoveTo 160 120 self)
+				(gGame handsOff:)
+				(gGameMusic1 number: 3 flags: 1 loop: 1 play:)
+				(gEgo setMotion: MoveTo 160 120 self)
 			)
 			(1
 				(oriley
-					sel_110:
-					sel_320: 125
-					sel_161: Walk
-					sel_312: PChase gEgo 22 self
+					init:
+					setScale: 125
+					setCycle: Walk
+					setMotion: PChase gEgo 22 self
 				)
 			)
 			(2
-				(oriley sel_2: 424)
-				(oriley sel_4: 0)
+				(oriley view: 424)
+				(oriley cel: 0)
 				(Face gEgo oriley)
 				(Face oriley gEgo)
-				(= sel_136 4)
+				(= cycles 4)
 			)
 			(3
-				(oriley sel_161: End self)
+				(oriley setCycle: End self)
 			)
 			(4
-				(thudSound sel_39:)
-				(gEgo sel_2: 858 sel_161: End self)
+				(thudSound play:)
+				(gEgo view: 858 setCycle: End self)
 			)
 			(5
 				(= global145 0) ; "You came in thinking like a journalist, and you left with a skull full of mush."
-				(gCurRoom sel_399: 99)
-				(self sel_111:)
+				(gCurRoom newRoom: 99)
+				(self dispose:)
 			)
 		)
 	)
@@ -127,101 +127,101 @@
 
 (instance sGoingDown of Script
 	(properties
-		sel_20 {sGoingDown}
+		name {sGoingDown}
 	)
 
-	(method (sel_57)
-		(super sel_57:)
-		(switch sel_29
+	(method (doit)
+		(super doit:)
+		(switch state
 			(5
 				(gEgo
-					sel_105: (+ (gEgo sel_105:) 2)
-					sel_104: (- (gEgo sel_104:) 2)
+					scaleY: (+ (gEgo scaleY:) 2)
+					scaleX: (- (gEgo scaleX:) 2)
 				)
 			)
 			(6
 				(gEgo
-					sel_105: (- (gEgo sel_105:) 2)
-					sel_104: (+ (gEgo sel_104:) 2)
+					scaleY: (- (gEgo scaleY:) 2)
+					scaleX: (+ (gEgo scaleX:) 2)
 				)
 			)
 			(10
 				(gEgo
-					sel_105: (- (gEgo sel_105:) 3)
-					sel_104: (+ (gEgo sel_104:) 4)
+					scaleY: (- (gEgo scaleY:) 3)
+					scaleX: (+ (gEgo scaleX:) 4)
 				)
 			)
 			(11
 				(gEgo
-					sel_105: (+ (gEgo sel_105:) 3)
-					sel_104: (- (gEgo sel_104:) 4)
+					scaleY: (+ (gEgo scaleY:) 3)
+					scaleX: (- (gEgo scaleX:) 4)
 				)
 			)
 		)
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
-				(gGame sel_587:)
-				((ScriptID 94 1) sel_111: sel_81:) ; pursuitTimer
-				(gEgo sel_312: PolyPath 165 117 self)
+				(gGame handsOff:)
+				((ScriptID 94 1) dispose: delete:) ; pursuitTimer
+				(gEgo setMotion: PolyPath 165 117 self)
 			)
 			(1
-				(gEgo sel_2: 661 sel_3: 0 sel_4: 0 sel_161: CT 3 1 self)
+				(gEgo view: 661 loop: 0 cel: 0 setCycle: CT 3 1 self)
 			)
 			(2
-				(gEgo sel_161: End self)
-				(crank sel_161: End self)
-				(gGameMusic2 sel_40: 661 sel_99: 1 sel_3: 1 sel_39:)
+				(gEgo setCycle: End self)
+				(crank setCycle: End self)
+				(gGameMusic2 number: 661 flags: 1 loop: 1 play:)
 			)
 			(3
-				(gGameMusic1 sel_40: 660 sel_99: 1 sel_3: 1 sel_39:)
+				(gGameMusic1 number: 660 flags: 1 loop: 1 play:)
 			)
 			(4
-				(crank sel_313:)
-				(gEgo sel_585: 426 sel_253: 180 sel_103: 1 sel_106: 256)
-				(gGameMusic2 sel_40: 662 sel_99: 1 sel_3: -1 sel_39:)
-				(wall1 sel_161: Fwd)
-				(wall2 sel_161: Fwd)
-				(= sel_136 1)
+				(crank stopUpd:)
+				(gEgo normalize: 426 setHeading: 180 scaleSignal: 1 maxScale: 256)
+				(gGameMusic2 number: 662 flags: 1 loop: -1 play:)
+				(wall1 setCycle: Fwd)
+				(wall2 setCycle: Fwd)
+				(= cycles 1)
 			)
 			(5
-				(= sel_136 10)
+				(= cycles 10)
 			)
 			(6
-				(= sel_136 10)
+				(= cycles 10)
 			)
 			(7
-				(= sel_137 2)
+				(= seconds 2)
 			)
 			(8
-				(wall1 sel_244: (+ (wall1 sel_244:) 1))
-				(wall2 sel_244: (+ (wall1 sel_244:) 1))
-				(= sel_137 1)
+				(wall1 cycleSpeed: (+ (wall1 cycleSpeed:) 1))
+				(wall2 cycleSpeed: (+ (wall1 cycleSpeed:) 1))
+				(= seconds 1)
 			)
 			(9
-				(if (< (wall1 sel_244:) 8)
-					(self sel_144: 8)
+				(if (< (wall1 cycleSpeed:) 8)
+					(self changeState: 8)
 				else
-					(wall1 sel_161: End)
-					(wall2 sel_161: End)
-					(= sel_136 1)
+					(wall1 setCycle: End)
+					(wall2 setCycle: End)
+					(= cycles 1)
 				)
 			)
 			(10
-				(= sel_136 10)
+				(= cycles 10)
 			)
 			(11
-				(= sel_136 10)
+				(= cycles 10)
 			)
 			(12
-				(gGameMusic2 sel_167:)
-				(gGame sel_588:)
-				(wall1 sel_313:)
-				(wall2 sel_313:)
-				(gCurRoom sel_411: 700)
-				(self sel_111:)
+				(gGameMusic2 stop:)
+				(gGame handsOn:)
+				(wall1 stopUpd:)
+				(wall2 stopUpd:)
+				(gCurRoom south: 700)
+				(self dispose:)
 			)
 		)
 	)
@@ -229,21 +229,21 @@
 
 (instance sEnterElevator of Script
 	(properties
-		sel_20 {sEnterElevator}
+		name {sEnterElevator}
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
-				(gGame sel_587:)
-				(gEgo sel_153: 160 200 sel_253: 0 sel_312: MoveFwd 80 self)
+				(gGame handsOff:)
+				(gEgo posn: 160 200 setHeading: 0 setMotion: MoveFwd 80 self)
 			)
 			(1
-				(gEgo sel_253: 180 self)
+				(gEgo setHeading: 180 self)
 			)
 			(2
-				(gGame sel_588:)
-				(self sel_111:)
+				(gGame handsOn:)
+				(self dispose:)
 			)
 		)
 	)
@@ -251,37 +251,37 @@
 
 (instance oriley of Actor
 	(properties
-		sel_20 {oriley}
-		sel_1 160
-		sel_0 180
-		sel_2 423
+		name {oriley}
+		x 160
+		y 180
+		view 423
 	)
 )
 
 (instance crank of Prop
 	(properties
-		sel_20 {crank}
-		sel_1 189
-		sel_0 80
-		sel_213 1
-		sel_2 661
-		sel_3 1
-		sel_60 15
-		sel_14 16
+		name {crank}
+		x 189
+		y 80
+		noun 1
+		view 661
+		loop 1
+		priority 15
+		signal 16
 	)
 
-	(method (sel_300 param1)
+	(method (doVerb param1)
 		(switch param1
 			(4
 				(if local0
-					(gMessager sel_295: 1 4 4)
+					(gMessager say: 1 4 4)
 				else
-					(gCurRoom sel_146: sGoingDown)
+					(gCurRoom setScript: sGoingDown)
 					(= local0 1)
 				)
 			)
 			(else
-				(super sel_300: param1 &rest)
+				(super doVerb: param1 &rest)
 			)
 		)
 	)
@@ -289,82 +289,82 @@
 
 (instance wall1 of Prop
 	(properties
-		sel_20 {wall1}
-		sel_1 106
-		sel_0 125
-		sel_2 660
-		sel_244 0
+		name {wall1}
+		x 106
+		y 125
+		view 660
+		cycleSpeed 0
 	)
 )
 
 (instance wall2 of Prop
 	(properties
-		sel_20 {wall2}
-		sel_1 217
-		sel_0 125
-		sel_2 660
-		sel_244 0
+		name {wall2}
+		x 217
+		y 125
+		view 660
+		cycleSpeed 0
 	)
 )
 
 (instance walls of Feature
 	(properties
-		sel_20 {walls}
-		sel_1 162
-		sel_0 8
-		sel_213 2
-		sel_302 8
+		name {walls}
+		x 162
+		y 8
+		noun 2
+		onMeCheck 8
 	)
 )
 
 (instance floor of Feature
 	(properties
-		sel_20 {floor}
-		sel_1 162
-		sel_0 8
-		sel_213 5
-		sel_302 32
+		name {floor}
+		x 162
+		y 8
+		noun 5
+		onMeCheck 32
 	)
 )
 
 (instance ceiling of Feature
 	(properties
-		sel_20 {ceiling}
-		sel_1 162
-		sel_0 8
-		sel_213 4
-		sel_302 4
+		name {ceiling}
+		x 162
+		y 8
+		noun 4
+		onMeCheck 4
 	)
 )
 
 (instance trash of Feature
 	(properties
-		sel_20 {trash}
-		sel_1 6
-		sel_0 60
-		sel_213 3
-		sel_301 40
-		sel_302 2
+		name {trash}
+		x 6
+		y 60
+		noun 3
+		sightAngle 40
+		onMeCheck 2
 	)
 )
 
 (instance southExitFeature of ExitFeature
 	(properties
-		sel_20 {southExitFeature}
-		sel_6 122
-		sel_7 125
-		sel_8 189
-		sel_9 202
-		sel_33 11
-		sel_583 3
-		sel_213 6
+		name {southExitFeature}
+		nsTop 122
+		nsLeft 125
+		nsBottom 189
+		nsRight 202
+		cursor 11
+		exitDir 3
+		noun 6
 	)
 )
 
 (instance thudSound of Sound
 	(properties
-		sel_20 {thudSound}
-		sel_99 5
-		sel_40 80
+		name {thudSound}
+		flags 5
+		number 80
 	)
 )

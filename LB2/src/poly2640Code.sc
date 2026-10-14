@@ -17,32 +17,32 @@
 
 (instance poly2640Code of Code
 	(properties
-		sel_20 {poly2640Code}
+		name {poly2640Code}
 	)
 
-	(method (sel_57 param1)
-		(param1 sel_118: (poly2640 sel_110: sel_117:))
+	(method (doit param1)
+		(param1 add: (poly2640 init: yourself:))
 	)
 )
 
 (instance poly2640 of Polygon
 	(properties
-		sel_20 {poly2640}
+		name {poly2640}
 	)
 
-	(method (sel_110)
-		(= sel_31 3)
-		(= sel_86 23)
-		(= sel_87 @local0)
+	(method (init)
+		(= type 3)
+		(= size 23)
+		(= points @local0)
 	)
 )
 
 (instance pts2640 of MuseumPoints
 	(properties
-		sel_20 {pts2640}
-		sel_621 145
-		sel_622 155
-		sel_629 1045
-		sel_630 150
+		name {pts2640}
+		midPtX 145
+		midPtY 155
+		westPtX 1045
+		westPtY 150
 	)
 )

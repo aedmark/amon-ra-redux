@@ -15,66 +15,66 @@
 
 (instance sHeKills of Script
 	(properties
-		sel_20 {sHeKills}
+		name {sHeKills}
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
-				(if (== (gEgo sel_2:) 443)
-					(gTheIconBar sel_233: 0 3 4)
+				(if (== (gEgo view:) 443)
+					(gTheIconBar disable: 0 3 4)
 				)
-				(gGame sel_587:)
-				(= sel_136 1)
+				(gGame handsOff:)
+				(= cycles 1)
 			)
 			(1
 				(cond
 					((and (IsFlag 41) (not (IsFlag 47)))
-						(self sel_146: sSmashedDoorOpen self)
+						(self setScript: sSmashedDoorOpen self)
 					)
-					((and (== ((ScriptID 440 2) sel_29:) 0) (not (IsFlag 47))) ; rm440Door
-						((ScriptID 440 2) sel_143: self sel_189:) ; rm440Door
+					((and (== ((ScriptID 440 2) state:) 0) (not (IsFlag 47))) ; rm440Door
+						((ScriptID 440 2) caller: self open:) ; rm440Door
 					)
 					(else
-						(= sel_136 1)
+						(= cycles 1)
 					)
 				)
 			)
 			(2
 				(if (IsFlag 47)
-					(oriley sel_153: 160 250)
+					(oriley posn: 160 250)
 				)
-				(oriley sel_110: sel_161: Walk sel_320: Scaler 155 0 190 90)
-				(= sel_136 3)
+				(oriley init: setCycle: Walk setScale: Scaler 155 0 190 90)
+				(= cycles 3)
 			)
 			(3
 				(cond
 					((IsFlag 47)
-						(self sel_146: sKillFromSouth self)
+						(self setScript: sKillFromSouth self)
 					)
-					((== (gEgo sel_2:) 443)
-						(gGameMusic1 sel_40: 3 sel_3: 1 sel_99: 1 sel_39:)
-						(oriley sel_63: -1 sel_312: PolyPath 20 150 self)
+					((== (gEgo view:) 443)
+						(gGameMusic1 number: 3 loop: 1 flags: 1 play:)
+						(oriley setPri: -1 setMotion: PolyPath 20 150 self)
 					)
 					(else
-						(self sel_146: sKillFromEast self)
+						(self setScript: sKillFromEast self)
 					)
 				)
 			)
 			(4
-				(oriley sel_2: 424 sel_4: 0 sel_161: End self)
+				(oriley view: 424 cel: 0 setCycle: End self)
 			)
 			(5
-				((ScriptID 440 3) sel_40: 80 sel_99: 5 sel_39:) ; noise
-				(gEgo sel_2: 858 sel_161: End self)
+				((ScriptID 440 3) number: 80 flags: 5 play:) ; noise
+				(gEgo view: 858 setCycle: End self)
 			)
 			(6
-				(if (and (== (gEgo sel_2:) 443) (gWalkHandler sel_122: gCurRoom))
-					(gWalkHandler sel_81: gCurRoom)
+				(if (and (== (gEgo view:) 443) (gWalkHandler contains: gCurRoom))
+					(gWalkHandler delete: gCurRoom)
 				)
 				(= global145 0) ; "You came in thinking like a journalist, and you left with a skull full of mush."
-				(gCurRoom sel_399: 99)
-				(self sel_111:)
+				(gCurRoom newRoom: 99)
+				(self dispose:)
 			)
 		)
 	)
@@ -82,24 +82,24 @@
 
 (instance sKillFromSouth of Script
 	(properties
-		sel_20 {sKillFromSouth}
+		name {sKillFromSouth}
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
-				(gGame sel_587:)
-				(= sel_136 1)
+				(gGame handsOff:)
+				(= cycles 1)
 			)
 			(1
-				(gEgo sel_312: PolyPath 198 166 self)
+				(gEgo setMotion: PolyPath 198 166 self)
 			)
 			(2
-				(gGameMusic1 sel_40: 3 sel_3: 1 sel_99: 1 sel_39:)
-				(oriley sel_312: MoveTo 174 174 self)
+				(gGameMusic1 number: 3 loop: 1 flags: 1 play:)
+				(oriley setMotion: MoveTo 174 174 self)
 			)
 			(3
-				(self sel_111:)
+				(self dispose:)
 			)
 		)
 	)
@@ -107,24 +107,24 @@
 
 (instance sKillFromEast of Script
 	(properties
-		sel_20 {sKillFromEast}
+		name {sKillFromEast}
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
-				(gGame sel_587:)
-				(= sel_136 1)
+				(gGame handsOff:)
+				(= cycles 1)
 			)
 			(1
-				(gEgo sel_312: PolyPath 93 155 self)
+				(gEgo setMotion: PolyPath 93 155 self)
 			)
 			(2
-				(gGameMusic1 sel_40: 3 sel_3: 1 sel_99: 1 sel_39:)
-				(oriley sel_312: MoveTo 119 153 self)
+				(gGameMusic1 number: 3 loop: 1 flags: 1 play:)
+				(oriley setMotion: MoveTo 119 153 self)
 			)
 			(3
-				(self sel_111:)
+				(self dispose:)
 			)
 		)
 	)
@@ -132,42 +132,42 @@
 
 (instance sSmashedDoorOpen of Script
 	(properties
-		sel_20 {sSmashedDoorOpen}
+		name {sSmashedDoorOpen}
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
-				(shavings sel_110: sel_155: 7)
-				(= sel_136 1)
+				(shavings init: setLoop: 7)
+				(= cycles 1)
 			)
 			(1
-				((ScriptID 440 3) sel_40: 444 sel_3: 1 sel_99: 5 sel_39:) ; noise
-				(shavings sel_161: End self)
+				((ScriptID 440 3) number: 444 loop: 1 flags: 5 play:) ; noise
+				(shavings setCycle: End self)
 			)
 			(2
-				(gMessager sel_295: 37 0 5 0 self)
+				(gMessager say: 37 0 5 0 self)
 			)
 			(3
 				(shavings
-					sel_4: 0
-					sel_153: (- (shavings sel_1:) 2) (- (shavings sel_0:) 1)
+					cel: 0
+					posn: (- (shavings x:) 2) (- (shavings y:) 1)
 				)
-				(= sel_136 1)
+				(= cycles 1)
 			)
 			(4
-				((ScriptID 440 3) sel_40: 444 sel_3: 1 sel_99: 5 sel_39:) ; noise
-				(shavings sel_161: End self)
+				((ScriptID 440 3) number: 444 loop: 1 flags: 5 play:) ; noise
+				(shavings setCycle: End self)
 			)
 			(5
-				((ScriptID 440 3) sel_40: 444 sel_3: 1 sel_99: 5 sel_39:) ; noise
-				(shavings sel_161: End self)
-				((ScriptID 440 2) sel_590: 0 sel_189:) ; rm440Door
-				((ScriptID 440 4) sel_161: Beg) ; bolt
+				((ScriptID 440 3) number: 444 loop: 1 flags: 5 play:) ; noise
+				(shavings setCycle: End self)
+				((ScriptID 440 2) locked: 0 open:) ; rm440Door
+				((ScriptID 440 4) setCycle: Beg) ; bolt
 			)
 			(6
-				(shavings sel_317:)
-				(self sel_111:)
+				(shavings addToPic:)
+				(self dispose:)
 			)
 		)
 	)
@@ -175,20 +175,20 @@
 
 (instance oriley of Actor
 	(properties
-		sel_20 {oriley}
-		sel_1 233
-		sel_0 135
-		sel_2 423
+		name {oriley}
+		x 233
+		y 135
+		view 423
 	)
 )
 
 (instance shavings of Prop
 	(properties
-		sel_20 {shavings}
-		sel_1 220
-		sel_0 142
-		sel_2 440
-		sel_3 7
-		sel_14 16384
+		name {shavings}
+		x 220
+		y 142
+		view 440
+		loop 7
+		signal 16384
 	)
 )

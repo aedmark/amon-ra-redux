@@ -12,14 +12,14 @@
 
 (instance aHeimlich of MuseumActor
 	(properties
-		sel_20 {aHeimlich}
-		sel_213 1
-		sel_214 1889
-		sel_51 2
-		sel_620 350
+		name {aHeimlich}
+		noun 1
+		modNum 1889
+		xStep 2
+		room 350
 	)
 
-	(method (sel_300 param1 param2 &tmp temp0 temp1 temp2)
+	(method (doVerb param1 param2 &tmp temp0 temp1 temp2)
 		(switch param1
 			(6
 				(if
@@ -28,7 +28,7 @@
 							(if (== argc 2)
 								param2
 							else
-								(gCurRoom sel_422: (ScriptID 20 0)) ; inNotebook
+								(gCurRoom setInset: (ScriptID 20 0)) ; inNotebook
 							)
 						)
 						-1
@@ -57,17 +57,17 @@
 						(cond
 							((or (IsFlag 171) (IsFlag 12))
 								(if (proc27_0 2 global363)
-									(gMessager sel_295: sel_213 6 1 0 0 sel_214)
+									(gMessager say: noun 6 1 0 0 modNum)
 								else
-									(gMessager sel_295: sel_213 6 69 0 0 sel_214)
+									(gMessager say: noun 6 69 0 0 modNum)
 									(proc27_1 2 @global363)
 								)
 							)
 							((proc27_0 2 global298)
-								(gMessager sel_295: sel_213 6 1 0 0 sel_214)
+								(gMessager say: noun 6 1 0 0 modNum)
 							)
 							(else
-								(gMessager sel_295: sel_213 6 4 0 0 sel_214)
+								(gMessager say: noun 6 4 0 0 modNum)
 								(proc27_1 2 @global298)
 							)
 						)
@@ -76,17 +76,17 @@
 						(cond
 							((or (IsFlag 143) (IsFlag 72))
 								(if (proc27_0 2 global366)
-									(gMessager sel_295: sel_213 6 1 0 0 sel_214)
+									(gMessager say: noun 6 1 0 0 modNum)
 								else
-									(gMessager sel_295: sel_213 6 74 0 0 sel_214)
+									(gMessager say: noun 6 74 0 0 modNum)
 									(proc27_1 2 @global366)
 								)
 							)
 							((proc27_0 2 global303)
-								(gMessager sel_295: sel_213 6 1 0 0 sel_214)
+								(gMessager say: noun 6 1 0 0 modNum)
 							)
 							(else
-								(gMessager sel_295: sel_213 6 9 0 0 sel_214)
+								(gMessager say: noun 6 9 0 0 modNum)
 								(proc27_1 2 @global303)
 							)
 						)
@@ -95,17 +95,17 @@
 						(cond
 							((or (IsFlag 161) (IsFlag 68))
 								(if (proc27_0 2 global367)
-									(gMessager sel_295: sel_213 6 1 0 0 sel_214)
+									(gMessager say: noun 6 1 0 0 modNum)
 								else
-									(gMessager sel_295: sel_213 6 73 0 0 sel_214)
+									(gMessager say: noun 6 73 0 0 modNum)
 									(proc27_1 2 @global367)
 								)
 							)
 							((proc27_0 2 global305)
-								(gMessager sel_295: sel_213 6 1 0 0 sel_214)
+								(gMessager say: noun 6 1 0 0 modNum)
 							)
 							(else
-								(gMessager sel_295: sel_213 6 11 0 0 sel_214)
+								(gMessager say: noun 6 11 0 0 modNum)
 								(proc27_1 2 @global305)
 							)
 						)
@@ -114,31 +114,31 @@
 						(cond
 							((or (IsFlag 158) (IsFlag 67))
 								(if (proc27_0 2 global365)
-									(gMessager sel_295: sel_213 6 1 0 0 sel_214)
+									(gMessager say: noun 6 1 0 0 modNum)
 								else
-									(gMessager sel_295: sel_213 6 71 0 0 sel_214)
+									(gMessager say: noun 6 71 0 0 modNum)
 									(proc27_1 2 @global365)
 								)
 							)
 							((proc27_0 2 global306)
-								(gMessager sel_295: sel_213 6 1 0 0 sel_214)
+								(gMessager say: noun 6 1 0 0 modNum)
 							)
 							(else
-								(gMessager sel_295: sel_213 6 12 0 0 sel_214)
+								(gMessager say: noun 6 12 0 0 modNum)
 								(proc27_1 2 @global306)
 							)
 						)
 					)
 					(else
 						(cond
-							((not (Message msgGET sel_214 sel_213 6 temp1 1))
-								(gMessager sel_295: sel_213 6 81 0 0 sel_214)
+							((not (Message msgGET modNum noun 6 temp1 1))
+								(gMessager say: noun 6 81 0 0 modNum)
 							)
 							((proc27_0 2 [global296 (- temp1 2)])
-								(gMessager sel_295: sel_213 6 1 0 0 sel_214)
+								(gMessager say: noun 6 1 0 0 modNum)
 							)
 							(else
-								(gMessager sel_295: sel_213 6 temp1 0 0 sel_214)
+								(gMessager say: noun 6 temp1 0 0 modNum)
 								(proc27_1 2 @[global296 (- temp1 2)])
 							)
 						)
@@ -146,7 +146,7 @@
 				)
 			)
 			(else
-				(super sel_300: param1)
+				(super doVerb: param1)
 			)
 		)
 	)

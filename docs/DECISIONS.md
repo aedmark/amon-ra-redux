@@ -323,7 +323,7 @@ Rewrite culturally stereotyped dialogue act by act without flattening distinct v
 
 ---
 
-## D-032 Use Sluicebox Annotations with Stable Numeric Selectors
+## D-032 Use Sluicebox Annotations with Stable Numeric Selectors (selector naming superseded by D-039)
 
 Adopt a compiler-facing source reconstruction from the effective Redux resources rather than importing the published
 `ra-dos-1.000` text verbatim.
@@ -484,6 +484,32 @@ Make SCI Companion's message editor the source of truth for LB2 message text, us
   to the original with only that text changed, including junk reference bytes. Re-applying an old manifest would
   revert later editor changes. SCI Companion also writes `LB2/msg/<n>.shm` noun and condition name files, which are
   tracked so names chosen in the editor persist.
+
+---
+
+## D-039 Name Selectors from the Sluicebox Reference, Verified Against the CD Vocabulary
+
+Replace the `sel_N` placeholders with one readable name per selector ID, keeping every ID unchanged.
+
+- **Context:** The floppy release ships without vocab 997, so D-032 normalized all selectors to `sel_N`, which made the
+  source hard to edit in SCI Companion. D-032's objection was that Sluicebox's published names are contextual. A
+  token alignment of the 221 scripts against the pinned `ra-dos-1.000` publication, pairing methods by body within each
+  class, matched 98.4% of the 37,516 selector uses and gave 543 of 563 IDs a near-unanimous name. The rest were settled
+  from class property and method lists (for example `File`, `List`, `DItem`, `Script`). The CD release's vocab 997,
+  extracted from the maintainer's disc image (DCL-compressed resource), lists Sierra's names with shifted IDs: 528 of
+  the 563 names appear in the same order, and all but six exist in it.
+- **Decision:** Store the mapping in `tools/selector_names.json` and apply it with `tools/name_selectors.py`, which
+  rewrites `997.voc` and every `src/*.sc` without touching IDs or line endings. Selector 343 is `theControls` because
+  the Sierra name `controls` collides with the `controls` instance in `Game.sc` and changed `Rm`'s bytecode. Selectors
+  667 and 668 keep their vanilla names (`convRoom`, `convReturn`) even though Redux's P3-06 conversation lock reuses them
+  for a museum-actor flag and method; giving those uses their own names requires new selector IDs and is a separate
+  change. This supersedes D-032's numeric-selector rule.
+- **Consequences:** Every script SCI Companion compiled from the renamed source is byte-identical to the same script
+  compiled from the `sel_N` source with the same `.sco` class files (full two-pass rebuild plus targeted reruns). The
+  12 scripts absent from SCI Companion's script list were not rebuilt and are unchanged. The rebuild also showed that
+  committed patches for 34 scripts (including `Main`, `Game`, `Actor`, `User`, `Feature`, `Sound`, and rooms 18, 250,
+  330, 450, 610, 720, 730, and 750) cannot be reproduced from the current source; the playtested patches remain in place
+  and a future edit to one of those scripts will also carry those latent source differences.
 
 ---
 

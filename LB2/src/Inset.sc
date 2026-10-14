@@ -8,145 +8,145 @@
 
 (class Inset of Code
 	(properties
-		sel_20 {Inset}
-		sel_408 0
-		sel_559 0
-		sel_28 100
-		sel_2 0
-		sel_3 0
-		sel_4 0
-		sel_1 0
-		sel_0 0
-		sel_60 14
-		sel_141 0
-		sel_560 0
-		sel_143 0
-		sel_166 0
-		sel_142 0
-		sel_561 0
-		sel_562 0
-		sel_563 0
-		sel_564 0
-		sel_565 0
-		sel_566 0
-		sel_567 0
-		sel_568 0
-		sel_569 0
-		sel_365 0
-		sel_570 0
-		sel_214 -1
-		sel_213 0
-		sel_571 0
+		name {Inset}
+		picture 0
+		anOverlay 0
+		style 100
+		view 0
+		loop 0
+		cel 0
+		x 0
+		y 0
+		priority 14
+		register 0
+		hideTheCast 0
+		caller 0
+		owner 0
+		script 0
+		oldCast 0
+		oldFeatures 0
+		oldATPs 0
+		oldMH 0
+		oldKH 0
+		oldDH 0
+		oldWH 0
+		oldObstacles 0
+		oldStyle 0
+		inset 0
+		disposeNotOnMe 0
+		modNum -1
+		noun 0
+		insetView 0
 	)
 
-	(method (sel_110 param1 param2 param3)
-		(= sel_166 param2)
-		(sel_166 sel_365: self)
-		(= sel_141 param3)
-		(= sel_143 param1)
-		(if (and (not sel_408) sel_560)
-			(self sel_572: 1)
+	(method (init param1 param2 param3)
+		(= owner param2)
+		(owner inset: self)
+		(= register param3)
+		(= caller param1)
+		(if (and (not picture) hideTheCast)
+			(self hideCast: 1)
 		)
-		(= sel_561 gCast)
-		(= sel_562 gFeatures)
-		(= sel_563 gAddToPics)
-		(= sel_564 gMouseDownHandler)
-		(= sel_565 gKeyDownHandler)
-		(= sel_566 gDirectionHandler)
-		(= sel_567 gWalkHandler)
-		(= sel_568 (gCurRoom sel_259:))
-		(gCurRoom sel_259: ((List sel_109:) sel_118: sel_117:))
-		((= gCast (EventHandler sel_109:)) sel_20: {newCast} sel_118:)
-		((= gFeatures (EventHandler sel_109:))
-			sel_20: {newFeatures}
-			sel_118: self
+		(= oldCast gCast)
+		(= oldFeatures gFeatures)
+		(= oldATPs gAddToPics)
+		(= oldMH gMouseDownHandler)
+		(= oldKH gKeyDownHandler)
+		(= oldDH gDirectionHandler)
+		(= oldWH gWalkHandler)
+		(= oldObstacles (gCurRoom obstacles:))
+		(gCurRoom obstacles: ((List new:) add: yourself:))
+		((= gCast (EventHandler new:)) name: {newCast} add:)
+		((= gFeatures (EventHandler new:))
+			name: {newFeatures}
+			add: self
 		)
-		((= gAddToPics (EventHandler sel_109:)) sel_20: {newATPs} sel_118:)
-		((= gMouseDownHandler (EventHandler sel_109:)) sel_20: {newMH} sel_118: self)
-		((= gKeyDownHandler (EventHandler sel_109:)) sel_20: {newKH} sel_118: self)
-		((= gDirectionHandler (EventHandler sel_109:)) sel_20: {newDH} sel_118: self)
-		((= gWalkHandler (EventHandler sel_109:)) sel_20: {newWH} sel_118:)
-		(gTheDoits sel_118: self)
-		(self sel_573:)
+		((= gAddToPics (EventHandler new:)) name: {newATPs} add:)
+		((= gMouseDownHandler (EventHandler new:)) name: {newMH} add: self)
+		((= gKeyDownHandler (EventHandler new:)) name: {newKH} add: self)
+		((= gDirectionHandler (EventHandler new:)) name: {newDH} add: self)
+		((= gWalkHandler (EventHandler new:)) name: {newWH} add:)
+		(gTheDoits add: self)
+		(self drawInset:)
 	)
 
-	(method (sel_57)
-		(if sel_142
-			(sel_142 sel_57:)
+	(method (doit)
+		(if script
+			(script doit:)
 		)
-		(if (not sel_560)
-			(Animate (sel_561 sel_24:) 0)
+		(if (not hideTheCast)
+			(Animate (oldCast elements:) 0)
 		)
 	)
 
-	(method (sel_111 param1 &tmp temp0)
-		(if sel_365
-			(sel_365 sel_111: 0)
+	(method (dispose param1 &tmp temp0)
+		(if inset
+			(inset dispose: 0)
 		)
-		(gFeatures sel_81: self)
-		(gMouseDownHandler sel_81: self)
-		(gKeyDownHandler sel_81: self)
-		(gDirectionHandler sel_81: self)
-		(gWalkHandler sel_81: self)
-		(gTheDoits sel_81: self)
-		(gCast sel_119: 111 sel_119: 81 sel_125: sel_111:)
-		(gAddToPics sel_111:)
-		(gFeatures sel_111:)
-		(gMouseDownHandler sel_111:)
-		(gKeyDownHandler sel_111:)
-		(gDirectionHandler sel_111:)
-		(gWalkHandler sel_111:)
-		((gCurRoom sel_259:) sel_111:)
-		(sel_166 sel_365: 0)
-		(if (== sel_166 gCurRoom)
-			(gTheIconBar sel_177: 7)
+		(gFeatures delete: self)
+		(gMouseDownHandler delete: self)
+		(gKeyDownHandler delete: self)
+		(gDirectionHandler delete: self)
+		(gWalkHandler delete: self)
+		(gTheDoits delete: self)
+		(gCast eachElementDo: 111 eachElementDo: 81 release: dispose:)
+		(gAddToPics dispose:)
+		(gFeatures dispose:)
+		(gMouseDownHandler dispose:)
+		(gKeyDownHandler dispose:)
+		(gDirectionHandler dispose:)
+		(gWalkHandler dispose:)
+		((gCurRoom obstacles:) dispose:)
+		(owner inset: 0)
+		(if (== owner gCurRoom)
+			(gTheIconBar enable: 7)
 		)
 		(if (or (not argc) param1)
-			(self sel_574:)
+			(self refresh:)
 		)
-		(gCurRoom sel_259: sel_568)
-		(= gCast sel_561)
-		(= gAddToPics sel_563)
-		(= gFeatures sel_562)
-		(= gMouseDownHandler sel_564)
-		(= gKeyDownHandler sel_565)
-		(= gDirectionHandler sel_566)
-		(= gWalkHandler sel_567)
+		(gCurRoom obstacles: oldObstacles)
+		(= gCast oldCast)
+		(= gAddToPics oldATPs)
+		(= gFeatures oldFeatures)
+		(= gMouseDownHandler oldMH)
+		(= gKeyDownHandler oldKH)
+		(= gDirectionHandler oldDH)
+		(= gWalkHandler oldWH)
 		(if (or (not argc) param1)
-			(gAddToPics sel_57:)
+			(gAddToPics doit:)
 		)
-		(if (and (not sel_408) sel_560)
-			(self sel_572: 0)
+		(if (and (not picture) hideTheCast)
+			(self hideCast: 0)
 		)
-		(if (and (or (not argc) param1) sel_143)
-			(= temp0 sel_143)
-			(= sel_143 0)
-			(temp0 sel_145:)
-		)
-	)
-
-	(method (sel_146 param1)
-		(if (IsObject sel_142)
-			(sel_142 sel_111:)
-		)
-		(= sel_142 (if argc param1 else 0))
-		(if sel_142
-			(sel_142 sel_110: self &rest)
+		(if (and (or (not argc) param1) caller)
+			(= temp0 caller)
+			(= caller 0)
+			(temp0 cue:)
 		)
 	)
 
-	(method (sel_133 param1 &tmp [temp0 2])
+	(method (setScript param1)
+		(if (IsObject script)
+			(script dispose:)
+		)
+		(= script (if argc param1 else 0))
+		(if script
+			(script init: self &rest)
+		)
+	)
+
+	(method (handleEvent param1 &tmp [temp0 2])
 		(cond
-			((and sel_365 (sel_365 sel_133: param1)) 0)
-			((& (param1 sel_31:) $4000)
+			((and inset (inset handleEvent: param1)) 0)
+			((& (param1 type:) $4000)
 				(cond
-					((self sel_218: param1)
-						(param1 sel_73: 1)
-						(self sel_300: (param1 sel_37:))
+					((self onMe: param1)
+						(param1 claimed: 1)
+						(self doVerb: (param1 message:))
 					)
-					(sel_570
-						(param1 sel_73: 1)
-						(self sel_111:)
+					(disposeNotOnMe
+						(param1 claimed: 1)
+						(self dispose:)
 					)
 					(else
 						(return 0)
@@ -156,85 +156,85 @@
 		)
 	)
 
-	(method (sel_300 param1)
-		(if (== sel_214 -1)
-			(= sel_214 gCurRoomNum)
+	(method (doVerb param1)
+		(if (== modNum -1)
+			(= modNum gCurRoomNum)
 		)
-		(if (and gMsgType (Message msgGET sel_214 sel_213 param1 0 1))
-			(gMessager sel_295: sel_213 param1 0 0 0 sel_214)
+		(if (and gMsgType (Message msgGET modNum noun param1 0 1))
+			(gMessager say: noun param1 0 0 0 modNum)
 		else
-			(gDoVerbCode sel_57: param1 self)
+			(gDoVerbCode doit: param1 self)
 		)
 	)
 
-	(method (sel_572 param1 &tmp temp0 temp1)
+	(method (hideCast param1 &tmp temp0 temp1)
 		(= temp0 0)
 		(= temp1 (if param1 1000 else -1000))
-		(while (< temp0 (gCast sel_86:))
-			((gCast sel_64: temp0)
-				sel_82: (+ ((gCast sel_64: temp0) sel_82:) temp1)
+		(while (< temp0 (gCast size:))
+			((gCast at: temp0)
+				z: (+ ((gCast at: temp0) z:) temp1)
 			)
 			(++ temp0)
 		)
-		(Animate (gCast sel_24:) 0)
+		(Animate (gCast elements:) 0)
 	)
 
-	(method (sel_573)
-		(if (> sel_408 0)
+	(method (drawInset)
+		(if (> picture 0)
 			(DrawPic
-				sel_408
-				(if sel_559 100 else sel_28)
-				(if sel_559 0 else 1)
+				picture
+				(if anOverlay 100 else style)
+				(if anOverlay 0 else 1)
 				global40
 			)
 		)
-		(if sel_2
-			(= sel_571
-				((inView sel_109:)
-					sel_2: sel_2
-					sel_3: sel_3
-					sel_4: sel_4
-					sel_1: sel_1
-					sel_0: sel_0
-					sel_63: sel_60
-					sel_316: 1
-					sel_110:
-					sel_117:
+		(if view
+			(= insetView
+				((inView new:)
+					view: view
+					loop: loop
+					cel: cel
+					x: x
+					y: y
+					setPri: priority
+					ignoreActors: 1
+					init:
+					yourself:
 				)
 			)
 		)
 	)
 
-	(method (sel_76)
-		(self sel_573:)
-		(if sel_365
-			((sel_365 sel_563:) sel_57:)
-			(sel_365 sel_76:)
+	(method (restore)
+		(self drawInset:)
+		(if inset
+			((inset oldATPs:) doit:)
+			(inset restore:)
 		)
 	)
 
-	(method (sel_574)
-		(if sel_2
-			(DrawPic (gCurRoom sel_408:) 100)
+	(method (refresh)
+		(if view
+			(DrawPic (gCurRoom picture:) 100)
 		else
-			(DrawPic (gCurRoom sel_408:) sel_28)
+			(DrawPic (gCurRoom picture:) style)
 		)
-		(gCurRoom sel_28: sel_569)
+		(gCurRoom style: oldStyle)
 		(if (!= gOverlays -1)
 			(DrawPic gOverlays 100 0 global40)
 		)
-		(if (gCurRoom sel_365:)
-			((gCurRoom sel_365:) sel_76:)
+		(if (gCurRoom inset:)
+			((gCurRoom inset:) restore:)
 		)
 	)
 
-	(method (sel_422 param1 param2 param3)
-		(if sel_365
-			(sel_365 sel_111:)
+	(method (setInset param1 param2 param3)
+		(if inset
+			(inset dispose:)
 		)
 		(if (and argc param1)
 			(param1
-				sel_110:
+				init:
 					(if (>= argc 2) param2 else 0)
 					self
 					(if (>= argc 3) param3 else 0)
@@ -242,16 +242,16 @@
 		)
 	)
 
-	(method (sel_218 param1 param2 &tmp temp0 temp1)
+	(method (onMe param1 param2 &tmp temp0 temp1)
 		(if (IsObject param1)
-			(= temp0 (param1 sel_1:))
-			(= temp1 (param1 sel_0:))
+			(= temp0 (param1 x:))
+			(= temp1 (param1 y:))
 		else
 			(= temp0 param1)
 			(= temp1 param2)
 		)
-		(if sel_2
-			(return (sel_571 sel_218: param1 param2))
+		(if view
+			(return (insetView onMe: param1 param2))
 		else
 			(return 1)
 		)
@@ -260,10 +260,10 @@
 
 (instance inView of View
 	(properties
-		sel_20 {inView}
+		name {inView}
 	)
 
-	(method (sel_133)
+	(method (handleEvent)
 		(return 0)
 	)
 )

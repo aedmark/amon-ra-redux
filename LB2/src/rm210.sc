@@ -30,39 +30,39 @@
 
 (instance rm210 of LBRoom
 	(properties
-		sel_20 {rm210}
-		sel_213 16
-		sel_408 210
-		sel_409 230
-		sel_411 280
-		sel_107 150
-		sel_108 112
+		name {rm210}
+		noun 16
+		picture 210
+		north 230
+		south 280
+		vanishingX 150
+		vanishingY 112
 	)
 
-	(method (sel_110)
+	(method (init)
 		(LoadMany rsVIEW 214 210 284 212 213 852 803)
 		(LoadMany rsSOUND 190 40 252)
-		(self sel_414: 91)
-		(gEgo sel_585: 803 sel_110:)
+		(self setRegions: 91)
+		(gEgo normalize: 803 init:)
 		(switch gPrevRoomNum
-			(sel_409
-				(gEgo sel_349: 0 sel_253: 180 sel_320: 0 sel_585: 803)
+			(north
+				(gEgo edgeHit: 0 setHeading: 180 setScale: 0 normalize: 803)
 			)
-			(sel_411
-				(gCurRoom sel_146: sOverControl)
+			(south
+				(gCurRoom setScript: sOverControl)
 			)
 			(else
-				(gEgo sel_1: 150 sel_0: 187)
-				(taxi sel_320: Scaler 105 0 190 112 sel_110: sel_153: 190 195)
-				(gCurRoom sel_146: sOutCab)
+				(gEgo x: 150 y: 187)
+				(taxi setScale: Scaler 105 0 190 112 init: posn: 190 195)
+				(gCurRoom setScript: sOutCab)
 			)
 		)
-		(super sel_110:)
+		(super init:)
 		(self
-			sel_395:
-				((Polygon sel_109:)
-					sel_31: 2
-					sel_110:
+			addObstacle:
+				((Polygon new:)
+					type: 2
+					init:
 						319
 						0
 						319
@@ -93,11 +93,11 @@
 						180
 						0
 						0
-					sel_117:
+					yourself:
 				)
-				((Polygon sel_109:)
-					sel_31: 2
-					sel_110:
+				((Polygon new:)
+					type: 2
+					init:
 						0
 						189
 						0
@@ -114,104 +114,104 @@
 						187
 						194
 						189
-					sel_117:
+					yourself:
 				)
 		)
-		(if (gEgo sel_238: 0)
+		(if (gEgo has: 0)
 			(self
-				sel_395:
-					((Polygon sel_109:)
-						sel_31: 2
-						sel_110: 224 177 235 182 216 185 205 179
-						sel_117:
+				addObstacle:
+					((Polygon new:)
+						type: 2
+						init: 224 177 235 182 216 185 205 179
+						yourself:
 					)
 			)
-			(luigi sel_311: 4 2 6 10 sel_110: sel_161: Fwd)
-			(gGameMusic1 sel_40: 190 sel_3: -1 sel_99: 1 sel_39:)
+			(luigi approachVerbs: 4 2 6 10 init: setCycle: Fwd)
+			(gGameMusic1 number: 190 loop: -1 flags: 1 play:)
 		)
-		(frontDoor sel_110:)
-		(taxiSign sel_311: 4 sel_317:)
-		(if (> (gGame sel_321:) 2)
+		(frontDoor init:)
+		(taxiSign approachVerbs: 4 addToPic:)
+		(if (> (gGame detailLevel:) 2)
 			(man1
-				sel_110:
-				sel_155: 0
-				sel_161: Walk
-				sel_312: MoveTo 198 176 man1
+				init:
+				setLoop: 0
+				setCycle: Walk
+				setMotion: MoveTo 198 176 man1
 			)
 			(person2
-				sel_110:
-				sel_155: 2
-				sel_338: 1 1
-				sel_161: Walk
-				sel_312: MoveTo -20 183 person2
+				init:
+				setLoop: 2
+				setStep: 1 1
+				setCycle: Walk
+				setMotion: MoveTo -20 183 person2
 			)
 			(person3
-				sel_110:
-				sel_155: 3
-				sel_338: 1 1
-				sel_161: Walk
-				sel_312: MoveTo 208 179 person3
+				init:
+				setLoop: 3
+				setStep: 1 1
+				setCycle: Walk
+				setMotion: MoveTo 208 179 person3
 			)
 			(person4
-				sel_110:
-				sel_155: 5
-				sel_161: Walk
-				sel_312: person4Path person4
+				init:
+				setLoop: 5
+				setCycle: Walk
+				setMotion: person4Path person4
 			)
 		)
 		(person6
-			sel_110:
-			sel_155: 7
-			sel_338: 2 2
-			sel_161: Walk
-			sel_312: person6Path person6
+			init:
+			setLoop: 7
+			setStep: 2 2
+			setCycle: Walk
+			setMotion: person6Path person6
 		)
 		(person8
-			sel_110:
-			sel_155: 11
-			sel_161: Walk
-			sel_312: MoveTo 202 176 person8
+			init:
+			setLoop: 11
+			setCycle: Walk
+			setMotion: MoveTo 202 176 person8
 		)
 		(car2
-			sel_110:
-			sel_155: 6
-			sel_4: (Random 0 4)
-			sel_53: 4
-			sel_312: car2Path car2
+			init:
+			setLoop: 6
+			cel: (Random 0 4)
+			moveSpeed: 4
+			setMotion: car2Path car2
 		)
-		(greyBuilding sel_110:)
-		(nextBuilding sel_110:)
-		(gothicEntrance sel_110:)
-		(newsBuilding sel_110:)
-		(tree sel_110:)
-		(southExitFeature sel_110:)
+		(greyBuilding init:)
+		(nextBuilding init:)
+		(gothicEntrance init:)
+		(newsBuilding init:)
+		(tree init:)
+		(southExitFeature init:)
 	)
 
-	(method (sel_111)
-		(gGameMusic1 sel_170:)
+	(method (dispose)
+		(gGameMusic1 fade:)
 		(DisposeScript 983)
-		(super sel_111:)
+		(super dispose:)
 	)
 )
 
 (instance sOverControl of Script
 	(properties
-		sel_20 {sOverControl}
+		name {sOverControl}
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
-				(gGame sel_587:)
-				(gEgo sel_1: 134 sel_0: 185)
-				(= sel_136 1)
+				(gGame handsOff:)
+				(gEgo x: 134 y: 185)
+				(= cycles 1)
 			)
 			(1
-				(gEgo sel_312: PolyPath 134 180 self)
+				(gEgo setMotion: PolyPath 134 180 self)
 			)
 			(2
-				(gGame sel_588:)
-				(self sel_111:)
+				(gGame handsOn:)
+				(self dispose:)
 			)
 		)
 	)
@@ -219,27 +219,27 @@
 
 (instance sOutCab of Script
 	(properties
-		sel_20 {sOutCab}
+		name {sOutCab}
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
-				(gGame sel_587:)
-				(= sel_136 1)
+				(gGame handsOff:)
+				(= cycles 1)
 			)
 			(1
-				((ScriptID 91 1) sel_168:) ; streetSounds
-				(gGameMusic2 sel_173: 2 224 2000)
-				(gEgo sel_153: 147 185)
-				(taxi sel_155: 4 sel_312: MoveTo 105 227 self)
-				(gGameMusic2 sel_170:)
+				((ScriptID 91 1) pause:) ; streetSounds
+				(gGameMusic2 send: 2 224 2000)
+				(gEgo posn: 147 185)
+				(taxi setLoop: 4 setMotion: MoveTo 105 227 self)
+				(gGameMusic2 fade:)
 			)
 			(2
-				((ScriptID 91 1) sel_168: 0) ; streetSounds
-				(gGame sel_588:)
-				(taxi sel_111:)
-				(self sel_111:)
+				((ScriptID 91 1) pause: 0) ; streetSounds
+				(gGame handsOn:)
+				(taxi dispose:)
+				(self dispose:)
 			)
 		)
 	)
@@ -247,28 +247,28 @@
 
 (instance sMoveMan1 of Script
 	(properties
-		sel_20 {sMoveMan1}
+		name {sMoveMan1}
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
-				(man1 sel_155: 1 sel_153: 194 175 sel_312: MoveTo 163 173 self)
+				(man1 setLoop: 1 posn: 194 175 setMotion: MoveTo 163 173 self)
 			)
 			(1
-				(= sel_137 (Random 3 12))
+				(= seconds (Random 3 12))
 			)
 			(2
 				(man1
-					sel_153: -10 188
-					sel_155: 0
-					sel_161: Walk
-					sel_312: MoveTo 198 176 self
+					posn: -10 188
+					setLoop: 0
+					setCycle: Walk
+					setMotion: MoveTo 198 176 self
 				)
 			)
 			(3
-				(= sel_29 -1)
-				(= sel_136 1)
+				(= state -1)
+				(= cycles 1)
 			)
 		)
 	)
@@ -276,28 +276,28 @@
 
 (instance sMovePerson2 of Script
 	(properties
-		sel_20 {sMovePerson2}
+		name {sMovePerson2}
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
-				(= sel_137 (Random 5 10))
+				(= seconds (Random 5 10))
 			)
 			(1
 				(person2
-					sel_155: 8
-					sel_338: 2 2
-					sel_153: 166 172
-					sel_312: MoveTo 194 176 self
+					setLoop: 8
+					setStep: 2 2
+					posn: 166 172
+					setMotion: MoveTo 194 176 self
 				)
 			)
 			(2
-				(person2 sel_3: 9 sel_312: MoveTo -20 189 self)
+				(person2 loop: 9 setMotion: MoveTo -20 189 self)
 			)
 			(3
-				(= sel_29 -1)
-				(= sel_136 1)
+				(= state -1)
+				(= cycles 1)
 			)
 		)
 	)
@@ -305,23 +305,23 @@
 
 (instance sMovePerson3 of Script
 	(properties
-		sel_20 {sMovePerson3}
+		name {sMovePerson3}
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
-				(person3 sel_3: 4 sel_153: 209 176 sel_312: MoveTo 170 172 self)
+				(person3 loop: 4 posn: 209 176 setMotion: MoveTo 170 172 self)
 			)
 			(1
-				(= sel_137 (Random 1 6))
+				(= seconds (Random 1 6))
 			)
 			(2
-				(person3 sel_3: 3 sel_153: -10 185 sel_312: MoveTo 208 176 self)
+				(person3 loop: 3 posn: -10 185 setMotion: MoveTo 208 176 self)
 			)
 			(3
-				(= sel_29 -1)
-				(= sel_136 1)
+				(= state -1)
+				(= cycles 1)
 			)
 		)
 	)
@@ -329,27 +329,27 @@
 
 (instance sMovePerson8 of Script
 	(properties
-		sel_20 {sMovePerson8}
+		name {sMovePerson8}
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
 				(person8
-					sel_3: 12
-					sel_153: 203 175
-					sel_312: MoveTo 158 173 self
+					loop: 12
+					posn: 203 175
+					setMotion: MoveTo 158 173 self
 				)
 			)
 			(1
-				(= sel_137 (Random 5 10))
+				(= seconds (Random 5 10))
 			)
 			(2
-				(person8 sel_153: -5 189 sel_3: 11 sel_312: MoveTo 202 176 self)
+				(person8 posn: -5 189 loop: 11 setMotion: MoveTo 202 176 self)
 			)
 			(3
-				(= sel_29 -1)
-				(= sel_136 1)
+				(= state -1)
+				(= cycles 1)
 			)
 		)
 	)
@@ -357,79 +357,79 @@
 
 (instance sHailTaxi of Script
 	(properties
-		sel_20 {sHailTaxi}
+		name {sHailTaxi}
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
-				(gGameMusic2 sel_40: 252 sel_3: -1 sel_99: 1 sel_39: 20)
-				(gGame sel_587:)
-				((ScriptID 91 1) sel_168:) ; streetSounds
-				(= sel_136 1)
+				(gGameMusic2 number: 252 loop: -1 flags: 1 play: 20)
+				(gGame handsOff:)
+				((ScriptID 91 1) pause:) ; streetSounds
+				(= cycles 1)
 			)
 			(1
 				(gEgo
-					sel_2: 852
-					sel_3: 1
-					sel_153: (- (gEgo sel_1:) 2) (- (gEgo sel_0:) 1)
-					sel_320: Scaler 102 0 190 112
-					sel_161: End self
+					view: 852
+					loop: 1
+					posn: (- (gEgo x:) 2) (- (gEgo y:) 1)
+					setScale: Scaler 102 0 190 112
+					setCycle: End self
 				)
-				(noise sel_40: 97 sel_39:)
+				(noise number: 97 play:)
 			)
 			(2
-				(taxi sel_110: sel_320: Scaler 116 0 190 112 sel_153: 378 181)
-				(gGameMusic2 sel_173: 2 224 2000 sel_170: 127 5 5 0)
-				(= sel_136 1)
+				(taxi init: setScale: Scaler 116 0 190 112 posn: 378 181)
+				(gGameMusic2 send: 2 224 2000 fade: 127 5 5 0)
+				(= cycles 1)
 			)
 			(3
 				(taxi
-					sel_155: 4
-					sel_51: 4
-					sel_312:
+					setLoop: 4
+					xStep: 4
+					setMotion:
 						MoveTo
-						(+ (taxiSign sel_1:) 25)
-						(+ (taxiSign sel_0:) 10)
+						(+ (taxiSign x:) 25)
+						(+ (taxiSign y:) 10)
 						self
 				)
 			)
 			(4
-				(gGameMusic2 sel_173: 2 224 1600)
-				(= sel_136 1)
+				(gGameMusic2 send: 2 224 1600)
+				(= cycles 1)
 			)
 			(5
-				(gGameMusic2 sel_173: 2 224 1200)
-				(= sel_136 1)
+				(gGameMusic2 send: 2 224 1200)
+				(= cycles 1)
 			)
 			(6
-				(gGameMusic2 sel_173: 2 224 800)
-				(= sel_136 1)
+				(gGameMusic2 send: 2 224 800)
+				(= cycles 1)
 			)
 			(7
-				(gGameMusic2 sel_173: 2 224 400)
-				(= sel_136 1)
+				(gGameMusic2 send: 2 224 400)
+				(= cycles 1)
 			)
 			(8
-				(gGameMusic2 sel_173: 2 224 0)
-				(noise sel_40: 40 sel_99: 5 sel_39: self)
-				(if (gCast sel_122: luigi)
-					(luigi sel_146: 0 sel_317:)
+				(gGameMusic2 send: 2 224 0)
+				(noise number: 40 flags: 5 play: self)
+				(if (gCast contains: luigi)
+					(luigi setScript: 0 addToPic:)
 				)
 			)
 			(9
 				(gEgo
-					sel_2: 803
-					sel_155: 4
-					sel_312:
+					view: 803
+					setLoop: 4
+					setMotion:
 						MoveTo
-						(+ (gEgo sel_1:) 17)
-						(gEgo sel_0:)
+						(+ (gEgo x:) 17)
+						(gEgo y:)
 						self
 				)
 			)
 			(10
-				(gCurRoom sel_399: 250)
+				(gCurRoom newRoom: 250)
 			)
 		)
 	)
@@ -437,35 +437,35 @@
 
 (instance sGetSandwich of Script
 	(properties
-		sel_20 {sGetSandwich}
+		name {sGetSandwich}
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
-				(gGame sel_587:)
-				(= sel_136 1)
+				(gGame handsOff:)
+				(= cycles 1)
 			)
 			(1
-				(gMessager sel_295: 3 10 0 1 self)
-				(luigi sel_153: 221 179 sel_161: 0)
+				(gMessager say: 3 10 0 1 self)
+				(luigi posn: 221 179 setCycle: 0)
 			)
 			(2
-				(gMessager sel_295: 3 10 0 2 self)
+				(gMessager say: 3 10 0 2 self)
 			)
 			(3
-				(luigi sel_3: 1 sel_153: 217 180 sel_244: 10 sel_161: End self)
+				(luigi loop: 1 posn: 217 180 cycleSpeed: 10 setCycle: End self)
 			)
 			(4
-				(gMessager sel_295: 3 10 0 3 self)
+				(gMessager say: 3 10 0 3 self)
 			)
 			(5
-				(gCurRoom sel_422: sandwichI self)
+				(gCurRoom setInset: sandwichI self)
 			)
 			(6
-				(luigi sel_3: 0 sel_153: 221 179 sel_161: Fwd)
-				(gGame sel_588:)
-				(self sel_111:)
+				(luigi loop: 0 posn: 221 179 setCycle: Fwd)
+				(gGame handsOn:)
+				(self dispose:)
 			)
 		)
 	)
@@ -473,22 +473,22 @@
 
 (instance sGetSandwichInset of Script
 	(properties
-		sel_20 {sGetSandwichInset}
+		name {sGetSandwichInset}
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
-				(gEgo sel_351: 0)
-				((ScriptID 21 1) sel_57: 769) ; dropCluesCode
-				((ScriptID 21 0) sel_57: 772) ; addCluesCode
-				(sandwichI sel_111:)
-				(luigi sel_3: 0 sel_153: 217 180 sel_161: Fwd)
-				(= sel_136 2)
+				(gEgo put: 0)
+				((ScriptID 21 1) doit: 769) ; dropCluesCode
+				((ScriptID 21 0) doit: 772) ; addCluesCode
+				(sandwichI dispose:)
+				(luigi loop: 0 posn: 217 180 setCycle: Fwd)
+				(= cycles 2)
 			)
 			(1
-				(gEgo sel_350: 3)
-				(self sel_111:)
+				(gEgo get: 3)
+				(self dispose:)
 			)
 		)
 	)
@@ -496,46 +496,46 @@
 
 (instance luigi of Prop
 	(properties
-		sel_20 {luigi}
-		sel_1 221
-		sel_0 179
-		sel_213 3
-		sel_303 189
-		sel_304 181
-		sel_2 214
-		sel_14 16384
+		name {luigi}
+		x 221
+		y 179
+		noun 3
+		approachX 189
+		approachY 181
+		view 214
+		signal 16384
 	)
 
-	(method (sel_110)
+	(method (init)
 		(cart
-			sel_153: (- (self sel_1:) 13) (+ (self sel_0:) 5)
-			sel_110:
-			sel_313:
+			posn: (- (self x:) 13) (+ (self y:) 5)
+			init:
+			stopUpd:
 		)
-		(super sel_110:)
+		(super init:)
 	)
 
-	(method (sel_111)
-		(cart sel_111:)
-		(super sel_111:)
+	(method (dispose)
+		(cart dispose:)
+		(super dispose:)
 	)
 
-	(method (sel_300 param1 &tmp temp0)
+	(method (doVerb param1 &tmp temp0)
 		(switch param1
 			(10
-				(gCurRoom sel_146: sGetSandwich)
+				(gCurRoom setScript: sGetSandwich)
 			)
 			(2
 				(cond
-					((and (not (gEgo sel_238: 0)) (not (IsFlag 28)))
+					((and (not (gEgo has: 0)) (not (IsFlag 28)))
 						(SetFlag 28)
-						(gMessager sel_295: 3 2 1 0)
+						(gMessager say: 3 2 1 0)
 					)
-					((not (gEgo sel_238: 0))
-						(gMessager sel_295: 3 2 2 0)
+					((not (gEgo has: 0))
+						(gMessager say: 3 2 2 0)
 					)
-					((gEgo sel_238: 0)
-						(gMessager sel_295: 3 2 3 0)
+					((gEgo has: 0)
+						(gMessager say: 3 2 3 0)
 					)
 				)
 			)
@@ -545,28 +545,28 @@
 						(and
 							(<=
 								256
-								(= temp0 (gCurRoom sel_422: (ScriptID 20 0))) ; inNotebook
+								(= temp0 (gCurRoom setInset: (ScriptID 20 0))) ; inNotebook
 							)
 							(<= temp0 409)
 						)
-						(gMessager sel_295: 3 6 4)
+						(gMessager say: 3 6 4)
 					)
 					((and (<= 512 temp0) (<= temp0 665))
-						(gMessager sel_295: 3 6 5)
+						(gMessager say: 3 6 5)
 					)
 					((== temp0 772)
-						(gMessager sel_295: 3 6 8)
+						(gMessager say: 3 6 8)
 					)
 					((and (<= 768 temp0) (<= temp0 921))
-						(gMessager sel_295: 3 6 6)
+						(gMessager say: 3 6 6)
 					)
 					((and (<= 1024 temp0) (<= temp0 1177))
-						(gMessager sel_295: 3 6 7)
+						(gMessager say: 3 6 7)
 					)
 				)
 			)
 			(else
-				(super sel_300: param1 &rest)
+				(super doVerb: param1 &rest)
 			)
 		)
 	)
@@ -574,37 +574,37 @@
 
 (instance cart of View
 	(properties
-		sel_20 {cart}
-		sel_213 4
-		sel_2 214
-		sel_3 3
-		sel_14 16385
+		name {cart}
+		noun 4
+		view 214
+		loop 3
+		signal 16385
 	)
 )
 
 (instance sandwichI of Inset
 	(properties
-		sel_20 {sandwichI}
-		sel_2 214
-		sel_3 4
-		sel_1 141
-		sel_0 90
-		sel_570 1
-		sel_213 2
+		name {sandwichI}
+		view 214
+		loop 4
+		x 141
+		y 90
+		disposeNotOnMe 1
+		noun 2
 	)
 
-	(method (sel_110)
-		(super sel_110: &rest)
-		(gGame sel_588:)
+	(method (init)
+		(super init: &rest)
+		(gGame handsOn:)
 	)
 
-	(method (sel_300 param1)
+	(method (doVerb param1)
 		(switch param1
 			(4
-				(gCurRoom sel_146: sGetSandwichInset)
+				(gCurRoom setScript: sGetSandwichInset)
 			)
 			(else
-				(super sel_300: param1 &rest)
+				(super doVerb: param1 &rest)
 			)
 		)
 	)
@@ -612,41 +612,41 @@
 
 (instance frontDoor of Door
 	(properties
-		sel_20 {frontDoor}
-		sel_1 39
-		sel_0 167
-		sel_213 5
-		sel_303 36
-		sel_304 175
-		sel_2 210
-		sel_589 230
-		sel_597 22
-		sel_598 169
-		sel_599 0
-		sel_600 0
+		name {frontDoor}
+		x 39
+		y 167
+		noun 5
+		approachX 36
+		approachY 175
+		view 210
+		entranceTo 230
+		moveToX 22
+		moveToY 169
+		enterType 0
+		exitType 0
 	)
 )
 
 (instance taxiSign of View
 	(properties
-		sel_20 {taxiSign}
-		sel_1 165
-		sel_0 185
-		sel_213 6
-		sel_303 150
-		sel_304 187
-		sel_2 284
-		sel_4 2
-		sel_14 16385
+		name {taxiSign}
+		x 165
+		y 185
+		noun 6
+		approachX 150
+		approachY 187
+		view 284
+		cel 2
+		signal 16385
 	)
 
-	(method (sel_300 param1)
+	(method (doVerb param1)
 		(switch param1
 			(4
-				(gCurRoom sel_146: sHailTaxi)
+				(gCurRoom setScript: sHailTaxi)
 			)
 			(else
-				(super sel_300: param1 &rest)
+				(super doVerb: param1 &rest)
 			)
 		)
 	)
@@ -654,237 +654,237 @@
 
 (instance taxi of Actor
 	(properties
-		sel_20 {taxi}
-		sel_1 375
-		sel_0 181
-		sel_213 13
-		sel_2 852
-		sel_3 4
+		name {taxi}
+		x 375
+		y 181
+		noun 13
+		view 852
+		loop 4
 	)
 )
 
 (instance man1 of Actor
 	(properties
-		sel_20 {man1}
-		sel_1 117
-		sel_0 188
-		sel_213 9
-		sel_2 212
-		sel_14 16384
+		name {man1}
+		x 117
+		y 188
+		noun 9
+		view 212
+		signal 16384
 	)
 
-	(method (sel_145)
-		(man1 sel_146: sMoveMan1)
+	(method (cue)
+		(man1 setScript: sMoveMan1)
 	)
 )
 
 (instance person2 of Actor
 	(properties
-		sel_20 {person2}
-		sel_1 140
-		sel_0 180
-		sel_213 9
-		sel_2 212
-		sel_3 2
-		sel_14 16384
+		name {person2}
+		x 140
+		y 180
+		noun 9
+		view 212
+		loop 2
+		signal 16384
 	)
 
-	(method (sel_145)
-		(person2 sel_146: sMovePerson2)
+	(method (cue)
+		(person2 setScript: sMovePerson2)
 	)
 )
 
 (instance person3 of Actor
 	(properties
-		sel_20 {person3}
-		sel_1 -10
-		sel_0 183
-		sel_213 9
-		sel_2 212
-		sel_3 3
-		sel_14 16384
+		name {person3}
+		x -10
+		y 183
+		noun 9
+		view 212
+		loop 3
+		signal 16384
 	)
 
-	(method (sel_145)
-		(person3 sel_146: sMovePerson3)
+	(method (cue)
+		(person3 setScript: sMovePerson3)
 	)
 )
 
 (instance person4 of Actor
 	(properties
-		sel_20 {person4}
-		sel_1 140
-		sel_0 165
-		sel_213 9
-		sel_2 212
-		sel_3 5
-		sel_60 11
-		sel_14 16400
+		name {person4}
+		x 140
+		y 165
+		noun 9
+		view 212
+		loop 5
+		priority 11
+		signal 16400
 	)
 
-	(method (sel_145)
-		(person4 sel_153: 140 165 sel_312: person4Path self)
+	(method (cue)
+		(person4 posn: 140 165 setMotion: person4Path self)
 	)
 )
 
 (instance person4Path of Path
 	(properties
-		sel_20 {person4Path}
+		name {person4Path}
 	)
 
-	(method (sel_64 param1)
+	(method (at param1)
 		(return [local0 param1])
 	)
 )
 
 (instance person6 of Actor
 	(properties
-		sel_20 {person6}
-		sel_1 150
-		sel_0 167
-		sel_213 9
-		sel_2 212
-		sel_3 7
-		sel_60 11
-		sel_14 16400
+		name {person6}
+		x 150
+		y 167
+		noun 9
+		view 212
+		loop 7
+		priority 11
+		signal 16400
 	)
 
-	(method (sel_145)
-		(person6 sel_153: 150 167 sel_312: person6Path self)
+	(method (cue)
+		(person6 posn: 150 167 setMotion: person6Path self)
 	)
 )
 
 (instance person6Path of Path
 	(properties
-		sel_20 {person6Path}
+		name {person6Path}
 	)
 
-	(method (sel_64 param1)
+	(method (at param1)
 		(return [local5 param1])
 	)
 )
 
 (instance person8 of Actor
 	(properties
-		sel_20 {person8}
-		sel_1 -5
-		sel_0 189
-		sel_213 9
-		sel_2 212
-		sel_3 11
-		sel_14 16384
+		name {person8}
+		x -5
+		y 189
+		noun 9
+		view 212
+		loop 11
+		signal 16384
 	)
 
-	(method (sel_145)
-		(person8 sel_146: sMovePerson8)
+	(method (cue)
+		(person8 setScript: sMovePerson8)
 	)
 )
 
 (instance car of Actor
 	(properties
-		sel_20 {car}
-		sel_1 154
-		sel_0 189
-		sel_213 13
-		sel_2 213
-		sel_4 1
-		sel_60 14
-		sel_14 16400
+		name {car}
+		x 154
+		y 189
+		noun 13
+		view 213
+		cel 1
+		priority 14
+		signal 16400
 	)
 
-	(method (sel_145)
-		(car sel_111:)
+	(method (cue)
+		(car dispose:)
 	)
 )
 
 (instance car2 of Actor
 	(properties
-		sel_20 {car2}
-		sel_1 127
-		sel_0 172
-		sel_213 13
-		sel_2 213
-		sel_3 7
-		sel_4 3
-		sel_14 16384
+		name {car2}
+		x 127
+		y 172
+		noun 13
+		view 213
+		loop 7
+		cel 3
+		signal 16384
 	)
 
-	(method (sel_145)
-		(car2 sel_153: 127 172 sel_4: (Random 0 4) sel_312: car2Path self)
+	(method (cue)
+		(car2 posn: 127 172 cel: (Random 0 4) setMotion: car2Path self)
 	)
 )
 
 (instance car2Path of Path
 	(properties
-		sel_20 {car2Path}
+		name {car2Path}
 	)
 
-	(method (sel_64 param1)
+	(method (at param1)
 		(return [local10 param1])
 	)
 )
 
 (instance greyBuilding of Feature
 	(properties
-		sel_20 {greyBuilding}
-		sel_0 100
-		sel_213 10
-		sel_302 8192
+		name {greyBuilding}
+		y 100
+		noun 10
+		onMeCheck 8192
 	)
 )
 
 (instance nextBuilding of Feature
 	(properties
-		sel_20 {nextBuilding}
-		sel_0 180
-		sel_213 7
-		sel_302 16384
+		name {nextBuilding}
+		y 180
+		noun 7
+		onMeCheck 16384
 	)
 )
 
 (instance gothicEntrance of Feature
 	(properties
-		sel_20 {gothicEntrance}
-		sel_0 100
-		sel_213 5
-		sel_302 4096
+		name {gothicEntrance}
+		y 100
+		noun 5
+		onMeCheck 4096
 	)
 )
 
 (instance newsBuilding of Feature
 	(properties
-		sel_20 {newsBuilding}
-		sel_0 100
-		sel_213 15
-		sel_302 2048
+		name {newsBuilding}
+		y 100
+		noun 15
+		onMeCheck 2048
 	)
 )
 
 (instance tree of Feature
 	(properties
-		sel_20 {tree}
-		sel_0 190
-		sel_213 19
-		sel_302 1024
+		name {tree}
+		y 190
+		noun 19
+		onMeCheck 1024
 	)
 )
 
 (instance southExitFeature of ExitFeature
 	(properties
-		sel_20 {southExitFeature}
-		sel_6 184
-		sel_7 195
-		sel_8 189
-		sel_9 289
-		sel_33 11
-		sel_583 3
-		sel_213 18
+		name {southExitFeature}
+		nsTop 184
+		nsLeft 195
+		nsBottom 189
+		nsRight 289
+		cursor 11
+		exitDir 3
+		noun 18
 	)
 )
 
 (instance noise of Sound
 	(properties
-		sel_20 {noise}
-		sel_99 1
+		name {noise}
+		flags 1
 	)
 )

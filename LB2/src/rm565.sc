@@ -29,194 +29,194 @@
 
 (instance rm565 of LBRoom
 	(properties
-		sel_20 {rm565}
-		sel_409 666
-		sel_412 550
+		name {rm565}
+		north 666
+		west 550
 	)
 
-	(method (sel_110)
-		(gEgo sel_110: sel_585: 831 sel_316: sel_320: Scaler 130 0 190 0)
+	(method (init)
+		(gEgo init: normalize: 831 ignoreActors: setScale: Scaler 130 0 190 0)
 		(LoadMany rsVIEW 560 561 562 563 564 565 831)
 		(LoadMany rsSOUND 2 6 721)
 		(LoadMany rsPIC 465 565)
-		(self sel_414: 90)
+		(self setRegions: 90)
 		(switch gPrevRoomNum
-			(sel_409
-				(gCurRoom sel_146: sEnterTunnel)
+			(north
+				(gCurRoom setScript: sEnterTunnel)
 			)
-			(sel_412
-				(gEgo sel_1: 8 sel_0: 150)
+			(west
+				(gEgo x: 8 y: 150)
 			)
 		)
-		(super sel_110:)
+		(super init:)
 		(if (IsFlag 66)
-			(gCurRoom sel_146: sDeadWatney)
+			(gCurRoom setScript: sDeadWatney)
 		else
-			(gCurRoom sel_408: 560 sel_417: 560)
-			(deskClock sel_317:)
-			(deadWatney sel_317:)
-			(calendar sel_317:)
-			(intercom sel_317:)
-			(phoneList sel_317:)
-			(phone sel_317:)
-			(safePic sel_110: sel_313:)
-			(xWestDoor sel_110:)
-			(if (== gPrevRoomNum sel_409)
+			(gCurRoom picture: 560 drawPic: 560)
+			(deskClock addToPic:)
+			(deadWatney addToPic:)
+			(calendar addToPic:)
+			(intercom addToPic:)
+			(phoneList addToPic:)
+			(phone addToPic:)
+			(safePic init: stopUpd:)
+			(xWestDoor init:)
+			(if (== gPrevRoomNum north)
 				(Palette palSET_INTENSITY 0 255 100)
-				(self sel_146: sEnterTunnel)
+				(self setScript: sEnterTunnel)
 			else
-				(secretDoor sel_110: sel_313:)
-				(self sel_146: sEgoEnter)
+				(secretDoor init: stopUpd:)
+				(self setScript: sEgoEnter)
 			)
 		)
 	)
 
-	(method (sel_111)
+	(method (dispose)
 		(DisposeScript 2565)
-		(super sel_111: &rest)
+		(super dispose: &rest)
 	)
 )
 
 (instance deskClock of View
 	(properties
-		sel_20 {deskClock}
-		sel_1 128
-		sel_0 114
-		sel_213 41
-		sel_303 89
-		sel_304 185
-		sel_2 563
-		sel_3 4
-		sel_4 5
-		sel_60 11
-		sel_14 16
+		name {deskClock}
+		x 128
+		y 114
+		noun 41
+		approachX 89
+		approachY 185
+		view 563
+		loop 4
+		cel 5
+		priority 11
+		signal 16
 	)
 )
 
 (instance deadWatney of View
 	(properties
-		sel_20 {deadWatney}
-		sel_1 137
-		sel_0 114
-		sel_2 560
-		sel_60 11
-		sel_14 16400
+		name {deadWatney}
+		x 137
+		y 114
+		view 560
+		priority 11
+		signal 16400
 	)
 )
 
 (instance calendar of View
 	(properties
-		sel_20 {calendar}
-		sel_1 120
-		sel_0 118
-		sel_213 44
-		sel_303 99
-		sel_304 178
-		sel_2 563
-		sel_3 4
-		sel_4 1
-		sel_60 12
-		sel_14 16
+		name {calendar}
+		x 120
+		y 118
+		noun 44
+		approachX 99
+		approachY 178
+		view 563
+		loop 4
+		cel 1
+		priority 12
+		signal 16
 	)
 )
 
 (instance intercom of View
 	(properties
-		sel_20 {intercom}
-		sel_1 132
-		sel_0 122
-		sel_213 42
-		sel_303 93
-		sel_304 171
-		sel_2 563
-		sel_3 4
-		sel_4 3
-		sel_60 12
-		sel_14 16
+		name {intercom}
+		x 132
+		y 122
+		noun 42
+		approachX 93
+		approachY 171
+		view 563
+		loop 4
+		cel 3
+		priority 12
+		signal 16
 	)
 )
 
 (instance phoneList of View
 	(properties
-		sel_20 {phoneList}
-		sel_1 109
-		sel_0 123
-		sel_213 43
-		sel_2 563
-		sel_3 4
-		sel_60 12
-		sel_14 16
+		name {phoneList}
+		x 109
+		y 123
+		noun 43
+		view 563
+		loop 4
+		priority 12
+		signal 16
 	)
 )
 
 (instance phone of View
 	(properties
-		sel_20 {phone}
-		sel_1 83
-		sel_0 118
-		sel_213 58
-		sel_2 563
-		sel_3 4
-		sel_4 6
-		sel_60 12
-		sel_14 16
+		name {phone}
+		x 83
+		y 118
+		noun 58
+		view 563
+		loop 4
+		cel 6
+		priority 12
+		signal 16
 	)
 )
 
 (instance safePic of View
 	(properties
-		sel_20 {safePic}
-		sel_1 82
-		sel_0 100
-		sel_213 77
-		sel_303 93
-		sel_304 149
-		sel_2 564
-		sel_3 1
-		sel_60 6
-		sel_14 16
+		name {safePic}
+		x 82
+		y 100
+		noun 77
+		approachX 93
+		approachY 149
+		view 564
+		loop 1
+		priority 6
+		signal 16
 	)
 )
 
 (instance secretDoor of Prop
 	(properties
-		sel_20 {secretDoor}
-		sel_1 294
-		sel_0 147
-		sel_2 560
-		sel_3 2
-		sel_244 12
+		name {secretDoor}
+		x 294
+		y 147
+		view 560
+		loop 2
+		cycleSpeed 12
 	)
 )
 
 (instance bloodDrip of Prop
 	(properties
-		sel_20 {bloodDrip}
-		sel_1 152
-		sel_0 125
-		sel_213 78
-		sel_214 560
-		sel_2 565
+		name {bloodDrip}
+		x 152
+		y 125
+		noun 78
+		modNum 560
+		view 565
 	)
 )
 
 (instance feCpBlood of Feature
 	(properties
-		sel_20 {feCpBlood}
-		sel_0 1
-		sel_213 61
-		sel_214 560
-		sel_301 40
-		sel_302 16384
+		name {feCpBlood}
+		y 1
+		noun 61
+		modNum 560
+		sightAngle 40
+		onMeCheck 16384
 	)
 
-	(method (sel_300 param1)
+	(method (doVerb param1)
 		(switch param1
 			(8
-				(gCurRoom sel_422: inFeCpBlood)
+				(gCurRoom setInset: inFeCpBlood)
 			)
 			(else
-				(super sel_300: param1)
+				(super doVerb: param1)
 			)
 		)
 	)
@@ -224,157 +224,157 @@
 
 (instance feQuills of Feature
 	(properties
-		sel_20 {feQuills}
-		sel_0 1
-		sel_213 62
-		sel_214 560
-		sel_301 40
-		sel_302 8192
+		name {feQuills}
+		y 1
+		noun 62
+		modNum 560
+		sightAngle 40
+		onMeCheck 8192
 	)
 )
 
 (instance fePorcupine of Feature
 	(properties
-		sel_20 {fePorcupine}
-		sel_0 1
-		sel_213 63
-		sel_214 560
-		sel_301 40
-		sel_302 4096
+		name {fePorcupine}
+		y 1
+		noun 63
+		modNum 560
+		sightAngle 40
+		onMeCheck 4096
 	)
 )
 
 (instance feHead of Feature
 	(properties
-		sel_20 {feHead}
-		sel_0 1
-		sel_213 64
-		sel_214 560
-		sel_301 40
-		sel_302 2048
+		name {feHead}
+		y 1
+		noun 64
+		modNum 560
+		sightAngle 40
+		onMeCheck 2048
 	)
 )
 
 (instance feHandLeft of Feature
 	(properties
-		sel_20 {feHandLeft}
-		sel_0 1
-		sel_213 65
-		sel_214 560
-		sel_301 40
-		sel_302 1024
+		name {feHandLeft}
+		y 1
+		noun 65
+		modNum 560
+		sightAngle 40
+		onMeCheck 1024
 	)
 )
 
 (instance feHandRight of Feature
 	(properties
-		sel_20 {feHandRight}
-		sel_0 1
-		sel_213 66
-		sel_214 560
-		sel_301 40
-		sel_302 512
+		name {feHandRight}
+		y 1
+		noun 66
+		modNum 560
+		sightAngle 40
+		onMeCheck 512
 	)
 )
 
 (instance feIntercom of Feature
 	(properties
-		sel_20 {feIntercom}
-		sel_0 1
-		sel_213 67
-		sel_214 560
-		sel_301 40
-		sel_302 256
+		name {feIntercom}
+		y 1
+		noun 67
+		modNum 560
+		sightAngle 40
+		onMeCheck 256
 	)
 )
 
 (instance feClockBroken of Feature
 	(properties
-		sel_20 {feClockBroken}
-		sel_0 1
-		sel_213 53
-		sel_214 560
-		sel_301 40
-		sel_302 128
+		name {feClockBroken}
+		y 1
+		noun 53
+		modNum 560
+		sightAngle 40
+		onMeCheck 128
 	)
 )
 
 (instance feCalendar of Feature
 	(properties
-		sel_20 {feCalendar}
-		sel_0 1
-		sel_213 51
-		sel_214 560
-		sel_301 40
-		sel_302 64
+		name {feCalendar}
+		y 1
+		noun 51
+		modNum 560
+		sightAngle 40
+		onMeCheck 64
 	)
 )
 
 (instance feBody of Feature
 	(properties
-		sel_20 {feBody}
-		sel_0 1
-		sel_213 70
-		sel_214 560
-		sel_301 40
-		sel_302 32
+		name {feBody}
+		y 1
+		noun 70
+		modNum 560
+		sightAngle 40
+		onMeCheck 32
 	)
 )
 
 (instance feDrawerBig of Feature
 	(properties
-		sel_20 {feDrawerBig}
-		sel_0 1
-		sel_213 71
-		sel_214 560
-		sel_301 40
-		sel_302 16
+		name {feDrawerBig}
+		y 1
+		noun 71
+		modNum 560
+		sightAngle 40
+		onMeCheck 16
 	)
 )
 
 (instance feDrawerTop of Feature
 	(properties
-		sel_20 {feDrawerTop}
-		sel_0 1
-		sel_213 72
-		sel_214 560
-		sel_301 40
-		sel_302 8
+		name {feDrawerTop}
+		y 1
+		noun 72
+		modNum 560
+		sightAngle 40
+		onMeCheck 8
 	)
 )
 
 (instance feDesk of Feature
 	(properties
-		sel_20 {feDesk}
-		sel_0 1
-		sel_213 73
-		sel_214 560
-		sel_301 40
-		sel_302 4
+		name {feDesk}
+		y 1
+		noun 73
+		modNum 560
+		sightAngle 40
+		onMeCheck 4
 	)
 )
 
 (instance sEgoEnter of Script
 	(properties
-		sel_20 {sEgoEnter}
+		name {sEgoEnter}
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
-				(gGame sel_587:)
-				(= sel_136 2)
+				(gGame handsOff:)
+				(= cycles 2)
 			)
 			(1
-				(gEgo sel_312: PolyPath 20 170 self)
+				(gEgo setMotion: PolyPath 20 170 self)
 			)
 			(2
-				(xWestDoor sel_360:)
-				(= sel_139 60)
+				(xWestDoor close:)
+				(= ticks 60)
 			)
 			(3
 				(Face gEgo deadWatney)
-				(gCurRoom sel_146: sDeadWatney)
+				(gCurRoom setScript: sDeadWatney)
 			)
 		)
 	)
@@ -382,44 +382,44 @@
 
 (instance sEnterTunnel of Script
 	(properties
-		sel_20 {sEnterTunnel}
+		name {sEnterTunnel}
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
-				(gGame sel_587:)
-				(secretDoor sel_110:)
-				(= sel_136 2)
+				(gGame handsOff:)
+				(secretDoor init:)
+				(= cycles 2)
 			)
 			(1
-				(= sel_137 3)
+				(= seconds 3)
 			)
 			(2
-				(gEgo sel_1: 306 sel_0: 147 sel_63: 5 sel_253: 180)
-				(sFX sel_40: 721 sel_99: 5 sel_155: 1 sel_39:)
-				(secretDoor sel_110: sel_161: End self)
+				(gEgo x: 306 y: 147 setPri: 5 setHeading: 180)
+				(sFX number: 721 flags: 5 setLoop: 1 play:)
+				(secretDoor init: setCycle: End self)
 			)
 			(3
-				(sFX sel_167:)
-				(gEgo sel_63: -1 sel_312: MoveTo 303 177 self)
+				(sFX stop:)
+				(gEgo setPri: -1 setMotion: MoveTo 303 177 self)
 			)
 			(4
-				(gEgo sel_312: PolyPath 265 180 self)
-				(sFX sel_40: 721 sel_99: 5 sel_155: 1 sel_39:)
-				(secretDoor sel_161: Beg self)
+				(gEgo setMotion: PolyPath 265 180 self)
+				(sFX number: 721 flags: 5 setLoop: 1 play:)
+				(secretDoor setCycle: Beg self)
 			)
 			(5 0)
 			(6
-				(gEgo sel_161: StopWalk -1)
+				(gEgo setCycle: StopWalk -1)
 				(Face gEgo deadWatney)
-				(= sel_137 2)
+				(= seconds 2)
 			)
 			(7
-				(secretDoor sel_313:)
-				(sFX sel_167:)
-				(gCurRoom sel_146: sDeadWatney)
-				(self sel_111:)
+				(secretDoor stopUpd:)
+				(sFX stop:)
+				(gCurRoom setScript: sDeadWatney)
+				(self dispose:)
 			)
 		)
 	)
@@ -427,43 +427,43 @@
 
 (instance sDeadWatney of Script
 	(properties
-		sel_20 {sDeadWatney}
+		name {sDeadWatney}
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
-				(gCast sel_119: 102)
-				(gGame sel_197: 1 1)
+				(gCast eachElementDo: 102)
+				(gGame setCursor: 1 1)
 				(if (IsFlag 66)
-					(gGameMusic2 sel_168: 1)
+					(gGameMusic2 pause: 1)
 					(= local0 1)
-					(fooSound sel_40: 6 sel_3: -1 sel_99: 1 sel_39:)
-					(= sel_136 1)
+					(fooSound number: 6 loop: -1 flags: 1 play:)
+					(= cycles 1)
 				else
 					(SetFlag 66)
-					(gCurRoom sel_408: 465 sel_417: 465)
-					(sFX sel_40: 84 sel_99: 5 sel_3: 1 sel_39:)
-					(wrapMusic sel_110: -1 2 6)
+					(gCurRoom picture: 465 drawPic: 465)
+					(sFX number: 84 flags: 5 loop: 1 play:)
+					(wrapMusic init: -1 2 6)
 					(= local1 1)
-					(= sel_139 180)
+					(= ticks 180)
 				)
 			)
 			(1
-				(gAddToPics sel_119: 111 sel_119: 81 sel_125:)
-				(gGame sel_588:)
-				(self sel_146: sCUDeadWatney self)
+				(gAddToPics eachElementDo: 111 eachElementDo: 81 release:)
+				(gGame handsOn:)
+				(self setScript: sCUDeadWatney self)
 			)
 			(2
-				(fooSound sel_170: 0 12 30 1)
+				(fooSound fade: 0 12 30 1)
 				(if local1
-					(wrapMusic sel_111: 1)
+					(wrapMusic dispose: 1)
 				)
 				(if local0
-					(gGameMusic2 sel_168: 0)
+					(gGameMusic2 pause: 0)
 				)
 				(proc0_8 0)
-				(gCurRoom sel_399: 560)
+				(gCurRoom newRoom: 560)
 			)
 		)
 	)
@@ -471,48 +471,48 @@
 
 (instance sCUDeadWatney of Script
 	(properties
-		sel_20 {sCUDeadWatney}
+		name {sCUDeadWatney}
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
 				(= local3 gCast)
-				(gCast sel_119: 111 sel_119: 81)
-				(local3 sel_119: 102)
-				(gCurRoom sel_408: 565)
+				(gCast eachElementDo: 111 eachElementDo: 81)
+				(local3 eachElementDo: 102)
+				(gCurRoom picture: 565)
 				(DrawPic 565)
-				(Animate (local3 sel_24:) 0)
-				(gCurRoom sel_214: 560)
+				(Animate (local3 elements:) 0)
+				(gCurRoom modNum: 560)
 				(= local2 gDoVerbCode)
 				(= gDoVerbCode exitDoVerbCode)
 				(proc0_8 1)
-				(gWalkHandler sel_129: self)
-				(bloodDrip sel_110: sel_244: 12 sel_161: Fwd)
-				(feCpBlood sel_110:)
-				(feQuills sel_110:)
-				(fePorcupine sel_110:)
-				(feHead sel_110:)
-				(feHandLeft sel_110:)
-				(feHandRight sel_110:)
-				(feIntercom sel_110:)
-				(feClockBroken sel_110:)
-				(feCalendar sel_110:)
-				(feBody sel_110:)
-				(feDrawerBig sel_110:)
-				(feDrawerTop sel_110:)
-				(feDesk sel_110:)
+				(gWalkHandler addToFront: self)
+				(bloodDrip init: cycleSpeed: 12 setCycle: Fwd)
+				(feCpBlood init:)
+				(feQuills init:)
+				(fePorcupine init:)
+				(feHead init:)
+				(feHandLeft init:)
+				(feHandRight init:)
+				(feIntercom init:)
+				(feClockBroken init:)
+				(feCalendar init:)
+				(feBody init:)
+				(feDrawerBig init:)
+				(feDrawerTop init:)
+				(feDesk init:)
 			)
 			(1
-				(if (gCurRoom sel_365:)
-					((gCurRoom sel_365:) sel_111: 0)
+				(if (gCurRoom inset:)
+					((gCurRoom inset:) dispose: 0)
 				)
-				(gCast sel_119: 111)
+				(gCast eachElementDo: 111)
 				(= gCast local3)
-				(gWalkHandler sel_81: self)
-				(gTheIconBar sel_177: 7)
+				(gWalkHandler delete: self)
+				(gTheIconBar enable: 7)
 				(= gDoVerbCode local2)
-				(self sel_111:)
+				(self dispose:)
 			)
 		)
 	)
@@ -520,23 +520,23 @@
 
 (instance inFeCpBlood of Inset
 	(properties
-		sel_20 {inFeCpBlood}
-		sel_2 563
-		sel_4 2
-		sel_1 89
-		sel_0 85
-		sel_570 1
-		sel_214 560
-		sel_213 74
+		name {inFeCpBlood}
+		view 563
+		cel 2
+		x 89
+		y 85
+		disposeNotOnMe 1
+		modNum 560
+		noun 74
 	)
 
-	(method (sel_300 param1)
+	(method (doVerb param1)
 		(switch param1
 			(13
-				(sCUDeadWatney sel_145:)
+				(sCUDeadWatney cue:)
 			)
 			(else
-				(super sel_300: param1 &rest)
+				(super doVerb: param1 &rest)
 			)
 		)
 	)
@@ -544,36 +544,36 @@
 
 (instance wrapMusic of WrapMusic
 	(properties
-		sel_20 {wrapMusic}
+		name {wrapMusic}
 	)
 
-	(method (sel_110)
-		(= sel_608 fooSound)
-		(super sel_110: &rest)
+	(method (init)
+		(= wrapSound fooSound)
+		(super init: &rest)
 	)
 )
 
 (instance fooSound of Sound
 	(properties
-		sel_20 {fooSound}
+		name {fooSound}
 	)
 )
 
 (instance sFX of Sound
 	(properties
-		sel_20 {sFX}
-		sel_99 1
+		name {sFX}
+		flags 1
 	)
 )
 
 (instance exitDoVerbCode of Code
 	(properties
-		sel_20 {exitDoVerbCode}
+		name {exitDoVerbCode}
 	)
 
-	(method (sel_57 param1 param2)
+	(method (doit param1 param2)
 		(if (== param1 13)
-			(sCUDeadWatney sel_145:)
+			(sCUDeadWatney cue:)
 		else
 			(proc0_6 param2 param1)
 		)
@@ -582,20 +582,20 @@
 
 (instance xWestDoor of Door
 	(properties
-		sel_20 {xWestDoor}
-		sel_1 17
-		sel_0 148
-		sel_213 36
-		sel_301 40
-		sel_303 14
-		sel_304 160
-		sel_2 560
-		sel_3 1
-		sel_60 7
-		sel_14 16
-		sel_589 550
-		sel_596 0
-		sel_597 4
-		sel_598 145
+		name {xWestDoor}
+		x 17
+		y 148
+		noun 36
+		sightAngle 40
+		approachX 14
+		approachY 160
+		view 560
+		loop 1
+		priority 7
+		signal 16
+		entranceTo 550
+		forceClose 0
+		moveToX 4
+		moveToY 145
 	)
 )

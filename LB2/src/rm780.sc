@@ -26,128 +26,128 @@
 
 (procedure (localproc_0)
 	(= local2 0)
-	(for ((= local1 0)) (< local1 (creditTitle sel_246:)) ((++ local1))
-		(= [local3 local1] (creditName sel_2: 791 sel_109:))
-		([local3 local1] sel_155: local0 sel_156: (+ local1 1))
+	(for ((= local1 0)) (< local1 (creditTitle lastCel:)) ((++ local1))
+		(= [local3 local1] (creditName view: 791 new:))
+		([local3 local1] setLoop: local0 setCel: (+ local1 1))
 		(++ local2)
 	)
 )
 
 (procedure (localproc_1)
 	(= local2 0)
-	(for ((= local1 0)) (< local1 (creditTitle sel_246:)) ((++ local1))
-		(= [local3 local1] (creditName sel_2: 8000 sel_109:))
-		([local3 local1] sel_155: local0 sel_156: (+ local1 1))
+	(for ((= local1 0)) (< local1 (creditTitle lastCel:)) ((++ local1))
+		(= [local3 local1] (creditName view: 8000 new:))
+		([local3 local1] setLoop: local0 setCel: (+ local1 1))
 		(++ local2)
 	)
 )
 
 (instance rm780 of LBRoom
 	(properties
-		sel_20 {rm780}
-		sel_408 780
-		sel_28 10
+		name {rm780}
+		picture 780
+		style 10
 	)
 
-	(method (sel_110)
+	(method (init)
 		(LoadMany rsVIEW 792 791)
 		(LoadMany rsSOUND 795)
-		(super sel_110:)
-		(wrapMusic sel_110: 1 795 1312 (if (== global106 32) 310 else 314) 311)
-		(gGame sel_587:)
-		(gTheIconBar sel_233:)
-		(gGame sel_197: 996 1)
-		(if (== (gGame sel_84:) 1)
-			(self sel_146: runCredits)
+		(super init:)
+		(wrapMusic init: 1 795 1312 (if (== global106 32) 310 else 314) 311)
+		(gGame handsOff:)
+		(gTheIconBar disable:)
+		(gGame setCursor: 996 1)
+		(if (== (gGame printLang:) 1)
+			(self setScript: runCredits)
 		else
-			(self sel_146: runCreditsFor)
+			(self setScript: runCreditsFor)
 		)
 	)
 )
 
 (instance runCredits of Script
 	(properties
-		sel_20 {runCredits}
+		name {runCredits}
 	)
 
-	(method (sel_144 param1 &tmp [temp0 100])
-		(switch (= sel_29 param1)
+	(method (changeState param1 &tmp [temp0 100])
+		(switch (= state param1)
 			(0
-				(creditTitle sel_2: 791 sel_155: local0 sel_110: sel_317:)
+				(creditTitle view: 791 setLoop: local0 init: addToPic:)
 				(localproc_0)
-				(creditProp sel_110: sel_216: sel_4: 0 sel_161: 0)
+				(creditProp init: show: cel: 0 setCycle: 0)
 				(switch local0
 					(0
-						(creditProp sel_155: 0 sel_1: 57 sel_0: 146)
+						(creditProp setLoop: 0 x: 57 y: 146)
 					)
 					(1
-						(creditProp sel_155: 1 sel_1: 42 sel_0: 109)
+						(creditProp setLoop: 1 x: 42 y: 109)
 					)
 					(2
-						(creditProp sel_155: 2 sel_1: -20 sel_0: 189 sel_313:)
+						(creditProp setLoop: 2 x: -20 y: 189 stopUpd:)
 					)
 					(3
-						(creditProp sel_155: 2 sel_1: -20 sel_0: 189 sel_313:)
+						(creditProp setLoop: 2 x: -20 y: 189 stopUpd:)
 					)
 					(4
-						(creditProp sel_155: 9 sel_1: 20 sel_0: 160)
+						(creditProp setLoop: 9 x: 20 y: 160)
 					)
 					(5
-						(creditProp sel_155: 6 sel_1: 270 sel_0: 170)
+						(creditProp setLoop: 6 x: 270 y: 170)
 					)
 					(6
-						(creditProp sel_155: 3 sel_1: -20 sel_0: 189)
+						(creditProp setLoop: 3 x: -20 y: 189)
 					)
 					(7
-						(creditProp sel_155: 4 sel_1: 339 sel_0: 189)
+						(creditProp setLoop: 4 x: 339 y: 189)
 					)
 					(8
-						(creditProp sel_155: 5 sel_1: 339 sel_0: 189)
+						(creditProp setLoop: 5 x: 339 y: 189)
 					)
 					(9
-						(creditProp sel_155: 7 sel_1: 46 sel_0: 175)
+						(creditProp setLoop: 7 x: 46 y: 175)
 					)
 					(10
-						(creditProp sel_155: 7 sel_1: 46 sel_0: 175)
+						(creditProp setLoop: 7 x: 46 y: 175)
 					)
 					(11
-						(creditProp sel_155: 10 sel_1: 46 sel_0: 175)
+						(creditProp setLoop: 10 x: 46 y: 175)
 					)
 					(12
-						(creditProp sel_155: 11 sel_1: 46 sel_0: 175)
+						(creditProp setLoop: 11 x: 46 y: 175)
 					)
 				)
-				(if (== (creditProp sel_3:) 7)
-					(volleyBall sel_110: sel_1: 43 sel_0: 124 sel_102:)
-					(sunnyTwo sel_110: sel_216:)
+				(if (== (creditProp loop:) 7)
+					(volleyBall init: x: 43 y: 124 hide:)
+					(sunnyTwo init: show:)
 				else
-					(volleyBall sel_111:)
-					(sunnyTwo sel_111:)
+					(volleyBall dispose:)
+					(sunnyTwo dispose:)
 				)
-				(= sel_136 1)
+				(= cycles 1)
 			)
 			(1
 				(= local12 (if (OneOf local0 5 6 7 8 9 11 12) 90 else 40))
 				(= local1 0)
-				([local3 local1] sel_110:)
-				(= sel_136 1)
+				([local3 local1] init:)
+				(= cycles 1)
 			)
 			(2
-				([local3 local1] sel_312: MoveTo 86 local12 self)
+				([local3 local1] setMotion: MoveTo 86 local12 self)
 				(if (< (+ local1 1) local2)
-					([local3 (+ local1 1)] sel_110:)
+					([local3 (+ local1 1)] init:)
 				)
-				(= sel_136 1)
+				(= cycles 1)
 			)
 			(3
 				(if (>= (+ local1 1) local2)
-					(= sel_29 4)
+					(= state 4)
 				else
 					0
 				)
 			)
 			(4
-				([local3 local1] sel_317:)
+				([local3 local1] addToPic:)
 				(++ local1)
 				(if (== local0 6)
 					(+= local12 40)
@@ -162,77 +162,77 @@
 						)
 					)
 				)
-				(= sel_29 1)
-				(self sel_145:)
+				(= state 1)
+				(self cue:)
 			)
 			(5
 				(switch local0
 					(0
-						(creditProp sel_161: End)
-						(= sel_139 300)
+						(creditProp setCycle: End)
+						(= ticks 300)
 					)
 					(1
-						(creditProp sel_161: End)
-						(= sel_139 300)
+						(creditProp setCycle: End)
+						(= ticks 300)
 					)
 					(2
-						(= sel_139 300)
+						(= ticks 300)
 					)
 					(3
-						(creditProp sel_161: End)
-						(= sel_139 300)
+						(creditProp setCycle: End)
+						(= ticks 300)
 					)
 					(4
-						(creditProp sel_161: End)
-						(= sel_139 300)
+						(creditProp setCycle: End)
+						(= ticks 300)
 					)
 					(5
-						(creditProp sel_161: End)
-						(= sel_139 300)
+						(creditProp setCycle: End)
+						(= ticks 300)
 					)
 					(6
-						(creditProp sel_161: Fwd sel_312: MoveTo 75 189 self)
+						(creditProp setCycle: Fwd setMotion: MoveTo 75 189 self)
 					)
 					(7
-						(creditProp sel_161: Fwd sel_312: MoveTo 235 189 self)
+						(creditProp setCycle: Fwd setMotion: MoveTo 235 189 self)
 					)
 					(8
-						(creditProp sel_161: Fwd sel_312: MoveTo 235 189 self)
+						(creditProp setCycle: Fwd setMotion: MoveTo 235 189 self)
 					)
 					(9
-						(creditProp sel_146: sPlay self)
+						(creditProp setScript: sPlay self)
 					)
 					(10
-						(creditProp sel_146: sPlay self)
+						(creditProp setScript: sPlay self)
 					)
 					(11
-						(creditProp sel_161: End)
-						(= sel_139 300)
+						(creditProp setCycle: End)
+						(= ticks 300)
 					)
 					(12
-						(creditProp sel_161: End)
-						(= sel_139 300)
+						(creditProp setCycle: End)
+						(= ticks 300)
 					)
 				)
 			)
 			(6
-				(creditProp sel_111:)
-				(gCurRoom sel_417: 780)
-				(gCast sel_119: 111)
+				(creditProp dispose:)
+				(gCurRoom drawPic: 780)
+				(gCast eachElementDo: 111)
 				(if (< local0 12)
 					(++ local0)
-					(self sel_144: -1)
-					(= sel_136 1)
+					(self changeState: -1)
+					(= cycles 1)
 				else
-					(= sel_137 4)
+					(= seconds 4)
 				)
 			)
 			(7
-				(gCurRoom sel_422: daggerInset self)
+				(gCurRoom setInset: daggerInset self)
 			)
 			(8
-				(creditSound sel_170: 0 30 12 1)
-				(= sel_137 3)
+				(creditSound fade: 0 30 12 1)
+				(= seconds 3)
 			)
 			(9
 				(= gQuit 1)
@@ -243,62 +243,62 @@
 
 (instance runCreditsFor of Script
 	(properties
-		sel_20 {runCreditsFor}
+		name {runCreditsFor}
 	)
 
-	(method (sel_144 param1 &tmp [temp0 100])
-		(switch (= sel_29 param1)
+	(method (changeState param1 &tmp [temp0 100])
+		(switch (= state param1)
 			(0
-				(gGame sel_197: 996 1)
-				(creditTitle sel_2: 8000 sel_155: local0 sel_110: sel_317:)
+				(gGame setCursor: 996 1)
+				(creditTitle view: 8000 setLoop: local0 init: addToPic:)
 				(localproc_1)
-				(= sel_136 1)
+				(= cycles 1)
 			)
 			(1
 				(= local12 85)
 				(= local1 0)
-				([local3 local1] sel_110:)
-				(= sel_136 1)
+				([local3 local1] init:)
+				(= cycles 1)
 			)
 			(2
-				([local3 local1] sel_312: MoveTo 86 local12 self)
+				([local3 local1] setMotion: MoveTo 86 local12 self)
 				(if (< (+ local1 1) local2)
-					([local3 (+ local1 1)] sel_110:)
+					([local3 (+ local1 1)] init:)
 				)
-				(= sel_136 1)
+				(= cycles 1)
 			)
 			(3
 				(if (>= (+ local1 1) local2)
-					(= sel_29 4)
+					(= state 4)
 				else
 					0
 				)
 			)
 			(4
-				([local3 local1] sel_317:)
+				([local3 local1] addToPic:)
 				(++ local1)
 				(+= local12 30)
-				(= sel_29 1)
-				(self sel_145:)
+				(= state 1)
+				(self cue:)
 			)
 			(5
-				(= sel_137 5)
+				(= seconds 5)
 			)
 			(6
-				(gCurRoom sel_417: 780)
-				(gCast sel_119: 111)
+				(gCurRoom drawPic: 780)
+				(gCast eachElementDo: 111)
 				(if (< local0 3)
 					(++ local0)
-					(self sel_144: -1)
-					(= sel_136 1)
+					(self changeState: -1)
+					(= cycles 1)
 				else
-					(= sel_136 1)
+					(= cycles 1)
 				)
 			)
 			(7
 				(= local0 0)
-				(gGame sel_197: 996 1)
-				(self sel_146: runCredits)
+				(gGame setCursor: 996 1)
+				(self setScript: runCredits)
 			)
 		)
 	)
@@ -306,33 +306,33 @@
 
 (instance sPlay of Script
 	(properties
-		sel_20 {sPlay}
+		name {sPlay}
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
-				(volleyBall sel_216: sel_161: Fwd)
-				(creditProp sel_161: End self)
-				(volleyBall sel_312: JumpTo 283 125 self)
+				(volleyBall show: setCycle: Fwd)
+				(creditProp setCycle: End self)
+				(volleyBall setMotion: JumpTo 283 125 self)
 			)
 			(1 0)
 			(2
-				(sunnyTwo sel_161: End self)
-				(volleyBall sel_312: JumpTo 43 124 self)
+				(sunnyTwo setCycle: End self)
+				(volleyBall setMotion: JumpTo 43 124 self)
 			)
 			(3 0)
 			(4
-				(creditProp sel_161: End self)
-				(volleyBall sel_312: JumpTo 283 125 self)
+				(creditProp setCycle: End self)
+				(volleyBall setMotion: JumpTo 283 125 self)
 			)
 			(5 0)
 			(6
-				(sunnyTwo sel_161: End self)
-				(volleyBall sel_111:)
+				(sunnyTwo setCycle: End self)
+				(volleyBall dispose:)
 			)
 			(7
-				(self sel_111:)
+				(self dispose:)
 			)
 		)
 	)
@@ -340,98 +340,98 @@
 
 (instance creditTitle of Actor
 	(properties
-		sel_20 {creditTitle}
-		sel_1 9
-		sel_0 20
+		name {creditTitle}
+		x 9
+		y 20
 	)
 )
 
 (instance creditName of Actor
 	(properties
-		sel_20 {creditName}
-		sel_1 86
-		sel_0 220
-		sel_4 1
-		sel_14 16384
-		sel_53 0
+		name {creditName}
+		x 86
+		y 220
+		cel 1
+		signal 16384
+		moveSpeed 0
 	)
 )
 
 (instance creditProp of Actor
 	(properties
-		sel_20 {creditProp}
-		sel_2 792
+		name {creditProp}
+		view 792
 	)
 )
 
 (instance volleyBall of Actor
 	(properties
-		sel_20 {volleyBall}
-		sel_1 43
-		sel_0 124
-		sel_2 792
-		sel_3 8
+		name {volleyBall}
+		x 43
+		y 124
+		view 792
+		loop 8
 	)
 )
 
 (instance sunnyTwo of Prop
 	(properties
-		sel_20 {sunnyTwo}
-		sel_1 286
-		sel_0 179
-		sel_2 792
-		sel_3 7
+		name {sunnyTwo}
+		x 286
+		y 179
+		view 792
+		loop 7
 	)
 )
 
 (instance wrapMusic of WrapMusic
 	(properties
-		sel_20 {wrapMusic}
+		name {wrapMusic}
 	)
 
-	(method (sel_110)
-		(= sel_608 creditSound)
-		(super sel_110: &rest)
+	(method (init)
+		(= wrapSound creditSound)
+		(super init: &rest)
 	)
 )
 
 (instance creditSound of Sound
 	(properties
-		sel_20 {creditSound}
+		name {creditSound}
 	)
 )
 
 (instance daggerEnd of View
 	(properties
-		sel_20 {daggerEnd}
-		sel_1 88
-		sel_0 85
-		sel_2 401
-		sel_4 1
+		name {daggerEnd}
+		x 88
+		y 85
+		view 401
+		cel 1
 	)
 
-	(method (sel_300)
-		(daggerInset sel_300: &rest)
+	(method (doVerb)
+		(daggerInset doVerb: &rest)
 	)
 )
 
 (instance daggerInset of Inset
 	(properties
-		sel_20 {daggerInset}
-		sel_408 401
+		name {daggerInset}
+		picture 401
 	)
 
-	(method (sel_110)
-		(super sel_110: &rest)
-		(daggerEnd sel_110:)
-		(gGame sel_588:)
-		(gTheIconBar sel_177:)
+	(method (init)
+		(super init: &rest)
+		(daggerEnd init:)
+		(gGame handsOn:)
+		(gTheIconBar enable:)
 	)
 
-	(method (sel_133 param1)
-		(gGame sel_587:)
-		(param1 sel_73: 1)
-		(daggerEnd sel_111:)
-		(self sel_111:)
+	(method (handleEvent param1)
+		(gGame handsOff:)
+		(param1 claimed: 1)
+		(daggerEnd dispose:)
+		(self dispose:)
 	)
 )

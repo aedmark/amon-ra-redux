@@ -18,50 +18,50 @@
 
 (instance poly2420Code of Code
 	(properties
-		sel_20 {poly2420Code}
+		name {poly2420Code}
 	)
 
-	(method (sel_57 param1)
+	(method (doit param1)
 		(param1
-			sel_118: (poly2420a sel_110: sel_117:) (poly2420b sel_110: sel_117:)
+			add: (poly2420a init: yourself:) (poly2420b init: yourself:)
 		)
 	)
 )
 
 (instance poly2420a of Polygon
 	(properties
-		sel_20 {poly2420a}
+		name {poly2420a}
 	)
 
-	(method (sel_110)
-		(= sel_31 2)
-		(= sel_86 19)
-		(= sel_87 @local0)
+	(method (init)
+		(= type 2)
+		(= size 19)
+		(= points @local0)
 	)
 )
 
 (instance poly2420b of Polygon
 	(properties
-		sel_20 {poly2420b}
+		name {poly2420b}
 	)
 
-	(method (sel_110)
-		(= sel_31 2)
-		(= sel_86 4)
-		(= sel_87 @local38)
+	(method (init)
+		(= type 2)
+		(= size 4)
+		(= points @local38)
 	)
 )
 
 (instance pts2420 of MuseumPoints
 	(properties
-		sel_20 {pts2420}
-		sel_621 160
-		sel_622 180
-		sel_623 300
-		sel_624 125
-		sel_627 330
-		sel_628 230
-		sel_629 3
-		sel_630 150
+		name {pts2420}
+		midPtX 160
+		midPtY 180
+		northPtX 300
+		northPtY 125
+		eastPtX 330
+		eastPtY 230
+		westPtX 3
+		westPtY 150
 	)
 )

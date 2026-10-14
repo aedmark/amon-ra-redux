@@ -14,10 +14,10 @@
 
 (instance lb2InitCode of Code
 	(properties
-		sel_20 {lb2InitCode}
+		name {lb2InitCode}
 	)
 
-	(method (sel_110 &tmp temp0)
+	(method (init &tmp temp0)
 		(= gPossibleScore 1000)
 		(= gUserFont 69)
 		(= gBigFont 2108)
@@ -25,8 +25,8 @@
 		(= global118 2407)
 		(= global119 4115)
 		(= global120 2510)
-		(Print sel_30: gUserFont)
-		((= gNarrator Narrator) sel_30: gUserFont sel_26: 15 sel_538: 1)
+		(Print font: gUserFont)
+		((= gNarrator Narrator) font: gUserFont back: 15 keepWindow: 1)
 		(= gMsgType 1)
 		(= gSystemWindow (ScriptID 0 9)) ; lb2Win
 		(= temp0 (FileIO fiOPEN {version} 1))
@@ -39,7 +39,7 @@
 		(= gUseSortedFeatures 1)
 		(= gEatMice 30)
 		(StrCpy @gSysLogPath {})
-		(gGame sel_197: gTheCursor 1 304 172 sel_321: 5)
+		(gGame setCursor: gTheCursor 1 304 172 detailLevel: 5)
 		(= gTextSpeed 2)
 		(= global106 (DoSound sndGET_POLYPHONY))
 		(if (and (>= (= global105 (Graph grGET_COLOURS)) 2) (<= global105 16))
@@ -47,38 +47,38 @@
 		else
 			(SetFlag 0)
 		)
-		(gSystemWindow sel_25: 0 sel_26: global176)
+		(gSystemWindow color: 0 back: global176)
 		((ScriptID 15 1) ; invWin
-			sel_25: 0
-			sel_26: global176
-			sel_367: global176
-			sel_368: global176
-			sel_369: global176
-			sel_370: global176
-			sel_374: global168
-			sel_375: global172
-			sel_376: global172
-			sel_377: global173
-			sel_378: global173
+			color: 0
+			back: global176
+			topBordColor: global176
+			lftBordColor: global176
+			rgtBordColor: global176
+			botBordColor: global176
+			insideColor: global168
+			topBordColor2: global172
+			lftBordColor2: global172
+			botBordColor2: global173
+			rgtBordColor2: global173
 		)
-		((ScriptID 21 0) sel_57: 257) ; addCluesCode
-		((ScriptID 21 0) sel_57: 258) ; addCluesCode
-		((ScriptID 21 0) sel_57: 259) ; addCluesCode
-		((ScriptID 21 0) sel_57: 260) ; addCluesCode
-		((ScriptID 21 0) sel_57: 261) ; addCluesCode
-		((ScriptID 21 0) sel_57: 262) ; addCluesCode
-		((ScriptID 21 0) sel_57: 273) ; addCluesCode
-		((ScriptID 21 0) sel_57: 513) ; addCluesCode
-		((ScriptID 21 0) sel_57: 514) ; addCluesCode
-		((ScriptID 21 0) sel_57: 515) ; addCluesCode
-		((ScriptID 21 0) sel_57: 516) ; addCluesCode
-		((ScriptID 21 0) sel_57: 517) ; addCluesCode
-		((ScriptID 21 0) sel_57: 518) ; addCluesCode
-		((ScriptID 21 0) sel_57: 519) ; addCluesCode
-		((ScriptID 21 0) sel_57: 771) ; addCluesCode
-		((ScriptID 21 0) sel_57: 1026) ; addCluesCode
-		((ScriptID 21 0) sel_57: 1027) ; addCluesCode
-		((ScriptID 21 0) sel_57: 1028) ; addCluesCode
+		((ScriptID 21 0) doit: 257) ; addCluesCode
+		((ScriptID 21 0) doit: 258) ; addCluesCode
+		((ScriptID 21 0) doit: 259) ; addCluesCode
+		((ScriptID 21 0) doit: 260) ; addCluesCode
+		((ScriptID 21 0) doit: 261) ; addCluesCode
+		((ScriptID 21 0) doit: 262) ; addCluesCode
+		((ScriptID 21 0) doit: 273) ; addCluesCode
+		((ScriptID 21 0) doit: 513) ; addCluesCode
+		((ScriptID 21 0) doit: 514) ; addCluesCode
+		((ScriptID 21 0) doit: 515) ; addCluesCode
+		((ScriptID 21 0) doit: 516) ; addCluesCode
+		((ScriptID 21 0) doit: 517) ; addCluesCode
+		((ScriptID 21 0) doit: 518) ; addCluesCode
+		((ScriptID 21 0) doit: 519) ; addCluesCode
+		((ScriptID 21 0) doit: 771) ; addCluesCode
+		((ScriptID 21 0) doit: 1026) ; addCluesCode
+		((ScriptID 21 0) doit: 1027) ; addCluesCode
+		((ScriptID 21 0) doit: 1028) ; addCluesCode
 		(DisposeScript 21)
 		(DisposeScript 12)
 	)

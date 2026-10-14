@@ -31,112 +31,112 @@
 
 (instance rm460 of LBRoom
 	(properties
-		sel_20 {rm460}
-		sel_213 1
-		sel_408 460
-		sel_410 660
-		sel_412 448
-		sel_108 20
+		name {rm460}
+		noun 1
+		picture 460
+		east 660
+		west 448
+		vanishingY 20
 	)
 
-	(method (sel_110)
+	(method (init)
 		(LoadMany rsVIEW 460 462 461 858 423 424)
 		(LoadMany rsSOUND 462 460)
-		(self sel_414: 94)
-		(gEgo sel_110: sel_320: 165 sel_585: 426)
+		(self setRegions: 94)
+		(gEgo init: setScale: 165 normalize: 426)
 		(switch gPrevRoomNum
-			(sel_412
-				(gEgo sel_1: 84 sel_0: 122 sel_349: 0 sel_253: 135)
-				(shoveCrate sel_1: 261)
-				(self sel_146: sEnter)
-				(gCurRoom sel_395: (poly460a sel_110: sel_117:))
-				(crane sel_110: sel_313:)
-				(moverCrate sel_110: sel_313: sel_311: 4)
+			(west
+				(gEgo x: 84 y: 122 edgeHit: 0 setHeading: 135)
+				(shoveCrate x: 261)
+				(self setScript: sEnter)
+				(gCurRoom addObstacle: (poly460a init: yourself:))
+				(crane init: stopUpd:)
+				(moverCrate init: stopUpd: approachVerbs: 4)
 			)
-			(sel_410
-				(gEgo sel_153: 105 135 sel_349: 0 sel_253: 135)
+			(east
+				(gEgo posn: 105 135 edgeHit: 0 setHeading: 135)
 				(cond
 					((IsFlag 103)
-						(gCurRoom sel_395: (poly460d sel_110: sel_117:))
-						(crane sel_110: sel_313: sel_4: (crane sel_246:))
+						(gCurRoom addObstacle: (poly460d init: yourself:))
+						(crane init: stopUpd: cel: (crane lastCel:))
 						(moverCrate
-							sel_110:
-							sel_313:
-							sel_2: 462
-							sel_3: 2
-							sel_1: 108
-							sel_0: 153
-							sel_4: 0
-							sel_311: 4
+							init:
+							stopUpd:
+							view: 462
+							loop: 2
+							x: 108
+							y: 153
+							cel: 0
+							approachVerbs: 4
 						)
 					)
 					((IsFlag 102)
-						(gCurRoom sel_395: (poly460d sel_110: sel_117:))
-						(crane sel_110: sel_313: sel_4: (crane sel_246:))
+						(gCurRoom addObstacle: (poly460d init: yourself:))
+						(crane init: stopUpd: cel: (crane lastCel:))
 						(moverCrate
-							sel_110:
-							sel_313:
-							sel_4: (moverCrate sel_246:)
-							sel_311: 4
+							init:
+							stopUpd:
+							cel: (moverCrate lastCel:)
+							approachVerbs: 4
 						)
 					)
 					(else
-						(gCurRoom sel_395: (poly460c sel_110: sel_117:))
-						(crane sel_110: sel_313:)
-						(moverCrate sel_110: sel_313: sel_311: 4)
+						(gCurRoom addObstacle: (poly460c init: yourself:))
+						(crane init: stopUpd:)
+						(moverCrate init: stopUpd: approachVerbs: 4)
 					)
 				)
-				(shoveCrate sel_1: 281)
+				(shoveCrate x: 281)
 			)
 			(else
-				(gEgo sel_153: 211 160)
-				(gGame sel_588:)
+				(gEgo posn: 211 160)
+				(gGame handsOn:)
 			)
 		)
-		(super sel_110:)
-		(smashedDoor sel_110: sel_316: sel_317:)
-		(shoveCrate sel_110: sel_313: sel_155: 3)
-		(elevatorDoor sel_110: sel_313:)
-		(floor sel_110:)
-		(pipe sel_110: sel_311: 1 4 8)
-		(cable sel_110: sel_311: 1 4 21)
-		(ties sel_110: sel_311: 1 4)
-		(crate1 sel_110: sel_311: 1 4 8)
-		(crate2 sel_110: sel_311: 1 4 8)
-		(crate3 sel_110: sel_311: 1 4 8)
-		(crate4 sel_110: sel_311: 1 4 8)
-		(crate5 sel_110: sel_311: 1 4 8)
-		(crate6 sel_110: sel_311: 1 4 8)
-		(darkCrates sel_110: sel_311: 1 4 8)
-		(PursuitRgn sel_669:)
+		(super init:)
+		(smashedDoor init: ignoreActors: addToPic:)
+		(shoveCrate init: stopUpd: setLoop: 3)
+		(elevatorDoor init: stopUpd:)
+		(floor init:)
+		(pipe init: approachVerbs: 1 4 8)
+		(cable init: approachVerbs: 1 4 21)
+		(ties init: approachVerbs: 1 4)
+		(crate1 init: approachVerbs: 1 4 8)
+		(crate2 init: approachVerbs: 1 4 8)
+		(crate3 init: approachVerbs: 1 4 8)
+		(crate4 init: approachVerbs: 1 4 8)
+		(crate5 init: approachVerbs: 1 4 8)
+		(crate6 init: approachVerbs: 1 4 8)
+		(darkCrates init: approachVerbs: 1 4 8)
+		(PursuitRgn increaseTime:)
 	)
 
-	(method (sel_403)
-		(if (gCurRoom sel_142:)
-			((gCurRoom sel_142:) sel_65: sDie)
+	(method (notify)
+		(if (gCurRoom script:)
+			((gCurRoom script:) next: sDie)
 		else
-			(gCurRoom sel_146: sDie)
+			(gCurRoom setScript: sDie)
 		)
 	)
 )
 
 (instance sEnter of Script
 	(properties
-		sel_20 {sEnter}
+		name {sEnter}
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
-				(gGame sel_587:)
-				(= sel_136 1)
+				(gGame handsOff:)
+				(= cycles 1)
 			)
 			(1
-				(gEgo sel_312: PolyPath 100 140 self)
+				(gEgo setMotion: PolyPath 100 140 self)
 			)
 			(2
-				(gGame sel_588:)
-				(self sel_111:)
+				(gGame handsOn:)
+				(self dispose:)
 			)
 		)
 	)
@@ -144,57 +144,57 @@
 
 (instance sDie of Script
 	(properties
-		sel_20 {sDie}
+		name {sDie}
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
-				(gGame sel_587:)
-				(gEgo sel_312: PolyPath 211 160 self)
+				(gGame handsOff:)
+				(gEgo setMotion: PolyPath 211 160 self)
 			)
 			(1
-				(oriley sel_110: sel_320: 165 sel_312: PolyPath 100 140 self)
-				(gGameMusic1 sel_40: 3 sel_99: 1 sel_3: 1 sel_39:)
+				(oriley init: setScale: 165 setMotion: PolyPath 100 140 self)
+				(gGameMusic1 number: 3 flags: 1 loop: 1 play:)
 			)
 			(2
 				(if (IsFlag 102)
-					(= sel_136 1)
+					(= cycles 1)
 				else
-					(self sel_144: 4)
+					(self changeState: 4)
 				)
 			)
 			(3
-				(oriley sel_2: 424 sel_161: Fwd)
-				(moverCrate sel_161: End self)
-				(splinters sel_110: sel_161: End)
-				(gGameMusic2 sel_40: 444 sel_99: 5 sel_3: 1 sel_39:)
+				(oriley view: 424 setCycle: Fwd)
+				(moverCrate setCycle: End self)
+				(splinters init: setCycle: End)
+				(gGameMusic2 number: 444 flags: 5 loop: 1 play:)
 			)
 			(4
 				(oriley
-					sel_2: 423
-					sel_161: Walk
-					sel_312: PChase gEgo 22 self
+					view: 423
+					setCycle: Walk
+					setMotion: PChase gEgo 22 self
 				)
 			)
 			(5
-				(oriley sel_2: 424)
-				(oriley sel_4: 0)
+				(oriley view: 424)
+				(oriley cel: 0)
 				(Face gEgo oriley)
 				(Face oriley gEgo)
-				(= sel_136 4)
+				(= cycles 4)
 			)
 			(6
-				(oriley sel_161: End self)
+				(oriley setCycle: End self)
 			)
 			(7
-				(thudSound sel_39:)
-				(gEgo sel_2: 858 sel_161: End self)
+				(thudSound play:)
+				(gEgo view: 858 setCycle: End self)
 			)
 			(8
 				(= global145 0) ; "You came in thinking like a journalist, and you left with a skull full of mush."
-				(gCurRoom sel_399: 99)
-				(self sel_111:)
+				(gCurRoom newRoom: 99)
+				(self dispose:)
 			)
 		)
 	)
@@ -202,64 +202,64 @@
 
 (instance sMoveCrate of Script
 	(properties
-		sel_20 {sMoveCrate}
+		name {sMoveCrate}
 	)
 
-	(method (sel_57)
-		(super sel_57:)
-		(if (and local1 (== (shoveCrate sel_1:) 281))
-			(gGameMusic2 sel_167:)
+	(method (doit)
+		(super doit:)
+		(if (and local1 (== (shoveCrate x:) 281))
+			(gGameMusic2 stop:)
 			(= local1 0)
 		)
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
-				(PursuitRgn sel_669:)
+				(PursuitRgn increaseTime:)
 				(= local0 1)
-				(gGame sel_587:)
-				(gEgo sel_312: PolyPath 243 134 self)
+				(gGame handsOff:)
+				(gEgo setMotion: PolyPath 243 134 self)
 			)
 			(1
 				(gEgo
-					sel_2: 461
-					sel_3: 2
-					sel_4: 0
-					sel_153: 256 136
-					sel_161: CT 2 1 self
+					view: 461
+					loop: 2
+					cel: 0
+					posn: 256 136
+					setCycle: CT 2 1 self
 				)
 			)
 			(2
-				(gGameMusic2 sel_40: 721 sel_99: 5 sel_3: 1 sel_39:)
+				(gGameMusic2 number: 721 flags: 5 loop: 1 play:)
 				(= local1 1)
-				(gEgo sel_161: End self)
-				(shoveCrate sel_312: MoveTo 281 140 self)
+				(gEgo setCycle: End self)
+				(shoveCrate setMotion: MoveTo 281 140 self)
 			)
 			(3 0)
 			(4
-				((gCurRoom sel_259:) sel_119: 111 sel_125:)
-				(= sel_136 1)
+				((gCurRoom obstacles:) eachElementDo: 111 release:)
+				(= cycles 1)
 			)
 			(5
-				(shoveCrate sel_313:)
+				(shoveCrate stopUpd:)
 				(gCurRoom
-					sel_395:
+					addObstacle:
 						(if (IsFlag 102)
-							(poly460d sel_110: sel_117:)
+							(poly460d init: yourself:)
 						else
-							(poly460c sel_110: sel_117:)
+							(poly460c init: yourself:)
 						)
 				)
-				(gEgo sel_585: 426)
-				(= sel_136 1)
+				(gEgo normalize: 426)
+				(= cycles 1)
 			)
 			(6
-				(gEgo sel_312: MoveTo (gEgo sel_1:) 140 self)
+				(gEgo setMotion: MoveTo (gEgo x:) 140 self)
 			)
 			(7
-				(gGame sel_588:)
-				(self sel_111:)
+				(gGame handsOn:)
+				(self dispose:)
 			)
 		)
 	)
@@ -267,51 +267,51 @@
 
 (instance sCutRope of Script
 	(properties
-		sel_20 {sCutRope}
+		name {sCutRope}
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
-				(gGame sel_587:)
-				(PursuitRgn sel_669:)
+				(gGame handsOff:)
+				(PursuitRgn increaseTime:)
 				(gEgo
-					sel_2: 461
-					sel_3: 1
-					sel_4: 0
-					sel_153: 196 147
-					sel_161: End self
+					view: 461
+					loop: 1
+					cel: 0
+					posn: 196 147
+					setCycle: End self
 				)
 			)
 			(1
-				(gGameMusic2 sel_40: 460 sel_99: 1 sel_39:)
+				(gGameMusic2 number: 460 flags: 1 play:)
 				(moverCrate
-					sel_155: 3
-					sel_153: 108 32
-					sel_4: 0
-					sel_161: End self
+					setLoop: 3
+					posn: 108 32
+					cel: 0
+					setCycle: End self
 				)
-				(cable sel_161: End self)
+				(cable setCycle: End self)
 			)
 			(2
-				(gGameMusic2 sel_40: 462 sel_99: 1 sel_39:)
+				(gGameMusic2 number: 462 flags: 1 play:)
 			)
 			(3
 				(moverCrate
-					sel_2: 462
-					sel_155: 2
-					sel_4: 0
-					sel_153: 108 153
-					sel_316: 0
+					view: 462
+					setLoop: 2
+					cel: 0
+					posn: 108 153
+					ignoreActors: 0
 				)
-				(gEgo sel_585: 426)
-				(gEgo sel_312: MoveTo 177 149 self)
+				(gEgo normalize: 426)
+				(gEgo setMotion: MoveTo 177 149 self)
 			)
 			(4
-				(gGame sel_588:)
-				(moverCrate sel_313:)
+				(gGame handsOn:)
+				(moverCrate stopUpd:)
 				(SetFlag 103)
-				(self sel_111:)
+				(self dispose:)
 			)
 		)
 	)
@@ -319,58 +319,58 @@
 
 (instance sSwingIt of Script
 	(properties
-		sel_20 {sSwingIt}
+		name {sSwingIt}
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
-				(PursuitRgn sel_669:)
-				(gGame sel_587:)
-				(gEgo sel_63: 13)
-				(gEgo sel_312: MoveTo 153 148 self)
+				(PursuitRgn increaseTime:)
+				(gGame handsOff:)
+				(gEgo setPri: 13)
+				(gEgo setMotion: MoveTo 153 148 self)
 			)
 			(1
 				(Face gEgo crane)
-				(= sel_136 1)
+				(= cycles 1)
 			)
 			(2
 				(gEgo
-					sel_2: 461
-					sel_3: 0
-					sel_4: 0
-					sel_63: 14
-					sel_161: End self
+					view: 461
+					loop: 0
+					cel: 0
+					setPri: 14
+					setCycle: End self
 				)
-				(crane sel_161: End self)
-				(moverCrate sel_161: End self)
+				(crane setCycle: End self)
+				(moverCrate setCycle: End self)
 			)
 			(3 0)
 			(4 0)
 			(5
-				((gCurRoom sel_259:) sel_119: 111)
-				((gCurRoom sel_259:) sel_125:)
-				(= sel_136 1)
+				((gCurRoom obstacles:) eachElementDo: 111)
+				((gCurRoom obstacles:) release:)
+				(= cycles 1)
 			)
 			(6
 				(gCurRoom
-					sel_395:
+					addObstacle:
 						(if local0
-							(poly460d sel_110: sel_117:)
+							(poly460d init: yourself:)
 						else
-							(poly460b sel_110: sel_117:)
+							(poly460b init: yourself:)
 						)
 				)
-				(gEgo sel_585: 426)
-				(gEgo sel_312: MoveTo 184 159 self)
+				(gEgo normalize: 426)
+				(gEgo setMotion: MoveTo 184 159 self)
 			)
 			(7
-				(gGame sel_588:)
-				(crane sel_313:)
-				(moverCrate sel_313:)
+				(gGame handsOn:)
+				(crane stopUpd:)
+				(moverCrate stopUpd:)
 				(SetFlag 102)
-				(gEgo sel_63: -1)
-				(self sel_111:)
+				(gEgo setPri: -1)
+				(self dispose:)
 			)
 		)
 	)
@@ -378,54 +378,54 @@
 
 (instance splinters of Prop
 	(properties
-		sel_20 {splinters}
-		sel_1 116
-		sel_0 114
-		sel_2 462
-		sel_3 3
+		name {splinters}
+		x 116
+		y 114
+		view 462
+		loop 3
 	)
 )
 
 (instance oriley of Actor
 	(properties
-		sel_20 {oriley}
-		sel_1 84
-		sel_0 122
-		sel_2 424
+		name {oriley}
+		x 84
+		y 122
+		view 424
 	)
 )
 
 (instance cable of Prop
 	(properties
-		sel_20 {cable}
-		sel_1 202
-		sel_0 53
-		sel_213 18
-		sel_303 184
-		sel_304 147
-		sel_2 460
-		sel_3 4
-		sel_14 16384
+		name {cable}
+		x 202
+		y 53
+		noun 18
+		approachX 184
+		approachY 147
+		view 460
+		loop 4
+		signal 16384
 	)
 
-	(method (sel_300 param1)
+	(method (doVerb param1)
 		(switch param1
 			(21
 				(if (IsFlag 102)
-					(gCurRoom sel_146: sCutRope)
+					(gCurRoom setScript: sCutRope)
 				else
-					(gMessager sel_295: 18 22 1)
+					(gMessager say: 18 22 1)
 				)
 			)
 			(22
 				(if (IsFlag 102)
-					(gCurRoom sel_146: sCutRope)
+					(gCurRoom setScript: sCutRope)
 				else
-					(gMessager sel_295: 18 22 1)
+					(gMessager say: 18 22 1)
 				)
 			)
 			(else
-				(super sel_300: param1 &rest)
+				(super doVerb: param1 &rest)
 			)
 		)
 	)
@@ -433,28 +433,28 @@
 
 (instance shoveCrate of Actor
 	(properties
-		sel_20 {shoveCrate}
-		sel_1 261
-		sel_0 140
-		sel_82 50
-		sel_213 14
-		sel_2 461
-		sel_3 3
-		sel_60 11
-		sel_14 16
+		name {shoveCrate}
+		x 261
+		y 140
+		z 50
+		noun 14
+		view 461
+		loop 3
+		priority 11
+		signal 16
 	)
 
-	(method (sel_300 param1)
+	(method (doVerb param1)
 		(switch param1
 			(4
 				(if (and (not (== gPrevRoomNum 660)) (not local0))
-					(gCurRoom sel_146: sMoveCrate)
+					(gCurRoom setScript: sMoveCrate)
 				else
-					(super sel_300: param1 &rest)
+					(super doVerb: param1 &rest)
 				)
 			)
 			(else
-				(super sel_300: param1 &rest)
+				(super doVerb: param1 &rest)
 			)
 		)
 	)
@@ -462,41 +462,41 @@
 
 (instance crane of Prop
 	(properties
-		sel_20 {crane}
-		sel_1 213
-		sel_0 57
-		sel_213 17
-		sel_2 460
-		sel_60 11
-		sel_14 16
+		name {crane}
+		x 213
+		y 57
+		noun 17
+		view 460
+		priority 11
+		signal 16
 	)
 )
 
 (instance moverCrate of Prop
 	(properties
-		sel_20 {moverCrate}
-		sel_1 135
-		sel_0 57
-		sel_213 19
-		sel_303 182
-		sel_304 153
-		sel_2 460
-		sel_3 1
-		sel_60 11
-		sel_14 16400
+		name {moverCrate}
+		x 135
+		y 57
+		noun 19
+		approachX 182
+		approachY 153
+		view 460
+		loop 1
+		priority 11
+		signal 16400
 	)
 
-	(method (sel_300 param1)
+	(method (doVerb param1)
 		(switch param1
 			(4
 				(if (IsFlag 102)
-					(super sel_300: param1 &rest)
+					(super doVerb: param1 &rest)
 				else
-					(gCurRoom sel_146: sSwingIt)
+					(gCurRoom setScript: sSwingIt)
 				)
 			)
 			(else
-				(super sel_300: param1 &rest)
+				(super doVerb: param1 &rest)
 			)
 		)
 	)
@@ -504,246 +504,246 @@
 
 (instance elevatorDoor of Door
 	(properties
-		sel_20 {elevatorDoor}
-		sel_1 268
-		sel_0 131
-		sel_303 265
-		sel_304 144
-		sel_2 462
-		sel_589 660
-		sel_597 274
-		sel_598 133
-		sel_599 0
-		sel_600 0
+		name {elevatorDoor}
+		x 268
+		y 131
+		approachX 265
+		approachY 144
+		view 462
+		entranceTo 660
+		moveToX 274
+		moveToY 133
+		enterType 0
+		exitType 0
 	)
 
-	(method (sel_606)
-		(super sel_606: 266 123 290 123 290 134 266 134)
+	(method (createPoly)
+		(super createPoly: 266 123 290 123 290 134 266 134)
 	)
 )
 
 (instance smashedDoor of View
 	(properties
-		sel_20 {smashedDoor}
-		sel_1 117
-		sel_0 5
-		sel_82 -90
-		sel_213 5
-		sel_2 462
-		sel_3 1
-		sel_60 10
-		sel_14 16
+		name {smashedDoor}
+		x 117
+		y 5
+		z -90
+		noun 5
+		view 462
+		loop 1
+		priority 10
+		signal 16
 	)
 )
 
 (instance pipe of Feature
 	(properties
-		sel_20 {pipe}
-		sel_1 208
-		sel_0 89
-		sel_213 16
-		sel_6 57
-		sel_7 205
-		sel_8 122
-		sel_9 212
-		sel_301 40
-		sel_303 186
-		sel_304 151
+		name {pipe}
+		x 208
+		y 89
+		noun 16
+		nsTop 57
+		nsLeft 205
+		nsBottom 122
+		nsRight 212
+		sightAngle 40
+		approachX 186
+		approachY 151
 	)
 )
 
 (instance ties of Feature
 	(properties
-		sel_20 {ties}
-		sel_1 209
-		sel_0 177
-		sel_213 3
-		sel_6 122
-		sel_7 205
-		sel_8 132
-		sel_9 213
-		sel_301 40
-		sel_303 184
-		sel_304 147
+		name {ties}
+		x 209
+		y 177
+		noun 3
+		nsTop 122
+		nsLeft 205
+		nsBottom 132
+		nsRight 213
+		sightAngle 40
+		approachX 184
+		approachY 147
 	)
 )
 
 (instance crate1 of Feature
 	(properties
-		sel_20 {crate1}
-		sel_1 15
-		sel_0 47
-		sel_213 8
-		sel_6 54
-		sel_8 141
-		sel_9 30
-		sel_301 40
-		sel_303 77
-		sel_304 155
+		name {crate1}
+		x 15
+		y 47
+		noun 8
+		nsTop 54
+		nsBottom 141
+		nsRight 30
+		sightAngle 40
+		approachX 77
+		approachY 155
 	)
 )
 
 (instance crate2 of Feature
 	(properties
-		sel_20 {crate2}
-		sel_1 50
-		sel_0 45
-		sel_213 9
-		sel_6 106
-		sel_7 31
-		sel_8 145
-		sel_9 69
-		sel_301 40
-		sel_303 83
-		sel_304 156
+		name {crate2}
+		x 50
+		y 45
+		noun 9
+		nsTop 106
+		nsLeft 31
+		nsBottom 145
+		nsRight 69
+		sightAngle 40
+		approachX 83
+		approachY 156
 	)
 )
 
 (instance crate3 of Feature
 	(properties
-		sel_20 {crate3}
-		sel_1 155
-		sel_0 49
-		sel_213 10
-		sel_6 76
-		sel_7 133
-		sel_8 103
-		sel_9 178
-		sel_301 40
-		sel_303 141
-		sel_304 145
+		name {crate3}
+		x 155
+		y 49
+		noun 10
+		nsTop 76
+		nsLeft 133
+		nsBottom 103
+		nsRight 178
+		sightAngle 40
+		approachX 141
+		approachY 145
 	)
 )
 
 (instance crate4 of Feature
 	(properties
-		sel_20 {crate4}
-		sel_1 154
-		sel_0 49
-		sel_213 11
-		sel_6 104
-		sel_7 126
-		sel_8 135
-		sel_9 182
-		sel_301 40
-		sel_303 174
-		sel_304 146
+		name {crate4}
+		x 154
+		y 49
+		noun 11
+		nsTop 104
+		nsLeft 126
+		nsBottom 135
+		nsRight 182
+		sightAngle 40
+		approachX 174
+		approachY 146
 	)
 )
 
 (instance crate5 of Feature
 	(properties
-		sel_20 {crate5}
-		sel_1 209
-		sel_0 44
-		sel_213 12
-		sel_6 73
-		sel_7 193
-		sel_8 96
-		sel_9 225
-		sel_301 40
-		sel_303 182
-		sel_304 144
+		name {crate5}
+		x 209
+		y 44
+		noun 12
+		nsTop 73
+		nsLeft 193
+		nsBottom 96
+		nsRight 225
+		sightAngle 40
+		approachX 182
+		approachY 144
 	)
 )
 
 (instance crate6 of Feature
 	(properties
-		sel_20 {crate6}
-		sel_1 210
-		sel_0 47
-		sel_213 13
-		sel_6 99
-		sel_7 185
-		sel_8 136
-		sel_9 236
-		sel_301 40
-		sel_303 223
-		sel_304 145
+		name {crate6}
+		x 210
+		y 47
+		noun 13
+		nsTop 99
+		nsLeft 185
+		nsBottom 136
+		nsRight 236
+		sightAngle 40
+		approachX 223
+		approachY 145
 	)
 )
 
 (instance darkCrates of Feature
 	(properties
-		sel_20 {darkCrates}
-		sel_1 159
-		sel_0 179
-		sel_213 6
-		sel_6 170
-		sel_8 189
-		sel_9 319
-		sel_301 40
-		sel_303 198
-		sel_304 165
+		name {darkCrates}
+		x 159
+		y 179
+		noun 6
+		nsTop 170
+		nsBottom 189
+		nsRight 319
+		sightAngle 40
+		approachX 198
+		approachY 165
 	)
 )
 
 (instance floor of Feature
 	(properties
-		sel_20 {floor}
-		sel_1 195
-		sel_0 55
-		sel_213 4
-		sel_6 142
-		sel_7 71
-		sel_8 169
-		sel_9 319
-		sel_301 40
+		name {floor}
+		x 195
+		y 55
+		noun 4
+		nsTop 142
+		nsLeft 71
+		nsBottom 169
+		nsRight 319
+		sightAngle 40
 	)
 )
 
 (instance poly460a of Polygon
 	(properties
-		sel_20 {poly460a}
+		name {poly460a}
 	)
 
-	(method (sel_110)
-		(= sel_31 3)
-		(= sel_86 22)
-		(= sel_87 @local2)
+	(method (init)
+		(= type 3)
+		(= size 22)
+		(= points @local2)
 	)
 )
 
 (instance poly460b of Polygon
 	(properties
-		sel_20 {poly460b}
+		name {poly460b}
 	)
 
-	(method (sel_110)
-		(= sel_31 3)
-		(= sel_86 15)
-		(= sel_87 @local46)
+	(method (init)
+		(= type 3)
+		(= size 15)
+		(= points @local46)
 	)
 )
 
 (instance poly460c of Polygon
 	(properties
-		sel_20 {poly460c}
+		name {poly460c}
 	)
 
-	(method (sel_110)
-		(= sel_31 3)
-		(= sel_86 23)
-		(= sel_87 @local76)
+	(method (init)
+		(= type 3)
+		(= size 23)
+		(= points @local76)
 	)
 )
 
 (instance poly460d of Polygon
 	(properties
-		sel_20 {poly460d}
+		name {poly460d}
 	)
 
-	(method (sel_110)
-		(= sel_31 3)
-		(= sel_86 15)
-		(= sel_87 @local122)
+	(method (init)
+		(= type 3)
+		(= size 15)
+		(= points @local122)
 	)
 )
 
 (instance thudSound of Sound
 	(properties
-		sel_20 {thudSound}
-		sel_99 5
-		sel_40 80
+		name {thudSound}
+		flags 5
+		number 80
 	)
 )

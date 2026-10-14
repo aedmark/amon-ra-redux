@@ -7,59 +7,59 @@
 
 (class DPath of Motion
 	(properties
-		sel_20 {DPath}
-		sel_87 0
-		sel_74 0
+		name {DPath}
+		points 0
+		value 0
 	)
 
-	(method (sel_110 param1 param2 &tmp temp0)
-		(= sel_87
-			(if sel_87
-				sel_87
+	(method (init param1 param2 &tmp temp0)
+		(= points
+			(if points
+				points
 			else
-				(List sel_109:)
+				(List new:)
 			)
 		)
 		(if argc
-			(= sel_42 param1)
+			(= client param1)
 			(for ((= temp0 0)) (<= temp0 (- argc 3)) ((++ temp0))
-				(sel_87 sel_118: [param2 temp0] [param2 (++ temp0)])
+				(points add: [param2 temp0] [param2 (++ temp0)])
 			)
 			(if (<= temp0 (- argc 2))
-				(= sel_143 [param2 temp0])
+				(= caller [param2 temp0])
 			)
 		)
-		(if (sel_87 sel_122: -32768)
+		(if (points contains: -32768)
 		else
-			(sel_87 sel_118: -32768)
+			(points add: -32768)
 		)
-		(self sel_251:)
-		(super sel_110:)
+		(self setTarget:)
+		(super init:)
 		(if (not argc)
-			(self sel_57:)
+			(self doit:)
 		)
 	)
 
-	(method (sel_111)
-		(if (IsObject sel_87)
-			(sel_87 sel_111:)
+	(method (dispose)
+		(if (IsObject points)
+			(points dispose:)
 		)
-		(super sel_111:)
+		(super dispose:)
 	)
 
-	(method (sel_97)
-		(if (== (sel_87 sel_64: sel_74) -32768)
-			(super sel_97:)
+	(method (moveDone)
+		(if (== (points at: value) -32768)
+			(super moveDone:)
 		else
-			(self sel_110:)
+			(self init:)
 		)
 	)
 
-	(method (sel_251)
-		(if (!= (sel_87 sel_64: sel_74) -32768)
-			(= sel_1 (sel_87 sel_64: sel_74))
-			(= sel_0 (sel_87 sel_64: (++ sel_74)))
-			(++ sel_74)
+	(method (setTarget)
+		(if (!= (points at: value) -32768)
+			(= x (points at: value))
+			(= y (points at: (++ value)))
+			(++ value)
 		)
 	)
 )

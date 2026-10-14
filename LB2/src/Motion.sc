@@ -7,271 +7,271 @@
 
 (class Cycle of Obj
 	(properties
-		sel_20 {Cycle}
-		sel_42 0
-		sel_143 0
-		sel_239 1
-		sel_158 0
-		sel_240 0
+		name {Cycle}
+		client 0
+		caller 0
+		cycleDir 1
+		cycleCnt 0
+		completed 0
 	)
 
-	(method (sel_110 param1)
+	(method (init param1)
 		(if argc
-			(= sel_42 param1)
+			(= client param1)
 		)
-		(= sel_158 (- (- gGameTime (sel_42 sel_244:)) 1))
-		(= sel_240 0)
+		(= cycleCnt (- (- gGameTime (client cycleSpeed:)) 1))
+		(= completed 0)
 	)
 
-	(method (sel_241)
+	(method (nextCel)
 		(return
-			(if (< (Abs (- gGameTime sel_158)) (sel_42 sel_244:))
-				(sel_42 sel_4:)
+			(if (< (Abs (- gGameTime cycleCnt)) (client cycleSpeed:))
+				(client cel:)
 			else
-				(= sel_158 gGameTime)
-				(+ (sel_42 sel_4:) sel_239)
+				(= cycleCnt gGameTime)
+				(+ (client cel:) cycleDir)
 			)
 		)
 	)
 
-	(method (sel_242))
+	(method (cycleDone))
 
-	(method (sel_243)
-		(sel_42 sel_245: 0)
-		(if (and sel_240 (IsObject sel_143))
-			(sel_143 sel_145:)
+	(method (motionCue)
+		(client cycler: 0)
+		(if (and completed (IsObject caller))
+			(caller cue:)
 		)
-		(self sel_111:)
+		(self dispose:)
 	)
 )
 
 (class Fwd of Cycle
 	(properties
-		sel_20 {Fwd}
+		name {Fwd}
 	)
 
-	(method (sel_57 &tmp temp0)
-		(if (> (= temp0 (self sel_241:)) (sel_42 sel_246:))
-			(self sel_242:)
+	(method (doit &tmp temp0)
+		(if (> (= temp0 (self nextCel:)) (client lastCel:))
+			(self cycleDone:)
 		else
-			(sel_42 sel_4: temp0)
+			(client cel: temp0)
 		)
 	)
 
-	(method (sel_242)
-		(sel_42 sel_4: 0)
+	(method (cycleDone)
+		(client cel: 0)
 	)
 )
 
 (class Walk of Fwd
 	(properties
-		sel_20 {Walk}
+		name {Walk}
 	)
 
-	(method (sel_57 &tmp temp0)
-		(if (not (sel_42 sel_247:))
-			(super sel_57:)
+	(method (doit &tmp temp0)
+		(if (not (client isStopped:))
+			(super doit:)
 		)
 	)
 )
 
 (class CT of Cycle
 	(properties
-		sel_20 {CT}
-		sel_248 0
+		name {CT}
+		endCel 0
 	)
 
-	(method (sel_110 param1 param2 param3 param4 &tmp temp0)
-		(super sel_110: param1)
-		(= sel_239 param3)
+	(method (init param1 param2 param3 param4 &tmp temp0)
+		(super init: param1)
+		(= cycleDir param3)
 		(if (== argc 4)
-			(= sel_143 param4)
+			(= caller param4)
 		)
-		(= sel_248
-			(if (> param2 (= temp0 (sel_42 sel_246:))) temp0 else param2)
+		(= endCel
+			(if (> param2 (= temp0 (client lastCel:))) temp0 else param2)
 		)
 	)
 
-	(method (sel_57 &tmp temp0 temp1)
-		(if (> sel_248 (= temp1 (sel_42 sel_246:)))
-			(= sel_248 temp1)
+	(method (doit &tmp temp0 temp1)
+		(if (> endCel (= temp1 (client lastCel:)))
+			(= endCel temp1)
 		)
-		(= temp0 (self sel_241:))
-		(sel_42
-			sel_4:
+		(= temp0 (self nextCel:))
+		(client
+			cel:
 				(cond
 					((> temp0 temp1) 0)
 					((< temp0 0) temp1)
 					(else temp0)
 				)
 		)
-		(if (and (== gGameTime sel_158) (== sel_248 (sel_42 sel_4:)))
-			(self sel_242:)
+		(if (and (== gGameTime cycleCnt) (== endCel (client cel:)))
+			(self cycleDone:)
 		)
 	)
 
-	(method (sel_242)
-		(= sel_240 1)
-		(if sel_143
+	(method (cycleDone)
+		(= completed 1)
+		(if caller
 			(= gDoMotionCue 1)
 		else
-			(self sel_243:)
+			(self motionCue:)
 		)
 	)
 )
 
 (class End of CT
 	(properties
-		sel_20 {End}
+		name {End}
 	)
 
-	(method (sel_110 param1 param2)
+	(method (init param1 param2)
 		(super
-			sel_110: param1 (param1 sel_246:) 1 (if (== argc 2) param2 else 0)
+			init: param1 (param1 lastCel:) 1 (if (== argc 2) param2 else 0)
 		)
 	)
 )
 
 (class Beg of CT
 	(properties
-		sel_20 {Beg}
+		name {Beg}
 	)
 
-	(method (sel_110 param1 param2)
-		(super sel_110: param1 0 -1 (if (== argc 2) param2 else 0))
+	(method (init param1 param2)
+		(super init: param1 0 -1 (if (== argc 2) param2 else 0))
 	)
 )
 
 (class SyncWalk of Fwd
 	(properties
-		sel_20 {SyncWalk}
-		sel_249 0
-		sel_250 0
+		name {SyncWalk}
+		xLast 0
+		yLast 0
 	)
 
-	(method (sel_57 &tmp temp0)
+	(method (doit &tmp temp0)
 		(if
 			(and
-				(IsObject (= temp0 (sel_42 sel_56:)))
-				(or (!= (sel_42 sel_1:) sel_249) (!= (sel_42 sel_0:) sel_250))
+				(IsObject (= temp0 (client mover:)))
+				(or (!= (client x:) xLast) (!= (client y:) yLast))
 			)
-			(= sel_249 (sel_42 sel_1:))
-			(= sel_250 (sel_42 sel_0:))
-			(super sel_57:)
+			(= xLast (client x:))
+			(= yLast (client y:))
+			(super doit:)
 		)
 	)
 
-	(method (sel_241)
-		(= sel_158 (+ gGameTime (sel_42 sel_244:)))
-		(super sel_241:)
+	(method (nextCel)
+		(= cycleCnt (+ gGameTime (client cycleSpeed:)))
+		(super nextCel:)
 	)
 )
 
 (class Motion of Obj
 	(properties
-		sel_20 {Motion}
-		sel_42 0
-		sel_143 0
-		sel_1 0
-		sel_0 0
-		sel_43 0
-		sel_44 0
-		sel_45 0
-		sel_46 0
-		sel_47 0
-		sel_48 0
-		sel_49 0
-		sel_50 0
-		sel_240 0
-		sel_249 0
-		sel_250 0
+		name {Motion}
+		client 0
+		caller 0
+		x 0
+		y 0
+		dx 0
+		dy 0
+		b-moveCnt 0
+		b-i1 0
+		b-i2 0
+		b-di 0
+		b-xAxis 0
+		b-incr 0
+		completed 0
+		xLast 0
+		yLast 0
 	)
 
-	(method (sel_110 param1 param2 param3 param4 &tmp [temp0 2] temp2 temp3)
+	(method (init param1 param2 param3 param4 &tmp [temp0 2] temp2 temp3)
 		(if (>= argc 1)
-			(= sel_42 param1)
+			(= client param1)
 			(if (>= argc 2)
-				(= sel_1 param2)
+				(= x param2)
 				(if (>= argc 3)
-					(= sel_0 param3)
+					(= y param3)
 					(if (>= argc 4)
-						(= sel_143 param4)
+						(= caller param4)
 					)
 				)
 			)
 		)
-		(= sel_250 (= sel_249 (= sel_240 0)))
-		(= sel_45 (+ 1 (sel_42 sel_53:) gGameTime))
-		(if (= temp3 (sel_42 sel_245:))
-			(temp3 sel_158: sel_45)
+		(= yLast (= xLast (= completed 0)))
+		(= b-moveCnt (+ 1 (client moveSpeed:) gGameTime))
+		(if (= temp3 (client cycler:))
+			(temp3 cycleCnt: b-moveCnt)
 		)
 		(if
 			(GetDistance
-				(= temp2 (sel_42 sel_1:))
-				(= temp3 (sel_42 sel_0:))
-				sel_1
-				sel_0
+				(= temp2 (client x:))
+				(= temp3 (client y:))
+				x
+				y
 			)
-			(sel_42 sel_253: (GetAngle temp2 temp3 sel_1 sel_0))
+			(client setHeading: (GetAngle temp2 temp3 x y))
 		)
 		(InitBresen self)
 	)
 
-	(method (sel_57 &tmp [temp0 6])
-		(if (>= (Abs (- gGameTime sel_45)) (sel_42 sel_53:))
-			(= sel_45 gGameTime)
+	(method (doit &tmp [temp0 6])
+		(if (>= (Abs (- gGameTime b-moveCnt)) (client moveSpeed:))
+			(= b-moveCnt gGameTime)
 			(DoBresen self)
 		)
 	)
 
-	(method (sel_97)
-		(= sel_240 1)
-		(if sel_143
+	(method (moveDone)
+		(= completed 1)
+		(if caller
 			(= gDoMotionCue 1)
 		else
-			(self sel_243:)
+			(self motionCue:)
 		)
 	)
 
-	(method (sel_251 param1 param2)
+	(method (setTarget param1 param2)
 		(if argc
-			(= sel_1 param1)
-			(= sel_0 param2)
+			(= x param1)
+			(= y param2)
 		)
 	)
 
-	(method (sel_252)
+	(method (onTarget)
 		(return
-			(if (== (sel_42 sel_1:) sel_1)
-				(== (sel_42 sel_0:) sel_0)
+			(if (== (client x:) x)
+				(== (client y:) y)
 			else
 				0
 			)
 		)
 	)
 
-	(method (sel_243)
-		(sel_42 sel_56: 0)
-		(if (and sel_240 (IsObject sel_143))
-			(sel_143 sel_145:)
+	(method (motionCue)
+		(client mover: 0)
+		(if (and completed (IsObject caller))
+			(caller cue:)
 		)
-		(self sel_111:)
+		(self dispose:)
 	)
 )
 
 (class MoveTo of Motion
 	(properties
-		sel_20 {MoveTo}
+		name {MoveTo}
 	)
 
-	(method (sel_110)
-		(super sel_110: &rest)
+	(method (init)
+		(super init: &rest)
 	)
 
-	(method (sel_252)
+	(method (onTarget)
 		(return
-			(if (<= (Abs (- (sel_42 sel_1:) sel_1)) (sel_42 sel_51:))
-				(<= (Abs (- (sel_42 sel_0:) sel_0)) (sel_42 sel_52:))
+			(if (<= (Abs (- (client x:) x)) (client xStep:))
+				(<= (Abs (- (client y:) y)) (client yStep:))
 			else
 				0
 			)

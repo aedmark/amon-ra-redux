@@ -8,174 +8,174 @@
 
 (class GameControls of IconBar
 	(properties
-		sel_20 {GameControls}
-		sel_220 200
-		sel_29 0
-		sel_392 0
+		name {GameControls}
+		height 200
+		state 0
+		okButton 0
 	)
 
-	(method (sel_216 &tmp temp0 temp1 temp2 temp3 temp4)
-		(gSounds sel_168:)
-		(if (and gPMouse (gPMouse sel_116: 167))
-			(gPMouse sel_167:)
+	(method (show &tmp temp0 temp1 temp2 temp3 temp4)
+		(gSounds pause:)
+		(if (and gPMouse (gPMouse respondsTo: 167))
+			(gPMouse stop:)
 		)
-		(|= sel_29 $0020)
-		(if (IsObject sel_32)
-			(sel_32 sel_189:)
+		(|= state $0020)
+		(if (IsObject window)
+			(window open:)
 		else
-			(= sel_32
-				((gSystemWindow sel_109:)
-					sel_193: 46
-					sel_194: 24
-					sel_195: 155
-					sel_196: 296
-					sel_60: 15
-					sel_189:
-					sel_117:
+			(= window
+				((gSystemWindow new:)
+					top: 46
+					left: 24
+					bottom: 155
+					right: 296
+					priority: 15
+					open:
+					yourself:
 				)
 			)
 		)
 		(= temp0 30)
 		(= temp1 30)
-		(for ((= temp2 (FirstNode sel_24))) temp2 ((= temp2 temp3))
+		(for ((= temp2 (FirstNode elements))) temp2 ((= temp2 temp3))
 			(= temp3 (NextNode temp2))
 			(if (not (IsObject (= temp4 (NodeValue temp2))))
 				(return)
 			)
-			(if (and (not (& (temp4 sel_14:) $0080)) (<= (temp4 sel_9:) 0))
-				(temp4 sel_216: temp0 temp1)
-				(= temp0 (+ 20 (temp4 sel_9:)))
+			(if (and (not (& (temp4 signal:) $0080)) (<= (temp4 nsRight:) 0))
+				(temp4 show: temp0 temp1)
+				(= temp0 (+ 20 (temp4 nsRight:)))
 			else
-				(temp4 sel_216:)
+				(temp4 show:)
 			)
 		)
-		(if (not sel_392)
-			(= sel_392 (NodeValue (self sel_124:)))
+		(if (not okButton)
+			(= okButton (NodeValue (self first:)))
 		)
-		(if sel_207
+		(if curIcon
 			(gGame
-				sel_197:
+				setCursor:
 					gTheCursor
 					1
 					(+
-						(sel_207 sel_7:)
-						(/ (- (sel_207 sel_9:) (sel_207 sel_7:)) 2)
+						(curIcon nsLeft:)
+						(/ (- (curIcon nsRight:) (curIcon nsLeft:)) 2)
 					)
-					(- (sel_207 sel_8:) 3)
+					(- (curIcon nsBottom:) 3)
 			)
 		)
-		(self sel_57: sel_102:)
+		(self doit: hide:)
 	)
 
-	(method (sel_102)
-		(if sel_32
-			(sel_32 sel_111:)
-			(= sel_32 0)
+	(method (hide)
+		(if window
+			(window dispose:)
+			(= window 0)
 		)
-		(if (& sel_29 $0020)
-			(gSounds sel_168: 0)
-			(&= sel_29 $ffdf)
+		(if (& state $0020)
+			(gSounds pause: 0)
+			(&= state $ffdf)
 		)
 	)
 
-	(method (sel_178 param1 param2)
-		(param1 sel_178: (if (>= argc 2) param2 else 0))
+	(method (select param1 param2)
+		(param1 select: (if (>= argc 2) param2 else 0))
 	)
 
-	(method (sel_230))
+	(method (swapCurIcon))
 
-	(method (sel_231 &tmp temp0))
+	(method (advanceCurIcon &tmp temp0))
 
-	(method (sel_232 param1 &tmp temp0 temp1 temp2 [temp3 50])
+	(method (dispatchEvent param1 &tmp temp0 temp1 temp2 [temp3 50])
 		(cond
-			((== (param1 sel_31:) 8192)
-				(= temp1 (self sel_120: 218 param1))
-				(param1 sel_111:)
-				(if (and temp1 (temp1 sel_215:))
+			((== (param1 type:) 8192)
+				(= temp1 (self firstTrue: 218 param1))
+				(param1 dispose:)
+				(if (and temp1 (temp1 helpVerb:))
 					(= temp2 (GetPort))
-					(if (gSystemWindow sel_116: 236)
-						(= temp0 (gSystemWindow sel_236:))
-						(gSystemWindow sel_236: 1)
+					(if (gSystemWindow respondsTo: 236)
+						(= temp0 (gSystemWindow eraseOnly:))
+						(gSystemWindow eraseOnly: 1)
 						(Print
-							sel_30: gUserFont
-							sel_67: 250
-							sel_198:
-								(temp1 sel_213:)
-								(temp1 sel_215:)
+							font: gUserFont
+							width: 250
+							addText:
+								(temp1 noun:)
+								(temp1 helpVerb:)
 								0
 								1
 								0
 								0
-								(temp1 sel_214:)
-							sel_110:
+								(temp1 modNum:)
+							init:
 						)
-						(gSystemWindow sel_236: temp0)
+						(gSystemWindow eraseOnly: temp0)
 					else
 						(Print
-							sel_30: gUserFont
-							sel_67: 250
-							sel_198:
-								(temp1 sel_213:)
-								(temp1 sel_215:)
+							font: gUserFont
+							width: 250
+							addText:
+								(temp1 noun:)
+								(temp1 helpVerb:)
 								0
 								1
 								0
 								0
-								(temp1 sel_214:)
-							sel_110:
+								(temp1 modNum:)
+							init:
 						)
 					)
 					(SetPort temp2)
 				)
-				(if sel_227
-					(sel_227 sel_14: (& (sel_227 sel_14:) $ffef))
+				(if helpIconItem
+					(helpIconItem signal: (& (helpIconItem signal:) $ffef))
 				)
-				(gGame sel_197: 999)
+				(gGame setCursor: 999)
 				(return 0)
 			)
-			((& (param1 sel_31:) $0040)
-				(switch (param1 sel_37:)
+			((& (param1 type:) $0040)
+				(switch (param1 message:)
 					(5
-						(param1 sel_111:)
+						(param1 dispose:)
 						(cond
-							((and (IsObject sel_223) (sel_223 sel_116: 191))
-								(sel_223 sel_191:)
+							((and (IsObject highlightedIcon) (highlightedIcon respondsTo: 191))
+								(highlightedIcon retreat:)
 								(return 0)
 							)
 							(
 								(or
-									(not (IsObject sel_223))
-									(& (sel_223 sel_14:) $0100)
+									(not (IsObject highlightedIcon))
+									(& (highlightedIcon signal:) $0100)
 								)
-								(self sel_190:)
+								(self advance:)
 								(return 0)
 							)
 						)
 					)
 					(1
-						(param1 sel_111:)
+						(param1 dispose:)
 						(cond
-							((and (IsObject sel_223) (sel_223 sel_116: 190))
-								(sel_223 sel_190:)
+							((and (IsObject highlightedIcon) (highlightedIcon respondsTo: 190))
+								(highlightedIcon advance:)
 								(return 0)
 							)
 							(
 								(or
-									(not (IsObject sel_223))
-									(& (sel_223 sel_14:) $0100)
+									(not (IsObject highlightedIcon))
+									(& (highlightedIcon signal:) $0100)
 								)
-								(self sel_191:)
+								(self retreat:)
 								(return 0)
 							)
 						)
 					)
 					(else
-						(super sel_232: param1)
+						(super dispatchEvent: param1)
 					)
 				)
 			)
 			(else
-				(super sel_232: param1)
+				(super dispatchEvent: param1)
 			)
 		)
 	)
@@ -183,17 +183,17 @@
 
 (class ControlIcon of IconI
 	(properties
-		sel_20 {ControlIcon}
-		sel_348 0
-		sel_519 0
+		name {ControlIcon}
+		theObj 0
+		selector 0
 	)
 
-	(method (sel_57)
-		(if sel_348
-			(if (& sel_14 $0040)
-				((if gGameControls gGameControls else GameControls) sel_102:)
+	(method (doit)
+		(if theObj
+			(if (& signal $0040)
+				((if gGameControls gGameControls else GameControls) hide:)
 			)
-			(gGame sel_397: sel_348 sel_398: sel_519)
+			(gGame panelObj: theObj panelSelector: selector)
 		)
 	)
 )

@@ -19,63 +19,63 @@
 
 (instance poly2500Code of Code
 	(properties
-		sel_20 {poly2500Code}
+		name {poly2500Code}
 	)
 
-	(method (sel_57 param1)
+	(method (doit param1)
 		(param1
-			sel_118:
-				(poly2500a sel_110: sel_117:)
-				(poly2500c sel_110: sel_117:)
-				(poly2500d sel_110: sel_117:)
+			add:
+				(poly2500a init: yourself:)
+				(poly2500c init: yourself:)
+				(poly2500d init: yourself:)
 		)
 	)
 )
 
 (instance poly2500a of Polygon
 	(properties
-		sel_20 {poly2500a}
+		name {poly2500a}
 	)
 
-	(method (sel_110)
-		(= sel_31 2)
-		(= sel_86 16)
-		(= sel_87 @local0)
+	(method (init)
+		(= type 2)
+		(= size 16)
+		(= points @local0)
 	)
 )
 
 (instance poly2500c of Polygon
 	(properties
-		sel_20 {poly2500c}
+		name {poly2500c}
 	)
 
-	(method (sel_110)
-		(= sel_31 2)
-		(= sel_86 4)
-		(= sel_87 @local32)
+	(method (init)
+		(= type 2)
+		(= size 4)
+		(= points @local32)
 	)
 )
 
 (instance poly2500d of Polygon
 	(properties
-		sel_20 {poly2500d}
+		name {poly2500d}
 	)
 
-	(method (sel_110)
-		(= sel_31 2)
-		(= sel_86 4)
-		(= sel_87 @local40)
+	(method (init)
+		(= type 2)
+		(= size 4)
+		(= points @local40)
 	)
 )
 
 (instance pts2500 of MuseumPoints
 	(properties
-		sel_20 {pts2500}
-		sel_621 170
-		sel_622 175
-		sel_623 97
-		sel_624 150
-		sel_625 170
-		sel_626 250
+		name {pts2500}
+		midPtX 170
+		midPtY 175
+		northPtX 97
+		northPtY 150
+		southPtX 170
+		southPtY 250
 	)
 )

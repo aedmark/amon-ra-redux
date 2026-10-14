@@ -21,87 +21,87 @@
 
 (instance poly2560Code of Code
 	(properties
-		sel_20 {poly2560Code}
+		name {poly2560Code}
 	)
 
-	(method (sel_57 param1)
+	(method (doit param1)
 		(param1
-			sel_118:
-				(poly2560a sel_110: sel_117:)
-				(poly2560b sel_110: sel_117:)
-				(poly2560c sel_110: sel_117:)
-				(poly2560d sel_110: sel_117:)
-				(poly2560e sel_110: sel_117:)
+			add:
+				(poly2560a init: yourself:)
+				(poly2560b init: yourself:)
+				(poly2560c init: yourself:)
+				(poly2560d init: yourself:)
+				(poly2560e init: yourself:)
 		)
 	)
 )
 
 (instance poly2560a of Polygon
 	(properties
-		sel_20 {poly2560a}
+		name {poly2560a}
 	)
 
-	(method (sel_110)
-		(= sel_31 3)
-		(= sel_86 10)
-		(= sel_87 @local0)
+	(method (init)
+		(= type 3)
+		(= size 10)
+		(= points @local0)
 	)
 )
 
 (instance poly2560b of Polygon
 	(properties
-		sel_20 {poly2560b}
+		name {poly2560b}
 	)
 
-	(method (sel_110)
-		(= sel_31 2)
-		(= sel_86 4)
-		(= sel_87 @local20)
+	(method (init)
+		(= type 2)
+		(= size 4)
+		(= points @local20)
 	)
 )
 
 (instance poly2560c of Polygon
 	(properties
-		sel_20 {poly2560c}
+		name {poly2560c}
 	)
 
-	(method (sel_110)
-		(= sel_31 2)
-		(= sel_86 7)
-		(= sel_87 @local28)
+	(method (init)
+		(= type 2)
+		(= size 7)
+		(= points @local28)
 	)
 )
 
 (instance poly2560d of Polygon
 	(properties
-		sel_20 {poly2560d}
+		name {poly2560d}
 	)
 
-	(method (sel_110)
-		(= sel_31 2)
-		(= sel_86 5)
-		(= sel_87 @local42)
+	(method (init)
+		(= type 2)
+		(= size 5)
+		(= points @local42)
 	)
 )
 
 (instance poly2560e of Polygon
 	(properties
-		sel_20 {poly2560e}
+		name {poly2560e}
 	)
 
-	(method (sel_110)
-		(= sel_31 2)
-		(= sel_86 4)
-		(= sel_87 @local52)
+	(method (init)
+		(= type 2)
+		(= size 4)
+		(= points @local52)
 	)
 )
 
 (instance pts2560 of MuseumPoints
 	(properties
-		sel_20 {pts2560}
-		sel_621 160
-		sel_622 165
-		sel_629 1010
-		sel_630 155
+		name {pts2560}
+		midPtX 160
+		midPtY 165
+		westPtX 1010
+		westPtY 155
 	)
 )

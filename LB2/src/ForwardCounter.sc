@@ -6,26 +6,26 @@
 
 (class ForwardCounter of Fwd
 	(properties
-		sel_20 {ForwardCounter}
-		sel_467 0
+		name {ForwardCounter}
+		count 0
 	)
 
-	(method (sel_110 param1 param2 param3)
-		(super sel_110: param1)
+	(method (init param1 param2 param3)
+		(super init: param1)
 		(if (>= argc 2)
-			(= sel_467 param2)
+			(= count param2)
 			(if (>= argc 3)
-				(= sel_143 param3)
+				(= caller param3)
 			)
 		)
 	)
 
-	(method (sel_242)
-		(if (-- sel_467)
-			(super sel_242:)
+	(method (cycleDone)
+		(if (-- count)
+			(super cycleDone:)
 		else
-			(= sel_240 1)
-			(self sel_243:)
+			(= completed 1)
+			(self motionCue:)
 		)
 	)
 )

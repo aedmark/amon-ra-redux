@@ -8,41 +8,41 @@
 
 (class CueObj of Script
 	(properties
-		sel_20 {CueObj}
-		sel_298 0
+		name {CueObj}
+		theVerb 0
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(1
 				(gEgo
-					sel_253:
+					setHeading:
 						(GetAngle
-							(gEgo sel_1:)
-							(gEgo sel_0:)
-							(sel_42 sel_1:)
-							(sel_42 sel_0:)
+							(gEgo x:)
+							(gEgo y:)
+							(client x:)
+							(client y:)
 						)
 						self
 				)
-				(gTheDoits sel_118: self)
+				(gTheDoits add: self)
 			)
 			(2
-				(= sel_136 3)
+				(= cycles 3)
 			)
 			(3
-				(gTheDoits sel_81: self)
+				(gTheDoits delete: self)
 				(if
 					(not
 						(and
-							sel_42
-							(IsObject (sel_42 sel_299:))
-							((sel_42 sel_299:) sel_300: sel_298)
+							client
+							(IsObject (client actions:))
+							((client actions:) doVerb: theVerb)
 						)
 					)
-					(sel_42 sel_300: sel_298)
+					(client doVerb: theVerb)
 				)
-				(= sel_29 0)
+				(= state 0)
 			)
 		)
 	)
@@ -50,137 +50,137 @@
 
 (class Feature of Obj
 	(properties
-		sel_20 {Feature}
-		sel_1 0
-		sel_0 0
-		sel_82 0
-		sel_55 0
-		sel_213 0
-		sel_214 -1
-		sel_6 0
-		sel_7 0
-		sel_8 0
-		sel_9 0
-		sel_301 26505
-		sel_299 0
-		sel_302 26505
-		sel_303 0
-		sel_304 0
-		sel_305 0
-		sel_306 0
+		name {Feature}
+		x 0
+		y 0
+		z 0
+		heading 0
+		noun 0
+		modNum -1
+		nsTop 0
+		nsLeft 0
+		nsBottom 0
+		nsRight 0
+		sightAngle 26505
+		actions 0
+		onMeCheck 26505
+		approachX 0
+		approachY 0
+		approachDist 0
+		_approachVerbs 0
 	)
 
-	(method (sel_110 param1)
-		(self sel_307: (if argc param1 else 0))
-		(if (self sel_116: 5)
-			(gCast sel_118: self)
+	(method (init param1)
+		(self initialize: (if argc param1 else 0))
+		(if (self respondsTo: 5)
+			(gCast add: self)
 		else
-			(gFeatures sel_118: self)
+			(gFeatures add: self)
 		)
 	)
 
-	(method (sel_111)
-		(if sel_299
-			(sel_299 sel_111:)
-			(= sel_299 0)
+	(method (dispose)
+		(if actions
+			(actions dispose:)
+			(= actions 0)
 		)
-		(if (IsObject sel_302)
-			(sel_302 sel_111:)
-			(= sel_302 0)
+		(if (IsObject onMeCheck)
+			(onMeCheck dispose:)
+			(= onMeCheck 0)
 		)
-		(gFeatures sel_81: self)
-		(super sel_111:)
+		(gFeatures delete: self)
+		(super dispose:)
 	)
 
-	(method (sel_307 param1)
+	(method (initialize param1)
 		(cond
 			((and argc param1)
-				(self sel_96: param1)
+				(self perform: param1)
 			)
 			(gFtrInitializer
-				(self sel_96: gFtrInitializer)
+				(self perform: gFtrInitializer)
 			)
 		)
 	)
 
-	(method (sel_133 param1 &tmp temp0)
+	(method (handleEvent param1 &tmp temp0)
 		(cond
-			((param1 sel_73:)
+			((param1 claimed:)
 				(return 1)
 			)
 			(
 				(and
-					(& (param1 sel_31:) $4000)
-					(self sel_218: param1)
-					(self sel_310:)
+					(& (param1 type:) $4000)
+					(self onMe: param1)
+					(self isNotHidden:)
 				)
 				(CueObj
-					sel_29: 0
-					sel_136: 0
-					sel_42: self
-					sel_298: (param1 sel_37:)
+					state: 0
+					cycles: 0
+					client: self
+					theVerb: (param1 message:)
 				)
-				(param1 sel_73: 1)
+				(param1 claimed: 1)
 				(if
 					(and
-						(gUser sel_237:)
+						(gUser canControl:)
 						(>
 							(GetDistance
-								(gEgo sel_1:)
-								(gEgo sel_0:)
-								sel_303
-								sel_304
+								(gEgo x:)
+								(gEgo y:)
+								approachX
+								approachY
 							)
-							sel_305
+							approachDist
 						)
 						gLb2ApproachCode
-						(& sel_306 (gLb2ApproachCode sel_57: (param1 sel_37:)))
+						(& _approachVerbs (gLb2ApproachCode doit: (param1 message:)))
 					)
 					(gEgo
-						sel_312:
+						setMotion:
 							PApproach
-							sel_303
-							(+ (gEgo sel_82:) sel_304)
-							sel_305
+							approachX
+							(+ (gEgo z:) approachY)
+							approachDist
 							CueObj
 					)
 				else
-					(gEgo sel_312: 0)
-					(if (self sel_309:)
-						(CueObj sel_144: 3)
+					(gEgo setMotion: 0)
+					(if (self facingMe:)
+						(CueObj changeState: 3)
 					)
 				)
 			)
 		)
-		(return (param1 sel_73:))
+		(return (param1 claimed:))
 	)
 
-	(method (sel_300 param1 &tmp temp0 temp1)
+	(method (doVerb param1 &tmp temp0 temp1)
 		(= temp0 (if gDoVerbCode gDoVerbCode else dftDoVerb))
-		(if (== sel_214 -1)
-			(= sel_214 gCurRoomNum)
+		(if (== modNum -1)
+			(= modNum gCurRoomNum)
 		)
-		(if (and gMsgType (Message msgGET sel_214 sel_213 param1 0 1))
-			(gMessager sel_295: sel_213 param1 0 0 0 sel_214)
+		(if (and gMsgType (Message msgGET modNum noun param1 0 1))
+			(gMessager say: noun param1 0 0 0 modNum)
 		else
-			(temp0 sel_57: param1 self)
+			(temp0 doit: param1 self)
 		)
 	)
 
-	(method (sel_308 &tmp temp0)
-		(gEgo sel_312: 0)
-		(CueObj sel_42: self sel_29: 0 sel_136: 0 sel_145:)
+	(method (notFacing &tmp temp0)
+		(gEgo setMotion: 0)
+		(CueObj client: self state: 0 cycles: 0 cue:)
 	)
 
-	(method (sel_309 param1 &tmp temp0 temp1)
+	(method (facingMe param1 &tmp temp0 temp1)
 		(= temp0 (if argc param1 else gEgo))
 		(if
 			(>
 				(= temp1
 					(Abs
 						(-
-							(GetAngle (temp0 sel_1:) (temp0 sel_0:) sel_1 sel_0)
-							(temp0 sel_55:)
+							(GetAngle (temp0 x:) (temp0 y:) x y)
+							(temp0 heading:)
 						)
 					)
 				)
@@ -188,50 +188,50 @@
 			)
 			(= temp1 (- 360 temp1))
 		)
-		(if (<= temp1 sel_301)
+		(if (<= temp1 sightAngle)
 			(return 1)
 		else
-			(if (!= sel_301 26505)
-				(self sel_308:)
+			(if (!= sightAngle 26505)
+				(self notFacing:)
 			)
 			(return 0)
 		)
 	)
 
-	(method (sel_310)
+	(method (isNotHidden)
 		(return 1)
 	)
 
-	(method (sel_218 param1 param2 &tmp temp0 temp1)
+	(method (onMe param1 param2 &tmp temp0 temp1)
 		(if (IsObject param1)
-			(= temp0 (param1 sel_1:))
-			(= temp1 (param1 sel_0:))
+			(= temp0 (param1 x:))
+			(= temp1 (param1 y:))
 		else
 			(= temp0 param1)
 			(= temp1 param2)
 		)
 		(return
 			(cond
-				((IsObject sel_302)
-					(AvoidPath temp0 temp1 sel_302)
+				((IsObject onMeCheck)
+					(AvoidPath temp0 temp1 onMeCheck)
 				)
 				(
 					(or
 						(not
-							(if (or sel_7 sel_9 sel_6)
+							(if (or nsLeft nsRight nsTop)
 							else
-								sel_8
+								nsBottom
 							)
 						)
 						(and
-							(<= sel_7 temp0)
-							(<= temp0 sel_9)
-							(<= sel_6 temp1)
-							(<= temp1 sel_8)
+							(<= nsLeft temp0)
+							(<= temp0 nsRight)
+							(<= nsTop temp1)
+							(<= temp1 nsBottom)
 						)
 					)
-					(if (!= sel_302 26505)
-						(& sel_302 (OnControl CONTROL temp0 temp1))
+					(if (!= onMeCheck 26505)
+						(& onMeCheck (OnControl CONTROL temp0 temp1))
 					else
 						1
 					)
@@ -240,12 +240,12 @@
 		)
 	)
 
-	(method (sel_311 param1 &tmp temp0 temp1)
-		(= sel_306 0)
+	(method (approachVerbs param1 &tmp temp0 temp1)
+		(= _approachVerbs 0)
 		(if (and argc gLb2ApproachCode param1)
 			(for ((= temp0 0)) (< temp0 argc) ((++ temp0))
-				(= temp1 (gLb2ApproachCode sel_57: [param1 temp0]))
-				(self sel_306: (| (self sel_306:) temp1))
+				(= temp1 (gLb2ApproachCode doit: [param1 temp0]))
+				(self _approachVerbs: (| (self _approachVerbs:) temp1))
 			)
 		)
 	)
@@ -253,20 +253,20 @@
 
 (instance dftDoVerb of Code
 	(properties
-		sel_20 {dftDoVerb}
+		name {dftDoVerb}
 	)
 
-	(method (sel_57)
+	(method (doit)
 		(return 1)
 	)
 )
 
 (class Actions of Code
 	(properties
-		sel_20 {Actions}
+		name {Actions}
 	)
 
-	(method (sel_300)
+	(method (doVerb)
 		(return 0)
 	)
 )

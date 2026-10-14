@@ -12,46 +12,46 @@
 
 (instance Lo_Fat of Talker
 	(properties
-		sel_20 {Lo Fat}
-		sel_1 6
-		sel_0 47
-		sel_2 1895
-		sel_3 3
-		sel_537 150
-		sel_26 15
-		sel_549 100
-		sel_550 -37
+		name {Lo Fat}
+		x 6
+		y 47
+		view 1895
+		loop 3
+		talkWidth 150
+		back 15
+		textX 100
+		textY -37
 	)
 
-	(method (sel_110)
-		(= sel_30 gUserFont)
-		(super sel_110: loFatBust loFatEyes loFatMouth &rest)
+	(method (init)
+		(= font gUserFont)
+		(super init: loFatBust loFatEyes loFatMouth &rest)
 	)
 )
 
 (instance loFatBust of Prop
 	(properties
-		sel_20 {loFatBust}
-		sel_2 1895
-		sel_3 1
+		name {loFatBust}
+		view 1895
+		loop 1
 	)
 )
 
 (instance loFatEyes of Prop
 	(properties
-		sel_20 {loFatEyes}
-		sel_6 22
-		sel_7 26
-		sel_2 1895
-		sel_3 2
+		name {loFatEyes}
+		nsTop 22
+		nsLeft 26
+		view 1895
+		loop 2
 	)
 )
 
 (instance loFatMouth of Prop
 	(properties
-		sel_20 {loFatMouth}
-		sel_6 33
-		sel_7 24
-		sel_2 1895
+		name {loFatMouth}
+		nsTop 33
+		nsLeft 24
+		view 1895
 	)
 )

@@ -18,62 +18,62 @@
 
 (instance sCountessMeeting of Script
 	(properties
-		sel_20 {sCountessMeeting}
+		name {sCountessMeeting}
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
-				(= sel_136 3)
+				(= cycles 3)
 			)
 			(1
-				(= sel_136 1)
+				(= cycles 1)
 			)
 			(2
-				(self sel_146: sCountessEnters self)
+				(self setScript: sCountessEnters self)
 			)
 			(3
-				((ScriptID 90 1) sel_312: PolyPath 141 171 self) ; aCountess
+				((ScriptID 90 1) setMotion: PolyPath 141 171 self) ; aCountess
 			)
 			(4
-				((ScriptID 90 1) sel_2: 444 sel_3: 0 sel_4: 0) ; aCountess
-				(gGame sel_588:)
-				(if (== (gEgo sel_2:) 443)
-					(gTheIconBar sel_233: 1 2 5 6)
+				((ScriptID 90 1) view: 444 loop: 0 cel: 0) ; aCountess
+				(gGame handsOn:)
+				(if (== (gEgo view:) 443)
+					(gTheIconBar disable: 1 2 5 6)
 				)
-				(gTheIconBar sel_177: 7)
-				(= sel_136 1)
+				(gTheIconBar enable: 7)
+				(= cycles 1)
 			)
 			(5
-				(= sel_137 10)
+				(= seconds 10)
 			)
 			(6
-				(if (== (gEgo sel_2:) 443)
-					(gTheIconBar sel_233: 1 2 5 6)
+				(if (== (gEgo view:) 443)
+					(gTheIconBar disable: 1 2 5 6)
 				)
-				(gGame sel_587:)
-				(= sel_136 3)
+				(gGame handsOff:)
+				(= cycles 3)
 			)
 			(7
-				(if (== (gEgo sel_2:) 443)
-					((ScriptID 90 1) sel_161: End self) ; aCountess
+				(if (== (gEgo view:) 443)
+					((ScriptID 90 1) setCycle: End self) ; aCountess
 				else
-					(gGame sel_588: 1)
-					(self sel_111:)
+					(gGame handsOn: 1)
+					(self dispose:)
 				)
 			)
 			(8
-				(= sel_137 2)
+				(= seconds 2)
 			)
 			(9
-				((ScriptID 90 1) sel_161: Beg self) ; aCountess
+				((ScriptID 90 1) setCycle: Beg self) ; aCountess
 			)
 			(10
-				(= sel_137 3)
+				(= seconds 3)
 			)
 			(11
-				(gGame sel_588: 1)
-				(sel_42 sel_146: sCountessLeaves)
+				(gGame handsOn: 1)
+				(client setScript: sCountessLeaves)
 			)
 		)
 	)
@@ -81,30 +81,30 @@
 
 (instance sCountessNoMeet of Script
 	(properties
-		sel_20 {sCountessNoMeet}
+		name {sCountessNoMeet}
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
-				(= sel_136 3)
+				(= cycles 3)
 			)
 			(1
-				(= sel_136 1)
+				(= cycles 1)
 			)
 			(2
-				(self sel_146: sCountessEnters self)
+				(self setScript: sCountessEnters self)
 			)
 			(3
-				(if (and (gEgo sel_238: 7) (not (IsFlag 120)))
-					(gEgo sel_146: sTalkWithCountess)
-					(self sel_111:)
+				(if (and (gEgo has: 7) (not (IsFlag 120)))
+					(gEgo setScript: sTalkWithCountess)
+					(self dispose:)
 				else
-					(= sel_137 2)
+					(= seconds 2)
 				)
 			)
 			(4
-				(sel_42 sel_146: sCountessLeaves)
+				(client setScript: sCountessLeaves)
 			)
 		)
 	)
@@ -112,37 +112,37 @@
 
 (instance sCountessEnters of Script
 	(properties
-		sel_20 {sCountessEnters}
+		name {sCountessEnters}
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
 				((ScriptID 90 1) ; aCountess
-					sel_182: 440
-					sel_3: 1
-					sel_1: 240
-					sel_0: 134
-					sel_299: askQuestions
+					moveTo: 440
+					loop: 1
+					x: 240
+					y: 134
+					actions: askQuestions
 				)
-				(if ((ScriptID 90 1) sel_322:) ; aCountess
-					(((ScriptID 90 1) sel_322:) sel_57:) ; aCountess
+				(if ((ScriptID 90 1) scaler:) ; aCountess
+					(((ScriptID 90 1) scaler:) doit:) ; aCountess
 				)
-				(= sel_136 1)
+				(= cycles 1)
 			)
 			(1
-				((ScriptID 90 1) sel_2: 825) ; aCountess
-				(if (== ((ScriptID 440 2) sel_29:) 0) ; rm440Door
-					((ScriptID 440 2) sel_143: self sel_189:) ; rm440Door
+				((ScriptID 90 1) view: 825) ; aCountess
+				(if (== ((ScriptID 440 2) state:) 0) ; rm440Door
+					((ScriptID 440 2) caller: self open:) ; rm440Door
 				else
-					(= sel_136 1)
+					(= cycles 1)
 				)
 			)
 			(2
-				((ScriptID 90 1) sel_312: PolyPath 122 154 self) ; aCountess
+				((ScriptID 90 1) setMotion: PolyPath 122 154 self) ; aCountess
 			)
 			(3
-				(self sel_111:)
+				(self dispose:)
 			)
 		)
 	)
@@ -150,56 +150,56 @@
 
 (instance sCountessLeaves of Script
 	(properties
-		sel_20 {sCountessLeaves}
+		name {sCountessLeaves}
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
-				(if (== (gEgo sel_2:) 443)
-					(gTheIconBar sel_233: 1 2 5 6)
+				(if (== (gEgo view:) 443)
+					(gTheIconBar disable: 1 2 5 6)
 				else
-					(gWalkHandler sel_81: gCurRoom)
-					(gDirectionHandler sel_81: gCurRoom)
+					(gWalkHandler delete: gCurRoom)
+					(gDirectionHandler delete: gCurRoom)
 				)
-				(gGame sel_587:)
-				(= sel_136 1)
+				(gGame handsOff:)
+				(= cycles 1)
 			)
 			(1
 				((ScriptID 90 1) ; aCountess
-					sel_2: 825
-					sel_161: Walk
-					sel_312: PolyPath 122 154 self
+					view: 825
+					setCycle: Walk
+					setMotion: PolyPath 122 154 self
 				)
 			)
 			(2
-				((ScriptID 90 1) sel_312: PolyPath 210 145 self) ; aCountess
+				((ScriptID 90 1) setMotion: PolyPath 210 145 self) ; aCountess
 			)
 			(3
-				(if (== ((ScriptID 440 2) sel_29:) 0) ; rm440Door
-					((ScriptID 440 2) sel_143: self sel_189:) ; rm440Door
+				(if (== ((ScriptID 440 2) state:) 0) ; rm440Door
+					((ScriptID 440 2) caller: self open:) ; rm440Door
 				else
-					(= sel_136 1)
+					(= cycles 1)
 				)
 			)
 			(4
-				((ScriptID 90 1) sel_312: PolyPath 239 134 self) ; aCountess
+				((ScriptID 90 1) setMotion: PolyPath 239 134 self) ; aCountess
 			)
 			(5
-				((ScriptID 440 2) sel_143: self sel_360:) ; rm440Door
+				((ScriptID 440 2) caller: self close:) ; rm440Door
 			)
 			(6
-				(if (== (gEgo sel_2:) 443)
-					(gGame sel_588: 1)
-					(gUser sel_237: 1)
+				(if (== (gEgo view:) 443)
+					(gGame handsOn: 1)
+					(gUser canControl: 1)
 				else
-					(gGame sel_588:)
+					(gGame handsOn:)
 				)
-				((ScriptID 90 1) sel_299: 0 sel_182: 430 sel_619: 1) ; aCountess
-				(countTimer sel_111:)
-				(gGameMusic2 sel_170:)
-				(WrapMusic sel_168: 0)
-				(self sel_111:)
+				((ScriptID 90 1) actions: 0 moveTo: 430 wandering: 1) ; aCountess
+				(countTimer dispose:)
+				(gGameMusic2 fade:)
+				(WrapMusic pause: 0)
+				(self dispose:)
 				(DisposeScript 441)
 			)
 		)
@@ -208,23 +208,23 @@
 
 (instance sTalkWithCountess of Script
 	(properties
-		sel_20 {sTalkWithCountess}
+		name {sTalkWithCountess}
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
-				(gEgo sel_312: PolyPath 100 172 self)
+				(gEgo setMotion: PolyPath 100 172 self)
 			)
 			(1
-				(gMessager sel_295: 1 0 1 0 self 1440)
+				(gMessager say: 1 0 1 0 self 1440)
 			)
 			(2
 				(SetFlag 120)
-				(countTimer sel_162: countTimer 15)
-				(gGame sel_588: 1)
-				(gTheIconBar sel_177: 1 2 5 6)
-				(self sel_111:)
+				(countTimer setReal: countTimer 15)
+				(gGame handsOn: 1)
+				(gTheIconBar enable: 1 2 5 6)
+				(self dispose:)
 			)
 		)
 	)
@@ -232,45 +232,45 @@
 
 (instance askQuestions of Actions
 	(properties
-		sel_20 {askQuestions}
+		name {askQuestions}
 	)
 
-	(method (sel_300 param1)
+	(method (doVerb param1)
 		(return
 			(switch param1
 				(6
-					(if (== (gEgo sel_2:) 443)
-						(gCurRoom sel_146: (ScriptID 440 1)) ; sOutTapestry
+					(if (== (gEgo view:) 443)
+						(gCurRoom setScript: (ScriptID 440 1)) ; sOutTapestry
 					else
-						(switch (gCurRoom sel_422: (ScriptID 20 0)) ; inNotebook
+						(switch (gCurRoom setInset: (ScriptID 20 0)) ; inNotebook
 							(1030
-								(gMessager sel_295: 1 6 2 0 0 1440)
+								(gMessager say: 1 6 2 0 0 1440)
 								(countTimer
-									sel_137: (+ (countTimer sel_137:) 10)
+									seconds: (+ (countTimer seconds:) 10)
 								)
 							)
 							(else
-								(gMessager sel_295: 1 6 4 0 0 1440)
-								(countTimer sel_137: 1)
+								(gMessager say: 1 6 4 0 0 1440)
+								(countTimer seconds: 1)
 							)
 						)
 					)
 					1
 				)
 				(2
-					(if (== (gEgo sel_2:) 443)
-						(gCurRoom sel_146: (ScriptID 440 1)) ; sOutTapestry
+					(if (== (gEgo view:) 443)
+						(gCurRoom setScript: (ScriptID 440 1)) ; sOutTapestry
 					else
-						(gMessager sel_295: 1 2 0 0 0 1440)
+						(gMessager say: 1 2 0 0 0 1440)
 					)
 					1
 				)
 				(17
-					(if (== (gEgo sel_2:) 443)
-						(gCurRoom sel_146: (ScriptID 440 1)) ; sOutTapestry
+					(if (== (gEgo view:) 443)
+						(gCurRoom setScript: (ScriptID 440 1)) ; sOutTapestry
 					else
-						(gMessager sel_295: 1 17 0 0 0 1440)
-						(countTimer sel_137: (+ (countTimer sel_137:) 10))
+						(gMessager say: 1 17 0 0 0 1440)
+						(countTimer seconds: (+ (countTimer seconds:) 10))
 					)
 					1
 				)
@@ -282,16 +282,16 @@
 
 (instance countTimer of Timer
 	(properties
-		sel_20 {countTimer}
+		name {countTimer}
 	)
 
-	(method (sel_145)
+	(method (cue)
 		(cond
-			((not ((ScriptID 90 1) sel_56:)) ; aCountess
-				((ScriptID 90 1) sel_146: sCountessLeaves) ; aCountess
+			((not ((ScriptID 90 1) mover:)) ; aCountess
+				((ScriptID 90 1) setScript: sCountessLeaves) ; aCountess
 			)
-			(((ScriptID 90 1) sel_142:) ; aCountess
-				(((ScriptID 90 1) sel_142:) sel_65: sCountessLeaves) ; aCountess
+			(((ScriptID 90 1) script:) ; aCountess
+				(((ScriptID 90 1) script:) next: sCountessLeaves) ; aCountess
 			)
 		)
 	)

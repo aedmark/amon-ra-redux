@@ -6,16 +6,16 @@
 
 (class MuseumPoints of Obj
 	(properties
-		sel_20 {MuseumPoints}
-		sel_621 0
-		sel_622 0
-		sel_623 0
-		sel_624 0
-		sel_625 0
-		sel_626 0
-		sel_627 0
-		sel_628 0
-		sel_629 0
-		sel_630 0
+		name {MuseumPoints}
+		midPtX 0
+		midPtY 0
+		northPtX 0
+		northPtY 0
+		southPtX 0
+		southPtY 0
+		eastPtX 0
+		eastPtY 0
+		westPtX 0
+		westPtY 0
 	)
 )

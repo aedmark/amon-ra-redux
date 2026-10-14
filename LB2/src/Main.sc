@@ -527,7 +527,7 @@
 )
 
 (procedure (StepOn param1 param2)
-	(if (& (param1 sel_337: 1) param2)
+	(if (& (param1 onControl: 1) param2)
 		(return 1)
 	else
 		0
@@ -553,8 +553,8 @@
 (procedure (Face param1 param2 param3 param4 &tmp temp0 temp1 temp2 temp3)
 	(= temp3 0)
 	(if (IsObject param2)
-		(= temp1 (param2 sel_1:))
-		(= temp2 (param2 sel_0:))
+		(= temp1 (param2 x:))
+		(= temp2 (param2 y:))
 		(if (== argc 3)
 			(= temp3 param3)
 		)
@@ -565,48 +565,48 @@
 			(= temp3 param4)
 		)
 	)
-	(= temp0 (GetAngle (param1 sel_1:) (param1 sel_0:) temp1 temp2))
-	(param1 sel_253: temp0 (if (IsObject temp3) temp3 else 0))
+	(= temp0 (GetAngle (param1 x:) (param1 y:) temp1 temp2))
+	(param1 setHeading: temp0 (if (IsObject temp3) temp3 else 0))
 )
 
 (procedure (proc0_6 param1 param2)
 	(cond
 		((OneOf param2 4 3 38)
-			(gMessager sel_295: 0 param2 0 0 0 0)
+			(gMessager say: 0 param2 0 0 0 0)
 		)
 		((OneOf param2 6 1 8)
-			(gMessager sel_295: 0 param2 0 (Random 1 2) 0 0)
+			(gMessager say: 0 param2 0 (Random 1 2) 0 0)
 		)
 		((== param2 2)
-			(gMessager sel_295: 0 param2 0 (Random 1 4) 0 0)
+			(gMessager say: 0 param2 0 (Random 1 4) 0 0)
 		)
 		(else
-			(gMessager sel_295: 0 47 0 0 0 0)
+			(gMessager say: 0 47 0 0 0 0)
 		)
 	)
 )
 
 (procedure (proc0_7 &tmp temp0)
-	(gUser sel_237: global108 sel_347: global109)
+	(gUser canControl: global108 canInput: global109)
 	(for ((= temp0 0)) (< temp0 8) ((++ temp0))
 		(if (& global116 (>> $8000 temp0))
-			(gTheIconBar sel_233: temp0)
+			(gTheIconBar disable: temp0)
 		)
 	)
 )
 
 (procedure (proc0_8 param1)
 	(if param1
-		(gTheIconBar sel_81: icon0 sel_129: (icon10 sel_110: sel_117:))
-		(if (== (gTheIconBar sel_207:) icon0)
-			(gTheIconBar sel_207: icon10 sel_228: 0)
-			(gGame sel_197: (icon10 sel_33:))
+		(gTheIconBar delete: icon0 addToFront: (icon10 init: yourself:))
+		(if (== (gTheIconBar curIcon:) icon0)
+			(gTheIconBar curIcon: icon10 walkIconItem: 0)
+			(gGame setCursor: (icon10 cursor:))
 		)
 	else
-		(gTheIconBar sel_81: icon10 sel_129: (icon0 sel_110: sel_117:))
-		(if (== (gTheIconBar sel_207:) icon10)
-			(gTheIconBar sel_207: icon0 sel_228: icon0)
-			(gGame sel_197: (icon0 sel_33:))
+		(gTheIconBar delete: icon10 addToFront: (icon0 init: yourself:))
+		(if (== (gTheIconBar curIcon:) icon10)
+			(gTheIconBar curIcon: icon0 walkIconItem: icon0)
+			(gGame setCursor: (icon0 cursor:))
 		)
 	)
 )
@@ -624,7 +624,7 @@
 
 (procedure (Localize param1 param2 param3 param4 param5)
 	(return
-		(switch (gGame sel_84:)
+		(switch (gGame printLang:)
 			(49 param1)
 			(34 param2)
 			(33 param3)
@@ -649,22 +649,22 @@
 	(SetFlag 29)
 	(SetFlag 34)
 	(SetFlag 43)
-	((ScriptID 21 0) sel_57: 791) ; addCluesCode
-	((ScriptID 21 0) sel_57: 263) ; addCluesCode
-	((ScriptID 21 0) sel_57: 264) ; addCluesCode
-	((ScriptID 21 0) sel_57: 265) ; addCluesCode
-	((ScriptID 21 0) sel_57: 266) ; addCluesCode
-	((ScriptID 21 0) sel_57: 267) ; addCluesCode
-	((ScriptID 21 0) sel_57: 268) ; addCluesCode
-	((ScriptID 21 0) sel_57: 269) ; addCluesCode
-	((ScriptID 21 0) sel_57: 270) ; addCluesCode
-	((ScriptID 21 0) sel_57: 271) ; addCluesCode
-	((ScriptID 21 0) sel_57: 272) ; addCluesCode
-	((ScriptID 21 1) sel_57: 518) ; dropCluesCode
-	((ScriptID 21 0) sel_57: 520) ; addCluesCode
-	(ego sel_584: 1)
-	(ego sel_350: -1 22)
-	(ego sel_350: -1 6)
+	((ScriptID 21 0) doit: 791) ; addCluesCode
+	((ScriptID 21 0) doit: 263) ; addCluesCode
+	((ScriptID 21 0) doit: 264) ; addCluesCode
+	((ScriptID 21 0) doit: 265) ; addCluesCode
+	((ScriptID 21 0) doit: 266) ; addCluesCode
+	((ScriptID 21 0) doit: 267) ; addCluesCode
+	((ScriptID 21 0) doit: 268) ; addCluesCode
+	((ScriptID 21 0) doit: 269) ; addCluesCode
+	((ScriptID 21 0) doit: 270) ; addCluesCode
+	((ScriptID 21 0) doit: 271) ; addCluesCode
+	((ScriptID 21 0) doit: 272) ; addCluesCode
+	((ScriptID 21 1) doit: 518) ; dropCluesCode
+	((ScriptID 21 0) doit: 520) ; addCluesCode
+	(ego wearingGown: 1)
+	(ego get: -1 22)
+	(ego get: -1 6)
 )
 
 (procedure (proc0_14)
@@ -672,9 +672,9 @@
 	(SetFlag 1)
 	(SetFlag 25)
 	(SetFlag 23)
-	((ScriptID 21 0) sel_57: 797) ; addCluesCode
-	(ego sel_350: -1 28)
-	(ego sel_350: -1 21)
+	((ScriptID 21 0) doit: 797) ; addCluesCode
+	(ego get: -1 28)
+	(ego get: -1 21)
 )
 
 (procedure (proc0_15)
@@ -692,20 +692,20 @@
 	(SetFlag 40)
 	(SetFlag 42)
 	(SetFlag 49)
-	((ScriptID 21 0) sel_57: 790) ; addCluesCode
-	((ScriptID 21 0) sel_57: 789) ; addCluesCode
-	((ScriptID 21 0) sel_57: 787) ; addCluesCode
-	((ScriptID 21 0) sel_57: 783) ; addCluesCode
-	((ScriptID 21 0) sel_57: 788) ; addCluesCode
-	((ScriptID 21 0) sel_57: 798) ; addCluesCode
-	((ScriptID 21 0) sel_57: 802) ; addCluesCode
-	((ScriptID 21 0) sel_57: 779) ; addCluesCode
-	((ScriptID 21 0) sel_57: 777) ; addCluesCode
-	((ScriptID 21 0) sel_57: 776) ; addCluesCode
-	((ScriptID 21 0) sel_57: 778) ; addCluesCode
-	((ScriptID 21 0) sel_57: 1025) ; addCluesCode
-	((ScriptID 21 0) sel_57: 1030) ; addCluesCode
-	(ego sel_350: -1 20 18 14 19 29 33 10 8 7 9 11)
+	((ScriptID 21 0) doit: 790) ; addCluesCode
+	((ScriptID 21 0) doit: 789) ; addCluesCode
+	((ScriptID 21 0) doit: 787) ; addCluesCode
+	((ScriptID 21 0) doit: 783) ; addCluesCode
+	((ScriptID 21 0) doit: 788) ; addCluesCode
+	((ScriptID 21 0) doit: 798) ; addCluesCode
+	((ScriptID 21 0) doit: 802) ; addCluesCode
+	((ScriptID 21 0) doit: 779) ; addCluesCode
+	((ScriptID 21 0) doit: 777) ; addCluesCode
+	((ScriptID 21 0) doit: 776) ; addCluesCode
+	((ScriptID 21 0) doit: 778) ; addCluesCode
+	((ScriptID 21 0) doit: 1025) ; addCluesCode
+	((ScriptID 21 0) doit: 1030) ; addCluesCode
+	(ego get: -1 20 18 14 19 29 33 10 8 7 9 11)
 )
 
 (procedure (proc0_16 &tmp temp0)
@@ -714,134 +714,134 @@
 	(SetFlag 5)
 	(SetFlag 6)
 	(SetFlag 62)
-	((ScriptID 21 0) sel_57: 794) ; addCluesCode
-	((ScriptID 21 0) sel_57: 785) ; addCluesCode
-	((ScriptID 21 0) sel_57: 786) ; addCluesCode
-	((ScriptID 21 0) sel_57: 799) ; addCluesCode
-	((ScriptID 21 0) sel_57: 796) ; addCluesCode
-	((ScriptID 21 0) sel_57: 795) ; addCluesCode
-	((ScriptID 21 0) sel_57: 781) ; addCluesCode
-	((ScriptID 21 0) sel_57: 800) ; addCluesCode
-	((ScriptID 21 0) sel_57: 782) ; addCluesCode
-	((ScriptID 21 0) sel_57: 780) ; addCluesCode
-	(ego sel_351: 6 0 1 3 4 5 8 9 18 23 32)
-	((ScriptID 21 1) sel_57: 775) ; dropCluesCode
-	((ScriptID 21 1) sel_57: 769) ; dropCluesCode
-	((ScriptID 21 1) sel_57: 770) ; dropCluesCode
-	((ScriptID 21 1) sel_57: 772) ; dropCluesCode
-	((ScriptID 21 1) sel_57: 773) ; dropCluesCode
-	((ScriptID 21 1) sel_57: 774) ; dropCluesCode
-	((ScriptID 21 1) sel_57: 777) ; dropCluesCode
-	((ScriptID 21 1) sel_57: 778) ; dropCluesCode
-	((ScriptID 21 1) sel_57: 787) ; dropCluesCode
-	((ScriptID 21 1) sel_57: 792) ; dropCluesCode
-	((ScriptID 21 1) sel_57: 801) ; dropCluesCode
+	((ScriptID 21 0) doit: 794) ; addCluesCode
+	((ScriptID 21 0) doit: 785) ; addCluesCode
+	((ScriptID 21 0) doit: 786) ; addCluesCode
+	((ScriptID 21 0) doit: 799) ; addCluesCode
+	((ScriptID 21 0) doit: 796) ; addCluesCode
+	((ScriptID 21 0) doit: 795) ; addCluesCode
+	((ScriptID 21 0) doit: 781) ; addCluesCode
+	((ScriptID 21 0) doit: 800) ; addCluesCode
+	((ScriptID 21 0) doit: 782) ; addCluesCode
+	((ScriptID 21 0) doit: 780) ; addCluesCode
+	(ego put: 6 0 1 3 4 5 8 9 18 23 32)
+	((ScriptID 21 1) doit: 775) ; dropCluesCode
+	((ScriptID 21 1) doit: 769) ; dropCluesCode
+	((ScriptID 21 1) doit: 770) ; dropCluesCode
+	((ScriptID 21 1) doit: 772) ; dropCluesCode
+	((ScriptID 21 1) doit: 773) ; dropCluesCode
+	((ScriptID 21 1) doit: 774) ; dropCluesCode
+	((ScriptID 21 1) doit: 777) ; dropCluesCode
+	((ScriptID 21 1) doit: 778) ; dropCluesCode
+	((ScriptID 21 1) doit: 787) ; dropCluesCode
+	((ScriptID 21 1) doit: 792) ; dropCluesCode
+	((ScriptID 21 1) doit: 801) ; dropCluesCode
 	(for ((= temp0 1)) (< temp0 27) ((++ temp0))
-		((ScriptID 21 0) sel_57: (+ temp0 1088)) ; addCluesCode
+		((ScriptID 21 0) doit: (+ temp0 1088)) ; addCluesCode
 	)
-	(ego sel_350: -1 25 16 17 30 27 26 12 31 13)
+	(ego get: -1 25 16 17 30 27 26 12 31 13)
 )
 
 (procedure (proc0_17)
 	(proc0_16)
 	(SetFlag 10)
-	((ScriptID 21 0) sel_57: 784) ; addCluesCode
-	((ScriptID 21 0) sel_57: 803) ; addCluesCode
-	(ego sel_350: -1 34 15)
+	((ScriptID 21 0) doit: 784) ; addCluesCode
+	((ScriptID 21 0) doit: 803) ; addCluesCode
+	(ego get: -1 34 15)
 )
 
 (instance gameMusic1 of Sound
 	(properties
-		sel_20 {gameMusic1}
+		name {gameMusic1}
 	)
 )
 
 (instance gameMusic2 of Sound
 	(properties
-		sel_20 {gameMusic2}
+		name {gameMusic2}
 	)
 )
 
 (class WrapMusic of List
 	(properties
-		sel_20 {WrapMusic}
-		sel_608 0
-		sel_609 0
-		sel_610 0
-		sel_94 127
-		sel_611 0
+		name {WrapMusic}
+		wrapSound 0
+		currentSound 0
+		loopIt 0
+		vol 127
+		paused 0
 	)
 
-	(method (sel_110 param1)
-		(Sounds sel_119: 174)
-		(if (not sel_608)
-			(= sel_608 gGameMusic1)
+	(method (init param1)
+		(Sounds eachElementDo: 174)
+		(if (not wrapSound)
+			(= wrapSound gGameMusic1)
 		)
-		(= sel_610 param1)
-		(= sel_609 0)
-		(self sel_118: &rest sel_145:)
+		(= loopIt param1)
+		(= currentSound 0)
+		(self add: &rest cue:)
 	)
 
-	(method (sel_111 param1)
-		(sel_608 sel_42: 0)
+	(method (dispose param1)
+		(wrapSound client: 0)
 		(if (and argc param1)
-			(super sel_111:)
+			(super dispose:)
 		else
-			(self sel_125:)
+			(self release:)
 		)
 	)
 
-	(method (sel_145 &tmp temp0 temp1 temp2)
+	(method (cue &tmp temp0 temp1 temp2)
 		(cond
-			((OneOf (sel_608 sel_165:) -1 0)
+			((OneOf (wrapSound prevSignal:) -1 0)
 				(= temp0 1)
 				(cond
-					((and (== sel_610 -1) (== sel_609 (- sel_86 1)))
+					((and (== loopIt -1) (== currentSound (- size 1)))
 						(= temp0 -1)
 					)
-					((== sel_609 sel_86)
-						(switch sel_610
+					((== currentSound size)
+						(switch loopIt
 							(1
-								(= sel_609 0)
+								(= currentSound 0)
 							)
 							(else
-								(self sel_125: sel_111:)
+								(self release: dispose:)
 								(return)
 							)
 						)
 					)
 				)
-				(if (> (= temp1 (self sel_64: sel_609)) 1000)
+				(if (> (= temp1 (self at: currentSound)) 1000)
 					(-= temp1 1000)
 					(= temp2 1)
 				else
 					(= temp2 0)
 				)
-				(sel_608
-					sel_40: temp1
-					sel_155: temp0
-					sel_99: (if temp2 5 else 1)
-					sel_39: sel_94 self
+				(wrapSound
+					number: temp1
+					setLoop: temp0
+					flags: (if temp2 5 else 1)
+					play: vol self
 				)
-				(++ sel_609)
+				(++ currentSound)
 			)
-			(sel_611
-				(sel_608 sel_168:)
+			(paused
+				(wrapSound pause:)
 			)
 			(else
-				(= sel_94 (sel_608 sel_94:))
+				(= vol (wrapSound vol:))
 			)
 		)
 	)
 
-	(method (sel_168 param1)
-		(if (IsObject sel_608)
+	(method (pause param1)
+		(if (IsObject wrapSound)
 			(if (and argc (not param1))
-				(= sel_611 0)
-				(sel_608 sel_168: 0 sel_170: sel_94 5 5 0)
+				(= paused 0)
+				(wrapSound pause: 0 fade: vol 5 5 0)
 			else
-				(= sel_611 1)
-				(sel_608 sel_170: 0 5 5 0)
+				(= paused 1)
+				(wrapSound fade: 0 5 5 0)
 			)
 		)
 	)
@@ -849,98 +849,98 @@
 
 (class Actions of Code
 	(properties
-		sel_20 {Actions}
+		name {Actions}
 	)
 
-	(method (sel_300)
+	(method (doVerb)
 		(return 0)
 	)
 )
 
 (instance stopGroop of Grooper
 	(properties
-		sel_20 {stopGroop}
+		name {stopGroop}
 	)
 )
 
 (instance walkCursor of Cursor
 	(properties
-		sel_20 {walkCursor}
+		name {walkCursor}
 	)
 )
 
 (instance lookCursor of Cursor
 	(properties
-		sel_20 {lookCursor}
-		sel_2 1
+		name {lookCursor}
+		view 1
 	)
 )
 
 (instance doCursor of Cursor
 	(properties
-		sel_20 {doCursor}
-		sel_2 2
+		name {doCursor}
+		view 2
 	)
 )
 
 (instance talkCursor of Cursor
 	(properties
-		sel_20 {talkCursor}
-		sel_2 3
+		name {talkCursor}
+		view 3
 	)
 )
 
 (instance askCursor of Cursor
 	(properties
-		sel_20 {askCursor}
-		sel_2 4
+		name {askCursor}
+		view 4
 	)
 )
 
 (instance exitCursor of Cursor
 	(properties
-		sel_20 {exitCursor}
-		sel_2 6
+		name {exitCursor}
+		view 6
 	)
 )
 
 (instance lb2KDH of EventHandler
 	(properties
-		sel_20 {lb2KDH}
+		name {lb2KDH}
 	)
 )
 
 (instance lb2MDH of EventHandler
 	(properties
-		sel_20 {lb2MDH}
+		name {lb2MDH}
 	)
 )
 
 (instance lb2DH of EventHandler
 	(properties
-		sel_20 {lb2DH}
+		name {lb2DH}
 	)
 )
 
 (instance lb2WH of EventHandler
 	(properties
-		sel_20 {lb2WH}
+		name {lb2WH}
 	)
 )
 
 (instance lb2Exits of EventHandler
 	(properties
-		sel_20 {lb2Exits}
+		name {lb2Exits}
 	)
 )
 
 (class LB2 of Game
 	(properties
-		sel_20 {LB2}
-		sel_84 0
+		name {LB2}
+		printLang 0
 	)
 
-	(method (sel_110 &tmp temp0 [temp1 5] [temp6 16])
+	(method (init &tmp temp0 [temp1 5] [temp6 16])
 		(StrSplit @temp1 @temp6 0)
 		Print
 		StopWalk
@@ -955,44 +955,44 @@
 		(ScriptID 982)
 		Narrator
 		Osc
-		(super sel_110:)
+		(super init:)
 		(= gVersion {x.yyy.zzz})
 		(= global112 {991-999-9999})
 		(= global113 {9999-999999})
 		(= global114 {992-999-9999})
-		((ScriptID 14 0) sel_110:) ; lb2InitCode
+		((ScriptID 14 0) init:) ; lb2InitCode
 		(DisposeScript 14)
-		((ScriptID 15 0) sel_110:) ; invCode
+		((ScriptID 15 0) init:) ; invCode
 		(= gNormalCursor walkCursor)
 		(= gDoVerbCode lb2DoVerbCode)
 		(= gFtrInitializer lb2FtrInit)
 		(= gLb2ApproachCode lb2ApproachCode)
 		(= gStopGroop stopGroop)
 		(= gMessager lb2Messager)
-		((= gKeyDownHandler lb2KDH) sel_118:)
-		((= gMouseDownHandler lb2MDH) sel_118:)
-		((= gDirectionHandler lb2DH) sel_118:)
-		((= gWalkHandler lb2WH) sel_118:)
-		((= gLb2Exits lb2Exits) sel_118:)
-		((= global95 (List sel_109:)) sel_20: {altPolys} sel_118:)
-		(gMouseDownHandler sel_129: lb2Exits)
-		(gKeyDownHandler sel_129: lb2Exits)
+		((= gKeyDownHandler lb2KDH) add:)
+		((= gMouseDownHandler lb2MDH) add:)
+		((= gDirectionHandler lb2DH) add:)
+		((= gWalkHandler lb2WH) add:)
+		((= gLb2Exits lb2Exits) add:)
+		((= global95 (List new:)) name: {altPolys} add:)
+		(gMouseDownHandler addToFront: lb2Exits)
+		(gKeyDownHandler addToFront: lb2Exits)
 		(= gPMouse PseudoMouse)
-		(WrapMusic sel_118:)
-		((= gGameMusic1 gameMusic1) sel_166: self sel_99: 1 sel_110:)
-		((= gGameMusic2 gameMusic2) sel_166: self sel_99: 1 sel_110:)
+		(WrapMusic add:)
+		((= gGameMusic1 gameMusic1) owner: self flags: 1 init:)
+		((= gGameMusic2 gameMusic2) owner: self flags: 1 init:)
 		((= gTheIconBar IconBar)
-			sel_118: icon0 icon1 icon2 icon3 icon4 icon6 icon7 icon8 icon9
-			sel_119: 110
-			sel_119: 211 global157
-			sel_119: 212 global177
-			sel_207: icon0
-			sel_226: icon6
-			sel_227: icon9
-			sel_228: icon0
-			sel_233: 5
-			sel_233:
-			sel_29: 3072
+			add: icon0 icon1 icon2 icon3 icon4 icon6 icon7 icon8 icon9
+			eachElementDo: 110
+			eachElementDo: 211 global157
+			eachElementDo: 212 global177
+			curIcon: icon0
+			useIconItem: icon6
+			helpIconItem: icon9
+			walkIconItem: icon0
+			disable: 5
+			disable:
+			state: 3072
 		)
 		(if (GameIsRestarting)
 			(MemorySegment 1 @global107) ; MS_RESTORE_TO
@@ -1004,30 +1004,30 @@
 		else
 			(= global110 0)
 		)
-		(gTheIconBar sel_177:)
+		(gTheIconBar enable:)
 		(= gEgo ego)
-		(gUser sel_341: gEgo sel_237: 0 sel_347: 0)
-		(self sel_399: global107)
+		(gUser alterEgo: gEgo canControl: 0 canInput: 0)
+		(self newRoom: global107)
 	)
 
-	(method (sel_57 &tmp temp0 temp1)
+	(method (doit &tmp temp0 temp1)
 		(if
 			(and
-				(gLb2Exits sel_86:)
-				(== (gTheIconBar sel_207:) (gTheIconBar sel_228:))
+				(gLb2Exits size:)
+				(== (gTheIconBar curIcon:) (gTheIconBar walkIconItem:))
 			)
-			(gLb2Exits sel_119: 57)
+			(gLb2Exits eachElementDo: 57)
 		)
-		(if sel_397
-			(= temp0 sel_397)
-			(= temp1 sel_398)
-			(= sel_397 (= sel_398 0))
+		(if panelObj
+			(= temp0 panelObj)
+			(= temp1 panelSelector)
+			(= panelObj (= panelSelector 0))
 			(Eval temp0 temp1)
 		)
-		(super sel_57:)
+		(super doit:)
 	)
 
-	(method (sel_62 &tmp temp0)
+	(method (replay &tmp temp0)
 		(= gSystemWindow lb2Win)
 		(= gNormalCursor walkCursor)
 		(if (and (OneOf gCurRoomNum 330 335) (== gAct 2))
@@ -1035,21 +1035,21 @@
 		else
 			(Palette palSET_INTENSITY 0 255 100)
 		)
-		(super sel_62: &rest)
+		(super replay: &rest)
 	)
 
-	(method (sel_399 param1)
-		(gGame sel_197: gWaitCursor)
-		(gPMouse sel_167:)
+	(method (newRoom param1)
+		(gGame setCursor: gWaitCursor)
+		(gPMouse stop:)
 		(if (and (== gAct 5) (not (IsFlag 123)))
-			(if (not (gEgo sel_238: 10))
-				(gEgo sel_350: 10)
+			(if (not (gEgo has: 10))
+				(gEgo get: 10)
 			)
-			(if (not (gEgo sel_238: 14))
-				(gEgo sel_350: 14)
+			(if (not (gEgo has: 14))
+				(gEgo get: 14)
 			)
-			(if (not (gEgo sel_238: 16))
-				(gEgo sel_350: 16)
+			(if (not (gEgo has: 16))
+				(gEgo get: 16)
 			)
 			(if (== global150 0)
 				(= global150 4)
@@ -1057,46 +1057,46 @@
 			(SetFlag 123)
 		)
 		(if gModelessDialog
-			(gModelessDialog sel_111:)
+			(gModelessDialog dispose:)
 		)
-		(if (and (IsObject gFastCast) (gFastCast sel_24:))
-			(gFastCast sel_119: 111 1)
+		(if (and (IsObject gFastCast) (gFastCast elements:))
+			(gFastCast eachElementDo: 111 1)
 		)
-		(if (gLb2Exits sel_86:)
-			(gLb2Exits sel_119: 111)
+		(if (gLb2Exits size:)
+			(gLb2Exits eachElementDo: 111)
 		)
 		(gNarrator
-			sel_1: -1
-			sel_0: -1
-			sel_291: 1
-			sel_537: 0
-			sel_538: 1
-			sel_203: 0
-			sel_540: 0
-			sel_20: {Narrator}
+			x: -1
+			y: -1
+			disposeWhenDone: 1
+			talkWidth: 0
+			keepWindow: 1
+			modeless: 0
+			showTitle: 0
+			name: {Narrator}
 		)
-		(gTheIconBar sel_233:)
-		(super sel_399: param1)
+		(gTheIconBar disable:)
+		(super newRoom: param1)
 	)
 
-	(method (sel_400 param1 &tmp temp0 temp1 [temp2 2])
-		((ScriptID 11) sel_57: param1) ; disposeCode
-		(for ((= temp1 0)) (< temp1 (gTimers sel_86:)) ((++ temp1))
-			(gTimers sel_81: (= temp0 (gTimers sel_64: 0)))
-			(gTimers sel_118: temp0)
+	(method (startRoom param1 &tmp temp0 temp1 [temp2 2])
+		((ScriptID 11) doit: param1) ; disposeCode
+		(for ((= temp1 0)) (< temp1 (gTimers size:)) ((++ temp1))
+			(gTimers delete: (= temp0 (gTimers at: 0)))
+			(gTimers add: temp0)
 		)
-		(for ((= temp1 0)) (< temp1 (WrapMusic sel_86:)) ((++ temp1))
-			(WrapMusic sel_81: (= temp0 (WrapMusic sel_64: 0)))
-			(WrapMusic sel_118: temp0)
+		(for ((= temp1 0)) (< temp1 (WrapMusic size:)) ((++ temp1))
+			(WrapMusic delete: (= temp0 (WrapMusic at: 0)))
+			(WrapMusic add: temp0)
 		)
 		(if
 			(and
 				(!= (- (MemoryInfo 1) 2) (MemoryInfo 0)) ; FreeHeap, LargestPtr
 				(Print
-					sel_198: 1 0 0 1 0 0 10
-					sel_205: 0 1 0 1 1 0 12 10
-					sel_205: 1 1 0 2 1 70 12 10
-					sel_110:
+					addText: 1 0 0 1 0 0 10
+					addButton: 0 1 0 1 1 0 12 10
+					addButton: 1 1 0 2 1 70 12 10
+					init:
 				)
 			)
 			(SetDebug)
@@ -1174,158 +1174,158 @@
 			(ScriptID 92) ; intro
 		)
 		(if (and global110 (not (OneOf param1 100)))
-			((ScriptID 10 0) sel_110:) ; MISSING SCRIPT
+			((ScriptID 10 0) init:) ; MISSING SCRIPT
 		)
-		(gTheIconBar sel_177:)
-		(super sel_400: param1)
+		(gTheIconBar enable:)
+		(super startRoom: param1)
 		(if
 			(and
-				(gEgo sel_245:)
-				(not (gEgo sel_59:))
-				((gEgo sel_245:) sel_114: StopWalk)
+				(gEgo cycler:)
+				(not (gEgo looper:))
+				((gEgo cycler:) isKindOf: StopWalk)
 			)
-			(gEgo sel_155: stopGroop)
+			(gEgo setLoop: stopGroop)
 		)
-		(if (== (gTheIconBar sel_207:) (gTheIconBar sel_64: 5))
-			(gTheIconBar sel_207: (gTheIconBar sel_64: 0))
+		(if (== (gTheIconBar curIcon:) (gTheIconBar at: 5))
+			(gTheIconBar curIcon: (gTheIconBar at: 0))
 		)
 	)
 
-	(method (sel_101)
-		(gCurRoom sel_28: 6 sel_417: 780)
-		(gCast sel_119: 102)
-		(Animate (gCast sel_24:) 0)
+	(method (restart)
+		(gCurRoom style: 6 drawPic: 780)
+		(gCast eachElementDo: 102)
+		(Animate (gCast elements:) 0)
 		(MemorySegment 0 @global107 2) ; MS_SAVE_FROM
-		(super sel_101:)
+		(super restart:)
 	)
 
-	(method (sel_76 &tmp temp0 temp1 temp2 temp3)
-		(= temp3 (EventHandler sel_109:))
-		(for ((= temp2 0)) (< temp2 (gAddToPics sel_86:)) ((++ temp2))
-			(temp3 sel_118: (gAddToPics sel_64: temp2))
+	(method (restore &tmp temp0 temp1 temp2 temp3)
+		(= temp3 (EventHandler new:))
+		(for ((= temp2 0)) (< temp2 (gAddToPics size:)) ((++ temp2))
+			(temp3 add: (gAddToPics at: temp2))
 		)
 		(DrawPic 780 7)
-		(gCast sel_119: 102)
+		(gCast eachElementDo: 102)
 		(Animate 0)
 		(= temp1 gNormalCursor)
 		(= gNormalCursor 999)
 		(= temp0 gSystemWindow)
 		(= gSystemWindow SysWindow)
-		(super sel_76: &rest)
-		(DrawPic (gCurRoom sel_408:) 100)
-		(gCast sel_119: 216)
-		(for ((= temp2 0)) (< temp2 (temp3 sel_86:)) ((++ temp2))
-			(gAddToPics sel_118: (temp3 sel_64: temp2))
+		(super restore: &rest)
+		(DrawPic (gCurRoom picture:) 100)
+		(gCast eachElementDo: 216)
+		(for ((= temp2 0)) (< temp2 (temp3 size:)) ((++ temp2))
+			(gAddToPics add: (temp3 at: temp2))
 		)
-		(temp3 sel_125: sel_111:)
-		(gAddToPics sel_57:)
-		(Animate (gCast sel_24:) 0)
+		(temp3 release: dispose:)
+		(gAddToPics doit:)
+		(Animate (gCast elements:) 0)
 		(= gSystemWindow temp0)
 		(= gNormalCursor temp1)
-		(if (== (= temp2 ((gTheIconBar sel_207:) sel_33:)) 999)
-			(gGame sel_197: gWaitCursor)
+		(if (== (= temp2 ((gTheIconBar curIcon:) cursor:)) 999)
+			(gGame setCursor: gWaitCursor)
 		else
-			(gGame sel_197: temp2)
+			(gGame setCursor: temp2)
 		)
 	)
 
-	(method (sel_75 &tmp temp0 temp1 temp2)
+	(method (save &tmp temp0 temp1 temp2)
 		(= temp1 gNormalCursor)
 		(= gNormalCursor 999)
 		(= temp0 gSystemWindow)
 		(= gSystemWindow SysWindow)
-		(super sel_75: &rest)
+		(super save: &rest)
 		(= gSystemWindow temp0)
 		(= gNormalCursor temp1)
-		(if (== (= temp2 ((gTheIconBar sel_207:) sel_33:)) 999)
-			(gGame sel_197: gWaitCursor)
+		(if (== (= temp2 ((gTheIconBar curIcon:) cursor:)) 999)
+			(gGame setCursor: gWaitCursor)
 		else
-			(gGame sel_197: temp2)
+			(gGame setCursor: temp2)
 		)
 	)
 
-	(method (sel_133 param1)
-		(if (param1 sel_73:)
+	(method (handleEvent param1)
+		(if (param1 claimed:)
 			(return 1)
 		)
 		(return
-			(switch (param1 sel_31:)
+			(switch (param1 type:)
 				(4
-					(switch (param1 sel_37:)
+					(switch (param1 message:)
 						(9
-							(if (not (& ((gTheIconBar sel_64: 6) sel_14:) $0004))
+							(if (not (& ((gTheIconBar at: 6) signal:) $0004))
 								(if gFastCast
 									(return gFastCast)
 								)
-								(gEgo sel_586:)
-								(param1 sel_73: 1)
+								(gEgo showInv:)
+								(param1 claimed: 1)
 							)
 						)
 						(3840
-							(if (not (& ((gTheIconBar sel_64: 6) sel_14:) $0004))
+							(if (not (& ((gTheIconBar at: 6) signal:) $0004))
 								(if gFastCast
 									(return gFastCast)
 								)
-								(gEgo sel_586:)
-								(param1 sel_73: 1)
+								(gEgo showInv:)
+								(param1 claimed: 1)
 							)
 						)
 						(17
-							(gGame sel_100:)
-							(param1 sel_73: 1)
+							(gGame quitGame:)
+							(param1 claimed: 1)
 						)
 						(3
-							(if (not (& ((gTheIconBar sel_64: 7) sel_14:) $0004))
-								(gGame sel_612:)
+							(if (not (& ((gTheIconBar at: 7) signal:) $0004))
+								(gGame showControls:)
 							)
 						)
 						(15360
 							(cond
-								((gGame sel_404:)
-									(gGame sel_404: 0)
+								((gGame masterVolume:)
+									(gGame masterVolume: 0)
 								)
 								((> global106 1)
-									(gGame sel_404: 15)
+									(gGame masterVolume: 15)
 								)
 								(else
-									(gGame sel_404: 1)
+									(gGame masterVolume: 1)
 								)
 							)
-							(param1 sel_73: 1)
+							(param1 claimed: 1)
 						)
 						(16128
-							(if (not (& ((gTheIconBar sel_64: 7) sel_14:) $0004))
+							(if (not (& ((gTheIconBar at: 7) signal:) $0004))
 								(if gFastCast
 									(return gFastCast)
 								)
-								(gGame sel_75:)
-								(param1 sel_73: 1)
+								(gGame save:)
+								(param1 claimed: 1)
 							)
 						)
 						(16640
-							(if (not (& ((gTheIconBar sel_64: 7) sel_14:) $0004))
+							(if (not (& ((gTheIconBar at: 7) signal:) $0004))
 								(if gFastCast
 									(return gFastCast)
 								)
-								(gGame sel_76:)
-								(param1 sel_73: 1)
+								(gGame restore:)
+								(param1 claimed: 1)
 							)
 						)
 						(43
-							(if (gUser sel_343:)
+							(if (gUser theControls:)
 								(= gSpeed (Max 0 (-- gSpeed)))
-								(gEgo sel_352: gSpeed)
+								(gEgo setSpeed: gSpeed)
 							)
 						)
 						(45
-							(if (gUser sel_343:)
+							(if (gUser theControls:)
 								(++ gSpeed)
-								(gEgo sel_352: gSpeed)
+								(gEgo setSpeed: gSpeed)
 							)
 						)
 						(61
-							(if (gUser sel_343:)
-								(gEgo sel_352: 6)
+							(if (gUser theControls:)
+								(gEgo setSpeed: 6)
 							)
 						)
 					)
@@ -1334,11 +1334,11 @@
 		)
 	)
 
-	(method (sel_197 param1 param2 param3 param4 &tmp temp0)
+	(method (setCursor param1 param2 param3 param4 &tmp temp0)
 		(= temp0 gTheCursor)
 		(if argc
 			(if (IsObject param1)
-				((= gTheCursor param1) sel_110:)
+				((= gTheCursor param1) init:)
 			else
 				(SetCursor (= gTheCursor param1) 0 0)
 			)
@@ -1358,124 +1358,124 @@
 		(return temp0)
 	)
 
-	(method (sel_402))
+	(method (checkAni))
 
-	(method (sel_100)
+	(method (quitGame)
 		(if
 			(Print
-				sel_198: 12 0 0 1 0 0 0
-				sel_206: 992 0 0 0 15
-				sel_205: 1 12 0 8 1 140 67 0
-				sel_205: 0 12 0 9 1 140 87 0
-				sel_204: 1
-				sel_110:
+				addText: 12 0 0 1 0 0 0
+				addIcon: 992 0 0 0 15
+				addButton: 1 12 0 8 1 140 67 0
+				addButton: 0 12 0 9 1 140 87 0
+				saveCursor: 1
+				init:
 			)
-			(super sel_100: 1)
+			(super quitGame: 1)
 		)
 	)
 
-	(method (sel_71)
+	(method (pragmaFail)
 		(if gModelessDialog
-			(gModelessDialog sel_111:)
+			(gModelessDialog dispose:)
 		)
-		(if (gUser sel_347:)
-			(gMessager sel_295: 0 ((gUser sel_346:) sel_37:))
+		(if (gUser canInput:)
+			(gMessager say: 0 ((gUser curEvent:) message:))
 		)
 	)
 
-	(method (sel_587)
+	(method (handsOff)
 		(if (not global121)
-			(= global121 (gTheIconBar sel_207:))
+			(= global121 (gTheIconBar curIcon:))
 		)
-		(= global108 (gUser sel_237:))
-		(= global109 (gUser sel_347:))
-		(gUser sel_237: 0 sel_347: 0)
-		(gEgo sel_312: 0)
+		(= global108 (gUser canControl:))
+		(= global109 (gUser canInput:))
+		(gUser canControl: 0 canInput: 0)
+		(gEgo setMotion: 0)
 		(= global116 0)
-		(gTheIconBar sel_119: 96 checkIcon)
-		(gTheIconBar sel_207: (gTheIconBar sel_64: 7))
-		(gTheIconBar sel_233: 0 1 2 3 4 5 6)
+		(gTheIconBar eachElementDo: 96 checkIcon)
+		(gTheIconBar curIcon: (gTheIconBar at: 7))
+		(gTheIconBar disable: 0 1 2 3 4 5 6)
 		(if (not (HaveMouse))
-			(gGame sel_197: 996)
+			(gGame setCursor: 996)
 		else
-			(gGame sel_197: gWaitCursor)
+			(gGame setCursor: gWaitCursor)
 		)
 	)
 
-	(method (sel_588 param1)
-		(gUser sel_237: 1 sel_347: 1)
-		(gTheIconBar sel_177: 0 1 2 3 4 5 6)
-		(gTheIconBar sel_177: 7)
+	(method (handsOn param1)
+		(gUser canControl: 1 canInput: 1)
+		(gTheIconBar enable: 0 1 2 3 4 5 6)
+		(gTheIconBar enable: 7)
 		(if (and argc param1)
 			(proc0_7)
 		)
-		(if (not (gTheIconBar sel_225:))
-			(gTheIconBar sel_233: 5)
+		(if (not (gTheIconBar curInvIcon:))
+			(gTheIconBar disable: 5)
 		)
 		(if
 			(and
 				global121
-				(or (!= global121 icon10) (== (gTheIconBar sel_64: 0) icon10))
+				(or (!= global121 icon10) (== (gTheIconBar at: 0) icon10))
 			)
-			(gTheIconBar sel_207: global121)
-			(gGame sel_197: (global121 sel_33:))
+			(gTheIconBar curIcon: global121)
+			(gGame setCursor: (global121 cursor:))
 			(if
 				(and
-					(== (gTheIconBar sel_207:) (gTheIconBar sel_64: 5))
-					(not (gTheIconBar sel_225:))
+					(== (gTheIconBar curIcon:) (gTheIconBar at: 5))
+					(not (gTheIconBar curInvIcon:))
 				)
-				(gTheIconBar sel_231:)
+				(gTheIconBar advanceCurIcon:)
 			)
 		)
 		(= global121 0)
-		(gGame sel_197: ((gTheIconBar sel_207:) sel_33:) 1)
+		(gGame setCursor: ((gTheIconBar curIcon:) cursor:) 1)
 	)
 
-	(method (sel_87 param1 param2)
+	(method (points param1 param2)
 		(if (and (> argc 1) (SetFlag param2))
 			(= param1 0)
 		)
 		(if param1
-			(gGame sel_388: param1)
+			(gGame changeScore: param1)
 		)
 	)
 
-	(method (sel_612 &tmp temp0)
-		((ScriptID 24 0) sel_110: sel_216: sel_111:) ; lb2GameControls
+	(method (showControls &tmp temp0)
+		((ScriptID 24 0) init: show: dispose:) ; lb2GameControls
 	)
 
-	(method (sel_613)
+	(method (showAbout)
 		(if (OneOf gCurRoomNum 435 454 455 520 521 525 550 560 565 620 650) ; meanWhile
-			(gMessager sel_295: 11 0 0 0 0 0)
+			(gMessager say: 11 0 0 0 0 0)
 		else
-			((ScriptID 13 0) sel_57:) ; aboutCode
+			((ScriptID 13 0) doit:) ; aboutCode
 		)
 	)
 )
 
 (instance icon0 of IconI
 	(properties
-		sel_20 {icon0}
-		sel_2 990
-		sel_3 0
-		sel_4 0
-		sel_31 20480
-		sel_37 3
-		sel_14 65
-		sel_208 990
-		sel_209 9
-		sel_213 1
-		sel_215 12
+		name {icon0}
+		view 990
+		loop 0
+		cel 0
+		type 20480
+		message 3
+		signal 65
+		maskView 990
+		maskLoop 9
+		noun 1
+		helpVerb 12
 	)
 
-	(method (sel_110)
-		(= sel_33 walkCursor)
-		(super sel_110:)
+	(method (init)
+		(= cursor walkCursor)
+		(super init:)
 	)
 
-	(method (sel_178 &tmp temp0)
-		(if (super sel_178: &rest)
-			(gTheIconBar sel_102:)
+	(method (select &tmp temp0)
+		(if (super select: &rest)
+			(gTheIconBar hide:)
 			(return 1)
 		else
 			(return 0)
@@ -1485,209 +1485,209 @@
 
 (instance icon1 of IconI
 	(properties
-		sel_20 {icon1}
-		sel_2 990
-		sel_3 1
-		sel_4 0
-		sel_37 1
-		sel_14 65
-		sel_208 990
-		sel_209 9
-		sel_213 2
-		sel_215 12
+		name {icon1}
+		view 990
+		loop 1
+		cel 0
+		message 1
+		signal 65
+		maskView 990
+		maskLoop 9
+		noun 2
+		helpVerb 12
 	)
 
-	(method (sel_110)
-		(= sel_33 lookCursor)
-		(super sel_110:)
+	(method (init)
+		(= cursor lookCursor)
+		(super init:)
 	)
 )
 
 (instance icon2 of IconI
 	(properties
-		sel_20 {icon2}
-		sel_2 990
-		sel_3 2
-		sel_4 0
-		sel_37 4
-		sel_14 65
-		sel_208 990
-		sel_209 9
-		sel_213 3
-		sel_215 12
+		name {icon2}
+		view 990
+		loop 2
+		cel 0
+		message 4
+		signal 65
+		maskView 990
+		maskLoop 9
+		noun 3
+		helpVerb 12
 	)
 
-	(method (sel_110)
-		(= sel_33 doCursor)
-		(super sel_110:)
+	(method (init)
+		(= cursor doCursor)
+		(super init:)
 	)
 )
 
 (instance icon3 of IconI
 	(properties
-		sel_20 {icon3}
-		sel_2 990
-		sel_3 3
-		sel_4 0
-		sel_37 2
-		sel_14 65
-		sel_208 990
-		sel_209 9
-		sel_213 4
-		sel_215 12
+		name {icon3}
+		view 990
+		loop 3
+		cel 0
+		message 2
+		signal 65
+		maskView 990
+		maskLoop 9
+		noun 4
+		helpVerb 12
 	)
 
-	(method (sel_110)
-		(= sel_33 talkCursor)
-		(super sel_110:)
+	(method (init)
+		(= cursor talkCursor)
+		(super init:)
 	)
 )
 
 (instance icon4 of IconI
 	(properties
-		sel_20 {icon4}
-		sel_2 990
-		sel_3 4
-		sel_4 0
-		sel_37 6
-		sel_14 65
-		sel_208 990
-		sel_209 9
-		sel_213 5
-		sel_215 12
+		name {icon4}
+		view 990
+		loop 4
+		cel 0
+		message 6
+		signal 65
+		maskView 990
+		maskLoop 9
+		noun 5
+		helpVerb 12
 	)
 
-	(method (sel_110)
-		(= sel_33 askCursor)
-		(super sel_110:)
+	(method (init)
+		(= cursor askCursor)
+		(super init:)
 	)
 )
 
 (instance icon6 of IconI
 	(properties
-		sel_20 {icon6}
-		sel_2 990
-		sel_3 5
-		sel_4 0
-		sel_33 999
-		sel_37 0
-		sel_14 65
-		sel_208 990
-		sel_209 9
-		sel_210 1
-		sel_213 9
-		sel_215 12
+		name {icon6}
+		view 990
+		loop 5
+		cel 0
+		cursor 999
+		message 0
+		signal 65
+		maskView 990
+		maskLoop 9
+		maskCel 1
+		noun 9
+		helpVerb 12
 	)
 
-	(method (sel_178 param1 &tmp temp0 temp1 temp2 temp3 temp4)
+	(method (select param1 &tmp temp0 temp1 temp2 temp3 temp4)
 		(return
 			(cond
-				((& sel_14 $0004) 0)
-				((and argc param1 (& sel_14 $0001))
-					(if (= temp2 (gTheIconBar sel_225:))
+				((& signal $0004) 0)
+				((and argc param1 (& signal $0001))
+					(if (= temp2 (gTheIconBar curInvIcon:))
 						(= temp3
 							(+
 								(/
 									(-
-										(- sel_9 sel_7)
+										(- nsRight nsLeft)
 										(CelWide
-											(temp2 sel_2:)
-											(+ (temp2 sel_3:) 1)
-											(temp2 sel_4:)
+											(temp2 view:)
+											(+ (temp2 loop:) 1)
+											(temp2 cel:)
 										)
 									)
 									2
 								)
-								sel_7
+								nsLeft
 							)
 						)
 						(= temp4
 							(+
-								(gTheIconBar sel_0:)
+								(gTheIconBar y:)
 								(/
 									(-
-										(- sel_8 sel_6)
+										(- nsBottom nsTop)
 										(CelHigh
-											(temp2 sel_2:)
-											(+ (temp2 sel_3:) 1)
-											(temp2 sel_4:)
+											(temp2 view:)
+											(+ (temp2 loop:) 1)
+											(temp2 cel:)
 										)
 									)
 									2
 								)
-								sel_6
+								nsTop
 							)
 						)
 					)
-					(DrawCel sel_2 sel_3 (= temp1 1) sel_7 sel_6 -1)
-					(if (= temp2 (gTheIconBar sel_225:))
+					(DrawCel view loop (= temp1 1) nsLeft nsTop -1)
+					(if (= temp2 (gTheIconBar curInvIcon:))
 						(DrawCel
-							(temp2 sel_2:)
-							(+ 1 (temp2 sel_3:))
-							(temp2 sel_4:)
+							(temp2 view:)
+							(+ 1 (temp2 loop:))
+							(temp2 cel:)
 							temp3
 							temp4
 							-1
 						)
 					)
-					(Graph grUPDATE_BOX sel_6 sel_7 sel_8 sel_9 1)
-					(while (!= ((= temp0 (Event sel_109:)) sel_31:) 2)
-						(temp0 sel_148:)
+					(Graph grUPDATE_BOX nsTop nsLeft nsBottom nsRight 1)
+					(while (!= ((= temp0 (Event new:)) type:) 2)
+						(temp0 localize:)
 						(cond
-							((self sel_218: temp0)
+							((self onMe: temp0)
 								(if (not temp1)
 									(DrawCel
-										sel_2
-										sel_3
+										view
+										loop
 										(= temp1 1)
-										sel_7
-										sel_6
+										nsLeft
+										nsTop
 										-1
 									)
-									(if (= temp2 (gTheIconBar sel_225:))
+									(if (= temp2 (gTheIconBar curInvIcon:))
 										(DrawCel
-											(temp2 sel_2:)
-											(+ 1 (temp2 sel_3:))
-											(temp2 sel_4:)
+											(temp2 view:)
+											(+ 1 (temp2 loop:))
+											(temp2 cel:)
 											temp3
 											temp4
 											-1
 										)
 									)
-									(Graph grUPDATE_BOX sel_6 sel_7 sel_8 sel_9 1)
+									(Graph grUPDATE_BOX nsTop nsLeft nsBottom nsRight 1)
 								)
 							)
 							(temp1
-								(DrawCel sel_2 sel_3 (= temp1 0) sel_7 sel_6 -1)
-								(if (= temp2 (gTheIconBar sel_225:))
+								(DrawCel view loop (= temp1 0) nsLeft nsTop -1)
+								(if (= temp2 (gTheIconBar curInvIcon:))
 									(DrawCel
-										(temp2 sel_2:)
-										(+ 1 (temp2 sel_3:))
-										(temp2 sel_4:)
+										(temp2 view:)
+										(+ 1 (temp2 loop:))
+										(temp2 cel:)
 										temp3
 										temp4
 										-1
 									)
 								)
-								(Graph grUPDATE_BOX sel_6 sel_7 sel_8 sel_9 1)
+								(Graph grUPDATE_BOX nsTop nsLeft nsBottom nsRight 1)
 							)
 						)
-						(temp0 sel_111:)
+						(temp0 dispose:)
 					)
-					(temp0 sel_111:)
+					(temp0 dispose:)
 					(if (== temp1 1)
-						(DrawCel sel_2 sel_3 0 sel_7 sel_6 -1)
-						(if (= temp2 (gTheIconBar sel_225:))
+						(DrawCel view loop 0 nsLeft nsTop -1)
+						(if (= temp2 (gTheIconBar curInvIcon:))
 							(DrawCel
-								(temp2 sel_2:)
-								(+ 1 (temp2 sel_3:))
-								(temp2 sel_4:)
+								(temp2 view:)
+								(+ 1 (temp2 loop:))
+								(temp2 cel:)
 								temp3
 								temp4
 								-1
 							)
 						)
-						(Graph grUPDATE_BOX sel_6 sel_7 sel_8 sel_9 1)
+						(Graph grUPDATE_BOX nsTop nsLeft nsBottom nsRight 1)
 					)
 					temp1
 				)
@@ -1699,29 +1699,29 @@
 
 (instance icon7 of IconI
 	(properties
-		sel_20 {icon7}
-		sel_2 990
-		sel_3 6
-		sel_4 0
-		sel_33 999
-		sel_31 0
-		sel_37 0
-		sel_14 67
-		sel_208 990
-		sel_209 9
-		sel_213 6
-		sel_215 12
+		name {icon7}
+		view 990
+		loop 6
+		cel 0
+		cursor 999
+		type 0
+		message 0
+		signal 67
+		maskView 990
+		maskLoop 9
+		noun 6
+		helpVerb 12
 	)
 
-	(method (sel_216)
-		(= sel_3 (if (gEgo sel_584:) 11 else 6))
-		(super sel_216: &rest)
+	(method (show)
+		(= loop (if (gEgo wearingGown:) 11 else 6))
+		(super show: &rest)
 	)
 
-	(method (sel_178)
-		(if (super sel_178: &rest)
-			(gTheIconBar sel_102:)
-			(gEgo sel_586:)
+	(method (select)
+		(if (super select: &rest)
+			(gTheIconBar hide:)
+			(gEgo showInv:)
 			(return 1)
 		else
 			(return 0)
@@ -1731,23 +1731,23 @@
 
 (instance icon8 of IconI
 	(properties
-		sel_20 {icon8}
-		sel_2 990
-		sel_3 7
-		sel_4 0
-		sel_33 999
-		sel_37 7
-		sel_14 67
-		sel_208 990
-		sel_209 9
-		sel_213 7
-		sel_215 12
+		name {icon8}
+		view 990
+		loop 7
+		cel 0
+		cursor 999
+		message 7
+		signal 67
+		maskView 990
+		maskLoop 9
+		noun 7
+		helpVerb 12
 	)
 
-	(method (sel_178)
-		(if (super sel_178: &rest)
-			(gTheIconBar sel_102:)
-			(gGame sel_612:)
+	(method (select)
+		(if (super select: &rest)
+			(gTheIconBar hide:)
+			(gGame showControls:)
 			(return 1)
 		else
 			(return 0)
@@ -1757,43 +1757,43 @@
 
 (instance icon9 of IconI
 	(properties
-		sel_20 {icon9}
-		sel_2 990
-		sel_3 8
-		sel_4 0
-		sel_33 9
-		sel_31 8192
-		sel_37 12
-		sel_14 3
-		sel_208 990
-		sel_209 9
-		sel_213 8
-		sel_215 12
+		name {icon9}
+		view 990
+		loop 8
+		cel 0
+		cursor 9
+		type 8192
+		message 12
+		signal 3
+		maskView 990
+		maskLoop 9
+		noun 8
+		helpVerb 12
 	)
 )
 
 (instance icon10 of IconI
 	(properties
-		sel_20 {icon10}
-		sel_2 990
-		sel_3 10
-		sel_4 0
-		sel_37 13
-		sel_14 65
-		sel_208 990
-		sel_209 9
-		sel_213 10
-		sel_215 12
+		name {icon10}
+		view 990
+		loop 10
+		cel 0
+		message 13
+		signal 65
+		maskView 990
+		maskLoop 9
+		noun 10
+		helpVerb 12
 	)
 
-	(method (sel_110)
-		(= sel_33 exitCursor)
-		(super sel_110:)
+	(method (init)
+		(= cursor exitCursor)
+		(super init:)
 	)
 
-	(method (sel_178 &tmp temp0)
-		(if (super sel_178: &rest)
-			(gTheIconBar sel_102:)
+	(method (select &tmp temp0)
+		(if (super select: &rest)
+			(gTheIconBar hide:)
 			(return 1)
 		else
 			(return 0)
@@ -1803,50 +1803,50 @@
 
 (instance checkIcon of Code
 	(properties
-		sel_20 {checkIcon}
+		name {checkIcon}
 	)
 
-	(method (sel_57 param1)
-		(if (and (param1 sel_114: IconI) (& (param1 sel_14:) $0004))
-			(|= global116 (>> $8000 (gTheIconBar sel_132: param1)))
+	(method (doit param1)
+		(if (and (param1 isKindOf: IconI) (& (param1 signal:) $0004))
+			(|= global116 (>> $8000 (gTheIconBar indexOf: param1)))
 		)
 	)
 )
 
 (instance lb2DoVerbCode of Code
 	(properties
-		sel_20 {lb2DoVerbCode}
+		name {lb2DoVerbCode}
 	)
 
-	(method (sel_57 param1 param2)
+	(method (doit param1 param2)
 		(proc0_6 param2 param1)
 	)
 )
 
 (instance lb2FtrInit of Code
 	(properties
-		sel_20 {lb2FtrInit}
+		name {lb2FtrInit}
 	)
 
-	(method (sel_57 param1)
-		(if (== (param1 sel_301:) 26505)
-			(param1 sel_301: 40)
+	(method (doit param1)
+		(if (== (param1 sightAngle:) 26505)
+			(param1 sightAngle: 40)
 		)
-		(if (== (param1 sel_299:) 26505)
-			(param1 sel_299: 0)
+		(if (== (param1 actions:) 26505)
+			(param1 actions: 0)
 		)
-		(if (and (not (param1 sel_303:)) (not (param1 sel_304:)))
-			(param1 sel_303: (param1 sel_1:) sel_304: (param1 sel_0:))
+		(if (and (not (param1 approachX:)) (not (param1 approachY:)))
+			(param1 approachX: (param1 x:) approachY: (param1 y:))
 		)
 	)
 )
 
 (instance lb2Messager of Messager
 	(properties
-		sel_20 {lb2Messager}
+		name {lb2Messager}
 	)
 
-	(method (sel_297 param1 &tmp temp0)
+	(method (findTalker param1 &tmp temp0)
 		(if
 			(= temp0
 				(switch param1
@@ -1925,7 +1925,7 @@
 							((and (== gCurRoomNum 355) (not (IsFlag 91)))
 								(ScriptID 355 2) ; tkrLaura
 							)
-							((and (== gCurRoomNum 710) (== (gCurRoom sel_408:) 716))
+							((and (== gCurRoomNum 710) (== (gCurRoom picture:) 716))
 								(ScriptID 710 2) ; Rameses_b
 							)
 							(else
@@ -1977,7 +1977,7 @@
 						(ScriptID 1882 10) ; Pippin
 					)
 					(27
-						(if (and (== gCurRoomNum 710) (== (gCurRoom sel_408:) 716))
+						(if (and (== gCurRoomNum 710) (== (gCurRoom picture:) 716))
 							(ScriptID 710 27) ; Rameses_a
 						else
 							(ScriptID 1891 27) ; Rameses
@@ -2043,17 +2043,17 @@
 			)
 			(return)
 		else
-			(super sel_297: param1)
+			(super findTalker: param1)
 		)
 	)
 )
 
 (instance lb2ApproachCode of Code
 	(properties
-		sel_20 {lb2ApproachCode}
+		name {lb2ApproachCode}
 	)
 
-	(method (sel_57 param1)
+	(method (doit param1)
 		(return
 			(switch param1
 				(1 1)
@@ -2072,11 +2072,11 @@
 
 (instance lb2Win of SysWindow
 	(properties
-		sel_20 {lb2Win}
-		sel_31 128
+		name {lb2Win}
+		type 128
 	)
 
-	(method (sel_189 &tmp temp0 temp1)
+	(method (open &tmp temp0 temp1)
 		(cond
 			((OneOf gCurRoomNum 280 210 330 240 260 300)
 				(= temp1 0)
@@ -2164,43 +2164,43 @@
 				(= temp1 4)
 			)
 		)
-		(= sel_11 (- sel_194 (/ (CelWide 994 temp1 0) 2)))
-		(= sel_10 (- sel_193 (if sel_77 19 else 10)))
-		(= sel_13 (+ sel_196 (/ (CelWide 994 temp1 0) 2)))
-		(= sel_12 (Max (+ sel_195 3) (+ sel_10 (CelHigh 994 temp1 0) 3)))
-		(= sel_60 15)
-		(super sel_189:)
+		(= lsLeft (- left (/ (CelWide 994 temp1 0) 2)))
+		(= lsTop (- top (if title 19 else 10)))
+		(= lsRight (+ right (/ (CelWide 994 temp1 0) 2)))
+		(= lsBottom (Max (+ bottom 3) (+ lsTop (CelHigh 994 temp1 0) 3)))
+		(= priority 15)
+		(super open:)
 		(= temp0 (GetPort))
 		(SetPort 0)
-		(Graph grFILL_BOX sel_193 sel_194 sel_195 sel_196 3 global176 15)
-		(Graph grDRAW_LINE (- sel_193 1) (- sel_194 1) (- sel_193 1) sel_196 global151 15)
-		(Graph grDRAW_LINE (- sel_193 1) (- sel_194 1) sel_195 (- sel_194 1) global151 15)
-		(Graph grDRAW_LINE sel_195 (- sel_194 1) sel_195 sel_196 global151 15)
-		(Graph grDRAW_LINE (- sel_193 1) sel_196 sel_195 sel_196 global151 15)
-		(Graph grUPDATE_BOX sel_193 sel_194 sel_195 sel_196 1)
+		(Graph grFILL_BOX top left bottom right 3 global176 15)
+		(Graph grDRAW_LINE (- top 1) (- left 1) (- top 1) right global151 15)
+		(Graph grDRAW_LINE (- top 1) (- left 1) bottom (- left 1) global151 15)
+		(Graph grDRAW_LINE bottom (- left 1) bottom right global151 15)
+		(Graph grDRAW_LINE (- top 1) right bottom right global151 15)
+		(Graph grUPDATE_BOX top left bottom right 1)
 		(Graph
 			grUPDATE_BOX
-			sel_10
-			sel_11
-			(+ sel_10 (CelHigh 994 temp1 0))
-			(+ sel_11 (CelWide 994 temp1 0))
+			lsTop
+			lsLeft
+			(+ lsTop (CelHigh 994 temp1 0))
+			(+ lsLeft (CelWide 994 temp1 0))
 			1
 		)
 		(Graph
 			grUPDATE_BOX
-			sel_10
-			(- sel_13 (CelWide 994 temp1 0))
-			(+ sel_10 (CelHigh 994 temp1 0))
-			sel_13
+			lsTop
+			(- lsRight (CelWide 994 temp1 0))
+			(+ lsTop (CelHigh 994 temp1 0))
+			lsRight
 			1
 		)
-		(DrawCel 994 temp1 0 (+ sel_11 1) (+ sel_10 1) -1)
+		(DrawCel 994 temp1 0 (+ lsLeft 1) (+ lsTop 1) -1)
 		(DrawCel
 			994
 			temp1
 			1
-			(- (- sel_13 (CelWide 994 temp1 0)) 1)
-			(+ sel_10 1)
+			(- (- lsRight (CelWide 994 temp1 0)) 1)
+			(+ lsTop 1)
 			-1
 		)
 		(SetPort temp0)

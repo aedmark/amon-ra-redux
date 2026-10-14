@@ -22,10 +22,10 @@
 
 (instance triggerAndClock of Code
 	(properties
-		sel_20 {triggerAndClock}
+		name {triggerAndClock}
 	)
 
-	(method (sel_57 param1 param2)
+	(method (doit param1 param2)
 		(if (& param1 $ff00)
 			(= local0 (>> (= local0 (& param1 $f000)) $000c))
 			(= local1 (>> (= local1 (& param1 $0f00)) $0008))
@@ -50,7 +50,7 @@
 					(SetFlag 6)
 				)
 			)
-			(gCurRoom sel_422: clockInset (if (> argc 1) param2 else 0))
+			(gCurRoom setInset: clockInset (if (> argc 1) param2 else 0))
 			(&= param1 $00ff)
 		)
 		(+= gMustDos param1)
@@ -59,14 +59,14 @@
 
 (instance saveVolume of Code
 	(properties
-		sel_20 {saveVolume}
+		name {saveVolume}
 	)
 
-	(method (sel_57 param1)
-		(if (param1 sel_90:)
-			(= [local5 (gSounds sel_132: param1)] (param1 sel_94:))
-			(if (> [local5 (gSounds sel_132: param1)] 50)
-				(param1 sel_172: 50)
+	(method (doit param1)
+		(if (param1 handle:)
+			(= [local5 (gSounds indexOf: param1)] (param1 vol:))
+			(if (> [local5 (gSounds indexOf: param1)] 50)
+				(param1 setVol: 50)
 			)
 		)
 	)
@@ -74,49 +74,49 @@
 
 (instance restoreVolume of Code
 	(properties
-		sel_20 {restoreVolume}
+		name {restoreVolume}
 	)
 
-	(method (sel_57 param1 &tmp temp0)
-		(if (= temp0 [local5 (gSounds sel_132: param1)])
-			(param1 sel_170: temp0 1 5 0)
+	(method (doit param1 &tmp temp0)
+		(if (= temp0 [local5 (gSounds indexOf: param1)])
+			(param1 fade: temp0 1 5 0)
 		)
 	)
 )
 
 (instance sShowClock of Script
 	(properties
-		sel_20 {sShowClock}
+		name {sShowClock}
 	)
 
-	(method (sel_144 param1 &tmp [temp0 40] temp40)
-		(switch (= sel_29 param1)
+	(method (changeState param1 &tmp [temp0 40] temp40)
+		(switch (= state param1)
 			(0
-				(quarterHand sel_4: local1 sel_110:)
-				(hourHand sel_4: local0 sel_110:)
-				(gSounds sel_119: 96 saveVolume)
-				(= sel_139 60)
+				(quarterHand cel: local1 init:)
+				(hourHand cel: local0 init:)
+				(gSounds eachElementDo: 96 saveVolume)
+				(= ticks 60)
 			)
 			(1
 				(clockSound
-					sel_40:
+					number:
 						(switch local1
 							(0 23)
 							(1 20)
 							(2 21)
 							(3 22)
 						)
-					sel_39: self
+					play: self
 				)
 			)
 			(2
-				(= sel_139 60)
+				(= ticks 60)
 			)
 			(3
-				(gSounds sel_119: 96 restoreVolume)
+				(gSounds eachElementDo: 96 restoreVolume)
 				(if
 					(= temp40
-						(switch sel_141
+						(switch register
 							(1000 -24319)
 							(1245 4104)
 							(145 8224)
@@ -124,9 +124,9 @@
 							(else 0)
 						)
 					)
-					((ScriptID 90 15) sel_162: (ScriptID 90 15) 0 15 0 temp40) ; meetingTimer, meetingTimer
+					((ScriptID 90 15) setReal: (ScriptID 90 15) 0 15 0 temp40) ; meetingTimer, meetingTimer
 				)
-				(clockInset sel_111:)
+				(clockInset dispose:)
 			)
 		)
 	)
@@ -134,102 +134,102 @@
 
 (instance quarterHand of View
 	(properties
-		sel_20 {quarterHand}
-		sel_1 33
-		sel_0 19
-		sel_2 22
-		sel_3 2
-		sel_60 15
-		sel_14 16400
+		name {quarterHand}
+		x 33
+		y 19
+		view 22
+		loop 2
+		priority 15
+		signal 16400
 	)
 )
 
 (instance hourHand of View
 	(properties
-		sel_20 {hourHand}
-		sel_1 33
-		sel_0 19
-		sel_2 22
-		sel_3 1
-		sel_60 15
-		sel_14 16400
+		name {hourHand}
+		x 33
+		y 19
+		view 22
+		loop 1
+		priority 15
+		signal 16400
 	)
 )
 
 (instance clockInset of Inset
 	(properties
-		sel_20 {clockInset}
-		sel_2 22
+		name {clockInset}
+		view 22
 	)
 
-	(method (sel_110)
-		(super sel_110: &rest)
-		(self sel_146: sShowClock 0 local2)
+	(method (init)
+		(super init: &rest)
+		(self setScript: sShowClock 0 local2)
 	)
 
-	(method (sel_111)
-		(clockSound sel_111:)
-		(super sel_111: &rest)
+	(method (dispose)
+		(clockSound dispose:)
+		(super dispose: &rest)
 		(switch local2
 			(1015
 				(if (or (< gAct 3) (> gAct 4))
-					((ScriptID 90 3) sel_182: -2) ; aORiley
+					((ScriptID 90 3) moveTo: -2) ; aORiley
 				)
 			)
 			(1115
-				((ScriptID 90 1) sel_618: 440) ; aCountess
-				((ScriptID 90 2) sel_618: 520) ; aOlympia
-				((ScriptID 90 4) sel_182: -1) ; aTut
+				((ScriptID 90 1) goTo: 440) ; aCountess
+				((ScriptID 90 2) goTo: 520) ; aOlympia
+				((ScriptID 90 4) moveTo: -1) ; aTut
 			)
 			(1245
-				((ScriptID 90 6) sel_182: -2) ; aYvette
+				((ScriptID 90 6) moveTo: -2) ; aYvette
 			)
 			(145
 				(if (IsFlag 120)
-					((ScriptID 90 1) sel_618: 520) ; aCountess
+					((ScriptID 90 1) goTo: 520) ; aCountess
 				)
-				((ScriptID 90 4) sel_618: 430) ; aTut
+				((ScriptID 90 4) goTo: 430) ; aTut
 			)
 			(200
-				((ScriptID 90 1) sel_618: 520) ; aCountess
+				((ScriptID 90 1) goTo: 520) ; aCountess
 			)
 			(215
-				(if (== ((gInventory sel_64: 14) sel_166:) 520)
-					((gInventory sel_64: 14) sel_166: 630)
+				(if (== ((gInventory at: 14) owner:) 520)
+					((gInventory at: 14) owner: 630)
 				)
 			)
 			(245
-				((ScriptID 90 4) sel_618: 510) ; aTut
-				((ScriptID 90 1) sel_618: 520) ; aCountess
+				((ScriptID 90 4) goTo: 510) ; aTut
+				((ScriptID 90 1) goTo: 520) ; aCountess
 			)
 		)
-		(if (and (IsFlag 1) (gCast sel_122: (ScriptID 35 0))) ; aPippin
-			((ScriptID 35 0) sel_111:) ; aPippin
+		(if (and (IsFlag 1) (gCast contains: (ScriptID 35 0))) ; aPippin
+			((ScriptID 35 0) dispose:) ; aPippin
 		)
-		(if (and (IsFlag 2) (gCast sel_122: (ScriptID 90 7))) ; aZiggy
-			((ScriptID 90 7) sel_619: 0 sel_146: 0 sel_182: -2) ; aZiggy
+		(if (and (IsFlag 2) (gCast contains: (ScriptID 90 7))) ; aZiggy
+			((ScriptID 90 7) wandering: 0 setScript: 0 moveTo: -2) ; aZiggy
 		)
-		(if (and (IsFlag 3) (gCast sel_122: (ScriptID 90 5))) ; aWatney
-			((ScriptID 90 5) sel_619: 0 sel_146: 0 sel_182: -2) ; aWatney
+		(if (and (IsFlag 3) (gCast contains: (ScriptID 90 5))) ; aWatney
+			((ScriptID 90 5) wandering: 0 setScript: 0 moveTo: -2) ; aWatney
 		)
-		(if (and (IsFlag 5) (gCast sel_122: (ScriptID 90 6))) ; aYvette
-			((ScriptID 90 6) sel_619: 0 sel_146: 0 sel_182: -2) ; aYvette
+		(if (and (IsFlag 5) (gCast contains: (ScriptID 90 6))) ; aYvette
+			((ScriptID 90 6) wandering: 0 setScript: 0 moveTo: -2) ; aYvette
 		)
-		(if (and (IsFlag 6) (gCast sel_122: (ScriptID 90 1))) ; aCountess
-			((ScriptID 90 1) sel_619: 0 sel_146: 0 sel_620: -2) ; aCountess
+		(if (and (IsFlag 6) (gCast contains: (ScriptID 90 1))) ; aCountess
+			((ScriptID 90 1) wandering: 0 setScript: 0 room: -2) ; aCountess
 		)
 		(DisposeScript 22)
 	)
 
-	(method (sel_133 param1)
-		(param1 sel_73: 1)
-		(super sel_133: param1)
+	(method (handleEvent param1)
+		(param1 claimed: 1)
+		(super handleEvent: param1)
 	)
 )
 
 (instance clockSound of Sound
 	(properties
-		sel_20 {clockSound}
-		sel_99 1
+		name {clockSound}
+		flags 1
 	)
 )

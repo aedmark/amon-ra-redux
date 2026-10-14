@@ -26,60 +26,60 @@
 
 (instance streetRgn of Rgn
 	(properties
-		sel_20 {streetRgn}
+		name {streetRgn}
 	)
 
-	(method (sel_110)
+	(method (init)
 		(Load rsVIEW 853)
 		(LoadMany rsSOUND 96 94 81)
-		(leftFeature sel_110:)
-		(rightFeature sel_110:)
-		(car sel_155: 3 sel_156: 3 sel_51: 6 sel_53: 3 sel_102:)
-		(if (not (streetSounds sel_90:))
-			(streetSounds sel_39:)
+		(leftFeature init:)
+		(rightFeature init:)
+		(car setLoop: 3 setCel: 3 xStep: 6 moveSpeed: 3 hide:)
+		(if (not (streetSounds handle:))
+			(streetSounds play:)
 		)
-		(super sel_110:)
+		(super init:)
 	)
 
-	(method (sel_57)
+	(method (doit)
 		(cond
-			((gCurRoom sel_142:))
+			((gCurRoom script:))
 			((and (== local0 1) (== local1 1) (StepOn gEgo 4))
-				(gCurRoom sel_146: sLeaveNow)
+				(gCurRoom setScript: sLeaveNow)
 			)
 			((and (not (and (== local0 1) (== local1 1))) (StepOn gEgo 4))
-				(gCurRoom sel_146: sRunOver)
+				(gCurRoom setScript: sRunOver)
 			)
 			((StepOn gEgo 256)
-				(gCurRoom sel_146: sHitEdgeScreen)
+				(gCurRoom setScript: sHitEdgeScreen)
 			)
 		)
-		(super sel_57:)
+		(super doit:)
 	)
 
-	(method (sel_399 param1)
-		(= sel_406 (OneOf param1 280 210 260 300))
-		(= sel_407 0)
+	(method (newRoom param1)
+		(= keep (OneOf param1 280 210 260 300))
+		(= initialized 0)
 	)
 )
 
 (instance sLeaveNow of Script
 	(properties
-		sel_20 {sLeaveNow}
+		name {sLeaveNow}
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
-				(gGame sel_587:)
-				(gEgo sel_55: 180)
-				(= sel_136 2)
+				(gGame handsOff:)
+				(gEgo heading: 180)
+				(= cycles 2)
 			)
 			(1
-				(gEgo sel_312: MoveFwd 65 self)
+				(gEgo setMotion: MoveFwd 65 self)
 			)
 			(2
-				(gCurRoom sel_399: (gCurRoom sel_411:))
+				(gCurRoom newRoom: (gCurRoom south:))
 			)
 		)
 	)
@@ -87,81 +87,81 @@
 
 (instance sRunOver of Script
 	(properties
-		sel_20 {sRunOver}
+		name {sRunOver}
 	)
 
-	(method (sel_57)
+	(method (doit)
 		(cond
-			((and (< (car sel_255: gEgo) 160) (not local2))
-				(mRunOver sel_40: 96 sel_3: -1 sel_39:)
+			((and (< (car distanceTo: gEgo) 160) (not local2))
+				(mRunOver number: 96 loop: -1 play:)
 				(= local2 1)
 			)
-			((and (< (car sel_255: gEgo) 100) (not local3))
-				(mRunOver sel_40: 81 sel_3: 1 sel_39:)
+			((and (< (car distanceTo: gEgo) 100) (not local3))
+				(mRunOver number: 81 loop: 1 play:)
 				(= local3 1)
 			)
 		)
-		(super sel_57:)
+		(super doit:)
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
-				(gGame sel_587:)
-				(streetSounds sel_167:)
+				(gGame handsOff:)
+				(streetSounds stop:)
 				(if (== gCurRoomNum 280)
-					((ScriptID 280 1) sel_111:) ; carSound
-					((ScriptID 280 2) sel_146: 0) ; drunk
+					((ScriptID 280 1) dispose:) ; carSound
+					((ScriptID 280 2) setScript: 0) ; drunk
 				)
-				(gEgo sel_63: 13)
-				(car sel_110:)
-				(= sel_136 1)
+				(gEgo setPri: 13)
+				(car init:)
+				(= cycles 1)
 			)
 			(1
 				(car
-					sel_312:
+					setMotion:
 						MoveTo
-						(+ (gEgo sel_1:) 55)
-						(- (gEgo sel_0:) 1)
+						(+ (gEgo x:) 55)
+						(- (gEgo y:) 1)
 						self
 				)
 			)
 			(2
 				(switch gCurRoomNum
 					(210
-						(car sel_312: MoveTo 160 225)
+						(car setMotion: MoveTo 160 225)
 					)
 					(260
-						(car sel_312: MoveTo -30 251)
+						(car setMotion: MoveTo -30 251)
 					)
 					(280
-						(car sel_312: MoveTo 112 221)
+						(car setMotion: MoveTo 112 221)
 					)
 					(300
-						(car sel_312: MoveTo 220 215)
+						(car setMotion: MoveTo 220 215)
 					)
 				)
-				(= sel_136 1)
+				(= cycles 1)
 			)
 			(3
 				(gEgo
-					sel_2: 853
-					sel_3: (if (== (gEgo sel_2:) 803) 1 else 0)
-					sel_4: 0
-					sel_153: (- (gEgo sel_1:) 19) (- (gEgo sel_0:) 1)
-					sel_244: 8
-					sel_161: End self
+					view: 853
+					loop: (if (== (gEgo view:) 803) 1 else 0)
+					cel: 0
+					posn: (- (gEgo x:) 19) (- (gEgo y:) 1)
+					cycleSpeed: 8
+					setCycle: End self
 				)
 			)
 			(4
-				(= sel_137 7)
-				(if (gEgo sel_59:)
-					(gEgo sel_155: 0)
+				(= seconds 7)
+				(if (gEgo looper:)
+					(gEgo setLoop: 0)
 				)
 			)
 			(5
 				(= global145 9) ; "If you don't look both ways, you'll be dead in no time flat!"
-				(gCurRoom sel_399: 99)
+				(gCurRoom newRoom: 99)
 			)
 		)
 	)
@@ -169,26 +169,26 @@
 
 (instance sHitEdgeScreen of Script
 	(properties
-		sel_20 {sHitEdgeScreen}
+		name {sHitEdgeScreen}
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
-				(gGame sel_587:)
-				(gMessager sel_295: 4 3 0 0 self 91)
+				(gGame handsOff:)
+				(gMessager say: 4 3 0 0 self 91)
 			)
 			(1
-				(if (> (gEgo sel_55:) 180)
-					(gEgo sel_253: 90)
+				(if (> (gEgo heading:) 180)
+					(gEgo setHeading: 90)
 				else
-					(gEgo sel_253: 270)
+					(gEgo setHeading: 270)
 				)
-				(gEgo sel_312: MoveFwd 10 self)
+				(gEgo setMotion: MoveFwd 10 self)
 			)
 			(2
-				(gGame sel_588:)
-				(self sel_111:)
+				(gGame handsOn:)
+				(self dispose:)
 			)
 		)
 	)
@@ -196,23 +196,23 @@
 
 (instance leftFeature of Feature
 	(properties
-		sel_20 {leftFeature}
-		sel_1 28
-		sel_0 100
-		sel_6 88
-		sel_8 189
-		sel_9 20
-		sel_301 40
+		name {leftFeature}
+		x 28
+		y 100
+		nsTop 88
+		nsBottom 189
+		nsRight 20
+		sightAngle 40
 	)
 
-	(method (sel_300 param1)
+	(method (doVerb param1)
 		(switch param1
 			(1
 				(= local0 1)
-				(gMessager sel_295: 1 1 0 0 0 91)
+				(gMessager say: 1 1 0 0 0 91)
 			)
 			(else
-				(super sel_300: param1)
+				(super doVerb: param1)
 			)
 		)
 	)
@@ -220,24 +220,24 @@
 
 (instance rightFeature of Feature
 	(properties
-		sel_20 {rightFeature}
-		sel_1 287
-		sel_0 100
-		sel_6 88
-		sel_7 300
-		sel_8 189
-		sel_9 320
-		sel_301 40
+		name {rightFeature}
+		x 287
+		y 100
+		nsTop 88
+		nsLeft 300
+		nsBottom 189
+		nsRight 320
+		sightAngle 40
 	)
 
-	(method (sel_300 param1)
+	(method (doVerb param1)
 		(switch param1
 			(1
 				(= local1 1)
-				(gMessager sel_295: 2 1 0 0 0 91)
+				(gMessager say: 2 1 0 0 0 91)
 			)
 			(else
-				(super sel_300: param1)
+				(super doVerb: param1)
 			)
 		)
 	)
@@ -245,29 +245,29 @@
 
 (instance car of Actor
 	(properties
-		sel_20 {car}
-		sel_1 362
-		sel_0 181
-		sel_2 213
-		sel_3 3
-		sel_4 3
-		sel_14 16384
-		sel_53 3
+		name {car}
+		x 362
+		y 181
+		view 213
+		loop 3
+		cel 3
+		signal 16384
+		moveSpeed 3
 	)
 )
 
 (instance mRunOver of Sound
 	(properties
-		sel_20 {mRunOver}
-		sel_99 5
+		name {mRunOver}
+		flags 5
 	)
 )
 
 (instance streetSounds of Sound
 	(properties
-		sel_20 {streetSounds}
-		sel_99 1
-		sel_40 94
-		sel_3 -1
+		name {streetSounds}
+		flags 1
+		number 94
+		loop -1
 	)
 )

@@ -7,34 +7,34 @@
 
 (class DCIcon of DIcon
 	(properties
-		sel_20 {DCIcon}
-		sel_245 0
-		sel_244 6
-		sel_14 0
+		name {DCIcon}
+		cycler 0
+		cycleSpeed 6
+		signal 0
 	)
 
-	(method (sel_110)
-		((= sel_245 (Fwd sel_109:)) sel_110: self)
+	(method (init)
+		((= cycler (Fwd new:)) init: self)
 	)
 
-	(method (sel_111)
-		(if sel_245
-			(sel_245 sel_111:)
+	(method (dispose)
+		(if cycler
+			(cycler dispose:)
 		)
-		(super sel_111:)
+		(super dispose:)
 	)
 
-	(method (sel_186 &tmp temp0)
-		(if sel_245
-			(= temp0 sel_4)
-			(sel_245 sel_57:)
-			(if (!= sel_4 temp0)
-				(self sel_80:)
+	(method (cycle &tmp temp0)
+		(if cycler
+			(= temp0 cel)
+			(cycler doit:)
+			(if (!= cel temp0)
+				(self draw:)
 			)
 		)
 	)
 
-	(method (sel_246)
+	(method (lastCel)
 		(return (- (NumCels self) 1))
 	)
 )

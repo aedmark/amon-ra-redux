@@ -7,53 +7,53 @@
 
 (class Path of MoveTo
 	(properties
-		sel_20 {Path}
-		sel_446 0
-		sel_74 0
+		name {Path}
+		intermediate 0
+		value 0
 	)
 
-	(method (sel_110 param1 param2 param3)
-		(= sel_42 param1)
-		(= sel_143 (if (>= argc 2) param2 else 0))
-		(= sel_446 (if (== argc 3) param3 else 0))
-		(= sel_74 -1)
-		(= sel_1 (sel_42 sel_1:))
-		(= sel_0 (sel_42 sel_0:))
-		(if (self sel_447:)
-			(self sel_97:)
+	(method (init param1 param2 param3)
+		(= client param1)
+		(= caller (if (>= argc 2) param2 else 0))
+		(= intermediate (if (== argc 3) param3 else 0))
+		(= value -1)
+		(= x (client x:))
+		(= y (client y:))
+		(if (self atEnd:)
+			(self moveDone:)
 		else
-			(self sel_65:)
-			(super sel_110: sel_42 sel_1 sel_0)
+			(self next:)
+			(super init: client x y)
 		)
 	)
 
-	(method (sel_97)
-		(if (self sel_447:)
-			(super sel_97:)
+	(method (moveDone)
+		(if (self atEnd:)
+			(super moveDone:)
 		else
-			(if sel_446
-				(sel_446 sel_145: (/ sel_74 2))
+			(if intermediate
+				(intermediate cue: (/ value 2))
 			)
-			(self sel_65:)
-			(super sel_110: sel_42 sel_1 sel_0)
+			(self next:)
+			(super init: client x y)
 		)
 	)
 
-	(method (sel_64 &tmp [temp0 20])
-		(Print sel_199: @temp0 {%s needs an 'at:' method.} sel_20 sel_110:)
+	(method (at &tmp [temp0 20])
+		(Print addTextF: @temp0 {%s needs an 'at:' method.} name init:)
 		(return 0)
 	)
 
-	(method (sel_65)
-		(= sel_1 (self sel_64: (++ sel_74)))
-		(= sel_0 (self sel_64: (++ sel_74)))
+	(method (next)
+		(= x (self at: (++ value)))
+		(= y (self at: (++ value)))
 	)
 
-	(method (sel_447)
+	(method (atEnd)
 		(return
-			(if (== (self sel_64: (+ sel_74 1)) -32768)
+			(if (== (self at: (+ value 1)) -32768)
 			else
-				(== (self sel_64: (+ sel_74 2)) -32768)
+				(== (self at: (+ value 2)) -32768)
 			)
 		)
 	)
@@ -61,11 +61,11 @@
 
 (class RelPath of Path
 	(properties
-		sel_20 {RelPath}
+		name {RelPath}
 	)
 
-	(method (sel_65)
-		(+= sel_1 (self sel_64: (++ sel_74)))
-		(+= sel_0 (self sel_64: (++ sel_74)))
+	(method (next)
+		(+= x (self at: (++ value)))
+		(+= y (self at: (++ value)))
 	)
 )

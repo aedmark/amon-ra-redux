@@ -13,8 +13,8 @@
 )
 
 (procedure (StillDown &tmp event ret)
-	(= ret (!= ((= event (Event sel_109:)) sel_31:) 2))
-	(event sel_111:)
+	(= ret (!= ((= event (Event new:)) type:) 2))
+	(event dispose:)
 	(return ret)
 )
 
@@ -36,11 +36,11 @@
 	(return
 		(if
 			(and
-				(< (obj sel_7:) (event sel_1:))
-				(< (event sel_1:) (obj sel_9:))
-				(< (obj sel_6:) (event sel_0:))
+				(< (obj nsLeft:) (event x:))
+				(< (event x:) (obj nsRight:))
+				(< (obj nsTop:) (event y:))
 			)
-			(< (event sel_0:) (obj sel_8:))
+			(< (event y:) (obj nsBottom:))
 		else
 			0
 		)
@@ -49,84 +49,84 @@
 
 (class DItem of Obj
 	(properties
-		sel_20 0
-		sel_31 0
-		sel_29 0
-		sel_6 0
-		sel_7 0
-		sel_8 0
-		sel_9 0
-		sel_21 0
-		sel_72 0
-		sel_74 0
+		name 0
+		type 0
+		state 0
+		nsTop 0
+		nsLeft 0
+		nsBottom 0
+		nsRight 0
+		key 0
+		said 0
+		value 0
 	)
 
-	(method (sel_57)
-		(return sel_74)
+	(method (doit)
+		(return value)
 	)
 
-	(method (sel_177 param1)
+	(method (enable param1)
 		(if param1
-			(|= sel_29 $0001)
+			(|= state $0001)
 		else
-			(&= sel_29 $fffe)
+			(&= state $fffe)
 		)
 	)
 
-	(method (sel_178 param1)
+	(method (select param1)
 		(if param1
-			(|= sel_29 $0008)
+			(|= state $0008)
 		else
-			(&= sel_29 $fff7)
+			(&= state $fff7)
 		)
-		(self sel_80:)
+		(self draw:)
 	)
 
-	(method (sel_133 param1 &tmp temp0 temp1 temp2)
-		(if (param1 sel_73:)
+	(method (handleEvent param1 &tmp temp0 temp1 temp2)
+		(if (param1 claimed:)
 			(return 0)
 		)
 		(= temp0 0)
 		(if
 			(and
-				(& sel_29 $0001)
+				(& state $0001)
 				(or
-					(and (== (= temp1 (param1 sel_31:)) 128) (Said sel_72))
-					(and (== temp1 4) (== (param1 sel_37:) sel_21))
-					(and (== temp1 1) (self sel_174: param1))
+					(and (== (= temp1 (param1 type:)) 128) (Said said))
+					(and (== temp1 4) (== (param1 message:) key))
+					(and (== temp1 1) (self check: param1))
 				)
 			)
-			(param1 sel_73: 1)
-			(= temp0 (self sel_179: param1))
+			(param1 claimed: 1)
+			(= temp0 (self track: param1))
 		)
 		(return temp0)
 	)
 
-	(method (sel_174 param1)
+	(method (check param1)
 		(return
 			(if
 				(and
-					(>= (param1 sel_1:) sel_7)
-					(>= (param1 sel_0:) sel_6)
-					(< (param1 sel_1:) sel_9)
+					(>= (param1 x:) nsLeft)
+					(>= (param1 y:) nsTop)
+					(< (param1 x:) nsRight)
 				)
-				(< (param1 sel_0:) sel_8)
+				(< (param1 y:) nsBottom)
 			else
 				0
 			)
 		)
 	)
 
-	(method (sel_179 param1 &tmp temp0 temp1)
-		(if (== 1 (param1 sel_31:))
+	(method (track param1 &tmp temp0 temp1)
+		(if (== 1 (param1 type:))
 			(= temp1 0)
 			(while 1
-				((= param1 (Event sel_109: -32768)) sel_148:)
-				(if (!= (= temp0 (self sel_174: param1)) temp1)
+				((= param1 (Event new: -32768)) localize:)
+				(if (!= (= temp0 (self check: param1)) temp1)
 					(HiliteControl self)
 					(= temp1 temp0)
 				)
-				(param1 sel_111:)
+				(param1 dispose:)
 				(if (not (StillDown))
 					(break)
 				)
@@ -140,131 +140,131 @@
 		)
 	)
 
-	(method (sel_180))
+	(method (setSize))
 
-	(method (sel_181 param1 param2)
-		(+= sel_9 param1)
-		(+= sel_7 param1)
-		(+= sel_6 param2)
-		(+= sel_8 param2)
+	(method (move param1 param2)
+		(+= nsRight param1)
+		(+= nsLeft param1)
+		(+= nsTop param2)
+		(+= nsBottom param2)
 	)
 
-	(method (sel_182 param1 param2)
-		(self sel_181: (- param1 sel_7) (- param2 sel_6))
+	(method (moveTo param1 param2)
+		(self move: (- param1 nsLeft) (- param2 nsTop))
 	)
 
-	(method (sel_80)
+	(method (draw)
 		(DrawControl self)
 	)
 
-	(method (sel_184 param1)
-		(return (== sel_31 param1))
+	(method (isType param1)
+		(return (== type param1))
 	)
 
-	(method (sel_185 param1)
-		(return (& sel_29 param1))
+	(method (checkState param1)
+		(return (& state param1))
 	)
 
-	(method (sel_186))
+	(method (cycle))
 )
 
 (class DText of DItem
 	(properties
-		sel_20 {DText}
-		sel_31 2
-		sel_23 0
-		sel_30 1
-		sel_27 0
+		name {DText}
+		type 2
+		text 0
+		font 1
+		mode 0
 	)
 
-	(method (sel_109 &tmp temp0)
-		((super sel_109:) sel_30: gUserFont sel_117:)
+	(method (new &tmp temp0)
+		((super new:) font: gUserFont yourself:)
 	)
 
-	(method (sel_111 param1)
-		(if (and sel_23 (or (not argc) (not param1)))
-			(Memory memFREE (self sel_23:))
+	(method (dispose param1)
+		(if (and text (or (not argc) (not param1)))
+			(Memory memFREE (self text:))
 		)
-		(super sel_111:)
+		(super dispose:)
 	)
 
-	(method (sel_180 param1 &tmp [temp0 2] temp2 temp3)
+	(method (setSize param1 &tmp [temp0 2] temp2 temp3)
 		(TextSize
 			@temp0
-			sel_23
-			sel_30
+			text
+			font
 			(if argc param1 else 0)
 			{ \n---------- \n}
 		)
-		(= sel_8 (+ sel_6 temp2))
-		(= sel_9 (+ sel_7 temp3))
+		(= nsBottom (+ nsTop temp2))
+		(= nsRight (+ nsLeft temp3))
 	)
 )
 
 (class Dialog of List
 	(properties
-		sel_20 {Dialog}
-		sel_23 0
-		sel_30 0
-		sel_32 0
-		sel_187 0
-		sel_6 0
-		sel_7 0
-		sel_8 0
-		sel_9 0
-		sel_22 0
-		sel_143 0
-		sel_137 0
-		sel_138 0
-		sel_188 0
-		sel_140 0
+		name {Dialog}
+		text 0
+		font 0
+		window 0
+		theItem 0
+		nsTop 0
+		nsLeft 0
+		nsBottom 0
+		nsRight 0
+		time 0
+		caller 0
+		seconds 0
+		lastSeconds 0
+		eatTheMice 0
+		lastTicks 0
 	)
 
-	(method (sel_57 param1 &tmp temp0 temp1 temp2)
+	(method (doit param1 &tmp temp0 temp1 temp2)
 		(= gGameTime (+ gTickOffset (GetTime)))
 		(= temp2 0)
-		(self sel_119: 110)
-		(if sel_187
-			(sel_187 sel_178: 0)
+		(self eachElementDo: 110)
+		(if theItem
+			(theItem select: 0)
 		)
-		(= sel_187
+		(= theItem
 			(if (and argc param1)
 				param1
 			else
-				(self sel_120: 185 1)
+				(self firstTrue: 185 1)
 			)
 		)
-		(if sel_187
-			(sel_187 sel_178: 1)
+		(if theItem
+			(theItem select: 1)
 		)
-		(if (not sel_187)
-			(= sel_188 gEatMice)
-			(= sel_140 (GetTime))
+		(if (not theItem)
+			(= eatTheMice gEatMice)
+			(= lastTicks (GetTime))
 		else
-			(= sel_188 0)
+			(= eatTheMice 0)
 		)
 		(= temp1 0)
 		(while (not temp1)
 			(= gGameTime (+ gTickOffset (GetTime)))
-			(self sel_119: 186)
-			(= temp0 ((Event sel_109:) sel_148:))
-			(if sel_188
-				(-- sel_188)
-				(if (== (temp0 sel_31:) 1)
-					(temp0 sel_31: 0)
+			(self eachElementDo: 186)
+			(= temp0 ((Event new:) localize:))
+			(if eatTheMice
+				(-- eatTheMice)
+				(if (== (temp0 type:) 1)
+					(temp0 type: 0)
 				)
-				(while (== sel_140 (GetTime))
+				(while (== lastTicks (GetTime))
 				)
-				(= sel_140 (GetTime))
+				(= lastTicks (GetTime))
 			)
-			(= temp1 (self sel_133: temp0))
-			(temp0 sel_111:)
-			(if (self sel_174:)
+			(= temp1 (self handleEvent: temp0))
+			(temp0 dispose:)
+			(if (self check:)
 				(break)
 			)
 			(if (== temp1 -2)
 				(= temp1 0)
-				(EditControl sel_187 0)
+				(EditControl theItem 0)
 				(break)
 			)
 			(Wait 1)
@@ -272,132 +272,132 @@
 		(return temp1)
 	)
 
-	(method (sel_111 &tmp temp0)
-		(self sel_119: 111 sel_125:)
+	(method (dispose &tmp temp0)
+		(self eachElementDo: 111 release:)
 		(if (== self gModelessDialog)
 			(SetPort gModelessPort)
 			(= gModelessDialog 0)
 			(= gModelessPort 0)
 		)
-		(if sel_32
-			(sel_32 sel_111:)
-			(= sel_32 0)
+		(if window
+			(window dispose:)
+			(= window 0)
 		)
-		(= sel_187 0)
-		(= temp0 sel_143)
-		(super sel_111:)
+		(= theItem 0)
+		(= temp0 caller)
+		(super dispose:)
 		(if temp0
-			(temp0 sel_145:)
+			(temp0 cue:)
 		)
 	)
 
-	(method (sel_189 param1 param2)
+	(method (open param1 param2)
 		(if (and (PicNotValid) gCast)
-			(Animate (gCast sel_24:) 0)
+			(Animate (gCast elements:) 0)
 		)
-		(= sel_32 (sel_32 sel_109:))
-		(sel_32
-			sel_193: sel_6
-			sel_194: sel_7
-			sel_195: sel_8
-			sel_196: sel_9
-			sel_77: sel_23
-			sel_31: param1
-			sel_60: param2
-			sel_189:
+		(= window (window new:))
+		(window
+			top: nsTop
+			left: nsLeft
+			bottom: nsBottom
+			right: nsRight
+			title: text
+			type: param1
+			priority: param2
+			open:
 		)
-		(= sel_137 sel_22)
-		(self sel_80:)
+		(= seconds time)
+		(self draw:)
 	)
 
-	(method (sel_80)
-		(self sel_119: 80)
+	(method (draw)
+		(self eachElementDo: 80)
 	)
 
-	(method (sel_190 &tmp temp0 temp1)
-		(if sel_187
-			(sel_187 sel_178: 0)
-			(= temp1 (self sel_122: sel_187))
+	(method (advance &tmp temp0 temp1)
+		(if theItem
+			(theItem select: 0)
+			(= temp1 (self contains: theItem))
 			(while 1
-				(if (not (= temp1 (self sel_65: temp1)))
-					(= temp1 (self sel_124:))
+				(if (not (= temp1 (self next: temp1)))
+					(= temp1 (self first:))
 				)
-				(= sel_187 (NodeValue temp1))
-				(if (& (sel_187 sel_29:) $0001)
+				(= theItem (NodeValue temp1))
+				(if (& (theItem state:) $0001)
 					(break)
 				)
 			)
-			(sel_187 sel_178: 1)
+			(theItem select: 1)
 			(gGame
-				sel_197:
+				setCursor:
 					gTheCursor
 					1
 					(+
-						(sel_187 sel_7:)
-						(/ (- (sel_187 sel_9:) (sel_187 sel_7:)) 2)
+						(theItem nsLeft:)
+						(/ (- (theItem nsRight:) (theItem nsLeft:)) 2)
 					)
-					(- (sel_187 sel_8:) 3)
+					(- (theItem nsBottom:) 3)
 			)
 		)
 	)
 
-	(method (sel_191 &tmp temp0 temp1)
-		(if sel_187
-			(sel_187 sel_178: 0)
-			(= temp1 (self sel_122: sel_187))
+	(method (retreat &tmp temp0 temp1)
+		(if theItem
+			(theItem select: 0)
+			(= temp1 (self contains: theItem))
 			(while 1
-				(if (not (= temp1 (self sel_128: temp1)))
-					(= temp1 (self sel_127:))
+				(if (not (= temp1 (self prev: temp1)))
+					(= temp1 (self last:))
 				)
-				(= sel_187 (NodeValue temp1))
-				(if (& (sel_187 sel_29:) $0001)
+				(= theItem (NodeValue temp1))
+				(if (& (theItem state:) $0001)
 					(break)
 				)
 			)
-			(sel_187 sel_178: 1)
+			(theItem select: 1)
 			(gGame
-				sel_197:
+				setCursor:
 					gTheCursor
 					1
 					(+
-						(sel_187 sel_7:)
-						(/ (- (sel_187 sel_9:) (sel_187 sel_7:)) 2)
+						(theItem nsLeft:)
+						(/ (- (theItem nsRight:) (theItem nsLeft:)) 2)
 					)
-					(- (sel_187 sel_8:) 3)
+					(- (theItem nsBottom:) 3)
 			)
 		)
 	)
 
-	(method (sel_181 param1 param2)
-		(+= sel_9 param1)
-		(+= sel_7 param1)
-		(+= sel_6 param2)
-		(+= sel_8 param2)
+	(method (move param1 param2)
+		(+= nsRight param1)
+		(+= nsLeft param1)
+		(+= nsTop param2)
+		(+= nsBottom param2)
 	)
 
-	(method (sel_182 param1 param2)
-		(self sel_181: (- param1 sel_7) (- param2 sel_6))
+	(method (moveTo param1 param2)
+		(self move: (- param1 nsLeft) (- param2 nsTop))
 	)
 
-	(method (sel_192)
+	(method (center)
 		(self
-			sel_182:
+			moveTo:
 				(+
-					(sel_32 sel_17:)
+					(window brLeft:)
 					(/
 						(-
-							(- (sel_32 sel_19:) (sel_32 sel_17:))
-							(- sel_9 sel_7)
+							(- (window brRight:) (window brLeft:))
+							(- nsRight nsLeft)
 						)
 						2
 					)
 				)
 				(+
-					(sel_32 sel_16:)
+					(window brTop:)
 					(/
 						(-
-							(- (sel_32 sel_18:) (sel_32 sel_16:))
-							(- sel_8 sel_6)
+							(- (window brBottom:) (window brTop:))
+							(- nsBottom nsTop)
 						)
 						2
 					)
@@ -405,62 +405,62 @@
 		)
 	)
 
-	(method (sel_180 &tmp temp0 temp1 temp2 temp3 temp4 temp5)
-		(if sel_23
-			(TextSize @temp2 sel_23 sel_30 -1 0)
-			(= sel_6 temp2)
-			(= sel_7 temp3)
-			(= sel_8 temp4)
-			(= sel_9 temp5)
+	(method (setSize &tmp temp0 temp1 temp2 temp3 temp4 temp5)
+		(if text
+			(TextSize @temp2 text font -1 0)
+			(= nsTop temp2)
+			(= nsLeft temp3)
+			(= nsBottom temp4)
+			(= nsRight temp5)
 		else
-			(= sel_9 (= sel_8 (= sel_7 (= sel_6 0))))
+			(= nsRight (= nsBottom (= nsLeft (= nsTop 0))))
 		)
-		(for ((= temp0 (self sel_124:))) temp0 ((= temp0 (self sel_65: temp0)))
-			(if (< ((= temp1 (NodeValue temp0)) sel_7:) sel_7)
-				(= sel_7 (temp1 sel_7:))
+		(for ((= temp0 (self first:))) temp0 ((= temp0 (self next: temp0)))
+			(if (< ((= temp1 (NodeValue temp0)) nsLeft:) nsLeft)
+				(= nsLeft (temp1 nsLeft:))
 			)
-			(if (< (temp1 sel_6:) sel_6)
-				(= sel_6 (temp1 sel_6:))
+			(if (< (temp1 nsTop:) nsTop)
+				(= nsTop (temp1 nsTop:))
 			)
-			(if (> (temp1 sel_9:) sel_9)
-				(= sel_9 (temp1 sel_9:))
+			(if (> (temp1 nsRight:) nsRight)
+				(= nsRight (temp1 nsRight:))
 			)
-			(if (> (temp1 sel_8:) sel_8)
-				(= sel_8 (temp1 sel_8:))
+			(if (> (temp1 nsBottom:) nsBottom)
+				(= nsBottom (temp1 nsBottom:))
 			)
 		)
-		(+= sel_9 4)
-		(+= sel_8 4)
-		(self sel_182: 0 0)
+		(+= nsRight 4)
+		(+= nsBottom 4)
+		(self moveTo: 0 0)
 	)
 
-	(method (sel_133 param1 &tmp temp0 temp1 temp2)
-		(if (& (param1 sel_31:) $0040)
-			(switch (param1 sel_37:)
+	(method (handleEvent param1 &tmp temp0 temp1 temp2)
+		(if (& (param1 type:) $0040)
+			(switch (param1 message:)
 				(5
-					(param1 sel_31: 4 sel_37: 20480)
+					(param1 type: 4 message: 20480)
 				)
 				(1
-					(param1 sel_31: 4 sel_37: 18432)
+					(param1 type: 4 message: 18432)
 				)
 				(7
-					(param1 sel_31: 4 sel_37: 19200)
+					(param1 type: 4 message: 19200)
 				)
 				(3
-					(param1 sel_31: 4 sel_37: 19712)
+					(param1 type: 4 message: 19712)
 				)
 			)
 		)
-		(= temp1 (param1 sel_31:))
-		(= temp2 (param1 sel_37:))
-		(if (= temp0 (self sel_120: 133 param1))
-			(EditControl sel_187 0)
-			(if (not (temp0 sel_185: 2))
-				(if sel_187
-					(sel_187 sel_178: 0)
+		(= temp1 (param1 type:))
+		(= temp2 (param1 message:))
+		(if (= temp0 (self firstTrue: 133 param1))
+			(EditControl theItem 0)
+			(if (not (temp0 checkState: 2))
+				(if theItem
+					(theItem select: 0)
 				)
-				((= sel_187 temp0) sel_178: 1)
-				(temp0 sel_57:)
+				((= theItem temp0) select: 1)
+				(temp0 doit:)
 				(= temp0 0)
 			else
 				(return temp0)
@@ -471,74 +471,74 @@
 				(
 					(and
 						(or (== temp1 256) (and (== temp1 4) (== temp2 13)))
-						sel_187
-						(sel_187 sel_185: 1)
+						theItem
+						(theItem checkState: 1)
 					)
-					(= temp0 sel_187)
-					(EditControl sel_187 0)
-					(param1 sel_73: 1)
+					(= temp0 theItem)
+					(EditControl theItem 0)
+					(param1 claimed: 1)
 				)
 				((and (== temp1 4) (== temp2 27))
-					(param1 sel_73: 1)
+					(param1 claimed: 1)
 					(= temp0 -1)
 				)
 				(
 					(and
-						(not (self sel_120: 185 1))
+						(not (self firstTrue: 185 1))
 						(or
 							(and (== temp1 4) (== temp2 13))
 							(OneOf temp1 1 256)
 						)
 					)
-					(param1 sel_73: 1)
+					(param1 claimed: 1)
 					(= temp0 -2)
 				)
 				(
 					(and
-						(IsObject sel_187)
-						(sel_187 sel_184: 3)
+						(IsObject theItem)
+						(theItem isType: 3)
 						(== temp1 4)
 						(== temp2 19712)
 					)
-					(if (>= (sel_187 sel_33:) (StrLen (sel_187 sel_23:)))
-						(self sel_190:)
+					(if (>= (theItem cursor:) (StrLen (theItem text:)))
+						(self advance:)
 					else
-						(EditControl sel_187 param1)
+						(EditControl theItem param1)
 					)
 				)
 				(
 					(and
-						(IsObject sel_187)
-						(sel_187 sel_184: 3)
+						(IsObject theItem)
+						(theItem isType: 3)
 						(== temp1 4)
 						(== temp2 19200)
 					)
-					(if (<= (sel_187 sel_33:) 0)
-						(self sel_191:)
+					(if (<= (theItem cursor:) 0)
+						(self retreat:)
 					else
-						(EditControl sel_187 param1)
+						(EditControl theItem param1)
 					)
 				)
 				((and (== temp1 4) (OneOf temp2 9 19712 20480))
-					(param1 sel_73: 1)
-					(self sel_190:)
+					(param1 claimed: 1)
+					(self advance:)
 				)
 				((and (== temp1 4) (OneOf temp2 3840 19200 18432))
-					(param1 sel_73: 1)
-					(self sel_191:)
+					(param1 claimed: 1)
+					(self retreat:)
 				)
 				(else
-					(EditControl sel_187 param1)
+					(EditControl theItem param1)
 				)
 			)
 		)
 		(return temp0)
 	)
 
-	(method (sel_174 &tmp temp0)
-		(if (and sel_137 (!= sel_138 (= temp0 (GetTime 1)))) ; SysTime12
-			(= sel_138 temp0)
-			(return (not (-- sel_137)))
+	(method (check &tmp temp0)
+		(if (and seconds (!= lastSeconds (= temp0 (GetTime 1)))) ; SysTime12
+			(= lastSeconds temp0)
+			(return (not (-- seconds)))
 		else
 			0
 		)

@@ -12,7 +12,7 @@ Security: [SECURITY.md](SECURITY.md). Changes: [CHANGELOG.md](CHANGELOG.md). Old
 
 ## Current state
 
-_Last updated: 2026-10-13, session 52: forked SCI Companion saves LB2 messages; repo cleanup._
+_Last updated: 2026-10-13, session 53: readable selector names (D-039)._
 
 **Where things stand, in one paragraph:** Alpha v0.01 is public in the SQH Discord; alpha v0.02 (`LB2/LB2-Redux-v0.02.zip`, built from `master` at `43b1fbc`) is packaged and its tester guides are updated, pending publication. The room 335 benefit podium remains at `(190, 174)` with visual bounds `nsTop: 148, nsLeft: 182, nsBottom: 174, nsRight: 198` and fixed priority 12. Script 2335's existing 14-point barred room polygon reaches `(190, 176)` around the podium, and Script 335 routes Look/Hand/Magnifier to `(186, 180)` in front of the ledger. Old saves rebind that same polygon object to current static points without heap writes or new objects. Script 21's duplicate-clue repair prevents the prior Error 5 memory corruption. The remaining one-frame “interesting approach” flash was traced to the global fallback for an unsupported verb dispatch occurring before the valid podium dispatch on exact-position repeats. The podium now handles its three intended verbs normally and locally consumes any unsupported dispatch instead of forwarding it to the global narrator (D-035). The flash persisted, and occurred only on the engine's immediate-dispatch ending, when Laura was already in place. The podium now sets `sightAngle` -1 and `approachDist` 4, so repeats take the same deferred `CueObj` path as a fresh approach (D-036). The maintainer confirmed in DOSBox-X that repeat LOOK and DO show only the guestbook response. Saved games no longer overwrite slot 0 (Script 990 fix).
 
@@ -68,7 +68,7 @@ _Last updated: 2026-10-13, session 52: forked SCI Companion saves LB2 messages; 
 - **Act 5 Dialogue:** Rameses's Society confrontation and riddle, Tut's inquest testimony, Steve's already-clean escape dialogue, and O'Riley's jailhouse threat preserve the ending while removing the final phonetic caricatures (P2-08, D-031).
 - **Act 6 Dialogue:** The coroner conducts the complete final inquest in a dry, exacting professional voice; every question, evidence check, joke, verdict, and ending route remains intact (P2-08, D-031).
 - **Source Baseline:** P5-00's Sluicebox-annotated effective reconstruction is active under D-032; normal work remains single-script compilation under D-028.
-- **Documentation Architecture:** `docs/ROADMAP.md`, `DECISIONS.md` (D-001 through D-038), `docs/manual/`, `docs/manual/manual.html`, and `docs/PLAYTEST_CHECKLIST.md` synchronized.
+- **Documentation Architecture:** `docs/ROADMAP.md`, `DECISIONS.md` (D-001 through D-039), `docs/manual/`, `docs/manual/manual.html`, and `docs/PLAYTEST_CHECKLIST.md` synchronized.
 
 **Not verified**
 
@@ -80,8 +80,9 @@ _Last updated: 2026-10-13, session 52: forked SCI Companion saves LB2 messages; 
 
 - Edit message text in SCI Companion's message editor using the fork build in `SCI Companion/` (D-038); it saves LB2's message format in place. Upstream SCI Companion cannot write it (D-037). `docs/dialogue/*.json` manifests are a historical record of the P2-08 rewrites: re-running `tools/dialogue.py` would overwrite later editor changes.
 - Before changing an interactive room object, follow `docs/CONTRIBUTING.md`'s reference-first SCI object workflow (D-034): consult SCI Companion's object-interaction documentation, inspect `Feature.sc`/`PApproach.sc`/`Polygon.sc`, and compare at least two established same-class hotspots before adding custom selectors, cues, dispatchers, or per-cycle mutation.
-- Do not replace numeric selectors with contextual readable aliases; one selector ID can have several receiver-specific names (D-032).
-- Rebuild the developer vocabulary with `python3 tools/normalize_selector_vocab.py LB2/997.voc LB2/997.voc.tmp`, then replace it only after validation.
+- Selectors have readable names (D-039). Change a name only in `tools/selector_names.json`, rerun `python3 tools/name_selectors.py LB2`, restart SCI Companion (it reads `997.voc` only at startup), and recompile to confirm byte-identical output. Never give a selector the same name as an instance, class, or procedure used inside a method (`controls` vs. selector 343 changed `Game`'s bytecode).
+- SCI Companion resolves classes from other scripts through their `.sco` files. Compile a class's defining script before scripts that use changed classes (`Interface` before `Dialog`); several committed `.sco` files predate the current source.
+- Batch compiles: `compile_any.exe` leaves each script window open, which slows SCI Companion until saves lag and the GUI times out. SCI Companion ignores a game path given on its command line and reopens the last game.
 - Loose patch files in `LB2/` are lowercase (`.scr`, `.hep`, `.msg`, `.v56`), matching SCI Companion's output, and the working copy lives on a case-insensitive exFAT drive (D-037). `core.fileMode` is false there because exFAT has no Unix permissions; case-only renames need `git mv -f` plus a two-step rename on disk.
 - Before any SCI Companion GUI action, inspect the active window and verify the loaded archive/project identity; if it is ambiguous, ask the maintainer rather than closing, reloading, or choosing a window by inference.
 - Single-script compilation only: use `python3 tools/compile.py <script>`. Never use Compile All or resource rebuild.
@@ -98,6 +99,23 @@ _Last updated: 2026-10-13, session 52: forked SCI Companion saves LB2 messages; 
 None currently open. Q-001 and Q-002 have been resolved by D-007, D-017, and D-018.
 
 ## Session log
+
+### Session 53: 2026-10-13: Readable Selector Names
+
+**Contributor:** Claude Code and maintainer
+
+**Goal:** Make the source readable in SCI Companion by naming selectors without changing compiled output.
+
+**Done:**
+- Built `tools/selector_names.json` (563 IDs) by aligning `LB2/src` with the pinned Sluicebox publication and resolving disagreements from class definitions; cross-checked against the CD release's vocab 997 extracted from the maintainer's disc image (528 names in matching order). Added `tools/name_selectors.py` and applied it to `LB2/997.voc` and 218 source files (D-039).
+- Verified with two full SCI Companion rebuilds (original vs. renamed source) and targeted reruns: every compiled script is byte-identical. Fixed the one difference by naming selector 343 `theControls`.
+- Restored all playtested `.scr`/`.hep` patches from git afterwards; kept the regenerated `Interface.sco`, which fixes `Dialog`'s "Unknown class DItem" errors. Fixed `tools/make_test_copy.sh` for lowercase patch names.
+
+**Decisions:** D-039 (supersedes D-032's numeric-selector rule).
+
+**Verified:** Byte comparisons as above; headless DOSBox-X startup; base archive MD5s unchanged; documentation and manual checks.
+
+**Next session should start with:** Give Redux's museum-actor uses of selectors 667/668 their own names (new IDs), then decide whether to rebuild the 34 scripts whose committed patches differ from current source.
 
 ### Session 52: 2026-10-13: SCI Companion Message Saving and Workspace Cleanup
 
@@ -116,7 +134,7 @@ None currently open. Q-001 and Q-002 have been resolved by D-007, D-017, and D-0
 
 - Wired the orphaned (335, 6, 8) narrator line: `doorActions` now starts `sHeimlichStare` for the Magnifying Glass, which shows the narrator's scars line and then Heimlich's (1889, 1, 8) reply, following `sGiveInvite`'s room-script pattern. `335.scr` 1,872 bytes, `335.hep` 962 bytes; maintainer confirmed in DOSBox-X.
 
-**Next session should start with:** Readable selector names (plan item B).
+**Next session should start with:** Readable selector names (plan item B) — done in session 53.
 
 ### Session 51: 2026-10-12: Alpha v0.02 Playtest Package
 
@@ -266,15 +284,3 @@ None currently open. Q-001 and Q-002 have been resolved by D-007, D-017, and D-0
 **Verified:** Documentation consistency check passes with the new public guide and links.
 
 **Next session should start with:** Collect public alpha reports, reproduce them in DOSBox-X, and assign stable `PLAY-nnn` IDs in the internal checklist.
-
-### Session 43: 2026-10-10: Act 1 Playtest Music, Grade Frame, and Ziggy Continuity
-
-**Contributor:** Codex and maintainer
-
-**Goal:** Resolve the first three concrete regressions found during the clean Act 1 playthrough.
-
-**Done:** Restored Script 310's native randomized music wrapper and preserved its current song across the bathroom cue; retained picture 26's neutral gold Art Deco frame for all act-grade narration instead of drawing picture 780; and added explicit, plot-safe Act 1 replies when Laura asks Ziggy about Yvette or the Countess. Extended the tuple-manifest tool with idempotent SCI 1.1 record insertion so the two additive messages remain reproducible.
-
-**Verified:** Maintainer confirmed both speakeasy songs rotate and bathroom return no longer restarts the song; Script 310 compiled at 0 errors/0 warnings; Script 26 emitted updated loose patches; both additive message tuples parse and the manifest reapplies with zero changes; immutable base archives retain their vanilla hashes.
-
-**Next session should start with:** Continue the Act 1 playthrough and retest the neutral grade frame plus both new Ziggy inquiry replies.

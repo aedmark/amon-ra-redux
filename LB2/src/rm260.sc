@@ -33,37 +33,37 @@
 
 (instance rm260 of LBRoom
 	(properties
-		sel_20 {rm260}
-		sel_213 13
-		sel_408 260
-		sel_409 270
-		sel_411 300
-		sel_108 50
+		name {rm260}
+		noun 13
+		picture 260
+		north 270
+		south 300
+		vanishingY 50
 	)
 
-	(method (sel_110)
+	(method (init)
 		(LoadMany rsVIEW 284 260 852 282 830)
 		(LoadMany rsSOUND 40 97 260 261)
-		(self sel_414: 91)
-		(gEgo sel_110: sel_585: 830 sel_320: Scaler 98 0 190 50)
+		(self setRegions: 91)
+		(gEgo init: normalize: 830 setScale: Scaler 98 0 190 50)
 		(switch gPrevRoomNum
-			(sel_409
-				(gEgo sel_349: 0 sel_253: 180)
+			(north
+				(gEgo edgeHit: 0 setHeading: 180)
 			)
-			(sel_411
-				(gCurRoom sel_146: sUpCurb)
+			(south
+				(gCurRoom setScript: sUpCurb)
 			)
 			(else
-				(gCurRoom sel_146: sOutCab)
+				(gCurRoom setScript: sOutCab)
 			)
 		)
-		(super sel_110:)
-		(gGameMusic1 sel_40: 260 sel_99: 1 sel_3: 1 sel_39:)
+		(super init:)
+		(gGameMusic1 number: 260 flags: 1 loop: 1 play:)
 		(gCurRoom
-			sel_395:
-				((Polygon sel_109:)
-					sel_31: 2
-					sel_110:
+			addObstacle:
+				((Polygon new:)
+					type: 2
+					init:
 						319
 						0
 						319
@@ -104,75 +104,75 @@
 						189
 						0
 						0
-					sel_117:
+					yourself:
 				)
-				((Polygon sel_109:)
-					sel_31: 2
-					sel_110: 92 174 127 174 127 179 92 179
-					sel_117:
+				((Polygon new:)
+					type: 2
+					init: 92 174 127 174 127 179 92 179
+					yourself:
 				)
 		)
 		(if (not (IsFlag 129))
-			(kidR sel_110: sel_311: 6 4 2 8 15 sel_146: (sKidsPlaying sel_109:))
-			(kidL sel_110: sel_311: 6 4 2 8 15 sel_146: (sKidsPlaying sel_109:))
-			(kid sel_110: sel_311: 6 4 2 8 15 sel_146: (sKidsPlaying sel_109:))
+			(kidR init: approachVerbs: 6 4 2 8 15 setScript: (sKidsPlaying new:))
+			(kidL init: approachVerbs: 6 4 2 8 15 setScript: (sKidsPlaying new:))
+			(kid init: approachVerbs: 6 4 2 8 15 setScript: (sKidsPlaying new:))
 		)
-		(southExitFeature sel_110:)
-		(sky sel_110:)
-		(window1 sel_110:)
-		(window2 sel_110:)
-		(store sel_110:)
-		(lofats sel_110:)
-		(storeSign sel_110:)
-		(lamp1 sel_110:)
-		(lamp2 sel_110:)
-		(plant1 sel_110:)
-		(plant2 sel_110:)
-		(street sel_110:)
-		(stairs sel_110:)
-		(streetLamp sel_110:)
-		(frontDoor sel_110:)
-		(taxiSign sel_110:)
-		(taxi sel_110: sel_320: 220)
+		(southExitFeature init:)
+		(sky init:)
+		(window1 init:)
+		(window2 init:)
+		(store init:)
+		(lofats init:)
+		(storeSign init:)
+		(lamp1 init:)
+		(lamp2 init:)
+		(plant1 init:)
+		(plant2 init:)
+		(street init:)
+		(stairs init:)
+		(streetLamp init:)
+		(frontDoor init:)
+		(taxiSign init:)
+		(taxi init: setScale: 220)
 	)
 
-	(method (sel_57)
-		(super sel_57:)
+	(method (doit)
+		(super doit:)
 		(cond
-			(sel_142)
+			(script)
 			((StepOn gEgo 16)
-				(gCurRoom sel_146: sDownStairs)
+				(gCurRoom setScript: sDownStairs)
 			)
 		)
 	)
 
-	(method (sel_111)
-		(carSound sel_111:)
-		(gGameMusic1 sel_170: 0 30 12 1)
-		(super sel_111: &rest)
+	(method (dispose)
+		(carSound dispose:)
+		(gGameMusic1 fade: 0 30 12 1)
+		(super dispose: &rest)
 	)
 )
 
 (instance sDownStairs of Script
 	(properties
-		sel_20 {sDownStairs}
+		name {sDownStairs}
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
-				(gGame sel_587:)
-				(= sel_137 3)
+				(gGame handsOff:)
+				(= seconds 3)
 			)
 			(1
-				(gEgo sel_312: PolyPath 91 174 self)
+				(gEgo setMotion: PolyPath 91 174 self)
 			)
 			(2
-				(gMessager sel_295: 11 0 11 0 self)
+				(gMessager say: 11 0 11 0 self)
 			)
 			(3
-				(gGame sel_588:)
-				(self sel_111:)
+				(gGame handsOn:)
+				(self dispose:)
 			)
 		)
 	)
@@ -180,18 +180,18 @@
 
 (instance sUpCurb of Script
 	(properties
-		sel_20 {sUpCurb}
+		name {sUpCurb}
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
-				(gGame sel_587:)
-				(gEgo sel_312: PolyPath 161 170 self)
+				(gGame handsOff:)
+				(gEgo setMotion: PolyPath 161 170 self)
 			)
 			(1
-				(gGame sel_588:)
-				(self sel_111:)
+				(gGame handsOn:)
+				(self dispose:)
 			)
 		)
 	)
@@ -199,26 +199,26 @@
 
 (instance sOutCab of Script
 	(properties
-		sel_20 {sOutCab}
+		name {sOutCab}
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
-				(gGame sel_587:)
-				(gEgo sel_1: 127 sel_0: 171)
-				(taxi sel_110: sel_153: 115 188 sel_155: 5)
-				(= sel_136 1)
+				(gGame handsOff:)
+				(gEgo x: 127 y: 171)
+				(taxi init: posn: 115 188 setLoop: 5)
+				(= cycles 1)
 			)
 			(1
-				(gGameMusic2 sel_173: 2 224 2000 sel_170:)
-				(taxi sel_312: MoveTo -30 251 self)
+				(gGameMusic2 send: 2 224 2000 fade:)
+				(taxi setMotion: MoveTo -30 251 self)
 			)
 			(2
-				(gGame sel_588:)
-				(taxi sel_153: 411 171)
-				(taxi sel_111:)
-				(self sel_111:)
+				(gGame handsOn:)
+				(taxi posn: 411 171)
+				(taxi dispose:)
+				(self dispose:)
 			)
 		)
 	)
@@ -226,37 +226,37 @@
 
 (instance sKidsPlaying of Script
 	(properties
-		sel_20 {sKidsPlaying}
+		name {sKidsPlaying}
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
-				(sel_42 sel_161: CT (Random 1 5) 1 self)
+				(client setCycle: CT (Random 1 5) 1 self)
 			)
 			(1
-				(= sel_139 (Random 10 120))
+				(= ticks (Random 10 120))
 			)
 			(2
-				(sel_42 sel_161: End self)
+				(client setCycle: End self)
 			)
 			(3
-				(= sel_139 (Random 10 120))
+				(= ticks (Random 10 120))
 			)
 			(4
-				(sel_42 sel_161: CT (Random 1 5) -1 self)
+				(client setCycle: CT (Random 1 5) -1 self)
 			)
 			(5
-				(= sel_139 (Random 10 120))
+				(= ticks (Random 10 120))
 			)
 			(6
-				(sel_42 sel_161: Beg self)
+				(client setCycle: Beg self)
 			)
 			(7
-				(= sel_139 (Random 10 120))
+				(= ticks (Random 10 120))
 			)
 			(8
-				(self sel_144: 0)
+				(self changeState: 0)
 			)
 		)
 	)
@@ -264,54 +264,54 @@
 
 (instance sTradeBaseBall of Script
 	(properties
-		sel_20 {sTradeBaseBall}
+		name {sTradeBaseBall}
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
-				(gGame sel_587:)
-				(= sel_136 1)
+				(gGame handsOff:)
+				(= cycles 1)
 			)
 			(1
-				(kid sel_146: 0)
-				(kidL sel_4: 0)
-				(= sel_136 1)
+				(kid setScript: 0)
+				(kidL cel: 0)
+				(= cycles 1)
 			)
 			(2
-				(gEgo sel_2: 282 sel_3: 5 sel_4: 0 sel_161: End self)
+				(gEgo view: 282 loop: 5 cel: 0 setCycle: End self)
 			)
 			(3
-				(gMessager sel_295: 18 7 0 0 self)
-				(kidL sel_161: CT 8 1)
+				(gMessager say: 18 7 0 0 self)
+				(kidL setCycle: CT 8 1)
 			)
 			(4
-				(kid sel_3: 3 sel_4: 0 sel_161: CT 7 1 self)
+				(kid loop: 3 cel: 0 setCycle: CT 7 1 self)
 			)
 			(5
-				(kid sel_161: End self)
-				(kidL sel_161: CT 0 -1)
+				(kid setCycle: End self)
+				(kidL setCycle: CT 0 -1)
 			)
 			(6
-				(kid sel_3: 0)
-				(= sel_136 1)
+				(kid loop: 0)
+				(= cycles 1)
 			)
 			(7
-				(kid sel_146: sKidsPlaying)
-				(gGame sel_87: 1 129)
-				((ScriptID 22 0) sel_57: 4) ; triggerAndClock
-				((ScriptID 21 0) sel_57: 791) ; addCluesCode
-				((ScriptID 21 1) sel_57: 773) ; dropCluesCode
-				(gEgo sel_351: 4 sel_350: 22 sel_161: Beg self)
+				(kid setScript: sKidsPlaying)
+				(gGame points: 1 129)
+				((ScriptID 22 0) doit: 4) ; triggerAndClock
+				((ScriptID 21 0) doit: 791) ; addCluesCode
+				((ScriptID 21 1) doit: 773) ; dropCluesCode
+				(gEgo put: 4 get: 22 setCycle: Beg self)
 			)
 			(8
-				(gGameMusic2 sel_40: 261 sel_99: 1 sel_3: 1 sel_39:)
-				(gEgo sel_2: 830 sel_161: StopWalk -1)
-				(= sel_136 2)
+				(gGameMusic2 number: 261 flags: 1 loop: 1 play:)
+				(gEgo view: 830 setCycle: StopWalk -1)
+				(= cycles 2)
 			)
 			(9
-				(gGame sel_588:)
-				(self sel_111:)
+				(gGame handsOn:)
+				(self dispose:)
 			)
 		)
 	)
@@ -319,70 +319,70 @@
 
 (instance sHailTaxi of Script
 	(properties
-		sel_20 {sHailTaxi}
+		name {sHailTaxi}
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
-				(gGame sel_587:)
+				(gGame handsOff:)
 				(gEgo
-					sel_312:
+					setMotion:
 						PolyPath
-						(- (taxiSign sel_1:) 20)
-						(+ (taxiSign sel_0:) 2)
+						(- (taxiSign x:) 20)
+						(+ (taxiSign y:) 2)
 						self
 				)
 			)
 			(1
-				(gGameMusic2 sel_40: 252 sel_99: 1 sel_3: -1 sel_39: 20)
+				(gGameMusic2 number: 252 flags: 1 loop: -1 play: 20)
 				(gEgo
-					sel_2: 852
-					sel_3: 0
-					sel_153: (- (gEgo sel_1:) 2) (gEgo sel_0:)
-					sel_161: End self
+					view: 852
+					loop: 0
+					posn: (- (gEgo x:) 2) (gEgo y:)
+					setCycle: End self
 				)
-				(gGameMusic1 sel_40: 97 sel_99: 1 sel_3: 1 sel_39:)
+				(gGameMusic1 number: 97 flags: 1 loop: 1 play:)
 			)
 			(2
-				(gGameMusic2 sel_173: 2 224 2000 sel_170: 127 5 5 0)
+				(gGameMusic2 send: 2 224 2000 fade: 127 5 5 0)
 				(taxi
-					sel_110:
-					sel_155: 5
-					sel_312:
+					init:
+					setLoop: 5
+					setMotion:
 						MoveTo
-						(+ (gEgo sel_1:) 28)
-						(+ (gEgo sel_0:) 11)
+						(+ (gEgo x:) 28)
+						(+ (gEgo y:) 11)
 						self
 				)
 			)
 			(3
-				(gGameMusic2 sel_173: 2 224 1600)
-				(= sel_136 1)
+				(gGameMusic2 send: 2 224 1600)
+				(= cycles 1)
 			)
 			(4
-				(gGameMusic2 sel_173: 2 224 1200)
-				(= sel_136 1)
+				(gGameMusic2 send: 2 224 1200)
+				(= cycles 1)
 			)
 			(5
-				(gGameMusic2 sel_173: 2 224 800)
-				(= sel_136 1)
+				(gGameMusic2 send: 2 224 800)
+				(= cycles 1)
 			)
 			(6
-				(gGameMusic2 sel_173: 2 224 400)
-				(= sel_136 1)
+				(gGameMusic2 send: 2 224 400)
+				(= cycles 1)
 			)
 			(7
-				(gEgo sel_585: 830 sel_316: sel_312: MoveTo 122 185 self)
+				(gEgo normalize: 830 ignoreActors: setMotion: MoveTo 122 185 self)
 			)
 			(8
-				(gGameMusic2 sel_173: 2 224 0)
-				(carSound sel_39:)
-				(gEgo sel_102:)
-				(= sel_136 5)
+				(gGameMusic2 send: 2 224 0)
+				(carSound play:)
+				(gEgo hide:)
+				(= cycles 5)
 			)
 			(9
-				(gCurRoom sel_399: 250)
+				(gCurRoom newRoom: 250)
 			)
 		)
 	)
@@ -390,97 +390,97 @@
 
 (instance frontDoor of Door
 	(properties
-		sel_20 {frontDoor}
-		sel_1 155
-		sel_0 112
-		sel_213 1
-		sel_303 151
-		sel_304 172
-		sel_2 260
-		sel_589 270
-		sel_597 126
-		sel_598 164
-		sel_599 0
-		sel_600 0
+		name {frontDoor}
+		x 155
+		y 112
+		noun 1
+		approachX 151
+		approachY 172
+		view 260
+		entranceTo 270
+		moveToX 126
+		moveToY 164
+		enterType 0
+		exitType 0
 	)
 
-	(method (sel_606)
-		(super sel_606: 135 162 162 162 162 169 135 169)
+	(method (createPoly)
+		(super createPoly: 135 162 162 162 162 169 135 169)
 	)
 )
 
 (instance kid of Prop
 	(properties
-		sel_20 {kid}
-		sel_1 40
-		sel_0 172
-		sel_213 18
-		sel_303 63
-		sel_304 172
-		sel_2 282
-		sel_14 20480
-		sel_244 8
+		name {kid}
+		x 40
+		y 172
+		noun 18
+		approachX 63
+		approachY 172
+		view 282
+		signal 20480
+		cycleSpeed 8
 	)
 
-	(method (sel_300 param1 &tmp temp0)
+	(method (doVerb param1 &tmp temp0)
 		(switch param1
 			(6
-				(switch (= temp0 (gCurRoom sel_422: (ScriptID 20 0))) ; inNotebook
+				(switch (= temp0 (gCurRoom setInset: (ScriptID 20 0))) ; inNotebook
 					(1026
-						(gMessager sel_295: 18 6 5)
+						(gMessager say: 18 6 5)
 					)
 					(1027
-						(gMessager sel_295: 18 6 6)
+						(gMessager say: 18 6 6)
 					)
 					(1028
-						(gMessager sel_295: 18 6 10)
+						(gMessager say: 18 6 10)
 					)
 					(519
-						(gMessager sel_295: 18 6 4)
+						(gMessager say: 18 6 4)
 					)
 					(else
 						(cond
 							((< temp0 512)
-								(gMessager sel_295: 18 6 1)
+								(gMessager say: 18 6 1)
 							)
 							((< temp0 768)
-								(gMessager sel_295: 18 6 2)
+								(gMessager say: 18 6 2)
 							)
 							((< temp0 1024)
-								(gMessager sel_295: 18 6 3)
+								(gMessager say: 18 6 3)
 							)
 						)
 					)
 				)
 			)
 			(7
-				(gCurRoom sel_146: sTradeBaseBall)
+				(gCurRoom setScript: sTradeBaseBall)
 			)
 			(4
 				(if local0
-					(gMessager sel_295: 18 4 7)
+					(gMessager say: 18 4 7)
 					(= local0 0)
 				else
-					(gMessager sel_295: 18 4 8)
+					(gMessager say: 18 4 8)
 				)
 			)
 			(2
 				(if local1
-					(gMessager sel_295: 18 2 7)
+					(gMessager say: 18 2 7)
 					(= local1 0)
 				else
-					(gMessager sel_295: 18 2 8)
+					(gMessager say: 18 2 8)
 				)
 			)
 			(1
 				(if (IsFlag 129)
-					(gMessager sel_295: 18 1 12)
+					(gMessager say: 18 1 12)
 				else
-					(super sel_300: param1)
+					(super doVerb: param1)
 				)
 			)
 			(else
-				(super sel_300: param1)
+				(super doVerb: param1)
 			)
 		)
 	)
@@ -488,44 +488,44 @@
 
 (instance kidR of Prop
 	(properties
-		sel_20 {kidR}
-		sel_1 42
-		sel_0 174
-		sel_213 17
-		sel_303 63
-		sel_304 172
-		sel_2 282
-		sel_3 1
-		sel_14 20480
-		sel_244 8
+		name {kidR}
+		x 42
+		y 174
+		noun 17
+		approachX 63
+		approachY 172
+		view 282
+		loop 1
+		signal 20480
+		cycleSpeed 8
 	)
 
-	(method (sel_300 param1 &tmp temp0)
+	(method (doVerb param1 &tmp temp0)
 		(switch param1
 			(6
-				(switch (= temp0 (gCurRoom sel_422: (ScriptID 20 0))) ; inNotebook
+				(switch (= temp0 (gCurRoom setInset: (ScriptID 20 0))) ; inNotebook
 					(1026
-						(gMessager sel_295: 17 6 5)
+						(gMessager say: 17 6 5)
 					)
 					(1027
-						(gMessager sel_295: 17 6 6)
+						(gMessager say: 17 6 6)
 					)
 					(1028
-						(gMessager sel_295: 17 6 10)
+						(gMessager say: 17 6 10)
 					)
 					(519
-						(gMessager sel_295: 17 6 4)
+						(gMessager say: 17 6 4)
 					)
 					(else
 						(cond
 							((< temp0 512)
-								(gMessager sel_295: 17 6 1)
+								(gMessager say: 17 6 1)
 							)
 							((< temp0 768)
-								(gMessager sel_295: 17 6 2)
+								(gMessager say: 17 6 2)
 							)
 							((< temp0 1024)
-								(gMessager sel_295: 17 6 3)
+								(gMessager say: 17 6 3)
 							)
 						)
 					)
@@ -534,26 +534,26 @@
 			(2
 				(cond
 					((IsFlag 129)
-						(gMessager sel_295: 17 2 12)
+						(gMessager say: 17 2 12)
 					)
 					(local2
-						(gMessager sel_295: 17 2 7)
+						(gMessager say: 17 2 7)
 						(= local2 0)
 					)
 					(else
-						(gMessager sel_295: 17 2 8)
+						(gMessager say: 17 2 8)
 					)
 				)
 			)
 			(1
 				(if (IsFlag 129)
-					(gMessager sel_295: 17 1 12)
+					(gMessager say: 17 1 12)
 				else
-					(super sel_300: param1)
+					(super doVerb: param1)
 				)
 			)
 			(else
-				(super sel_300: param1)
+				(super doVerb: param1)
 			)
 		)
 	)
@@ -561,44 +561,44 @@
 
 (instance kidL of Prop
 	(properties
-		sel_20 {kidL}
-		sel_1 29
-		sel_0 173
-		sel_213 19
-		sel_303 63
-		sel_304 172
-		sel_2 282
-		sel_3 2
-		sel_14 20480
-		sel_244 8
+		name {kidL}
+		x 29
+		y 173
+		noun 19
+		approachX 63
+		approachY 172
+		view 282
+		loop 2
+		signal 20480
+		cycleSpeed 8
 	)
 
-	(method (sel_300 param1 &tmp temp0)
+	(method (doVerb param1 &tmp temp0)
 		(switch param1
 			(6
-				(switch (= temp0 (gCurRoom sel_422: (ScriptID 20 0))) ; inNotebook
+				(switch (= temp0 (gCurRoom setInset: (ScriptID 20 0))) ; inNotebook
 					(1026
-						(gMessager sel_295: 19 6 5)
+						(gMessager say: 19 6 5)
 					)
 					(1027
-						(gMessager sel_295: 19 6 6)
+						(gMessager say: 19 6 6)
 					)
 					(1028
-						(gMessager sel_295: 19 6 10)
+						(gMessager say: 19 6 10)
 					)
 					(519
-						(gMessager sel_295: 19 6 4)
+						(gMessager say: 19 6 4)
 					)
 					(else
 						(cond
 							((< temp0 512)
-								(gMessager sel_295: 19 6 1)
+								(gMessager say: 19 6 1)
 							)
 							((< temp0 768)
-								(gMessager sel_295: 19 6 2)
+								(gMessager say: 19 6 2)
 							)
 							((< temp0 1024)
-								(gMessager sel_295: 19 6 3)
+								(gMessager say: 19 6 3)
 							)
 						)
 					)
@@ -606,20 +606,20 @@
 			)
 			(2
 				(if (IsFlag 129)
-					(gMessager sel_295: 19 2 12)
+					(gMessager say: 19 2 12)
 				else
-					(super sel_300: param1)
+					(super doVerb: param1)
 				)
 			)
 			(1
 				(if (IsFlag 129)
-					(gMessager sel_295: 19 1 12)
+					(gMessager say: 19 1 12)
 				else
-					(super sel_300: param1)
+					(super doVerb: param1)
 				)
 			)
 			(else
-				(super sel_300: param1)
+				(super doVerb: param1)
 			)
 		)
 	)
@@ -627,76 +627,76 @@
 
 (instance taxi of Actor
 	(properties
-		sel_20 {taxi}
-		sel_1 411
-		sel_0 171
-		sel_2 852
-		sel_3 5
-		sel_4 1
-		sel_244 4
-		sel_53 0
+		name {taxi}
+		x 411
+		y 171
+		view 852
+		loop 5
+		cel 1
+		cycleSpeed 4
+		moveSpeed 0
 	)
 )
 
 (instance Biff of Narrator
 	(properties
-		sel_20 {Biff}
-		sel_26 15
+		name {Biff}
+		back 15
 	)
 
-	(method (sel_110)
-		(= sel_30 gUserFont)
-		(= sel_540 1)
-		(super sel_110: &rest)
+	(method (init)
+		(= font gUserFont)
+		(= showTitle 1)
+		(super init: &rest)
 	)
 )
 
 (instance Stinky of Narrator
 	(properties
-		sel_20 {Stinky}
-		sel_26 15
+		name {Stinky}
+		back 15
 	)
 
-	(method (sel_110)
-		(= sel_30 gUserFont)
-		(= sel_540 1)
-		(super sel_110: &rest)
+	(method (init)
+		(= font gUserFont)
+		(= showTitle 1)
+		(super init: &rest)
 	)
 )
 
 (instance Tubby of Narrator
 	(properties
-		sel_20 {Tubby}
-		sel_26 15
+		name {Tubby}
+		back 15
 	)
 
-	(method (sel_110)
-		(= sel_30 gUserFont)
-		(= sel_540 1)
-		(super sel_110: &rest)
+	(method (init)
+		(= font gUserFont)
+		(= showTitle 1)
+		(super init: &rest)
 	)
 )
 
 (instance taxiSign of View
 	(properties
-		sel_20 {taxiSign}
-		sel_1 109
-		sel_0 175
-		sel_213 3
-		sel_301 40
-		sel_2 284
-		sel_3 1
-		sel_4 1
-		sel_14 16384
+		name {taxiSign}
+		x 109
+		y 175
+		noun 3
+		sightAngle 40
+		view 284
+		loop 1
+		cel 1
+		signal 16384
 	)
 
-	(method (sel_300 param1)
+	(method (doVerb param1)
 		(switch param1
 			(4
-				(gCurRoom sel_146: sHailTaxi)
+				(gCurRoom setScript: sHailTaxi)
 			)
 			(else
-				(super sel_300: param1)
+				(super doVerb: param1)
 			)
 		)
 	)
@@ -704,168 +704,168 @@
 
 (instance sky of Feature
 	(properties
-		sel_20 {sky}
-		sel_0 3
-		sel_213 16
-		sel_302 8
+		name {sky}
+		y 3
+		noun 16
+		onMeCheck 8
 	)
 )
 
 (instance window1 of Feature
 	(properties
-		sel_20 {window1}
-		sel_0 3
-		sel_213 4
-		sel_6 33
-		sel_7 28
-		sel_8 71
-		sel_9 57
+		name {window1}
+		y 3
+		noun 4
+		nsTop 33
+		nsLeft 28
+		nsBottom 71
+		nsRight 57
 	)
 )
 
 (instance window2 of Feature
 	(properties
-		sel_20 {window2}
-		sel_0 3
-		sel_213 4
-		sel_6 43
-		sel_7 75
-		sel_8 74
-		sel_9 98
+		name {window2}
+		y 3
+		noun 4
+		nsTop 43
+		nsLeft 75
+		nsBottom 74
+		nsRight 98
 	)
 )
 
 (instance store of Feature
 	(properties
-		sel_20 {store}
-		sel_0 3
-		sel_213 5
-		sel_6 78
-		sel_8 169
-		sel_9 64
+		name {store}
+		y 3
+		noun 5
+		nsTop 78
+		nsBottom 169
+		nsRight 64
 	)
 )
 
 (instance lofats of Feature
 	(properties
-		sel_20 {lofats}
-		sel_0 3
-		sel_213 6
-		sel_6 92
-		sel_7 108
-		sel_8 166
-		sel_9 206
+		name {lofats}
+		y 3
+		noun 6
+		nsTop 92
+		nsLeft 108
+		nsBottom 166
+		nsRight 206
 	)
 )
 
 (instance storeSign of Feature
 	(properties
-		sel_20 {storeSign}
-		sel_0 4
-		sel_213 7
-		sel_6 102
-		sel_7 148
-		sel_8 111
-		sel_9 188
+		name {storeSign}
+		y 4
+		noun 7
+		nsTop 102
+		nsLeft 148
+		nsBottom 111
+		nsRight 188
 	)
 )
 
 (instance lamp1 of Feature
 	(properties
-		sel_20 {lamp1}
-		sel_0 4
-		sel_213 8
-		sel_6 97
-		sel_7 125
-		sel_8 118
-		sel_9 137
+		name {lamp1}
+		y 4
+		noun 8
+		nsTop 97
+		nsLeft 125
+		nsBottom 118
+		nsRight 137
 	)
 )
 
 (instance lamp2 of Feature
 	(properties
-		sel_20 {lamp2}
-		sel_0 4
-		sel_213 8
-		sel_6 104
-		sel_7 189
-		sel_8 118
-		sel_9 198
+		name {lamp2}
+		y 4
+		noun 8
+		nsTop 104
+		nsLeft 189
+		nsBottom 118
+		nsRight 198
 	)
 )
 
 (instance plant1 of Feature
 	(properties
-		sel_20 {plant1}
-		sel_0 3
-		sel_213 9
-		sel_6 64
-		sel_7 110
-		sel_8 79
-		sel_9 135
+		name {plant1}
+		y 3
+		noun 9
+		nsTop 64
+		nsLeft 110
+		nsBottom 79
+		nsRight 135
 	)
 )
 
 (instance plant2 of Feature
 	(properties
-		sel_20 {plant2}
-		sel_0 3
-		sel_213 9
-		sel_6 80
-		sel_7 163
-		sel_8 89
-		sel_9 199
+		name {plant2}
+		y 3
+		noun 9
+		nsTop 80
+		nsLeft 163
+		nsBottom 89
+		nsRight 199
 	)
 )
 
 (instance street of Feature
 	(properties
-		sel_20 {street}
-		sel_0 3
-		sel_213 10
-		sel_6 168
-		sel_8 189
-		sel_9 319
+		name {street}
+		y 3
+		noun 10
+		nsTop 168
+		nsBottom 189
+		nsRight 319
 	)
 )
 
 (instance stairs of Feature
 	(properties
-		sel_20 {stairs}
-		sel_0 3
-		sel_213 11
-		sel_6 89
-		sel_7 66
-		sel_8 169
-		sel_9 101
+		name {stairs}
+		y 3
+		noun 11
+		nsTop 89
+		nsLeft 66
+		nsBottom 169
+		nsRight 101
 	)
 )
 
 (instance streetLamp of Feature
 	(properties
-		sel_20 {streetLamp}
-		sel_0 3
-		sel_213 12
-		sel_302 2
+		name {streetLamp}
+		y 3
+		noun 12
+		onMeCheck 2
 	)
 )
 
 (instance southExitFeature of ExitFeature
 	(properties
-		sel_20 {southExitFeature}
-		sel_6 184
-		sel_8 189
-		sel_9 320
-		sel_33 11
-		sel_583 3
-		sel_213 2
+		name {southExitFeature}
+		nsTop 184
+		nsBottom 189
+		nsRight 320
+		cursor 11
+		exitDir 3
+		noun 2
 	)
 )
 
 (instance carSound of Sound
 	(properties
-		sel_20 {carSound}
-		sel_99 5
-		sel_40 40
+		name {carSound}
+		flags 5
+		number 40
 	)
 )

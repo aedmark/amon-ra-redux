@@ -12,79 +12,79 @@
 
 (instance magRosetta of Rm
 	(properties
-		sel_20 {magRosetta}
-		sel_408 780
+		name {magRosetta}
+		picture 780
 	)
 
-	(method (sel_110)
-		(if (gTimers sel_122: (ScriptID 90 15)) ; meetingTimer
-			((ScriptID 90 15) sel_42: self) ; meetingTimer
+	(method (init)
+		(if (gTimers contains: (ScriptID 90 15)) ; meetingTimer
+			((ScriptID 90 15) client: self) ; meetingTimer
 		)
-		(self sel_414: 90)
-		(super sel_110:)
-		(bigRosetta sel_110:)
+		(self setRegions: 90)
+		(super init:)
+		(bigRosetta init:)
 	)
 
-	(method (sel_145)
-		((ScriptID 90 15) sel_162: self 10 0 0 gClockTimeMustDos) ; meetingTimer
+	(method (cue)
+		((ScriptID 90 15) setReal: self 10 0 0 gClockTimeMustDos) ; meetingTimer
 	)
 
-	(method (sel_399)
-		(if (gTimers sel_122: (ScriptID 90 15)) ; meetingTimer
-			(= sel_135 0)
-			((ScriptID 90 15) sel_42: (ScriptID 90 15)) ; meetingTimer, meetingTimer
+	(method (newRoom)
+		(if (gTimers contains: (ScriptID 90 15)) ; meetingTimer
+			(= timer 0)
+			((ScriptID 90 15) client: (ScriptID 90 15)) ; meetingTimer, meetingTimer
 		)
-		(gGameMusic2 sel_170: 127 20 20 0)
-		(super sel_399: &rest)
+		(gGameMusic2 fade: 127 20 20 0)
+		(super newRoom: &rest)
 	)
 )
 
 (instance bigRosetta of Feature
 	(properties
-		sel_20 {bigRosetta}
-		sel_0 190
-		sel_6 50
-		sel_7 50
-		sel_8 145
-		sel_9 210
+		name {bigRosetta}
+		y 190
+		nsTop 50
+		nsLeft 50
+		nsBottom 145
+		nsRight 210
 	)
 
-	(method (sel_110)
-		(gKeyDownHandler sel_129: self)
-		(gMouseDownHandler sel_129: self)
-		(gGameMusic2 sel_170: 80 20 20 0)
-		(gTheIconBar sel_233: 7)
-		(super sel_110: &rest)
-		(gTheIconBar sel_207: (gTheIconBar sel_64: 1) sel_233:)
+	(method (init)
+		(gKeyDownHandler addToFront: self)
+		(gMouseDownHandler addToFront: self)
+		(gGameMusic2 fade: 80 20 20 0)
+		(gTheIconBar disable: 7)
+		(super init: &rest)
+		(gTheIconBar curIcon: (gTheIconBar at: 1) disable:)
 		(if (== gPrevRoomNum 454)
 			(DrawPic 455 100)
 		else
 			(DrawPic 521 100)
 		)
-		(gGame sel_197: 996)
+		(gGame setCursor: 996)
 		(if (== gPrevRoomNum 454)
 			(SetCursor 2 79 55 239 144 86 0 0 456 53)
 		else
 			(SetCursor 2 79 55 239 144 86 0 0 527 53)
 		)
-		(Animate (gCast sel_24:) 0)
+		(Animate (gCast elements:) 0)
 	)
 
-	(method (sel_111)
-		(gKeyDownHandler sel_81: self)
-		(gMouseDownHandler sel_81: self)
-		(super sel_111: &rest)
-		(gTheIconBar sel_177: 7)
-		(gCurRoom sel_399: gPrevRoomNum)
+	(method (dispose)
+		(gKeyDownHandler delete: self)
+		(gMouseDownHandler delete: self)
+		(super dispose: &rest)
+		(gTheIconBar enable: 7)
+		(gCurRoom newRoom: gPrevRoomNum)
 	)
 
-	(method (sel_133 param1)
-		(if (or (== (param1 sel_31:) 1) (== (param1 sel_31:) 4))
+	(method (handleEvent param1)
+		(if (or (== (param1 type:) 1) (== (param1 type:) 4))
 			(SetCursor -1)
-			(gGame sel_197: ((gTheIconBar sel_207:) sel_33:) 1)
-			(param1 sel_73: 1)
-			(self sel_111:)
-			(gTheIconBar sel_177:)
+			(gGame setCursor: ((gTheIconBar curIcon:) cursor:) 1)
+			(param1 claimed: 1)
+			(self dispose:)
+			(gTheIconBar enable:)
 		)
 	)
 )

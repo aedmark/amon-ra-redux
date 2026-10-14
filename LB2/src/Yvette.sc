@@ -12,46 +12,46 @@
 
 (instance Yvette of Talker
 	(properties
-		sel_20 {Yvette}
-		sel_1 5
-		sel_0 5
-		sel_2 1885
-		sel_3 3
-		sel_537 150
-		sel_26 15
-		sel_549 110
-		sel_550 12
+		name {Yvette}
+		x 5
+		y 5
+		view 1885
+		loop 3
+		talkWidth 150
+		back 15
+		textX 110
+		textY 12
 	)
 
-	(method (sel_110)
-		(= sel_30 gUserFont)
-		(super sel_110: yvetteBust yvetteEyes yvetteMouth &rest)
+	(method (init)
+		(= font gUserFont)
+		(super init: yvetteBust yvetteEyes yvetteMouth &rest)
 	)
 )
 
 (instance yvetteBust of Prop
 	(properties
-		sel_20 {yvetteBust}
-		sel_2 1885
-		sel_3 1
+		name {yvetteBust}
+		view 1885
+		loop 1
 	)
 )
 
 (instance yvetteEyes of Prop
 	(properties
-		sel_20 {yvetteEyes}
-		sel_6 29
-		sel_7 21
-		sel_2 1885
-		sel_3 2
+		name {yvetteEyes}
+		nsTop 29
+		nsLeft 21
+		view 1885
+		loop 2
 	)
 )
 
 (instance yvetteMouth of Prop
 	(properties
-		sel_20 {yvetteMouth}
-		sel_6 47
-		sel_7 25
-		sel_2 1885
+		name {yvetteMouth}
+		nsTop 47
+		nsLeft 25
+		view 1885
 	)
 )

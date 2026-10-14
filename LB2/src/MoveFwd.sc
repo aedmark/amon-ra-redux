@@ -6,20 +6,20 @@
 
 (class MoveFwd of PolyPath
 	(properties
-		sel_20 {MoveFwd}
+		name {MoveFwd}
 	)
 
-	(method (sel_110 param1 param2 param3)
+	(method (init param1 param2 param3)
 		(if argc
 			(super
-				sel_110:
+				init:
 					param1
-					(+ (param1 sel_1:) (SinMult (param1 sel_55:) param2))
-					(- (param1 sel_0:) (CosMult (param1 sel_55:) param2))
+					(+ (param1 x:) (SinMult (param1 heading:) param2))
+					(- (param1 y:) (CosMult (param1 heading:) param2))
 					(if (>= argc 3) param3 else 0)
 			)
 		else
-			(super sel_110:)
+			(super init:)
 		)
 	)
 )

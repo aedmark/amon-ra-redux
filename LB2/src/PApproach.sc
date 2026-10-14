@@ -6,47 +6,47 @@
 
 (class PApproach of PolyPath
 	(properties
-		sel_20 {PApproach}
-		sel_254 20
-		sel_272 0
-		sel_273 0
+		name {PApproach}
+		distance 20
+		targetX 0
+		targetY 0
 	)
 
-	(method (sel_110 param1 param2 param3 param4 param5)
+	(method (init param1 param2 param3 param4 param5)
 		(if (>= argc 1)
-			(= sel_42 param1)
+			(= client param1)
 			(if (>= argc 2)
 				(if (IsObject param2)
-					(= sel_272 (param2 sel_1:))
-					(= sel_273 (param2 sel_0:))
+					(= targetX (param2 x:))
+					(= targetY (param2 y:))
 					(if (>= argc 3)
-						(= sel_254 param3)
+						(= distance param3)
 						(if (>= argc 4)
-							(= sel_143 param4)
+							(= caller param4)
 						)
 					)
 				else
-					(= sel_272 param2)
-					(= sel_273 param3)
+					(= targetX param2)
+					(= targetY param3)
 					(if (>= argc 4)
-						(= sel_254 param4)
+						(= distance param4)
 						(if (>= argc 5)
-							(= sel_143 param5)
+							(= caller param5)
 						)
 					)
 				)
 			)
-			(super sel_110: sel_42 sel_272 sel_273 sel_143)
+			(super init: client targetX targetY caller)
 		else
-			(super sel_110:)
+			(super init:)
 		)
 	)
 
-	(method (sel_252)
+	(method (onTarget)
 		(return
 			(<=
-				(GetDistance (sel_42 sel_1:) (sel_42 sel_0:) sel_272 sel_273)
-				sel_254
+				(GetDistance (client x:) (client y:) targetX targetY)
+				distance
 			)
 		)
 	)

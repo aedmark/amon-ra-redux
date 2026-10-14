@@ -22,63 +22,63 @@
 
 (instance poly2530Code of Code
 	(properties
-		sel_20 {poly2530Code}
+		name {poly2530Code}
 	)
 
-	(method (sel_57 param1)
+	(method (doit param1)
 		(param1
-			sel_118: (poly2530a sel_110: sel_117:) (poly2530b sel_110: sel_117:)
+			add: (poly2530a init: yourself:) (poly2530b init: yourself:)
 		)
 		(if (not (IsFlag 31))
-			(param1 sel_118: (poly2530c sel_110: sel_117:))
+			(param1 add: (poly2530c init: yourself:))
 		)
 	)
 )
 
 (instance poly2530a of Polygon
 	(properties
-		sel_20 {poly2530a}
+		name {poly2530a}
 	)
 
-	(method (sel_110)
-		(= sel_31 2)
-		(= sel_86 (if (IsFlag 31) 27 else 4))
-		(= sel_87 (if (IsFlag 31) @local36 else @local0))
+	(method (init)
+		(= type 2)
+		(= size (if (IsFlag 31) 27 else 4))
+		(= points (if (IsFlag 31) @local36 else @local0))
 	)
 )
 
 (instance poly2530b of Polygon
 	(properties
-		sel_20 {poly2530b}
+		name {poly2530b}
 	)
 
-	(method (sel_110)
-		(= sel_31 2)
-		(= sel_86 (if (IsFlag 31) 14 else 10))
-		(= sel_87 (if (IsFlag 31) @local90 else @local8))
+	(method (init)
+		(= type 2)
+		(= size (if (IsFlag 31) 14 else 10))
+		(= points (if (IsFlag 31) @local90 else @local8))
 	)
 )
 
 (instance poly2530c of Polygon
 	(properties
-		sel_20 {poly2530c}
+		name {poly2530c}
 	)
 
-	(method (sel_110)
-		(= sel_31 2)
-		(= sel_86 4)
-		(= sel_87 @local28)
+	(method (init)
+		(= type 2)
+		(= size 4)
+		(= points @local28)
 	)
 )
 
 (instance pts2530 of MuseumPoints
 	(properties
-		sel_20 {pts2530}
-		sel_621 290
-		sel_622 175
-		sel_623 100
-		sel_624 160
-		sel_625 230
-		sel_626 150
+		name {pts2530}
+		midPtX 290
+		midPtY 175
+		northPtX 100
+		northPtY 160
+		southPtX 230
+		southPtY 150
 	)
 )

@@ -17,28 +17,28 @@
 
 (instance poly2666Code of Code
 	(properties
-		sel_20 {poly2666Code}
+		name {poly2666Code}
 	)
 
-	(method (sel_57 param1)
-		(param1 sel_118: (poly2666a sel_110: sel_117:))
+	(method (doit param1)
+		(param1 add: (poly2666a init: yourself:))
 	)
 )
 
 (instance poly2666a of Polygon
 	(properties
-		sel_20 {poly2666a}
+		name {poly2666a}
 	)
 
-	(method (sel_110)
-		(= sel_31 2)
-		(= sel_86 4)
-		(= sel_87 @local0)
+	(method (init)
+		(= type 2)
+		(= size 4)
+		(= points @local0)
 	)
 )
 
 (instance pts2666 of MuseumPoints
 	(properties
-		sel_20 {pts2666}
+		name {pts2666}
 	)
 )

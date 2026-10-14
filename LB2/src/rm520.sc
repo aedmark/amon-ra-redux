@@ -41,34 +41,34 @@
 
 (instance rm520 of LBRoom
 	(properties
-		sel_20 {rm520}
-		sel_213 58
-		sel_408 520
-		sel_409 666
-		sel_411 510
-		sel_107 0
+		name {rm520}
+		noun 58
+		picture 520
+		north 666
+		south 510
+		vanishingX 0
 	)
 
-	(method (sel_110)
+	(method (init)
 		(LoadMany rsVIEW 520 521 522 523 524 525 526 527 528 529 563 820 561 831)
 		(LoadMany rsPIC 521 522 523)
 		(LoadMany rsSOUND 520 524 521 522 523 525 441 481 49 721)
-		(gEgo sel_110: sel_585: 831 sel_320: Scaler 120 100 190 0)
-		(self sel_414: 90)
+		(gEgo init: normalize: 831 setScale: Scaler 120 100 190 0)
+		(self setRegions: 90)
 		(switch gPrevRoomNum
-			(sel_411
-				(gEgo sel_1: 160)
-				(gGame sel_588:)
+			(south
+				(gEgo x: 160)
+				(gGame handsOn:)
 			)
 			(456 ; magRosetta
-				(gEgo sel_1: 209 sel_0: 127)
+				(gEgo x: 209 y: 127)
 			)
 			(else
-				(gEgo sel_153: 109 125 sel_253: 62)
+				(gEgo posn: 109 125 setHeading: 62)
 			)
 		)
-		(gGame sel_588:)
-		(super sel_110:)
+		(gGame handsOn:)
+		(super init:)
 		(cond
 			(
 				(and
@@ -80,29 +80,29 @@
 					(!= gPrevRoomNum 456) ; magRosetta
 					(not (TimeCheck $4108)) ; has 4:15 am occurred?
 				)
-				(gGameMusic2 sel_40: 521 sel_3: -1 sel_99: 1 sel_39:)
+				(gGameMusic2 number: 521 loop: -1 flags: 1 play:)
 			)
 			((!= gPrevRoomNum 456) ; magRosetta
-				(gGameMusic2 sel_40: 520 sel_3: -1 sel_99: 1 sel_39:)
+				(gGameMusic2 number: 520 loop: -1 flags: 1 play:)
 			)
 		)
 		(if (and (== gPrevRoomNum 525) (not (TimeCheck $4108))) ; has 4:15 am occurred?
-			((Timer sel_109:) sel_162: self 2)
+			((Timer new:) setReal: self 2)
 		)
 		(if (or (> gAct 4) (and (== gAct 4) (TimeCheck $4108 1))) ; can 4:15 am occur?
 			(if (not (IsFlag 80))
-				(cobraDoor sel_110:)
+				(cobraDoor init:)
 				(= local5 0)
 				(= local2 sCobraLoose)
 			else
-				(cobra sel_110: sel_311: 4 1 8 sel_313:)
+				(cobra init: approachVerbs: 4 1 8 stopUpd:)
 			)
 		else
-			(mountedSkull sel_110: sel_311: 4 1 8 sel_313:)
-			(cobra sel_110: sel_311: 4 1 8 sel_313:)
+			(mountedSkull init: approachVerbs: 4 1 8 stopUpd:)
+			(cobra init: approachVerbs: 4 1 8 stopUpd:)
 		)
 		(if (not (IsFlag 49))
-			(rosettaCloth sel_110: sel_311: 4 1 8 sel_313:)
+			(rosettaCloth init: approachVerbs: 4 1 8 stopUpd:)
 		)
 		(if
 			(and
@@ -112,121 +112,121 @@
 				)
 				(not (IsFlag 48))
 			)
-			(snakeOil sel_110: sel_311: 4 1 8 sel_313:)
+			(snakeOil init: approachVerbs: 4 1 8 stopUpd:)
 		)
-		(secretDoor sel_110: sel_313:)
+		(secretDoor init: stopUpd:)
 		(if (or (> gAct 4) (and (== gAct 4) (TimeCheck $4108 1))) ; can 4:15 am occur?
-			(deadCountess sel_110: sel_313: sel_311: 1 8)
+			(deadCountess init: stopUpd: approachVerbs: 1 8)
 		else
-			(intercom sel_110: sel_313: sel_311: 4 1 8)
+			(intercom init: stopUpd: approachVerbs: 4 1 8)
 		)
-		(ratBack sel_110: sel_311: 4 1 8)
-		(ratFore sel_110: sel_311: 4 1 8)
-		(rosetta sel_110: sel_311: 4 1 8)
-		(hieroglyphics sel_110: sel_311: 4 1 8)
-		(certificate sel_110:)
-		(skeletonLegs sel_110:)
-		(cobraCage sel_110:)
-		(bookShelf sel_110:)
-		(jars sel_110:)
-		(chair sel_110:)
-		(skeletonFore sel_110:)
-		(desk sel_110:)
-		(windowView sel_110:)
-		(drapes sel_110:)
-		(roachTop sel_110:)
-		(roachBottom sel_110:)
-		(displayCase sel_110:)
-		(cages sel_110:)
-		(lizards sel_110:)
-		(bookcase sel_110:)
-		(lizardTable sel_110:)
-		(standRat sel_110:)
+		(ratBack init: approachVerbs: 4 1 8)
+		(ratFore init: approachVerbs: 4 1 8)
+		(rosetta init: approachVerbs: 4 1 8)
+		(hieroglyphics init: approachVerbs: 4 1 8)
+		(certificate init:)
+		(skeletonLegs init:)
+		(cobraCage init:)
+		(bookShelf init:)
+		(jars init:)
+		(chair init:)
+		(skeletonFore init:)
+		(desk init:)
+		(windowView init:)
+		(drapes init:)
+		(roachTop init:)
+		(roachBottom init:)
+		(displayCase init:)
+		(cages init:)
+		(lizards init:)
+		(bookcase init:)
+		(lizardTable init:)
+		(standRat init:)
 		(if local2
-			(gCurRoom sel_146: local2)
+			(gCurRoom setScript: local2)
 		)
-		(southExitFeature sel_110:)
+		(southExitFeature init:)
 	)
 
-	(method (sel_57)
-		(super sel_57:)
+	(method (doit)
+		(super doit:)
 		(cond
-			(sel_142)
+			(script)
 			((and local4 (StepOn gEgo 16))
-				(self sel_146: sDropCobraGetBitten)
+				(self setScript: sDropCobraGetBitten)
 			)
 			(
 				(and
-					(> (gEgo sel_0:) 185)
+					(> (gEgo y:) 185)
 					(or
-						(== (gEgo sel_2:) 522)
-						(== (gEgo sel_2:) 528)
-						(== (gEgo sel_2:) 529)
+						(== (gEgo view:) 522)
+						(== (gEgo view:) 528)
+						(== (gEgo view:) 529)
 					)
 				)
-				(gCurRoom sel_146: sDropCobraGetBitten)
+				(gCurRoom setScript: sDropCobraGetBitten)
 			)
-			((> (gEgo sel_0:) 185)
+			((> (gEgo y:) 185)
 				(= local4 1)
 			)
 		)
 	)
 
-	(method (sel_145)
+	(method (cue)
 		(if local10
-			(super sel_399: 26)
+			(super newRoom: 26)
 		else
-			(gGameMusic2 sel_40: 520)
-			((ScriptID 22 0) sel_57: 16648) ; triggerAndClock
+			(gGameMusic2 number: 520)
+			((ScriptID 22 0) doit: 16648) ; triggerAndClock
 		)
 	)
 
-	(method (sel_399 param1)
+	(method (newRoom param1)
 		(cond
 			((== param1 456)
-				(super sel_399: param1)
+				(super newRoom: param1)
 			)
-			((and (== gAct 4) (gEgo sel_238: 31))
+			((and (== gAct 4) (gEgo has: 31))
 				(= param1 26)
-				(WrapMusic sel_111:)
-				((ScriptID 22 0) sel_57: 31) ; triggerAndClock
-				(gGameMusic2 sel_40: 524 sel_3: 1 sel_99: 1 sel_39: self)
+				(WrapMusic dispose:)
+				((ScriptID 22 0) doit: 31) ; triggerAndClock
+				(gGameMusic2 number: 524 loop: 1 flags: 1 play: self)
 				(= local10 1)
 			)
 			(else
-				(gGameMusic2 sel_170:)
-				(super sel_399: param1)
+				(gGameMusic2 fade:)
+				(super newRoom: param1)
 			)
 		)
-		((ScriptID 90 2) sel_63: -1) ; aOlympia
+		((ScriptID 90 2) setPri: -1) ; aOlympia
 	)
 )
 
 (instance cobra of Actor
 	(properties
-		sel_20 {cobra}
-		sel_1 85
-		sel_0 58
-		sel_213 16
-		sel_303 78
-		sel_304 122
-		sel_2 521
-		sel_3 3
-		sel_60 2
-		sel_14 16400
-		sel_244 12
+		name {cobra}
+		x 85
+		y 58
+		noun 16
+		approachX 78
+		approachY 122
+		view 521
+		loop 3
+		priority 2
+		signal 16400
+		cycleSpeed 12
 	)
 
-	(method (sel_300 param1)
+	(method (doVerb param1)
 		(switch param1
 			(1
-				(gCurRoom sel_422: inCobra)
+				(gCurRoom setInset: inCobra)
 			)
 			(8
-				(gCurRoom sel_422: inCobra)
+				(gCurRoom setInset: inCobra)
 			)
 			(else
-				(super sel_300: param1)
+				(super doVerb: param1)
 			)
 		)
 	)
@@ -234,54 +234,54 @@
 
 (instance cobraLoose of Actor
 	(properties
-		sel_20 {cobraLoose}
-		sel_1 77
-		sel_0 178
-		sel_2 521
-		sel_244 12
+		name {cobraLoose}
+		x 77
+		y 178
+		view 521
+		cycleSpeed 12
 	)
 
-	(method (sel_57)
-		(if (and (not local4) (not (cobraDoor sel_142:)) (not local5))
+	(method (doit)
+		(if (and (not local4) (not (cobraDoor script:)) (not local5))
 			(cond
 				(
 					(and
 						local8
 						(or
-							(< (gEgo sel_255: self) 40)
-							(> (gEgo sel_255: self) local9)
+							(< (gEgo distanceTo: self) 40)
+							(> (gEgo distanceTo: self) local9)
 						)
 					)
-					(cobraDoor sel_146: sCobraStrike)
+					(cobraDoor setScript: sCobraStrike)
 				)
-				((and (< (gEgo sel_1:) (self sel_1:)) local6)
+				((and (< (gEgo x:) (self x:)) local6)
 					(= local6 0)
-					(self sel_146: sCobraTurn)
+					(self setScript: sCobraTurn)
 				)
-				((and (> (gEgo sel_1:) (self sel_1:)) (not local6))
+				((and (> (gEgo x:) (self x:)) (not local6))
 					(= local6 1)
-					(self sel_146: sCobraTurn)
+					(self setScript: sCobraTurn)
 				)
 			)
 		)
-		(super sel_57:)
+		(super doit:)
 	)
 
-	(method (sel_300 param1)
+	(method (doVerb param1)
 		(switch param1
 			(25
 				(switch local3
 					(0
-						(if (< (gEgo sel_0:) 152)
-							(gEgo sel_312: MoveTo 158 130)
+						(if (< (gEgo y:) 152)
+							(gEgo setMotion: MoveTo 158 130)
 							(= local3 1)
 						else
-							(gEgo sel_312: MoveTo 160 189)
+							(gEgo setMotion: MoveTo 160 189)
 							(= local3 11)
 						)
 					)
 					(else
-						(if (gEgo sel_238: 14)
+						(if (gEgo has: 14)
 							(++ local3)
 						)
 					)
@@ -290,45 +290,45 @@
 					((or (> local3 13) (and (> local3 3) (< local3 9)))
 						(= global150 0)
 						(-- local3)
-						(gMessager sel_295: 30 0 5)
+						(gMessager say: 30 0 5)
 					)
 					((> global150 0)
 						(-- global150)
-						(cobraDoor sel_146: sLauraOil)
+						(cobraDoor setScript: sLauraOil)
 					)
 					(else
-						(gMessager sel_295: 30 0 5)
+						(gMessager say: 30 0 5)
 					)
 				)
 			)
 			(30
 				(switch local3
 					(3
-						(gEgo sel_146: 0)
+						(gEgo setScript: 0)
 						(= local4 1)
-						(cobraDoor sel_146: sLauraLasso3)
+						(cobraDoor setScript: sLauraLasso3)
 					)
 					(13
-						(gEgo sel_146: 0)
+						(gEgo setScript: 0)
 						(= local4 1)
-						(cobraDoor sel_146: sLauraLasso13)
+						(cobraDoor setScript: sLauraLasso13)
 					)
 					(else
-						(cobraDoor sel_146: sCobraStrike)
+						(cobraDoor setScript: sCobraStrike)
 					)
 				)
 			)
 			(4
-				(cobraDoor sel_146: sCobraStrike)
+				(cobraDoor setScript: sCobraStrike)
 			)
 			(1
-				(gCurRoom sel_146: sShowCobraLoose)
+				(gCurRoom setScript: sShowCobraLoose)
 			)
 			(8
-				(gCurRoom sel_146: sShowCobraLoose)
+				(gCurRoom setScript: sShowCobraLoose)
 			)
 			(else
-				(super sel_300: param1)
+				(super doVerb: param1)
 			)
 		)
 	)
@@ -336,37 +336,37 @@
 
 (instance cobraDoor of Prop
 	(properties
-		sel_20 {cobraDoor}
-		sel_1 108
-		sel_0 28
-		sel_213 29
-		sel_2 521
-		sel_3 8
-		sel_4 6
-		sel_60 2
-		sel_14 16
+		name {cobraDoor}
+		x 108
+		y 28
+		noun 29
+		view 521
+		loop 8
+		cel 6
+		priority 2
+		signal 16
 	)
 
-	(method (sel_300 param1)
+	(method (doVerb param1)
 		(switch param1
 			(4
-				(self sel_300: 30)
+				(self doVerb: 30)
 			)
 			(30
 				(cond
 					(local4
-						(self sel_146: sPutCobraBack)
+						(self setScript: sPutCobraBack)
 					)
-					((== (self sel_4:) 0)
-						(self sel_161: End)
+					((== (self cel:) 0)
+						(self setCycle: End)
 					)
 					(else
-						(self sel_161: Beg)
+						(self setCycle: Beg)
 					)
 				)
 			)
 			(else
-				(super sel_300: param1)
+				(super doVerb: param1)
 			)
 		)
 	)
@@ -374,47 +374,47 @@
 
 (instance bigCobra of View
 	(properties
-		sel_20 {bigCobra}
-		sel_1 34
-		sel_0 79
-		sel_2 521
-		sel_3 13
-		sel_4 3
-		sel_60 15
-		sel_14 16
+		name {bigCobra}
+		x 34
+		y 79
+		view 521
+		loop 13
+		cel 3
+		priority 15
+		signal 16
 	)
 )
 
 (instance rosettaCloth of View
 	(properties
-		sel_20 {rosettaCloth}
-		sel_1 223
-		sel_0 105
-		sel_213 21
-		sel_303 210
-		sel_304 131
-		sel_2 521
-		sel_3 13
-		sel_60 9
-		sel_14 16400
+		name {rosettaCloth}
+		x 223
+		y 105
+		noun 21
+		approachX 210
+		approachY 131
+		view 521
+		loop 13
+		priority 9
+		signal 16400
 	)
 
-	(method (sel_300 param1)
+	(method (doVerb param1)
 		(switch param1
 			(4
 				(if
 					(or
-						(== (gEgo sel_2:) 522)
-						(== (gEgo sel_2:) 528)
-						(== (gEgo sel_2:) 529)
+						(== (gEgo view:) 522)
+						(== (gEgo view:) 528)
+						(== (gEgo view:) 529)
 					)
-					(gMessager sel_295: 58 0 7)
+					(gMessager say: 58 0 7)
 				else
-					(gCurRoom sel_146: sRemoveCloth)
+					(gCurRoom setScript: sRemoveCloth)
 				)
 			)
 			(else
-				(super sel_300: param1)
+				(super doVerb: param1)
 			)
 		)
 	)
@@ -422,32 +422,32 @@
 
 (instance snakeOil of View
 	(properties
-		sel_20 {snakeOil}
-		sel_1 113
-		sel_0 104
-		sel_82 10
-		sel_213 30
-		sel_303 130
-		sel_304 145
-		sel_2 520
-		sel_3 3
-		sel_60 8
-		sel_14 16
+		name {snakeOil}
+		x 113
+		y 104
+		z 10
+		noun 30
+		approachX 130
+		approachY 145
+		view 520
+		loop 3
+		priority 8
+		signal 16
 	)
 
-	(method (sel_300 param1)
+	(method (doVerb param1)
 		(switch param1
 			(1
-				(gCurRoom sel_422: inSnakeOil)
+				(gCurRoom setInset: inSnakeOil)
 			)
 			(8
-				(self sel_300: 1)
+				(self doVerb: 1)
 			)
 			(4
-				(self sel_300: 1)
+				(self doVerb: 1)
 			)
 			(else
-				(super sel_300: param1)
+				(super doVerb: param1)
 			)
 		)
 	)
@@ -455,33 +455,33 @@
 
 (instance mountedSkull of Prop
 	(properties
-		sel_20 {mountedSkull}
-		sel_1 98
-		sel_0 74
-		sel_213 31
-		sel_303 91
-		sel_304 141
-		sel_2 520
-		sel_3 4
-		sel_60 8
-		sel_14 16
-		sel_244 18
+		name {mountedSkull}
+		x 98
+		y 74
+		noun 31
+		approachX 91
+		approachY 141
+		view 520
+		loop 4
+		priority 8
+		signal 16
+		cycleSpeed 18
 	)
 
-	(method (sel_300 param1)
+	(method (doVerb param1)
 		(switch param1
 			(4
 				(cond
 					(
 						(or
-							(== (gEgo sel_2:) 522)
-							(== (gEgo sel_2:) 528)
-							(== (gEgo sel_2:) 529)
+							(== (gEgo view:) 522)
+							(== (gEgo view:) 528)
+							(== (gEgo view:) 529)
 						)
-						(gMessager sel_295: 58 0 7)
+						(gMessager say: 58 0 7)
 					)
-					((MuseumRgn sel_646:)
-						(self sel_146: sSecretDoor)
+					((MuseumRgn nobodyAround:)
+						(self setScript: sSecretDoor)
 					)
 					(else
 						(return 1)
@@ -489,7 +489,7 @@
 				)
 			)
 			(else
-				(super sel_300: param1)
+				(super doVerb: param1)
 			)
 		)
 	)
@@ -497,43 +497,43 @@
 
 (instance secretDoor of Prop
 	(properties
-		sel_20 {secretDoor}
-		sel_1 294
-		sel_0 159
-		sel_2 524
-		sel_3 1
-		sel_244 12
+		name {secretDoor}
+		x 294
+		y 159
+		view 524
+		loop 1
+		cycleSpeed 12
 	)
 )
 
 (instance intercom of View
 	(properties
-		sel_20 {intercom}
-		sel_1 179
-		sel_0 96
-		sel_213 32
-		sel_303 152
-		sel_304 135
-		sel_2 520
-		sel_3 3
-		sel_4 1
-		sel_60 8
-		sel_14 16
+		name {intercom}
+		x 179
+		y 96
+		noun 32
+		approachX 152
+		approachY 135
+		view 520
+		loop 3
+		cel 1
+		priority 8
+		signal 16
 	)
 
-	(method (sel_300 param1)
+	(method (doVerb param1)
 		(switch param1
 			(1
-				(gCurRoom sel_422: inIntercom)
+				(gCurRoom setInset: inIntercom)
 			)
 			(8
-				(self sel_300: 1)
+				(self doVerb: 1)
 			)
 			(4
-				(self sel_300: 1)
+				(self doVerb: 1)
 			)
 			(else
-				(super sel_300: param1)
+				(super doVerb: param1)
 			)
 		)
 	)
@@ -541,34 +541,34 @@
 
 (instance deadCountess of View
 	(properties
-		sel_20 {deadCountess}
-		sel_1 111
-		sel_0 89
-		sel_55 90
-		sel_213 33
-		sel_303 109
-		sel_304 125
-		sel_2 524
-		sel_60 8
-		sel_14 16400
+		name {deadCountess}
+		x 111
+		y 89
+		heading 90
+		noun 33
+		approachX 109
+		approachY 125
+		view 524
+		priority 8
+		signal 16400
 	)
 
-	(method (sel_300 param1)
+	(method (doVerb param1)
 		(switch param1
 			(1
 				(if local5
-					(gEgo sel_253: 62)
-					(gGame sel_87: 1 163)
-					(gCurRoom sel_399: 525)
+					(gEgo setHeading: 62)
+					(gGame points: 1 163)
+					(gCurRoom newRoom: 525)
 				else
-					(gMessager sel_295: 58 0 7)
+					(gMessager say: 58 0 7)
 				)
 			)
 			(8
-				(self sel_300: 1)
+				(self doVerb: 1)
 			)
 			(else
-				(super sel_300: param1)
+				(super doVerb: param1)
 			)
 		)
 	)
@@ -576,22 +576,22 @@
 
 (instance ratFore of Feature
 	(properties
-		sel_20 {ratFore}
-		sel_1 281
-		sel_0 200
-		sel_213 14
-		sel_302 4
-		sel_303 225
-		sel_304 171
+		name {ratFore}
+		x 281
+		y 200
+		noun 14
+		onMeCheck 4
+		approachX 225
+		approachY 171
 	)
 
-	(method (sel_300 param1)
+	(method (doVerb param1)
 		(switch param1
 			(8
-				(gCurRoom sel_422: inRatFore)
+				(gCurRoom setInset: inRatFore)
 			)
 			(else
-				(super sel_300: param1)
+				(super doVerb: param1)
 			)
 		)
 	)
@@ -599,25 +599,25 @@
 
 (instance ratBack of Feature
 	(properties
-		sel_20 {ratBack}
-		sel_1 88
-		sel_0 21
-		sel_213 14
-		sel_6 14
-		sel_7 74
-		sel_8 29
-		sel_9 103
-		sel_303 80
-		sel_304 113
+		name {ratBack}
+		x 88
+		y 21
+		noun 14
+		nsTop 14
+		nsLeft 74
+		nsBottom 29
+		nsRight 103
+		approachX 80
+		approachY 113
 	)
 
-	(method (sel_300 param1)
+	(method (doVerb param1)
 		(switch param1
 			(8
-				(gCurRoom sel_422: inRatBack)
+				(gCurRoom setInset: inRatBack)
 			)
 			(else
-				(super sel_300: param1)
+				(super doVerb: param1)
 			)
 		)
 	)
@@ -625,38 +625,38 @@
 
 (instance rosetta of Feature
 	(properties
-		sel_20 {rosetta}
-		sel_1 293
-		sel_0 104
-		sel_55 90
-		sel_213 34
-		sel_301 40
-		sel_302 256
-		sel_303 210
-		sel_304 131
+		name {rosetta}
+		x 293
+		y 104
+		heading 90
+		noun 34
+		sightAngle 40
+		onMeCheck 256
+		approachX 210
+		approachY 131
 	)
 
-	(method (sel_300 param1 &tmp temp0)
+	(method (doVerb param1 &tmp temp0)
 		(switch param1
 			(8
 				(if
 					(or
-						(== (gEgo sel_2:) 522)
-						(== (gEgo sel_2:) 528)
-						(== (gEgo sel_2:) 529)
+						(== (gEgo view:) 522)
+						(== (gEgo view:) 528)
+						(== (gEgo view:) 529)
 					)
-					(gMessager sel_295: 58 0 7)
+					(gMessager say: 58 0 7)
 				else
-					(gGame sel_87: 1 137)
-					((ScriptID 21 0) sel_57: 1025) ; addCluesCode
+					(gGame points: 1 137)
+					((ScriptID 21 0) doit: 1025) ; addCluesCode
 					(for ((= temp0 14)) (< temp0 27) ((++ temp0))
-						((ScriptID 21 0) sel_57: (+ temp0 1088)) ; addCluesCode
+						((ScriptID 21 0) doit: (+ temp0 1088)) ; addCluesCode
 					)
-					(gCurRoom sel_399: 456)
+					(gCurRoom newRoom: 456)
 				)
 			)
 			(else
-				(super sel_300: param1)
+				(super doVerb: param1)
 			)
 		)
 	)
@@ -664,12 +664,12 @@
 
 (instance certificate of Feature
 	(properties
-		sel_20 {certificate}
-		sel_0 1
+		name {certificate}
+		y 1
 	)
 
-	(method (sel_218 param1)
-		(if (super sel_218: param1)
+	(method (onMe param1)
+		(if (super onMe: param1)
 			(cond
 				(
 					(and
@@ -678,10 +678,10 @@
 						(<= 20 gMouseY)
 						(<= gMouseY 43)
 					)
-					(= sel_1 197)
-					(= sel_0 31)
-					(= sel_82 0)
-					(= sel_213 2)
+					(= x 197)
+					(= y 31)
+					(= z 0)
+					(= noun 2)
 				)
 				(
 					(and
@@ -690,10 +690,10 @@
 						(<= 51 gMouseY)
 						(<= gMouseY 72)
 					)
-					(= sel_1 197)
-					(= sel_0 61)
-					(= sel_82 0)
-					(= sel_213 3)
+					(= x 197)
+					(= y 61)
+					(= z 0)
+					(= noun 3)
 				)
 				(
 					(and
@@ -702,10 +702,10 @@
 						(<= 17 gMouseY)
 						(<= gMouseY 37)
 					)
-					(= sel_1 231)
-					(= sel_0 27)
-					(= sel_82 0)
-					(= sel_213 4)
+					(= x 231)
+					(= y 27)
+					(= z 0)
+					(= noun 4)
 				)
 				(
 					(and
@@ -714,10 +714,10 @@
 						(<= 15 gMouseY)
 						(<= gMouseY 38)
 					)
-					(= sel_1 260)
-					(= sel_0 26)
-					(= sel_82 0)
-					(= sel_213 5)
+					(= x 260)
+					(= y 26)
+					(= z 0)
+					(= noun 5)
 				)
 			)
 		)
@@ -726,46 +726,46 @@
 
 (instance skeletonLegs of Feature
 	(properties
-		sel_20 {skeletonLegs}
-		sel_1 302
-		sel_0 134
-		sel_213 6
-		sel_7 285
-		sel_8 68
-		sel_9 319
-		sel_301 40
+		name {skeletonLegs}
+		x 302
+		y 134
+		noun 6
+		nsLeft 285
+		nsBottom 68
+		nsRight 319
+		sightAngle 40
 	)
 )
 
 (instance cobraCage of Feature
 	(properties
-		sel_20 {cobraCage}
-		sel_1 93
-		sel_0 46
-		sel_213 7
-		sel_6 29
-		sel_7 78
-		sel_8 63
-		sel_9 109
-		sel_301 40
-		sel_303 81
-		sel_304 116
+		name {cobraCage}
+		x 93
+		y 46
+		noun 7
+		nsTop 29
+		nsLeft 78
+		nsBottom 63
+		nsRight 109
+		sightAngle 40
+		approachX 81
+		approachY 116
 	)
 
-	(method (sel_300 param1)
+	(method (doVerb param1)
 		(switch param1
 			(4
 				(if local4
-					(cobraDoor sel_146: sPutCobraBack)
+					(cobraDoor setScript: sPutCobraBack)
 				else
-					(super sel_300: param1 &rest)
+					(super doVerb: param1 &rest)
 				)
 			)
 			(30
-				(self sel_300: 4)
+				(self doVerb: 4)
 			)
 			(else
-				(super sel_300: param1 &rest)
+				(super doVerb: param1 &rest)
 			)
 		)
 	)
@@ -773,25 +773,25 @@
 
 (instance bookShelf of Feature
 	(properties
-		sel_20 {bookShelf}
-		sel_1 91
-		sel_0 70
-		sel_213 8
-		sel_6 65
-		sel_7 78
-		sel_8 76
-		sel_9 104
-		sel_301 40
+		name {bookShelf}
+		x 91
+		y 70
+		noun 8
+		nsTop 65
+		nsLeft 78
+		nsBottom 76
+		nsRight 104
+		sightAngle 40
 	)
 )
 
 (instance jars of Feature
 	(properties
-		sel_20 {jars}
+		name {jars}
 	)
 
-	(method (sel_218 param1)
-		(if (super sel_218: param1)
+	(method (onMe param1)
+		(if (super onMe: param1)
 			(cond
 				(
 					(and
@@ -800,10 +800,10 @@
 						(<= 79 gMouseY)
 						(<= gMouseY 90)
 					)
-					(= sel_1 85)
-					(= sel_0 83)
-					(= sel_82 0)
-					(= sel_213 9)
+					(= x 85)
+					(= y 83)
+					(= z 0)
+					(= noun 9)
 				)
 				(
 					(and
@@ -812,10 +812,10 @@
 						(<= 79 gMouseY)
 						(<= gMouseY 87)
 					)
-					(= sel_1 96)
-					(= sel_0 83)
-					(= sel_82 0)
-					(= sel_213 10)
+					(= x 96)
+					(= y 83)
+					(= z 0)
+					(= noun 10)
 				)
 				(
 					(and
@@ -824,10 +824,10 @@
 						(<= 90 gMouseY)
 						(<= gMouseY 97)
 					)
-					(= sel_1 85)
-					(= sel_0 93)
-					(= sel_82 0)
-					(= sel_213 11)
+					(= x 85)
+					(= y 93)
+					(= z 0)
+					(= noun 11)
 				)
 			)
 		)
@@ -836,155 +836,155 @@
 
 (instance chair of Feature
 	(properties
-		sel_20 {chair}
-		sel_1 144
-		sel_0 82
-		sel_213 12
-		sel_6 76
-		sel_7 134
-		sel_8 88
-		sel_9 154
-		sel_301 40
+		name {chair}
+		x 144
+		y 82
+		noun 12
+		nsTop 76
+		nsLeft 134
+		nsBottom 88
+		nsRight 154
+		sightAngle 40
 	)
 )
 
 (instance skeletonFore of Feature
 	(properties
-		sel_20 {skeletonFore}
-		sel_1 260
-		sel_0 164
-		sel_213 13
-		sel_301 40
-		sel_302 2
+		name {skeletonFore}
+		x 260
+		y 164
+		noun 13
+		sightAngle 40
+		onMeCheck 2
 	)
 )
 
 (instance desk of Feature
 	(properties
-		sel_20 {desk}
-		sel_0 88
-		sel_213 15
-		sel_301 40
-		sel_302 8
+		name {desk}
+		y 88
+		noun 15
+		sightAngle 40
+		onMeCheck 8
 	)
 )
 
 (instance windowView of Feature
 	(properties
-		sel_20 {windowView}
-		sel_0 47
-		sel_213 28
-		sel_301 40
-		sel_302 16
+		name {windowView}
+		y 47
+		noun 28
+		sightAngle 40
+		onMeCheck 16
 	)
 )
 
 (instance drapes of Feature
 	(properties
-		sel_20 {drapes}
-		sel_0 12
-		sel_213 17
-		sel_301 40
-		sel_302 32
+		name {drapes}
+		y 12
+		noun 17
+		sightAngle 40
+		onMeCheck 32
 	)
 )
 
 (instance roachTop of Feature
 	(properties
-		sel_20 {roachTop}
-		sel_0 55
-		sel_213 18
-		sel_301 40
-		sel_302 64
+		name {roachTop}
+		y 55
+		noun 18
+		sightAngle 40
+		onMeCheck 64
 	)
 )
 
 (instance roachBottom of Feature
 	(properties
-		sel_20 {roachBottom}
-		sel_0 102
-		sel_213 19
-		sel_301 40
-		sel_302 -32768
+		name {roachBottom}
+		y 102
+		noun 19
+		sightAngle 40
+		onMeCheck -32768
 	)
 )
 
 (instance displayCase of Feature
 	(properties
-		sel_20 {displayCase}
-		sel_1 320
-		sel_0 77
-		sel_213 20
-		sel_301 40
-		sel_302 128
+		name {displayCase}
+		x 320
+		y 77
+		noun 20
+		sightAngle 40
+		onMeCheck 128
 	)
 )
 
 (instance cages of Feature
 	(properties
-		sel_20 {cages}
-		sel_1 320
-		sel_0 128
-		sel_213 22
-		sel_301 40
-		sel_302 512
+		name {cages}
+		x 320
+		y 128
+		noun 22
+		sightAngle 40
+		onMeCheck 512
 	)
 )
 
 (instance lizards of Feature
 	(properties
-		sel_20 {lizards}
-		sel_0 180
-		sel_213 23
-		sel_301 40
-		sel_302 1024
+		name {lizards}
+		y 180
+		noun 23
+		sightAngle 40
+		onMeCheck 1024
 	)
 )
 
 (instance bookcase of Feature
 	(properties
-		sel_20 {bookcase}
-		sel_0 1
-		sel_213 25
-		sel_301 40
-		sel_302 4096
+		name {bookcase}
+		y 1
+		noun 25
+		sightAngle 40
+		onMeCheck 4096
 	)
 )
 
 (instance lizardTable of Feature
 	(properties
-		sel_20 {lizardTable}
-		sel_0 183
-		sel_213 26
-		sel_301 40
-		sel_302 8192
+		name {lizardTable}
+		y 183
+		noun 26
+		sightAngle 40
+		onMeCheck 8192
 	)
 )
 
 (instance standRat of Feature
 	(properties
-		sel_20 {standRat}
-		sel_1 260
-		sel_0 180
-		sel_213 27
-		sel_301 40
-		sel_302 16384
+		name {standRat}
+		x 260
+		y 180
+		noun 27
+		sightAngle 40
+		onMeCheck 16384
 	)
 )
 
 (instance inCobra of Inset
 	(properties
-		sel_20 {inCobra}
-		sel_2 521
-		sel_3 13
-		sel_4 1
-		sel_1 77
-		sel_0 23
-		sel_570 1
-		sel_213 54
+		name {inCobra}
+		view 521
+		loop 13
+		cel 1
+		x 77
+		y 23
+		disposeNotOnMe 1
+		noun 54
 	)
 
-	(method (sel_110)
+	(method (init)
 		(if
 			(not
 				(cond
@@ -994,17 +994,17 @@
 					)
 				)
 			)
-			(fang sel_110:)
+			(fang init:)
 		)
-		(super sel_110: &rest)
+		(super init: &rest)
 	)
 
-	(method (sel_111)
-		(fang sel_111:)
-		(super sel_111:)
+	(method (dispose)
+		(fang dispose:)
+		(super dispose:)
 	)
 
-	(method (sel_300 param1)
+	(method (doVerb param1)
 		(switch param1
 			(1
 				(if
@@ -1012,13 +1012,13 @@
 						(> gAct 4)
 						(and (== gAct 4) (TimeCheck $4108 1)) ; can 4:15 am occur?
 					)
-					(gMessager sel_295: sel_213 1 8)
+					(gMessager say: noun 1 8)
 				else
-					(gMessager sel_295: sel_213 1 9)
+					(gMessager say: noun 1 9)
 				)
 			)
 			(else
-				(super sel_300: param1)
+				(super doVerb: param1)
 			)
 		)
 	)
@@ -1026,37 +1026,37 @@
 
 (instance hieroglyphics of Feature
 	(properties
-		sel_20 {hieroglyphics}
-		sel_1 250
-		sel_0 65
-		sel_55 90
-		sel_213 24
-		sel_301 90
-		sel_302 2048
-		sel_303 210
-		sel_304 131
+		name {hieroglyphics}
+		x 250
+		y 65
+		heading 90
+		noun 24
+		sightAngle 90
+		onMeCheck 2048
+		approachX 210
+		approachY 131
 	)
 
-	(method (sel_300 param1)
+	(method (doVerb param1)
 		(switch param1
 			(1
 				(if
 					(or
-						(== (gEgo sel_2:) 522)
-						(== (gEgo sel_2:) 528)
-						(== (gEgo sel_2:) 529)
+						(== (gEgo view:) 522)
+						(== (gEgo view:) 528)
+						(== (gEgo view:) 529)
 					)
-					(gMessager sel_295: 58 0 7)
+					(gMessager say: 58 0 7)
 				else
-					(gGame sel_587:)
-					(gCurRoom sel_146: sHieroglyphics)
+					(gGame handsOff:)
+					(gCurRoom setScript: sHieroglyphics)
 				)
 			)
 			(8
-				(self sel_300: 1)
+				(self doVerb: 1)
 			)
 			(else
-				(super sel_300: param1)
+				(super doVerb: param1)
 			)
 		)
 	)
@@ -1064,41 +1064,41 @@
 
 (instance fang of View
 	(properties
-		sel_20 {fang}
-		sel_1 93
-		sel_0 32
-		sel_2 521
-		sel_3 13
-		sel_4 2
-		sel_60 15
-		sel_14 16
+		name {fang}
+		x 93
+		y 32
+		view 521
+		loop 13
+		cel 2
+		priority 15
+		signal 16
 	)
 )
 
 (instance inSnakeOil of Inset
 	(properties
-		sel_20 {inSnakeOil}
-		sel_2 520
-		sel_3 2
-		sel_1 127
-		sel_0 33
-		sel_60 15
-		sel_570 1
-		sel_213 38
+		name {inSnakeOil}
+		view 520
+		loop 2
+		x 127
+		y 33
+		priority 15
+		disposeNotOnMe 1
+		noun 38
 	)
 
-	(method (sel_111)
-		(gCurRoom sel_146: sOlympiaOil)
-		(super sel_111:)
+	(method (dispose)
+		(gCurRoom setScript: sOlympiaOil)
+		(super dispose:)
 	)
 
-	(method (sel_300 param1)
+	(method (doVerb param1)
 		(switch param1
 			(4
-				(self sel_111:)
+				(self dispose:)
 			)
 			(else
-				(super sel_300: param1)
+				(super doVerb: param1)
 			)
 		)
 	)
@@ -1106,71 +1106,71 @@
 
 (instance inIntercom of Inset
 	(properties
-		sel_20 {inIntercom}
-		sel_2 520
-		sel_1 162
-		sel_0 79
-		sel_570 1
-		sel_213 39
+		name {inIntercom}
+		view 520
+		x 162
+		y 79
+		disposeNotOnMe 1
+		noun 39
 	)
 )
 
 (instance inRatFore of Inset
 	(properties
-		sel_20 {inRatFore}
-		sel_2 520
-		sel_3 1
-		sel_1 232
-		sel_0 147
-		sel_60 15
-		sel_570 1
-		sel_213 40
+		name {inRatFore}
+		view 520
+		loop 1
+		x 232
+		y 147
+		priority 15
+		disposeNotOnMe 1
+		noun 40
 	)
 )
 
 (instance inRatBack of Inset
 	(properties
-		sel_20 {inRatBack}
-		sel_2 520
-		sel_3 1
-		sel_1 72
-		sel_0 6
-		sel_570 1
-		sel_213 41
+		name {inRatBack}
+		view 520
+		loop 1
+		x 72
+		y 6
+		disposeNotOnMe 1
+		noun 41
 	)
 )
 
 (instance inHieroglyphics of Inset
 	(properties
-		sel_20 {inHieroglyphics}
-		sel_408 522
-		sel_213 24
+		name {inHieroglyphics}
+		picture 522
+		noun 24
 	)
 
-	(method (sel_110)
-		(super sel_110: &rest)
+	(method (init)
+		(super init: &rest)
 		(proc0_8 1)
-		(gWalkHandler sel_129: self)
+		(gWalkHandler addToFront: self)
 	)
 
-	(method (sel_111)
-		(gWalkHandler sel_81: self)
+	(method (dispose)
+		(gWalkHandler delete: self)
 		(proc0_8 0)
-		(super sel_111:)
+		(super dispose:)
 	)
 
-	(method (sel_300 param1)
+	(method (doVerb param1)
 		(switch param1
 			(4
-				(= sel_408 (if (== sel_408 522) 523 else 522))
-				(sFX sel_40: 525 sel_99: 1 sel_39:)
-				(DrawPic sel_408 (if (== sel_408 522) 11 else 12))
+				(= picture (if (== picture 522) 523 else 522))
+				(sFX number: 525 flags: 1 play:)
+				(DrawPic picture (if (== picture 522) 11 else 12))
 			)
 			(13
-				(self sel_111:)
+				(self dispose:)
 			)
 			(else
-				(super sel_300: param1 &rest)
+				(super doVerb: param1 &rest)
 			)
 		)
 	)
@@ -1178,33 +1178,33 @@
 
 (instance sHieroglyphics of Script
 	(properties
-		sel_20 {sHieroglyphics}
+		name {sHieroglyphics}
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
-				(gGameMusic2 sel_170: 80 20 20 0)
-				(= sel_136 1)
+				(gGameMusic2 fade: 80 20 20 0)
+				(= cycles 1)
 			)
 			(1
-				(gCast sel_119: 102)
-				(gGame sel_587:)
-				(User sel_347: 1)
-				(gTheIconBar sel_177: 0 2 1)
-				(gCurRoom sel_422: inHieroglyphics self)
+				(gCast eachElementDo: 102)
+				(gGame handsOff:)
+				(User canInput: 1)
+				(gTheIconBar enable: 0 2 1)
+				(gCurRoom setInset: inHieroglyphics self)
 			)
 			(2
-				(if (not (gEgo sel_238: 14))
-					(snakeOil sel_216:)
+				(if (not (gEgo has: 14))
+					(snakeOil show:)
 				)
-				(gGame sel_588:)
-				(gCast sel_119: 216)
-				(= sel_136 1)
+				(gGame handsOn:)
+				(gCast eachElementDo: 216)
+				(= cycles 1)
 			)
 			(3
-				(gGameMusic2 sel_170: 127 20 20 0)
-				(self sel_111:)
+				(gGameMusic2 fade: 127 20 20 0)
+				(self dispose:)
 			)
 		)
 	)
@@ -1212,24 +1212,24 @@
 
 (instance sRemoveCloth of Script
 	(properties
-		sel_20 {sRemoveCloth}
+		name {sRemoveCloth}
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
-				(gGame sel_587:)
-				(gEgo sel_312: PolyPath 215 126 self)
+				(gGame handsOff:)
+				(gEgo setMotion: PolyPath 215 126 self)
 			)
 			(1
-				(rosettaCloth sel_111:)
+				(rosettaCloth dispose:)
 				(SetFlag 49)
-				(gEgo sel_2: 521 sel_155: 14 sel_156: 0 sel_161: End self)
+				(gEgo view: 521 setLoop: 14 setCel: 0 setCycle: End self)
 			)
 			(2
-				(gEgo sel_585: 831 sel_253: 90)
-				(gGame sel_588:)
-				(self sel_111:)
+				(gEgo normalize: 831 setHeading: 90)
+				(gGame handsOn:)
+				(self dispose:)
 			)
 		)
 	)
@@ -1237,84 +1237,84 @@
 
 (instance sOlympiaOil of Script
 	(properties
-		sel_20 {sOlympiaOil}
+		name {sOlympiaOil}
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
-				(gGame sel_587:)
-				(gEgo sel_313:)
-				(if (== ((ScriptID 90 2) sel_620:) gCurRoomNum) ; aOlympia
+				(gGame handsOff:)
+				(gEgo stopUpd:)
+				(if (== ((ScriptID 90 2) room:) gCurRoomNum) ; aOlympia
 					((ScriptID 90 2) ; aOlympia
-						sel_63: 13
-						sel_312: DPath 128 183 102 160 95 125 self
+						setPri: 13
+						setMotion: DPath 128 183 102 160 95 125 self
 					)
 				else
 					((ScriptID 90 2) ; aOlympia
-						sel_182: gCurRoomNum
-						sel_153: 170 250
-						sel_63: 13
-						sel_312: DPath 128 183 102 160 95 125 self
+						moveTo: gCurRoomNum
+						posn: 170 250
+						setPri: 13
+						setMotion: DPath 128 183 102 160 95 125 self
 					)
 				)
 			)
 			(1
 				(Face (ScriptID 90 2) gEgo) ; aOlympia
-				(= sel_136 1)
+				(= cycles 1)
 			)
 			(2
 				(SetFlag 48)
 				((ScriptID 90 2) ; aOlympia
-					sel_2: 525
-					sel_155: 2
-					sel_156: 0
-					sel_161: End self
+					view: 525
+					setLoop: 2
+					setCel: 0
+					setCycle: End self
 				)
 			)
 			(3
-				(= sel_139 30)
+				(= ticks 30)
 			)
 			(4
-				(snakeOil sel_111:)
-				((ScriptID 90 2) sel_161: Beg self) ; aOlympia
+				(snakeOil dispose:)
+				((ScriptID 90 2) setCycle: Beg self) ; aOlympia
 			)
 			(5
 				((ScriptID 90 2) ; aOlympia
-					sel_2: 820
-					sel_155: -1
-					sel_161: Walk
-					sel_312:
+					view: 820
+					setLoop: -1
+					setCycle: Walk
+					setMotion:
 						MoveTo
-						(+ ((ScriptID 90 2) sel_1:) 10) ; aOlympia
-						((ScriptID 90 2) sel_0:) ; aOlympia
+						(+ ((ScriptID 90 2) x:) 10) ; aOlympia
+						((ScriptID 90 2) y:) ; aOlympia
 						self
 				)
 			)
 			(6
-				((ScriptID 90 2) sel_253: 180) ; aOlympia
-				(= sel_136 1)
+				((ScriptID 90 2) setHeading: 180) ; aOlympia
+				(= cycles 1)
 			)
 			(7
-				((ScriptID 90 2) sel_161: StopWalk -1) ; aOlympia
-				(= sel_139 120)
+				((ScriptID 90 2) setCycle: StopWalk -1) ; aOlympia
+				(= ticks 120)
 			)
 			(8
-				(gMessager sel_295: 1 0 1 0 self 1520)
+				(gMessager say: 1 0 1 0 self 1520)
 			)
 			(9
 				((ScriptID 90 2) ; aOlympia
-					sel_2: 820
-					sel_161: Walk
-					sel_312: DPath 102 160 128 183 170 250 self
+					view: 820
+					setCycle: Walk
+					setMotion: DPath 102 160 128 183 170 250 self
 				)
 			)
 			(10
-				((ScriptID 90 2) sel_182: -2) ; aOlympia
-				(gEgo sel_315:)
-				((Inv sel_64: 14) sel_166: 0)
-				(gGame sel_588:)
-				(self sel_111:)
+				((ScriptID 90 2) moveTo: -2) ; aOlympia
+				(gEgo startUpd:)
+				((Inv at: 14) owner: 0)
+				(gGame handsOn:)
+				(self dispose:)
 			)
 		)
 	)
@@ -1322,60 +1322,60 @@
 
 (instance sCobraLoose of Script
 	(properties
-		sel_20 {sCobraLoose}
+		name {sCobraLoose}
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
-				(= sel_136 2)
+				(= cycles 2)
 			)
 			(1
-				(= sel_139 180)
+				(= ticks 180)
 			)
 			(2
-				(sFX sel_40: 522 sel_99: 1 sel_39:)
-				(= sel_136 2)
+				(sFX number: 522 flags: 1 play:)
+				(= cycles 2)
 			)
 			(3
-				(gEgo sel_253: 270)
-				(= sel_139 60)
+				(gEgo setHeading: 270)
+				(= ticks 60)
 			)
 			(4
 				(cobraLoose
-					sel_110:
-					sel_155: 0
-					sel_161: Fwd
-					sel_312: MoveTo 86 158 self
+					init:
+					setLoop: 0
+					setCycle: Fwd
+					setMotion: MoveTo 86 158 self
 				)
 			)
 			(5
 				(Face gEgo cobraLoose)
-				(cobraLoose sel_161: End self)
+				(cobraLoose setCycle: End self)
 			)
 			(6
 				(cobraLoose
-					sel_155: 9
-					sel_156: 0
-					sel_153: 90 159
-					sel_161: End self
+					setLoop: 9
+					setCel: 0
+					posn: 90 159
+					setCycle: End self
 				)
 			)
 			(7
-				(cobraLoose sel_155: 11 sel_156: 0 sel_153: 92 159 sel_161: Fwd)
-				(= sel_139 30)
+				(cobraLoose setLoop: 11 setCel: 0 posn: 92 159 setCycle: Fwd)
+				(= ticks 30)
 			)
 			(8
-				(sFX sel_40: 522 sel_99: 1 sel_39:)
-				(bigCobra sel_110:)
-				(= sel_139 180)
+				(sFX number: 522 flags: 1 play:)
+				(bigCobra init:)
+				(= ticks 180)
 			)
 			(9
-				(bigCobra sel_111:)
+				(bigCobra dispose:)
 				(= local8 1)
-				(gEgo sel_146: sCobraTimer)
-				(gGame sel_588:)
-				(self sel_111:)
+				(gEgo setScript: sCobraTimer)
+				(gGame handsOn:)
+				(self dispose:)
 			)
 		)
 	)
@@ -1383,28 +1383,28 @@
 
 (instance sShowCobraLoose of Script
 	(properties
-		sel_20 {sShowCobraLoose}
+		name {sShowCobraLoose}
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
-				(gGame sel_587:)
-				(sFX sel_40: 522 sel_99: 1 sel_39:)
+				(gGame handsOff:)
+				(sFX number: 522 flags: 1 play:)
 				(bigCobra
-					sel_110:
-					sel_1: (- (cobraLoose sel_1:) 58)
-					sel_0: (- (cobraLoose sel_0:) 80)
+					init:
+					x: (- (cobraLoose x:) 58)
+					y: (- (cobraLoose y:) 80)
 				)
-				(= sel_139 180)
+				(= ticks 180)
 			)
 			(1
-				(bigCobra sel_111:)
-				(= sel_139 60)
+				(bigCobra dispose:)
+				(= ticks 60)
 			)
 			(2
-				(gGame sel_588:)
-				(self sel_111:)
+				(gGame handsOn:)
+				(self dispose:)
 			)
 		)
 	)
@@ -1412,18 +1412,18 @@
 
 (instance sLauraOil of Script
 	(properties
-		sel_20 {sLauraOil}
+		name {sLauraOil}
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
-				(gGame sel_587:)
-				(gEgo sel_146: 0)
+				(gGame handsOff:)
+				(gEgo setScript: 0)
 				(if (< local3 9)
-					(gEgo sel_312: PolyPath 158 130 self)
+					(gEgo setMotion: PolyPath 158 130 self)
 				else
-					(gEgo sel_312: PolyPath 160 179 self)
+					(gEgo setMotion: PolyPath 160 179 self)
 				)
 			)
 			(1
@@ -1448,67 +1448,67 @@
 					)
 				)
 				(gEgo
-					sel_2: 522
-					sel_155: local7
-					sel_156: 0
-					sel_161: End self
+					view: 522
+					setLoop: local7
+					setCel: 0
+					setCycle: End self
 				)
 			)
 			(2
 				(switch local3
 					(1
-						(cobraLoose sel_155: 0 sel_312: MoveTo 147 177 self)
+						(cobraLoose setLoop: 0 setMotion: MoveTo 147 177 self)
 					)
 					(2
-						(cobraLoose sel_155: 0 sel_312: MoveTo 213 171 self)
+						(cobraLoose setLoop: 0 setMotion: MoveTo 213 171 self)
 					)
 					(3
 						(= local9 120)
-						(cobraLoose sel_155: 0 sel_312: MoveTo 260 150 self)
+						(cobraLoose setLoop: 0 setMotion: MoveTo 260 150 self)
 					)
 					(11
-						(cobraLoose sel_155: 0 sel_312: MoveTo 128 134 self)
+						(cobraLoose setLoop: 0 setMotion: MoveTo 128 134 self)
 					)
 					(12
-						(cobraLoose sel_155: 0 sel_312: MoveTo 187 133 self)
+						(cobraLoose setLoop: 0 setMotion: MoveTo 187 133 self)
 					)
 					(13
-						(cobraLoose sel_155: 15 sel_312: PolyPath 207 107 self)
+						(cobraLoose setLoop: 15 setMotion: PolyPath 207 107 self)
 					)
 				)
 			)
 			(3
-				(gEgo sel_585: 831)
+				(gEgo normalize: 831)
 				(Face gEgo cobraLoose)
-				(= sel_136 1)
+				(= cycles 1)
 			)
 			(4
-				(cobraLoose sel_155: 4 sel_156: 0 sel_161: End self)
+				(cobraLoose setLoop: 4 setCel: 0 setCycle: End self)
 			)
 			(5
-				(if (< (cobraLoose sel_1:) (gEgo sel_1:))
-					(cobraLoose sel_155: 9 sel_156: 0 sel_161: End self)
+				(if (< (cobraLoose x:) (gEgo x:))
+					(cobraLoose setLoop: 9 setCel: 0 setCycle: End self)
 				else
-					(cobraLoose sel_155: 10 sel_156: 0 sel_161: End self)
+					(cobraLoose setLoop: 10 setCel: 0 setCycle: End self)
 				)
 			)
 			(6
-				(if (< (cobraLoose sel_1:) (gEgo sel_1:))
-					(cobraLoose sel_155: 11 sel_156: 0 sel_161: Fwd)
+				(if (< (cobraLoose x:) (gEgo x:))
+					(cobraLoose setLoop: 11 setCel: 0 setCycle: Fwd)
 				else
-					(cobraLoose sel_155: 12 sel_156: 0 sel_161: Fwd)
+					(cobraLoose setLoop: 12 setCel: 0 setCycle: Fwd)
 				)
-				(= sel_136 1)
+				(= cycles 1)
 			)
 			(7
-				(if (< (gEgo sel_1:) (cobraLoose sel_1:))
+				(if (< (gEgo x:) (cobraLoose x:))
 					(= local6 0)
 				else
 					(= local6 1)
 				)
-				(gEgo sel_146: sCobraTimer)
-				(gGame sel_588:)
-				(self sel_111:)
+				(gEgo setScript: sCobraTimer)
+				(gGame handsOn:)
+				(self dispose:)
 			)
 		)
 	)
@@ -1516,47 +1516,47 @@
 
 (instance sLauraLasso3 of Script
 	(properties
-		sel_20 {sLauraLasso3}
+		name {sLauraLasso3}
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
-				(gGame sel_587:)
-				(gEgo sel_312: MoveTo 216 151 self)
+				(gGame handsOff:)
+				(gEgo setMotion: MoveTo 216 151 self)
 			)
 			(1
-				(= sel_136 2)
+				(= cycles 2)
 			)
 			(2
-				(gEgo sel_2: 522 sel_161: 0 sel_155: 5 sel_156: 0)
-				(= sel_139 30)
+				(gEgo view: 522 setCycle: 0 setLoop: 5 setCel: 0)
+				(= ticks 30)
 			)
 			(3
-				(cobraLoose sel_155: 3 sel_156: 0 sel_161: 0)
-				(= sel_136 1)
+				(cobraLoose setLoop: 3 setCel: 0 setCycle: 0)
+				(= cycles 1)
 			)
 			(4
-				(gEgo sel_161: CT 3 1 self)
+				(gEgo setCycle: CT 3 1 self)
 			)
 			(5
-				(cobraLoose sel_102: sel_111:)
-				(gEgo sel_161: End self)
+				(cobraLoose hide: dispose:)
+				(gEgo setCycle: End self)
 			)
 			(6
 				(gEgo
-					sel_2: 528
-					sel_155: 0
-					sel_156: 0
-					sel_153: 220 152
-					sel_155: -1
-					sel_161: StopWalk 529
+					view: 528
+					setLoop: 0
+					setCel: 0
+					posn: 220 152
+					setLoop: -1
+					setCycle: StopWalk 529
 				)
-				(= sel_139 60)
+				(= ticks 60)
 			)
 			(7
-				(gGame sel_588:)
-				(self sel_111:)
+				(gGame handsOn:)
+				(self dispose:)
 			)
 		)
 	)
@@ -1564,47 +1564,47 @@
 
 (instance sLauraLasso13 of Script
 	(properties
-		sel_20 {sLauraLasso13}
+		name {sLauraLasso13}
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
-				(gGame sel_587:)
+				(gGame handsOff:)
 				(= local4 1)
-				(gEgo sel_585: 831 sel_312: MoveTo 209 127 self)
+				(gEgo normalize: 831 setMotion: MoveTo 209 127 self)
 			)
 			(1
 				(gEgo
-					sel_2: 522
-					sel_320: Scaler 110 90 190 0
-					sel_155: 6
-					sel_156: 0
-					sel_161: StopWalk
+					view: 522
+					setScale: Scaler 110 90 190 0
+					setLoop: 6
+					setCel: 0
+					setCycle: StopWalk
 				)
-				(= sel_136 1)
+				(= cycles 1)
 			)
 			(2
-				(cobraLoose sel_102: sel_111:)
-				(gEgo sel_2: 522 sel_155: 6 sel_4: 0 sel_161: End self)
+				(cobraLoose hide: dispose:)
+				(gEgo view: 522 setLoop: 6 cel: 0 setCycle: End self)
 			)
 			(3
-				(gEgo sel_161: Beg self)
+				(gEgo setCycle: Beg self)
 			)
 			(4
 				(gEgo
-					sel_2: 528
-					sel_155: 3
-					sel_156: 6
-					sel_153: 211 128
-					sel_155: -1
-					sel_161: StopWalk 529
+					view: 528
+					setLoop: 3
+					setCel: 6
+					posn: 211 128
+					setLoop: -1
+					setCycle: StopWalk 529
 				)
-				(= sel_139 60)
+				(= ticks 60)
 			)
 			(5
-				(gGame sel_588:)
-				(self sel_111:)
+				(gGame handsOn:)
+				(self dispose:)
 			)
 		)
 	)
@@ -1612,74 +1612,74 @@
 
 (instance sCobraStrike of Script
 	(properties
-		sel_20 {sCobraStrike}
+		name {sCobraStrike}
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
-				(gGame sel_587:)
+				(gGame handsOff:)
 				(Face gEgo cobraLoose)
 				(= local4 1)
-				(cobraLoose sel_15: 0 sel_316: 1)
+				(cobraLoose illegalBits: 0 ignoreActors: 1)
 				(if local6
 					(cobraLoose
-						sel_155: 0
-						sel_161: Fwd
-						sel_312:
+						setLoop: 0
+						setCycle: Fwd
+						setMotion:
 							PolyPath
-							(- (gEgo sel_1:) 34)
-							(+ (gEgo sel_0:) 10)
+							(- (gEgo x:) 34)
+							(+ (gEgo y:) 10)
 							self
 					)
 				else
 					(cobraLoose
-						sel_155: 1
-						sel_161: Fwd
-						sel_312:
+						setLoop: 1
+						setCycle: Fwd
+						setMotion:
 							PolyPath
-							(+ (gEgo sel_1:) 35)
-							(+ (gEgo sel_0:) 11)
+							(+ (gEgo x:) 35)
+							(+ (gEgo y:) 11)
 							self
 					)
 				)
 			)
 			(1
-				(gGameMusic2 sel_167:)
-				(sFX sel_40: 523 sel_99: 1 sel_39:)
+				(gGameMusic2 stop:)
+				(sFX number: 523 flags: 1 play:)
 				(if local6
 					(cobraLoose
-						sel_155: 2
-						sel_156: 0
-						sel_153: (- (gEgo sel_1:) 21) (+ (gEgo sel_0:) 6)
-						sel_161: CT 4 1 self
+						setLoop: 2
+						setCel: 0
+						posn: (- (gEgo x:) 21) (+ (gEgo y:) 6)
+						setCycle: CT 4 1 self
 					)
 				else
 					(cobraLoose
-						sel_155: 3
-						sel_156: 0
-						sel_153: (+ (gEgo sel_1:) 21) (+ (gEgo sel_0:) 7)
-						sel_161: CT 4 1 self
+						setLoop: 3
+						setCel: 0
+						posn: (+ (gEgo x:) 21) (+ (gEgo y:) 7)
+						setCycle: CT 4 1 self
 					)
 				)
 			)
 			(2
-				(cobraLoose sel_161: End self)
-				(sFX sel_40: 481 sel_99: 5 sel_155: 1 sel_39:)
+				(cobraLoose setCycle: End self)
+				(sFX number: 481 flags: 5 setLoop: 1 play:)
 			)
 			(3
 				(gEgo
-					sel_2: 523
-					sel_155: 0
-					sel_156: 0
-					sel_153: (+ (gEgo sel_1:) 15) (+ (gEgo sel_0:) 1)
-					sel_161: End self
+					view: 523
+					setLoop: 0
+					setCel: 0
+					posn: (+ (gEgo x:) 15) (+ (gEgo y:) 1)
+					setCycle: End self
 				)
 			)
 			(4
 				(= global145 11) ; "Your dying thought is, "Venom I ever going to learn?""
-				(gCurRoom sel_399: 99)
-				(self sel_111:)
+				(gCurRoom newRoom: 99)
+				(self dispose:)
 			)
 		)
 	)
@@ -1687,59 +1687,59 @@
 
 (instance sPutCobraBack of Script
 	(properties
-		sel_20 {sPutCobraBack}
+		name {sPutCobraBack}
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
-				(gGame sel_587:)
+				(gGame handsOff:)
 				(= local4 0)
-				(gEgo sel_161: Walk sel_312: PolyPath 132 95 self)
+				(gEgo setCycle: Walk setMotion: PolyPath 132 95 self)
 			)
 			(1
 				(gEgo
-					sel_2: 522
-					sel_155: 4
-					sel_156: 0
-					sel_153: 126 98
-					sel_161: CT 6 1 self
+					view: 522
+					setLoop: 4
+					setCel: 0
+					posn: 126 98
+					setCycle: CT 6 1 self
 				)
 			)
 			(2
-				(cobraDoor sel_161: End self)
+				(cobraDoor setCycle: End self)
 			)
 			(3
-				(gGameMusic2 sel_170:)
-				(gEgo sel_161: CT 9 1 self)
+				(gGameMusic2 fade:)
+				(gEgo setCycle: CT 9 1 self)
 			)
 			(4
-				(cobra sel_110: sel_313:)
-				(= sel_136 1)
+				(cobra init: stopUpd:)
+				(= cycles 1)
 			)
 			(5
-				(gEgo sel_161: End)
-				(cobraDoor sel_161: Beg self)
+				(gEgo setCycle: End)
+				(cobraDoor setCycle: Beg self)
 			)
 			(6
-				(sFX sel_40: 441 sel_99: 5 sel_155: 1 sel_39:)
-				(gGame sel_87: 1 164)
+				(sFX number: 441 flags: 5 setLoop: 1 play:)
+				(gGame points: 1 164)
 				(= local5 1)
 				(SetFlag 80)
-				(cobraLoose sel_102:)
+				(cobraLoose hide:)
 				(gEgo
-					sel_585: 831
-					sel_320: Scaler 120 100 190 0
-					sel_14: 16384
-					sel_253: 270
+					normalize: 831
+					setScale: Scaler 120 100 190 0
+					signal: 16384
+					setHeading: 270
 				)
-				(gGameMusic2 sel_40: 520 sel_3: -1 sel_99: 1 sel_39:)
-				(= sel_136 1)
+				(gGameMusic2 number: 520 loop: -1 flags: 1 play:)
+				(= cycles 1)
 			)
 			(7
-				(cobraDoor sel_313:)
-				(gGame sel_588:)
-				(self sel_111:)
+				(cobraDoor stopUpd:)
+				(gGame handsOn:)
+				(self dispose:)
 			)
 		)
 	)
@@ -1747,33 +1747,33 @@
 
 (instance sDropCobraGetBitten of Script
 	(properties
-		sel_20 {sDropCobraGetBitten}
+		name {sDropCobraGetBitten}
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
-				(gGame sel_587:)
+				(gGame handsOff:)
 				(= local4 0)
-				(gEgo sel_2: 522 sel_155: 7 sel_156: 0 sel_161: End self)
+				(gEgo view: 522 setLoop: 7 setCel: 0 setCycle: End self)
 			)
 			(1
-				(= sel_139 60)
+				(= ticks 60)
 			)
 			(2
 				(cobraLoose
-					sel_216:
-					sel_155: 4
-					sel_156: 3
-					sel_1: (+ (gEgo sel_1:) 4)
-					sel_0: (+ (gEgo sel_0:) 3)
+					show:
+					setLoop: 4
+					setCel: 3
+					x: (+ (gEgo x:) 4)
+					y: (+ (gEgo y:) 3)
 				)
-				(gEgo sel_2: 523 sel_155: 0 sel_156: 0 sel_161: End self)
+				(gEgo view: 523 setLoop: 0 setCel: 0 setCycle: End self)
 			)
 			(3
 				(= global145 11) ; "Your dying thought is, "Venom I ever going to learn?""
-				(gCurRoom sel_399: 99)
-				(self sel_111:)
+				(gCurRoom newRoom: 99)
+				(self dispose:)
 			)
 		)
 	)
@@ -1781,27 +1781,27 @@
 
 (instance sCobraTurn of Script
 	(properties
-		sel_20 {sCobraTurn}
+		name {sCobraTurn}
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
 				(if local6
-					(cobraLoose sel_155: 5 sel_156: 0 sel_161: End self)
+					(cobraLoose setLoop: 5 setCel: 0 setCycle: End self)
 				else
-					(cobraLoose sel_155: 4 sel_156: 0 sel_161: End self)
+					(cobraLoose setLoop: 4 setCel: 0 setCycle: End self)
 				)
 			)
 			(1
 				(if local6
-					(cobraLoose sel_155: 11 sel_156: 0 sel_161: End self)
+					(cobraLoose setLoop: 11 setCel: 0 setCycle: End self)
 				else
-					(cobraLoose sel_155: 12 sel_156: 0 sel_161: End self)
+					(cobraLoose setLoop: 12 setCel: 0 setCycle: End self)
 				)
 			)
 			(2
-				(self sel_111:)
+				(self dispose:)
 			)
 		)
 	)
@@ -1809,17 +1809,17 @@
 
 (instance sCobraTimer of Script
 	(properties
-		sel_20 {sCobraTimer}
+		name {sCobraTimer}
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
-				(= sel_137 15)
+				(= seconds 15)
 			)
 			(1
-				(gEgo sel_146: sCobraStrike)
-				(self sel_111:)
+				(gEgo setScript: sCobraStrike)
+				(self dispose:)
 			)
 		)
 	)
@@ -1827,72 +1827,72 @@
 
 (instance sFX of Sound
 	(properties
-		sel_20 {sFX}
-		sel_99 1
+		name {sFX}
+		flags 1
 	)
 )
 
 (instance southExitFeature of ExitFeature
 	(properties
-		sel_20 {southExitFeature}
-		sel_6 184
-		sel_7 115
-		sel_8 189
-		sel_9 245
-		sel_33 11
-		sel_583 3
-		sel_213 57
+		name {southExitFeature}
+		nsTop 184
+		nsLeft 115
+		nsBottom 189
+		nsRight 245
+		cursor 11
+		exitDir 3
+		noun 57
 	)
 )
 
 (instance sSecretDoor of Script
 	(properties
-		sel_20 {sSecretDoor}
+		name {sSecretDoor}
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
-				(gGame sel_587:)
-				(gEgo sel_312: PolyPath 93 122 self)
+				(gGame handsOff:)
+				(gEgo setMotion: PolyPath 93 122 self)
 			)
 			(1
 				(Face gEgo mountedSkull)
-				(= sel_136 4)
+				(= cycles 4)
 			)
 			(2
-				(gEgo sel_2: 561 sel_155: 0 sel_156: 0 sel_161: End self)
+				(gEgo view: 561 setLoop: 0 setCel: 0 setCycle: End self)
 			)
 			(3
-				(gEgo sel_244: 12 sel_161: Beg self)
-				(sFX sel_40: 49 sel_99: 5 sel_155: 1 sel_39:)
-				(mountedSkull sel_161: End self)
+				(gEgo cycleSpeed: 12 setCycle: Beg self)
+				(sFX number: 49 flags: 5 setLoop: 1 play:)
+				(mountedSkull setCycle: End self)
 			)
 			(4 0)
 			(5
-				(gEgo sel_585: 831)
+				(gEgo normalize: 831)
 				(Face gEgo secretDoor)
-				(sFX sel_40: 721 sel_99: 5 sel_155: 1 sel_39:)
-				(secretDoor sel_161: End self)
+				(sFX number: 721 flags: 5 setLoop: 1 play:)
+				(secretDoor setCycle: End self)
 			)
 			(6
-				(sFX sel_167:)
-				(gEgo sel_312: PolyPath 315 167 self)
+				(sFX stop:)
+				(gEgo setMotion: PolyPath 315 167 self)
 			)
 			(7
-				(gEgo sel_312: MoveTo 330 167 self)
+				(gEgo setMotion: MoveTo 330 167 self)
 			)
 			(8
-				(gEgo sel_63: 2)
-				(sFX sel_40: 721 sel_99: 5 sel_155: 1 sel_39:)
-				(secretDoor sel_161: Beg self)
+				(gEgo setPri: 2)
+				(sFX number: 721 flags: 5 setLoop: 1 play:)
+				(secretDoor setCycle: Beg self)
 			)
 			(9
-				(sFX sel_167:)
-				(secretDoor sel_313:)
-				(gCurRoom sel_399: (gCurRoom sel_409:))
-				(gGame sel_588:)
-				(self sel_111:)
+				(sFX stop:)
+				(secretDoor stopUpd:)
+				(gCurRoom newRoom: (gCurRoom north:))
+				(gGame handsOn:)
+				(self dispose:)
 			)
 		)
 	)

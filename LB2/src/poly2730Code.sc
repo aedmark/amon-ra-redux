@@ -18,49 +18,49 @@
 
 (instance poly2730Code of Code
 	(properties
-		sel_20 {poly2730Code}
+		name {poly2730Code}
 	)
 
-	(method (sel_57 param1)
+	(method (doit param1)
 		(param1
-			sel_118: (poly2730a sel_110: sel_117:) (poly2730b sel_110: sel_117:)
+			add: (poly2730a init: yourself:) (poly2730b init: yourself:)
 		)
 	)
 )
 
 (instance poly2730a of Polygon
 	(properties
-		sel_20 {poly2730a}
+		name {poly2730a}
 	)
 
-	(method (sel_110)
-		(= sel_31 2)
-		(= sel_86 5)
-		(= sel_87 @local0)
+	(method (init)
+		(= type 2)
+		(= size 5)
+		(= points @local0)
 	)
 )
 
 (instance poly2730b of Polygon
 	(properties
-		sel_20 {poly2730b}
+		name {poly2730b}
 	)
 
-	(method (sel_110)
-		(= sel_31 2)
-		(= sel_86 3)
-		(= sel_87 @local10)
+	(method (init)
+		(= type 2)
+		(= size 3)
+		(= points @local10)
 	)
 )
 
 (instance pts2730 of MuseumPoints
 	(properties
-		sel_20 {pts2730}
-		sel_621 200
-		sel_622 164
-		sel_623 298
-		sel_624 140
-		sel_627 319
-		sel_628 189
-		sel_630 153
+		name {pts2730}
+		midPtX 200
+		midPtY 164
+		northPtX 298
+		northPtY 140
+		eastPtX 319
+		eastPtY 189
+		westPtY 153
 	)
 )

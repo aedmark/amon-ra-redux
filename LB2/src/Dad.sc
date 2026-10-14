@@ -12,46 +12,46 @@
 
 (instance Dad of Talker
 	(properties
-		sel_20 {Dad}
-		sel_1 5
-		sel_0 5
-		sel_2 1880
-		sel_3 3
-		sel_537 150
-		sel_26 15
-		sel_549 105
-		sel_550 12
+		name {Dad}
+		x 5
+		y 5
+		view 1880
+		loop 3
+		talkWidth 150
+		back 15
+		textX 105
+		textY 12
 	)
 
-	(method (sel_110)
-		(= sel_30 gUserFont)
-		(super sel_110: dadBust dadEyes dadMouth &rest)
+	(method (init)
+		(= font gUserFont)
+		(super init: dadBust dadEyes dadMouth &rest)
 	)
 )
 
 (instance dadBust of Prop
 	(properties
-		sel_20 {dadBust}
-		sel_2 1880
-		sel_3 1
+		name {dadBust}
+		view 1880
+		loop 1
 	)
 )
 
 (instance dadEyes of Prop
 	(properties
-		sel_20 {dadEyes}
-		sel_6 34
-		sel_7 26
-		sel_2 1880
-		sel_3 2
+		name {dadEyes}
+		nsTop 34
+		nsLeft 26
+		view 1880
+		loop 2
 	)
 )
 
 (instance dadMouth of Prop
 	(properties
-		sel_20 {dadMouth}
-		sel_6 56
-		sel_7 22
-		sel_2 1880
+		name {dadMouth}
+		nsTop 56
+		nsLeft 22
+		view 1880
 	)
 )

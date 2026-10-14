@@ -14,51 +14,51 @@
 
 (procedure (localproc_0)
 	(cond
-		((< (gEgo sel_1:) 0)
-			(gEgo sel_1: (+ 0 (* (gEgo sel_51:) 2)))
+		((< (gEgo x:) 0)
+			(gEgo x: (+ 0 (* (gEgo xStep:) 2)))
 		)
-		((> (gEgo sel_1:) 319)
-			(gEgo sel_1: (- 319 (* (gEgo sel_51:) 2)))
+		((> (gEgo x:) 319)
+			(gEgo x: (- 319 (* (gEgo xStep:) 2)))
 		)
 	)
 )
 
 (procedure (localproc_1)
 	(cond
-		((< (gEgo sel_0:) (gCurRoom sel_340:))
-			(gEgo sel_0: (+ (gCurRoom sel_340:) (* (gEgo sel_52:) 2)))
+		((< (gEgo y:) (gCurRoom horizon:))
+			(gEgo y: (+ (gCurRoom horizon:) (* (gEgo yStep:) 2)))
 		)
-		((> (gEgo sel_0:) 189)
-			(gEgo sel_0: (- 189 (* (gEgo sel_52:) 2)))
+		((> (gEgo y:) 189)
+			(gEgo y: (- 189 (* (gEgo yStep:) 2)))
 		)
 	)
 )
 
 (class LBRoom of Rm
 	(properties
-		sel_20 {LBRoom}
-		sel_340 15
+		name {LBRoom}
+		horizon 15
 	)
 
-	(method (sel_110 param1 &tmp temp0 temp1 [temp2 2])
-		(= sel_40 gCurRoomNum)
-		(= gPerspective sel_413)
-		(if sel_408
-			(self sel_417: sel_408)
+	(method (init param1 &tmp temp0 temp1 [temp2 2])
+		(= number gCurRoomNum)
+		(= gPerspective picAngle)
+		(if picture
+			(self drawPic: picture)
 		)
 		(cond
-			((not (gCast sel_122: gEgo)) 0)
-			(sel_142 0)
-			((not ((User sel_341:) sel_349:)) 0)
-			((OneOf sel_28 11 12 13 14)
+			((not (gCast contains: gEgo)) 0)
+			(script 0)
+			((not ((User alterEgo:) edgeHit:)) 0)
+			((OneOf style 11 12 13 14)
 				(= temp0
 					(+
 						1
 						(/
 							(CelWide
-								((User sel_341:) sel_2:)
-								((User sel_341:) sel_3:)
-								((User sel_341:) sel_4:)
+								((User alterEgo:) view:)
+								((User alterEgo:) loop:)
+								((User alterEgo:) cel:)
 							)
 							2
 						)
@@ -69,125 +69,125 @@
 						1
 						(/
 							(CelHigh
-								((User sel_341:) sel_2:)
-								((User sel_341:) sel_3:)
-								((User sel_341:) sel_4:)
+								((User alterEgo:) view:)
+								((User alterEgo:) loop:)
+								((User alterEgo:) cel:)
 							)
 							2
 						)
 					)
 				)
-				(switch ((User sel_341:) sel_349:)
+				(switch ((User alterEgo:) edgeHit:)
 					(1
-						((User sel_341:) sel_0: 188)
+						((User alterEgo:) y: 188)
 					)
 					(4
-						((User sel_341:) sel_1: (- 319 temp0))
+						((User alterEgo:) x: (- 319 temp0))
 					)
 					(3
-						((User sel_341:) sel_0: (+ sel_340 temp1))
+						((User alterEgo:) y: (+ horizon temp1))
 					)
 					(2
-						((User sel_341:) sel_1: (+ 0 temp0))
+						((User alterEgo:) x: (+ 0 temp0))
 					)
 				)
-				((User sel_341:) sel_349: 0)
+				((User alterEgo:) edgeHit: 0)
 			)
 			(else
 				(if (not argc)
 					(= param1 0)
 				)
-				(self sel_146: eRS param1 gPrevRoomNum)
+				(self setScript: eRS param1 gPrevRoomNum)
 			)
 		)
-		(if (gEgo sel_322:)
-			((gEgo sel_322:) sel_57:)
+		(if (gEgo scaler:)
+			((gEgo scaler:) doit:)
 		)
 	)
 
-	(method (sel_57 &tmp temp0)
+	(method (doit &tmp temp0)
 		(cond
-			(sel_142
-				(sel_142 sel_57:)
+			(script
+				(script doit:)
 			)
 			((!= gCurRoomNum gNewRoomNum) 0)
-			((not (gCast sel_122: gEgo)) 0)
+			((not (gCast contains: gEgo)) 0)
 			(
-				(switch (= temp0 ((User sel_341:) sel_349:))
-					(1 sel_409)
-					(2 sel_410)
-					(3 sel_411)
-					(4 sel_412)
+				(switch (= temp0 ((User alterEgo:) edgeHit:))
+					(1 north)
+					(2 east)
+					(3 south)
+					(4 west)
 				)
-				(self sel_146: lRS 0 temp0)
+				(self setScript: lRS 0 temp0)
 			)
 		)
 	)
 
-	(method (sel_300 param1)
-		(if (not (super sel_300: param1))
+	(method (doVerb param1)
+		(if (not (super doVerb: param1))
 			(proc0_6 self param1)
 		)
 	)
 
-	(method (sel_422)
-		(super sel_422: &rest)
+	(method (setInset)
+		(super setInset: &rest)
 	)
 )
 
 (instance lRS of Script
 	(properties
-		sel_20 {lRS}
+		name {lRS}
 	)
 
-	(method (sel_144 param1 &tmp temp0 temp1)
-		(switch (= sel_29 param1)
+	(method (changeState param1 &tmp temp0 temp1)
+		(switch (= state param1)
 			(0
-				(gGame sel_587:)
+				(gGame handsOff:)
 				(= temp1
-					(CelWide (gEgo sel_2:) (gEgo sel_3:) (gEgo sel_4:))
+					(CelWide (gEgo view:) (gEgo loop:) (gEgo cel:))
 				)
 				(= temp0
-					(CelHigh (gEgo sel_2:) (gEgo sel_3:) (gEgo sel_4:))
+					(CelHigh (gEgo view:) (gEgo loop:) (gEgo cel:))
 				)
-				(switch sel_141
+				(switch register
 					(1
-						(gCurRoom sel_399: (gCurRoom sel_409:))
+						(gCurRoom newRoom: (gCurRoom north:))
 					)
 					(3
 						(gEgo
-							sel_312:
+							setMotion:
 								PolyPath
-								(gEgo sel_1:)
+								(gEgo x:)
 								(+ 189 temp0)
 								self
 						)
-						(= sel_141 (gCurRoom sel_411:))
+						(= register (gCurRoom south:))
 					)
 					(2
 						(gEgo
-							sel_312:
+							setMotion:
 								PolyPath
 								(+ 319 temp1)
-								(gEgo sel_0:)
+								(gEgo y:)
 								self
 						)
-						(= sel_141 (gCurRoom sel_410:))
+						(= register (gCurRoom east:))
 					)
 					(4
 						(gEgo
-							sel_312: PolyPath (- 0 temp1) (gEgo sel_0:) self
+							setMotion: PolyPath (- 0 temp1) (gEgo y:) self
 						)
-						(= sel_141 (gCurRoom sel_412:))
+						(= register (gCurRoom west:))
 					)
 				)
 			)
 			(1
-				(gEgo sel_102:)
-				(= sel_136 2)
+				(gEgo hide:)
+				(= cycles 2)
 			)
 			(2
-				(gCurRoom sel_399: sel_141)
+				(gCurRoom newRoom: register)
 			)
 		)
 	)
@@ -195,71 +195,71 @@
 
 (instance eRS of Script
 	(properties
-		sel_20 {eRS}
+		name {eRS}
 	)
 
-	(method (sel_144 param1 &tmp temp0 temp1)
-		(switch (= sel_29 param1)
+	(method (changeState param1 &tmp temp0 temp1)
+		(switch (= state param1)
 			(0
-				(= sel_136 0)
-				(if (gUser sel_237:)
-					(gGame sel_587:)
+				(= cycles 0)
+				(if (gUser canControl:)
+					(gGame handsOff:)
 				)
 				(= temp0
-					(CelHigh (gEgo sel_2:) (gEgo sel_3:) (gEgo sel_4:))
+					(CelHigh (gEgo view:) (gEgo loop:) (gEgo cel:))
 				)
 				(= temp1
-					(CelWide (gEgo sel_2:) (gEgo sel_3:) (gEgo sel_4:))
+					(CelWide (gEgo view:) (gEgo loop:) (gEgo cel:))
 				)
-				(switch sel_141
-					((sel_42 sel_409:)
+				(switch register
+					((client north:)
 						(localproc_0)
 						(gEgo
-							sel_0: (+ (gCurRoom sel_340:) (gEgo sel_52:))
+							y: (+ (gCurRoom horizon:) (gEgo yStep:))
 						)
-						(= sel_136 1)
+						(= cycles 1)
 					)
-					((sel_42 sel_411:)
+					((client south:)
 						(localproc_0)
 						(gEgo
-							sel_0: (+ 189 temp0)
-							sel_312:
+							y: (+ 189 temp0)
+							setMotion:
 								PolyPath
-								(gEgo sel_1:)
-								(- 189 (* (gEgo sel_52:) 2))
+								(gEgo x:)
+								(- 189 (* (gEgo yStep:) 2))
 								self
 						)
 					)
-					((sel_42 sel_410:)
+					((client east:)
 						(localproc_1)
 						(gEgo
-							sel_1: (+ 319 (/ temp1 2))
-							sel_312:
+							x: (+ 319 (/ temp1 2))
+							setMotion:
 								PolyPath
-								(- 319 (* (gEgo sel_51:) 2))
-								(gEgo sel_0:)
+								(- 319 (* (gEgo xStep:) 2))
+								(gEgo y:)
 								self
 						)
 					)
-					((sel_42 sel_412:)
+					((client west:)
 						(localproc_1)
 						(gEgo
-							sel_1: (- 0 (/ temp1 2))
-							sel_312:
+							x: (- 0 (/ temp1 2))
+							setMotion:
 								PolyPath
-								(+ 0 (* (gEgo sel_51:) 2))
-								(gEgo sel_0:)
+								(+ 0 (* (gEgo xStep:) 2))
+								(gEgo y:)
 								self
 						)
 					)
 					(else
-						(= sel_136 1)
+						(= cycles 1)
 					)
 				)
 			)
 			(1
-				(gGame sel_588: 1)
-				(self sel_111:)
+				(gGame handsOn: 1)
+				(self dispose:)
 			)
 		)
 	)

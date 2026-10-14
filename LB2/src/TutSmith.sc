@@ -12,46 +12,46 @@
 
 (instance TutSmith of Talker
 	(properties
-		sel_20 {TutSmith}
-		sel_1 5
-		sel_0 5
-		sel_2 1883
-		sel_3 3
-		sel_537 150
-		sel_26 15
-		sel_549 112
-		sel_550 12
+		name {TutSmith}
+		x 5
+		y 5
+		view 1883
+		loop 3
+		talkWidth 150
+		back 15
+		textX 112
+		textY 12
 	)
 
-	(method (sel_110)
-		(= sel_30 gUserFont)
-		(super sel_110: tutSmithBust tutSmithEyes tutSmithMouth &rest)
+	(method (init)
+		(= font gUserFont)
+		(super init: tutSmithBust tutSmithEyes tutSmithMouth &rest)
 	)
 )
 
 (instance tutSmithBust of Prop
 	(properties
-		sel_20 {tutSmithBust}
-		sel_2 1883
-		sel_3 1
+		name {tutSmithBust}
+		view 1883
+		loop 1
 	)
 )
 
 (instance tutSmithEyes of Prop
 	(properties
-		sel_20 {tutSmithEyes}
-		sel_6 44
-		sel_7 30
-		sel_2 1883
-		sel_3 2
+		name {tutSmithEyes}
+		nsTop 44
+		nsLeft 30
+		view 1883
+		loop 2
 	)
 )
 
 (instance tutSmithMouth of Prop
 	(properties
-		sel_20 {tutSmithMouth}
-		sel_6 65
-		sel_7 20
-		sel_2 1883
+		name {tutSmithMouth}
+		nsTop 65
+		nsLeft 20
+		view 1883
 	)
 )

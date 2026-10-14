@@ -59,7 +59,7 @@
 			(<=
 				lEdge
 				(if (< argc 6)
-					(ptxOrObj sel_1:)
+					(ptxOrObj x:)
 				else
 					ptxOrObj
 				)
@@ -68,7 +68,7 @@
 			(<=
 				tEdge
 				(if (< argc 6)
-					(ptxOrObj sel_0:)
+					(ptxOrObj y:)
 				else
 					pty
 				)
@@ -97,40 +97,40 @@
 
 (class Obj
 	(properties
-		sel_20 {Obj}
+		name {Obj}
 	)
 
-	(method (sel_109)
+	(method (new)
 		(Clone self)
 	)
 
-	(method (sel_110))
+	(method (init))
 
-	(method (sel_57)
+	(method (doit)
 		(return self)
 	)
 
-	(method (sel_111)
+	(method (dispose)
 		(DisposeClone self)
 	)
 
-	(method (sel_112 param1)
-		(StrCpy param1 sel_20)
+	(method (showStr param1)
+		(StrCpy param1 name)
 	)
 
-	(method (sel_113 &tmp [temp0 200])
-		(Prints (self sel_112: @temp0))
+	(method (showSelf &tmp [temp0 200])
+		(Prints (self showStr: @temp0))
 	)
 
-	(method (sel_96 param1)
-		(param1 sel_57: self &rest)
+	(method (perform param1)
+		(param1 doit: self &rest)
 	)
 
-	(method (sel_116 param1)
+	(method (respondsTo param1)
 		(RespondsTo self param1)
 	)
 
-	(method (sel_115 param1)
+	(method (isMemberOf param1)
 		(return
 			(or
 				(== param1 self)
@@ -143,7 +143,7 @@
 		)
 	)
 
-	(method (sel_114 param1 &tmp temp0)
+	(method (isKindOf param1 &tmp temp0)
 		(return
 			(or
 				(and
@@ -153,94 +153,94 @@
 				(and
 					(= temp0 (self -super-:))
 					(IsObject temp0)
-					(temp0 sel_114: param1)
+					(temp0 isKindOf: param1)
 				)
 			)
 		)
 	)
 
-	(method (sel_117)
+	(method (yourself)
 		(return self)
 	)
 )
 
 (class Code of Obj
 	(properties
-		sel_20 {Code}
+		name {Code}
 	)
 
-	(method (sel_57))
+	(method (doit))
 )
 
 (class Collect of Obj
 	(properties
-		sel_20 {Collect}
-		sel_24 0
-		sel_86 0
+		name {Collect}
+		elements 0
+		size 0
 	)
 
-	(method (sel_57)
-		(self sel_119: 57 &rest)
+	(method (doit)
+		(self eachElementDo: 57 &rest)
 	)
 
-	(method (sel_112 param1)
-		(Format param1 999 0 sel_20 sel_86) ; "%s [Collection of size %d]"
+	(method (showStr param1)
+		(Format param1 999 0 name size) ; "%s [Collection of size %d]"
 	)
 
-	(method (sel_113 &tmp [temp0 40])
-		(Prints (self sel_112: @temp0))
-		(self sel_119: 113)
+	(method (showSelf &tmp [temp0 40])
+		(Prints (self showStr: @temp0))
+		(self eachElementDo: 113)
 	)
 
-	(method (sel_118 param1 &tmp temp0 temp1 temp2)
-		(if (not sel_24)
-			(= sel_24 (NewList))
+	(method (add param1 &tmp temp0 temp1 temp2)
+		(if (not elements)
+			(= elements (NewList))
 		)
 		(for ((= temp1 0)) (< temp1 argc) ((++ temp1))
-			(if (not (self sel_126: [param1 temp1]))
-				(AddToEnd sel_24 (NewNode [param1 temp1] [param1 temp1]))
-				(++ sel_86)
+			(if (not (self isDuplicate: [param1 temp1]))
+				(AddToEnd elements (NewNode [param1 temp1] [param1 temp1]))
+				(++ size)
 			)
 		)
 		(return self)
 	)
 
-	(method (sel_81 param1 &tmp temp0)
+	(method (delete param1 &tmp temp0)
 		(for ((= temp0 0)) (< temp0 argc) ((++ temp0))
-			(if (DeleteKey sel_24 [param1 temp0])
-				(-- sel_86)
+			(if (DeleteKey elements [param1 temp0])
+				(-- size)
 			)
 		)
 		(return self)
 	)
 
-	(method (sel_111)
-		(if sel_24
-			(self sel_119: 111)
-			(DisposeList sel_24)
+	(method (dispose)
+		(if elements
+			(self eachElementDo: 111)
+			(DisposeList elements)
 		)
-		(= sel_86 (= sel_24 0))
-		(super sel_111:)
+		(= size (= elements 0))
+		(super dispose:)
 	)
 
-	(method (sel_124)
-		(FirstNode sel_24)
+	(method (first)
+		(FirstNode elements)
 	)
 
-	(method (sel_65 param1)
+	(method (next param1)
 		(NextNode param1)
 	)
 
-	(method (sel_123)
-		(return (or (== sel_24 0) (EmptyList sel_24)))
+	(method (isEmpty)
+		(return (or (== elements 0) (EmptyList elements)))
 	)
 
-	(method (sel_122 param1)
-		(FindKey sel_24 param1)
+	(method (contains param1)
+		(FindKey elements param1)
 	)
 
-	(method (sel_119 param1 &tmp temp0 temp1 temp2)
-		(for ((= temp0 (FirstNode sel_24))) temp0 ((= temp0 temp1))
+	(method (eachElementDo param1 &tmp temp0 temp1 temp2)
+		(for ((= temp0 (FirstNode elements))) temp0 ((= temp0 temp1))
 			(= temp1 (NextNode temp0))
 			(if (not (IsObject (= temp2 (NodeValue temp0))))
 				(return)
@@ -249,8 +249,8 @@
 		)
 	)
 
-	(method (sel_120 param1 &tmp temp0 temp1 temp2)
-		(for ((= temp0 (FirstNode sel_24))) temp0 ((= temp0 temp1))
+	(method (firstTrue param1 &tmp temp0 temp1 temp2)
+		(for ((= temp0 (FirstNode elements))) temp0 ((= temp0 temp1))
 			(= temp1 (NextNode temp0))
 			(= temp2 (NodeValue temp0))
 			(if (temp2 param1: &rest)
@@ -260,8 +260,8 @@
 		(return 0)
 	)
 
-	(method (sel_121 param1 &tmp temp0 temp1 temp2)
-		(for ((= temp0 (FirstNode sel_24))) temp0 ((= temp0 temp1))
+	(method (allTrue param1 &tmp temp0 temp1 temp2)
+		(for ((= temp0 (FirstNode elements))) temp0 ((= temp0 temp1))
 			(= temp1 (NextNode temp0))
 			(= temp2 (NodeValue temp0))
 			(if (not (temp2 param1: &rest))
@@ -271,30 +271,30 @@
 		(return 1)
 	)
 
-	(method (sel_125 &tmp temp0 temp1)
-		(for ((= temp0 (FirstNode sel_24))) temp0 ((= temp0 temp1))
+	(method (release &tmp temp0 temp1)
+		(for ((= temp0 (FirstNode elements))) temp0 ((= temp0 temp1))
 			(= temp1 (NextNode temp0))
-			(self sel_81: (NodeValue temp0))
+			(self delete: (NodeValue temp0))
 		)
 	)
 
-	(method (sel_126)
+	(method (isDuplicate)
 		(return 0)
 	)
 )
 
 (class List of Collect
 	(properties
-		sel_20 {List}
+		name {List}
 	)
 
-	(method (sel_112 param1)
-		(Format param1 999 1 sel_20 sel_86) ; "%s [List of size %d]"
+	(method (showStr param1)
+		(Format param1 999 1 name size) ; "%s [List of size %d]"
 	)
 
-	(method (sel_64 param1 &tmp temp0)
+	(method (at param1 &tmp temp0)
 		(for
-			((= temp0 (FirstNode sel_24)))
+			((= temp0 (FirstNode elements)))
 			(and param1 temp0)
 			((= temp0 (NextNode temp0)))
 
@@ -309,62 +309,62 @@
 		)
 	)
 
-	(method (sel_127)
-		(LastNode sel_24)
+	(method (last)
+		(LastNode elements)
 	)
 
-	(method (sel_128 param1)
+	(method (prev param1)
 		(PrevNode param1)
 	)
 
-	(method (sel_129 param1 &tmp temp0)
-		(if (not sel_24)
-			(= sel_24 (NewList))
+	(method (addToFront param1 &tmp temp0)
+		(if (not elements)
+			(= elements (NewList))
 		)
 		(for ((= temp0 (- argc 1))) (<= 0 temp0) ((-- temp0))
-			(if (not (self sel_126: [param1 temp0]))
-				(AddToFront sel_24 (NewNode [param1 temp0] [param1 temp0]))
-				(++ sel_86)
+			(if (not (self isDuplicate: [param1 temp0]))
+				(AddToFront elements (NewNode [param1 temp0] [param1 temp0]))
+				(++ size)
 			)
 		)
 		(return self)
 	)
 
-	(method (sel_130 param1 &tmp temp0)
-		(if (not sel_24)
-			(= sel_24 (NewList))
+	(method (addToEnd param1 &tmp temp0)
+		(if (not elements)
+			(= elements (NewList))
 		)
 		(for ((= temp0 0)) (< temp0 argc) ((++ temp0))
-			(if (not (self sel_126: [param1 temp0]))
-				(AddToEnd sel_24 (NewNode [param1 temp0] [param1 temp0]))
-				(++ sel_86)
+			(if (not (self isDuplicate: [param1 temp0]))
+				(AddToEnd elements (NewNode [param1 temp0] [param1 temp0]))
+				(++ size)
 			)
 		)
 		(return self)
 	)
 
-	(method (sel_131 param1 param2 &tmp temp0 temp1 temp2)
-		(if (= temp2 (FindKey sel_24 param1))
+	(method (addAfter param1 param2 &tmp temp0 temp1 temp2)
+		(if (= temp2 (FindKey elements param1))
 			(-- argc)
 			(for ((= temp0 0)) (< temp0 argc) ((++ temp0))
-				(if (not (self sel_126: [param2 temp0]))
+				(if (not (self isDuplicate: [param2 temp0]))
 					(= temp2
 						(AddAfter
-							sel_24
+							elements
 							temp2
 							(NewNode [param2 temp0] [param2 temp0])
 						)
 					)
-					(++ sel_86)
+					(++ size)
 				)
 			)
 		)
 		(return self)
 	)
 
-	(method (sel_132 param1 &tmp temp0 temp1)
+	(method (indexOf param1 &tmp temp0 temp1)
 		(= temp0 0)
-		(for ((= temp1 (FirstNode sel_24))) temp1 ((= temp1 (NextNode temp1)))
+		(for ((= temp1 (FirstNode elements))) temp1 ((= temp1 (NextNode temp1)))
 			(if (== param1 (NodeValue temp1))
 				(return temp0)
 			)
@@ -376,112 +376,112 @@
 
 (class Set of List
 	(properties
-		sel_20 {Set}
+		name {Set}
 	)
 
-	(method (sel_112 param1)
-		(Format param1 999 2 sel_20 sel_86) ; "%s [Set of size %d]"
+	(method (showStr param1)
+		(Format param1 999 2 name size) ; "%s [Set of size %d]"
 	)
 
-	(method (sel_126 param1)
-		(self sel_122: param1)
+	(method (isDuplicate param1)
+		(self contains: param1)
 	)
 )
 
 (class EventHandler of Set
 	(properties
-		sel_20 {EventHandler}
+		name {EventHandler}
 	)
 
-	(method (sel_133 param1 &tmp temp0 temp1 temp2)
+	(method (handleEvent param1 &tmp temp0 temp1 temp2)
 		(for
-			((= temp0 (FirstNode sel_24)))
-			(and temp0 (not (param1 sel_73:)))
+			((= temp0 (FirstNode elements)))
+			(and temp0 (not (param1 claimed:)))
 			((= temp0 temp1))
 
 			(= temp1 (NextNode temp0))
 			(breakif (not (IsObject (= temp2 (NodeValue temp0)))))
-			(temp2 sel_133: param1)
+			(temp2 handleEvent: param1)
 		)
-		(param1 sel_73:)
+		(param1 claimed:)
 	)
 )
 
 (class Script of Obj
 	(properties
-		sel_20 {Script}
-		sel_42 0
-		sel_29 -1
-		sel_134 0
-		sel_135 0
-		sel_136 0
-		sel_137 0
-		sel_138 0
-		sel_139 0
-		sel_140 0
-		sel_141 0
-		sel_142 0
-		sel_143 0
-		sel_65 0
+		name {Script}
+		client 0
+		state -1
+		start 0
+		timer 0
+		cycles 0
+		seconds 0
+		lastSeconds 0
+		ticks 0
+		lastTicks 0
+		register 0
+		script 0
+		caller 0
+		next 0
 	)
 
-	(method (sel_57 &tmp temp0)
-		(if sel_142
-			(sel_142 sel_57:)
+	(method (doit &tmp temp0)
+		(if script
+			(script doit:)
 		)
 		(cond
-			(sel_136
-				(if (not (-- sel_136))
-					(self sel_145:)
+			(cycles
+				(if (not (-- cycles))
+					(self cue:)
 				)
 			)
-			(sel_137
+			(seconds
 				(= temp0 (GetTime 1)) ; SysTime12
-				(if (!= sel_138 temp0)
-					(= sel_138 temp0)
-					(if (not (-- sel_137))
-						(self sel_145:)
+				(if (!= lastSeconds temp0)
+					(= lastSeconds temp0)
+					(if (not (-- seconds))
+						(self cue:)
 					)
 				)
 			)
-			((and sel_139 (<= (-= sel_139 (Abs (- gGameTime sel_140))) 0))
-				(= sel_139 0)
-				(self sel_145:)
+			((and ticks (<= (-= ticks (Abs (- gGameTime lastTicks))) 0))
+				(= ticks 0)
+				(self cue:)
 			)
 		)
-		(= sel_140 gGameTime)
+		(= lastTicks gGameTime)
 	)
 
-	(method (sel_110 param1 param2 param3)
-		(= sel_140 gGameTime)
+	(method (init param1 param2 param3)
+		(= lastTicks gGameTime)
 		(if (>= argc 1)
-			((= sel_42 param1) sel_142: self)
+			((= client param1) script: self)
 			(if (>= argc 2)
-				(= sel_143 param2)
+				(= caller param2)
 				(if (>= argc 3)
-					(= sel_141 param3)
+					(= register param3)
 				)
 			)
 		)
-		(= sel_29 (- sel_134 1))
-		(self sel_145:)
+		(= state (- start 1))
+		(self cue:)
 	)
 
-	(method (sel_111 &tmp temp0)
-		(if (IsObject sel_142)
-			(sel_142 sel_111:)
+	(method (dispose &tmp temp0)
+		(if (IsObject script)
+			(script dispose:)
 		)
-		(if (IsObject sel_135)
-			(sel_135 sel_111:)
+		(if (IsObject timer)
+			(timer dispose:)
 		)
-		(if (IsObject sel_42)
-			(sel_42
-				sel_142:
+		(if (IsObject client)
+			(client
+				script:
 					(= temp0
 						(cond
-							((IsObject sel_65) sel_65)
-							(sel_65
-								(ScriptID sel_65)
+							((IsObject next) next)
+							(next
+								(ScriptID next)
 							)
 						)
 					)
@@ -489,98 +489,98 @@
 			(cond
 				((not temp0) 0)
 				((== gNewRoomNum gCurRoomNum)
-					(temp0 sel_110: sel_42)
+					(temp0 init: client)
 				)
 				(else
-					(temp0 sel_111:)
+					(temp0 dispose:)
 				)
 			)
 		)
-		(if (and (IsObject sel_143) (== gNewRoomNum gCurRoomNum))
-			(sel_143 sel_145: sel_141)
+		(if (and (IsObject caller) (== gNewRoomNum gCurRoomNum))
+			(caller cue: register)
 		)
-		(= sel_142 (= sel_135 (= sel_42 (= sel_65 (= sel_143 0)))))
-		(super sel_111:)
+		(= script (= timer (= client (= next (= caller 0)))))
+		(super dispose:)
 	)
 
-	(method (sel_144 param1)
-		(= sel_29 param1)
+	(method (changeState param1)
+		(= state param1)
 	)
 
-	(method (sel_145)
-		(if sel_42
-			(self sel_144: (+ sel_29 1) &rest)
+	(method (cue)
+		(if client
+			(self changeState: (+ state 1) &rest)
 		)
 	)
 
-	(method (sel_146 param1)
-		(if (IsObject sel_142)
-			(sel_142 sel_111:)
+	(method (setScript param1)
+		(if (IsObject script)
+			(script dispose:)
 		)
 		(if param1
-			(param1 sel_110: self &rest)
+			(param1 init: self &rest)
 		)
 	)
 
-	(method (sel_133 param1)
-		(if sel_142
-			(sel_142 sel_133: param1)
+	(method (handleEvent param1)
+		(if script
+			(script handleEvent: param1)
 		)
-		(param1 sel_73:)
+		(param1 claimed:)
 	)
 )
 
 (class Event of Obj
 	(properties
-		sel_20 {Event}
-		sel_31 0
-		sel_37 0
-		sel_61 0
-		sel_0 0
-		sel_1 0
-		sel_73 0
-		sel_147 0
+		name {Event}
+		type 0
+		message 0
+		modifiers 0
+		y 0
+		x 0
+		claimed 0
+		port 0
 	)
 
-	(method (sel_109 param1 &tmp temp0)
-		(= temp0 (super sel_109:))
+	(method (new param1 &tmp temp0)
+		(= temp0 (super new:))
 		(GetEvent (if argc param1 else 32767) temp0)
 		(return temp0)
 	)
 
-	(method (sel_148 &tmp temp0)
-		(if (not (& sel_31 $4000))
+	(method (localize &tmp temp0)
+		(if (not (& type $4000))
 			(= temp0 (GetPort))
 			(cond
-				((not sel_147)
+				((not port)
 					(GlobalToLocal self)
 				)
-				((!= sel_147 temp0)
-					(SetPort sel_147)
+				((!= port temp0)
+					(SetPort port)
 					(LocalToGlobal self)
 					(SetPort temp0)
 					(GlobalToLocal self)
 				)
 			)
-			(= sel_147 temp0)
+			(= port temp0)
 		)
 		(return self)
 	)
 
-	(method (sel_149 &tmp temp0)
-		(if (not (& sel_31 $4000))
+	(method (globalize &tmp temp0)
+		(if (not (& type $4000))
 			(= temp0 (GetPort))
 			(cond
-				((== sel_147 temp0)
+				((== port temp0)
 					(LocalToGlobal self)
 				)
-				(sel_147
-					(SetPort sel_147)
+				(port
+					(SetPort port)
 					(LocalToGlobal self)
 					(SetPort temp0)
 				)
 			)
-			(= sel_147 0)
+			(= port 0)
 		)
 		(return self)
 	)
@@ -588,46 +588,46 @@
 
 (class Cursor of Obj
 	(properties
-		sel_20 {Cursor}
-		sel_2 0
-		sel_3 0
-		sel_4 0
-		sel_1 0
-		sel_0 0
-		sel_150 0
-		sel_151 0
-		sel_152 0
+		name {Cursor}
+		view 0
+		loop 0
+		cel 0
+		x 0
+		y 0
+		hotSpotX 0
+		hotSpotY 0
+		hidden 0
 	)
 
-	(method (sel_110)
-		(if (or sel_150 sel_151)
-			(SetCursor sel_2 sel_3 sel_4 sel_150 sel_151)
+	(method (init)
+		(if (or hotSpotX hotSpotY)
+			(SetCursor view loop cel hotSpotX hotSpotY)
 		else
-			(SetCursor sel_2 sel_3 sel_4)
+			(SetCursor view loop cel)
 		)
 	)
 
-	(method (sel_153 param1 param2)
+	(method (posn param1 param2)
 		(SetCursor param1 param2)
 	)
 
-	(method (sel_154 param1 param2)
-		(= sel_150 param1)
-		(= sel_151 param2)
-		(self sel_110:)
+	(method (posnHotSpot param1 param2)
+		(= hotSpotX param1)
+		(= hotSpotY param2)
+		(self init:)
 	)
 
-	(method (sel_155 param1)
-		(= sel_3 param1)
-		(self sel_110:)
+	(method (setLoop param1)
+		(= loop param1)
+		(self init:)
 	)
 
-	(method (sel_156 param1)
-		(= sel_4 param1)
-		(self sel_110:)
+	(method (setCel param1)
+		(= cel param1)
+		(self init:)
 	)
 
-	(method (sel_157 param1)
+	(method (showCursor param1)
 		(if argc
 			(SetCursor param1)
 		)

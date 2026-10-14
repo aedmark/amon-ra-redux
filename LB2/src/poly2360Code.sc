@@ -22,21 +22,21 @@
 
 (instance poly2360Code of Code
 	(properties
-		sel_20 {poly2360Code}
+		name {poly2360Code}
 	)
 
-	(method (sel_57 param1)
+	(method (doit param1)
 		(param1
-			sel_118:
-				(poly2360a sel_110: sel_117:)
-				(poly2360b sel_110: sel_117:)
+			add:
+				(poly2360a init: yourself:)
+				(poly2360b init: yourself:)
 				(if (== gAct 2)
-					(poly2360c sel_110: sel_117:)
+					(poly2360c init: yourself:)
 				else
 					0
 				)
 				(if (OneOf global128 2 3 10 11 12)
-					(poly2360d sel_110: sel_117:)
+					(poly2360d init: yourself:)
 				else
 					0
 				)
@@ -46,57 +46,57 @@
 
 (instance poly2360a of Polygon
 	(properties
-		sel_20 {poly2360a}
+		name {poly2360a}
 	)
 
-	(method (sel_110)
-		(= sel_86 (if (> gAct (= sel_31 2)) 12 else 15))
-		(= sel_87 (if (> gAct 2) @local0 else @local24))
+	(method (init)
+		(= size (if (> gAct (= type 2)) 12 else 15))
+		(= points (if (> gAct 2) @local0 else @local24))
 	)
 )
 
 (instance poly2360b of Polygon
 	(properties
-		sel_20 {poly2360b}
+		name {poly2360b}
 	)
 
-	(method (sel_110)
-		(= sel_31 2)
-		(= sel_86 5)
-		(= sel_87 @local54)
+	(method (init)
+		(= type 2)
+		(= size 5)
+		(= points @local54)
 	)
 )
 
 (instance poly2360c of Polygon
 	(properties
-		sel_20 {poly2360c}
+		name {poly2360c}
 	)
 
-	(method (sel_110)
-		(= sel_31 2)
-		(= sel_86 4)
-		(= sel_87 @local64)
+	(method (init)
+		(= type 2)
+		(= size 4)
+		(= points @local64)
 	)
 )
 
 (instance poly2360d of Polygon
 	(properties
-		sel_20 {poly2360d}
+		name {poly2360d}
 	)
 
-	(method (sel_110)
-		(= sel_31 2)
-		(= sel_86 4)
-		(= sel_87 @local72)
+	(method (init)
+		(= type 2)
+		(= size 4)
+		(= points @local72)
 	)
 )
 
 (instance pts2360 of MuseumPoints
 	(properties
-		sel_20 {pts2360}
-		sel_621 220
-		sel_622 130
-		sel_627 330
-		sel_628 120
+		name {pts2360}
+		midPtX 220
+		midPtY 130
+		eastPtX 330
+		eastPtY 120
 	)
 )

@@ -24,23 +24,23 @@
 
 (instance rm775 of LBRoom
 	(properties
-		sel_20 {rm775}
-		sel_408 120
-		sel_28 10
+		name {rm775}
+		picture 120
+		style 10
 	)
 
-	(method (sel_110)
+	(method (init)
 		(LoadMany rsVIEW 123 121 1125 125)
 		(LoadMany rsSOUND 121 120)
-		(gEgo sel_110: sel_585: sel_320: 167 sel_153: 240 160)
-		(super sel_110:)
-		(gTheIconBar sel_233:)
-		(gGame sel_197: 996)
+		(gEgo init: normalize: setScale: 167 posn: 240 160)
+		(super init:)
+		(gTheIconBar disable:)
+		(gGame setCursor: 996)
 		(self
-			sel_395:
-				((Polygon sel_109:)
-					sel_31: 3
-					sel_110:
+			addObstacle:
+				((Polygon new:)
+					type: 3
+					init:
 						84
 						154
 						83
@@ -57,76 +57,76 @@
 						149
 						91
 						154
-					sel_117:
+					yourself:
 				)
 		)
-		(gGameMusic1 sel_40: 332 sel_99: 1 sel_3: -1 sel_39:)
-		(steve sel_110: sel_320: 158)
-		(gCurRoom sel_146: sTalkSteve)
+		(gGameMusic1 number: 332 flags: 1 loop: -1 play:)
+		(steve init: setScale: 158)
+		(gCurRoom setScript: sTalkSteve)
 	)
 )
 
 (instance sTalkSteve of Script
 	(properties
-		sel_20 {sTalkSteve}
+		name {sTalkSteve}
 	)
 
-	(method (sel_57)
+	(method (doit)
 		(if (and local0 local1)
 			(Palette palSET_INTENSITY 0 255 (-- local1))
 			(if (not local1)
-				(self sel_145:)
+				(self cue:)
 			)
 		)
-		(super sel_57:)
+		(super doit:)
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
-				(gGame sel_587:)
-				(gEgo sel_312: PolyPath 197 155 self)
+				(gGame handsOff:)
+				(gEgo setMotion: PolyPath 197 155 self)
 				((ScriptID 1881 2) ; Laura
-					sel_1: 203
-					sel_0: 17
-					sel_549: -180
-					sel_550: 0
+					x: 203
+					y: 17
+					textX: -180
+					textY: 0
 				)
 			)
 			(1
 				(Face gEgo steve self)
 			)
 			(2
-				(togetherView sel_110: sel_63: 14)
-				(= sel_136 4)
+				(togetherView init: setPri: 14)
+				(= cycles 4)
 			)
 			(3
-				(gMessager sel_295: 1 0 0 0 self)
+				(gMessager say: 1 0 0 0 self)
 			)
 			(4
-				(gCurRoom sel_422: inDagger)
-				(= sel_137 4)
+				(gCurRoom setInset: inDagger)
+				(= seconds 4)
 			)
 			(5
-				(inDagger sel_111:)
-				(= sel_136 2)
+				(inDagger dispose:)
+				(= cycles 2)
 			)
 			(6
-				(gMessager sel_295: 1 0 1 0 self)
+				(gMessager say: 1 0 1 0 self)
 			)
 			(7
-				(gMessager sel_295: 1 0 2 0 self)
-				(gGameMusic1 sel_40: 334 sel_99: 1 sel_3: 1 sel_39: self)
+				(gMessager say: 1 0 2 0 self)
+				(gGameMusic1 number: 334 flags: 1 loop: 1 play: self)
 			)
 			(8
 				(= local0 1)
 			)
 			(9 0)
 			(10
-				(togetherView sel_102:)
-				(= sel_136 4)
-				(gCurRoom sel_399: 785)
-				(self sel_111:)
+				(togetherView hide:)
+				(= cycles 4)
+				(gCurRoom newRoom: 785)
+				(self dispose:)
 			)
 		)
 	)
@@ -134,76 +134,76 @@
 
 (instance steve of Actor
 	(properties
-		sel_20 {steve}
-		sel_1 184
-		sel_0 145
-		sel_2 121
-		sel_3 5
+		name {steve}
+		x 184
+		y 145
+		view 121
+		loop 5
 	)
 )
 
 (instance Steve of Talker
 	(properties
-		sel_20 {Steve}
-		sel_1 78
-		sel_0 100
-		sel_2 1125
-		sel_3 3
-		sel_291 0
-		sel_537 110
-		sel_26 15
-		sel_549 81
-		sel_550 -90
+		name {Steve}
+		x 78
+		y 100
+		view 1125
+		loop 3
+		disposeWhenDone 0
+		talkWidth 110
+		back 15
+		textX 81
+		textY -90
 	)
 
-	(method (sel_110)
-		(= sel_30 gUserFont)
-		(super sel_110: tSteveBust tSteveEyes tSteveMouth &rest)
+	(method (init)
+		(= font gUserFont)
+		(super init: tSteveBust tSteveEyes tSteveMouth &rest)
 	)
 )
 
 (instance tSteveMouth of Prop
 	(properties
-		sel_20 {tSteveMouth}
-		sel_6 14
-		sel_7 4
-		sel_2 1125
+		name {tSteveMouth}
+		nsTop 14
+		nsLeft 4
+		view 1125
 	)
 )
 
 (instance tSteveEyes of Prop
 	(properties
-		sel_20 {tSteveEyes}
-		sel_6 9
-		sel_7 6
-		sel_2 1125
-		sel_3 2
+		name {tSteveEyes}
+		nsTop 9
+		nsLeft 6
+		view 1125
+		loop 2
 	)
 )
 
 (instance tSteveBust of View
 	(properties
-		sel_20 {tSteveBust}
-		sel_2 1125
-		sel_3 1
+		name {tSteveBust}
+		view 1125
+		loop 1
 	)
 )
 
 (instance togetherView of View
 	(properties
-		sel_20 {togetherView}
-		sel_1 25
-		sel_0 80
-		sel_2 125
+		name {togetherView}
+		x 25
+		y 80
+		view 125
 	)
 )
 
 (instance inDagger of Inset
 	(properties
-		sel_20 {inDagger}
-		sel_2 123
-		sel_1 95
-		sel_0 57
-		sel_560 1
+		name {inDagger}
+		view 123
+		x 95
+		y 57
+		hideTheCast 1
 	)
 )

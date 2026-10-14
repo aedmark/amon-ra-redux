@@ -22,103 +22,103 @@
 
 (procedure (localproc_0)
 	(proc0_8 1)
-	(if (not (gEgo sel_238: 31))
-		(grapes sel_110:)
+	(if (not (gEgo has: 31))
+		(grapes init:)
 	)
-	(feIntercom sel_110:)
-	(feDocBottom sel_110:)
-	(feDocTop sel_110:)
-	(feDesk sel_110:)
-	(feDocDesk sel_110:)
-	(feDocLeft sel_110:)
-	(feBody sel_110:)
-	(feAnkle sel_110:)
-	(feLeg sel_110:)
-	(feHands sel_110:)
-	(feFace sel_110:)
-	(gGame sel_588:)
+	(feIntercom init:)
+	(feDocBottom init:)
+	(feDocTop init:)
+	(feDesk init:)
+	(feDocDesk init:)
+	(feDocLeft init:)
+	(feBody init:)
+	(feAnkle init:)
+	(feLeg init:)
+	(feHands init:)
+	(feFace init:)
+	(gGame handsOn:)
 )
 
 (instance rm525 of LBRoom
 	(properties
-		sel_20 {rm525}
-		sel_408 525
+		name {rm525}
+		picture 525
 	)
 
-	(method (sel_110)
+	(method (init)
 		(LoadMany rsVIEW 520 523 524 525 526)
 		(LoadMany rsPIC 556 525)
 		(LoadMany rsSOUND 520 524 4 6 85)
-		(self sel_414: 90)
+		(self setRegions: 90)
 		(= local0 gDoVerbCode)
 		(= gDoVerbCode exitDoVerbCode)
 		(SetFlag 165)
 		(if (SetFlag 69)
-			(= sel_408 525)
-			(gGameMusic1 sel_40: 6 sel_3: -1 sel_99: 1 sel_39:)
+			(= picture 525)
+			(gGameMusic1 number: 6 loop: -1 flags: 1 play:)
 			(localproc_0)
 		else
-			(= sel_408 556)
-			(wrapMusic sel_110: -1 4 6)
-			(sFX sel_40: 85 sel_99: 5 sel_3: 1 sel_39:)
-			((Timer sel_109:) sel_162: self 3)
+			(= picture 556)
+			(wrapMusic init: -1 4 6)
+			(sFX number: 85 flags: 5 loop: 1 play:)
+			((Timer new:) setReal: self 3)
 		)
-		(super sel_110:)
+		(super init:)
 	)
 
-	(method (sel_300 param1)
+	(method (doVerb param1)
 		(switch param1
 			(13
 				(proc0_8 0)
-				(self sel_399: 520)
+				(self newRoom: 520)
 			)
 			(else
-				(super sel_300: param1)
+				(super doVerb: param1)
 			)
 		)
 	)
 
-	(method (sel_145)
-		(self sel_417: (= sel_408 525))
+	(method (cue)
+		(self drawPic: (= picture 525))
 		(localproc_0)
 	)
 
-	(method (sel_399 param1)
+	(method (newRoom param1)
 		(= gDoVerbCode local0)
-		(if sel_365
-			(sel_365 sel_111:)
+		(if inset
+			(inset dispose:)
 		)
-		(gTheIconBar sel_177: 7)
-		(if (gSounds sel_122: wrapSong)
-			(wrapMusic sel_111: 1)
+		(gTheIconBar enable: 7)
+		(if (gSounds contains: wrapSong)
+			(wrapMusic dispose: 1)
 		)
-		(super sel_399: param1)
+		(super newRoom: param1)
 	)
 )
 
 (instance grapes of View
 	(properties
-		sel_20 {grapes}
-		sel_1 224
-		sel_0 154
-		sel_213 15
-		sel_2 526
-		sel_4 1
+		name {grapes}
+		x 224
+		y 154
+		noun 15
+		view 526
+		cel 1
 	)
 
-	(method (sel_300 param1)
+	(method (doVerb param1)
 		(switch param1
 			(1
-				(gCurRoom sel_422: inGrapes)
+				(gCurRoom setInset: inGrapes)
 			)
 			(8
-				(gCurRoom sel_422: inGrapes)
+				(gCurRoom setInset: inGrapes)
 			)
 			(4
-				(gCurRoom sel_422: inGrapes)
+				(gCurRoom setInset: inGrapes)
 			)
 			(else
-				(super sel_300: param1 &rest)
+				(super doVerb: param1 &rest)
 			)
 		)
 	)
@@ -126,82 +126,82 @@
 
 (instance feIntercom of Feature
 	(properties
-		sel_20 {feIntercom}
-		sel_0 1
-		sel_213 10
-		sel_301 40
-		sel_302 4
+		name {feIntercom}
+		y 1
+		noun 10
+		sightAngle 40
+		onMeCheck 4
 	)
 )
 
 (instance feDocBottom of Feature
 	(properties
-		sel_20 {feDocBottom}
-		sel_0 1
-		sel_213 4
-		sel_301 40
-		sel_302 16
+		name {feDocBottom}
+		y 1
+		noun 4
+		sightAngle 40
+		onMeCheck 16
 	)
 )
 
 (instance feDocTop of Feature
 	(properties
-		sel_20 {feDocTop}
-		sel_0 1
-		sel_213 7
-		sel_301 40
-		sel_302 32
+		name {feDocTop}
+		y 1
+		noun 7
+		sightAngle 40
+		onMeCheck 32
 	)
 )
 
 (instance feDesk of Feature
 	(properties
-		sel_20 {feDesk}
-		sel_0 1
-		sel_213 3
-		sel_301 40
-		sel_302 128
+		name {feDesk}
+		y 1
+		noun 3
+		sightAngle 40
+		onMeCheck 128
 	)
 )
 
 (instance feDocDesk of Feature
 	(properties
-		sel_20 {feDocDesk}
-		sel_0 1
-		sel_213 5
-		sel_301 40
-		sel_302 256
+		name {feDocDesk}
+		y 1
+		noun 5
+		sightAngle 40
+		onMeCheck 256
 	)
 )
 
 (instance feDocLeft of Feature
 	(properties
-		sel_20 {feDocLeft}
-		sel_0 1
-		sel_213 6
-		sel_301 40
-		sel_302 512
+		name {feDocLeft}
+		y 1
+		noun 6
+		sightAngle 40
+		onMeCheck 512
 	)
 )
 
 (instance feBody of Feature
 	(properties
-		sel_20 {feBody}
-		sel_0 1
-		sel_213 2
-		sel_301 40
-		sel_302 1024
+		name {feBody}
+		y 1
+		noun 2
+		sightAngle 40
+		onMeCheck 1024
 	)
 
-	(method (sel_300 param1)
+	(method (doVerb param1)
 		(switch param1
 			(8
-				(if (not (gEgo sel_238: 13))
-					(gCurRoom sel_422: inSmellingSalts)
+				(if (not (gEgo has: 13))
+					(gCurRoom setInset: inSmellingSalts)
 				)
 			)
 			(else
-				(super sel_300: param1)
+				(super doVerb: param1)
 			)
 		)
 	)
@@ -209,20 +209,20 @@
 
 (instance feAnkle of Feature
 	(properties
-		sel_20 {feAnkle}
-		sel_0 1
-		sel_213 1
-		sel_301 40
-		sel_302 2048
+		name {feAnkle}
+		y 1
+		noun 1
+		sightAngle 40
+		onMeCheck 2048
 	)
 
-	(method (sel_300 param1)
+	(method (doVerb param1)
 		(switch param1
 			(8
-				(gCurRoom sel_422: inFeAnkle)
+				(gCurRoom setInset: inFeAnkle)
 			)
 			(else
-				(super sel_300: param1)
+				(super doVerb: param1)
 			)
 		)
 	)
@@ -230,20 +230,20 @@
 
 (instance feLeg of Feature
 	(properties
-		sel_20 {feLeg}
-		sel_0 1
-		sel_213 11
-		sel_301 40
-		sel_302 4096
+		name {feLeg}
+		y 1
+		noun 11
+		sightAngle 40
+		onMeCheck 4096
 	)
 
-	(method (sel_300 param1)
+	(method (doVerb param1)
 		(switch param1
 			(8
-				(gCurRoom sel_422: inFeAnkle)
+				(gCurRoom setInset: inFeAnkle)
 			)
 			(else
-				(super sel_300: param1)
+				(super doVerb: param1)
 			)
 		)
 	)
@@ -251,50 +251,50 @@
 
 (instance feHands of Feature
 	(properties
-		sel_20 {feHands}
-		sel_0 1
-		sel_213 9
-		sel_301 40
-		sel_302 16384
+		name {feHands}
+		y 1
+		noun 9
+		sightAngle 40
+		onMeCheck 16384
 	)
 )
 
 (instance feFace of Feature
 	(properties
-		sel_20 {feFace}
-		sel_0 1
-		sel_213 8
-		sel_301 40
-		sel_302 -32768
+		name {feFace}
+		y 1
+		noun 8
+		sightAngle 40
+		onMeCheck -32768
 	)
 )
 
 (instance inGrapes of Inset
 	(properties
-		sel_20 {inGrapes}
-		sel_2 526
-		sel_1 210
-		sel_0 144
-		sel_570 1
-		sel_213 12
+		name {inGrapes}
+		view 526
+		x 210
+		y 144
+		disposeNotOnMe 1
+		noun 12
 	)
 
-	(method (sel_300 param1)
+	(method (doVerb param1)
 		(switch param1
 			(13
 				(proc0_8 0)
-				(gCurRoom sel_399: 520)
+				(gCurRoom newRoom: 520)
 			)
 			(4
-				(gGame sel_87: 1 165)
-				(gEgo sel_350: 31)
-				((ScriptID 21 0) sel_57: 800) ; addCluesCode
-				((ScriptID 22 0) sel_57: 16) ; triggerAndClock
-				(grapes sel_111:)
-				(self sel_111:)
+				(gGame points: 1 165)
+				(gEgo get: 31)
+				((ScriptID 21 0) doit: 800) ; addCluesCode
+				((ScriptID 22 0) doit: 16) ; triggerAndClock
+				(grapes dispose:)
+				(self dispose:)
 			)
 			(else
-				(super sel_300: param1)
+				(super doVerb: param1)
 			)
 		)
 	)
@@ -302,29 +302,29 @@
 
 (instance inSmellingSalts of Inset
 	(properties
-		sel_20 {inSmellingSalts}
-		sel_2 526
-		sel_3 1
-		sel_1 121
-		sel_0 41
-		sel_570 1
-		sel_213 14
+		name {inSmellingSalts}
+		view 526
+		loop 1
+		x 121
+		y 41
+		disposeNotOnMe 1
+		noun 14
 	)
 
-	(method (sel_300 param1)
+	(method (doVerb param1)
 		(switch param1
 			(13
 				(proc0_8 0)
-				(gCurRoom sel_399: 520)
+				(gCurRoom newRoom: 520)
 			)
 			(4
-				(gGame sel_87: 1 166)
-				(gEgo sel_350: 13)
-				((ScriptID 21 0) sel_57: 782) ; addCluesCode
-				(self sel_111:)
+				(gGame points: 1 166)
+				(gEgo get: 13)
+				((ScriptID 21 0) doit: 782) ; addCluesCode
+				(self dispose:)
 			)
 			(else
-				(super sel_300: param1)
+				(super doVerb: param1)
 			)
 		)
 	)
@@ -332,23 +332,23 @@
 
 (instance inFeAnkle of Inset
 	(properties
-		sel_20 {inFeAnkle}
-		sel_2 526
-		sel_3 2
-		sel_1 117
-		sel_0 133
-		sel_570 1
-		sel_213 16
+		name {inFeAnkle}
+		view 526
+		loop 2
+		x 117
+		y 133
+		disposeNotOnMe 1
+		noun 16
 	)
 
-	(method (sel_300 param1)
+	(method (doVerb param1)
 		(switch param1
 			(13
 				(proc0_8 0)
-				(gCurRoom sel_399: 520)
+				(gCurRoom newRoom: 520)
 			)
 			(else
-				(super sel_300: param1)
+				(super doVerb: param1)
 			)
 		)
 	)
@@ -356,22 +356,22 @@
 
 (instance inIntercom of Inset ; UNUSED
 	(properties
-		sel_20 {inIntercom}
-		sel_2 520
-		sel_1 162
-		sel_0 79
-		sel_570 1
-		sel_213 13
+		name {inIntercom}
+		view 520
+		x 162
+		y 79
+		disposeNotOnMe 1
+		noun 13
 	)
 
-	(method (sel_300 param1)
+	(method (doVerb param1)
 		(switch param1
 			(13
 				(proc0_8 0)
-				(gCurRoom sel_399: 520)
+				(gCurRoom newRoom: 520)
 			)
 			(else
-				(super sel_300: param1)
+				(super doVerb: param1)
 			)
 		)
 	)
@@ -379,37 +379,37 @@
 
 (instance wrapMusic of WrapMusic
 	(properties
-		sel_20 {wrapMusic}
+		name {wrapMusic}
 	)
 
-	(method (sel_110)
-		(= sel_608 wrapSong)
-		(super sel_110: &rest)
+	(method (init)
+		(= wrapSound wrapSong)
+		(super init: &rest)
 	)
 )
 
 (instance wrapSong of Sound
 	(properties
-		sel_20 {wrapSong}
+		name {wrapSong}
 	)
 )
 
 (instance sFX of Sound
 	(properties
-		sel_20 {sFX}
-		sel_99 1
+		name {sFX}
+		flags 1
 	)
 )
 
 (instance exitDoVerbCode of Code
 	(properties
-		sel_20 {exitDoVerbCode}
+		name {exitDoVerbCode}
 	)
 
-	(method (sel_57 param1 param2)
+	(method (doit param1 param2)
 		(if (== param1 13)
 			(proc0_8 0)
-			(gCurRoom sel_399: 520)
+			(gCurRoom newRoom: 520)
 		else
 			(proc0_6 param2 param1)
 		)

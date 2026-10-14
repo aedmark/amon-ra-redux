@@ -26,43 +26,43 @@
 
 (instance rm320 of LBRoom
 	(properties
-		sel_20 {rm320}
-		sel_213 7
-		sel_408 320
-		sel_411 310
-		sel_108 -60
+		name {rm320}
+		noun 7
+		picture 320
+		south 310
+		vanishingY -60
 	)
 
-	(method (sel_110)
+	(method (init)
 		(LoadMany rsVIEW 321 322 318 831 830)
 		(Load rsSOUND 321)
 		(gEgo
-			sel_110:
-			sel_1: 133
-			sel_0: 182
-			sel_299: aPutOnDress
-			sel_585: (if (gEgo sel_584:) 831 else 830)
-			sel_320: Scaler 145 0 190 0
+			init:
+			x: 133
+			y: 182
+			actions: aPutOnDress
+			normalize: (if (gEgo wearingGown:) 831 else 830)
+			setScale: Scaler 145 0 190 0
 		)
 		(switch gPrevRoomNum
-			(sel_411
+			(south
 				(if (not (IsFlag 24))
-					(gCurRoom sel_146: sEnterRm1stTime)
+					(gCurRoom setScript: sEnterRm1stTime)
 				else
-					(gCurRoom sel_146: sEnterRmNthTime)
+					(gCurRoom setScript: sEnterRmNthTime)
 				)
 			)
 			(else
-				(gEgo sel_153: 160 130)
-				(gGame sel_588:)
+				(gEgo posn: 160 130)
+				(gGame handsOn:)
 			)
 		)
-		(super sel_110:)
+		(super init:)
 		(self
-			sel_395:
-				((Polygon sel_109:)
-					sel_31: 3
-					sel_110:
+			addObstacle:
+				((Polygon new:)
+					type: 3
+					init:
 						236
 						150
 						199
@@ -87,49 +87,49 @@
 						189
 						181
 						150
-					sel_117:
+					yourself:
 				)
 		)
-		(gGameMusic2 sel_40: 321 sel_3: -1 sel_99: 1 sel_39:)
-		(sleazy sel_311: 4 2 6 sel_110: sel_146: sSheAnimates)
-		(smoke sel_110: sel_146: sDoSomethingLaura)
-		(partition sel_110:)
-		(stalls sel_110:)
-		(sink sel_110:)
-		(rm320Window sel_110:)
-		(couch sel_110:)
-		(southExitFeature sel_110:)
+		(gGameMusic2 number: 321 loop: -1 flags: 1 play:)
+		(sleazy approachVerbs: 4 2 6 init: setScript: sSheAnimates)
+		(smoke init: setScript: sDoSomethingLaura)
+		(partition init:)
+		(stalls init:)
+		(sink init:)
+		(rm320Window init:)
+		(couch init:)
+		(southExitFeature init:)
 	)
 
-	(method (sel_57)
+	(method (doit)
 		(cond
-			(sel_142)
+			(script)
 			((StepOn gEgo 2)
-				(gCurRoom sel_146: sExitSouth)
+				(gCurRoom setScript: sExitSouth)
 			)
 		)
-		(super sel_57:)
+		(super doit:)
 	)
 )
 
 (instance sExitSouth of Script
 	(properties
-		sel_20 {sExitSouth}
+		name {sExitSouth}
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
-				(gGame sel_587:)
-				(= sel_136 1)
+				(gGame handsOff:)
+				(= cycles 1)
 			)
 			(1
-				(gEgo sel_253: 180 sel_312: MoveTo (gEgo sel_1:) 250 self)
+				(gEgo setHeading: 180 setMotion: MoveTo (gEgo x:) 250 self)
 			)
 			(2
-				(gGameMusic1 sel_170: 127 30 12 0)
-				(gCurRoom sel_399: 310)
-				(self sel_111:)
+				(gGameMusic1 fade: 127 30 12 0)
+				(gCurRoom newRoom: 310)
+				(self dispose:)
 			)
 		)
 	)
@@ -137,34 +137,34 @@
 
 (instance sEnterRm1stTime of Script
 	(properties
-		sel_20 {sEnterRm1stTime}
+		name {sEnterRm1stTime}
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
-				(gGame sel_587:)
-				(= sel_136 1)
+				(gGame handsOff:)
+				(= cycles 1)
 			)
 			(1
-				(gEgo sel_153: 137 151 sel_253: 1 sel_312: MoveFwd 10 self)
+				(gEgo posn: 137 151 setHeading: 1 setMotion: MoveFwd 10 self)
 			)
 			(2
-				(gMessager sel_295: 1 0 1 1 self)
+				(gMessager say: 1 0 1 1 self)
 			)
 			(3
 				(Print
-					sel_198: 12 0 0 0
-					sel_205: 1 13 0 0 1 5 25
-					sel_205: 1 13 0 0 2 5 50
-					sel_110:
+					addText: 12 0 0 0
+					addButton: 1 13 0 0 1 5 25
+					addButton: 1 13 0 0 2 5 50
+					init:
 				)
-				(gMessager sel_295: 1 0 1 2 self)
+				(gMessager say: 1 0 1 2 self)
 			)
 			(4
 				(SetFlag 24)
-				(gGame sel_588:)
-				(self sel_111:)
+				(gGame handsOn:)
+				(self dispose:)
 			)
 		)
 	)
@@ -172,29 +172,29 @@
 
 (instance sEnterRmNthTime of Script
 	(properties
-		sel_20 {sEnterRmNthTime}
+		name {sEnterRmNthTime}
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
-				(gGame sel_587:)
-				(= sel_136 1)
+				(gGame handsOff:)
+				(= cycles 1)
 			)
 			(1
-				(gEgo sel_153: 137 151 sel_253: 1 sel_312: MoveFwd 10 self)
+				(gEgo posn: 137 151 setHeading: 1 setMotion: MoveFwd 10 self)
 			)
 			(2
 				(if (IsFlag 78)
-					(gMessager sel_295: 15 0 0 0 self)
+					(gMessager say: 15 0 0 0 self)
 					(ClearFlag 78)
 				else
-					(gMessager sel_295: 1 0 3 0 self)
+					(gMessager say: 1 0 3 0 self)
 				)
 			)
 			(3
-				(gGame sel_588:)
-				(self sel_111:)
+				(gGame handsOn:)
+				(self dispose:)
 			)
 		)
 	)
@@ -202,57 +202,57 @@
 
 (instance sLauraChanges of Script
 	(properties
-		sel_20 {sLauraChanges}
+		name {sLauraChanges}
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
-				(gGame sel_587:)
-				(= sel_136 3)
+				(gGame handsOff:)
+				(= cycles 3)
 			)
 			(1
-				(gEgo sel_351: 32 sel_584: 1 sel_312: PolyPath 208 150 self)
-				((ScriptID 22 0) sel_57: 16) ; triggerAndClock
-				(gGame sel_87: 1 132)
+				(gEgo put: 32 wearingGown: 1 setMotion: PolyPath 208 150 self)
+				((ScriptID 22 0) doit: 16) ; triggerAndClock
+				(gGame points: 1 132)
 			)
 			(2
-				(gEgo sel_312: MoveTo 210 160 self)
+				(gEgo setMotion: MoveTo 210 160 self)
 			)
 			(3
 				(gEgo
-					sel_2: 321
-					sel_3: 0
-					sel_153: (- (gEgo sel_1:) 3) (- (gEgo sel_0:) 45)
-					sel_244: 10
-					sel_53: 10
-					sel_161: End self
+					view: 321
+					loop: 0
+					posn: (- (gEgo x:) 3) (- (gEgo y:) 45)
+					cycleSpeed: 10
+					moveSpeed: 10
+					setCycle: End self
 				)
-				(clothes sel_110: sel_161: End)
+				(clothes init: setCycle: End)
 			)
 			(4
-				(gMessager sel_295: 2 0 0 0)
-				(gEgo sel_2: 321 sel_3: 1 sel_161: End self)
+				(gMessager say: 2 0 0 0)
+				(gEgo view: 321 loop: 1 setCycle: End self)
 			)
 			(5
 				(gEgo
-					sel_2: 831
-					sel_3: 2
-					sel_153: (+ (gEgo sel_1:) 3) (+ (gEgo sel_0:) 45)
+					view: 831
+					loop: 2
+					posn: (+ (gEgo x:) 3) (+ (gEgo y:) 45)
 				)
-				(= sel_136 1)
+				(= cycles 1)
 			)
 			(6
-				(gEgo sel_161: Walk sel_312: MoveTo 208 150 self)
+				(gEgo setCycle: Walk setMotion: MoveTo 208 150 self)
 			)
 			(7
 				(= local0 1)
-				(clothes sel_317:)
-				(gGame sel_588:)
+				(clothes addToPic:)
+				(gGame handsOn:)
 				(SetFlag 78)
-				((ScriptID 21 1) sel_57: 801) ; dropCluesCode
-				(gEgo sel_585: 831)
-				(self sel_111:)
+				((ScriptID 21 1) doit: 801) ; dropCluesCode
+				(gEgo normalize: 831)
+				(self dispose:)
 			)
 		)
 	)
@@ -260,27 +260,27 @@
 
 (instance sSheAnimates of Script
 	(properties
-		sel_20 {sSheAnimates}
+		name {sSheAnimates}
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
 				(switch (Random 0 2)
 					(0
-						(self sel_146: sSheMoves self)
+						(self setScript: sSheMoves self)
 					)
 					(else
-						(self sel_146: sSheSmokes self)
+						(self setScript: sSheSmokes self)
 					)
 				)
 			)
 			(1
-				(= sel_136 70)
+				(= cycles 70)
 			)
 			(2
-				(= sel_29 -1)
-				(= sel_136 1)
+				(= state -1)
+				(= cycles 1)
 			)
 		)
 	)
@@ -288,26 +288,26 @@
 
 (instance sSheSmokes of Script
 	(properties
-		sel_20 {sSheSmokes}
+		name {sSheSmokes}
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
-				(sleazy sel_155: 0 sel_161: CT 9 1 self)
+				(sleazy setLoop: 0 setCycle: CT 9 1 self)
 			)
 			(1
-				(smoke sel_161: End self)
+				(smoke setCycle: End self)
 			)
 			(2
-				(sleazy sel_161: End self)
-				(smoke sel_4: 0)
+				(sleazy setCycle: End self)
+				(smoke cel: 0)
 			)
 			(3
-				(= sel_136 (Random 30 70))
+				(= cycles (Random 30 70))
 			)
 			(4
-				(self sel_111:)
+				(self dispose:)
 			)
 		)
 	)
@@ -315,46 +315,46 @@
 
 (instance sSheMoves of Script
 	(properties
-		sel_20 {sSheMoves}
+		name {sSheMoves}
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
-				(sleazy sel_4: 0 sel_155: 2 sel_161: End self)
+				(sleazy cel: 0 setLoop: 2 setCycle: End self)
 			)
 			(1
-				(= sel_136 100)
+				(= cycles 100)
 			)
 			(2
 				(switch (Random 0 2)
 					(0
-						(gMessager sel_295: 10 0 0 1 self)
+						(gMessager say: 10 0 0 1 self)
 					)
 					(1
-						(gMessager sel_295: 10 0 0 2 self)
+						(gMessager say: 10 0 0 2 self)
 					)
 					(2
-						(gMessager sel_295: 10 0 0 3 self)
+						(gMessager say: 10 0 0 3 self)
 					)
 				)
 			)
 			(3
-				(sleazy sel_155: 3 sel_161: Fwd)
-				(= sel_136 (Random 30 60))
+				(sleazy setLoop: 3 setCycle: Fwd)
+				(= cycles (Random 30 60))
 			)
 			(4
-				(sleazy sel_161: End self)
+				(sleazy setCycle: End self)
 			)
 			(5
-				(sleazy sel_155: 2)
-				(= sel_136 1)
+				(sleazy setLoop: 2)
+				(= cycles 1)
 			)
 			(6
-				(sleazy sel_4: (sleazy sel_246:) sel_161: Beg self)
+				(sleazy cel: (sleazy lastCel:) setCycle: Beg self)
 			)
 			(7
-				(self sel_111:)
+				(self dispose:)
 			)
 		)
 	)
@@ -362,24 +362,24 @@
 
 (instance sDoSomethingLaura of Script
 	(properties
-		sel_20 {sDoSomethingLaura}
+		name {sDoSomethingLaura}
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
-				(= sel_137 50)
+				(= seconds 50)
 			)
 			(1
-				(if (gEgo sel_584:)
-					(self sel_111:)
+				(if (gEgo wearingGown:)
+					(self dispose:)
 				else
-					(gMessager sel_295: 11 0 0 1 self)
+					(gMessager say: 11 0 0 1 self)
 				)
 			)
 			(2
-				(= sel_29 -1)
-				(= sel_136 1)
+				(= state -1)
+				(= cycles 1)
 			)
 		)
 	)
@@ -387,13 +387,13 @@
 
 (instance aPutOnDress of Actions
 	(properties
-		sel_20 {aPutOnDress}
+		name {aPutOnDress}
 	)
 
-	(method (sel_300 param1 &tmp temp0)
+	(method (doVerb param1 &tmp temp0)
 		(switch param1
 			(42
-				(gCurRoom sel_146: sLauraChanges)
+				(gCurRoom setScript: sLauraChanges)
 			)
 			(else 0)
 		)
@@ -402,43 +402,43 @@
 
 (instance sleazy of Prop
 	(properties
-		sel_20 {sleazy}
-		sel_1 109
-		sel_0 113
-		sel_213 3
-		sel_303 145
-		sel_304 124
-		sel_2 322
-		sel_60 10
-		sel_14 16
-		sel_244 10
+		name {sleazy}
+		x 109
+		y 113
+		noun 3
+		approachX 145
+		approachY 124
+		view 322
+		priority 10
+		signal 16
+		cycleSpeed 10
 	)
 
-	(method (sel_300 param1 &tmp temp0)
+	(method (doVerb param1 &tmp temp0)
 		(switch param1
 			(2
-				((ScriptID 21 0) sel_57: 269) ; addCluesCode
-				(gMessager sel_295: 3 2)
+				((ScriptID 21 0) doit: 269) ; addCluesCode
+				(gMessager say: 3 2)
 			)
 			(6
-				(switch (gCurRoom sel_422: (ScriptID 20 0)) ; inNotebook
+				(switch (gCurRoom setInset: (ScriptID 20 0)) ; inNotebook
 					(269
-						(gMessager sel_295: 3 6 7)
+						(gMessager say: 3 6 7)
 					)
 					(264
-						(gMessager sel_295: 3 6 4)
+						(gMessager say: 3 6 4)
 					)
 					(520
-						(gMessager sel_295: 3 6 9)
+						(gMessager say: 3 6 9)
 					)
 					(-1 0)
 					(else
-						(gMessager sel_295: 3 6 5)
+						(gMessager say: 3 6 5)
 					)
 				)
 			)
 			(else
-				(super sel_300: param1 &rest)
+				(super doVerb: param1 &rest)
 			)
 		)
 	)
@@ -446,66 +446,66 @@
 
 (instance smoke of Prop
 	(properties
-		sel_20 {smoke}
-		sel_1 113
-		sel_0 96
-		sel_2 318
-		sel_3 6
+		name {smoke}
+		x 113
+		y 96
+		view 318
+		loop 6
 	)
 
-	(method (sel_110)
-		(self sel_153: (+ (sleazy sel_1:) 4) (- (sleazy sel_0:) 17))
-		(super sel_110:)
+	(method (init)
+		(self posn: (+ (sleazy x:) 4) (- (sleazy y:) 17))
+		(super init:)
 	)
 )
 
 (instance clothes of Prop
 	(properties
-		sel_20 {clothes}
-		sel_1 207
-		sel_0 114
-		sel_2 321
-		sel_3 2
-		sel_4 10
-		sel_60 15
-		sel_14 16400
+		name {clothes}
+		x 207
+		y 114
+		view 321
+		loop 2
+		cel 10
+		priority 15
+		signal 16400
 	)
 )
 
 (instance partition of Feature
 	(properties
-		sel_20 {partition}
-		sel_1 217
-		sel_0 130
-		sel_213 4
-		sel_6 109
-		sel_7 185
-		sel_8 151
-		sel_9 250
-		sel_301 40
+		name {partition}
+		x 217
+		y 130
+		noun 4
+		nsTop 109
+		nsLeft 185
+		nsBottom 151
+		nsRight 250
+		sightAngle 40
 	)
 
-	(method (sel_300 param1)
+	(method (doVerb param1)
 		(switch param1
 			(1
 				(if local0
-					(gMessager sel_295: 4 1 8)
+					(gMessager say: 4 1 8)
 				else
-					(gMessager sel_295: 4 1 6)
+					(gMessager say: 4 1 6)
 				)
 			)
 			(4
 				(if local0
-					(gMessager sel_295: 4 4 8)
+					(gMessager say: 4 4 8)
 				else
-					(gMessager sel_295: 4 4 6)
+					(gMessager say: 4 4 6)
 				)
 			)
 			(42
-				(gCurRoom sel_146: sLauraChanges)
+				(gCurRoom setScript: sLauraChanges)
 			)
 			(else
-				(super sel_300: param1 &rest)
+				(super doVerb: param1 &rest)
 			)
 		)
 	)
@@ -513,64 +513,64 @@
 
 (instance stalls of Feature
 	(properties
-		sel_20 {stalls}
-		sel_1 170
-		sel_0 68
-		sel_213 5
-		sel_6 40
-		sel_7 139
-		sel_8 96
-		sel_9 202
-		sel_301 40
+		name {stalls}
+		x 170
+		y 68
+		noun 5
+		nsTop 40
+		nsLeft 139
+		nsBottom 96
+		nsRight 202
+		sightAngle 40
 	)
 )
 
 (instance sink of Feature
 	(properties
-		sel_20 {sink}
-		sel_1 221
-		sel_0 91
-		sel_213 6
-		sel_6 78
-		sel_7 203
-		sel_8 104
-		sel_9 239
-		sel_301 40
+		name {sink}
+		x 221
+		y 91
+		noun 6
+		nsTop 78
+		nsLeft 203
+		nsBottom 104
+		nsRight 239
+		sightAngle 40
 	)
 )
 
 (instance rm320Window of Feature
 	(properties
-		sel_20 {rm320Window}
-		sel_1 239
-		sel_0 57
-		sel_213 9
-		sel_6 51
-		sel_7 229
-		sel_8 63
-		sel_9 249
-		sel_301 40
+		name {rm320Window}
+		x 239
+		y 57
+		noun 9
+		nsTop 51
+		nsLeft 229
+		nsBottom 63
+		nsRight 249
+		sightAngle 40
 	)
 )
 
 (instance couch of Feature
 	(properties
-		sel_20 {couch}
-		sel_0 101
-		sel_213 8
-		sel_302 16384
+		name {couch}
+		y 101
+		noun 8
+		onMeCheck 16384
 	)
 )
 
 (instance southExitFeature of ExitFeature
 	(properties
-		sel_20 {southExitFeature}
-		sel_6 149
-		sel_7 69
-		sel_8 154
-		sel_9 192
-		sel_33 11
-		sel_583 3
-		sel_213 14
+		name {southExitFeature}
+		nsTop 149
+		nsLeft 69
+		nsBottom 154
+		nsRight 192
+		cursor 11
+		exitDir 3
+		noun 14
 	)
 )

@@ -11,15 +11,15 @@
 
 (instance Lesbian_Flapper of Narrator
 	(properties
-		sel_20 {Lesbian Flapper}
-		sel_1 100
-		sel_0 50
-		sel_537 150
-		sel_26 15
+		name {Lesbian Flapper}
+		x 100
+		y 50
+		talkWidth 150
+		back 15
 	)
 
-	(method (sel_110)
-		(= sel_30 gUserFont)
-		(super sel_110: &rest)
+	(method (init)
+		(= font gUserFont)
+		(super init: &rest)
 	)
 )

@@ -26,22 +26,22 @@
 
 (procedure (GetDirectory where &tmp temp0 [temp1 33] [temp34 100] temp134 [temp135 100] [temp235 5] [temp240 5])
 	(repeat
-		(= temp134 (gGame sel_83:))
-		(gGame sel_83: 1)
+		(= temp134 (gGame parseLang:))
+		(gGame parseLang: 1)
 		(Message msgGET 990 1 0 0 1 @temp135) ; "New save-game directory:"
 		(Message msgGET 990 4 0 0 1 @temp235) ; "OK"
 		(Message msgGET 990 5 0 0 1 @temp240) ; "Cancel"
 		(= temp0
 			(Print
-				sel_30: 0
-				sel_198: @temp135
-				sel_200: (StrCpy @temp1 where) 29 0 12 where
-				sel_205: 1 @temp235 0 26
-				sel_205: 0 @temp240 50 26
-				sel_110:
+				font: 0
+				addText: @temp135
+				addEdit: (StrCpy @temp1 where) 29 0 12 where
+				addButton: 1 @temp235 0 26
+				addButton: 0 @temp240 50 26
+				init:
 			)
 		)
-		(gGame sel_83: temp134)
+		(gGame parseLang: temp134)
 		(if (not temp0)
 			(return 0)
 		)
@@ -54,7 +54,7 @@
 		else
 			(Message msgGET 990 2 0 0 1 @temp135) ; "%s is not a valid directory."
 			(Format @temp34 @temp135 @temp1)
-			(Print sel_30: 0 sel_198: @temp34 sel_110:)
+			(Print font: 0 addText: @temp34 init:)
 		)
 	)
 )
@@ -78,45 +78,45 @@
 
 (procedure (localproc_2 &tmp [temp0 100])
 	(Message msgGET 990 3 0 0 1 @temp0) ; "You must type a description for the game."
-	(Print sel_30: 0 sel_198: @temp0 sel_110:)
+	(Print font: 0 addText: @temp0 init:)
 )
 
 (class SRDialog of Dialog
 	(properties
-		sel_20 {SRDialog}
+		name {SRDialog}
 	)
 
-	(method (sel_110 param1 param2 param3)
+	(method (init param1 param2 param3)
 		(SaveSubLang)
-		(= saveParse (gGame sel_83:))
-		(gGame sel_83: 1)
-		(= sel_32 gSystemWindow)
-		(= sel_8 0)
-		(if (== (= numGames (GetSaveFiles (gGame sel_20:) param2 param3)) -1)
+		(= saveParse (gGame parseLang:))
+		(gGame parseLang: 1)
+		(= window gSystemWindow)
+		(= nsBottom 0)
+		(if (== (= numGames (GetSaveFiles (gGame name:) param2 param3)) -1)
 			(return 0)
 		)
 		(if (== (= theStatus (localproc_0)) 1)
 			(editI
-				sel_23: (StrCpy param1 param2)
-				sel_30: gSmallFont
-				sel_180:
-				sel_182: 4 4
+				text: (StrCpy param1 param2)
+				font: gSmallFont
+				setSize:
+				moveTo: 4 4
 			)
-			(self sel_118: editI sel_180:)
+			(self add: editI setSize:)
 		)
 		(selectorI
-			sel_23: param2
-			sel_30: gSmallFont
-			sel_180:
-			sel_182: 4 (+ sel_8 4)
-			sel_29: 2
+			text: param2
+			font: gSmallFont
+			setSize:
+			moveTo: 4 (+ nsBottom 4)
+			state: 2
 		)
-		(= i (+ (selectorI sel_9:) 4))
+		(= i (+ (selectorI nsRight:) 4))
 		(okI
-			sel_23: [okIText theStatus]
-			sel_180:
-			sel_182: i (selectorI sel_6:)
-			sel_29:
+			text: [okIText theStatus]
+			setSize:
+			moveTo: i (selectorI nsTop:)
+			state:
 				(if (or (and (== theStatus 0) (not numGames)) (== theStatus 3))
 					0
 				else
@@ -124,38 +124,38 @@
 				)
 		)
 		(deleteI
-			sel_180:
-			sel_182: i (+ (okI sel_8:) 4)
-			sel_29: (if (not numGames) 0 else 3)
+			setSize:
+			moveTo: i (+ (okI nsBottom:) 4)
+			state: (if (not numGames) 0 else 3)
 		)
 		(changeDirI
-			sel_180:
-			sel_182: i (+ (deleteI sel_8:) 4)
-			sel_29: (& (changeDirI sel_29:) $fff7)
+			setSize:
+			moveTo: i (+ (deleteI nsBottom:) 4)
+			state: (& (changeDirI state:) $fff7)
 		)
 		(cancelI
-			sel_180:
-			sel_182: i (+ (changeDirI sel_8:) 4)
-			sel_29: (& (cancelI sel_29:) $fff7)
+			setSize:
+			moveTo: i (+ (changeDirI nsBottom:) 4)
+			state: (& (cancelI state:) $fff7)
 		)
-		(self sel_118: selectorI okI deleteI changeDirI cancelI sel_180:)
+		(self add: selectorI okI deleteI changeDirI cancelI setSize:)
 		(textI
-			sel_23: [textIText theStatus]
-			sel_180: (- (- sel_9 sel_7) 8)
-			sel_182: 4 4
+			text: [textIText theStatus]
+			setSize: (- (- nsRight nsLeft) 8)
+			moveTo: 4 4
 		)
-		(= i (+ (textI sel_8:) 4))
-		(self sel_119: 181 0 i)
-		(self sel_118: textI sel_180: sel_192: sel_189: 4 -1)
+		(= i (+ (textI nsBottom:) 4))
+		(self eachElementDo: 181 0 i)
+		(self add: textI setSize: center: open: 4 -1)
 		(return 1)
 	)
 
-	(method (sel_57 param1 &tmp temp0 temp1 temp2 [temp3 361] [temp364 21] [temp385 140])
+	(method (doit param1 &tmp temp0 temp1 temp2 [temp3 361] [temp364 21] [temp385 140])
 		(if (and (== self Restore) argc param1)
 			(if
 				(==
 					(= temp0
-						(FileIO fiOPEN (Format @temp385 990 0 (gGame sel_20:))) ; "%ssg.dir"
+						(FileIO fiOPEN (Format @temp385 990 0 (gGame name:))) ; "%ssg.dir"
 					)
 					-1
 				)
@@ -163,7 +163,7 @@
 			)
 			(FileIO fiCLOSE temp0)
 		)
-		(if (not (self sel_110: param1 @temp3 @temp364))
+		(if (not (self init: param1 @temp3 @temp364))
 			(return -1)
 		)
 		(repeat
@@ -177,16 +177,16 @@
 					(else changeDirI)
 				)
 			)
-			(= i (super sel_57: default))
-			(= temp2 (* (= selected (selectorI sel_132: (selectorI sel_33:))) 18))
+			(= i (super doit: default))
+			(= temp2 (* (= selected (selectorI indexOf: (selectorI cursor:))) 18))
 			(if (== i changeDirI)
-				(self sel_111:)
+				(self dispose:)
 				(if
 					(and
 						(GetDirectory gCurSaveDir)
 						(==
 							(= numGames
-								(GetSaveFiles (gGame sel_20:) @temp3 @temp364)
+								(GetSaveFiles (gGame name:) @temp3 @temp364)
 							)
 							-1
 						)
@@ -194,22 +194,22 @@
 					(= temp1 -1)
 					(break)
 				)
-				(self sel_110: param1 @temp3 @temp364)
+				(self init: param1 @temp3 @temp364)
 			else
 				(if (and (== theStatus 2) (== i okI))
-					(self sel_111:)
-					(if (GetReplaceName sel_57: (StrCpy param1 @[temp3 temp2]))
+					(self dispose:)
+					(if (GetReplaceName doit: (StrCpy param1 @[temp3 temp2]))
 						(= temp1 [temp364 selected])
 						(break)
 					)
-					(self sel_110: param1 @temp3 @temp364)
+					(self init: param1 @temp3 @temp364)
 					(continue)
 				)
 				(if (and (== theStatus 1) (or (== i okI) (== i editI)))
 					(if (== (StrLen param1) 0)
-						(self sel_111:)
+						(self dispose:)
 						(localproc_2)
-						(self sel_110: param1 @temp3 @temp364)
+						(self init: param1 @temp3 @temp364)
 						(continue)
 					)
 					(= temp1 -1)
@@ -240,41 +240,41 @@
 				)
 				(cond
 					((== i deleteI)
-						(self sel_111:)
+						(self dispose:)
 						(if
 							(not
 								(Print
-									sel_198:
+									addText:
 										{Are you sure you want to \ndelete this saved game?}
-									sel_205: 0 { No } 0 30
-									sel_205: 1 {Yes} 50 30
-									sel_110:
+									addButton: 0 { No } 0 30
+									addButton: 1 {Yes} 50 30
+									init:
 								)
 							)
-							(self sel_110: param1 @temp3 @temp364)
+							(self init: param1 @temp3 @temp364)
 						else
-							((= temp0 (Class_993_0 sel_109:))
-								sel_20: (DeviceInfo 7 @temp385 (gGame sel_20:)) ; MakeSaveDirName
-								sel_189: 2
+							((= temp0 (Class_993_0 new:))
+								name: (DeviceInfo 7 @temp385 (gGame name:)) ; MakeSaveDirName
+								open: 2
 							)
 							(= temp1 2570)
 							(for ((= i 0)) (< i numGames) ((++ i))
 								(if (!= i selected)
-									(temp0 sel_357: @[temp364 i] 2)
-									(temp0 sel_356: @[temp3 (* i 18)])
-									(temp0 sel_357: @temp1 1)
+									(temp0 write: @[temp364 i] 2)
+									(temp0 writeString: @[temp3 (* i 18)])
+									(temp0 write: @temp1 1)
 								)
 							)
 							(= temp1 -1)
-							(temp0 sel_357: @temp1 2 sel_360: sel_111:)
+							(temp0 write: @temp1 2 close: dispose:)
 							(DeviceInfo
 								8 ; MakeSaveFileName
 								@temp385
-								(gGame sel_20:)
+								(gGame name:)
 								[temp364 selected]
 							)
 							(FileIO fiUNLINK @temp385)
-							(self sel_110: param1 @temp3 @temp364)
+							(self init: param1 @temp3 @temp364)
 						)
 					)
 					((== i okI)
@@ -287,69 +287,69 @@
 					)
 					((== theStatus 1)
 						(editI
-							sel_33: (StrLen (StrCpy param1 @[temp3 temp2]))
-							sel_80:
+							cursor: (StrLen (StrCpy param1 @[temp3 temp2]))
+							draw:
 						)
 					)
 				)
 			)
 		)
 		(DisposeScript 993)
-		(self sel_111:)
+		(self dispose:)
 		(DisposeScript 990)
 		(return temp1)
 	)
 
-	(method (sel_111)
+	(method (dispose)
 		(RestoreSubLang)
-		(gGame sel_83: saveParse)
-		(super sel_111: &rest)
+		(gGame parseLang: saveParse)
+		(super dispose: &rest)
 	)
 )
 
 (class Restore of SRDialog
 	(properties
-		sel_20 {Restore}
-		sel_23 {Restore a Game}
+		name {Restore}
+		text {Restore a Game}
 	)
 )
 
 (class Save of SRDialog
 	(properties
-		sel_20 {Save}
-		sel_23 {Save a Game}
+		name {Save}
+		text {Save a Game}
 	)
 )
 
 (instance GetReplaceName of Dialog
 	(properties
-		sel_20 {GetReplaceName}
+		name {GetReplaceName}
 	)
 
-	(method (sel_57 param1 &tmp temp0 temp1)
-		(= temp1 (gGame sel_83:))
-		(gGame sel_83: 1)
-		(= sel_32 gSystemWindow)
-		(text1 sel_180: sel_182: 4 4)
-		(self sel_118: text1 sel_180:)
-		(oldName sel_23: param1 sel_30: gSmallFont sel_180: sel_182: 4 sel_8)
-		(self sel_118: oldName sel_180:)
-		(text2 sel_180: sel_182: 4 sel_8)
-		(self sel_118: text2 sel_180:)
-		(newName sel_23: param1 sel_30: gSmallFont sel_180: sel_182: 4 sel_8)
-		(self sel_118: newName sel_180:)
-		(button1 sel_7: 0 sel_6: 0 sel_180:)
-		(button2 sel_7: 0 sel_6: 0 sel_180:)
-		(button2 sel_182: (- sel_9 (+ (button2 sel_9:) 4)) sel_8)
-		(button1 sel_182: (- (button2 sel_7:) (+ (button1 sel_9:) 4)) sel_8)
-		(self sel_118: button1 button2 sel_180: sel_192: sel_189: 0 -1)
-		(= temp0 (super sel_57: newName))
-		(self sel_111:)
+	(method (doit param1 &tmp temp0 temp1)
+		(= temp1 (gGame parseLang:))
+		(gGame parseLang: 1)
+		(= window gSystemWindow)
+		(text1 setSize: moveTo: 4 4)
+		(self add: text1 setSize:)
+		(oldName text: param1 font: gSmallFont setSize: moveTo: 4 nsBottom)
+		(self add: oldName setSize:)
+		(text2 setSize: moveTo: 4 nsBottom)
+		(self add: text2 setSize:)
+		(newName text: param1 font: gSmallFont setSize: moveTo: 4 nsBottom)
+		(self add: newName setSize:)
+		(button1 nsLeft: 0 nsTop: 0 setSize:)
+		(button2 nsLeft: 0 nsTop: 0 setSize:)
+		(button2 moveTo: (- nsRight (+ (button2 nsRight:) 4)) nsBottom)
+		(button1 moveTo: (- (button2 nsLeft:) (+ (button1 nsRight:) 4)) nsBottom)
+		(self add: button1 button2 setSize: center: open: 0 -1)
+		(= temp0 (super doit: newName))
+		(self dispose:)
 		(if (not (StrLen param1))
 			(localproc_2)
 			(= temp0 0)
 		)
-		(gGame sel_83: temp1)
+		(gGame parseLang: temp1)
 		(return
 			(if (== temp0 newName)
 			else
@@ -361,132 +361,132 @@
 
 (instance selectorI of DSelector
 	(properties
-		sel_20 {selectorI}
-		sel_1 36
-		sel_0 8
+		name {selectorI}
+		x 36
+		y 8
 	)
 )
 
 (instance editI of DEdit
 	(properties
-		sel_20 {editI}
-		sel_34 35
+		name {editI}
+		max 35
 	)
 )
 
 (instance okI of DButton
 	(properties
-		sel_20 {okI}
+		name {okI}
 	)
 
-	(method (sel_111)
-		(super sel_111: 1)
+	(method (dispose)
+		(super dispose: 1)
 	)
 )
 
 (instance cancelI of DButton
 	(properties
-		sel_20 {cancelI}
-		sel_23 { Cancel }
+		name {cancelI}
+		text { Cancel }
 	)
 
-	(method (sel_111)
-		(super sel_111: 1)
+	(method (dispose)
+		(super dispose: 1)
 	)
 )
 
 (instance changeDirI of DButton
 	(properties
-		sel_20 {changeDirI}
-		sel_23 {Change \nDirectory}
+		name {changeDirI}
+		text {Change \nDirectory}
 	)
 
-	(method (sel_111)
-		(super sel_111: 1)
+	(method (dispose)
+		(super dispose: 1)
 	)
 )
 
 (instance deleteI of DButton
 	(properties
-		sel_20 {deleteI}
-		sel_23 { Delete }
+		name {deleteI}
+		text { Delete }
 	)
 
-	(method (sel_111)
-		(super sel_111: 1)
+	(method (dispose)
+		(super dispose: 1)
 	)
 )
 
 (instance textI of DText
 	(properties
-		sel_20 {textI}
-		sel_30 0
+		name {textI}
+		font 0
 	)
 
-	(method (sel_111)
-		(super sel_111: 1)
+	(method (dispose)
+		(super dispose: 1)
 	)
 )
 
 (instance text1 of DText
 	(properties
-		sel_20 {text1}
-		sel_23 {Replace}
-		sel_30 0
+		name {text1}
+		text {Replace}
+		font 0
 	)
 
-	(method (sel_111)
-		(super sel_111: 1)
+	(method (dispose)
+		(super dispose: 1)
 	)
 )
 
 (instance text2 of DText
 	(properties
-		sel_20 {text2}
-		sel_23 {with:}
-		sel_30 0
+		name {text2}
+		text {with:}
+		font 0
 	)
 
-	(method (sel_111)
-		(super sel_111: 1)
+	(method (dispose)
+		(super dispose: 1)
 	)
 )
 
 (instance oldName of DText
 	(properties
-		sel_20 {oldName}
+		name {oldName}
 	)
 
-	(method (sel_111)
-		(super sel_111: 1)
+	(method (dispose)
+		(super dispose: 1)
 	)
 )
 
 (instance newName of DEdit
 	(properties
-		sel_20 {newName}
-		sel_34 35
+		name {newName}
+		max 35
 	)
 )
 
 (instance button1 of DButton
 	(properties
-		sel_20 {button1}
-		sel_23 {Replace}
+		name {button1}
+		text {Replace}
 	)
 
-	(method (sel_111)
-		(super sel_111: 1)
+	(method (dispose)
+		(super dispose: 1)
 	)
 )
 
 (instance button2 of DButton
 	(properties
-		sel_20 {button2}
-		sel_23 {Cancel}
+		name {button2}
+		text {Cancel}
 	)
 
-	(method (sel_111)
-		(super sel_111: 1)
+	(method (dispose)
+		(super dispose: 1)
 	)
 )

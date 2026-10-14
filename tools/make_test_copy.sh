@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # tools/make_test_copy.sh <name> [git-rev]
 # Build a throwaway game copy in /tmp/amon-ra-test/<name> with its own DOSBox-X config, so a suspect
-# patch set can be boot-tested (or bisected) without touching LB2/. With [git-rev], the .SCR/.HEP files
+# patch set can be boot-tested (or bisected) without touching LB2/. With [git-rev], the .scr/.hep files
 # come from that commit instead of the working tree. Prints the command that boots the copy.
 set -euo pipefail
 name=${1:?usage: make_test_copy.sh <name> [git-rev]}
@@ -12,8 +12,8 @@ rm -rf "$dest"; mkdir -p "$dest"
 cp -r "$root/LB2" "$dest/LB2"
 rm -rf "$dest/LB2/src"
 if [ -n "$rev" ]; then
-  rm -f "$dest"/LB2/[0-9]*.SCR "$dest"/LB2/[0-9]*.HEP
-  git -C "$root" ls-tree -r --name-only "$rev" LB2 | grep -E '^LB2/[0-9]+\.(SCR|HEP)$' | while read -r f; do
+  rm -f "$dest"/LB2/[0-9]*.scr "$dest"/LB2/[0-9]*.hep
+  git -C "$root" ls-tree -r --name-only "$rev" LB2 | grep -E '^LB2/[0-9]+\.(scr|hep)$' | while read -r f; do
     git -C "$root" show "$rev:$f" > "$dest/LB2/$(basename "$f")"
   done
 fi

@@ -8,169 +8,169 @@
 
 (class DIcon of DItem
 	(properties
-		sel_20 {DIcon}
-		sel_31 4
-		sel_2 0
-		sel_3 0
-		sel_4 0
+		name {DIcon}
+		type 4
+		view 0
+		loop 0
+		cel 0
 	)
 
-	(method (sel_180)
-		(= sel_9 (+ sel_7 (CelWide sel_2 sel_3 sel_4)))
-		(= sel_8 (+ sel_6 (CelHigh sel_2 sel_3 sel_4)))
+	(method (setSize)
+		(= nsRight (+ nsLeft (CelWide view loop cel)))
+		(= nsBottom (+ nsTop (CelHigh view loop cel)))
 	)
 )
 
 (class DButton of DItem
 	(properties
-		sel_20 {DButton}
-		sel_31 1
-		sel_29 3
-		sel_23 0
-		sel_30 0
+		name {DButton}
+		type 1
+		state 3
+		text 0
+		font 0
 	)
 
-	(method (sel_111 param1)
-		(if (and sel_23 (or (not argc) (not param1)))
-			(Memory memFREE (self sel_23:))
+	(method (dispose param1)
+		(if (and text (or (not argc) (not param1)))
+			(Memory memFREE (self text:))
 		)
-		(super sel_111:)
+		(super dispose:)
 	)
 
-	(method (sel_180 &tmp [temp0 2] temp2 temp3)
-		(TextSize @temp0 sel_23 sel_30 0 0)
+	(method (setSize &tmp [temp0 2] temp2 temp3)
+		(TextSize @temp0 text font 0 0)
 		(+= temp2 2)
 		(+= temp3 2)
-		(= sel_8 (+ sel_6 temp2))
+		(= nsBottom (+ nsTop temp2))
 		(= temp3 (* (/ (+ temp3 15) 16) 16))
-		(= sel_9 (+ temp3 sel_7))
+		(= nsRight (+ temp3 nsLeft))
 	)
 )
 
 (class DEdit of DItem
 	(properties
-		sel_20 {DEdit}
-		sel_31 3
-		sel_29 1
-		sel_23 0
-		sel_30 0
-		sel_34 0
-		sel_33 0
+		name {DEdit}
+		type 3
+		state 1
+		text 0
+		font 0
+		max 0
+		cursor 0
 	)
 
-	(method (sel_179 param1)
+	(method (track param1)
 		(EditControl self param1)
 		(return self)
 	)
 
-	(method (sel_180 &tmp [temp0 2] temp2 temp3)
-		(= sel_30 gInputFont)
-		(TextSize @temp0 {M} sel_30 0 0)
-		(= sel_8 (+ sel_6 temp2))
-		(= sel_9 (+ sel_7 (/ (* temp3 sel_34 3) 4)))
-		(= sel_33 (StrLen sel_23))
+	(method (setSize &tmp [temp0 2] temp2 temp3)
+		(= font gInputFont)
+		(TextSize @temp0 {M} font 0 0)
+		(= nsBottom (+ nsTop temp2))
+		(= nsRight (+ nsLeft (/ (* temp3 max 3) 4)))
+		(= cursor (StrLen text))
 	)
 )
 
 (class DSelector of DItem
 	(properties
-		sel_20 {DSelector}
-		sel_31 6
-		sel_30 0
-		sel_1 20
-		sel_0 6
-		sel_23 0
-		sel_33 0
-		sel_98 0
-		sel_35 0
+		name {DSelector}
+		type 6
+		font 0
+		x 20
+		y 6
+		text 0
+		cursor 0
+		topString 0
+		mark 0
 	)
 
-	(method (sel_133 param1 &tmp temp0 [temp1 3] temp4 [temp5 2] temp7 temp8)
-		(if (param1 sel_73:)
+	(method (handleEvent param1 &tmp temp0 [temp1 3] temp4 [temp5 2] temp7 temp8)
+		(if (param1 claimed:)
 			(return 0)
 		)
 		(= temp0 0)
-		(switch (param1 sel_31:)
+		(switch (param1 type:)
 			(4
 				(param1
-					sel_73:
-						(switch (param1 sel_37:)
+					claimed:
+						(switch (param1 message:)
 							(18176
-								(self sel_191: 50)
+								(self retreat: 50)
 							)
 							(20224
-								(self sel_190: 50)
+								(self advance: 50)
 							)
 							(20736
-								(self sel_190: (- sel_0 1))
+								(self advance: (- y 1))
 							)
 							(18688
-								(self sel_191: (- sel_0 1))
+								(self retreat: (- y 1))
 							)
 							(20480
-								(self sel_190: 1)
+								(self advance: 1)
 							)
 							(18432
-								(self sel_191: 1)
+								(self retreat: 1)
 							)
 							(else 0)
 						)
 				)
 			)
 			(1
-				(if (self sel_174: param1)
-					(param1 sel_73: 1)
+				(if (self check: param1)
+					(param1 claimed: 1)
 					(cond
-						((< (param1 sel_0:) (+ sel_6 10))
+						((< (param1 y:) (+ nsTop 10))
 							(while 1
-								(self sel_191: 1)
+								(self retreat: 1)
 								(if (not (StillDown))
 									(break)
 								)
 							)
 						)
-						((> (param1 sel_0:) (- sel_8 10))
+						((> (param1 y:) (- nsBottom 10))
 							(while 1
-								(self sel_190: 1)
+								(self advance: 1)
 								(if (not (StillDown))
 									(break)
 								)
 							)
 						)
 						(else
-							(TextSize @temp5 {M} sel_30 0 0)
+							(TextSize @temp5 {M} font 0 0)
 							(if
 								(>
 									(= temp4
 										(/
-											(- (param1 sel_0:) (+ sel_6 10))
+											(- (param1 y:) (+ nsTop 10))
 											temp7
 										)
 									)
-									sel_35
+									mark
 								)
-								(self sel_190: (- temp4 sel_35))
+								(self advance: (- temp4 mark))
 							else
-								(self sel_191: (- sel_35 temp4))
+								(self retreat: (- mark temp4))
 							)
 						)
 					)
 				)
 			)
 		)
-		(return (if (and (param1 sel_73:) (& sel_29 $0002)) self else 0))
+		(return (if (and (param1 claimed:) (& state $0002)) self else 0))
 	)
 
-	(method (sel_180 &tmp [temp0 2] temp2 temp3)
-		(TextSize @temp0 {M} sel_30 0 0)
-		(= sel_8 (+ sel_6 20 (* temp2 sel_0)))
-		(= sel_9 (+ sel_7 (/ (* temp3 sel_1 3) 4)))
-		(= sel_98 (= sel_33 sel_23))
-		(= sel_35 0)
+	(method (setSize &tmp [temp0 2] temp2 temp3)
+		(TextSize @temp0 {M} font 0 0)
+		(= nsBottom (+ nsTop 20 (* temp2 y)))
+		(= nsRight (+ nsLeft (/ (* temp3 x 3) 4)))
+		(= topString (= cursor text))
+		(= mark 0)
 	)
 
-	(method (sel_132 param1 &tmp temp0 temp1)
-		(= temp0 sel_23)
+	(method (indexOf param1 &tmp temp0 temp1)
+		(= temp0 text)
 		(for ((= temp1 0)) (< temp1 300) ((++ temp1))
 			(if (== 0 (StrLen temp0))
 				(return -1)
@@ -178,32 +178,32 @@
 			(if (not (StrCmp param1 temp0))
 				(return temp1)
 			)
-			(+= temp0 sel_1)
+			(+= temp0 x)
 		)
 	)
 
-	(method (sel_64 param1)
-		(return (+ sel_23 (* sel_1 param1)))
+	(method (at param1)
+		(return (+ text (* x param1)))
 	)
 
-	(method (sel_190 param1 &tmp temp0)
-		(if (not (StrAt sel_33 0))
-			(return (not (StrAt sel_33 0)))
+	(method (advance param1 &tmp temp0)
+		(if (not (StrAt cursor 0))
+			(return (not (StrAt cursor 0)))
 		)
 		(= temp0 0)
-		(while (and param1 (StrAt sel_33 sel_1))
+		(while (and param1 (StrAt cursor x))
 			(= temp0 1)
-			(+= sel_33 sel_1)
-			(if (< (+ sel_35 1) sel_0)
-				(++ sel_35)
+			(+= cursor x)
+			(if (< (+ mark 1) y)
+				(++ mark)
 			else
-				(+= sel_98 sel_1)
+				(+= topString x)
 			)
 			(-- param1)
 		)
 		(return
 			(if temp0
-				(self sel_80:)
+				(self draw:)
 				1
 			else
 				0
@@ -211,21 +211,21 @@
 		)
 	)
 
-	(method (sel_191 param1 &tmp temp0)
+	(method (retreat param1 &tmp temp0)
 		(= temp0 0)
-		(while (and param1 (!= sel_33 sel_23))
+		(while (and param1 (!= cursor text))
 			(= temp0 1)
-			(-= sel_33 sel_1)
-			(if sel_35
-				(-- sel_35)
+			(-= cursor x)
+			(if mark
+				(-- mark)
 			else
-				(-= sel_98 sel_1)
+				(-= topString x)
 			)
 			(-- param1)
 		)
 		(return
 			(if temp0
-				(self sel_80:)
+				(self draw:)
 				1
 			else
 				0
@@ -236,20 +236,20 @@
 
 (class Controls of List
 	(properties
-		sel_20 {Controls}
+		name {Controls}
 	)
 
-	(method (sel_80)
-		(self sel_119: 180)
-		(self sel_119: 80)
+	(method (draw)
+		(self eachElementDo: 180)
+		(self eachElementDo: 80)
 	)
 
-	(method (sel_133 param1 &tmp temp0)
-		(if (param1 sel_73:)
+	(method (handleEvent param1 &tmp temp0)
+		(if (param1 claimed:)
 			(return 0)
 		)
-		(if (and (= temp0 (self sel_120: 133 param1)) (not (temp0 sel_185: 2)))
-			(temp0 sel_57:)
+		(if (and (= temp0 (self firstTrue: 133 param1)) (not (temp0 checkState: 2)))
+			(temp0 doit:)
 			(= temp0 0)
 		)
 		(return temp0)

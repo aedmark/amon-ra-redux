@@ -12,26 +12,26 @@
 
 (instance aSteve of MuseumActor
 	(properties
-		sel_20 {aSteve}
-		sel_213 1
-		sel_214 1887
-		sel_103 1
-		sel_648 812
-		sel_620 370
+		name {aSteve}
+		noun 1
+		modNum 1887
+		scaleSignal 1
+		originalView 812
+		room 370
 	)
 
-	(method (sel_300 param1 param2 &tmp temp0 temp1 temp2)
+	(method (doVerb param1 param2 &tmp temp0 temp1 temp2)
 		(switch param1
 			(1
 				(switch gAct
 					(1
-						(gMessager sel_295: sel_213 param1 0 0 0 sel_214)
+						(gMessager say: noun param1 0 0 0 modNum)
 					)
 					(5
-						(gMessager sel_295: sel_213 param1 27 0 0 sel_214)
+						(gMessager say: noun param1 27 0 0 modNum)
 					)
 					(else
-						(gMessager sel_295: sel_213 param1 24 0 0 sel_214)
+						(gMessager say: noun param1 24 0 0 modNum)
 					)
 				)
 			)
@@ -42,7 +42,7 @@
 							(if (== argc 2)
 								param2
 							else
-								(gCurRoom sel_422: (ScriptID 20 0)) ; inNotebook
+								(gCurRoom setInset: (ScriptID 20 0)) ; inNotebook
 							)
 						)
 						-1
@@ -71,31 +71,31 @@
 						(cond
 							((IsFlag 134)
 								(if (proc27_0 10 global364)
-									(gMessager sel_295: sel_213 6 1 0 0 sel_214)
+									(gMessager say: noun 6 1 0 0 modNum)
 								else
-									(gMessager sel_295: sel_213 6 72 0 0 sel_214)
+									(gMessager say: noun 6 72 0 0 modNum)
 									(proc27_1 10 @global364)
 								)
 							)
 							((proc27_0 10 global297)
-								(gMessager sel_295: sel_213 6 1 0 0 sel_214)
+								(gMessager say: noun 6 1 0 0 modNum)
 							)
 							(else
-								(gMessager sel_295: sel_213 6 3 0 0 sel_214)
+								(gMessager say: noun 6 3 0 0 modNum)
 								(proc27_1 10 @global297)
 							)
 						)
 					)
 					(else
 						(cond
-							((not (Message msgGET sel_214 sel_213 6 temp1 1))
-								(gMessager sel_295: sel_213 6 81 0 0 sel_214)
+							((not (Message msgGET modNum noun 6 temp1 1))
+								(gMessager say: noun 6 81 0 0 modNum)
 							)
 							((proc27_0 10 [global296 (- temp1 2)])
-								(gMessager sel_295: sel_213 6 1 0 0 sel_214)
+								(gMessager say: noun 6 1 0 0 modNum)
 							)
 							(else
-								(gMessager sel_295: sel_213 6 temp1 0 0 sel_214)
+								(gMessager say: noun 6 temp1 0 0 modNum)
 								(proc27_1 10 @[global296 (- temp1 2)])
 							)
 						)
@@ -103,7 +103,7 @@
 				)
 			)
 			(else
-				(super sel_300: param1)
+				(super doVerb: param1)
 			)
 		)
 	)

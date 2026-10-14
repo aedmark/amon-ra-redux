@@ -18,53 +18,53 @@
 
 (instance rm155 of LBRoom
 	(properties
-		sel_20 {rm155}
-		sel_408 155
-		sel_28 10
+		name {rm155}
+		picture 155
+		style 10
 	)
 
-	(method (sel_110)
+	(method (init)
 		(LoadMany rsVIEW 1155 156 157 155)
-		(self sel_414: 92)
-		(super sel_110:)
-		(gGameMusic2 sel_40: 151 sel_99: 1 sel_3: -1 sel_39:)
-		(grass sel_110: sel_317:)
-		(moon sel_110: sel_317:)
-		(cloud1 sel_110: sel_317:)
-		(cloud2 sel_110: sel_317:)
-		(blue sel_110: sel_317:)
-		(lauraArm sel_110: sel_244: 15 sel_161: RandCycle)
-		(fan sel_110: sel_161: Fwd)
-		(trees1 sel_110: sel_146: sMoveTrees1)
-		(trees2 sel_110: sel_146: sMoveTrees2)
-		(gCurRoom sel_146: sCartoon)
+		(self setRegions: 92)
+		(super init:)
+		(gGameMusic2 number: 151 flags: 1 loop: -1 play:)
+		(grass init: addToPic:)
+		(moon init: addToPic:)
+		(cloud1 init: addToPic:)
+		(cloud2 init: addToPic:)
+		(blue init: addToPic:)
+		(lauraArm init: cycleSpeed: 15 setCycle: RandCycle)
+		(fan init: setCycle: Fwd)
+		(trees1 init: setScript: sMoveTrees1)
+		(trees2 init: setScript: sMoveTrees2)
+		(gCurRoom setScript: sCartoon)
 	)
 
-	(method (sel_111)
-		(gGameMusic1 sel_170: 0 30 12 1)
-		(gGameMusic2 sel_170: 0 30 12 1)
-		(super sel_111: &rest)
+	(method (dispose)
+		(gGameMusic1 fade: 0 30 12 1)
+		(gGameMusic2 fade: 0 30 12 1)
+		(super dispose: &rest)
 	)
 )
 
 (instance sCartoon of Script
 	(properties
-		sel_20 {sCartoon}
+		name {sCartoon}
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
-				((ScriptID 1900 15) sel_203: 1) ; Irmgaard
-				(Laura sel_203: 1)
-				(= sel_139 60)
+				((ScriptID 1900 15) modeless: 1) ; Irmgaard
+				(Laura modeless: 1)
+				(= ticks 60)
 			)
 			(1
-				(gMessager sel_295: 1 0 0 0 self)
+				(gMessager say: 1 0 0 0 self)
 			)
 			(2
-				(gCurRoom sel_399: 160)
-				(self sel_111:)
+				(gCurRoom newRoom: 160)
+				(self dispose:)
 			)
 		)
 	)
@@ -72,22 +72,22 @@
 
 (instance sMoveTrees1 of Script
 	(properties
-		sel_20 {sMoveTrees1}
+		name {sMoveTrees1}
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
 				(trees1
-					sel_155: 2
-					sel_51: 15
-					sel_52: 15
-					sel_312: MoveTo 365 160 self
+					setLoop: 2
+					xStep: 15
+					yStep: 15
+					setMotion: MoveTo 365 160 self
 				)
 			)
 			(1
-				(sel_42 sel_1: 0 sel_0: 79)
-				(self sel_144: 0)
+				(client x: 0 y: 79)
+				(self changeState: 0)
 			)
 		)
 	)
@@ -95,22 +95,22 @@
 
 (instance sMoveTrees2 of Script
 	(properties
-		sel_20 {sMoveTrees2}
+		name {sMoveTrees2}
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
 				(trees2
-					sel_155: 2
-					sel_51: 15
-					sel_52: 15
-					sel_312: MoveTo 438 160 self
+					setLoop: 2
+					xStep: 15
+					yStep: 15
+					setMotion: MoveTo 438 160 self
 				)
 			)
 			(1
-				(sel_42 sel_1: 0 sel_0: 79)
-				(self sel_144: 0)
+				(client x: 0 y: 79)
+				(self changeState: 0)
 			)
 		)
 	)
@@ -118,152 +118,152 @@
 
 (instance trees1 of Actor
 	(properties
-		sel_20 {trees1}
-		sel_0 74
-		sel_2 155
-		sel_3 2
-		sel_60 3
-		sel_14 16400
-		sel_53 5
+		name {trees1}
+		y 74
+		view 155
+		loop 2
+		priority 3
+		signal 16400
+		moveSpeed 5
 	)
 )
 
 (instance trees2 of Actor
 	(properties
-		sel_20 {trees2}
-		sel_0 74
-		sel_2 155
-		sel_3 2
-		sel_4 1
-		sel_60 3
-		sel_14 16400
-		sel_53 5
+		name {trees2}
+		y 74
+		view 155
+		loop 2
+		cel 1
+		priority 3
+		signal 16400
+		moveSpeed 5
 	)
 )
 
 (instance fan of Prop
 	(properties
-		sel_20 {fan}
-		sel_1 157
-		sel_0 35
-		sel_2 157
-		sel_60 14
-		sel_14 16
+		name {fan}
+		x 157
+		y 35
+		view 157
+		priority 14
+		signal 16
 	)
 )
 
 (instance lauraArm of Prop
 	(properties
-		sel_20 {lauraArm}
-		sel_1 144
-		sel_0 131
-		sel_2 156
+		name {lauraArm}
+		x 144
+		y 131
+		view 156
 	)
 )
 
 (instance Laura of Talker
 	(properties
-		sel_20 {Laura}
-		sel_1 0
-		sel_0 0
-		sel_2 1155
-		sel_3 3
-		sel_291 0
-		sel_537 150
-		sel_26 15
-		sel_549 10
-		sel_550 10
+		name {Laura}
+		x 0
+		y 0
+		view 1155
+		loop 3
+		disposeWhenDone 0
+		talkWidth 150
+		back 15
+		textX 10
+		textY 10
 	)
 
-	(method (sel_110)
-		(= sel_30 gUserFont)
-		(super sel_110: lauraBust lauraEyes lauraMouth &rest)
+	(method (init)
+		(= font gUserFont)
+		(super init: lauraBust lauraEyes lauraMouth &rest)
 	)
 )
 
 (instance lauraBust of Prop
 	(properties
-		sel_20 {lauraBust}
-		sel_2 1155
-		sel_3 1
+		name {lauraBust}
+		view 1155
+		loop 1
 	)
 )
 
 (instance lauraEyes of Prop
 	(properties
-		sel_20 {lauraEyes}
-		sel_6 85
-		sel_7 180
-		sel_2 1155
-		sel_3 2
+		name {lauraEyes}
+		nsTop 85
+		nsLeft 180
+		view 1155
+		loop 2
 	)
 )
 
 (instance lauraMouth of Prop
 	(properties
-		sel_20 {lauraMouth}
-		sel_6 90
-		sel_7 180
-		sel_2 1155
+		name {lauraMouth}
+		nsTop 90
+		nsLeft 180
+		view 1155
 	)
 )
 
 (instance grass of View
 	(properties
-		sel_20 {grass}
-		sel_1 142
-		sel_0 87
-		sel_2 155
-		sel_3 1
-		sel_60 2
-		sel_14 16400
+		name {grass}
+		x 142
+		y 87
+		view 155
+		loop 1
+		priority 2
+		signal 16400
 	)
 )
 
 (instance moon of View
 	(properties
-		sel_20 {moon}
-		sel_1 140
-		sel_0 60
-		sel_2 155
-		sel_60 1
-		sel_14 16400
+		name {moon}
+		x 140
+		y 60
+		view 155
+		priority 1
+		signal 16400
 	)
 )
 
 (instance blue of View
 	(properties
-		sel_20 {blue}
-		sel_1 34
-		sel_0 71
-		sel_2 155
-		sel_3 3
-		sel_4 1
-		sel_60 1
-		sel_14 16400
+		name {blue}
+		x 34
+		y 71
+		view 155
+		loop 3
+		cel 1
+		priority 1
+		signal 16400
 	)
 )
 
 (instance cloud1 of View
 	(properties
-		sel_20 {cloud1}
-		sel_1 148
-		sel_0 48
-		sel_2 155
-		sel_3 3
-		sel_60 1
-		sel_14 16400
+		name {cloud1}
+		x 148
+		y 48
+		view 155
+		loop 3
+		priority 1
+		signal 16400
 	)
 )
 
 (instance cloud2 of View
 	(properties
-		sel_20 {cloud2}
-		sel_1 26
-		sel_0 47
-		sel_2 155
-		sel_3 3
-		sel_60 1
-		sel_14 16400
+		name {cloud2}
+		x 26
+		y 47
+		view 155
+		loop 3
+		priority 1
+		signal 16400
 	)
 )

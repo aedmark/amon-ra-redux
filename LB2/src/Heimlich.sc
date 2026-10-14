@@ -12,46 +12,46 @@
 
 (instance Heimlich of Talker
 	(properties
-		sel_20 {Heimlich}
-		sel_1 5
-		sel_0 5
-		sel_2 1889
-		sel_3 3
-		sel_537 150
-		sel_26 15
-		sel_549 110
-		sel_550 12
+		name {Heimlich}
+		x 5
+		y 5
+		view 1889
+		loop 3
+		talkWidth 150
+		back 15
+		textX 110
+		textY 12
 	)
 
-	(method (sel_110)
-		(= sel_30 gUserFont)
-		(super sel_110: heimlichBust heimlichEyes heimlichMouth &rest)
+	(method (init)
+		(= font gUserFont)
+		(super init: heimlichBust heimlichEyes heimlichMouth &rest)
 	)
 )
 
 (instance heimlichBust of Prop
 	(properties
-		sel_20 {heimlichBust}
-		sel_2 1889
-		sel_3 1
+		name {heimlichBust}
+		view 1889
+		loop 1
 	)
 )
 
 (instance heimlichEyes of Prop
 	(properties
-		sel_20 {heimlichEyes}
-		sel_6 36
-		sel_7 28
-		sel_2 1889
-		sel_3 2
+		name {heimlichEyes}
+		nsTop 36
+		nsLeft 28
+		view 1889
+		loop 2
 	)
 )
 
 (instance heimlichMouth of Prop
 	(properties
-		sel_20 {heimlichMouth}
-		sel_6 56
-		sel_7 33
-		sel_2 1889
+		name {heimlichMouth}
+		nsTop 56
+		nsLeft 33
+		view 1889
 	)
 )

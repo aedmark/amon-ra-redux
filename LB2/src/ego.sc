@@ -10,63 +10,63 @@
 
 (class ego of Ego
 	(properties
-		sel_20 {ego}
-		sel_213 1
-		sel_214 19
-		sel_301 180
-		sel_2 800
-		sel_584 0
+		name {ego}
+		noun 1
+		modNum 19
+		sightAngle 180
+		view 800
+		wearingGown 0
 	)
 
-	(method (sel_350 param1)
+	(method (get param1)
 		(if (== param1 -1)
-			(super sel_350: &rest)
+			(super get: &rest)
 		else
-			(super sel_350: param1 &rest)
-			(gMessager sel_295: 2 4 0 0 0 19)
+			(super get: param1 &rest)
+			(gMessager say: 2 4 0 0 0 19)
 		)
 	)
 
-	(method (sel_351)
-		(if (and (not (gUser sel_237:)) (== global121 (gTheIconBar sel_64: 5)))
-			(= global121 (gTheIconBar sel_64: 0))
-			(gGame sel_197: gWaitCursor)
+	(method (put)
+		(if (and (not (gUser canControl:)) (== global121 (gTheIconBar at: 5)))
+			(= global121 (gTheIconBar at: 0))
+			(gGame setCursor: gWaitCursor)
 		)
-		(super sel_351: &rest)
+		(super put: &rest)
 	)
 
-	(method (sel_585 param1)
-		(= sel_2 (if argc param1 else 800))
+	(method (normalize param1)
+		(= view (if argc param1 else 800))
 		(self
-			sel_155: -1
-			sel_156: -1
-			sel_63: -1
-			sel_312: 0
-			sel_161: StopWalk -1
-			sel_338: 3 2
-			sel_82: 0
-			sel_15: -32768
-			sel_316: 0
-			sel_352: gSpeed
+			setLoop: -1
+			setCel: -1
+			setPri: -1
+			setMotion: 0
+			setCycle: StopWalk -1
+			setStep: 3 2
+			z: 0
+			illegalBits: -32768
+			ignoreActors: 0
+			setSpeed: gSpeed
 		)
 	)
 
-	(method (sel_586 &tmp temp0)
-		(if (Inv sel_120: 353 gEgo)
+	(method (showInv &tmp temp0)
+		(if (Inv firstTrue: 353 gEgo)
 			(= temp0 gSystemWindow)
 			(= gSystemWindow SysWindow)
-			(Inv sel_113: gEgo)
-			(if (not (gTheIconBar sel_225:))
-				(gTheIconBar sel_207: (gTheIconBar sel_64: 0) sel_233: 5)
-				(if (& ((gTheIconBar sel_207:) sel_14:) $0004)
-					(gTheIconBar sel_231:)
+			(Inv showSelf: gEgo)
+			(if (not (gTheIconBar curInvIcon:))
+				(gTheIconBar curIcon: (gTheIconBar at: 0) disable: 5)
+				(if (& ((gTheIconBar curIcon:) signal:) $0004)
+					(gTheIconBar advanceCurIcon:)
 				)
-				(gGame sel_197: ((gTheIconBar sel_207:) sel_33:))
+				(gGame setCursor: ((gTheIconBar curIcon:) cursor:))
 			)
 			(= gSystemWindow temp0)
-			(gNarrator sel_540: 0 sel_20: {Narrator})
+			(gNarrator showTitle: 0 name: {Narrator})
 		else
-			(gMessager sel_295: 1 0 1 0 0 19)
+			(gMessager say: 1 0 1 0 0 19)
 		)
 	)
 )

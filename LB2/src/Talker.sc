@@ -11,263 +11,263 @@
 
 (class RTRandCycle of RandCycle
 	(properties
-		sel_20 {RTRandCycle}
+		name {RTRandCycle}
 	)
 
-	(method (sel_57 &tmp temp0)
-		(if (or (> sel_467 (= temp0 (GetTime))) (== sel_467 -1))
-			(if (> (- temp0 sel_158) (sel_42 sel_244:))
-				(sel_42 sel_4: (self sel_241:))
-				(= sel_158 (GetTime))
+	(method (doit &tmp temp0)
+		(if (or (> count (= temp0 (GetTime))) (== count -1))
+			(if (> (- temp0 cycleCnt) (client cycleSpeed:))
+				(client cel: (self nextCel:))
+				(= cycleCnt (GetTime))
 			)
 		else
-			(sel_42 sel_4: 0)
-			(self sel_242:)
+			(client cel: 0)
+			(self cycleDone:)
 		)
 	)
 
-	(method (sel_110 param1 param2 param3)
-		(super sel_110: param1)
-		(sel_42 sel_4: 0)
-		(= sel_158 (GetTime))
+	(method (init param1 param2 param3)
+		(super init: param1)
+		(client cel: 0)
+		(= cycleCnt (GetTime))
 		(if (>= argc 2)
 			(if (!= param2 -1)
-				(= sel_467 (+ (GetTime) param2))
+				(= count (+ (GetTime) param2))
 			else
-				(= sel_467 -1)
+				(= count -1)
 			)
 			(if (>= argc 3)
-				(= sel_143 param3)
+				(= caller param3)
 			)
 		else
-			(= sel_467 -1)
+			(= count -1)
 		)
 	)
 )
 
 (class Blink of Cycle
 	(properties
-		sel_20 {Blink}
-		sel_533 0
-		sel_534 0
-		sel_535 0
-		sel_536 0
+		name {Blink}
+		waitCount 0
+		lastCount 0
+		waitMin 0
+		waitMax 0
 	)
 
-	(method (sel_110 param1 param2)
+	(method (init param1 param2)
 		(if argc
-			(= sel_535 (/ param2 2))
-			(= sel_536 (+ param2 sel_535))
-			(super sel_110: param1)
+			(= waitMin (/ param2 2))
+			(= waitMax (+ param2 waitMin))
+			(super init: param1)
 		else
-			(super sel_110:)
+			(super init:)
 		)
 	)
 
-	(method (sel_57 &tmp temp0)
+	(method (doit &tmp temp0)
 		(cond
-			(sel_533
-				(if (> (- gGameTime sel_533) 0)
-					(= sel_533 0)
-					(self sel_110:)
+			(waitCount
+				(if (> (- gGameTime waitCount) 0)
+					(= waitCount 0)
+					(self init:)
 				)
 			)
-			((or (> (= temp0 (self sel_241:)) (sel_42 sel_246:)) (< temp0 0))
-				(= sel_239 (- sel_239))
-				(self sel_242:)
+			((or (> (= temp0 (self nextCel:)) (client lastCel:)) (< temp0 0))
+				(= cycleDir (- cycleDir))
+				(self cycleDone:)
 			)
 			(else
-				(sel_42 sel_4: temp0)
+				(client cel: temp0)
 			)
 		)
 	)
 
-	(method (sel_242)
-		(if (== sel_239 -1)
-			(self sel_110:)
+	(method (cycleDone)
+		(if (== cycleDir -1)
+			(self init:)
 		else
-			(= sel_533 (+ (Random sel_535 sel_536) gGameTime))
+			(= waitCount (+ (Random waitMin waitMax) gGameTime))
 		)
 	)
 )
 
 (class Narrator of Prop
 	(properties
-		sel_20 {Narrator}
-		sel_1 -1
-		sel_0 -1
-		sel_143 0
-		sel_291 1
-		sel_139 0
-		sel_537 0
-		sel_538 0
-		sel_203 0
-		sel_30 0
-		sel_539 0
-		sel_407 0
-		sel_540 0
-		sel_25 0
-		sel_26 7
-		sel_541 0
-		sel_204 0
+		name {Narrator}
+		x -1
+		y -1
+		caller 0
+		disposeWhenDone 1
+		ticks 0
+		talkWidth 0
+		keepWindow 0
+		modeless 0
+		font 0
+		cueVal 0
+		initialized 0
+		showTitle 0
+		color 0
+		back 7
+		curVolume 0
+		saveCursor 0
 	)
 
-	(method (sel_110)
+	(method (init)
 		(if global83
-			(self sel_541: (gGame sel_404:))
-			(if (>= (gGame sel_404:) 4)
-				(gGame sel_404: (- sel_541 4))
+			(self curVolume: (gGame masterVolume:))
+			(if (>= (gGame masterVolume:) 4)
+				(gGame masterVolume: (- curVolume 4))
 			)
-			(if (not sel_203)
-				(= sel_204 (gGame sel_197: gWaitCursor 1))
+			(if (not modeless)
+				(= saveCursor (gGame setCursor: gWaitCursor 1))
 			)
 		)
-		(= sel_407 1)
+		(= initialized 1)
 	)
 
-	(method (sel_295 param1 param2 param3 param4 param5 param6 &tmp [temp0 4])
-		(gTheIconBar sel_233:)
+	(method (say param1 param2 param3 param4 param5 param6 &tmp [temp0 4])
+		(gTheIconBar disable:)
 		(if (and (> argc 5) param6)
-			(= sel_214 param6)
+			(= modNum param6)
 		else
-			(= sel_214 -1)
+			(= modNum -1)
 		)
-		(if (not sel_407)
-			(self sel_110:)
+		(if (not initialized)
+			(self init:)
 		)
-		(if (== sel_214 -1)
-			(= sel_214 gCurRoomNum)
+		(if (== modNum -1)
+			(= modNum gCurRoomNum)
 		)
-		(= sel_143 (if (and (> argc 4) param5) param5 else 0))
+		(= caller (if (and (> argc 4) param5) param5 else 0))
 		(if (& gMsgType $0002)
-			(self sel_544:)
+			(self startAudio:)
 		)
 		(if (& gMsgType $0001)
-			(self sel_542:)
+			(self startText:)
 		)
 		(cond
-			(sel_203
-				(gMouseDownHandler sel_129: self)
-				(gKeyDownHandler sel_129: self)
-				(gTheDoits sel_118: self)
+			(modeless
+				(gMouseDownHandler addToFront: self)
+				(gKeyDownHandler addToFront: self)
+				(gTheDoits add: self)
 			)
 			((IsObject gFastCast)
-				(gFastCast sel_118: self)
+				(gFastCast add: self)
 			)
 			(else
-				((= gFastCast (EventHandler sel_109:))
-					sel_20: {fastCast}
-					sel_118: self
+				((= gFastCast (EventHandler new:))
+					name: {fastCast}
+					add: self
 				)
 			)
 		)
-		(+= sel_139 (+ 60 gGameTime))
+		(+= ticks (+ 60 gGameTime))
 		(return 1)
 	)
 
-	(method (sel_542 &tmp [temp0 1000] temp1000)
+	(method (startText &tmp [temp0 1000] temp1000)
 		(Message msgNEXT @temp0)
 		(if (not (& gMsgType $0002))
-			(= sel_139 (Max 240 (* 8 (= temp1000 (StrLen @temp0)))))
+			(= ticks (Max 240 (* 8 (= temp1000 (StrLen @temp0)))))
 		)
 		(if gModelessDialog
-			(gModelessDialog sel_111:)
+			(gModelessDialog dispose:)
 		)
-		(self sel_543: @temp0)
+		(self display: @temp0)
 		(return temp1000)
 	)
 
-	(method (sel_543 param1 &tmp temp0 temp1)
-		(if (> (+ sel_1 sel_537) 318)
-			(= temp0 (- 318 sel_1))
+	(method (display param1 &tmp temp0 temp1)
+		(if (> (+ x talkWidth) 318)
+			(= temp0 (- 318 x))
 		else
-			(= temp0 sel_537)
+			(= temp0 talkWidth)
 		)
-		((= temp1 (gSystemWindow sel_109:)) sel_25: sel_25 sel_26: sel_26)
+		((= temp1 (gSystemWindow new:)) color: color back: back)
 		(if (and (not (HaveMouse)) (!= gTheCursor 996))
-			(= sel_204 gTheCursor)
-			(gGame sel_197: 996)
+			(= saveCursor gTheCursor)
+			(gGame setCursor: 996)
 		else
-			(= sel_204 0)
+			(= saveCursor 0)
 		)
 		(Print
-			sel_32: temp1
-			sel_153: sel_1 sel_0
-			sel_30: sel_30
-			sel_67: temp0
-			sel_77: (if sel_540 sel_20 else 0)
-			sel_198: param1
-			sel_203: 1
-			sel_110:
+			window: temp1
+			posn: x y
+			font: font
+			width: temp0
+			title: (if showTitle name else 0)
+			addText: param1
+			modeless: 1
+			init:
 		)
 	)
 
-	(method (sel_544))
+	(method (startAudio))
 
-	(method (sel_57)
+	(method (doit)
 		(if
 			(and
-				(!= sel_139 -1)
-				(> (- gGameTime sel_139) 0)
+				(!= ticks -1)
+				(> (- gGameTime ticks) 0)
 				(if global83
 					(== (DoAudio audPOSITION) -1)
 				else
 					1
 				)
-				(not sel_538)
+				(not keepWindow)
 			)
-			(self sel_111: sel_291)
+			(self dispose: disposeWhenDone)
 			(return 0)
 		)
 		(return 1)
 	)
 
-	(method (sel_133 param1)
+	(method (handleEvent param1)
 		(cond
-			((param1 sel_73:))
-			((== sel_139 -1)
+			((param1 claimed:))
+			((== ticks -1)
 				(return 0)
 			)
 			(else
-				(switch (param1 sel_31:)
+				(switch (param1 type:)
 					(256
-						(= sel_539 0)
+						(= cueVal 0)
 					)
 					(1
-						(= sel_539 (& (param1 sel_61:) $0003))
+						(= cueVal (& (param1 modifiers:) $0003))
 					)
 					(4
-						(= sel_539 (== (param1 sel_37:) 27))
+						(= cueVal (== (param1 message:) 27))
 					)
 				)
 				(if
 					(or
-						(& (param1 sel_31:) $4101)
+						(& (param1 type:) $4101)
 						(and
-							(& (param1 sel_31:) $0004)
-							(OneOf (param1 sel_37:) 13 27)
+							(& (param1 type:) $0004)
+							(OneOf (param1 message:) 13 27)
 						)
 					)
-					(param1 sel_73: 1)
-					(self sel_111: sel_291)
+					(param1 claimed: 1)
+					(self dispose: disposeWhenDone)
 				)
 			)
 		)
 	)
 
-	(method (sel_111 param1)
-		(= sel_139 -1)
+	(method (dispose param1)
+		(= ticks -1)
 		(if (or (not argc) param1)
 			(cond
-				(sel_203
-					(gKeyDownHandler sel_81: self)
-					(gMouseDownHandler sel_81: self)
-					(gTheDoits sel_81: self)
+				(modeless
+					(gKeyDownHandler delete: self)
+					(gMouseDownHandler delete: self)
+					(gTheDoits delete: self)
 				)
-				((and gFastCast (gFastCast sel_122: self))
-					(gFastCast sel_81: self)
-					(if (gFastCast sel_123:)
-						(gFastCast sel_111:)
+				((and gFastCast (gFastCast contains: self))
+					(gFastCast delete: self)
+					(if (gFastCast isEmpty:)
+						(gFastCast dispose:)
 						(= gFastCast 0)
 					)
 				)
@@ -275,20 +275,20 @@
 			(if global83
 				(DoAudio audSTOP)
 			)
-			(= sel_214 -1)
-			(= sel_407 0)
+			(= modNum -1)
+			(= initialized 0)
 		)
 		(if gModelessDialog
-			(gModelessDialog sel_111:)
+			(gModelessDialog dispose:)
 		)
 		(if global83
-			(gGame sel_404: sel_541)
+			(gGame masterVolume: curVolume)
 		)
-		(if (and sel_204 (not (HaveMouse)))
-			(gGame sel_197: sel_204)
+		(if (and saveCursor (not (HaveMouse)))
+			(gGame setCursor: saveCursor)
 		)
-		(if sel_143
-			(sel_143 sel_145: sel_539)
+		(if caller
+			(caller cue: cueVal)
 		)
 		(DisposeClone self)
 	)
@@ -296,119 +296,119 @@
 
 (class Talker of Narrator
 	(properties
-		sel_20 {Talker}
-		sel_537 318
-		sel_545 0
-		sel_546 0
-		sel_547 0
-		sel_548 0
-		sel_549 0
-		sel_550 0
-		sel_551 0
-		sel_552 100
+		name {Talker}
+		talkWidth 318
+		bust 0
+		eyes 0
+		mouth 0
+		viewInPrint 0
+		textX 0
+		textY 0
+		useFrame 0
+		blinkSpeed 100
 	)
 
-	(method (sel_110 param1 param2 param3)
+	(method (init param1 param2 param3)
 		(if argc
-			(= sel_545 param1)
+			(= bust param1)
 			(if (>= argc 2)
-				(= sel_546 param2)
+				(= eyes param2)
 				(if (>= argc 3)
-					(= sel_547 param3)
+					(= mouth param3)
 				)
 			)
 		)
-		(self sel_180:)
-		(super sel_110:)
+		(self setSize:)
+		(super init:)
 	)
 
-	(method (sel_180)
-		(= sel_7 sel_1)
-		(= sel_6 sel_0)
-		(= sel_9
+	(method (setSize)
+		(= nsLeft x)
+		(= nsTop y)
+		(= nsRight
 			(+
-				sel_7
+				nsLeft
 				(Max
-					(if sel_2
-						(CelWide sel_2 sel_3 sel_4)
+					(if view
+						(CelWide view loop cel)
 					else
 						0
 					)
 					(and
-						(IsObject sel_545)
+						(IsObject bust)
 						(+
-							(sel_545 sel_7:)
+							(bust nsLeft:)
 							(CelWide
-								(sel_545 sel_2:)
-								(sel_545 sel_3:)
-								(sel_545 sel_4:)
+								(bust view:)
+								(bust loop:)
+								(bust cel:)
 							)
 						)
 					)
 					(and
-						(IsObject sel_546)
+						(IsObject eyes)
 						(+
-							(sel_546 sel_7:)
+							(eyes nsLeft:)
 							(CelWide
-								(sel_546 sel_2:)
-								(sel_546 sel_3:)
-								(sel_546 sel_4:)
+								(eyes view:)
+								(eyes loop:)
+								(eyes cel:)
 							)
 						)
 					)
 					(and
-						(IsObject sel_547)
+						(IsObject mouth)
 						(+
-							(sel_547 sel_7:)
+							(mouth nsLeft:)
 							(CelWide
-								(sel_547 sel_2:)
-								(sel_547 sel_3:)
-								(sel_547 sel_4:)
+								(mouth view:)
+								(mouth loop:)
+								(mouth cel:)
 							)
 						)
 					)
 				)
 			)
 		)
-		(= sel_8
+		(= nsBottom
 			(+
-				sel_6
+				nsTop
 				(Max
-					(if sel_2
-						(CelHigh sel_2 sel_3 sel_4)
+					(if view
+						(CelHigh view loop cel)
 					else
 						0
 					)
 					(and
-						(IsObject sel_545)
+						(IsObject bust)
 						(+
-							(sel_545 sel_6:)
+							(bust nsTop:)
 							(CelHigh
-								(sel_545 sel_2:)
-								(sel_545 sel_3:)
-								(sel_545 sel_4:)
+								(bust view:)
+								(bust loop:)
+								(bust cel:)
 							)
 						)
 					)
 					(and
-						(IsObject sel_546)
+						(IsObject eyes)
 						(+
-							(sel_546 sel_6:)
+							(eyes nsTop:)
 							(CelHigh
-								(sel_546 sel_2:)
-								(sel_546 sel_3:)
-								(sel_546 sel_4:)
+								(eyes view:)
+								(eyes loop:)
+								(eyes cel:)
 							)
 						)
 					)
 					(and
-						(IsObject sel_547)
+						(IsObject mouth)
 						(+
-							(sel_547 sel_6:)
+							(mouth nsTop:)
 							(CelHigh
-								(sel_547 sel_2:)
-								(sel_547 sel_3:)
-								(sel_547 sel_4:)
+								(mouth view:)
+								(mouth loop:)
+								(mouth cel:)
 							)
 						)
 					)
@@ -417,222 +417,222 @@
 		)
 	)
 
-	(method (sel_216 &tmp temp0)
-		(if (not sel_5)
-			(= sel_5 (Graph grSAVE_BOX sel_6 sel_7 sel_8 sel_9 1))
+	(method (show &tmp temp0)
+		(if (not underBits)
+			(= underBits (Graph grSAVE_BOX nsTop nsLeft nsBottom nsRight 1))
 		)
 		(= temp0 (PicNotValid))
 		(PicNotValid 1)
-		(if sel_545
+		(if bust
 			(DrawCel
-				(sel_545 sel_2:)
-				(sel_545 sel_3:)
-				(sel_545 sel_4:)
-				(+ (sel_545 sel_7:) sel_7)
-				(+ (sel_545 sel_6:) sel_6)
+				(bust view:)
+				(bust loop:)
+				(bust cel:)
+				(+ (bust nsLeft:) nsLeft)
+				(+ (bust nsTop:) nsTop)
 				-1
 			)
 		)
-		(if sel_546
+		(if eyes
 			(DrawCel
-				(sel_546 sel_2:)
-				(sel_546 sel_3:)
-				(sel_546 sel_4:)
-				(+ (sel_546 sel_7:) sel_7)
-				(+ (sel_546 sel_6:) sel_6)
+				(eyes view:)
+				(eyes loop:)
+				(eyes cel:)
+				(+ (eyes nsLeft:) nsLeft)
+				(+ (eyes nsTop:) nsTop)
 				-1
 			)
 		)
-		(if sel_547
+		(if mouth
 			(DrawCel
-				(sel_547 sel_2:)
-				(sel_547 sel_3:)
-				(sel_547 sel_4:)
-				(+ (sel_547 sel_7:) sel_7)
-				(+ (sel_547 sel_6:) sel_6)
+				(mouth view:)
+				(mouth loop:)
+				(mouth cel:)
+				(+ (mouth nsLeft:) nsLeft)
+				(+ (mouth nsTop:) nsTop)
 				-1
 			)
 		)
-		(DrawCel sel_2 sel_3 sel_4 sel_7 sel_6 -1)
-		(Graph grUPDATE_BOX sel_6 sel_7 sel_8 sel_9 1)
+		(DrawCel view loop cel nsLeft nsTop -1)
+		(Graph grUPDATE_BOX nsTop nsLeft nsBottom nsRight 1)
 		(PicNotValid temp0)
 	)
 
-	(method (sel_295)
-		(if (or (== sel_214 -1) (and (> sel_2 0) (not sel_5)))
-			(self sel_110:)
-			(if (== sel_214 -1)
-				(= sel_214 gCurRoomNum)
+	(method (say)
+		(if (or (== modNum -1) (and (> view 0) (not underBits)))
+			(self init:)
+			(if (== modNum -1)
+				(= modNum gCurRoomNum)
 			)
 		)
-		(super sel_295: &rest)
+		(super say: &rest)
 	)
 
-	(method (sel_542 &tmp temp0)
-		(if (not sel_548)
-			(self sel_216:)
+	(method (startText &tmp temp0)
+		(if (not viewInPrint)
+			(self show:)
 		)
-		(= temp0 (super sel_542: &rest))
-		(if sel_547
-			(sel_547 sel_161: RTRandCycle (* 4 temp0))
+		(= temp0 (super startText: &rest))
+		(if mouth
+			(mouth setCycle: RTRandCycle (* 4 temp0))
 		)
-		(if (and sel_546 (not (sel_546 sel_245:)))
-			(sel_546 sel_161: Blink sel_552)
+		(if (and eyes (not (eyes cycler:)))
+			(eyes setCycle: Blink blinkSpeed)
 		)
 	)
 
-	(method (sel_543 param1 &tmp temp0 temp1 temp2 temp3)
-		((= temp3 (gSystemWindow sel_109:)) sel_25: sel_25 sel_26: sel_26)
+	(method (display param1 &tmp temp0 temp1 temp2 temp3)
+		((= temp3 (gSystemWindow new:)) color: color back: back)
 		(if (and (not (HaveMouse)) (!= gTheCursor 996))
-			(= sel_204 gTheCursor)
-			(gGame sel_197: 996)
+			(= saveCursor gTheCursor)
+			(gGame setCursor: 996)
 		else
-			(= sel_204 0)
+			(= saveCursor 0)
 		)
-		(if sel_548
+		(if viewInPrint
 			(= temp0
-				(if sel_551
-					sel_3
+				(if useFrame
+					loop
 				else
-					(sel_545 sel_3:)
+					(bust loop:)
 				)
 			)
 			(Print
-				sel_32: temp3
-				sel_153: sel_1 sel_0
-				sel_203: 1
-				sel_30: sel_30
-				sel_67: temp1
-				sel_77: (if sel_540 sel_20 else 0)
-				sel_198: param1
-				sel_206: sel_2 temp0 sel_4 0 0
-				sel_110:
+				window: temp3
+				posn: x y
+				modeless: 1
+				font: font
+				width: temp1
+				title: (if showTitle name else 0)
+				addText: param1
+				addIcon: view temp0 cel 0 0
+				init:
 			)
 		else
-			(if (not (+ sel_549 sel_550))
-				(= sel_549 (+ (- sel_9 sel_7) 5))
+			(if (not (+ textX textY))
+				(= textX (+ (- nsRight nsLeft) 5))
 			)
-			(if (> (+ (= temp2 (+ sel_7 sel_549)) sel_537) 318)
+			(if (> (+ (= temp2 (+ nsLeft textX)) talkWidth) 318)
 				(= temp1 (- 318 temp2))
 			else
-				(= temp1 sel_537)
+				(= temp1 talkWidth)
 			)
 			(Print
-				sel_32: temp3
-				sel_153: (+ sel_1 sel_549) (+ sel_0 sel_550)
-				sel_203: 1
-				sel_30: sel_30
-				sel_67: temp1
-				sel_77: (if sel_540 sel_20 else 0)
-				sel_198: param1
-				sel_110:
+				window: temp3
+				posn: (+ x textX) (+ y textY)
+				modeless: 1
+				font: font
+				width: temp1
+				title: (if showTitle name else 0)
+				addText: param1
+				init:
 			)
 		)
 	)
 
-	(method (sel_544 param1)
-		(self sel_216:)
-		(super sel_544: param1 &rest)
-		(if (and sel_546 (not (sel_546 sel_245:)))
-			(sel_546 sel_161: Blink sel_552)
+	(method (startAudio param1)
+		(self show:)
+		(super startAudio: param1 &rest)
+		(if (and eyes (not (eyes cycler:)))
+			(eyes setCycle: Blink blinkSpeed)
 		)
 	)
 
-	(method (sel_186 param1 &tmp temp0 [temp1 100])
-		(if (and param1 (param1 sel_245:))
-			(= temp0 (param1 sel_4:))
-			((param1 sel_245:) sel_57:)
-			(if (!= temp0 (param1 sel_4:))
+	(method (cycle param1 &tmp temp0 [temp1 100])
+		(if (and param1 (param1 cycler:))
+			(= temp0 (param1 cel:))
+			((param1 cycler:) doit:)
+			(if (!= temp0 (param1 cel:))
 				(DrawCel
-					(param1 sel_2:)
-					(param1 sel_3:)
-					(param1 sel_4:)
-					(+ (param1 sel_7:) sel_7)
-					(+ (param1 sel_6:) sel_6)
+					(param1 view:)
+					(param1 loop:)
+					(param1 cel:)
+					(+ (param1 nsLeft:) nsLeft)
+					(+ (param1 nsTop:) nsTop)
 					-1
 				)
 				(param1
-					sel_9:
+					nsRight:
 						(+
-							(param1 sel_7:)
+							(param1 nsLeft:)
 							(CelWide
-								(param1 sel_2:)
-								(param1 sel_3:)
-								(param1 sel_4:)
+								(param1 view:)
+								(param1 loop:)
+								(param1 cel:)
 							)
 						)
 				)
 				(param1
-					sel_8:
+					nsBottom:
 						(+
-							(param1 sel_6:)
+							(param1 nsTop:)
 							(CelHigh
-								(param1 sel_2:)
-								(param1 sel_3:)
-								(param1 sel_4:)
+								(param1 view:)
+								(param1 loop:)
+								(param1 cel:)
 							)
 						)
 				)
 				(Graph
 					grUPDATE_BOX
-					(+ (param1 sel_6:) sel_6)
-					(+ (param1 sel_7:) sel_7)
-					(+ (param1 sel_8:) sel_6)
-					(+ (param1 sel_9:) sel_7)
+					(+ (param1 nsTop:) nsTop)
+					(+ (param1 nsLeft:) nsLeft)
+					(+ (param1 nsBottom:) nsTop)
+					(+ (param1 nsRight:) nsLeft)
 					1
 				)
 			)
 		)
 	)
 
-	(method (sel_57)
-		(if (and (super sel_57:) sel_547)
-			(self sel_186: sel_547)
+	(method (doit)
+		(if (and (super doit:) mouth)
+			(self cycle: mouth)
 		)
-		(if sel_546
-			(self sel_186: sel_546)
+		(if eyes
+			(self cycle: eyes)
 		)
 	)
 
-	(method (sel_102)
-		(Graph grRESTORE_BOX sel_5)
-		(= sel_5 0)
-		(Graph grREDRAW_BOX sel_6 sel_7 sel_8 sel_9)
-		(gTheIconBar sel_177:)
+	(method (hide)
+		(Graph grRESTORE_BOX underBits)
+		(= underBits 0)
+		(Graph grREDRAW_BOX nsTop nsLeft nsBottom nsRight)
+		(gTheIconBar enable:)
 	)
 
-	(method (sel_111 param1)
-		(if (and sel_547 sel_5)
-			(sel_547 sel_4: 0)
+	(method (dispose param1)
+		(if (and mouth underBits)
+			(mouth cel: 0)
 			(DrawCel
-				(sel_547 sel_2:)
-				(sel_547 sel_3:)
+				(mouth view:)
+				(mouth loop:)
 				0
-				(+ (sel_547 sel_7:) sel_7)
-				(+ (sel_547 sel_6:) sel_6)
+				(+ (mouth nsLeft:) nsLeft)
+				(+ (mouth nsTop:) nsTop)
 				-1
 			)
 		)
-		(if (and sel_547 (sel_547 sel_245:))
-			(if ((sel_547 sel_245:) sel_116: 145)
-				((sel_547 sel_245:) sel_145:)
+		(if (and mouth (mouth cycler:))
+			(if ((mouth cycler:) respondsTo: 145)
+				((mouth cycler:) cue:)
 			)
-			(sel_547 sel_161: 0)
+			(mouth setCycle: 0)
 		)
 		(if (or (not argc) param1)
-			(if (and sel_546 sel_5)
-				(sel_546 sel_161: 0 sel_4: 0)
+			(if (and eyes underBits)
+				(eyes setCycle: 0 cel: 0)
 				(DrawCel
-					(sel_546 sel_2:)
-					(sel_546 sel_3:)
+					(eyes view:)
+					(eyes loop:)
 					0
-					(+ (sel_546 sel_7:) sel_7)
-					(+ (sel_546 sel_6:) sel_6)
+					(+ (eyes nsLeft:) nsLeft)
+					(+ (eyes nsTop:) nsTop)
 					-1
 				)
 			)
-			(self sel_102:)
+			(self hide:)
 		)
-		(super sel_111: param1)
+		(super dispose: param1)
 	)
 )

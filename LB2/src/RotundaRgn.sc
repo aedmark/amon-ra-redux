@@ -28,14 +28,14 @@
 
 (class RotundaRgn of Rgn
 	(properties
-		sel_20 {RotundaRgn}
-		sel_667 0
-		sel_668 0
+		name {RotundaRgn}
+		convRoom 0
+		convReturn 0
 	)
 
-	(method (sel_110)
-		(super sel_110:)
-		(= sel_667
+	(method (init)
+		(super init:)
+		(= convRoom
 			(switch global128
 				(0 350)
 				(1 350)
@@ -53,62 +53,62 @@
 				(13 350)
 			)
 		)
-		(Countess sel_305: 20 sel_311: 2 6)
-		(Heimlich sel_305: 20 sel_311: 2 6)
-		(Olympia sel_305: 20 sel_311: 2 6)
-		(O_Riley sel_305: 20 sel_311: 2 6)
-		(Pippin sel_305: 20 sel_311: 2 6)
-		(Rameses sel_305: 20 sel_311: 2 6)
-		(Steve sel_305: 20 sel_311: 2 6)
-		(Tut sel_305: 20 sel_311: 2 6)
-		(Watney sel_305: 20 sel_311: 2 6)
-		(Yvette sel_305: 20 sel_311: 2 6)
-		(Ziggy sel_305: 20 sel_311: 2 6)
+		(Countess approachDist: 20 approachVerbs: 2 6)
+		(Heimlich approachDist: 20 approachVerbs: 2 6)
+		(Olympia approachDist: 20 approachVerbs: 2 6)
+		(O_Riley approachDist: 20 approachVerbs: 2 6)
+		(Pippin approachDist: 20 approachVerbs: 2 6)
+		(Rameses approachDist: 20 approachVerbs: 2 6)
+		(Steve approachDist: 20 approachVerbs: 2 6)
+		(Tut approachDist: 20 approachVerbs: 2 6)
+		(Watney approachDist: 20 approachVerbs: 2 6)
+		(Yvette approachDist: 20 approachVerbs: 2 6)
+		(Ziggy approachDist: 20 approachVerbs: 2 6)
 	)
 
-	(method (sel_399 param1)
-		(= sel_406 (OneOf param1 335 340 350 355 360 370 400))
-		(= sel_407 0)
+	(method (newRoom param1)
+		(= keep (OneOf param1 335 340 350 355 360 370 400))
+		(= initialized 0)
 		(cond
 			((not (== gAct 2)))
 			((OneOf param1 335 400 420)
-				(gGameMusic1 sel_170: 50 5 5 0)
+				(gGameMusic1 fade: 50 5 5 0)
 			)
 			((== param1 340)
-				(gGameMusic1 sel_170: 100 5 5 0)
+				(gGameMusic1 fade: 100 5 5 0)
 			)
 		)
 		(if (and (& $7204 gMustDos) (not (IsFlag 71)) (== param1 360))
 			(SetFlag 71)
 		)
-		(super sel_399: param1)
+		(super newRoom: param1)
 	)
 
-	(method (sel_403)
-		(= sel_668 gCurRoomNum)
-		(gCurRoom sel_399: 340)
+	(method (notify)
+		(= convReturn gCurRoomNum)
+		(gCurRoom newRoom: 340)
 	)
 )
 
 (instance Countess of Actor
 	(properties
-		sel_20 {Countess}
-		sel_213 1
-		sel_214 1884
-		sel_2 813
-		sel_14 16384
+		name {Countess}
+		noun 1
+		modNum 1884
+		view 813
+		signal 16384
 	)
 
-	(method (sel_300 param1 param2 &tmp temp0 temp1 temp2)
+	(method (doVerb param1 param2 &tmp temp0 temp1 temp2)
 		(if (OneOf param1 1 2)
-			((ScriptID 21 0) sel_57: 269) ; addCluesCode
+			((ScriptID 21 0) doit: 269) ; addCluesCode
 		)
 		(cond
 			((== param1 2)
 				(if (not (SetFlag 112))
-					(gMessager sel_295: sel_213 param1 80 0 0 sel_214)
+					(gMessager say: noun param1 80 0 0 modNum)
 				else
-					(super sel_300: param1)
+					(super doVerb: param1)
 				)
 			)
 			((OneOf param1 6 14)
@@ -118,7 +118,7 @@
 							(if (== argc 2)
 								param2
 							else
-								(gCurRoom sel_422: (ScriptID 20 0)) ; inNotebook
+								(gCurRoom setInset: (ScriptID 20 0)) ; inNotebook
 							)
 						)
 						-1
@@ -143,20 +143,20 @@
 					)
 				)
 				(cond
-					((not (Message msgGET sel_214 sel_213 6 temp1 1))
-						(gMessager sel_295: sel_213 6 81 0 0 sel_214)
+					((not (Message msgGET modNum noun 6 temp1 1))
+						(gMessager say: noun 6 81 0 0 modNum)
 					)
 					((proc27_0 0 [global296 (- temp1 2)])
-						(gMessager sel_295: sel_213 6 1 0 0 sel_214)
+						(gMessager say: noun 6 1 0 0 modNum)
 					)
 					(else
-						(gMessager sel_295: sel_213 6 temp1 0 0 sel_214)
+						(gMessager say: noun 6 temp1 0 0 modNum)
 						(proc27_1 0 @[global296 (- temp1 2)])
 					)
 				)
 			)
 			(else
-				(super sel_300: param1)
+				(super doVerb: param1)
 			)
 		)
 	)
@@ -164,16 +164,16 @@
 
 (instance Heimlich of Actor
 	(properties
-		sel_20 {Heimlich}
-		sel_213 1
-		sel_214 1889
-		sel_2 814
-		sel_14 16384
+		name {Heimlich}
+		noun 1
+		modNum 1889
+		view 814
+		signal 16384
 	)
 
-	(method (sel_300 param1 param2 &tmp temp0 temp1 temp2)
+	(method (doVerb param1 param2 &tmp temp0 temp1 temp2)
 		(if (OneOf param1 1 2)
-			((ScriptID 21 0) sel_57: 265) ; addCluesCode
+			((ScriptID 21 0) doit: 265) ; addCluesCode
 		)
 		(if (OneOf param1 6 14)
 			(if
@@ -182,7 +182,7 @@
 						(if (== argc 2)
 							param2
 						else
-							(gCurRoom sel_422: (ScriptID 20 0)) ; inNotebook
+							(gCurRoom setInset: (ScriptID 20 0)) ; inNotebook
 						)
 					)
 					-1
@@ -207,35 +207,35 @@
 				)
 			)
 			(cond
-				((not (Message msgGET sel_214 sel_213 6 temp1 1))
-					(gMessager sel_295: sel_213 6 81 0 0 sel_214)
+				((not (Message msgGET modNum noun 6 temp1 1))
+					(gMessager say: noun 6 81 0 0 modNum)
 				)
 				((proc27_0 2 [global296 (- temp1 2)])
-					(gMessager sel_295: sel_213 6 1 0 0 sel_214)
+					(gMessager say: noun 6 1 0 0 modNum)
 				)
 				(else
-					(gMessager sel_295: sel_213 6 temp1 0 0 sel_214)
+					(gMessager say: noun 6 temp1 0 0 modNum)
 					(proc27_1 2 @[global296 (- temp1 2)])
 				)
 			)
 		else
-			(super sel_300: param1)
+			(super doVerb: param1)
 		)
 	)
 )
 
 (instance Olympia of Actor
 	(properties
-		sel_20 {Olympia}
-		sel_213 1
-		sel_214 1892
-		sel_2 820
-		sel_14 16384
+		name {Olympia}
+		noun 1
+		modNum 1892
+		view 820
+		signal 16384
 	)
 
-	(method (sel_300 param1 param2 &tmp temp0 temp1 temp2)
+	(method (doVerb param1 param2 &tmp temp0 temp1 temp2)
 		(if (OneOf param1 1 2)
-			((ScriptID 21 0) sel_57: 270) ; addCluesCode
+			((ScriptID 21 0) doit: 270) ; addCluesCode
 		)
 		(if (OneOf param1 6 14)
 			(if
@@ -244,7 +244,7 @@
 						(if (== argc 2)
 							param2
 						else
-							(gCurRoom sel_422: (ScriptID 20 0)) ; inNotebook
+							(gCurRoom setInset: (ScriptID 20 0)) ; inNotebook
 						)
 					)
 					-1
@@ -269,49 +269,49 @@
 				)
 			)
 			(cond
-				((not (Message msgGET sel_214 sel_213 6 temp1 1))
-					(gMessager sel_295: sel_213 6 81 0 0 sel_214)
+				((not (Message msgGET modNum noun 6 temp1 1))
+					(gMessager say: noun 6 81 0 0 modNum)
 				)
 				((proc27_0 3 [global296 (- temp1 2)])
-					(gMessager sel_295: sel_213 6 1 0 0 sel_214)
+					(gMessager say: noun 6 1 0 0 modNum)
 				)
 				(else
-					(gMessager sel_295: sel_213 6 temp1 0 0 sel_214)
+					(gMessager say: noun 6 temp1 0 0 modNum)
 					(proc27_1 3 @[global296 (- temp1 2)])
 				)
 			)
 		else
-			(super sel_300: param1)
+			(super doVerb: param1)
 		)
 	)
 )
 
 (instance O_Riley of Actor
 	(properties
-		sel_20 {O'Riley}
-		sel_213 1
-		sel_214 1888
-		sel_2 819
-		sel_14 16384
+		name {O'Riley}
+		noun 1
+		modNum 1888
+		view 819
+		signal 16384
 	)
 
-	(method (sel_300 param1 param2 &tmp temp0 temp1 temp2)
+	(method (doVerb param1 param2 &tmp temp0 temp1 temp2)
 		(if (OneOf param1 1 2)
-			((ScriptID 21 0) sel_57: 260) ; addCluesCode
+			((ScriptID 21 0) doit: 260) ; addCluesCode
 		)
 		(if (== param1 22)
-			(super sel_300: param1)
-			(if (gEgo sel_238: 11)
-				(gEgo sel_351: 11)
+			(super doVerb: param1)
+			(if (gEgo has: 11)
+				(gEgo put: 11)
 			)
 			(return)
 		)
 		(cond
 			((== param1 2)
 				(if (not (SetFlag 114))
-					(gMessager sel_295: sel_213 param1 80 0 0 sel_214)
+					(gMessager say: noun param1 80 0 0 modNum)
 				else
-					(super sel_300: param1)
+					(super doVerb: param1)
 				)
 			)
 			((OneOf param1 6 14)
@@ -321,7 +321,7 @@
 							(if (== argc 2)
 								param2
 							else
-								(gCurRoom sel_422: (ScriptID 20 0)) ; inNotebook
+								(gCurRoom setInset: (ScriptID 20 0)) ; inNotebook
 							)
 						)
 						-1
@@ -350,17 +350,17 @@
 						(cond
 							((IsFlag 134)
 								(if (proc27_0 4 global364)
-									(gMessager sel_295: sel_213 6 1 0 0 sel_214)
+									(gMessager say: noun 6 1 0 0 modNum)
 								else
-									(gMessager sel_295: sel_213 6 72 0 0 sel_214)
+									(gMessager say: noun 6 72 0 0 modNum)
 									(proc27_1 4 @global364)
 								)
 							)
 							((proc27_0 4 global297)
-								(gMessager sel_295: sel_213 6 1 0 0 sel_214)
+								(gMessager say: noun 6 1 0 0 modNum)
 							)
 							(else
-								(gMessager sel_295: sel_213 6 3 0 0 sel_214)
+								(gMessager say: noun 6 3 0 0 modNum)
 								(proc27_1 4 @global297)
 							)
 						)
@@ -369,17 +369,17 @@
 						(cond
 							((or (IsFlag 171) (IsFlag 12))
 								(if (proc27_0 4 global363)
-									(gMessager sel_295: sel_213 6 1 0 0 sel_214)
+									(gMessager say: noun 6 1 0 0 modNum)
 								else
-									(gMessager sel_295: sel_213 6 69 0 0 sel_214)
+									(gMessager say: noun 6 69 0 0 modNum)
 									(proc27_1 4 @global363)
 								)
 							)
 							((proc27_0 4 global298)
-								(gMessager sel_295: sel_213 6 1 0 0 sel_214)
+								(gMessager say: noun 6 1 0 0 modNum)
 							)
 							(else
-								(gMessager sel_295: sel_213 6 4 0 0 sel_214)
+								(gMessager say: noun 6 4 0 0 modNum)
 								(proc27_1 4 @global298)
 							)
 						)
@@ -388,17 +388,17 @@
 						(cond
 							((or (IsFlag 143) (IsFlag 72))
 								(if (proc27_0 4 global366)
-									(gMessager sel_295: sel_213 6 1 0 0 sel_214)
+									(gMessager say: noun 6 1 0 0 modNum)
 								else
-									(gMessager sel_295: sel_213 6 74 0 0 sel_214)
+									(gMessager say: noun 6 74 0 0 modNum)
 									(proc27_1 4 @global366)
 								)
 							)
 							((proc27_0 4 global303)
-								(gMessager sel_295: sel_213 6 1 0 0 sel_214)
+								(gMessager say: noun 6 1 0 0 modNum)
 							)
 							(else
-								(gMessager sel_295: sel_213 6 9 0 0 sel_214)
+								(gMessager say: noun 6 9 0 0 modNum)
 								(proc27_1 4 @global303)
 							)
 						)
@@ -407,17 +407,17 @@
 						(cond
 							((or (IsFlag 161) (IsFlag 68))
 								(if (proc27_0 4 global367)
-									(gMessager sel_295: sel_213 6 1 0 0 sel_214)
+									(gMessager say: noun 6 1 0 0 modNum)
 								else
-									(gMessager sel_295: sel_213 6 73 0 0 sel_214)
+									(gMessager say: noun 6 73 0 0 modNum)
 									(proc27_1 4 @global367)
 								)
 							)
 							((proc27_0 4 global305)
-								(gMessager sel_295: sel_213 6 1 0 0 sel_214)
+								(gMessager say: noun 6 1 0 0 modNum)
 							)
 							(else
-								(gMessager sel_295: sel_213 6 11 0 0 sel_214)
+								(gMessager say: noun 6 11 0 0 modNum)
 								(proc27_1 4 @global305)
 							)
 						)
@@ -426,17 +426,17 @@
 						(cond
 							((or (IsFlag 158) (IsFlag 67))
 								(if (proc27_0 4 global365)
-									(gMessager sel_295: sel_213 6 1 0 0 sel_214)
+									(gMessager say: noun 6 1 0 0 modNum)
 								else
-									(gMessager sel_295: sel_213 6 71 0 0 sel_214)
+									(gMessager say: noun 6 71 0 0 modNum)
 									(proc27_1 4 @global365)
 								)
 							)
 							((proc27_0 4 global306)
-								(gMessager sel_295: sel_213 6 1 0 0 sel_214)
+								(gMessager say: noun 6 1 0 0 modNum)
 							)
 							(else
-								(gMessager sel_295: sel_213 6 12 0 0 sel_214)
+								(gMessager say: noun 6 12 0 0 modNum)
 								(proc27_1 4 @global306)
 							)
 						)
@@ -447,34 +447,34 @@
 								(or
 									(IsFlag 155)
 									(IsFlag 22)
-									(gEgo sel_238: 11)
+									(gEgo has: 11)
 								)
 								(if (proc27_0 4 global368)
-									(gMessager sel_295: sel_213 6 1 0 0 sel_214)
+									(gMessager say: noun 6 1 0 0 modNum)
 								else
-									(gMessager sel_295: sel_213 6 75 0 0 sel_214)
+									(gMessager say: noun 6 75 0 0 modNum)
 									(proc27_1 4 @global368)
 								)
 							)
 							((proc27_0 4 global332)
-								(gMessager sel_295: sel_213 6 1 0 0 sel_214)
+								(gMessager say: noun 6 1 0 0 modNum)
 							)
 							(else
-								(gMessager sel_295: sel_213 6 38 0 0 sel_214)
+								(gMessager say: noun 6 38 0 0 modNum)
 								(proc27_1 4 @global332)
 							)
 						)
 					)
 					(else
 						(cond
-							((not (Message msgGET sel_214 sel_213 6 temp1 1))
-								(gMessager sel_295: sel_213 6 81 0 0 sel_214)
+							((not (Message msgGET modNum noun 6 temp1 1))
+								(gMessager say: noun 6 81 0 0 modNum)
 							)
 							((proc27_0 4 [global296 (- temp1 2)])
-								(gMessager sel_295: sel_213 6 1 0 0 sel_214)
+								(gMessager say: noun 6 1 0 0 modNum)
 							)
 							(else
-								(gMessager sel_295: sel_213 6 temp1 0 0 sel_214)
+								(gMessager say: noun 6 temp1 0 0 modNum)
 								(proc27_1 4 @[global296 (- temp1 2)])
 							)
 						)
@@ -482,7 +482,7 @@
 				)
 			)
 			(else
-				(super sel_300: param1)
+				(super doVerb: param1)
 			)
 		)
 	)
@@ -490,23 +490,23 @@
 
 (instance Pippin of Actor
 	(properties
-		sel_20 {Pippin}
-		sel_213 1
-		sel_214 1882
-		sel_2 822
-		sel_14 16384
+		name {Pippin}
+		noun 1
+		modNum 1882
+		view 822
+		signal 16384
 	)
 
-	(method (sel_300 param1 param2 &tmp temp0 temp1 temp2)
+	(method (doVerb param1 param2 &tmp temp0 temp1 temp2)
 		(if (OneOf param1 1 2)
-			((ScriptID 21 0) sel_57: 258) ; addCluesCode
+			((ScriptID 21 0) doit: 258) ; addCluesCode
 		)
 		(cond
 			((== param1 2)
 				(if (not (SetFlag 110))
-					(gMessager sel_295: sel_213 param1 80 0 0 sel_214)
+					(gMessager say: noun param1 80 0 0 modNum)
 				else
-					(super sel_300: param1)
+					(super doVerb: param1)
 				)
 			)
 			((OneOf param1 6 14)
@@ -516,7 +516,7 @@
 							(if (== argc 2)
 								param2
 							else
-								(gCurRoom sel_422: (ScriptID 20 0)) ; inNotebook
+								(gCurRoom setInset: (ScriptID 20 0)) ; inNotebook
 							)
 						)
 						-1
@@ -541,20 +541,20 @@
 					)
 				)
 				(cond
-					((not (Message msgGET sel_214 sel_213 6 temp1 1))
-						(gMessager sel_295: sel_213 6 81 0 0 sel_214)
+					((not (Message msgGET modNum noun 6 temp1 1))
+						(gMessager say: noun 6 81 0 0 modNum)
 					)
 					((proc27_0 5 [global296 (- temp1 2)])
-						(gMessager sel_295: sel_213 6 1 0 0 sel_214)
+						(gMessager say: noun 6 1 0 0 modNum)
 					)
 					(else
-						(gMessager sel_295: sel_213 6 temp1 0 0 sel_214)
+						(gMessager say: noun 6 temp1 0 0 modNum)
 						(proc27_1 5 @[global296 (- temp1 2)])
 					)
 				)
 			)
 			(else
-				(super sel_300: param1)
+				(super doVerb: param1)
 			)
 		)
 	)
@@ -562,23 +562,23 @@
 
 (instance Rameses of Actor
 	(properties
-		sel_20 {Rameses}
-		sel_213 1
-		sel_214 1891
-		sel_2 823
-		sel_14 16384
+		name {Rameses}
+		noun 1
+		modNum 1891
+		view 823
+		signal 16384
 	)
 
-	(method (sel_300 param1 param2 &tmp temp0 temp1 temp2)
+	(method (doVerb param1 param2 &tmp temp0 temp1 temp2)
 		(if (OneOf param1 1 2)
-			((ScriptID 21 0) sel_57: 268) ; addCluesCode
+			((ScriptID 21 0) doit: 268) ; addCluesCode
 		)
 		(cond
 			((== param1 2)
 				(if (not (SetFlag 115))
-					(gMessager sel_295: sel_213 param1 80 0 0 sel_214)
+					(gMessager say: noun param1 80 0 0 modNum)
 				else
-					(super sel_300: param1)
+					(super doVerb: param1)
 				)
 			)
 			((OneOf param1 6 14)
@@ -588,7 +588,7 @@
 							(if (== argc 2)
 								param2
 							else
-								(gCurRoom sel_422: (ScriptID 20 0)) ; inNotebook
+								(gCurRoom setInset: (ScriptID 20 0)) ; inNotebook
 							)
 						)
 						-1
@@ -613,20 +613,20 @@
 					)
 				)
 				(cond
-					((not (Message msgGET sel_214 sel_213 6 temp1 1))
-						(gMessager sel_295: sel_213 6 81 0 0 sel_214)
+					((not (Message msgGET modNum noun 6 temp1 1))
+						(gMessager say: noun 6 81 0 0 modNum)
 					)
 					((proc27_0 6 [global296 (- temp1 2)])
-						(gMessager sel_295: sel_213 6 1 0 0 sel_214)
+						(gMessager say: noun 6 1 0 0 modNum)
 					)
 					(else
-						(gMessager sel_295: sel_213 6 temp1 0 0 sel_214)
+						(gMessager say: noun 6 temp1 0 0 modNum)
 						(proc27_1 6 @[global296 (- temp1 2)])
 					)
 				)
 			)
 			(else
-				(super sel_300: param1)
+				(super doVerb: param1)
 			)
 		)
 	)
@@ -634,17 +634,17 @@
 
 (instance Steve of Actor
 	(properties
-		sel_20 {Steve}
-		sel_213 1
-		sel_214 1887
-		sel_2 812
-		sel_14 16384
-		sel_103 1
+		name {Steve}
+		noun 1
+		modNum 1887
+		view 812
+		signal 16384
+		scaleSignal 1
 	)
 
-	(method (sel_300 param1 param2 &tmp temp0 temp1 temp2)
+	(method (doVerb param1 param2 &tmp temp0 temp1 temp2)
 		(if (OneOf param1 1 2)
-			((ScriptID 21 0) sel_57: 263) ; addCluesCode
+			((ScriptID 21 0) doit: 263) ; addCluesCode
 		)
 		(if (== param1 6)
 			(if
@@ -653,7 +653,7 @@
 						(if (== argc 2)
 							param2
 						else
-							(gCurRoom sel_422: (ScriptID 20 0)) ; inNotebook
+							(gCurRoom setInset: (ScriptID 20 0)) ; inNotebook
 						)
 					)
 					-1
@@ -678,42 +678,42 @@
 				)
 			)
 			(cond
-				((not (Message msgGET sel_214 sel_213 6 temp1 1))
-					(gMessager sel_295: sel_213 6 81 0 0 sel_214)
+				((not (Message msgGET modNum noun 6 temp1 1))
+					(gMessager say: noun 6 81 0 0 modNum)
 				)
 				((proc27_0 10 [global296 (- temp1 2)])
-					(gMessager sel_295: sel_213 6 1 0 0 sel_214)
+					(gMessager say: noun 6 1 0 0 modNum)
 				)
 				(else
-					(gMessager sel_295: sel_213 6 temp1 0 0 sel_214)
+					(gMessager say: noun 6 temp1 0 0 modNum)
 					(proc27_1 10 @[global296 (- temp1 2)])
 				)
 			)
 		else
-			(super sel_300: param1)
+			(super doVerb: param1)
 		)
 	)
 )
 
 (instance Tut of Actor
 	(properties
-		sel_20 {Tut}
-		sel_213 1
-		sel_214 1883
-		sel_2 821
-		sel_14 16384
+		name {Tut}
+		noun 1
+		modNum 1883
+		view 821
+		signal 16384
 	)
 
-	(method (sel_300 param1 param2 &tmp temp0 temp1 temp2)
+	(method (doVerb param1 param2 &tmp temp0 temp1 temp2)
 		(if (OneOf param1 1 2)
-			((ScriptID 21 0) sel_57: 271) ; addCluesCode
+			((ScriptID 21 0) doit: 271) ; addCluesCode
 		)
 		(cond
 			((== param1 2)
 				(if (not (SetFlag 111))
-					(gMessager sel_295: sel_213 param1 80 0 0 sel_214)
+					(gMessager say: noun param1 80 0 0 modNum)
 				else
-					(super sel_300: param1)
+					(super doVerb: param1)
 				)
 			)
 			((OneOf param1 6 14)
@@ -723,7 +723,7 @@
 							(if (== argc 2)
 								param2
 							else
-								(gCurRoom sel_422: (ScriptID 20 0)) ; inNotebook
+								(gCurRoom setInset: (ScriptID 20 0)) ; inNotebook
 							)
 						)
 						-1
@@ -748,20 +748,20 @@
 					)
 				)
 				(cond
-					((not (Message msgGET sel_214 sel_213 6 temp1 1))
-						(gMessager sel_295: sel_213 6 81 0 0 sel_214)
+					((not (Message msgGET modNum noun 6 temp1 1))
+						(gMessager say: noun 6 81 0 0 modNum)
 					)
 					((proc27_0 7 [global296 (- temp1 2)])
-						(gMessager sel_295: sel_213 6 1 0 0 sel_214)
+						(gMessager say: noun 6 1 0 0 modNum)
 					)
 					(else
-						(gMessager sel_295: sel_213 6 temp1 0 0 sel_214)
+						(gMessager say: noun 6 temp1 0 0 modNum)
 						(proc27_1 7 @[global296 (- temp1 2)])
 					)
 				)
 			)
 			(else
-				(super sel_300: param1)
+				(super doVerb: param1)
 			)
 		)
 	)
@@ -769,14 +769,14 @@
 
 (instance Watney of Actor
 	(properties
-		sel_20 {Watney}
-		sel_213 1
-		sel_214 1886
-		sel_2 815
-		sel_14 16384
+		name {Watney}
+		noun 1
+		modNum 1886
+		view 815
+		signal 16384
 	)
 
-	(method (sel_300 param1 param2 &tmp temp0 temp1 temp2)
+	(method (doVerb param1 param2 &tmp temp0 temp1 temp2)
 		(if (== param1 6)
 			(if
 				(==
@@ -784,7 +784,7 @@
 						(if (== argc 2)
 							param2
 						else
-							(gCurRoom sel_422: (ScriptID 20 0)) ; inNotebook
+							(gCurRoom setInset: (ScriptID 20 0)) ; inNotebook
 						)
 					)
 					-1
@@ -809,43 +809,43 @@
 				)
 			)
 			(cond
-				((not (Message msgGET sel_214 sel_213 6 temp1 1))
-					(gMessager sel_295: sel_213 6 81 0 0 sel_214)
+				((not (Message msgGET modNum noun 6 temp1 1))
+					(gMessager say: noun 6 81 0 0 modNum)
 				)
 				((proc27_0 8 [global296 (- temp1 2)])
-					(gMessager sel_295: sel_213 6 1 0 0 sel_214)
+					(gMessager say: noun 6 1 0 0 modNum)
 				)
 				(else
-					(gMessager sel_295: sel_213 6 temp1 0 0 sel_214)
+					(gMessager say: noun 6 temp1 0 0 modNum)
 					(proc27_1 8 @[global296 (- temp1 2)])
 				)
 			)
 		else
-			(super sel_300: param1)
+			(super doVerb: param1)
 		)
 	)
 )
 
 (instance Yvette of Actor
 	(properties
-		sel_20 {Yvette}
-		sel_213 1
-		sel_214 1885
-		sel_2 817
-		sel_14 16384
-		sel_103 1
+		name {Yvette}
+		noun 1
+		modNum 1885
+		view 817
+		signal 16384
+		scaleSignal 1
 	)
 
-	(method (sel_300 param1 param2 &tmp temp0 temp1 temp2)
+	(method (doVerb param1 param2 &tmp temp0 temp1 temp2)
 		(if (OneOf param1 1 2)
-			((ScriptID 21 0) sel_57: 266) ; addCluesCode
+			((ScriptID 21 0) doit: 266) ; addCluesCode
 		)
 		(cond
 			((== param1 2)
 				(if (not (SetFlag 113))
-					(gMessager sel_295: sel_213 param1 80 0 0 sel_214)
+					(gMessager say: noun param1 80 0 0 modNum)
 				else
-					(gMessager sel_295: sel_213 param1 28 0 0 sel_214)
+					(gMessager say: noun param1 28 0 0 modNum)
 				)
 			)
 			((OneOf param1 6 14)
@@ -855,7 +855,7 @@
 							(if (== argc 2)
 								param2
 							else
-								(gCurRoom sel_422: (ScriptID 20 0)) ; inNotebook
+								(gCurRoom setInset: (ScriptID 20 0)) ; inNotebook
 							)
 						)
 						-1
@@ -884,39 +884,39 @@
 						(cond
 							((IsFlag 158)
 								(if (proc27_0 9 global365)
-									(gMessager sel_295: sel_213 6 1 0 0 sel_214)
+									(gMessager say: noun 6 1 0 0 modNum)
 								else
-									(gMessager sel_295: sel_213 6 71 0 0 sel_214)
+									(gMessager say: noun 6 71 0 0 modNum)
 									(proc27_1 9 @global365)
 								)
 							)
 							((proc27_0 9 global306)
-								(gMessager sel_295: sel_213 6 1 0 0 sel_214)
+								(gMessager say: noun 6 1 0 0 modNum)
 							)
 							(else
-								(gMessager sel_295: sel_213 6 12 0 0 sel_214)
+								(gMessager say: noun 6 12 0 0 modNum)
 								(proc27_1 9 @global306)
 							)
 						)
 					)
 					(263
 						(if (proc27_0 9 global302)
-							(gMessager sel_295: sel_213 6 1 0 0 sel_214)
+							(gMessager say: noun 6 1 0 0 modNum)
 						else
-							(gMessager sel_295: sel_213 6 8 0 0 sel_214)
+							(gMessager say: noun 6 8 0 0 modNum)
 							(proc27_1 9 @global302)
 						)
 					)
 					(else
 						(cond
-							((not (Message msgGET sel_214 sel_213 6 temp1 1))
-								(gMessager sel_295: sel_213 6 81 0 0 sel_214)
+							((not (Message msgGET modNum noun 6 temp1 1))
+								(gMessager say: noun 6 81 0 0 modNum)
 							)
 							((proc27_0 9 [global296 (- temp1 2)])
-								(gMessager sel_295: sel_213 6 1 0 0 sel_214)
+								(gMessager say: noun 6 1 0 0 modNum)
 							)
 							(else
-								(gMessager sel_295: sel_213 6 temp1 0 0 sel_214)
+								(gMessager say: noun 6 temp1 0 0 modNum)
 								(proc27_1 9 @[global296 (- temp1 2)])
 							)
 						)
@@ -924,7 +924,7 @@
 				)
 			)
 			(else
-				(super sel_300: param1)
+				(super doVerb: param1)
 			)
 		)
 	)
@@ -932,16 +932,16 @@
 
 (instance Ziggy of Actor
 	(properties
-		sel_20 {Ziggy}
-		sel_213 1
-		sel_214 1890
-		sel_2 816
-		sel_14 16384
+		name {Ziggy}
+		noun 1
+		modNum 1890
+		view 816
+		signal 16384
 	)
 
-	(method (sel_300 param1 param2 &tmp temp0 temp1 temp2)
+	(method (doVerb param1 param2 &tmp temp0 temp1 temp2)
 		(if (OneOf param1 1 2)
-			((ScriptID 21 0) sel_57: 264) ; addCluesCode
+			((ScriptID 21 0) doit: 264) ; addCluesCode
 		)
 		(if (OneOf param1 6 14)
 			(if
@@ -950,7 +950,7 @@
 						(if (== argc 2)
 							param2
 						else
-							(gCurRoom sel_422: (ScriptID 20 0)) ; inNotebook
+							(gCurRoom setInset: (ScriptID 20 0)) ; inNotebook
 						)
 					)
 					-1
@@ -975,19 +975,19 @@
 				)
 			)
 			(cond
-				((not (Message msgGET sel_214 sel_213 6 temp1 1))
-					(gMessager sel_295: sel_213 6 81 0 0 sel_214)
+				((not (Message msgGET modNum noun 6 temp1 1))
+					(gMessager say: noun 6 81 0 0 modNum)
 				)
 				((proc27_0 11 [global296 (- temp1 2)])
-					(gMessager sel_295: sel_213 6 1 0 0 sel_214)
+					(gMessager say: noun 6 1 0 0 modNum)
 				)
 				(else
-					(gMessager sel_295: sel_213 6 temp1 0 0 sel_214)
+					(gMessager say: noun 6 temp1 0 0 modNum)
 					(proc27_1 11 @[global296 (- temp1 2)])
 				)
 			)
 		else
-			(super sel_300: param1)
+			(super doVerb: param1)
 		)
 	)
 )

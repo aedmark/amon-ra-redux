@@ -11,10 +11,10 @@
 
 (instance disposeCode of Code
 	(properties
-		sel_20 {disposeCode}
+		name {disposeCode}
 	)
 
-	(method (sel_57)
+	(method (doit)
 		(LoadMany
 			0
 			1880

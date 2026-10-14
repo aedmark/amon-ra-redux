@@ -27,15 +27,15 @@
 
 (instance actBreak of LBRoom
 	(properties
-		sel_20 {actBreak}
-		sel_408 780
-		sel_28 10
+		name {actBreak}
+		picture 780
+		style 10
 	)
 
-	(method (sel_110)
+	(method (init)
 		(LoadMany rsVIEW 26)
 		(LoadMany rsSOUND 30)
-		(gGame sel_587:)
+		(gGame handsOff:)
 		(switch gAct
 			(0
 				(= local0 230)
@@ -61,7 +61,7 @@
 				(= local0 750)
 			)
 		)
-		(super sel_110: &rest)
+		(super init: &rest)
 		(if gAct
 			(cond
 				((and (< -1 local8) (< local8 21))
@@ -91,62 +91,62 @@
 				)
 			)
 		)
-		(actView sel_110: sel_4: gAct)
-		(gGameMusic1 sel_40: 30 sel_99: 1 sel_3: -1 sel_39:)
-		(self sel_146: sBreakIt)
+		(actView init: cel: gAct)
+		(gGameMusic1 number: 30 flags: 1 loop: -1 play:)
+		(self setScript: sBreakIt)
 	)
 )
 
 (instance sBreakIt of Script
 	(properties
-		sel_20 {sBreakIt}
+		name {sBreakIt}
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
-				(gCurRoom sel_408: 26 sel_417: 26)
-				(= sel_136 2)
+				(gCurRoom picture: 26 drawPic: 26)
+				(= cycles 2)
 			)
 			(1
-				(actView sel_312: MoveTo 150 115 self)
+				(actView setMotion: MoveTo 150 115 self)
 			)
 			(2
-				(titleView sel_110: sel_4: gAct)
-				(= sel_137 3)
+				(titleView init: cel: gAct)
+				(= seconds 3)
 			)
 			(3
-				(actView sel_312: MoveTo 150 49 self)
+				(actView setMotion: MoveTo 150 49 self)
 			)
 			(4
-				(titleView sel_312: MoveTo 150 115 self)
+				(titleView setMotion: MoveTo 150 115 self)
 			)
 			(5
-				(gGameMusic1 sel_170: 0 40 10 1)
-				(= sel_137 3)
+				(gGameMusic1 fade: 0 40 10 1)
+				(= seconds 3)
 			)
 			(6
-				(actView sel_111:)
-				(titleView sel_312: MoveTo 150 49 self)
+				(actView dispose:)
+				(titleView setMotion: MoveTo 150 49 self)
 			)
 			(7
-				(titleView sel_111:)
-				(= sel_137 2)
+				(titleView dispose:)
+				(= seconds 2)
 			)
 			(8
-				(gNarrator sel_537: 120)
+				(gNarrator talkWidth: 120)
 				(if (and local1 local2 gAct)
-					(gMessager sel_295: local1 0 0 local2 self)
+					(gMessager say: local1 0 0 local2 self)
 				else
-					(= sel_136 1)
+					(= cycles 1)
 				)
 			)
 			(9
-				(gGameMusic1 sel_170: 0 10 20 1)
+				(gGameMusic1 fade: 0 10 20 1)
 				(++ gAct)
 				(= gMustDos 0)
-				(gCurRoom sel_399: local0)
-				(self sel_111:)
+				(gCurRoom newRoom: local0)
+				(self dispose:)
 			)
 		)
 	)
@@ -154,27 +154,27 @@
 
 (instance actView of Actor
 	(properties
-		sel_20 {actView}
-		sel_1 150
-		sel_0 141
-		sel_2 26
+		name {actView}
+		x 150
+		y 141
+		view 26
 	)
 
-	(method (sel_300 param1)
+	(method (doVerb param1)
 		(if (== param1 2)
-			(sBreakIt sel_144: 8)
+			(sBreakIt changeState: 8)
 		else
-			(super sel_300: param1)
+			(super doVerb: param1)
 		)
 	)
 )
 
 (instance titleView of Actor
 	(properties
-		sel_20 {titleView}
-		sel_1 150
-		sel_0 161
-		sel_2 26
-		sel_3 1
+		name {titleView}
+		x 150
+		y 161
+		view 26
+		loop 1
 	)
 )

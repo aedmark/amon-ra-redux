@@ -12,20 +12,20 @@
 
 (instance aPippin of MuseumActor
 	(properties
-		sel_20 {aPippin}
-		sel_213 1
-		sel_214 1882
-		sel_648 822
-		sel_620 350
+		name {aPippin}
+		noun 1
+		modNum 1882
+		originalView 822
+		room 350
 	)
 
-	(method (sel_300 param1 param2 &tmp temp0 temp1 temp2)
+	(method (doVerb param1 param2 &tmp temp0 temp1 temp2)
 		(switch param1
 			(2
 				(if (not (SetFlag 110))
-					(gMessager sel_295: sel_213 param1 80 0 0 sel_214)
+					(gMessager say: noun param1 80 0 0 modNum)
 				else
-					(super sel_300: param1)
+					(super doVerb: param1)
 				)
 			)
 			(6
@@ -35,7 +35,7 @@
 							(if (== argc 2)
 								param2
 							else
-								(gCurRoom sel_422: (ScriptID 20 0)) ; inNotebook
+								(gCurRoom setInset: (ScriptID 20 0)) ; inNotebook
 							)
 						)
 						-1
@@ -60,27 +60,27 @@
 					)
 				)
 				(cond
-					((not (Message msgGET sel_214 sel_213 6 temp1 1))
-						(gMessager sel_295: sel_213 6 81 0 0 sel_214)
+					((not (Message msgGET modNum noun 6 temp1 1))
+						(gMessager say: noun 6 81 0 0 modNum)
 					)
 					((proc27_0 5 [global296 (- temp1 2)])
-						(gMessager sel_295: sel_213 6 1 0 0 sel_214)
+						(gMessager say: noun 6 1 0 0 modNum)
 					)
 					(else
-						(gMessager sel_295: sel_213 6 temp1 0 0 sel_214)
+						(gMessager say: noun 6 temp1 0 0 modNum)
 						(proc27_1 5 @[global296 (- temp1 2)])
 					)
 				)
 			)
 			(else
-				(super sel_300: param1)
+				(super doVerb: param1)
 			)
 		)
 	)
 
-	(method (sel_145)
-		(super sel_145: &rest)
+	(method (cue)
+		(super cue: &rest)
 		(SetFlag 1)
-		(self sel_111:)
+		(self dispose:)
 	)
 )

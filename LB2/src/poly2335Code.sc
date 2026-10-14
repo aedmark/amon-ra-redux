@@ -19,19 +19,19 @@
 
 (instance poly2335Code of Code
 	(properties
-		sel_20 {poly2335Code}
+		name {poly2335Code}
 	)
 
-	(method (sel_57 param1 param2)
+	(method (doit param1 param2)
 		(if (> argc 1)
 			; RestoreGame can replace the Polygon's points pointer with the copy
 			; stored in an old save. Restore the known-good current static boundary.
-			(poly2335a sel_31: 2 sel_86: 14 sel_87: @local0 sel_256: 0)
+			(poly2335a type: 2 size: 14 points: @local0 dynamic: 0)
 		else
 			(if (and (== gAct 2) (not (IsFlag 25)))
-				(param1 sel_118: (poly2335a sel_110: sel_117:))
+				(param1 add: (poly2335a init: yourself:))
 			else
-				(param1 sel_118: (poly2335b sel_110: sel_117:))
+				(param1 add: (poly2335b init: yourself:))
 			)
 		)
 	)
@@ -39,30 +39,30 @@
 
 (instance poly2335a of Polygon
 	(properties
-		sel_20 {poly2335a}
+		name {poly2335a}
 	)
 
-	(method (sel_110)
-		(= sel_31 2)
-		(= sel_86 14)
-		(= sel_87 @local0)
+	(method (init)
+		(= type 2)
+		(= size 14)
+		(= points @local0)
 	)
 )
 
 (instance poly2335b of Polygon
 	(properties
-		sel_20 {poly2335b}
+		name {poly2335b}
 	)
 
-	(method (sel_110)
-		(= sel_31 2)
-		(= sel_86 13)
-		(= sel_87 @local28)
+	(method (init)
+		(= type 2)
+		(= size 13)
+		(= points @local28)
 	)
 )
 
 (instance pts2335 of MuseumPoints
 	(properties
-		sel_20 {pts2335}
+		name {pts2335}
 	)
 )

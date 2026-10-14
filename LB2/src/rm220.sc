@@ -25,56 +25,56 @@
 
 (instance rm220 of LBRoom
 	(properties
-		sel_20 {rm220}
-		sel_408 220
+		name {rm220}
+		picture 220
 	)
 
-	(method (sel_110)
+	(method (init)
 		(LoadMany rsVIEW 221 220 1220 1221)
 		(Load rsSOUND 220)
 		(Load rsPIC 225)
-		(self sel_414: 92)
-		(super sel_110:)
-		(WrapMusic sel_111:)
-		(gGameMusic1 sel_40: 220 sel_3: -1 sel_99: 1 sel_39:)
-		(fan sel_110: sel_161: Fwd)
-		(shadowL sel_110: sel_146: sLeftShadow)
-		(shadowR sel_110: sel_146: sRightShadow)
-		(self sel_146: sCartoon)
+		(self setRegions: 92)
+		(super init:)
+		(WrapMusic dispose:)
+		(gGameMusic1 number: 220 loop: -1 flags: 1 play:)
+		(fan init: setCycle: Fwd)
+		(shadowL init: setScript: sLeftShadow)
+		(shadowR init: setScript: sRightShadow)
+		(self setScript: sCartoon)
 	)
 )
 
 (instance sCartoon of Script
 	(properties
-		sel_20 {sCartoon}
+		name {sCartoon}
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
-				(= sel_136 3)
+				(= cycles 3)
 			)
 			(1
-				(gEgo sel_350: -1 2)
-				(myConv sel_558: @local0 sel_110: self)
+				(gEgo get: -1 2)
+				(myConv load: @local0 init: self)
 			)
 			(2
-				(gCurRoom sel_422: inLauraPeeks)
-				(= sel_137 5)
+				(gCurRoom setInset: inLauraPeeks)
+				(= seconds 5)
 			)
 			(3
-				(gEgo sel_102:)
-				(gCurRoom sel_422: 0)
-				(= sel_136 1)
+				(gEgo hide:)
+				(gCurRoom setInset: 0)
+				(= cycles 1)
 			)
 			(4
-				(myConv sel_558: @local65 sel_110: self)
+				(myConv load: @local65 init: self)
 			)
 			(5
-				(gGameMusic1 sel_170: self)
+				(gGameMusic1 fade: self)
 			)
 			(6
-				(gCurRoom sel_399: 26)
+				(gCurRoom newRoom: 26)
 			)
 		)
 	)
@@ -82,21 +82,21 @@
 
 (instance sRightShadow of Script
 	(properties
-		sel_20 {sRightShadow}
+		name {sRightShadow}
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
-				(shadowR sel_155: 1 sel_312: MoveTo 180 84 self)
+				(shadowR setLoop: 1 setMotion: MoveTo 180 84 self)
 			)
 			(1
-				(= sel_137 (Random 3 6))
+				(= seconds (Random 3 6))
 			)
 			(2
-				(shadowR sel_153: -20 89)
-				(= sel_29 -1)
-				(= sel_136 1)
+				(shadowR posn: -20 89)
+				(= state -1)
+				(= cycles 1)
 			)
 		)
 	)
@@ -104,21 +104,21 @@
 
 (instance sLeftShadow of Script
 	(properties
-		sel_20 {sLeftShadow}
+		name {sLeftShadow}
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
-				(= sel_137 (Random 2 5))
+				(= seconds (Random 2 5))
 			)
 			(1
-				(shadowL sel_155: 0 sel_312: MoveTo -30 89 self)
+				(shadowL setLoop: 0 setMotion: MoveTo -30 89 self)
 			)
 			(2
-				(shadowL sel_153: 175 85)
-				(= sel_29 -1)
-				(= sel_136 1)
+				(shadowL posn: 175 85)
+				(= state -1)
+				(= cycles 1)
 			)
 		)
 	)
@@ -126,120 +126,120 @@
 
 (instance shadowL of Actor
 	(properties
-		sel_20 {shadowL}
-		sel_1 175
-		sel_0 84
-		sel_2 221
-		sel_60 4
-		sel_14 16400
+		name {shadowL}
+		x 175
+		y 84
+		view 221
+		priority 4
+		signal 16400
 	)
 )
 
 (instance shadowR of Actor
 	(properties
-		sel_20 {shadowR}
-		sel_1 -20
-		sel_0 89
-		sel_2 221
-		sel_3 1
-		sel_60 4
-		sel_14 16400
+		name {shadowR}
+		x -20
+		y 89
+		view 221
+		loop 1
+		priority 4
+		signal 16400
 	)
 )
 
 (instance fan of Prop
 	(properties
-		sel_20 {fan}
-		sel_1 10
-		sel_0 177
-		sel_2 220
+		name {fan}
+		x 10
+		y 177
+		view 220
 	)
 )
 
 (instance inLauraPeeks of Inset
 	(properties
-		sel_20 {inLauraPeeks}
-		sel_408 225
-		sel_560 1
+		name {inLauraPeeks}
+		picture 225
+		hideTheCast 1
 	)
 )
 
 (instance myConv of Conversation
 	(properties
-		sel_20 {myConv}
+		name {myConv}
 	)
 )
 
 (instance Sam220 of Talker
 	(properties
-		sel_20 {Sam220}
-		sel_1 0
-		sel_0 0
-		sel_2 1220
-		sel_3 3
-		sel_291 0
-		sel_537 200
-		sel_203 1
-		sel_26 15
-		sel_549 10
-		sel_550 10
+		name {Sam220}
+		x 0
+		y 0
+		view 1220
+		loop 3
+		disposeWhenDone 0
+		talkWidth 200
+		modeless 1
+		back 15
+		textX 10
+		textY 10
 	)
 
-	(method (sel_110)
-		(= sel_30 gUserFont)
-		(super sel_110: 0 samEyes samMouth &rest)
+	(method (init)
+		(= font gUserFont)
+		(super init: 0 samEyes samMouth &rest)
 	)
 )
 
 (instance samMouth of Prop
 	(properties
-		sel_20 {samMouth}
-		sel_6 63
-		sel_7 247
-		sel_2 1220
+		name {samMouth}
+		nsTop 63
+		nsLeft 247
+		view 1220
 	)
 )
 
 (instance samEyes of Prop
 	(properties
-		sel_20 {samEyes}
-		sel_6 58
-		sel_7 251
-		sel_2 1220
-		sel_3 2
+		name {samEyes}
+		nsTop 58
+		nsLeft 251
+		view 1220
+		loop 2
 	)
 )
 
 (instance Laura220 of Talker
 	(properties
-		sel_20 {Laura220}
-		sel_1 0
-		sel_0 0
-		sel_2 1221
-		sel_3 3
-		sel_60 14
-		sel_14 16
-		sel_291 0
-		sel_537 150
-		sel_203 1
-		sel_26 15
-		sel_549 139
-		sel_550 104
+		name {Laura220}
+		x 0
+		y 0
+		view 1221
+		loop 3
+		priority 14
+		signal 16
+		disposeWhenDone 0
+		talkWidth 150
+		modeless 1
+		back 15
+		textX 139
+		textY 104
 	)
 
-	(method (sel_110)
-		(= sel_30 gUserFont)
-		(super sel_110: 0 0 lMouth &rest)
+	(method (init)
+		(= font gUserFont)
+		(super init: 0 0 lMouth &rest)
 	)
 )
 
 (instance lMouth of Prop
 	(properties
-		sel_20 {lMouth}
-		sel_6 100
-		sel_7 117
-		sel_2 1221
-		sel_60 7
-		sel_14 16
+		name {lMouth}
+		nsTop 100
+		nsLeft 117
+		view 1221
+		priority 7
+		signal 16
 	)
 )

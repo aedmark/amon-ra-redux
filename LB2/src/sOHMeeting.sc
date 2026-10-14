@@ -19,46 +19,46 @@
 
 (instance sOHMeeting of Script
 	(properties
-		sel_20 {sOHMeeting}
+		name {sOHMeeting}
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
-				(= sel_136 1)
+				(= cycles 1)
 			)
 			(1
 				((ScriptID 32 0) ; aHeimlich
-					sel_110:
-					sel_2: 814
-					sel_3: 1
-					sel_63: 9
-					sel_1: 225
-					sel_0: 138
-					sel_620: 440
+					init:
+					view: 814
+					loop: 1
+					setPri: 9
+					x: 225
+					y: 138
+					room: 440
 				)
-				(= sel_136 1)
+				(= cycles 1)
 			)
 			(2
-				((ScriptID 32 0) sel_63: 9 sel_312: MoveTo 189 145 self) ; aHeimlich
+				((ScriptID 32 0) setPri: 9 setMotion: MoveTo 189 145 self) ; aHeimlich
 			)
 			(3
-				((ScriptID 32 0) sel_63: -1 sel_312: MoveTo 127 154 self) ; aHeimlich
+				((ScriptID 32 0) setPri: -1 setMotion: MoveTo 127 154 self) ; aHeimlich
 			)
 			(4
-				((ScriptID 90 2) sel_312: PolyPath 124 156 self) ; aOlympia
-				((ScriptID 32 0) sel_312: MoveTo 86 159 self) ; aHeimlich
+				((ScriptID 90 2) setMotion: PolyPath 124 156 self) ; aOlympia
+				((ScriptID 32 0) setMotion: MoveTo 86 159 self) ; aHeimlich
 			)
 			(5 0)
 			(6
 				(Face (ScriptID 32 0) (ScriptID 90 2)) ; aHeimlich, aOlympia
-				(= sel_136 5)
+				(= cycles 5)
 			)
 			(7
-				(gMessager sel_295: 2 0 3 0 self 1440)
+				(gMessager say: 2 0 3 0 self 1440)
 			)
 			(8
-				(self sel_111:)
+				(self dispose:)
 			)
 		)
 	)
@@ -66,40 +66,40 @@
 
 (instance sOHNoMeet of Script
 	(properties
-		sel_20 {sOHNoMeet}
+		name {sOHNoMeet}
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
-				(= sel_136 1)
+				(= cycles 1)
 			)
 			(1
-				(gEgo sel_312: MoveTo 98 161 self)
+				(gEgo setMotion: MoveTo 98 161 self)
 			)
 			(2
 				((ScriptID 32 0) ; aHeimlich
-					sel_110:
-					sel_2: 814
-					sel_63: 9
-					sel_1: 225
-					sel_0: 138
-					sel_620: 440
+					init:
+					view: 814
+					setPri: 9
+					x: 225
+					y: 138
+					room: 440
 				)
 				(Face gEgo (ScriptID 32 0)) ; aHeimlich
-				(= sel_136 1)
+				(= cycles 1)
 			)
 			(3
-				((ScriptID 32 0) sel_63: 9 sel_312: MoveTo 189 145 self) ; aHeimlich
+				((ScriptID 32 0) setPri: 9 setMotion: MoveTo 189 145 self) ; aHeimlich
 			)
 			(4
-				((ScriptID 32 0) sel_63: -1 sel_312: MoveTo 127 154 self) ; aHeimlich
+				((ScriptID 32 0) setPri: -1 setMotion: MoveTo 127 154 self) ; aHeimlich
 			)
 			(5
-				((ScriptID 90 2) sel_312: PolyPath 176 150 self) ; aOlympia
+				((ScriptID 90 2) setMotion: PolyPath 176 150 self) ; aOlympia
 			)
 			(6
-				(self sel_111:)
+				(self dispose:)
 			)
 		)
 	)
@@ -107,42 +107,42 @@
 
 (instance sOHLeave of Script
 	(properties
-		sel_20 {sOHLeave}
+		name {sOHLeave}
 	)
 
-	(method (sel_57)
+	(method (doit)
 		(if
 			(and
-				(== (self sel_29:) 3)
-				(not ((ScriptID 90 2) sel_56:)) ; aOlympia
-				(not ((ScriptID 32 0) sel_56:)) ; aHeimlich
+				(== (self state:) 3)
+				(not ((ScriptID 90 2) mover:)) ; aOlympia
+				(not ((ScriptID 32 0) mover:)) ; aHeimlich
 				(not local0)
 			)
 			(= local0 1)
-			(self sel_145:)
+			(self cue:)
 		)
-		(super sel_57:)
+		(super doit:)
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
-				(= sel_136 3)
+				(= cycles 3)
 			)
 			(1
-				((ScriptID 90 2) sel_312: PolyPath 228 133 sOHLeave) ; aOlympia
-				((ScriptID 32 0) sel_63: -1 sel_312: MoveTo 189 145 self) ; aHeimlich
+				((ScriptID 90 2) setMotion: PolyPath 228 133 sOHLeave) ; aOlympia
+				((ScriptID 32 0) setPri: -1 setMotion: MoveTo 189 145 self) ; aHeimlich
 			)
 			(2
-				((ScriptID 32 0) sel_63: 9 sel_312: MoveTo 230 138 self) ; aHeimlich
+				((ScriptID 32 0) setPri: 9 setMotion: MoveTo 230 138 self) ; aHeimlich
 			)
 			(3 0)
 			(4
-				(= sel_137 1)
+				(= seconds 1)
 			)
 			(5
-				((ScriptID 32 0) sel_111:) ; aHeimlich
-				(self sel_111:)
+				((ScriptID 32 0) dispose:) ; aHeimlich
+				(self dispose:)
 			)
 		)
 	)

@@ -12,46 +12,46 @@
 
 (instance Olympia of Talker
 	(properties
-		sel_20 {Olympia}
-		sel_1 5
-		sel_0 5
-		sel_2 1892
-		sel_3 3
-		sel_537 150
-		sel_26 15
-		sel_549 112
-		sel_550 12
+		name {Olympia}
+		x 5
+		y 5
+		view 1892
+		loop 3
+		talkWidth 150
+		back 15
+		textX 112
+		textY 12
 	)
 
-	(method (sel_110)
-		(= sel_30 gUserFont)
-		(super sel_110: olympiaBust olympiaEyes olympiaMouth &rest)
+	(method (init)
+		(= font gUserFont)
+		(super init: olympiaBust olympiaEyes olympiaMouth &rest)
 	)
 )
 
 (instance olympiaBust of Prop
 	(properties
-		sel_20 {olympiaBust}
-		sel_2 1892
-		sel_3 1
+		name {olympiaBust}
+		view 1892
+		loop 1
 	)
 )
 
 (instance olympiaEyes of Prop
 	(properties
-		sel_20 {olympiaEyes}
-		sel_6 39
-		sel_7 31
-		sel_2 1892
-		sel_3 2
+		name {olympiaEyes}
+		nsTop 39
+		nsLeft 31
+		view 1892
+		loop 2
 	)
 )
 
 (instance olympiaMouth of Prop
 	(properties
-		sel_20 {olympiaMouth}
-		sel_6 59
-		sel_7 26
-		sel_2 1892
+		name {olympiaMouth}
+		nsTop 59
+		nsLeft 26
+		view 1892
 	)
 )

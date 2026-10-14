@@ -12,46 +12,46 @@
 
 (instance Steve of Talker
 	(properties
-		sel_20 {Steve}
-		sel_1 5
-		sel_0 5
-		sel_2 1887
-		sel_3 3
-		sel_537 150
-		sel_26 15
-		sel_549 107
-		sel_550 12
+		name {Steve}
+		x 5
+		y 5
+		view 1887
+		loop 3
+		talkWidth 150
+		back 15
+		textX 107
+		textY 12
 	)
 
-	(method (sel_110)
-		(= sel_30 gUserFont)
-		(super sel_110: steveBust steveEyes steveMouth &rest)
+	(method (init)
+		(= font gUserFont)
+		(super init: steveBust steveEyes steveMouth &rest)
 	)
 )
 
 (instance steveBust of Prop
 	(properties
-		sel_20 {steveBust}
-		sel_2 1887
-		sel_3 1
+		name {steveBust}
+		view 1887
+		loop 1
 	)
 )
 
 (instance steveEyes of Prop
 	(properties
-		sel_20 {steveEyes}
-		sel_6 39
-		sel_7 27
-		sel_2 1887
-		sel_3 2
+		name {steveEyes}
+		nsTop 39
+		nsLeft 27
+		view 1887
+		loop 2
 	)
 )
 
 (instance steveMouth of Prop
 	(properties
-		sel_20 {steveMouth}
-		sel_6 58
-		sel_7 32
-		sel_2 1887
+		name {steveMouth}
+		nsTop 58
+		nsLeft 32
+		view 1887
 	)
 )

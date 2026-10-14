@@ -19,357 +19,357 @@
 
 (instance rm370 of LBRoom
 	(properties
-		sel_20 {rm370}
-		sel_213 5
-		sel_408 370
-		sel_28 12
-		sel_410 400
-		sel_412 350
+		name {rm370}
+		noun 5
+		picture 370
+		style 12
+		east 400
+		west 350
 	)
 
-	(method (sel_110 &tmp [temp0 6])
-		(gEgo sel_110: sel_585: 831 sel_320: Scaler 95 75 190 120)
+	(method (init &tmp [temp0 6])
+		(gEgo init: normalize: 831 setScale: Scaler 95 75 190 120)
 		(if (== gAct 2)
-			(self sel_414: 93)
-			((ScriptID 2370 0) sel_57: (= sel_259 (List sel_109:))) ; poly2370Code
+			(self setRegions: 93)
+			((ScriptID 2370 0) doit: (= obstacles (List new:))) ; poly2370Code
 		else
-			(self sel_414: 90)
+			(self setRegions: 90)
 			(if (== gPrevRoomNum 355)
-				((ScriptID 90 5) sel_182: 420 sel_618: 500) ; aWatney
-				((ScriptID 90 1) sel_182: 420 sel_618: 510) ; aCountess
-				((ScriptID 90 7) sel_182: 450 sel_664:) ; aZiggy
-				((ScriptID 90 4) sel_182: 454 sel_664:) ; aTut
-				((ScriptID 90 2) sel_182: -2) ; aOlympia
-				((ScriptID 32 0) sel_182: -2) ; aHeimlich
-				((ScriptID 90 6) sel_182: 550 sel_153: 175 130 sel_253: 1) ; aYvette
+				((ScriptID 90 5) moveTo: 420 goTo: 500) ; aWatney
+				((ScriptID 90 1) moveTo: 420 goTo: 510) ; aCountess
+				((ScriptID 90 7) moveTo: 450 wander:) ; aZiggy
+				((ScriptID 90 4) moveTo: 454 wander:) ; aTut
+				((ScriptID 90 2) moveTo: -2) ; aOlympia
+				((ScriptID 32 0) moveTo: -2) ; aHeimlich
+				((ScriptID 90 6) moveTo: 550 posn: 175 130 setHeading: 1) ; aYvette
 				((ScriptID 90 3) ; aORiley
-					sel_648: 818
-					sel_182: 430
-					sel_153: 155 165
-					sel_253: 135
+					originalView: 818
+					moveTo: 430
+					posn: 155 165
+					setHeading: 135
 				)
 			)
 		)
 		(switch gPrevRoomNum
-			(sel_410
-				(= sel_28 100)
-				(gEgo sel_349: 0 sel_253: 270)
+			(east
+				(= style 100)
+				(gEgo edgeHit: 0 setHeading: 270)
 			)
 			(340 ; testRoom
-				(= sel_28 9)
+				(= style 9)
 			)
 			(355 0)
-			(sel_412
-				(if (> (gEgo sel_0:) 185)
-					(gEgo sel_0: 185)
+			(west
+				(if (> (gEgo y:) 185)
+					(gEgo y: 185)
 				)
 			)
 			(else
-				(gEgo sel_153: 160 160)
+				(gEgo posn: 160 160)
 			)
 		)
-		(super sel_110:)
-		(if (!= gPrevRoomNum sel_410)
-			(gGame sel_588:)
+		(super init:)
+		(if (!= gPrevRoomNum east)
+			(gGame handsOn:)
 		)
-		(westExitFeature sel_110:)
-		(giftShoppeDoor sel_110:)
+		(westExitFeature init:)
+		(giftShoppeDoor init:)
 		(if (> gAct 2)
-			(giftShoppeDoor sel_590: 1)
+			(giftShoppeDoor locked: 1)
 		)
-		(tables sel_110:)
-		(column1 sel_110:)
-		(column2 sel_110:)
-		(column3 sel_110:)
-		(column4 sel_110:)
-		(column5 sel_110:)
-		(bench sel_110:)
-		(alcove sel_110:)
-		(doorway sel_110: sel_311: 4)
+		(tables init:)
+		(column1 init:)
+		(column2 init:)
+		(column3 init:)
+		(column4 init:)
+		(column5 init:)
+		(bench init:)
+		(alcove init:)
+		(doorway init: approachVerbs: 4)
 		(if (== gAct 2)
-			(partyATP1 sel_320: 170 sel_317:)
-			(partyATP2 sel_320: 170 sel_317:)
-			(partyATP3 sel_320: 170 sel_317:)
-			(partyATP4 sel_320: 170 sel_317:)
-			(partyATP5 sel_320: 170 sel_317:)
-			(partyATP6 sel_320: 170 sel_317:)
+			(partyATP1 setScale: 170 addToPic:)
+			(partyATP2 setScale: 170 addToPic:)
+			(partyATP3 setScale: 170 addToPic:)
+			(partyATP4 setScale: 170 addToPic:)
+			(partyATP5 setScale: 170 addToPic:)
+			(partyATP6 setScale: 170 addToPic:)
 			(switch global128
 				(0
 					((ScriptID 93 1) ; Countess
-						sel_155: 8
-						sel_156: 3
-						sel_153: 160 180
-						sel_317:
+						setLoop: 8
+						setCel: 3
+						posn: 160 180
+						addToPic:
 					)
 				)
 				(1
 					((ScriptID 93 1) ; Countess
-						sel_155: 8
-						sel_156: 3
-						sel_153: 160 180
-						sel_317:
+						setLoop: 8
+						setCel: 3
+						posn: 160 180
+						addToPic:
 					)
 				)
 				(2
 					((ScriptID 93 10) ; Watney
-						sel_155: 8
-						sel_156: 3
-						sel_153: 160 180
-						sel_317:
+						setLoop: 8
+						setCel: 3
+						posn: 160 180
+						addToPic:
 					)
 				)
 				(3
 					((ScriptID 93 10) ; Watney
-						sel_155: 8
-						sel_156: 6
-						sel_153: 155 180
-						sel_317:
+						setLoop: 8
+						setCel: 6
+						posn: 155 180
+						addToPic:
 					)
 					((ScriptID 93 11) ; Yvette
-						sel_155: 8
-						sel_156: 7
-						sel_153: 170 180
-						sel_317:
+						setLoop: 8
+						setCel: 7
+						posn: 170 180
+						addToPic:
 					)
 				)
 				(4
 					((ScriptID 93 5) ; O_Riley
-						sel_155: 8
-						sel_156: 0
-						sel_153: 140 180
-						sel_317:
+						setLoop: 8
+						setCel: 0
+						posn: 140 180
+						addToPic:
 					)
 					((ScriptID 93 11) ; Yvette
-						sel_155: 8
-						sel_156: 2
-						sel_153: 155 180
-						sel_317:
+						setLoop: 8
+						setCel: 2
+						posn: 155 180
+						addToPic:
 					)
 					((ScriptID 93 10) ; Watney
-						sel_155: 8
-						sel_156: 1
-						sel_153: 170 180
-						sel_317:
+						setLoop: 8
+						setCel: 1
+						posn: 170 180
+						addToPic:
 					)
 				)
 				(5
 					((ScriptID 93 5) ; O_Riley
-						sel_155: 8
-						sel_156: 0
-						sel_153: 140 180
-						sel_317:
+						setLoop: 8
+						setCel: 0
+						posn: 140 180
+						addToPic:
 					)
 					((ScriptID 93 11) ; Yvette
-						sel_155: 8
-						sel_156: 2
-						sel_153: 155 180
-						sel_317:
+						setLoop: 8
+						setCel: 2
+						posn: 155 180
+						addToPic:
 					)
 					((ScriptID 93 10) ; Watney
-						sel_155: 8
-						sel_156: 1
-						sel_153: 170 180
-						sel_317:
+						setLoop: 8
+						setCel: 1
+						posn: 170 180
+						addToPic:
 					)
 				)
 				(6
 					((ScriptID 93 12) ; Ziggy
-						sel_155: 8
-						sel_156: 0
-						sel_153: 155 185
-						sel_317:
+						setLoop: 8
+						setCel: 0
+						posn: 155 185
+						addToPic:
 					)
 					((ScriptID 93 11) ; Yvette
-						sel_155: 8
-						sel_156: 2
-						sel_153: 165 186
-						sel_317:
+						setLoop: 8
+						setCel: 2
+						posn: 165 186
+						addToPic:
 					)
 				)
 				(7
 					((ScriptID 93 11) ; Yvette
-						sel_155: 8
-						sel_156: 0
-						sel_153: 150 185
-						sel_317:
+						setLoop: 8
+						setCel: 0
+						posn: 150 185
+						addToPic:
 					)
 					((ScriptID 93 10) ; Watney
-						sel_155: 8
-						sel_156: 5
-						sel_153: 165 183
-						sel_317:
+						setLoop: 8
+						setCel: 5
+						posn: 165 183
+						addToPic:
 					)
 				)
 				(8
 					((ScriptID 93 5) ; O_Riley
-						sel_155: 8
-						sel_156: 2
-						sel_153: 155 182
-						sel_317:
+						setLoop: 8
+						setCel: 2
+						posn: 155 182
+						addToPic:
 					)
 					((ScriptID 93 12) ; Ziggy
-						sel_155: 8
-						sel_156: 0
-						sel_153: 165 185
-						sel_317:
+						setLoop: 8
+						setCel: 0
+						posn: 165 185
+						addToPic:
 					)
 				)
 				(9
 					((ScriptID 93 5) ; O_Riley
-						sel_155: 8
-						sel_156: 0
-						sel_153: 140 180
-						sel_317:
+						setLoop: 8
+						setCel: 0
+						posn: 140 180
+						addToPic:
 					)
 					((ScriptID 93 10) ; Watney
-						sel_155: 8
-						sel_156: 3
-						sel_153: 155 183
-						sel_317:
+						setLoop: 8
+						setCel: 3
+						posn: 155 183
+						addToPic:
 					)
 					((ScriptID 93 12) ; Ziggy
-						sel_155: 8
-						sel_156: 7
-						sel_153: 170 180
-						sel_317:
+						setLoop: 8
+						setCel: 7
+						posn: 170 180
+						addToPic:
 					)
 				)
 				(10
 					((ScriptID 93 5) ; O_Riley
-						sel_155: 8
-						sel_156: 0
-						sel_153: 140 180
-						sel_317:
+						setLoop: 8
+						setCel: 0
+						posn: 140 180
+						addToPic:
 					)
 					((ScriptID 93 10) ; Watney
-						sel_155: 8
-						sel_156: 3
-						sel_153: 155 183
-						sel_317:
+						setLoop: 8
+						setCel: 3
+						posn: 155 183
+						addToPic:
 					)
 					((ScriptID 93 12) ; Ziggy
-						sel_155: 8
-						sel_156: 7
-						sel_153: 170 180
-						sel_317:
+						setLoop: 8
+						setCel: 7
+						posn: 170 180
+						addToPic:
 					)
 				)
 				(11
 					((ScriptID 93 5) ; O_Riley
-						sel_155: 8
-						sel_156: 0
-						sel_153: 140 180
-						sel_317:
+						setLoop: 8
+						setCel: 0
+						posn: 140 180
+						addToPic:
 					)
 					((ScriptID 93 10) ; Watney
-						sel_155: 8
-						sel_156: 3
-						sel_153: 155 183
-						sel_317:
+						setLoop: 8
+						setCel: 3
+						posn: 155 183
+						addToPic:
 					)
 					((ScriptID 93 12) ; Ziggy
-						sel_155: 8
-						sel_156: 7
-						sel_153: 170 180
-						sel_317:
+						setLoop: 8
+						setCel: 7
+						posn: 170 180
+						addToPic:
 					)
 				)
 				(12
 					((ScriptID 93 5) ; O_Riley
-						sel_155: 8
-						sel_156: 0
-						sel_153: 140 180
-						sel_317:
+						setLoop: 8
+						setCel: 0
+						posn: 140 180
+						addToPic:
 					)
 					((ScriptID 93 10) ; Watney
-						sel_155: 8
-						sel_156: 3
-						sel_153: 155 183
-						sel_317:
+						setLoop: 8
+						setCel: 3
+						posn: 155 183
+						addToPic:
 					)
 					((ScriptID 93 12) ; Ziggy
-						sel_155: 8
-						sel_156: 7
-						sel_153: 170 180
-						sel_317:
+						setLoop: 8
+						setCel: 7
+						posn: 170 180
+						addToPic:
 					)
 				)
 				(13
 					((ScriptID 93 5) ; O_Riley
-						sel_155: 8
-						sel_156: 0
-						sel_153: 140 180
-						sel_317:
+						setLoop: 8
+						setCel: 0
+						posn: 140 180
+						addToPic:
 					)
 					((ScriptID 93 10) ; Watney
-						sel_155: 8
-						sel_156: 3
-						sel_153: 155 183
-						sel_317:
+						setLoop: 8
+						setCel: 3
+						posn: 155 183
+						addToPic:
 					)
 					((ScriptID 93 12) ; Ziggy
-						sel_155: 8
-						sel_156: 7
-						sel_153: 170 180
-						sel_317:
+						setLoop: 8
+						setCel: 7
+						posn: 170 180
+						addToPic:
 					)
 				)
 			)
 		)
-		(if (and (== gPrevRoomNum 340) (== gCurRoomNum (RotundaRgn sel_667:))) ; testRoom
+		(if (and (== gPrevRoomNum 340) (== gCurRoomNum (RotundaRgn convRoom:))) ; testRoom
 			(while (StepOn gEgo 8)
 				(gEgo
-					sel_1: (- (gEgo sel_1:) 1)
-					sel_0: (- (gEgo sel_0:) 1)
+					x: (- (gEgo x:) 1)
+					y: (- (gEgo y:) 1)
 				)
 			)
 		)
 	)
 
-	(method (sel_57)
-		(super sel_57:)
+	(method (doit)
+		(super doit:)
 		(cond
-			(sel_142)
-			((not (gUser sel_237:)))
+			(script)
+			((not (gUser canControl:)))
 			(
 				(and
 					(== gAct 2)
 					(StepOn gEgo 8)
-					(== gCurRoomNum (RotundaRgn sel_667:))
+					(== gCurRoomNum (RotundaRgn convRoom:))
 				)
-				(RotundaRgn sel_403:)
+				(RotundaRgn notify:)
 			)
 		)
 	)
 
-	(method (sel_111)
-		(super sel_111:)
+	(method (dispose)
+		(super dispose:)
 		(DisposeScript 2370)
 	)
 
-	(method (sel_300 param1)
+	(method (doVerb param1)
 		(if (== param1 4)
-			(gMessager sel_295: sel_213 param1 (if (> gAct 2) 1 else 2))
+			(gMessager say: noun param1 (if (> gAct 2) 1 else 2))
 		else
-			(super sel_300: param1)
+			(super doVerb: param1)
 		)
 	)
 )
 
 (instance sExitEast of Script ; UNUSED
 	(properties
-		sel_20 {sExitEast}
+		name {sExitEast}
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
-				(gGame sel_587:)
-				(gEgo sel_63: 9 sel_312: MoveFwd 30 self)
+				(gGame handsOff:)
+				(gEgo setPri: 9 setMotion: MoveFwd 30 self)
 			)
 			(1
-				(gEgo sel_349: 2)
-				(gCurRoom sel_399: (gCurRoom sel_410:))
+				(gEgo edgeHit: 2)
+				(gCurRoom newRoom: (gCurRoom east:))
 			)
 		)
 	)
@@ -377,175 +377,175 @@
 
 (instance giftShoppeDoor of Door
 	(properties
-		sel_20 {giftShoppeDoor}
-		sel_1 276
-		sel_0 145
-		sel_213 9
-		sel_303 257
-		sel_304 149
-		sel_2 371
-		sel_589 400
-		sel_597 300
-		sel_598 145
-		sel_599 0
-		sel_600 0
+		name {giftShoppeDoor}
+		x 276
+		y 145
+		noun 9
+		approachX 257
+		approachY 149
+		view 371
+		entranceTo 400
+		moveToX 300
+		moveToY 145
+		enterType 0
+		exitType 0
 	)
 
-	(method (sel_606)
-		(super sel_606: 255 140 271 140 288 152 273 152)
+	(method (createPoly)
+		(super createPoly: 255 140 271 140 288 152 273 152)
 	)
 )
 
 (instance westExitFeature of ExitFeature
 	(properties
-		sel_20 {westExitFeature}
-		sel_6 94
-		sel_8 189
-		sel_9 5
-		sel_33 12
-		sel_583 4
-		sel_213 4
+		name {westExitFeature}
+		nsTop 94
+		nsBottom 189
+		nsRight 5
+		cursor 12
+		exitDir 4
+		noun 4
 	)
 )
 
 (instance tables of Feature
 	(properties
-		sel_20 {tables}
-		sel_0 147
-		sel_213 8
-		sel_301 40
-		sel_302 4096
+		name {tables}
+		y 147
+		noun 8
+		sightAngle 40
+		onMeCheck 4096
 	)
 )
 
 (instance column1 of Feature
 	(properties
-		sel_20 {column1}
-		sel_1 35
-		sel_0 72
-		sel_213 1
-		sel_6 54
-		sel_7 30
-		sel_8 91
-		sel_9 40
-		sel_301 40
+		name {column1}
+		x 35
+		y 72
+		noun 1
+		nsTop 54
+		nsLeft 30
+		nsBottom 91
+		nsRight 40
+		sightAngle 40
 	)
 )
 
 (instance column2 of Feature
 	(properties
-		sel_20 {column2}
-		sel_1 100
-		sel_0 73
-		sel_213 1
-		sel_6 55
-		sel_7 95
-		sel_8 92
-		sel_9 105
-		sel_301 40
+		name {column2}
+		x 100
+		y 73
+		noun 1
+		nsTop 55
+		nsLeft 95
+		nsBottom 92
+		nsRight 105
+		sightAngle 40
 	)
 )
 
 (instance column3 of Feature
 	(properties
-		sel_20 {column3}
-		sel_1 168
-		sel_0 77
-		sel_213 1
-		sel_6 52
-		sel_7 163
-		sel_8 102
-		sel_9 173
-		sel_301 40
+		name {column3}
+		x 168
+		y 77
+		noun 1
+		nsTop 52
+		nsLeft 163
+		nsBottom 102
+		nsRight 173
+		sightAngle 40
 	)
 )
 
 (instance column4 of Feature
 	(properties
-		sel_20 {column4}
-		sel_1 231
-		sel_0 83
-		sel_213 1
-		sel_6 47
-		sel_7 226
-		sel_8 119
-		sel_9 237
-		sel_301 40
+		name {column4}
+		x 231
+		y 83
+		noun 1
+		nsTop 47
+		nsLeft 226
+		nsBottom 119
+		nsRight 237
+		sightAngle 40
 	)
 )
 
 (instance column5 of Feature
 	(properties
-		sel_20 {column5}
-		sel_1 312
-		sel_0 100
-		sel_213 1
-		sel_6 39
-		sel_7 305
-		sel_8 162
-		sel_9 319
-		sel_301 40
+		name {column5}
+		x 312
+		y 100
+		noun 1
+		nsTop 39
+		nsLeft 305
+		nsBottom 162
+		nsRight 319
+		sightAngle 40
 	)
 )
 
 (instance bench of Feature
 	(properties
-		sel_20 {bench}
-		sel_1 200
-		sel_0 116
-		sel_213 2
-		sel_6 108
-		sel_7 186
-		sel_8 120
-		sel_9 214
-		sel_301 40
+		name {bench}
+		x 200
+		y 116
+		noun 2
+		nsTop 108
+		nsLeft 186
+		nsBottom 120
+		nsRight 214
+		sightAngle 40
 	)
 )
 
 (instance alcove of Feature
 	(properties
-		sel_20 {alcove}
-		sel_1 198
-		sel_0 87
-		sel_213 3
-		sel_6 51
-		sel_7 174
-		sel_8 118
-		sel_9 223
-		sel_301 40
+		name {alcove}
+		x 198
+		y 87
+		noun 3
+		nsTop 51
+		nsLeft 174
+		nsBottom 118
+		nsRight 223
+		sightAngle 40
 	)
 )
 
 (instance doorway of Feature
 	(properties
-		sel_20 {doorway}
-		sel_1 261
-		sel_0 101
-		sel_213 9
-		sel_6 54
-		sel_7 244
-		sel_8 139
-		sel_9 278
-		sel_301 40
+		name {doorway}
+		x 261
+		y 101
+		noun 9
+		nsTop 54
+		nsLeft 244
+		nsBottom 139
+		nsRight 278
+		sightAngle 40
 	)
 
-	(method (sel_300)
-		(giftShoppeDoor sel_300: &rest)
+	(method (doVerb)
+		(giftShoppeDoor doVerb: &rest)
 	)
 )
 
 (instance partyATP1 of View
 	(properties
-		sel_20 {partyATP1}
-		sel_1 104
-		sel_0 103
-		sel_213 6
-		sel_2 374
-		sel_14 16384
+		name {partyATP1}
+		x 104
+		y 103
+		noun 6
+		view 374
+		signal 16384
 	)
 
-	(method (sel_110)
-		(= sel_4
+	(method (init)
+		(= cel
 			(switch (Random 0 4)
 				(0 2)
 				(1 7)
@@ -554,26 +554,26 @@
 				(4 29)
 			)
 		)
-		(= sel_3 (/ sel_4 16))
-		(= sel_4 (mod sel_4 16))
-		(= sel_103 1)
-		(= sel_105 (= sel_104 75))
-		(super sel_110:)
+		(= loop (/ cel 16))
+		(= cel (mod cel 16))
+		(= scaleSignal 1)
+		(= scaleY (= scaleX 75))
+		(super init:)
 	)
 )
 
 (instance partyATP2 of View
 	(properties
-		sel_20 {partyATP2}
-		sel_1 119
-		sel_0 105
-		sel_213 6
-		sel_2 374
-		sel_14 16384
+		name {partyATP2}
+		x 119
+		y 105
+		noun 6
+		view 374
+		signal 16384
 	)
 
-	(method (sel_110)
-		(= sel_4
+	(method (init)
+		(= cel
 			(switch (Random 0 5)
 				(0 3)
 				(1 4)
@@ -583,47 +583,47 @@
 				(5 31)
 			)
 		)
-		(= sel_3 (/ sel_4 16))
-		(= sel_4 (mod sel_4 16))
-		(super sel_110:)
+		(= loop (/ cel 16))
+		(= cel (mod cel 16))
+		(super init:)
 	)
 )
 
 (instance partyATP3 of View
 	(properties
-		sel_20 {partyATP3}
-		sel_1 171
-		sel_0 133
-		sel_213 6
-		sel_2 374
-		sel_14 16384
+		name {partyATP3}
+		x 171
+		y 133
+		noun 6
+		view 374
+		signal 16384
 	)
 
-	(method (sel_110)
-		(= sel_4
+	(method (init)
+		(= cel
 			(switch (Random 0 1)
 				(0 5)
 				(1 28)
 			)
 		)
-		(= sel_3 (/ sel_4 16))
-		(= sel_4 (mod sel_4 16))
-		(super sel_110:)
+		(= loop (/ cel 16))
+		(= cel (mod cel 16))
+		(super init:)
 	)
 )
 
 (instance partyATP4 of View
 	(properties
-		sel_20 {partyATP4}
-		sel_1 190
-		sel_0 126
-		sel_213 6
-		sel_2 374
-		sel_14 16384
+		name {partyATP4}
+		x 190
+		y 126
+		noun 6
+		view 374
+		signal 16384
 	)
 
-	(method (sel_110)
-		(= sel_4
+	(method (init)
+		(= cel
 			(switch (Random 0 5)
 				(0 0)
 				(1 1)
@@ -633,24 +633,24 @@
 				(5 23)
 			)
 		)
-		(= sel_3 (/ sel_4 16))
-		(= sel_4 (mod sel_4 16))
-		(super sel_110:)
+		(= loop (/ cel 16))
+		(= cel (mod cel 16))
+		(super init:)
 	)
 )
 
 (instance partyATP5 of View
 	(properties
-		sel_20 {partyATP5}
-		sel_1 226
-		sel_0 169
-		sel_213 6
-		sel_2 374
-		sel_14 16384
+		name {partyATP5}
+		x 226
+		y 169
+		noun 6
+		view 374
+		signal 16384
 	)
 
-	(method (sel_110)
-		(= sel_4
+	(method (init)
+		(= cel
 			(switch (Random 0 8)
 				(0 6)
 				(1 9)
@@ -663,20 +663,20 @@
 				(8 30)
 			)
 		)
-		(= sel_3 (/ sel_4 16))
-		(= sel_4 (mod sel_4 16))
-		(super sel_110:)
+		(= loop (/ cel 16))
+		(= cel (mod cel 16))
+		(super init:)
 	)
 )
 
 (instance partyATP6 of View
 	(properties
-		sel_20 {partyATP6}
-		sel_1 243
-		sel_0 177
-		sel_213 6
-		sel_2 374
-		sel_4 15
-		sel_14 16384
+		name {partyATP6}
+		x 243
+		y 177
+		noun 6
+		view 374
+		cel 15
+		signal 16384
 	)
 )

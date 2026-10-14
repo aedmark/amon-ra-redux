@@ -6,118 +6,118 @@
 
 (class Class_993_0 of Obj
 	(properties
-		sel_20 0
-		sel_90 0
+		name 0
+		handle 0
 	)
 
-	(method (sel_111)
-		(self sel_360:)
-		(super sel_111:)
+	(method (dispose)
+		(self close:)
+		(super dispose:)
 	)
 
-	(method (sel_112 param1)
-		(Format param1 993 0 sel_20) ; "File: %s"
+	(method (showStr param1)
+		(Format param1 993 0 name) ; "File: %s"
 	)
 
-	(method (sel_189 param1)
-		(= sel_90
+	(method (open param1)
+		(= handle
 			(switch argc
 				(0
-					(FileIO fiOPEN sel_20 0)
+					(FileIO fiOPEN name 0)
 				)
 				(1
-					(FileIO fiOPEN sel_20 param1)
+					(FileIO fiOPEN name param1)
 				)
 				(else 0)
 			)
 		)
-		(if (== sel_90 -1)
-			(= sel_90 0)
+		(if (== handle -1)
+			(= handle 0)
 		)
-		(return (if sel_90 self else 0))
+		(return (if handle self else 0))
 	)
 
-	(method (sel_355 param1 param2)
+	(method (readString param1 param2)
 		(if (!= argc 2)
 			(return 0)
 		)
-		(if (not sel_90)
-			(self sel_189: 1)
+		(if (not handle)
+			(self open: 1)
 		)
 		(return
-			(if sel_90
-				(FileIO fiREAD_STRING param1 param2 sel_90)
+			(if handle
+				(FileIO fiREAD_STRING param1 param2 handle)
 			else
 				0
 			)
 		)
 	)
 
-	(method (sel_356 param1 &tmp temp0)
-		(if (not sel_90)
-			(self sel_189:)
+	(method (writeString param1 &tmp temp0)
+		(if (not handle)
+			(self open:)
 		)
-		(if sel_90
+		(if handle
 			(for ((= temp0 0)) (< temp0 argc) ((++ temp0))
-				(FileIO fiWRITE_STRING sel_90 [param1 temp0])
+				(FileIO fiWRITE_STRING handle [param1 temp0])
 			)
 		)
 	)
 
-	(method (sel_357 param1 param2 &tmp temp0)
-		(if (not sel_90)
-			(self sel_189:)
+	(method (write param1 param2 &tmp temp0)
+		(if (not handle)
+			(self open:)
 		)
 		(return
-			(if sel_90
-				(FileIO fiWRITE sel_90 param1 param2)
+			(if handle
+				(FileIO fiWRITE handle param1 param2)
 			else
 				0
 			)
 		)
 	)
 
-	(method (sel_358 param1 param2)
+	(method (read param1 param2)
 		(if (!= argc 2)
 			(return 0)
 		)
-		(if (not sel_90)
-			(self sel_189: 1)
+		(if (not handle)
+			(self open: 1)
 		)
 		(return
-			(if sel_90
-				(FileIO fiREAD sel_90 param1 param2)
+			(if handle
+				(FileIO fiREAD handle param1 param2)
 			else
 				0
 			)
 		)
 	)
 
-	(method (sel_359 param1 param2 &tmp temp0)
+	(method (seek param1 param2 &tmp temp0)
 		(= temp0 (if (>= argc 2) param2 else 0))
-		(if (not sel_90)
-			(self sel_189: 1)
+		(if (not handle)
+			(self open: 1)
 		)
 		(return
-			(if sel_90
-				(FileIO fiSEEK sel_90 param1 temp0)
+			(if handle
+				(FileIO fiSEEK handle param1 temp0)
 			else
 				0
 			)
 		)
 	)
 
-	(method (sel_360)
-		(if sel_90
-			(FileIO fiCLOSE sel_90)
-			(= sel_90 0)
+	(method (close)
+		(if handle
+			(FileIO fiCLOSE handle)
+			(= handle 0)
 		)
 	)
 
-	(method (sel_81)
-		(if sel_90
-			(self sel_360:)
+	(method (delete)
+		(if handle
+			(self close:)
 		)
-		(FileIO fiUNLINK sel_20)
+		(FileIO fiUNLINK name)
 	)
 )

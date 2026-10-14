@@ -12,46 +12,46 @@
 
 (instance Pippin of Talker
 	(properties
-		sel_20 {Pippin}
-		sel_1 5
-		sel_0 5
-		sel_2 1882
-		sel_3 3
-		sel_537 150
-		sel_26 15
-		sel_549 105
-		sel_550 12
+		name {Pippin}
+		x 5
+		y 5
+		view 1882
+		loop 3
+		talkWidth 150
+		back 15
+		textX 105
+		textY 12
 	)
 
-	(method (sel_110)
-		(= sel_30 gUserFont)
-		(super sel_110: pippinBust pippinEyes pippinMouth &rest)
+	(method (init)
+		(= font gUserFont)
+		(super init: pippinBust pippinEyes pippinMouth &rest)
 	)
 )
 
 (instance pippinBust of Prop
 	(properties
-		sel_20 {pippinBust}
-		sel_2 1882
-		sel_3 1
+		name {pippinBust}
+		view 1882
+		loop 1
 	)
 )
 
 (instance pippinEyes of Prop
 	(properties
-		sel_20 {pippinEyes}
-		sel_6 36
-		sel_7 27
-		sel_2 1882
-		sel_3 2
+		name {pippinEyes}
+		nsTop 36
+		nsLeft 27
+		view 1882
+		loop 2
 	)
 )
 
 (instance pippinMouth of Prop
 	(properties
-		sel_20 {pippinMouth}
-		sel_6 57
-		sel_7 24
-		sel_2 1882
+		name {pippinMouth}
+		nsTop 57
+		nsLeft 24
+		view 1882
 	)
 )

@@ -12,56 +12,56 @@
 
 (instance Irmgaard of Talker
 	(properties
-		sel_20 {Irmgaard}
-		sel_1 0
-		sel_0 0
-		sel_3 1
-		sel_537 150
-		sel_26 15
-		sel_549 10
-		sel_550 10
+		name {Irmgaard}
+		x 0
+		y 0
+		loop 1
+		talkWidth 150
+		back 15
+		textX 10
+		textY 10
 	)
 
-	(method (sel_110)
-		(= sel_2 (if (== gCurRoomNum 155) 1156 else 828))
-		(= sel_30 gUserFont)
+	(method (init)
+		(= view (if (== gCurRoomNum 155) 1156 else 828))
+		(= font gUserFont)
 		(if (== gCurRoomNum 155)
-			(= sel_291 0)
-			(= sel_545 irmgaardBust)
-			(= sel_546 irmgaardEyes)
-			(= sel_547 irmgaardMouth)
-			(= sel_549 10)
-			(= sel_550 125)
+			(= disposeWhenDone 0)
+			(= bust irmgaardBust)
+			(= eyes irmgaardEyes)
+			(= mouth irmgaardMouth)
+			(= textX 10)
+			(= textY 125)
 		else
-			(= sel_547 (= sel_546 (= sel_545 0)))
+			(= mouth (= eyes (= bust 0)))
 		)
-		(super sel_110: &rest)
+		(super init: &rest)
 	)
 )
 
 (instance irmgaardBust of Prop
 	(properties
-		sel_20 {irmgaardBust}
-		sel_2 1156
-		sel_3 1
+		name {irmgaardBust}
+		view 1156
+		loop 1
 	)
 )
 
 (instance irmgaardEyes of Prop
 	(properties
-		sel_20 {irmgaardEyes}
-		sel_6 87
-		sel_7 258
-		sel_2 1156
-		sel_3 2
+		name {irmgaardEyes}
+		nsTop 87
+		nsLeft 258
+		view 1156
+		loop 2
 	)
 )
 
 (instance irmgaardMouth of Prop
 	(properties
-		sel_20 {irmgaardMouth}
-		sel_6 96
-		sel_7 258
-		sel_2 1156
+		name {irmgaardMouth}
+		nsTop 96
+		nsLeft 258
+		view 1156
 	)
 )

@@ -21,19 +21,19 @@
 
 (instance poly2720Code of Code
 	(properties
-		sel_20 {poly2720Code}
+		name {poly2720Code}
 	)
 
-	(method (sel_57 param1)
+	(method (doit param1)
 		(cond
 			((IsFlag 65)
-				(param1 sel_118: (poly2720b sel_110: sel_117:))
+				(param1 add: (poly2720b init: yourself:))
 			)
 			((IsFlag 121)
-				(param1 sel_118: (poly2720c sel_110: sel_117:))
+				(param1 add: (poly2720c init: yourself:))
 			)
 			(else
-				(param1 sel_118: (poly2720a sel_110: sel_117:))
+				(param1 add: (poly2720a init: yourself:))
 			)
 		)
 	)
@@ -41,36 +41,36 @@
 
 (instance poly2720a of Polygon
 	(properties
-		sel_20 {poly2720a}
+		name {poly2720a}
 	)
 
-	(method (sel_110)
-		(= sel_31 3)
-		(= sel_86 15)
-		(= sel_87 @local0)
+	(method (init)
+		(= type 3)
+		(= size 15)
+		(= points @local0)
 	)
 )
 
 (instance poly2720b of Polygon
 	(properties
-		sel_20 {poly2720b}
+		name {poly2720b}
 	)
 
-	(method (sel_110)
-		(= sel_31 3)
-		(= sel_86 19)
-		(= sel_87 @local30)
+	(method (init)
+		(= type 3)
+		(= size 19)
+		(= points @local30)
 	)
 )
 
 (instance poly2720c of Polygon
 	(properties
-		sel_20 {poly2720c}
+		name {poly2720c}
 	)
 
-	(method (sel_110)
-		(= sel_31 3)
-		(= sel_86 18)
-		(= sel_87 @local68)
+	(method (init)
+		(= type 3)
+		(= size 18)
+		(= points @local68)
 	)
 )

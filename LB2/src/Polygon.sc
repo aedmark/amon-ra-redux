@@ -6,24 +6,24 @@
 
 (class Polygon of Obj
 	(properties
-		sel_20 {Polygon}
-		sel_86 0
-		sel_87 0
-		sel_31 1
-		sel_256 0
+		name {Polygon}
+		size 0
+		points 0
+		type 1
+		dynamic 0
 	)
 
-	(method (sel_110 param1 &tmp [temp0 2])
-		(= sel_86 (/ argc 2))
-		(= sel_87 (Memory memALLOC_CRIT (* 2 argc)))
-		(StrCpy sel_87 @param1 (- (* argc 2)))
-		(= sel_256 1)
+	(method (init param1 &tmp [temp0 2])
+		(= size (/ argc 2))
+		(= points (Memory memALLOC_CRIT (* 2 argc)))
+		(StrCpy points @param1 (- (* argc 2)))
+		(= dynamic 1)
 	)
 
-	(method (sel_111)
-		(if (and sel_256 sel_87)
-			(Memory memFREE sel_87)
+	(method (dispose)
+		(if (and dynamic points)
+			(Memory memFREE points)
 		)
-		(super sel_111:)
+		(super dispose:)
 	)
 )

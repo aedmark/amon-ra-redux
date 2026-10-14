@@ -15,72 +15,72 @@
 
 (instance lb2GameControls of GameControls
 	(properties
-		sel_20 {lb2GameControls}
+		name {lb2GameControls}
 	)
 
-	(method (sel_110)
+	(method (init)
 		(= gGameControls self)
 		(self
-			sel_118:
+			add:
 				iconOk
 				detailSlider
-				(volumeSlider sel_348: gGame sel_519: 404 sel_117:)
-				(speedSlider sel_348: gEgo sel_519: 352 sel_117:)
+				(volumeSlider theObj: gGame selector: 404 yourself:)
+				(speedSlider theObj: gEgo selector: 352 yourself:)
 				textSlider
-				(iconSave sel_348: gGame sel_519: 75 sel_117:)
-				(iconRestore sel_348: gGame sel_519: 76 sel_117:)
-				(iconRestart sel_348: gGame sel_519: 101 sel_117:)
-				(iconQuit sel_348: gGame sel_519: 100 sel_117:)
-				(iconAbout sel_348: gGame sel_519: 613 sel_117:)
+				(iconSave theObj: gGame selector: 75 yourself:)
+				(iconRestore theObj: gGame selector: 76 yourself:)
+				(iconRestart theObj: gGame selector: 101 yourself:)
+				(iconQuit theObj: gGame selector: 100 yourself:)
+				(iconAbout theObj: gGame selector: 613 yourself:)
 				iconHelp
-			sel_119: 211 global169
-			sel_119: 212 global151
-			sel_227: iconHelp
-			sel_207: iconSave
-			sel_29: 2048
-			sel_32: gcWin
+			eachElementDo: 211 global169
+			eachElementDo: 212 global151
+			helpIconItem: iconHelp
+			curIcon: iconSave
+			state: 2048
+			window: gcWin
 		)
-		(super sel_110: &rest)
+		(super init: &rest)
 	)
 
-	(method (sel_111)
-		(super sel_111:)
-		(gGame sel_197: gNormalCursor)
+	(method (dispose)
+		(super dispose:)
+		(gGame setCursor: gNormalCursor)
 		(DisposeScript 934)
 		(DisposeScript 978)
 		(DisposeScript 24)
 	)
 
-	(method (sel_216)
-		(gGame sel_197: 999)
-		(super sel_216: &rest)
+	(method (show)
+		(gGame setCursor: 999)
+		(super show: &rest)
 	)
 )
 
 (instance gcWin of SysWindow
 	(properties
-		sel_20 {gcWin}
+		name {gcWin}
 	)
 
-	(method (sel_189 &tmp temp0 [temp1 4] temp5 [temp6 20])
-		(= sel_31 128)
-		(= sel_193 (/ (- 200 (+ (CelHigh 995 1 1) 6)) 2))
-		(= sel_194 (/ (- 320 (+ 191 (CelWide 995 0 1))) 2))
-		(= sel_195
+	(method (open &tmp temp0 [temp1 4] temp5 [temp6 20])
+		(= type 128)
+		(= top (/ (- 200 (+ (CelHigh 995 1 1) 6)) 2))
+		(= left (/ (- 320 (+ 191 (CelWide 995 0 1))) 2))
+		(= bottom
 			(+ (CelHigh 995 1 1) 6 (/ (- 200 (+ (CelHigh 995 1 1) 6)) 2))
 		)
-		(= sel_196
+		(= right
 			(+ 191 (CelWide 995 0 1) (/ (- 320 (+ 191 (CelWide 995 0 1))) 2))
 		)
-		(= sel_11 (- sel_194 6))
-		(= sel_10 (- sel_193 6))
-		(= sel_13 (+ sel_196 6))
-		(= sel_12 (+ sel_195 6))
-		(= sel_60 15)
-		(super sel_189:)
+		(= lsLeft (- left 6))
+		(= lsTop (- top 6))
+		(= lsRight (+ right 6))
+		(= lsBottom (+ bottom 6))
+		(= priority 15)
+		(super open:)
 		(= temp0 (GetPort))
 		(SetPort 0)
-		(Graph grFILL_BOX sel_193 sel_194 sel_195 sel_196 3 global151 15)
+		(Graph grFILL_BOX top left bottom right 3 global151 15)
 		(Graph grDRAW_LINE 33 49 33 269 global171 15)
 		(Graph grDRAW_LINE 34 50 34 268 global168 15)
 		(Graph grDRAW_LINE 35 51 35 267 global170 15)
@@ -116,115 +116,115 @@
 			temp5 ; UNINIT
 		)
 		(DrawCel 995 0 5 238 (Localize 134 60 60 60 60) temp5) ; UNINIT
-		(Graph grUPDATE_BOX sel_10 sel_11 sel_12 sel_13 1)
+		(Graph grUPDATE_BOX lsTop lsLeft lsBottom lsRight 1)
 		(SetPort temp0)
 	)
 )
 
 (instance detailSlider of Slider
 	(properties
-		sel_20 {detailSlider}
-		sel_2 995
-		sel_3 0
-		sel_4 1
-		sel_7 67
-		sel_6 35
-		sel_14 128
-		sel_213 1
-		sel_214 24
-		sel_215 12
-		sel_511 995
-		sel_520 1
-		sel_521 5
+		name {detailSlider}
+		view 995
+		loop 0
+		cel 1
+		nsLeft 67
+		nsTop 35
+		signal 128
+		noun 1
+		modNum 24
+		helpVerb 12
+		sliderView 995
+		bottomValue 1
+		topValue 5
 	)
 
-	(method (sel_57 param1)
+	(method (doit param1)
 		(if argc
-			(gGame sel_321: param1)
+			(gGame detailLevel: param1)
 		)
-		(gGame sel_321:)
+		(gGame detailLevel:)
 	)
 )
 
 (instance volumeSlider of Slider
 	(properties
-		sel_20 {volumeSlider}
-		sel_2 995
-		sel_3 0
-		sel_4 1
-		sel_7 107
-		sel_6 35
-		sel_14 128
-		sel_213 2
-		sel_214 24
-		sel_215 12
-		sel_511 995
-		sel_521 15
+		name {volumeSlider}
+		view 995
+		loop 0
+		cel 1
+		nsLeft 107
+		nsTop 35
+		signal 128
+		noun 2
+		modNum 24
+		helpVerb 12
+		sliderView 995
+		topValue 15
 	)
 )
 
 (instance speedSlider of Slider
 	(properties
-		sel_20 {speedSlider}
-		sel_2 995
-		sel_3 0
-		sel_4 1
-		sel_7 147
-		sel_6 35
-		sel_14 128
-		sel_213 3
-		sel_214 24
-		sel_215 12
-		sel_511 995
-		sel_520 15
+		name {speedSlider}
+		view 995
+		loop 0
+		cel 1
+		nsLeft 147
+		nsTop 35
+		signal 128
+		noun 3
+		modNum 24
+		helpVerb 12
+		sliderView 995
+		bottomValue 15
 	)
 
-	(method (sel_57 param1)
+	(method (doit param1)
 		(if argc
-			(gEgo sel_352: param1)
+			(gEgo setSpeed: param1)
 			(= gSpeed param1)
 		)
-		(gEgo sel_53:)
+		(gEgo moveSpeed:)
 	)
 
-	(method (sel_216)
-		(if (not (gUser sel_343:))
-			(= sel_14 132)
-			(= sel_512 9)
+	(method (show)
+		(if (not (gUser theControls:))
+			(= signal 132)
+			(= sliderLoop 9)
 		else
-			(= sel_512 0)
-			(= sel_14 128)
+			(= sliderLoop 0)
+			(= signal 128)
 		)
-		(super sel_216: &rest)
+		(super show: &rest)
 	)
 
-	(method (sel_219))
+	(method (mask))
 
-	(method (sel_181)
-		(if (gUser sel_343:)
-			(super sel_181: &rest)
+	(method (move)
+		(if (gUser theControls:)
+			(super move: &rest)
 		)
 	)
 )
 
 (instance textSlider of Slider
 	(properties
-		sel_20 {textSlider}
-		sel_2 995
-		sel_3 0
-		sel_4 1
-		sel_7 187
-		sel_6 35
-		sel_14 128
-		sel_213 4
-		sel_214 24
-		sel_215 12
-		sel_511 995
-		sel_520 24
-		sel_521 1
+		name {textSlider}
+		view 995
+		loop 0
+		cel 1
+		nsLeft 187
+		nsTop 35
+		signal 128
+		noun 4
+		modNum 24
+		helpVerb 12
+		sliderView 995
+		bottomValue 24
+		topValue 1
 	)
 
-	(method (sel_57 param1)
+	(method (doit param1)
 		(if argc
 			(= gTextSpeed param1)
 		)
@@ -234,114 +234,114 @@
 
 (instance iconSave of ControlIcon
 	(properties
-		sel_20 {iconSave}
-		sel_2 995
-		sel_3 2
-		sel_4 0
-		sel_7 8
-		sel_6 8
-		sel_37 8
-		sel_14 451
-		sel_213 5
-		sel_214 24
-		sel_215 12
+		name {iconSave}
+		view 995
+		loop 2
+		cel 0
+		nsLeft 8
+		nsTop 8
+		message 8
+		signal 451
+		noun 5
+		modNum 24
+		helpVerb 12
 	)
 )
 
 (instance iconRestore of ControlIcon
 	(properties
-		sel_20 {iconRestore}
-		sel_2 995
-		sel_3 3
-		sel_4 0
-		sel_7 8
-		sel_6 28
-		sel_37 8
-		sel_14 451
-		sel_213 6
-		sel_214 24
-		sel_215 12
+		name {iconRestore}
+		view 995
+		loop 3
+		cel 0
+		nsLeft 8
+		nsTop 28
+		message 8
+		signal 451
+		noun 6
+		modNum 24
+		helpVerb 12
 	)
 )
 
 (instance iconRestart of ControlIcon
 	(properties
-		sel_20 {iconRestart}
-		sel_2 995
-		sel_3 4
-		sel_4 0
-		sel_7 8
-		sel_6 48
-		sel_37 8
-		sel_14 451
-		sel_213 7
-		sel_214 24
-		sel_215 12
+		name {iconRestart}
+		view 995
+		loop 4
+		cel 0
+		nsLeft 8
+		nsTop 48
+		message 8
+		signal 451
+		noun 7
+		modNum 24
+		helpVerb 12
 	)
 )
 
 (instance iconQuit of ControlIcon
 	(properties
-		sel_20 {iconQuit}
-		sel_2 995
-		sel_3 5
-		sel_4 0
-		sel_7 8
-		sel_6 68
-		sel_37 8
-		sel_14 451
-		sel_213 8
-		sel_214 24
-		sel_215 12
+		name {iconQuit}
+		view 995
+		loop 5
+		cel 0
+		nsLeft 8
+		nsTop 68
+		message 8
+		signal 451
+		noun 8
+		modNum 24
+		helpVerb 12
 	)
 )
 
 (instance iconAbout of ControlIcon
 	(properties
-		sel_20 {iconAbout}
-		sel_2 995
-		sel_3 6
-		sel_4 0
-		sel_7 8
-		sel_6 88
-		sel_37 8
-		sel_14 451
-		sel_213 9
-		sel_214 24
-		sel_215 12
+		name {iconAbout}
+		view 995
+		loop 6
+		cel 0
+		nsLeft 8
+		nsTop 88
+		message 8
+		signal 451
+		noun 9
+		modNum 24
+		helpVerb 12
 	)
 )
 
 (instance iconHelp of IconI
 	(properties
-		sel_20 {iconHelp}
-		sel_2 995
-		sel_3 7
-		sel_4 0
-		sel_7 34
-		sel_6 88
-		sel_33 9
-		sel_37 12
-		sel_14 387
-		sel_213 10
-		sel_214 24
-		sel_215 12
+		name {iconHelp}
+		view 995
+		loop 7
+		cel 0
+		nsLeft 34
+		nsTop 88
+		cursor 9
+		message 12
+		signal 387
+		noun 10
+		modNum 24
+		helpVerb 12
 	)
 )
 
 (instance iconOk of IconI
 	(properties
-		sel_20 {iconOk}
-		sel_2 995
-		sel_3 8
-		sel_4 0
-		sel_7 8
-		sel_6 108
-		sel_33 9
-		sel_37 8
-		sel_14 451
-		sel_213 11
-		sel_214 24
-		sel_215 12
+		name {iconOk}
+		view 995
+		loop 8
+		cel 0
+		nsLeft 8
+		nsTop 108
+		cursor 9
+		message 8
+		signal 451
+		noun 11
+		modNum 24
+		helpVerb 12
 	)
 )

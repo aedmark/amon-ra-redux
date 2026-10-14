@@ -30,58 +30,58 @@
 )
 
 (procedure (ShowSplit funIsDisplay &tmp mainLang subLang)
-	(= subLang (gGame sel_85:))
-	(gGame sel_85: 0)
+	(= subLang (gGame subtitleLang:))
+	(gGame subtitleLang: 0)
 	(if funIsDisplay
 		(Display &rest)
 	else
 		(Prints &rest 124)
 	)
 	(if subLang
-		(= mainLang (gGame sel_84:))
-		(gGame sel_84: subLang)
+		(= mainLang (gGame printLang:))
+		(gGame printLang: subLang)
 		(if funIsDisplay
 			(Display &rest)
 		else
 			(Prints &rest)
 		)
-		(gGame sel_84: mainLang)
+		(gGame printLang: mainLang)
 	)
-	(gGame sel_85: subLang)
+	(gGame subtitleLang: subLang)
 )
 
 (procedure (LangSwitch EngVal ForVal EngForVal ForEngVal) ; UNUSED
 	(return
 		(cond
-			((== (gGame sel_84:) 1)
-				(if (or (< argc 3) (== (gGame sel_85:) 0)) EngVal else EngForVal)
+			((== (gGame printLang:) 1)
+				(if (or (< argc 3) (== (gGame subtitleLang:) 0)) EngVal else EngForVal)
 			)
-			((or (< argc 4) (== (gGame sel_85:) 0)) ForVal)
+			((or (< argc 4) (== (gGame subtitleLang:) 0)) ForVal)
 			(else ForEngVal)
 		)
 	)
 )
 
 (procedure (SaveSubLang &tmp subL)
-	(if (and (not savedSubLang) (= subL (gGame sel_85:)))
+	(if (and (not savedSubLang) (= subL (gGame subtitleLang:)))
 		(= savedSubLang subL)
-		(gGame sel_85: 0)
+		(gGame subtitleLang: 0)
 	)
 	(return subL)
 )
 
 (procedure (RestoreSubLang &tmp subL)
-	(if (and (= subL savedSubLang) (not (gGame sel_85:)))
-		(gGame sel_85: savedSubLang)
+	(if (and (= subL savedSubLang) (not (gGame subtitleLang:)))
+		(gGame subtitleLang: savedSubLang)
 		(= savedSubLang 0)
 	)
 	(return subL)
 )
 
 (procedure (SwapLangs &tmp subL) ; UNUSED
-	(if (= subL (gGame sel_85:))
-		(gGame sel_85: (gGame sel_84:))
-		(gGame sel_84: subL)
+	(if (= subL (gGame subtitleLang:))
+		(gGame subtitleLang: (gGame printLang:))
+		(gGame printLang: subL)
 		(return 1)
 	)
 )
@@ -92,20 +92,20 @@
 	else
 		(StrCpy @thisBuf bufOrNum)
 	)
-	(= mainL (gGame sel_84:))
-	(= subL (gGame sel_85:))
-	(gGame sel_84: 1 sel_85: 0)
+	(= mainL (gGame printLang:))
+	(= subL (gGame subtitleLang:))
+	(gGame printLang: 1 subtitleLang: 0)
 	(StrSplit engBuf @thisBuf 0)
 	(if (= altLang 0)
-		(gGame sel_84: 0)
+		(gGame printLang: 0)
 		(StrSplit forBuf @thisBuf 0)
 	else
 		(StrCpy forBuf {})
 	)
-	(gGame sel_84: mainL sel_85: subL)
+	(gGame printLang: mainL subtitleLang: subL)
 	(return engBuf)
 )
 
 (procedure (IfEnglishElse EngVal ForVal) ; UNUSED
-	(return (if (== (gGame sel_83:) 1) EngVal else ForVal))
+	(return (if (== (gGame parseLang:) 1) EngVal else ForVal))
 )

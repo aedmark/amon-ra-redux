@@ -30,109 +30,109 @@
 
 (instance rm640 of LBRoom
 	(properties
-		sel_20 {rm640}
-		sel_213 29
-		sel_408 640
-		sel_412 610
-		sel_108 85
+		name {rm640}
+		noun 29
+		picture 640
+		west 610
+		vanishingY 85
 	)
 
-	(method (sel_110)
-		(gEgo sel_110: sel_585: 831 sel_320: 155)
-		(self sel_414: 90)
+	(method (init)
+		(gEgo init: normalize: 831 setScale: 155)
+		(self setRegions: 90)
 		(switch gPrevRoomNum
-			(sel_412
-				(gEgo sel_349: 0 sel_253: 90)
+			(west
+				(gEgo edgeHit: 0 setHeading: 90)
 			)
 			(else
-				(gEgo sel_584: 1 sel_153: 160 160)
+				(gEgo wearingGown: 1 posn: 160 160)
 				(SetFlag 4)
-				(gGame sel_588:)
+				(gGame handsOn:)
 			)
 		)
-		(super sel_110:)
+		(super init:)
 		(LoadMany rsSOUND 640 641 643)
-		(westDoor sel_110:)
+		(westDoor init:)
 		(if (not (IsFlag 4))
 			(Load rsVIEW 646)
 			(cond
 				((not (TimeCheck $b102)) ; has 11:15 pm occurred?
 					(Load rsPIC 645)
-					(gGameMusic2 sel_40: 551 sel_99: 1 sel_3: -1 sel_39:)
-					(ernie_Yvette sel_110: sel_244: 42 sel_161: Fwd)
+					(gGameMusic2 number: 551 flags: 1 loop: -1 play:)
+					(ernie_Yvette init: cycleSpeed: 42 setCycle: Fwd)
 					(SetFlag 18)
-					(toolBoxClosed sel_110:)
-					(desk sel_110:)
-					(underDesk sel_110:)
-					(intercom sel_110:)
-					(mopBucket sel_110:)
-					(bear sel_110:)
-					(skeleton sel_110:)
-					(brooms sel_110:)
-					(block sel_110:)
-					(blotchOnWall sel_110:)
-					(light sel_110:)
-					(nautilus sel_110:)
-					(nefertiti sel_110:)
-					(squirrel sel_110:)
-					(heads sel_110:)
-					(beam1 sel_110:)
-					(beam2 sel_110:)
-					(leftStuff sel_110:)
-					(rightStuff sel_110:)
-					(rightmostStuff sel_110:)
-					(blender sel_110:)
-					(snakeLasso sel_311: 4 1 8 sel_110:)
+					(toolBoxClosed init:)
+					(desk init:)
+					(underDesk init:)
+					(intercom init:)
+					(mopBucket init:)
+					(bear init:)
+					(skeleton init:)
+					(brooms init:)
+					(block init:)
+					(blotchOnWall init:)
+					(light init:)
+					(nautilus init:)
+					(nefertiti init:)
+					(squirrel init:)
+					(heads init:)
+					(beam1 init:)
+					(beam2 init:)
+					(leftStuff init:)
+					(rightStuff init:)
+					(rightmostStuff init:)
+					(blender init:)
+					(snakeLasso approachVerbs: 4 1 8 init:)
 				)
 				((not (TimeCheck $1310)) ; has 1:45 am occurred?
-					(gGameMusic2 sel_40: 642 sel_99: 1 sel_3: -1 sel_39:)
+					(gGameMusic2 number: 642 flags: 1 loop: -1 play:)
 					(if (or (IsFlag 15) (Random 0 1))
 						(LoadMany rsVIEW 642 643)
-						(toolBoxClosed sel_110: sel_311: 4)
-						(toolBoxOpen sel_110: sel_311: 4 1)
+						(toolBoxClosed init: approachVerbs: 4)
+						(toolBoxOpen init: approachVerbs: 4 1)
 						(if (not (IsFlag 19))
-							(toolBoxOpen sel_102:)
+							(toolBoxOpen hide:)
 						)
-						(if (not (gEgo sel_238: 19))
-							(snakeLasso sel_311: 4 1 8 sel_110:)
+						(if (not (gEgo has: 19))
+							(snakeLasso approachVerbs: 4 1 8 init:)
 						)
-						(desk sel_110: sel_311: 1 8)
-						(underDesk sel_110: sel_311: 1 8)
-						(intercom sel_110:)
-						(mopBucket sel_110:)
-						(bear sel_110:)
-						(skeleton sel_110:)
-						(brooms sel_110:)
-						(block sel_110:)
+						(desk init: approachVerbs: 1 8)
+						(underDesk init: approachVerbs: 1 8)
+						(intercom init:)
+						(mopBucket init:)
+						(bear init:)
+						(skeleton init:)
+						(brooms init:)
+						(block init:)
 						(blotchOnWall
-							sel_156:
+							setCel:
 								(if (IsFlag 119)
-									(blotchOnWall sel_246:)
+									(blotchOnWall lastCel:)
 								else
 									0
 								)
-							sel_311: 4
-							sel_110:
+							approachVerbs: 4
+							init:
 						)
-						(light sel_110:)
-						(nautilus sel_110:)
-						(nefertiti sel_110:)
-						(squirrel sel_110:)
-						(heads sel_110:)
-						(beam1 sel_110:)
-						(beam2 sel_110:)
-						(leftStuff sel_110:)
-						(rightStuff sel_110:)
-						(rightmostStuff sel_110:)
-						(blender sel_110:)
+						(light init:)
+						(nautilus init:)
+						(nefertiti init:)
+						(squirrel init:)
+						(heads init:)
+						(beam1 init:)
+						(beam2 init:)
+						(leftStuff init:)
+						(rightStuff init:)
+						(rightmostStuff init:)
+						(blender init:)
 					else
 						((ScriptID 31 0) ; aErnie
-							sel_110:
-							sel_2: 824
-							sel_620: gCurRoomNum
-							sel_63: 9
-							sel_153: 108 140
-							sel_253: 90
+							init:
+							view: 824
+							room: gCurRoomNum
+							setPri: 9
+							posn: 108 140
+							setHeading: 90
 						)
 						(SetFlag 18)
 						(= local0 1)
@@ -140,142 +140,142 @@
 				)
 				(else
 					(Load rsPIC 645)
-					(gGameMusic2 sel_40: 551 sel_99: 1 sel_3: -1 sel_39:)
-					(ernie_Yvette sel_110: sel_155: 1 sel_244: 42 sel_161: Fwd)
+					(gGameMusic2 number: 551 flags: 1 loop: -1 play:)
+					(ernie_Yvette init: setLoop: 1 cycleSpeed: 42 setCycle: Fwd)
 					(SetFlag 18)
 				)
 			)
 		else
 			(LoadMany rsVIEW 642 643)
-			(gGameMusic2 sel_40: 642 sel_99: 1 sel_3: -1 sel_39:)
-			(toolBoxClosed sel_110: sel_311: 4)
-			(toolBoxOpen sel_110: sel_311: 4 1)
+			(gGameMusic2 number: 642 flags: 1 loop: -1 play:)
+			(toolBoxClosed init: approachVerbs: 4)
+			(toolBoxOpen init: approachVerbs: 4 1)
 			(if (not (IsFlag 19))
-				(toolBoxOpen sel_102:)
+				(toolBoxOpen hide:)
 			)
-			(desk sel_110: sel_311: 1 8)
-			(underDesk sel_110: sel_311: 1 8)
-			(if (not (gEgo sel_238: 19))
-				(snakeLasso sel_311: 4 1 8 sel_110:)
+			(desk init: approachVerbs: 1 8)
+			(underDesk init: approachVerbs: 1 8)
+			(if (not (gEgo has: 19))
+				(snakeLasso approachVerbs: 4 1 8 init:)
 			)
-			(intercom sel_110:)
-			(mopBucket sel_110:)
-			(bear sel_110:)
-			(skeleton sel_110:)
-			(brooms sel_110:)
-			(block sel_110:)
+			(intercom init:)
+			(mopBucket init:)
+			(bear init:)
+			(skeleton init:)
+			(brooms init:)
+			(block init:)
 			(blotchOnWall
-				sel_156:
+				setCel:
 					(if (IsFlag 119)
-						(blotchOnWall sel_246:)
+						(blotchOnWall lastCel:)
 					else
 						0
 					)
-				sel_311: 4
-				sel_110:
+				approachVerbs: 4
+				init:
 			)
-			(light sel_110:)
-			(nautilus sel_110:)
-			(nefertiti sel_110:)
-			(squirrel sel_110:)
-			(heads sel_110:)
-			(beam1 sel_110:)
-			(beam2 sel_110:)
-			(leftStuff sel_110:)
-			(rightStuff sel_110:)
-			(rightmostStuff sel_110:)
-			(blender sel_110:)
+			(light init:)
+			(nautilus init:)
+			(nefertiti init:)
+			(squirrel init:)
+			(heads init:)
+			(beam1 init:)
+			(beam2 init:)
+			(leftStuff init:)
+			(rightStuff init:)
+			(rightmostStuff init:)
+			(blender init:)
 		)
 	)
 
-	(method (sel_300 param1)
+	(method (doVerb param1)
 		(switch param1
 			(3
 				(if local3
-					(roomActions sel_300:)
+					(roomActions doVerb:)
 				else
-					(gCurRoom sel_146: sKickOut)
+					(gCurRoom setScript: sKickOut)
 				)
 			)
 			(else
 				(if local3
-					(roomActions sel_300:)
+					(roomActions doVerb:)
 				else
-					(super sel_300: param1)
+					(super doVerb: param1)
 				)
 			)
 		)
 	)
 
-	(method (sel_145)
-		(if (or sel_142 sel_365 (westDoor sel_4:))
-			(ernieTimer sel_162: self 10)
+	(method (cue)
+		(if (or script inset (westDoor cel:))
+			(ernieTimer setReal: self 10)
 		else
-			(gCurRoom sel_146: sErnieKickOut)
+			(gCurRoom setScript: sErnieKickOut)
 		)
 	)
 
-	(method (sel_111)
-		(if (gWalkHandler sel_122: gCurRoom)
-			(gWalkHandler sel_81: gCurRoom)
+	(method (dispose)
+		(if (gWalkHandler contains: gCurRoom)
+			(gWalkHandler delete: gCurRoom)
 		)
 		(if (not (IsFlag 18))
 			(SetFlag 15)
 		else
 			(ClearFlag 15)
 		)
-		(ernieTimer sel_111: sel_81:)
-		(gGameMusic2 sel_170:)
-		(super sel_111:)
+		(ernieTimer dispose: delete:)
+		(gGameMusic2 fade:)
+		(super dispose:)
 	)
 )
 
 (instance sEnterErnie1 of Script
 	(properties
-		sel_20 {sEnterErnie1}
+		name {sEnterErnie1}
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
-				(gGame sel_587:)
-				(gEgo sel_253: 46)
-				(ernie_Yvette sel_161: ForwardCounter 2 self)
+				(gGame handsOff:)
+				(gEgo setHeading: 46)
+				(ernie_Yvette setCycle: ForwardCounter 2 self)
 			)
 			(1
-				(gCast sel_119: 102)
-				(gCurRoom sel_417: 645 9)
-				(= sel_137 4)
+				(gCast eachElementDo: 102)
+				(gCurRoom drawPic: 645 9)
+				(= seconds 4)
 			)
 			(2
-				(gCurRoom sel_417: 640 9)
-				(gCast sel_119: 216)
-				(= sel_139 90)
+				(gCurRoom drawPic: 640 9)
+				(gCast eachElementDo: 216)
+				(= ticks 90)
 			)
 			(3
 				(ernie_Yvette
-					sel_155: 2
-					sel_156: 0
-					sel_244: 12
-					sel_161: End self
+					setLoop: 2
+					setCel: 0
+					cycleSpeed: 12
+					setCycle: End self
 				)
 			)
 			(4
-				(gMessager sel_295: 27 0 1)
-				(= sel_136 1)
+				(gMessager say: 27 0 1)
+				(= cycles 1)
 			)
 			(5
-				(gWalkHandler sel_129: gCurRoom)
-				(gCast sel_119: 299 roomActions)
-				(westDoor sel_299: 0)
-				(gFeatures sel_119: 299 roomActions)
+				(gWalkHandler addToFront: gCurRoom)
+				(gCast eachElementDo: 299 roomActions)
+				(westDoor actions: 0)
+				(gFeatures eachElementDo: 299 roomActions)
 				(= local3 1)
-				(gGame sel_588:)
-				(= sel_137 15)
+				(gGame handsOn:)
+				(= seconds 15)
 			)
 			(6
-				(gCurRoom sel_146: sKickOut)
-				(self sel_111:)
+				(gCurRoom setScript: sKickOut)
+				(self dispose:)
 			)
 		)
 	)
@@ -283,54 +283,54 @@
 
 (instance sEnterErnie2 of Script
 	(properties
-		sel_20 {sEnterErnie2}
+		name {sEnterErnie2}
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
-				(gGame sel_587:)
-				(gEgo sel_253: 0)
-				(ernie_Yvette sel_161: ForwardCounter 2 self)
+				(gGame handsOff:)
+				(gEgo setHeading: 0)
+				(ernie_Yvette setCycle: ForwardCounter 2 self)
 			)
 			(1
-				(gCast sel_119: 102)
-				(gCurRoom sel_417: 645 9)
-				(= sel_137 4)
+				(gCast eachElementDo: 102)
+				(gCurRoom drawPic: 645 9)
+				(= seconds 4)
 			)
 			(2
-				(gCurRoom sel_417: 640 9)
-				(gCast sel_119: 216)
-				(= sel_139 90)
+				(gCurRoom drawPic: 640 9)
+				(gCast eachElementDo: 216)
+				(= ticks 90)
 			)
 			(3
 				(ernie_Yvette
-					sel_155: 2
-					sel_156: 0
-					sel_244: 12
-					sel_161: End self
+					setLoop: 2
+					setCel: 0
+					cycleSpeed: 12
+					setCycle: End self
 				)
 			)
 			(4
-				(gMessager sel_295: 27 0 2)
-				(= sel_139 60)
+				(gMessager say: 27 0 2)
+				(= ticks 60)
 			)
 			(5
-				(gEgo sel_253: 180 self)
+				(gEgo setHeading: 180 self)
 			)
 			(6
 				(gEgo
-					sel_2: 646
-					sel_155: 0
-					sel_156: 0
-					sel_244: 12
-					sel_161: End self
+					view: 646
+					setLoop: 0
+					setCel: 0
+					cycleSpeed: 12
+					setCycle: End self
 				)
 			)
 			(7
-				(gEgo sel_585: 831 sel_3: 2)
-				(westDoor sel_300: 4)
-				(self sel_111:)
+				(gEgo normalize: 831 loop: 2)
+				(westDoor doVerb: 4)
+				(self dispose:)
 			)
 		)
 	)
@@ -338,45 +338,45 @@
 
 (instance sErnieAloneKick of Script
 	(properties
-		sel_20 {sErnieAloneKick}
+		name {sErnieAloneKick}
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
-				(gGame sel_587:)
-				((ScriptID 31 0) sel_155: 7 sel_156: 4) ; aErnie
-				(= sel_136 4)
+				(gGame handsOff:)
+				((ScriptID 31 0) setLoop: 7 setCel: 4) ; aErnie
+				(= cycles 4)
 			)
 			(1
-				((ScriptID 31 0) sel_156: 2) ; aErnie
-				(= sel_136 1)
+				((ScriptID 31 0) setCel: 2) ; aErnie
+				(= cycles 1)
 			)
 			(2
 				(if (Random 0 1)
-					(gMessager sel_295: 27 0 3)
+					(gMessager say: 27 0 3)
 				else
-					(gMessager sel_295: 27 0 6)
+					(gMessager say: 27 0 6)
 				)
-				(= sel_139 60)
+				(= ticks 60)
 			)
 			(3
-				(gEgo sel_253: 180 self)
+				(gEgo setHeading: 180 self)
 			)
 			(4
 				(gEgo
-					sel_2: 646
-					sel_155: 0
-					sel_156: 0
-					sel_244: 12
-					sel_161: End self
+					view: 646
+					setLoop: 0
+					setCel: 0
+					cycleSpeed: 12
+					setCycle: End self
 				)
 			)
 			(5
-				(gEgo sel_585: 831 sel_3: 2)
+				(gEgo normalize: 831 loop: 2)
 				(SetFlag 18)
-				(westDoor sel_300: 4)
-				(self sel_111:)
+				(westDoor doVerb: 4)
+				(self dispose:)
 			)
 		)
 	)
@@ -384,33 +384,33 @@
 
 (instance sErnieAloneAsk of Script
 	(properties
-		sel_20 {sErnieAloneAsk}
+		name {sErnieAloneAsk}
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
-				(gGame sel_587:)
-				((ScriptID 31 0) sel_155: 7 sel_156: 4) ; aErnie
-				(= sel_136 4)
+				(gGame handsOff:)
+				((ScriptID 31 0) setLoop: 7 setCel: 4) ; aErnie
+				(= cycles 4)
 			)
 			(1
-				((ScriptID 31 0) sel_156: 2) ; aErnie
-				(= sel_136 1)
+				((ScriptID 31 0) setCel: 2) ; aErnie
+				(= cycles 1)
 			)
 			(2
-				(gMessager sel_295: 30)
-				(= sel_136 1)
+				(gMessager say: 30)
+				(= cycles 1)
 			)
 			(3
-				(gWalkHandler sel_129: gCurRoom)
-				(gCast sel_119: 299 roomActions)
-				(westDoor sel_299: 0)
-				((ScriptID 31 0) sel_299: ernieActions) ; aErnie
-				(gFeatures sel_119: 299 roomActions)
+				(gWalkHandler addToFront: gCurRoom)
+				(gCast eachElementDo: 299 roomActions)
+				(westDoor actions: 0)
+				((ScriptID 31 0) actions: ernieActions) ; aErnie
+				(gFeatures eachElementDo: 299 roomActions)
 				(= local3 1)
-				(gGame sel_588:)
-				(self sel_111:)
+				(gGame handsOn:)
+				(self dispose:)
 			)
 		)
 	)
@@ -418,72 +418,72 @@
 
 (instance sErnieKickOut of Script
 	(properties
-		sel_20 {sErnieKickOut}
+		name {sErnieKickOut}
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
-				(gGame sel_587:)
+				(gGame handsOff:)
 				((ScriptID 31 0) ; aErnie
-					sel_110:
-					sel_2: 824
-					sel_620: gCurRoomNum
-					sel_153: (westDoor sel_597:) (westDoor sel_598:)
-					sel_253: 90
+					init:
+					view: 824
+					room: gCurRoomNum
+					posn: (westDoor moveToX:) (westDoor moveToY:)
+					setHeading: 90
 				)
-				(westDoor sel_189:)
+				(westDoor open:)
 			)
 			(1
-				(if (and (< (gEgo sel_1:) 127) (< (gEgo sel_0:) 165))
-					(gEgo sel_312: PolyPath 124 160 self)
+				(if (and (< (gEgo x:) 127) (< (gEgo y:) 165))
+					(gEgo setMotion: PolyPath 124 160 self)
 				else
-					(= sel_136 1)
+					(= cycles 1)
 				)
 			)
 			(2
-				(Face gEgo (+ (westDoor sel_303:) 30) (westDoor sel_304:))
+				(Face gEgo (+ (westDoor approachX:) 30) (westDoor approachY:))
 				((ScriptID 31 0) ; aErnie
-					sel_312:
+					setMotion:
 						PolyPath
-						(+ (westDoor sel_303:) 30)
-						(westDoor sel_304:)
+						(+ (westDoor approachX:) 30)
+						(westDoor approachY:)
 						self
 				)
 			)
 			(3
 				(Face (ScriptID 31 0) gEgo) ; aErnie
-				(westDoor sel_360:)
+				(westDoor close:)
 			)
 			(4
 				(cond
 					((IsFlag 96)
-						(gMessager sel_295: 27 0 10)
+						(gMessager say: 27 0 10)
 					)
 					((IsFlag 95)
-						(gMessager sel_295: 27 0 9)
+						(gMessager say: 27 0 9)
 						(SetFlag 96)
 					)
 					(else
-						(gMessager sel_295: 27 0 8)
+						(gMessager say: 27 0 8)
 						(SetFlag 95)
 					)
 				)
-				(= sel_136 1)
+				(= cycles 1)
 			)
 			(5
 				(gEgo
-					sel_312:
+					setMotion:
 						PolyPath
-						(westDoor sel_303:)
-						(westDoor sel_304:)
+						(westDoor approachX:)
+						(westDoor approachY:)
 						self
 				)
 			)
 			(6
 				(SetFlag 18)
-				(westDoor sel_300: 4)
-				(self sel_111:)
+				(westDoor doVerb: 4)
+				(self dispose:)
 			)
 		)
 	)
@@ -491,41 +491,41 @@
 
 (instance sKickOut of Script
 	(properties
-		sel_20 {sKickOut}
+		name {sKickOut}
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
-				(gGame sel_587:)
-				(gEgo sel_253: 0)
-				(= sel_136 1)
+				(gGame handsOff:)
+				(gEgo setHeading: 0)
+				(= cycles 1)
 			)
 			(1
 				(if local2
-					(gMessager sel_295: 27 0 6)
+					(gMessager say: 27 0 6)
 				else
-					(gMessager sel_295: 27 0 4)
+					(gMessager say: 27 0 4)
 				)
-				(= sel_139 60)
+				(= ticks 60)
 			)
 			(2
-				(gEgo sel_253: 180 self)
+				(gEgo setHeading: 180 self)
 			)
 			(3
 				(gEgo
-					sel_2: 646
-					sel_155: 0
-					sel_156: 0
-					sel_244: 12
-					sel_161: End self
+					view: 646
+					setLoop: 0
+					setCel: 0
+					cycleSpeed: 12
+					setCycle: End self
 				)
 			)
 			(4
-				(gEgo sel_585: 831 sel_3: 2)
-				(westDoor sel_300: 4)
+				(gEgo normalize: 831 loop: 2)
+				(westDoor doVerb: 4)
 				(SetFlag 18)
-				(self sel_111:)
+				(self dispose:)
 			)
 		)
 	)
@@ -533,21 +533,21 @@
 
 (instance sPlayIntercom of Script
 	(properties
-		sel_20 {sPlayIntercom}
+		name {sPlayIntercom}
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
-				(= sel_137 3)
+				(= seconds 3)
 			)
 			(1
-				(gMessager sel_295: 4 0 5)
-				(= sel_136 1)
+				(gMessager say: 4 0 5)
+				(= cycles 1)
 			)
 			(2
 				(SetFlag 17)
-				(self sel_111:)
+				(self dispose:)
 			)
 		)
 	)
@@ -555,40 +555,40 @@
 
 (instance sGetWireCutters of Script
 	(properties
-		sel_20 {sGetWireCutters}
+		name {sGetWireCutters}
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
-				(gGame sel_587:)
+				(gGame handsOff:)
 				(gEgo
-					sel_2: 642
-					sel_155: 0
-					sel_156: 0
-					sel_244: 12
-					sel_161: End self
+					view: 642
+					setLoop: 0
+					setCel: 0
+					cycleSpeed: 12
+					setCycle: End self
 				)
 			)
 			(1
-				(gEgo sel_155: 1 sel_156: 0 sel_161: End self)
+				(gEgo setLoop: 1 setCel: 0 setCycle: End self)
 			)
 			(2
-				(gEgo sel_161: Beg self)
+				(gEgo setCycle: Beg self)
 			)
 			(3
 				(gEgo
-					sel_155: 0
-					sel_156: (gEgo sel_246:)
-					sel_161: Beg self
+					setLoop: 0
+					setCel: (gEgo lastCel:)
+					setCycle: Beg self
 				)
 			)
 			(4
-				(gEgo sel_350: 10 sel_585: 831 sel_3: 1)
-				((ScriptID 21 0) sel_57: 779) ; addCluesCode
-				(gGame sel_87: 1 145)
-				(gGame sel_588:)
-				(self sel_111:)
+				(gEgo get: 10 normalize: 831 loop: 1)
+				((ScriptID 21 0) doit: 779) ; addCluesCode
+				(gGame points: 1 145)
+				(gGame handsOn:)
+				(self dispose:)
 			)
 		)
 	)
@@ -596,39 +596,39 @@
 
 (instance sLookLasso of Script
 	(properties
-		sel_20 {sLookLasso}
+		name {sLookLasso}
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
-				(gGame sel_587:)
-				(gEgo sel_253: 270 self)
+				(gGame handsOff:)
+				(gEgo setHeading: 270 self)
 			)
 			(1
 				(gEgo
-					sel_2: 643
-					sel_155: 0
-					sel_156: 0
-					sel_244: 12
-					sel_161: End self
+					view: 643
+					setLoop: 0
+					setCel: 0
+					cycleSpeed: 12
+					setCycle: End self
 				)
 			)
 			(2
-				(= sel_139 60)
+				(= ticks 60)
 			)
 			(3
-				(gEgo sel_161: Beg self)
+				(gEgo setCycle: Beg self)
 			)
 			(4
-				(if (gEgo sel_238: 19)
-					(gMessager sel_295: 24 1)
+				(if (gEgo has: 19)
+					(gMessager say: 24 1)
 				else
-					(gCurRoom sel_422: inSnakeLasso)
+					(gCurRoom setInset: inSnakeLasso)
 				)
-				(gEgo sel_585: 831 sel_3: 1)
-				(gGame sel_588:)
-				(self sel_111:)
+				(gEgo normalize: 831 loop: 1)
+				(gGame handsOn:)
+				(self dispose:)
 			)
 		)
 	)
@@ -636,34 +636,34 @@
 
 (instance sGetLasso of Script
 	(properties
-		sel_20 {sGetLasso}
+		name {sGetLasso}
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
-				(gGame sel_587:)
+				(gGame handsOff:)
 				(gEgo
-					sel_2: 643
-					sel_155: 3
-					sel_156: 0
-					sel_244: 12
-					sel_161: End self
+					view: 643
+					setLoop: 3
+					setCel: 0
+					cycleSpeed: 12
+					setCycle: End self
 				)
 			)
 			(1
-				(snakeLasso sel_111:)
-				(= sel_139 30)
+				(snakeLasso dispose:)
+				(= ticks 30)
 			)
 			(2
-				(gEgo sel_161: Beg self)
+				(gEgo setCycle: Beg self)
 			)
 			(3
-				(gEgo sel_350: 19 sel_585: 831 sel_3: 1)
-				((ScriptID 21 0) sel_57: 788) ; addCluesCode
-				(gGame sel_87: 1 141)
-				(gGame sel_588:)
-				(self sel_111:)
+				(gEgo get: 19 normalize: 831 loop: 1)
+				((ScriptID 21 0) doit: 788) ; addCluesCode
+				(gGame points: 1 141)
+				(gGame handsOn:)
+				(self dispose:)
 			)
 		)
 	)
@@ -671,17 +671,17 @@
 
 (instance sLookWireCutters of Script
 	(properties
-		sel_20 {sLookWireCutters}
+		name {sLookWireCutters}
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
-				(gEgo sel_312: PolyPath 32 172 self)
+				(gEgo setMotion: PolyPath 32 172 self)
 			)
 			(1
-				(gCurRoom sel_422: inWireCutter)
-				(self sel_111:)
+				(gCurRoom setInset: inWireCutter)
+				(self dispose:)
 			)
 		)
 	)
@@ -689,43 +689,43 @@
 
 (instance sBlotchTime of Script
 	(properties
-		sel_20 {sBlotchTime}
+		name {sBlotchTime}
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
-				(gGame sel_587:)
+				(gGame handsOff:)
 				(gEgo
-					sel_2: 640
-					sel_155: 7
-					sel_156: 0
-					sel_244: 12
-					sel_161: End self
+					view: 640
+					setLoop: 7
+					setCel: 0
+					cycleSpeed: 12
+					setCycle: End self
 				)
 			)
 			(1
-				(= sel_139 20)
+				(= ticks 20)
 			)
 			(2
-				(gEgo sel_161: Beg)
-				(blotchOnWall sel_161: End self)
-				(sFX sel_40: 558 sel_3: 1 sel_99: 5 sel_39:)
+				(gEgo setCycle: Beg)
+				(blotchOnWall setCycle: End self)
+				(sFX number: 558 loop: 1 flags: 5 play:)
 			)
 			(3
-				(sFX sel_40: 721 sel_3: -1 sel_99: 5 sel_39:)
+				(sFX number: 721 loop: -1 flags: 5 play:)
 				(SetFlag 119)
-				(= sel_139 180)
+				(= ticks 180)
 			)
 			(4
-				(sFX sel_167:)
-				(= sel_136 1)
+				(sFX stop:)
+				(= cycles 1)
 			)
 			(5
-				(gEgo sel_585: 831 sel_3: 1)
-				(gMessager sel_295: 10 4 11)
-				(gGame sel_588:)
-				(self sel_111:)
+				(gEgo normalize: 831 loop: 1)
+				(gMessager say: 10 4 11)
+				(gGame handsOn:)
+				(self dispose:)
 			)
 		)
 	)
@@ -733,34 +733,34 @@
 
 (instance blotchOnWall of Prop
 	(properties
-		sel_20 {blotchOnWall}
-		sel_1 54
-		sel_0 103
-		sel_213 10
-		sel_303 66
-		sel_304 145
-		sel_2 640
-		sel_3 6
+		name {blotchOnWall}
+		x 54
+		y 103
+		noun 10
+		approachX 66
+		approachY 145
+		view 640
+		loop 6
 	)
 
-	(method (sel_300 param1)
+	(method (doVerb param1)
 		(switch param1
 			(1
 				(if (IsFlag 119)
-					(gMessager sel_295: 10 1 12)
+					(gMessager say: 10 1 12)
 				else
-					(gMessager sel_295: 10 1 11)
+					(gMessager say: 10 1 11)
 				)
 			)
 			(4
 				(if (IsFlag 119)
-					(gMessager sel_295: 10 4 12)
+					(gMessager say: 10 4 12)
 				else
-					(gCurRoom sel_146: sBlotchTime)
+					(gCurRoom setScript: sBlotchTime)
 				)
 			)
 			(else
-				(super sel_300: param1)
+				(super doVerb: param1)
 			)
 		)
 	)
@@ -768,46 +768,46 @@
 
 (instance ernie_Yvette of Prop
 	(properties
-		sel_20 {ernie&Yvette}
-		sel_1 113
-		sel_0 143
-		sel_2 641
-		sel_14 16385
-		sel_244 12
+		name {ernie&Yvette}
+		x 113
+		y 143
+		view 641
+		signal 16385
+		cycleSpeed 12
 	)
 )
 
 (instance roomActions of WrapMusic
 	(properties
-		sel_20 {roomActions}
+		name {roomActions}
 	)
 
-	(method (sel_300)
+	(method (doVerb)
 		(if local1
-			(gMessager sel_295: 30 0 7)
+			(gMessager say: 30 0 7)
 			(= local1 0)
 			(= local2 1)
 		else
-			(gCurRoom sel_146: sKickOut)
+			(gCurRoom setScript: sKickOut)
 		)
 	)
 )
 
 (instance ernieActions of WrapMusic
 	(properties
-		sel_20 {ernieActions}
+		name {ernieActions}
 	)
 
-	(method (sel_300 param1)
+	(method (doVerb param1)
 		(switch param1
 			(1
-				(gMessager sel_295: 1 1 24 0 0 1893)
+				(gMessager say: 1 1 24 0 0 1893)
 			)
 			(4
-				(gMessager sel_295: 1 4 24 0 0 1893)
+				(gMessager say: 1 4 24 0 0 1893)
 			)
 			(2
-				(gMessager sel_295: 1 2 24 0 0 1893)
+				(gMessager say: 1 2 24 0 0 1893)
 			)
 			(else 0)
 		)
@@ -816,73 +816,73 @@
 
 (instance westDoor of Door
 	(properties
-		sel_20 {westDoor}
-		sel_1 38
-		sel_0 94
-		sel_213 1
-		sel_303 70
-		sel_304 152
-		sel_2 640
-		sel_3 5
-		sel_60 10
-		sel_14 16
-		sel_589 610
-		sel_597 12
-		sel_598 143
-		sel_599 0
-		sel_600 0
+		name {westDoor}
+		x 38
+		y 94
+		noun 1
+		approachX 70
+		approachY 152
+		view 640
+		loop 5
+		priority 10
+		signal 16
+		entranceTo 610
+		moveToX 12
+		moveToY 143
+		enterType 0
+		exitType 0
 	)
 
-	(method (sel_606)
-		(super sel_606: 13 150 40 138 47 145 22 155)
+	(method (createPoly)
+		(super createPoly: 13 150 40 138 47 145 22 155)
 	)
 
-	(method (sel_145)
-		(if (== (gCurRoom sel_142:) sErnieKickOut)
-			(if (== sel_29 1)
-				(global95 sel_81: sel_603)
+	(method (cue)
+		(if (== (gCurRoom script:) sErnieKickOut)
+			(if (== state 1)
+				(global95 delete: doorPoly)
 			)
-			(sErnieKickOut sel_145:)
+			(sErnieKickOut cue:)
 		else
-			(super sel_145:)
-			(if (== sel_29 0)
-				(gTheIconBar sel_177: 7)
+			(super cue:)
+			(if (== state 0)
+				(gTheIconBar enable: 7)
 				(cond
 					((IsFlag 4)
 						(if (and (not (IsFlag 17)) (not (IsFlag 22)))
-							(gCurRoom sel_146: sPlayIntercom)
+							(gCurRoom setScript: sPlayIntercom)
 						)
 					)
 					((not (TimeCheck $b102)) ; has 11:15 pm occurred?
-						(gCurRoom sel_146: sEnterErnie1)
+						(gCurRoom setScript: sEnterErnie1)
 					)
 					((not (TimeCheck $c304)) ; has 12:45 am occurred?
 						(if local0
-							(gCurRoom sel_146: sErnieAloneKick)
+							(gCurRoom setScript: sErnieAloneKick)
 						else
 							(ernieTimer
-								sel_162: gCurRoom (if (IsFlag 96) 30 else 60)
+								setReal: gCurRoom (if (IsFlag 96) 30 else 60)
 							)
 							(if (and (not (IsFlag 17)) (not (IsFlag 22)))
-								(gCurRoom sel_146: sPlayIntercom)
+								(gCurRoom setScript: sPlayIntercom)
 							)
 						)
 					)
 					((not (TimeCheck $1310)) ; has 1:45 am occurred?
 						(if local0
 							(= local1 1)
-							(gCurRoom sel_146: sErnieAloneAsk)
+							(gCurRoom setScript: sErnieAloneAsk)
 						else
 							(ernieTimer
-								sel_162: gCurRoom (if (IsFlag 96) 30 else 60)
+								setReal: gCurRoom (if (IsFlag 96) 30 else 60)
 							)
 							(if (and (not (IsFlag 17)) (not (IsFlag 22)))
-								(gCurRoom sel_146: sPlayIntercom)
+								(gCurRoom setScript: sPlayIntercom)
 							)
 						)
 					)
 					(else
-						(gCurRoom sel_146: sEnterErnie2)
+						(gCurRoom setScript: sEnterErnie2)
 					)
 				)
 			)
@@ -892,33 +892,33 @@
 
 (instance toolBoxOpen of View
 	(properties
-		sel_20 {toolBoxOpen}
-		sel_1 1
-		sel_0 150
-		sel_213 2
-		sel_303 32
-		sel_304 172
-		sel_2 640
-		sel_60 13
-		sel_14 17
+		name {toolBoxOpen}
+		x 1
+		y 150
+		noun 2
+		approachX 32
+		approachY 172
+		view 640
+		priority 13
+		signal 17
 	)
 
-	(method (sel_300 param1)
+	(method (doVerb param1)
 		(switch param1
 			(1
-				(if (gEgo sel_238: 10)
-					(super sel_300: param1)
+				(if (gEgo has: 10)
+					(super doVerb: param1)
 				else
-					(gCurRoom sel_422: inWireCutter)
+					(gCurRoom setInset: inWireCutter)
 				)
 			)
 			(4
-				(self sel_102:)
+				(self hide:)
 				(ClearFlag 19)
-				(sFX sel_40: 641 sel_3: 1 sel_99: 5 sel_39:)
+				(sFX number: 641 loop: 1 flags: 5 play:)
 			)
 			(else
-				(super sel_300: param1)
+				(super doVerb: param1)
 			)
 		)
 	)
@@ -926,32 +926,32 @@
 
 (instance snakeLasso of View
 	(properties
-		sel_20 {snakeLasso}
-		sel_1 118
-		sel_0 140
-		sel_303 136
-		sel_304 143
-		sel_2 640
-		sel_3 8
+		name {snakeLasso}
+		x 118
+		y 140
+		approachX 136
+		approachY 143
+		view 640
+		loop 8
 	)
 
-	(method (sel_300 param1)
+	(method (doVerb param1)
 		(switch param1
 			(1
-				(if (self sel_299:)
+				(if (self actions:)
 					0
 				else
-					(gCurRoom sel_146: sLookLasso)
+					(gCurRoom setScript: sLookLasso)
 				)
 			)
 			(8
-				(self sel_300: 1)
+				(self doVerb: 1)
 			)
 			(4
-				(self sel_300: 1)
+				(self doVerb: 1)
 			)
 			(else
-				(super sel_300: param1)
+				(super doVerb: param1)
 			)
 		)
 	)
@@ -959,28 +959,28 @@
 
 (instance inWireCutter of Inset
 	(properties
-		sel_20 {inWireCutter}
-		sel_2 640
-		sel_3 4
-		sel_0 133
-		sel_570 1
-		sel_213 22
+		name {inWireCutter}
+		view 640
+		loop 4
+		y 133
+		disposeNotOnMe 1
+		noun 22
 	)
 
-	(method (sel_300 param1)
+	(method (doVerb param1)
 		(switch param1
 			(4
-				(gCurRoom sel_146: sGetWireCutters)
-				(self sel_111:)
+				(gCurRoom setScript: sGetWireCutters)
+				(self dispose:)
 			)
 			(1
-				(gMessager sel_295: 38 1 0 0 0 15)
+				(gMessager say: 38 1 0 0 0 15)
 			)
 			(8
-				(gMessager sel_295: 38 8 0 0 0 15)
+				(gMessager say: 38 8 0 0 0 15)
 			)
 			(else
-				(super sel_300: param1)
+				(super doVerb: param1)
 			)
 		)
 	)
@@ -988,29 +988,29 @@
 
 (instance inSnakeLasso of Inset
 	(properties
-		sel_20 {inSnakeLasso}
-		sel_2 640
-		sel_3 1
-		sel_1 81
-		sel_0 116
-		sel_570 1
-		sel_213 23
+		name {inSnakeLasso}
+		view 640
+		loop 1
+		x 81
+		y 116
+		disposeNotOnMe 1
+		noun 23
 	)
 
-	(method (sel_300 param1)
+	(method (doVerb param1)
 		(switch param1
 			(4
-				(gCurRoom sel_146: sGetLasso)
-				(self sel_111:)
+				(gCurRoom setScript: sGetLasso)
+				(self dispose:)
 			)
 			(1
-				(gMessager sel_295: 32 1 0 0 0 15)
+				(gMessager say: 32 1 0 0 0 15)
 			)
 			(8
-				(gMessager sel_295: 32 8 0 0 0 15)
+				(gMessager say: 32 8 0 0 0 15)
 			)
 			(else
-				(super sel_300: param1)
+				(super doVerb: param1)
 			)
 		)
 	)
@@ -1018,25 +1018,25 @@
 
 (instance inVatBook of Inset
 	(properties
-		sel_20 {inVatBook}
-		sel_2 640
-		sel_3 2
-		sel_1 53
-		sel_0 100
-		sel_570 1
-		sel_213 25
+		name {inVatBook}
+		view 640
+		loop 2
+		x 53
+		y 100
+		disposeNotOnMe 1
+		noun 25
 	)
 
-	(method (sel_300 param1)
+	(method (doVerb param1)
 		(switch param1
 			(4
-				(gCurRoom sel_422: inVatBookOpen)
+				(gCurRoom setInset: inVatBookOpen)
 			)
 			(8
-				(gMessager sel_295: 25 1)
+				(gMessager say: 25 1)
 			)
 			(else
-				(super sel_300: param1)
+				(super doVerb: param1)
 			)
 		)
 	)
@@ -1044,22 +1044,22 @@
 
 (instance inVatBookOpen of Inset
 	(properties
-		sel_20 {inVatBookOpen}
-		sel_2 640
-		sel_3 3
-		sel_1 53
-		sel_0 100
-		sel_570 1
-		sel_213 26
+		name {inVatBookOpen}
+		view 640
+		loop 3
+		x 53
+		y 100
+		disposeNotOnMe 1
+		noun 26
 	)
 
-	(method (sel_300 param1)
+	(method (doVerb param1)
 		(switch param1
 			(8
-				(gMessager sel_295: 26 1)
+				(gMessager say: 26 1)
 			)
 			(else
-				(super sel_300: param1)
+				(super doVerb: param1)
 			)
 		)
 	)
@@ -1067,41 +1067,41 @@
 
 (instance toolBoxClosed of Feature
 	(properties
-		sel_20 {toolBoxClosed}
-		sel_1 15
-		sel_0 163
-		sel_213 2
-		sel_6 156
-		sel_7 5
-		sel_8 170
-		sel_9 25
-		sel_301 40
-		sel_303 32
-		sel_304 172
+		name {toolBoxClosed}
+		x 15
+		y 163
+		noun 2
+		nsTop 156
+		nsLeft 5
+		nsBottom 170
+		nsRight 25
+		sightAngle 40
+		approachX 32
+		approachY 172
 	)
 
-	(method (sel_300 param1)
+	(method (doVerb param1)
 		(switch param1
 			(1
-				(if (and (IsFlag 19) (not (gEgo sel_238: 10)))
-					(gCurRoom sel_146: sLookWireCutters)
+				(if (and (IsFlag 19) (not (gEgo has: 10)))
+					(gCurRoom setScript: sLookWireCutters)
 				else
-					(super sel_300: param1)
+					(super doVerb: param1)
 				)
 			)
 			(4
 				(if (IsFlag 19)
-					(toolBoxOpen sel_102:)
+					(toolBoxOpen hide:)
 					(ClearFlag 19)
-					(sFX sel_40: 641 sel_3: 1 sel_99: 5 sel_39:)
+					(sFX number: 641 loop: 1 flags: 5 play:)
 				else
-					(toolBoxOpen sel_216: sel_313:)
+					(toolBoxOpen show: stopUpd:)
 					(SetFlag 19)
-					(sFX sel_40: 640 sel_3: 1 sel_99: 5 sel_39:)
+					(sFX number: 640 loop: 1 flags: 5 play:)
 				)
 			)
 			(else
-				(super sel_300: param1)
+				(super doVerb: param1)
 			)
 		)
 	)
@@ -1109,33 +1109,33 @@
 
 (instance desk of Feature
 	(properties
-		sel_20 {desk}
-		sel_1 79
-		sel_0 134
-		sel_213 3
-		sel_6 123
-		sel_7 43
-		sel_8 145
-		sel_9 116
-		sel_301 40
-		sel_303 79
-		sel_304 156
+		name {desk}
+		x 79
+		y 134
+		noun 3
+		nsTop 123
+		nsLeft 43
+		nsBottom 145
+		nsRight 116
+		sightAngle 40
+		approachX 79
+		approachY 156
 	)
 
-	(method (sel_300 param1)
+	(method (doVerb param1)
 		(switch param1
 			(1
-				(if (self sel_299:)
+				(if (self actions:)
 					0
 				else
-					(gCurRoom sel_422: inVatBook)
+					(gCurRoom setInset: inVatBook)
 				)
 			)
 			(8
-				(self sel_300: 1)
+				(self doVerb: 1)
 			)
 			(else
-				(super sel_300: param1)
+				(super doVerb: param1)
 			)
 		)
 	)
@@ -1143,32 +1143,32 @@
 
 (instance underDesk of Feature
 	(properties
-		sel_20 {underDesk}
-		sel_1 80
-		sel_0 144
-		sel_213 24
-		sel_6 136
-		sel_7 46
-		sel_8 147
-		sel_9 115
-		sel_303 136
-		sel_304 143
+		name {underDesk}
+		x 80
+		y 144
+		noun 24
+		nsTop 136
+		nsLeft 46
+		nsBottom 147
+		nsRight 115
+		approachX 136
+		approachY 143
 	)
 
-	(method (sel_300 param1)
+	(method (doVerb param1)
 		(switch param1
 			(1
-				(if (self sel_299:)
+				(if (self actions:)
 					0
 				else
-					(gCurRoom sel_146: sLookLasso)
+					(gCurRoom setScript: sLookLasso)
 				)
 			)
 			(8
-				(self sel_300: 1)
+				(self doVerb: 1)
 			)
 			(else
-				(super sel_300: param1)
+				(super doVerb: param1)
 			)
 		)
 	)
@@ -1176,54 +1176,54 @@
 
 (instance intercom of Feature
 	(properties
-		sel_20 {intercom}
-		sel_1 54
-		sel_0 122
-		sel_213 4
-		sel_6 119
-		sel_7 47
-		sel_8 126
-		sel_9 62
-		sel_301 40
+		name {intercom}
+		x 54
+		y 122
+		noun 4
+		nsTop 119
+		nsLeft 47
+		nsBottom 126
+		nsRight 62
+		sightAngle 40
 	)
 )
 
 (instance mopBucket of Feature
 	(properties
-		sel_20 {mopBucket}
-		sel_1 238
-		sel_0 133
-		sel_213 5
-		sel_6 108
-		sel_7 231
-		sel_8 158
-		sel_9 246
-		sel_301 40
+		name {mopBucket}
+		x 238
+		y 133
+		noun 5
+		nsTop 108
+		nsLeft 231
+		nsBottom 158
+		nsRight 246
+		sightAngle 40
 	)
 )
 
 (instance bear of Feature
 	(properties
-		sel_20 {bear}
-		sel_1 285
-		sel_0 146
-		sel_213 6
-		sel_6 104
-		sel_7 251
-		sel_8 189
-		sel_9 319
-		sel_301 40
-		sel_302 4
+		name {bear}
+		x 285
+		y 146
+		noun 6
+		nsTop 104
+		nsLeft 251
+		nsBottom 189
+		nsRight 319
+		sightAngle 40
+		onMeCheck 4
 	)
 
-	(method (sel_300 param1)
+	(method (doVerb param1)
 		(switch param1
 			(4
-				(sFX sel_40: 643 sel_3: 1 sel_99: 1 sel_39:)
-				(gMessager sel_295: 6 4)
+				(sFX number: 643 loop: 1 flags: 1 play:)
+				(gMessager say: 6 4)
 			)
 			(else
-				(super sel_300: param1 &rest)
+				(super doVerb: param1 &rest)
 			)
 		)
 	)
@@ -1231,211 +1231,211 @@
 
 (instance skeleton of Feature
 	(properties
-		sel_20 {skeleton}
-		sel_1 199
-		sel_0 154
-		sel_213 7
-		sel_6 119
-		sel_7 166
-		sel_8 189
-		sel_9 233
-		sel_301 40
-		sel_302 2
+		name {skeleton}
+		x 199
+		y 154
+		noun 7
+		nsTop 119
+		nsLeft 166
+		nsBottom 189
+		nsRight 233
+		sightAngle 40
+		onMeCheck 2
 	)
 )
 
 (instance brooms of Feature
 	(properties
-		sel_20 {brooms}
-		sel_1 8
-		sel_0 118
-		sel_213 8
-		sel_6 91
-		sel_8 146
-		sel_9 16
-		sel_301 40
+		name {brooms}
+		x 8
+		y 118
+		noun 8
+		nsTop 91
+		nsBottom 146
+		nsRight 16
+		sightAngle 40
 	)
 )
 
 (instance block of Feature
 	(properties
-		sel_20 {block}
-		sel_1 235
-		sel_0 172
-		sel_213 9
-		sel_6 156
-		sel_7 203
-		sel_8 189
-		sel_9 268
-		sel_301 40
-		sel_302 8
+		name {block}
+		x 235
+		y 172
+		noun 9
+		nsTop 156
+		nsLeft 203
+		nsBottom 189
+		nsRight 268
+		sightAngle 40
+		onMeCheck 8
 	)
 )
 
 (instance light of Feature
 	(properties
-		sel_20 {light}
-		sel_1 151
-		sel_0 80
-		sel_213 11
-		sel_6 74
-		sel_7 142
-		sel_8 86
-		sel_9 160
-		sel_301 40
-		sel_302 16
+		name {light}
+		x 151
+		y 80
+		noun 11
+		nsTop 74
+		nsLeft 142
+		nsBottom 86
+		nsRight 160
+		sightAngle 40
+		onMeCheck 16
 	)
 )
 
 (instance nautilus of Feature
 	(properties
-		sel_20 {nautilus}
-		sel_1 140
-		sel_0 121
-		sel_213 12
-		sel_6 111
-		sel_7 133
-		sel_8 132
-		sel_9 147
-		sel_301 40
+		name {nautilus}
+		x 140
+		y 121
+		noun 12
+		nsTop 111
+		nsLeft 133
+		nsBottom 132
+		nsRight 147
+		sightAngle 40
 	)
 )
 
 (instance nefertiti of Feature
 	(properties
-		sel_20 {nefertiti}
-		sel_1 196
-		sel_0 183
-		sel_82 100
-		sel_213 21
-		sel_6 73
-		sel_7 184
-		sel_8 93
-		sel_9 208
-		sel_301 40
+		name {nefertiti}
+		x 196
+		y 183
+		z 100
+		noun 21
+		nsTop 73
+		nsLeft 184
+		nsBottom 93
+		nsRight 208
+		sightAngle 40
 	)
 )
 
 (instance squirrel of Feature
 	(properties
-		sel_20 {squirrel}
-		sel_1 299
-		sel_0 32
-		sel_213 14
-		sel_6 11
-		sel_7 279
-		sel_8 54
-		sel_9 319
-		sel_301 40
+		name {squirrel}
+		x 299
+		y 32
+		noun 14
+		nsTop 11
+		nsLeft 279
+		nsBottom 54
+		nsRight 319
+		sightAngle 40
 	)
 )
 
 (instance heads of Feature
 	(properties
-		sel_20 {heads}
-		sel_1 299
-		sel_0 81
-		sel_213 15
-		sel_6 56
-		sel_7 279
-		sel_8 107
-		sel_9 319
-		sel_301 40
+		name {heads}
+		x 299
+		y 81
+		noun 15
+		nsTop 56
+		nsLeft 279
+		nsBottom 107
+		nsRight 319
+		sightAngle 40
 	)
 )
 
 (instance beam1 of Feature
 	(properties
-		sel_20 {beam1}
-		sel_1 138
-		sel_0 16
-		sel_213 16
-		sel_6 10
-		sel_8 22
-		sel_9 276
-		sel_301 40
+		name {beam1}
+		x 138
+		y 16
+		noun 16
+		nsTop 10
+		nsBottom 22
+		nsRight 276
+		sightAngle 40
 	)
 )
 
 (instance beam2 of Feature
 	(properties
-		sel_20 {beam2}
-		sel_1 142
-		sel_0 51
-		sel_213 17
-		sel_6 46
-		sel_7 49
-		sel_8 56
-		sel_9 235
-		sel_301 40
+		name {beam2}
+		x 142
+		y 51
+		noun 17
+		nsTop 46
+		nsLeft 49
+		nsBottom 56
+		nsRight 235
+		sightAngle 40
 	)
 )
 
 (instance leftStuff of Feature
 	(properties
-		sel_20 {leftStuff}
-		sel_1 114
-		sel_0 96
-		sel_213 18
-		sel_6 74
-		sel_7 87
-		sel_8 119
-		sel_9 142
-		sel_301 40
+		name {leftStuff}
+		x 114
+		y 96
+		noun 18
+		nsTop 74
+		nsLeft 87
+		nsBottom 119
+		nsRight 142
+		sightAngle 40
 	)
 )
 
 (instance rightStuff of Feature
 	(properties
-		sel_20 {rightStuff}
-		sel_1 184
-		sel_0 95
-		sel_213 19
-		sel_6 72
-		sel_7 159
-		sel_8 118
-		sel_9 209
-		sel_301 40
+		name {rightStuff}
+		x 184
+		y 95
+		noun 19
+		nsTop 72
+		nsLeft 159
+		nsBottom 118
+		nsRight 209
+		sightAngle 40
 	)
 )
 
 (instance rightmostStuff of Feature
 	(properties
-		sel_20 {rightmostStuff}
-		sel_1 246
-		sel_0 87
-		sel_213 20
-		sel_6 30
-		sel_7 210
-		sel_8 107
-		sel_9 279
-		sel_301 40
-		sel_302 32
+		name {rightmostStuff}
+		x 246
+		y 87
+		noun 20
+		nsTop 30
+		nsLeft 210
+		nsBottom 107
+		nsRight 279
+		sightAngle 40
+		onMeCheck 32
 	)
 )
 
 (instance blender of Feature
 	(properties
-		sel_20 {blender}
-		sel_0 97
-		sel_213 28
-		sel_6 75
-		sel_7 97
-		sel_8 95
-		sel_9 109
-		sel_301 40
+		name {blender}
+		y 97
+		noun 28
+		nsTop 75
+		nsLeft 97
+		nsBottom 95
+		nsRight 109
+		sightAngle 40
 	)
 )
 
 (instance ernieTimer of Timer
 	(properties
-		sel_20 {ernieTimer}
+		name {ernieTimer}
 	)
 )
 
 (instance sFX of Sound
 	(properties
-		sel_20 {sFX}
-		sel_99 1
+		name {sFX}
+		flags 1
 	)
 )

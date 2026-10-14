@@ -20,45 +20,45 @@
 
 (instance rm235 of LBRoom
 	(properties
-		sel_20 {rm235}
-		sel_214 230
-		sel_213 24
-		sel_408 235
+		name {rm235}
+		modNum 230
+		noun 24
+		picture 235
 	)
 
-	(method (sel_110)
+	(method (init)
 		(Load rsVIEW 235)
-		(super sel_110:)
-		(closeupBlotterLF sel_110:)
-		(closeupBlotterLB sel_110:)
-		(closeupBlotterRF sel_110:)
-		(closeupBlotterRB sel_110:)
-		(pencilHolder sel_110:)
-		(drawer sel_110:)
-		(restOfBlotter sel_110:)
+		(super init:)
+		(closeupBlotterLF init:)
+		(closeupBlotterLB init:)
+		(closeupBlotterRF init:)
+		(closeupBlotterRB init:)
+		(pencilHolder init:)
+		(drawer init:)
+		(restOfBlotter init:)
 		(if (IsFlag 29)
-			(keyInDrawerC sel_110:)
+			(keyInDrawerC init:)
 		)
 		(proc0_8 1)
-		(gGame sel_588:)
+		(gGame handsOn:)
 	)
 
-	(method (sel_111)
+	(method (dispose)
 		(proc0_8 0)
-		(super sel_111:)
+		(super dispose:)
 	)
 
-	(method (sel_300 param1)
+	(method (doVerb param1)
 		(switch param1
 			(1
-				(gMessager sel_295: 24 1 0 0 0 230)
+				(gMessager say: 24 1 0 0 0 230)
 			)
 			(13
 				(proc0_8 0)
-				(gCurRoom sel_399: 230)
+				(gCurRoom newRoom: 230)
 			)
 			(else
-				(super sel_300: param1 &rest)
+				(super doVerb: param1 &rest)
 			)
 		)
 	)
@@ -66,77 +66,77 @@
 
 (instance sLiftMat of Script
 	(properties
-		sel_20 {sLiftMat}
+		name {sLiftMat}
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
-				(switch sel_141
+				(switch register
 					(0
-						(if (gCast sel_122: cornerUpLF)
-							(cornerUpLF sel_111:)
+						(if (gCast contains: cornerUpLF)
+							(cornerUpLF dispose:)
 						else
-							(cornerUpLF sel_110:)
+							(cornerUpLF init:)
 						)
 					)
 					(1
-						(if (gCast sel_122: cornerUpLB)
-							(cornerUpLB sel_111:)
+						(if (gCast contains: cornerUpLB)
+							(cornerUpLB dispose:)
 						else
-							(cornerUpLB sel_110:)
+							(cornerUpLB init:)
 						)
 					)
 					(2
-						(if (gCast sel_122: cornerUpRF)
-							(cornerUpRF sel_111:)
-							(keyUnder sel_111:)
+						(if (gCast contains: cornerUpRF)
+							(cornerUpRF dispose:)
+							(keyUnder dispose:)
 						else
 							(if
 								(and
-									(not (gEgo sel_238: 5))
+									(not (gEgo has: 5))
 									(not (IsFlag 29))
 								)
-								(keyUnder sel_110:)
+								(keyUnder init:)
 							)
-							(cornerUpRF sel_110:)
+							(cornerUpRF init:)
 						)
 					)
 					(3
-						(if (gCast sel_122: cornerUpRB)
-							(cornerUpRB sel_111:)
+						(if (gCast contains: cornerUpRB)
+							(cornerUpRB dispose:)
 						else
-							(cornerUpRB sel_110:)
+							(cornerUpRB init:)
 						)
 					)
 				)
-				(= sel_136 1)
+				(= cycles 1)
 			)
 			(1
 				(cond
-					((and (gCast sel_122: cornerUpRF) (== sel_141 2))
-						(if (and (not (gEgo sel_238: 5)) (not (IsFlag 29)))
-							(gMessager sel_295: 10 4 1 0 self 230)
+					((and (gCast contains: cornerUpRF) (== register 2))
+						(if (and (not (gEgo has: 5)) (not (IsFlag 29)))
+							(gMessager say: 10 4 1 0 self 230)
 						else
-							(gMessager sel_295: 10 4 2 0 self 230)
+							(gMessager say: 10 4 2 0 self 230)
 						)
 					)
-					((and (gCast sel_122: cornerUpRB) (== sel_141 3))
-						(gMessager sel_295: 10 4 2 0 self 230)
+					((and (gCast contains: cornerUpRB) (== register 3))
+						(gMessager say: 10 4 2 0 self 230)
 					)
-					((and (gCast sel_122: cornerUpLB) (== sel_141 1))
-						(gMessager sel_295: 10 4 2 0 self 230)
+					((and (gCast contains: cornerUpLB) (== register 1))
+						(gMessager say: 10 4 2 0 self 230)
 					)
-					((and (gCast sel_122: cornerUpLF) (== sel_141 0))
-						(gMessager sel_295: 10 4 2 0 self 230)
+					((and (gCast contains: cornerUpLF) (== register 0))
+						(gMessager say: 10 4 2 0 self 230)
 					)
 					(else
-						(= sel_136 1)
+						(= cycles 1)
 					)
 				)
 			)
 			(2
-				(self sel_111:)
+				(self dispose:)
 			)
 		)
 	)
@@ -144,25 +144,25 @@
 
 (instance sUseKeyOnDrawer of Script
 	(properties
-		sel_20 {sUseKeyOnDrawer}
+		name {sUseKeyOnDrawer}
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
 				(= local0 0)
-				(gEgo sel_351: 5)
-				((ScriptID 21 1) sel_57: 774) ; dropCluesCode
+				(gEgo put: 5)
+				((ScriptID 21 1) doit: 774) ; dropCluesCode
 				(SetFlag 29)
-				(gMessager sel_295: 9 16 0 0 self 230)
+				(gMessager say: 9 16 0 0 self 230)
 			)
 			(1
-				(openDrawer sel_110:)
-				(sFX sel_40: 42 sel_39:)
-				(= sel_136 1)
+				(openDrawer init:)
+				(sFX number: 42 play:)
+				(= cycles 1)
 			)
 			(2
-				(self sel_111:)
+				(self dispose:)
 			)
 		)
 	)
@@ -170,48 +170,48 @@
 
 (instance openDrawer of View
 	(properties
-		sel_20 {openDrawer}
-		sel_1 66
-		sel_0 120
-		sel_213 20
-		sel_214 230
-		sel_2 235
-		sel_3 1
-		sel_14 16385
+		name {openDrawer}
+		x 66
+		y 120
+		noun 20
+		modNum 230
+		view 235
+		loop 1
+		signal 16385
 	)
 
-	(method (sel_110)
-		(super sel_110:)
-		(if (not (gEgo sel_238: 6))
-			(pressPass sel_110:)
+	(method (init)
+		(super init:)
+		(if (not (gEgo has: 6))
+			(pressPass init:)
 		)
 		(if (IsFlag 29)
-			(keyInDrawerC sel_111:)
+			(keyInDrawerC dispose:)
 		)
-		(keyInDrawerO sel_110:)
+		(keyInDrawerO init:)
 	)
 
-	(method (sel_111)
-		(super sel_111:)
-		(pressPass sel_111:)
-		(keyInDrawerO sel_111:)
+	(method (dispose)
+		(super dispose:)
+		(pressPass dispose:)
+		(keyInDrawerO dispose:)
 		(if (IsFlag 29)
-			(keyInDrawerC sel_110:)
+			(keyInDrawerC init:)
 		)
 	)
 
-	(method (sel_300 param1)
+	(method (doVerb param1)
 		(switch param1
 			(13
 				(proc0_8 0)
-				(gCurRoom sel_399: 230)
+				(gCurRoom newRoom: 230)
 			)
 			(4
-				(sFX sel_40: 42 sel_39:)
-				(openDrawer sel_111:)
+				(sFX number: 42 play:)
+				(openDrawer dispose:)
 			)
 			(else
-				(super sel_300: param1 &rest)
+				(super doVerb: param1 &rest)
 			)
 		)
 	)
@@ -219,24 +219,24 @@
 
 (instance cornerUpLF of View
 	(properties
-		sel_20 {cornerUpLF}
-		sel_1 69
-		sel_0 100
-		sel_213 19
-		sel_214 230
-		sel_2 235
-		sel_60 8
-		sel_14 16401
+		name {cornerUpLF}
+		x 69
+		y 100
+		noun 19
+		modNum 230
+		view 235
+		priority 8
+		signal 16401
 	)
 
-	(method (sel_300 param1)
+	(method (doVerb param1)
 		(switch param1
 			(13
 				(proc0_8 0)
-				(gCurRoom sel_399: 230)
+				(gCurRoom newRoom: 230)
 			)
 			(else
-				(super sel_300: param1 &rest)
+				(super doVerb: param1 &rest)
 			)
 		)
 	)
@@ -244,25 +244,25 @@
 
 (instance cornerUpRF of View
 	(properties
-		sel_20 {cornerUpRF}
-		sel_1 200
-		sel_0 100
-		sel_213 19
-		sel_214 230
-		sel_2 235
-		sel_4 1
-		sel_60 8
-		sel_14 16401
+		name {cornerUpRF}
+		x 200
+		y 100
+		noun 19
+		modNum 230
+		view 235
+		cel 1
+		priority 8
+		signal 16401
 	)
 
-	(method (sel_300 param1)
+	(method (doVerb param1)
 		(switch param1
 			(13
 				(proc0_8 0)
-				(gCurRoom sel_399: 230)
+				(gCurRoom newRoom: 230)
 			)
 			(else
-				(super sel_300: param1 &rest)
+				(super doVerb: param1 &rest)
 			)
 		)
 	)
@@ -270,25 +270,25 @@
 
 (instance cornerUpRB of View
 	(properties
-		sel_20 {cornerUpRB}
-		sel_1 174
-		sel_0 83
-		sel_213 19
-		sel_214 230
-		sel_2 235
-		sel_4 2
-		sel_60 8
-		sel_14 16401
+		name {cornerUpRB}
+		x 174
+		y 83
+		noun 19
+		modNum 230
+		view 235
+		cel 2
+		priority 8
+		signal 16401
 	)
 
-	(method (sel_300 param1)
+	(method (doVerb param1)
 		(switch param1
 			(13
 				(proc0_8 0)
-				(gCurRoom sel_399: 230)
+				(gCurRoom newRoom: 230)
 			)
 			(else
-				(super sel_300: param1 &rest)
+				(super doVerb: param1 &rest)
 			)
 		)
 	)
@@ -296,25 +296,25 @@
 
 (instance cornerUpLB of View
 	(properties
-		sel_20 {cornerUpLB}
-		sel_1 97
-		sel_0 85
-		sel_213 19
-		sel_214 230
-		sel_2 235
-		sel_4 3
-		sel_60 8
-		sel_14 16401
+		name {cornerUpLB}
+		x 97
+		y 85
+		noun 19
+		modNum 230
+		view 235
+		cel 3
+		priority 8
+		signal 16401
 	)
 
-	(method (sel_300 param1)
+	(method (doVerb param1)
 		(switch param1
 			(13
 				(proc0_8 0)
-				(gCurRoom sel_399: 230)
+				(gCurRoom newRoom: 230)
 			)
 			(else
-				(super sel_300: param1 &rest)
+				(super doVerb: param1 &rest)
 			)
 		)
 	)
@@ -322,29 +322,29 @@
 
 (instance keyUnder of View
 	(properties
-		sel_20 {keyUnder}
-		sel_1 216
-		sel_0 118
-		sel_213 21
-		sel_214 230
-		sel_2 235
-		sel_3 3
-		sel_60 9
-		sel_14 16400
+		name {keyUnder}
+		x 216
+		y 118
+		noun 21
+		modNum 230
+		view 235
+		loop 3
+		priority 9
+		signal 16400
 	)
 
-	(method (sel_300 param1)
+	(method (doVerb param1)
 		(switch param1
 			(4
-				(gEgo sel_350: 5)
-				((ScriptID 21 0) sel_57: 774) ; addCluesCode
-				(keyUnder sel_111:)
+				(gEgo get: 5)
+				((ScriptID 21 0) doit: 774) ; addCluesCode
+				(keyUnder dispose:)
 			)
 			(1
-				(gCurRoom sel_422: inKey)
+				(gCurRoom setInset: inKey)
 			)
 			(else
-				(super sel_300: param1 &rest)
+				(super doVerb: param1 &rest)
 			)
 		)
 	)
@@ -352,24 +352,24 @@
 
 (instance keyInDrawerO of View
 	(properties
-		sel_20 {keyInDrawerO}
-		sel_1 154
-		sel_0 155
-		sel_213 22
-		sel_214 230
-		sel_2 235
-		sel_3 2
-		sel_14 16384
+		name {keyInDrawerO}
+		x 154
+		y 155
+		noun 22
+		modNum 230
+		view 235
+		loop 2
+		signal 16384
 	)
 
-	(method (sel_300 param1)
+	(method (doVerb param1)
 		(switch param1
 			(13
 				(proc0_8 0)
-				(gCurRoom sel_399: 230)
+				(gCurRoom newRoom: 230)
 			)
 			(else
-				(super sel_300: param1 &rest)
+				(super doVerb: param1 &rest)
 			)
 		)
 	)
@@ -377,24 +377,24 @@
 
 (instance keyInDrawerC of View
 	(properties
-		sel_20 {keyInDrawerC}
-		sel_1 154
-		sel_0 132
-		sel_213 23
-		sel_214 230
-		sel_2 235
-		sel_3 2
-		sel_14 16384
+		name {keyInDrawerC}
+		x 154
+		y 132
+		noun 23
+		modNum 230
+		view 235
+		loop 2
+		signal 16384
 	)
 
-	(method (sel_300 param1)
+	(method (doVerb param1)
 		(switch param1
 			(13
 				(proc0_8 0)
-				(gCurRoom sel_399: 230)
+				(gCurRoom newRoom: 230)
 			)
 			(else
-				(super sel_300: param1 &rest)
+				(super doVerb: param1 &rest)
 			)
 		)
 	)
@@ -402,37 +402,37 @@
 
 (instance pressPass of View
 	(properties
-		sel_20 {pressPass}
-		sel_1 92
-		sel_0 137
-		sel_213 27
-		sel_214 15
-		sel_2 235
-		sel_3 4
-		sel_4 1
-		sel_60 14
-		sel_14 16401
+		name {pressPass}
+		x 92
+		y 137
+		noun 27
+		modNum 15
+		view 235
+		loop 4
+		cel 1
+		priority 14
+		signal 16401
 	)
 
-	(method (sel_300 param1)
+	(method (doVerb param1)
 		(switch param1
 			(4
-				((ScriptID 22 0) sel_57: 1) ; triggerAndClock
-				(gGame sel_87: 1 128)
-				(gEgo sel_350: 6)
-				((ScriptID 21 0) sel_57: 775) ; addCluesCode
-				(pressPass sel_111:)
+				((ScriptID 22 0) doit: 1) ; triggerAndClock
+				(gGame points: 1 128)
+				(gEgo get: 6)
+				((ScriptID 21 0) doit: 775) ; addCluesCode
+				(pressPass dispose:)
 			)
 			(13
 				(proc0_8 0)
-				(gCurRoom sel_399: 230)
+				(gCurRoom newRoom: 230)
 			)
 			(1
-				(gCurRoom sel_422: inPressPass)
-				(gMessager sel_295: 27 1 0 0 0 15)
+				(gCurRoom setInset: inPressPass)
+				(gMessager say: 27 1 0 0 0 15)
 			)
 			(else
-				(super sel_300: param1 &rest)
+				(super doVerb: param1 &rest)
 			)
 		)
 	)
@@ -440,31 +440,31 @@
 
 (instance inPressPass of Inset
 	(properties
-		sel_20 {inPressPass}
-		sel_2 235
-		sel_3 4
-		sel_1 85
-		sel_0 129
-		sel_570 1
-		sel_214 15
-		sel_213 27
+		name {inPressPass}
+		view 235
+		loop 4
+		x 85
+		y 129
+		disposeNotOnMe 1
+		modNum 15
+		noun 27
 	)
 
-	(method (sel_300 param1)
+	(method (doVerb param1)
 		(switch param1
 			(4
-				((ScriptID 22 0) sel_57: 1) ; triggerAndClock
-				(gGame sel_87: 1 128)
-				(gEgo sel_350: 6)
-				((ScriptID 21 0) sel_57: 775) ; addCluesCode
-				(pressPass sel_111:)
-				(inPressPass sel_111:)
+				((ScriptID 22 0) doit: 1) ; triggerAndClock
+				(gGame points: 1 128)
+				(gEgo get: 6)
+				((ScriptID 21 0) doit: 775) ; addCluesCode
+				(pressPass dispose:)
+				(inPressPass dispose:)
 			)
 			(1
-				(gMessager sel_295: 27 1 0 0 0 15)
+				(gMessager say: 27 1 0 0 0 15)
 			)
 			(else
-				(super sel_300: param1 &rest)
+				(super doVerb: param1 &rest)
 			)
 		)
 	)
@@ -472,35 +472,35 @@
 
 (instance inKey of Inset
 	(properties
-		sel_20 {inKey}
-		sel_2 235
-		sel_3 3
-		sel_4 1
-		sel_1 187
-		sel_0 92
-		sel_560 1
-		sel_570 1
-		sel_214 15
-		sel_213 9
+		name {inKey}
+		view 235
+		loop 3
+		cel 1
+		x 187
+		y 92
+		hideTheCast 1
+		disposeNotOnMe 1
+		modNum 15
+		noun 9
 	)
 
-	(method (sel_110)
-		(super sel_110: &rest)
+	(method (init)
+		(super init: &rest)
 	)
 
-	(method (sel_300 param1)
+	(method (doVerb param1)
 		(switch param1
 			(1
-				(gMessager sel_295: 9 1 0 0 0 15)
+				(gMessager say: 9 1 0 0 0 15)
 			)
 			(4
-				(gEgo sel_350: 5)
-				((ScriptID 21 0) sel_57: 774) ; addCluesCode
-				(inKey sel_111:)
-				(keyUnder sel_111:)
+				(gEgo get: 5)
+				((ScriptID 21 0) doit: 774) ; addCluesCode
+				(inKey dispose:)
+				(keyUnder dispose:)
 			)
 			(else
-				(super sel_300: param1 &rest)
+				(super doVerb: param1 &rest)
 			)
 		)
 	)
@@ -508,25 +508,25 @@
 
 (instance closeupBlotterRF of Feature
 	(properties
-		sel_20 {closeupBlotterRF}
-		sel_0 109
-		sel_213 10
-		sel_214 230
-		sel_301 40
-		sel_302 16384
+		name {closeupBlotterRF}
+		y 109
+		noun 10
+		modNum 230
+		sightAngle 40
+		onMeCheck 16384
 	)
 
-	(method (sel_300 param1)
+	(method (doVerb param1)
 		(switch param1
 			(4
-				(gCurRoom sel_146: sLiftMat 0 2)
+				(gCurRoom setScript: sLiftMat 0 2)
 			)
 			(13
 				(proc0_8 0)
-				(gCurRoom sel_399: 230)
+				(gCurRoom newRoom: 230)
 			)
 			(else
-				(super sel_300: param1 &rest)
+				(super doVerb: param1 &rest)
 			)
 		)
 	)
@@ -534,25 +534,25 @@
 
 (instance closeupBlotterRB of Feature
 	(properties
-		sel_20 {closeupBlotterRB}
-		sel_0 95
-		sel_213 10
-		sel_214 230
-		sel_301 40
-		sel_302 8192
+		name {closeupBlotterRB}
+		y 95
+		noun 10
+		modNum 230
+		sightAngle 40
+		onMeCheck 8192
 	)
 
-	(method (sel_300 param1)
+	(method (doVerb param1)
 		(switch param1
 			(4
-				(gCurRoom sel_146: sLiftMat 0 3)
+				(gCurRoom setScript: sLiftMat 0 3)
 			)
 			(13
 				(proc0_8 0)
-				(gCurRoom sel_399: 230)
+				(gCurRoom newRoom: 230)
 			)
 			(else
-				(super sel_300: param1 &rest)
+				(super doVerb: param1 &rest)
 			)
 		)
 	)
@@ -560,25 +560,25 @@
 
 (instance closeupBlotterLB of Feature
 	(properties
-		sel_20 {closeupBlotterLB}
-		sel_0 95
-		sel_213 10
-		sel_214 230
-		sel_301 40
-		sel_302 4096
+		name {closeupBlotterLB}
+		y 95
+		noun 10
+		modNum 230
+		sightAngle 40
+		onMeCheck 4096
 	)
 
-	(method (sel_300 param1)
+	(method (doVerb param1)
 		(switch param1
 			(4
-				(gCurRoom sel_146: sLiftMat 0 1)
+				(gCurRoom setScript: sLiftMat 0 1)
 			)
 			(13
 				(proc0_8 0)
-				(gCurRoom sel_399: 230)
+				(gCurRoom newRoom: 230)
 			)
 			(else
-				(super sel_300: param1 &rest)
+				(super doVerb: param1 &rest)
 			)
 		)
 	)
@@ -586,25 +586,25 @@
 
 (instance closeupBlotterLF of Feature
 	(properties
-		sel_20 {closeupBlotterLF}
-		sel_0 109
-		sel_213 10
-		sel_214 230
-		sel_301 40
-		sel_302 2048
+		name {closeupBlotterLF}
+		y 109
+		noun 10
+		modNum 230
+		sightAngle 40
+		onMeCheck 2048
 	)
 
-	(method (sel_300 param1)
+	(method (doVerb param1)
 		(switch param1
 			(4
-				(gCurRoom sel_146: sLiftMat 0 0)
+				(gCurRoom setScript: sLiftMat 0 0)
 			)
 			(13
 				(proc0_8 0)
-				(gCurRoom sel_399: 230)
+				(gCurRoom newRoom: 230)
 			)
 			(else
-				(super sel_300: param1 &rest)
+				(super doVerb: param1 &rest)
 			)
 		)
 	)
@@ -612,21 +612,21 @@
 
 (instance restOfBlotter of Feature
 	(properties
-		sel_20 {restOfBlotter}
-		sel_0 109
-		sel_213 26
-		sel_214 230
-		sel_302 1024
+		name {restOfBlotter}
+		y 109
+		noun 26
+		modNum 230
+		onMeCheck 1024
 	)
 
-	(method (sel_300 param1)
+	(method (doVerb param1)
 		(switch param1
 			(13
 				(proc0_8 0)
-				(gCurRoom sel_399: 230)
+				(gCurRoom newRoom: 230)
 			)
 			(else
-				(super sel_300: param1 &rest)
+				(super doVerb: param1 &rest)
 			)
 		)
 	)
@@ -634,26 +634,26 @@
 
 (instance pencilHolder of Feature
 	(properties
-		sel_20 {pencilHolder}
-		sel_1 227
-		sel_0 78
-		sel_213 8
-		sel_214 230
-		sel_6 64
-		sel_7 219
-		sel_8 92
-		sel_9 236
-		sel_301 40
+		name {pencilHolder}
+		x 227
+		y 78
+		noun 8
+		modNum 230
+		nsTop 64
+		nsLeft 219
+		nsBottom 92
+		nsRight 236
+		sightAngle 40
 	)
 
-	(method (sel_300 param1)
+	(method (doVerb param1)
 		(switch param1
 			(13
 				(proc0_8 0)
-				(gCurRoom sel_399: 230)
+				(gCurRoom newRoom: 230)
 			)
 			(else
-				(super sel_300: param1 &rest)
+				(super doVerb: param1 &rest)
 			)
 		)
 	)
@@ -661,51 +661,51 @@
 
 (instance drawer of Feature
 	(properties
-		sel_20 {drawer}
-		sel_1 155
-		sel_0 137
-		sel_213 9
-		sel_214 230
-		sel_6 128
-		sel_7 67
-		sel_8 146
-		sel_9 244
-		sel_301 40
+		name {drawer}
+		x 155
+		y 137
+		noun 9
+		modNum 230
+		nsTop 128
+		nsLeft 67
+		nsBottom 146
+		nsRight 244
+		sightAngle 40
 	)
 
-	(method (sel_300 param1)
+	(method (doVerb param1)
 		(switch param1
 			(4
 				(cond
-					((gCast sel_122: openDrawer)
-						(sFX sel_40: 42 sel_39:)
-						(openDrawer sel_111:)
+					((gCast contains: openDrawer)
+						(sFX number: 42 play:)
+						(openDrawer dispose:)
 					)
 					((IsFlag 29)
-						(sFX sel_40: 42 sel_39:)
-						(openDrawer sel_110:)
+						(sFX number: 42 play:)
+						(openDrawer init:)
 					)
 					(local0
-						(gMessager sel_295: 9 4 3 0 0 230)
+						(gMessager say: 9 4 3 0 0 230)
 					)
-					((not (gEgo sel_238: 6))
-						(sFX sel_40: 42 sel_39:)
-						(openDrawer sel_110:)
+					((not (gEgo has: 6))
+						(sFX number: 42 play:)
+						(openDrawer init:)
 					)
 					(else
-						(gMessager sel_295: 9 4 4 0 0 230)
+						(gMessager say: 9 4 4 0 0 230)
 					)
 				)
 			)
 			(16
-				(gCurRoom sel_146: sUseKeyOnDrawer)
+				(gCurRoom setScript: sUseKeyOnDrawer)
 			)
 			(13
 				(proc0_8 0)
-				(gCurRoom sel_399: 230)
+				(gCurRoom newRoom: 230)
 			)
 			(else
-				(super sel_300: param1 &rest)
+				(super doVerb: param1 &rest)
 			)
 		)
 	)
@@ -713,8 +713,8 @@
 
 (instance sFX of Sound
 	(properties
-		sel_20 {sFX}
-		sel_99 5
-		sel_40 42
+		name {sFX}
+		flags 5
+		number 42
 	)
 )

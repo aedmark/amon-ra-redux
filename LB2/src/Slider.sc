@@ -7,114 +7,114 @@
 
 (class Slider of IconI
 	(properties
-		sel_20 {Slider}
-		sel_511 0
-		sel_512 0
-		sel_513 0
-		sel_514 0
-		sel_515 0
-		sel_516 0
-		sel_517 0
-		sel_518 0
-		sel_5 0
-		sel_52 1
-		sel_348 0
-		sel_519 0
-		sel_520 0
-		sel_521 0
+		name {Slider}
+		sliderView 0
+		sliderLoop 0
+		sliderCel 0
+		sTop 0
+		sLeft 0
+		sRight 0
+		maxY 0
+		minY 0
+		underBits 0
+		yStep 1
+		theObj 0
+		selector 0
+		bottomValue 0
+		topValue 0
 	)
 
-	(method (sel_57)
-		(if sel_348
-			(Eval sel_348 sel_519 &rest)
+	(method (doit)
+		(if theObj
+			(Eval theObj selector &rest)
 		)
 	)
 
-	(method (sel_216)
-		(super sel_216: &rest)
-		(if (not sel_516)
-			(= sel_515 sel_7)
-			(= sel_516 sel_9)
-			(= sel_517 (- sel_8 (CelHigh sel_511 sel_512 sel_513)))
-			(= sel_518 sel_6)
+	(method (show)
+		(super show: &rest)
+		(if (not sRight)
+			(= sLeft nsLeft)
+			(= sRight nsRight)
+			(= maxY (- nsBottom (CelHigh sliderView sliderLoop sliderCel)))
+			(= minY nsTop)
 		)
-		(= sel_514 (self sel_522:))
-		(DrawCel sel_511 sel_512 sel_513 sel_515 sel_514 -1)
-		(Graph grUPDATE_BOX (- sel_6 1) (- sel_7 1) (+ 2 sel_8) (+ 2 sel_9) 1)
+		(= sTop (self valueToPosn:))
+		(DrawCel sliderView sliderLoop sliderCel sLeft sTop -1)
+		(Graph grUPDATE_BOX (- nsTop 1) (- nsLeft 1) (+ 2 nsBottom) (+ 2 nsRight) 1)
 	)
 
-	(method (sel_178 param1 &tmp temp0)
+	(method (select param1 &tmp temp0)
 		(if (and argc param1)
-			(while (!= ((= temp0 (Event sel_109:)) sel_31:) 2)
-				(temp0 sel_148:)
+			(while (!= ((= temp0 (Event new:)) type:) 2)
+				(temp0 localize:)
 				(cond
-					((< (temp0 sel_0:) (- sel_514 sel_52))
-						(self sel_181: sel_52 (not (& sel_14 $0200)))
+					((< (temp0 y:) (- sTop yStep))
+						(self move: yStep (not (& signal $0200)))
 					)
-					((> (temp0 sel_0:) (+ sel_514 sel_52))
-						(self sel_181: (- sel_52) (not (& sel_14 $0200)))
+					((> (temp0 y:) (+ sTop yStep))
+						(self move: (- yStep) (not (& signal $0200)))
 					)
 				)
-				(temp0 sel_111:)
+				(temp0 dispose:)
 			)
-			(if (& sel_14 $0200)
-				(self sel_57: (self sel_523: sel_514))
+			(if (& signal $0200)
+				(self doit: (self posnToValue: sTop))
 			)
-			(temp0 sel_111:)
+			(temp0 dispose:)
 		else
 			(return 1)
 		)
 	)
 
-	(method (sel_217))
+	(method (highlight))
 
-	(method (sel_190)
+	(method (advance)
 		(self
-			sel_181:
+			move:
 				(Max
-					sel_52
+					yStep
 					(-
-						sel_514
+						sTop
 						(self
-							sel_522:
+							valueToPosn:
 								(+
-									(self sel_57:)
-									(sign (- sel_521 sel_520))
+									(self doit:)
+									(sign (- topValue bottomValue))
 								)
 						)
 					)
 				)
-				(not (& sel_14 $0200))
+				(not (& signal $0200))
 		)
-		(if (& sel_14 $0200)
-			(self sel_57: (self sel_523: sel_514))
+		(if (& signal $0200)
+			(self doit: (self posnToValue: sTop))
 		)
 	)
 
-	(method (sel_191)
+	(method (retreat)
 		(self
-			sel_181:
+			move:
 				(Min
-					(- sel_52)
+					(- yStep)
 					(-
-						sel_514
+						sTop
 						(self
-							sel_522:
+							valueToPosn:
 								(-
-									(self sel_57:)
-									(sign (- sel_521 sel_520))
+									(self doit:)
+									(sign (- topValue bottomValue))
 								)
 						)
 					)
 				)
-				(not (& sel_14 $0200))
+				(not (& signal $0200))
 		)
-		(if (& sel_14 $0200)
-			(self sel_57: (self sel_523: sel_514))
+		(if (& signal $0200)
+			(self doit: (self posnToValue: sTop))
 		)
 	)
 
-	(method (sel_181 param1 param2 &tmp temp0 temp1 temp2 temp3 temp4 temp5 temp6 temp7)
+	(method (move param1 param2 &tmp temp0 temp1 temp2 temp3 temp4 temp5 temp6 temp7)
 		(= temp7
 			(if (not argc)
 			else
@@ -124,37 +124,37 @@
 		(= temp5 (sign param1))
 		(for
 			((= temp4 param1))
-			(<= sel_52 (Abs temp4))
-			((-= temp4 (* sel_52 temp5)))
+			(<= yStep (Abs temp4))
+			((-= temp4 (* yStep temp5)))
 
-			(= temp0 (- sel_514 (* temp5 sel_52)))
-			(= temp1 (CelHigh sel_511 sel_512 sel_513))
-			(= sel_514
+			(= temp0 (- sTop (* temp5 yStep)))
+			(= temp1 (CelHigh sliderView sliderLoop sliderCel))
+			(= sTop
 				(cond
-					((< temp0 sel_518) sel_518)
-					((> temp0 sel_517) sel_517)
+					((< temp0 minY) minY)
+					((> temp0 maxY) maxY)
 					(else temp0)
 				)
 			)
 			(= temp2 (PicNotValid))
 			(PicNotValid 1)
-			(DrawCel sel_2 sel_3 sel_4 sel_7 sel_6 -1)
-			(DrawCel sel_511 sel_512 sel_513 sel_515 sel_514 -1)
-			(Graph grUPDATE_BOX (- sel_6 1) (- sel_7 1) (+ 2 sel_8) (+ 2 sel_9) 1)
+			(DrawCel view loop cel nsLeft nsTop -1)
+			(DrawCel sliderView sliderLoop sliderCel sLeft sTop -1)
+			(Graph grUPDATE_BOX (- nsTop 1) (- nsLeft 1) (+ 2 nsBottom) (+ 2 nsRight) 1)
 			(PicNotValid temp2)
-			(= temp3 (self sel_523: sel_514))
+			(= temp3 (self posnToValue: sTop))
 			(= temp6
 				(if temp7
-					(self sel_57: temp3)
+					(self doit: temp3)
 				else
-					(self sel_57:)
+					(self doit:)
 				)
 			)
 		)
 		(return temp6)
 	)
 
-	(method (sel_522 param1 &tmp temp0)
+	(method (valueToPosn param1 &tmp temp0)
 		(return
 			(cond
 				(
@@ -164,24 +164,24 @@
 								(if argc
 									param1
 								else
-									(self sel_57:)
+									(self doit:)
 								)
 							)
-							sel_521
+							topValue
 						)
-						(< temp0 sel_520)
+						(< temp0 bottomValue)
 					)
-					(if (< sel_520 sel_521) sel_517 else sel_518)
+					(if (< bottomValue topValue) maxY else minY)
 				)
-				((and (> temp0 sel_521) (> temp0 sel_520))
-					(if (< sel_520 sel_521) sel_518 else sel_517)
+				((and (> temp0 topValue) (> temp0 bottomValue))
+					(if (< bottomValue topValue) minY else maxY)
 				)
 				(else
 					(+
-						sel_518
+						minY
 						(/
-							(* (Abs (- sel_521 temp0)) (- sel_517 sel_518))
-							(Abs (- sel_521 sel_520))
+							(* (Abs (- topValue temp0)) (- maxY minY))
+							(Abs (- topValue bottomValue))
 						)
 					)
 				)
@@ -189,13 +189,13 @@
 		)
 	)
 
-	(method (sel_523 param1)
+	(method (posnToValue param1)
 		(return
 			(+
-				sel_520
+				bottomValue
 				(/
-					(* (- sel_517 param1) (- sel_521 sel_520))
-					(- sel_517 sel_518)
+					(* (- maxY param1) (- topValue bottomValue))
+					(- maxY minY)
 				)
 			)
 		)

@@ -12,46 +12,46 @@
 
 (instance Coroner of Talker
 	(properties
-		sel_20 {Coroner}
-		sel_1 100
-		sel_0 0
-		sel_6 5
-		sel_7 5
-		sel_2 1899
-		sel_3 3
-		sel_537 150
-		sel_26 15
+		name {Coroner}
+		x 100
+		y 0
+		nsTop 5
+		nsLeft 5
+		view 1899
+		loop 3
+		talkWidth 150
+		back 15
 	)
 
-	(method (sel_110)
-		(= sel_30 gUserFont)
-		(super sel_110: coronerBust coronerEyes coronerMouth &rest)
+	(method (init)
+		(= font gUserFont)
+		(super init: coronerBust coronerEyes coronerMouth &rest)
 	)
 )
 
 (instance coronerBust of Prop
 	(properties
-		sel_20 {coronerBust}
-		sel_2 1899
-		sel_3 1
+		name {coronerBust}
+		view 1899
+		loop 1
 	)
 )
 
 (instance coronerEyes of Prop
 	(properties
-		sel_20 {coronerEyes}
-		sel_6 15
-		sel_7 30
-		sel_2 1899
-		sel_3 2
+		name {coronerEyes}
+		nsTop 15
+		nsLeft 30
+		view 1899
+		loop 2
 	)
 )
 
 (instance coronerMouth of Prop
 	(properties
-		sel_20 {coronerMouth}
-		sel_6 33
-		sel_7 30
-		sel_2 1899
+		name {coronerMouth}
+		nsTop 33
+		nsLeft 30
+		view 1899
 	)
 )

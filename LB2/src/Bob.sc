@@ -11,17 +11,17 @@
 
 (instance Bob of Narrator
 	(properties
-		sel_20 {Bob}
-		sel_1 15
-		sel_0 120
-		sel_537 275
-		sel_203 1
-		sel_26 15
+		name {Bob}
+		x 15
+		y 120
+		talkWidth 275
+		modeless 1
+		back 15
 	)
 
-	(method (sel_110)
-		(= sel_30 gUserFont)
-		(= sel_540 1)
-		(super sel_110: &rest)
+	(method (init)
+		(= font gUserFont)
+		(= showTitle 1)
+		(super init: &rest)
 	)
 )

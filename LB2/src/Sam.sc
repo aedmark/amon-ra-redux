@@ -12,46 +12,46 @@
 
 (instance Sam of Talker
 	(properties
-		sel_20 {Sam}
-		sel_1 5
-		sel_0 5
-		sel_2 1894
-		sel_3 3
-		sel_537 150
-		sel_26 15
-		sel_549 105
-		sel_550 12
+		name {Sam}
+		x 5
+		y 5
+		view 1894
+		loop 3
+		talkWidth 150
+		back 15
+		textX 105
+		textY 12
 	)
 
-	(method (sel_110)
-		(= sel_30 gUserFont)
-		(super sel_110: samBust samEyes samMouth &rest)
+	(method (init)
+		(= font gUserFont)
+		(super init: samBust samEyes samMouth &rest)
 	)
 )
 
 (instance samBust of Prop
 	(properties
-		sel_20 {samBust}
-		sel_2 1894
-		sel_3 1
+		name {samBust}
+		view 1894
+		loop 1
 	)
 )
 
 (instance samEyes of Prop
 	(properties
-		sel_20 {samEyes}
-		sel_6 35
-		sel_7 31
-		sel_2 1894
-		sel_3 2
+		name {samEyes}
+		nsTop 35
+		nsLeft 31
+		view 1894
+		loop 2
 	)
 )
 
 (instance samMouth of Prop
 	(properties
-		sel_20 {samMouth}
-		sel_6 54
-		sel_7 17
-		sel_2 1894
+		name {samMouth}
+		nsTop 54
+		nsLeft 17
+		view 1894
 	)
 )

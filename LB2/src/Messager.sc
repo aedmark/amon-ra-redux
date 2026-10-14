@@ -8,66 +8,66 @@
 
 (class Messager of Obj
 	(properties
-		sel_20 {Messager}
-		sel_143 0
-		sel_290 0
-		sel_291 1
-		sel_292 0
-		sel_293 0
-		sel_294 0
+		name {Messager}
+		caller 0
+		talkerList 0
+		disposeWhenDone 1
+		oneOnly 0
+		killed 0
+		oldIconBarState 0
 	)
 
-	(method (sel_111 &tmp temp0)
-		(if sel_290
-			(sel_290 sel_119: 143 0 sel_119: 111 1 sel_111:)
-			(= sel_290 0)
+	(method (dispose &tmp temp0)
+		(if talkerList
+			(talkerList eachElementDo: 143 0 eachElementDo: 111 1 dispose:)
+			(= talkerList 0)
 		)
-		(gTheIconBar sel_29: sel_294)
-		(= sel_294 0)
-		(= temp0 sel_143)
-		(super sel_111:)
+		(gTheIconBar state: oldIconBarState)
+		(= oldIconBarState 0)
+		(= temp0 caller)
+		(super dispose:)
 		(if temp0
-			(temp0 sel_145: sel_293)
+			(temp0 cue: killed)
 		)
 	)
 
-	(method (sel_145 param1)
+	(method (cue param1)
 		(if (and argc param1)
-			(= sel_293 1)
+			(= killed 1)
 		)
-		(if (or sel_292 sel_293)
+		(if (or oneOnly killed)
 			(if gFastCast
-				(gFastCast sel_125: sel_111:)
+				(gFastCast release: dispose:)
 				(= gFastCast 0)
 			)
-			(self sel_111:)
+			(self dispose:)
 		else
-			(self sel_296:)
+			(self sayNext:)
 		)
 	)
 
-	(method (sel_295 param1 param2 param3 param4 param5 param6 &tmp temp0 temp1 temp2 temp3 [temp4 20])
+	(method (say param1 param2 param3 param4 param5 param6 &tmp temp0 temp1 temp2 temp3 [temp4 20])
 		(= temp0 (= temp1 (= temp2 0)))
-		(= sel_143 (= sel_292 (= sel_293 0)))
-		(if (not sel_294)
-			(= sel_294 (gTheIconBar sel_29:))
+		(= caller (= oneOnly (= killed 0)))
+		(if (not oldIconBarState)
+			(= oldIconBarState (gTheIconBar state:))
 		)
 		(if (> argc 5)
 			(= temp3 param6)
 		else
 			(= temp3 gCurRoomNum)
 		)
-		(if (not sel_290)
-			((= sel_290 (Set sel_109:)) sel_118:)
+		(if (not talkerList)
+			((= talkerList (Set new:)) add:)
 		)
 		(if (== param1 -1)
 			(if (and (> argc 1) (IsObject param2))
-				(= sel_143 param2)
+				(= caller param2)
 			)
-			(self sel_296:)
+			(self sayNext:)
 		else
 			(if (and (> argc 4) param5)
-				(= sel_143 param5)
+				(= caller param5)
 			)
 			(if (and (> argc 1) param2)
 				(= temp0 param2)
@@ -76,12 +76,12 @@
 				(= temp1 param3)
 			)
 			(if (and (> argc 3) param4)
-				(= sel_292 1)
+				(= oneOnly 1)
 				(= temp2 param4)
 			else
 				(= temp2 1)
 			)
-			(= sel_143 (if (and (> argc 4) param5) param5 else 0))
+			(= caller (if (and (> argc 4) param5) param5 else 0))
 			(if
 				(or
 					(and
@@ -90,10 +90,10 @@
 					)
 					0
 				)
-				(self sel_296: temp3 param1 temp0 temp1 temp2)
+				(self sayNext: temp3 param1 temp0 temp1 temp2)
 			else
 				(Print
-					sel_199:
+					addTextF:
 						@temp4
 						{<Messager> %d: %d, %d, %d, %d not found}
 						temp3
@@ -101,32 +101,32 @@
 						temp0
 						temp1
 						temp2
-					sel_110:
+					init:
 				)
-				(self sel_111:)
+				(self dispose:)
 			)
 		)
 	)
 
-	(method (sel_296 param1 param2 param3 param4 param5 &tmp temp0)
+	(method (sayNext param1 param2 param3 param4 param5 &tmp temp0)
 		(if (= temp0 (Message msgNEXT 0))
-			(= temp0 (self sel_297: temp0))
-			(sel_290 sel_118: temp0)
+			(= temp0 (self findTalker: temp0))
+			(talkerList add: temp0)
 			(if argc
-				(temp0 sel_295: param2 param3 param4 param5 self param1)
+				(temp0 say: param2 param3 param4 param5 self param1)
 			else
-				(temp0 sel_295: 0 0 0 0 self)
+				(temp0 say: 0 0 0 0 self)
 			)
 		else
 			(if gFastCast
-				(gFastCast sel_125: sel_111:)
+				(gFastCast release: dispose:)
 				(= gFastCast 0)
 			)
-			(self sel_111:)
+			(self dispose:)
 		)
 	)
 
-	(method (sel_297)
+	(method (findTalker)
 		(Prints {<Messager findTalker:> Can't find talker})
 		(= gQuit 1)
 	)

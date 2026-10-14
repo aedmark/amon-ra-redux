@@ -23,7 +23,7 @@
 			(DeviceInfo diIS_FLOPPY @curDevice)
 			(or
 				(DeviceInfo diPATHS_EQUAL @saveDevice @curDevice)
-				(not (DeviceInfo 6 (gGame sel_20:))) ; SaveDirMounted
+				(not (DeviceInfo 6 (gGame name:))) ; SaveDirMounted
 			)
 		)
 		(Message msgGET 994 6 0 0 1 @buf1) ; "Insert the %s disk in drive %s."
@@ -40,19 +40,19 @@
 				(= ret
 					(if saveDisk
 						(Print
-							sel_30: 0
-							sel_198: str
-							sel_205: 1 @buf1 0 40
-							sel_205: 0 @buf2 30 40
-							sel_205: 2 @buf3
-							sel_110:
+							font: 0
+							addText: str
+							addButton: 1 @buf1 0 40
+							addButton: 0 @buf2 30 40
+							addButton: 2 @buf3
+							init:
 						)
 					else
 						(Print
-							sel_30: 0
-							sel_198: str
-							sel_205: 1 @buf1 0 40
-							sel_110:
+							font: 0
+							addText: str
+							addButton: 1 @buf1 0 40
+							init:
 						)
 					)
 				)
@@ -67,118 +67,118 @@
 
 (instance cast of EventHandler
 	(properties
-		sel_20 {cast}
+		name {cast}
 	)
 )
 
 (instance features of EventHandler
 	(properties
-		sel_20 {features}
+		name {features}
 	)
 )
 
 (instance theDoits of EventHandler
 	(properties
-		sel_20 {theDoits}
+		name {theDoits}
 	)
 )
 
 (instance sFeatures of EventHandler
 	(properties
-		sel_20 {sFeatures}
+		name {sFeatures}
 	)
 
-	(method (sel_81 param1)
-		(super sel_81: param1)
+	(method (delete param1)
+		(super delete: param1)
 		(if
 			(and
 				gUseSortedFeatures
-				(param1 sel_114: Collect)
+				(param1 isKindOf: Collect)
 				(not (OneOf param1 gRegions gLocales))
 			)
-			(param1 sel_125: sel_111:)
+			(param1 release: dispose:)
 		)
 	)
 )
 
 (class Sounds of EventHandler
 	(properties
-		sel_20 {Sounds}
+		name {Sounds}
 	)
 
-	(method (sel_168 param1)
-		(self sel_119: 96 mayPause (if argc param1 else 1))
+	(method (pause param1)
+		(self eachElementDo: 96 mayPause (if argc param1 else 1))
 	)
 )
 
 (instance mayPause of Code
 	(properties
-		sel_20 {mayPause}
+		name {mayPause}
 	)
 
-	(method (sel_57 param1 param2)
-		(if (not (& (param1 sel_99:) $0001))
-			(param1 sel_168: param2)
+	(method (doit param1 param2)
+		(if (not (& (param1 flags:) $0001))
+			(param1 pause: param2)
 		)
 	)
 )
 
 (instance regions of EventHandler
 	(properties
-		sel_20 {regions}
+		name {regions}
 	)
 )
 
 (instance locales of EventHandler
 	(properties
-		sel_20 {locales}
+		name {locales}
 	)
 )
 
 (instance addToPics of EventHandler
 	(properties
-		sel_20 {addToPics}
+		name {addToPics}
 	)
 
-	(method (sel_57)
-		(AddToPic sel_24)
+	(method (doit)
+		(AddToPic elements)
 	)
 )
 
 (instance controls of Controls
 	(properties
-		sel_20 {controls}
+		name {controls}
 	)
 )
 
 (instance timers of Set
 	(properties
-		sel_20 {timers}
+		name {timers}
 	)
 )
 
 (instance aTOC of Code ; UNUSED
 	(properties
-		sel_20 {aTOC}
+		name {aTOC}
 	)
 
-	(method (sel_57 param1 &tmp temp0 temp1 [temp2 48])
-		(if (not (& (param1 sel_14:) $4000))
-			(= temp0 (+ (gEgo sel_51:) (/ (CelWide (gEgo sel_2:) 2 0) 2)))
-			(= temp1 (* (gEgo sel_52:) 2))
+	(method (doit param1 &tmp temp0 temp1 [temp2 48])
+		(if (not (& (param1 signal:) $4000))
+			(= temp0 (+ (gEgo xStep:) (/ (CelWide (gEgo view:) 2 0) 2)))
+			(= temp1 (* (gEgo yStep:) 2))
 			(gCurRoom
-				sel_395:
-					((Polygon sel_109:)
-						sel_110:
-							(- (param1 sel_17:) temp0)
-							(- (CoordPri 1 (CoordPri (param1 sel_0:))) temp1)
-							(+ (param1 sel_19:) temp0)
-							(- (CoordPri 1 (CoordPri (param1 sel_0:))) temp1)
-							(+ (param1 sel_19:) temp0)
-							(+ (param1 sel_0:) temp1)
-							(- (param1 sel_17:) temp0)
-							(+ (param1 sel_0:) temp1)
-						sel_117:
+				addObstacle:
+					((Polygon new:)
+						init:
+							(- (param1 brLeft:) temp0)
+							(- (CoordPri 1 (CoordPri (param1 y:))) temp1)
+							(+ (param1 brRight:) temp0)
+							(- (CoordPri 1 (CoordPri (param1 y:))) temp1)
+							(+ (param1 brRight:) temp0)
+							(+ (param1 y:) temp1)
+							(- (param1 brLeft:) temp0)
+							(+ (param1 y:) temp1)
+						yourself:
 					)
 			)
 		)
@@ -187,276 +187,276 @@
 
 (class Game of Obj
 	(properties
-		sel_20 {Game}
-		sel_142 0
-		sel_83 1
-		sel_84 1
-		sel_85 0
-		sel_396 3
-		sel_397 0
-		sel_398 0
+		name {Game}
+		script 0
+		parseLang 1
+		printLang 1
+		subtitleLang 0
+		_detailLevel 3
+		panelObj 0
+		panelSelector 0
 	)
 
-	(method (sel_110)
+	(method (init)
 		Motion
 		Sound
 		(ScriptID 932)
-		((= gCast cast) sel_118:)
-		((= gFeatures features) sel_118:)
-		((= gSFeatures sFeatures) sel_118:)
-		((= gSounds Sounds) sel_118:)
-		((= gRegions regions) sel_118:)
-		((= gLocales locales) sel_118:)
-		((= gAddToPics addToPics) sel_118:)
-		((= gTimers timers) sel_118:)
-		((= gTheDoits theDoits) sel_118:)
+		((= gCast cast) add:)
+		((= gFeatures features) add:)
+		((= gSFeatures sFeatures) add:)
+		((= gSounds Sounds) add:)
+		((= gRegions regions) add:)
+		((= gLocales locales) add:)
+		((= gAddToPics addToPics) add:)
+		((= gTimers timers) add:)
+		((= gTheDoits theDoits) add:)
 		(= gFastCast 0)
 		(= gCurSaveDir (GetSaveDir))
-		(Inv sel_110:)
+		(Inv init:)
 		(if (not gUser)
 			(= gUser User)
 		)
-		(gUser sel_110:)
+		(gUser init:)
 	)
 
-	(method (sel_57 &tmp temp0 temp1 temp2)
-		(if sel_397
-			(= temp1 sel_397)
-			(= temp2 sel_398)
-			(= sel_397 (= sel_398 0))
+	(method (doit &tmp temp0 temp1 temp2)
+		(if panelObj
+			(= temp1 panelObj)
+			(= temp2 panelSelector)
+			(= panelObj (= panelSelector 0))
 			(Eval temp1 temp2)
 		)
 		(= gGameTime (+ gTickOffset (GetTime)))
 		(if gFastCast
 			(while gFastCast
-				(gFastCast sel_119: 57)
-				(if (and ((= temp0 (Event sel_109:)) sel_31:) gFastCast)
-					(gFastCast sel_120: 133 temp0)
+				(gFastCast eachElementDo: 57)
+				(if (and ((= temp0 (Event new:)) type:) gFastCast)
+					(gFastCast firstTrue: 133 temp0)
 				)
-				(temp0 sel_111:)
+				(temp0 dispose:)
 				(= gGameTime (+ gTickOffset (GetTime)))
 			)
 		)
 		(if gPrints
-			(gPrints sel_119: 57)
+			(gPrints eachElementDo: 57)
 			(if (not gModelessDialog)
-				(if (and ((= temp0 (Event sel_109:)) sel_31:) gPrints)
-					(gPrints sel_120: 133 temp0)
+				(if (and ((= temp0 (Event new:)) type:) gPrints)
+					(gPrints firstTrue: 133 temp0)
 				)
-				(temp0 sel_111:)
+				(temp0 dispose:)
 				(= gGameTime (+ gTickOffset (GetTime)))
 				(return)
 			)
 		)
-		(gSounds sel_119: 174)
-		(gTimers sel_119: 57)
+		(gSounds eachElementDo: 174)
+		(gTimers eachElementDo: 57)
 		(if gModelessDialog
-			(gModelessDialog sel_174:)
+			(gModelessDialog check:)
 		)
-		(Animate (gCast sel_24:) 1)
+		(Animate (gCast elements:) 1)
 		(if gDoMotionCue
 			(= gDoMotionCue 0)
-			(gCast sel_119: 243)
+			(gCast eachElementDo: 243)
 		)
-		(if sel_142
-			(sel_142 sel_57:)
+		(if script
+			(script doit:)
 		)
-		(gRegions sel_119: 57)
+		(gRegions eachElementDo: 57)
 		(if (== gNewRoomNum gCurRoomNum)
-			(gUser sel_57:)
+			(gUser doit:)
 		)
-		(gTheDoits sel_57:)
+		(gTheDoits doit:)
 		(if (!= gNewRoomNum gCurRoomNum)
-			(self sel_399: gNewRoomNum)
+			(self newRoom: gNewRoomNum)
 		)
-		(gTimers sel_119: 81)
+		(gTimers eachElementDo: 81)
 		(GameIsRestarting 0)
 	)
 
-	(method (sel_39)
+	(method (play)
 		(= gGame self)
 		(= gCurSaveDir (GetSaveDir))
 		(if (not (GameIsRestarting))
 			(GetCWD gCurSaveDir)
 		)
-		(self sel_197: gWaitCursor 1 sel_110:)
-		(self sel_197: gNormalCursor 1)
+		(self setCursor: gWaitCursor 1 init:)
+		(self setCursor: gNormalCursor 1)
 		(while (not gQuit)
-			(self sel_57:)
+			(self doit:)
 		)
 	)
 
-	(method (sel_62)
+	(method (replay)
 		(if gLastEvent
-			(gLastEvent sel_111:)
+			(gLastEvent dispose:)
 		)
-		(gSFeatures sel_125:)
+		(gSFeatures release:)
 		(if gModelessDialog
-			(gModelessDialog sel_111:)
+			(gModelessDialog dispose:)
 		)
-		(gCast sel_119: 96 RU)
-		(gGame sel_197: gWaitCursor 1)
-		(DrawPic (gCurRoom sel_405:) 100 1 global40)
+		(gCast eachElementDo: 96 RU)
+		(gGame setCursor: gWaitCursor 1)
+		(DrawPic (gCurRoom curPic:) 100 1 global40)
 		(if (!= gOverlays -1)
 			(DrawPic gOverlays 100 0 global40)
 		)
-		(if (gCurRoom sel_343:)
-			((gCurRoom sel_343:) sel_80:)
+		(if (gCurRoom theControls:)
+			((gCurRoom theControls:) draw:)
 		)
-		(gAddToPics sel_57:)
+		(gAddToPics doit:)
 		(cond
-			((not (User sel_237:))
-				(gGame sel_197: gWaitCursor)
+			((not (User canControl:))
+				(gGame setCursor: gWaitCursor)
 			)
-			((and gTheIconBar (gTheIconBar sel_207:))
-				(gGame sel_197: ((gTheIconBar sel_207:) sel_33:))
+			((and gTheIconBar (gTheIconBar curIcon:))
+				(gGame setCursor: ((gTheIconBar curIcon:) cursor:))
 			)
 			(else
-				(gGame sel_197: gNormalCursor)
+				(gGame setCursor: gNormalCursor)
 			)
 		)
 		(HaveMouse)
-		(SL sel_57:)
+		(SL doit:)
 		(DoSound sndRESTORE)
-		(Sound sel_168: 0)
+		(Sound pause: 0)
 		(= gTickOffset (- gGameTime (GetTime)))
 		(while (not gQuit)
-			(self sel_57:)
+			(self doit:)
 		)
 	)
 
-	(method (sel_399 param1 &tmp [temp0 5] temp5)
-		(gAddToPics sel_119: 111 sel_119: 81 sel_125:)
-		(gFeatures sel_119: 96 fDC sel_125:)
-		(gCast sel_119: 111 sel_119: 81)
-		(gTimers sel_119: 81)
-		(gRegions sel_119: 96 DNKR sel_125:)
-		(gLocales sel_119: 111 sel_125:)
-		(gTheDoits sel_125:)
+	(method (newRoom param1 &tmp [temp0 5] temp5)
+		(gAddToPics eachElementDo: 111 eachElementDo: 81 release:)
+		(gFeatures eachElementDo: 96 fDC release:)
+		(gCast eachElementDo: 111 eachElementDo: 81)
+		(gTimers eachElementDo: 81)
+		(gRegions eachElementDo: 96 DNKR release:)
+		(gLocales eachElementDo: 111 release:)
+		(gTheDoits release:)
 		(Animate 0)
 		(= gPrevRoomNum gCurRoomNum)
 		(= gCurRoomNum param1)
 		(= gNewRoomNum param1)
 		(FlushResources param1)
-		(self sel_400: gCurRoomNum sel_402:)
+		(self startRoom: gCurRoomNum checkAni:)
 		(SetSynonyms gRegions)
-		(while ((= temp5 (Event sel_109: 3)) sel_31:)
-			(temp5 sel_111:)
+		(while ((= temp5 (Event new: 3)) type:)
+			(temp5 dispose:)
 		)
-		(temp5 sel_111:)
+		(temp5 dispose:)
 	)
 
-	(method (sel_400 param1)
+	(method (startRoom param1)
 		(if gDebugOn
 			(SetDebug)
 		)
-		(gRegions sel_129: (= gCurRoom (ScriptID param1)))
-		(gCurRoom sel_110:)
+		(gRegions addToFront: (= gCurRoom (ScriptID param1)))
+		(gCurRoom init:)
 	)
 
-	(method (sel_101)
+	(method (restart)
 		(if gModelessDialog
-			(gModelessDialog sel_111:)
+			(gModelessDialog dispose:)
 		)
 		(RestartGame)
 	)
 
-	(method (sel_76 &tmp [temp0 20] temp20 temp21 temp22 [temp23 100] [temp123 5] [temp128 100])
+	(method (restore &tmp [temp0 20] temp20 temp21 temp22 [temp23 100] [temp123 5] [temp128 100])
 		(if (not (ValidPath gCurSaveDir))
 			(Message msgGET 994 9 0 0 1 @temp23) ; "%s is not a valid directory."
 			(Format @temp128 @temp23 gCurSaveDir)
-			(Print sel_30: 0 sel_198: @temp128 sel_110:)
+			(Print font: 0 addText: @temp128 init:)
 			(GetDirectory gCurSaveDir)
 		)
-		(= temp22 sel_83)
-		(= sel_83 1)
+		(= temp22 parseLang)
+		(= parseLang 1)
 		(Load rsFONT gSmallFont)
 		(ScriptID 990)
-		(= temp21 (self sel_197: gNormalCursor))
-		(Sound sel_168: 1)
+		(= temp21 (self setCursor: gNormalCursor))
+		(Sound pause: 1)
 		(if (PromptForDiskChange 1)
 			(if gModelessDialog
-				(gModelessDialog sel_111:)
+				(gModelessDialog dispose:)
 			)
-			(if (!= (= temp20 (Restore sel_57: &rest)) -1)
-				(self sel_197: gWaitCursor 1)
-				(if (CheckSaveGame sel_20 temp20 gVersion)
-					(RestoreGame sel_20 temp20 gVersion)
+			(if (!= (= temp20 (Restore doit: &rest)) -1)
+				(self setCursor: gWaitCursor 1)
+				(if (CheckSaveGame name temp20 gVersion)
+					(RestoreGame name temp20 gVersion)
 				else
 					(Message msgGET 994 3 0 0 1 @temp23) ; "That game was saved under a different interpreter. It cannot be restored."
 					(Message msgGET 994 2 0 0 1 @temp123) ; "OK"
 					(Print
-						sel_30: 0
-						sel_198: @temp23
-						sel_205: 1 @temp123 0 40
-						sel_110:
+						font: 0
+						addText: @temp23
+						addButton: 1 @temp123 0 40
+						init:
 					)
-					(self sel_197: temp21 (HaveMouse))
-					(= sel_83 temp22)
+					(self setCursor: temp21 (HaveMouse))
+					(= parseLang temp22)
 				)
 			else
-				(= sel_83 temp22)
+				(= parseLang temp22)
 			)
 			(PromptForDiskChange 0)
 		)
-		(Sound sel_168: 0)
+		(Sound pause: 0)
 	)
 
-	(method (sel_75 &tmp [temp0 20] temp20 temp21 temp22 [temp23 100] [temp123 5] [temp128 100])
+	(method (save &tmp [temp0 20] temp20 temp21 temp22 [temp23 100] [temp123 5] [temp128 100])
 		(if (not (ValidPath gCurSaveDir))
 			(Message msgGET 994 9 0 0 1 @temp23) ; "%s is not a valid directory."
 			(Format @temp128 @temp23 gCurSaveDir)
-			(Print sel_30: 0 sel_198: @temp128 sel_110:)
+			(Print font: 0 addText: @temp128 init:)
 			(GetDirectory gCurSaveDir)
 		)
-		(= temp22 sel_83)
-		(= sel_83 1)
+		(= temp22 parseLang)
+		(= parseLang 1)
 		(Load rsFONT gSmallFont)
 		(ScriptID 990)
-		(= temp21 (self sel_197: gNormalCursor))
-		(Sound sel_168: 1)
+		(= temp21 (self setCursor: gNormalCursor))
+		(Sound pause: 1)
 		(if (PromptForDiskChange 1)
 			(if gModelessDialog
-				(gModelessDialog sel_111:)
+				(gModelessDialog dispose:)
 			)
-			(if (!= (= temp20 (Save sel_57: @temp0)) -1)
-				(= sel_83 temp22)
-				(= temp21 (self sel_197: gWaitCursor 1))
-				(if (not (SaveGame sel_20 temp20 @temp0 gVersion))
+			(if (!= (= temp20 (Save doit: @temp0)) -1)
+				(= parseLang temp22)
+				(= temp21 (self setCursor: gWaitCursor 1))
+				(if (not (SaveGame name temp20 @temp0 gVersion))
 					(Message msgGET 994 1 0 0 1 @temp23) ; "Your save game disk is full. You must either use another disk or save over an existing saved game."
 					(Message msgGET 994 2 0 0 1 @temp123) ; "OK"
 					(Print
-						sel_30: 0
-						sel_198: @temp23
-						sel_205: 1 @temp123 0 40
-						sel_110:
+						font: 0
+						addText: @temp23
+						addButton: 1 @temp123 0 40
+						init:
 					)
 				)
-				(self sel_197: temp21 (HaveMouse))
+				(self setCursor: temp21 (HaveMouse))
 			)
 			(PromptForDiskChange 0)
 		)
-		(Sound sel_168: 0)
-		(= sel_83 temp22)
+		(Sound pause: 0)
+		(= parseLang temp22)
 	)
 
-	(method (sel_388 param1)
+	(method (changeScore param1)
 		(+= gScore param1)
-		(SL sel_57:)
+		(SL doit:)
 	)
 
-	(method (sel_133 param1)
+	(method (handleEvent param1)
 		(cond
-			((param1 sel_73:) 1)
-			((and sel_142 (sel_142 sel_133: param1)) 1)
-			((& (param1 sel_31:) $4000)
-				(self sel_71:)
+			((param1 claimed:) 1)
+			((and script (script handleEvent: param1)) 1)
+			((& (param1 type:) $4000)
+				(self pragmaFail:)
 			)
 		)
-		(param1 sel_73:)
+		(param1 claimed:)
 	)
 
-	(method (sel_401 &tmp [temp0 100])
+	(method (showMem &tmp [temp0 100])
 		(Format
 			@temp0
 			{Free Heap: %u Bytes\nLargest ptr: %u Bytes\nFreeHunk: %u KBytes\nLargest hunk: %u Bytes}
@@ -465,20 +465,20 @@
 			(>> (MemoryInfo miFREEHUNK) $0006)
 			(MemoryInfo miLARGESTHUNK)
 		)
-		(Print sel_198: @temp0 sel_110:)
+		(Print addText: @temp0 init:)
 	)
 
-	(method (sel_352 param1 &tmp temp0)
+	(method (setSpeed param1 &tmp temp0)
 		(= temp0 gSpeed)
 		(= gSpeed param1)
 		(return temp0)
 	)
 
-	(method (sel_197 param1 param2 param3 param4 param5 param6 &tmp temp0)
+	(method (setCursor param1 param2 param3 param4 param5 param6 &tmp temp0)
 		(= temp0 gTheCursor)
 		(if (IsObject param1)
 			(= gTheCursor param1)
-			(param1 sel_110:)
+			(param1 init:)
 		else
 			(SetCursor param1 0 0)
 		)
@@ -494,44 +494,44 @@
 		(return temp0)
 	)
 
-	(method (sel_402 &tmp temp0)
-		(Animate (gCast sel_24:) 0)
+	(method (checkAni &tmp temp0)
+		(Animate (gCast elements:) 0)
 		(Wait 0)
-		(Animate (gCast sel_24:) 0)
+		(Animate (gCast elements:) 0)
 		(while (> (Wait 0) global30)
-			(if (== (= temp0 (gCast sel_120: 318)) 0)
+			(if (== (= temp0 (gCast firstTrue: 318)) 0)
 				(break)
 			)
-			(temp0 sel_317:)
-			(Animate (gCast sel_24:) 0)
-			(gCast sel_119: 81)
+			(temp0 addToPic:)
+			(Animate (gCast elements:) 0)
+			(gCast eachElementDo: 81)
 		)
 	)
 
-	(method (sel_403))
+	(method (notify))
 
-	(method (sel_146 param1)
-		(if sel_142
-			(sel_142 sel_111:)
+	(method (setScript param1)
+		(if script
+			(script dispose:)
 		)
 		(if param1
-			(param1 sel_110: self &rest)
+			(param1 init: self &rest)
 		)
 	)
 
-	(method (sel_145)
-		(if sel_142
-			(sel_142 sel_145:)
+	(method (cue)
+		(if script
+			(script cue:)
 		)
 	)
 
-	(method (sel_100 param1)
+	(method (quitGame param1)
 		(if (or (not argc) param1)
 			(= gQuit 1)
 		)
 	)
 
-	(method (sel_404 param1)
+	(method (masterVolume param1)
 		(if argc
 			(DoSound sndMASTER_VOLUME param1)
 		else
@@ -539,211 +539,211 @@
 		)
 	)
 
-	(method (sel_321 param1)
+	(method (detailLevel param1)
 		(if argc
-			(= sel_396 param1)
-			(gCast sel_119: 319)
+			(= _detailLevel param1)
+			(gCast eachElementDo: 319)
 		)
-		(return sel_396)
+		(return _detailLevel)
 	)
 
-	(method (sel_71))
+	(method (pragmaFail))
 )
 
 (class Rgn of Obj
 	(properties
-		sel_20 {Rgn}
-		sel_142 0
-		sel_40 0
-		sel_214 -1
-		sel_213 0
-		sel_135 0
-		sel_406 0
-		sel_407 0
+		name {Rgn}
+		script 0
+		number 0
+		modNum -1
+		noun 0
+		timer 0
+		keep 0
+		initialized 0
 	)
 
-	(method (sel_110)
-		(if (not sel_407)
-			(= sel_407 1)
-			(if (not (gRegions sel_122: self))
-				(gRegions sel_130: self)
+	(method (init)
+		(if (not initialized)
+			(= initialized 1)
+			(if (not (gRegions contains: self))
+				(gRegions addToEnd: self)
 			)
-			(super sel_110:)
+			(super init:)
 		)
 	)
 
-	(method (sel_57)
-		(if sel_142
-			(sel_142 sel_57:)
+	(method (doit)
+		(if script
+			(script doit:)
 		)
 	)
 
-	(method (sel_111)
-		(gRegions sel_81: self)
-		(if (IsObject sel_142)
-			(sel_142 sel_111:)
+	(method (dispose)
+		(gRegions delete: self)
+		(if (IsObject script)
+			(script dispose:)
 		)
-		(if (IsObject sel_135)
-			(sel_135 sel_111: sel_81:)
+		(if (IsObject timer)
+			(timer dispose: delete:)
 		)
-		(gSounds sel_119: 175 self)
-		(DisposeScript sel_40)
+		(gSounds eachElementDo: 175 self)
+		(DisposeScript number)
 	)
 
-	(method (sel_133 param1)
+	(method (handleEvent param1)
 		(cond
-			((param1 sel_73:) 1)
+			((param1 claimed:) 1)
 			(
 				(not
 					(and
-						sel_142
-						(or (sel_142 sel_133: param1) 1)
-						(param1 sel_73:)
+						script
+						(or (script handleEvent: param1) 1)
+						(param1 claimed:)
 					)
 				)
-				(param1 sel_73: (self sel_300: (param1 sel_37:)))
+				(param1 claimed: (self doVerb: (param1 message:)))
 			)
 		)
-		(param1 sel_73:)
+		(param1 claimed:)
 	)
 
-	(method (sel_300 param1 &tmp temp0)
-		(if (== sel_214 -1)
-			(= sel_214 gCurRoomNum)
+	(method (doVerb param1 &tmp temp0)
+		(if (== modNum -1)
+			(= modNum gCurRoomNum)
 		)
-		(if (Message msgGET sel_214 sel_213 param1 0 1)
-			(gMessager sel_295: sel_213 param1 0 0 0 sel_214)
+		(if (Message msgGET modNum noun param1 0 1)
+			(gMessager say: noun param1 0 0 0 modNum)
 		else
 			(return 0)
 		)
 	)
 
-	(method (sel_146 param1)
-		(if (IsObject sel_142)
-			(sel_142 sel_111:)
+	(method (setScript param1)
+		(if (IsObject script)
+			(script dispose:)
 		)
 		(if param1
-			(param1 sel_110: self &rest)
+			(param1 init: self &rest)
 		)
 	)
 
-	(method (sel_145)
-		(if sel_142
-			(sel_142 sel_145:)
+	(method (cue)
+		(if script
+			(script cue:)
 		)
 	)
 
-	(method (sel_399))
+	(method (newRoom))
 
-	(method (sel_403))
+	(method (notify))
 )
 
 (class Rm of Rgn
 	(properties
-		sel_20 {Rm}
-		sel_408 0
-		sel_28 -1
-		sel_340 0
-		sel_343 0
-		sel_409 0
-		sel_410 0
-		sel_411 0
-		sel_412 0
-		sel_405 0
-		sel_413 0
-		sel_107 160
-		sel_108 0
-		sel_259 0
-		sel_365 0
+		name {Rm}
+		picture 0
+		style -1
+		horizon 0
+		theControls 0
+		north 0
+		east 0
+		south 0
+		west 0
+		curPic 0
+		picAngle 0
+		vanishingX 160
+		vanishingY 0
+		obstacles 0
+		inset 0
 	)
 
-	(method (sel_110 &tmp temp0)
-		(= sel_40 gCurRoomNum)
-		(= sel_343 controls)
-		(= gPerspective sel_413)
-		(if sel_408
-			(self sel_417: sel_408)
+	(method (init &tmp temp0)
+		(= number gCurRoomNum)
+		(= theControls controls)
+		(= gPerspective picAngle)
+		(if picture
+			(self drawPic: picture)
 		)
-		(self sel_419: (gUser sel_341:) ((gUser sel_341:) sel_349:))
-		((gUser sel_341:) sel_349: 0)
+		(self reflectPosn: (gUser alterEgo:) ((gUser alterEgo:) edgeHit:))
+		((gUser alterEgo:) edgeHit: 0)
 	)
 
-	(method (sel_57 &tmp temp0)
-		(if sel_142
-			(sel_142 sel_57:)
+	(method (doit &tmp temp0)
+		(if script
+			(script doit:)
 		)
-		(if (= temp0 (self sel_420: ((gUser sel_341:) sel_349:)))
-			(self sel_399: temp0)
+		(if (= temp0 (self edgeToRoom: ((gUser alterEgo:) edgeHit:)))
+			(self newRoom: temp0)
 		)
 	)
 
-	(method (sel_111)
-		(if sel_343
-			(sel_343 sel_111:)
+	(method (dispose)
+		(if theControls
+			(theControls dispose:)
 		)
-		(if sel_259
-			(sel_259 sel_111:)
+		(if obstacles
+			(obstacles dispose:)
 		)
-		(super sel_111:)
+		(super dispose:)
 	)
 
-	(method (sel_133 param1)
+	(method (handleEvent param1)
 		(cond
 			(
 				(or
-					(and sel_365 (sel_365 sel_133: param1))
-					(super sel_133: param1)
+					(and inset (inset handleEvent: param1))
+					(super handleEvent: param1)
 				))
-			(sel_343
-				(sel_343 sel_133: param1)
+			(theControls
+				(theControls handleEvent: param1)
 			)
 		)
-		(param1 sel_73:)
+		(param1 claimed:)
 	)
 
-	(method (sel_399 param1)
-		(gRegions sel_81: self sel_119: 399 param1 sel_129: self)
+	(method (newRoom param1)
+		(gRegions delete: self eachElementDo: 399 param1 addToFront: self)
 		(= gNewRoomNum param1)
-		(super sel_399: param1)
+		(super newRoom: param1)
 	)
 
-	(method (sel_414 param1 &tmp temp0 temp1 temp2)
+	(method (setRegions param1 &tmp temp0 temp1 temp2)
 		(for ((= temp0 0)) (< temp0 argc) ((++ temp0))
 			(= temp1 [param1 temp0])
-			((= temp2 (ScriptID temp1)) sel_40: temp1)
-			(gRegions sel_118: temp2)
-			(if (not (temp2 sel_407:))
-				(temp2 sel_110:)
+			((= temp2 (ScriptID temp1)) number: temp1)
+			(gRegions add: temp2)
+			(if (not (temp2 initialized:))
+				(temp2 init:)
 			)
 		)
 	)
 
-	(method (sel_415 param1 &tmp temp0 [temp1 2])
+	(method (setFeatures param1 &tmp temp0 [temp1 2])
 		(for ((= temp0 0)) (< temp0 argc) ((++ temp0))
-			(gFeatures sel_118: [param1 temp0])
+			(gFeatures add: [param1 temp0])
 		)
 	)
 
-	(method (sel_416 param1 &tmp temp0 temp1 temp2)
+	(method (setLocales param1 &tmp temp0 temp1 temp2)
 		(for ((= temp0 0)) (< temp0 argc) ((++ temp0))
 			(= temp1 [param1 temp0])
-			((= temp2 (ScriptID temp1)) sel_40: temp1)
-			(gLocales sel_118: temp2)
-			(temp2 sel_110:)
+			((= temp2 (ScriptID temp1)) number: temp1)
+			(gLocales add: temp2)
+			(temp2 init:)
 		)
 	)
 
-	(method (sel_417 param1 param2)
+	(method (drawPic param1 param2)
 		(if gAddToPics
-			(gAddToPics sel_119: 111 sel_125:)
+			(gAddToPics eachElementDo: 111 release:)
 		)
-		(= sel_405 param1)
+		(= curPic param1)
 		(= gOverlays -1)
 		(DrawPic
 			param1
 			(cond
 				((== argc 2) param2)
-				((!= sel_28 -1) sel_28)
+				((!= style -1) style)
 				(else global17)
 			)
 			1
@@ -751,13 +751,13 @@
 		)
 	)
 
-	(method (sel_418 param1 param2)
+	(method (overlay param1 param2)
 		(= gOverlays param1)
 		(DrawPic
 			param1
 			(cond
 				((== argc 2) param2)
-				((!= sel_28 -1) sel_28)
+				((!= style -1) style)
 				(else global17)
 			)
 			0
@@ -765,59 +765,59 @@
 		)
 	)
 
-	(method (sel_395 param1)
-		(if (not (IsObject sel_259))
-			(= sel_259 (List sel_109:))
+	(method (addObstacle param1)
+		(if (not (IsObject obstacles))
+			(= obstacles (List new:))
 		)
-		(sel_259 sel_118: param1 &rest)
+		(obstacles add: param1 &rest)
 	)
 
-	(method (sel_419 param1 param2)
+	(method (reflectPosn param1 param2)
 		(switch param2
 			(1
-				(param1 sel_0: 188)
+				(param1 y: 188)
 			)
 			(4
-				(param1 sel_1: (- 319 (param1 sel_51:)))
+				(param1 x: (- 319 (param1 xStep:)))
 			)
 			(3
-				(param1 sel_0: (+ sel_340 (param1 sel_52:)))
+				(param1 y: (+ horizon (param1 yStep:)))
 			)
 			(2
-				(param1 sel_1: 1)
+				(param1 x: 1)
 			)
 		)
 	)
 
-	(method (sel_420 param1)
+	(method (edgeToRoom param1)
 		(return
 			(switch param1
-				(1 sel_409)
-				(2 sel_410)
-				(3 sel_411)
-				(4 sel_412)
+				(1 north)
+				(2 east)
+				(3 south)
+				(4 west)
 			)
 		)
 	)
 
-	(method (sel_421 param1)
+	(method (roomToEdge param1)
 		(return
 			(switch param1
-				(sel_409 1)
-				(sel_411 3)
-				(sel_410 2)
-				(sel_412 4)
+				(north 1)
+				(south 3)
+				(east 2)
+				(west 4)
 			)
 		)
 	)
 
-	(method (sel_422 param1 param2 param3)
-		(if sel_365
-			(sel_365 sel_111:)
+	(method (setInset param1 param2 param3)
+		(if inset
+			(inset dispose:)
 		)
 		(if (and argc param1)
 			(param1
-				sel_110:
+				init:
 					(if (>= argc 2) param2 else 0)
 					self
 					(if (>= argc 3) param3 else 0)
@@ -828,82 +828,82 @@
 
 (class Locale of Obj
 	(properties
-		sel_20 {Locale}
-		sel_40 0
+		name {Locale}
+		number 0
 	)
 
-	(method (sel_111)
-		(gLocales sel_81: self)
-		(DisposeScript sel_40)
+	(method (dispose)
+		(gLocales delete: self)
+		(DisposeScript number)
 	)
 
-	(method (sel_133 param1)
-		(param1 sel_73:)
+	(method (handleEvent param1)
+		(param1 claimed:)
 	)
 )
 
 (class SL of Obj
 	(properties
-		sel_20 {SL}
-		sel_29 0
-		sel_328 0
+		name {SL}
+		state 0
+		code 0
 	)
 
-	(method (sel_57 &tmp temp0)
-		(if sel_328
+	(method (doit &tmp temp0)
+		(if code
 			(= temp0 (Memory memALLOC_CRIT (if 0 240 else 82)))
-			(sel_328 sel_57: temp0)
-			(DrawStatus (if sel_29 temp0 else 0))
+			(code doit: temp0)
+			(DrawStatus (if state temp0 else 0))
 			(Memory memFREE temp0)
 		)
 	)
 
-	(method (sel_177)
-		(= sel_29 1)
-		(self sel_57:)
+	(method (enable)
+		(= state 1)
+		(self doit:)
 	)
 
-	(method (sel_233)
-		(= sel_29 0)
-		(self sel_57:)
+	(method (disable)
+		(= state 0)
+		(self doit:)
 	)
 )
 
 (instance RU of Code
 	(properties
-		sel_20 {RU}
+		name {RU}
 	)
 
-	(method (sel_57 param1 &tmp temp0)
-		(if (param1 sel_5:)
-			(= temp0 (& (= temp0 (| (= temp0 (param1 sel_14:)) $0001)) $fffb))
-			(param1 sel_5: 0 sel_14: temp0)
+	(method (doit param1 &tmp temp0)
+		(if (param1 underBits:)
+			(= temp0 (& (= temp0 (| (= temp0 (param1 signal:)) $0001)) $fffb))
+			(param1 underBits: 0 signal: temp0)
 		)
 	)
 )
 
 (instance DNKR of Code
 	(properties
-		sel_20 {DNKR}
+		name {DNKR}
 	)
 
-	(method (sel_57 param1)
-		(if (not (param1 sel_406:))
-			(param1 sel_111:)
+	(method (doit param1)
+		(if (not (param1 keep:))
+			(param1 dispose:)
 		)
 	)
 )
 
 (instance fDC of Code
 	(properties
-		sel_20 {fDC}
+		name {fDC}
 	)
 
-	(method (sel_57 param1)
-		(if (param1 sel_116: 81)
-			(param1 sel_14: (& (param1 sel_14:) $ffdf) sel_111: sel_81:)
+	(method (doit param1)
+		(if (param1 respondsTo: 81)
+			(param1 signal: (& (param1 signal:) $ffdf) dispose: delete:)
 		else
-			(param1 sel_111:)
+			(param1 dispose:)
 		)
 	)
 )

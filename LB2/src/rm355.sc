@@ -25,167 +25,167 @@
 
 (instance rm355 of LBRoom
 	(properties
-		sel_20 {rm355}
-		sel_213 5
-		sel_408 350
+		name {rm355}
+		noun 5
+		picture 350
 	)
 
-	(method (sel_110)
-		(gEgo sel_110: sel_585: 831 sel_320: Scaler 95 75 190 120)
-		(self sel_414: 90)
+	(method (init)
+		(gEgo init: normalize: 831 setScale: Scaler 95 75 190 120)
+		(self setRegions: 90)
 		(Palette palSET_INTENSITY 0 255 0)
-		(self sel_146: (if (IsFlag 34) sPartysOver else sIllegal))
-		(super sel_110:)
+		(self setScript: (if (IsFlag 34) sPartysOver else sIllegal))
+		(super init:)
 	)
 )
 
 (instance sPartysOver of Script
 	(properties
-		sel_20 {sPartysOver}
+		name {sPartysOver}
 	)
 
-	(method (sel_57)
+	(method (doit)
 		(if (< local0 100)
 			(Palette palSET_INTENSITY 0 255 (+= local0 2))
 			(if (== local0 100)
-				(self sel_145:)
+				(self cue:)
 			)
 		)
-		(super sel_57:)
+		(super doit:)
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
-				(gGame sel_587:)
-				(gEgo sel_153: 245 165 sel_3: 8 sel_156: 5)
+				(gGame handsOff:)
+				(gEgo posn: 245 165 loop: 8 setCel: 5)
 				((ScriptID 32 0) ; aHeimlich
-					sel_182: 355
-					sel_648: 814
-					sel_110:
-					sel_155: 8
-					sel_156: 2
-					sel_153: 190 175
-					sel_316: 1
+					moveTo: 355
+					originalView: 814
+					init:
+					setLoop: 8
+					setCel: 2
+					posn: 190 175
+					ignoreActors: 1
 				)
 				((ScriptID 90 3) ; aORiley
-					sel_182: 355
-					sel_2: 353
-					sel_155: 1
-					sel_153: 204 185
-					sel_316: 1
+					moveTo: 355
+					view: 353
+					setLoop: 1
+					posn: 204 185
+					ignoreActors: 1
 				)
 				((ScriptID 90 5) ; aWatney
-					sel_182: 355
-					sel_2: 815
-					sel_153: 147 184
-					sel_316: 1
-					sel_161: StopWalk -1
-					sel_312: PolyPath 184 184 self
+					moveTo: 355
+					view: 815
+					posn: 147 184
+					ignoreActors: 1
+					setCycle: StopWalk -1
+					setMotion: PolyPath 184 184 self
 				)
 				((ScriptID 90 1) ; aCountess
-					sel_182: 355
-					sel_2: 813
-					sel_153: 119 184
-					sel_316: 1
-					sel_161: StopWalk -1
-					sel_312: PolyPath 161 184
+					moveTo: 355
+					view: 813
+					posn: 119 184
+					ignoreActors: 1
+					setCycle: StopWalk -1
+					setMotion: PolyPath 161 184
 				)
 				((ScriptID 90 6) ; aYvette
-					sel_182: 355
-					sel_2: 817
-					sel_153: 85 184
-					sel_316: 1
-					sel_161: StopWalk -1
-					sel_312: PolyPath 132 184
+					moveTo: 355
+					view: 817
+					posn: 85 184
+					ignoreActors: 1
+					setCycle: StopWalk -1
+					setMotion: PolyPath 132 184
 				)
-				(= sel_136 1)
+				(= cycles 1)
 			)
 			(1
-				((ScriptID 32 0) sel_317:) ; aHeimlich
-				(gGameMusic1 sel_40: 350 sel_155: -1 sel_99: 1 sel_39:)
+				((ScriptID 32 0) addToPic:) ; aHeimlich
+				(gGameMusic1 number: 350 setLoop: -1 flags: 1 play:)
 			)
 			(2 0)
 			(3
-				(gMessager sel_295: 2)
-				((ScriptID 90 3) sel_161: Osc 2 self) ; aORiley
+				(gMessager say: 2)
+				((ScriptID 90 3) setCycle: Osc 2 self) ; aORiley
 			)
 			(4
-				((ScriptID 22 0) sel_57: -24576 self) ; triggerAndClock
+				((ScriptID 22 0) doit: -24576 self) ; triggerAndClock
 			)
 			(5
-				((ScriptID 90 5) sel_312: PolyPath 330 182) ; aWatney
-				((ScriptID 90 1) sel_312: PolyPath 184 184 self) ; aCountess
-				((ScriptID 90 6) sel_312: PolyPath 146 184) ; aYvette
+				((ScriptID 90 5) setMotion: PolyPath 330 182) ; aWatney
+				((ScriptID 90 1) setMotion: PolyPath 184 184 self) ; aCountess
+				((ScriptID 90 6) setMotion: PolyPath 146 184) ; aYvette
 			)
 			(6
-				((ScriptID 90 3) sel_161: Osc 3 self) ; aORiley
+				((ScriptID 90 3) setCycle: Osc 3 self) ; aORiley
 			)
 			(7
-				((ScriptID 90 1) sel_312: PolyPath 330 182) ; aCountess
-				((ScriptID 90 6) sel_312: PolyPath 184 184 self) ; aYvette
+				((ScriptID 90 1) setMotion: PolyPath 330 182) ; aCountess
+				((ScriptID 90 6) setMotion: PolyPath 184 184 self) ; aYvette
 			)
 			(8
-				((ScriptID 90 3) sel_161: Osc 2 self) ; aORiley
+				((ScriptID 90 3) setCycle: Osc 2 self) ; aORiley
 			)
 			(9
-				((ScriptID 90 6) sel_312: PolyPath 330 182 self) ; aYvette
+				((ScriptID 90 6) setMotion: PolyPath 330 182 self) ; aYvette
 			)
 			(10
-				((ScriptID 90 6) sel_111:) ; aYvette
-				((ScriptID 90 5) sel_111:) ; aWatney
-				((ScriptID 90 1) sel_111:) ; aCountess
+				((ScriptID 90 6) dispose:) ; aYvette
+				((ScriptID 90 5) dispose:) ; aWatney
+				((ScriptID 90 1) dispose:) ; aCountess
 				(SetFlag 42)
-				(gGameMusic1 sel_170:)
-				(= sel_139 60)
+				(gGameMusic1 fade:)
+				(= ticks 60)
 			)
 			(11
-				(gGameMusic1 sel_40: 642 sel_3: -1 sel_99: 1 sel_39:)
+				(gGameMusic1 number: 642 loop: -1 flags: 1 play:)
 				((ScriptID 31 0) ; aErnie
-					sel_620: gCurRoomNum
-					sel_110:
-					sel_153: 350 182
-					sel_161: StopWalk -1
-					sel_312:
+					room: gCurRoomNum
+					init:
+					posn: 350 182
+					setCycle: StopWalk -1
+					setMotion:
 						PolyPath
-						(+ (gEgo sel_1:) 10)
-						(+ (gEgo sel_0:) 10)
+						(+ (gEgo x:) 10)
+						(+ (gEgo y:) 10)
 						self
 				)
 			)
 			(12
-				(= sel_136 2)
+				(= cycles 2)
 			)
 			(13
-				(gCurRoom sel_422: inErnie_Laura)
-				(= sel_136 2)
+				(gCurRoom setInset: inErnie_Laura)
+				(= cycles 2)
 			)
 			(14
-				(gMessager sel_295: 4 0 1 0 self)
+				(gMessager say: 4 0 1 0 self)
 			)
 			(15
 				(SetFlag 91)
-				(gCurRoom sel_422: 0)
+				(gCurRoom setInset: 0)
 				((ScriptID 32 0) ; aHeimlich
-					sel_153:
-						(- ((ScriptID 90 3) sel_1:) 25) ; aORiley
-						(- ((ScriptID 90 3) sel_0:) 10) ; aORiley
-					sel_155: 8
-					sel_156: 4
+					posn:
+						(- ((ScriptID 90 3) x:) 25) ; aORiley
+						(- ((ScriptID 90 3) y:) 10) ; aORiley
+					setLoop: 8
+					setCel: 4
 				)
-				((ScriptID 21 0) sel_57: 267) ; addCluesCode
-				((ScriptID 31 0) sel_312: PolyPath 350 185 self) ; aErnie
-				(gGameMusic1 sel_170:)
+				((ScriptID 21 0) doit: 267) ; addCluesCode
+				((ScriptID 31 0) setMotion: PolyPath 350 185 self) ; aErnie
+				(gGameMusic1 fade:)
 			)
 			(16
-				(gMessager sel_295: 1 0 0 0 self)
+				(gMessager say: 1 0 0 0 self)
 			)
 			(17
-				(WrapMusic sel_110: 1 90 91 92 93)
-				(gEgo sel_312: PolyPath 340 185 self)
+				(WrapMusic init: 1 90 91 92 93)
+				(gEgo setMotion: PolyPath 340 185 self)
 			)
 			(18
-				(gCurRoom sel_399: 370)
+				(gCurRoom newRoom: 370)
 			)
 		)
 	)
@@ -193,52 +193,52 @@
 
 (instance sIllegal of Script
 	(properties
-		sel_20 {sIllegal}
+		name {sIllegal}
 	)
 
-	(method (sel_57)
+	(method (doit)
 		(if (< local0 100)
 			(Palette palSET_INTENSITY 0 255 (+= local0 2))
 			(if (== local0 100)
-				(self sel_145:)
+				(self cue:)
 			)
 		)
-		(super sel_57:)
+		(super doit:)
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
-				(gGame sel_588:)
+				(gGame handsOn:)
 				(SetFlag 91)
 				(= gAct 0)
-				(gUser sel_347: 0 sel_237: 0)
+				(gUser canInput: 0 canControl: 0)
 				((ScriptID 32 0) ; aHeimlich
-					sel_620: gCurRoomNum
-					sel_648: 814
-					sel_110:
-					sel_155: 8
-					sel_156: 2
-					sel_153: 190 175
+					room: gCurRoomNum
+					originalView: 814
+					init:
+					setLoop: 8
+					setCel: 2
+					posn: 190 175
 				)
 				((ScriptID 90 3) ; aORiley
-					sel_620: gCurRoomNum
-					sel_2: 819
-					sel_155: 8
-					sel_156: 2
-					sel_153: 210 180
+					room: gCurRoomNum
+					view: 819
+					setLoop: 8
+					setCel: 2
+					posn: 210 180
 				)
-				(gEgo sel_153: 230 182 sel_155: 8 sel_156: 2)
+				(gEgo posn: 230 182 setLoop: 8 setCel: 2)
 			)
 			(1
-				(gMessager sel_295: 3 0 0 0 self)
+				(gMessager say: 3 0 0 0 self)
 			)
 			(2
-				(= sel_137 5)
+				(= seconds 5)
 			)
 			(3
 				(= global145 3) ; "The first three rules of journalism: research, research, research."
-				(gCurRoom sel_399: 99)
+				(gCurRoom newRoom: 99)
 			)
 		)
 	)
@@ -246,58 +246,58 @@
 
 (instance inErnie_Laura of Inset
 	(properties
-		sel_20 {inErnie&Laura}
-		sel_408 475
-		sel_560 1
+		name {inErnie&Laura}
+		picture 475
+		hideTheCast 1
 	)
 )
 
 (instance tkrErnie of Talker
 	(properties
-		sel_20 {tkrErnie}
-		sel_2 1475
-		sel_3 1
-		sel_537 250
-		sel_26 15
-		sel_549 20
-		sel_550 120
+		name {tkrErnie}
+		view 1475
+		loop 1
+		talkWidth 250
+		back 15
+		textX 20
+		textY 120
 	)
 
-	(method (sel_110)
-		(= sel_30 gUserFont)
-		(super sel_110: 0 ernieEyes ernieMouth &rest)
+	(method (init)
+		(= font gUserFont)
+		(super init: 0 ernieEyes ernieMouth &rest)
 	)
 )
 
 (instance ernieMouth of Prop
 	(properties
-		sel_20 {ernieMouth}
-		sel_6 82
-		sel_7 119
-		sel_2 1475
+		name {ernieMouth}
+		nsTop 82
+		nsLeft 119
+		view 1475
 	)
 )
 
 (instance ernieEyes of Prop
 	(properties
-		sel_20 {ernieEyes}
-		sel_6 67
-		sel_7 122
-		sel_2 1475
-		sel_3 2
+		name {ernieEyes}
+		nsTop 67
+		nsLeft 122
+		view 1475
+		loop 2
 	)
 )
 
 (instance tkrLaura of Narrator
 	(properties
-		sel_20 {tkrLaura}
-		sel_1 150
-		sel_0 130
-		sel_26 15
+		name {tkrLaura}
+		x 150
+		y 130
+		back 15
 	)
 
-	(method (sel_110)
-		(= sel_30 gUserFont)
-		(super sel_110: &rest)
+	(method (init)
+		(= font gUserFont)
+		(super init: &rest)
 	)
 )

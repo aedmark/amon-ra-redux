@@ -21,91 +21,91 @@
 
 (instance poly2440Code of Code
 	(properties
-		sel_20 {poly2440Code}
+		name {poly2440Code}
 	)
 
-	(method (sel_57 param1)
+	(method (doit param1)
 		(param1
-			sel_118:
-				(poly2440a sel_110: sel_117:)
-				(poly2440b sel_110: sel_117:)
-				(poly2440c sel_110: sel_117:)
-				(poly2440d sel_110: sel_117:)
-				(poly2440e sel_110: sel_117:)
+			add:
+				(poly2440a init: yourself:)
+				(poly2440b init: yourself:)
+				(poly2440c init: yourself:)
+				(poly2440d init: yourself:)
+				(poly2440e init: yourself:)
 		)
 	)
 )
 
 (instance poly2440a of Polygon
 	(properties
-		sel_20 {poly2440a}
+		name {poly2440a}
 	)
 
-	(method (sel_110)
-		(= sel_31 2)
-		(= sel_86 17)
-		(= sel_87 @local0)
+	(method (init)
+		(= type 2)
+		(= size 17)
+		(= points @local0)
 	)
 )
 
 (instance poly2440b of Polygon
 	(properties
-		sel_20 {poly2440b}
+		name {poly2440b}
 	)
 
-	(method (sel_110)
-		(= sel_31 2)
-		(= sel_86 4)
-		(= sel_87 @local34)
+	(method (init)
+		(= type 2)
+		(= size 4)
+		(= points @local34)
 	)
 )
 
 (instance poly2440c of Polygon
 	(properties
-		sel_20 {poly2440c}
+		name {poly2440c}
 	)
 
-	(method (sel_110)
-		(= sel_31 2)
-		(= sel_86 4)
-		(= sel_87 @local42)
+	(method (init)
+		(= type 2)
+		(= size 4)
+		(= points @local42)
 	)
 )
 
 (instance poly2440d of Polygon
 	(properties
-		sel_20 {poly2440d}
+		name {poly2440d}
 	)
 
-	(method (sel_110)
-		(= sel_31 2)
-		(= sel_86 4)
-		(= sel_87 @local50)
+	(method (init)
+		(= type 2)
+		(= size 4)
+		(= points @local50)
 	)
 )
 
 (instance poly2440e of Polygon
 	(properties
-		sel_20 {poly2440e}
+		name {poly2440e}
 	)
 
-	(method (sel_110)
-		(= sel_31 2)
-		(= sel_86 4)
-		(= sel_87 @local58)
+	(method (init)
+		(= type 2)
+		(= size 4)
+		(= points @local58)
 	)
 )
 
 (instance pts2440 of MuseumPoints
 	(properties
-		sel_20 {pts2440}
-		sel_621 180
-		sel_622 150
-		sel_623 135
-		sel_624 130
-		sel_625 110
-		sel_626 250
-		sel_627 235
-		sel_628 140
+		name {pts2440}
+		midPtX 180
+		midPtY 150
+		northPtX 135
+		northPtY 130
+		southPtX 110
+		southPtY 250
+		eastPtX 235
+		eastPtY 140
 	)
 )

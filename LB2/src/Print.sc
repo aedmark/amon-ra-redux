@@ -14,20 +14,20 @@
 )
 
 (procedure (Prints)
-	(Print sel_198: &rest sel_110:)
+	(Print addText: &rest init:)
 )
 
 (procedure (Printf)
-	(Print sel_199: &rest sel_110:)
+	(Print addTextF: &rest init:)
 )
 
 (procedure (GetInput str maxLen prompt theFont)
 	(if
 		(Print
-			sel_30: (if (> argc 3) theFont else 0)
-			sel_198: (if (and (> argc 2) prompt) prompt else {})
-			sel_200: str maxLen 0 12 str
-			sel_110:
+			font: (if (> argc 3) theFont else 0)
+			addText: (if (and (> argc 2) prompt) prompt else {})
+			addEdit: str maxLen 0 12 str
+			init:
 		)
 		(StrLen str)
 	)
@@ -35,136 +35,136 @@
 
 (class Print of Obj
 	(properties
-		sel_20 {Print}
-		sel_201 0
-		sel_32 0
-		sel_77 0
-		sel_27 0
-		sel_30 0
-		sel_67 0
-		sel_1 -1
-		sel_0 -1
-		sel_139 0
-		sel_143 0
-		sel_202 0
-		sel_203 0
-		sel_124 0
-		sel_204 0
+		name {Print}
+		dialog 0
+		window 0
+		title 0
+		mode 0
+		font 0
+		width 0
+		x -1
+		y -1
+		ticks 0
+		caller 0
+		retValue 0
+		modeless 0
+		first 0
+		saveCursor 0
 	)
 
-	(method (sel_110 param1)
-		(= sel_143 0)
+	(method (init param1)
+		(= caller 0)
 		(if argc
-			(= sel_143 param1)
+			(= caller param1)
 		)
 		(if (> argc 1)
-			(self sel_198: &rest)
+			(self addText: &rest)
 		)
-		(if (not sel_203)
+		(if (not modeless)
 			(if (not (IsObject gPrints))
-				(= gPrints ((EventHandler sel_109:) sel_20: {prints}))
+				(= gPrints ((EventHandler new:) name: {prints}))
 			)
-			(gPrints sel_118: self)
+			(gPrints add: self)
 		)
-		(self sel_113:)
+		(self showSelf:)
 	)
 
-	(method (sel_57)
-		(sel_201 sel_119: 57)
+	(method (doit)
+		(dialog eachElementDo: 57)
 	)
 
-	(method (sel_111)
-		(if (and gPrints (gPrints sel_122: self))
-			(gPrints sel_81: self)
-			(if (gPrints sel_123:)
-				(gPrints sel_111:)
+	(method (dispose)
+		(if (and gPrints (gPrints contains: self))
+			(gPrints delete: self)
+			(if (gPrints isEmpty:)
+				(gPrints dispose:)
 				(= gPrints 0)
 			)
 		)
-		(= sel_77 (= sel_124 (= sel_204 (= sel_32 0))))
-		(= sel_30 gUserFont)
-		(= sel_67 (= sel_27 0))
-		(= sel_1 (= sel_0 -1))
-		(= sel_203 0)
-		(gSounds sel_168: 0)
-		(super sel_111:)
+		(= title (= first (= saveCursor (= window 0))))
+		(= font gUserFont)
+		(= width (= mode 0))
+		(= x (= y -1))
+		(= modeless 0)
+		(gSounds pause: 0)
+		(super dispose:)
 	)
 
-	(method (sel_113 &tmp temp0 temp1 temp2 temp3 temp4)
-		(if sel_204
-			(gGame sel_197: 999)
+	(method (showSelf &tmp temp0 temp1 temp2 temp3 temp4)
+		(if saveCursor
+			(gGame setCursor: 999)
 		)
-		(if (not sel_201)
-			(= sel_201 (Dialog sel_109:))
+		(if (not dialog)
+			(= dialog (Dialog new:))
 		)
-		(sel_201
-			sel_32: (if sel_32 sel_32 else gSystemWindow)
-			sel_20: {PODialog}
-			sel_143: self
+		(dialog
+			window: (if window window else gSystemWindow)
+			name: {PODialog}
+			caller: self
 		)
-		(sel_201 sel_23: sel_77 sel_22: sel_139 sel_180:)
-		(sel_201 sel_192:)
+		(dialog text: title time: ticks setSize:)
+		(dialog center:)
 		(= temp3
-			(if (== sel_1 -1)
-				(sel_201 sel_7:)
+			(if (== x -1)
+				(dialog nsLeft:)
 			else
-				sel_1
+				x
 			)
 		)
 		(= temp4
-			(if (== sel_0 -1)
-				(sel_201 sel_6:)
+			(if (== y -1)
+				(dialog nsTop:)
 			else
-				sel_0
+				y
 			)
 		)
-		(sel_201 sel_182: temp3 temp4)
+		(dialog moveTo: temp3 temp4)
 		(= temp1 (GetPort))
-		(sel_201 sel_189: (if sel_77 4 else 0) 15)
-		(if sel_203
+		(dialog open: (if title 4 else 0) 15)
+		(if modeless
 			(= gModelessPort (GetPort))
 			(SetPort temp1)
-			(= gModelessDialog sel_201)
+			(= gModelessDialog dialog)
 		else
-			(gSounds sel_168: 1)
+			(gSounds pause: 1)
 			(cond
-				((not (= temp0 sel_124))
+				((not (= temp0 first))
 					(if
 						(and
-							(= temp0 (sel_201 sel_120: 185 1))
-							(not (sel_201 sel_120: 185 2))
+							(= temp0 (dialog firstTrue: 185 1))
+							(not (dialog firstTrue: 185 2))
 						)
-						(temp0 sel_29: (| (temp0 sel_29:) $0002))
+						(temp0 state: (| (temp0 state:) $0002))
 					)
 				)
 				((not (IsObject temp0))
-					(= temp0 (sel_201 sel_64: temp0))
+					(= temp0 (dialog at: temp0))
 				)
 			)
-			(= sel_202 (sel_201 sel_57: temp0))
+			(= retValue (dialog doit: temp0))
 			(SetPort temp1)
 			(cond
-				((== sel_202 -1)
-					(= sel_202 0)
+				((== retValue -1)
+					(= retValue 0)
 				)
-				((and (IsObject sel_202) (sel_202 sel_114: DButton))
-					(= sel_202 (sel_202 sel_74:))
+				((and (IsObject retValue) (retValue isKindOf: DButton))
+					(= retValue (retValue value:))
 				)
-				((not (sel_201 sel_187:))
-					(= sel_202 1)
+				((not (dialog theItem:))
+					(= retValue 1)
 				)
 			)
-			(if sel_204
-				(gGame sel_197: ((gTheIconBar sel_207:) sel_33:))
+			(if saveCursor
+				(gGame setCursor: ((gTheIconBar curIcon:) cursor:))
 			)
-			(sel_201 sel_111:)
-			(return sel_202)
+			(dialog dispose:)
+			(return retValue)
 		)
 	)
 
-	(method (sel_205 param1 param2 param3 param4 param5 param6 param7 param8 &tmp temp0 temp1 temp2 temp3 temp4 temp5 temp6 temp7 temp8)
-		(if (not sel_201)
-			(= sel_201 (Dialog sel_109:))
+	(method (addButton param1 param2 param3 param4 param5 param6 param7 param8 &tmp temp0 temp1 temp2 temp3 temp4 temp5 temp6 temp7 temp8)
+		(if (not dialog)
+			(= dialog (Dialog new:))
 		)
 		(if (> argc 4)
 			(= temp0 param2)
@@ -202,24 +202,24 @@
 			(StrCpy temp7 param2)
 		)
 		(if temp7
-			(sel_201
-				sel_118:
-					((DButton sel_109:)
-						sel_74: param1
-						sel_30: sel_30
-						sel_23: temp7
-						sel_180:
-						sel_182: (+ 4 temp4) (+ 4 temp5)
-						sel_117:
+			(dialog
+				add:
+					((DButton new:)
+						value: param1
+						font: font
+						text: temp7
+						setSize:
+						moveTo: (+ 4 temp4) (+ 4 temp5)
+						yourself:
 					)
-				sel_180:
+				setSize:
 			)
 		)
 	)
 
-	(method (sel_200 param1 param2 param3 param4 param5 &tmp temp0 temp1)
-		(if (not sel_201)
-			(= sel_201 (Dialog sel_109:))
+	(method (addEdit param1 param2 param3 param4 param5 &tmp temp0 temp1)
+		(if (not dialog)
+			(= dialog (Dialog new:))
 		)
 		(StrCpy param1 (if (> argc 4) param5 else {}))
 		(if (> argc 2)
@@ -228,22 +228,22 @@
 				(= temp1 param4)
 			)
 		)
-		(sel_201
-			sel_118:
-				((DEdit sel_109:)
-					sel_23: param1
-					sel_34: param2
-					sel_180:
-					sel_182: (+ temp0 4) (+ temp1 4)
-					sel_117:
+		(dialog
+			add:
+				((DEdit new:)
+					text: param1
+					max: param2
+					setSize:
+					moveTo: (+ temp0 4) (+ temp1 4)
+					yourself:
 				)
-			sel_180:
+			setSize:
 		)
 	)
 
-	(method (sel_206 param1 param2 param3 param4 param5 &tmp temp0 temp1)
-		(if (not sel_201)
-			(= sel_201 (Dialog sel_109:))
+	(method (addIcon param1 param2 param3 param4 param5 &tmp temp0 temp1)
+		(if (not dialog)
+			(= dialog (Dialog new:))
 		)
 		(if (> argc 3)
 			(= temp0 param4)
@@ -252,30 +252,30 @@
 			(= temp0 (= temp1 0))
 		)
 		(if (IsObject param1)
-			(sel_201
-				sel_118:
-					(param1 sel_180: sel_182: (+ temp0 4) (+ temp1 4) sel_117:)
-				sel_180:
+			(dialog
+				add:
+					(param1 setSize: moveTo: (+ temp0 4) (+ temp1 4) yourself:)
+				setSize:
 			)
 		else
-			(sel_201
-				sel_118:
-					((DIcon sel_109:)
-						sel_2: param1
-						sel_3: param2
-						sel_4: param3
-						sel_180:
-						sel_182: (+ temp0 4) (+ temp1 4)
-						sel_117:
+			(dialog
+				add:
+					((DIcon new:)
+						view: param1
+						loop: param2
+						cel: param3
+						setSize:
+						moveTo: (+ temp0 4) (+ temp1 4)
+						yourself:
 					)
-				sel_180:
+				setSize:
 			)
 		)
 	)
 
-	(method (sel_198 param1 param2 param3 param4 param5 param6 param7 &tmp temp0 temp1 temp2 temp3 temp4 temp5 temp6 temp7 temp8)
-		(if (not sel_201)
-			(= sel_201 (Dialog sel_109:))
+	(method (addText param1 param2 param3 param4 param5 param6 param7 &tmp temp0 temp1 temp2 temp3 temp4 temp5 temp6 temp7 temp8)
+		(if (not dialog)
+			(= dialog (Dialog new:))
 		)
 		(if (> argc 3)
 			(= temp0 param1)
@@ -297,17 +297,17 @@
 			(if (= temp8 (Message msgSIZE temp6 temp0 temp1 temp2 temp3))
 				(= temp7 (Memory memALLOC_CRIT temp8))
 				(if (Message msgGET temp6 temp0 temp1 temp2 temp3 temp7)
-					(sel_201
-						sel_118:
-							((DText sel_109:)
-								sel_23: temp7
-								sel_30: sel_30
-								sel_27: sel_27
-								sel_180: sel_67
-								sel_182: (+ 4 temp4) (+ 4 temp5)
-								sel_117:
+					(dialog
+						add:
+							((DText new:)
+								text: temp7
+								font: font
+								mode: mode
+								setSize: width
+								moveTo: (+ 4 temp4) (+ 4 temp5)
+								yourself:
 							)
-						sel_180:
+						setSize:
 					)
 				)
 			)
@@ -322,46 +322,46 @@
 			)
 			(= temp7 (Memory memALLOC_CRIT (+ (StrLen param1) 1)))
 			(StrCpy temp7 param1)
-			(sel_201
-				sel_118:
-					((DText sel_109:)
-						sel_23: temp7
-						sel_30: sel_30
-						sel_27: sel_27
-						sel_180: sel_67
-						sel_182: (+ 4 temp4) (+ 4 temp5)
-						sel_117:
+			(dialog
+				add:
+					((DText new:)
+						text: temp7
+						font: font
+						mode: mode
+						setSize: width
+						moveTo: (+ 4 temp4) (+ 4 temp5)
+						yourself:
 					)
-				sel_180:
+				setSize:
 			)
 		)
 	)
 
-	(method (sel_199 param1)
+	(method (addTextF param1)
 		(Format param1 &rest)
-		(self sel_198: param1)
+		(self addText: param1)
 	)
 
-	(method (sel_153 param1 param2)
-		(= sel_1 param1)
-		(= sel_0 param2)
+	(method (posn param1 param2)
+		(= x param1)
+		(= y param2)
 	)
 
-	(method (sel_133 param1)
-		(if (sel_201 sel_133: param1)
-			(sel_201 sel_111:)
+	(method (handleEvent param1)
+		(if (dialog handleEvent: param1)
+			(dialog dispose:)
 		)
 	)
 
-	(method (sel_145 &tmp temp0)
-		(= temp0 sel_143)
-		(= sel_201 0)
-		(if sel_32
-			(sel_32 sel_111:)
+	(method (cue &tmp temp0)
+		(= temp0 caller)
+		(= dialog 0)
+		(if window
+			(window dispose:)
 		)
-		(self sel_111:)
+		(self dispose:)
 		(if temp0
-			(temp0 sel_145:)
+			(temp0 cue:)
 		)
 	)
 )

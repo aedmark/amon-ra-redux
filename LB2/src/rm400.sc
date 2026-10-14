@@ -20,115 +20,115 @@
 
 (instance rm400 of LBRoom
 	(properties
-		sel_20 {rm400}
-		sel_213 28
-		sel_408 400
-		sel_412 370
-		sel_108 50
+		name {rm400}
+		noun 28
+		picture 400
+		west 370
+		vanishingY 50
 	)
 
-	(method (sel_110 &tmp [temp0 30])
-		(self sel_414: 93)
-		((ScriptID 2400 0) sel_57: (= sel_259 (List sel_109:))) ; poly2400Code
-		(gEgo sel_0: 180 sel_110: sel_585: 831 sel_320: Scaler 125 30 190 50)
-		(super sel_110:)
+	(method (init &tmp [temp0 30])
+		(self setRegions: 93)
+		((ScriptID 2400 0) doit: (= obstacles (List new:))) ; poly2400Code
+		(gEgo y: 180 init: normalize: 831 setScale: Scaler 125 30 190 50)
+		(super init:)
 		(cond
 			((or (> gAct 2) (not (& $7204 gMustDos)))
-				(realDagger sel_110: sel_311: 4 1 8)
+				(realDagger init: approachVerbs: 4 1 8)
 			)
 			((not (IsFlag 71))
 				((ScriptID 93 3) ; Heimlich
-					sel_110:
-					sel_153: 70 185
-					sel_155: 8
-					sel_156: 1
-					sel_320: 160
+					init:
+					posn: 70 185
+					setLoop: 8
+					setCel: 1
+					setScale: 160
 				)
-				(sel_142 sel_65: sHeimlichShoos2)
+				(script next: sHeimlichShoos2)
 			)
 			(else
-				(daggerGone sel_110:)
+				(daggerGone init:)
 			)
 		)
-		(westExitFeature sel_110:)
-		(cashRegister sel_110: sel_311: 4)
-		(middleShelves sel_110:)
-		(secondShelf sel_110: sel_311: 4 1)
-		(glassCounter sel_110:)
-		(fakeDaggers sel_110: sel_311: 4 1 8)
-		(footedPot sel_110: sel_311: 4 1 8)
-		(largePicture sel_110: sel_311: 1)
-		(littleThings sel_110: sel_311: 1)
-		(leftShelves sel_110:)
-		(nefertiti sel_110: sel_311: 4 1 8)
-		(fakeNefertiti sel_110: sel_311: 4 1 8)
-		(purplePots sel_110: sel_311: 1)
-		(rug sel_110:)
-		(rightShelves sel_110: sel_311: 4 1)
-		(smallPicture sel_110: sel_311: 1)
+		(westExitFeature init:)
+		(cashRegister init: approachVerbs: 4)
+		(middleShelves init:)
+		(secondShelf init: approachVerbs: 4 1)
+		(glassCounter init:)
+		(fakeDaggers init: approachVerbs: 4 1 8)
+		(footedPot init: approachVerbs: 4 1 8)
+		(largePicture init: approachVerbs: 1)
+		(littleThings init: approachVerbs: 1)
+		(leftShelves init:)
+		(nefertiti init: approachVerbs: 4 1 8)
+		(fakeNefertiti init: approachVerbs: 4 1 8)
+		(purplePots init: approachVerbs: 1)
+		(rug init:)
+		(rightShelves init: approachVerbs: 4 1)
+		(smallPicture init: approachVerbs: 1)
 	)
 
-	(method (sel_111)
+	(method (dispose)
 		(DisposeScript 2400)
-		(super sel_111:)
+		(super dispose:)
 	)
 
-	(method (sel_399)
-		(gGameMusic2 sel_167:)
-		(gGameMusic1 sel_168: 0 sel_170: 127 5 5 0)
-		(super sel_399: &rest)
+	(method (newRoom)
+		(gGameMusic2 stop:)
+		(gGameMusic1 pause: 0 fade: 127 5 5 0)
+		(super newRoom: &rest)
 	)
 )
 
 (instance sHeimlichShoos of Script
 	(properties
-		sel_20 {sHeimlichShoos}
+		name {sHeimlichShoos}
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
-				(= sel_136 1)
+				(= cycles 1)
 			)
 			(1
-				(gGame sel_587:)
-				(= sel_139 30)
+				(gGame handsOff:)
+				(= ticks 30)
 			)
 			(2
-				((ScriptID 22 0) sel_57: 29188 self) ; triggerAndClock
+				((ScriptID 22 0) doit: 29188 self) ; triggerAndClock
 			)
 			(3
-				(gGameMusic1 sel_168: 1)
-				(gGameMusic2 sel_40: 19 sel_99: 1 sel_155: 1 sel_39:)
+				(gGameMusic1 pause: 1)
+				(gGameMusic2 number: 19 flags: 1 setLoop: 1 play:)
 				((ScriptID 93 3) ; Heimlich
-					sel_110:
-					sel_161: StopWalk -1
-					sel_320: 160
-					sel_153: -20 185
-					sel_312: MoveTo 80 185 self
+					init:
+					setCycle: StopWalk -1
+					setScale: 160
+					posn: -20 185
+					setMotion: MoveTo 80 185 self
 				)
 			)
 			(4
-				((ScriptID 93 3) sel_155: 8 sel_156: 6) ; Heimlich
-				(= sel_139 30)
+				((ScriptID 93 3) setLoop: 8 setCel: 6) ; Heimlich
+				(= ticks 30)
 			)
 			(5
-				(gMessager sel_295: 33 8 0 0 self)
+				(gMessager say: 33 8 0 0 self)
 			)
 			(6
-				(gEgo sel_312: PolyPath 80 165 self)
+				(gEgo setMotion: PolyPath 80 165 self)
 			)
 			(7
-				((ScriptID 93 3) sel_156: 3) ; Heimlich
-				(gEgo sel_312: PolyPath 40 180 self)
+				((ScriptID 93 3) setCel: 3) ; Heimlich
+				(gEgo setMotion: PolyPath 40 180 self)
 			)
 			(8
-				((ScriptID 93 3) sel_156: 7) ; Heimlich
-				(gEgo sel_312: PolyPath -50 180 self)
+				((ScriptID 93 3) setCel: 7) ; Heimlich
+				(gEgo setMotion: PolyPath -50 180 self)
 			)
 			(9
-				(gEgo sel_349: 4)
-				(gCurRoom sel_399: 370)
+				(gEgo edgeHit: 4)
+				(gCurRoom newRoom: 370)
 			)
 		)
 	)
@@ -136,25 +136,25 @@
 
 (instance sHeimlichShoos2 of Script
 	(properties
-		sel_20 {sHeimlichShoos2}
+		name {sHeimlichShoos2}
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
-				(gGame sel_587:)
-				(gGameMusic1 sel_168: 1)
-				(gGameMusic2 sel_40: 19 sel_99: 1 sel_155: 1 sel_39:)
-				(= sel_136 2)
+				(gGame handsOff:)
+				(gGameMusic1 pause: 1)
+				(gGameMusic2 number: 19 flags: 1 setLoop: 1 play:)
+				(= cycles 2)
 			)
 			(1
-				(gMessager sel_295: 3 0 82 0 self 1889)
+				(gMessager say: 3 0 82 0 self 1889)
 			)
 			(2
-				(gEgo sel_312: PolyPath -50 (gEgo sel_0:) self)
+				(gEgo setMotion: PolyPath -50 (gEgo y:) self)
 			)
 			(3
-				(gCurRoom sel_399: 370)
+				(gCurRoom newRoom: 370)
 			)
 		)
 	)
@@ -162,44 +162,44 @@
 
 (instance daggerGone of View
 	(properties
-		sel_20 {daggerGone}
-		sel_1 242
-		sel_0 110
-		sel_2 403
+		name {daggerGone}
+		x 242
+		y 110
+		view 403
 	)
 )
 
 (instance inPittsburgh of Inset
 	(properties
-		sel_20 {inPittsburgh}
-		sel_408 401
-		sel_1 250
-		sel_0 50
-		sel_560 1
+		name {inPittsburgh}
+		picture 401
+		x 250
+		y 50
+		hideTheCast 1
 	)
 
-	(method (sel_110)
-		(super sel_110: &rest)
-		(if sel_141
-			(stamp sel_110:)
+	(method (init)
+		(super init: &rest)
+		(if register
+			(stamp init:)
 		)
-		(daggerFeature sel_110: sel_141)
+		(daggerFeature init: register)
 		(proc0_8 1)
 	)
 
-	(method (sel_111)
+	(method (dispose)
 		(proc0_8 0)
-		(daggerFeature sel_111:)
-		(if (not sel_141)
-			(gCurRoom sel_146: sHeimlichShoos)
+		(daggerFeature dispose:)
+		(if (not register)
+			(gCurRoom setScript: sHeimlichShoos)
 		)
-		(super sel_111:)
+		(super dispose:)
 	)
 
-	(method (sel_300 param1)
+	(method (doVerb param1)
 		(switch param1
 			(13
-				(self sel_111:)
+				(self dispose:)
 			)
 		)
 	)
@@ -207,40 +207,40 @@
 
 (instance stamp of View
 	(properties
-		sel_20 {stamp}
-		sel_1 88
-		sel_0 85
-		sel_2 401
+		name {stamp}
+		x 88
+		y 85
+		view 401
 	)
 
-	(method (sel_300 param1)
-		(daggerFeature sel_300: param1)
+	(method (doVerb param1)
+		(daggerFeature doVerb: param1)
 	)
 )
 
 (instance daggerFeature of Feature
 	(properties
-		sel_20 {daggerFeature}
-		sel_1 1
-		sel_0 100
-		sel_302 4
+		name {daggerFeature}
+		x 1
+		y 100
+		onMeCheck 4
 	)
 
-	(method (sel_110 param1)
-		(= sel_213 (if param1 7 else 8))
-		(super sel_110: &rest)
+	(method (init param1)
+		(= noun (if param1 7 else 8))
+		(super init: &rest)
 	)
 
-	(method (sel_300 param1)
+	(method (doVerb param1)
 		(switch param1
 			(13
-				(inPittsburgh sel_300: 13)
+				(inPittsburgh doVerb: 13)
 			)
 			(8
-				(gMessager sel_295: sel_213 8)
+				(gMessager say: noun 8)
 			)
 			(else
-				(super sel_300: param1)
+				(super doVerb: param1)
 			)
 		)
 	)
@@ -248,262 +248,262 @@
 
 (instance westExitFeature of ExitFeature
 	(properties
-		sel_20 {westExitFeature}
-		sel_6 150
-		sel_8 189
-		sel_9 5
-		sel_33 12
-		sel_583 4
-		sel_213 32
+		name {westExitFeature}
+		nsTop 150
+		nsBottom 189
+		nsRight 5
+		cursor 12
+		exitDir 4
+		noun 32
 	)
 )
 
 (instance cashRegister of Feature
 	(properties
-		sel_20 {cashRegister}
-		sel_1 225
-		sel_0 140
-		sel_213 9
-		sel_301 40
-		sel_302 16384
-		sel_303 241
-		sel_304 138
-		sel_305 44
+		name {cashRegister}
+		x 225
+		y 140
+		noun 9
+		sightAngle 40
+		onMeCheck 16384
+		approachX 241
+		approachY 138
+		approachDist 44
 	)
 )
 
 (instance middleShelves of Feature
 	(properties
-		sel_20 {middleShelves}
-		sel_1 159
-		sel_0 84
-		sel_213 16
-		sel_6 61
-		sel_7 88
-		sel_8 107
-		sel_9 230
-		sel_301 40
-		sel_303 153
-		sel_304 110
-		sel_305 55
+		name {middleShelves}
+		x 159
+		y 84
+		noun 16
+		nsTop 61
+		nsLeft 88
+		nsBottom 107
+		nsRight 230
+		sightAngle 40
+		approachX 153
+		approachY 110
+		approachDist 55
 	)
 )
 
 (instance secondShelf of Feature
 	(properties
-		sel_20 {secondShelf}
-		sel_1 136
-		sel_0 85
-		sel_213 2
-		sel_6 79
-		sel_7 101
-		sel_8 91
-		sel_9 171
-		sel_301 40
-		sel_303 136
-		sel_304 110
-		sel_305 34
+		name {secondShelf}
+		x 136
+		y 85
+		noun 2
+		nsTop 79
+		nsLeft 101
+		nsBottom 91
+		nsRight 171
+		sightAngle 40
+		approachX 136
+		approachY 110
+		approachDist 34
 	)
 )
 
 (instance glassCounter of Feature
 	(properties
-		sel_20 {glassCounter}
-		sel_1 225
-		sel_0 122
-		sel_213 6
-		sel_301 40
-		sel_302 8192
-		sel_303 222
-		sel_304 140
+		name {glassCounter}
+		x 225
+		y 122
+		noun 6
+		sightAngle 40
+		onMeCheck 8192
+		approachX 222
+		approachY 140
 	)
 )
 
 (instance fakeDaggers of Feature
 	(properties
-		sel_20 {fakeDaggers}
-		sel_1 270
-		sel_0 114
-		sel_213 7
-		sel_301 40
-		sel_302 4096
-		sel_303 254
-		sel_304 141
+		name {fakeDaggers}
+		x 270
+		y 114
+		noun 7
+		sightAngle 40
+		onMeCheck 4096
+		approachX 254
+		approachY 141
 	)
 
-	(method (sel_300 param1)
+	(method (doVerb param1)
 		(if (== param1 8)
-			(gCurRoom sel_422: inPittsburgh 0 1)
+			(gCurRoom setInset: inPittsburgh 0 1)
 		else
-			(super sel_300: param1)
+			(super doVerb: param1)
 		)
 	)
 )
 
 (instance realDagger of Feature
 	(properties
-		sel_20 {realDagger}
-		sel_1 249
-		sel_0 115
-		sel_213 8
-		sel_6 104
-		sel_7 240
-		sel_8 116
-		sel_9 260
-		sel_301 40
-		sel_303 249
-		sel_304 109
+		name {realDagger}
+		x 249
+		y 115
+		noun 8
+		nsTop 104
+		nsLeft 240
+		nsBottom 116
+		nsRight 260
+		sightAngle 40
+		approachX 249
+		approachY 109
 	)
 
-	(method (sel_300 param1)
+	(method (doVerb param1)
 		(if
 			(and
 				(or (== param1 8) (== param1 1))
 				(== gAct 2)
 				(not (& gMustDos $7204))
 			)
-			(gCurRoom sel_422: inPittsburgh)
+			(gCurRoom setInset: inPittsburgh)
 		else
-			(super sel_300: param1)
+			(super doVerb: param1)
 		)
 	)
 )
 
 (instance footedPot of Feature
 	(properties
-		sel_20 {footedPot}
-		sel_1 231
-		sel_0 153
-		sel_213 14
-		sel_6 151
-		sel_7 224
-		sel_8 156
-		sel_9 239
-		sel_301 40
-		sel_303 235
-		sel_304 166
+		name {footedPot}
+		x 231
+		y 153
+		noun 14
+		nsTop 151
+		nsLeft 224
+		nsBottom 156
+		nsRight 239
+		sightAngle 40
+		approachX 235
+		approachY 166
 	)
 )
 
 (instance largePicture of Feature
 	(properties
-		sel_20 {largePicture}
-		sel_1 285
-		sel_0 74
-		sel_213 5
-		sel_301 40
-		sel_302 2048
-		sel_303 261
-		sel_304 149
+		name {largePicture}
+		x 285
+		y 74
+		noun 5
+		sightAngle 40
+		onMeCheck 2048
+		approachX 261
+		approachY 149
 	)
 )
 
 (instance littleThings of Feature
 	(properties
-		sel_20 {littleThings}
-		sel_1 225
-		sel_0 133
-		sel_213 15
-		sel_301 40
-		sel_302 1024
-		sel_303 235
-		sel_304 166
+		name {littleThings}
+		x 225
+		y 133
+		noun 15
+		sightAngle 40
+		onMeCheck 1024
+		approachX 235
+		approachY 166
 	)
 )
 
 (instance leftShelves of Feature
 	(properties
-		sel_20 {leftShelves}
-		sel_1 43
-		sel_0 70
-		sel_213 1
-		sel_301 40
-		sel_302 512
-		sel_303 69
-		sel_304 130
+		name {leftShelves}
+		x 43
+		y 70
+		noun 1
+		sightAngle 40
+		onMeCheck 512
+		approachX 69
+		approachY 130
 	)
 )
 
 (instance nefertiti of Feature
 	(properties
-		sel_20 {nefertiti}
-		sel_1 10
-		sel_0 107
-		sel_213 12
-		sel_6 97
-		sel_7 2
-		sel_8 117
-		sel_9 19
-		sel_301 40
-		sel_303 40
-		sel_304 153
+		name {nefertiti}
+		x 10
+		y 107
+		noun 12
+		nsTop 97
+		nsLeft 2
+		nsBottom 117
+		nsRight 19
+		sightAngle 40
+		approachX 40
+		approachY 153
 	)
 )
 
 (instance fakeNefertiti of Feature
 	(properties
-		sel_20 {fakeNefertiti}
-		sel_1 48
-		sel_0 75
-		sel_213 13
-		sel_6 69
-		sel_7 43
-		sel_8 81
-		sel_9 53
-		sel_301 40
-		sel_303 73
-		sel_304 127
+		name {fakeNefertiti}
+		x 48
+		y 75
+		noun 13
+		nsTop 69
+		nsLeft 43
+		nsBottom 81
+		nsRight 53
+		sightAngle 40
+		approachX 73
+		approachY 127
 	)
 )
 
 (instance purplePots of Feature
 	(properties
-		sel_20 {purplePots}
-		sel_1 253
-		sel_0 124
-		sel_213 10
-		sel_301 40
-		sel_302 256
-		sel_303 247
-		sel_304 135
+		name {purplePots}
+		x 253
+		y 124
+		noun 10
+		sightAngle 40
+		onMeCheck 256
+		approachX 247
+		approachY 135
 	)
 )
 
 (instance rug of Feature
 	(properties
-		sel_20 {rug}
-		sel_1 132
-		sel_0 141
-		sel_213 11
-		sel_301 40
-		sel_302 128
-		sel_303 132
-		sel_304 141
+		name {rug}
+		x 132
+		y 141
+		noun 11
+		sightAngle 40
+		onMeCheck 128
+		approachX 132
+		approachY 141
 	)
 )
 
 (instance rightShelves of Feature
 	(properties
-		sel_20 {rightShelves}
-		sel_1 270
-		sel_0 113
-		sel_213 3
-		sel_301 40
-		sel_302 64
-		sel_303 254
-		sel_304 141
+		name {rightShelves}
+		x 270
+		y 113
+		noun 3
+		sightAngle 40
+		onMeCheck 64
+		approachX 254
+		approachY 141
 	)
 )
 
 (instance smallPicture of Feature
 	(properties
-		sel_20 {smallPicture}
-		sel_1 248
-		sel_0 64
-		sel_213 4
-		sel_301 40
-		sel_302 32
-		sel_303 234
-		sel_304 117
+		name {smallPicture}
+		x 248
+		y 64
+		noun 4
+		sightAngle 40
+		onMeCheck 32
+		approachX 234
+		approachY 117
 	)
 )

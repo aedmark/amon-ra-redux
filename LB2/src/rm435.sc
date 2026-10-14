@@ -22,91 +22,91 @@
 
 (instance rm435 of LBRoom
 	(properties
-		sel_20 {rm435}
-		sel_28 -32758
+		name {rm435}
+		style -32758
 	)
 
-	(method (sel_110)
-		(self sel_408: (if (IsFlag 72) 436 else 430))
+	(method (init)
+		(self picture: (if (IsFlag 72) 436 else 430))
 		(LoadMany rsVIEW 431 430)
 		(LoadMany rsPIC 436 780)
 		(LoadMany rsSOUND 90 6 2)
 		(if (== gAct 5)
-			(self sel_414: 94)
+			(self setRegions: 94)
 		else
-			(WrapMusic sel_168: 1)
-			(self sel_414: 90)
+			(WrapMusic pause: 1)
+			(self setRegions: 90)
 		)
-		(gEgo sel_55: 180)
-		(super sel_110:)
+		(gEgo heading: 180)
+		(super init:)
 		(if (not (IsFlag 72))
 			(gEgo
-				sel_110:
-				sel_585: (if (== gAct 5) 426 else 831)
-				sel_320: 125
+				init:
+				normalize: (if (== gAct 5) 426 else 831)
+				setScale: 125
 			)
 			(switch gPrevRoomNum
 				(440
-					(gEgo sel_1: 51 sel_0: 121)
+					(gEgo x: 51 y: 121)
 				)
 				(480
-					(gEgo sel_1: 114 sel_0: 112)
+					(gEgo x: 114 y: 112)
 				)
 				(420
-					(gEgo sel_1: 319 sel_0: 125)
+					(gEgo x: 319 y: 125)
 				)
 			)
-			(gGame sel_87: 1 143)
-			(eastDoor sel_110:)
-			(eastDoor2 sel_110:)
-			(westDoor sel_110:)
-			(westDoor2 sel_110:)
-			(wireEnd sel_110:)
-			(skewer sel_110: sel_313:)
+			(gGame points: 1 143)
+			(eastDoor init:)
+			(eastDoor2 init:)
+			(westDoor init:)
+			(westDoor2 init:)
+			(wireEnd init:)
+			(skewer init: stopUpd:)
 		)
-		(gCurRoom sel_146: sRunIt)
+		(gCurRoom setScript: sRunIt)
 	)
 
-	(method (sel_111)
+	(method (dispose)
 		(if local0
-			(wrapMusic sel_111: 1)
+			(wrapMusic dispose: 1)
 		)
-		(screamAndLook sel_111:)
+		(screamAndLook dispose:)
 		(if (< gAct 5)
-			(WrapMusic sel_168: 0)
+			(WrapMusic pause: 0)
 		)
-		(super sel_111:)
+		(super dispose:)
 	)
 
-	(method (sel_403)
+	(method (notify)
 		(if (== gAct 5)
-			(self sel_422: 0)
-			((ScriptID 94 1) sel_162: (ScriptID 94 1) 2) ; pursuitTimer, pursuitTimer
-			(gCurRoom sel_399: 430)
+			(self setInset: 0)
+			((ScriptID 94 1) setReal: (ScriptID 94 1) 2) ; pursuitTimer, pursuitTimer
+			(gCurRoom newRoom: 430)
 		)
 	)
 )
 
 (instance sEnter of Script
 	(properties
-		sel_20 {sEnter}
+		name {sEnter}
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
-				(gGame sel_587:)
-				(= sel_136 1)
+				(gGame handsOff:)
+				(= cycles 1)
 			)
 			(1
 				(if (== gPrevRoomNum 420)
-					(gEgo sel_312: PolyPath 300 133 self)
+					(gEgo setMotion: PolyPath 300 133 self)
 				else
-					(gEgo sel_312: PolyPath 100 133 self)
+					(gEgo setMotion: PolyPath 100 133 self)
 				)
 			)
 			(2
-				(self sel_111:)
+				(self dispose:)
 			)
 		)
 	)
@@ -114,55 +114,55 @@
 
 (instance sRunIt of Script
 	(properties
-		sel_20 {sRunIt}
+		name {sRunIt}
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
 				(if (IsFlag 72)
-					(self sel_144: 4)
+					(self changeState: 4)
 				else
-					(self sel_146: sEnter self)
+					(self setScript: sEnter self)
 				)
 			)
 			(1
 				(gEgo
-					sel_312:
+					setMotion:
 						PolyPath
-						(gEgo sel_1:)
-						(+ (gEgo sel_0:) 10)
+						(gEgo x:)
+						(+ (gEgo y:) 10)
 						self
 				)
 			)
 			(2
-				(gEgo sel_102:)
-				(eastDoor sel_111:)
-				(eastDoor2 sel_111:)
-				(westDoor sel_111:)
-				(westDoor2 sel_111:)
-				(wireEnd sel_111:)
-				(skewer sel_111:)
-				(gCurRoom sel_408: 465 sel_417: 465)
-				(= sel_136 1)
+				(gEgo hide:)
+				(eastDoor dispose:)
+				(eastDoor2 dispose:)
+				(westDoor dispose:)
+				(westDoor2 dispose:)
+				(wireEnd dispose:)
+				(skewer dispose:)
+				(gCurRoom picture: 465 drawPic: 465)
+				(= cycles 1)
 			)
 			(3
-				(wrapMusic sel_110: -1 2 6)
-				(gGameMusic2 sel_40: 83 sel_99: 5 sel_3: 1 sel_39:)
+				(wrapMusic init: -1 2 6)
+				(gGameMusic2 number: 83 flags: 5 loop: 1 play:)
 				(= local0 1)
-				(= sel_137 3)
+				(= seconds 3)
 			)
 			(4
 				(if (and (IsFlag 72) (!= gAct 5))
-					(screamAndLook sel_40: 6 sel_3: -1 sel_99: 1 sel_39:)
+					(screamAndLook number: 6 loop: -1 flags: 1 play:)
 				else
 					(SetFlag 72)
 					(SetFlag 143)
 				)
-				(sel_42 sel_422: inZiggyDead self)
+				(client setInset: inZiggyDead self)
 			)
 			(5
-				(gCurRoom sel_399: 430)
+				(gCurRoom newRoom: 430)
 			)
 		)
 	)
@@ -170,36 +170,36 @@
 
 (instance wireEnd2 of View
 	(properties
-		sel_20 {wireEnd2}
-		sel_1 33
-		sel_0 41
-		sel_213 9
-		sel_2 431
-		sel_3 4
-		sel_60 13
-		sel_14 16
+		name {wireEnd2}
+		x 33
+		y 41
+		noun 9
+		view 431
+		loop 4
+		priority 13
+		signal 16
 	)
 
-	(method (sel_307))
+	(method (initialize))
 
-	(method (sel_300 param1)
+	(method (doVerb param1)
 		(switch param1
 			(21
 				(if (IsFlag 44)
-					(super sel_300: param1 &rest)
+					(super doVerb: param1 &rest)
 				else
 					(SetFlag 63)
-					(inZiggyDead sel_111:)
+					(inZiggyDead dispose:)
 				)
 			)
 			(8
-				(inZiggyDead sel_422: inWire)
+				(inZiggyDead setInset: inWire)
 			)
 			(13
-				(inZiggyDead sel_300: param1)
+				(inZiggyDead doVerb: param1)
 			)
 			(else
-				(super sel_300: param1 &rest)
+				(super doVerb: param1 &rest)
 			)
 		)
 	)
@@ -207,22 +207,22 @@
 
 (instance neck of Feature
 	(properties
-		sel_20 {neck}
-		sel_1 1
-		sel_0 1
-		sel_213 5
-		sel_302 16384
+		name {neck}
+		x 1
+		y 1
+		noun 5
+		onMeCheck 16384
 	)
 
-	(method (sel_307))
+	(method (initialize))
 
-	(method (sel_300 param1)
+	(method (doVerb param1)
 		(switch param1
 			(13
-				(inZiggyDead sel_300: param1)
+				(inZiggyDead doVerb: param1)
 			)
 			(else
-				(super sel_300: param1)
+				(super doVerb: param1)
 			)
 		)
 	)
@@ -230,22 +230,22 @@
 
 (instance jacket of Feature
 	(properties
-		sel_20 {jacket}
-		sel_1 1
-		sel_0 1
-		sel_213 3
-		sel_302 128
+		name {jacket}
+		x 1
+		y 1
+		noun 3
+		onMeCheck 128
 	)
 
-	(method (sel_307))
+	(method (initialize))
 
-	(method (sel_300 param1)
+	(method (doVerb param1)
 		(switch param1
 			(13
-				(inZiggyDead sel_300: param1)
+				(inZiggyDead doVerb: param1)
 			)
 			(else
-				(super sel_300: param1)
+				(super doVerb: param1)
 			)
 		)
 	)
@@ -253,22 +253,22 @@
 
 (instance pants of Feature
 	(properties
-		sel_20 {pants}
-		sel_1 1
-		sel_0 1
-		sel_213 6
-		sel_302 256
+		name {pants}
+		x 1
+		y 1
+		noun 6
+		onMeCheck 256
 	)
 
-	(method (sel_307))
+	(method (initialize))
 
-	(method (sel_300 param1)
+	(method (doVerb param1)
 		(switch param1
 			(13
-				(inZiggyDead sel_300: param1)
+				(inZiggyDead doVerb: param1)
 			)
 			(else
-				(super sel_300: param1)
+				(super doVerb: param1)
 			)
 		)
 	)
@@ -276,22 +276,22 @@
 
 (instance ptero of Feature
 	(properties
-		sel_20 {ptero}
-		sel_1 1
-		sel_0 1
-		sel_213 2
-		sel_302 2
+		name {ptero}
+		x 1
+		y 1
+		noun 2
+		onMeCheck 2
 	)
 
-	(method (sel_307))
+	(method (initialize))
 
-	(method (sel_300 param1)
+	(method (doVerb param1)
 		(switch param1
 			(13
-				(inZiggyDead sel_300: param1)
+				(inZiggyDead doVerb: param1)
 			)
 			(else
-				(super sel_300: param1)
+				(super doVerb: param1)
 			)
 		)
 	)
@@ -299,33 +299,33 @@
 
 (instance wire1 of Feature
 	(properties
-		sel_20 {wire1}
-		sel_1 1
-		sel_0 1
-		sel_213 8
-		sel_302 4
+		name {wire1}
+		x 1
+		y 1
+		noun 8
+		onMeCheck 4
 	)
 
-	(method (sel_307))
+	(method (initialize))
 
-	(method (sel_300 param1)
+	(method (doVerb param1)
 		(switch param1
 			(21
 				(if (IsFlag 44)
-					(super sel_300: param1 &rest)
+					(super doVerb: param1 &rest)
 				else
 					(SetFlag 63)
-					(inZiggyDead sel_111:)
+					(inZiggyDead dispose:)
 				)
 			)
 			(8
-				(inZiggyDead sel_422: inWire)
+				(inZiggyDead setInset: inWire)
 			)
 			(13
-				(inZiggyDead sel_300: param1)
+				(inZiggyDead doVerb: param1)
 			)
 			(else
-				(super sel_300: param1 &rest)
+				(super doVerb: param1 &rest)
 			)
 		)
 	)
@@ -333,22 +333,22 @@
 
 (instance wire2 of Feature
 	(properties
-		sel_20 {wire2}
-		sel_1 1
-		sel_0 1
-		sel_213 9
-		sel_302 8
+		name {wire2}
+		x 1
+		y 1
+		noun 9
+		onMeCheck 8
 	)
 
-	(method (sel_307))
+	(method (initialize))
 
-	(method (sel_300 param1)
+	(method (doVerb param1)
 		(switch param1
 			(13
-				(inZiggyDead sel_300: param1)
+				(inZiggyDead doVerb: param1)
 			)
 			(else
-				(super sel_300: param1)
+				(super doVerb: param1)
 			)
 		)
 	)
@@ -356,22 +356,22 @@
 
 (instance wire3 of Feature
 	(properties
-		sel_20 {wire3}
-		sel_1 1
-		sel_0 1
-		sel_213 10
-		sel_302 16
+		name {wire3}
+		x 1
+		y 1
+		noun 10
+		onMeCheck 16
 	)
 
-	(method (sel_307))
+	(method (initialize))
 
-	(method (sel_300 param1)
+	(method (doVerb param1)
 		(switch param1
 			(13
-				(inZiggyDead sel_300: param1)
+				(inZiggyDead doVerb: param1)
 			)
 			(else
-				(super sel_300: param1)
+				(super doVerb: param1)
 			)
 		)
 	)
@@ -379,22 +379,22 @@
 
 (instance lHand of Feature
 	(properties
-		sel_20 {lHand}
-		sel_1 1
-		sel_0 1
-		sel_213 4
-		sel_302 32
+		name {lHand}
+		x 1
+		y 1
+		noun 4
+		onMeCheck 32
 	)
 
-	(method (sel_307))
+	(method (initialize))
 
-	(method (sel_300 param1)
+	(method (doVerb param1)
 		(switch param1
 			(13
-				(inZiggyDead sel_300: param1)
+				(inZiggyDead doVerb: param1)
 			)
 			(else
-				(super sel_300: param1)
+				(super doVerb: param1)
 			)
 		)
 	)
@@ -402,22 +402,22 @@
 
 (instance rHand of Feature
 	(properties
-		sel_20 {rHand}
-		sel_1 1
-		sel_0 1
-		sel_213 7
-		sel_302 64
+		name {rHand}
+		x 1
+		y 1
+		noun 7
+		onMeCheck 64
 	)
 
-	(method (sel_307))
+	(method (initialize))
 
-	(method (sel_300 param1)
+	(method (doVerb param1)
 		(switch param1
 			(13
-				(inZiggyDead sel_300: param1)
+				(inZiggyDead doVerb: param1)
 			)
 			(else
-				(super sel_300: param1)
+				(super doVerb: param1)
 			)
 		)
 	)
@@ -425,22 +425,22 @@
 
 (instance blood of Feature
 	(properties
-		sel_20 {blood}
-		sel_1 1
-		sel_0 1
-		sel_213 1
-		sel_302 512
+		name {blood}
+		x 1
+		y 1
+		noun 1
+		onMeCheck 512
 	)
 
-	(method (sel_307))
+	(method (initialize))
 
-	(method (sel_300 param1)
+	(method (doVerb param1)
 		(switch param1
 			(13
-				(inZiggyDead sel_300: param1)
+				(inZiggyDead doVerb: param1)
 			)
 			(else
-				(super sel_300: param1)
+				(super doVerb: param1)
 			)
 		)
 	)
@@ -448,22 +448,22 @@
 
 (instance wound of Feature
 	(properties
-		sel_20 {wound}
-		sel_1 1
-		sel_0 1
-		sel_213 11
-		sel_302 1024
+		name {wound}
+		x 1
+		y 1
+		noun 11
+		onMeCheck 1024
 	)
 
-	(method (sel_307))
+	(method (initialize))
 
-	(method (sel_300 param1)
+	(method (doVerb param1)
 		(switch param1
 			(13
-				(inZiggyDead sel_300: param1)
+				(inZiggyDead doVerb: param1)
 			)
 			(else
-				(super sel_300: param1)
+				(super doVerb: param1)
 			)
 		)
 	)
@@ -471,28 +471,28 @@
 
 (instance inWire of Inset
 	(properties
-		sel_20 {inWire}
-		sel_2 431
-		sel_3 2
-		sel_1 8
-		sel_0 42
-		sel_570 1
-		sel_213 8
+		name {inWire}
+		view 431
+		loop 2
+		x 8
+		y 42
+		disposeNotOnMe 1
+		noun 8
 	)
 
-	(method (sel_300 param1)
+	(method (doVerb param1)
 		(switch param1
 			(21
 				(if (IsFlag 44)
-					(super sel_300: param1 &rest)
+					(super doVerb: param1 &rest)
 				else
 					(SetFlag 63)
-					(self sel_111:)
-					(inZiggyDead sel_111:)
+					(self dispose:)
+					(inZiggyDead dispose:)
 				)
 			)
 			(else
-				(super sel_300: param1 &rest)
+				(super doVerb: param1 &rest)
 			)
 		)
 	)
@@ -500,50 +500,50 @@
 
 (instance inZiggyDead of Inset
 	(properties
-		sel_20 {inZiggyDead}
-		sel_408 436
-		sel_28 -32758
-		sel_560 1
+		name {inZiggyDead}
+		picture 436
+		style -32758
+		hideTheCast 1
 	)
 
-	(method (sel_110)
-		(super sel_110: &rest)
+	(method (init)
+		(super init: &rest)
 		(SetFlag 72)
 		(SetFlag 143)
-		(gCurRoom sel_408: 780)
-		(gGame sel_588:)
+		(gCurRoom picture: 780)
+		(gGame handsOn:)
 		(proc0_8 1)
-		(neck sel_110:)
-		(jacket sel_110:)
-		(pants sel_110:)
-		(ptero sel_110:)
-		(wire1 sel_110:)
-		(wire2 sel_110:)
-		(wire3 sel_110:)
-		(lHand sel_110:)
-		(rHand sel_110:)
-		(blood sel_110:)
-		(wound sel_110:)
+		(neck init:)
+		(jacket init:)
+		(pants init:)
+		(ptero init:)
+		(wire1 init:)
+		(wire2 init:)
+		(wire3 init:)
+		(lHand init:)
+		(rHand init:)
+		(blood init:)
+		(wound init:)
 		(if (not (IsFlag 44))
-			(wireEnd2 sel_110:)
+			(wireEnd2 init:)
 		)
-		(= sel_28 100)
+		(= style 100)
 	)
 
-	(method (sel_111)
-		(= sel_28 -32758)
-		(screamAndLook sel_170: 0 12 30 1)
+	(method (dispose)
+		(= style -32758)
+		(screamAndLook fade: 0 12 30 1)
 		(proc0_8 0)
-		(super sel_111:)
+		(super dispose:)
 	)
 
-	(method (sel_300 param1)
+	(method (doVerb param1)
 		(switch param1
 			(13
-				(self sel_111:)
+				(self dispose:)
 			)
 			(else
-				(super sel_300: param1 &rest)
+				(super doVerb: param1 &rest)
 			)
 		)
 	)
@@ -551,92 +551,92 @@
 
 (instance westDoor2 of View
 	(properties
-		sel_20 {westDoor2}
-		sel_1 74
-		sel_0 66
-		sel_2 432
-		sel_3 1
-		sel_4 4
-		sel_14 16384
+		name {westDoor2}
+		x 74
+		y 66
+		view 432
+		loop 1
+		cel 4
+		signal 16384
 	)
 )
 
 (instance eastDoor2 of View
 	(properties
-		sel_20 {eastDoor2}
-		sel_1 312
-		sel_0 68
-		sel_2 432
-		sel_3 3
-		sel_4 9
-		sel_60 9
-		sel_14 16400
+		name {eastDoor2}
+		x 312
+		y 68
+		view 432
+		loop 3
+		cel 9
+		priority 9
+		signal 16400
 	)
 )
 
 (instance eastDoor of View
 	(properties
-		sel_20 {eastDoor}
-		sel_1 292
-		sel_0 68
-		sel_2 432
-		sel_3 2
-		sel_4 9
-		sel_14 16384
+		name {eastDoor}
+		x 292
+		y 68
+		view 432
+		loop 2
+		cel 9
+		signal 16384
 	)
 )
 
 (instance westDoor of View
 	(properties
-		sel_20 {westDoor}
-		sel_1 53
-		sel_0 66
-		sel_2 432
-		sel_4 4
-		sel_60 9
-		sel_14 16400
+		name {westDoor}
+		x 53
+		y 66
+		view 432
+		cel 4
+		priority 9
+		signal 16400
 	)
 )
 
 (instance skewer of View
 	(properties
-		sel_20 {skewer}
-		sel_1 3
-		sel_0 189
-		sel_82 89
-		sel_2 430
-		sel_3 1
-		sel_60 15
-		sel_14 20496
+		name {skewer}
+		x 3
+		y 189
+		z 89
+		view 430
+		loop 1
+		priority 15
+		signal 20496
 	)
 )
 
 (instance wireEnd of View
 	(properties
-		sel_20 {wireEnd}
-		sel_1 21
-		sel_0 130
-		sel_2 431
-		sel_3 4
-		sel_4 1
-		sel_60 15
-		sel_14 16400
+		name {wireEnd}
+		x 21
+		y 130
+		view 431
+		loop 4
+		cel 1
+		priority 15
+		signal 16400
 	)
 )
 
 (instance wrapMusic of WrapMusic
 	(properties
-		sel_20 {wrapMusic}
+		name {wrapMusic}
 	)
 
-	(method (sel_110)
-		(= sel_608 screamAndLook)
-		(super sel_110: &rest)
+	(method (init)
+		(= wrapSound screamAndLook)
+		(super init: &rest)
 	)
 )
 
 (instance screamAndLook of Sound
 	(properties
-		sel_20 {screamAndLook}
+		name {screamAndLook}
 	)
 )

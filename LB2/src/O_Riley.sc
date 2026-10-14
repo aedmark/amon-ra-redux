@@ -12,46 +12,46 @@
 
 (instance O_Riley of Talker
 	(properties
-		sel_20 {O'Riley}
-		sel_1 5
-		sel_0 5
-		sel_2 1888
-		sel_3 3
-		sel_537 150
-		sel_26 15
-		sel_549 115
-		sel_550 12
+		name {O'Riley}
+		x 5
+		y 5
+		view 1888
+		loop 3
+		talkWidth 150
+		back 15
+		textX 115
+		textY 12
 	)
 
-	(method (sel_110)
-		(= sel_30 gUserFont)
-		(super sel_110: oRileyBust oRileyEyes oRileyMouth &rest)
+	(method (init)
+		(= font gUserFont)
+		(super init: oRileyBust oRileyEyes oRileyMouth &rest)
 	)
 )
 
 (instance oRileyBust of Prop
 	(properties
-		sel_20 {oRileyBust}
-		sel_2 1888
-		sel_3 1
+		name {oRileyBust}
+		view 1888
+		loop 1
 	)
 )
 
 (instance oRileyEyes of Prop
 	(properties
-		sel_20 {oRileyEyes}
-		sel_6 38
-		sel_7 31
-		sel_2 1888
-		sel_3 2
+		name {oRileyEyes}
+		nsTop 38
+		nsLeft 31
+		view 1888
+		loop 2
 	)
 )
 
 (instance oRileyMouth of Prop
 	(properties
-		sel_20 {oRileyMouth}
-		sel_6 57
-		sel_7 30
-		sel_2 1888
+		name {oRileyMouth}
+		nsTop 57
+		nsLeft 30
+		view 1888
 	)
 )

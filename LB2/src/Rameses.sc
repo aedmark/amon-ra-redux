@@ -12,46 +12,46 @@
 
 (instance Rameses of Talker
 	(properties
-		sel_20 {Rameses}
-		sel_1 5
-		sel_0 5
-		sel_2 1891
-		sel_3 3
-		sel_537 150
-		sel_26 15
-		sel_549 110
-		sel_550 12
+		name {Rameses}
+		x 5
+		y 5
+		view 1891
+		loop 3
+		talkWidth 150
+		back 15
+		textX 110
+		textY 12
 	)
 
-	(method (sel_110)
-		(= sel_30 gUserFont)
-		(super sel_110: ramesesBust ramesesEyes ramesesMouth &rest)
+	(method (init)
+		(= font gUserFont)
+		(super init: ramesesBust ramesesEyes ramesesMouth &rest)
 	)
 )
 
 (instance ramesesBust of Prop
 	(properties
-		sel_20 {ramesesBust}
-		sel_2 1891
-		sel_3 1
+		name {ramesesBust}
+		view 1891
+		loop 1
 	)
 )
 
 (instance ramesesEyes of Prop
 	(properties
-		sel_20 {ramesesEyes}
-		sel_6 39
-		sel_7 36
-		sel_2 1891
-		sel_3 2
+		name {ramesesEyes}
+		nsTop 39
+		nsLeft 36
+		view 1891
+		loop 2
 	)
 )
 
 (instance ramesesMouth of Prop
 	(properties
-		sel_20 {ramesesMouth}
-		sel_6 54
-		sel_7 27
-		sel_2 1891
+		name {ramesesMouth}
+		nsTop 54
+		nsLeft 27
+		view 1891
 	)
 )

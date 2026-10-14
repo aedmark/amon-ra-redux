@@ -31,163 +31,163 @@
 
 (instance rm620 of LBRoom
 	(properties
-		sel_20 {rm620}
-		sel_408 620
+		name {rm620}
+		picture 620
 	)
 
-	(method (sel_110)
-		(if (gTimers sel_122: (ScriptID 90 15)) ; meetingTimer
-			((ScriptID 90 15) sel_42: self) ; meetingTimer
+	(method (init)
+		(if (gTimers contains: (ScriptID 90 15)) ; meetingTimer
+			((ScriptID 90 15) client: self) ; meetingTimer
 		)
-		(gEgo sel_110: sel_585: 622)
+		(gEgo init: normalize: 622)
 		(LoadMany rsVIEW 621 622)
 		(LoadMany rsSOUND 611 612 615)
 		(if (< global129 6)
-			(= sel_28 16384)
+			(= style 16384)
 			(= local2 1)
 		)
-		(super sel_110:)
+		(super init:)
 		(churning
-			sel_110:
-			sel_155: (+ (churning sel_3:) local2)
-			sel_1: (localproc_0 (churning sel_1:))
-			sel_161: Fwd
+			init:
+			setLoop: (+ (churning loop:) local2)
+			x: (localproc_0 (churning x:))
+			setCycle: Fwd
 		)
-		(self sel_414: 90)
+		(self setRegions: 90)
 		(switch global129
 			(1
 				(= local1 8)
-				(animal1 sel_110: sel_155: 7 sel_156: 0 sel_153: 130 130)
-				(animal2 sel_110: sel_155: 7 sel_156: 1 sel_153: 144 94)
-				(animal3 sel_110: sel_155: 7 sel_156: 0 sel_153: 179 105)
-				(animal4 sel_110: sel_155: 7 sel_156: 1 sel_153: 169 149)
+				(animal1 init: setLoop: 7 setCel: 0 posn: 130 130)
+				(animal2 init: setLoop: 7 setCel: 1 posn: 144 94)
+				(animal3 init: setLoop: 7 setCel: 0 posn: 179 105)
+				(animal4 init: setLoop: 7 setCel: 1 posn: 169 149)
 			)
 			(2
 				(= local1 10)
-				(animal1 sel_110: sel_155: 7 sel_156: 2 sel_153: 129 103)
-				(animal2 sel_110: sel_155: 7 sel_156: 3 sel_153: 167 117)
-				(animal3 sel_110: sel_155: 7 sel_156: 4 sel_153: 124 134)
-				(animal4 sel_110: sel_155: 7 sel_156: 2 sel_153: 126 166)
-				(animal5 sel_110: sel_155: 7 sel_156: 4 sel_153: 162 145)
+				(animal1 init: setLoop: 7 setCel: 2 posn: 129 103)
+				(animal2 init: setLoop: 7 setCel: 3 posn: 167 117)
+				(animal3 init: setLoop: 7 setCel: 4 posn: 124 134)
+				(animal4 init: setLoop: 7 setCel: 2 posn: 126 166)
+				(animal5 init: setLoop: 7 setCel: 4 posn: 162 145)
 			)
 			(3
 				(= local1 9)
-				(animal1 sel_110: sel_155: 7 sel_156: 5 sel_153: 137 100)
-				(animal2 sel_110: sel_155: 7 sel_156: 6 sel_153: 126 134)
-				(animal3 sel_110: sel_155: 7 sel_156: 7 sel_153: 178 151)
+				(animal1 init: setLoop: 7 setCel: 5 posn: 137 100)
+				(animal2 init: setLoop: 7 setCel: 6 posn: 126 134)
+				(animal3 init: setLoop: 7 setCel: 7 posn: 178 151)
 			)
 			(4
 				(= local1 6)
-				(animal1 sel_110: sel_155: 7 sel_156: 8 sel_153: 149 96)
+				(animal1 init: setLoop: 7 setCel: 8 posn: 149 96)
 			)
 			(5
 				(= local1 6)
-				(animal1 sel_110: sel_155: 7 sel_156: 9 sel_153: 125 133)
-				(animal2 sel_110: sel_155: 7 sel_156: 10 sel_153: 142 103)
+				(animal1 init: setLoop: 7 setCel: 9 posn: 125 133)
+				(animal2 init: setLoop: 7 setCel: 10 posn: 142 103)
 			)
 			(6
 				(= local1 8)
-				(animal1 sel_110: sel_155: 7 sel_156: 13 sel_153: 142 159)
-				(animal2 sel_110: sel_155: 7 sel_156: 11 sel_153: 125 116)
-				(animal3 sel_110: sel_155: 7 sel_156: 12 sel_153: 173 103)
-				(animal4 sel_110: sel_155: 7 sel_156: 12 sel_153: 116 118)
+				(animal1 init: setLoop: 7 setCel: 13 posn: 142 159)
+				(animal2 init: setLoop: 7 setCel: 11 posn: 125 116)
+				(animal3 init: setLoop: 7 setCel: 12 posn: 173 103)
+				(animal4 init: setLoop: 7 setCel: 12 posn: 116 118)
 			)
 			(7
 				(= local1 6)
-				(animal1 sel_110: sel_155: 8 sel_156: 0 sel_153: 110 98)
+				(animal1 init: setLoop: 8 setCel: 0 posn: 110 98)
 			)
 			(8
 				(= local1 9)
-				(animal1 sel_110: sel_155: 8 sel_156: 3 sel_153: 139 157)
-				(animal2 sel_110: sel_155: 8 sel_156: 1 sel_153: 112 102)
-				(animal3 sel_110: sel_155: 8 sel_156: 2 sel_153: 164 113)
+				(animal1 init: setLoop: 8 setCel: 3 posn: 139 157)
+				(animal2 init: setLoop: 8 setCel: 1 posn: 112 102)
+				(animal3 init: setLoop: 8 setCel: 2 posn: 164 113)
 			)
 			(9
 				(= local1 10)
-				(animal1 sel_110: sel_155: 8 sel_156: 5 sel_153: 114 103)
-				(animal2 sel_110: sel_155: 8 sel_156: 6 sel_153: 158 117)
-				(animal3 sel_110: sel_155: 8 sel_156: 6 sel_153: 115 141)
-				(animal4 sel_110: sel_155: 8 sel_156: 5 sel_153: 129 164)
-				(animal5 sel_110: sel_155: 8 sel_156: 5 sel_153: 165 141)
+				(animal1 init: setLoop: 8 setCel: 5 posn: 114 103)
+				(animal2 init: setLoop: 8 setCel: 6 posn: 158 117)
+				(animal3 init: setLoop: 8 setCel: 6 posn: 115 141)
+				(animal4 init: setLoop: 8 setCel: 5 posn: 129 164)
+				(animal5 init: setLoop: 8 setCel: 5 posn: 165 141)
 			)
 			(10
 				(= local1 6)
-				(animal1 sel_110: sel_155: 8 sel_156: 7 sel_153: 115 92)
+				(animal1 init: setLoop: 8 setCel: 7 posn: 115 92)
 			)
 			(11
 				(= local1 5)
-				(animal1 sel_110: sel_155: 8 sel_156: 8 sel_153: 109 113)
+				(animal1 init: setLoop: 8 setCel: 8 posn: 109 113)
 			)
 			(12
 				(= local1 10)
-				(animal1 sel_110: sel_155: 8 sel_156: 9 sel_153: 114 100)
-				(animal2 sel_110: sel_155: 8 sel_156: 10 sel_153: 158 117)
-				(animal3 sel_110: sel_155: 8 sel_156: 10 sel_153: 109 134)
-				(animal4 sel_110: sel_155: 8 sel_156: 10 sel_153: 123 167)
-				(animal5 sel_110: sel_155: 8 sel_156: 9 sel_153: 147 145)
+				(animal1 init: setLoop: 8 setCel: 9 posn: 114 100)
+				(animal2 init: setLoop: 8 setCel: 10 posn: 158 117)
+				(animal3 init: setLoop: 8 setCel: 10 posn: 109 134)
+				(animal4 init: setLoop: 8 setCel: 10 posn: 123 167)
+				(animal5 init: setLoop: 8 setCel: 9 posn: 147 145)
 			)
 			(13
 				(= local1 10)
-				(animal1 sel_110: sel_155: 0 sel_156: 0 sel_153: 117 125)
-				(animal2 sel_110: sel_155: 1 sel_156: 0 sel_153: 134 110)
-				(animal3 sel_110: sel_155: 2 sel_156: 0 sel_153: 170 105)
-				(animal4 sel_110: sel_155: 3 sel_156: 0 sel_153: 134 148)
-				(animal5 sel_110: sel_155: 4 sel_156: 0 sel_153: 173 143)
+				(animal1 init: setLoop: 0 setCel: 0 posn: 117 125)
+				(animal2 init: setLoop: 1 setCel: 0 posn: 134 110)
+				(animal3 init: setLoop: 2 setCel: 0 posn: 170 105)
+				(animal4 init: setLoop: 3 setCel: 0 posn: 134 148)
+				(animal5 init: setLoop: 4 setCel: 0 posn: 173 143)
 			)
 			(14
 				(= local1 6)
-				(animal1 sel_110: sel_155: 8 sel_156: 11 sel_153: 163 131)
-				(animal2 sel_110: sel_155: 8 sel_156: 12 sel_153: 113 107)
+				(animal1 init: setLoop: 8 setCel: 11 posn: 163 131)
+				(animal2 init: setLoop: 8 setCel: 12 posn: 113 107)
 			)
 			(else
 				(= local1 1)
 			)
 		)
-		(self sel_146: sSearchVat)
+		(self setScript: sSearchVat)
 	)
 
-	(method (sel_145)
-		((ScriptID 90 15) sel_162: self 10 0 0 gClockTimeMustDos) ; meetingTimer
+	(method (cue)
+		((ScriptID 90 15) setReal: self 10 0 0 gClockTimeMustDos) ; meetingTimer
 	)
 
-	(method (sel_399)
-		(if (gTimers sel_122: (ScriptID 90 15)) ; meetingTimer
-			(= sel_135 0)
-			((ScriptID 90 15) sel_42: (ScriptID 90 15)) ; meetingTimer, meetingTimer
+	(method (newRoom)
+		(if (gTimers contains: (ScriptID 90 15)) ; meetingTimer
+			(= timer 0)
+			((ScriptID 90 15) client: (ScriptID 90 15)) ; meetingTimer, meetingTimer
 		)
-		(super sel_399: &rest)
+		(super newRoom: &rest)
 	)
 )
 
 (instance sSearchVat of Script
 	(properties
-		sel_20 {sSearchVat}
+		name {sSearchVat}
 	)
 
-	(method (sel_57)
-		(super sel_57:)
+	(method (doit)
+		(super doit:)
 		(switch global129
 			(1
 				(switch local0
 					(0
 						(animal1
-							sel_1: (Random 129 131)
-							sel_0: (Random 128 132)
+							x: (Random 129 131)
+							y: (Random 128 132)
 						)
 					)
 					(2
-						(animal2 sel_1: (Random 143 145) sel_0: (Random 92 96))
+						(animal2 x: (Random 143 145) y: (Random 92 96))
 					)
 					(4
 						(animal3
-							sel_1: (Random 178 180)
-							sel_0: (Random 103 107)
+							x: (Random 178 180)
+							y: (Random 103 107)
 						)
 					)
 					(6
 						(animal4
-							sel_1: (Random 168 170)
-							sel_0: (Random 147 151)
+							x: (Random 168 170)
+							y: (Random 147 151)
 						)
 					)
 				)
@@ -196,32 +196,32 @@
 				(switch local0
 					(0
 						(animal1
-							sel_1: (Random 128 130)
-							sel_0: (Random 101 105)
+							x: (Random 128 130)
+							y: (Random 101 105)
 						)
 					)
 					(2
 						(animal2
-							sel_1: (Random 166 168)
-							sel_0: (Random 115 119)
+							x: (Random 166 168)
+							y: (Random 115 119)
 						)
 					)
 					(4
 						(animal3
-							sel_1: (Random 123 125)
-							sel_0: (Random 132 136)
+							x: (Random 123 125)
+							y: (Random 132 136)
 						)
 					)
 					(6
 						(animal4
-							sel_1: (Random 125 127)
-							sel_0: (Random 164 168)
+							x: (Random 125 127)
+							y: (Random 164 168)
 						)
 					)
 					(8
 						(animal5
-							sel_1: (Random 161 163)
-							sel_0: (Random 143 147)
+							x: (Random 161 163)
+							y: (Random 143 147)
 						)
 					)
 				)
@@ -229,18 +229,18 @@
 			(3
 				(switch local0
 					(0
-						(animal1 sel_1: (Random 136 138) sel_0: (Random 98 102))
+						(animal1 x: (Random 136 138) y: (Random 98 102))
 					)
 					(3
 						(animal2
-							sel_1: (Random 125 127)
-							sel_0: (Random 132 136)
+							x: (Random 125 127)
+							y: (Random 132 136)
 						)
 					)
 					(6
 						(animal3
-							sel_1: (Random 177 179)
-							sel_0: (Random 149 153)
+							x: (Random 177 179)
+							y: (Random 149 153)
 						)
 					)
 				)
@@ -248,7 +248,7 @@
 			(4
 				(switch local0
 					(0
-						(animal1 sel_1: (Random 148 150) sel_0: (Random 94 98))
+						(animal1 x: (Random 148 150) y: (Random 94 98))
 					)
 				)
 			)
@@ -256,14 +256,14 @@
 				(switch local0
 					(0
 						(animal1
-							sel_1: (Random 124 126)
-							sel_0: (Random 131 135)
+							x: (Random 124 126)
+							y: (Random 131 135)
 						)
 					)
 					(3
 						(animal2
-							sel_1: (Random 141 143)
-							sel_0: (Random 101 105)
+							x: (Random 141 143)
+							y: (Random 101 105)
 						)
 					)
 				)
@@ -272,26 +272,26 @@
 				(switch local0
 					(0
 						(animal1
-							sel_1: (Random 141 143)
-							sel_0: (Random 157 161)
+							x: (Random 141 143)
+							y: (Random 157 161)
 						)
 					)
 					(2
 						(animal2
-							sel_1: (Random 124 126)
-							sel_0: (Random 114 118)
+							x: (Random 124 126)
+							y: (Random 114 118)
 						)
 					)
 					(4
 						(animal3
-							sel_1: (Random 172 174)
-							sel_0: (Random 101 105)
+							x: (Random 172 174)
+							y: (Random 101 105)
 						)
 					)
 					(6
 						(animal4
-							sel_1: (Random 115 117)
-							sel_0: (Random 116 120)
+							x: (Random 115 117)
+							y: (Random 116 120)
 						)
 					)
 				)
@@ -299,7 +299,7 @@
 			(7
 				(switch local0
 					(0
-						(animal1 sel_1: (Random 109 111) sel_0: (Random 96 100))
+						(animal1 x: (Random 109 111) y: (Random 96 100))
 					)
 				)
 			)
@@ -307,20 +307,20 @@
 				(switch local0
 					(0
 						(animal1
-							sel_1: (Random 138 140)
-							sel_0: (Random 155 159)
+							x: (Random 138 140)
+							y: (Random 155 159)
 						)
 					)
 					(3
 						(animal2
-							sel_1: (Random 111 113)
-							sel_0: (Random 100 104)
+							x: (Random 111 113)
+							y: (Random 100 104)
 						)
 					)
 					(6
 						(animal3
-							sel_1: (Random 163 165)
-							sel_0: (Random 111 115)
+							x: (Random 163 165)
+							y: (Random 111 115)
 						)
 					)
 				)
@@ -329,32 +329,32 @@
 				(switch local0
 					(0
 						(animal1
-							sel_1: (Random 113 115)
-							sel_0: (Random 101 105)
+							x: (Random 113 115)
+							y: (Random 101 105)
 						)
 					)
 					(2
 						(animal2
-							sel_1: (Random 157 159)
-							sel_0: (Random 115 119)
+							x: (Random 157 159)
+							y: (Random 115 119)
 						)
 					)
 					(4
 						(animal3
-							sel_1: (Random 114 116)
-							sel_0: (Random 139 143)
+							x: (Random 114 116)
+							y: (Random 139 143)
 						)
 					)
 					(6
 						(animal4
-							sel_1: (Random 128 130)
-							sel_0: (Random 162 166)
+							x: (Random 128 130)
+							y: (Random 162 166)
 						)
 					)
 					(8
 						(animal5
-							sel_1: (Random 164 166)
-							sel_0: (Random 139 143)
+							x: (Random 164 166)
+							y: (Random 139 143)
 						)
 					)
 				)
@@ -362,7 +362,7 @@
 			(10
 				(switch local0
 					(0
-						(animal1 sel_1: (Random 114 116) sel_0: (Random 90 94))
+						(animal1 x: (Random 114 116) y: (Random 90 94))
 					)
 				)
 			)
@@ -370,8 +370,8 @@
 				(switch local0
 					(0
 						(animal1
-							sel_1: (Random 108 110)
-							sel_0: (Random 111 115)
+							x: (Random 108 110)
+							y: (Random 111 115)
 						)
 					)
 				)
@@ -379,30 +379,30 @@
 			(12
 				(switch local0
 					(0
-						(animal1 sel_1: (Random 113 115) sel_0: (Random 98 102))
+						(animal1 x: (Random 113 115) y: (Random 98 102))
 					)
 					(2
 						(animal2
-							sel_1: (Random 157 159)
-							sel_0: (Random 115 119)
+							x: (Random 157 159)
+							y: (Random 115 119)
 						)
 					)
 					(4
 						(animal3
-							sel_1: (Random 108 110)
-							sel_0: (Random 132 136)
+							x: (Random 108 110)
+							y: (Random 132 136)
 						)
 					)
 					(6
 						(animal4
-							sel_1: (Random 122 124)
-							sel_0: (Random 165 169)
+							x: (Random 122 124)
+							y: (Random 165 169)
 						)
 					)
 					(8
 						(animal5
-							sel_1: (Random 146 148)
-							sel_0: (Random 143 147)
+							x: (Random 146 148)
+							y: (Random 143 147)
 						)
 					)
 				)
@@ -411,32 +411,32 @@
 				(switch local0
 					(0
 						(animal1
-							sel_1: (Random 116 118)
-							sel_0: (Random 123 127)
+							x: (Random 116 118)
+							y: (Random 123 127)
 						)
 					)
 					(2
 						(animal2
-							sel_1: (Random 133 135)
-							sel_0: (Random 108 112)
+							x: (Random 133 135)
+							y: (Random 108 112)
 						)
 					)
 					(4
 						(animal3
-							sel_1: (Random 169 171)
-							sel_0: (Random 103 107)
+							x: (Random 169 171)
+							y: (Random 103 107)
 						)
 					)
 					(6
 						(animal4
-							sel_1: (Random 133 135)
-							sel_0: (Random 146 150)
+							x: (Random 133 135)
+							y: (Random 146 150)
 						)
 					)
 					(8
 						(animal5
-							sel_1: (Random 172 174)
-							sel_0: (Random 141 145)
+							x: (Random 172 174)
+							y: (Random 141 145)
 						)
 					)
 				)
@@ -445,14 +445,14 @@
 				(switch local0
 					(0
 						(animal1
-							sel_1: (Random 162 164)
-							sel_0: (Random 129 133)
+							x: (Random 162 164)
+							y: (Random 129 133)
 						)
 					)
 					(3
 						(animal2
-							sel_1: (Random 112 114)
-							sel_0: (Random 105 109)
+							x: (Random 112 114)
+							y: (Random 105 109)
 						)
 					)
 				)
@@ -461,123 +461,123 @@
 		(= local0 (mod (++ local0) local1))
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
-				(gGame sel_587:)
+				(gGame handsOff:)
 				(gEgo
-					sel_155: (- 1 local2)
-					sel_156: 0
-					sel_153: (localproc_0 201) 98
-					sel_63: 13
-					sel_161: End self
+					setLoop: (- 1 local2)
+					setCel: 0
+					posn: (localproc_0 201) 98
+					setPri: 13
+					setCycle: End self
 				)
 			)
 			(1
-				(gEgo sel_155: (- 3 local2) sel_156: 0 sel_161: End self)
-				(sFX sel_40: 611 sel_3: -1 sel_99: 1 sel_39:)
+				(gEgo setLoop: (- 3 local2) setCel: 0 setCycle: End self)
+				(sFX number: 611 loop: -1 flags: 1 play:)
 			)
 			(2
-				(gEgo sel_155: (- 5 local2) sel_156: 0 sel_161: End self)
+				(gEgo setLoop: (- 5 local2) setCel: 0 setCycle: End self)
 			)
 			(3
-				(gEgo sel_161: Beg self)
+				(gEgo setCycle: Beg self)
 			)
 			(4
-				(= sel_139 45)
+				(= ticks 45)
 			)
 			(5
-				(gEgo sel_161: End self)
+				(gEgo setCycle: End self)
 			)
 			(6
-				(sFX sel_167:)
+				(sFX stop:)
 				(if (IsFlag 21)
-					(gCurRoom sel_146: sFallInVat)
+					(gCurRoom setScript: sFallInVat)
 				else
-					(= sel_139 45)
+					(= ticks 45)
 				)
 			)
 			(7
-				(gEgo sel_155: (- 11 local2) sel_156: 0 sel_161: Fwd)
+				(gEgo setLoop: (- 11 local2) setCel: 0 setCycle: Fwd)
 				(net
-					sel_110:
-					sel_153: (if local2 130 else 183) 35
-					sel_155: 12
-					sel_312:
+					init:
+					posn: (if local2 130 else 183) 35
+					setLoop: 12
+					setMotion:
 						MoveTo
 						(if local2
-							(- (net sel_1:) 53)
+							(- (net x:) 53)
 						else
-							(net sel_1:)
+							(net x:)
 						)
-						(- (net sel_0:) 90)
+						(- (net y:) 90)
 						self
 				)
 				(if (and (== global129 13) (not (IsFlag 22)) (== gAct 3))
 					(dagger
-						sel_110:
-						sel_155: 12
-						sel_156: 1
-						sel_312: MoveTo (dagger sel_1:) (- (dagger sel_0:) 90)
+						init:
+						setLoop: 12
+						setCel: 1
+						setMotion: MoveTo (dagger x:) (- (dagger y:) 90)
 					)
 				)
 			)
 			(8
-				(net sel_313:)
-				(dagger sel_313:)
-				(gEgo sel_161: 0)
-				(= sel_139 60)
+				(net stopUpd:)
+				(dagger stopUpd:)
+				(gEgo setCycle: 0)
+				(= ticks 60)
 			)
 			(9
 				(if (and (== global129 13) (not (IsFlag 22)) (== gAct 3))
-					(gCurRoom sel_146: sFoundDagger)
+					(gCurRoom setScript: sFoundDagger)
 				else
 					(switch global129
 						(1
-							(gMessager sel_295: 2 0 2)
+							(gMessager say: 2 0 2)
 						)
 						(2
-							(gMessager sel_295: 3 0 2)
+							(gMessager say: 3 0 2)
 						)
 						(3
-							(gMessager sel_295: 4 0 2)
+							(gMessager say: 4 0 2)
 						)
 						(4
-							(gMessager sel_295: 5 0 2)
+							(gMessager say: 5 0 2)
 						)
 						(5
-							(gMessager sel_295: 6 0 2)
+							(gMessager say: 6 0 2)
 						)
 						(6
-							(gMessager sel_295: 7 0 2)
+							(gMessager say: 7 0 2)
 						)
 						(7
-							(gMessager sel_295: 8 0 2)
+							(gMessager say: 8 0 2)
 						)
 						(8
-							(gMessager sel_295: 9 0 2)
+							(gMessager say: 9 0 2)
 						)
 						(9
-							(gMessager sel_295: 10 0 2)
+							(gMessager say: 10 0 2)
 						)
 						(10
-							(gMessager sel_295: 11 0 2)
+							(gMessager say: 11 0 2)
 						)
 						(11
-							(gMessager sel_295: 12 0 2)
+							(gMessager say: 12 0 2)
 						)
 						(12
-							(gMessager sel_295: 13 0 2)
+							(gMessager say: 13 0 2)
 						)
 						(13
 							(if (IsFlag 155)
-								(gMessager sel_295: 15 0 7)
+								(gMessager say: 15 0 7)
 							else
-								(gMessager sel_295: 15 0 8)
+								(gMessager say: 15 0 8)
 							)
 						)
 						(14
-							(gMessager sel_295: 14 0 2)
+							(gMessager say: 14 0 2)
 						)
 					)
 					(if (IsFlag 20)
@@ -585,12 +585,12 @@
 					else
 						(SetFlag 20)
 					)
-					(= sel_136 1)
+					(= cycles 1)
 				)
 			)
 			(10
-				(gCurRoom sel_399: 610)
-				(self sel_111:)
+				(gCurRoom newRoom: 610)
+				(self dispose:)
 			)
 		)
 	)
@@ -598,71 +598,71 @@
 
 (instance sFoundDagger of Script
 	(properties
-		sel_20 {sFoundDagger}
+		name {sFoundDagger}
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
-				(gGameMusic2 sel_167:)
-				(sFX sel_40: 616 sel_3: -1 sel_99: 1 sel_39:)
+				(gGameMusic2 stop:)
+				(sFX number: 616 loop: -1 flags: 1 play:)
 				(LoadMany rsVIEW 1898 108)
-				(gMessager sel_295: 1 0 1 1 self)
+				(gMessager say: 1 0 1 1 self)
 			)
 			(1
-				(gMessager sel_295: 1 0 1 2 self)
+				(gMessager say: 1 0 1 2 self)
 			)
 			(2
-				(gMessager sel_295: 1 0 1 3 self)
+				(gMessager say: 1 0 1 3 self)
 			)
 			(3
-				(gMessager sel_295: 1 0 1 4 self)
+				(gMessager say: 1 0 1 4 self)
 			)
 			(4
-				(gMessager sel_295: 1 0 1 5 self)
+				(gMessager say: 1 0 1 5 self)
 			)
 			(5
-				(gMessager sel_295: 1 0 1 6 self)
+				(gMessager say: 1 0 1 6 self)
 			)
 			(6
-				(gMessager sel_295: 1 0 1 7 self)
+				(gMessager say: 1 0 1 7 self)
 			)
 			(7
-				(sFX sel_40: 615 sel_3: 1 sel_99: 1 sel_39: self)
-				(gCurRoom sel_28: 9 sel_417: 785)
-				(gCurRoom sel_422: inDagger)
-				(= sel_136 10)
+				(sFX number: 615 loop: 1 flags: 1 play: self)
+				(gCurRoom style: 9 drawPic: 785)
+				(gCurRoom setInset: inDagger)
+				(= cycles 10)
 			)
 			(8
-				(gMessager sel_295: 1 0 1 8)
+				(gMessager say: 1 0 1 8)
 			)
 			(9
-				(gCurRoom sel_417: (gCurRoom sel_408:))
-				(inDagger sel_111:)
-				(= sel_136 5)
+				(gCurRoom drawPic: (gCurRoom picture:))
+				(inDagger dispose:)
+				(= cycles 5)
 			)
 			(10
-				(dagger sel_111:)
-				(gEgo sel_350: 11)
-				((ScriptID 21 0) sel_57: 780) ; addCluesCode
+				(dagger dispose:)
+				(gEgo get: 11)
+				((ScriptID 21 0) doit: 780) ; addCluesCode
 				(SetFlag 22)
 				(SetFlag 155)
-				(gGame sel_87: 1 155)
-				((ScriptID 22 0) sel_57: 128) ; triggerAndClock
-				(= sel_136 1)
+				(gGame points: 1 155)
+				((ScriptID 22 0) doit: 128) ; triggerAndClock
+				(= cycles 1)
 			)
 			(11
 				(if (TimeCheck $2140) ; has 2:15 am occurred?
-					(gCurRoom sel_399: 26)
+					(gCurRoom newRoom: 26)
 				else
 					(if (IsFlag 20)
 						(SetFlag 21)
 					else
 						(SetFlag 20)
 					)
-					(gCurRoom sel_399: 610)
+					(gCurRoom newRoom: 610)
 				)
-				(self sel_111:)
+				(self dispose:)
 			)
 		)
 	)
@@ -670,41 +670,41 @@
 
 (instance sFallInVat of Script
 	(properties
-		sel_20 {sFallInVat}
+		name {sFallInVat}
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
-				(gMessager sel_295: 1 0 3)
-				(= sel_139 45)
+				(gMessager say: 1 0 3)
+				(= ticks 45)
 			)
 			(1
-				(gEgo sel_155: (- 7 local2) sel_156: 0 sel_161: End self)
+				(gEgo setLoop: (- 7 local2) setCel: 0 setCycle: End self)
 			)
 			(2
-				(gEgo sel_155: (- 9 local2) sel_156: 0 sel_161: End self)
+				(gEgo setLoop: (- 9 local2) setCel: 0 setCycle: End self)
 			)
 			(3
-				(sFX sel_40: 612 sel_99: 5 sel_39:)
+				(sFX number: 612 flags: 5 play:)
 				(gEgo
-					sel_63: 10
-					sel_161: 0
-					sel_312: MoveTo (localproc_0 181) 142 self
+					setPri: 10
+					setCycle: 0
+					setMotion: MoveTo (localproc_0 181) 142 self
 				)
 			)
 			(4
-				(bubbles sel_110: sel_161: End self)
+				(bubbles init: setCycle: End self)
 			)
 			(5
-				(bubbles sel_111:)
-				(= sel_139 120)
+				(bubbles dispose:)
+				(= ticks 120)
 			)
 			(6
 				(= global145 5) ; "You're in a heck of a pickle now!"
-				(gGameMusic2 sel_170:)
-				(gCurRoom sel_399: 99)
-				(self sel_111:)
+				(gGameMusic2 fade:)
+				(gCurRoom newRoom: 99)
+				(self dispose:)
 			)
 		)
 	)
@@ -712,19 +712,19 @@
 
 (instance sSparkle of Script
 	(properties
-		sel_20 {sSparkle}
+		name {sSparkle}
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
-				(= sel_139 180)
+				(= ticks 180)
 			)
 			(1
-				(spark sel_161: End self)
+				(spark setCycle: End self)
 			)
 			(2
-				(self sel_111:)
+				(self dispose:)
 			)
 		)
 	)
@@ -732,133 +732,133 @@
 
 (instance net of Actor
 	(properties
-		sel_20 {net}
-		sel_1 183
-		sel_0 35
-		sel_2 622
-		sel_3 12
-		sel_60 11
-		sel_14 24593
-		sel_53 3
+		name {net}
+		x 183
+		y 35
+		view 622
+		loop 12
+		priority 11
+		signal 24593
+		moveSpeed 3
 	)
 )
 
 (instance dagger of Actor
 	(properties
-		sel_20 {dagger}
-		sel_1 188
-		sel_0 158
-		sel_2 622
-		sel_3 12
-		sel_4 1
-		sel_60 11
-		sel_14 16401
-		sel_53 3
+		name {dagger}
+		x 188
+		y 158
+		view 622
+		loop 12
+		cel 1
+		priority 11
+		signal 16401
+		moveSpeed 3
 	)
 )
 
 (instance churning of Prop
 	(properties
-		sel_20 {churning}
-		sel_1 112
-		sel_0 51
-		sel_2 621
-		sel_3 10
-		sel_60 10
-		sel_14 16401
-		sel_244 12
+		name {churning}
+		x 112
+		y 51
+		view 621
+		loop 10
+		priority 10
+		signal 16401
+		cycleSpeed 12
 	)
 )
 
 (instance bubbles of Prop
 	(properties
-		sel_20 {bubbles}
-		sel_1 132
-		sel_0 60
-		sel_2 621
-		sel_3 6
-		sel_60 11
-		sel_14 16401
-		sel_244 11
+		name {bubbles}
+		x 132
+		y 60
+		view 621
+		loop 6
+		priority 11
+		signal 16401
+		cycleSpeed 11
 	)
 )
 
 (instance spark of Prop
 	(properties
-		sel_20 {spark}
-		sel_1 151
-		sel_0 104
-		sel_2 108
-		sel_60 15
-		sel_14 16
+		name {spark}
+		x 151
+		y 104
+		view 108
+		priority 15
+		signal 16
 	)
 )
 
 (instance animal1 of View
 	(properties
-		sel_20 {animal1}
-		sel_2 621
-		sel_60 13
-		sel_14 16400
+		name {animal1}
+		view 621
+		priority 13
+		signal 16400
 	)
 )
 
 (instance animal2 of View
 	(properties
-		sel_20 {animal2}
-		sel_2 621
-		sel_60 13
-		sel_14 16400
+		name {animal2}
+		view 621
+		priority 13
+		signal 16400
 	)
 )
 
 (instance animal3 of View
 	(properties
-		sel_20 {animal3}
-		sel_2 621
-		sel_60 13
-		sel_14 16400
+		name {animal3}
+		view 621
+		priority 13
+		signal 16400
 	)
 )
 
 (instance animal4 of View
 	(properties
-		sel_20 {animal4}
-		sel_2 621
-		sel_60 13
-		sel_14 16400
+		name {animal4}
+		view 621
+		priority 13
+		signal 16400
 	)
 )
 
 (instance animal5 of View
 	(properties
-		sel_20 {animal5}
-		sel_2 621
-		sel_60 13
-		sel_14 16400
+		name {animal5}
+		view 621
+		priority 13
+		signal 16400
 	)
 )
 
 (instance inDagger of Inset
 	(properties
-		sel_20 {inDagger}
-		sel_2 1898
-		sel_3 1
-		sel_1 98
-		sel_0 3
-		sel_560 1
+		name {inDagger}
+		view 1898
+		loop 1
+		x 98
+		y 3
+		hideTheCast 1
 	)
 
-	(method (sel_110)
-		(super sel_110: &rest)
-		(spark sel_110:)
-		(self sel_146: sSparkle)
+	(method (init)
+		(super init: &rest)
+		(spark init:)
+		(self setScript: sSparkle)
 	)
 )
 
 (instance sFX of Sound
 	(properties
-		sel_20 {sFX}
-		sel_99 1
+		name {sFX}
+		flags 1
 	)
 )

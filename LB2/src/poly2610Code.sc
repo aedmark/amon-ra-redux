@@ -19,52 +19,52 @@
 
 (instance poly2610Code of Code
 	(properties
-		sel_20 {poly2610Code}
+		name {poly2610Code}
 	)
 
-	(method (sel_57 param1)
+	(method (doit param1)
 		(if (IsFlag 20)
-			(param1 sel_118: (poly2610b sel_110: sel_117:))
+			(param1 add: (poly2610b init: yourself:))
 		else
-			(param1 sel_118: (poly2610 sel_110: sel_117:))
+			(param1 add: (poly2610 init: yourself:))
 		)
 	)
 )
 
 (instance poly2610 of Polygon
 	(properties
-		sel_20 {poly2610}
+		name {poly2610}
 	)
 
-	(method (sel_110)
-		(= sel_31 2)
-		(= sel_86 33)
-		(= sel_87 @local0)
+	(method (init)
+		(= type 2)
+		(= size 33)
+		(= points @local0)
 	)
 )
 
 (instance poly2610b of Polygon
 	(properties
-		sel_20 {poly2610b}
+		name {poly2610b}
 	)
 
-	(method (sel_110)
-		(= sel_31 2)
-		(= sel_86 35)
-		(= sel_87 @local66)
+	(method (init)
+		(= type 2)
+		(= size 35)
+		(= points @local66)
 	)
 )
 
 (instance pts2610 of MuseumPoints
 	(properties
-		sel_20 {pts2610}
-		sel_621 80
-		sel_622 175
-		sel_623 1180
-		sel_624 125
-		sel_625 80
-		sel_626 250
-		sel_627 1300
-		sel_628 157
+		name {pts2610}
+		midPtX 80
+		midPtY 175
+		northPtX 1180
+		northPtY 125
+		southPtX 80
+		southPtY 250
+		eastPtX 1300
+		eastPtY 157
 	)
 )

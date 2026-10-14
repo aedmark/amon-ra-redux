@@ -12,51 +12,51 @@
 
 (instance Countess of Talker
 	(properties
-		sel_20 {Countess}
-		sel_1 5
-		sel_0 5
-		sel_2 1884
-		sel_3 3
-		sel_537 150
-		sel_26 15
-		sel_549 120
-		sel_550 12
+		name {Countess}
+		x 5
+		y 5
+		view 1884
+		loop 3
+		talkWidth 150
+		back 15
+		textX 120
+		textY 12
 	)
 
-	(method (sel_110)
+	(method (init)
 		(if (IsFlag 92)
-			(countessBust sel_4: 1)
-			(countessEyes sel_155: 3)
-			(countessMouth sel_155: 3)
+			(countessBust cel: 1)
+			(countessEyes setLoop: 3)
+			(countessMouth setLoop: 3)
 		)
-		(= sel_30 gUserFont)
-		(super sel_110: countessBust countessEyes countessMouth &rest)
+		(= font gUserFont)
+		(super init: countessBust countessEyes countessMouth &rest)
 	)
 )
 
 (instance countessBust of Prop
 	(properties
-		sel_20 {countessBust}
-		sel_2 1884
-		sel_3 1
+		name {countessBust}
+		view 1884
+		loop 1
 	)
 )
 
 (instance countessEyes of Prop
 	(properties
-		sel_20 {countessEyes}
-		sel_6 35
-		sel_7 42
-		sel_2 1884
-		sel_3 2
+		name {countessEyes}
+		nsTop 35
+		nsLeft 42
+		view 1884
+		loop 2
 	)
 )
 
 (instance countessMouth of Prop
 	(properties
-		sel_20 {countessMouth}
-		sel_6 52
-		sel_7 35
-		sel_2 1884
+		name {countessMouth}
+		nsTop 52
+		nsLeft 35
+		view 1884
 	)
 )

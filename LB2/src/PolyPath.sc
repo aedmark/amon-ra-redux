@@ -8,42 +8,42 @@
 
 (class PolyPath of Motion
 	(properties
-		sel_20 {PolyPath}
-		sel_74 2
-		sel_87 0
-		sel_257 0
-		sel_258 0
-		sel_259 0
+		name {PolyPath}
+		value 2
+		points 0
+		finalX 0
+		finalY 0
+		obstacles 0
 	)
 
-	(method (sel_110 param1 param2 param3 param4 param5 param6 &tmp [temp0 30])
+	(method (init param1 param2 param3 param4 param5 param6 &tmp [temp0 30])
 		(if argc
-			(= sel_42 param1)
+			(= client param1)
 			(if (> argc 1)
 				(cond
 					((>= argc 6)
-						(= sel_259 param6)
+						(= obstacles param6)
 					)
-					((not (IsObject sel_259))
-						(= sel_259 (gCurRoom sel_259:))
+					((not (IsObject obstacles))
+						(= obstacles (gCurRoom obstacles:))
 					)
 				)
-				(if sel_87
-					(Memory memFREE sel_87)
+				(if points
+					(Memory memFREE points)
 				)
-				(= sel_87
+				(= points
 					(AvoidPath
-						(param1 sel_1:)
-						(param1 sel_0:)
-						(= sel_257 param2)
-						(= sel_258 param3)
-						(if sel_259
-							(sel_259 sel_24:)
+						(param1 x:)
+						(param1 y:)
+						(= finalX param2)
+						(= finalY param3)
+						(if obstacles
+							(obstacles elements:)
 						else
 							0
 						)
-						(if sel_259
-							(sel_259 sel_86:)
+						(if obstacles
+							(obstacles size:)
 						else
 							0
 						)
@@ -51,53 +51,53 @@
 					)
 				)
 				(if (> argc 3)
-					(= sel_143 param4)
+					(= caller param4)
 				)
 			)
-			(self sel_251:)
+			(self setTarget:)
 		)
-		(super sel_110:)
+		(super init:)
 	)
 
-	(method (sel_111)
-		(if sel_87
-			(Memory memFREE sel_87)
+	(method (dispose)
+		(if points
+			(Memory memFREE points)
 		)
-		(= sel_87 0)
-		(super sel_111:)
+		(= points 0)
+		(super dispose:)
 	)
 
-	(method (sel_97)
-		(if (== (WordAt sel_87 sel_74) 30583)
-			(super sel_97:)
+	(method (moveDone)
+		(if (== (WordAt points value) 30583)
+			(super moveDone:)
 		else
-			(self sel_251: sel_110:)
+			(self setTarget: init:)
 		)
 	)
 
-	(method (sel_251 &tmp temp0 temp1 temp2 temp3 [temp4 30])
-		(if (!= (WordAt sel_87 sel_74) 30583)
-			(= sel_1 (WordAt sel_87 sel_74))
-			(= sel_0 (WordAt sel_87 (++ sel_74)))
-			(++ sel_74)
-			(if (and (IsObject global95) (= temp3 (global95 sel_86:)))
+	(method (setTarget &tmp temp0 temp1 temp2 temp3 [temp4 30])
+		(if (!= (WordAt points value) 30583)
+			(= x (WordAt points value))
+			(= y (WordAt points (++ value)))
+			(++ value)
+			(if (and (IsObject global95) (= temp3 (global95 size:)))
 				(= temp0
 					(AvoidPath
-						(sel_42 sel_1:)
-						(sel_42 sel_0:)
-						sel_1
-						sel_0
-						(global95 sel_24:)
+						(client x:)
+						(client y:)
+						x
+						y
+						(global95 elements:)
 						temp3
 						0
 					)
 				)
 				(= temp1 (WordAt temp0 2))
 				(= temp2 (WordAt temp0 3))
-				(if (or (!= sel_1 temp1) (!= sel_0 temp2))
-					(= sel_1 temp1)
-					(= sel_0 temp2)
-					(Memory memPOKE (+ sel_87 sel_74 2) 30583)
+				(if (or (!= x temp1) (!= y temp2))
+					(= x temp1)
+					(= y temp2)
+					(Memory memPOKE (+ points value 2) 30583)
 				)
 				(Memory memFREE temp0)
 			)

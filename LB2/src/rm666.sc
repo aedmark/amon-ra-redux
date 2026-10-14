@@ -24,80 +24,80 @@
 
 (instance rm666 of LBRoom
 	(properties
-		sel_20 {rm666}
+		name {rm666}
 	)
 
-	(method (sel_110)
-		(self sel_414: 90)
+	(method (init)
+		(self setRegions: 90)
 		(if (== gPrevRoomNum 520)
-			(gEgo sel_110: sel_153: 277 55 sel_585: 732)
+			(gEgo init: posn: 277 55 normalize: 732)
 			(SetFlag 31)
 		else
-			(gEgo sel_110: sel_153: 96 161 sel_585: 732)
+			(gEgo init: posn: 96 161 normalize: 732)
 		)
 		(self
-			sel_408:
-				(if ((Inv sel_64: 15) sel_4:)
+			picture:
+				(if ((Inv at: 15) cel:)
 					(if (== gPrevRoomNum 520) 735 else 730)
 				else
 					780
 				)
 		)
-		(if ((Inv sel_64: 15) sel_4:)
+		(if ((Inv at: 15) cel:)
 			(Palette palSET_INTENSITY 0 255 0)
 		)
-		(gGame sel_587:)
-		(super sel_110:)
-		(if ((Inv sel_64: 15) sel_4:)
-			(WrapMusic sel_168: 0)
+		(gGame handsOff:)
+		(super init:)
+		(if ((Inv at: 15) cel:)
+			(WrapMusic pause: 0)
 			(= local0 1)
 			(if (== gPrevRoomNum 520)
-				(self sel_146: sEnterSouthLight520)
+				(self setScript: sEnterSouthLight520)
 			else
-				(self sel_146: sEnterSouthLight)
+				(self setScript: sEnterSouthLight)
 			)
 		else
-			(gGameMusic2 sel_40: 56 sel_99: 1 sel_3: -1 sel_39:)
-			(gEgo sel_102:)
+			(gGameMusic2 number: 56 flags: 1 loop: -1 play:)
+			(gEgo hide:)
 			(LoadMany rsSOUND 82 53)
-			(self sel_146: sEnterDark)
+			(self setScript: sEnterDark)
 		)
 	)
 
-	(method (sel_57)
-		(super sel_57: &rest)
-		(if (and (== (self sel_408:) 780) ((Inv sel_64: 15) sel_4:))
-			(gGame sel_587:)
-			(gGameMusic2 sel_170:)
-			(WrapMusic sel_168: 0)
+	(method (doit)
+		(super doit: &rest)
+		(if (and (== (self picture:) 780) ((Inv at: 15) cel:))
+			(gGame handsOff:)
+			(gGameMusic2 fade:)
+			(WrapMusic pause: 0)
 			(= local0 1)
 			(Palette palSET_INTENSITY 0 255 0)
 			(if (== gPrevRoomNum 520)
-				(self sel_408: 735 sel_417: 735)
+				(self picture: 735 drawPic: 735)
 			else
-				(self sel_408: 730 sel_417: 730)
+				(self picture: 730 drawPic: 730)
 			)
 			(if (== gPrevRoomNum 520)
 				(gEgo
-					sel_2: 732
-					sel_155: 5
-					sel_153: 277 55
-					sel_244: 4
-					sel_53: 4
-					sel_51: 2
-					sel_161: Walk
-					sel_216:
+					view: 732
+					setLoop: 5
+					posn: 277 55
+					cycleSpeed: 4
+					moveSpeed: 4
+					xStep: 2
+					setCycle: Walk
+					show:
 				)
 			else
 				(gEgo
-					sel_2: 732
-					sel_155: 0
-					sel_153: 96 161
-					sel_244: 4
-					sel_53: 4
-					sel_51: 2
-					sel_161: Walk
-					sel_216:
+					view: 732
+					setLoop: 0
+					posn: 96 161
+					cycleSpeed: 4
+					moveSpeed: 4
+					xStep: 2
+					setCycle: Walk
+					show:
 				)
 			)
 			(= local3 1)
@@ -108,9 +108,9 @@
 				(= local0 0)
 				(if local3
 					(if (== gPrevRoomNum 520)
-						(self sel_146: sEnterSouthLight520)
+						(self setScript: sEnterSouthLight520)
 					else
-						(self sel_146: sEnterSouthLight)
+						(self setScript: sEnterSouthLight)
 					)
 				)
 			)
@@ -123,13 +123,13 @@
 		)
 	)
 
-	(method (sel_111)
-		(WrapMusic sel_168: 1)
-		(gGameMusic2 sel_170:)
-		(super sel_111: &rest)
+	(method (dispose)
+		(WrapMusic pause: 1)
+		(gGameMusic2 fade:)
+		(super dispose: &rest)
 	)
 
-	(method (sel_399 param1)
+	(method (newRoom param1)
 		(cond
 			((== param1 99) 0)
 			((== gPrevRoomNum 650)
@@ -151,44 +151,44 @@
 				(= param1 610)
 			)
 		)
-		(super sel_399: param1)
+		(super newRoom: param1)
 	)
 )
 
 (instance sEnterSouthLight of Script
 	(properties
-		sel_20 {sEnterSouthLight}
+		name {sEnterSouthLight}
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
 				(if local3
-					(= sel_136 1)
+					(= cycles 1)
 				else
 					(gEgo
-						sel_155: 0
-						sel_153: -10 240
-						sel_349: 0
-						sel_161: Walk
-						sel_244: 4
-						sel_53: 4
-						sel_51: 2
-						sel_312: MoveTo 96 161 self
+						setLoop: 0
+						posn: -10 240
+						edgeHit: 0
+						setCycle: Walk
+						cycleSpeed: 4
+						moveSpeed: 4
+						xStep: 2
+						setMotion: MoveTo 96 161 self
 					)
 				)
 			)
 			(1
-				(gEgo sel_312: MoveTo 277 55 self)
+				(gEgo setMotion: MoveTo 277 55 self)
 			)
 			(2
 				(= local1 1)
-				(gEgo sel_312: MoveTo 335 23 self)
+				(gEgo setMotion: MoveTo 335 23 self)
 			)
 			(3
-				(gCurRoom sel_417: 780)
-				(gCurRoom sel_399: 0)
-				(self sel_111:)
+				(gCurRoom drawPic: 780)
+				(gCurRoom newRoom: 0)
+				(self dispose:)
 			)
 		)
 	)
@@ -196,38 +196,38 @@
 
 (instance sEnterSouthLight520 of Script
 	(properties
-		sel_20 {sEnterSouthLight520}
+		name {sEnterSouthLight520}
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
 				(if local3
-					(= sel_136 1)
+					(= cycles 1)
 				else
 					(gEgo
-						sel_155: 5
-						sel_153: 335 23
-						sel_349: 0
-						sel_161: Walk
-						sel_244: 4
-						sel_53: 4
-						sel_51: 2
-						sel_312: MoveTo 277 55 self
+						setLoop: 5
+						posn: 335 23
+						edgeHit: 0
+						setCycle: Walk
+						cycleSpeed: 4
+						moveSpeed: 4
+						xStep: 2
+						setMotion: MoveTo 277 55 self
 					)
 				)
 			)
 			(1
-				(gEgo sel_312: MoveTo 96 161 self)
+				(gEgo setMotion: MoveTo 96 161 self)
 			)
 			(2
 				(= local1 1)
-				(gEgo sel_312: MoveTo -10 240 self)
+				(gEgo setMotion: MoveTo -10 240 self)
 			)
 			(3
-				(gCurRoom sel_417: 780)
-				(gCurRoom sel_399: 0)
-				(self sel_111:)
+				(gCurRoom drawPic: 780)
+				(gCurRoom newRoom: 0)
+				(self dispose:)
 			)
 		)
 	)
@@ -235,37 +235,37 @@
 
 (instance sEnterDark of Script
 	(properties
-		sel_20 {sEnterDark}
+		name {sEnterDark}
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
-				(if (gEgo sel_238: 15)
-					(gGame sel_588:)
-					(User sel_237: 0)
-					(User sel_347: 0)
-					(gTheIconBar sel_233: 0 1 2 3 4 5 7)
-					(= sel_137 8)
+				(if (gEgo has: 15)
+					(gGame handsOn:)
+					(User canControl: 0)
+					(User canInput: 0)
+					(gTheIconBar disable: 0 1 2 3 4 5 7)
+					(= seconds 8)
 				else
-					(gTheIconBar sel_233: 6)
-					(= sel_137 4)
+					(gTheIconBar disable: 6)
+					(= seconds 4)
 				)
 			)
 			(1
-				(sFX2 sel_40: 53 sel_3: -1 sel_99: 1 sel_39:)
-				(= sel_139 120)
+				(sFX2 number: 53 loop: -1 flags: 1 play:)
+				(= ticks 120)
 			)
 			(2
-				(sFX sel_40: 82 sel_3: 1 sel_99: 5 sel_39: self)
+				(sFX number: 82 loop: 1 flags: 5 play: self)
 			)
 			(3
-				(sFX2 sel_170: self)
+				(sFX2 fade: self)
 			)
 			(4
 				(= global145 15) ; "In the darkness of the secret passage, you're blind as a bat. You have a brave, but brief, battle, during which you endure the battering of the berserk and bellicose black bats without batting an eye. Then your body, bothered by bloody bites, becomes bereft of life."
-				(gCurRoom sel_399: 99)
-				(self sel_111:)
+				(gCurRoom newRoom: 99)
+				(self dispose:)
 			)
 		)
 	)
@@ -273,14 +273,14 @@
 
 (instance sFX of Sound
 	(properties
-		sel_20 {sFX}
-		sel_99 1
+		name {sFX}
+		flags 1
 	)
 )
 
 (instance sFX2 of Sound
 	(properties
-		sel_20 {sFX2}
-		sel_99 1
+		name {sFX2}
+		flags 1
 	)
 )

@@ -36,119 +36,119 @@
 
 (instance rm730 of LBRoom
 	(properties
-		sel_20 {rm730}
-		sel_213 1
-		sel_410 740
-		sel_411 720
+		name {rm730}
+		noun 1
+		east 740
+		south 720
 	)
 
-	(method (sel_110)
-		(gCurRoom sel_259: (List sel_109:))
-		((ScriptID 2730 0) sel_57: (gCurRoom sel_259:)) ; poly2730Code
-		(gEgo sel_110: sel_585: 732 sel_299: egoActions)
-		(self sel_408: (if ((Inv sel_64: 15) sel_4:) 730 else 780))
-		(if ((Inv sel_64: 15) sel_4:)
-			(piece1 sel_110:)
-			(piece2 sel_110:)
-			(piece3 sel_110:)
+	(method (init)
+		(gCurRoom obstacles: (List new:))
+		((ScriptID 2730 0) doit: (gCurRoom obstacles:)) ; poly2730Code
+		(gEgo init: normalize: 732 actions: egoActions)
+		(self picture: (if ((Inv at: 15) cel:) 730 else 780))
+		(if ((Inv at: 15) cel:)
+			(piece1 init:)
+			(piece2 init:)
+			(piece3 init:)
 			(Palette palSET_INTENSITY 0 255 0)
 		)
 		(LoadMany rsSOUND 732)
-		(gGame sel_587:)
-		(super sel_110:)
-		(if (!= (gGameMusic2 sel_40:) 17)
-			(gGameMusic2 sel_40: 17 sel_3: -1 sel_99: 1 sel_39:)
+		(gGame handsOff:)
+		(super init:)
+		(if (!= (gGameMusic2 number:) 17)
+			(gGameMusic2 number: 17 loop: -1 flags: 1 play:)
 		)
-		(gTheIconBar sel_233: 7)
-		(steve sel_110:)
-		(snake1 sel_110:)
-		(snake2 sel_110:)
-		(snake3 sel_110:)
-		(snake4 sel_110:)
-		(snake5 sel_110:)
-		(floor sel_110:)
-		(wall sel_110:)
-		(hieroglyphics sel_110:)
-		(if ((Inv sel_64: 15) sel_4:)
+		(gTheIconBar disable: 7)
+		(steve init:)
+		(snake1 init:)
+		(snake2 init:)
+		(snake3 init:)
+		(snake4 init:)
+		(snake5 init:)
+		(floor init:)
+		(wall init:)
+		(hieroglyphics init:)
+		(if ((Inv at: 15) cel:)
 			(= local0 1)
-			(self sel_146: sEnterSouthLight)
+			(self setScript: sEnterSouthLight)
 		else
-			(self sel_146: sEnterDark)
+			(self setScript: sEnterDark)
 		)
 	)
 
-	(method (sel_57)
-		(super sel_57: &rest)
-		(if (and (== (self sel_408:) 780) ((Inv sel_64: 15) sel_4:))
+	(method (doit)
+		(super doit: &rest)
+		(if (and (== (self picture:) 780) ((Inv at: 15) cel:))
 			(= local0 1)
 			(Palette palSET_INTENSITY 0 255 0)
-			(piece1 sel_110:)
-			(piece2 sel_110:)
-			(piece3 sel_110:)
-			(self sel_408: 730 sel_417: 730)
-			(gGame sel_587:)
-			(gTheIconBar sel_233: 7)
-			(sFX sel_40: 732 sel_99: 1 sel_3: -1 sel_39:)
+			(piece1 init:)
+			(piece2 init:)
+			(piece3 init:)
+			(self picture: 730 drawPic: 730)
+			(gGame handsOff:)
+			(gTheIconBar disable: 7)
+			(sFX number: 732 flags: 1 loop: -1 play:)
 			(gEgo
-				sel_2: 732
-				sel_155: 0
-				sel_153: 96 161
-				sel_244: 4
-				sel_53: 4
-				sel_51: 2
-				sel_161: Walk
+				view: 732
+				setLoop: 0
+				posn: 96 161
+				cycleSpeed: 4
+				moveSpeed: 4
+				xStep: 2
+				setCycle: Walk
 			)
 			(steve
-				sel_155: 0
-				sel_153: 65 180
-				sel_161: Walk
-				sel_244: 4
-				sel_53: 4
-				sel_51: 2
-				sel_312: PFollow gEgo 36
+				setLoop: 0
+				posn: 65 180
+				setCycle: Walk
+				cycleSpeed: 4
+				moveSpeed: 4
+				xStep: 2
+				setMotion: PFollow gEgo 36
 			)
 			(snake1
-				sel_2: 731
-				sel_155: 2
-				sel_156: 0
-				sel_153: 248 72
-				sel_244: 6
-				sel_161: Fwd
+				view: 731
+				setLoop: 2
+				setCel: 0
+				posn: 248 72
+				cycleSpeed: 6
+				setCycle: Fwd
 			)
 			(snake2
-				sel_2: 731
-				sel_155: 2
-				sel_156: 2
-				sel_153: 252 59
-				sel_244: 6
-				sel_161: Fwd
+				view: 731
+				setLoop: 2
+				setCel: 2
+				posn: 252 59
+				cycleSpeed: 6
+				setCycle: Fwd
 			)
 			(snake3
-				sel_2: 731
-				sel_155: 2
-				sel_156: 0
-				sel_153: 266 62
-				sel_244: 6
-				sel_161: Fwd
+				view: 731
+				setLoop: 2
+				setCel: 0
+				posn: 266 62
+				cycleSpeed: 6
+				setCycle: Fwd
 			)
 			(snake4
-				sel_2: 731
-				sel_155: 2
-				sel_156: 2
-				sel_153: 265 57
-				sel_244: 6
-				sel_161: Fwd
+				view: 731
+				setLoop: 2
+				setCel: 2
+				posn: 265 57
+				cycleSpeed: 6
+				setCycle: Fwd
 			)
 			(snake5
-				sel_2: 731
-				sel_155: 2
-				sel_156: 0
-				sel_153: 276 55
-				sel_244: 6
-				sel_161: Fwd
+				view: 731
+				setLoop: 2
+				setCel: 0
+				posn: 276 55
+				cycleSpeed: 6
+				setCycle: Fwd
 			)
-			(snake6 sel_244: 6 sel_161: Fwd sel_110:)
-			(snake7 sel_244: 6 sel_161: Fwd sel_110:)
+			(snake6 cycleSpeed: 6 setCycle: Fwd init:)
+			(snake7 cycleSpeed: 6 setCycle: Fwd init:)
 			(Load rsVIEW 734)
 			(Load rsSOUND 3)
 			(= local9 1)
@@ -157,15 +157,15 @@
 			(Palette palSET_INTENSITY 0 255 (+= local2 2))
 			(if (>= local2 100)
 				(= local0 0)
-				(if (!= (gCurRoom sel_142:) sEnterSouthLight)
-					(gGame sel_588:)
-					(gTheIconBar sel_233: 7)
+				(if (!= (gCurRoom script:) sEnterSouthLight)
+					(gGame handsOn:)
+					(gTheIconBar disable: 7)
 				)
-				(piece1 sel_317:)
-				(piece2 sel_317:)
-				(piece3 sel_317:)
+				(piece1 addToPic:)
+				(piece2 addToPic:)
+				(piece3 addToPic:)
 				(if local9
-					(self sel_146: sLetThereBeLight)
+					(self setScript: sLetThereBeLight)
 				)
 			)
 		)
@@ -176,39 +176,39 @@
 			)
 		)
 		(cond
-			(sel_142 0)
+			(script 0)
 			((StepOn gEgo 8)
-				(gGame sel_587:)
+				(gGame handsOff:)
 				(= local1 1)
-				(self sel_146: sExitEast)
+				(self setScript: sExitEast)
 			)
 		)
 	)
 
-	(method (sel_111)
+	(method (dispose)
 		(LoadMany 0 930 991)
 		(DisposeScript 2730)
-		(super sel_111:)
+		(super dispose:)
 	)
 
-	(method (sel_300 param1)
+	(method (doVerb param1)
 		(switch param1
 			(1
-				(if (== (self sel_408:) 780)
-					(gMessager sel_295: 1 1 1)
+				(if (== (self picture:) 780)
+					(gMessager say: 1 1 1)
 				else
-					(gMessager sel_295: 1 1 11)
+					(gMessager say: 1 1 11)
 				)
 			)
 			(4
-				(if (== (self sel_408:) 780)
-					(gMessager sel_295: 1 4 1)
+				(if (== (self picture:) 780)
+					(gMessager say: 1 4 1)
 				else
-					(gMessager sel_295: 1 4 11)
+					(gMessager say: 1 4 11)
 				)
 			)
 			(else
-				(super sel_300: param1)
+				(super doVerb: param1)
 			)
 		)
 	)
@@ -216,89 +216,89 @@
 
 (instance sEnterSouthLight of Script
 	(properties
-		sel_20 {sEnterSouthLight}
+		name {sEnterSouthLight}
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
 				(steve
-					sel_155: 0
-					sel_161: Walk
-					sel_244: 4
-					sel_53: 4
-					sel_51: 2
-					sel_312: PFollow gEgo 36
+					setLoop: 0
+					setCycle: Walk
+					cycleSpeed: 4
+					moveSpeed: 4
+					xStep: 2
+					setMotion: PFollow gEgo 36
 				)
 				(gEgo
-					sel_155: 0
-					sel_153: -10 240
-					sel_349: 0
-					sel_161: Walk
-					sel_244: 4
-					sel_53: 4
-					sel_51: 2
-					sel_312: MoveTo 96 161 self
+					setLoop: 0
+					posn: -10 240
+					edgeHit: 0
+					setCycle: Walk
+					cycleSpeed: 4
+					moveSpeed: 4
+					xStep: 2
+					setMotion: MoveTo 96 161 self
 				)
 				(snake1
-					sel_2: 731
-					sel_155: 2
-					sel_156: 0
-					sel_153: 248 72
-					sel_244: 6
-					sel_161: Fwd
+					view: 731
+					setLoop: 2
+					setCel: 0
+					posn: 248 72
+					cycleSpeed: 6
+					setCycle: Fwd
 				)
 				(snake2
-					sel_2: 731
-					sel_155: 2
-					sel_156: 2
-					sel_153: 252 59
-					sel_244: 6
-					sel_161: Fwd
+					view: 731
+					setLoop: 2
+					setCel: 2
+					posn: 252 59
+					cycleSpeed: 6
+					setCycle: Fwd
 				)
 				(snake3
-					sel_2: 731
-					sel_155: 2
-					sel_156: 0
-					sel_153: 266 62
-					sel_244: 6
-					sel_161: Fwd
+					view: 731
+					setLoop: 2
+					setCel: 0
+					posn: 266 62
+					cycleSpeed: 6
+					setCycle: Fwd
 				)
 				(snake4
-					sel_2: 731
-					sel_155: 2
-					sel_156: 2
-					sel_153: 265 57
-					sel_244: 6
-					sel_161: Fwd
+					view: 731
+					setLoop: 2
+					setCel: 2
+					posn: 265 57
+					cycleSpeed: 6
+					setCycle: Fwd
 				)
 				(snake5
-					sel_2: 731
-					sel_155: 2
-					sel_156: 0
-					sel_153: 276 55
-					sel_244: 6
-					sel_161: Fwd
+					view: 731
+					setLoop: 2
+					setCel: 0
+					posn: 276 55
+					cycleSpeed: 6
+					setCycle: Fwd
 				)
-				(snake6 sel_244: 6 sel_161: Fwd sel_110:)
-				(snake7 sel_244: 6 sel_161: Fwd sel_110:)
+				(snake6 cycleSpeed: 6 setCycle: Fwd init:)
+				(snake7 cycleSpeed: 6 setCycle: Fwd init:)
 				(Load rsVIEW 734)
 				(Load rsSOUND 3)
 			)
 			(1
-				(gGame sel_588:)
-				(gTheIconBar sel_233: 7)
-				(= sel_137 5)
+				(gGame handsOn:)
+				(gTheIconBar disable: 7)
+				(= seconds 5)
 			)
 			(2
-				(snake1 sel_155: 0 sel_161: Walk sel_312: MoveTo 58 184)
-				(snake2 sel_155: 0 sel_161: Walk sel_312: MoveTo 45 180)
-				(snake3 sel_155: 0 sel_161: Walk sel_312: MoveTo 59 183)
-				(snake4 sel_155: 0 sel_161: Walk sel_312: MoveTo 58 178)
-				(snake5 sel_155: 0 sel_161: Walk sel_312: MoveTo 69 176)
-				(snake6 sel_155: 0 sel_161: Walk sel_312: MoveTo 72 170)
-				(snake7 sel_155: 0 sel_161: Walk sel_312: MoveTo 73 165)
-				(self sel_111:)
+				(snake1 setLoop: 0 setCycle: Walk setMotion: MoveTo 58 184)
+				(snake2 setLoop: 0 setCycle: Walk setMotion: MoveTo 45 180)
+				(snake3 setLoop: 0 setCycle: Walk setMotion: MoveTo 59 183)
+				(snake4 setLoop: 0 setCycle: Walk setMotion: MoveTo 58 178)
+				(snake5 setLoop: 0 setCycle: Walk setMotion: MoveTo 69 176)
+				(snake6 setLoop: 0 setCycle: Walk setMotion: MoveTo 72 170)
+				(snake7 setLoop: 0 setCycle: Walk setMotion: MoveTo 73 165)
+				(self dispose:)
 			)
 		)
 	)
@@ -306,16 +306,16 @@
 
 (instance sExitEast of Script
 	(properties
-		sel_20 {sExitEast}
+		name {sExitEast}
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
-				(gEgo sel_312: MoveTo 335 23 self)
+				(gEgo setMotion: MoveTo 335 23 self)
 			)
 			(1
-				(gCurRoom sel_399: (gCurRoom sel_410:))
+				(gCurRoom newRoom: (gCurRoom east:))
 			)
 		)
 	)
@@ -323,96 +323,96 @@
 
 (instance sEnterDark of Script
 	(properties
-		sel_20 {sEnterDark}
+		name {sEnterDark}
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
-				(gGame sel_588:)
-				(User sel_237: 0)
-				(User sel_347: 1)
-				(gTheIconBar sel_233: 0 3 4 5 7)
-				(steve sel_155: 2 sel_153: 66 148 sel_161: Blink 150)
+				(gGame handsOn:)
+				(User canControl: 0)
+				(User canInput: 1)
+				(gTheIconBar disable: 0 3 4 5 7)
+				(steve setLoop: 2 posn: 66 148 setCycle: Blink 150)
 				(gEgo
-					sel_2: 733
-					sel_155: 1
-					sel_153: 85 135
-					sel_161: Blink 150
+					view: 733
+					setLoop: 1
+					posn: 85 135
+					setCycle: Blink 150
 				)
-				(= sel_137 6)
+				(= seconds 6)
 			)
 			(1
-				(snake1 sel_161: Beg)
-				(snake2 sel_161: Beg)
-				(snake3 sel_161: Beg)
-				(snake4 sel_161: Beg)
-				(snake5 sel_161: Beg)
-				(= sel_139 60)
+				(snake1 setCycle: Beg)
+				(snake2 setCycle: Beg)
+				(snake3 setCycle: Beg)
+				(snake4 setCycle: Beg)
+				(snake5 setCycle: Beg)
+				(= ticks 60)
 			)
 			(2
-				(snake1 sel_161: Blink 200)
-				(snake2 sel_161: Blink 200)
-				(snake3 sel_161: Blink 200)
-				(snake4 sel_161: Blink 200)
-				(snake5 sel_161: Blink 200)
-				(= sel_137 15)
+				(snake1 setCycle: Blink 200)
+				(snake2 setCycle: Blink 200)
+				(snake3 setCycle: Blink 200)
+				(snake4 setCycle: Blink 200)
+				(snake5 setCycle: Blink 200)
+				(= seconds 15)
 			)
 			(3
-				(gGame sel_587:)
-				(snake1 sel_155: 4 sel_312: MoveTo 110 127)
-				(snake2 sel_155: 4 sel_312: MoveTo 123 117)
-				(snake3 sel_155: 4 sel_312: MoveTo 137 127)
-				(snake4 sel_155: 4 sel_312: MoveTo 134 106)
-				(snake5 sel_155: 4 sel_312: MoveTo 152 118 self)
-				(= sel_139 60)
+				(gGame handsOff:)
+				(snake1 setLoop: 4 setMotion: MoveTo 110 127)
+				(snake2 setLoop: 4 setMotion: MoveTo 123 117)
+				(snake3 setLoop: 4 setMotion: MoveTo 137 127)
+				(snake4 setLoop: 4 setMotion: MoveTo 134 106)
+				(snake5 setLoop: 4 setMotion: MoveTo 152 118 self)
+				(= ticks 60)
 			)
 			(4
-				(gGameMusic2 sel_167:)
-				(gGameMusic1 sel_40: 3 sel_99: 1 sel_3: 1 sel_39:)
+				(gGameMusic2 stop:)
+				(gGameMusic1 number: 3 flags: 1 loop: 1 play:)
 				(steve
-					sel_155: 6
-					sel_156: 0
-					sel_244: 3
-					sel_161: ForwardCounter 4
+					setLoop: 6
+					setCel: 0
+					cycleSpeed: 3
+					setCycle: ForwardCounter 4
 				)
 				(gEgo
-					sel_155: 5
-					sel_156: 0
-					sel_244: 3
-					sel_161: ForwardCounter 4 self
+					setLoop: 5
+					setCel: 0
+					cycleSpeed: 3
+					setCycle: ForwardCounter 4 self
 				)
 			)
 			(5
-				(steve sel_155: 2 sel_244: 6 sel_161: Blink 150)
-				(gEgo sel_155: 1 sel_244: 6 sel_161: Blink 150)
+				(steve setLoop: 2 cycleSpeed: 6 setCycle: Blink 150)
+				(gEgo setLoop: 1 cycleSpeed: 6 setCycle: Blink 150)
 			)
 			(6
-				(gEgo sel_155: 1 sel_156: 1 sel_312: JumpTo 98 148 self)
+				(gEgo setLoop: 1 setCel: 1 setMotion: JumpTo 98 148 self)
 			)
 			(7
-				(gEgo sel_244: 18 sel_161: End self)
+				(gEgo cycleSpeed: 18 setCycle: End self)
 			)
 			(8
-				(snake1 sel_155: 4 sel_312: MoveTo 89 140)
-				(snake2 sel_155: 4 sel_312: MoveTo 102 130)
-				(snake3 sel_155: 4 sel_312: MoveTo 118 140)
-				(snake4 sel_155: 4 sel_312: MoveTo 110 118)
-				(snake5 sel_155: 4 sel_312: MoveTo 127 129 self)
+				(snake1 setLoop: 4 setMotion: MoveTo 89 140)
+				(snake2 setLoop: 4 setMotion: MoveTo 102 130)
+				(snake3 setLoop: 4 setMotion: MoveTo 118 140)
+				(snake4 setLoop: 4 setMotion: MoveTo 110 118)
+				(snake5 setLoop: 4 setMotion: MoveTo 127 129 self)
 			)
 			(9
-				(steve sel_155: 2 sel_156: 1 sel_312: JumpTo 77 163 self)
+				(steve setLoop: 2 setCel: 1 setMotion: JumpTo 77 163 self)
 			)
 			(10
-				(steve sel_244: 18 sel_161: End self)
+				(steve cycleSpeed: 18 setCycle: End self)
 			)
 			(11
-				(= sel_139 60)
+				(= ticks 60)
 			)
 			(12
 				(= global145 11) ; "Your dying thought is, "Venom I ever going to learn?""
-				(gCurRoom sel_399: 99)
-				(self sel_111:)
+				(gCurRoom newRoom: 99)
+				(self dispose:)
 			)
 		)
 	)
@@ -420,23 +420,23 @@
 
 (instance sLetThereBeLight of Script
 	(properties
-		sel_20 {sLetThereBeLight}
+		name {sLetThereBeLight}
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
-				(= sel_137 7)
+				(= seconds 7)
 			)
 			(1
-				(snake1 sel_155: 0 sel_161: Walk sel_312: MoveTo 58 184)
-				(snake2 sel_155: 0 sel_161: Walk sel_312: MoveTo 45 180)
-				(snake3 sel_155: 0 sel_161: Walk sel_312: MoveTo 59 183)
-				(snake4 sel_155: 0 sel_161: Walk sel_312: MoveTo 58 178)
-				(snake5 sel_155: 0 sel_161: Walk sel_312: MoveTo 69 176)
-				(snake6 sel_155: 0 sel_161: Walk sel_312: MoveTo 72 170)
-				(snake7 sel_155: 0 sel_161: Walk sel_312: MoveTo 73 165)
-				(self sel_111:)
+				(snake1 setLoop: 0 setCycle: Walk setMotion: MoveTo 58 184)
+				(snake2 setLoop: 0 setCycle: Walk setMotion: MoveTo 45 180)
+				(snake3 setLoop: 0 setCycle: Walk setMotion: MoveTo 59 183)
+				(snake4 setLoop: 0 setCycle: Walk setMotion: MoveTo 58 178)
+				(snake5 setLoop: 0 setCycle: Walk setMotion: MoveTo 69 176)
+				(snake6 setLoop: 0 setCycle: Walk setMotion: MoveTo 72 170)
+				(snake7 setLoop: 0 setCycle: Walk setMotion: MoveTo 73 165)
+				(self dispose:)
 			)
 		)
 	)
@@ -444,35 +444,35 @@
 
 (instance sSteveDies of Script
 	(properties
-		sel_20 {sSteveDies}
+		name {sSteveDies}
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
 				(steve
-					sel_2: 734
-					sel_155: 1
-					sel_156: 0
-					sel_244: 12
-					sel_316: 1
-					sel_161: End self
+					view: 734
+					setLoop: 1
+					setCel: 0
+					cycleSpeed: 12
+					ignoreActors: 1
+					setCycle: End self
 				)
 			)
 			(1
-				(snake1 sel_161: Fwd sel_312: 0)
-				(snake2 sel_161: Fwd sel_312: 0)
-				(snake3 sel_161: Fwd sel_312: 0)
-				(snake4 sel_161: Fwd sel_312: 0)
-				(snake5 sel_161: Fwd sel_312: 0)
-				(snake6 sel_161: Fwd sel_312: 0)
-				(snake7 sel_161: Fwd sel_312: 0)
-				(= sel_139 120)
+				(snake1 setCycle: Fwd setMotion: 0)
+				(snake2 setCycle: Fwd setMotion: 0)
+				(snake3 setCycle: Fwd setMotion: 0)
+				(snake4 setCycle: Fwd setMotion: 0)
+				(snake5 setCycle: Fwd setMotion: 0)
+				(snake6 setCycle: Fwd setMotion: 0)
+				(snake7 setCycle: Fwd setMotion: 0)
+				(= ticks 120)
 			)
 			(2
 				(= global145 11) ; "Your dying thought is, "Venom I ever going to learn?""
-				(gCurRoom sel_399: 99)
-				(self sel_111:)
+				(gCurRoom newRoom: 99)
+				(self dispose:)
 			)
 		)
 	)
@@ -480,41 +480,41 @@
 
 (instance sSprinkleOil of Script
 	(properties
-		sel_20 {sSprinkleOil}
+		name {sSprinkleOil}
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
-				(gEgo sel_155: 1 sel_156: 0 sel_161: CT 4 1 self)
+				(gEgo setLoop: 1 setCel: 0 setCycle: CT 4 1 self)
 			)
 			(1
 				(oil
-					sel_110:
-					sel_153: (+ (gEgo sel_1:) 23) (- (gEgo sel_0:) 27)
-					sel_312:
+					init:
+					posn: (+ (gEgo x:) 23) (- (gEgo y:) 27)
+					setMotion:
 						JumpTo
-						(+ (gEgo sel_1:) 59)
-						(- (gEgo sel_0:) 39)
+						(+ (gEgo x:) 59)
+						(- (gEgo y:) 39)
 						self
 				)
-				(gEgo sel_156: 5)
+				(gEgo setCel: 5)
 			)
 			(2
 				(= local3 1)
-				(oil sel_313:)
+				(oil stopUpd:)
 				(gEgo
-					sel_2: 732
-					sel_155: 0
-					sel_244: 4
-					sel_53: 4
-					sel_51: 2
-					sel_161: Walk
+					view: 732
+					setLoop: 0
+					cycleSpeed: 4
+					moveSpeed: 4
+					xStep: 2
+					setCycle: Walk
 				)
 				(if local8
-					(sRepelSnakes sel_145:)
+					(sRepelSnakes cue:)
 				)
-				(self sel_111:)
+				(self dispose:)
 			)
 		)
 	)
@@ -522,87 +522,87 @@
 
 (instance sRepelSnakes of Script
 	(properties
-		sel_20 {sRepelSnakes}
+		name {sRepelSnakes}
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
-				(gGame sel_587:)
-				(snake1 sel_161: Fwd sel_312: 0)
-				(snake2 sel_161: Fwd sel_312: 0)
-				(snake3 sel_161: Fwd sel_312: 0)
-				(snake4 sel_161: Fwd sel_312: 0)
-				(snake5 sel_161: Fwd sel_312: 0)
-				(snake6 sel_161: Fwd sel_312: 0)
-				(snake7 sel_161: Fwd sel_312: 0)
+				(gGame handsOff:)
+				(snake1 setCycle: Fwd setMotion: 0)
+				(snake2 setCycle: Fwd setMotion: 0)
+				(snake3 setCycle: Fwd setMotion: 0)
+				(snake4 setCycle: Fwd setMotion: 0)
+				(snake5 setCycle: Fwd setMotion: 0)
+				(snake6 setCycle: Fwd setMotion: 0)
+				(snake7 setCycle: Fwd setMotion: 0)
 				(if local3
-					(= sel_136 1)
+					(= cycles 1)
 				else
 					(= local8 1)
-					(gEgo sel_146: sSprinkleOil)
+					(gEgo setScript: sSprinkleOil)
 				)
 			)
 			(1
-				(= sel_139 90)
+				(= ticks 90)
 			)
 			(2
 				(snake1
-					sel_155: 1
-					sel_153: (snake1 sel_1:) (- (snake1 sel_0:) 3)
-					sel_161: Walk
-					sel_312: MoveTo 320 27 self
+					setLoop: 1
+					posn: (snake1 x:) (- (snake1 y:) 3)
+					setCycle: Walk
+					setMotion: MoveTo 320 27 self
 				)
 				(snake2
-					sel_155: 1
-					sel_153: (snake2 sel_1:) (- (snake2 sel_0:) 3)
-					sel_161: Walk
-					sel_312: MoveTo 324 14
+					setLoop: 1
+					posn: (snake2 x:) (- (snake2 y:) 3)
+					setCycle: Walk
+					setMotion: MoveTo 324 14
 				)
 				(snake3
-					sel_155: 1
-					sel_153: (snake3 sel_1:) (- (snake3 sel_0:) 3)
-					sel_161: Walk
-					sel_312: MoveTo 338 17
+					setLoop: 1
+					posn: (snake3 x:) (- (snake3 y:) 3)
+					setCycle: Walk
+					setMotion: MoveTo 338 17
 				)
 				(snake4
-					sel_155: 1
-					sel_153: (snake4 sel_1:) (- (snake4 sel_0:) 3)
-					sel_161: Walk
-					sel_312: MoveTo 337 12
+					setLoop: 1
+					posn: (snake4 x:) (- (snake4 y:) 3)
+					setCycle: Walk
+					setMotion: MoveTo 337 12
 				)
 				(snake5
-					sel_155: 1
-					sel_153: (snake5 sel_1:) (- (snake5 sel_0:) 3)
-					sel_161: Walk
-					sel_312: MoveTo 348 10
+					setLoop: 1
+					posn: (snake5 x:) (- (snake5 y:) 3)
+					setCycle: Walk
+					setMotion: MoveTo 348 10
 				)
 				(snake6
-					sel_155: 1
-					sel_153: (snake6 sel_1:) (- (snake6 sel_0:) 3)
-					sel_161: Walk
-					sel_312: MoveTo 351 4
+					setLoop: 1
+					posn: (snake6 x:) (- (snake6 y:) 3)
+					setCycle: Walk
+					setMotion: MoveTo 351 4
 				)
 				(snake7
-					sel_155: 1
-					sel_153: (snake7 sel_1:) (- (snake7 sel_0:) 3)
-					sel_161: Walk
-					sel_312: MoveTo 352 -1
+					setLoop: 1
+					posn: (snake7 x:) (- (snake7 y:) 3)
+					setCycle: Walk
+					setMotion: MoveTo 352 -1
 				)
 			)
 			(3
-				(snake1 sel_111:)
-				(snake2 sel_111:)
-				(snake3 sel_111:)
-				(snake4 sel_111:)
-				(snake5 sel_111:)
-				(snake6 sel_111:)
-				(snake7 sel_111:)
-				(sFX sel_167:)
+				(snake1 dispose:)
+				(snake2 dispose:)
+				(snake3 dispose:)
+				(snake4 dispose:)
+				(snake5 dispose:)
+				(snake6 dispose:)
+				(snake7 dispose:)
+				(sFX stop:)
 				(= local4 1)
-				(gGame sel_588:)
-				(gTheIconBar sel_233: 7)
-				(self sel_111:)
+				(gGame handsOn:)
+				(gTheIconBar disable: 7)
+				(self dispose:)
 			)
 		)
 	)
@@ -610,42 +610,42 @@
 
 (instance sThrowBottle of Script
 	(properties
-		sel_20 {sThrowBottle}
+		name {sThrowBottle}
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
-				(gEgo sel_155: 1 sel_156: 0 sel_161: CT 4 1 self)
+				(gEgo setLoop: 1 setCel: 0 setCycle: CT 4 1 self)
 			)
 			(1
 				(oilBottle
-					sel_110:
-					sel_161: Fwd
-					sel_153: (+ (gEgo sel_1:) 23) (- (gEgo sel_0:) 27)
-					sel_312:
+					init:
+					setCycle: Fwd
+					posn: (+ (gEgo x:) 23) (- (gEgo y:) 27)
+					setMotion:
 						JumpTo
-						(+ (gEgo sel_1:) 59)
-						(- (gEgo sel_0:) 39)
+						(+ (gEgo x:) 59)
+						(- (gEgo y:) 39)
 						self
 				)
-				(gEgo sel_156: 5)
+				(gEgo setCel: 5)
 			)
 			(2
-				(oilBottle sel_155: 4 sel_156: 0 sel_161: End self)
+				(oilBottle setLoop: 4 setCel: 0 setCycle: End self)
 			)
 			(3
-				(oilBottle sel_161: 0 sel_317:)
+				(oilBottle setCycle: 0 addToPic:)
 				(gEgo
-					sel_2: 732
-					sel_155: 0
-					sel_351: 14
-					sel_244: 4
-					sel_53: 4
-					sel_51: 2
-					sel_161: Walk
+					view: 732
+					setLoop: 0
+					put: 14
+					cycleSpeed: 4
+					moveSpeed: 4
+					xStep: 2
+					setCycle: Walk
 				)
-				(self sel_111:)
+				(self dispose:)
 			)
 		)
 	)
@@ -653,20 +653,20 @@
 
 (instance egoActions of Actions
 	(properties
-		sel_20 {egoActions}
+		name {egoActions}
 	)
 
-	(method (sel_300 param1)
+	(method (doVerb param1)
 		(switch param1
 			(1
-				(if (== (gCurRoom sel_408:) 780)
-					(gMessager sel_295: 3 1 1)
+				(if (== (gCurRoom picture:) 780)
+					(gMessager say: 3 1 1)
 				else
 					0
 				)
 			)
 			(25
-				(gMessager sel_295: 11 25)
+				(gMessager say: 11 25)
 			)
 			(else 0)
 		)
@@ -675,53 +675,53 @@
 
 (instance steve of Actor
 	(properties
-		sel_20 {steve}
-		sel_1 -30
-		sel_0 260
-		sel_213 9
-		sel_2 733
+		name {steve}
+		x -30
+		y 260
+		noun 9
+		view 733
 	)
 
-	(method (sel_300 param1)
+	(method (doVerb param1)
 		(switch param1
 			(1
-				(if (== (gCurRoom sel_408:) 780)
-					(gMessager sel_295: 4 1 1)
+				(if (== (gCurRoom picture:) 780)
+					(gMessager say: 4 1 1)
 				else
-					(gMessager sel_295: 1 1 27 0 0 1887)
+					(gMessager say: 1 1 27 0 0 1887)
 				)
 			)
 			(4
-				(if (== (gCurRoom sel_408:) 780)
-					(super sel_300: param1)
+				(if (== (gCurRoom picture:) 780)
+					(super doVerb: param1)
 				else
-					(gMessager sel_295: 1 4 27 0 0 1887)
+					(gMessager say: 1 4 27 0 0 1887)
 				)
 			)
 			(8
-				(if (== (gCurRoom sel_408:) 780)
-					(super sel_300: param1)
+				(if (== (gCurRoom picture:) 780)
+					(super doVerb: param1)
 				else
-					(gMessager sel_295: 1 8 27 0 0 1887)
+					(gMessager say: 1 8 27 0 0 1887)
 				)
 			)
 			(2
 				(if local4
-					(gMessager sel_295: 9 2 9)
+					(gMessager say: 9 2 9)
 				else
 					(switch local7
 						(0
-							(gMessager sel_295: 9 2 5)
+							(gMessager say: 9 2 5)
 						)
 						(else
-							(gMessager sel_295: 9 2 6)
+							(gMessager say: 9 2 6)
 						)
 					)
 					(++ local7)
 				)
 			)
 			(else
-				(super sel_300: param1)
+				(super doVerb: param1)
 			)
 		)
 	)
@@ -729,67 +729,67 @@
 
 (instance snake1 of Actor
 	(properties
-		sel_20 {snake1}
-		sel_1 226
-		sel_0 60
-		sel_213 7
-		sel_2 733
-		sel_3 4
-		sel_4 3
-		sel_14 16384
+		name {snake1}
+		x 226
+		y 60
+		noun 7
+		view 733
+		loop 4
+		cel 3
+		signal 16384
 	)
 
-	(method (sel_57)
-		(super sel_57: &rest)
+	(method (doit)
+		(super doit: &rest)
 		(cond
-			(sel_142)
-			((== (gCurRoom sel_142:) sRepelSnakes))
-			((and local3 (< (gEgo sel_255: snake1) 65))
-				(gCurRoom sel_146: sRepelSnakes)
+			(script)
+			((== (gCurRoom script:) sRepelSnakes))
+			((and local3 (< (gEgo distanceTo: snake1) 65))
+				(gCurRoom setScript: sRepelSnakes)
 			)
 			(
 				(and
-					(< (self sel_255: gEgo) 14)
-					(== (gEgo sel_2:) 732)
-					(== (self sel_2:) 731)
+					(< (self distanceTo: gEgo) 14)
+					(== (gEgo view:) 732)
+					(== (self view:) 731)
 				)
-				(gGame sel_587:)
-				(gGameMusic2 sel_167:)
-				(gGameMusic1 sel_40: 3 sel_99: 1 sel_3: 1 sel_39:)
+				(gGame handsOff:)
+				(gGameMusic2 stop:)
+				(gGameMusic1 number: 3 flags: 1 loop: 1 play:)
 				(gEgo
-					sel_2: 734
-					sel_155: 0
-					sel_156: 0
-					sel_244: 12
-					sel_161: End
+					view: 734
+					setLoop: 0
+					setCel: 0
+					cycleSpeed: 12
+					setCycle: End
 				)
 			)
 			(
 				(and
-					(< (self sel_255: steve) 14)
-					(== (steve sel_2:) 733)
-					(== (self sel_2:) 731)
+					(< (self distanceTo: steve) 14)
+					(== (steve view:) 733)
+					(== (self view:) 731)
 				)
-				(gCurRoom sel_146: sSteveDies)
+				(gCurRoom setScript: sSteveDies)
 			)
 		)
 	)
 
-	(method (sel_300 param1)
+	(method (doVerb param1)
 		(switch param1
 			(1
-				(if (== (gCurRoom sel_408:) 780)
-					(gMessager sel_295: 5 1 1)
+				(if (== (gCurRoom picture:) 780)
+					(gMessager say: 5 1 1)
 				else
 					(switch local5
 						(0
-							(gMessager sel_295: 7 1 2)
+							(gMessager say: 7 1 2)
 						)
 						(1
-							(gMessager sel_295: 7 1 3)
+							(gMessager say: 7 1 3)
 						)
 						(else
-							(gMessager sel_295: 7 1 4)
+							(gMessager say: 7 1 4)
 						)
 					)
 					(++ local5)
@@ -798,31 +798,31 @@
 			(2
 				(switch local6
 					(0
-						(gMessager sel_295: 7 2 5)
+						(gMessager say: 7 2 5)
 					)
 					(else
-						(gMessager sel_295: 7 2 6)
+						(gMessager say: 7 2 6)
 					)
 				)
 				(++ local6)
 			)
 			(25
 				(cond
-					((== (gCurRoom sel_408:) 780) 0)
+					((== (gCurRoom picture:) 780) 0)
 					((== global150 0)
-						(gEgo sel_146: sThrowBottle)
+						(gEgo setScript: sThrowBottle)
 					)
-					((< (gEgo sel_255: snake1) 65)
-						(gCurRoom sel_146: sRepelSnakes)
+					((< (gEgo distanceTo: snake1) 65)
+						(gCurRoom setScript: sRepelSnakes)
 					)
 					(else
-						(gGame sel_587:)
-						(gEgo sel_146: sSprinkleOil)
+						(gGame handsOff:)
+						(gEgo setScript: sSprinkleOil)
 					)
 				)
 			)
 			(else
-				(super sel_300: param1)
+				(super doVerb: param1)
 			)
 		)
 	)
@@ -830,121 +830,121 @@
 
 (instance snake2 of Actor
 	(properties
-		sel_20 {snake2}
-		sel_1 240
-		sel_0 51
-		sel_213 7
-		sel_2 733
-		sel_3 4
-		sel_4 3
-		sel_14 16384
+		name {snake2}
+		x 240
+		y 51
+		noun 7
+		view 733
+		loop 4
+		cel 3
+		signal 16384
 	)
 
-	(method (sel_300)
-		(snake1 sel_300: &rest)
+	(method (doVerb)
+		(snake1 doVerb: &rest)
 	)
 )
 
 (instance snake3 of Actor
 	(properties
-		sel_20 {snake3}
-		sel_1 256
-		sel_0 57
-		sel_213 7
-		sel_2 733
-		sel_3 4
-		sel_4 3
-		sel_14 16384
+		name {snake3}
+		x 256
+		y 57
+		noun 7
+		view 733
+		loop 4
+		cel 3
+		signal 16384
 	)
 
-	(method (sel_300)
-		(snake1 sel_300: &rest)
+	(method (doVerb)
+		(snake1 doVerb: &rest)
 	)
 )
 
 (instance snake4 of Actor
 	(properties
-		sel_20 {snake4}
-		sel_1 248
-		sel_0 40
-		sel_213 7
-		sel_2 733
-		sel_3 4
-		sel_4 3
-		sel_14 16384
+		name {snake4}
+		x 248
+		y 40
+		noun 7
+		view 733
+		loop 4
+		cel 3
+		signal 16384
 	)
 
-	(method (sel_300)
-		(snake1 sel_300: &rest)
+	(method (doVerb)
+		(snake1 doVerb: &rest)
 	)
 )
 
 (instance snake5 of Actor
 	(properties
-		sel_20 {snake5}
-		sel_1 271
-		sel_0 49
-		sel_213 7
-		sel_2 733
-		sel_3 4
-		sel_4 3
-		sel_14 16384
+		name {snake5}
+		x 271
+		y 49
+		noun 7
+		view 733
+		loop 4
+		cel 3
+		signal 16384
 	)
 
-	(method (sel_300)
-		(snake1 sel_300: &rest)
+	(method (doVerb)
+		(snake1 doVerb: &rest)
 	)
 )
 
 (instance snake6 of Actor
 	(properties
-		sel_20 {snake6}
-		sel_1 279
-		sel_0 49
-		sel_213 7
-		sel_2 731
-		sel_3 2
-		sel_14 16384
+		name {snake6}
+		x 279
+		y 49
+		noun 7
+		view 731
+		loop 2
+		signal 16384
 	)
 
-	(method (sel_300)
-		(snake1 sel_300: &rest)
+	(method (doVerb)
+		(snake1 doVerb: &rest)
 	)
 )
 
 (instance snake7 of Actor
 	(properties
-		sel_20 {snake7}
-		sel_1 280
-		sel_0 44
-		sel_213 7
-		sel_2 731
-		sel_3 2
-		sel_4 2
-		sel_14 16384
+		name {snake7}
+		x 280
+		y 44
+		noun 7
+		view 731
+		loop 2
+		cel 2
+		signal 16384
 	)
 
-	(method (sel_300)
-		(snake1 sel_300: &rest)
+	(method (doVerb)
+		(snake1 doVerb: &rest)
 	)
 )
 
 (instance oil of Actor
 	(properties
-		sel_20 {oil}
-		sel_2 732
-		sel_3 2
-		sel_60 2
-		sel_14 16400
+		name {oil}
+		view 732
+		loop 2
+		priority 2
+		signal 16400
 	)
 
-	(method (sel_300 param1)
+	(method (doVerb param1)
 		(switch param1
 			(1
-				(gMessager sel_295: 10 1 10)
+				(gMessager say: 10 1 10)
 			)
 			(else
-				(super sel_300: param1)
+				(super doVerb: param1)
 			)
 		)
 	)
@@ -952,97 +952,97 @@
 
 (instance oilBottle of Actor
 	(properties
-		sel_20 {oilBottle}
-		sel_2 732
-		sel_3 3
-		sel_14 16384
+		name {oilBottle}
+		view 732
+		loop 3
+		signal 16384
 	)
 )
 
 (instance piece1 of View
 	(properties
-		sel_20 {piece1}
-		sel_1 37
-		sel_0 126
-		sel_2 731
-		sel_3 3
-		sel_60 1
-		sel_14 16401
+		name {piece1}
+		x 37
+		y 126
+		view 731
+		loop 3
+		priority 1
+		signal 16401
 	)
 
-	(method (sel_218)
+	(method (onMe)
 		(return 0)
 	)
 )
 
 (instance piece2 of View
 	(properties
-		sel_20 {piece2}
-		sel_1 115
-		sel_0 74
-		sel_2 731
-		sel_3 3
-		sel_4 1
-		sel_60 1
-		sel_14 16401
+		name {piece2}
+		x 115
+		y 74
+		view 731
+		loop 3
+		cel 1
+		priority 1
+		signal 16401
 	)
 
-	(method (sel_218)
+	(method (onMe)
 		(return 0)
 	)
 )
 
 (instance piece3 of View
 	(properties
-		sel_20 {piece3}
-		sel_1 207
-		sel_0 46
-		sel_2 731
-		sel_3 3
-		sel_4 2
-		sel_60 1
-		sel_14 16401
+		name {piece3}
+		x 207
+		y 46
+		view 731
+		loop 3
+		cel 2
+		priority 1
+		signal 16401
 	)
 
-	(method (sel_218)
+	(method (onMe)
 		(return 0)
 	)
 )
 
 (instance floor of Feature
 	(properties
-		sel_20 {floor}
-		sel_0 1
-		sel_213 10
-		sel_302 4
+		name {floor}
+		y 1
+		noun 10
+		onMeCheck 4
 	)
 
-	(method (sel_300 param1)
+	(method (doVerb param1)
 		(switch param1
 			(25
 				(cond
 					(local4 0)
-					((> gMouseX (gEgo sel_1:))
+					((> gMouseX (gEgo x:))
 						(cond
 							((== global150 0)
-								(gEgo sel_146: sThrowBottle)
+								(gEgo setScript: sThrowBottle)
 							)
-							((< (gEgo sel_255: snake1) 65)
-								(gCurRoom sel_146: sRepelSnakes)
+							((< (gEgo distanceTo: snake1) 65)
+								(gCurRoom setScript: sRepelSnakes)
 							)
 							(else
-								(gGame sel_587:)
-								(gEgo sel_146: sSprinkleOil)
+								(gGame handsOff:)
+								(gEgo setScript: sSprinkleOil)
 							)
 						)
 					)
 					(else
-						(gMessager sel_295: 10 25 8)
+						(gMessager say: 10 25 8)
 					)
 				)
 			)
 			(else
-				(super sel_300: param1)
+				(super doVerb: param1)
 			)
 		)
 	)
@@ -1050,25 +1050,25 @@
 
 (instance hieroglyphics of Feature
 	(properties
-		sel_20 {hieroglyphics}
-		sel_0 1
-		sel_213 2
-		sel_302 2
+		name {hieroglyphics}
+		y 1
+		noun 2
+		onMeCheck 2
 	)
 )
 
 (instance wall of Feature
 	(properties
-		sel_20 {wall}
-		sel_0 1
-		sel_213 6
-		sel_302 16
+		name {wall}
+		y 1
+		noun 6
+		onMeCheck 16
 	)
 )
 
 (instance sFX of Sound
 	(properties
-		sel_20 {sFX}
-		sel_99 1
+		name {sFX}
+		flags 1
 	)
 )

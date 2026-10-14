@@ -22,69 +22,69 @@
 
 (instance poly2350Code of Code
 	(properties
-		sel_20 {poly2350Code}
+		name {poly2350Code}
 	)
 
-	(method (sel_57 param1)
+	(method (doit param1)
 		(param1
-			sel_118:
-				(poly2350a sel_110: sel_117:)
-				(poly2350b sel_110: sel_117:)
-				(poly2350c sel_110: sel_117:)
+			add:
+				(poly2350a init: yourself:)
+				(poly2350b init: yourself:)
+				(poly2350c init: yourself:)
 		)
 	)
 )
 
 (instance poly2350a of Polygon
 	(properties
-		sel_20 {poly2350a}
+		name {poly2350a}
 	)
 
-	(method (sel_110)
-		(= sel_86 (if (>= gAct (= sel_31 2)) 16 else 22))
-		(= sel_87 (if (>= gAct 2) @local0 else @local32))
+	(method (init)
+		(= size (if (>= gAct (= type 2)) 16 else 22))
+		(= points (if (>= gAct 2) @local0 else @local32))
 	)
 )
 
 (instance poly2350b of Polygon
 	(properties
-		sel_20 {poly2350b}
+		name {poly2350b}
 	)
 
-	(method (sel_110)
-		(= sel_31 2)
+	(method (init)
+		(= type 2)
 		(if (OneOf global128 0 1 4 5 9 13)
-			(= sel_86 10)
-			(= sel_87 @local88)
+			(= size 10)
+			(= points @local88)
 		else
-			(= sel_86 6)
-			(= sel_87 @local76)
+			(= size 6)
+			(= points @local76)
 		)
 	)
 )
 
 (instance poly2350c of Polygon
 	(properties
-		sel_20 {poly2350c}
+		name {poly2350c}
 	)
 
-	(method (sel_110)
-		(= sel_31 2)
-		(= sel_86 8)
-		(= sel_87 @local108)
+	(method (init)
+		(= type 2)
+		(= size 8)
+		(= points @local108)
 	)
 )
 
 (instance pts2350 of MuseumPoints
 	(properties
-		sel_20 {pts2350}
-		sel_621 275
-		sel_622 120
-		sel_623 264
-		sel_624 86
-		sel_627 330
-		sel_628 120
-		sel_629 -10
-		sel_630 120
+		name {pts2350}
+		midPtX 275
+		midPtY 120
+		northPtX 264
+		northPtY 86
+		eastPtX 330
+		eastPtY 120
+		westPtX -10
+		westPtY 120
 	)
 )

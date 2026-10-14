@@ -15,52 +15,52 @@
 
 (instance rm120 of LBRoom
 	(properties
-		sel_20 {rm120}
-		sel_408 120
-		sel_28 10
+		name {rm120}
+		picture 120
+		style 10
 	)
 
-	(method (sel_110)
+	(method (init)
 		(LoadMany rsVIEW 131 121 130)
 		(LoadMany rsSOUND 120 121)
-		(self sel_414: 92)
-		(super sel_110:)
-		(person1 sel_110: sel_320: 122)
-		(person2 sel_110: sel_320: 122)
-		(gGameMusic1 sel_40: 120 sel_99: 1 sel_3: -1 sel_39:)
-		(gCurRoom sel_146: sIntroScript)
+		(self setRegions: 92)
+		(super init:)
+		(person1 init: setScale: 122)
+		(person2 init: setScale: 122)
+		(gGameMusic1 number: 120 flags: 1 loop: -1 play:)
+		(gCurRoom setScript: sIntroScript)
 	)
 
-	(method (sel_111)
-		(gGameMusic1 sel_170: 0 30 12 1)
-		(super sel_111: &rest)
+	(method (dispose)
+		(gGameMusic1 fade: 0 30 12 1)
+		(super dispose: &rest)
 	)
 )
 
 (instance moveIt of Script
 	(properties
-		sel_20 {moveIt}
+		name {moveIt}
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
-				(= sel_139 sel_141)
-				(= sel_141 0)
+				(= ticks register)
+				(= register 0)
 			)
 			(1
-				(sel_42 sel_312: MoveTo 194 127 self)
+				(client setMotion: MoveTo 194 127 self)
 			)
 			(2
-				(sel_42 sel_3: (Random 0 4) sel_153: 169 121)
-				(= sel_139 (Random 12 60))
-				(++ sel_141)
+				(client loop: (Random 0 4) posn: 169 121)
+				(= ticks (Random 12 60))
+				(++ register)
 			)
 			(3
-				(if (< sel_141 3)
-					(self sel_144: 1)
+				(if (< register 3)
+					(self changeState: 1)
 				else
-					(self sel_111:)
+					(self dispose:)
 				)
 			)
 		)
@@ -69,34 +69,34 @@
 
 (instance sIntroScript of Script
 	(properties
-		sel_20 {sIntroScript}
+		name {sIntroScript}
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
-				(= sel_136 2)
-				(person1 sel_320:)
-				(person2 sel_320:)
+				(= cycles 2)
+				(person1 setScale:)
+				(person2 setScale:)
 			)
 			(1
-				(person1 sel_146: (moveIt sel_109:) self 60)
-				(person2 sel_146: (moveIt sel_109:) self 90)
+				(person1 setScript: (moveIt new:) self 60)
+				(person2 setScript: (moveIt new:) self 90)
 			)
 			(2 0)
 			(3
-				(person1 sel_111:)
-				(person2 sel_111:)
-				(= sel_136 2)
+				(person1 dispose:)
+				(person2 dispose:)
+				(= cycles 2)
 			)
 			(4
-				(closeUpView sel_110:)
-				(gangplankBG sel_110:)
-				(= sel_136 1)
+				(closeUpView init:)
+				(gangplankBG init:)
+				(= cycles 1)
 			)
 			(5
-				(gCurRoom sel_146: sCloseUp)
-				(self sel_111:)
+				(gCurRoom setScript: sCloseUp)
+				(self dispose:)
 			)
 		)
 	)
@@ -104,104 +104,104 @@
 
 (instance sCloseUp of Script
 	(properties
-		sel_20 {sCloseUp}
+		name {sCloseUp}
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
-				(closeUpView sel_313:)
+				(closeUpView stopUpd:)
 				(person1
-					sel_110:
-					sel_2: 131
-					sel_153: 78 82
-					sel_51: 5
-					sel_52: 2
-					sel_63: 8
-					sel_3: 3
-					sel_53: 16
-					sel_161: Walk
+					init:
+					view: 131
+					posn: 78 82
+					xStep: 5
+					yStep: 2
+					setPri: 8
+					loop: 3
+					moveSpeed: 16
+					setCycle: Walk
 				)
 				(person2
-					sel_110:
-					sel_2: 131
-					sel_153: 48 72
-					sel_51: 5
-					sel_52: 2
-					sel_63: 8
-					sel_3: 2
-					sel_53: 16
-					sel_161: Walk
+					init:
+					view: 131
+					posn: 48 72
+					xStep: 5
+					yStep: 2
+					setPri: 8
+					loop: 2
+					moveSpeed: 16
+					setCycle: Walk
 				)
 				((ScriptID 1882 10) ; Pippin
-					sel_203: 1
-					sel_291: 0
-					sel_1: 224
-					sel_0: 21
-					sel_549: -214
-					sel_550: 121
-					sel_537: 284
+					modeless: 1
+					disposeWhenDone: 0
+					x: 224
+					y: 21
+					textX: -214
+					textY: 121
+					talkWidth: 284
 				)
 				((ScriptID 1883 9) ; TutSmith
-					sel_203: 1
-					sel_291: 0
-					sel_1: 3
-					sel_0: 2
-					sel_549: 7
-					sel_550: 140
-					sel_537: 284
+					modeless: 1
+					disposeWhenDone: 0
+					x: 3
+					y: 2
+					textX: 7
+					textY: 140
+					talkWidth: 284
 				)
-				(self sel_146: sDisembark self 1)
+				(self setScript: sDisembark self 1)
 			)
 			(1
 				((ScriptID 1887 12) ; Steve
-					sel_203: 1
-					sel_291: 0
-					sel_1: 224
-					sel_0: 21
-					sel_549: -214
-					sel_550: 121
-					sel_537: 284
+					modeless: 1
+					disposeWhenDone: 0
+					x: 224
+					y: 21
+					textX: -214
+					textY: 121
+					talkWidth: 284
 				)
 				((ScriptID 1886 11) ; Watney
-					sel_203: 1
-					sel_291: 0
-					sel_1: 4
-					sel_0: 22
-					sel_549: 7
-					sel_550: 120
-					sel_537: 284
+					modeless: 1
+					disposeWhenDone: 0
+					x: 4
+					y: 22
+					textX: 7
+					textY: 120
+					talkWidth: 284
 				)
 				(person1
-					sel_110:
-					sel_2: 131
-					sel_153: 78 82
-					sel_51: 5
-					sel_52: 2
-					sel_63: 8
-					sel_3: 0
-					sel_53: 16
-					sel_161: Walk
+					init:
+					view: 131
+					posn: 78 82
+					xStep: 5
+					yStep: 2
+					setPri: 8
+					loop: 0
+					moveSpeed: 16
+					setCycle: Walk
 				)
 				(person2
-					sel_110:
-					sel_2: 131
-					sel_153: 48 72
-					sel_51: 5
-					sel_52: 2
-					sel_63: 8
-					sel_3: 1
-					sel_53: 16
-					sel_161: Walk
+					init:
+					view: 131
+					posn: 48 72
+					xStep: 5
+					yStep: 2
+					setPri: 8
+					loop: 1
+					moveSpeed: 16
+					setCycle: Walk
 				)
-				(= sel_136 2)
+				(= cycles 2)
 			)
 			(2
-				(self sel_146: sDisembark self 0)
+				(self setScript: sDisembark self 0)
 			)
 			(3
-				(gCurRoom sel_399: 140)
-				(self sel_111:)
+				(gCurRoom newRoom: 140)
+				(self dispose:)
 			)
 		)
 	)
@@ -209,60 +209,60 @@
 
 (instance sDisembark of Script
 	(properties
-		sel_20 {sDisembark}
+		name {sDisembark}
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
-				(= sel_136 2)
+				(= cycles 2)
 			)
 			(1
-				(if sel_141
-					(person1 sel_312: MoveTo 168 110)
+				(if register
+					(person1 setMotion: MoveTo 168 110)
 				else
-					(person1 sel_312: MoveTo 159 114)
+					(person1 setMotion: MoveTo 159 114)
 				)
-				(person2 sel_312: MoveTo 138 100 self)
+				(person2 setMotion: MoveTo 138 100 self)
 			)
 			(2
-				(if sel_141
-					(person1 sel_3: 4 sel_161: End self)
-					(person2 sel_161: 0)
+				(if register
+					(person1 loop: 4 setCycle: End self)
+					(person2 setCycle: 0)
 				else
-					(= sel_136 2)
+					(= cycles 2)
 				)
 			)
 			(3
-				(gMessager sel_295: (if sel_141 1 else 2) 0 0 0 self)
+				(gMessager say: (if register 1 else 2) 0 0 0 self)
 			)
 			(4
-				(if sel_141
-					(person1 sel_161: Beg self)
+				(if register
+					(person1 setCycle: Beg self)
 				else
-					(++ sel_29)
-					(= sel_136 2)
+					(++ state)
+					(= cycles 2)
 				)
 			)
 			(5
-				(person1 sel_3: 3 sel_161: Walk)
-				(= sel_136 2)
+				(person1 loop: 3 setCycle: Walk)
+				(= cycles 2)
 			)
 			(6
-				(person1 sel_312: MoveTo 211 134 self)
-				(if (not sel_141)
-					(person2 sel_312: MoveTo 181 118 self)
+				(person1 setMotion: MoveTo 211 134 self)
+				(if (not register)
+					(person2 setMotion: MoveTo 181 118 self)
 				else
-					(= sel_136 2)
+					(= cycles 2)
 				)
 			)
 			(7 0)
 			(8
-				(person1 sel_111:)
-				(person2 sel_161: Walk sel_312: MoveTo 217 128 self)
+				(person1 dispose:)
+				(person2 setCycle: Walk setMotion: MoveTo 217 128 self)
 			)
 			(9
-				(self sel_111:)
+				(self dispose:)
 			)
 		)
 	)
@@ -270,48 +270,48 @@
 
 (instance person1 of Actor
 	(properties
-		sel_20 {person1}
-		sel_1 169
-		sel_0 121
-		sel_2 121
-		sel_60 3
-		sel_14 18448
-		sel_53 10
+		name {person1}
+		x 169
+		y 121
+		view 121
+		priority 3
+		signal 18448
+		moveSpeed 10
 	)
 )
 
 (instance person2 of Actor
 	(properties
-		sel_20 {person2}
-		sel_1 169
-		sel_0 121
-		sel_2 121
-		sel_3 1
-		sel_60 3
-		sel_14 18448
-		sel_53 10
+		name {person2}
+		x 169
+		y 121
+		view 121
+		loop 1
+		priority 3
+		signal 18448
+		moveSpeed 10
 	)
 )
 
 (instance gangplankBG of View
 	(properties
-		sel_20 {gangplankBG}
-		sel_1 107
-		sel_0 42
-		sel_2 130
-		sel_60 8
-		sel_14 16400
+		name {gangplankBG}
+		x 107
+		y 42
+		view 130
+		priority 8
+		signal 16400
 	)
 )
 
 (instance closeUpView of View
 	(properties
-		sel_20 {closeUpView}
-		sel_1 85
-		sel_0 25
-		sel_2 130
-		sel_4 1
-		sel_60 9
-		sel_14 16400
+		name {closeUpView}
+		x 85
+		y 25
+		view 130
+		cel 1
+		priority 9
+		signal 16400
 	)
 )

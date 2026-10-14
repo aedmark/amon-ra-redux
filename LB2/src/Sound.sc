@@ -7,105 +7,105 @@
 
 (class Sound of Obj
 	(properties
-		sel_20 {Sound}
-		sel_41 0
-		sel_90 0
-		sel_99 0
-		sel_40 0
-		sel_94 127
-		sel_60 0
-		sel_3 1
-		sel_14 0
-		sel_165 0
-		sel_89 0
-		sel_91 0
-		sel_92 0
-		sel_93 0
-		sel_42 0
-		sel_166 0
+		name {Sound}
+		nodePtr 0
+		handle 0
+		flags 0
+		number 0
+		vol 127
+		priority 0
+		loop 1
+		signal 0
+		prevSignal 0
+		dataInc 0
+		min 0
+		sec 0
+		frame 0
+		client 0
+		owner 0
 	)
 
-	(method (sel_109 param1)
-		((super sel_109:) sel_166: (if argc param1 else 0) sel_117:)
+	(method (new param1)
+		((super new:) owner: (if argc param1 else 0) yourself:)
 	)
 
-	(method (sel_110)
-		(= sel_165 (= sel_14 0))
-		(gSounds sel_118: self)
-		(if (not (and (DoSound sndGET_AUDIO_CAPABILITY) (& sel_99 $0004)))
+	(method (init)
+		(= prevSignal (= signal 0))
+		(gSounds add: self)
+		(if (not (and (DoSound sndGET_AUDIO_CAPABILITY) (& flags $0004)))
 			(DoSound sndINIT self)
 		)
 	)
 
-	(method (sel_111)
-		(gSounds sel_81: self)
-		(if sel_41
+	(method (dispose)
+		(gSounds delete: self)
+		(if nodePtr
 			(DoSound sndDISPOSE self)
-			(= sel_41 0)
+			(= nodePtr 0)
 		)
-		(super sel_111:)
+		(super dispose:)
 	)
 
-	(method (sel_39 param1 &tmp temp0)
+	(method (play param1 &tmp temp0)
 		(= temp0 argc)
 		(if (and argc (IsObject [param1 (- argc 1)]))
-			(= sel_42 [param1 (= temp0 (- argc 1))])
+			(= client [param1 (= temp0 (- argc 1))])
 		else
-			(= sel_42 0)
+			(= client 0)
 		)
-		(self sel_110:)
-		(if (not sel_3)
-			(= sel_3 1)
+		(self init:)
+		(if (not loop)
+			(= loop 1)
 		)
 		(if temp0
-			(= sel_94 param1)
+			(= vol param1)
 		else
-			(= sel_94 127)
+			(= vol 127)
 		)
-		(if (and (DoSound sndGET_AUDIO_CAPABILITY) (& sel_99 $0004))
-			(DoAudio audPLAY sel_40)
+		(if (and (DoSound sndGET_AUDIO_CAPABILITY) (& flags $0004))
+			(DoAudio audPLAY number)
 		else
 			(DoSound sndPLAY self 0)
 		)
 	)
 
-	(method (sel_167)
+	(method (stop)
 		(cond
-			((and (DoSound sndGET_AUDIO_CAPABILITY) (& sel_99 $0004))
+			((and (DoSound sndGET_AUDIO_CAPABILITY) (& flags $0004))
 				(DoAudio audSTOP)
 			)
-			(sel_90
+			(handle
 				(DoSound sndUPDATE_CUES self)
 				(DoSound sndSTOP self)
 			)
 		)
 	)
 
-	(method (sel_168 param1)
+	(method (pause param1)
 		(if (not argc)
 			(= param1 1)
 		)
-		(DoSound sndPAUSE (if (self sel_115: Sound) self else 0) param1)
+		(DoSound sndPAUSE (if (self isMemberOf: Sound) self else 0) param1)
 	)
 
-	(method (sel_169 param1)
+	(method (hold param1)
 		(if (not argc)
 			(= param1 1)
 		)
 		(DoSound sndSET_HOLD self param1)
 	)
 
-	(method (sel_125)
+	(method (release)
 		(DoSound sndSET_HOLD self 0)
 	)
 
-	(method (sel_170 param1 param2 param3 param4 &tmp temp0)
-		(if (and (DoSound sndGET_AUDIO_CAPABILITY) (& sel_99 $0004))
+	(method (fade param1 param2 param3 param4 &tmp temp0)
+		(if (and (DoSound sndGET_AUDIO_CAPABILITY) (& flags $0004))
 			(DoAudio audSTOP)
 		else
 			(= temp0 argc)
 			(if (and argc (IsObject [param1 (- argc 1)]))
-				(= sel_42 [param1 (= temp0 (- argc 1))])
+				(= client [param1 (= temp0 (- argc 1))])
 			)
 			(if temp0
 				(DoSound sndFADE self param1 param2 param3 param4)
@@ -115,26 +115,26 @@
 		)
 	)
 
-	(method (sel_171 param1)
+	(method (mute param1)
 		(if (not argc)
 			(= param1 1)
 		)
 		(DoSound 13 self param1) ; Mute
 	)
 
-	(method (sel_172 param1)
+	(method (setVol param1)
 		(DoSound sndSET_VOLUME self param1)
 	)
 
-	(method (sel_63 param1)
+	(method (setPri param1)
 		(DoSound sndSET_PRIORITY self param1)
 	)
 
-	(method (sel_155 param1)
+	(method (setLoop param1)
 		(DoSound sndSET_LOOP self param1)
 	)
 
-	(method (sel_173 param1 param2 param3 param4)
+	(method (send param1 param2 param3 param4)
 		(if (and (<= 1 param1) (<= param1 15))
 			(if (< param2 128)
 				(DoSound sndSEND_MIDI self param1 176 param2 param3)
@@ -144,55 +144,55 @@
 		)
 	)
 
-	(method (sel_174)
-		(if (and (DoSound sndGET_AUDIO_CAPABILITY) (& sel_99 $0004))
-			(if (and (!= sel_165 -1) (== (DoAudio audPOSITION) -1))
-				(= sel_165 -1)
-				(= sel_14 0)
-				(if (IsObject sel_42)
-					(sel_42 sel_145: self)
+	(method (check)
+		(if (and (DoSound sndGET_AUDIO_CAPABILITY) (& flags $0004))
+			(if (and (!= prevSignal -1) (== (DoAudio audPOSITION) -1))
+				(= prevSignal -1)
+				(= signal 0)
+				(if (IsObject client)
+					(client cue: self)
 				)
 			)
 		else
-			(if sel_90
+			(if handle
 				(DoSound sndUPDATE_CUES self)
 			)
-			(if sel_14
-				(= sel_165 sel_14)
-				(= sel_14 0)
-				(if (IsObject sel_42)
-					(sel_42 sel_145: self)
+			(if signal
+				(= prevSignal signal)
+				(= signal 0)
+				(if (IsObject client)
+					(client cue: self)
 				)
 			)
 		)
 	)
 
-	(method (sel_175 param1)
-		(if (or (not sel_166) (== sel_166 param1))
-			(self sel_111:)
+	(method (clean param1)
+		(if (or (not owner) (== owner param1))
+			(self dispose:)
 		)
 	)
 
-	(method (sel_176 param1 &tmp temp0)
+	(method (playBed param1 &tmp temp0)
 		(= temp0 argc)
 		(if (and argc (IsObject [param1 (- argc 1)]))
-			(= sel_42 [param1 (= temp0 (- argc 1))])
+			(= client [param1 (= temp0 (- argc 1))])
 		else
-			(= sel_42 0)
+			(= client 0)
 		)
-		(self sel_110:)
-		(if (not sel_3)
-			(= sel_3 1)
+		(self init:)
+		(if (not loop)
+			(= loop 1)
 		)
 		(if temp0
-			(= sel_94 param1)
+			(= vol param1)
 		else
-			(= sel_94 127)
+			(= vol 127)
 		)
 		(DoSound sndPLAY self 1)
 	)
 
-	(method (sel_144)
+	(method (changeState)
 		(DoSound sndUPDATE self)
 	)
 )

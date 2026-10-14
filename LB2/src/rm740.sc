@@ -32,92 +32,92 @@
 
 (instance rm740 of LBRoom
 	(properties
-		sel_20 {rm740}
-		sel_213 9
-		sel_408 740
-		sel_409 480
-		sel_412 730
+		name {rm740}
+		noun 9
+		picture 740
+		north 480
+		west 730
 	)
 
-	(method (sel_110)
-		(gCurRoom sel_259: (List sel_109:))
-		((ScriptID 2740 0) sel_57: (gCurRoom sel_259:)) ; poly2740Code
-		(gEgo sel_110: sel_585: 732 sel_316: 1 sel_299: egoActions)
-		(gGame sel_587:)
+	(method (init)
+		(gCurRoom obstacles: (List new:))
+		((ScriptID 2740 0) doit: (gCurRoom obstacles:)) ; poly2740Code
+		(gEgo init: normalize: 732 ignoreActors: 1 actions: egoActions)
+		(gGame handsOff:)
 		(LoadMany rsVIEW 734 742 812 745)
 		(LoadMany rsSOUND 736 52)
 		(Palette palSET_INTENSITY 0 255 0)
-		(super sel_110:)
-		(sFXRats sel_39:)
-		(gTheIconBar sel_233: 7)
+		(super init:)
+		(sFXRats play:)
+		(gTheIconBar disable: 7)
 		(= local0 1)
-		(steve sel_110:)
-		(rat1 sel_110: sel_161: RTRandCycle)
-		(rat2 sel_110: sel_161: RTRandCycle)
-		(rat3 sel_110: sel_161: RTRandCycle)
-		(rat4 sel_110: sel_161: RTRandCycle)
-		(rat5 sel_110: sel_161: RTRandCycle)
-		(floor sel_110:)
-		(wall sel_110:)
-		(furnaceExit sel_110:)
-		(tRexExit sel_110:)
-		(gDirectionHandler sel_118: self)
-		(gWalkHandler sel_118: self)
-		(self sel_146: sEnterSouth)
+		(steve init:)
+		(rat1 init: setCycle: RTRandCycle)
+		(rat2 init: setCycle: RTRandCycle)
+		(rat3 init: setCycle: RTRandCycle)
+		(rat4 init: setCycle: RTRandCycle)
+		(rat5 init: setCycle: RTRandCycle)
+		(floor init:)
+		(wall init:)
+		(furnaceExit init:)
+		(tRexExit init:)
+		(gDirectionHandler add: self)
+		(gWalkHandler add: self)
+		(self setScript: sEnterSouth)
 	)
 
-	(method (sel_57)
-		(super sel_57:)
+	(method (doit)
+		(super doit:)
 		(if local0
 			(Palette palSET_INTENSITY 0 255 (+= local1 2))
 			(if (>= local1 100)
 				(= local0 0)
-				(steve sel_146: sGunShots)
+				(steve setScript: sGunShots)
 			)
 		)
 		(cond
-			(sel_142)
+			(script)
 			((StepOn gEgo 2)
-				(self sel_146: sBurnEm)
+				(self setScript: sBurnEm)
 			)
 			((StepOn gEgo 4)
-				(self sel_146: sGoTRex)
+				(self setScript: sGoTRex)
 			)
-			((and (> (gEgo sel_1:) 211) (== (gEgo sel_2:) 732))
-				(gEgo sel_2: 745 sel_244: 6 sel_53: 6 sel_51: 3)
+			((and (> (gEgo x:) 211) (== (gEgo view:) 732))
+				(gEgo view: 745 cycleSpeed: 6 moveSpeed: 6 xStep: 3)
 			)
-			((and (< (gEgo sel_1:) 212) (== (gEgo sel_2:) 745))
-				(gEgo sel_2: 732 sel_244: 4 sel_53: 4 sel_51: 2)
+			((and (< (gEgo x:) 212) (== (gEgo view:) 745))
+				(gEgo view: 732 cycleSpeed: 4 moveSpeed: 4 xStep: 2)
 			)
 		)
 	)
 
-	(method (sel_111)
+	(method (dispose)
 		(LoadMany 0 930 991)
-		(gDirectionHandler sel_81: self)
-		(gWalkHandler sel_81: self)
+		(gDirectionHandler delete: self)
+		(gWalkHandler delete: self)
 		(DisposeScript 2740)
-		(gGameMusic1 sel_170:)
-		(super sel_111:)
+		(gGameMusic1 fade:)
+		(super dispose:)
 	)
 
-	(method (sel_133 param1)
+	(method (handleEvent param1)
 		(cond
 			(
 				(and
-					(& (param1 sel_31:) $0040)
-					(== (gTheIconBar sel_207:) (gTheIconBar sel_228:))
+					(& (param1 type:) $0040)
+					(== (gTheIconBar curIcon:) (gTheIconBar walkIconItem:))
 					(or
-						(== (param1 sel_37:) 7)
-						(== (param1 sel_37:) 8)
-						(== (param1 sel_37:) 6)
+						(== (param1 message:) 7)
+						(== (param1 message:) 8)
+						(== (param1 message:) 6)
 					)
 				)
-				(param1 sel_73: 1)
+				(param1 claimed: 1)
 			)
-			((& (param1 sel_31:) $1000)
-				(if (< gMouseX (gEgo sel_1:))
-					(param1 sel_73: 1)
+			((& (param1 type:) $1000)
+				(if (< gMouseX (gEgo x:))
+					(param1 claimed: 1)
 				else
 					(return 0)
 				)
@@ -128,32 +128,32 @@
 		)
 	)
 
-	(method (sel_145)
-		(gGameMusic2 sel_40: 16 sel_3: -1 sel_99: 1 sel_39:)
+	(method (cue)
+		(gGameMusic2 number: 16 loop: -1 flags: 1 play:)
 	)
 )
 
 (instance sGunShots of Script
 	(properties
-		sel_20 {sGunShots}
+		name {sGunShots}
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
-				(sFX sel_40: 52 sel_99: 5 sel_39: self)
+				(sFX number: 52 flags: 5 play: self)
 			)
 			(1
-				(= sel_139 30)
+				(= ticks 30)
 			)
 			(2
-				(sFX sel_39: self)
+				(sFX play: self)
 			)
 			(3
-				(gMessager sel_295: 8 0 0 0 gCurRoom)
-				(gGame sel_588:)
-				(gTheIconBar sel_233: 7)
-				(self sel_111:)
+				(gMessager say: 8 0 0 0 gCurRoom)
+				(gGame handsOn:)
+				(gTheIconBar disable: 7)
+				(self dispose:)
 			)
 		)
 	)
@@ -161,34 +161,34 @@
 
 (instance sEnterSouth of Script
 	(properties
-		sel_20 {sEnterSouth}
+		name {sEnterSouth}
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
 				(steve
-					sel_155: 0
-					sel_161: Walk
-					sel_244: 4
-					sel_53: 4
-					sel_51: 2
-					sel_312: PFollow gEgo 36
+					setLoop: 0
+					setCycle: Walk
+					cycleSpeed: 4
+					moveSpeed: 4
+					xStep: 2
+					setMotion: PFollow gEgo 36
 				)
 				(gEgo
-					sel_155: 0
-					sel_153: 10 209
-					sel_349: 0
-					sel_161: Walk
-					sel_244: 4
-					sel_53: 4
-					sel_51: 2
-					sel_312: MoveTo 89 163 self
+					setLoop: 0
+					posn: 10 209
+					edgeHit: 0
+					setCycle: Walk
+					cycleSpeed: 4
+					moveSpeed: 4
+					xStep: 2
+					setMotion: MoveTo 89 163 self
 				)
 			)
 			(1
-				(rat3 sel_146: sRat3Movement)
-				(self sel_111:)
+				(rat3 setScript: sRat3Movement)
+				(self dispose:)
 			)
 		)
 	)
@@ -196,78 +196,78 @@
 
 (instance sBurnEm of Script
 	(properties
-		sel_20 {sBurnEm}
+		name {sBurnEm}
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
-				(gGame sel_587:)
+				(gGame handsOff:)
 				(gEgo
-					sel_2: 744
-					sel_155: 2
-					sel_156: 0
-					sel_316: 1
-					sel_244: 12
-					sel_161: End self
+					view: 744
+					setLoop: 2
+					setCel: 0
+					ignoreActors: 1
+					cycleSpeed: 12
+					setCycle: End self
 				)
-				(steve sel_316: 1)
+				(steve ignoreActors: 1)
 			)
 			(1
-				(gGameMusic2 sel_167:)
-				(sFXFall sel_39:)
+				(gGameMusic2 stop:)
+				(sFXFall play:)
 				(gEgo
-					sel_63: 5
-					sel_53: 3
-					sel_52: 4
-					sel_161: 0
-					sel_312:
+					setPri: 5
+					moveSpeed: 3
+					yStep: 4
+					setCycle: 0
+					setMotion:
 						MoveTo
-						(gEgo sel_1:)
-						(+ (gEgo sel_0:) 15)
+						(gEgo x:)
+						(+ (gEgo y:) 15)
 						self
 				)
 			)
 			(2
-				(gEgo sel_111:)
-				(steve sel_312: PolyPath 239 106 self)
+				(gEgo dispose:)
+				(steve setMotion: PolyPath 239 106 self)
 			)
 			(3
-				(sFXFall sel_39:)
-				(steve sel_2: 744 sel_155: 1 sel_156: 0 sel_161: End self)
+				(sFXFall play:)
+				(steve view: 744 setLoop: 1 setCel: 0 setCycle: End self)
 			)
 			(4
 				(steve
-					sel_63: 5
-					sel_53: 3
-					sel_52: 4
-					sel_312: MoveTo (steve sel_1:) (+ (steve sel_0:) 40) self
+					setPri: 5
+					moveSpeed: 3
+					yStep: 4
+					setMotion: MoveTo (steve x:) (+ (steve y:) 40) self
 				)
 			)
 			(5
-				(= sel_139 120)
+				(= ticks 120)
 			)
 			(6
-				(gGameMusic1 sel_40: 736 sel_99: 1 sel_3: 1 sel_39:)
-				(furnaceExit sel_161: Osc 1 self)
+				(gGameMusic1 number: 736 flags: 1 loop: 1 play:)
+				(furnaceExit setCycle: Osc 1 self)
 			)
 			(7
-				(= sel_139 120)
+				(= ticks 120)
 			)
 			(8
-				(gGameMusic1 sel_40: 736 sel_99: 1 sel_3: 1 sel_39:)
-				(furnaceExit sel_161: CT 4 1 self)
+				(gGameMusic1 number: 736 flags: 1 loop: 1 play:)
+				(furnaceExit setCycle: CT 4 1 self)
 			)
 			(9
-				(furnaceExit sel_161: Beg self)
+				(furnaceExit setCycle: Beg self)
 			)
 			(10
-				(= sel_137 3)
+				(= seconds 3)
 			)
 			(11
 				(= global145 2) ; "If you can't stand the heat, stay out of the furnace!"
-				(gCurRoom sel_399: 99)
-				(self sel_111:)
+				(gCurRoom newRoom: 99)
+				(self dispose:)
 			)
 		)
 	)
@@ -275,41 +275,41 @@
 
 (instance sGoTRex of Script
 	(properties
-		sel_20 {sGoTRex}
+		name {sGoTRex}
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
-				(gGame sel_587:)
+				(gGame handsOff:)
 				(gEgo
-					sel_2: 745
-					sel_155: 1
-					sel_316: 1
-					sel_244: 10
-					sel_161: End self
+					view: 745
+					setLoop: 1
+					ignoreActors: 1
+					cycleSpeed: 10
+					setCycle: End self
 				)
-				(steve sel_316: 1)
+				(steve ignoreActors: 1)
 			)
 			(1
-				(steve sel_312: PolyPath 290 106 self)
+				(steve setMotion: PolyPath 290 106 self)
 			)
 			(2
 				(steve
-					sel_2: 745
-					sel_155: 2
-					sel_244: 10
-					sel_161: End self
-					sel_312: MoveTo (gEgo sel_1:) (- (gEgo sel_0:) 2)
+					view: 745
+					setLoop: 2
+					cycleSpeed: 10
+					setCycle: End self
+					setMotion: MoveTo (gEgo x:) (- (gEgo y:) 2)
 				)
 			)
 			(3
-				(steve sel_111:)
-				(= sel_136 2)
+				(steve dispose:)
+				(= cycles 2)
 			)
 			(4
-				(gCurRoom sel_399: (gCurRoom sel_409:))
-				(self sel_111:)
+				(gCurRoom newRoom: (gCurRoom north:))
+				(self dispose:)
 			)
 		)
 	)
@@ -317,39 +317,39 @@
 
 (instance sRat3Movement of Script
 	(properties
-		sel_20 {sRat3Movement}
+		name {sRat3Movement}
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
-				(= sel_137 2)
+				(= seconds 2)
 			)
 			(1
 				(rat3
-					sel_3: 1
-					sel_161: Walk
-					sel_244: 6
-					sel_312:
+					loop: 1
+					setCycle: Walk
+					cycleSpeed: 6
+					setMotion:
 						MoveTo
-						(- (rat3 sel_1:) 30)
-						(+ (rat3 sel_0:) 16)
+						(- (rat3 x:) 30)
+						(+ (rat3 y:) 16)
 						self
 				)
 			)
 			(2
 				(rat3
-					sel_312:
+					setMotion:
 						MoveTo
-						(+ (rat3 sel_1:) 30)
-						(- (rat3 sel_0:) 16)
+						(+ (rat3 x:) 30)
+						(- (rat3 y:) 16)
 						self
 				)
 			)
 			(3
-				(rat3 sel_155: 3 sel_244: 12 sel_161: RTRandCycle)
-				(rat4 sel_146: sRat4Movement)
-				(self sel_111:)
+				(rat3 setLoop: 3 cycleSpeed: 12 setCycle: RTRandCycle)
+				(rat4 setScript: sRat4Movement)
+				(self dispose:)
 			)
 		)
 	)
@@ -357,36 +357,36 @@
 
 (instance sRat4Movement of Script
 	(properties
-		sel_20 {sRat4Movement}
+		name {sRat4Movement}
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
 				(rat4
-					sel_3: 1
-					sel_161: Walk
-					sel_244: 6
-					sel_312:
+					loop: 1
+					setCycle: Walk
+					cycleSpeed: 6
+					setMotion:
 						MoveTo
-						(- (rat4 sel_1:) 36)
-						(+ (rat4 sel_0:) 21)
+						(- (rat4 x:) 36)
+						(+ (rat4 y:) 21)
 						self
 				)
 			)
 			(1
 				(rat4
-					sel_312:
+					setMotion:
 						MoveTo
-						(+ (rat4 sel_1:) 36)
-						(- (rat4 sel_0:) 21)
+						(+ (rat4 x:) 36)
+						(- (rat4 y:) 21)
 						self
 				)
 			)
 			(2
-				(rat4 sel_155: 3 sel_244: 12 sel_161: RTRandCycle)
-				(rat5 sel_146: sRat5Movement)
-				(self sel_111:)
+				(rat4 setLoop: 3 cycleSpeed: 12 setCycle: RTRandCycle)
+				(rat5 setScript: sRat5Movement)
+				(self dispose:)
 			)
 		)
 	)
@@ -394,68 +394,68 @@
 
 (instance sRat5Movement of Script
 	(properties
-		sel_20 {sRat5Movement}
+		name {sRat5Movement}
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
 				(rat5
-					sel_3: 1
-					sel_161: Walk
-					sel_244: 6
-					sel_312:
+					loop: 1
+					setCycle: Walk
+					cycleSpeed: 6
+					setMotion:
 						MoveTo
-						(- (rat5 sel_1:) 40)
-						(+ (rat5 sel_0:) 22)
+						(- (rat5 x:) 40)
+						(+ (rat5 y:) 22)
 						self
 				)
 			)
 			(1
 				(rat5
-					sel_312:
+					setMotion:
 						MoveTo
-						(+ (rat5 sel_1:) 40)
-						(- (rat5 sel_0:) 22)
+						(+ (rat5 x:) 40)
+						(- (rat5 y:) 22)
 						self
 				)
 			)
 			(2
-				(rat5 sel_155: 3 sel_244: 12 sel_161: RTRandCycle)
-				(= sel_137 4)
+				(rat5 setLoop: 3 cycleSpeed: 12 setCycle: RTRandCycle)
+				(= seconds 4)
 			)
 			(3
 				(rat1
-					sel_155: 1
-					sel_244: 6
-					sel_161: Walk
-					sel_312: MoveTo 51 182
+					setLoop: 1
+					cycleSpeed: 6
+					setCycle: Walk
+					setMotion: MoveTo 51 182
 				)
 				(rat2
-					sel_155: 1
-					sel_244: 6
-					sel_161: Walk
-					sel_312: MoveTo 59 172
+					setLoop: 1
+					cycleSpeed: 6
+					setCycle: Walk
+					setMotion: MoveTo 59 172
 				)
 				(rat3
-					sel_155: 1
-					sel_244: 6
-					sel_161: Walk
-					sel_312: MoveTo 66 175
+					setLoop: 1
+					cycleSpeed: 6
+					setCycle: Walk
+					setMotion: MoveTo 66 175
 				)
 				(rat4
-					sel_155: 1
-					sel_244: 6
-					sel_161: Walk
-					sel_312: MoveTo 76 165
+					setLoop: 1
+					cycleSpeed: 6
+					setCycle: Walk
+					setMotion: MoveTo 76 165
 				)
 				(rat5
-					sel_155: 1
-					sel_244: 6
-					sel_161: Walk
-					sel_312: MoveTo 84 165
+					setLoop: 1
+					cycleSpeed: 6
+					setCycle: Walk
+					setMotion: MoveTo 84 165
 				)
-				(self sel_111:)
+				(self dispose:)
 			)
 		)
 	)
@@ -463,45 +463,45 @@
 
 (instance sKillLaura of Script
 	(properties
-		sel_20 {sKillLaura}
+		name {sKillLaura}
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
-				(gGame sel_587:)
-				(gGameMusic2 sel_40: 3 sel_3: 1 sel_99: 1 sel_39:)
+				(gGame handsOff:)
+				(gGameMusic2 number: 3 loop: 1 flags: 1 play:)
 				(= local5 1)
-				(rat1 sel_155: 3 sel_161: Fwd sel_312: 0)
-				(rat2 sel_155: 3 sel_161: Fwd sel_312: 0)
+				(rat1 setLoop: 3 setCycle: Fwd setMotion: 0)
+				(rat2 setLoop: 3 setCycle: Fwd setMotion: 0)
 				(rat3
-					sel_155: 9
-					sel_63: 15
-					sel_312: MoveTo (rat3 sel_1:) (- (rat3 sel_0:) 24) self
+					setLoop: 9
+					setPri: 15
+					setMotion: MoveTo (rat3 x:) (- (rat3 y:) 24) self
 				)
-				(rat4 sel_155: 3 sel_161: Fwd sel_312: 0)
-				(rat5 sel_155: 3 sel_161: Fwd sel_312: 0)
+				(rat4 setLoop: 3 setCycle: Fwd setMotion: 0)
+				(rat5 setLoop: 3 setCycle: Fwd setMotion: 0)
 			)
 			(1
 				(gEgo
-					sel_2: 734
-					sel_155: 0
-					sel_156: 0
-					sel_244: 9
-					sel_161: End
+					view: 734
+					setLoop: 0
+					setCel: 0
+					cycleSpeed: 9
+					setCycle: End
 				)
 				(rat3
-					sel_155: 10
-					sel_312: MoveTo (rat3 sel_1:) (+ (rat3 sel_0:) 24) self
+					setLoop: 10
+					setMotion: MoveTo (rat3 x:) (+ (rat3 y:) 24) self
 				)
 			)
 			(2
-				(rat1 sel_155: 1 sel_161: Walk sel_312: MoveTo 49 183)
-				(rat2 sel_155: 1 sel_161: Walk sel_312: MoveTo 57 173)
-				(rat3 sel_155: 1 sel_161: Walk sel_312: MoveTo 64 176)
-				(rat4 sel_155: 1 sel_161: Walk sel_312: MoveTo 74 166)
-				(rat5 sel_155: 1 sel_161: Walk sel_312: MoveTo 82 166)
-				(self sel_111:)
+				(rat1 setLoop: 1 setCycle: Walk setMotion: MoveTo 49 183)
+				(rat2 setLoop: 1 setCycle: Walk setMotion: MoveTo 57 173)
+				(rat3 setLoop: 1 setCycle: Walk setMotion: MoveTo 64 176)
+				(rat4 setLoop: 1 setCycle: Walk setMotion: MoveTo 74 166)
+				(rat5 setLoop: 1 setCycle: Walk setMotion: MoveTo 82 166)
+				(self dispose:)
 			)
 		)
 	)
@@ -509,50 +509,50 @@
 
 (instance sKillSteve of Script
 	(properties
-		sel_20 {sKillSteve}
+		name {sKillSteve}
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
 				(= local6 1)
-				(rat1 sel_155: 3 sel_161: Fwd sel_312: 0)
-				(rat2 sel_155: 3 sel_161: Fwd sel_312: 0)
+				(rat1 setLoop: 3 setCycle: Fwd setMotion: 0)
+				(rat2 setLoop: 3 setCycle: Fwd setMotion: 0)
 				(rat3
-					sel_312: MoveTo (- (rat3 sel_1:) 7) (+ (rat3 sel_0:) 4) self
+					setMotion: MoveTo (- (rat3 x:) 7) (+ (rat3 y:) 4) self
 				)
-				(rat4 sel_155: 3 sel_161: Fwd sel_312: 0)
-				(rat5 sel_155: 3 sel_161: Fwd sel_312: 0)
+				(rat4 setLoop: 3 setCycle: Fwd setMotion: 0)
+				(rat5 setLoop: 3 setCycle: Fwd setMotion: 0)
 			)
 			(1
 				(rat3
-					sel_155: 9
-					sel_63: 15
-					sel_312: MoveTo (rat3 sel_1:) (- (rat3 sel_0:) 18) self
+					setLoop: 9
+					setPri: 15
+					setMotion: MoveTo (rat3 x:) (- (rat3 y:) 18) self
 				)
 			)
 			(2
 				(steve
-					sel_2: 734
-					sel_155: 1
-					sel_156: 0
-					sel_244: 9
-					sel_316: 1
-					sel_161: End
+					view: 734
+					setLoop: 1
+					setCel: 0
+					cycleSpeed: 9
+					ignoreActors: 1
+					setCycle: End
 				)
 				(rat3
-					sel_155: 10
-					sel_312: MoveTo (rat3 sel_1:) (+ (rat3 sel_0:) 18) self
+					setLoop: 10
+					setMotion: MoveTo (rat3 x:) (+ (rat3 y:) 18) self
 				)
 			)
 			(3
-				(rat3 sel_155: 3 sel_161: Fwd)
-				(gGameMusic2 sel_170: self)
+				(rat3 setLoop: 3 setCycle: Fwd)
+				(gGameMusic2 fade: self)
 			)
 			(4
 				(= global145 8) ; "You have a gnawing feeling you've made a horrible mistake. Rats!"
-				(gCurRoom sel_399: 99)
-				(self sel_111:)
+				(gCurRoom newRoom: 99)
+				(self dispose:)
 			)
 		)
 	)
@@ -560,86 +560,86 @@
 
 (instance sRatsEatCheese of Script
 	(properties
-		sel_20 {sRatsEatCheese}
+		name {sRatsEatCheese}
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
-				(gGame sel_587:)
-				(rat1 sel_155: 3 sel_161: Fwd sel_312: 0)
-				(rat2 sel_155: 3 sel_161: Fwd sel_312: 0)
-				(if (rat3 sel_142:)
-					(rat3 sel_146: sRat3Return)
+				(gGame handsOff:)
+				(rat1 setLoop: 3 setCycle: Fwd setMotion: 0)
+				(rat2 setLoop: 3 setCycle: Fwd setMotion: 0)
+				(if (rat3 script:)
+					(rat3 setScript: sRat3Return)
 				else
-					(rat3 sel_155: 3 sel_161: Fwd sel_312: 0)
+					(rat3 setLoop: 3 setCycle: Fwd setMotion: 0)
 				)
-				(if (rat4 sel_142:)
-					(rat4 sel_146: sRat4Return)
+				(if (rat4 script:)
+					(rat4 setScript: sRat4Return)
 				else
-					(rat4 sel_155: 3 sel_161: Fwd sel_312: 0)
+					(rat4 setLoop: 3 setCycle: Fwd setMotion: 0)
 				)
-				(if (rat5 sel_142:)
-					(rat5 sel_146: sRat5Return)
+				(if (rat5 script:)
+					(rat5 setScript: sRat5Return)
 				else
-					(rat5 sel_155: 3 sel_161: Fwd sel_312: 0)
+					(rat5 setLoop: 3 setCycle: Fwd setMotion: 0)
 				)
 				(gEgo
-					sel_2: 742
-					sel_155: 0
-					sel_156: 0
-					sel_244: 6
-					sel_161: End self
+					view: 742
+					setLoop: 0
+					setCel: 0
+					cycleSpeed: 6
+					setCycle: End self
 				)
 			)
 			(1
-				(gEgo sel_161: Beg)
+				(gEgo setCycle: Beg)
 				(cheese
-					sel_110:
-					sel_153: (+ (gEgo sel_1:) 30) (- (gEgo sel_0:) 31)
-					sel_312: JumpTo (- (rat2 sel_1:) 2) (+ (rat2 sel_0:) 1) self
+					init:
+					posn: (+ (gEgo x:) 30) (- (gEgo y:) 31)
+					setMotion: JumpTo (- (rat2 x:) 2) (+ (rat2 y:) 1) self
 				)
 			)
 			(2
-				(gEgo sel_351: 16)
-				((ScriptID 21 1) sel_57: 785) ; dropCluesCode
-				(= sel_139 90)
+				(gEgo put: 16)
+				((ScriptID 21 1) doit: 785) ; dropCluesCode
+				(= ticks 90)
 			)
 			(3
-				(gMessager sel_295: 4 27)
-				(cheese sel_111:)
-				(gEgo sel_2: 732 sel_155: 0 sel_156: 0)
+				(gMessager say: 4 27)
+				(cheese dispose:)
+				(gEgo view: 732 setLoop: 0 setCel: 0)
 				(rat1
-					sel_155: 1
-					sel_244: 6
-					sel_161: Walk
-					sel_312: MoveTo 51 182
+					setLoop: 1
+					cycleSpeed: 6
+					setCycle: Walk
+					setMotion: MoveTo 51 182
 				)
 				(rat2
-					sel_155: 1
-					sel_244: 6
-					sel_161: Walk
-					sel_312: MoveTo 59 172
+					setLoop: 1
+					cycleSpeed: 6
+					setCycle: Walk
+					setMotion: MoveTo 59 172
 				)
 				(rat3
-					sel_155: 1
-					sel_244: 6
-					sel_161: Walk
-					sel_312: MoveTo 66 175
+					setLoop: 1
+					cycleSpeed: 6
+					setCycle: Walk
+					setMotion: MoveTo 66 175
 				)
 				(rat4
-					sel_155: 1
-					sel_244: 6
-					sel_161: Walk
-					sel_312: MoveTo 76 165
+					setLoop: 1
+					cycleSpeed: 6
+					setCycle: Walk
+					setMotion: MoveTo 76 165
 				)
 				(rat5
-					sel_155: 1
-					sel_244: 6
-					sel_161: Walk
-					sel_312: MoveTo 84 165
+					setLoop: 1
+					cycleSpeed: 6
+					setCycle: Walk
+					setMotion: MoveTo 84 165
 				)
-				(self sel_111:)
+				(self dispose:)
 			)
 		)
 	)
@@ -647,17 +647,17 @@
 
 (instance sRat3Return of Script
 	(properties
-		sel_20 {sRat3Return}
+		name {sRat3Return}
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
-				(rat3 sel_312: MoveTo 177 111 self)
+				(rat3 setMotion: MoveTo 177 111 self)
 			)
 			(1
-				(rat3 sel_155: 3 sel_161: Fwd)
-				(self sel_111:)
+				(rat3 setLoop: 3 setCycle: Fwd)
+				(self dispose:)
 			)
 		)
 	)
@@ -665,17 +665,17 @@
 
 (instance sRat4Return of Script
 	(properties
-		sel_20 {sRat4Return}
+		name {sRat4Return}
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
-				(rat4 sel_312: MoveTo 187 101 self)
+				(rat4 setMotion: MoveTo 187 101 self)
 			)
 			(1
-				(rat4 sel_155: 3 sel_161: Fwd)
-				(self sel_111:)
+				(rat4 setLoop: 3 setCycle: Fwd)
+				(self dispose:)
 			)
 		)
 	)
@@ -683,17 +683,17 @@
 
 (instance sRat5Return of Script
 	(properties
-		sel_20 {sRat5Return}
+		name {sRat5Return}
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
-				(rat5 sel_312: MoveTo 195 101 self)
+				(rat5 setMotion: MoveTo 195 101 self)
 			)
 			(1
-				(rat5 sel_155: 3 sel_161: Fwd)
-				(self sel_111:)
+				(rat5 setLoop: 3 setCycle: Fwd)
+				(self dispose:)
 			)
 		)
 	)
@@ -701,113 +701,113 @@
 
 (instance sRatsEnterFurnace of Script
 	(properties
-		sel_20 {sRatsEnterFurnace}
+		name {sRatsEnterFurnace}
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
-				(gGame sel_587:)
-				(rat1 sel_155: 3 sel_161: Fwd sel_312: 0)
-				(rat2 sel_155: 3 sel_161: Fwd sel_312: 0)
-				(rat3 sel_155: 3 sel_146: 0 sel_161: Fwd sel_312: 0)
-				(rat4 sel_155: 3 sel_146: 0 sel_161: Fwd sel_312: 0)
-				(rat5 sel_155: 3 sel_146: 0 sel_161: Fwd sel_312: 0)
+				(gGame handsOff:)
+				(rat1 setLoop: 3 setCycle: Fwd setMotion: 0)
+				(rat2 setLoop: 3 setCycle: Fwd setMotion: 0)
+				(rat3 setLoop: 3 setScript: 0 setCycle: Fwd setMotion: 0)
+				(rat4 setLoop: 3 setScript: 0 setCycle: Fwd setMotion: 0)
+				(rat5 setLoop: 3 setScript: 0 setCycle: Fwd setMotion: 0)
 				(gEgo
-					sel_2: 742
-					sel_155: 0
-					sel_156: 0
-					sel_244: 6
-					sel_161: End self
+					view: 742
+					setLoop: 0
+					setCel: 0
+					cycleSpeed: 6
+					setCycle: End self
 				)
 			)
 			(1
-				(gEgo sel_161: Beg)
+				(gEgo setCycle: Beg)
 				(cheese
-					sel_110:
-					sel_153: (+ (gEgo sel_1:) 30) (- (gEgo sel_0:) 31)
-					sel_53: 6
-					sel_63: 5
-					sel_312: JumpTo 245 108 self
+					init:
+					posn: (+ (gEgo x:) 30) (- (gEgo y:) 31)
+					moveSpeed: 6
+					setPri: 5
+					setMotion: JumpTo 245 108 self
 				)
 			)
 			(2
-				(cheese sel_111:)
-				(gEgo sel_2: 732 sel_155: 0 sel_161: Walk sel_351: 16)
-				((ScriptID 21 1) sel_57: 785) ; dropCluesCode
-				(rat1 sel_155: 0 sel_161: Walk sel_312: MoveTo 194 105 self)
+				(cheese dispose:)
+				(gEgo view: 732 setLoop: 0 setCycle: Walk put: 16)
+				((ScriptID 21 1) doit: 785) ; dropCluesCode
+				(rat1 setLoop: 0 setCycle: Walk setMotion: MoveTo 194 105 self)
 			)
 			(3
-				(rat1 sel_155: 4 sel_312: MoveTo 211 104 self)
+				(rat1 setLoop: 4 setMotion: MoveTo 211 104 self)
 			)
 			(4
-				(rat1 sel_155: 6 sel_244: 6 sel_161: Osc 1 self)
+				(rat1 setLoop: 6 cycleSpeed: 6 setCycle: Osc 1 self)
 			)
 			(5
-				(rat1 sel_161: 0 sel_63: 5 sel_312: JumpTo 239 114 self)
+				(rat1 setCycle: 0 setPri: 5 setMotion: JumpTo 239 114 self)
 			)
 			(6
-				(rat1 sel_111:)
-				(rat2 sel_155: 0 sel_161: Walk sel_312: MoveTo 190 107 self)
+				(rat1 dispose:)
+				(rat2 setLoop: 0 setCycle: Walk setMotion: MoveTo 190 107 self)
 			)
 			(7
-				(rat2 sel_161: Fwd sel_63: 5 sel_312: JumpTo 238 117 self)
+				(rat2 setCycle: Fwd setPri: 5 setMotion: JumpTo 238 117 self)
 			)
 			(8
-				(rat2 sel_111:)
-				(rat3 sel_155: 0 sel_161: Walk sel_312: MoveTo 194 105 self)
+				(rat2 dispose:)
+				(rat3 setLoop: 0 setCycle: Walk setMotion: MoveTo 194 105 self)
 			)
 			(9
-				(rat3 sel_155: 4 sel_312: MoveTo 228 98 self)
+				(rat3 setLoop: 4 setMotion: MoveTo 228 98 self)
 			)
 			(10
-				(rat3 sel_155: 6 sel_244: 6 sel_161: Osc 1 self)
+				(rat3 setLoop: 6 cycleSpeed: 6 setCycle: Osc 1 self)
 			)
 			(11
 				(rat3
-					sel_63: 5
-					sel_53: 0
-					sel_52: 4
-					sel_312: MoveTo 228 110 self
+					setPri: 5
+					moveSpeed: 0
+					yStep: 4
+					setMotion: MoveTo 228 110 self
 				)
 			)
 			(12
-				(rat3 sel_111:)
-				(rat4 sel_155: 0 sel_161: Walk sel_312: MoveTo 194 105 self)
+				(rat3 dispose:)
+				(rat4 setLoop: 0 setCycle: Walk setMotion: MoveTo 194 105 self)
 			)
 			(13
-				(rat4 sel_155: 4 sel_312: MoveTo 211 104 self)
+				(rat4 setLoop: 4 setMotion: MoveTo 211 104 self)
 			)
 			(14
-				(rat4 sel_161: Fwd sel_63: 5 sel_312: JumpTo 246 94 self)
+				(rat4 setCycle: Fwd setPri: 5 setMotion: JumpTo 246 94 self)
 			)
 			(15
-				(rat4 sel_155: 2 sel_156: 7 sel_161: 0 sel_53: 9)
-				(= sel_139 45)
+				(rat4 setLoop: 2 setCel: 7 setCycle: 0 moveSpeed: 9)
+				(= ticks 45)
 			)
 			(16
-				(rat4 sel_312: MoveTo 246 110 self)
+				(rat4 setMotion: MoveTo 246 110 self)
 			)
 			(17
-				(rat4 sel_111:)
-				(rat5 sel_155: 0 sel_161: Walk sel_312: MoveTo 190 107 self)
+				(rat4 dispose:)
+				(rat5 setLoop: 0 setCycle: Walk setMotion: MoveTo 190 107 self)
 			)
 			(18
 				(rat5
-					sel_155: 8
-					sel_244: 9
-					sel_161: Fwd
-					sel_63: 5
-					sel_312: JumpTo 238 117 self
+					setLoop: 8
+					cycleSpeed: 9
+					setCycle: Fwd
+					setPri: 5
+					setMotion: JumpTo 238 117 self
 				)
 			)
 			(19
-				(rat5 sel_111:)
-				(sFXRats sel_170:)
-				(gMessager sel_295: 7 0 8)
+				(rat5 dispose:)
+				(sFXRats fade:)
+				(gMessager say: 7 0 8)
 				(= local2 1)
-				(gGame sel_588:)
-				(self sel_111:)
+				(gGame handsOn:)
+				(self dispose:)
 			)
 		)
 	)
@@ -815,118 +815,118 @@
 
 (instance sRatsEnterRex of Script
 	(properties
-		sel_20 {sRatsEnterRex}
+		name {sRatsEnterRex}
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
-				(gGame sel_587:)
-				(rat1 sel_155: 3 sel_161: Fwd sel_312: 0)
-				(rat2 sel_155: 3 sel_161: Fwd sel_312: 0)
-				(rat3 sel_155: 3 sel_146: 0 sel_161: Fwd sel_312: 0)
-				(rat4 sel_155: 3 sel_146: 0 sel_161: Fwd sel_312: 0)
-				(rat5 sel_155: 3 sel_146: 0 sel_161: Fwd sel_312: 0)
+				(gGame handsOff:)
+				(rat1 setLoop: 3 setCycle: Fwd setMotion: 0)
+				(rat2 setLoop: 3 setCycle: Fwd setMotion: 0)
+				(rat3 setLoop: 3 setScript: 0 setCycle: Fwd setMotion: 0)
+				(rat4 setLoop: 3 setScript: 0 setCycle: Fwd setMotion: 0)
+				(rat5 setLoop: 3 setScript: 0 setCycle: Fwd setMotion: 0)
 				(gEgo
-					sel_2: 742
-					sel_155: 0
-					sel_156: 0
-					sel_244: 6
-					sel_161: End self
+					view: 742
+					setLoop: 0
+					setCel: 0
+					cycleSpeed: 6
+					setCycle: End self
 				)
 			)
 			(1
-				(gEgo sel_161: Beg)
+				(gEgo setCycle: Beg)
 				(cheese
-					sel_110:
-					sel_153: (+ (gEgo sel_1:) 30) (- (gEgo sel_0:) 31)
-					sel_53: 6
-					sel_63: 5
-					sel_312: JumpTo 295 105 self
+					init:
+					posn: (+ (gEgo x:) 30) (- (gEgo y:) 31)
+					moveSpeed: 6
+					setPri: 5
+					setMotion: JumpTo 295 105 self
 				)
 			)
 			(2
-				(cheese sel_111:)
-				(gEgo sel_2: 732 sel_155: 0 sel_161: Walk sel_351: 16)
-				((ScriptID 21 1) sel_57: 785) ; dropCluesCode
-				(rat1 sel_155: 0 sel_161: Walk sel_312: MoveTo 194 105 self)
+				(cheese dispose:)
+				(gEgo view: 732 setLoop: 0 setCycle: Walk put: 16)
+				((ScriptID 21 1) doit: 785) ; dropCluesCode
+				(rat1 setLoop: 0 setCycle: Walk setMotion: MoveTo 194 105 self)
 			)
 			(3
-				(rat1 sel_155: 4 sel_312: MoveTo 266 103 self)
+				(rat1 setLoop: 4 setMotion: MoveTo 266 103 self)
 			)
 			(4
-				(rat1 sel_155: 6 sel_244: 6 sel_161: Osc 1 self)
+				(rat1 setLoop: 6 cycleSpeed: 6 setCycle: Osc 1 self)
 			)
 			(5
-				(rat1 sel_161: 0 sel_63: 5 sel_312: JumpTo 291 112 self)
+				(rat1 setCycle: 0 setPri: 5 setMotion: JumpTo 291 112 self)
 			)
 			(6
-				(rat1 sel_111:)
-				(rat2 sel_155: 0 sel_161: Walk sel_312: MoveTo 190 107 self)
+				(rat1 dispose:)
+				(rat2 setLoop: 0 setCycle: Walk setMotion: MoveTo 190 107 self)
 			)
 			(7
-				(rat2 sel_161: Fwd sel_63: 5 sel_312: JumpTo 291 112 self)
+				(rat2 setCycle: Fwd setPri: 5 setMotion: JumpTo 291 112 self)
 			)
 			(8
-				(rat2 sel_111:)
-				(rat3 sel_155: 0 sel_161: Walk sel_312: MoveTo 194 105 self)
+				(rat2 dispose:)
+				(rat3 setLoop: 0 setCycle: Walk setMotion: MoveTo 194 105 self)
 			)
 			(9
-				(rat3 sel_155: 4 sel_312: MoveTo 266 103 self)
+				(rat3 setLoop: 4 setMotion: MoveTo 266 103 self)
 			)
 			(10
-				(rat3 sel_155: 4 sel_312: MoveTo 281 98 self)
+				(rat3 setLoop: 4 setMotion: MoveTo 281 98 self)
 			)
 			(11
-				(rat3 sel_155: 6 sel_244: 6 sel_161: Osc 1 self)
+				(rat3 setLoop: 6 cycleSpeed: 6 setCycle: Osc 1 self)
 			)
 			(12
 				(rat3
-					sel_63: 5
-					sel_53: 0
-					sel_52: 4
-					sel_312: MoveTo 281 111 self
+					setPri: 5
+					moveSpeed: 0
+					yStep: 4
+					setMotion: MoveTo 281 111 self
 				)
 			)
 			(13
-				(rat3 sel_111:)
-				(rat4 sel_155: 0 sel_161: Walk sel_312: MoveTo 194 105 self)
+				(rat3 dispose:)
+				(rat4 setLoop: 0 setCycle: Walk setMotion: MoveTo 194 105 self)
 			)
 			(14
-				(rat4 sel_155: 4 sel_312: MoveTo 271 103 self)
+				(rat4 setLoop: 4 setMotion: MoveTo 271 103 self)
 			)
 			(15
-				(rat4 sel_161: Fwd sel_63: 5 sel_312: JumpTo 299 94 self)
+				(rat4 setCycle: Fwd setPri: 5 setMotion: JumpTo 299 94 self)
 			)
 			(16
-				(rat4 sel_155: 2 sel_156: 7 sel_161: 0 sel_53: 9)
-				(= sel_139 45)
+				(rat4 setLoop: 2 setCel: 7 setCycle: 0 moveSpeed: 9)
+				(= ticks 45)
 			)
 			(17
-				(rat4 sel_312: MoveTo 299 119 self)
+				(rat4 setMotion: MoveTo 299 119 self)
 			)
 			(18
-				(rat4 sel_111:)
-				(rat5 sel_155: 0 sel_161: Walk sel_312: MoveTo 190 107 self)
+				(rat4 dispose:)
+				(rat5 setLoop: 0 setCycle: Walk setMotion: MoveTo 190 107 self)
 			)
 			(19
 				(rat5
-					sel_155: 8
-					sel_244: 9
-					sel_161: Fwd
-					sel_63: 5
-					sel_312: JumpTo 283 112 self
+					setLoop: 8
+					cycleSpeed: 9
+					setCycle: Fwd
+					setPri: 5
+					setMotion: JumpTo 283 112 self
 				)
 			)
 			(20
-				(rat5 sel_111:)
-				(sFXRats sel_170:)
-				(gMessager sel_295: 7 0 9)
+				(rat5 dispose:)
+				(sFXRats fade:)
+				(gMessager say: 7 0 9)
 				(= local2 1)
 				(SetFlag 46)
-				(gGame sel_588:)
-				(gTheIconBar sel_233: 7)
-				(self sel_111:)
+				(gGame handsOn:)
+				(gTheIconBar disable: 7)
+				(self dispose:)
 			)
 		)
 	)
@@ -934,13 +934,13 @@
 
 (instance egoActions of Actions
 	(properties
-		sel_20 {egoActions}
+		name {egoActions}
 	)
 
-	(method (sel_300 param1)
+	(method (doVerb param1)
 		(switch param1
 			(27
-				(gMessager sel_295: 6 27)
+				(gMessager say: 6 27)
 			)
 			(else 0)
 		)
@@ -949,57 +949,57 @@
 
 (instance steve of Actor
 	(properties
-		sel_20 {steve}
-		sel_1 -10
-		sel_0 222
-		sel_213 5
-		sel_2 733
-		sel_14 16384
+		name {steve}
+		x -10
+		y 222
+		noun 5
+		view 733
+		signal 16384
 	)
 
-	(method (sel_57)
-		(super sel_57:)
+	(method (doit)
+		(super doit:)
 		(cond
-			(sel_142)
-			((and (> (self sel_1:) 211) (== (self sel_2:) 733))
-				(self sel_2: 812 sel_244: 6 sel_53: 6 sel_51: 3 sel_103: 1)
+			(script)
+			((and (> (self x:) 211) (== (self view:) 733))
+				(self view: 812 cycleSpeed: 6 moveSpeed: 6 xStep: 3 scaleSignal: 1)
 			)
 		)
 	)
 
-	(method (sel_300 param1)
+	(method (doVerb param1)
 		(switch param1
 			(1
-				(gMessager sel_295: 1 1 27 0 0 1887)
+				(gMessager say: 1 1 27 0 0 1887)
 			)
 			(4
-				(gMessager sel_295: 1 4 27 0 0 1887)
+				(gMessager say: 1 4 27 0 0 1887)
 			)
 			(8
-				(gMessager sel_295: 1 8 27 0 0 1887)
+				(gMessager say: 1 8 27 0 0 1887)
 			)
 			(2
 				(if local2
-					(gMessager sel_295: 5 2 7)
+					(gMessager say: 5 2 7)
 				else
 					(switch local4
 						(0
-							(gMessager sel_295: 5 2)
+							(gMessager say: 5 2)
 						)
 						(else
-							(gMessager sel_295: 5 2 6)
+							(gMessager say: 5 2 6)
 						)
 					)
 					(++ local4)
 				)
 			)
 			(27
-				(gEgo sel_351: 16)
-				((ScriptID 21 1) sel_57: 785) ; dropCluesCode
-				(gMessager sel_295: 5 27)
+				(gEgo put: 16)
+				((ScriptID 21 1) doit: 785) ; dropCluesCode
+				(gMessager say: 5 27)
 			)
 			(else
-				(super sel_300: param1)
+				(super doVerb: param1)
 			)
 		)
 	)
@@ -1007,108 +1007,108 @@
 
 (instance cheese of Actor
 	(properties
-		sel_20 {cheese}
-		sel_52 1
-		sel_2 742
-		sel_3 2
-		sel_51 1
-		sel_53 9
+		name {cheese}
+		yStep 1
+		view 742
+		loop 2
+		xStep 1
+		moveSpeed 9
 	)
 )
 
 (instance rat1 of Actor
 	(properties
-		sel_20 {rat1}
-		sel_1 162
-		sel_0 118
-		sel_213 4
-		sel_2 741
-		sel_3 3
-		sel_14 16384
-		sel_244 18
-		sel_53 4
+		name {rat1}
+		x 162
+		y 118
+		noun 4
+		view 741
+		loop 3
+		signal 16384
+		cycleSpeed 18
+		moveSpeed 4
 	)
 
-	(method (sel_300)
-		(rat3 sel_300: &rest)
+	(method (doVerb)
+		(rat3 doVerb: &rest)
 	)
 )
 
 (instance rat2 of Actor
 	(properties
-		sel_20 {rat2}
-		sel_1 170
-		sel_0 108
-		sel_213 4
-		sel_2 741
-		sel_3 3
-		sel_14 16384
-		sel_244 18
-		sel_53 4
+		name {rat2}
+		x 170
+		y 108
+		noun 4
+		view 741
+		loop 3
+		signal 16384
+		cycleSpeed 18
+		moveSpeed 4
 	)
 
-	(method (sel_300)
-		(rat3 sel_300: &rest)
+	(method (doVerb)
+		(rat3 doVerb: &rest)
 	)
 )
 
 (instance rat3 of Actor
 	(properties
-		sel_20 {rat3}
-		sel_1 177
-		sel_0 111
-		sel_213 4
-		sel_2 741
-		sel_3 3
-		sel_14 16384
-		sel_244 18
-		sel_53 4
+		name {rat3}
+		x 177
+		y 111
+		noun 4
+		view 741
+		loop 3
+		signal 16384
+		cycleSpeed 18
+		moveSpeed 4
 	)
 
-	(method (sel_57)
-		(super sel_57:)
+	(method (doit)
+		(super doit:)
 		(cond
-			(sel_142)
+			(script)
 			(
 				(and
-					(< (self sel_255: gEgo) 5)
-					(== (gEgo sel_2:) 732)
+					(< (self distanceTo: gEgo) 5)
+					(== (gEgo view:) 732)
 					(not local5)
 				)
-				(gCurRoom sel_146: sKillLaura)
+				(gCurRoom setScript: sKillLaura)
 			)
 			(
 				(and
-					(< (self sel_255: steve) 10)
-					(== (steve sel_2:) 733)
+					(< (self distanceTo: steve) 10)
+					(== (steve view:) 733)
 					(not local6)
 				)
-				(gCurRoom sel_146: sKillSteve)
+				(gCurRoom setScript: sKillSteve)
 			)
 		)
 	)
 
-	(method (sel_300 param1)
+	(method (doVerb param1)
 		(switch param1
 			(1
 				(switch local3
 					(0
-						(gMessager sel_295: 4 1 3)
+						(gMessager say: 4 1 3)
 					)
 					(1
-						(gMessager sel_295: 4 1 4)
+						(gMessager say: 4 1 4)
 					)
 					(else
-						(gMessager sel_295: 4 1 5)
+						(gMessager say: 4 1 5)
 					)
 				)
 				(++ local3)
 			)
 			(27
-				(gCurRoom sel_146: sRatsEatCheese)
+				(gCurRoom setScript: sRatsEatCheese)
 			)
 			(else
-				(super sel_300: param1)
+				(super doVerb: param1)
 			)
 		)
 	)
@@ -1116,68 +1116,68 @@
 
 (instance rat4 of Actor
 	(properties
-		sel_20 {rat4}
-		sel_1 187
-		sel_0 101
-		sel_213 4
-		sel_2 741
-		sel_3 3
-		sel_14 16384
-		sel_244 18
-		sel_53 4
+		name {rat4}
+		x 187
+		y 101
+		noun 4
+		view 741
+		loop 3
+		signal 16384
+		cycleSpeed 18
+		moveSpeed 4
 	)
 
-	(method (sel_300)
-		(rat3 sel_300: &rest)
+	(method (doVerb)
+		(rat3 doVerb: &rest)
 	)
 )
 
 (instance rat5 of Actor
 	(properties
-		sel_20 {rat5}
-		sel_1 195
-		sel_0 101
-		sel_213 4
-		sel_2 741
-		sel_3 3
-		sel_14 16384
-		sel_244 18
-		sel_53 4
+		name {rat5}
+		x 195
+		y 101
+		noun 4
+		view 741
+		loop 3
+		signal 16384
+		cycleSpeed 18
+		moveSpeed 4
 	)
 
-	(method (sel_300)
-		(rat3 sel_300: &rest)
+	(method (doVerb)
+		(rat3 doVerb: &rest)
 	)
 )
 
 (instance furnaceExit of Prop
 	(properties
-		sel_20 {furnaceExit}
-		sel_1 253
-		sel_0 33
-		sel_213 3
-		sel_2 744
-		sel_14 16385
+		name {furnaceExit}
+		x 253
+		y 33
+		noun 3
+		view 744
+		signal 16385
 	)
 
-	(method (sel_300 param1)
+	(method (doVerb param1)
 		(switch param1
 			(1
-				(if (< (gEgo sel_1:) 202)
-					(gMessager sel_295: 3 1 1)
+				(if (< (gEgo x:) 202)
+					(gMessager say: 3 1 1)
 				else
-					(gMessager sel_295: 3 1 2)
+					(gMessager say: 3 1 2)
 				)
 			)
 			(27
 				(if local2
-					(super sel_300: param1)
+					(super doVerb: param1)
 				else
-					(gCurRoom sel_146: sRatsEnterFurnace)
+					(gCurRoom setScript: sRatsEnterFurnace)
 				)
 			)
 			(else
-				(super sel_300: param1)
+				(super doVerb: param1)
 			)
 		)
 	)
@@ -1185,34 +1185,34 @@
 
 (instance tRexExit of Feature
 	(properties
-		sel_20 {tRexExit}
-		sel_1 287
-		sel_0 69
-		sel_213 2
-		sel_6 35
-		sel_7 271
-		sel_8 103
-		sel_9 304
+		name {tRexExit}
+		x 287
+		y 69
+		noun 2
+		nsTop 35
+		nsLeft 271
+		nsBottom 103
+		nsRight 304
 	)
 
-	(method (sel_300 param1)
+	(method (doVerb param1)
 		(switch param1
 			(1
-				(if (< (gEgo sel_1:) 202)
-					(gMessager sel_295: 2 1 1)
+				(if (< (gEgo x:) 202)
+					(gMessager say: 2 1 1)
 				else
-					(gMessager sel_295: 2 1 2)
+					(gMessager say: 2 1 2)
 				)
 			)
 			(27
 				(if local2
-					(super sel_300: param1)
+					(super doVerb: param1)
 				else
-					(gCurRoom sel_146: sRatsEnterRex)
+					(gCurRoom setScript: sRatsEnterRex)
 				)
 			)
 			(else
-				(super sel_300: param1)
+				(super doVerb: param1)
 			)
 		)
 	)
@@ -1220,22 +1220,22 @@
 
 (instance floor of Feature
 	(properties
-		sel_20 {floor}
-		sel_0 1
-		sel_302 8
+		name {floor}
+		y 1
+		onMeCheck 8
 	)
 
-	(method (sel_300 param1)
+	(method (doVerb param1)
 		(switch param1
 			(27
 				(if local2
-					(super sel_300: param1)
+					(super doVerb: param1)
 				else
-					(gCurRoom sel_146: sRatsEatCheese)
+					(gCurRoom setScript: sRatsEatCheese)
 				)
 			)
 			(else
-				(super sel_300: param1)
+				(super doVerb: param1)
 			)
 		)
 	)
@@ -1243,33 +1243,33 @@
 
 (instance wall of Feature
 	(properties
-		sel_20 {wall}
-		sel_0 1
-		sel_213 1
-		sel_302 16
+		name {wall}
+		y 1
+		noun 1
+		onMeCheck 16
 	)
 )
 
 (instance sFXRats of Sound
 	(properties
-		sel_20 {sFXRats}
-		sel_99 1
-		sel_40 733
-		sel_3 -1
+		name {sFXRats}
+		flags 1
+		number 733
+		loop -1
 	)
 )
 
 (instance sFXFall of Sound
 	(properties
-		sel_20 {sFXFall}
-		sel_99 1
-		sel_40 542
+		name {sFXFall}
+		flags 1
+		number 542
 	)
 )
 
 (instance sFX of Sound
 	(properties
-		sel_20 {sFX}
-		sel_99 1
+		name {sFX}
+		flags 1
 	)
 )

@@ -19,57 +19,57 @@
 
 (instance poly2355Code of Code
 	(properties
-		sel_20 {poly2355Code}
+		name {poly2355Code}
 	)
 
-	(method (sel_57 param1)
+	(method (doit param1)
 		(param1
-			sel_118:
-				(poly2355a sel_110: sel_117:)
-				(poly2355b sel_110: sel_117:)
-				(poly2355c sel_110: sel_117:)
+			add:
+				(poly2355a init: yourself:)
+				(poly2355b init: yourself:)
+				(poly2355c init: yourself:)
 		)
 	)
 )
 
 (instance poly2355a of Polygon
 	(properties
-		sel_20 {poly2355a}
+		name {poly2355a}
 	)
 
-	(method (sel_110)
-		(= sel_31 2)
-		(= sel_86 22)
-		(= sel_87 @local0)
+	(method (init)
+		(= type 2)
+		(= size 22)
+		(= points @local0)
 	)
 )
 
 (instance poly2355b of Polygon
 	(properties
-		sel_20 {poly2355b}
+		name {poly2355b}
 	)
 
-	(method (sel_110)
-		(= sel_31 2)
-		(= sel_86 6)
-		(= sel_87 @local44)
+	(method (init)
+		(= type 2)
+		(= size 6)
+		(= points @local44)
 	)
 )
 
 (instance poly2355c of Polygon
 	(properties
-		sel_20 {poly2355c}
+		name {poly2355c}
 	)
 
-	(method (sel_110)
-		(= sel_31 2)
-		(= sel_86 8)
-		(= sel_87 @local56)
+	(method (init)
+		(= type 2)
+		(= size 8)
+		(= points @local56)
 	)
 )
 
 (instance pts2355 of MuseumPoints
 	(properties
-		sel_20 {pts2355}
+		name {pts2355}
 	)
 )

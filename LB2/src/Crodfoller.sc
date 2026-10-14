@@ -12,45 +12,45 @@
 
 (instance Crodfoller of Talker
 	(properties
-		sel_20 {Crodfoller}
-		sel_1 220
-		sel_0 15
-		sel_2 1896
-		sel_3 3
-		sel_537 150
-		sel_26 15
-		sel_549 -200
+		name {Crodfoller}
+		x 220
+		y 15
+		view 1896
+		loop 3
+		talkWidth 150
+		back 15
+		textX -200
 	)
 
-	(method (sel_110)
-		(= sel_30 gUserFont)
-		(super sel_110: crodfollerBust crodfollerEyes crodfollerMouth &rest)
+	(method (init)
+		(= font gUserFont)
+		(super init: crodfollerBust crodfollerEyes crodfollerMouth &rest)
 	)
 )
 
 (instance crodfollerBust of Prop
 	(properties
-		sel_20 {crodfollerBust}
-		sel_2 1896
-		sel_3 1
+		name {crodfollerBust}
+		view 1896
+		loop 1
 	)
 )
 
 (instance crodfollerEyes of Prop
 	(properties
-		sel_20 {crodfollerEyes}
-		sel_6 31
-		sel_7 33
-		sel_2 1896
-		sel_3 2
+		name {crodfollerEyes}
+		nsTop 31
+		nsLeft 33
+		view 1896
+		loop 2
 	)
 )
 
 (instance crodfollerMouth of Prop
 	(properties
-		sel_20 {crodfollerMouth}
-		sel_6 50
-		sel_7 27
-		sel_2 1896
+		name {crodfollerMouth}
+		nsTop 50
+		nsLeft 27
+		view 1896
 	)
 )

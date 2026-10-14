@@ -19,20 +19,20 @@
 
 (instance poly2430Code of Code
 	(properties
-		sel_20 {poly2430Code}
+		name {poly2430Code}
 	)
 
-	(method (sel_57 param1)
+	(method (doit param1)
 		(param1
-			sel_118:
+			add:
 				(if
 					(or
 						(> gAct 3)
 						(and (== gAct 3) (TimeCheck $b102 1)) ; can 11:15 pm occur?
 					)
-					(poly2430b sel_110: sel_117:)
+					(poly2430b init: yourself:)
 				else
-					(poly2430a sel_110: sel_117:)
+					(poly2430a init: yourself:)
 				)
 		)
 	)
@@ -40,38 +40,38 @@
 
 (instance poly2430a of Polygon
 	(properties
-		sel_20 {poly2430a}
+		name {poly2430a}
 	)
 
-	(method (sel_110)
-		(= sel_31 3)
-		(= sel_86 16)
-		(= sel_87 @local0)
+	(method (init)
+		(= type 3)
+		(= size 16)
+		(= points @local0)
 	)
 )
 
 (instance poly2430b of Polygon
 	(properties
-		sel_20 {poly2430b}
+		name {poly2430b}
 	)
 
-	(method (sel_110)
-		(= sel_31 3)
-		(= sel_86 15)
-		(= sel_87 @local32)
+	(method (init)
+		(= type 3)
+		(= size 15)
+		(= points @local32)
 	)
 )
 
 (instance pts2430 of MuseumPoints
 	(properties
-		sel_20 {pts2430}
-		sel_621 150
-		sel_622 130
-		sel_623 115
-		sel_624 95
-		sel_627 315
-		sel_628 127
-		sel_629 44
-		sel_630 119
+		name {pts2430}
+		midPtX 150
+		midPtY 130
+		northPtX 115
+		northPtY 95
+		eastPtX 315
+		eastPtY 127
+		westPtX 44
+		westPtY 119
 	)
 )

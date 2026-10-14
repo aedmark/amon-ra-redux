@@ -18,42 +18,42 @@
 
 (instance poly2400Code of Code
 	(properties
-		sel_20 {poly2400Code}
+		name {poly2400Code}
 	)
 
-	(method (sel_57 param1)
+	(method (doit param1)
 		(param1
-			sel_118: (poly2400a sel_110: sel_117:) (poly2400b sel_110: sel_117:)
+			add: (poly2400a init: yourself:) (poly2400b init: yourself:)
 		)
 	)
 )
 
 (instance poly2400a of Polygon
 	(properties
-		sel_20 {poly2400a}
+		name {poly2400a}
 	)
 
-	(method (sel_110)
-		(= sel_31 2)
-		(= sel_86 9)
-		(= sel_87 @local0)
+	(method (init)
+		(= type 2)
+		(= size 9)
+		(= points @local0)
 	)
 )
 
 (instance poly2400b of Polygon
 	(properties
-		sel_20 {poly2400b}
+		name {poly2400b}
 	)
 
-	(method (sel_110)
-		(= sel_31 2)
-		(= sel_86 4)
-		(= sel_87 @local18)
+	(method (init)
+		(= type 2)
+		(= size 4)
+		(= points @local18)
 	)
 )
 
 (instance pts2400 of MuseumPoints
 	(properties
-		sel_20 {pts2400}
+		name {pts2400}
 	)
 )

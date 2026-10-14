@@ -18,78 +18,78 @@
 
 (instance rm455 of LBRoom
 	(properties
-		sel_20 {rm455}
-		sel_408 555
+		name {rm455}
+		picture 555
 	)
 
-	(method (sel_110)
+	(method (init)
 		(LoadMany rsVIEW 470 563)
 		(LoadMany rsSOUND 6)
-		(super sel_110:)
-		(gGame sel_87: 1 134)
-		(self sel_146: sFindPippin)
+		(super init:)
+		(gGame points: 1 134)
+		(self setScript: sFindPippin)
 	)
 
-	(method (sel_111)
-		(screamAndLook sel_170: 0 12 30 1)
-		(super sel_111:)
+	(method (dispose)
+		(screamAndLook fade: 0 12 30 1)
+		(super dispose:)
 	)
 
-	(method (sel_300 param1)
+	(method (doVerb param1)
 		(switch param1
 			(13
-				(sFindPippin sel_145:)
+				(sFindPippin cue:)
 			)
 			(else
-				(super sel_300: param1)
+				(super doVerb: param1)
 			)
 		)
 	)
 
-	(method (sel_399 param1)
+	(method (newRoom param1)
 		(proc0_8 0)
-		(screamAndLook sel_170: 0 12 30 1)
-		(wrapMusic sel_111: 1)
-		(super sel_399: param1)
+		(screamAndLook fade: 0 12 30 1)
+		(wrapMusic dispose: 1)
+		(super newRoom: param1)
 	)
 )
 
 (instance sFindPippin of Script
 	(properties
-		sel_20 {sFindPippin}
+		name {sFindPippin}
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
-				(gGameMusic2 sel_40: 82 sel_99: 5 sel_3: 1 sel_39:)
-				(wrapMusic sel_110: -1 1 6)
-				(= sel_137 3)
+				(gGameMusic2 number: 82 flags: 5 loop: 1 play:)
+				(wrapMusic init: -1 1 6)
+				(= seconds 3)
 			)
 			(1
-				(gGame sel_588:)
+				(gGame handsOn:)
 				(proc0_8 1)
-				(gCurRoom sel_417: 470)
-				(gCurRoom sel_408: 470)
-				(drip sel_110: sel_161: Fwd)
-				(pipMummy sel_110:)
-				(leftEye sel_110:)
-				(rightEye sel_110:)
-				(nose sel_110:)
-				(moustache sel_110:)
-				(mouthOpen sel_110:)
-				(ear sel_110:)
-				(hair sel_110:)
-				(dagger sel_110:)
-				(jacket sel_110:)
-				(pants sel_110:)
-				(vest sel_110:)
-				(flesh sel_110:)
-				(shirt sel_110:)
-				(flower sel_110:)
+				(gCurRoom drawPic: 470)
+				(gCurRoom picture: 470)
+				(drip init: setCycle: Fwd)
+				(pipMummy init:)
+				(leftEye init:)
+				(rightEye init:)
+				(nose init:)
+				(moustache init:)
+				(mouthOpen init:)
+				(ear init:)
+				(hair init:)
+				(dagger init:)
+				(jacket init:)
+				(pants init:)
+				(vest init:)
+				(flesh init:)
+				(shirt init:)
+				(flower init:)
 			)
 			(2
-				(gCurRoom sel_399: 454)
+				(gCurRoom newRoom: 454)
 			)
 		)
 	)
@@ -97,20 +97,20 @@
 
 (instance drip of Prop
 	(properties
-		sel_20 {drip}
-		sel_1 180
-		sel_0 100
-		sel_213 2
-		sel_2 470
+		name {drip}
+		x 180
+		y 100
+		noun 2
+		view 470
 	)
 
-	(method (sel_300 param1)
+	(method (doVerb param1)
 		(switch param1
 			(13
-				(sFindPippin sel_145:)
+				(sFindPippin cue:)
 			)
 			(else
-				(super sel_300: param1)
+				(super doVerb: param1)
 			)
 		)
 	)
@@ -118,20 +118,20 @@
 
 (instance pipMummy of Feature
 	(properties
-		sel_20 {pipMummy}
-		sel_1 1
-		sel_0 1
-		sel_213 13
-		sel_302 -32768
+		name {pipMummy}
+		x 1
+		y 1
+		noun 13
+		onMeCheck -32768
 	)
 
-	(method (sel_300 param1)
+	(method (doVerb param1)
 		(switch param1
 			(13
-				(sFindPippin sel_145:)
+				(sFindPippin cue:)
 			)
 			(else
-				(super sel_300: param1)
+				(super doVerb: param1)
 			)
 		)
 	)
@@ -139,20 +139,20 @@
 
 (instance leftEye of Feature
 	(properties
-		sel_20 {leftEye}
-		sel_1 1
-		sel_0 1
-		sel_213 14
-		sel_302 2
+		name {leftEye}
+		x 1
+		y 1
+		noun 14
+		onMeCheck 2
 	)
 
-	(method (sel_300 param1)
+	(method (doVerb param1)
 		(switch param1
 			(13
-				(sFindPippin sel_145:)
+				(sFindPippin cue:)
 			)
 			(else
-				(super sel_300: param1)
+				(super doVerb: param1)
 			)
 		)
 	)
@@ -160,20 +160,20 @@
 
 (instance rightEye of Feature
 	(properties
-		sel_20 {rightEye}
-		sel_1 1
-		sel_0 1
-		sel_213 8
-		sel_302 4
+		name {rightEye}
+		x 1
+		y 1
+		noun 8
+		onMeCheck 4
 	)
 
-	(method (sel_300 param1)
+	(method (doVerb param1)
 		(switch param1
 			(13
-				(sFindPippin sel_145:)
+				(sFindPippin cue:)
 			)
 			(else
-				(super sel_300: param1)
+				(super doVerb: param1)
 			)
 		)
 	)
@@ -181,20 +181,20 @@
 
 (instance nose of Feature
 	(properties
-		sel_20 {nose}
-		sel_1 1
-		sel_0 1
-		sel_213 11
-		sel_302 8
+		name {nose}
+		x 1
+		y 1
+		noun 11
+		onMeCheck 8
 	)
 
-	(method (sel_300 param1)
+	(method (doVerb param1)
 		(switch param1
 			(13
-				(sFindPippin sel_145:)
+				(sFindPippin cue:)
 			)
 			(else
-				(super sel_300: param1)
+				(super doVerb: param1)
 			)
 		)
 	)
@@ -202,20 +202,20 @@
 
 (instance moustache of Feature
 	(properties
-		sel_20 {moustache}
-		sel_1 1
-		sel_0 1
-		sel_213 9
-		sel_302 16
+		name {moustache}
+		x 1
+		y 1
+		noun 9
+		onMeCheck 16
 	)
 
-	(method (sel_300 param1)
+	(method (doVerb param1)
 		(switch param1
 			(13
-				(sFindPippin sel_145:)
+				(sFindPippin cue:)
 			)
 			(else
-				(super sel_300: param1)
+				(super doVerb: param1)
 			)
 		)
 	)
@@ -223,20 +223,20 @@
 
 (instance mouthOpen of Feature
 	(properties
-		sel_20 {mouthOpen}
-		sel_1 1
-		sel_0 1
-		sel_213 10
-		sel_302 32
+		name {mouthOpen}
+		x 1
+		y 1
+		noun 10
+		onMeCheck 32
 	)
 
-	(method (sel_300 param1)
+	(method (doVerb param1)
 		(switch param1
 			(13
-				(sFindPippin sel_145:)
+				(sFindPippin cue:)
 			)
 			(else
-				(super sel_300: param1)
+				(super doVerb: param1)
 			)
 		)
 	)
@@ -244,20 +244,20 @@
 
 (instance ear of Feature
 	(properties
-		sel_20 {ear}
-		sel_1 1
-		sel_0 1
-		sel_213 3
-		sel_302 64
+		name {ear}
+		x 1
+		y 1
+		noun 3
+		onMeCheck 64
 	)
 
-	(method (sel_300 param1)
+	(method (doVerb param1)
 		(switch param1
 			(13
-				(sFindPippin sel_145:)
+				(sFindPippin cue:)
 			)
 			(else
-				(super sel_300: param1)
+				(super doVerb: param1)
 			)
 		)
 	)
@@ -265,20 +265,20 @@
 
 (instance hair of Feature
 	(properties
-		sel_20 {hair}
-		sel_1 1
-		sel_0 1
-		sel_213 6
-		sel_302 128
+		name {hair}
+		x 1
+		y 1
+		noun 6
+		onMeCheck 128
 	)
 
-	(method (sel_300 param1)
+	(method (doVerb param1)
 		(switch param1
 			(13
-				(sFindPippin sel_145:)
+				(sFindPippin cue:)
 			)
 			(else
-				(super sel_300: param1)
+				(super doVerb: param1)
 			)
 		)
 	)
@@ -286,20 +286,20 @@
 
 (instance dagger of Feature
 	(properties
-		sel_20 {dagger}
-		sel_1 1
-		sel_0 1
-		sel_213 1
-		sel_302 256
+		name {dagger}
+		x 1
+		y 1
+		noun 1
+		onMeCheck 256
 	)
 
-	(method (sel_300 param1)
+	(method (doVerb param1)
 		(switch param1
 			(13
-				(sFindPippin sel_145:)
+				(sFindPippin cue:)
 			)
 			(else
-				(super sel_300: param1)
+				(super doVerb: param1)
 			)
 		)
 	)
@@ -307,41 +307,41 @@
 
 (instance jacket of Feature
 	(properties
-		sel_20 {jacket}
-		sel_1 1
-		sel_0 1
-		sel_213 7
-		sel_302 512
+		name {jacket}
+		x 1
+		y 1
+		noun 7
+		onMeCheck 512
 	)
 
-	(method (sel_300 param1)
+	(method (doVerb param1)
 		(switch param1
 			(1
-				(if (gEgo sel_238: 21)
-					(gMessager sel_295: 7 1 2)
+				(if (gEgo has: 21)
+					(gMessager say: 7 1 2)
 				else
-					(gMessager sel_295: 7 1 1)
+					(gMessager say: 7 1 1)
 				)
 			)
 			(8
-				(if (gEgo sel_238: 21)
-					(gMessager sel_295: 7 8 2)
+				(if (gEgo has: 21)
+					(gMessager say: 7 8 2)
 				else
-					(gMessager sel_295: 7 8 1)
+					(gMessager say: 7 8 1)
 				)
 			)
 			(4
-				(if (gEgo sel_238: 21)
-					(gMessager sel_295: 7 4 2)
+				(if (gEgo has: 21)
+					(gMessager say: 7 4 2)
 				else
-					(gCurRoom sel_422: inNotepad)
+					(gCurRoom setInset: inNotepad)
 				)
 			)
 			(13
-				(sFindPippin sel_145:)
+				(sFindPippin cue:)
 			)
 			(else
-				(super sel_300: param1)
+				(super doVerb: param1)
 			)
 		)
 	)
@@ -349,20 +349,20 @@
 
 (instance pants of Feature
 	(properties
-		sel_20 {pants}
-		sel_1 1
-		sel_0 1
-		sel_213 12
-		sel_302 1024
+		name {pants}
+		x 1
+		y 1
+		noun 12
+		onMeCheck 1024
 	)
 
-	(method (sel_300 param1)
+	(method (doVerb param1)
 		(switch param1
 			(13
-				(sFindPippin sel_145:)
+				(sFindPippin cue:)
 			)
 			(else
-				(super sel_300: param1)
+				(super doVerb: param1)
 			)
 		)
 	)
@@ -370,20 +370,20 @@
 
 (instance vest of Feature
 	(properties
-		sel_20 {vest}
-		sel_1 1
-		sel_0 1
-		sel_213 16
-		sel_302 2048
+		name {vest}
+		x 1
+		y 1
+		noun 16
+		onMeCheck 2048
 	)
 
-	(method (sel_300 param1)
+	(method (doVerb param1)
 		(switch param1
 			(13
-				(sFindPippin sel_145:)
+				(sFindPippin cue:)
 			)
 			(else
-				(super sel_300: param1)
+				(super doVerb: param1)
 			)
 		)
 	)
@@ -391,20 +391,20 @@
 
 (instance flesh of Feature
 	(properties
-		sel_20 {flesh}
-		sel_1 1
-		sel_0 1
-		sel_213 4
-		sel_302 4096
+		name {flesh}
+		x 1
+		y 1
+		noun 4
+		onMeCheck 4096
 	)
 
-	(method (sel_300 param1)
+	(method (doVerb param1)
 		(switch param1
 			(13
-				(sFindPippin sel_145:)
+				(sFindPippin cue:)
 			)
 			(else
-				(super sel_300: param1)
+				(super doVerb: param1)
 			)
 		)
 	)
@@ -412,20 +412,20 @@
 
 (instance shirt of Feature
 	(properties
-		sel_20 {shirt}
-		sel_1 1
-		sel_0 1
-		sel_213 15
-		sel_302 8192
+		name {shirt}
+		x 1
+		y 1
+		noun 15
+		onMeCheck 8192
 	)
 
-	(method (sel_300 param1)
+	(method (doVerb param1)
 		(switch param1
 			(13
-				(sFindPippin sel_145:)
+				(sFindPippin cue:)
 			)
 			(else
-				(super sel_300: param1)
+				(super doVerb: param1)
 			)
 		)
 	)
@@ -433,20 +433,20 @@
 
 (instance flower of Feature
 	(properties
-		sel_20 {flower}
-		sel_1 1
-		sel_0 1
-		sel_213 5
-		sel_302 16384
+		name {flower}
+		x 1
+		y 1
+		noun 5
+		onMeCheck 16384
 	)
 
-	(method (sel_300 param1)
+	(method (doVerb param1)
 		(switch param1
 			(13
-				(sFindPippin sel_145:)
+				(sFindPippin cue:)
 			)
 			(else
-				(super sel_300: param1)
+				(super doVerb: param1)
 			)
 		)
 	)
@@ -454,36 +454,36 @@
 
 (instance inNotepad of Inset
 	(properties
-		sel_20 {inNotepad}
-		sel_2 563
-		sel_3 2
-		sel_4 2
-		sel_1 118
-		sel_0 79
-		sel_570 1
+		name {inNotepad}
+		view 563
+		loop 2
+		cel 2
+		x 118
+		y 79
+		disposeNotOnMe 1
 	)
 
-	(method (sel_110)
-		(super sel_110: &rest)
-		(gMessager sel_295: 7 4 1)
+	(method (init)
+		(super init: &rest)
+		(gMessager say: 7 4 1)
 	)
 
-	(method (sel_300 param1)
+	(method (doVerb param1)
 		(switch param1
 			(4
-				(self sel_111:)
-				(gGame sel_87: 1 135)
-				((ScriptID 21 0) sel_57: 790) ; addCluesCode
-				(gEgo sel_350: 21)
+				(self dispose:)
+				(gGame points: 1 135)
+				((ScriptID 21 0) doit: 790) ; addCluesCode
+				(gEgo get: 21)
 			)
 			(1
-				(gMessager sel_295: 45 1 0 0 0 15)
+				(gMessager say: 45 1 0 0 0 15)
 			)
 			(8
-				(gMessager sel_295: 45 8 0 0 0 15)
+				(gMessager say: 45 8 0 0 0 15)
 			)
 			(else
-				(super sel_300: param1 &rest)
+				(super doVerb: param1 &rest)
 			)
 		)
 	)
@@ -491,17 +491,17 @@
 
 (instance wrapMusic of WrapMusic
 	(properties
-		sel_20 {wrapMusic}
+		name {wrapMusic}
 	)
 
-	(method (sel_110)
-		(= sel_608 screamAndLook)
-		(super sel_110: &rest)
+	(method (init)
+		(= wrapSound screamAndLook)
+		(super init: &rest)
 	)
 )
 
 (instance screamAndLook of Sound
 	(properties
-		sel_20 {screamAndLook}
+		name {screamAndLook}
 	)
 )

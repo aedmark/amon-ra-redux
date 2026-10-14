@@ -18,50 +18,50 @@
 
 (instance poly2600Code of Code
 	(properties
-		sel_20 {poly2600Code}
+		name {poly2600Code}
 	)
 
-	(method (sel_57 param1)
+	(method (doit param1)
 		(param1
-			sel_118: (poly2600a sel_110: sel_117:) (poly2600b sel_110: sel_117:)
+			add: (poly2600a init: yourself:) (poly2600b init: yourself:)
 		)
 	)
 )
 
 (instance poly2600a of Polygon
 	(properties
-		sel_20 {poly2600a}
+		name {poly2600a}
 	)
 
-	(method (sel_110)
-		(= sel_31 2)
-		(= sel_86 17)
-		(= sel_87 @local0)
+	(method (init)
+		(= type 2)
+		(= size 17)
+		(= points @local0)
 	)
 )
 
 (instance poly2600b of Polygon
 	(properties
-		sel_20 {poly2600b}
+		name {poly2600b}
 	)
 
-	(method (sel_110)
-		(= sel_31 2)
-		(= sel_86 6)
-		(= sel_87 @local34)
+	(method (init)
+		(= type 2)
+		(= size 6)
+		(= points @local34)
 	)
 )
 
 (instance pts2600 of MuseumPoints
 	(properties
-		sel_20 {pts2600}
-		sel_621 120
-		sel_622 180
-		sel_623 1135
-		sel_624 165
-		sel_625 120
-		sel_626 250
-		sel_627 1285
-		sel_628 165
+		name {pts2600}
+		midPtX 120
+		midPtY 180
+		northPtX 1135
+		northPtY 165
+		southPtX 120
+		southPtY 250
+		eastPtX 1285
+		eastPtY 165
 	)
 )

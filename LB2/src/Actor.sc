@@ -11,277 +11,277 @@
 
 (class View of Feature
 	(properties
-		sel_20 {View}
-		sel_52 2
-		sel_2 -1
-		sel_3 0
-		sel_4 0
-		sel_60 0
-		sel_5 0
-		sel_14 257
-		sel_10 0
-		sel_11 0
-		sel_12 0
-		sel_13 0
-		sel_16 0
-		sel_17 0
-		sel_18 0
-		sel_19 0
-		sel_88 0
-		sel_103 0
-		sel_104 128
-		sel_105 128
-		sel_106 128
+		name {View}
+		yStep 2
+		view -1
+		loop 0
+		cel 0
+		priority 0
+		underBits 0
+		signal 257
+		lsTop 0
+		lsLeft 0
+		lsBottom 0
+		lsRight 0
+		brTop 0
+		brLeft 0
+		brBottom 0
+		brRight 0
+		palette 0
+		scaleSignal 0
+		scaleX 128
+		scaleY 128
+		maxScale 128
 	)
 
-	(method (sel_110 &tmp temp0)
-		(= temp0 (if (& sel_14 $0020) gAddToPics else gCast))
-		(&= sel_14 $7fff)
-		(if (not (temp0 sel_122: self))
-			(= sel_13 (= sel_12 (= sel_11 (= sel_10 0))))
-			(&= sel_14 $ff77)
+	(method (init &tmp temp0)
+		(= temp0 (if (& signal $0020) gAddToPics else gCast))
+		(&= signal $7fff)
+		(if (not (temp0 contains: self))
+			(= lsRight (= lsBottom (= lsLeft (= lsTop 0))))
+			(&= signal $ff77)
 		)
 		(BaseSetter self)
-		(temp0 sel_118: self)
+		(temp0 add: self)
 		(if (== temp0 gAddToPics)
-			(if (not (& sel_14 $0010))
-				(= sel_60 (CoordPri sel_0))
+			(if (not (& signal $0010))
+				(= priority (CoordPri y))
 			)
 			(SetNowSeen self)
-			(temp0 sel_57:)
+			(temp0 doit:)
 		)
-		(self sel_307: sel_319:)
+		(self initialize: checkDetail:)
 	)
 
-	(method (sel_111)
-		(self sel_315: sel_102:)
-		(|= sel_14 $8000)
+	(method (dispose)
+		(self startUpd: hide:)
+		(|= signal $8000)
 	)
 
-	(method (sel_113)
-		(Print sel_198: sel_20 sel_206: sel_2 sel_3 sel_4 sel_110:)
+	(method (showSelf)
+		(Print addText: name addIcon: view loop cel init:)
 	)
 
-	(method (sel_310)
-		(return (not (& sel_14 $0088)))
+	(method (isNotHidden)
+		(return (not (& signal $0088)))
 	)
 
-	(method (sel_218 param1 param2 &tmp temp0 temp1)
+	(method (onMe param1 param2 &tmp temp0 temp1)
 		(if (IsObject param1)
-			(= temp0 (param1 sel_1:))
-			(= temp1 (param1 sel_0:))
+			(= temp0 (param1 x:))
+			(= temp1 (param1 y:))
 		else
 			(= temp0 param1)
 			(= temp1 param2)
 		)
 		(return
 			(cond
-				((& sel_14 $0080) 0)
-				((and (not (IsObject sel_302)) (& sel_14 $1000))
+				((& signal $0080) 0)
+				((and (not (IsObject onMeCheck)) (& signal $1000))
 					(if
 						(or
 							(not
-								(if (or sel_7 sel_9 sel_6)
+								(if (or nsLeft nsRight nsTop)
 								else
-									sel_8
+									nsBottom
 								)
 							)
 							(and
-								(<= sel_7 temp0)
-								(<= temp0 sel_9)
-								(<= sel_6 temp1)
-								(<= temp1 sel_8)
+								(<= nsLeft temp0)
+								(<= temp0 nsRight)
+								(<= nsTop temp1)
+								(<= temp1 nsBottom)
 							)
 						)
 						(not
 							(IsItSkip
-								sel_2
-								sel_3
-								sel_4
-								(- temp1 sel_6)
-								(- temp0 sel_7)
+								view
+								loop
+								cel
+								(- temp1 nsTop)
+								(- temp0 nsLeft)
 							)
 						)
 					)
 				)
 				(else
-					(super sel_218: temp0 temp1)
+					(super onMe: temp0 temp1)
 				)
 			)
 		)
 	)
 
-	(method (sel_153 param1 param2 param3)
+	(method (posn param1 param2 param3)
 		(if (>= argc 1)
-			(= sel_1 param1)
+			(= x param1)
 			(if (>= argc 2)
-				(= sel_0 param2)
+				(= y param2)
 				(if (>= argc 3)
-					(= sel_82 param3)
+					(= z param3)
 				)
 			)
 		)
 		(BaseSetter self)
-		(self sel_314:)
+		(self forceUpd:)
 	)
 
-	(method (sel_313)
-		(|= sel_14 $0001)
-		(&= sel_14 $fffd)
+	(method (stopUpd)
+		(|= signal $0001)
+		(&= signal $fffd)
 	)
 
-	(method (sel_314)
-		(|= sel_14 $0040)
+	(method (forceUpd)
+		(|= signal $0040)
 	)
 
-	(method (sel_315)
-		(|= sel_14 $0002)
-		(&= sel_14 $fffe)
+	(method (startUpd)
+		(|= signal $0002)
+		(&= signal $fffe)
 	)
 
-	(method (sel_63 param1)
+	(method (setPri param1)
 		(cond
 			((== argc 0)
-				(|= sel_14 $0010)
+				(|= signal $0010)
 			)
 			((== param1 -1)
-				(&= sel_14 $ffef)
+				(&= signal $ffef)
 			)
 			(else
-				(= sel_60 param1)
-				(|= sel_14 $0010)
+				(= priority param1)
+				(|= signal $0010)
 			)
 		)
-		(self sel_314:)
+		(self forceUpd:)
 	)
 
-	(method (sel_155 param1)
+	(method (setLoop param1)
 		(cond
 			((== argc 0)
-				(|= sel_14 $0800)
+				(|= signal $0800)
 			)
 			((== param1 -1)
-				(&= sel_14 $f7ff)
+				(&= signal $f7ff)
 			)
 			(else
-				(= sel_3 param1)
-				(|= sel_14 $0800)
+				(= loop param1)
+				(|= signal $0800)
 			)
 		)
-		(self sel_314:)
+		(self forceUpd:)
 	)
 
-	(method (sel_156 param1)
+	(method (setCel param1)
 		(cond
 			((== argc 0) 0)
 			((== param1 -1) 0)
 			(else
-				(= sel_4
-					(if (>= param1 (self sel_246:))
-						(self sel_246:)
+				(= cel
+					(if (>= param1 (self lastCel:))
+						(self lastCel:)
 					else
 						param1
 					)
 				)
 			)
 		)
-		(self sel_314:)
+		(self forceUpd:)
 	)
 
-	(method (sel_316 param1)
+	(method (ignoreActors param1)
 		(if (or (== 0 argc) param1)
-			(|= sel_14 $4000)
+			(|= signal $4000)
 		else
-			(&= sel_14 $bfff)
+			(&= signal $bfff)
 		)
 	)
 
-	(method (sel_102)
-		(|= sel_14 $0008)
+	(method (hide)
+		(|= signal $0008)
 	)
 
-	(method (sel_216)
-		(&= sel_14 $fff7)
+	(method (show)
+		(&= signal $fff7)
 	)
 
-	(method (sel_81)
-		(if (& sel_14 $8000)
-			(&= sel_14 $7fff)
+	(method (delete)
+		(if (& signal $8000)
+			(&= signal $7fff)
 			(cond
-				((gAddToPics sel_122: self)
-					(gAddToPics sel_81: self)
-					(&= sel_14 $ffdf)
+				((gAddToPics contains: self)
+					(gAddToPics delete: self)
+					(&= signal $ffdf)
 				)
-				((& sel_14 $0020)
-					(gCast sel_81: self)
-					(gAddToPics sel_118: self)
+				((& signal $0020)
+					(gCast delete: self)
+					(gAddToPics add: self)
 					(return)
 				)
 				(else
-					(gCast sel_81: self)
+					(gCast delete: self)
 				)
 			)
-			(if sel_5
-				(UnLoad 133 sel_5)
-				(= sel_5 0)
+			(if underBits
+				(UnLoad 133 underBits)
+				(= underBits 0)
 			)
-			(super sel_111:)
-			(if (IsObject sel_299)
-				(sel_299 sel_111:)
+			(super dispose:)
+			(if (IsObject actions)
+				(actions dispose:)
 			)
-			(= sel_299 0)
+			(= actions 0)
 		)
 	)
 
-	(method (sel_317)
-		(if (gCast sel_122: self)
-			(|= sel_14 $8021)
+	(method (addToPic)
+		(if (gCast contains: self)
+			(|= signal $8021)
 		else
-			(|= sel_14 $0020)
-			(self sel_110:)
+			(|= signal $0020)
+			(self init:)
 		)
 	)
 
-	(method (sel_246)
+	(method (lastCel)
 		(return (- (NumCels self) 1))
 	)
 
-	(method (sel_318 param1 &tmp temp0)
-		(= temp0 (& sel_14 $0200))
+	(method (isExtra param1 &tmp temp0)
+		(= temp0 (& signal $0200))
 		(if argc
 			(if param1
-				(|= sel_14 $0200)
+				(|= signal $0200)
 			else
-				(&= sel_14 $fdff)
+				(&= signal $fdff)
 			)
 		)
 		(return temp0)
 	)
 
-	(method (sel_243))
+	(method (motionCue))
 
-	(method (sel_319))
+	(method (checkDetail))
 
-	(method (sel_320 param1 &tmp temp0 temp1 temp2 [temp3 40])
+	(method (setScale param1 &tmp temp0 temp1 temp2 [temp3 40])
 		(cond
 			((not argc)
-				(= sel_103 1)
+				(= scaleSignal 1)
 			)
 			((not param1)
-				(= sel_103 0)
+				(= scaleSignal 0)
 			)
-			((< param1 (gCurRoom sel_108:))
+			((< param1 (gCurRoom vanishingY:))
 				(Printf
 					@temp3
 					{<%s setScale:> y value less than vanishingY}
-					sel_20
+					name
 				)
 			)
 			(else
-				(= temp0 (- param1 (gCurRoom sel_108:)))
+				(= temp0 (- param1 (gCurRoom vanishingY:)))
 				(= temp2 (+ (/ (* (= temp1 (- 190 param1)) 100) temp0) 100))
-				(|= sel_103 $0003)
-				(= sel_106 (/ (* temp2 128) 100))
+				(|= scaleSignal $0003)
+				(= maxScale (/ (* temp2 128) 100))
 			)
 		)
 	)
@@ -289,462 +289,462 @@
 
 (class Prop of View
 	(properties
-		sel_20 {Prop}
-		sel_14 0
-		sel_244 6
-		sel_142 0
-		sel_245 0
-		sel_135 0
-		sel_321 0
-		sel_322 0
+		name {Prop}
+		signal 0
+		cycleSpeed 6
+		script 0
+		cycler 0
+		timer 0
+		detailLevel 0
+		scaler 0
 	)
 
-	(method (sel_57 &tmp temp0)
-		(SetNowSeen self sel_6)
-		(if (& sel_14 $8000)
+	(method (doit &tmp temp0)
+		(SetNowSeen self nsTop)
+		(if (& signal $8000)
 			(return)
 		)
-		(if sel_142
-			(sel_142 sel_57:)
+		(if script
+			(script doit:)
 		)
-		(if (and (& sel_14 $0004) (not (& sel_14 $0002)))
+		(if (and (& signal $0004) (not (& signal $0002)))
 			(return)
 		)
-		(if sel_245
-			(sel_245 sel_57:)
+		(if cycler
+			(cycler doit:)
 		)
-		(if sel_322
-			(sel_322 sel_57:)
+		(if scaler
+			(scaler doit:)
 		)
 	)
 
-	(method (sel_133 param1)
-		(if sel_142
-			(sel_142 sel_133: param1)
+	(method (handleEvent param1)
+		(if script
+			(script handleEvent: param1)
 		)
-		(super sel_133: param1)
+		(super handleEvent: param1)
 	)
 
-	(method (sel_81)
-		(if (& sel_14 $8000)
-			(self sel_146: 0 sel_161: 0)
-			(if sel_135
-				(sel_135 sel_111:)
+	(method (delete)
+		(if (& signal $8000)
+			(self setScript: 0 setCycle: 0)
+			(if timer
+				(timer dispose:)
 			)
-			(if (IsObject sel_322)
-				(sel_322 sel_111:)
-				(= sel_322 0)
+			(if (IsObject scaler)
+				(scaler dispose:)
+				(= scaler 0)
 			)
-			(super sel_81:)
+			(super delete:)
 		)
 	)
 
-	(method (sel_243)
-		(if (and sel_245 (sel_245 sel_240:))
-			(sel_245 sel_243:)
+	(method (motionCue)
+		(if (and cycler (cycler completed:))
+			(cycler motionCue:)
 		)
 	)
 
-	(method (sel_319 param1)
+	(method (checkDetail param1)
 		(cond
-			((not sel_321))
+			((not detailLevel))
 			(
 				(<
 					(if argc
 						param1
 					else
-						(gGame sel_321:)
+						(gGame detailLevel:)
 					)
-					sel_321
+					detailLevel
 				)
-				(self sel_313:)
+				(self stopUpd:)
 			)
-			(sel_245
-				(self sel_315:)
+			(cycler
+				(self startUpd:)
 			)
 		)
 	)
 
-	(method (sel_320 param1 param2 &tmp [temp0 40])
-		(if sel_322
-			(sel_322 sel_111:)
-			(= sel_322 0)
+	(method (setScale param1 param2 &tmp [temp0 40])
+		(if scaler
+			(scaler dispose:)
+			(= scaler 0)
 		)
 		(cond
 			((not argc)
-				(= sel_103 1)
+				(= scaleSignal 1)
 			)
 			((IsObject param1)
-				(= sel_103 1)
-				(= sel_322
+				(= scaleSignal 1)
+				(= scaler
 					(if (& (param1 -info-:) $8000)
-						(param1 sel_109:)
+						(param1 new:)
 					else
 						param1
 					)
 				)
-				(sel_322 sel_110: self param2 &rest)
+				(scaler init: self param2 &rest)
 			)
 			((== param1 -1)
-				(if (param2 sel_103:)
-					(= sel_103 (param2 sel_103:))
-					(= sel_106 (param2 sel_106:))
-					(if (IsObject (param2 sel_322:))
-						((= sel_322 ((param2 sel_322:) sel_109:)) sel_42: self)
+				(if (param2 scaleSignal:)
+					(= scaleSignal (param2 scaleSignal:))
+					(= maxScale (param2 maxScale:))
+					(if (IsObject (param2 scaler:))
+						((= scaler ((param2 scaler:) new:)) client: self)
 					)
 				)
 			)
 			(else
-				(super sel_320: param1)
+				(super setScale: param1)
 			)
 		)
 	)
 
-	(method (sel_161 param1)
-		(if sel_245
-			(sel_245 sel_111:)
+	(method (setCycle param1)
+		(if cycler
+			(cycler dispose:)
 		)
 		(if param1
-			(self sel_315:)
-			(= sel_245
+			(self startUpd:)
+			(= cycler
 				(if (& (param1 -info-:) $8000)
-					(param1 sel_109:)
+					(param1 new:)
 				else
 					param1
 				)
 			)
-			(sel_245 sel_110: self &rest)
+			(cycler init: self &rest)
 		else
-			(= sel_245 0)
+			(= cycler 0)
 		)
 	)
 
-	(method (sel_146 param1)
-		(if (IsObject sel_142)
-			(sel_142 sel_111:)
+	(method (setScript param1)
+		(if (IsObject script)
+			(script dispose:)
 		)
 		(if param1
-			(param1 sel_110: self &rest)
+			(param1 init: self &rest)
 		)
 	)
 
-	(method (sel_145)
-		(if sel_142
-			(sel_142 sel_145:)
+	(method (cue)
+		(if script
+			(script cue:)
 		)
 	)
 )
 
 (class Actor of Prop
 	(properties
-		sel_20 {Actor}
-		sel_15 -32768
-		sel_249 0
-		sel_250 0
-		sel_51 3
-		sel_323 770
-		sel_53 6
-		sel_324 0
-		sel_325 0
-		sel_56 0
-		sel_59 0
-		sel_326 0
-		sel_327 0
-		sel_328 0
+		name {Actor}
+		illegalBits -32768
+		xLast 0
+		yLast 0
+		xStep 3
+		origStep 770
+		moveSpeed 6
+		blocks 0
+		baseSetter 0
+		mover 0
+		looper 0
+		viewer 0
+		avoider 0
+		code 0
 	)
 
-	(method (sel_110)
-		(super sel_110: &rest)
-		(= sel_249 sel_1)
-		(= sel_250 sel_0)
+	(method (init)
+		(super init: &rest)
+		(= xLast x)
+		(= yLast y)
 	)
 
-	(method (sel_57 &tmp temp0 temp1 temp2 temp3 temp4 temp5 temp6)
-		(if (& sel_14 $8000)
+	(method (doit &tmp temp0 temp1 temp2 temp3 temp4 temp5 temp6)
+		(if (& signal $8000)
 			(return)
 		)
-		(if sel_142
-			(sel_142 sel_57:)
+		(if script
+			(script doit:)
 		)
-		(if sel_328
-			(sel_328 sel_57: self)
+		(if code
+			(code doit: self)
 		)
-		(if (and (& sel_14 $0004) (not (& sel_14 $0002)))
+		(if (and (& signal $0004) (not (& signal $0002)))
 			(return)
 		)
-		(if sel_326
-			(sel_326 sel_57: self)
+		(if viewer
+			(viewer doit: self)
 		)
 		(cond
-			(sel_327
-				(sel_327 sel_57:)
+			(avoider
+				(avoider doit:)
 			)
-			(sel_56
-				(sel_56 sel_57:)
-				(if (& sel_103 $0001)
-					(= temp5 (>> sel_323 $0008))
-					(= temp6 (& sel_323 $00ff))
-					(= temp3 (/ (+ (/ (* temp5 sel_104 10) 128) 5) 10))
-					(= temp4 (/ (+ (/ (* temp6 sel_105 10) 128) 5) 10))
-					(if (or (!= temp3 sel_51) (!= temp4 sel_52))
+			(mover
+				(mover doit:)
+				(if (& scaleSignal $0001)
+					(= temp5 (>> origStep $0008))
+					(= temp6 (& origStep $00ff))
+					(= temp3 (/ (+ (/ (* temp5 scaleX 10) 128) 5) 10))
+					(= temp4 (/ (+ (/ (* temp6 scaleY 10) 128) 5) 10))
+					(if (or (!= temp3 xStep) (!= temp4 yStep))
 						(if (< temp3 1)
 							(= temp3 1)
 						)
 						(if (< temp4 1)
 							(= temp4 1)
 						)
-						(self sel_338: temp3 temp4 1)
+						(self setStep: temp3 temp4 1)
 					)
 				)
 			)
 		)
-		(if sel_322
-			(sel_322 sel_57:)
+		(if scaler
+			(scaler doit:)
 		)
-		(if sel_245
-			(= temp1 sel_17)
-			(= temp2 sel_19)
-			(sel_245 sel_57:)
-			(if sel_325
-				(sel_325 sel_57: self)
+		(if cycler
+			(= temp1 brLeft)
+			(= temp2 brRight)
+			(cycler doit:)
+			(if baseSetter
+				(baseSetter doit: self)
 			else
 				(BaseSetter self)
 			)
-			(if (and (or (!= temp1 sel_17) (!= temp2 sel_19)) (self sel_54:))
-				(self sel_335:)
+			(if (and (or (!= temp1 brLeft) (!= temp2 brRight)) (self cantBeHere:))
+				(self findPosn:)
 			)
 		)
-		(= sel_249 sel_1)
-		(= sel_250 sel_0)
+		(= xLast x)
+		(= yLast y)
 	)
 
-	(method (sel_153 param1 param2)
-		(super sel_153: param1 param2 &rest)
-		(= sel_249 param1)
-		(= sel_250 param2)
-		(if (self sel_54:)
-			(self sel_335:)
+	(method (posn param1 param2)
+		(super posn: param1 param2 &rest)
+		(= xLast param1)
+		(= yLast param2)
+		(if (self cantBeHere:)
+			(self findPosn:)
 		)
 	)
 
-	(method (sel_155 param1 &tmp temp0)
+	(method (setLoop param1 &tmp temp0)
 		(if
 			(= temp0
 				(cond
 					((== argc 0)
-						(super sel_155:)
+						(super setLoop:)
 						0
 					)
 					((not (IsObject param1))
-						(super sel_155: param1 &rest)
+						(super setLoop: param1 &rest)
 						0
 					)
 					((& (param1 -info-:) $8000)
-						(param1 sel_109:)
+						(param1 new:)
 					)
 					(else param1)
 				)
 			)
-			(if sel_59
-				(sel_59 sel_111:)
+			(if looper
+				(looper dispose:)
 			)
-			((= sel_59 temp0) sel_110: self &rest)
+			((= looper temp0) init: self &rest)
 		)
 	)
 
-	(method (sel_81)
-		(if (& sel_14 $8000)
-			(if (!= sel_56 -1)
-				(self sel_312: 0)
+	(method (delete)
+		(if (& signal $8000)
+			(if (!= mover -1)
+				(self setMotion: 0)
 			)
-			(self sel_329: 0)
-			(if sel_325
-				(sel_325 sel_111:)
-				(= sel_325 0)
+			(self setAvoider: 0)
+			(if baseSetter
+				(baseSetter dispose:)
+				(= baseSetter 0)
 			)
-			(if sel_59
-				(sel_59 sel_111:)
-				(= sel_59 0)
+			(if looper
+				(looper dispose:)
+				(= looper 0)
 			)
-			(if sel_326
-				(sel_326 sel_111:)
-				(= sel_326 0)
+			(if viewer
+				(viewer dispose:)
+				(= viewer 0)
 			)
-			(if sel_324
-				(sel_324 sel_111:)
-				(= sel_324 0)
+			(if blocks
+				(blocks dispose:)
+				(= blocks 0)
 			)
-			(if sel_328
-				(sel_328 sel_111:)
-				(= sel_328 0)
+			(if code
+				(code dispose:)
+				(= code 0)
 			)
-			(if (IsObject sel_299)
-				(sel_299 sel_111:)
-				(= sel_299 0)
+			(if (IsObject actions)
+				(actions dispose:)
+				(= actions 0)
 			)
-			(super sel_81:)
+			(super delete:)
 		)
 	)
 
-	(method (sel_243)
-		(if (and sel_56 (sel_56 sel_240:))
-			(sel_56 sel_243:)
+	(method (motionCue)
+		(if (and mover (mover completed:))
+			(mover motionCue:)
 		)
-		(super sel_243:)
+		(super motionCue:)
 	)
 
-	(method (sel_319 param1)
+	(method (checkDetail param1)
 		(cond
-			((not sel_321))
+			((not detailLevel))
 			(
 				(<
 					(if argc
 						param1
 					else
-						(gGame sel_321:)
+						(gGame detailLevel:)
 					)
-					sel_321
+					detailLevel
 				)
-				(self sel_313:)
+				(self stopUpd:)
 			)
-			((or sel_245 sel_56)
-				(self sel_315:)
+			((or cycler mover)
+				(self startUpd:)
 			)
 		)
 	)
 
-	(method (sel_312 param1)
-		(if (and sel_56 (!= sel_56 -1))
-			(sel_56 sel_111:)
+	(method (setMotion param1)
+		(if (and mover (!= mover -1))
+			(mover dispose:)
 		)
 		(if param1
-			(self sel_315:)
-			(= sel_56
+			(self startUpd:)
+			(= mover
 				(if (& (param1 -info-:) $8000)
-					(param1 sel_109:)
+					(param1 new:)
 				else
 					param1
 				)
 			)
-			(sel_56 sel_110: self &rest)
+			(mover init: self &rest)
 		else
-			(= sel_56 0)
+			(= mover 0)
 		)
 	)
 
-	(method (sel_329 param1)
-		(if sel_327
-			(sel_327 sel_111:)
+	(method (setAvoider param1)
+		(if avoider
+			(avoider dispose:)
 		)
-		(= sel_327
+		(= avoider
 			(if (and (IsObject param1) (& (param1 -info-:) $8000))
-				(param1 sel_109:)
+				(param1 new:)
 			else
 				param1
 			)
 		)
-		(if sel_327
-			(sel_327 sel_110: self &rest)
+		(if avoider
+			(avoider init: self &rest)
 		)
 	)
 
-	(method (sel_330 param1)
+	(method (ignoreHorizon param1)
 		(if (or (not argc) param1)
-			(|= sel_14 $2000)
+			(|= signal $2000)
 		else
-			(&= sel_14 $dfff)
+			(&= signal $dfff)
 		)
 	)
 
-	(method (sel_331 param1 &tmp temp0)
+	(method (observeControl param1 &tmp temp0)
 		(for ((= temp0 0)) (< temp0 argc) ((++ temp0))
-			(|= sel_15 [param1 temp0])
+			(|= illegalBits [param1 temp0])
 		)
 	)
 
-	(method (sel_332 param1 &tmp temp0)
+	(method (ignoreControl param1 &tmp temp0)
 		(for ((= temp0 0)) (< temp0 argc) ((++ temp0))
-			(&= sel_15 (~ [param1 temp0]))
+			(&= illegalBits (~ [param1 temp0]))
 		)
 	)
 
-	(method (sel_333)
-		(if (not sel_324)
-			(= sel_324 (Set sel_109:))
+	(method (observeBlocks)
+		(if (not blocks)
+			(= blocks (Set new:))
 		)
-		(sel_324 sel_118: &rest)
+		(blocks add: &rest)
 	)
 
-	(method (sel_334)
-		(sel_324 sel_81: &rest)
-		(if (sel_324 sel_123:)
-			(sel_324 sel_111:)
-			(= sel_324 0)
+	(method (ignoreBlocks)
+		(blocks delete: &rest)
+		(if (blocks isEmpty:)
+			(blocks dispose:)
+			(= blocks 0)
 		)
 	)
 
-	(method (sel_247)
+	(method (isStopped)
 		(return
-			(if (not (IsObject sel_56))
+			(if (not (IsObject mover))
 			else
-				(and (== sel_1 (sel_56 sel_249:)) (== sel_0 (sel_56 sel_250:)))
+				(and (== x (mover xLast:)) (== y (mover yLast:)))
 			)
 		)
 	)
 
-	(method (sel_58)
-		(return (& sel_14 $0400))
+	(method (isBlocked)
+		(return (& signal $0400))
 	)
 
-	(method (sel_335 &tmp [temp0 5]))
+	(method (findPosn &tmp [temp0 5]))
 
-	(method (sel_336 param1 param2 param3 param4)
+	(method (inRect param1 param2 param3 param4)
 		(return
-			(if (and (<= param1 sel_1) (< sel_1 param3) (<= param2 sel_0))
-				(< sel_0 param4)
+			(if (and (<= param1 x) (< x param3) (<= param2 y))
+				(< y param4)
 			else
 				0
 			)
 		)
 	)
 
-	(method (sel_337 param1)
+	(method (onControl param1)
 		(if (and argc param1)
-			(OnControl CONTROL sel_1 sel_0)
+			(OnControl CONTROL x y)
 		else
-			(OnControl CONTROL sel_17 sel_16 sel_19 sel_18)
+			(OnControl CONTROL brLeft brTop brRight brBottom)
 		)
 	)
 
-	(method (sel_255 param1)
-		(GetDistance sel_1 sel_0 (param1 sel_1:) (param1 sel_0:) gPerspective)
+	(method (distanceTo param1)
+		(GetDistance x y (param1 x:) (param1 y:) gPerspective)
 	)
 
-	(method (sel_54 &tmp temp0)
-		(if sel_325
-			(sel_325 sel_57: self)
+	(method (cantBeHere &tmp temp0)
+		(if baseSetter
+			(baseSetter doit: self)
 		else
 			(BaseSetter self)
 		)
 		(= temp0
 			(cond
-				((CantBeHere self (gCast sel_24:)))
+				((CantBeHere self (gCast elements:)))
 				(
 					(and
-						(not (& sel_14 $2000))
+						(not (& signal $2000))
 						(IsObject gCurRoom)
-						(< sel_0 (gCurRoom sel_340:))
+						(< y (gCurRoom horizon:))
 					)
 					-1
 				)
-				((and sel_324 (not (sel_324 sel_121: 57 self))) -2)
+				((and blocks (not (blocks allTrue: 57 self))) -2)
 			)
 		)
 	)
 
-	(method (sel_338 param1 param2 param3 &tmp temp0 temp1)
-		(= temp0 (>> sel_323 $0008))
-		(= temp1 (& sel_323 $00ff))
+	(method (setStep param1 param2 param3 &tmp temp0 temp1)
+		(= temp0 (>> origStep $0008))
+		(= temp1 (& origStep $00ff))
 		(if (and (>= argc 1) (!= param1 -1))
 			(= temp0 param1)
 		)
@@ -752,43 +752,43 @@
 			(= temp1 param2)
 		)
 		(if (or (< argc 3) (not param3))
-			(= sel_323 (+ (<< temp0 $0008) temp1))
+			(= origStep (+ (<< temp0 $0008) temp1))
 		)
-		(= sel_51 temp0)
-		(= sel_52 temp1)
+		(= xStep temp0)
+		(= yStep temp1)
 		(if
 			(and
-				(IsObject sel_56)
-				(or (sel_56 sel_115: MoveTo) (sel_56 sel_115: PolyPath))
+				(IsObject mover)
+				(or (mover isMemberOf: MoveTo) (mover isMemberOf: PolyPath))
 			)
-			(sel_56 sel_110:)
+			(mover init:)
 		)
 	)
 
-	(method (sel_339 param1 &tmp temp0 temp1 temp2 temp3 temp4 temp5 temp6 temp7)
+	(method (setDirection param1 &tmp temp0 temp1 temp2 temp3 temp4 temp5 temp6 temp7)
 		(= temp0
-			(if (== (= temp1 (gCurRoom sel_108:)) -30000)
-				sel_1
+			(if (== (= temp1 (gCurRoom vanishingY:)) -30000)
+				x
 			else
-				(gCurRoom sel_107:)
+				(gCurRoom vanishingX:)
 			)
 		)
-		(if (and (== sel_51 0) (== sel_52 0))
+		(if (and (== xStep 0) (== yStep 0))
 			(return)
 		)
-		(= temp5 (/ 32000 (Max sel_51 sel_52)))
+		(= temp5 (/ 32000 (Max xStep yStep)))
 		(switch param1
 			(0
-				(self sel_312: 0)
+				(self setMotion: 0)
 				(return)
 			)
 			(1
-				(= temp2 (- temp0 sel_1))
-				(= temp3 (- temp1 sel_0))
+				(= temp2 (- temp0 x))
+				(= temp3 (- temp1 y))
 			)
 			(5
-				(= temp2 (- sel_1 temp0))
-				(= temp3 (- sel_0 temp1))
+				(= temp2 (- x temp0))
+				(= temp3 (- y temp1))
 			)
 			(3
 				(= temp2 temp5)
@@ -799,7 +799,7 @@
 				(= temp3 0)
 			)
 			(else
-				(if (< 180 (= temp4 (GetAngle sel_1 sel_0 temp0 temp1)))
+				(if (< 180 (= temp4 (GetAngle x y temp0 temp1)))
 					(-= temp4 360)
 				)
 				(= temp4 (+ (/ (+ temp4 90) 2) (* 45 (- param1 2))))
@@ -812,47 +812,47 @@
 			(*= temp2 5)
 			(*= temp3 5)
 		)
-		(if (and (= temp7 (gCurRoom sel_259:)) gUseObstacles)
+		(if (and (= temp7 (gCurRoom obstacles:)) gUseObstacles)
 			(= temp6
 				(AvoidPath
-					sel_1
-					sel_0
-					(+ sel_1 temp2)
-					(+ sel_0 temp3)
-					(temp7 sel_24:)
-					(temp7 sel_86:)
+					x
+					y
+					(+ x temp2)
+					(+ y temp3)
+					(temp7 elements:)
+					(temp7 size:)
 					0
 				)
 			)
-			(= temp2 (- (WordAt temp6 2) sel_1))
-			(= temp3 (- (WordAt temp6 3) sel_0))
+			(= temp2 (- (WordAt temp6 2) x))
+			(= temp3 (- (WordAt temp6 3) y))
 			(Memory memFREE temp6)
 		)
 		(cond
 			((or temp2 temp3)
-				(self sel_312: PolyPath (+ sel_1 temp2) (+ sel_0 temp3))
+				(self setMotion: PolyPath (+ x temp2) (+ y temp3))
 			)
 			(param1
-				(self sel_312: 0 sel_253: (* (- param1 1) 45))
+				(self setMotion: 0 setHeading: (* (- param1 1) 45))
 			)
 			(else
-				(self sel_312: 0)
+				(self setMotion: 0)
 			)
 		)
 	)
 
-	(method (sel_253 param1 param2)
+	(method (setHeading param1 param2)
 		(if argc
-			(= sel_55 param1)
+			(= heading param1)
 		)
-		(if sel_59
-			(sel_59 sel_57: self sel_55 (if (>= argc 2) param2 else 0))
+		(if looper
+			(looper doit: self heading (if (>= argc 2) param2 else 0))
 		else
-			(DirLoop self sel_55)
+			(DirLoop self heading)
 			(if (and (>= argc 2) (IsObject param2))
-				(param2 sel_145: &rest)
+				(param2 cue: &rest)
 			)
 		)
-		(return sel_55)
+		(return heading)
 	)
 )

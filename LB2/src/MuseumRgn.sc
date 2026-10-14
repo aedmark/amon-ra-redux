@@ -59,57 +59,57 @@
 
 (class MuseumRgn of Rgn
 	(properties
-		sel_20 {MuseumRgn}
-		sel_631 0
-		sel_632 0
-		sel_633 0
-		sel_634 0
-		sel_635 0
-		sel_636 0
-		sel_637 0
-		sel_638 0
-		sel_639 0
-		sel_640 0
-		sel_641 0
-		sel_642 0
-		sel_643 0
-		sel_678 0
-		sel_679 0
+		name {MuseumRgn}
+		northList 0
+		northModule 0
+		eastList 0
+		eastModule 0
+		southList 0
+		southModule 0
+		westList 0
+		westModule 0
+		northPts 0
+		eastPts 0
+		southPts 0
+		westPts 0
+		midPts 0
+		legalX 0
+		legalY 0
 	)
 
-	(method (sel_110)
-		(super sel_110:)
-		(self sel_645:)
+	(method (init)
+		(super init:)
+		(self loadPolyList:)
 		(if (not (IsFlag 6))
-			((ScriptID 90 1) sel_110:) ; aCountess
+			((ScriptID 90 1) init:) ; aCountess
 		)
-		((ScriptID 90 2) sel_110:) ; aOlympia
-		((ScriptID 90 3) sel_110:) ; aORiley
-		((ScriptID 90 4) sel_110:) ; aTut
+		((ScriptID 90 2) init:) ; aOlympia
+		((ScriptID 90 3) init:) ; aORiley
+		((ScriptID 90 4) init:) ; aTut
 		(if (not (IsFlag 3))
-			((ScriptID 90 5) sel_110:) ; aWatney
+			((ScriptID 90 5) init:) ; aWatney
 		)
 		(if (not (IsFlag 5))
-			((ScriptID 90 6) sel_110:) ; aYvette
+			((ScriptID 90 6) init:) ; aYvette
 		)
 		(if (not (IsFlag 2))
-			((ScriptID 90 7) sel_110:) ; aZiggy
+			((ScriptID 90 7) init:) ; aZiggy
 		)
-		(gKeyDownHandler sel_129: self)
-		(if (not (gTimers sel_122: wanderTimer))
-			(wanderTimer sel_162: wanderTimer 120)
+		(gKeyDownHandler addToFront: self)
+		(if (not (gTimers contains: wanderTimer))
+			(wanderTimer setReal: wanderTimer 120)
 		)
 	)
 
-	(method (sel_111)
-		(if (gTimers sel_122: wanderTimer)
-			(wanderTimer sel_111: sel_81:)
+	(method (dispose)
+		(if (gTimers contains: wanderTimer)
+			(wanderTimer dispose: delete:)
 		)
-		(super sel_111:)
+		(super dispose:)
 	)
 
-	(method (sel_399 param1)
-		(= sel_406
+	(method (newRoom param1)
+		(= keep
 			(OneOf
 				param1
 				335
@@ -157,50 +157,50 @@
 				740
 			)
 		)
-		(= sel_407 0)
-		(gKeyDownHandler sel_81: self)
-		(if (gCurRoom sel_259:)
+		(= initialized 0)
+		(gKeyDownHandler delete: self)
+		(if (gCurRoom obstacles:)
 			(DisposeScript (+ 2000 gCurRoomNum))
 		)
-		(if sel_631
-			(sel_631 sel_111:)
-			(= sel_631 0)
-			(if (IsObject sel_639)
-				(sel_639 sel_111:)
+		(if northList
+			(northList dispose:)
+			(= northList 0)
+			(if (IsObject northPts)
+				(northPts dispose:)
 			)
-			(= sel_639 0)
-			(DisposeScript sel_632)
+			(= northPts 0)
+			(DisposeScript northModule)
 		)
-		(if sel_633
-			(sel_633 sel_111:)
-			(= sel_633 0)
-			(if (IsObject sel_640)
-				(sel_640 sel_111:)
+		(if eastList
+			(eastList dispose:)
+			(= eastList 0)
+			(if (IsObject eastPts)
+				(eastPts dispose:)
 			)
-			(= sel_640 0)
-			(DisposeScript sel_634)
+			(= eastPts 0)
+			(DisposeScript eastModule)
 		)
-		(if sel_635
-			(sel_635 sel_111:)
-			(= sel_635 0)
-			(if (IsObject sel_641)
-				(sel_641 sel_111:)
+		(if southList
+			(southList dispose:)
+			(= southList 0)
+			(if (IsObject southPts)
+				(southPts dispose:)
 			)
-			(= sel_641 0)
-			(DisposeScript sel_636)
+			(= southPts 0)
+			(DisposeScript southModule)
 		)
-		(if sel_637
-			(sel_637 sel_111:)
-			(= sel_637 0)
-			(if (IsObject sel_642)
-				(sel_642 sel_111:)
+		(if westList
+			(westList dispose:)
+			(= westList 0)
+			(if (IsObject westPts)
+				(westPts dispose:)
 			)
-			(= sel_642 0)
-			(DisposeScript sel_638)
+			(= westPts 0)
+			(DisposeScript westModule)
 		)
 	)
 
-	(method (sel_644 param1 param2 &tmp temp0 temp1 temp2 temp3 temp4)
+	(method (crowdInRoom param1 param2 &tmp temp0 temp1 temp2 temp3 temp4)
 		(if (< argc 2)
 			(= temp0 (localproc_0 3 param1))
 			(return [local220 (++ temp0)])
@@ -223,25 +223,25 @@
 		)
 	)
 
-	(method (sel_680 param1 param2 param3 &tmp temp0 temp1 temp2 temp3)
+	(method (findLegalPoint param1 param2 param3 &tmp temp0 temp1 temp2 temp3)
 		(if
 			(not
 				(= temp1
 					(switch param1
-						((gCurRoom sel_409:)
-							(MuseumRgn sel_631:)
+						((gCurRoom north:)
+							(MuseumRgn northList:)
 						)
-						((gCurRoom sel_410:)
-							(MuseumRgn sel_633:)
+						((gCurRoom east:)
+							(MuseumRgn eastList:)
 						)
-						((gCurRoom sel_411:)
-							(MuseumRgn sel_635:)
+						((gCurRoom south:)
+							(MuseumRgn southList:)
 						)
-						((gCurRoom sel_412:)
-							(MuseumRgn sel_637:)
+						((gCurRoom west:)
+							(MuseumRgn westList:)
 						)
 						(gCurRoomNum
-							(gCurRoom sel_259:)
+							(gCurRoom obstacles:)
 						)
 						(else 0)
 					)
@@ -250,66 +250,66 @@
 			(return 1)
 		)
 		(= temp0 1)
-		(for ((= temp3 0)) (and temp0 (< temp3 (temp1 sel_86:))) ((++ temp3))
+		(for ((= temp3 0)) (and temp0 (< temp3 (temp1 size:))) ((++ temp3))
 			(if
 				(or
 					(and
-						(== ((= temp2 (temp1 sel_64: temp3)) sel_31:) 3)
+						(== ((= temp2 (temp1 at: temp3)) type:) 3)
 						(not (AvoidPath param2 param3 temp2))
 					)
-					(and (!= (temp2 sel_31:) 3) (AvoidPath param2 param3 temp2))
+					(and (!= (temp2 type:) 3) (AvoidPath param2 param3 temp2))
 				)
 				(= temp0 0)
 			)
 		)
 		(if (not temp0)
 			(switch param1
-				((gCurRoom sel_409:)
-					(= sel_678 ((MuseumRgn sel_639:) sel_621:))
-					(= sel_679 ((MuseumRgn sel_639:) sel_622:))
+				((gCurRoom north:)
+					(= legalX ((MuseumRgn northPts:) midPtX:))
+					(= legalY ((MuseumRgn northPts:) midPtY:))
 				)
-				((gCurRoom sel_410:)
-					(= sel_678 ((MuseumRgn sel_640:) sel_621:))
-					(= sel_679 ((MuseumRgn sel_640:) sel_622:))
+				((gCurRoom east:)
+					(= legalX ((MuseumRgn eastPts:) midPtX:))
+					(= legalY ((MuseumRgn eastPts:) midPtY:))
 				)
-				((gCurRoom sel_411:)
-					(= sel_678 ((MuseumRgn sel_641:) sel_621:))
-					(= sel_679 ((MuseumRgn sel_641:) sel_622:))
+				((gCurRoom south:)
+					(= legalX ((MuseumRgn southPts:) midPtX:))
+					(= legalY ((MuseumRgn southPts:) midPtY:))
 				)
-				((gCurRoom sel_412:)
-					(= sel_678 ((MuseumRgn sel_642:) sel_621:))
-					(= sel_679 ((MuseumRgn sel_642:) sel_622:))
+				((gCurRoom west:)
+					(= legalX ((MuseumRgn westPts:) midPtX:))
+					(= legalY ((MuseumRgn westPts:) midPtY:))
 				)
 				(gCurRoomNum
-					(= sel_678 ((MuseumRgn sel_643:) sel_621:))
-					(= sel_679 ((MuseumRgn sel_643:) sel_622:))
+					(= legalX ((MuseumRgn midPts:) midPtX:))
+					(= legalY ((MuseumRgn midPts:) midPtY:))
 				)
 			)
 		)
 		(return temp0)
 	)
 
-	(method (sel_645)
-		(if (gCurRoom sel_259:)
-			((gCurRoom sel_259:) sel_111:)
+	(method (loadPolyList)
+		(if (gCurRoom obstacles:)
+			((gCurRoom obstacles:) dispose:)
 		)
-		(if sel_631
-			(sel_631 sel_111:)
+		(if northList
+			(northList dispose:)
 		)
-		(if sel_633
-			(sel_633 sel_111:)
+		(if eastList
+			(eastList dispose:)
 		)
-		(if sel_635
-			(sel_635 sel_111:)
+		(if southList
+			(southList dispose:)
 		)
-		(if sel_637
-			(sel_637 sel_111:)
+		(if westList
+			(westList dispose:)
 		)
-		(gCurRoom sel_259: (List sel_109:))
-		((ScriptID (+ 2000 gCurRoomNum) 0) sel_57: (gCurRoom sel_259:))
+		(gCurRoom obstacles: (List new:))
+		((ScriptID (+ 2000 gCurRoomNum) 0) doit: (gCurRoom obstacles:))
 		(if
 			(OneOf
-				(gCurRoom sel_409:)
+				(gCurRoom north:)
 				335
 				340
 				350
@@ -354,12 +354,12 @@
 				730
 				740
 			)
-			(= sel_632 (+ 2000 (gCurRoom sel_409:)))
-			((ScriptID sel_632 0) sel_57: (= sel_631 (List sel_109:)))
+			(= northModule (+ 2000 (gCurRoom north:)))
+			((ScriptID northModule 0) doit: (= northList (List new:)))
 		)
 		(if
 			(OneOf
-				(gCurRoom sel_410:)
+				(gCurRoom east:)
 				335
 				340
 				350
@@ -404,12 +404,12 @@
 				730
 				740
 			)
-			(= sel_634 (+ 2000 (gCurRoom sel_410:)))
-			((ScriptID sel_634 0) sel_57: (= sel_633 (List sel_109:)))
+			(= eastModule (+ 2000 (gCurRoom east:)))
+			((ScriptID eastModule 0) doit: (= eastList (List new:)))
 		)
 		(if
 			(OneOf
-				(gCurRoom sel_411:)
+				(gCurRoom south:)
 				335
 				340
 				350
@@ -454,12 +454,12 @@
 				730
 				740
 			)
-			(= sel_636 (+ 2000 (gCurRoom sel_411:)))
-			((ScriptID sel_636 0) sel_57: (= sel_635 (List sel_109:)))
+			(= southModule (+ 2000 (gCurRoom south:)))
+			((ScriptID southModule 0) doit: (= southList (List new:)))
 		)
 		(if
 			(OneOf
-				(gCurRoom sel_412:)
+				(gCurRoom west:)
 				335
 				340
 				350
@@ -504,13 +504,13 @@
 				730
 				740
 			)
-			(= sel_638 (+ 2000 (gCurRoom sel_412:)))
-			((ScriptID sel_638 0) sel_57: (= sel_637 (List sel_109:)))
+			(= westModule (+ 2000 (gCurRoom west:)))
+			((ScriptID westModule 0) doit: (= westList (List new:)))
 		)
-		(= sel_643 (ScriptID (+ 2000 gCurRoomNum) 1))
+		(= midPts (ScriptID (+ 2000 gCurRoomNum) 1))
 		(if
 			(OneOf
-				(gCurRoom sel_409:)
+				(gCurRoom north:)
 				335
 				340
 				350
@@ -555,11 +555,11 @@
 				730
 				740
 			)
-			(= sel_639 (ScriptID sel_632 1))
+			(= northPts (ScriptID northModule 1))
 		)
 		(if
 			(OneOf
-				(gCurRoom sel_410:)
+				(gCurRoom east:)
 				335
 				340
 				350
@@ -604,11 +604,11 @@
 				730
 				740
 			)
-			(= sel_640 (ScriptID sel_634 1))
+			(= eastPts (ScriptID eastModule 1))
 		)
 		(if
 			(OneOf
-				(gCurRoom sel_411:)
+				(gCurRoom south:)
 				335
 				340
 				350
@@ -653,11 +653,11 @@
 				730
 				740
 			)
-			(= sel_641 (ScriptID sel_636 1))
+			(= southPts (ScriptID southModule 1))
 		)
 		(if
 			(OneOf
-				(gCurRoom sel_412:)
+				(gCurRoom west:)
 				335
 				340
 				350
@@ -702,39 +702,39 @@
 				730
 				740
 			)
-			(= sel_642 (ScriptID sel_638 1))
+			(= westPts (ScriptID westModule 1))
 		)
 	)
 
-	(method (sel_646)
+	(method (nobodyAround)
 		(if
 			(OneOf
 				gCurRoomNum
-				((ScriptID 90 1) sel_620:) ; aCountess
-				((ScriptID 90 2) sel_620:) ; aOlympia
-				((ScriptID 90 3) sel_620:) ; aORiley
-				((ScriptID 90 4) sel_620:) ; aTut
-				((ScriptID 90 5) sel_620:) ; aWatney
-				((ScriptID 90 6) sel_620:) ; aYvette
-				((ScriptID 90 7) sel_620:) ; aZiggy
+				((ScriptID 90 1) room:) ; aCountess
+				((ScriptID 90 2) room:) ; aOlympia
+				((ScriptID 90 3) room:) ; aORiley
+				((ScriptID 90 4) room:) ; aTut
+				((ScriptID 90 5) room:) ; aWatney
+				((ScriptID 90 6) room:) ; aYvette
+				((ScriptID 90 7) room:) ; aZiggy
 			)
-			(gMessager sel_295: 16 46 0 0 0 0)
+			(gMessager say: 16 46 0 0 0 0)
 			(return 0)
 		else
 			(return 1)
 		)
 	)
 
-	(method (sel_647 param1)
+	(method (whichList param1)
 		(return
 			(switch param1
 				(gCurRoomNum
-					(gCurRoom sel_259:)
+					(gCurRoom obstacles:)
 				)
-				((gCurRoom sel_409:) sel_631)
-				((gCurRoom sel_410:) sel_633)
-				((gCurRoom sel_411:) sel_635)
-				((gCurRoom sel_412:) sel_637)
+				((gCurRoom north:) northList)
+				((gCurRoom east:) eastList)
+				((gCurRoom south:) southList)
+				((gCurRoom west:) westList)
 			)
 		)
 	)
@@ -742,151 +742,151 @@
 
 (class MuseumActor of Actor
 	(properties
-		sel_20 {MuseumActor}
-		sel_648 0
-		sel_649 0
-		sel_619 0
-		sel_620 0
-		sel_650 0
-		sel_651 0
-		sel_652 0
-		sel_653 0
-		sel_654 0
-		sel_655 0
-		sel_656 0
-		sel_657 0
-		sel_533 0
-		sel_667 0
+		name {MuseumActor}
+		originalView 0
+		beelining 0
+		wandering 0
+		room 0
+		lastRoom 0
+		destination 0
+		originalDest 0
+		roomIdx 0
+		exitX 0
+		exitY 0
+		destX 0
+		destY 0
+		waitCount 0
+		convRoom 0
 	)
 
-	(method (sel_668 param1 param2 param3 param4 param5)
-		(= sel_667 1)
-		(museumDialogueResume sel_42: self)
-		(self sel_312: 0)
+	(method (convReturn param1 param2 param3 param4 param5)
+		(= convRoom 1)
+		(museumDialogueResume client: self)
+		(self setMotion: 0)
 		(gMessager
-			sel_295: param1 param2 param3 param4 museumDialogueResume param5
+			say: param1 param2 param3 param4 museumDialogueResume param5
 		)
 	)
 
-	(method (sel_110 &tmp [temp0 2] temp2 temp3 temp4 temp5 temp6 [temp7 5])
+	(method (init &tmp [temp0 2] temp2 temp3 temp4 temp5 temp6 [temp7 5])
 		(self
-			sel_2: (if (== sel_620 gCurRoomNum) sel_648 else 828)
-			sel_316:
-			sel_330:
-			sel_15: 0
-			sel_161: StopWalk -1
+			view: (if (== room gCurRoomNum) originalView else 828)
+			ignoreActors:
+			ignoreHorizon:
+			illegalBits: 0
+			setCycle: StopWalk -1
 		)
-		(if (gEgo sel_322:)
-			(= temp2 (/ (* 110 ((gEgo sel_322:) sel_577:)) 100))
-			(= temp3 ((gEgo sel_322:) sel_575:))
-			(= temp4 (/ (* 110 (+ 1 ((gEgo sel_322:) sel_578:))) 100))
-			(= temp5 ((gEgo sel_322:) sel_576:))
-			(self sel_320: Scaler temp2 temp4 temp3 temp5)
+		(if (gEgo scaler:)
+			(= temp2 (/ (* 110 ((gEgo scaler:) frontSize:)) 100))
+			(= temp3 ((gEgo scaler:) frontY:))
+			(= temp4 (/ (* 110 (+ 1 ((gEgo scaler:) backSize:))) 100))
+			(= temp5 ((gEgo scaler:) backY:))
+			(self setScale: Scaler temp2 temp4 temp3 temp5)
 		else
-			(self sel_320: -1 gEgo)
-			(= sel_106 (/ (* 110 sel_106) 100))
+			(self setScale: -1 gEgo)
+			(= maxScale (/ (* 110 maxScale) 100))
 		)
-		(super sel_110: &rest)
+		(super init: &rest)
 		(cond
-			((not sel_649)
+			((not beelining)
 				(cond
-					(sel_619
+					(wandering
 						(cond
-							((== sel_620 gCurRoomNum) 0)
-							((self sel_660:)
+							((== room gCurRoomNum) 0)
+							((self isAdjacent:)
 								(if
 									(not
-										(MuseumRgn sel_680: sel_620 sel_1 sel_0)
+										(MuseumRgn findLegalPoint: room x y)
 									)
 									(self
-										sel_153:
-											(MuseumRgn sel_678:)
-											(MuseumRgn sel_679:)
+										posn:
+											(MuseumRgn legalX:)
+											(MuseumRgn legalY:)
 									)
 								)
 							)
 							(else
-								(self sel_153: 160 165)
+								(self posn: 160 165)
 							)
 						)
-						(if (> (MuseumRgn sel_644: sel_620) 1)
+						(if (> (MuseumRgn crowdInRoom: room) 1)
 							(-= temp6 15) ; UNINIT
 						)
-						(self sel_664: sel_652 self)
+						(self wander: originalDest self)
 					)
-					((and (== sel_620 -1) (Random 0 1))
+					((and (== room -1) (Random 0 1))
 						(cond
-							((== sel_620 gCurRoomNum)
+							((== room gCurRoomNum)
 								(if
 									(not
-										(MuseumRgn sel_680: sel_620 sel_1 sel_0)
+										(MuseumRgn findLegalPoint: room x y)
 									)
 									(self
-										sel_153:
-											(MuseumRgn sel_678:)
-											(MuseumRgn sel_679:)
+										posn:
+											(MuseumRgn legalX:)
+											(MuseumRgn legalY:)
 									)
 								)
 							)
-							((self sel_660:)
+							((self isAdjacent:)
 								(if
 									(not
-										(MuseumRgn sel_680: sel_620 sel_1 sel_0)
+										(MuseumRgn findLegalPoint: room x y)
 									)
 									(self
-										sel_153:
-											(MuseumRgn sel_678:)
-											(MuseumRgn sel_679:)
+										posn:
+											(MuseumRgn legalX:)
+											(MuseumRgn legalY:)
 									)
 								)
 							)
 							(else 0)
 						)
-						(self sel_664:)
+						(self wander:)
 					)
 				)
 			)
-			(sel_652
+			(originalDest
 				(cond
-					((== sel_620 gCurRoomNum)
-						(if (not (MuseumRgn sel_680: sel_620 sel_1 sel_0))
+					((== room gCurRoomNum)
+						(if (not (MuseumRgn findLegalPoint: room x y))
 							(self
-								sel_153:
-									(MuseumRgn sel_678:)
-									(MuseumRgn sel_679:)
+								posn:
+									(MuseumRgn legalX:)
+									(MuseumRgn legalY:)
 							)
 						)
 					)
-					((self sel_660:)
-						(if (not (MuseumRgn sel_680: sel_620 sel_1 sel_0))
+					((self isAdjacent:)
+						(if (not (MuseumRgn findLegalPoint: room x y))
 							(self
-								sel_153:
-									(MuseumRgn sel_678:)
-									(MuseumRgn sel_679:)
+								posn:
+									(MuseumRgn legalX:)
+									(MuseumRgn legalY:)
 							)
 						)
 					)
 					(else 0)
 				)
-				(self sel_618: sel_652 self)
+				(self goTo: originalDest self)
 			)
-			((== sel_620 sel_651)
-				(= sel_651 0)
+			((== room destination)
+				(= destination 0)
 			)
 		)
 	)
 
-	(method (sel_218)
-		(if (== sel_2 828)
+	(method (onMe)
+		(if (== view 828)
 			(return 0)
 		else
-			(super sel_218: &rest)
+			(super onMe: &rest)
 		)
 	)
 
-	(method (sel_658 param1 &tmp temp0 temp1)
-		(= temp0 (self sel_662: param1))
-		(= temp1 (* sel_653 5))
+	(method (dirToRoom param1 &tmp temp0 temp1)
+		(= temp0 (self setBits: param1))
+		(= temp1 (* roomIdx 5))
 		(cond
 			((and (& [local0 (++ temp1)] temp0) (> [local0 temp1] 0))
 				(return 1)
@@ -906,11 +906,11 @@
 		)
 	)
 
-	(method (sel_659 param1)
+	(method (findRendezvous param1)
 		(cond
 			(
 				(OneOf
-					sel_620
+					room
 					420
 					500
 					510
@@ -946,14 +946,14 @@
 							490
 							521
 						)
-						(= sel_651 420)
+						(= destination 420)
 					)
 					((OneOf param1 600 610 620 630 640 650 666)
-						(= sel_651 530)
+						(= destination 530)
 					)
 				)
 			)
-			((OneOf sel_620 430 435 440 448 450 454 455 456 460 480 490 521)
+			((OneOf room 430 435 440 448 450 454 455 456 460 480 490 521)
 				(if
 					(not
 						(OneOf
@@ -972,128 +972,128 @@
 							521
 						)
 					)
-					(= sel_651 430)
+					(= destination 430)
 				)
 			)
 			(
 				(and
-					(OneOf sel_620 600 610 620 630 640 650 666)
+					(OneOf room 600 610 620 630 640 650 666)
 					(not (OneOf param1 600 610 620 630 640 650 666))
 				)
-				(= sel_651 600)
+				(= destination 600)
 			)
 		)
-		(return sel_651)
+		(return destination)
 	)
 
-	(method (sel_618 param1 param2 param3 param4)
-		(= sel_649 1)
-		(if (OneOf sel_620 -1 -2)
-			(self sel_182: sel_652)
+	(method (goTo param1 param2 param3 param4)
+		(= beelining 1)
+		(if (OneOf room -1 -2)
+			(self moveTo: originalDest)
 		)
-		(= sel_651 (= sel_652 param1))
+		(= destination (= originalDest param1))
 		(if (< argc 2)
 			(= param2 0)
 		)
 		(if (> argc 2)
-			(= sel_656 param3)
-			(= sel_657 param4)
+			(= destX param3)
+			(= destY param4)
 		else
-			(= sel_657 (= sel_656 -1))
+			(= destY (= destX -1))
 		)
-		(self sel_146: (TravelToRoom sel_109:) param2)
+		(self setScript: (TravelToRoom new:) param2)
 	)
 
-	(method (sel_660)
+	(method (isAdjacent)
 		(return
-			(switch sel_620
-				((gCurRoom sel_409:) 1)
-				((gCurRoom sel_411:) 3)
-				((gCurRoom sel_410:) 2)
-				((gCurRoom sel_412:) 4)
+			(switch room
+				((gCurRoom north:) 1)
+				((gCurRoom south:) 3)
+				((gCurRoom east:) 2)
+				((gCurRoom west:) 4)
 				(else 0)
 			)
 		)
 	)
 
-	(method (sel_182 param1 &tmp temp0 temp1)
+	(method (moveTo param1 &tmp temp0 temp1)
 		(if (OneOf param1 -1 -2)
-			(if (MuseumRgn sel_644: sel_620)
-				(MuseumRgn sel_644: sel_620 -1)
+			(if (MuseumRgn crowdInRoom: room)
+				(MuseumRgn crowdInRoom: room -1)
 			)
-			(= sel_652 sel_620)
-			(= sel_620 param1)
-			(= sel_649 (= sel_619 0))
-			(self sel_146: 0)
+			(= originalDest room)
+			(= room param1)
+			(= beelining (= wandering 0))
+			(self setScript: 0)
 			(return)
 		else
-			(= sel_619 0)
-			(self sel_146: 0)
-			(= temp1 sel_620)
-			(= sel_620 param1)
+			(= wandering 0)
+			(self setScript: 0)
+			(= temp1 room)
+			(= room param1)
 			(if (and (> temp1 0) (!= temp1 355) (!= param1 355))
-				(self sel_663: sel_620)
-				(= sel_650 (self sel_661: (self sel_658: temp1)))
-				(MuseumRgn sel_644: sel_650 -1)
+				(self setIndex: room)
+				(= lastRoom (self nextRoom: (self dirToRoom: temp1)))
+				(MuseumRgn crowdInRoom: lastRoom -1)
 			)
-			(= sel_2 (if (== sel_620 gCurRoomNum) sel_648 else 828))
-			(MuseumRgn sel_644: sel_620 1)
+			(= view (if (== room gCurRoomNum) originalView else 828))
+			(MuseumRgn crowdInRoom: room 1)
 		)
 	)
 
-	(method (sel_661 param1)
-		(return [local100 (+ (* sel_653 6) param1 1)])
+	(method (nextRoom param1)
+		(return [local100 (+ (* roomIdx 6) param1 1)])
 	)
 
-	(method (sel_662 param1 &tmp temp0)
+	(method (setBits param1 &tmp temp0)
 		(= temp0 (localproc_0 2 param1))
 		(return [local100 (++ temp0)])
 	)
 
-	(method (sel_663 &tmp temp0)
-		(= sel_653 (/ (= temp0 (localproc_0 2 sel_620)) 6))
+	(method (setIndex &tmp temp0)
+		(= roomIdx (/ (= temp0 (localproc_0 2 room)) 6))
 	)
 
-	(method (sel_664 param1 param2 param3 param4 &tmp temp0)
+	(method (wander param1 param2 param3 param4 &tmp temp0)
 		(if (not argc)
-			(while (== sel_620 (= temp0 [local100 (* (Random 0 22) 6)]))
+			(while (== room (= temp0 [local100 (* (Random 0 22) 6)]))
 				0
 			)
 		else
 			(= temp0 param1)
 		)
-		(= sel_649 0)
-		(= sel_619 1)
-		(= sel_651 (= sel_652 temp0))
+		(= beelining 0)
+		(= wandering 1)
+		(= destination (= originalDest temp0))
 		(if (< argc 2)
 			(= param2 0)
 		)
 		(if (> argc 2)
-			(= sel_656 param3)
-			(= sel_657 param4)
+			(= destX param3)
+			(= destY param4)
 		else
-			(= sel_657 (= sel_656 -1))
+			(= destY (= destX -1))
 		)
-		(= sel_533 10)
-		(self sel_146: (TravelToRoom sel_109:) param2)
+		(= waitCount 10)
+		(self setScript: (TravelToRoom new:) param2)
 	)
 )
 
 (instance aCountess of MuseumActor
 	(properties
-		sel_20 {aCountess}
-		sel_213 1
-		sel_214 1884
-		sel_323 514
-		sel_648 813
+		name {aCountess}
+		noun 1
+		modNum 1884
+		origStep 514
+		originalView 813
 	)
 
-	(method (sel_300 param1 param2 &tmp temp0 temp1 temp2)
+	(method (doVerb param1 param2 &tmp temp0 temp1 temp2)
 		(if (== param1 2)
 			(if (not (SetFlag 112))
-				(self sel_668: sel_213 param1 80 0 0 sel_214)
+				(self convReturn: noun param1 80 0 0 modNum)
 			else
-				(super sel_300: param1)
+				(super doVerb: param1)
 			)
 			(return)
 		)
@@ -1104,7 +1104,7 @@
 						(if (== argc 2)
 							param2
 						else
-							(gCurRoom sel_422: (ScriptID 20 0)) ; inNotebook
+							(gCurRoom setInset: (ScriptID 20 0)) ; inNotebook
 						)
 					)
 					-1
@@ -1133,17 +1133,17 @@
 					(cond
 						((IsFlag 134)
 							(if (proc27_0 0 global364)
-								(self sel_668: sel_213 6 1 0 0 sel_214)
+								(self convReturn: noun 6 1 0 0 modNum)
 							else
-								(self sel_668: sel_213 6 72 0 0 sel_214)
+								(self convReturn: noun 6 72 0 0 modNum)
 								(proc27_1 0 @global364)
 							)
 						)
 						((proc27_0 0 global297)
-							(self sel_668: sel_213 6 1 0 0 sel_214)
+							(self convReturn: noun 6 1 0 0 modNum)
 						)
 						(else
-							(self sel_668: sel_213 6 3 0 0 sel_214)
+							(self convReturn: noun 6 3 0 0 modNum)
 							(proc27_1 0 @global297)
 						)
 					)
@@ -1152,17 +1152,17 @@
 					(cond
 						((or (IsFlag 143) (IsFlag 72))
 							(if (proc27_0 0 global366)
-								(self sel_668: sel_213 6 1 0 0 sel_214)
+								(self convReturn: noun 6 1 0 0 modNum)
 							else
-								(self sel_668: sel_213 6 74 0 0 sel_214)
+								(self convReturn: noun 6 74 0 0 modNum)
 								(proc27_1 0 @global366)
 							)
 						)
 						((proc27_0 0 global303)
-							(self sel_668: sel_213 6 1 0 0 sel_214)
+							(self convReturn: noun 6 1 0 0 modNum)
 						)
 						(else
-							(self sel_668: sel_213 6 9 0 0 sel_214)
+							(self convReturn: noun 6 9 0 0 modNum)
 							(proc27_1 0 @global303)
 						)
 					)
@@ -1171,49 +1171,49 @@
 					(cond
 						((or (IsFlag 158) (IsFlag 67))
 							(if (proc27_0 0 global365)
-								(self sel_668: sel_213 6 1 0 0 sel_214)
+								(self convReturn: noun 6 1 0 0 modNum)
 							else
-								(self sel_668: sel_213 6 71 0 0 sel_214)
+								(self convReturn: noun 6 71 0 0 modNum)
 								(proc27_1 0 @global365)
 							)
 						)
 						((proc27_0 0 global306)
-							(self sel_668: sel_213 6 1 0 0 sel_214)
+							(self convReturn: noun 6 1 0 0 modNum)
 						)
 						(else
-							(self sel_668: sel_213 6 12 0 0 sel_214)
+							(self convReturn: noun 6 12 0 0 modNum)
 							(proc27_1 0 @global306)
 						)
 					)
 				)
 				(else
 					(cond
-						((not (Message msgGET sel_214 sel_213 6 temp1 1))
-							(self sel_668: sel_213 6 81 0 0 sel_214)
+						((not (Message msgGET modNum noun 6 temp1 1))
+							(self convReturn: noun 6 81 0 0 modNum)
 						)
 						((proc27_0 0 [global296 (- temp1 2)])
-							(self sel_668: sel_213 6 1 0 0 sel_214)
+							(self convReturn: noun 6 1 0 0 modNum)
 						)
 						(else
-							(self sel_668: sel_213 6 temp1 0 0 sel_214)
+							(self convReturn: noun 6 temp1 0 0 modNum)
 							(proc27_1 0 @[global296 (- temp1 2)])
 						)
 					)
 				)
 			)
 		else
-			(super sel_300: param1)
+			(super doVerb: param1)
 		)
 	)
 
-	(method (sel_145)
-		(self sel_664:)
+	(method (cue)
+		(self wander:)
 	)
 
-	(method (sel_664 param1 &tmp temp0 temp1)
+	(method (wander param1 &tmp temp0 temp1)
 		(if (or (not argc) (not param1))
-			(= temp1 sel_620)
-			(while (== temp1 sel_620)
+			(= temp1 room)
+			(while (== temp1 room)
 				(= temp1 0)
 				(= temp0 (Random 1 100))
 				(cond
@@ -1236,36 +1236,36 @@
 				)
 			)
 			(if temp1
-				(if (== sel_620 -1)
-					(if (> sel_652 0)
-						(self sel_182: sel_652)
+				(if (== room -1)
+					(if (> originalDest 0)
+						(self moveTo: originalDest)
 					)
-					(= sel_652 0)
+					(= originalDest 0)
 				)
-				(super sel_664: temp1 self)
+				(super wander: temp1 self)
 			else
-				(if (!= sel_620 -1)
-					(= sel_652 sel_620)
+				(if (!= room -1)
+					(= originalDest room)
 				)
-				(self sel_182: -1)
-				(= sel_619 0)
+				(self moveTo: -1)
+				(= wandering 0)
 			)
 		else
-			(super sel_664: param1 &rest)
+			(super wander: param1 &rest)
 		)
 	)
 )
 
 (instance aOlympia of MuseumActor
 	(properties
-		sel_20 {aOlympia}
-		sel_213 1
-		sel_214 1892
-		sel_103 1
-		sel_648 820
+		name {aOlympia}
+		noun 1
+		modNum 1892
+		scaleSignal 1
+		originalView 820
 	)
 
-	(method (sel_300 param1 param2 &tmp temp0 temp1 temp2)
+	(method (doVerb param1 param2 &tmp temp0 temp1 temp2)
 		(if (OneOf param1 6 14)
 			(if
 				(==
@@ -1273,7 +1273,7 @@
 						(if (== argc 2)
 							param2
 						else
-							(gCurRoom sel_422: (ScriptID 20 0)) ; inNotebook
+							(gCurRoom setInset: (ScriptID 20 0)) ; inNotebook
 						)
 					)
 					-1
@@ -1302,17 +1302,17 @@
 					(cond
 						((IsFlag 134)
 							(if (proc27_0 3 global364)
-								(self sel_668: sel_213 6 1 0 0 sel_214)
+								(self convReturn: noun 6 1 0 0 modNum)
 							else
-								(self sel_668: sel_213 6 72 0 0 sel_214)
+								(self convReturn: noun 6 72 0 0 modNum)
 								(proc27_1 3 @global364)
 							)
 						)
 						((proc27_0 3 global297)
-							(self sel_668: sel_213 6 1 0 0 sel_214)
+							(self convReturn: noun 6 1 0 0 modNum)
 						)
 						(else
-							(self sel_668: sel_213 6 3 0 0 sel_214)
+							(self convReturn: noun 6 3 0 0 modNum)
 							(proc27_1 3 @global297)
 						)
 					)
@@ -1321,17 +1321,17 @@
 					(cond
 						((or (IsFlag 171) (IsFlag 12))
 							(if (proc27_0 3 global363)
-								(self sel_668: sel_213 6 1 0 0 sel_214)
+								(self convReturn: noun 6 1 0 0 modNum)
 							else
-								(self sel_668: sel_213 6 69 0 0 sel_214)
+								(self convReturn: noun 6 69 0 0 modNum)
 								(proc27_1 3 @global363)
 							)
 						)
 						((proc27_0 3 global298)
-							(self sel_668: sel_213 6 1 0 0 sel_214)
+							(self convReturn: noun 6 1 0 0 modNum)
 						)
 						(else
-							(self sel_668: sel_213 6 4 0 0 sel_214)
+							(self convReturn: noun 6 4 0 0 modNum)
 							(proc27_1 3 @global298)
 						)
 					)
@@ -1340,17 +1340,17 @@
 					(cond
 						((or (IsFlag 143) (IsFlag 72))
 							(if (proc27_0 3 global366)
-								(self sel_668: sel_213 6 1 0 0 sel_214)
+								(self convReturn: noun 6 1 0 0 modNum)
 							else
-								(self sel_668: sel_213 6 74 0 0 sel_214)
+								(self convReturn: noun 6 74 0 0 modNum)
 								(proc27_1 3 @global366)
 							)
 						)
 						((proc27_0 3 global303)
-							(self sel_668: sel_213 6 1 0 0 sel_214)
+							(self convReturn: noun 6 1 0 0 modNum)
 						)
 						(else
-							(self sel_668: sel_213 6 9 0 0 sel_214)
+							(self convReturn: noun 6 9 0 0 modNum)
 							(proc27_1 3 @global303)
 						)
 					)
@@ -1359,17 +1359,17 @@
 					(cond
 						((or (IsFlag 161) (IsFlag 68))
 							(if (proc27_0 3 global367)
-								(self sel_668: sel_213 6 1 0 0 sel_214)
+								(self convReturn: noun 6 1 0 0 modNum)
 							else
-								(self sel_668: sel_213 6 73 0 0 sel_214)
+								(self convReturn: noun 6 73 0 0 modNum)
 								(proc27_1 3 @global367)
 							)
 						)
 						((proc27_0 3 global305)
-							(self sel_668: sel_213 6 1 0 0 sel_214)
+							(self convReturn: noun 6 1 0 0 modNum)
 						)
 						(else
-							(self sel_668: sel_213 6 11 0 0 sel_214)
+							(self convReturn: noun 6 11 0 0 modNum)
 							(proc27_1 3 @global305)
 						)
 					)
@@ -1378,49 +1378,49 @@
 					(cond
 						((or (IsFlag 158) (IsFlag 67))
 							(if (proc27_0 3 global365)
-								(self sel_668: sel_213 6 1 0 0 sel_214)
+								(self convReturn: noun 6 1 0 0 modNum)
 							else
-								(self sel_668: sel_213 6 71 0 0 sel_214)
+								(self convReturn: noun 6 71 0 0 modNum)
 								(proc27_1 3 @global365)
 							)
 						)
 						((proc27_0 3 global306)
-							(self sel_668: sel_213 6 1 0 0 sel_214)
+							(self convReturn: noun 6 1 0 0 modNum)
 						)
 						(else
-							(self sel_668: sel_213 6 12 0 0 sel_214)
+							(self convReturn: noun 6 12 0 0 modNum)
 							(proc27_1 3 @global306)
 						)
 					)
 				)
 				(else
 					(cond
-						((not (Message msgGET sel_214 sel_213 6 temp1 1))
-							(self sel_668: sel_213 6 81 0 0 sel_214)
+						((not (Message msgGET modNum noun 6 temp1 1))
+							(self convReturn: noun 6 81 0 0 modNum)
 						)
 						((proc27_0 3 [global296 (- temp1 2)])
-							(self sel_668: sel_213 6 1 0 0 sel_214)
+							(self convReturn: noun 6 1 0 0 modNum)
 						)
 						(else
-							(self sel_668: sel_213 6 temp1 0 0 sel_214)
+							(self convReturn: noun 6 temp1 0 0 modNum)
 							(proc27_1 3 @[global296 (- temp1 2)])
 						)
 					)
 				)
 			)
 		else
-			(super sel_300: param1)
+			(super doVerb: param1)
 		)
 	)
 
-	(method (sel_145)
-		(self sel_664:)
+	(method (cue)
+		(self wander:)
 	)
 
-	(method (sel_664 param1 &tmp temp0 temp1)
+	(method (wander param1 &tmp temp0 temp1)
 		(if (or (not argc) (not param1))
-			(= temp1 sel_620)
-			(while (== temp1 sel_620)
+			(= temp1 room)
+			(while (== temp1 room)
 				(= temp1 0)
 				(= temp0 (Random 1 100))
 				(cond
@@ -1449,52 +1449,52 @@
 				)
 			)
 			(if temp1
-				(if (== sel_620 -1)
-					(if (> sel_652 0)
-						(self sel_182: sel_652)
+				(if (== room -1)
+					(if (> originalDest 0)
+						(self moveTo: originalDest)
 					)
-					(= sel_652 0)
+					(= originalDest 0)
 				)
-				(super sel_664: temp1 self)
+				(super wander: temp1 self)
 			else
-				(if (!= sel_620 -1)
-					(= sel_652 sel_620)
+				(if (!= room -1)
+					(= originalDest room)
 				)
-				(self sel_182: -1)
-				(= sel_619 0)
+				(self moveTo: -1)
+				(= wandering 0)
 			)
 		else
-			(super sel_664: param1 &rest)
+			(super wander: param1 &rest)
 		)
 	)
 )
 
 (instance aORiley of MuseumActor
 	(properties
-		sel_20 {aORiley}
-		sel_213 1
-		sel_214 1888
-		sel_648 818
+		name {aORiley}
+		noun 1
+		modNum 1888
+		originalView 818
 	)
 
-	(method (sel_110)
-		(= sel_323 (if (== sel_2 818) 1282 else 770))
-		(super sel_110: &rest)
+	(method (init)
+		(= origStep (if (== view 818) 1282 else 770))
+		(super init: &rest)
 	)
 
-	(method (sel_300 param1 param2 &tmp temp0 temp1 temp2)
+	(method (doVerb param1 param2 &tmp temp0 temp1 temp2)
 		(if (== param1 2)
 			(if (not (SetFlag 114))
-				(self sel_668: sel_213 param1 80 0 0 sel_214)
+				(self convReturn: noun param1 80 0 0 modNum)
 			else
-				(super sel_300: param1)
+				(super doVerb: param1)
 			)
 			(return)
 		)
 		(if (== param1 22)
-			(super sel_300: param1)
-			(if (gEgo sel_238: 11)
-				(gEgo sel_351: 11)
+			(super doVerb: param1)
+			(if (gEgo has: 11)
+				(gEgo put: 11)
 			)
 			(return)
 		)
@@ -1505,7 +1505,7 @@
 						(if (== argc 2)
 							param2
 						else
-							(gCurRoom sel_422: (ScriptID 20 0)) ; inNotebook
+							(gCurRoom setInset: (ScriptID 20 0)) ; inNotebook
 						)
 					)
 					-1
@@ -1534,17 +1534,17 @@
 					(cond
 						((IsFlag 134)
 							(if (proc27_0 4 global364)
-								(self sel_668: sel_213 6 1 0 0 sel_214)
+								(self convReturn: noun 6 1 0 0 modNum)
 							else
-								(self sel_668: sel_213 6 72 0 0 sel_214)
+								(self convReturn: noun 6 72 0 0 modNum)
 								(proc27_1 4 @global364)
 							)
 						)
 						((proc27_0 4 global297)
-							(self sel_668: sel_213 6 1 0 0 sel_214)
+							(self convReturn: noun 6 1 0 0 modNum)
 						)
 						(else
-							(self sel_668: sel_213 6 3 0 0 sel_214)
+							(self convReturn: noun 6 3 0 0 modNum)
 							(proc27_1 4 @global297)
 						)
 					)
@@ -1553,17 +1553,17 @@
 					(cond
 						((or (IsFlag 171) (IsFlag 12))
 							(if (proc27_0 4 global363)
-								(self sel_668: sel_213 6 1 0 0 sel_214)
+								(self convReturn: noun 6 1 0 0 modNum)
 							else
-								(self sel_668: sel_213 6 69 0 0 sel_214)
+								(self convReturn: noun 6 69 0 0 modNum)
 								(proc27_1 4 @global363)
 							)
 						)
 						((proc27_0 4 global298)
-							(self sel_668: sel_213 6 1 0 0 sel_214)
+							(self convReturn: noun 6 1 0 0 modNum)
 						)
 						(else
-							(self sel_668: sel_213 6 4 0 0 sel_214)
+							(self convReturn: noun 6 4 0 0 modNum)
 							(proc27_1 4 @global298)
 						)
 					)
@@ -1572,17 +1572,17 @@
 					(cond
 						((or (IsFlag 143) (IsFlag 72))
 							(if (proc27_0 4 global366)
-								(self sel_668: sel_213 6 1 0 0 sel_214)
+								(self convReturn: noun 6 1 0 0 modNum)
 							else
-								(self sel_668: sel_213 6 74 0 0 sel_214)
+								(self convReturn: noun 6 74 0 0 modNum)
 								(proc27_1 4 @global366)
 							)
 						)
 						((proc27_0 4 global303)
-							(self sel_668: sel_213 6 1 0 0 sel_214)
+							(self convReturn: noun 6 1 0 0 modNum)
 						)
 						(else
-							(self sel_668: sel_213 6 9 0 0 sel_214)
+							(self convReturn: noun 6 9 0 0 modNum)
 							(proc27_1 4 @global303)
 						)
 					)
@@ -1591,17 +1591,17 @@
 					(cond
 						((or (IsFlag 161) (IsFlag 68))
 							(if (proc27_0 4 global367)
-								(self sel_668: sel_213 6 1 0 0 sel_214)
+								(self convReturn: noun 6 1 0 0 modNum)
 							else
-								(self sel_668: sel_213 6 73 0 0 sel_214)
+								(self convReturn: noun 6 73 0 0 modNum)
 								(proc27_1 4 @global367)
 							)
 						)
 						((proc27_0 4 global305)
-							(self sel_668: sel_213 6 1 0 0 sel_214)
+							(self convReturn: noun 6 1 0 0 modNum)
 						)
 						(else
-							(self sel_668: sel_213 6 11 0 0 sel_214)
+							(self convReturn: noun 6 11 0 0 modNum)
 							(proc27_1 4 @global305)
 						)
 					)
@@ -1610,17 +1610,17 @@
 					(cond
 						((or (IsFlag 158) (IsFlag 67))
 							(if (proc27_0 4 global365)
-								(self sel_668: sel_213 6 1 0 0 sel_214)
+								(self convReturn: noun 6 1 0 0 modNum)
 							else
-								(self sel_668: sel_213 6 71 0 0 sel_214)
+								(self convReturn: noun 6 71 0 0 modNum)
 								(proc27_1 4 @global365)
 							)
 						)
 						((proc27_0 4 global306)
-							(self sel_668: sel_213 6 1 0 0 sel_214)
+							(self convReturn: noun 6 1 0 0 modNum)
 						)
 						(else
-							(self sel_668: sel_213 6 12 0 0 sel_214)
+							(self convReturn: noun 6 12 0 0 modNum)
 							(proc27_1 4 @global306)
 						)
 					)
@@ -1629,76 +1629,76 @@
 					(cond
 						((or (IsFlag 69) (IsFlag 165) (IsFlag 166))
 							(if (proc27_0 4 global365)
-								(self sel_668: sel_213 6 1 0 0 sel_214)
+								(self convReturn: noun 6 1 0 0 modNum)
 							else
-								(self sel_668: sel_213 6 70 0 0 sel_214)
+								(self convReturn: noun 6 70 0 0 modNum)
 								(proc27_1 4 @global365)
 							)
 						)
 						((proc27_0 4 global308)
-							(self sel_668: sel_213 6 1 0 0 sel_214)
+							(self convReturn: noun 6 1 0 0 modNum)
 						)
 						(else
-							(self sel_668: sel_213 6 14 0 0 sel_214)
+							(self convReturn: noun 6 14 0 0 modNum)
 							(proc27_1 4 @global308)
 						)
 					)
 				)
 				(780
 					(cond
-						((or (IsFlag 155) (IsFlag 22) (gEgo sel_238: 11))
+						((or (IsFlag 155) (IsFlag 22) (gEgo has: 11))
 							(if (proc27_0 4 global368)
-								(self sel_668: sel_213 6 1 0 0 sel_214)
+								(self convReturn: noun 6 1 0 0 modNum)
 							else
-								(self sel_668: sel_213 6 75 0 0 sel_214)
+								(self convReturn: noun 6 75 0 0 modNum)
 								(proc27_1 4 @global368)
 							)
 						)
 						((proc27_0 4 global332)
-							(self sel_668: sel_213 6 1 0 0 sel_214)
+							(self convReturn: noun 6 1 0 0 modNum)
 						)
 						(else
-							(self sel_668: sel_213 6 38 0 0 sel_214)
+							(self convReturn: noun 6 38 0 0 modNum)
 							(proc27_1 4 @global332)
 						)
 					)
 				)
 				(else
 					(cond
-						((not (Message msgGET sel_214 sel_213 6 temp1 1))
-							(self sel_668: sel_213 6 81 0 0 sel_214)
+						((not (Message msgGET modNum noun 6 temp1 1))
+							(self convReturn: noun 6 81 0 0 modNum)
 						)
 						((proc27_0 4 [global296 (- temp1 2)])
-							(self sel_668: sel_213 6 1 0 0 sel_214)
+							(self convReturn: noun 6 1 0 0 modNum)
 						)
 						(else
-							(self sel_668: sel_213 6 temp1 0 0 sel_214)
+							(self convReturn: noun 6 temp1 0 0 modNum)
 							(proc27_1 4 @[global296 (- temp1 2)])
 						)
 					)
 				)
 			)
 		else
-			(super sel_300: param1)
+			(super doVerb: param1)
 		)
 	)
 )
 
 (instance aTut of MuseumActor
 	(properties
-		sel_20 {aTut}
-		sel_213 1
-		sel_214 1883
-		sel_103 1
-		sel_648 821
+		name {aTut}
+		noun 1
+		modNum 1883
+		scaleSignal 1
+		originalView 821
 	)
 
-	(method (sel_300 param1 param2 &tmp temp0 temp1 temp2)
+	(method (doVerb param1 param2 &tmp temp0 temp1 temp2)
 		(if (== param1 2)
 			(if (not (SetFlag 111))
-				(self sel_668: sel_213 param1 80 0 0 sel_214)
+				(self convReturn: noun param1 80 0 0 modNum)
 			else
-				(super sel_300: param1)
+				(super doVerb: param1)
 			)
 			(return)
 		)
@@ -1709,7 +1709,7 @@
 						(if (== argc 2)
 							param2
 						else
-							(gCurRoom sel_422: (ScriptID 20 0)) ; inNotebook
+							(gCurRoom setInset: (ScriptID 20 0)) ; inNotebook
 						)
 					)
 					-1
@@ -1738,17 +1738,17 @@
 					(cond
 						((IsFlag 134)
 							(if (proc27_0 7 global364)
-								(self sel_668: sel_213 6 1 0 0 sel_214)
+								(self convReturn: noun 6 1 0 0 modNum)
 							else
-								(self sel_668: sel_213 6 72 0 0 sel_214)
+								(self convReturn: noun 6 72 0 0 modNum)
 								(proc27_1 7 @global364)
 							)
 						)
 						((proc27_0 7 global297)
-							(self sel_668: sel_213 6 1 0 0 sel_214)
+							(self convReturn: noun 6 1 0 0 modNum)
 						)
 						(else
-							(self sel_668: sel_213 6 3 0 0 sel_214)
+							(self convReturn: noun 6 3 0 0 modNum)
 							(proc27_1 7 @global297)
 						)
 					)
@@ -1757,49 +1757,49 @@
 					(cond
 						((or (IsFlag 161) (IsFlag 68))
 							(if (proc27_0 7 global367)
-								(self sel_668: sel_213 6 1 0 0 sel_214)
+								(self convReturn: noun 6 1 0 0 modNum)
 							else
-								(self sel_668: sel_213 6 73 0 0 sel_214)
+								(self convReturn: noun 6 73 0 0 modNum)
 								(proc27_1 7 @global367)
 							)
 						)
 						((proc27_0 7 global305)
-							(self sel_668: sel_213 6 1 0 0 sel_214)
+							(self convReturn: noun 6 1 0 0 modNum)
 						)
 						(else
-							(self sel_668: sel_213 6 11 0 0 sel_214)
+							(self convReturn: noun 6 11 0 0 modNum)
 							(proc27_1 7 @global305)
 						)
 					)
 				)
 				(else
 					(cond
-						((not (Message msgGET sel_214 sel_213 6 temp1 1))
-							(self sel_668: sel_213 6 81 0 0 sel_214)
+						((not (Message msgGET modNum noun 6 temp1 1))
+							(self convReturn: noun 6 81 0 0 modNum)
 						)
 						((proc27_0 7 [global296 (- temp1 2)])
-							(self sel_668: sel_213 6 1 0 0 sel_214)
+							(self convReturn: noun 6 1 0 0 modNum)
 						)
 						(else
-							(self sel_668: sel_213 6 temp1 0 0 sel_214)
+							(self convReturn: noun 6 temp1 0 0 modNum)
 							(proc27_1 7 @[global296 (- temp1 2)])
 						)
 					)
 				)
 			)
 		else
-			(super sel_300: param1)
+			(super doVerb: param1)
 		)
 	)
 
-	(method (sel_145)
-		(self sel_664:)
+	(method (cue)
+		(self wander:)
 	)
 
-	(method (sel_664 param1 &tmp temp0 temp1)
+	(method (wander param1 &tmp temp0 temp1)
 		(if (or (not argc) (not param1))
-			(= temp1 sel_620)
-			(while (== temp1 sel_620)
+			(= temp1 room)
+			(while (== temp1 room)
 				(= temp1 0)
 				(= temp0 (Random 1 100))
 				(if (== gAct 3)
@@ -1813,35 +1813,35 @@
 				)
 			)
 			(if temp1
-				(if (== sel_620 -1)
-					(if (> sel_652 0)
-						(self sel_182: sel_652)
+				(if (== room -1)
+					(if (> originalDest 0)
+						(self moveTo: originalDest)
 					)
-					(= sel_652 0)
+					(= originalDest 0)
 				)
-				(super sel_664: temp1 self)
+				(super wander: temp1 self)
 			else
-				(if (!= sel_620 -1)
-					(= sel_652 sel_620)
+				(if (!= room -1)
+					(= originalDest room)
 				)
-				(self sel_182: -1)
-				(= sel_619 0)
+				(self moveTo: -1)
+				(= wandering 0)
 			)
 		else
-			(super sel_664: param1 &rest)
+			(super wander: param1 &rest)
 		)
 	)
 )
 
 (instance aWatney of MuseumActor
 	(properties
-		sel_20 {aWatney}
-		sel_213 1
-		sel_214 1886
-		sel_648 815
+		name {aWatney}
+		noun 1
+		modNum 1886
+		originalView 815
 	)
 
-	(method (sel_300 param1 param2 &tmp temp0 temp1 temp2)
+	(method (doVerb param1 param2 &tmp temp0 temp1 temp2)
 		(if (OneOf param1 6 14)
 			(if
 				(==
@@ -1849,7 +1849,7 @@
 						(if (== argc 2)
 							param2
 						else
-							(gCurRoom sel_422: (ScriptID 20 0)) ; inNotebook
+							(gCurRoom setInset: (ScriptID 20 0)) ; inNotebook
 						)
 					)
 					-1
@@ -1878,49 +1878,49 @@
 					(cond
 						((IsFlag 134)
 							(if (proc27_0 8 global364)
-								(self sel_668: sel_213 6 1 0 0 sel_214)
+								(self convReturn: noun 6 1 0 0 modNum)
 							else
-								(self sel_668: sel_213 6 72 0 0 sel_214)
+								(self convReturn: noun 6 72 0 0 modNum)
 								(proc27_1 8 @global364)
 							)
 						)
 						((proc27_0 8 global297)
-							(self sel_668: sel_213 6 1 0 0 sel_214)
+							(self convReturn: noun 6 1 0 0 modNum)
 						)
 						(else
-							(self sel_668: sel_213 6 3 0 0 sel_214)
+							(self convReturn: noun 6 3 0 0 modNum)
 							(proc27_1 8 @global297)
 						)
 					)
 				)
 				(else
 					(cond
-						((not (Message msgGET sel_214 sel_213 6 temp1 1))
-							(self sel_668: sel_213 6 81 0 0 sel_214)
+						((not (Message msgGET modNum noun 6 temp1 1))
+							(self convReturn: noun 6 81 0 0 modNum)
 						)
 						((proc27_0 8 [global296 (- temp1 2)])
-							(self sel_668: sel_213 6 1 0 0 sel_214)
+							(self convReturn: noun 6 1 0 0 modNum)
 						)
 						(else
-							(self sel_668: sel_213 6 temp1 0 0 sel_214)
+							(self convReturn: noun 6 temp1 0 0 modNum)
 							(proc27_1 8 @[global296 (- temp1 2)])
 						)
 					)
 				)
 			)
 		else
-			(super sel_300: param1)
+			(super doVerb: param1)
 		)
 	)
 
-	(method (sel_145)
-		(self sel_664:)
+	(method (cue)
+		(self wander:)
 	)
 
-	(method (sel_664 param1 &tmp temp0 temp1)
+	(method (wander param1 &tmp temp0 temp1)
 		(if (or (not argc) (not param1))
-			(= temp1 sel_620)
-			(while (== temp1 sel_620)
+			(= temp1 room)
+			(while (== temp1 room)
 				(= temp1 0)
 				(= temp0 (Random 1 100))
 				(if (== gAct 3)
@@ -1934,42 +1934,42 @@
 				)
 			)
 			(if temp1
-				(if (== sel_620 -1)
-					(if (> sel_652 0)
-						(self sel_182: sel_652)
+				(if (== room -1)
+					(if (> originalDest 0)
+						(self moveTo: originalDest)
 					)
-					(= sel_652 0)
+					(= originalDest 0)
 				)
-				(super sel_664: temp1 self)
+				(super wander: temp1 self)
 			else
-				(if (!= sel_620 -1)
-					(= sel_652 sel_620)
+				(if (!= room -1)
+					(= originalDest room)
 				)
-				(self sel_182: -1)
-				(= sel_619 0)
+				(self moveTo: -1)
+				(= wandering 0)
 			)
 		else
-			(super sel_664: param1 &rest)
+			(super wander: param1 &rest)
 		)
 	)
 )
 
 (instance aYvette of MuseumActor
 	(properties
-		sel_20 {aYvette}
-		sel_213 1
-		sel_214 1885
-		sel_103 1
-		sel_648 817
+		name {aYvette}
+		noun 1
+		modNum 1885
+		scaleSignal 1
+		originalView 817
 	)
 
-	(method (sel_300 param1 param2 &tmp temp0 temp1 temp2)
+	(method (doVerb param1 param2 &tmp temp0 temp1 temp2)
 		(cond
 			((== param1 2)
 				(if (not (SetFlag 113))
-					(self sel_668: sel_213 param1 80 0 0 sel_214)
+					(self convReturn: noun param1 80 0 0 modNum)
 				else
-					(self sel_668: sel_213 param1 27 0 0 sel_214)
+					(self convReturn: noun param1 27 0 0 modNum)
 				)
 			)
 			((OneOf param1 6 14)
@@ -1979,7 +1979,7 @@
 							(if (== argc 2)
 								param2
 							else
-								(gCurRoom sel_422: (ScriptID 20 0)) ; inNotebook
+								(gCurRoom setInset: (ScriptID 20 0)) ; inNotebook
 							)
 						)
 						-1
@@ -2008,17 +2008,17 @@
 						(cond
 							((or (IsFlag 158) (IsFlag 67))
 								(if (proc27_0 9 global365)
-									(self sel_668: sel_213 6 1 0 0 sel_214)
+									(self convReturn: noun 6 1 0 0 modNum)
 								else
-									(self sel_668: sel_213 6 71 0 0 sel_214)
+									(self convReturn: noun 6 71 0 0 modNum)
 									(proc27_1 9 @global365)
 								)
 							)
 							((proc27_0 9 global306)
-								(self sel_668: sel_213 6 1 0 0 sel_214)
+								(self convReturn: noun 6 1 0 0 modNum)
 							)
 							(else
-								(self sel_668: sel_213 6 12 0 0 sel_214)
+								(self convReturn: noun 6 12 0 0 modNum)
 								(proc27_1 9 @global306)
 							)
 						)
@@ -2027,17 +2027,17 @@
 						(cond
 							((or (IsFlag 171) (IsFlag 12))
 								(if (proc27_0 9 global363)
-									(self sel_668: sel_213 6 1 0 0 sel_214)
+									(self convReturn: noun 6 1 0 0 modNum)
 								else
-									(self sel_668: sel_213 6 69 0 0 sel_214)
+									(self convReturn: noun 6 69 0 0 modNum)
 									(proc27_1 9 @global363)
 								)
 							)
 							((proc27_0 9 global298)
-								(self sel_668: sel_213 6 1 0 0 sel_214)
+								(self convReturn: noun 6 1 0 0 modNum)
 							)
 							(else
-								(self sel_668: sel_213 6 4 0 0 sel_214)
+								(self convReturn: noun 6 4 0 0 modNum)
 								(proc27_1 9 @global298)
 							)
 						)
@@ -2046,39 +2046,39 @@
 						(cond
 							((IsFlag 134)
 								(if (proc27_0 9 global364)
-									(self sel_668: sel_213 6 1 0 0 sel_214)
+									(self convReturn: noun 6 1 0 0 modNum)
 								else
-									(self sel_668: sel_213 6 72 0 0 sel_214)
+									(self convReturn: noun 6 72 0 0 modNum)
 									(proc27_1 9 @global364)
 								)
 							)
 							((proc27_0 9 global297)
-								(self sel_668: sel_213 6 1 0 0 sel_214)
+								(self convReturn: noun 6 1 0 0 modNum)
 							)
 							(else
-								(self sel_668: sel_213 6 3 0 0 sel_214)
+								(self convReturn: noun 6 3 0 0 modNum)
 								(proc27_1 9 @global297)
 							)
 						)
 					)
 					(263
 						(if (proc27_0 9 global302)
-							(self sel_668: sel_213 6 1 0 0 sel_214)
+							(self convReturn: noun 6 1 0 0 modNum)
 						else
-							(self sel_668: sel_213 6 24 0 0 sel_214)
+							(self convReturn: noun 6 24 0 0 modNum)
 							(proc27_1 9 @global302)
 						)
 					)
 					(else
 						(cond
-							((not (Message msgGET sel_214 sel_213 6 temp1 1))
-								(self sel_668: sel_213 6 81 0 0 sel_214)
+							((not (Message msgGET modNum noun 6 temp1 1))
+								(self convReturn: noun 6 81 0 0 modNum)
 							)
 							((proc27_0 9 [global296 (- temp1 2)])
-								(self sel_668: sel_213 6 1 0 0 sel_214)
+								(self convReturn: noun 6 1 0 0 modNum)
 							)
 							(else
-								(self sel_668: sel_213 6 temp1 0 0 sel_214)
+								(self convReturn: noun 6 temp1 0 0 modNum)
 								(proc27_1 9 @[global296 (- temp1 2)])
 							)
 						)
@@ -2086,7 +2086,7 @@
 				)
 			)
 			(else
-				(super sel_300: param1)
+				(super doVerb: param1)
 			)
 		)
 	)
@@ -2094,13 +2094,13 @@
 
 (instance aZiggy of MuseumActor
 	(properties
-		sel_20 {aZiggy}
-		sel_213 1
-		sel_214 1890
-		sel_648 816
+		name {aZiggy}
+		noun 1
+		modNum 1890
+		originalView 816
 	)
 
-	(method (sel_300 param1 param2 &tmp temp0 temp1 temp2)
+	(method (doVerb param1 param2 &tmp temp0 temp1 temp2)
 		(if (OneOf param1 6 14)
 			(if
 				(==
@@ -2108,7 +2108,7 @@
 						(if (== argc 2)
 							param2
 						else
-							(gCurRoom sel_422: (ScriptID 20 0)) ; inNotebook
+							(gCurRoom setInset: (ScriptID 20 0)) ; inNotebook
 						)
 					)
 					-1
@@ -2133,30 +2133,30 @@
 				)
 			)
 			(cond
-				((not (Message msgGET sel_214 sel_213 6 temp1 1))
-					(self sel_668: sel_213 6 81 0 0 sel_214)
+				((not (Message msgGET modNum noun 6 temp1 1))
+					(self convReturn: noun 6 81 0 0 modNum)
 				)
 				((proc27_0 11 [global296 (- temp1 2)])
-					(self sel_668: sel_213 6 1 0 0 sel_214)
+					(self convReturn: noun 6 1 0 0 modNum)
 				)
 				(else
-					(self sel_668: sel_213 6 temp1 0 0 sel_214)
+					(self convReturn: noun 6 temp1 0 0 modNum)
 					(proc27_1 11 @[global296 (- temp1 2)])
 				)
 			)
 		else
-			(super sel_300: param1)
+			(super doVerb: param1)
 		)
 	)
 
-	(method (sel_145)
-		(self sel_664:)
+	(method (cue)
+		(self wander:)
 	)
 
-	(method (sel_664 param1 &tmp temp0 temp1)
+	(method (wander param1 &tmp temp0 temp1)
 		(if (or (not argc) (not param1))
-			(= temp1 sel_620)
-			(while (== temp1 sel_620)
+			(= temp1 room)
+			(while (== temp1 room)
 				(= temp1 0)
 				(= temp0 (Random 1 100))
 				(if (== gAct 3)
@@ -2170,224 +2170,224 @@
 				)
 			)
 			(if temp1
-				(if (== sel_620 -1)
-					(if (> sel_652 0)
-						(self sel_182: sel_652)
+				(if (== room -1)
+					(if (> originalDest 0)
+						(self moveTo: originalDest)
 					)
-					(= sel_652 0)
+					(= originalDest 0)
 				)
-				(super sel_664: temp1 self)
+				(super wander: temp1 self)
 			else
-				(if (!= sel_620 -1)
-					(= sel_652 sel_620)
+				(if (!= room -1)
+					(= originalDest room)
 				)
-				(self sel_182: -1)
-				(= sel_619 0)
+				(self moveTo: -1)
+				(= wandering 0)
 			)
 		else
-			(super sel_664: param1 &rest)
+			(super wander: param1 &rest)
 		)
 	)
 )
 
 (class TravelToRoom of Script
 	(properties
-		sel_20 {TravelToRoom}
-		sel_665 0
-		sel_666 0
+		name {TravelToRoom}
+		useDoor 0
+		fromRendezvous 0
 	)
 
-	(method (sel_111 param1)
+	(method (dispose param1)
 		(if (or (not argc) (not param1))
-			(= sel_143 0)
+			(= caller 0)
 		)
-		(super sel_111:)
+		(super dispose:)
 	)
 
-	(method (sel_145)
-		(if (sel_42 sel_667:)
+	(method (cue)
+		(if (client convRoom:)
 			(return)
 		else
-			(super sel_145: &rest)
+			(super cue: &rest)
 		)
 	)
 
-	(method (sel_144 param1 &tmp temp0 temp1 temp2 temp3 temp4 temp5 temp6 temp7 temp8 temp9)
-		(switch (= sel_29 param1)
+	(method (changeState param1 &tmp temp0 temp1 temp2 temp3 temp4 temp5 temp6 temp7 temp8 temp9)
+		(switch (= state param1)
 			(0
-				(= sel_141 0)
-				(= sel_136 1)
+				(= register 0)
+				(= cycles 1)
 			)
 			(1
 				(if
 					(and
 						(==
-							(= temp1 (sel_42 sel_659: (sel_42 sel_652:)))
-							(sel_42 sel_620:)
+							(= temp1 (client findRendezvous: (client originalDest:)))
+							(client room:)
 						)
-						(not sel_666)
+						(not fromRendezvous)
 					)
-					(self sel_144: 9)
+					(self changeState: 9)
 				else
-					(if sel_666
-						(++ sel_29)
+					(if fromRendezvous
+						(++ state)
 					)
-					(= sel_136 1)
+					(= cycles 1)
 				)
 			)
 			(2
-				(= temp0 (* (sel_42 sel_663:) 11))
-				(if (!= (sel_42 sel_651:) (sel_42 sel_620:))
-					(= sel_141 (sel_42 sel_658: (sel_42 sel_651:)))
-					(= temp6 (sel_42 sel_660:))
+				(= temp0 (* (client setIndex:) 11))
+				(if (!= (client destination:) (client room:))
+					(= register (client dirToRoom: (client destination:)))
+					(= temp6 (client isAdjacent:))
 				)
 				(= temp2
 					(switch temp6
 						(1
-							(MuseumRgn sel_639:)
+							(MuseumRgn northPts:)
 						)
 						(2
-							(MuseumRgn sel_640:)
+							(MuseumRgn eastPts:)
 						)
 						(3
-							(MuseumRgn sel_641:)
+							(MuseumRgn southPts:)
 						)
 						(4
-							(MuseumRgn sel_642:)
+							(MuseumRgn westPts:)
 						)
 						(else
-							(if (== (sel_42 sel_620:) gCurRoomNum)
-								(MuseumRgn sel_643:)
+							(if (== (client room:) gCurRoomNum)
+								(MuseumRgn midPts:)
 							else
 								0
 							)
 						)
 					)
 				)
-				(switch sel_141
+				(switch register
 					(1
-						(sel_42
-							sel_654:
+						(client
+							exitX:
 								(if temp2
-									(temp2 sel_623:)
+									(temp2 northPtX:)
 								else
 									160
 								)
-							sel_655:
+							exitY:
 								(if temp2
-									(temp2 sel_624:)
+									(temp2 northPtY:)
 								else
 									0
 								)
 						)
 					)
 					(2
-						(sel_42
-							sel_654:
+						(client
+							exitX:
 								(if temp2
-									(temp2 sel_627:)
+									(temp2 eastPtX:)
 								else
 									320
 								)
-							sel_655:
+							exitY:
 								(if temp2
-									(temp2 sel_628:)
+									(temp2 eastPtY:)
 								else
 									95
 								)
 						)
 					)
 					(3
-						(sel_42
-							sel_654:
+						(client
+							exitX:
 								(if temp2
-									(temp2 sel_625:)
+									(temp2 southPtX:)
 								else
 									160
 								)
-							sel_655:
+							exitY:
 								(if temp2
-									(temp2 sel_626:)
+									(temp2 southPtY:)
 								else
 									190
 								)
 						)
 					)
 					(4
-						(sel_42
-							sel_654:
+						(client
+							exitX:
 								(if temp2
-									(temp2 sel_629:)
+									(temp2 westPtX:)
 								else
 									0
 								)
-							sel_655:
+							exitY:
 								(if temp2
-									(temp2 sel_630:)
+									(temp2 westPtY:)
 								else
 									95
 								)
 						)
 					)
 					(else
-						(sel_42 sel_654: 0 sel_655: 0)
+						(client exitX: 0 exitY: 0)
 					)
 				)
-				(if (>= (= temp4 (sel_42 sel_654:)) 1000)
-					(sel_42 sel_654: (- temp4 1000))
-					(= sel_665 sel_141)
+				(if (>= (= temp4 (client exitX:)) 1000)
+					(client exitX: (- temp4 1000))
+					(= useDoor register)
 				)
-				(= sel_136 1)
+				(= cycles 1)
 			)
 			(3
-				(if sel_666
-					(= temp3 (sel_42 sel_620:))
+				(if fromRendezvous
+					(= temp3 (client room:))
 				else
-					(= temp3 (sel_42 sel_661: sel_141))
+					(= temp3 (client nextRoom: register))
 				)
 				(cond
 					(
 						(and
-							(== (sel_42 sel_620:) 530)
+							(== (client room:) 530)
 							(== temp3 600)
 							(== gCurRoomNum 530)
 						)
-						(= sel_139 600)
+						(= ticks 600)
 					)
-					(sel_666
-						(= sel_136 1)
+					(fromRendezvous
+						(= cycles 1)
 					)
-					((> (MuseumRgn sel_644: temp3) 1)
-						(if (not (= temp6 (sel_42 sel_533:)))
-							(-- sel_29)
-							(= sel_139 15)
+					((> (MuseumRgn crowdInRoom: temp3) 1)
+						(if (not (= temp6 (client waitCount:)))
+							(-- state)
+							(= ticks 15)
 						else
-							(sel_42 sel_533: (-- temp6))
-							(-- sel_29)
-							(= sel_139 (* (Random 3 8) 60))
+							(client waitCount: (-- temp6))
+							(-- state)
+							(= ticks (* (Random 3 8) 60))
 						)
 					)
-					((== (sel_42 sel_620:) gCurRoomNum)
-						(= sel_139 60)
+					((== (client room:) gCurRoomNum)
+						(= ticks 60)
 					)
-					((not (sel_42 sel_649:))
-						(= sel_139 (* (Random 3 15) 60))
+					((not (client beelining:))
+						(= ticks (* (Random 3 15) 60))
 					)
 					(else
-						(= sel_136 1)
+						(= cycles 1)
 					)
 				)
 			)
 			(4
-				(if sel_666
-					(= sel_136 1)
+				(if fromRendezvous
+					(= cycles 1)
 				else
-					(= temp2 (MuseumRgn sel_647: (sel_42 sel_620:)))
-					(sel_42
-						sel_312:
+					(= temp2 (MuseumRgn whichList: (client room:)))
+					(client
+						setMotion:
 							PolyPath
-							(sel_42 sel_654:)
-							(sel_42 sel_655:)
+							(client exitX:)
+							(client exitY:)
 							self
 							1
 							temp2
@@ -2395,74 +2395,74 @@
 				)
 			)
 			(5
-				(if (and sel_665 (== (sel_42 sel_620:) gCurRoomNum))
-					(self sel_146: (sUseDoor sel_109:) self 1)
+				(if (and useDoor (== (client room:) gCurRoomNum))
+					(self setScript: (sUseDoor new:) self 1)
 				else
-					(= sel_136 1)
+					(= cycles 1)
 				)
 			)
 			(6
-				(= temp0 (* (sel_42 sel_653:) 5))
-				(if sel_666
-					(sel_42
-						sel_2:
-							(if (== (sel_42 sel_620:) gCurRoomNum)
-								(sel_42 sel_648:)
+				(= temp0 (* (client roomIdx:) 5))
+				(if fromRendezvous
+					(client
+						view:
+							(if (== (client room:) gCurRoomNum)
+								(client originalView:)
 							else
 								828
 							)
 					)
-					(= sel_666 0)
+					(= fromRendezvous 0)
 				else
-					(= temp3 (sel_42 sel_661: sel_141))
-					(sel_42
-						sel_650: (sel_42 sel_620:)
-						sel_620: temp3
-						sel_2:
+					(= temp3 (client nextRoom: register))
+					(client
+						lastRoom: (client room:)
+						room: temp3
+						view:
 							(if (== temp3 gCurRoomNum)
-								(sel_42 sel_648:)
+								(client originalView:)
 							else
 								828
 							)
-						sel_663:
+						setIndex:
 					)
 					(MuseumRgn
-						sel_644: (sel_42 sel_620:) 1
-						sel_644: (sel_42 sel_650:) -1
+						crowdInRoom: (client room:) 1
+						crowdInRoom: (client lastRoom:) -1
 					)
 				)
-				(= temp8 sel_141)
-				(= temp0 (* (sel_42 sel_653:) 6))
-				(if (> (sel_42 sel_650:) 0)
-					(= temp3 (sel_42 sel_650:))
-					(for ((= sel_141 1)) (< sel_141 5) ((++ sel_141))
-						(if (== [local100 (+ temp0 sel_141 1)] temp3)
+				(= temp8 register)
+				(= temp0 (* (client roomIdx:) 6))
+				(if (> (client lastRoom:) 0)
+					(= temp3 (client lastRoom:))
+					(for ((= register 1)) (< register 5) ((++ register))
+						(if (== [local100 (+ temp0 register 1)] temp3)
 							(break)
 						)
 					)
 				else
-					(= sel_141 -1)
+					(= register -1)
 				)
-				(= temp9 sel_141)
-				(= temp0 (* (sel_42 sel_653:) 11))
+				(= temp9 register)
+				(= temp0 (* (client roomIdx:) 11))
 				(cond
-					((== (sel_42 sel_620:) gCurRoomNum)
-						(= temp2 (MuseumRgn sel_643:))
+					((== (client room:) gCurRoomNum)
+						(= temp2 (MuseumRgn midPts:))
 					)
-					((sel_42 sel_660:)
+					((client isAdjacent:)
 						(= temp2
 							(switch temp8
 								(1
-									(MuseumRgn sel_639:)
+									(MuseumRgn northPts:)
 								)
 								(2
-									(MuseumRgn sel_640:)
+									(MuseumRgn eastPts:)
 								)
 								(3
-									(MuseumRgn sel_641:)
+									(MuseumRgn southPts:)
 								)
 								(4
-									(MuseumRgn sel_642:)
+									(MuseumRgn westPts:)
 								)
 							)
 						)
@@ -2474,8 +2474,8 @@
 				(switch temp9
 					(1
 						(if temp2
-							(= temp4 (temp2 sel_623:))
-							(= temp5 (temp2 sel_624:))
+							(= temp4 (temp2 northPtX:))
+							(= temp5 (temp2 northPtY:))
 						else
 							(= temp4 160)
 							(= temp5 50)
@@ -2483,8 +2483,8 @@
 					)
 					(2
 						(if temp2
-							(= temp4 (temp2 sel_627:))
-							(= temp5 (temp2 sel_628:))
+							(= temp4 (temp2 eastPtX:))
+							(= temp5 (temp2 eastPtY:))
 						else
 							(= temp4 320)
 							(= temp5 120)
@@ -2492,8 +2492,8 @@
 					)
 					(3
 						(if temp2
-							(= temp4 (temp2 sel_625:))
-							(= temp5 (temp2 sel_626:))
+							(= temp4 (temp2 southPtX:))
+							(= temp5 (temp2 southPtY:))
 						else
 							(= temp4 160)
 							(= temp5 190)
@@ -2501,8 +2501,8 @@
 					)
 					(4
 						(if temp2
-							(= temp4 (temp2 sel_629:))
-							(= temp5 (temp2 sel_630:))
+							(= temp4 (temp2 westPtX:))
+							(= temp5 (temp2 westPtY:))
 						else
 							(= temp4 0)
 							(= temp5 120)
@@ -2510,8 +2510,8 @@
 					)
 					(-1
 						(if temp2
-							(= temp4 (temp2 sel_621:))
-							(= temp5 (temp2 sel_622:))
+							(= temp4 (temp2 midPtX:))
+							(= temp5 (temp2 midPtY:))
 						else
 							(= temp4 160)
 							(= temp5 165)
@@ -2521,47 +2521,47 @@
 						(= temp4 (= temp5 0))
 					)
 				)
-				(sel_42 sel_153: temp4 temp5)
+				(client posn: temp4 temp5)
 				(if (>= temp4 1000)
 					(-= temp4 1000)
-					(= sel_665 sel_141)
+					(= useDoor register)
 				)
-				(= sel_136 1)
+				(= cycles 1)
 			)
 			(7
-				(if (and sel_665 (== (sel_42 sel_620:) gCurRoomNum))
-					(self sel_146: (sUseDoor sel_109:) self -1)
+				(if (and useDoor (== (client room:) gCurRoomNum))
+					(self setScript: (sUseDoor new:) self -1)
 				else
-					(= sel_136 1)
+					(= cycles 1)
 				)
 			)
 			(8
-				(if (== (sel_42 sel_656:) -1)
+				(if (== (client destX:) -1)
 					(cond
 						(
 							(and
 								(== gCurRoomNum 510)
 								(or
 									(and
-										(== (sel_42 sel_650:) 520)
-										(< (sel_42 sel_652:) 510)
+										(== (client lastRoom:) 520)
+										(< (client originalDest:) 510)
 									)
 									(and
-										(== (sel_42 sel_650:) 500)
-										(== (sel_42 sel_652:) 520)
+										(== (client lastRoom:) 500)
+										(== (client originalDest:) 520)
 									)
 								)
 							)
 							(= temp4 80)
 							(= temp5 165)
 						)
-						((> (MuseumRgn sel_644: (sel_42 sel_620:)) 1)
-							(= temp4 (- ((MuseumRgn sel_643:) sel_621:) 15))
-							(= temp5 (- ((MuseumRgn sel_643:) sel_622:) 15))
+						((> (MuseumRgn crowdInRoom: (client room:)) 1)
+							(= temp4 (- ((MuseumRgn midPts:) midPtX:) 15))
+							(= temp5 (- ((MuseumRgn midPts:) midPtY:) 15))
 						)
-						((== (sel_42 sel_620:) gCurRoomNum)
-							(= temp4 ((MuseumRgn sel_643:) sel_621:))
-							(= temp5 ((MuseumRgn sel_643:) sel_622:))
+						((== (client room:) gCurRoomNum)
+							(= temp4 ((MuseumRgn midPts:) midPtX:))
+							(= temp5 ((MuseumRgn midPts:) midPtY:))
 						)
 						(else
 							(= temp4 160)
@@ -2569,88 +2569,88 @@
 						)
 					)
 				else
-					(= temp4 (sel_42 sel_656:))
-					(= temp5 (sel_42 sel_657:))
+					(= temp4 (client destX:))
+					(= temp5 (client destY:))
 				)
-				(= temp2 (MuseumRgn sel_647: (sel_42 sel_620:)))
-				(sel_42 sel_312: PolyPath temp4 temp5 self 1 temp2)
+				(= temp2 (MuseumRgn whichList: (client room:)))
+				(client setMotion: PolyPath temp4 temp5 self 1 temp2)
 			)
 			(9
 				(cond
-					((!= (sel_42 sel_620:) (sel_42 sel_651:))
-						(= sel_141 0)
-						(self sel_144: 2)
+					((!= (client room:) (client destination:))
+						(= register 0)
+						(self changeState: 2)
 					)
-					((!= (sel_42 sel_652:) (sel_42 sel_651:))
+					((!= (client originalDest:) (client destination:))
 						(cond
 							(
 								(==
 									[local0
-										(+ (* (= temp0 (sel_42 sel_663:)) 5) 1)
+										(+ (* (= temp0 (client setIndex:)) 5) 1)
 									]
 									-1
 								)
-								(= sel_141 1)
-								(sel_42
-									sel_654: ((MuseumRgn sel_643:) sel_623:)
-									sel_655: ((MuseumRgn sel_643:) sel_624:)
+								(= register 1)
+								(client
+									exitX: ((MuseumRgn midPts:) northPtX:)
+									exitY: ((MuseumRgn midPts:) northPtY:)
 								)
 							)
 							((== [local0 (+ (* temp0 5) 2)] -1)
-								(= sel_141 2)
-								(sel_42
-									sel_654: ((MuseumRgn sel_643:) sel_627:)
-									sel_655: ((MuseumRgn sel_643:) sel_628:)
+								(= register 2)
+								(client
+									exitX: ((MuseumRgn midPts:) eastPtX:)
+									exitY: ((MuseumRgn midPts:) eastPtY:)
 								)
 							)
 							((== [local0 (+ (* temp0 5) 3)] -1)
-								(= sel_141 3)
-								(sel_42
-									sel_654: ((MuseumRgn sel_643:) sel_625:)
-									sel_655: ((MuseumRgn sel_643:) sel_626:)
+								(= register 3)
+								(client
+									exitX: ((MuseumRgn midPts:) southPtX:)
+									exitY: ((MuseumRgn midPts:) southPtY:)
 								)
 							)
 							((== [local0 (+ (* temp0 5) 4)] -1)
-								(= sel_141 4)
-								(sel_42
-									sel_654: ((MuseumRgn sel_643:) sel_629:)
-									sel_655: ((MuseumRgn sel_643:) sel_630:)
+								(= register 4)
+								(client
+									exitX: ((MuseumRgn midPts:) westPtX:)
+									exitY: ((MuseumRgn midPts:) westPtY:)
 								)
 							)
 						)
-						(= temp2 (MuseumRgn sel_647: (sel_42 sel_620:)))
-						(sel_42
-							sel_312:
+						(= temp2 (MuseumRgn whichList: (client room:)))
+						(client
+							setMotion:
 								PolyPath
-								(sel_42 sel_654:)
-								(sel_42 sel_655:)
+								(client exitX:)
+								(client exitY:)
 								self
 								1
 								temp2
 						)
 					)
 					(else
-						(sel_42 sel_649: 0)
-						(self sel_111: 1)
+						(client beelining: 0)
+						(self dispose: 1)
 					)
 				)
 			)
 			(10
 				(= temp3
-					[local100 (+ (* (= temp0 (sel_42 sel_653:)) 6) sel_141 1)]
+					[local100 (+ (* (= temp0 (client roomIdx:)) 6) register 1)]
 				)
-				(sel_42
-					sel_650: (sel_42 sel_620:)
-					sel_620: temp3
-					sel_651: (sel_42 sel_652:)
-					sel_663:
+				(client
+					lastRoom: (client room:)
+					room: temp3
+					destination: (client originalDest:)
+					setIndex:
 				)
 				(MuseumRgn
-					sel_644: (sel_42 sel_620:) 1
-					sel_644: (sel_42 sel_650:) -1
+					crowdInRoom: (client room:) 1
+					crowdInRoom: (client lastRoom:) -1
 				)
-				(= sel_666 1)
-				(self sel_144: 1)
+				(= fromRendezvous 1)
+				(self changeState: 1)
 			)
 		)
 	)
@@ -2658,16 +2658,16 @@
 
 (instance museumDialogueResume of Script
 	(properties
-		sel_20 {museumDialogueResume}
+		name {museumDialogueResume}
 	)
 
-	(method (sel_145 &tmp temp0 temp1)
-		(= temp0 sel_42)
-		(= sel_42 0)
+	(method (cue &tmp temp0 temp1)
+		(= temp0 client)
+		(= client 0)
 		(if (IsObject temp0)
-			(temp0 sel_667: 0)
-			(if (IsObject (= temp1 (temp0 sel_142:)))
-				(temp1 sel_144: (temp1 sel_29:))
+			(temp0 convRoom: 0)
+			(if (IsObject (= temp1 (temp0 script:)))
+				(temp1 changeState: (temp1 state:))
 			)
 		)
 	)
@@ -2675,57 +2675,57 @@
 
 (instance sUseDoor of Script
 	(properties
-		sel_20 {sUseDoor}
+		name {sUseDoor}
 	)
 
-	(method (sel_144 param1 &tmp temp0 temp1)
-		(switch (= sel_29 param1)
+	(method (changeState param1 &tmp temp0 temp1)
+		(switch (= state param1)
 			(0
-				(gUser sel_237: 0 sel_347: 0)
-				(gGame sel_197: gWaitCursor)
-				(if (== sel_141 -1)
-					((sel_42 sel_42:)
-						sel_63:
+				(gUser canControl: 0 canInput: 0)
+				(gGame setCursor: gWaitCursor)
+				(if (== register -1)
+					((client client:)
+						setPri:
 							(-
-								((ScriptID gCurRoomNum (sel_42 sel_665:)) sel_60:)
+								((ScriptID gCurRoomNum (client useDoor:)) priority:)
 								1
 							)
-						sel_153:
-							((ScriptID gCurRoomNum (sel_42 sel_665:)) sel_597:)
-							((ScriptID gCurRoomNum (sel_42 sel_665:)) sel_598:)
+						posn:
+							((ScriptID gCurRoomNum (client useDoor:)) moveToX:)
+							((ScriptID gCurRoomNum (client useDoor:)) moveToY:)
 					)
 				)
-				((ScriptID gCurRoomNum (sel_42 sel_665:)) sel_161: End self)
+				((ScriptID gCurRoomNum (client useDoor:)) setCycle: End self)
 				(global95
-					sel_81: ((ScriptID gCurRoomNum (sel_42 sel_665:)) sel_603:)
+					delete: ((ScriptID gCurRoomNum (client useDoor:)) doorPoly:)
 				)
 			)
 			(1
 				(= temp0
-					(if (== sel_141 1)
-						((ScriptID gCurRoomNum (sel_42 sel_665:)) sel_597:)
+					(if (== register 1)
+						((ScriptID gCurRoomNum (client useDoor:)) moveToX:)
 					else
-						((ScriptID gCurRoomNum (sel_42 sel_665:)) sel_303:)
+						((ScriptID gCurRoomNum (client useDoor:)) approachX:)
 					)
 				)
 				(= temp1
-					(if (== sel_141 1)
-						((ScriptID gCurRoomNum (sel_42 sel_665:)) sel_598:)
+					(if (== register 1)
+						((ScriptID gCurRoomNum (client useDoor:)) moveToY:)
 					else
-						((ScriptID gCurRoomNum (sel_42 sel_665:)) sel_304:)
+						((ScriptID gCurRoomNum (client useDoor:)) approachY:)
 					)
 				)
-				((sel_42 sel_42:) sel_63: -1 sel_312: PolyPath temp0 temp1 self)
+				((client client:) setPri: -1 setMotion: PolyPath temp0 temp1 self)
 			)
 			(2
-				((ScriptID gCurRoomNum (sel_42 sel_665:)) sel_161: Beg)
+				((ScriptID gCurRoomNum (client useDoor:)) setCycle: Beg)
 				(global95
-					sel_118: ((ScriptID gCurRoomNum (sel_42 sel_665:)) sel_603:)
+					add: ((ScriptID gCurRoomNum (client useDoor:)) doorPoly:)
 				)
-				(sel_42 sel_665: 0)
-				(gGame sel_197: ((gTheIconBar sel_207:) sel_33:))
-				(gUser sel_237: 1 sel_347: 1)
-				(self sel_111:)
+				(client useDoor: 0)
+				(gGame setCursor: ((gTheIconBar curIcon:) cursor:))
+				(gUser canControl: 1 canInput: 1)
+				(self dispose:)
 			)
 		)
 	)
@@ -2733,51 +2733,51 @@
 
 (instance fumeTimer of Timer
 	(properties
-		sel_20 {fumeTimer}
+		name {fumeTimer}
 	)
 
-	(method (sel_162)
-		(MuseumRgn sel_135: self)
-		(super sel_162: &rest)
+	(method (setReal)
+		(MuseumRgn timer: self)
+		(super setReal: &rest)
 	)
 
-	(method (sel_145)
+	(method (cue)
 		(ClearFlag 20)
 	)
 )
 
 (instance meetingTimer of Timer
 	(properties
-		sel_20 {meetingTimer}
+		name {meetingTimer}
 	)
 
-	(method (sel_162 param1 param2 param3 param4 param5)
+	(method (setReal param1 param2 param3 param4 param5)
 		(= gClockTimeMustDos param5)
-		(MuseumRgn sel_135: self)
-		(super sel_162: param1 param2 param3 param4)
+		(MuseumRgn timer: self)
+		(super setReal: param1 param2 param3 param4)
 	)
 
-	(method (sel_145)
-		(gCurRoom sel_403:)
-		((ScriptID 22 0) sel_57: gClockTimeMustDos) ; triggerAndClock
+	(method (cue)
+		(gCurRoom notify:)
+		((ScriptID 22 0) doit: gClockTimeMustDos) ; triggerAndClock
 	)
 )
 
 (instance wanderTimer of Timer
 	(properties
-		sel_20 {wanderTimer}
+		name {wanderTimer}
 	)
 
-	(method (sel_145 &tmp temp0 temp1)
-		(for ((= temp0 0)) (< temp0 (gCast sel_86:)) ((++ temp0))
+	(method (cue &tmp temp0 temp1)
+		(for ((= temp0 0)) (< temp0 (gCast size:)) ((++ temp0))
 			(if
 				(and
-					((= temp1 (gCast sel_64: temp0)) sel_116: 620)
-					(== (temp1 sel_620:) -1)
+					((= temp1 (gCast at: temp0)) respondsTo: 620)
+					(== (temp1 room:) -1)
 				)
-				(temp1 sel_664:)
+				(temp1 wander:)
 			)
 		)
-		(self sel_162: self 120)
+		(self setReal: self 120)
 	)
 )

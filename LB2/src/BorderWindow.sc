@@ -63,116 +63,116 @@
 
 (class BorderWindow of SysWindow
 	(properties
-		sel_20 {BorderWindow}
-		sel_26 5
-		sel_367 7
-		sel_368 6
-		sel_369 4
-		sel_370 3
-		sel_371 3
-		sel_372 2
+		name {BorderWindow}
+		back 5
+		topBordColor 7
+		lftBordColor 6
+		rgtBordColor 4
+		botBordColor 3
+		bevelWid 3
+		shadowWid 2
 	)
 
-	(method (sel_111)
-		(super sel_111:)
+	(method (dispose)
+		(super dispose:)
 		(SetPort 0)
 	)
 
-	(method (sel_189 &tmp temp0 temp1)
+	(method (open &tmp temp0 temp1)
 		(SetPort 0)
 		(= temp1 1)
-		(if (!= sel_60 -1)
+		(if (!= priority -1)
 			(|= temp1 $0002)
 		)
-		(= sel_10 (- sel_193 sel_371))
-		(= sel_11 (- sel_194 sel_371))
-		(= sel_13 (+ sel_196 sel_371 sel_372))
-		(= sel_12 (+ sel_195 sel_371 sel_372))
-		(= sel_31 128)
-		(super sel_189:)
+		(= lsTop (- top bevelWid))
+		(= lsLeft (- left bevelWid))
+		(= lsRight (+ right bevelWid shadowWid))
+		(= lsBottom (+ bottom bevelWid shadowWid))
+		(= type 128)
+		(super open:)
 		(localproc_0
-			sel_193
-			sel_194
-			sel_195
-			sel_196
-			sel_26
-			sel_367
-			sel_368
-			sel_370
-			sel_369
-			sel_371
-			sel_372
-			sel_60
+			top
+			left
+			bottom
+			right
+			back
+			topBordColor
+			lftBordColor
+			botBordColor
+			rgtBordColor
+			bevelWid
+			shadowWid
+			priority
 			temp1
 		)
 		(= temp0 (GetPort))
 		(SetPort 0)
-		(Graph grUPDATE_BOX sel_10 sel_11 sel_12 sel_13 1)
+		(Graph grUPDATE_BOX lsTop lsLeft lsBottom lsRight 1)
 		(SetPort temp0)
 	)
 )
 
 (class InsetWindow of BorderWindow
 	(properties
-		sel_20 {InsetWindow}
-		sel_367 5
-		sel_368 4
-		sel_369 2
-		sel_370 1
-		sel_373 3
-		sel_374 2
-		sel_375 0
-		sel_376 1
-		sel_377 5
-		sel_378 4
-		sel_379 10
-		sel_380 24
-		sel_381 2
-		sel_382 0
-		sel_383 2
-		sel_384 0
-		sel_385 0
+		name {InsetWindow}
+		topBordColor 5
+		lftBordColor 4
+		rgtBordColor 2
+		botBordColor 1
+		ck 3
+		insideColor 2
+		topBordColor2 0
+		lftBordColor2 1
+		botBordColor2 5
+		rgtBordColor2 4
+		topBordHgt 10
+		botBordHgt 24
+		sideBordWid 2
+		shadWid 0
+		bevWid 2
+		xOffset 0
+		yOffset 0
 	)
 
-	(method (sel_189 &tmp temp0 temp1 temp2 temp3 temp4 temp5)
+	(method (open &tmp temp0 temp1 temp2 temp3 temp4 temp5)
 		(= temp0 1)
-		(if (!= sel_60 -1)
+		(if (!= priority -1)
 			(|= temp0 $0002)
 		)
-		(= temp2 sel_193)
-		(= temp3 sel_194)
-		(= temp4 sel_195)
-		(= temp5 sel_196)
-		(-= sel_193 (+ sel_371 sel_379))
-		(-= sel_194 (+ sel_371 sel_381))
-		(+= sel_195 (+ sel_371 sel_380))
-		(+= sel_196 (+ sel_371 sel_381))
-		(= sel_384 (+ sel_371 sel_381))
-		(= sel_385 (+ sel_371 sel_379))
-		(super sel_189:)
+		(= temp2 top)
+		(= temp3 left)
+		(= temp4 bottom)
+		(= temp5 right)
+		(-= top (+ bevelWid topBordHgt))
+		(-= left (+ bevelWid sideBordWid))
+		(+= bottom (+ bevelWid botBordHgt))
+		(+= right (+ bevelWid sideBordWid))
+		(= xOffset (+ bevelWid sideBordWid))
+		(= yOffset (+ bevelWid topBordHgt))
+		(super open:)
 		(localproc_0
 			temp2
 			temp3
 			temp4
 			temp5
-			sel_374
-			sel_375
-			sel_376
-			sel_377
-			sel_378
-			sel_383
-			sel_382
-			sel_60
+			insideColor
+			topBordColor2
+			lftBordColor2
+			botBordColor2
+			rgtBordColor2
+			bevWid
+			shadWid
+			priority
 			temp0
 		)
 		(= temp1 (GetPort))
 		(SetPort 0)
 		(Graph
 			grUPDATE_BOX
-			(- temp2 sel_383)
-			(- temp3 sel_383)
-			(+ temp4 sel_383)
-			(+ temp5 sel_383)
+			(- temp2 bevWid)
+			(- temp3 bevWid)
+			(+ temp4 bevWid)
+			(+ temp5 bevWid)
 			1
 		)
 		(SetPort temp1)

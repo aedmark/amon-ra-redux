@@ -20,74 +20,74 @@
 
 (instance poly2650Code of Code
 	(properties
-		sel_20 {poly2650Code}
+		name {poly2650Code}
 	)
 
-	(method (sel_57 param1)
+	(method (doit param1)
 		(param1
-			sel_118:
-				(poly2650a sel_110: sel_117:)
-				(poly2650b sel_110: sel_117:)
-				(poly2650c sel_110: sel_117:)
-				(poly2650d sel_110: sel_117:)
+			add:
+				(poly2650a init: yourself:)
+				(poly2650b init: yourself:)
+				(poly2650c init: yourself:)
+				(poly2650d init: yourself:)
 		)
 	)
 )
 
 (instance poly2650a of Polygon
 	(properties
-		sel_20 {poly2650a}
+		name {poly2650a}
 	)
 
-	(method (sel_110)
-		(= sel_31 2)
-		(= sel_86 11)
-		(= sel_87 @local0)
+	(method (init)
+		(= type 2)
+		(= size 11)
+		(= points @local0)
 	)
 )
 
 (instance poly2650b of Polygon
 	(properties
-		sel_20 {poly2650b}
+		name {poly2650b}
 	)
 
-	(method (sel_110)
-		(= sel_31 2)
-		(= sel_86 5)
-		(= sel_87 @local22)
+	(method (init)
+		(= type 2)
+		(= size 5)
+		(= points @local22)
 	)
 )
 
 (instance poly2650c of Polygon
 	(properties
-		sel_20 {poly2650c}
+		name {poly2650c}
 	)
 
-	(method (sel_110)
-		(= sel_31 2)
-		(= sel_86 8)
-		(= sel_87 @local32)
+	(method (init)
+		(= type 2)
+		(= size 8)
+		(= points @local32)
 	)
 )
 
 (instance poly2650d of Polygon
 	(properties
-		sel_20 {poly2650d}
+		name {poly2650d}
 	)
 
-	(method (sel_110)
-		(= sel_31 2)
-		(= sel_86 4)
-		(= sel_87 @local48)
+	(method (init)
+		(= type 2)
+		(= size 4)
+		(= points @local48)
 	)
 )
 
 (instance pts2650 of MuseumPoints
 	(properties
-		sel_20 {pts2650}
-		sel_621 125
-		sel_622 165
-		sel_625 125
-		sel_626 250
+		name {pts2650}
+		midPtX 125
+		midPtY 165
+		southPtX 125
+		southPtY 250
 	)
 )

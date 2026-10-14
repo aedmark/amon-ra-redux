@@ -7,97 +7,97 @@
 
 (class PseudoMouse of Code
 	(properties
-		sel_20 {PseudoMouse}
-		sel_525 2
-		sel_526 2
-		sel_527 20
-		sel_344 0
-		sel_528 5
+		name {PseudoMouse}
+		cursorInc 2
+		minInc 2
+		maxInc 20
+		prevDir 0
+		joyInc 5
 	)
 
-	(method (sel_57 &tmp temp0 temp1)
-		(= temp0 (gLastEvent sel_1:))
-		(= temp1 (gLastEvent sel_0:))
-		(switch sel_344
+	(method (doit &tmp temp0 temp1)
+		(= temp0 (gLastEvent x:))
+		(= temp1 (gLastEvent y:))
+		(switch prevDir
 			(1
-				(-= temp1 sel_525)
+				(-= temp1 cursorInc)
 			)
 			(2
-				(+= temp0 sel_525)
-				(-= temp1 sel_525)
+				(+= temp0 cursorInc)
+				(-= temp1 cursorInc)
 			)
 			(3
-				(+= temp0 sel_525)
+				(+= temp0 cursorInc)
 			)
 			(4
-				(+= temp0 sel_525)
-				(+= temp1 sel_525)
+				(+= temp0 cursorInc)
+				(+= temp1 cursorInc)
 			)
 			(5
-				(+= temp1 sel_525)
+				(+= temp1 cursorInc)
 			)
 			(6
-				(-= temp0 sel_525)
-				(+= temp1 sel_525)
+				(-= temp0 cursorInc)
+				(+= temp1 cursorInc)
 			)
 			(7
-				(-= temp0 sel_525)
+				(-= temp0 cursorInc)
 			)
 			(8
-				(-= temp0 sel_525)
-				(-= temp1 sel_525)
+				(-= temp0 cursorInc)
+				(-= temp1 cursorInc)
 			)
 		)
-		(gGame sel_197: gTheCursor 1 temp0 temp1)
+		(gGame setCursor: gTheCursor 1 temp0 temp1)
 	)
 
-	(method (sel_133 param1 &tmp temp0 temp1 temp2)
-		(= temp0 (param1 sel_31:))
-		(= temp1 (param1 sel_37:))
-		(= temp2 (param1 sel_61:))
+	(method (handleEvent param1 &tmp temp0 temp1 temp2)
+		(= temp0 (param1 type:))
+		(= temp1 (param1 message:))
+		(= temp2 (param1 modifiers:))
 		(if (& temp0 $0040)
-			(if (or (not gTheIconBar) (!= (gTheIconBar sel_207:) (gTheIconBar sel_228:)))
-				(= sel_344 temp1)
+			(if (or (not gTheIconBar) (!= (gTheIconBar curIcon:) (gTheIconBar walkIconItem:)))
+				(= prevDir temp1)
 			else
 				(return 0)
 			)
-			(= sel_525
+			(= cursorInc
 				(if (& temp0 $0004)
-					(if (& temp2 $0003) sel_526 else sel_527)
+					(if (& temp2 $0003) minInc else maxInc)
 				else
-					sel_528
+					joyInc
 				)
 			)
 			(cond
 				((& temp0 $0004)
-					(if sel_344
-						(self sel_57:)
+					(if prevDir
+						(self doit:)
 					else
-						(return (param1 sel_73: 0))
+						(return (param1 claimed: 0))
 					)
 				)
-				(sel_344
-					(self sel_134:)
+				(prevDir
+					(self start:)
 				)
 				(else
-					(self sel_167:)
+					(self stop:)
 				)
 			)
-			(return (param1 sel_73: 1))
+			(return (param1 claimed: 1))
 		else
 			0
 		)
 	)
 
-	(method (sel_134 param1)
+	(method (start param1)
 		(if argc
-			(= sel_344 param1)
+			(= prevDir param1)
 		)
-		(gTheDoits sel_118: self)
+		(gTheDoits add: self)
 	)
 
-	(method (sel_167)
-		(= sel_344 0)
-		(gTheDoits sel_81: self)
+	(method (stop)
+		(= prevDir 0)
+		(gTheDoits delete: self)
 	)
 )

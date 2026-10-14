@@ -31,48 +31,48 @@
 
 (instance rm300 of LBRoom
 	(properties
-		sel_20 {rm300}
-		sel_213 20
-		sel_408 300
-		sel_409 310
-		sel_411 260
-		sel_107 167
+		name {rm300}
+		noun 20
+		picture 300
+		north 310
+		south 260
+		vanishingX 167
 	)
 
-	(method (sel_110)
+	(method (init)
 		(LoadMany rsVIEW 303 301 852 304 284)
 		(LoadMany rsSOUND 94 40)
-		(self sel_414: 91)
+		(self setRegions: 91)
 		(gEgo
-			sel_110:
-			sel_585: (if (gEgo sel_584:) 831 else 830)
-			sel_320: Scaler 90 110 167 125
+			init:
+			normalize: (if (gEgo wearingGown:) 831 else 830)
+			setScale: Scaler 90 110 167 125
 		)
 		(switch gPrevRoomNum
-			(sel_409
-				(gEgo sel_349: 0 sel_253: 180)
-				(gGameMusic1 sel_170:)
+			(north
+				(gEgo edgeHit: 0 setHeading: 180)
+				(gGameMusic1 fade:)
 			)
-			(sel_411
-				(gEgo sel_1: 230 sel_0: 200)
-				(gCurRoom sel_146: sOverControl)
+			(south
+				(gEgo x: 230 y: 200)
+				(gCurRoom setScript: sOverControl)
 			)
 			(else
-				(taxi sel_320: 199 sel_110: sel_153: 269 199)
-				(gCurRoom sel_146: sOutCab)
+				(taxi setScale: 199 init: posn: 269 199)
+				(gCurRoom setScript: sOutCab)
 			)
 		)
-		(super sel_110:)
+		(super init:)
 		(self
-			sel_395:
-				((Polygon sel_109:)
-					sel_31: 2
-					sel_110: 291 165 298 175 277 179 244 177 242 169
-					sel_117:
+			addObstacle:
+				((Polygon new:)
+					type: 2
+					init: 291 165 298 175 277 179 244 177 242 169
+					yourself:
 				)
-				((Polygon sel_109:)
-					sel_31: 2
-					sel_110:
+				((Polygon new:)
+					type: 2
+					init:
 						0
 						0
 						319
@@ -111,45 +111,45 @@
 						189
 						0
 						189
-					sel_117:
+					yourself:
 				)
 		)
-		(mugger sel_110: sel_146: sMugTimer)
-		(frontDoor sel_110: sel_311: 11 6 4)
-		(taxiSign sel_311: 4 sel_317:)
-		(fireHydrant sel_110:)
-		(trash sel_110:)
-		(flowersDoor sel_110:)
-		(flowerWinL sel_110:)
-		(flowerWinR sel_110:)
-		(tinyWin sel_110:)
-		(moxieSign sel_110:)
-		(streetLight sel_110:)
-		(southExitFeature sel_110:)
+		(mugger init: setScript: sMugTimer)
+		(frontDoor init: approachVerbs: 11 6 4)
+		(taxiSign approachVerbs: 4 addToPic:)
+		(fireHydrant init:)
+		(trash init:)
+		(flowersDoor init:)
+		(flowerWinL init:)
+		(flowerWinR init:)
+		(tinyWin init:)
+		(moxieSign init:)
+		(streetLight init:)
+		(southExitFeature init:)
 	)
 
-	(method (sel_399 param1)
+	(method (newRoom param1)
 		(if (== param1 310)
-			(gGameMusic1 sel_170:)
+			(gGameMusic1 fade:)
 		)
-		(super sel_399: param1)
+		(super newRoom: param1)
 	)
 )
 
 (instance sOverControl of Script
 	(properties
-		sel_20 {sOverControl}
+		name {sOverControl}
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
-				(gGame sel_587:)
-				(gEgo sel_312: PolyPath (gEgo sel_1:) 170 self)
+				(gGame handsOff:)
+				(gEgo setMotion: PolyPath (gEgo x:) 170 self)
 			)
 			(1
-				(gGame sel_588:)
-				(self sel_111:)
+				(gGame handsOn:)
+				(self dispose:)
 			)
 		)
 	)
@@ -157,25 +157,25 @@
 
 (instance sOutCab of Script
 	(properties
-		sel_20 {sOutCab}
+		name {sOutCab}
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
-				(gGame sel_587:)
-				(gEgo sel_1: 241 sel_0: 179)
-				(= sel_137 1)
+				(gGame handsOff:)
+				(gEgo x: 241 y: 179)
+				(= seconds 1)
 			)
 			(1
-				(gGameMusic2 sel_173: 2 224 2000)
-				(taxi sel_155: 5 sel_312: MoveTo 157 275 self)
-				(gGameMusic2 sel_170:)
+				(gGameMusic2 send: 2 224 2000)
+				(taxi setLoop: 5 setMotion: MoveTo 157 275 self)
+				(gGameMusic2 fade:)
 			)
 			(2
-				(gGame sel_588:)
-				(taxi sel_111:)
-				(self sel_111:)
+				(gGame handsOn:)
+				(taxi dispose:)
+				(self dispose:)
 			)
 		)
 	)
@@ -183,20 +183,20 @@
 
 (instance sMugTimer of Script
 	(properties
-		sel_20 {sMugTimer}
+		name {sMugTimer}
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
-				(if (gEgo sel_584:)
-					(self sel_111:)
+				(if (gEgo wearingGown:)
+					(self dispose:)
 				else
-					(= sel_137 240)
+					(= seconds 240)
 				)
 			)
 			(1
-				(sel_42 sel_146: sMuggerKills)
+				(client setScript: sMuggerKills)
 			)
 		)
 	)
@@ -204,92 +204,92 @@
 
 (instance sMuggerKills of Script
 	(properties
-		sel_20 {sMuggerKills}
+		name {sMuggerKills}
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
-				(= sel_137 1)
+				(= seconds 1)
 			)
 			(1
-				(if (gCurRoom sel_142:)
-					(self sel_111:)
+				(if (gCurRoom script:)
+					(self dispose:)
 				else
-					(gGame sel_587:)
-					(= sel_136 1)
+					(gGame handsOff:)
+					(= cycles 1)
 				)
 			)
 			(2
 				(cond
 					((StepOn gEgo 2)
-						(gEgo sel_312: PolyPath 101 169 self)
+						(gEgo setMotion: PolyPath 101 169 self)
 					)
-					((> (gEgo sel_1:) 300)
-						(gEgo sel_312: PolyPath 280 165 self)
+					((> (gEgo x:) 300)
+						(gEgo setMotion: PolyPath 280 165 self)
 					)
 					(else
-						(= sel_136 1)
+						(= cycles 1)
 					)
 				)
 			)
 			(3
 				(Face gEgo mugger)
-				(noise sel_40: 163 sel_3: -1 sel_99: 1 sel_39:)
-				(= sel_136 5)
+				(noise number: 163 loop: -1 flags: 1 play:)
+				(= cycles 5)
 			)
 			(4
 				(mugger
-					sel_2: 303
-					sel_155: 0
-					sel_63: -1
-					sel_244: 4
-					sel_53: 4
-					sel_161: Walk
-					sel_312: MoveTo 311 162 self
+					view: 303
+					setLoop: 0
+					setPri: -1
+					cycleSpeed: 4
+					moveSpeed: 4
+					setCycle: Walk
+					setMotion: MoveTo 311 162 self
 				)
 			)
 			(5
 				(mugger
-					sel_312:
+					setMotion:
 						PolyPath
-						(+ (gEgo sel_1:) 22)
-						(+ (gEgo sel_0:) 3)
+						(+ (gEgo x:) 22)
+						(+ (gEgo y:) 3)
 						self
 				)
 			)
 			(6
 				(mugger
-					sel_155: 1
-					sel_4: 0
-					sel_153: (- (mugger sel_1:) 5) (- (mugger sel_0:) 1)
-					sel_244: 12
-					sel_53: 12
-					sel_161: End self
+					setLoop: 1
+					cel: 0
+					posn: (- (mugger x:) 5) (- (mugger y:) 1)
+					cycleSpeed: 12
+					moveSpeed: 12
+					setCycle: End self
 				)
-				(noise sel_167:)
-				(sFX sel_40: 3 sel_39:)
+				(noise stop:)
+				(sFX number: 3 play:)
 			)
 			(7
-				(= sel_137 1)
+				(= seconds 1)
 			)
 			(8
 				(gEgo
-					sel_2: 303
-					sel_3: 2
-					sel_153: (gEgo sel_1:) (- (gEgo sel_0:) 3)
-					sel_244: 12
-					sel_53: 12
-					sel_161: End self
+					view: 303
+					loop: 2
+					posn: (gEgo x:) (- (gEgo y:) 3)
+					cycleSpeed: 12
+					moveSpeed: 12
+					setCycle: End self
 				)
 			)
 			(9
-				(gMessager sel_295: 1 0 0 0 self)
-				(gEgo sel_59: 0)
+				(gMessager say: 1 0 0 0 self)
+				(gEgo looper: 0)
 			)
 			(10
 				(= global145 12) ; "In big cities, a person gets mugged every few minutes. Don't let that person be YOU."
-				(gCurRoom sel_399: 99)
+				(gCurRoom newRoom: 99)
 			)
 		)
 	)
@@ -297,47 +297,47 @@
 
 (instance sGivePass of Script
 	(properties
-		sel_20 {sGivePass}
+		name {sGivePass}
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
-				(gGame sel_587:)
-				(= sel_136 1)
+				(gGame handsOff:)
+				(= cycles 1)
 			)
 			(1
-				(= sel_137 1)
+				(= seconds 1)
 			)
 			(2
-				(gEgo sel_351: 6)
+				(gEgo put: 6)
 				(gEgo
-					sel_2: 301
-					sel_3: 0
-					sel_153: 88 160
-					sel_244: 10
-					sel_53: 10
-					sel_161: End self
+					view: 301
+					loop: 0
+					posn: 88 160
+					cycleSpeed: 10
+					moveSpeed: 10
+					setCycle: End self
 				)
 			)
 			(3
-				(gMessager sel_295: 3 11 0 0 self)
+				(gMessager say: 3 11 0 0 self)
 			)
 			(4
 				(gEgo
-					sel_153: 79 159
-					sel_585: (if (gEgo sel_584:) 831 else 830)
+					posn: 79 159
+					normalize: (if (gEgo wearingGown:) 831 else 830)
 				)
-				(= sel_136 1)
+				(= cycles 1)
 			)
 			(5
-				(gGame sel_588:)
-				(if (mugger sel_142:)
-					((mugger sel_142:) sel_111:)
+				(gGame handsOn:)
+				(if (mugger script:)
+					((mugger script:) dispose:)
 				)
-				(gGame sel_587:)
-				(mugger sel_146: sMuggerKills)
-				(self sel_111:)
+				(gGame handsOff:)
+				(mugger setScript: sMuggerKills)
+				(self dispose:)
 			)
 		)
 	)
@@ -345,67 +345,67 @@
 
 (instance sHailCab of Script
 	(properties
-		sel_20 {sHailCab}
+		name {sHailCab}
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
-				(gGameMusic2 sel_40: 252 sel_3: -1 sel_99: 1 sel_39: 20)
-				(gGame sel_587:)
-				(= sel_136 1)
+				(gGameMusic2 number: 252 loop: -1 flags: 1 play: 20)
+				(gGame handsOff:)
+				(= cycles 1)
 			)
 			(1
-				(taxi sel_110: sel_320: 199 sel_153: 415 186)
-				(gEgo sel_312: PolyPath 242 179 self)
+				(taxi init: setScale: 199 posn: 415 186)
+				(gEgo setMotion: PolyPath 242 179 self)
 			)
 			(2
 				(gEgo
-					sel_2: (if (gEgo sel_584:) 304 else 852)
-					sel_155: (if (gEgo sel_584:) 2 else 0)
-					sel_153: (- (gEgo sel_1:) 2) (- (gEgo sel_0:) 1)
-					sel_320: Scaler 105 0 190 0
-					sel_161: End self
+					view: (if (gEgo wearingGown:) 304 else 852)
+					setLoop: (if (gEgo wearingGown:) 2 else 0)
+					posn: (- (gEgo x:) 2) (- (gEgo y:) 1)
+					setScale: Scaler 105 0 190 0
+					setCycle: End self
 				)
-				(gGameMusic1 sel_40: 97 sel_3: 1 sel_99: 1 sel_39:)
+				(gGameMusic1 number: 97 loop: 1 flags: 1 play:)
 			)
 			(3
-				(gGameMusic2 sel_173: 2 224 2000 sel_170: 127 5 5 0)
+				(gGameMusic2 send: 2 224 2000 fade: 127 5 5 0)
 				(taxi
-					sel_155: 5
-					sel_312:
+					setLoop: 5
+					setMotion:
 						MoveTo
-						(+ (taxiSign sel_1:) 10)
-						(+ (taxiSign sel_0:) 25)
+						(+ (taxiSign x:) 10)
+						(+ (taxiSign y:) 25)
 						self
 				)
 			)
 			(4
-				(gGameMusic2 sel_173: 2 224 1600)
-				(= sel_136 1)
+				(gGameMusic2 send: 2 224 1600)
+				(= cycles 1)
 			)
 			(5
-				(gGameMusic2 sel_173: 2 224 1200)
-				(= sel_136 1)
+				(gGameMusic2 send: 2 224 1200)
+				(= cycles 1)
 			)
 			(6
-				(gGameMusic2 sel_173: 2 224 800)
-				(= sel_136 1)
+				(gGameMusic2 send: 2 224 800)
+				(= cycles 1)
 			)
 			(7
-				(gGameMusic2 sel_173: 2 224 400)
-				(= sel_136 1)
+				(gGameMusic2 send: 2 224 400)
+				(= cycles 1)
 			)
 			(8
-				(gGameMusic2 sel_173: 2 224 0)
-				(noise sel_40: 40 sel_99: 5 sel_39: self)
+				(gGameMusic2 send: 2 224 0)
+				(noise number: 40 flags: 5 play: self)
 			)
 			(9
-				(gEgo sel_585: 830 sel_102:)
-				(= sel_136 1)
+				(gEgo normalize: 830 hide:)
+				(= cycles 1)
 			)
 			(10
-				(gCurRoom sel_399: 250)
+				(gCurRoom newRoom: 250)
 			)
 		)
 	)
@@ -413,84 +413,84 @@
 
 (instance sEnterBar of Script
 	(properties
-		sel_20 {sEnterBar}
+		name {sEnterBar}
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
-				(gGame sel_587:)
-				(= local2 (gEgo sel_53:))
-				(= sel_136 1)
+				(gGame handsOff:)
+				(= local2 (gEgo moveSpeed:))
+				(= cycles 1)
 			)
 			(1
 				(gEgo
-					sel_2: 301
-					sel_3: 0
-					sel_4: 0
-					sel_153: (+ (gEgo sel_1:) 10) (gEgo sel_0:)
-					sel_352: 6
-					sel_161: CT 5 1 self
+					view: 301
+					loop: 0
+					cel: 0
+					posn: (+ (gEgo x:) 10) (gEgo y:)
+					setSpeed: 6
+					setCycle: CT 5 1 self
 				)
 			)
 			(2
-				(sFX sel_40: 297 sel_39:)
-				(gEgo sel_161: CT 6 1 self)
+				(sFX number: 297 play:)
+				(gEgo setCycle: CT 6 1 self)
 			)
 			(3
-				(gEgo sel_161: CT 2 -1 self)
+				(gEgo setCycle: CT 2 -1 self)
 			)
 			(4
-				(gEgo sel_161: CT 5 1 self)
+				(gEgo setCycle: CT 5 1 self)
 			)
 			(5
-				(gEgo sel_161: CT 6 1 self)
+				(gEgo setCycle: CT 6 1 self)
 			)
 			(6
 				(gEgo
-					sel_3: 6
-					sel_153: (- (gEgo sel_1:) 10) (gEgo sel_0:)
-					sel_352: local2
-					sel_585: (if (gEgo sel_584:) 831 else 830)
+					loop: 6
+					posn: (- (gEgo x:) 10) (gEgo y:)
+					setSpeed: local2
+					normalize: (if (gEgo wearingGown:) 831 else 830)
 				)
-				(= sel_136 5)
+				(= cycles 5)
 			)
 			(7
-				(gMessager sel_295: 3 4 0 1 self)
+				(gMessager say: 3 4 0 1 self)
 			)
 			(8
 				(switch
 					(Print
-						sel_198: 2 0 0 0
-						sel_205: 1 14 0 0 1 5 20
-						sel_205: 2 14 0 0 2 5 38
-						sel_205: 3 14 0 0 3 5 56
-						sel_110:
+						addText: 2 0 0 0
+						addButton: 1 14 0 0 1 5 20
+						addButton: 2 14 0 0 2 5 38
+						addButton: 3 14 0 0 3 5 56
+						init:
 					)
 					(1
-						(= sel_136 1)
+						(= cycles 1)
 					)
 					(2
-						(gMessager sel_295: 3 4 0 5 self)
+						(gMessager say: 3 4 0 5 self)
 					)
 					(3
 						(= local0 1)
-						(gMessager sel_295: 3 4 0 6 self)
+						(gMessager say: 3 4 0 6 self)
 					)
 					(else
-						(= sel_136 1)
+						(= cycles 1)
 					)
 				)
 			)
 			(9
-				(= sel_136 1)
+				(= cycles 1)
 			)
 			(10
 				(if local0
-					(sel_42 sel_146: sAskEnterBar)
+					(client setScript: sAskEnterBar)
 				else
-					(gGame sel_588:)
-					(self sel_111:)
+					(gGame handsOn:)
+					(self dispose:)
 				)
 			)
 		)
@@ -499,46 +499,46 @@
 
 (instance sAskEnterBar of Script
 	(properties
-		sel_20 {sAskEnterBar}
+		name {sAskEnterBar}
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
-				(= sel_141 0)
+				(= register 0)
 				(if local0
-					(switch (gCurRoom sel_422: (ScriptID 20 0)) ; inNotebook
+					(switch (gCurRoom setInset: (ScriptID 20 0)) ; inNotebook
 						(1029
-							(gMessager sel_295: 3 4 0 7 self)
-							(= sel_141 1)
+							(gMessager say: 3 4 0 7 self)
+							(= register 1)
 						)
 						(else
-							(gMessager sel_295: 3 4 0 8 self)
+							(gMessager say: 3 4 0 8 self)
 							(= local0 0)
 						)
 					)
 				else
-					(gMessager sel_295: 3 4 0 8 self)
+					(gMessager say: 3 4 0 8 self)
 					(= local0 0)
 				)
 			)
 			(1
-				(if (== sel_141 1)
-					(gMessager sel_295: 3 4 0 9 self)
+				(if (== register 1)
+					(gMessager say: 3 4 0 9 self)
 				else
-					(= sel_136 1)
+					(= cycles 1)
 				)
 			)
 			(2
-				(if (== sel_141 1)
+				(if (== register 1)
 					(= local1 1)
 					(= global116 1024)
 					(= global108 (= global109 1))
-					(frontDoor sel_300: 4)
+					(frontDoor doVerb: 4)
 				else
-					(gGame sel_588:)
+					(gGame handsOn:)
 				)
-				(self sel_111:)
+				(self dispose:)
 			)
 		)
 	)
@@ -546,109 +546,109 @@
 
 (instance mugger of Actor
 	(properties
-		sel_20 {mugger}
-		sel_1 330
-		sel_0 160
-		sel_213 1
-		sel_2 303
+		name {mugger}
+		x 330
+		y 160
+		noun 1
+		view 303
 	)
 )
 
 (instance frontDoor of Door
 	(properties
-		sel_20 {frontDoor}
-		sel_1 104
-		sel_0 155
-		sel_213 3
-		sel_303 79
-		sel_304 159
-		sel_2 304
-		sel_589 310
-		sel_597 121
-		sel_598 143
-		sel_599 0
-		sel_600 0
+		name {frontDoor}
+		x 104
+		y 155
+		noun 3
+		approachX 79
+		approachY 159
+		view 304
+		entranceTo 310
+		moveToX 121
+		moveToY 143
+		enterType 0
+		exitType 0
 	)
 
-	(method (sel_300 param1)
+	(method (doVerb param1)
 		(switch param1
 			(4
 				(if local1
-					(super sel_300: param1 &rest)
+					(super doVerb: param1 &rest)
 				else
-					(gCurRoom sel_146: sEnterBar)
+					(gCurRoom setScript: sEnterBar)
 				)
 			)
 			(11
-				(gCurRoom sel_146: sGivePass)
+				(gCurRoom setScript: sGivePass)
 			)
 			(6
 				(if local0
-					(gGame sel_587:)
-					(gCurRoom sel_146: sAskEnterBar)
+					(gGame handsOff:)
+					(gCurRoom setScript: sAskEnterBar)
 				else
-					(gCurRoom sel_146: sEnterBar)
+					(gCurRoom setScript: sEnterBar)
 				)
 			)
 			(14
 				(if local0
-					(gGame sel_587:)
-					(gCurRoom sel_146: sAskEnterBar)
+					(gGame handsOff:)
+					(gCurRoom setScript: sAskEnterBar)
 				else
-					(gCurRoom sel_146: sEnterBar)
+					(gCurRoom setScript: sEnterBar)
 				)
 			)
 			(else
-				(super sel_300: param1 &rest)
+				(super doVerb: param1 &rest)
 			)
 		)
 	)
 
-	(method (sel_145)
-		(super sel_145: &rest)
-		(if (gEgo sel_584:)
-			(gCurRoom sel_146: sHailCab)
+	(method (cue)
+		(super cue: &rest)
+		(if (gEgo wearingGown:)
+			(gCurRoom setScript: sHailCab)
 		)
 	)
 
-	(method (sel_606)
-		(super sel_606: 77 146 109 148 109 157 77 154)
+	(method (createPoly)
+		(super createPoly: 77 146 109 148 109 157 77 154)
 	)
 )
 
 (instance taxi of Actor
 	(properties
-		sel_20 {taxi}
-		sel_1 415
-		sel_0 186
-		sel_213 8
-		sel_2 852
-		sel_3 5
-		sel_53 4
+		name {taxi}
+		x 415
+		y 186
+		noun 8
+		view 852
+		loop 5
+		moveSpeed 4
 	)
 )
 
 (instance taxiSign of View
 	(properties
-		sel_20 {taxiSign}
-		sel_1 259
-		sel_0 174
-		sel_213 9
-		sel_301 40
-		sel_303 242
-		sel_304 179
-		sel_2 284
-		sel_4 1
-		sel_14 16384
+		name {taxiSign}
+		x 259
+		y 174
+		noun 9
+		sightAngle 40
+		approachX 242
+		approachY 179
+		view 284
+		cel 1
+		signal 16384
 	)
 
-	(method (sel_300 param1)
+	(method (doVerb param1)
 		(switch param1
 			(4
-				(gCurRoom sel_146: sHailCab)
+				(gCurRoom setScript: sHailCab)
 			)
 			(else
-				(super sel_300: param1 &rest)
+				(super doVerb: param1 &rest)
 			)
 		)
 	)
@@ -656,149 +656,149 @@
 
 (instance fireHydrant of Feature
 	(properties
-		sel_20 {fireHydrant}
-		sel_1 142
-		sel_0 169
-		sel_213 10
-		sel_6 153
-		sel_7 136
-		sel_8 185
-		sel_9 148
-		sel_301 40
+		name {fireHydrant}
+		x 142
+		y 169
+		noun 10
+		nsTop 153
+		nsLeft 136
+		nsBottom 185
+		nsRight 148
+		sightAngle 40
 	)
 )
 
 (instance trash of Feature
 	(properties
-		sel_20 {trash}
-		sel_1 33
-		sel_0 143
-		sel_213 11
-		sel_6 133
-		sel_7 13
-		sel_8 154
-		sel_9 54
-		sel_301 40
+		name {trash}
+		x 33
+		y 143
+		noun 11
+		nsTop 133
+		nsLeft 13
+		nsBottom 154
+		nsRight 54
+		sightAngle 40
 	)
 )
 
 (instance flowersDoor of Feature
 	(properties
-		sel_20 {flowersDoor}
-		sel_1 185
-		sel_0 125
-		sel_213 5
-		sel_6 98
-		sel_7 171
-		sel_8 152
-		sel_9 199
-		sel_301 40
+		name {flowersDoor}
+		x 185
+		y 125
+		noun 5
+		nsTop 98
+		nsLeft 171
+		nsBottom 152
+		nsRight 199
+		sightAngle 40
 	)
 )
 
 (instance flowerWinL of Feature
 	(properties
-		sel_20 {flowerWinL}
-		sel_1 152
-		sel_0 122
-		sel_213 6
-		sel_6 98
-		sel_7 135
-		sel_8 147
-		sel_9 169
-		sel_301 40
+		name {flowerWinL}
+		x 152
+		y 122
+		noun 6
+		nsTop 98
+		nsLeft 135
+		nsBottom 147
+		nsRight 169
+		sightAngle 40
 	)
 )
 
 (instance flowerWinR of Feature
 	(properties
-		sel_20 {flowerWinR}
-		sel_1 225
-		sel_0 121
-		sel_213 6
-		sel_6 98
-		sel_7 200
-		sel_8 144
-		sel_9 251
-		sel_301 40
+		name {flowerWinR}
+		x 225
+		y 121
+		noun 6
+		nsTop 98
+		nsLeft 200
+		nsBottom 144
+		nsRight 251
+		sightAngle 40
 	)
 )
 
 (instance tinyWin of Feature
 	(properties
-		sel_20 {tinyWin}
-		sel_1 91
-		sel_0 109
-		sel_213 4
-		sel_6 106
-		sel_7 88
-		sel_8 112
-		sel_9 95
-		sel_301 40
+		name {tinyWin}
+		x 91
+		y 109
+		noun 4
+		nsTop 106
+		nsLeft 88
+		nsBottom 112
+		nsRight 95
+		sightAngle 40
 	)
 )
 
 (instance moxieSign of Feature
 	(properties
-		sel_20 {moxieSign}
-		sel_1 34
-		sel_0 78
-		sel_213 7
-		sel_6 60
-		sel_8 97
-		sel_9 69
-		sel_301 40
+		name {moxieSign}
+		x 34
+		y 78
+		noun 7
+		nsTop 60
+		nsBottom 97
+		nsRight 69
+		sightAngle 40
 	)
 )
 
 (instance streetLight of Feature
 	(properties
-		sel_20 {streetLight}
-		sel_1 275
-		sel_0 78
-		sel_213 12
-		sel_302 16384
+		name {streetLight}
+		x 275
+		y 78
+		noun 12
+		onMeCheck 16384
 	)
 )
 
 (instance southExitFeature of ExitFeature
 	(properties
-		sel_20 {southExitFeature}
-		sel_6 184
-		sel_7 219
-		sel_8 189
-		sel_9 289
-		sel_33 11
-		sel_583 3
-		sel_213 15
+		name {southExitFeature}
+		nsTop 184
+		nsLeft 219
+		nsBottom 189
+		nsRight 289
+		cursor 11
+		exitDir 3
+		noun 15
 	)
 )
 
 (instance Bouncer of Narrator
 	(properties
-		sel_20 {Bouncer}
-		sel_1 100
-		sel_0 50
-		sel_537 150
-		sel_26 15
+		name {Bouncer}
+		x 100
+		y 50
+		talkWidth 150
+		back 15
 	)
 
-	(method (sel_110)
-		(= sel_30 gUserFont)
-		(super sel_110: &rest)
+	(method (init)
+		(= font gUserFont)
+		(super init: &rest)
 	)
 )
 
 (instance noise of Sound
 	(properties
-		sel_20 {noise}
-		sel_99 1
+		name {noise}
+		flags 1
 	)
 )
 
 (instance sFX of Sound
 	(properties
-		sel_20 {sFX}
-		sel_99 1
+		name {sFX}
+		flags 1
 	)
 )

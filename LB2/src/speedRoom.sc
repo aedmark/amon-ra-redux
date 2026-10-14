@@ -20,20 +20,20 @@
 
 (instance speedRoom of Rm
 	(properties
-		sel_20 {speedRoom}
-		sel_408 780
+		name {speedRoom}
+		picture 780
 	)
 
-	(method (sel_110)
+	(method (init)
 		(LoadMany rsVIEW 104)
-		(super sel_110:)
-		(gGame sel_587:)
-		(gGame sel_352: 0)
-		(self sel_146: speedTest)
+		(super init:)
+		(gGame handsOff:)
+		(gGame setSpeed: 0)
+		(self setScript: speedTest)
 	)
 
-	(method (sel_57 &tmp temp0)
-		(super sel_57:)
+	(method (doit &tmp temp0)
+		(super doit:)
 		(for ((= temp0 0)) (< temp0 500) ((++ temp0))
 		)
 	)
@@ -41,37 +41,37 @@
 
 (instance fred of Actor
 	(properties
-		sel_20 {fred}
-		sel_2 104
+		name {fred}
+		view 104
 	)
 )
 
 (instance speedTest of Script
 	(properties
-		sel_20 {speedTest}
+		name {speedTest}
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
 				(fred
-					sel_155: 0
-					sel_15: 0
-					sel_153: 0 0
-					sel_338: 1 1
-					sel_161: Fwd
-					sel_110:
+					setLoop: 0
+					illegalBits: 0
+					posn: 0 0
+					setStep: 1 1
+					setCycle: Fwd
+					init:
 				)
-				(= sel_136 1)
+				(= cycles 1)
 			)
 			(1
 				(= local1 (GetTime))
-				(fred sel_312: MoveTo 320 190)
-				(= sel_136 50)
+				(fred setMotion: MoveTo 320 190)
+				(= cycles 50)
 			)
 			(2
 				(= local0 (- (GetTime) local1))
-				(startGame sel_57:)
+				(startGame doit:)
 			)
 		)
 	)
@@ -79,10 +79,10 @@
 
 (instance startGame of Code
 	(properties
-		sel_20 {startGame}
+		name {startGame}
 	)
 
-	(method (sel_57 &tmp [temp0 100])
+	(method (doit &tmp [temp0 100])
 		(cond
 			((> local0 160)
 				(= gHowFast 0)
@@ -134,15 +134,15 @@
 			)
 		)
 		(gGame
-			sel_321:
+			detailLevel:
 				(cond
 					((<= gHowFast 3) 1)
 					((<= gHowFast 10) 2)
 					(else 3)
 				)
 		)
-		(gGame sel_352: 6)
+		(gGame setSpeed: 6)
 		(= gEatMice global18)
-		(gCurRoom sel_399: (if global110 29 else 105))
+		(gCurRoom newRoom: (if global110 29 else 105))
 	)
 )

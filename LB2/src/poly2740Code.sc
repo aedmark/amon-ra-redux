@@ -18,22 +18,22 @@
 
 (instance poly2740Code of Code
 	(properties
-		sel_20 {poly2740Code}
+		name {poly2740Code}
 	)
 
-	(method (sel_57 param1)
-		(param1 sel_118: (poly2740a sel_110: sel_117:))
+	(method (doit param1)
+		(param1 add: (poly2740a init: yourself:))
 	)
 )
 
 (instance poly2740a of Polygon
 	(properties
-		sel_20 {poly2740a}
+		name {poly2740a}
 	)
 
-	(method (sel_110)
-		(= sel_31 2)
-		(= sel_86 16)
-		(= sel_87 @local0)
+	(method (init)
+		(= type 2)
+		(= size 16)
+		(= points @local0)
 	)
 )

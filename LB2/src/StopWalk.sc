@@ -10,68 +10,68 @@
 
 (class StopWalk of Fwd
 	(properties
-		sel_20 {StopWalk}
-		sel_451 0
-		sel_452 0
+		name {StopWalk}
+		vWalking 0
+		vStopped 0
 	)
 
-	(method (sel_110 param1 param2)
+	(method (init param1 param2)
 		(if argc
-			(= sel_451 ((= sel_42 param1) sel_2:))
+			(= vWalking ((= client param1) view:))
 			(if (>= argc 2)
-				(= sel_452 param2)
+				(= vStopped param2)
 			)
 		)
-		(super sel_110: sel_42)
-		(self sel_57:)
+		(super init: client)
+		(self doit:)
 	)
 
-	(method (sel_57 &tmp temp0 temp1)
-		(if (sel_42 sel_247:)
+	(method (doit &tmp temp0 temp1)
+		(if (client isStopped:)
 			(cond
 				(
 					(and
-						(== sel_452 -1)
-						(!= (sel_42 sel_3:) (- (NumLoops sel_42) 1))
+						(== vStopped -1)
+						(!= (client loop:) (- (NumLoops client) 1))
 					)
-					(= temp0 (sel_42 sel_3:))
-					(if (and (= temp1 (sel_42 sel_56:)) (not (temp1 sel_240:)))
-						(sel_42 sel_312: 0)
+					(= temp0 (client loop:))
+					(if (and (= temp1 (client mover:)) (not (temp1 completed:)))
+						(client setMotion: 0)
 					)
-					(super sel_57:)
-					(sel_42 sel_3: (- (NumLoops sel_42) 1) sel_156: temp0)
+					(super doit:)
+					(client loop: (- (NumLoops client) 1) setCel: temp0)
 				)
-				((and (!= sel_452 -1) (== (sel_42 sel_2:) sel_451))
-					(sel_42 sel_2: sel_452)
-					(if (and (= temp1 (sel_42 sel_56:)) (not (temp1 sel_240:)))
-						(sel_42 sel_312: 0)
+				((and (!= vStopped -1) (== (client view:) vWalking))
+					(client view: vStopped)
+					(if (and (= temp1 (client mover:)) (not (temp1 completed:)))
+						(client setMotion: 0)
 					)
-					(super sel_57:)
+					(super doit:)
 				)
-				((!= sel_452 -1)
-					(super sel_57:)
+				((!= vStopped -1)
+					(super doit:)
 				)
 			)
 		else
-			(switch sel_452
-				((sel_42 sel_2:)
-					(sel_42 sel_2: sel_451)
+			(switch vStopped
+				((client view:)
+					(client view: vWalking)
 				)
 				(-1
-					(sel_42 sel_155: -1 sel_156: -1)
-					(if (== (sel_42 sel_3:) (- (NumLoops sel_42) 1))
-						(sel_42 sel_3: (sel_42 sel_4:) sel_4: 0)
+					(client setLoop: -1 setCel: -1)
+					(if (== (client loop:) (- (NumLoops client) 1))
+						(client loop: (client cel:) cel: 0)
 					)
 				)
 			)
-			(super sel_57:)
+			(super doit:)
 		)
 	)
 
-	(method (sel_111)
-		(if (== (sel_42 sel_2:) sel_452)
-			(sel_42 sel_2: sel_451)
+	(method (dispose)
+		(if (== (client view:) vStopped)
+			(client view: vWalking)
 		)
-		(super sel_111:)
+		(super dispose:)
 	)
 )

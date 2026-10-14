@@ -26,104 +26,104 @@
 
 (instance rm700 of LBRoom
 	(properties
-		sel_20 {rm700}
-		sel_213 19
-		sel_408 700
-		sel_409 660
-		sel_412 710
-		sel_108 38
+		name {rm700}
+		noun 19
+		picture 700
+		north 660
+		west 710
+		vanishingY 38
 	)
 
-	(method (sel_110)
-		(gCurRoom sel_259: (List sel_109:))
-		((ScriptID 2700 0) sel_57: (gCurRoom sel_259:)) ; poly2700Code
+	(method (init)
+		(gCurRoom obstacles: (List new:))
+		((ScriptID 2700 0) doit: (gCurRoom obstacles:)) ; poly2700Code
 		(gEgo
-			sel_110:
-			sel_585: 831
-			sel_320: 150
-			sel_349: 0
-			sel_153: 165 124
-			sel_63: 5
-			sel_253: 180
+			init:
+			normalize: 831
+			setScale: 150
+			edgeHit: 0
+			posn: 165 124
+			setPri: 5
+			setHeading: 180
 		)
 		(LoadMany rsVIEW 701 423 424)
 		(LoadMany rsSOUND 16 662 700 49 452 453 455 80 701)
-		(super sel_110:)
-		(northDoor sel_110:)
-		(elevatorShaft sel_110:)
-		(backg sel_110:)
-		(case1 sel_110:)
-		(case2 sel_110:)
-		(case3 sel_110:)
-		(case4 sel_110:)
-		(case5 sel_110:)
-		(case6 sel_110:)
-		(case7 sel_110:)
-		(case8 sel_110:)
-		(wall sel_110:)
-		(pooh sel_110:)
-		(caseDoor sel_110: sel_311: 4)
-		(mummyDoor sel_110: sel_311: 4 38)
-		(mummyDoorCase sel_110:)
-		(snake sel_110: sel_311: 4)
-		(mummy sel_110:)
-		(gWalkHandler sel_129: mummyDoorCase)
-		(northDoor sel_161: End self)
-		(sFXDoor sel_40: 46 sel_39:)
-		(global95 sel_81: (northDoor sel_603:))
+		(super init:)
+		(northDoor init:)
+		(elevatorShaft init:)
+		(backg init:)
+		(case1 init:)
+		(case2 init:)
+		(case3 init:)
+		(case4 init:)
+		(case5 init:)
+		(case6 init:)
+		(case7 init:)
+		(case8 init:)
+		(wall init:)
+		(pooh init:)
+		(caseDoor init: approachVerbs: 4)
+		(mummyDoor init: approachVerbs: 4 38)
+		(mummyDoorCase init:)
+		(snake init: approachVerbs: 4)
+		(mummy init:)
+		(gWalkHandler addToFront: mummyDoorCase)
+		(northDoor setCycle: End self)
+		(sFXDoor number: 46 play:)
+		(global95 delete: (northDoor doorPoly:))
 	)
 
-	(method (sel_111)
-		(gWalkHandler sel_81: mummyDoorCase)
+	(method (dispose)
+		(gWalkHandler delete: mummyDoorCase)
 		(DisposeScript 2700)
-		(gGameMusic1 sel_170:)
-		(super sel_111:)
+		(gGameMusic1 fade:)
+		(super dispose:)
 	)
 
-	(method (sel_145)
-		(if (== (backg sel_0:) 125)
-			(northDoor sel_29: 2 sel_316: 1 sel_313:)
-			(gEgo sel_63: -1 sel_312: MoveTo (gEgo sel_1:) 129 backg)
+	(method (cue)
+		(if (== (backg y:) 125)
+			(northDoor state: 2 ignoreActors: 1 stopUpd:)
+			(gEgo setPri: -1 setMotion: MoveTo (gEgo x:) 129 backg)
 		else
-			(if (gCurRoom sel_365:)
-				((gCurRoom sel_365:) sel_111:)
+			(if (gCurRoom inset:)
+				((gCurRoom inset:) dispose:)
 			)
-			(if (< (gEgo sel_0:) 123)
-				(gCurRoom sel_146: sCrushLaura)
+			(if (< (gEgo y:) 123)
+				(gCurRoom setScript: sCrushLaura)
 			else
-				(gCurRoom sel_146: sKillRileyKill)
+				(gCurRoom setScript: sKillRileyKill)
 			)
 		)
 	)
 
-	(method (sel_399)
-		(rileyTimer sel_111: sel_81:)
-		(super sel_399: &rest)
+	(method (newRoom)
+		(rileyTimer dispose: delete:)
+		(super newRoom: &rest)
 	)
 )
 
 (instance sGetMummy of Script
 	(properties
-		sel_20 {sGetMummy}
+		name {sGetMummy}
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
-				(gGame sel_587:)
-				(gEgo sel_312: PolyPath 185 137 self)
+				(gGame handsOff:)
+				(gEgo setMotion: PolyPath 185 137 self)
 			)
 			(1
-				(gEgo sel_2: 702 sel_155: 0 sel_156: 0 sel_161: CT 7 1 self)
+				(gEgo view: 702 setLoop: 0 setCel: 0 setCycle: CT 7 1 self)
 			)
 			(2
-				(mummy sel_102:)
-				(gEgo sel_161: End self)
+				(mummy hide:)
+				(gEgo setCycle: End self)
 			)
 			(3
-				(gEgo sel_350: 35 sel_585: 831 sel_3: 3)
-				(gGame sel_588:)
-				(self sel_111:)
+				(gEgo get: 35 normalize: 831 loop: 3)
+				(gGame handsOn:)
+				(self dispose:)
 			)
 		)
 	)
@@ -131,33 +131,33 @@
 
 (instance sPutMummy of Script
 	(properties
-		sel_20 {sPutMummy}
+		name {sPutMummy}
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
-				(gGame sel_587:)
-				(gEgo sel_312: PolyPath 176 137 self)
+				(gGame handsOff:)
+				(gEgo setMotion: PolyPath 176 137 self)
 			)
 			(1
-				(gEgo sel_2: 702 sel_155: 1 sel_156: 0 sel_161: CT 5 1 self)
+				(gEgo view: 702 setLoop: 1 setCel: 0 setCycle: CT 5 1 self)
 			)
 			(2
-				(sFX sel_40: 700 sel_99: 5 sel_3: 1 sel_39:)
-				(gEgo sel_161: End self)
+				(sFX number: 700 flags: 5 loop: 1 play:)
+				(gEgo setCycle: End self)
 			)
 			(3
 				(mummy
-					sel_216:
-					sel_63: 7
-					sel_153: 174 134 30
-					sel_156: 0
-					sel_313:
+					show:
+					setPri: 7
+					posn: 174 134 30
+					setCel: 0
+					stopUpd:
 				)
-				(gEgo sel_351: 35 sel_585: 831 sel_3: 3)
-				(gGame sel_588:)
-				(self sel_111:)
+				(gEgo put: 35 normalize: 831 loop: 3)
+				(gGame handsOn:)
+				(self dispose:)
 			)
 		)
 	)
@@ -165,29 +165,29 @@
 
 (instance sExitRoom of Script
 	(properties
-		sel_20 {sExitRoom}
+		name {sExitRoom}
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
-				(gGame sel_587:)
-				(gEgo sel_312: PolyPath 135 133 self)
+				(gGame handsOff:)
+				(gEgo setMotion: PolyPath 135 133 self)
 			)
 			(1
-				(if (or (gEgo sel_238: 35) (not (== (mummy sel_4:) 0)))
-					(rileyTimer sel_81: sel_111:)
-					(gCurRoom sel_146: sKillRileyKill)
+				(if (or (gEgo has: 35) (not (== (mummy cel:) 0)))
+					(rileyTimer delete: dispose:)
+					(gCurRoom setScript: sKillRileyKill)
 				else
-					(= sel_136 1)
+					(= cycles 1)
 				)
 			)
 			(2
-				(gEgo sel_312: MoveTo 96 133 self)
+				(gEgo setMotion: MoveTo 96 133 self)
 			)
 			(3
-				(gCurRoom sel_399: 710)
-				(self sel_111:)
+				(gCurRoom newRoom: 710)
+				(self dispose:)
 			)
 		)
 	)
@@ -195,45 +195,45 @@
 
 (instance sUnlockCase of Script
 	(properties
-		sel_20 {sUnlockCase}
+		name {sUnlockCase}
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
-				(gGame sel_587:)
-				(gEgo sel_312: PolyPath 135 139 self)
+				(gGame handsOff:)
+				(gEgo setMotion: PolyPath 135 139 self)
 			)
 			(1
-				(gEgo sel_253: 270 self)
+				(gEgo setHeading: 270 self)
 			)
 			(2
 				(gEgo
-					sel_2: 700
-					sel_155: 2
-					sel_156: 0
-					sel_63: 10
-					sel_244: 12
-					sel_161: CT 3 1 self
+					view: 700
+					setLoop: 2
+					setCel: 0
+					setPri: 10
+					cycleSpeed: 12
+					setCycle: CT 3 1 self
 				)
 			)
 			(3
-				(sFX sel_40: 49 sel_3: 1 sel_99: 5 sel_39:)
-				(gEgo sel_161: End self)
+				(sFX number: 49 loop: 1 flags: 5 play:)
+				(gEgo setCycle: End self)
 			)
 			(4
-				(gEgo sel_161: Beg self)
+				(gEgo setCycle: Beg self)
 			)
 			(5
 				(if local0
-					(gMessager sel_295: 15 0 1)
+					(gMessager say: 15 0 1)
 				else
-					(gMessager sel_295: 15 0 2)
+					(gMessager say: 15 0 2)
 					(= local0 1)
 				)
-				(gEgo sel_585: 831 sel_3: 1)
-				(gGame sel_588:)
-				(self sel_111:)
+				(gEgo normalize: 831 loop: 1)
+				(gGame handsOn:)
+				(self dispose:)
 			)
 		)
 	)
@@ -241,72 +241,72 @@
 
 (instance sCrushLaura of Script
 	(properties
-		sel_20 {sCrushLaura}
+		name {sCrushLaura}
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
-				(gGame sel_587:)
+				(gGame handsOff:)
 				(LoadMany rsSOUND 500 490)
-				(mummyDoor sel_317:)
-				(caseDoor sel_317:)
-				(northDoor sel_317:)
+				(mummyDoor addToPic:)
+				(caseDoor addToPic:)
+				(northDoor addToPic:)
 				(if
 					(and
-						(gCast sel_122: mummy)
-						(not (& (mummy sel_14:) $0008))
+						(gCast contains: mummy)
+						(not (& (mummy signal:) $0008))
 					)
-					(mummy sel_317:)
+					(mummy addToPic:)
 				)
-				(northDoor sel_316: 1)
-				(gEgo sel_63: 2)
+				(northDoor ignoreActors: 1)
+				(gEgo setPri: 2)
 				(riley
-					sel_110:
-					sel_103: 1
-					sel_104: 130
-					sel_105: 130
-					sel_155: 2
-					sel_63: 5
-					sel_312: MoveTo (riley sel_1:) 97
+					init:
+					scaleSignal: 1
+					scaleX: 130
+					scaleY: 130
+					setLoop: 2
+					setPri: 5
+					setMotion: MoveTo (riley x:) 97
 				)
-				(backg sel_155: 5 sel_312: MoveTo (backg sel_1:) 97 self)
-				(sFX sel_40: 662 sel_99: 1 sel_3: -1 sel_39:)
+				(backg setLoop: 5 setMotion: MoveTo (backg x:) 97 self)
+				(sFX number: 662 flags: 1 loop: -1 play:)
 			)
 			(1
-				(sFX2 sel_40: 500 sel_99: 1 sel_3: 1 sel_39:)
+				(sFX2 number: 500 flags: 1 loop: 1 play:)
 				(gEgo
-					sel_2: 701
-					sel_155: 1
-					sel_156: 0
-					sel_244: 12
-					sel_161: End
+					view: 701
+					setLoop: 1
+					setCel: 0
+					cycleSpeed: 12
+					setCycle: End
 				)
-				(riley sel_312: MoveTo (riley sel_1:) 125)
-				(backg sel_155: 5 sel_312: MoveTo (backg sel_1:) 125 self)
+				(riley setMotion: MoveTo (riley x:) 125)
+				(backg setLoop: 5 setMotion: MoveTo (backg x:) 125 self)
 			)
 			(2
-				(gGameMusic1 sel_167:)
-				(sFX sel_167:)
-				(sFX2 sel_167:)
-				(sFX sel_40: 490 sel_3: 1 sel_99: 1 sel_39:)
-				(backg sel_317:)
-				(= sel_139 30)
+				(gGameMusic1 stop:)
+				(sFX stop:)
+				(sFX2 stop:)
+				(sFX number: 490 loop: 1 flags: 1 play:)
+				(backg addToPic:)
+				(= ticks 30)
 			)
 			(3
 				(blood
-					sel_110:
-					sel_153: (+ (gEgo sel_1:) 13) (+ (gEgo sel_0:) 11)
-					sel_161: End self
+					init:
+					posn: (+ (gEgo x:) 13) (+ (gEgo y:) 11)
+					setCycle: End self
 				)
 			)
 			(4
-				(= sel_139 180)
+				(= ticks 180)
 			)
 			(5
 				(= global145 4) ; "Going down?"
-				(gCurRoom sel_399: 99)
-				(self sel_111:)
+				(gCurRoom newRoom: 99)
+				(self dispose:)
 			)
 		)
 	)
@@ -314,98 +314,98 @@
 
 (instance sKillRileyKill of Script
 	(properties
-		sel_20 {sKillRileyKill}
+		name {sKillRileyKill}
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
-				(gGame sel_587:)
-				(if (northDoor sel_4:)
-					(gGameMusic1 sel_40: 3 sel_3: 1 sel_99: 1 sel_39:)
+				(gGame handsOff:)
+				(if (northDoor cel:)
+					(gGameMusic1 number: 3 loop: 1 flags: 1 play:)
 				)
-				(northDoor sel_316: 1)
-				(mummyDoor sel_317:)
-				(caseDoor sel_317:)
+				(northDoor ignoreActors: 1)
+				(mummyDoor addToPic:)
+				(caseDoor addToPic:)
 				(if
 					(and
-						(gCast sel_122: mummy)
-						(not (& (mummy sel_14:) $0008))
+						(gCast contains: mummy)
+						(not (& (mummy signal:) $0008))
 					)
-					(mummy sel_317:)
+					(mummy addToPic:)
 				)
 				(riley
-					sel_110:
-					sel_103: 1
-					sel_104: 130
-					sel_105: 130
-					sel_155: 2
-					sel_63: 5
-					sel_312: MoveTo (riley sel_1:) 125
+					init:
+					scaleSignal: 1
+					scaleX: 130
+					scaleY: 130
+					setLoop: 2
+					setPri: 5
+					setMotion: MoveTo (riley x:) 125
 				)
-				(backg sel_155: 5 sel_312: MoveTo (backg sel_1:) 125 self)
-				(sFX sel_40: 662 sel_99: 1 sel_3: -1 sel_39:)
+				(backg setLoop: 5 setMotion: MoveTo (backg x:) 125 self)
+				(sFX number: 662 flags: 1 loop: -1 play:)
 			)
 			(1
-				(= sel_141 0)
-				(sFX sel_167:)
-				(backg sel_317:)
-				(if (northDoor sel_4:)
-					(= sel_136 1)
+				(= register 0)
+				(sFX stop:)
+				(backg addToPic:)
+				(if (northDoor cel:)
+					(= cycles 1)
 				else
-					(northDoor sel_161: End self)
-					(sFXDoor sel_40: 46 sel_39:)
-					(= sel_141 1)
-					(global95 sel_81: (northDoor sel_603:))
+					(northDoor setCycle: End self)
+					(sFXDoor number: 46 play:)
+					(= register 1)
+					(global95 delete: (northDoor doorPoly:))
 				)
 			)
 			(2
-				(if sel_141
-					(gGameMusic1 sel_40: 3 sel_3: 1 sel_99: 1 sel_39:)
+				(if register
+					(gGameMusic1 number: 3 loop: 1 flags: 1 play:)
 				)
-				(northDoor sel_317:)
-				(riley sel_63: -1)
-				(gEgo sel_312: PolyPath 120 143 self)
+				(northDoor addToPic:)
+				(riley setPri: -1)
+				(gEgo setMotion: PolyPath 120 143 self)
 			)
 			(3
-				(gEgo sel_253: 90)
-				(riley sel_161: Walk sel_320: 130 sel_312: MoveTo 145 148 self)
+				(gEgo setHeading: 90)
+				(riley setCycle: Walk setScale: 130 setMotion: MoveTo 145 148 self)
 			)
 			(4
-				(riley sel_253: 270 self)
+				(riley setHeading: 270 self)
 			)
 			(5
 				(gEgo
-					sel_2: 700
-					sel_155: 6
-					sel_156: 0
-					sel_244: 12
-					sel_161: End self
+					view: 700
+					setLoop: 6
+					setCel: 0
+					cycleSpeed: 12
+					setCycle: End self
 				)
 			)
 			(6
-				(riley sel_2: 424 sel_155: 1 sel_156: 0 sel_161: CT 6 1 self)
+				(riley view: 424 setLoop: 1 setCel: 0 setCycle: CT 6 1 self)
 			)
 			(7
-				(sFX sel_40: 80 sel_99: 5 sel_3: 1 sel_39:)
-				(riley sel_161: End self)
+				(sFX number: 80 flags: 5 loop: 1 play:)
+				(riley setCycle: End self)
 			)
 			(8
 				(gEgo
-					sel_2: 701
-					sel_155: 1
-					sel_156: 0
-					sel_244: 12
-					sel_161: End self
+					view: 701
+					setLoop: 1
+					setCel: 0
+					cycleSpeed: 12
+					setCycle: End self
 				)
 			)
 			(9
-				(= sel_139 120)
+				(= ticks 120)
 			)
 			(10
 				(= global145 0) ; "You came in thinking like a journalist, and you left with a skull full of mush."
-				(gCurRoom sel_399: 99)
-				(self sel_111:)
+				(gCurRoom newRoom: 99)
+				(self dispose:)
 			)
 		)
 	)
@@ -413,24 +413,24 @@
 
 (instance sListen of Script
 	(properties
-		sel_20 {sListen}
+		name {sListen}
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
-				(gGame sel_587:)
-				(gGameMusic2 sel_40: 701 sel_3: -1 sel_99: 5 sel_172: 63 sel_39:)
-				(= sel_136 1)
+				(gGame handsOff:)
+				(gGameMusic2 number: 701 loop: -1 flags: 5 setVol: 63 play:)
+				(= cycles 1)
 			)
 			(1
-				(gMessager sel_295: 14 38)
-				(= sel_136 1)
+				(gMessager say: 14 38)
+				(= cycles 1)
 			)
 			(2
-				(gGameMusic2 sel_170:)
-				(gGame sel_588:)
-				(self sel_111:)
+				(gGameMusic2 fade:)
+				(gGame handsOn:)
+				(self dispose:)
 			)
 		)
 	)
@@ -438,234 +438,234 @@
 
 (instance backg of Actor
 	(properties
-		sel_20 {backg}
-		sel_1 166
-		sel_0 125
-		sel_2 700
-		sel_3 5
-		sel_60 4
-		sel_14 16400
+		name {backg}
+		x 166
+		y 125
+		view 700
+		loop 5
+		priority 4
+		signal 16400
 	)
 
-	(method (sel_145)
-		(if (== sel_0 125)
-			(self sel_155: 5 sel_312: MoveTo (self sel_1:) 79 self)
-			(gGameMusic1 sel_40: 16 sel_99: 1 sel_3: -1 sel_39:)
-			(sFX sel_40: 662 sel_99: 1 sel_3: -1 sel_39:)
+	(method (cue)
+		(if (== y 125)
+			(self setLoop: 5 setMotion: MoveTo (self x:) 79 self)
+			(gGameMusic1 number: 16 flags: 1 loop: -1 play:)
+			(sFX number: 662 flags: 1 loop: -1 play:)
 		else
-			(sFX sel_167:)
-			(rileyTimer sel_162: gCurRoom 0 1)
-			(gCurRoom sel_135: rileyTimer)
-			(self sel_313:)
-			(gGame sel_588:)
+			(sFX stop:)
+			(rileyTimer setReal: gCurRoom 0 1)
+			(gCurRoom timer: rileyTimer)
+			(self stopUpd:)
+			(gGame handsOn:)
 		)
 	)
 )
 
 (instance riley of Actor
 	(properties
-		sel_20 {riley}
-		sel_1 167
-		sel_0 79
-		sel_2 423
-		sel_3 2
-		sel_4 4
-		sel_14 16384
+		name {riley}
+		x 167
+		y 79
+		view 423
+		loop 2
+		cel 4
+		signal 16384
 	)
 )
 
 (instance rileyTimer of Timer
 	(properties
-		sel_20 {rileyTimer}
+		name {rileyTimer}
 	)
 )
 
 (instance northDoor of Door
 	(properties
-		sel_20 {northDoor}
-		sel_1 152
-		sel_0 101
-		sel_82 21
-		sel_213 1
-		sel_303 166
-		sel_304 137
-		sel_2 700
-		sel_3 1
-		sel_589 660
-		sel_596 0
-		sel_597 166
-		sel_598 108
+		name {northDoor}
+		x 152
+		y 101
+		z 21
+		noun 1
+		approachX 166
+		approachY 137
+		view 700
+		loop 1
+		entranceTo 660
+		forceClose 0
+		moveToX 166
+		moveToY 108
 	)
 
-	(method (sel_300 param1)
+	(method (doVerb param1)
 		(switch param1
 			(4
-				(if (!= (mummy sel_4:) 0)
-					(super sel_300: param1)
+				(if (!= (mummy cel:) 0)
+					(super doVerb: param1)
 				)
 			)
 			(9
-				(if (self sel_4:)
-					(super sel_300: param1)
+				(if (self cel:)
+					(super doVerb: param1)
 				else
-					(rileyTimer sel_81: sel_111:)
-					(gCurRoom sel_146: sPutMummy)
+					(rileyTimer delete: dispose:)
+					(gCurRoom setScript: sPutMummy)
 				)
 			)
 			(else
-				(super sel_300: param1)
+				(super doVerb: param1)
 			)
 		)
 	)
 
-	(method (sel_606)
-		(super sel_606: 148 117 185 117 186 126 148 126)
+	(method (createPoly)
+		(super createPoly: 148 117 185 117 186 126 148 126)
 	)
 )
 
 (instance inPooh of Inset
 	(properties
-		sel_20 {inPooh}
-		sel_2 700
-		sel_3 4
-		sel_1 204
-		sel_0 77
-		sel_570 1
-		sel_213 18
+		name {inPooh}
+		view 700
+		loop 4
+		x 204
+		y 77
+		disposeNotOnMe 1
+		noun 18
 	)
 )
 
 (instance mummyDoor of Prop
 	(properties
-		sel_20 {mummyDoor}
-		sel_1 120
-		sel_0 126
-		sel_213 14
-		sel_303 138
-		sel_304 139
-		sel_2 700
-		sel_60 10
-		sel_14 16401
+		name {mummyDoor}
+		x 120
+		y 126
+		noun 14
+		approachX 138
+		approachY 139
+		view 700
+		priority 10
+		signal 16401
 	)
 
-	(method (sel_300 param1)
+	(method (doVerb param1)
 		(switch param1
 			(4
 				(cond
-					((self sel_4:)
-						(sFX sel_40: 453 sel_3: 1 sel_99: 5 sel_39:)
-						(self sel_161: Beg self)
-						(snake sel_110:)
+					((self cel:)
+						(sFX number: 453 loop: 1 flags: 5 play:)
+						(self setCycle: Beg self)
+						(snake init:)
 					)
 					(local0
-						(sFX sel_40: 452 sel_3: 1 sel_99: 5 sel_39:)
-						(self sel_161: End self)
-						(snake sel_111:)
+						(sFX number: 452 loop: 1 flags: 5 play:)
+						(self setCycle: End self)
+						(snake dispose:)
 					)
 					(else
-						(gMessager sel_295: 14 4 1)
+						(gMessager say: 14 4 1)
 					)
 				)
 			)
 			(38
-				(if (not sel_4)
-					(gCurRoom sel_146: sListen)
+				(if (not cel)
+					(gCurRoom setScript: sListen)
 				)
 			)
 			(else
-				(super sel_300: param1)
+				(super doVerb: param1)
 			)
 		)
 	)
 
-	(method (sel_145)
-		(if (self sel_4:)
-			(self sel_63: 7 sel_313:)
-			(sFX sel_167:)
+	(method (cue)
+		(if (self cel:)
+			(self setPri: 7 stopUpd:)
+			(sFX stop:)
 		else
-			(sFX sel_40: 455 sel_3: 1 sel_99: 5 sel_39:)
-			(self sel_63: 10 sel_313:)
+			(sFX number: 455 loop: 1 flags: 5 play:)
+			(self setPri: 10 stopUpd:)
 		)
 	)
 )
 
 (instance caseDoor of Prop
 	(properties
-		sel_20 {caseDoor}
-		sel_1 239
-		sel_0 128
-		sel_213 8
-		sel_303 172
-		sel_304 135
-		sel_2 700
-		sel_3 3
-		sel_14 16385
+		name {caseDoor}
+		x 239
+		y 128
+		noun 8
+		approachX 172
+		approachY 135
+		view 700
+		loop 3
+		signal 16385
 	)
 
-	(method (sel_300 param1)
+	(method (doVerb param1)
 		(switch param1
 			(4
-				(if (self sel_4:)
-					(sFX sel_40: 453 sel_3: 1 sel_99: 5 sel_39:)
-					(self sel_161: Beg self)
-					(-= sel_0 100)
-					(-= sel_82 100)
+				(if (self cel:)
+					(sFX number: 453 loop: 1 flags: 5 play:)
+					(self setCycle: Beg self)
+					(-= y 100)
+					(-= z 100)
 				else
-					(sFX sel_40: 452 sel_3: 1 sel_99: 5 sel_39:)
-					(self sel_161: End self)
-					(+= sel_0 100)
-					(+= sel_82 100)
+					(sFX number: 452 loop: 1 flags: 5 play:)
+					(self setCycle: End self)
+					(+= y 100)
+					(+= z 100)
 				)
 			)
 			(else
-				(super sel_300: param1)
+				(super doVerb: param1)
 			)
 		)
 	)
 
-	(method (sel_145)
-		(self sel_313:)
-		(if sel_4
-			(sFX sel_167:)
+	(method (cue)
+		(self stopUpd:)
+		(if cel
+			(sFX stop:)
 		else
-			(sFX sel_40: 455 sel_3: 1 sel_99: 5 sel_39:)
+			(sFX number: 455 loop: 1 flags: 5 play:)
 		)
 	)
 )
 
 (instance blood of Prop
 	(properties
-		sel_20 {blood}
-		sel_2 701
-		sel_3 2
-		sel_244 15
+		name {blood}
+		view 701
+		loop 2
+		cycleSpeed 15
 	)
 )
 
 (instance mummy of View
 	(properties
-		sel_20 {mummy}
-		sel_1 187
-		sel_0 122
-		sel_213 11
-		sel_2 702
-		sel_3 2
-		sel_4 1
-		sel_60 10
-		sel_14 16401
+		name {mummy}
+		x 187
+		y 122
+		noun 11
+		view 702
+		loop 2
+		cel 1
+		priority 10
+		signal 16401
 	)
 
-	(method (sel_300 param1)
+	(method (doVerb param1)
 		(switch param1
 			(4
-				(if (== (mummy sel_4:) 0)
-					(super sel_300: param1)
+				(if (== (mummy cel:) 0)
+					(super doVerb: param1)
 				else
-					(gCurRoom sel_146: sGetMummy)
+					(gCurRoom setScript: sGetMummy)
 				)
 			)
 			(else
-				(super sel_300: param1)
+				(super doVerb: param1)
 			)
 		)
 	)
@@ -673,43 +673,43 @@
 
 (instance pooh of Feature
 	(properties
-		sel_20 {pooh}
-		sel_1 228
-		sel_0 96
-		sel_6 90
-		sel_7 223
-		sel_8 103
-		sel_9 234
-		sel_301 40
-		sel_303 178
-		sel_304 133
+		name {pooh}
+		x 228
+		y 96
+		nsTop 90
+		nsLeft 223
+		nsBottom 103
+		nsRight 234
+		sightAngle 40
+		approachX 178
+		approachY 133
 	)
 
-	(method (sel_300 param1)
+	(method (doVerb param1)
 		(switch param1
 			(1
-				(if (caseDoor sel_4:)
-					(gCurRoom sel_422: inPooh)
+				(if (caseDoor cel:)
+					(gCurRoom setInset: inPooh)
 				else
-					(caseDoor sel_300: 1)
+					(caseDoor doVerb: 1)
 				)
 			)
 			(8
-				(if (caseDoor sel_4:)
-					(gCurRoom sel_422: inPooh)
+				(if (caseDoor cel:)
+					(gCurRoom setInset: inPooh)
 				else
-					(caseDoor sel_300: 8)
+					(caseDoor doVerb: 8)
 				)
 			)
 			(4
-				(if (caseDoor sel_4:)
-					(super sel_300: param1)
+				(if (caseDoor cel:)
+					(super doVerb: param1)
 				else
-					(caseDoor sel_300: 4)
+					(caseDoor doVerb: 4)
 				)
 			)
 			(else
-				(super sel_300: param1)
+				(super doVerb: param1)
 			)
 		)
 	)
@@ -717,30 +717,30 @@
 
 (instance mummyDoorCase of Feature
 	(properties
-		sel_20 {mummyDoorCase}
-		sel_1 115
-		sel_0 100
-		sel_213 16
-		sel_6 79
-		sel_7 98
-		sel_8 133
-		sel_9 118
-		sel_301 40
-		sel_303 135
-		sel_304 133
+		name {mummyDoorCase}
+		x 115
+		y 100
+		noun 16
+		nsTop 79
+		nsLeft 98
+		nsBottom 133
+		nsRight 118
+		sightAngle 40
+		approachX 135
+		approachY 133
 	)
 
-	(method (sel_300 param1)
+	(method (doVerb param1)
 		(switch param1
 			(3
-				(if (and local0 (mummyDoor sel_4:))
-					(gCurRoom sel_146: sExitRoom)
+				(if (and local0 (mummyDoor cel:))
+					(gCurRoom setScript: sExitRoom)
 				else
-					(super sel_300: param1)
+					(super doVerb: param1)
 				)
 			)
 			(else
-				(super sel_300: param1)
+				(super doVerb: param1)
 			)
 		)
 	)
@@ -748,25 +748,25 @@
 
 (instance snake of Feature
 	(properties
-		sel_20 {snake}
-		sel_0 127
-		sel_213 15
-		sel_6 75
-		sel_7 117
-		sel_8 86
-		sel_9 127
-		sel_301 40
-		sel_303 139
-		sel_304 139
+		name {snake}
+		y 127
+		noun 15
+		nsTop 75
+		nsLeft 117
+		nsBottom 86
+		nsRight 127
+		sightAngle 40
+		approachX 139
+		approachY 139
 	)
 
-	(method (sel_300 param1)
+	(method (doVerb param1)
 		(switch param1
 			(30
-				(gCurRoom sel_146: sUnlockCase)
+				(gCurRoom setScript: sUnlockCase)
 			)
 			(else
-				(super sel_300: param1)
+				(super doVerb: param1)
 			)
 		)
 	)
@@ -774,28 +774,28 @@
 
 (instance elevatorShaft of Feature
 	(properties
-		sel_20 {elevatorShaft}
-		sel_1 167
-		sel_0 100
-		sel_213 12
-		sel_6 80
-		sel_7 154
-		sel_8 121
-		sel_9 180
-		sel_301 40
+		name {elevatorShaft}
+		x 167
+		y 100
+		noun 12
+		nsTop 80
+		nsLeft 154
+		nsBottom 121
+		nsRight 180
+		sightAngle 40
 	)
 
-	(method (sel_300 param1)
+	(method (doVerb param1)
 		(switch param1
 			(1
-				(if (northDoor sel_4:)
-					(gMessager sel_295: 12 1)
+				(if (northDoor cel:)
+					(gMessager say: 12 1)
 				else
-					(super sel_300: param1)
+					(super doVerb: param1)
 				)
 			)
 			(else
-				(super sel_300: param1)
+				(super doVerb: param1)
 			)
 		)
 	)
@@ -803,91 +803,91 @@
 
 (instance case1 of Feature
 	(properties
-		sel_20 {case1}
-		sel_0 1
-		sel_213 2
-		sel_302 8
+		name {case1}
+		y 1
+		noun 2
+		onMeCheck 8
 	)
 )
 
 (instance case2 of Feature
 	(properties
-		sel_20 {case2}
-		sel_0 1
-		sel_213 3
-		sel_302 4
+		name {case2}
+		y 1
+		noun 3
+		onMeCheck 4
 	)
 )
 
 (instance case3 of Feature
 	(properties
-		sel_20 {case3}
-		sel_0 1
-		sel_213 4
-		sel_302 16
+		name {case3}
+		y 1
+		noun 4
+		onMeCheck 16
 	)
 )
 
 (instance case4 of Feature
 	(properties
-		sel_20 {case4}
-		sel_0 1
-		sel_213 5
-		sel_302 32
+		name {case4}
+		y 1
+		noun 5
+		onMeCheck 32
 	)
 )
 
 (instance case5 of Feature
 	(properties
-		sel_20 {case5}
-		sel_0 1
-		sel_213 6
-		sel_302 64
+		name {case5}
+		y 1
+		noun 6
+		onMeCheck 64
 	)
 )
 
 (instance case6 of Feature
 	(properties
-		sel_20 {case6}
-		sel_0 1
-		sel_213 7
-		sel_302 128
+		name {case6}
+		y 1
+		noun 7
+		onMeCheck 128
 	)
 )
 
 (instance case7 of Feature
 	(properties
-		sel_20 {case7}
-		sel_0 1
-		sel_213 20
-		sel_302 256
+		name {case7}
+		y 1
+		noun 20
+		onMeCheck 256
 	)
 
-	(method (sel_300 param1)
+	(method (doVerb param1)
 		(switch param1
 			(1
-				(if (caseDoor sel_4:)
-					(super sel_300: param1)
+				(if (caseDoor cel:)
+					(super doVerb: param1)
 				else
-					(caseDoor sel_300: 1)
+					(caseDoor doVerb: 1)
 				)
 			)
 			(8
-				(if (caseDoor sel_4:)
-					(super sel_300: param1)
+				(if (caseDoor cel:)
+					(super doVerb: param1)
 				else
-					(caseDoor sel_300: 8)
+					(caseDoor doVerb: 8)
 				)
 			)
 			(4
-				(if (caseDoor sel_4:)
-					(super sel_300: param1)
+				(if (caseDoor cel:)
+					(super doVerb: param1)
 				else
-					(caseDoor sel_300: 4)
+					(caseDoor doVerb: 4)
 				)
 			)
 			(else
-				(super sel_300: param1)
+				(super doVerb: param1)
 			)
 		)
 	)
@@ -895,40 +895,40 @@
 
 (instance case8 of Feature
 	(properties
-		sel_20 {case8}
-		sel_0 1
-		sel_213 9
-		sel_302 512
+		name {case8}
+		y 1
+		noun 9
+		onMeCheck 512
 	)
 )
 
 (instance wall of Feature
 	(properties
-		sel_20 {wall}
-		sel_0 1
-		sel_213 10
-		sel_302 1024
+		name {wall}
+		y 1
+		noun 10
+		onMeCheck 1024
 	)
 )
 
 (instance sFX of Sound
 	(properties
-		sel_20 {sFX}
-		sel_99 1
-		sel_3 -1
+		name {sFX}
+		flags 1
+		loop -1
 	)
 )
 
 (instance sFX2 of Sound
 	(properties
-		sel_20 {sFX2}
-		sel_99 1
+		name {sFX2}
+		flags 1
 	)
 )
 
 (instance sFXDoor of Sound
 	(properties
-		sel_20 {sFXDoor}
-		sel_99 5
+		name {sFXDoor}
+		flags 5
 	)
 )

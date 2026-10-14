@@ -17,21 +17,21 @@
 
 (instance rm110 of LBRoom
 	(properties
-		sel_20 {rm110}
-		sel_408 110
-		sel_28 10
+		name {rm110}
+		picture 110
+		style 10
 	)
 
-	(method (sel_110)
+	(method (init)
 		(LoadMany rsVIEW 151 110 111 112 113)
 		(LoadMany rsSOUND 110 112)
-		(self sel_414: 92)
-		(super sel_110:)
+		(self setRegions: 92)
+		(super init:)
 		(gCurRoom
-			sel_395:
-				((Polygon sel_109:)
-					sel_31: 2
-					sel_110:
+			addObstacle:
+				((Polygon new:)
+					type: 2
+					init:
 						138
 						90
 						129
@@ -54,185 +54,185 @@
 						63
 						221
 						89
-					sel_117:
+					yourself:
 				)
 		)
-		(thedoor sel_110:)
-		(mirror sel_110:)
-		(badGuy sel_110:)
-		(inTrunk sel_110:)
-		(lid sel_110:)
-		(gGameMusic1 sel_40: 110 sel_99: 1 sel_3: -1 sel_39: sCartoon)
+		(thedoor init:)
+		(mirror init:)
+		(badGuy init:)
+		(inTrunk init:)
+		(lid init:)
+		(gGameMusic1 number: 110 flags: 1 loop: -1 play: sCartoon)
 		(cond
 			((> gHowFast 12) 0)
 			((> gHowFast 8)
-				(creditTitle sel_338: 7 7)
-				(creditName sel_338: 7 7)
-				(badGuy sel_53: 4 sel_244: 4)
+				(creditTitle setStep: 7 7)
+				(creditName setStep: 7 7)
+				(badGuy moveSpeed: 4 cycleSpeed: 4)
 			)
 			(else
-				(creditTitle sel_338: 15 15)
-				(creditName sel_338: 15 15)
-				(badGuy sel_53: 3 sel_244: 3)
+				(creditTitle setStep: 15 15)
+				(creditName setStep: 15 15)
+				(badGuy moveSpeed: 3 cycleSpeed: 3)
 			)
 		)
-		(self sel_146: sCartoon)
+		(self setScript: sCartoon)
 	)
 )
 
 (instance sCartoon of Script
 	(properties
-		sel_20 {sCartoon}
+		name {sCartoon}
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
-				(= sel_137 2)
+				(= seconds 2)
 			)
 			(1
-				(thedoor sel_161: End self)
+				(thedoor setCycle: End self)
 			)
 			(2
-				(= sel_139 120)
+				(= ticks 120)
 			)
 			(3
-				(thedoor sel_161: Beg self)
+				(thedoor setCycle: Beg self)
 			)
 			(4
 				(badGuy
-					sel_155: 0
-					sel_161: Walk
-					sel_63: 15
-					sel_312: PolyPath 130 91 self
+					setLoop: 0
+					setCycle: Walk
+					setPri: 15
+					setMotion: PolyPath 130 91 self
 				)
-				(thedoor sel_111:)
+				(thedoor dispose:)
 			)
 			(5
-				(inTrunk sel_102:)
+				(inTrunk hide:)
 				(badGuy
-					sel_3: 1
-					sel_4: 0
-					sel_153: 122 91
-					sel_63: -1
-					sel_161: End self
+					loop: 1
+					cel: 0
+					posn: 122 91
+					setPri: -1
+					setCycle: End self
 				)
-				(gNarrator sel_1: 20 sel_0: 160 sel_203: 1)
+				(gNarrator x: 20 y: 160 modeless: 1)
 			)
 			(6
-				(gGameMusic1 sel_40: 112 sel_99: 1 sel_3: 1 sel_39: sCartoon)
-				(gMessager sel_295: 1 0 0 0)
-				(badGuy sel_161: CT 9 -1 self)
+				(gGameMusic1 number: 112 flags: 1 loop: 1 play: sCartoon)
+				(gMessager say: 1 0 0 0)
+				(badGuy setCycle: CT 9 -1 self)
 			)
 			(7
-				(badGuy sel_161: End self)
+				(badGuy setCycle: End self)
 			)
 			(8
-				(badGuy sel_161: CT 11 -1)
-				(= sel_139 30)
+				(badGuy setCycle: CT 11 -1)
+				(= ticks 30)
 			)
 			(9
-				(badGuy sel_161: End)
-				(= sel_139 120)
+				(badGuy setCycle: End)
+				(= ticks 120)
 			)
 			(10
 				(if gModelessDialog
-					(gModelessDialog sel_111:)
+					(gModelessDialog dispose:)
 				)
-				(gNarrator sel_111:)
-				(badGuy sel_3: 2 sel_4: 0 sel_161: End self)
+				(gNarrator dispose:)
+				(badGuy loop: 2 cel: 0 setCycle: End self)
 			)
 			(11
 				(badGuy
-					sel_2: 113
-					sel_3: 0
-					sel_4: 0
-					sel_153: 150 87
-					sel_161: End self
+					view: 113
+					loop: 0
+					cel: 0
+					posn: 150 87
+					setCycle: End self
 				)
 			)
 			(12
 				(badGuy
-					sel_2: 112
-					sel_3: 0
-					sel_4: 0
-					sel_153: 150 87
-					sel_161: End self
+					view: 112
+					loop: 0
+					cel: 0
+					posn: 150 87
+					setCycle: End self
 				)
 			)
 			(13
-				(mirror sel_161: End self)
+				(mirror setCycle: End self)
 				(badGuy
-					sel_3: 1
-					sel_4: 0
-					sel_153: 151 94
-					sel_161: Walk
-					sel_312: PolyPath 234 93 self
+					loop: 1
+					cel: 0
+					posn: 151 94
+					setCycle: Walk
+					setMotion: PolyPath 234 93 self
 				)
 			)
 			(14
-				(mirror sel_111:)
+				(mirror dispose:)
 			)
 			(15
-				(badGuy sel_3: 2 sel_4: 0 sel_153: 234 91 sel_161: End self)
+				(badGuy loop: 2 cel: 0 posn: 234 91 setCycle: End self)
 			)
 			(16
-				(inTrunk sel_3: 0 sel_153: 247 64 sel_63: 4 sel_216:)
+				(inTrunk loop: 0 posn: 247 64 setPri: 4 show:)
 				(badGuy
-					sel_3: 3
-					sel_4: 0
-					sel_153: 242 93
-					sel_63: 8
-					sel_161: CT 5 1 self
+					loop: 3
+					cel: 0
+					posn: 242 93
+					setPri: 8
+					setCycle: CT 5 1 self
 				)
 			)
 			(17
-				(badGuy sel_161: CT 9 1 self)
-				(lid sel_161: End)
+				(badGuy setCycle: CT 9 1 self)
+				(lid setCycle: End)
 			)
 			(18
-				(inTrunk sel_111:)
+				(inTrunk dispose:)
 				(badGuy
-					sel_3: 4
-					sel_4: 0
-					sel_153: 227 88
-					sel_63: 8
-					sel_161: End self
+					loop: 4
+					cel: 0
+					posn: 227 88
+					setPri: 8
+					setCycle: End self
 				)
 			)
 			(19
 				(badGuy
-					sel_3: 5
-					sel_4: 5
-					sel_153: 219 95
-					sel_161: Walk
-					sel_312: PolyPath 300 257 self
+					loop: 5
+					cel: 5
+					posn: 219 95
+					setCycle: Walk
+					setMotion: PolyPath 300 257 self
 				)
 			)
 			(20
-				(= sel_137 3)
+				(= seconds 3)
 			)
 			(21
-				(badGuy sel_111:)
-				(creditTitle sel_110: sel_312: MoveTo 53 124 self)
-				(creditName sel_110: sel_312: MoveTo 110 152 self)
+				(badGuy dispose:)
+				(creditTitle init: setMotion: MoveTo 53 124 self)
+				(creditName init: setMotion: MoveTo 110 152 self)
 			)
 			(22 0)
 			(23
-				(= sel_137 4)
+				(= seconds 4)
 			)
 			(24
-				(creditTitle sel_312: MoveTo 383 124 self)
-				(creditName sel_312: MoveTo 383 152 self)
+				(creditTitle setMotion: MoveTo 383 124 self)
+				(creditName setMotion: MoveTo 383 152 self)
 			)
 			(25 0)
 			(26
-				(if (== (gGameMusic1 sel_165:) -1)
-					(= sel_136 1)
+				(if (== (gGameMusic1 prevSignal:) -1)
+					(= cycles 1)
 				)
 			)
 			(27
-				(gCurRoom sel_399: 120)
+				(gCurRoom newRoom: 120)
 			)
 		)
 	)
@@ -240,82 +240,82 @@
 
 (instance badGuy of Actor
 	(properties
-		sel_20 {badGuy}
-		sel_1 300
-		sel_0 257
-		sel_52 3
-		sel_2 111
-		sel_14 16384
-		sel_51 4
+		name {badGuy}
+		x 300
+		y 257
+		yStep 3
+		view 111
+		signal 16384
+		xStep 4
 	)
 )
 
 (instance thedoor of Prop
 	(properties
-		sel_20 {thedoor}
-		sel_1 247
-		sel_0 188
-		sel_2 110
-		sel_3 4
-		sel_14 16384
+		name {thedoor}
+		x 247
+		y 188
+		view 110
+		loop 4
+		signal 16384
 	)
 )
 
 (instance lid of Prop
 	(properties
-		sel_20 {lid}
-		sel_1 287
-		sel_0 91
-		sel_2 110
-		sel_3 1
-		sel_60 8
-		sel_14 16400
+		name {lid}
+		x 287
+		y 91
+		view 110
+		loop 1
+		priority 8
+		signal 16400
 	)
 )
 
 (instance mirror of Prop
 	(properties
-		sel_20 {mirror}
-		sel_1 179
-		sel_0 39
-		sel_2 110
-		sel_3 3
+		name {mirror}
+		x 179
+		y 39
+		view 110
+		loop 3
 	)
 )
 
 (instance creditTitle of Actor
 	(properties
-		sel_20 {creditTitle}
-		sel_1 375
-		sel_0 124
-		sel_2 151
-		sel_3 2
-		sel_14 2048
-		sel_53 0
+		name {creditTitle}
+		x 375
+		y 124
+		view 151
+		loop 2
+		signal 2048
+		moveSpeed 0
 	)
 )
 
 (instance creditName of Actor
 	(properties
-		sel_20 {creditName}
-		sel_1 432
-		sel_0 152
-		sel_2 151
-		sel_3 2
-		sel_4 1
-		sel_14 2048
-		sel_53 0
+		name {creditName}
+		x 432
+		y 152
+		view 151
+		loop 2
+		cel 1
+		signal 2048
+		moveSpeed 0
 	)
 )
 
 (instance inTrunk of View
 	(properties
-		sel_20 {inTrunk}
-		sel_1 100
-		sel_0 62
-		sel_2 110
-		sel_3 2
-		sel_60 6
-		sel_14 16400
+		name {inTrunk}
+		x 100
+		y 62
+		view 110
+		loop 2
+		priority 6
+		signal 16400
 	)
 )

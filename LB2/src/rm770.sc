@@ -25,63 +25,63 @@
 
 (instance rm770 of LBRoom
 	(properties
-		sel_20 {rm770}
-		sel_408 770
-		sel_28 10
+		name {rm770}
+		picture 770
+		style 10
 	)
 
-	(method (sel_110)
+	(method (init)
 		(LoadMany rsVIEW 770 771)
 		(LoadMany rsSOUND 770)
-		(super sel_110:)
-		(gGameMusic1 sel_40: 771 sel_3: -1 sel_99: 1 sel_39:)
-		(gTheIconBar sel_233:)
-		(gGame sel_197: 996)
-		(bird sel_110: sel_146: sFly)
-		(bird2 sel_110: sel_146: sLand 0 4)
-		(murderer sel_110:)
-		(cop2 sel_110: sel_146: (sRandomScr sel_109:))
-		(cop3 sel_110:)
-		(cop5 sel_110:)
-		(cop6 sel_110:)
-		(badguy1 sel_110: sel_146: (sRandomScr sel_109:))
-		(badguy2 sel_110: sel_146: sRandomScr2)
-		(badguy3 sel_110:)
-		(self sel_146: sRunIt)
+		(super init:)
+		(gGameMusic1 number: 771 loop: -1 flags: 1 play:)
+		(gTheIconBar disable:)
+		(gGame setCursor: 996)
+		(bird init: setScript: sFly)
+		(bird2 init: setScript: sLand 0 4)
+		(murderer init:)
+		(cop2 init: setScript: (sRandomScr new:))
+		(cop3 init:)
+		(cop5 init:)
+		(cop6 init:)
+		(badguy1 init: setScript: (sRandomScr new:))
+		(badguy2 init: setScript: sRandomScr2)
+		(badguy3 init:)
+		(self setScript: sRunIt)
 	)
 
-	(method (sel_111)
-		(gGameMusic1 sel_170: 0 12 30 1)
-		(super sel_111:)
+	(method (dispose)
+		(gGameMusic1 fade: 0 12 30 1)
+		(super dispose:)
 	)
 )
 
 (instance sFly of Script
 	(properties
-		sel_20 {sFly}
+		name {sFly}
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
-				(sel_42 sel_155: (Random 0 3) sel_63: 15 sel_161: Fwd)
-				(switch (sel_42 sel_3:)
+				(client setLoop: (Random 0 3) setPri: 15 setCycle: Fwd)
+				(switch (client loop:)
 					(0
-						(sel_42 sel_153: 329 30 sel_312: MoveTo -10 17 self)
+						(client posn: 329 30 setMotion: MoveTo -10 17 self)
 					)
 					(1
-						(sel_42 sel_153: -10 17 sel_312: MoveTo 329 30 self)
+						(client posn: -10 17 setMotion: MoveTo 329 30 self)
 					)
 					(2
-						(sel_42 sel_153: -10 95 sel_312: MoveTo 174 -15 self)
+						(client posn: -10 95 setMotion: MoveTo 174 -15 self)
 					)
 					(3
-						(sel_42 sel_153: 329 136 sel_312: MoveTo 198 -17 self)
+						(client posn: 329 136 setMotion: MoveTo 198 -17 self)
 					)
 				)
 			)
 			(1
-				(self sel_144: 0)
+				(self changeState: 0)
 			)
 		)
 	)
@@ -89,27 +89,27 @@
 
 (instance sLand of Script
 	(properties
-		sel_20 {sLand}
+		name {sLand}
 	)
 
-	(method (sel_144 param1 &tmp temp0 temp1)
-		(switch (= sel_29 param1)
+	(method (changeState param1 &tmp temp0 temp1)
+		(switch (= state param1)
 			(0
-				(= temp0 (if (== sel_141 4) 199 else 171))
-				(= temp1 (if (== sel_141 4) 116 else 124))
-				(sel_42
-					sel_155: sel_141
-					sel_161: Fwd
-					sel_312: MoveTo temp0 temp1 self
+				(= temp0 (if (== register 4) 199 else 171))
+				(= temp1 (if (== register 4) 116 else 124))
+				(client
+					setLoop: register
+					setCycle: Fwd
+					setMotion: MoveTo temp0 temp1 self
 				)
 			)
 			(1
-				(sel_42 sel_155: (+ sel_141 2) sel_161: End self)
+				(client setLoop: (+ register 2) setCycle: End self)
 			)
 			(2
-				(sel_42 sel_155: (+ sel_141 4) sel_244: 10 sel_161: RandCycle)
-				(if (== sel_42 bird2)
-					(bird3 sel_110: sel_146: (sLand sel_109:) 0 5)
+				(client setLoop: (+ register 4) cycleSpeed: 10 setCycle: RandCycle)
+				(if (== client bird2)
+					(bird3 init: setScript: (sLand new:) 0 5)
 				)
 			)
 		)
@@ -118,54 +118,54 @@
 
 (instance sRunIt of Script
 	(properties
-		sel_20 {sRunIt}
+		name {sRunIt}
 	)
 
-	(method (sel_57)
-		(super sel_57:)
-		(if (and (not local1) (== (murderer sel_4:) 4) (== (murderer sel_3:) 0))
-			(gGameMusic2 sel_40: 770 sel_99: 5 sel_3: 1 sel_39: murderer)
+	(method (doit)
+		(super doit:)
+		(if (and (not local1) (== (murderer cel:) 4) (== (murderer loop:) 0))
+			(gGameMusic2 number: 770 flags: 5 loop: 1 play: murderer)
 			(= local1 1)
 		)
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
 				(= local0 1)
-				(= sel_136 1)
+				(= cycles 1)
 			)
 			(1
-				(gMessager sel_295: 1 0 0 local0 self)
+				(gMessager say: 1 0 0 local0 self)
 			)
 			(2
-				(murderer sel_161: End self)
+				(murderer setCycle: End self)
 			)
 			(3
 				(if (< (++ local0) 4)
-					(self sel_144: 1)
+					(self changeState: 1)
 				else
-					(gMessager sel_295: 1 0 0 4 self)
+					(gMessager say: 1 0 0 4 self)
 				)
 			)
 			(4
-				(murderer sel_161: CT 4 1 self)
+				(murderer setCycle: CT 4 1 self)
 			)
 			(5
-				(gGameMusic2 sel_40: 770 sel_99: 5 sel_3: 1 sel_39:)
-				(murderer sel_3: 1 sel_4: 0 sel_161: End self)
+				(gGameMusic2 number: 770 flags: 5 loop: 1 play:)
+				(murderer loop: 1 cel: 0 setCycle: End self)
 			)
 			(6
-				(gMessager sel_295: 1 0 0 5 self)
+				(gMessager say: 1 0 0 5 self)
 			)
 			(7
-				(gMessager sel_295: 1 0 0 6 self)
+				(gMessager say: 1 0 0 6 self)
 			)
 			(8
-				(gGameMusic1 sel_40: 772 sel_99: 1 sel_3: 1 sel_39: self)
+				(gGameMusic1 number: 772 flags: 1 loop: 1 play: self)
 			)
 			(9
-				(gCurRoom sel_399: (if (== global126 1) 775 else 785))
+				(gCurRoom newRoom: (if (== global126 1) 775 else 785))
 			)
 		)
 	)
@@ -173,27 +173,27 @@
 
 (instance sRandomScr of Script
 	(properties
-		sel_20 {sRandomScr}
+		name {sRandomScr}
 	)
 
-	(method (sel_57)
-		(super sel_57:)
-		(if (and (not local2) (== (sel_42 sel_4:) 4) (!= (sel_42 sel_3:) 5))
-			(gGameMusic2 sel_40: 770 sel_99: 5 sel_3: 1 sel_39: badguy1)
+	(method (doit)
+		(super doit:)
+		(if (and (not local2) (== (client cel:) 4) (!= (client loop:) 5))
+			(gGameMusic2 number: 770 flags: 5 loop: 1 play: badguy1)
 			(= local2 1)
 		)
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
-				(= sel_139 (Random 30 120))
+				(= ticks (Random 30 120))
 			)
 			(1
-				(sel_42 sel_161: End self)
+				(client setCycle: End self)
 			)
 			(2
-				(self sel_144: 0)
+				(self changeState: 0)
 			)
 		)
 	)
@@ -201,27 +201,27 @@
 
 (instance sRandomScr2 of Script
 	(properties
-		sel_20 {sRandomScr2}
+		name {sRandomScr2}
 	)
 
-	(method (sel_57)
-		(super sel_57:)
-		(if (and (not local3) (== (sel_42 sel_4:) 4))
-			(gGameMusic2 sel_40: 770 sel_99: 5 sel_3: 1 sel_39: badguy2)
+	(method (doit)
+		(super doit:)
+		(if (and (not local3) (== (client cel:) 4))
+			(gGameMusic2 number: 770 flags: 5 loop: 1 play: badguy2)
 			(= local3 1)
 		)
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
-				(= sel_139 (Random 30 120))
+				(= ticks (Random 30 120))
 			)
 			(1
-				(sel_42 sel_161: End self)
+				(client setCycle: End self)
 			)
 			(2
-				(self sel_144: 0)
+				(self changeState: 0)
 			)
 		)
 	)
@@ -229,158 +229,158 @@
 
 (instance bird of Actor
 	(properties
-		sel_20 {bird}
-		sel_1 -10
-		sel_0 17
-		sel_2 771
-		sel_3 1
-		sel_14 24576
-		sel_244 0
-		sel_53 0
+		name {bird}
+		x -10
+		y 17
+		view 771
+		loop 1
+		signal 24576
+		cycleSpeed 0
+		moveSpeed 0
 	)
 )
 
 (instance bird2 of Actor
 	(properties
-		sel_20 {bird2}
-		sel_1 329
-		sel_0 8
-		sel_2 771
-		sel_3 4
-		sel_14 24576
-		sel_244 0
-		sel_53 0
+		name {bird2}
+		x 329
+		y 8
+		view 771
+		loop 4
+		signal 24576
+		cycleSpeed 0
+		moveSpeed 0
 	)
 )
 
 (instance bird3 of Actor
 	(properties
-		sel_20 {bird3}
-		sel_1 58
-		sel_0 -18
-		sel_2 771
-		sel_3 5
-		sel_14 24576
-		sel_244 0
-		sel_53 0
+		name {bird3}
+		x 58
+		y -18
+		view 771
+		loop 5
+		signal 24576
+		cycleSpeed 0
+		moveSpeed 0
 	)
 )
 
 (instance murderer of Prop
 	(properties
-		sel_20 {murderer}
-		sel_1 162
-		sel_0 176
-		sel_2 770
-		sel_4 9
-		sel_244 15
+		name {murderer}
+		x 162
+		y 176
+		view 770
+		cel 9
+		cycleSpeed 15
 	)
 
-	(method (sel_145)
+	(method (cue)
 		(= local1 0)
-		(super sel_145:)
+		(super cue:)
 	)
 )
 
 (instance cop2 of Prop
 	(properties
-		sel_20 {cop2}
-		sel_1 207
-		sel_0 45
-		sel_2 770
-		sel_3 5
-		sel_4 8
-		sel_244 15
+		name {cop2}
+		x 207
+		y 45
+		view 770
+		loop 5
+		cel 8
+		cycleSpeed 15
 	)
 )
 
 (instance cop3 of Prop
 	(properties
-		sel_20 {cop3}
-		sel_1 243
-		sel_0 49
-		sel_2 770
-		sel_3 6
-		sel_4 6
+		name {cop3}
+		x 243
+		y 49
+		view 770
+		loop 6
+		cel 6
 	)
 )
 
 (instance cop5 of Prop
 	(properties
-		sel_20 {cop5}
-		sel_1 275
-		sel_0 155
-		sel_2 770
-		sel_3 6
-		sel_4 5
+		name {cop5}
+		x 275
+		y 155
+		view 770
+		loop 6
+		cel 5
 	)
 )
 
 (instance cop6 of Prop
 	(properties
-		sel_20 {cop6}
-		sel_1 45
-		sel_0 151
-		sel_2 770
-		sel_3 6
-		sel_4 4
+		name {cop6}
+		x 45
+		y 151
+		view 770
+		loop 6
+		cel 4
 	)
 )
 
 (instance badguy1 of Prop
 	(properties
-		sel_20 {badguy1}
-		sel_1 280
-		sel_0 131
-		sel_2 770
-		sel_3 3
-		sel_4 3
-		sel_244 15
+		name {badguy1}
+		x 280
+		y 131
+		view 770
+		loop 3
+		cel 3
+		cycleSpeed 15
 	)
 
-	(method (sel_145)
+	(method (cue)
 		(= local2 0)
-		(super sel_145:)
+		(super cue:)
 	)
 )
 
 (instance badguy2 of Prop
 	(properties
-		sel_20 {badguy2}
-		sel_1 247
-		sel_0 154
-		sel_2 770
-		sel_3 2
-		sel_244 15
+		name {badguy2}
+		x 247
+		y 154
+		view 770
+		loop 2
+		cycleSpeed 15
 	)
 
-	(method (sel_145)
+	(method (cue)
 		(= local3 0)
-		(super sel_145:)
+		(super cue:)
 	)
 )
 
 (instance badguy3 of Prop
 	(properties
-		sel_20 {badguy3}
-		sel_1 313
-		sel_0 136
-		sel_2 770
-		sel_3 4
+		name {badguy3}
+		x 313
+		y 136
+		view 770
+		loop 4
 	)
 )
 
 (instance O_Riley of Narrator
 	(properties
-		sel_20 {O'Riley}
-		sel_1 10
-		sel_0 155
-		sel_203 1
-		sel_26 15
+		name {O'Riley}
+		x 10
+		y 155
+		modeless 1
+		back 15
 	)
 
-	(method (sel_110)
-		(= sel_30 gUserFont)
-		(super sel_110: &rest)
+	(method (init)
+		(= font gUserFont)
+		(super init: &rest)
 	)
 )

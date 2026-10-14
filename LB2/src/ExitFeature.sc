@@ -8,88 +8,88 @@
 
 (class ExitFeature of Obj
 	(properties
-		sel_20 {ExitFeature}
-		sel_6 0
-		sel_7 0
-		sel_8 0
-		sel_9 0
-		sel_33 999
-		sel_582 -1
-		sel_583 0
-		sel_213 0
+		name {ExitFeature}
+		nsTop 0
+		nsLeft 0
+		nsBottom 0
+		nsRight 0
+		cursor 999
+		lastCursor -1
+		exitDir 0
+		noun 0
 	)
 
-	(method (sel_110)
-		(gLb2Exits sel_118: self)
-		(= sel_33 ((Cursor sel_109:) sel_2: sel_33))
+	(method (init)
+		(gLb2Exits add: self)
+		(= cursor ((Cursor new:) view: cursor))
 	)
 
-	(method (sel_57)
+	(method (doit)
 		(cond
-			((self sel_218: gMouseX (- gMouseY 10))
-				(if (== sel_582 -1)
-					(= sel_582 gTheCursor)
-					(gGame sel_197: sel_33)
+			((self onMe: gMouseX (- gMouseY 10))
+				(if (== lastCursor -1)
+					(= lastCursor gTheCursor)
+					(gGame setCursor: cursor)
 				)
 			)
-			((!= sel_582 -1)
-				(if (== gTheCursor sel_33)
-					(gGame sel_197: ((gTheIconBar sel_228:) sel_33:))
+			((!= lastCursor -1)
+				(if (== gTheCursor cursor)
+					(gGame setCursor: ((gTheIconBar walkIconItem:) cursor:))
 				)
-				(= sel_582 -1)
+				(= lastCursor -1)
 			)
 		)
 	)
 
-	(method (sel_111 &tmp temp0)
-		(if (IsObject sel_33)
-			(= sel_33 ((= temp0 sel_33) sel_2:))
-			(temp0 sel_111:)
+	(method (dispose &tmp temp0)
+		(if (IsObject cursor)
+			(= cursor ((= temp0 cursor) view:))
+			(temp0 dispose:)
 		)
-		(gLb2Exits sel_81: self)
+		(gLb2Exits delete: self)
 	)
 
-	(method (sel_218 param1 param2)
+	(method (onMe param1 param2)
 		(return
-			(if (and (<= sel_7 param1) (<= param1 sel_9) (<= sel_6 param2))
-				(<= param2 sel_8)
+			(if (and (<= nsLeft param1) (<= param1 nsRight) (<= nsTop param2))
+				(<= param2 nsBottom)
 			else
 				0
 			)
 		)
 	)
 
-	(method (sel_133 param1)
+	(method (handleEvent param1)
 		(cond
-			((not (gUser sel_342:)))
-			((not (self sel_218: gMouseX (- gMouseY 10))))
+			((not (gUser input:)))
+			((not (self onMe: gMouseX (- gMouseY 10))))
 			(
 				(or
-					(and (== (param1 sel_31:) 4) (!= (param1 sel_37:) 13))
-					(and (== (param1 sel_31:) 1) (param1 sel_61:))
-					(not (OneOf (param1 sel_31:) 1 4))
+					(and (== (param1 type:) 4) (!= (param1 message:) 13))
+					(and (== (param1 type:) 1) (param1 modifiers:))
+					(not (OneOf (param1 type:) 1 4))
 				)
-				(= sel_582 -1)
+				(= lastCursor -1)
 			)
-			((== gTheCursor ((gTheIconBar sel_64: 1) sel_33:))
-				(param1 sel_73: 1)
-				(gMessager sel_295: sel_213 1)
+			((== gTheCursor ((gTheIconBar at: 1) cursor:))
+				(param1 claimed: 1)
+				(gMessager say: noun 1)
 			)
-			((!= gTheCursor sel_33))
+			((!= gTheCursor cursor))
 			(else
-				(param1 sel_73: 1)
-				(switch sel_583
+				(param1 claimed: 1)
+				(switch exitDir
 					(1
-						(gEgo sel_312: PolyPath gMouseX 0)
+						(gEgo setMotion: PolyPath gMouseX 0)
 					)
 					(3
-						(gEgo sel_312: PolyPath gMouseX 190)
+						(gEgo setMotion: PolyPath gMouseX 190)
 					)
 					(2
-						(gEgo sel_312: PolyPath 320 (- gMouseY 10))
+						(gEgo setMotion: PolyPath 320 (- gMouseY 10))
 					)
 					(4
-						(gEgo sel_312: PolyPath 0 (- gMouseY 10))
+						(gEgo setMotion: PolyPath 0 (- gMouseY 10))
 					)
 				)
 			)

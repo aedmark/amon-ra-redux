@@ -18,22 +18,22 @@
 
 (instance poly2700Code of Code
 	(properties
-		sel_20 {poly2700Code}
+		name {poly2700Code}
 	)
 
-	(method (sel_57 param1)
-		(param1 sel_118: (poly2700a sel_110: sel_117:))
+	(method (doit param1)
+		(param1 add: (poly2700a init: yourself:))
 	)
 )
 
 (instance poly2700a of Polygon
 	(properties
-		sel_20 {poly2700a}
+		name {poly2700a}
 	)
 
-	(method (sel_110)
-		(= sel_31 3)
-		(= sel_86 10)
-		(= sel_87 @local0)
+	(method (init)
+		(= type 3)
+		(= size 10)
+		(= points @local0)
 	)
 )

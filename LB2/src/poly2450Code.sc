@@ -21,89 +21,89 @@
 
 (instance poly2450Code of Code
 	(properties
-		sel_20 {poly2450Code}
+		name {poly2450Code}
 	)
 
-	(method (sel_57 param1)
+	(method (doit param1)
 		(param1
-			sel_118:
-				(poly2450a sel_110: sel_117:)
-				(poly2450b sel_110: sel_117:)
-				(poly2450c sel_110: sel_117:)
-				(poly2450d sel_110: sel_117:)
-				(poly2450e sel_110: sel_117:)
+			add:
+				(poly2450a init: yourself:)
+				(poly2450b init: yourself:)
+				(poly2450c init: yourself:)
+				(poly2450d init: yourself:)
+				(poly2450e init: yourself:)
 		)
 	)
 )
 
 (instance poly2450a of Polygon
 	(properties
-		sel_20 {poly2450a}
+		name {poly2450a}
 	)
 
-	(method (sel_110)
-		(= sel_31 2)
-		(= sel_86 8)
-		(= sel_87 @local0)
+	(method (init)
+		(= type 2)
+		(= size 8)
+		(= points @local0)
 	)
 )
 
 (instance poly2450b of Polygon
 	(properties
-		sel_20 {poly2450b}
+		name {poly2450b}
 	)
 
-	(method (sel_110)
-		(= sel_31 2)
-		(= sel_86 4)
-		(= sel_87 @local16)
+	(method (init)
+		(= type 2)
+		(= size 4)
+		(= points @local16)
 	)
 )
 
 (instance poly2450c of Polygon
 	(properties
-		sel_20 {poly2450c}
+		name {poly2450c}
 	)
 
-	(method (sel_110)
-		(= sel_31 2)
-		(= sel_86 4)
-		(= sel_87 @local24)
+	(method (init)
+		(= type 2)
+		(= size 4)
+		(= points @local24)
 	)
 )
 
 (instance poly2450d of Polygon
 	(properties
-		sel_20 {poly2450d}
+		name {poly2450d}
 	)
 
-	(method (sel_110)
-		(= sel_31 2)
-		(= sel_86 4)
-		(= sel_87 @local32)
+	(method (init)
+		(= type 2)
+		(= size 4)
+		(= points @local32)
 	)
 )
 
 (instance poly2450e of Polygon
 	(properties
-		sel_20 {poly2450e}
+		name {poly2450e}
 	)
 
-	(method (sel_110)
-		(= sel_31 2)
-		(= sel_86 4)
-		(= sel_87 @local40)
+	(method (init)
+		(= type 2)
+		(= size 4)
+		(= points @local40)
 	)
 )
 
 (instance pts2450 of MuseumPoints
 	(properties
-		sel_20 {pts2450}
-		sel_621 200
-		sel_622 160
-		sel_625 200
-		sel_626 250
-		sel_629 -10
-		sel_630 175
+		name {pts2450}
+		midPtX 200
+		midPtY 160
+		southPtX 200
+		southPtY 250
+		westPtX -10
+		westPtY 175
 	)
 )

@@ -11,151 +11,151 @@
 
 (class Door of Prop
 	(properties
-		sel_20 {Door}
-		sel_589 0
-		sel_590 0
-		sel_591 46
-		sel_592 47
-		sel_593 0
-		sel_29 0
-		sel_594 0
-		sel_595 0
-		sel_596 1
-		sel_143 0
-		sel_597 0
-		sel_598 0
-		sel_599 2
-		sel_600 2
-		sel_601 0
-		sel_602 0
-		sel_603 0
-		sel_604 5
+		name {Door}
+		entranceTo 0
+		locked 0
+		openSnd 46
+		closeSnd 47
+		listenVerb 0
+		state 0
+		doubleDoor 0
+		forceOpen 0
+		forceClose 1
+		caller 0
+		moveToX 0
+		moveToY 0
+		enterType 2
+		exitType 2
+		closeScript 0
+		openScript 0
+		doorPoly 0
+		polyAdjust 5
 	)
 
-	(method (sel_110)
-		(self sel_311: 4 18)
-		(if (or sel_595 (and gPrevRoomNum (== gPrevRoomNum sel_589)))
-			(= sel_29 2)
+	(method (init)
+		(self approachVerbs: 4 18)
+		(if (or forceOpen (and gPrevRoomNum (== gPrevRoomNum entranceTo)))
+			(= state 2)
 		)
-		(super sel_110:)
-		(self sel_606:)
-		(self sel_316: 1)
-		(if (== sel_29 0)
-			(= sel_4 0)
-			(if sel_594
-				(sel_594 sel_156: 0)
+		(super init:)
+		(self createPoly:)
+		(self ignoreActors: 1)
+		(if (== state 0)
+			(= cel 0)
+			(if doubleDoor
+				(doubleDoor setCel: 0)
 			)
 		else
-			(global95 sel_81: sel_603)
-			(= sel_4 (- (NumCels self) 1))
-			(if sel_594
-				(sel_594 sel_156: 255)
+			(global95 delete: doorPoly)
+			(= cel (- (NumCels self) 1))
+			(if doubleDoor
+				(doubleDoor setCel: 255)
 			)
 		)
-		(if (== sel_29 2)
-			(if sel_601
-				(self sel_146: sel_601)
+		(if (== state 2)
+			(if closeScript
+				(self setScript: closeScript)
 			else
-				(switch sel_599
+				(switch enterType
 					(0
 						(gEgo
-							sel_153: sel_597 sel_598
-							sel_312: PolyPath sel_303 sel_304 self
+							posn: moveToX moveToY
+							setMotion: PolyPath approachX approachY self
 						)
 					)
 					(1
 						(gEgo
-							sel_349: 0
-							sel_153: sel_303 sel_304
-							sel_253: sel_55
+							edgeHit: 0
+							posn: approachX approachY
+							setHeading: heading
 						)
-						(if sel_596
-							(self sel_360:)
+						(if forceClose
+							(self close:)
 						)
 					)
 					(2
-						(if sel_596
-							(self sel_360:)
+						(if forceClose
+							(self close:)
 						)
 					)
 				)
 			)
 		else
-			(self sel_313:)
+			(self stopUpd:)
 		)
 	)
 
-	(method (sel_111)
-		(global95 sel_81: sel_603)
-		(sel_603 sel_111:)
-		(super sel_111: &rest)
+	(method (dispose)
+		(global95 delete: doorPoly)
+		(doorPoly dispose:)
+		(super dispose: &rest)
 	)
 
-	(method (sel_300 param1)
+	(method (doVerb param1)
 		(switch param1
 			(4
-				(if (== sel_29 2)
-					(self sel_360:)
+				(if (== state 2)
+					(self close:)
 				else
-					(self sel_189:)
+					(self open:)
 				)
 			)
 			(18
-				(if sel_4
-					(gMessager sel_295: 1 18 2 0 0 16)
+				(if cel
+					(gMessager say: 1 18 2 0 0 16)
 				else
-					(gMessager sel_295: 1 18 1 0 0 16)
+					(gMessager say: 1 18 1 0 0 16)
 				)
 			)
-			(sel_593
-				(self sel_605:)
+			(listenVerb
+				(self listen:)
 			)
 			(else
-				(super sel_300: param1)
+				(super doVerb: param1)
 			)
 		)
 	)
 
-	(method (sel_145)
-		(switch sel_29
+	(method (cue)
+		(switch state
 			(3
-				(= sel_29 0)
-				(self sel_313:)
-				(global95 sel_118: sel_603)
-				(if sel_143
-					(sel_143 sel_145:)
+				(= state 0)
+				(self stopUpd:)
+				(global95 add: doorPoly)
+				(if caller
+					(caller cue:)
 				)
-				(if (not (gUser sel_343:))
-					(gGame sel_588: 1)
+				(if (not (gUser theControls:))
+					(gGame handsOn: 1)
 				)
 			)
 			(1
-				(= sel_29 2)
-				(self sel_313:)
-				(global95 sel_81: sel_603)
-				(if sel_143
-					(sel_143 sel_145:)
+				(= state 2)
+				(self stopUpd:)
+				(global95 delete: doorPoly)
+				(if caller
+					(caller cue:)
 				)
-				(if sel_602
-					(self sel_146: sel_602)
+				(if openScript
+					(self setScript: openScript)
 				else
-					(switch sel_600
+					(switch exitType
 						(0
-							(if (or sel_597 sel_598)
+							(if (or moveToX moveToY)
 								(gEgo
-									sel_15: 0
-									sel_312: PolyPath sel_597 sel_598 self
+									illegalBits: 0
+									setMotion: PolyPath moveToX moveToY self
 								)
 							)
 						)
 						(1
-							(if (or sel_597 sel_598)
-								(gEgo sel_312: PolyPath sel_597 sel_598 self)
+							(if (or moveToX moveToY)
+								(gEgo setMotion: PolyPath moveToX moveToY self)
 							)
 						)
 						(2
-							(if (not (gUser sel_343:))
-								(gGame sel_588: 1)
+							(if (not (gUser theControls:))
+								(gGame handsOn: 1)
 							)
 						)
 					)
@@ -165,46 +165,46 @@
 				(cond
 					(
 						(and
-							(== (gEgo sel_1:) sel_597)
-							(== (gEgo sel_0:) sel_598)
+							(== (gEgo x:) moveToX)
+							(== (gEgo y:) moveToY)
 						)
 						(cond
-							(sel_589
-								(switch sel_589
-									((gCurRoom sel_409:)
-										(gEgo sel_349: 1)
+							(entranceTo
+								(switch entranceTo
+									((gCurRoom north:)
+										(gEgo edgeHit: 1)
 									)
-									((gCurRoom sel_411:)
-										(gEgo sel_349: 3)
+									((gCurRoom south:)
+										(gEgo edgeHit: 3)
 									)
-									((gCurRoom sel_412:)
-										(gEgo sel_349: 4)
+									((gCurRoom west:)
+										(gEgo edgeHit: 4)
 									)
-									((gCurRoom sel_410:)
-										(gEgo sel_349: 2)
+									((gCurRoom east:)
+										(gEgo edgeHit: 2)
 									)
 								)
-								(gCurRoom sel_399: sel_589)
+								(gCurRoom newRoom: entranceTo)
 							)
-							(sel_596
-								(self sel_360:)
+							(forceClose
+								(self close:)
 							)
-							(sel_143
-								(sel_143 sel_145:)
+							(caller
+								(caller cue:)
 							)
 						)
 					)
 					(
 						(and
-							(== (gEgo sel_1:) sel_303)
-							(== (gEgo sel_0:) sel_304)
+							(== (gEgo x:) approachX)
+							(== (gEgo y:) approachY)
 						)
 						(cond
-							(sel_596
-								(self sel_360:)
+							(forceClose
+								(self close:)
 							)
-							(sel_143
-								(sel_143 sel_145:)
+							(caller
+								(caller cue:)
 							)
 						)
 					)
@@ -213,64 +213,64 @@
 		)
 	)
 
-	(method (sel_189)
-		(if sel_590
-			(doorSound sel_40: 48 sel_39:)
-			(gMessager sel_295: 1 0 3 0 0 16)
+	(method (open)
+		(if locked
+			(doorSound number: 48 play:)
+			(gMessager say: 1 0 3 0 0 16)
 		else
-			(if (gUser sel_343:)
-				(gGame sel_587:)
+			(if (gUser theControls:)
+				(gGame handsOff:)
 			)
-			(= sel_29 1)
-			(self sel_161: End self)
-			(if sel_591
-				(doorSound sel_40: sel_591 sel_39:)
+			(= state 1)
+			(self setCycle: End self)
+			(if openSnd
+				(doorSound number: openSnd play:)
 			)
-			(if sel_594
-				(sel_594 sel_161: End)
+			(if doubleDoor
+				(doubleDoor setCycle: End)
 			)
 		)
 	)
 
-	(method (sel_360)
-		(= sel_29 3)
-		(self sel_161: Beg self)
-		(if sel_592
-			(doorSound sel_40: sel_592 sel_39:)
+	(method (close)
+		(= state 3)
+		(self setCycle: Beg self)
+		(if closeSnd
+			(doorSound number: closeSnd play:)
 		)
-		(if sel_594
-			(sel_594 sel_161: Beg)
+		(if doubleDoor
+			(doubleDoor setCycle: Beg)
 		)
 	)
 
-	(method (sel_605)
-		(gMessager sel_295: 1 0 4 0 0 16)
+	(method (listen)
+		(gMessager say: 1 0 4 0 0 16)
 	)
 
-	(method (sel_606)
-		(= sel_603 ((Polygon sel_109:) sel_31: 2 sel_117:))
+	(method (createPoly)
+		(= doorPoly ((Polygon new:) type: 2 yourself:))
 		(if argc
-			(sel_603 sel_110: &rest)
+			(doorPoly init: &rest)
 		else
-			(sel_603
-				sel_110:
-					(- sel_17 sel_604)
-					(+ sel_18 sel_604)
-					(- sel_17 sel_604)
-					(- sel_16 sel_604)
-					(+ sel_19 sel_604)
-					(- sel_16 sel_604)
-					(+ sel_19 sel_604)
-					(+ sel_18 sel_604)
+			(doorPoly
+				init:
+					(- brLeft polyAdjust)
+					(+ brBottom polyAdjust)
+					(- brLeft polyAdjust)
+					(- brTop polyAdjust)
+					(+ brRight polyAdjust)
+					(- brTop polyAdjust)
+					(+ brRight polyAdjust)
+					(+ brBottom polyAdjust)
 			)
 		)
-		(global95 sel_118: sel_603)
+		(global95 add: doorPoly)
 	)
 )
 
 (instance doorSound of Sound
 	(properties
-		sel_20 {doorSound}
-		sel_99 5
+		name {doorSound}
+		flags 5
 	)
 )

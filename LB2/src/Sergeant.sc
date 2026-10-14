@@ -11,16 +11,16 @@
 
 (instance Sergeant of Narrator
 	(properties
-		sel_20 {Sergeant}
-		sel_1 10
-		sel_0 70
-		sel_537 150
-		sel_26 15
+		name {Sergeant}
+		x 10
+		y 70
+		talkWidth 150
+		back 15
 	)
 
-	(method (sel_110)
-		(= sel_30 gUserFont)
-		(= sel_540 1)
-		(super sel_110: &rest)
+	(method (init)
+		(= font gUserFont)
+		(= showTitle 1)
+		(super init: &rest)
 	)
 )

@@ -12,46 +12,46 @@
 
 (instance Ziggy of Talker
 	(properties
-		sel_20 {Ziggy}
-		sel_1 5
-		sel_0 5
-		sel_2 1890
-		sel_3 3
-		sel_537 150
-		sel_26 15
-		sel_549 115
-		sel_550 12
+		name {Ziggy}
+		x 5
+		y 5
+		view 1890
+		loop 3
+		talkWidth 150
+		back 15
+		textX 115
+		textY 12
 	)
 
-	(method (sel_110)
-		(= sel_30 gUserFont)
-		(super sel_110: ziggyBust ziggyEyes ziggyMouth &rest)
+	(method (init)
+		(= font gUserFont)
+		(super init: ziggyBust ziggyEyes ziggyMouth &rest)
 	)
 )
 
 (instance ziggyBust of Prop
 	(properties
-		sel_20 {ziggyBust}
-		sel_2 1890
-		sel_3 1
+		name {ziggyBust}
+		view 1890
+		loop 1
 	)
 )
 
 (instance ziggyEyes of Prop
 	(properties
-		sel_20 {ziggyEyes}
-		sel_6 39
-		sel_7 30
-		sel_2 1890
-		sel_3 2
+		name {ziggyEyes}
+		nsTop 39
+		nsLeft 30
+		view 1890
+		loop 2
 	)
 )
 
 (instance ziggyMouth of Prop
 	(properties
-		sel_20 {ziggyMouth}
-		sel_6 57
-		sel_7 33
-		sel_2 1890
+		name {ziggyMouth}
+		nsTop 57
+		nsLeft 33
+		view 1890
 	)
 )

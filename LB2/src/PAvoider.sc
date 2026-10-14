@@ -15,74 +15,74 @@
 )
 
 (procedure (localproc_1 param1 &tmp temp0 temp1 temp2 temp3)
-	(= temp3 (param1 sel_86:))
+	(= temp3 (param1 size:))
 	(for ((= temp0 0)) (< temp0 temp3) ((++ temp0))
-		(if (>= (= temp2 ((= temp1 (param1 sel_64: temp0)) sel_31:)) 16)
-			(temp1 sel_31: (- temp2 16))
+		(if (>= (= temp2 ((= temp1 (param1 at: temp0)) type:)) 16)
+			(temp1 type: (- temp2 16))
 		)
 	)
 )
 
 (class PAvoider of Code
 	(properties
-		sel_20 {PAvoider}
-		sel_42 0
-		sel_529 0
-		sel_530 0
-		sel_531 -99
-		sel_532 -99
+		name {PAvoider}
+		client 0
+		oldBlocker 0
+		oldBlockerMover 0
+		oldMoverX -99
+		oldMoverY -99
 	)
 
-	(method (sel_110 param1)
+	(method (init param1)
 		(if (>= argc 1)
-			(= sel_42 param1)
+			(= client param1)
 		)
 	)
 
-	(method (sel_57 &tmp temp0 temp1 temp2 temp3 temp4 temp5 temp6 temp7 temp8 temp9 [temp10 4] temp14 temp15 temp16 temp17 [temp18 5] temp23)
-		(= temp9 (sel_42 sel_56:))
+	(method (doit &tmp temp0 temp1 temp2 temp3 temp4 temp5 temp6 temp7 temp8 temp9 [temp10 4] temp14 temp15 temp16 temp17 [temp18 5] temp23)
+		(= temp9 (client mover:))
 		(if
 			(and
-				sel_529
+				oldBlocker
 				(or
 					(not temp9)
-					(>= (sel_42 sel_255: sel_529) 20)
-					(!= (temp9 sel_257:) sel_531)
-					(!= (temp9 sel_258:) sel_532)
+					(>= (client distanceTo: oldBlocker) 20)
+					(!= (temp9 finalX:) oldMoverX)
+					(!= (temp9 finalY:) oldMoverY)
 				)
 			)
-			(sel_529 sel_316: 0)
-			(if sel_530
-				(sel_529 sel_56: sel_530)
+			(oldBlocker ignoreActors: 0)
+			(if oldBlockerMover
+				(oldBlocker mover: oldBlockerMover)
 			)
-			(= sel_532 (= sel_531 -99))
-			(= sel_529 (= sel_530 0))
+			(= oldMoverY (= oldMoverX -99))
+			(= oldBlocker (= oldBlockerMover 0))
 		)
 		(if
 			(and
-				(= temp9 (sel_42 sel_56:))
-				(IsObject (= temp4 (temp9 sel_57:)))
-				(not (temp9 sel_240:))
-				(temp9 sel_114: PolyPath)
-				(IsObject (temp9 sel_259:))
+				(= temp9 (client mover:))
+				(IsObject (= temp4 (temp9 doit:)))
+				(not (temp9 completed:))
+				(temp9 isKindOf: PolyPath)
+				(IsObject (temp9 obstacles:))
 			)
-			(= sel_530 (temp4 sel_56:))
-			(if sel_530
-				(temp4 sel_56: 0)
+			(= oldBlockerMover (temp4 mover:))
+			(if oldBlockerMover
+				(temp4 mover: 0)
 			)
-			(= sel_531 (temp9 sel_257:))
-			(= sel_532 (temp9 sel_258:))
-			((= sel_529 temp4) sel_316: 1)
+			(= oldMoverX (temp9 finalX:))
+			(= oldMoverY (temp9 finalY:))
+			((= oldBlocker temp4) ignoreActors: 1)
 			(= temp5
 				(-
-					(temp4 sel_17:)
+					(temp4 brLeft:)
 					(= temp2
 						(+
-							(* 2 (sel_42 sel_51:))
+							(* 2 (client xStep:))
 							(/
 								(Max
-									(CelWide (sel_42 sel_2:) 2 0)
-									(CelWide (sel_42 sel_2:) 0 0)
+									(CelWide (client view:) 2 0)
+									(CelWide (client view:) 0 0)
 								)
 								2
 							)
@@ -90,17 +90,17 @@
 					)
 				)
 			)
-			(= temp6 (CoordPri 1 (CoordPri (temp4 sel_0:))))
-			(= temp3 (* 2 (temp4 sel_52:)))
-			(= temp7 (+ (temp4 sel_19:) temp2))
-			(if (<= (- (= temp8 (+ (temp4 sel_0:) temp3 2)) temp6) 3)
+			(= temp6 (CoordPri 1 (CoordPri (temp4 y:))))
+			(= temp3 (* 2 (temp4 yStep:)))
+			(= temp7 (+ (temp4 brRight:) temp2))
+			(if (<= (- (= temp8 (+ (temp4 y:) temp3 2)) temp6) 3)
 				(-= temp6 2)
 				(+= temp8 2)
 			)
-			(= temp0 (- (temp9 sel_257:) (sel_42 sel_1:)))
-			(= temp1 (- (temp9 sel_258:) (sel_42 sel_0:)))
+			(= temp0 (- (temp9 finalX:) (client x:)))
+			(= temp1 (- (temp9 finalY:) (client y:)))
 			(cond
-				((and (<= 85 (= temp23 (sel_42 sel_55:))) (<= temp23 95))
+				((and (<= 85 (= temp23 (client heading:))) (<= temp23 95))
 					(= temp14 0)
 				)
 				((and (<= 265 temp23) (<= temp23 275))
@@ -116,81 +116,81 @@
 			(switch temp14
 				(3
 					(= temp17
-						((Polygon sel_109:)
-							sel_110:
+						((Polygon new:)
+							init:
 								temp5
-								(sel_42 sel_0:)
+								(client y:)
 								temp5
 								temp6
 								temp7
 								temp6
 								temp7
-								(sel_42 sel_0:)
+								(client y:)
 								30583
 								0
-							sel_31: 2
-							sel_20: {isBlockedPoly}
-							sel_117:
+							type: 2
+							name: {isBlockedPoly}
+							yourself:
 						)
 					)
 				)
 				(2
 					(= temp17
-						((Polygon sel_109:)
-							sel_110:
+						((Polygon new:)
+							init:
 								temp7
-								(sel_42 sel_0:)
+								(client y:)
 								temp7
 								temp8
 								temp5
 								temp8
 								temp5
-								(sel_42 sel_0:)
+								(client y:)
 								30583
 								0
-							sel_31: 2
-							sel_20: {isBlockedPoly}
-							sel_117:
+							type: 2
+							name: {isBlockedPoly}
+							yourself:
 						)
 					)
 				)
 				(0
 					(= temp17
-						((Polygon sel_109:)
-							sel_110:
-								(sel_42 sel_1:)
+						((Polygon new:)
+							init:
+								(client x:)
 								temp6
 								temp7
 								temp6
 								temp7
 								temp8
-								(sel_42 sel_1:)
+								(client x:)
 								temp8
 								30583
 								0
-							sel_31: 2
-							sel_20: {isBlockedPoly}
-							sel_117:
+							type: 2
+							name: {isBlockedPoly}
+							yourself:
 						)
 					)
 				)
 				(1
 					(= temp17
-						((Polygon sel_109:)
-							sel_110:
-								(sel_42 sel_1:)
+						((Polygon new:)
+							init:
+								(client x:)
 								temp8
 								temp5
 								temp8
 								temp5
 								temp6
-								(sel_42 sel_1:)
+								(client x:)
 								temp6
 								30583
 								0
-							sel_31: 2
-							sel_20: {isBlockedPoly}
-							sel_117:
+							type: 2
+							name: {isBlockedPoly}
+							yourself:
 						)
 					)
 				)
@@ -198,32 +198,32 @@
 			(if
 				(= temp16
 					(MergePoly
-						(temp17 sel_87:)
-						((temp9 sel_259:) sel_24:)
-						((temp9 sel_259:) sel_86:)
+						(temp17 points:)
+						((temp9 obstacles:) elements:)
+						((temp9 obstacles:) size:)
 					)
 				)
-				((= temp15 (Polygon sel_109:))
-					sel_87: temp16
-					sel_86: (localproc_0 temp16)
-					sel_31: 2
-					sel_256: 1
+				((= temp15 (Polygon new:))
+					points: temp16
+					size: (localproc_0 temp16)
+					type: 2
+					dynamic: 1
 				)
 			)
-			((temp9 sel_259:) sel_118: temp15)
-			(temp9 sel_74: 2 sel_110: sel_42 (temp9 sel_257:) (temp9 sel_258:))
-			((temp9 sel_259:) sel_81: temp15)
-			((temp9 sel_259:) sel_81: temp17)
-			(localproc_1 (temp9 sel_259:))
-			(temp17 sel_111:)
-			(temp15 sel_111:)
+			((temp9 obstacles:) add: temp15)
+			(temp9 value: 2 init: client (temp9 finalX:) (temp9 finalY:))
+			((temp9 obstacles:) delete: temp15)
+			((temp9 obstacles:) delete: temp17)
+			(localproc_1 (temp9 obstacles:))
+			(temp17 dispose:)
+			(temp15 dispose:)
 		)
 	)
 
-	(method (sel_111)
-		(if (IsObject sel_530)
-			(sel_530 sel_111:)
+	(method (dispose)
+		(if (IsObject oldBlockerMover)
+			(oldBlockerMover dispose:)
 		)
-		(super sel_111: &rest)
+		(super dispose: &rest)
 	)
 )

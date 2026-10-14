@@ -33,83 +33,83 @@
 
 (instance rm350 of LBRoom
 	(properties
-		sel_20 {rm350}
-		sel_213 5
-		sel_408 350
-		sel_409 420
-		sel_410 370
-		sel_411 335
-		sel_412 360
+		name {rm350}
+		noun 5
+		picture 350
+		north 420
+		east 370
+		south 335
+		west 360
 	)
 
-	(method (sel_110 &tmp [temp0 5])
-		(gEgo sel_110: sel_585: 831 sel_320: Scaler 95 75 190 120)
+	(method (init &tmp [temp0 5])
+		(gEgo init: normalize: 831 setScale: Scaler 95 75 190 120)
 		(if (== gAct 5)
 			(LoadMany rsVIEW 424)
 		)
 		(if (> gAct 2)
-			(self sel_414: 90)
+			(self setRegions: 90)
 		else
-			(self sel_414: 93)
-			((ScriptID 2350 0) sel_57: (= sel_259 (List sel_109:))) ; poly2350Code
+			(self setRegions: 93)
+			((ScriptID 2350 0) doit: (= obstacles (List new:))) ; poly2350Code
 		)
 		(switch gPrevRoomNum
-			(sel_409
+			(north
 				(if (== gAct 5)
 					(gEgo
-						sel_1: 275
-						sel_0: 100
-						sel_352: 6
-						sel_338: 2 1
-						sel_253: 180
+						x: 275
+						y: 100
+						setSpeed: 6
+						setStep: 2 1
+						setHeading: 180
 					)
-					(self sel_146: sLauraDies)
+					(self setScript: sLauraDies)
 				else
-					(gEgo sel_153: 270 100 sel_349: 0 sel_253: 180)
+					(gEgo posn: 270 100 edgeHit: 0 setHeading: 180)
 				)
 			)
-			(sel_411
-				(self sel_146: sEnterSouth)
+			(south
+				(self setScript: sEnterSouth)
 			)
 			(330
-				(self sel_146: sEnterSouth 0 1)
+				(self setScript: sEnterSouth 0 1)
 			)
-			(sel_410
-				(= sel_28 11)
+			(east
+				(= style 11)
 			)
-			(sel_412
-				(= sel_28 12)
+			(west
+				(= style 12)
 			)
 			(340 ; testRoom
-				(= sel_28 9)
+				(= style 9)
 			)
 			(else
-				(gEgo sel_153: 70 175)
+				(gEgo posn: 70 175)
 				(= gAct 2)
-				(gGame sel_588:)
+				(gGame handsOn:)
 			)
 		)
-		(super sel_110:)
-		(if (not sel_142)
-			(gGame sel_588:)
+		(super init:)
+		(if (not script)
+			(gGame handsOn:)
 		)
-		(southExitFeature sel_110:)
-		(eastExitFeature sel_110:)
-		(westExitFeature sel_110:)
-		(tables sel_110:)
-		(waterGlass1 sel_110: sel_311: 4)
-		(waterGlass2 sel_110: sel_311: 4)
-		(waterGlass3 sel_110: sel_311: 4)
-		(tutHead sel_110:)
-		(plants sel_110:)
-		(arch sel_110:)
-		(column1 sel_110:)
-		(column2 sel_110:)
+		(southExitFeature init:)
+		(eastExitFeature init:)
+		(westExitFeature init:)
+		(tables init:)
+		(waterGlass1 init: approachVerbs: 4)
+		(waterGlass2 init: approachVerbs: 4)
+		(waterGlass3 init: approachVerbs: 4)
+		(tutHead init:)
+		(plants init:)
+		(arch init:)
+		(column1 init:)
+		(column2 init:)
 		(if (== gAct 2)
-			(partyATP1 sel_110: sel_320: 170 sel_317:)
-			(partyATP2 sel_110: sel_320: 170 sel_317:)
-			(partyATP3 sel_110: sel_320: 170 sel_317:)
-			(partyATP4 sel_110: sel_320: 170 sel_317:)
+			(partyATP1 init: setScale: 170 addToPic:)
+			(partyATP2 init: setScale: 170 addToPic:)
+			(partyATP3 init: setScale: 170 addToPic:)
+			(partyATP4 init: setScale: 170 addToPic:)
 		)
 		(cond
 			((not (== gAct 2)))
@@ -118,365 +118,365 @@
 					(IsFlag 122)
 					(TimeCheck $7204) ; has 7:30 pm occurred?
 					(not (TimeCheck $0008))
-					(> (gEgo sel_0:) 175)
+					(> (gEgo y:) 175)
 					(not (OneOf global128 0 1 4 5 9 13))
 				)
-				(self sel_146: sMeetSteve)
+				(self setScript: sMeetSteve)
 			)
 			(else
 				(switch global128
 					(0
 						((ScriptID 93 6) ; Pippin
-							sel_155: 8
-							sel_156: 4
-							sel_153: 158 179
-							sel_317:
+							setLoop: 8
+							setCel: 4
+							posn: 158 179
+							addToPic:
 						)
 						((ScriptID 93 7) ; Rameses
-							sel_155: 8
-							sel_156: 5
-							sel_153: 180 179
-							sel_317:
+							setLoop: 8
+							setCel: 5
+							posn: 180 179
+							addToPic:
 						)
 						((ScriptID 93 10) ; Watney
-							sel_155: 8
-							sel_156: 1
-							sel_153: 192 180
-							sel_317:
+							setLoop: 8
+							setCel: 1
+							posn: 192 180
+							addToPic:
 						)
 						((ScriptID 93 11) ; Yvette
-							sel_155: 8
-							sel_156: 2
-							sel_153: 166 180
-							sel_317:
+							setLoop: 8
+							setCel: 2
+							posn: 166 180
+							addToPic:
 						)
 						((ScriptID 93 12) ; Ziggy
-							sel_155: 8
-							sel_156: 0
-							sel_153: 149 182
-							sel_317:
+							setLoop: 8
+							setCel: 0
+							posn: 149 182
+							addToPic:
 						)
 					)
 					(1
 						((ScriptID 93 6) ; Pippin
-							sel_155: 8
-							sel_156: 4
-							sel_153: 158 180
-							sel_317:
+							setLoop: 8
+							setCel: 4
+							posn: 158 180
+							addToPic:
 						)
 						((ScriptID 93 7) ; Rameses
-							sel_155: 8
-							sel_156: 5
-							sel_153: 180 179
-							sel_317:
+							setLoop: 8
+							setCel: 5
+							posn: 180 179
+							addToPic:
 						)
 						((ScriptID 93 10) ; Watney
-							sel_155: 8
-							sel_156: 1
-							sel_153: 192 185
-							sel_317:
+							setLoop: 8
+							setCel: 1
+							posn: 192 185
+							addToPic:
 						)
 						((ScriptID 93 12) ; Ziggy
-							sel_155: 8
-							sel_156: 0
-							sel_153: 149 182
-							sel_317:
+							setLoop: 8
+							setCel: 0
+							posn: 149 182
+							addToPic:
 						)
 					)
 					(2
 						((ScriptID 93 1) ; Countess
-							sel_155: 8
-							sel_156: 3
-							sel_153: 140 182
-							sel_317:
+							setLoop: 8
+							setCel: 3
+							posn: 140 182
+							addToPic:
 						)
 						((ScriptID 93 7) ; Rameses
-							sel_155: 8
-							sel_156: 1
-							sel_153: 180 182
-							sel_317:
+							setLoop: 8
+							setCel: 1
+							posn: 180 182
+							addToPic:
 						)
 						((ScriptID 93 12) ; Ziggy
-							sel_155: 8
-							sel_156: 0
-							sel_153: 165 182
-							sel_317:
+							setLoop: 8
+							setCel: 0
+							posn: 165 182
+							addToPic:
 						)
 					)
 					(3
 						((ScriptID 93 1) ; Countess
-							sel_155: 8
-							sel_156: 3
-							sel_153: 140 182
-							sel_317:
+							setLoop: 8
+							setCel: 3
+							posn: 140 182
+							addToPic:
 						)
 						((ScriptID 93 7) ; Rameses
-							sel_155: 8
-							sel_156: 5
-							sel_153: 180 182
-							sel_317:
+							setLoop: 8
+							setCel: 5
+							posn: 180 182
+							addToPic:
 						)
 						((ScriptID 93 12) ; Ziggy
-							sel_155: 8
-							sel_156: 0
-							sel_153: 165 182
-							sel_317:
+							setLoop: 8
+							setCel: 0
+							posn: 165 182
+							addToPic:
 						)
 					)
 					(4
 						((ScriptID 93 1) ; Countess
-							sel_155: 8
-							sel_156: 5
-							sel_153: 180 182
-							sel_317:
+							setLoop: 8
+							setCel: 5
+							posn: 180 182
+							addToPic:
 						)
 						((ScriptID 93 7) ; Rameses
-							sel_155: 8
-							sel_156: 2
-							sel_153: 165 182
-							sel_317:
+							setLoop: 8
+							setCel: 2
+							posn: 165 182
+							addToPic:
 						)
 					)
 					(5
 						((ScriptID 93 1) ; Countess
-							sel_155: 8
-							sel_156: 5
-							sel_153: 180 182
-							sel_317:
+							setLoop: 8
+							setCel: 5
+							posn: 180 182
+							addToPic:
 						)
 						((ScriptID 93 12) ; Ziggy
-							sel_155: 8
-							sel_156: 0
-							sel_153: 160 182
-							sel_317:
+							setLoop: 8
+							setCel: 0
+							posn: 160 182
+							addToPic:
 						)
 					)
 					(6
 						((ScriptID 93 7) ; Rameses
-							sel_155: 8
-							sel_156: 5
-							sel_153: 180 182
-							sel_317:
+							setLoop: 8
+							setCel: 5
+							posn: 180 182
+							addToPic:
 						)
 						((ScriptID 93 9) ; Tut
-							sel_155: 8
-							sel_156: 4
-							sel_153: 165 182
-							sel_317:
+							setLoop: 8
+							setCel: 4
+							posn: 165 182
+							addToPic:
 						)
 					)
 					(7
 						((ScriptID 93 7) ; Rameses
-							sel_155: 8
-							sel_156: 5
-							sel_153: 180 182
-							sel_317:
+							setLoop: 8
+							setCel: 5
+							posn: 180 182
+							addToPic:
 						)
 						((ScriptID 93 9) ; Tut
-							sel_155: 8
-							sel_156: 4
-							sel_153: 165 182
-							sel_317:
+							setLoop: 8
+							setCel: 4
+							posn: 165 182
+							addToPic:
 						)
 					)
 					(8
 						((ScriptID 93 7) ; Rameses
-							sel_155: 8
-							sel_156: 1
-							sel_153: 180 182
-							sel_317:
+							setLoop: 8
+							setCel: 1
+							posn: 180 182
+							addToPic:
 						)
 						((ScriptID 93 9) ; Tut
-							sel_155: 8
-							sel_156: 4
-							sel_153: 150 182
-							sel_317:
+							setLoop: 8
+							setCel: 4
+							posn: 150 182
+							addToPic:
 						)
 						((ScriptID 93 11) ; Yvette
-							sel_155: 8
-							sel_156: 2
-							sel_153: 165 180
-							sel_317:
+							setLoop: 8
+							setCel: 2
+							posn: 165 180
+							addToPic:
 						)
 					)
 					(9
 						((ScriptID 93 7) ; Rameses
-							sel_155: 8
-							sel_156: 2
-							sel_153: 165 179
-							sel_317:
+							setLoop: 8
+							setCel: 2
+							posn: 165 179
+							addToPic:
 						)
 						((ScriptID 93 9) ; Tut
-							sel_155: 8
-							sel_156: 5
-							sel_153: 180 180
-							sel_320: 170
-							sel_317:
+							setLoop: 8
+							setCel: 5
+							posn: 180 180
+							setScale: 170
+							addToPic:
 						)
 						((ScriptID 93 11) ; Yvette
-							sel_155: 8
-							sel_156: 0
-							sel_153: 155 182
-							sel_317:
+							setLoop: 8
+							setCel: 0
+							posn: 155 182
+							addToPic:
 						)
 					)
 					(10
 						((ScriptID 93 7) ; Rameses
-							sel_155: 8
-							sel_156: 5
-							sel_153: 180 182
-							sel_317:
+							setLoop: 8
+							setCel: 5
+							posn: 180 182
+							addToPic:
 						)
 						((ScriptID 93 9) ; Tut
-							sel_155: 8
-							sel_156: 4
-							sel_153: 165 182
-							sel_317:
+							setLoop: 8
+							setCel: 4
+							posn: 165 182
+							addToPic:
 						)
 					)
 					(11
 						((ScriptID 93 7) ; Rameses
-							sel_155: 8
-							sel_156: 5
-							sel_153: 180 182
-							sel_317:
+							setLoop: 8
+							setCel: 5
+							posn: 180 182
+							addToPic:
 						)
 						((ScriptID 93 9) ; Tut
-							sel_155: 8
-							sel_156: 4
-							sel_153: 165 182
-							sel_317:
+							setLoop: 8
+							setCel: 4
+							posn: 165 182
+							addToPic:
 						)
 					)
 					(12
 						((ScriptID 93 7) ; Rameses
-							sel_155: 8
-							sel_156: 1
-							sel_153: 180 182
-							sel_317:
+							setLoop: 8
+							setCel: 1
+							posn: 180 182
+							addToPic:
 						)
 						((ScriptID 93 11) ; Yvette
-							sel_155: 8
-							sel_156: 0
-							sel_153: 160 182
-							sel_317:
+							setLoop: 8
+							setCel: 0
+							posn: 160 182
+							addToPic:
 						)
 					)
 					(13
 						((ScriptID 93 8) ; Steve
-							sel_155: 8
-							sel_156: 4
-							sel_153: 160 181
-							sel_317:
+							setLoop: 8
+							setCel: 4
+							posn: 160 181
+							addToPic:
 						)
 						((ScriptID 93 11) ; Yvette
-							sel_155: 8
-							sel_156: 2
-							sel_153: 175 183
-							sel_317:
+							setLoop: 8
+							setCel: 2
+							posn: 175 183
+							addToPic:
 						)
 					)
 				)
 			)
 		)
-		(if (and (== gPrevRoomNum 340) (== gCurRoomNum (RotundaRgn sel_667:))) ; testRoom
+		(if (and (== gPrevRoomNum 340) (== gCurRoomNum (RotundaRgn convRoom:))) ; testRoom
 			(while (StepOn gEgo 8)
 				(gEgo
-					sel_1: (- (gEgo sel_1:) 1)
-					sel_0: (- (gEgo sel_0:) 1)
+					x: (- (gEgo x:) 1)
+					y: (- (gEgo y:) 1)
 				)
 			)
 		)
 	)
 
-	(method (sel_57)
-		(super sel_57:)
+	(method (doit)
+		(super doit:)
 		(cond
-			(sel_142)
+			(script)
 			(
 				(and
 					(== gAct 2)
 					(StepOn gEgo 8)
-					(== gCurRoomNum (RotundaRgn sel_667:))
+					(== gCurRoomNum (RotundaRgn convRoom:))
 				)
-				(RotundaRgn sel_403:)
+				(RotundaRgn notify:)
 			)
 			((StepOn gEgo 2)
-				(self sel_146: sExitNorth)
+				(self setScript: sExitNorth)
 			)
 			((and (StepOn gEgo 4) (not (== gAct 2)))
-				(self sel_146: sCantLeave)
+				(self setScript: sCantLeave)
 			)
 		)
 	)
 
-	(method (sel_111)
-		(super sel_111:)
+	(method (dispose)
+		(super dispose:)
 		(DisposeScript 2350)
 	)
 
-	(method (sel_300 param1)
+	(method (doVerb param1)
 		(if (== param1 4)
-			(gMessager sel_295: sel_213 param1 (if (> gAct 2) 5 else 4))
+			(gMessager say: noun param1 (if (> gAct 2) 5 else 4))
 		else
-			(super sel_300: param1)
+			(super doVerb: param1)
 		)
 	)
 
-	(method (sel_399 param1)
-		(if (== param1 sel_411)
+	(method (newRoom param1)
+		(if (== param1 south)
 			(DrawPic 780 10)
 		)
-		(super sel_399: param1)
+		(super newRoom: param1)
 	)
 )
 
 (instance sEnterSouth of Script
 	(properties
-		sel_20 {sEnterSouth}
+		name {sEnterSouth}
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
 				(SetFlag 25)
-				(if (== (gGameMusic1 sel_40:) 335)
-					(gGameMusic1 sel_170: 127 5 5 0)
+				(if (== (gGameMusic1 number:) 335)
+					(gGameMusic1 fade: 127 5 5 0)
 				else
-					(gGameMusic1 sel_40: 335 sel_99: 1 sel_155: -1 sel_39:)
+					(gGameMusic1 number: 335 flags: 1 setLoop: -1 play:)
 				)
 				(gEgo
-					sel_349: 0
-					sel_153: 100 225
-					sel_312: PolyPath 100 180 self
+					edgeHit: 0
+					posn: 100 225
+					setMotion: PolyPath 100 180 self
 				)
-				(if sel_141
+				(if register
 					((ScriptID 93 8) ; Steve
-						sel_110:
-						sel_153: 110 230
-						sel_161: StopWalk -1
-						sel_312: PolyPath 110 180 self
+						init:
+						posn: 110 230
+						setCycle: StopWalk -1
+						setMotion: PolyPath 110 180 self
 					)
 				else
-					(= sel_136 1)
+					(= cycles 1)
 				)
 			)
 			(1 0)
 			(2
-				(if sel_141
-					(gEgo sel_352: (= gSpeed global149))
-					((ScriptID 93 8) sel_15: 0 sel_312: PolyPath 330 180 self) ; Steve
+				(if register
+					(gEgo setSpeed: (= gSpeed global149))
+					((ScriptID 93 8) illegalBits: 0 setMotion: PolyPath 330 180 self) ; Steve
 				else
-					(= sel_136 1)
+					(= cycles 1)
 				)
 			)
 			(3
-				(if sel_141
-					((ScriptID 93 8) sel_111:) ; Steve
+				(if register
+					((ScriptID 93 8) dispose:) ; Steve
 				)
-				(gGame sel_588:)
-				(gEgo sel_585: 831)
-				(self sel_111:)
+				(gGame handsOn:)
+				(gEgo normalize: 831)
+				(self dispose:)
 			)
 		)
 	)
@@ -484,17 +484,17 @@
 
 (instance sExitNorth of Script
 	(properties
-		sel_20 {sExitNorth}
+		name {sExitNorth}
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
-				(gGame sel_587:)
-				(gEgo sel_312: MoveTo 265 (- (gEgo sel_0:) 15) self)
+				(gGame handsOff:)
+				(gEgo setMotion: MoveTo 265 (- (gEgo y:) 15) self)
 			)
 			(1
-				(gCurRoom sel_399: (gCurRoom sel_409:))
+				(gCurRoom newRoom: (gCurRoom north:))
 			)
 		)
 	)
@@ -502,21 +502,21 @@
 
 (instance sCantLeave of Script
 	(properties
-		sel_20 {sCantLeave}
+		name {sCantLeave}
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
-				(gGame sel_587:)
-				(gEgo sel_312: MoveTo (gEgo sel_1:) 180 self)
+				(gGame handsOff:)
+				(gEgo setMotion: MoveTo (gEgo x:) 180 self)
 			)
 			(1
 				(if (not (SetFlag 70))
-					(gMessager sel_295: 12 1 2)
+					(gMessager say: 12 1 2)
 				)
-				(gGame sel_588:)
-				(self sel_111:)
+				(gGame handsOn:)
+				(self dispose:)
 			)
 		)
 	)
@@ -524,55 +524,55 @@
 
 (instance sMeetSteve of Script
 	(properties
-		sel_20 {sMeetSteve}
+		name {sMeetSteve}
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
-				(gGame sel_587:)
-				(if (< (gEgo sel_1:) 160)
+				(gGame handsOff:)
+				(if (< (gEgo x:) 160)
 					((ScriptID 93 8) ; Steve
-						sel_161: StopWalk -1
-						sel_153: 240 180
-						sel_3: 1
-						sel_110:
-						sel_312: PolyPath 185 180
+						setCycle: StopWalk -1
+						posn: 240 180
+						loop: 1
+						init:
+						setMotion: PolyPath 185 180
 					)
-					(gEgo sel_312: PolyPath 140 180 self)
+					(gEgo setMotion: PolyPath 140 180 self)
 				else
 					((ScriptID 93 8) ; Steve
-						sel_161: StopWalk -1
-						sel_153: 80 180
-						sel_3: 0
-						sel_110:
-						sel_312: PolyPath 140 180
+						setCycle: StopWalk -1
+						posn: 80 180
+						loop: 0
+						init:
+						setMotion: PolyPath 140 180
 					)
-					(gEgo sel_312: PolyPath 185 180 self)
+					(gEgo setMotion: PolyPath 185 180 self)
 				)
 			)
 			(1
 				(Face gEgo (ScriptID 93 8)) ; Steve
 				(Face (ScriptID 93 8) gEgo) ; Steve
-				(= sel_136 2)
+				(= cycles 2)
 			)
 			(2
-				(gMessager sel_295: 15 0 0 0 self)
+				(gMessager say: 15 0 0 0 self)
 			)
 			(3
 				(gEgo
-					sel_338: 3 2
-					sel_312: PolyPath (gEgo sel_1:) 240 self
+					setStep: 3 2
+					setMotion: PolyPath (gEgo x:) 240 self
 				)
 			)
 			(4
 				((ScriptID 93 8) ; Steve
-					sel_312: PolyPath ((ScriptID 93 8) sel_1:) 250 self ; Steve
+					setMotion: PolyPath ((ScriptID 93 8) x:) 250 self ; Steve
 				)
 			)
 			(5
-				((ScriptID 22 0) sel_57: 8) ; triggerAndClock
-				(gCurRoom sel_399: 335)
+				((ScriptID 22 0) doit: 8) ; triggerAndClock
+				(gCurRoom newRoom: 335)
 			)
 		)
 	)
@@ -580,28 +580,28 @@
 
 (instance sGetWaterGlass of Script
 	(properties
-		sel_20 {sGetWaterGlass}
+		name {sGetWaterGlass}
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
 				(gEgo
-					sel_2: 855
-					sel_156: 0
-					sel_155: (if (== sel_141 waterGlass3) 0 else 1)
-					sel_244: 12
-					sel_161: CT 5 1 self
+					view: 855
+					setCel: 0
+					setLoop: (if (== register waterGlass3) 0 else 1)
+					cycleSpeed: 12
+					setCycle: CT 5 1 self
 				)
 			)
 			(1
 				(gEgo
-					sel_350: 28
-					sel_585: 831
-					sel_3: (if (== sel_141 waterGlass3) 6 else 7)
+					get: 28
+					normalize: 831
+					loop: (if (== register waterGlass3) 6 else 7)
 				)
-				((ScriptID 21 0) sel_57: 797) ; addCluesCode
-				(self sel_111:)
+				((ScriptID 21 0) doit: 797) ; addCluesCode
+				(self dispose:)
 			)
 		)
 	)
@@ -609,40 +609,40 @@
 
 (instance sLauraDies of Script
 	(properties
-		sel_20 {sLauraDies}
+		name {sLauraDies}
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
-				(= sel_136 1)
+				(= cycles 1)
 			)
 			(1
-				(gEgo sel_312: MoveFwd 80)
+				(gEgo setMotion: MoveFwd 80)
 				(oriley
-					sel_110:
-					sel_153: 270 85
-					sel_320: 165
-					sel_253: 180
-					sel_161: StopWalk -1
-					sel_312: MoveFwd 20 self
+					init:
+					posn: 270 85
+					setScale: 165
+					setHeading: 180
+					setCycle: StopWalk -1
+					setMotion: MoveFwd 20 self
 				)
-				(gGameMusic1 sel_40: 3 sel_99: 1 sel_3: 1 sel_39:)
+				(gGameMusic1 number: 3 flags: 1 loop: 1 play:)
 			)
 			(2
-				(oriley sel_2: 424 sel_155: 0 sel_156: 0 sel_161: End self)
+				(oriley view: 424 setLoop: 0 setCel: 0 setCycle: End self)
 			)
 			(3
-				(thudSound sel_39:)
-				(gEgo sel_312: 0 sel_2: 858 sel_155: 4 sel_161: End self)
+				(thudSound play:)
+				(gEgo setMotion: 0 view: 858 setLoop: 4 setCycle: End self)
 			)
 			(4
-				(= sel_139 60)
+				(= ticks 60)
 			)
 			(5
 				(= global145 0) ; "You came in thinking like a journalist, and you left with a skull full of mush."
-				(gCurRoom sel_399: 99)
-				(self sel_111:)
+				(gCurRoom newRoom: 99)
+				(self dispose:)
 			)
 		)
 	)
@@ -650,85 +650,85 @@
 
 (instance oriley of Actor
 	(properties
-		sel_20 {oriley}
-		sel_2 423
+		name {oriley}
+		view 423
 	)
 )
 
 (instance southExitFeature of ExitFeature
 	(properties
-		sel_20 {southExitFeature}
-		sel_6 184
-		sel_7 6
-		sel_8 189
-		sel_9 314
-		sel_33 11
-		sel_583 3
-		sel_213 12
+		name {southExitFeature}
+		nsTop 184
+		nsLeft 6
+		nsBottom 189
+		nsRight 314
+		cursor 11
+		exitDir 3
+		noun 12
 	)
 )
 
 (instance eastExitFeature of ExitFeature
 	(properties
-		sel_20 {eastExitFeature}
-		sel_6 94
-		sel_7 315
-		sel_8 189
-		sel_9 320
-		sel_33 14
-		sel_583 2
-		sel_213 14
+		name {eastExitFeature}
+		nsTop 94
+		nsLeft 315
+		nsBottom 189
+		nsRight 320
+		cursor 14
+		exitDir 2
+		noun 14
 	)
 )
 
 (instance westExitFeature of ExitFeature
 	(properties
-		sel_20 {westExitFeature}
-		sel_6 94
-		sel_8 189
-		sel_9 5
-		sel_33 12
-		sel_583 4
-		sel_213 13
+		name {westExitFeature}
+		nsTop 94
+		nsBottom 189
+		nsRight 5
+		cursor 12
+		exitDir 4
+		noun 13
 	)
 )
 
 (instance tables of Feature
 	(properties
-		sel_20 {tables}
-		sel_0 152
-		sel_213 1
-		sel_301 40
-		sel_302 4096
+		name {tables}
+		y 152
+		noun 1
+		sightAngle 40
+		onMeCheck 4096
 	)
 )
 
 (instance waterGlass1 of Feature
 	(properties
-		sel_20 {waterGlass1}
-		sel_1 42
-		sel_0 153
-		sel_213 8
-		sel_6 132
-		sel_7 30
-		sel_8 142
-		sel_9 54
-		sel_301 40
-		sel_303 61
-		sel_304 168
+		name {waterGlass1}
+		x 42
+		y 153
+		noun 8
+		nsTop 132
+		nsLeft 30
+		nsBottom 142
+		nsRight 54
+		sightAngle 40
+		approachX 61
+		approachY 168
 	)
 
-	(method (sel_300 param1)
+	(method (doVerb param1)
 		(switch param1
 			(4
-				(if (gEgo sel_238: 28)
-					(gMessager sel_295: sel_213 param1 3)
+				(if (gEgo has: 28)
+					(gMessager say: noun param1 3)
 				else
-					(gCurRoom sel_146: sGetWaterGlass 0 self)
+					(gCurRoom setScript: sGetWaterGlass 0 self)
 				)
 			)
 			(else
-				(super sel_300: param1)
+				(super doVerb: param1)
 			)
 		)
 	)
@@ -736,30 +736,30 @@
 
 (instance waterGlass2 of Feature
 	(properties
-		sel_20 {waterGlass2}
-		sel_1 211
-		sel_0 153
-		sel_213 8
-		sel_6 147
-		sel_7 206
-		sel_8 157
-		sel_9 217
-		sel_301 40
-		sel_303 227
-		sel_304 174
+		name {waterGlass2}
+		x 211
+		y 153
+		noun 8
+		nsTop 147
+		nsLeft 206
+		nsBottom 157
+		nsRight 217
+		sightAngle 40
+		approachX 227
+		approachY 174
 	)
 
-	(method (sel_300 param1)
+	(method (doVerb param1)
 		(switch param1
 			(4
-				(if (gEgo sel_238: 28)
-					(gMessager sel_295: sel_213 param1 3)
+				(if (gEgo has: 28)
+					(gMessager say: noun param1 3)
 				else
-					(gCurRoom sel_146: sGetWaterGlass 0 self)
+					(gCurRoom setScript: sGetWaterGlass 0 self)
 				)
 			)
 			(else
-				(super sel_300: param1)
+				(super doVerb: param1)
 			)
 		)
 	)
@@ -767,30 +767,30 @@
 
 (instance waterGlass3 of Feature
 	(properties
-		sel_20 {waterGlass3}
-		sel_1 110
-		sel_0 153
-		sel_213 8
-		sel_6 141
-		sel_7 104
-		sel_8 152
-		sel_9 116
-		sel_301 40
-		sel_303 90
-		sel_304 170
+		name {waterGlass3}
+		x 110
+		y 153
+		noun 8
+		nsTop 141
+		nsLeft 104
+		nsBottom 152
+		nsRight 116
+		sightAngle 40
+		approachX 90
+		approachY 170
 	)
 
-	(method (sel_300 param1)
+	(method (doVerb param1)
 		(switch param1
 			(4
-				(if (gEgo sel_238: 28)
-					(gMessager sel_295: sel_213 param1 3)
+				(if (gEgo has: 28)
+					(gMessager say: noun param1 3)
 				else
-					(gCurRoom sel_146: sGetWaterGlass 0 self)
+					(gCurRoom setScript: sGetWaterGlass 0 self)
 				)
 			)
 			(else
-				(super sel_300: param1)
+				(super doVerb: param1)
 			)
 		)
 	)
@@ -798,96 +798,96 @@
 
 (instance tutHead of Feature
 	(properties
-		sel_20 {tutHead}
-		sel_1 160
-		sel_0 100
-		sel_213 2
-		sel_301 40
-		sel_302 16384
+		name {tutHead}
+		x 160
+		y 100
+		noun 2
+		sightAngle 40
+		onMeCheck 16384
 	)
 )
 
 (instance plants of Feature
 	(properties
-		sel_20 {plants}
-		sel_1 100
-		sel_0 100
-		sel_213 3
-		sel_302 8192
+		name {plants}
+		x 100
+		y 100
+		noun 3
+		onMeCheck 8192
 	)
 )
 
 (instance arch of Feature
 	(properties
-		sel_20 {arch}
-		sel_1 268
-		sel_0 72
-		sel_213 6
-		sel_6 56
-		sel_7 255
-		sel_8 89
-		sel_9 281
-		sel_301 40
+		name {arch}
+		x 268
+		y 72
+		noun 6
+		nsTop 56
+		nsLeft 255
+		nsBottom 89
+		nsRight 281
+		sightAngle 40
 	)
 )
 
 (instance column1 of Feature
 	(properties
-		sel_20 {column1}
-		sel_1 27
-		sel_0 68
-		sel_213 4
-		sel_6 50
-		sel_7 24
-		sel_8 87
-		sel_9 31
-		sel_301 40
+		name {column1}
+		x 27
+		y 68
+		noun 4
+		nsTop 50
+		nsLeft 24
+		nsBottom 87
+		nsRight 31
+		sightAngle 40
 	)
 )
 
 (instance column2 of Feature
 	(properties
-		sel_20 {column2}
-		sel_1 289
-		sel_0 71
-		sel_213 4
-		sel_6 53
-		sel_7 286
-		sel_8 89
-		sel_9 293
-		sel_301 40
+		name {column2}
+		x 289
+		y 71
+		noun 4
+		nsTop 53
+		nsLeft 286
+		nsBottom 89
+		nsRight 293
+		sightAngle 40
 	)
 )
 
 (instance partyATP1 of View
 	(properties
-		sel_20 {partyATP1}
-		sel_1 287
-		sel_0 151
-		sel_213 7
-		sel_2 374
-		sel_4 15
-		sel_14 16384
+		name {partyATP1}
+		x 287
+		y 151
+		noun 7
+		view 374
+		cel 15
+		signal 16384
 	)
 
-	(method (sel_110)
-		(super sel_110:)
-		(self sel_317:)
+	(method (init)
+		(super init:)
+		(self addToPic:)
 	)
 )
 
 (instance partyATP2 of View
 	(properties
-		sel_20 {partyATP2}
-		sel_1 271
-		sel_0 145
-		sel_213 7
-		sel_2 374
-		sel_14 16384
+		name {partyATP2}
+		x 271
+		y 145
+		noun 7
+		view 374
+		signal 16384
 	)
 
-	(method (sel_110)
-		(= sel_4
+	(method (init)
+		(= cel
 			(switch (Random 0 8)
 				(0 6)
 				(1 9)
@@ -900,25 +900,25 @@
 				(8 30)
 			)
 		)
-		(= sel_3 (/ sel_4 16))
-		(= sel_4 (mod sel_4 16))
-		(super sel_110:)
-		(self sel_317:)
+		(= loop (/ cel 16))
+		(= cel (mod cel 16))
+		(super init:)
+		(self addToPic:)
 	)
 )
 
 (instance partyATP3 of View
 	(properties
-		sel_20 {partyATP3}
-		sel_1 50
-		sel_0 130
-		sel_213 7
-		sel_2 374
-		sel_14 16384
+		name {partyATP3}
+		x 50
+		y 130
+		noun 7
+		view 374
+		signal 16384
 	)
 
-	(method (sel_110)
-		(= sel_4
+	(method (init)
+		(= cel
 			(switch (Random 0 5)
 				(0 3)
 				(1 4)
@@ -928,25 +928,25 @@
 				(5 31)
 			)
 		)
-		(= sel_3 (/ sel_4 16))
-		(= sel_4 (mod sel_4 16))
-		(super sel_110:)
-		(self sel_317:)
+		(= loop (/ cel 16))
+		(= cel (mod cel 16))
+		(super init:)
+		(self addToPic:)
 	)
 )
 
 (instance partyATP4 of View
 	(properties
-		sel_20 {partyATP4}
-		sel_1 28
-		sel_0 131
-		sel_213 7
-		sel_2 374
-		sel_14 16384
+		name {partyATP4}
+		x 28
+		y 131
+		noun 7
+		view 374
+		signal 16384
 	)
 
-	(method (sel_110)
-		(= sel_4
+	(method (init)
+		(= cel
 			(switch (Random 0 4)
 				(0 2)
 				(1 7)
@@ -955,17 +955,17 @@
 				(4 29)
 			)
 		)
-		(= sel_3 (/ sel_4 16))
-		(= sel_4 (mod sel_4 16))
-		(super sel_110:)
-		(self sel_317:)
+		(= loop (/ cel 16))
+		(= cel (mod cel 16))
+		(super init:)
+		(self addToPic:)
 	)
 )
 
 (instance thudSound of Sound
 	(properties
-		sel_20 {thudSound}
-		sel_99 5
-		sel_40 80
+		name {thudSound}
+		flags 5
+		number 80
 	)
 )

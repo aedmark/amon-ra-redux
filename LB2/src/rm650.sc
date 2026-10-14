@@ -29,116 +29,116 @@
 
 (instance rm650 of LBRoom
 	(properties
-		sel_20 {rm650}
-		sel_213 41
-		sel_408 650
-		sel_409 666
-		sel_411 600
-		sel_108 -30
+		name {rm650}
+		noun 41
+		picture 650
+		north 666
+		south 600
+		vanishingY -30
 	)
 
-	(method (sel_110)
+	(method (init)
 		(LoadMany rsVIEW 652 654)
-		(gEgo sel_110: sel_585: 831 sel_320: Scaler 140 0 190 -30)
-		(self sel_414: 90)
+		(gEgo init: normalize: 831 setScale: Scaler 140 0 190 -30)
+		(self setRegions: 90)
 		(switch gPrevRoomNum
-			(sel_411
-				(gEgo sel_1: 160)
+			(south
+				(gEgo x: 160)
 			)
 			(else
-				(gEgo sel_584: 1 sel_153: 180 160)
-				(gGame sel_588:)
+				(gEgo wearingGown: 1 posn: 180 160)
+				(gGame handsOn:)
 			)
 		)
-		(super sel_110:)
+		(super init:)
 		(LoadMany rsSOUND 651 652 655 49 721)
-		(gGameMusic2 sel_40: 650 sel_99: 1 sel_3: -1 sel_39:)
-		(chair sel_110:)
-		(shelf sel_110:)
-		(mace sel_110:)
-		(maceChain sel_110:)
-		(leftWeapon sel_110:)
-		(medalsA sel_110:)
-		(medalsB sel_110:)
-		(desk sel_110:)
-		(light sel_110:)
-		(chairWolf sel_110:)
-		(lamp sel_110:)
-		(blotter sel_110:)
-		(intercom sel_110:)
-		(shelf1 sel_110: sel_311: 1 4)
-		(shelf2 sel_110: sel_311: 1 4)
-		(shelf3 sel_110: sel_311: 1 4)
-		(shelf4 sel_110: sel_311: 1 4)
-		(shelf5 sel_110: sel_311: 1 4)
-		(shelf6a sel_110: sel_311: 1 4)
-		(shelf6b sel_110: sel_311: 1 4)
-		(shelf6c sel_110: sel_311: 1 4)
-		(shelf6d sel_110: sel_311: 1 4)
-		(shelf7 sel_110: sel_311: 1 4)
-		(shelf8 sel_110: sel_311: 1 4)
-		(weapons1 sel_110:)
-		(weapons2 sel_110:)
-		(weapons3 sel_110:)
-		(weapons4 sel_110:)
-		(weaponsB sel_110:)
-		(secretShelf sel_110:)
+		(gGameMusic2 number: 650 flags: 1 loop: -1 play:)
+		(chair init:)
+		(shelf init:)
+		(mace init:)
+		(maceChain init:)
+		(leftWeapon init:)
+		(medalsA init:)
+		(medalsB init:)
+		(desk init:)
+		(light init:)
+		(chairWolf init:)
+		(lamp init:)
+		(blotter init:)
+		(intercom init:)
+		(shelf1 init: approachVerbs: 1 4)
+		(shelf2 init: approachVerbs: 1 4)
+		(shelf3 init: approachVerbs: 1 4)
+		(shelf4 init: approachVerbs: 1 4)
+		(shelf5 init: approachVerbs: 1 4)
+		(shelf6a init: approachVerbs: 1 4)
+		(shelf6b init: approachVerbs: 1 4)
+		(shelf6c init: approachVerbs: 1 4)
+		(shelf6d init: approachVerbs: 1 4)
+		(shelf7 init: approachVerbs: 1 4)
+		(shelf8 init: approachVerbs: 1 4)
+		(weapons1 init:)
+		(weapons2 init:)
+		(weapons3 init:)
+		(weapons4 init:)
+		(weaponsB init:)
+		(secretShelf init:)
 		(if (IsFlag 117)
-			(secretPanel sel_311: 4 sel_156: (secretPanel sel_246:) sel_110:)
+			(secretPanel approachVerbs: 4 setCel: (secretPanel lastCel:) init:)
 		else
-			(secretPanel sel_110: sel_311: 4)
+			(secretPanel init: approachVerbs: 4)
 		)
-		(trap sel_317:)
-		(sword sel_110:)
-		(string1 sel_110: sel_311: 22 21)
-		(string2 sel_110: sel_311: 22 21)
-		(string3 sel_110: sel_311: 22 21)
+		(trap addToPic:)
+		(sword init:)
+		(string1 init: approachVerbs: 22 21)
+		(string2 init: approachVerbs: 22 21)
+		(string3 init: approachVerbs: 22 21)
 		(if (IsFlag 11)
-			(gun sel_110:)
-			(gunFire sel_156: (gunFire sel_246:) sel_110:)
-			(string1 sel_156: (string1 sel_246:))
-			(string2 sel_156: (string2 sel_246:))
-			(string3 sel_156: (string3 sel_246:))
+			(gun init:)
+			(gunFire setCel: (gunFire lastCel:) init:)
+			(string1 setCel: (string1 lastCel:))
+			(string2 setCel: (string2 lastCel:))
+			(string3 setCel: (string3 lastCel:))
 		else
 			(LoadMany rsSOUND 653 654)
 		)
-		(southExit sel_110:)
-		(eastExit sel_110:)
+		(southExit init:)
+		(eastExit init:)
 		(cond
 			((and (== gAct 3) (not (IsFlag 57)) (not (TimeCheck $2020))) ; has 2:00 am occurred?
-				(if (== ((ScriptID 90 2) sel_620:) gCurRoomNum) ; aOlympia
-					((ScriptID 90 2) sel_618: 520) ; aOlympia
+				(if (== ((ScriptID 90 2) room:) gCurRoomNum) ; aOlympia
+					((ScriptID 90 2) goTo: 520) ; aOlympia
 				)
-				(string1 sel_146: sIntercom)
+				(string1 setScript: sIntercom)
 			)
 			(
 				(and
-					(== ((ScriptID 90 2) sel_620:) gCurRoomNum) ; aOlympia
-					(not (gEgo sel_238: 17))
+					(== ((ScriptID 90 2) room:) gCurRoomNum) ; aOlympia
+					(not (gEgo has: 17))
 				)
-				((ScriptID 90 2) sel_618: 520) ; aOlympia
+				((ScriptID 90 2) goTo: 520) ; aOlympia
 			)
 		)
 	)
 
-	(method (sel_57)
-		(super sel_57:)
+	(method (doit)
+		(super doit:)
 		(cond
-			(sel_142)
+			(script)
 			((StepOn gEgo 2)
-				(self sel_146: sExitToSouth)
+				(self setScript: sExitToSouth)
 			)
 		)
 	)
 
-	(method (sel_111)
-		(gGameMusic2 sel_170:)
-		(super sel_111:)
+	(method (dispose)
+		(gGameMusic2 fade:)
+		(super dispose:)
 	)
 
-	(method (sel_399)
-		(super sel_399: &rest)
-		(if (== gNewRoomNum sel_409)
+	(method (newRoom)
+		(super newRoom: &rest)
+		(if (== gNewRoomNum north)
 			(ClearFlag 117)
 		)
 	)
@@ -146,17 +146,17 @@
 
 (instance sExitToSouth of Script
 	(properties
-		sel_20 {sExitToSouth}
+		name {sExitToSouth}
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
-				(gGame sel_587:)
-				(gEgo sel_312: MoveTo 330 (gEgo sel_0:) self)
+				(gGame handsOff:)
+				(gEgo setMotion: MoveTo 330 (gEgo y:) self)
 			)
 			(1
-				(gCurRoom sel_399: (gCurRoom sel_411:))
+				(gCurRoom newRoom: (gCurRoom south:))
 			)
 		)
 	)
@@ -164,29 +164,29 @@
 
 (instance sIntercom of Script
 	(properties
-		sel_20 {sIntercom}
+		name {sIntercom}
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
-				(= sel_136 2)
+				(= cycles 2)
 			)
 			(1
-				(= sel_137 30)
+				(= seconds 30)
 			)
 			(2
-				(if (gCurRoom sel_142:)
-					(-- sel_29)
-					(= sel_137 5)
+				(if (gCurRoom script:)
+					(-- state)
+					(= seconds 5)
 				else
-					(gMessager sel_295: 40)
-					(= sel_136 1)
+					(gMessager say: 40)
+					(= cycles 1)
 				)
 			)
 			(3
 				(SetFlag 57)
-				(self sel_111:)
+				(self dispose:)
 			)
 		)
 	)
@@ -194,68 +194,68 @@
 
 (instance sTouchTrap of Script
 	(properties
-		sel_20 {sTouchTrap}
+		name {sTouchTrap}
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
-				(gGame sel_587:)
-				(gEgo sel_312: PolyPath 179 157 self)
+				(gGame handsOff:)
+				(gEgo setMotion: PolyPath 179 157 self)
 			)
 			(1
 				(gEgo
-					sel_2: 652
-					sel_155: 2
-					sel_156: 0
-					sel_244: 12
-					sel_161: End self
+					view: 652
+					setLoop: 2
+					setCel: 0
+					cycleSpeed: 12
+					setCycle: End self
 				)
 			)
 			(2
-				(gGameMusic2 sel_167:)
-				(sFX sel_40: 654 sel_99: 5 sel_3: 1 sel_39:)
-				(string1 sel_161: End self)
+				(gGameMusic2 stop:)
+				(sFX number: 654 flags: 5 loop: 1 play:)
+				(string1 setCycle: End self)
 			)
 			(3
-				(string1 sel_313:)
-				(string2 sel_161: End self)
+				(string1 stopUpd:)
+				(string2 setCycle: End self)
 			)
 			(4
-				(string2 sel_313:)
-				(string3 sel_161: End self)
+				(string2 stopUpd:)
+				(string3 setCycle: End self)
 			)
 			(5
-				(string3 sel_313:)
-				(gun sel_110:)
-				(= sel_139 60)
+				(string3 stopUpd:)
+				(gun init:)
+				(= ticks 60)
 			)
 			(6
-				(gun sel_161: Fwd)
-				(sFX sel_40: 653 sel_99: 1 sel_3: -1 sel_39:)
-				(gunFire sel_110: sel_244: 10 sel_161: End)
+				(gun setCycle: Fwd)
+				(sFX number: 653 flags: 1 loop: -1 play:)
+				(gunFire init: cycleSpeed: 10 setCycle: End)
 				(gEgo
-					sel_155: 3
-					sel_156: 0
-					sel_312:
+					setLoop: 3
+					setCel: 0
+					setMotion:
 						MoveTo
-						(+ (gEgo sel_1:) 7)
-						(+ (gEgo sel_0:) 3)
-					sel_161: End self
+						(+ (gEgo x:) 7)
+						(+ (gEgo y:) 3)
+					setCycle: End self
 				)
 			)
 			(7
-				(= sel_139 60)
+				(= ticks 60)
 			)
 			(8
-				(sFX sel_167:)
-				(gun sel_161: 0 sel_156: 0)
-				(= sel_139 120)
+				(sFX stop:)
+				(gun setCycle: 0 setCel: 0)
+				(= ticks 120)
 			)
 			(9
 				(= global145 6) ; "Death from traumatic lead poisoning claims many lives every year."
-				(gCurRoom sel_399: 99)
-				(self sel_111:)
+				(gCurRoom newRoom: 99)
+				(self dispose:)
 			)
 		)
 	)
@@ -263,65 +263,65 @@
 
 (instance sDisarmTrap of Script
 	(properties
-		sel_20 {sDisarmTrap}
+		name {sDisarmTrap}
 	)
 
-	(method (sel_144 param1 &tmp temp0 temp1)
-		(switch (= sel_29 param1)
+	(method (changeState param1 &tmp temp0 temp1)
+		(switch (= state param1)
 			(0
-				(gGame sel_587:)
-				(if (== sel_141 30)
+				(gGame handsOff:)
+				(if (== register 30)
 					(= temp0 206)
 					(= temp1 152)
 				else
 					(= temp0 203)
 					(= temp1 150)
 				)
-				(gEgo sel_312: PolyPath temp0 temp1 self)
+				(gEgo setMotion: PolyPath temp0 temp1 self)
 			)
 			(1
-				(gEgo sel_253: 270 self)
+				(gEgo setHeading: 270 self)
 			)
 			(2
 				(gEgo
-					sel_2: 652
-					sel_155: (if (== sel_141 30) 0 else 1)
-					sel_156: 0
-					sel_63: 13
-					sel_244: 12
-					sel_161: End self
+					view: 652
+					setLoop: (if (== register 30) 0 else 1)
+					setCel: 0
+					setPri: 13
+					cycleSpeed: 12
+					setCycle: End self
 				)
 			)
 			(3
-				(sFX sel_40: 654 sel_99: 5 sel_3: 1 sel_39:)
-				(gEgo sel_585: 831 sel_3: 1)
-				(string1 sel_161: End self)
+				(sFX number: 654 flags: 5 loop: 1 play:)
+				(gEgo normalize: 831 loop: 1)
+				(string1 setCycle: End self)
 			)
 			(4
-				(string1 sel_313:)
-				(string2 sel_161: End self)
+				(string1 stopUpd:)
+				(string2 setCycle: End self)
 			)
 			(5
-				(string2 sel_313:)
-				(string3 sel_161: End self)
+				(string2 stopUpd:)
+				(string3 setCycle: End self)
 			)
 			(6
-				(string3 sel_313:)
-				(gun sel_110:)
-				(= sel_139 60)
+				(string3 stopUpd:)
+				(gun init:)
+				(= ticks 60)
 			)
 			(7
-				(gun sel_161: Fwd)
-				(sFX sel_40: 653 sel_99: 1 sel_3: -1 sel_39:)
-				(gunFire sel_110: sel_244: 10 sel_161: End)
-				(= sel_139 180)
+				(gun setCycle: Fwd)
+				(sFX number: 653 flags: 1 loop: -1 play:)
+				(gunFire init: cycleSpeed: 10 setCycle: End)
+				(= ticks 180)
 			)
 			(8
-				(sFX sel_167:)
-				(gun sel_161: 0 sel_156: 0)
+				(sFX stop:)
+				(gun setCycle: 0 setCel: 0)
 				(SetFlag 11)
-				(gGame sel_588:)
-				(self sel_111:)
+				(gGame handsOn:)
+				(self dispose:)
 			)
 		)
 	)
@@ -329,37 +329,37 @@
 
 (instance sGetCheese of Script
 	(properties
-		sel_20 {sGetCheese}
+		name {sGetCheese}
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
-				(gGame sel_587:)
-				(gEgo sel_312: PolyPath 179 157 self)
+				(gGame handsOff:)
+				(gEgo setMotion: PolyPath 179 157 self)
 			)
 			(1
 				(gEgo
-					sel_2: 652
-					sel_155: 2
-					sel_156: 0
-					sel_244: 12
-					sel_161: End self
+					view: 652
+					setLoop: 2
+					setCel: 0
+					cycleSpeed: 12
+					setCycle: End self
 				)
 			)
 			(2
-				(gEgo sel_350: 16)
-				((ScriptID 21 0) sel_57: 785) ; addCluesCode
-				(gGame sel_87: 1 152)
-				(= sel_136 1)
+				(gEgo get: 16)
+				((ScriptID 21 0) doit: 785) ; addCluesCode
+				(gGame points: 1 152)
+				(= cycles 1)
 			)
 			(3
-				(gEgo sel_2: 652 sel_155: 2 sel_156: 0 sel_161: Beg self)
+				(gEgo view: 652 setLoop: 2 setCel: 0 setCycle: Beg self)
 			)
 			(4
-				(gEgo sel_585: 831 sel_3: 1)
-				(gGame sel_588:)
-				(self sel_111:)
+				(gEgo normalize: 831 loop: 1)
+				(gGame handsOn:)
+				(self dispose:)
 			)
 		)
 	)
@@ -367,24 +367,24 @@
 
 (instance sLookTrap of Script
 	(properties
-		sel_20 {sLookTrap}
+		name {sLookTrap}
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
-				(if (< (gEgo sel_1:) 169)
-					(gEgo sel_312: PolyPath 153 163 self)
+				(if (< (gEgo x:) 169)
+					(gEgo setMotion: PolyPath 153 163 self)
 				else
-					(gEgo sel_312: PolyPath 186 154 self)
+					(gEgo setMotion: PolyPath 186 154 self)
 				)
 			)
 			(1
 				(Face gEgo trap self)
 			)
 			(2
-				(gCurRoom sel_422: inCheese)
-				(self sel_111:)
+				(gCurRoom setInset: inCheese)
+				(self dispose:)
 			)
 		)
 	)
@@ -392,41 +392,41 @@
 
 (instance sSwordKill of Script
 	(properties
-		sel_20 {sSwordKill}
+		name {sSwordKill}
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
-				(gGame sel_587:)
-				(gEgo sel_312: PolyPath 282 130 self)
+				(gGame handsOff:)
+				(gEgo setMotion: PolyPath 282 130 self)
 			)
 			(1
 				(gEgo
-					sel_2: 652
-					sel_155: 4
-					sel_156: 0
-					sel_244: 10
-					sel_161: End self
+					view: 652
+					setLoop: 4
+					setCel: 0
+					cycleSpeed: 10
+					setCycle: End self
 				)
 			)
 			(2
-				(gGameMusic2 sel_167:)
-				(sFX sel_40: 655 sel_99: 1 sel_3: 1 sel_39:)
-				(gEgo sel_155: 5 sel_156: 0 sel_161: CT 5 1 self)
-				(sword sel_111:)
+				(gGameMusic2 stop:)
+				(sFX number: 655 flags: 1 loop: 1 play:)
+				(gEgo setLoop: 5 setCel: 0 setCycle: CT 5 1 self)
+				(sword dispose:)
 			)
 			(3
-				(sFX sel_40: 652 sel_99: 1 sel_3: 1 sel_39:)
-				(gEgo sel_161: End self)
+				(sFX number: 652 flags: 1 loop: 1 play:)
+				(gEgo setCycle: End self)
 			)
 			(4
-				(= sel_139 150)
+				(= ticks 150)
 			)
 			(5
 				(= global145 13) ; "Take another stab at it."
-				(gCurRoom sel_399: 99)
-				(self sel_111:)
+				(gCurRoom newRoom: 99)
+				(self dispose:)
 			)
 		)
 	)
@@ -434,14 +434,14 @@
 
 (instance sShocked of Script
 	(properties
-		sel_20 {sShocked}
+		name {sShocked}
 	)
 
-	(method (sel_144 param1 &tmp temp0 temp1)
-		(switch (= sel_29 param1)
+	(method (changeState param1 &tmp temp0 temp1)
+		(switch (= state param1)
 			(0
-				(gGame sel_587:)
-				(switch sel_141
+				(gGame handsOff:)
+				(switch register
 					(0
 						(= temp0 200)
 						(= temp1 109)
@@ -463,38 +463,38 @@
 						(= temp1 134)
 					)
 				)
-				(gEgo sel_312: PolyPath temp0 temp1 self)
+				(gEgo setMotion: PolyPath temp0 temp1 self)
 			)
 			(1
 				(gEgo
-					sel_2: 654
-					sel_155: 0
-					sel_156: 0
-					sel_244: 4
-					sel_161: CT 4 1 self
+					view: 654
+					setLoop: 0
+					setCel: 0
+					cycleSpeed: 4
+					setCycle: CT 4 1 self
 				)
 			)
 			(2
-				(sFX sel_40: 651 sel_99: 1 sel_3: -1 sel_39:)
-				(gEgo sel_161: Osc 1 self)
+				(sFX number: 651 flags: 1 loop: -1 play:)
+				(gEgo setCycle: Osc 1 self)
 			)
 			(3
-				(sFX sel_167:)
-				(= sel_139 30)
+				(sFX stop:)
+				(= ticks 30)
 			)
 			(4
-				(gEgo sel_155: 1 sel_156: 0 sel_244: 10 sel_161: End self)
+				(gEgo setLoop: 1 setCel: 0 cycleSpeed: 10 setCycle: End self)
 			)
 			(5
-				(= sel_139 150)
+				(= ticks 150)
 			)
 			(6
-				(gEgo sel_161: Beg self)
+				(gEgo setCycle: Beg self)
 			)
 			(7
-				(gEgo sel_585: 831 sel_3: 0)
-				(gGame sel_588:)
-				(self sel_111:)
+				(gEgo normalize: 831 loop: 0)
+				(gGame handsOn:)
+				(self dispose:)
 			)
 		)
 	)
@@ -502,54 +502,54 @@
 
 (instance sShockedWire of Script
 	(properties
-		sel_20 {sShockedWire}
+		name {sShockedWire}
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
-				(gGame sel_587:)
+				(gGame handsOff:)
 				(gEgo
-					sel_2: 652
-					sel_155: 2
-					sel_156: 0
-					sel_244: 12
-					sel_161: End self
+					view: 652
+					setLoop: 2
+					setCel: 0
+					cycleSpeed: 12
+					setCycle: End self
 				)
 			)
 			(1
 				(gEgo
-					sel_2: 654
-					sel_155: 0
-					sel_156: 4
-					sel_244: 4
-					sel_161: End self
+					view: 654
+					setLoop: 0
+					setCel: 4
+					cycleSpeed: 4
+					setCycle: End self
 				)
-				(sFX sel_40: 651 sel_99: 1 sel_3: -1 sel_39:)
+				(sFX number: 651 flags: 1 loop: -1 play:)
 			)
 			(2
-				(gEgo sel_161: CT 4 -1 self)
+				(gEgo setCycle: CT 4 -1 self)
 			)
 			(3
-				(sFX sel_167:)
+				(sFX stop:)
 				(gEgo
-					sel_2: 652
-					sel_155: 2
-					sel_156: (gEgo sel_246:)
-					sel_244: 12
+					view: 652
+					setLoop: 2
+					setCel: (gEgo lastCel:)
+					cycleSpeed: 12
 				)
-				(= sel_139 15)
+				(= ticks 15)
 			)
 			(4
-				(gMessager sel_295: 35 21 0 0 self)
+				(gMessager say: 35 21 0 0 self)
 			)
 			(5
-				(gEgo sel_161: Beg self)
+				(gEgo setCycle: Beg self)
 			)
 			(6
-				(gEgo sel_585: 831 sel_3: 1)
-				(gGame sel_588:)
-				(self sel_111:)
+				(gEgo normalize: 831 loop: 1)
+				(gGame handsOn:)
+				(self dispose:)
 			)
 		)
 	)
@@ -557,39 +557,39 @@
 
 (instance sShockedWire3 of Script
 	(properties
-		sel_20 {sShockedWire3}
+		name {sShockedWire3}
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
-				(gGame sel_587:)
+				(gGame handsOff:)
 				(gEgo
-					sel_2: 654
-					sel_155: 0
-					sel_156: 0
-					sel_244: 4
-					sel_161: Osc 1 self
+					view: 654
+					setLoop: 0
+					setCel: 0
+					cycleSpeed: 4
+					setCycle: Osc 1 self
 				)
-				(sFX sel_40: 651 sel_99: 1 sel_3: -1 sel_39:)
+				(sFX number: 651 flags: 1 loop: -1 play:)
 			)
 			(1
-				(sFX sel_167:)
-				(= sel_139 30)
+				(sFX stop:)
+				(= ticks 30)
 			)
 			(2
-				(gEgo sel_155: 1 sel_156: 0 sel_244: 10 sel_161: End self)
+				(gEgo setLoop: 1 setCel: 0 cycleSpeed: 10 setCycle: End self)
 			)
 			(3
-				(gMessager sel_295: 35 21 0 0 self)
+				(gMessager say: 35 21 0 0 self)
 			)
 			(4
-				(gEgo sel_161: Beg self)
+				(gEgo setCycle: Beg self)
 			)
 			(5
-				(gEgo sel_585: 831 sel_3: 0)
-				(gGame sel_588:)
-				(self sel_111:)
+				(gEgo normalize: 831 loop: 0)
+				(gGame handsOn:)
+				(self dispose:)
 			)
 		)
 	)
@@ -597,36 +597,36 @@
 
 (instance sEnterSecretPassage of Script
 	(properties
-		sel_20 {sEnterSecretPassage}
+		name {sEnterSecretPassage}
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
-				(gEgo sel_2: 652 sel_155: 4 sel_156: 0 sel_161: CT 3 1 self)
+				(gEgo view: 652 setLoop: 4 setCel: 0 setCycle: CT 3 1 self)
 			)
 			(1
-				(sFX sel_40: 49 sel_99: 5 sel_3: 1 sel_39: self)
+				(sFX number: 49 flags: 5 loop: 1 play: self)
 			)
 			(2
-				(gEgo sel_585: 831 sel_3: 0)
+				(gEgo normalize: 831 loop: 0)
 				(secretShelf
-					sel_155: 6
-					sel_312: MoveTo 161 (secretShelf sel_0:) self
+					setLoop: 6
+					setMotion: MoveTo 161 (secretShelf y:) self
 				)
-				(sFX sel_40: 721 sel_99: 5 sel_3: -1 sel_39:)
+				(sFX number: 721 flags: 5 loop: -1 play:)
 			)
 			(3
-				(sFX sel_167:)
-				(secretShelf sel_313:)
-				(gEgo sel_312: PolyPath 132 107 self)
+				(sFX stop:)
+				(secretShelf stopUpd:)
+				(gEgo setMotion: PolyPath 132 107 self)
 			)
 			(4
-				(gEgo sel_312: MoveTo 126 99 self)
+				(gEgo setMotion: MoveTo 126 99 self)
 			)
 			(5
-				(gCurRoom sel_399: (gCurRoom sel_409:))
-				(self sel_111:)
+				(gCurRoom newRoom: (gCurRoom north:))
+				(self dispose:)
 			)
 		)
 	)
@@ -634,17 +634,17 @@
 
 (instance sShortPause of Script
 	(properties
-		sel_20 {sShortPause}
+		name {sShortPause}
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
-				(= sel_139 60)
+				(= ticks 60)
 			)
 			(1
-				(gMessager sel_295: 32 4)
-				(self sel_111:)
+				(gMessager say: 32 4)
+				(self dispose:)
 			)
 		)
 	)
@@ -652,104 +652,104 @@
 
 (instance secretShelf of Actor
 	(properties
-		sel_20 {secretShelf}
-		sel_1 137
-		sel_0 15
-		sel_82 -89
-		sel_2 650
-		sel_3 6
-		sel_14 16385
+		name {secretShelf}
+		x 137
+		y 15
+		z -89
+		view 650
+		loop 6
+		signal 16385
 	)
 )
 
 (instance secretPanel of Prop
 	(properties
-		sel_20 {secretPanel}
-		sel_1 199
-		sel_0 80
-		sel_303 196
-		sel_304 118
-		sel_2 650
-		sel_3 7
-		sel_14 16385
+		name {secretPanel}
+		x 199
+		y 80
+		approachX 196
+		approachY 118
+		view 650
+		loop 7
+		signal 16385
 	)
 
-	(method (sel_300 param1)
+	(method (doVerb param1)
 		(switch param1
 			(1
-				(if sel_4
-					(gMessager sel_295: 43 1)
+				(if cel
+					(gMessager say: 43 1)
 				else
-					(gMessager sel_295: 6 1)
+					(gMessager say: 6 1)
 				)
 			)
 			(4
-				(sFX sel_40: 49 sel_99: 5 sel_3: 1 sel_39:)
-				(if sel_4
-					(secretButton sel_111:)
-					(self sel_161: Beg self)
+				(sFX number: 49 flags: 5 loop: 1 play:)
+				(if cel
+					(secretButton dispose:)
+					(self setCycle: Beg self)
 					(ClearFlag 117)
 				else
-					(secretButton sel_110: sel_311: 4)
-					(self sel_161: End self)
+					(secretButton init: approachVerbs: 4)
+					(self setCycle: End self)
 					(SetFlag 117)
 				)
 			)
 			(else
-				(super sel_300: param1)
+				(super doVerb: param1)
 			)
 		)
 	)
 
-	(method (sel_145)
-		(sFX sel_167:)
-		(self sel_313:)
+	(method (cue)
+		(sFX stop:)
+		(self stopUpd:)
 	)
 )
 
 (instance gun of Prop
 	(properties
-		sel_20 {gun}
-		sel_1 46
-		sel_0 91
-		sel_82 50
-		sel_213 28
-		sel_2 651
-		sel_14 1
+		name {gun}
+		x 46
+		y 91
+		z 50
+		noun 28
+		view 651
+		signal 1
 	)
 )
 
 (instance string1 of Prop
 	(properties
-		sel_20 {string1}
-		sel_1 149
-		sel_0 144
-		sel_213 35
-		sel_303 161
-		sel_304 150
-		sel_2 650
-		sel_3 4
-		sel_14 16385
+		name {string1}
+		x 149
+		y 144
+		noun 35
+		approachX 161
+		approachY 150
+		view 650
+		loop 4
+		signal 16385
 	)
 
-	(method (sel_300 param1)
+	(method (doVerb param1)
 		(switch param1
 			(22
-				(if (MuseumRgn sel_646:)
-					(gCurRoom sel_146: sShockedWire)
+				(if (MuseumRgn nobodyAround:)
+					(gCurRoom setScript: sShockedWire)
 				else
 					(return 1)
 				)
 			)
 			(21
-				(if (MuseumRgn sel_646:)
-					(gCurRoom sel_146: sShockedWire)
+				(if (MuseumRgn nobodyAround:)
+					(gCurRoom setScript: sShockedWire)
 				else
 					(return 1)
 				)
 			)
 			(else
-				(super sel_300: param1)
+				(super doVerb: param1)
 			)
 		)
 	)
@@ -757,35 +757,35 @@
 
 (instance string2 of Prop
 	(properties
-		sel_20 {string2}
-		sel_1 81
-		sel_0 111
-		sel_213 35
-		sel_303 92
-		sel_304 114
-		sel_2 650
-		sel_3 3
-		sel_14 16385
+		name {string2}
+		x 81
+		y 111
+		noun 35
+		approachX 92
+		approachY 114
+		view 650
+		loop 3
+		signal 16385
 	)
 
-	(method (sel_300 param1)
+	(method (doVerb param1)
 		(switch param1
 			(22
-				(if (MuseumRgn sel_646:)
-					(gCurRoom sel_146: sShockedWire)
+				(if (MuseumRgn nobodyAround:)
+					(gCurRoom setScript: sShockedWire)
 				else
 					(return 1)
 				)
 			)
 			(21
-				(if (MuseumRgn sel_646:)
-					(gCurRoom sel_146: sShockedWire)
+				(if (MuseumRgn nobodyAround:)
+					(gCurRoom setScript: sShockedWire)
 				else
 					(return 1)
 				)
 			)
 			(else
-				(super sel_300: param1)
+				(super doVerb: param1)
 			)
 		)
 	)
@@ -793,35 +793,35 @@
 
 (instance string3 of Prop
 	(properties
-		sel_20 {string3}
-		sel_1 60
-		sel_0 57
-		sel_213 35
-		sel_303 55
-		sel_304 114
-		sel_2 650
-		sel_3 3
-		sel_14 16385
+		name {string3}
+		x 60
+		y 57
+		noun 35
+		approachX 55
+		approachY 114
+		view 650
+		loop 3
+		signal 16385
 	)
 
-	(method (sel_300 param1)
+	(method (doVerb param1)
 		(switch param1
 			(22
-				(if (MuseumRgn sel_646:)
-					(gCurRoom sel_146: sShockedWire3)
+				(if (MuseumRgn nobodyAround:)
+					(gCurRoom setScript: sShockedWire3)
 				else
 					(return 1)
 				)
 			)
 			(21
-				(if (MuseumRgn sel_646:)
-					(gCurRoom sel_146: sShockedWire3)
+				(if (MuseumRgn nobodyAround:)
+					(gCurRoom setScript: sShockedWire3)
 				else
 					(return 1)
 				)
 			)
 			(else
-				(super sel_300: param1)
+				(super doVerb: param1)
 			)
 		)
 	)
@@ -829,51 +829,51 @@
 
 (instance gunFire of Prop
 	(properties
-		sel_20 {gunFire}
-		sel_1 150
-		sel_0 143
-		sel_2 652
-		sel_3 7
-		sel_14 16384
+		name {gunFire}
+		x 150
+		y 143
+		view 652
+		loop 7
+		signal 16384
 	)
 )
 
 (instance trap of View
 	(properties
-		sel_20 {trap}
-		sel_1 165
-		sel_0 157
-		sel_2 651
-		sel_3 1
-		sel_14 16385
+		name {trap}
+		x 165
+		y 157
+		view 651
+		loop 1
+		signal 16385
 	)
 
-	(method (sel_300 param1)
+	(method (doVerb param1)
 		(switch param1
 			(1
-				(if (not (gEgo sel_238: 16))
-					(gCurRoom sel_146: sLookTrap)
+				(if (not (gEgo has: 16))
+					(gCurRoom setScript: sLookTrap)
 				else
-					(gMessager sel_295: 27 1 2)
+					(gMessager say: 27 1 2)
 				)
 			)
 			(8
-				(self sel_300: 1)
+				(self doVerb: 1)
 			)
 			(4
 				(cond
-					((gEgo sel_238: 16)
-						(gMessager sel_295: 27 4 2)
+					((gEgo has: 16)
+						(gMessager say: 27 4 2)
 					)
 					((IsFlag 11)
-						(if (MuseumRgn sel_646:)
-							(gCurRoom sel_146: sGetCheese)
+						(if (MuseumRgn nobodyAround:)
+							(gCurRoom setScript: sGetCheese)
 						else
 							(return 1)
 						)
 					)
-					((MuseumRgn sel_646:)
-						(gCurRoom sel_146: sTouchTrap)
+					((MuseumRgn nobodyAround:)
+						(gCurRoom setScript: sTouchTrap)
 					)
 					(else
 						(return 1)
@@ -883,14 +883,14 @@
 			(29
 				(cond
 					((IsFlag 11)
-						(if (gEgo sel_238: 16)
-							(gMessager sel_295: 27 4 2)
+						(if (gEgo has: 16)
+							(gMessager say: 27 4 2)
 						else
-							(gMessager sel_295: 27 4 7)
+							(gMessager say: 27 4 7)
 						)
 					)
-					((MuseumRgn sel_646:)
-						(gCurRoom sel_146: sDisarmTrap 0 29)
+					((MuseumRgn nobodyAround:)
+						(gCurRoom setScript: sDisarmTrap 0 29)
 					)
 					(else
 						(return 1)
@@ -900,10 +900,10 @@
 			(30
 				(cond
 					((IsFlag 11)
-						(gMessager sel_295: 27 4 7)
+						(gMessager say: 27 4 7)
 					)
-					((MuseumRgn sel_646:)
-						(gCurRoom sel_146: sDisarmTrap 0 30)
+					((MuseumRgn nobodyAround:)
+						(gCurRoom setScript: sDisarmTrap 0 30)
 					)
 					(else
 						(return 1)
@@ -911,7 +911,7 @@
 				)
 			)
 			(else
-				(super sel_300: param1)
+				(super doVerb: param1)
 			)
 		)
 	)
@@ -919,22 +919,22 @@
 
 (instance sword of View
 	(properties
-		sel_20 {sword}
-		sel_1 287
-		sel_0 40
-		sel_213 25
-		sel_2 652
-		sel_3 6
-		sel_14 16385
+		name {sword}
+		x 287
+		y 40
+		noun 25
+		view 652
+		loop 6
+		signal 16385
 	)
 
-	(method (sel_300 param1)
+	(method (doVerb param1)
 		(switch param1
 			(4
-				(gCurRoom sel_146: sSwordKill)
+				(gCurRoom setScript: sSwordKill)
 			)
 			(else
-				(super sel_300: param1)
+				(super doVerb: param1)
 			)
 		)
 	)
@@ -942,72 +942,72 @@
 
 (instance inCheese of Inset
 	(properties
-		sel_20 {inCheese}
-		sel_2 650
-		sel_3 2
-		sel_1 147
-		sel_0 135
-		sel_570 1
-		sel_213 33
+		name {inCheese}
+		view 650
+		loop 2
+		x 147
+		y 135
+		disposeNotOnMe 1
+		noun 33
 	)
 
-	(method (sel_300 param1)
+	(method (doVerb param1)
 		(return
 			(switch param1
 				(1
-					(gMessager sel_295: 33 1 5)
+					(gMessager say: 33 1 5)
 				)
 				(8
-					(gMessager sel_295: 5 8 0 0 0 15)
+					(gMessager say: 5 8 0 0 0 15)
 				)
 				(4
 					(cond
 						((IsFlag 11)
-							(if (MuseumRgn sel_646:)
-								(gCurRoom sel_146: sGetCheese)
+							(if (MuseumRgn nobodyAround:)
+								(gCurRoom setScript: sGetCheese)
 							else
 								(return 1)
 							)
 						)
-						((MuseumRgn sel_646:)
-							(gCurRoom sel_146: sTouchTrap)
+						((MuseumRgn nobodyAround:)
+							(gCurRoom setScript: sTouchTrap)
 						)
 						(else
 							(return 1)
 						)
 					)
-					(self sel_111:)
+					(self dispose:)
 				)
 				(29
 					(cond
 						((IsFlag 11)
-							(gMessager sel_295: 27 4 2)
+							(gMessager say: 27 4 2)
 						)
-						((MuseumRgn sel_646:)
-							(gCurRoom sel_146: sDisarmTrap 0 29)
+						((MuseumRgn nobodyAround:)
+							(gCurRoom setScript: sDisarmTrap 0 29)
 						)
 						(else
 							(return 1)
 						)
 					)
-					(self sel_111:)
+					(self dispose:)
 				)
 				(30
 					(cond
 						((IsFlag 11)
-							(gMessager sel_295: 27 4 2)
+							(gMessager say: 27 4 2)
 						)
-						((MuseumRgn sel_646:)
-							(gCurRoom sel_146: sDisarmTrap 0 30)
+						((MuseumRgn nobodyAround:)
+							(gCurRoom setScript: sDisarmTrap 0 30)
 						)
 						(else
 							(return 1)
 						)
 					)
-					(self sel_111:)
+					(self dispose:)
 				)
 				(else
-					(super sel_300: param1)
+					(super doVerb: param1)
 				)
 			)
 		)
@@ -1016,52 +1016,52 @@
 
 (instance inBooks of Inset
 	(properties
-		sel_20 {inBooks}
-		sel_2 650
-		sel_3 1
-		sel_570 1
-		sel_213 29
+		name {inBooks}
+		view 650
+		loop 1
+		disposeNotOnMe 1
+		noun 29
 	)
 
-	(method (sel_110)
-		(= sel_1 (- local0 24))
-		(= sel_0 (- local1 20))
+	(method (init)
+		(= x (- local0 24))
+		(= y (- local1 20))
 		(if (== local2 6)
-			(= sel_3 0)
+			(= loop 0)
 		else
-			(= sel_3 1)
+			(= loop 1)
 		)
-		(super sel_110: &rest)
+		(super init: &rest)
 		(if (== local2 6)
 			(poetryBook
-				sel_110:
-				sel_7: (+ sel_1 4)
-				sel_6: (+ sel_0 6)
-				sel_8: (+ sel_0 32)
-				sel_9: (+ sel_1 16)
+				init:
+				nsLeft: (+ x 4)
+				nsTop: (+ y 6)
+				nsBottom: (+ y 32)
+				nsRight: (+ x 16)
 			)
 		)
 		(if (== local2 7)
 			(heimlichBook
-				sel_110:
-				sel_7: (+ sel_1 16)
-				sel_6: (+ sel_0 6)
-				sel_8: (+ sel_0 32)
-				sel_9: (+ sel_1 28)
+				init:
+				nsLeft: (+ x 16)
+				nsTop: (+ y 6)
+				nsBottom: (+ y 32)
+				nsRight: (+ x 28)
 			)
 		)
 	)
 
-	(method (sel_300 param1)
+	(method (doVerb param1)
 		(switch param1
 			(1
-				(gMessager sel_295: (+ 13 local2) 1)
+				(gMessager say: (+ 13 local2) 1)
 			)
 			(4
-				(gMessager sel_295: 29 4)
+				(gMessager say: 29 4)
 			)
 			(else
-				(super sel_300: param1)
+				(super doVerb: param1)
 			)
 		)
 	)
@@ -1069,28 +1069,28 @@
 
 (instance inClosedBook of Inset
 	(properties
-		sel_20 {inClosedBook}
-		sel_2 650
-		sel_3 5
-		sel_4 1
-		sel_1 88
-		sel_0 65
-		sel_570 1
+		name {inClosedBook}
+		view 650
+		loop 5
+		cel 1
+		x 88
+		y 65
+		disposeNotOnMe 1
 	)
 
-	(method (sel_300 param1)
+	(method (doVerb param1)
 		(switch param1
 			(1
-				(gMessager sel_295: 32 1)
+				(gMessager say: 32 1)
 			)
 			(4
-				(gCurRoom sel_422: inOpenBook)
+				(gCurRoom setInset: inOpenBook)
 			)
 			(8
-				(gMessager sel_295: 32 8)
+				(gMessager say: 32 8)
 			)
 			(else
-				(super sel_300: param1)
+				(super doVerb: param1)
 			)
 		)
 	)
@@ -1098,41 +1098,41 @@
 
 (instance inOpenBook of Inset
 	(properties
-		sel_20 {inOpenBook}
-		sel_2 650
-		sel_3 5
-		sel_1 90
-		sel_0 67
-		sel_570 1
+		name {inOpenBook}
+		view 650
+		loop 5
+		x 90
+		y 67
+		disposeNotOnMe 1
 	)
 
-	(method (sel_110)
-		(super sel_110: &rest)
-		(gCurRoom sel_146: sShortPause)
+	(method (init)
+		(super init: &rest)
+		(gCurRoom setScript: sShortPause)
 	)
 
-	(method (sel_111 param1)
-		(super sel_111:)
+	(method (dispose param1)
+		(super dispose:)
 		(if (and argc param1)
-			(gEgo sel_350: 17)
-			((ScriptID 21 0) sel_57: 786) ; addCluesCode
-			(gGame sel_87: 1 153)
+			(gEgo get: 17)
+			((ScriptID 21 0) doit: 786) ; addCluesCode
+			(gGame points: 1 153)
 		)
 	)
 
-	(method (sel_300 param1)
+	(method (doVerb param1)
 		(switch param1
 			(1
-				(gCurRoom sel_422: inGarter)
+				(gCurRoom setInset: inGarter)
 			)
 			(8
-				(gCurRoom sel_422: inGarter)
+				(gCurRoom setInset: inGarter)
 			)
 			(4
-				(self sel_111: 1)
+				(self dispose: 1)
 			)
 			(else
-				(super sel_300: param1)
+				(super doVerb: param1)
 			)
 		)
 	)
@@ -1140,37 +1140,37 @@
 
 (instance inGarter of Inset
 	(properties
-		sel_20 {inGarter}
-		sel_2 650
-		sel_3 2
-		sel_4 1
-		sel_1 92
-		sel_0 69
-		sel_570 1
+		name {inGarter}
+		view 650
+		loop 2
+		cel 1
+		x 92
+		y 69
+		disposeNotOnMe 1
 	)
 
-	(method (sel_111 param1)
-		(super sel_111:)
+	(method (dispose param1)
+		(super dispose:)
 		(if (and argc param1)
-			(gEgo sel_350: 17)
-			((ScriptID 21 0) sel_57: 786) ; addCluesCode
-			(gGame sel_87: 1 153)
+			(gEgo get: 17)
+			((ScriptID 21 0) doit: 786) ; addCluesCode
+			(gGame points: 1 153)
 		)
 	)
 
-	(method (sel_300 param1)
+	(method (doVerb param1)
 		(switch param1
 			(1
-				(gMessager sel_295: 12 1 0 0 0 15)
+				(gMessager say: 12 1 0 0 0 15)
 			)
 			(8
-				(gMessager sel_295: 12 8 0 0 0 15)
+				(gMessager say: 12 8 0 0 0 15)
 			)
 			(4
-				(self sel_111: 1)
+				(self dispose: 1)
 			)
 			(else
-				(super sel_300: param1)
+				(super doVerb: param1)
 			)
 		)
 	)
@@ -1178,13 +1178,13 @@
 
 (class MyFeature of Feature
 	(properties
-		sel_20 {MyFeature}
+		name {MyFeature}
 	)
 
-	(method (sel_218 param1 param2 &tmp temp0 temp1)
+	(method (onMe param1 param2 &tmp temp0 temp1)
 		(if (IsObject param1)
-			(= temp0 (param1 sel_1:))
-			(= temp1 (param1 sel_0:))
+			(= temp0 (param1 x:))
+			(= temp1 (param1 y:))
 		else
 			(= temp0 param1)
 			(= temp1 param2)
@@ -1193,26 +1193,26 @@
 		(= local1 temp1)
 		(return
 			(cond
-				((IsObject sel_302)
-					(AvoidPath temp0 temp1 sel_302)
+				((IsObject onMeCheck)
+					(AvoidPath temp0 temp1 onMeCheck)
 				)
 				(
 					(or
 						(not
-							(if (or sel_7 sel_9 sel_6)
+							(if (or nsLeft nsRight nsTop)
 							else
-								sel_8
+								nsBottom
 							)
 						)
 						(and
-							(<= sel_7 temp0)
-							(<= temp0 sel_9)
-							(<= sel_6 temp1)
-							(<= temp1 sel_8)
+							(<= nsLeft temp0)
+							(<= temp0 nsRight)
+							(<= nsTop temp1)
+							(<= temp1 nsBottom)
 						)
 					)
-					(if (!= sel_302 26505)
-						(& sel_302 (OnControl CONTROL temp0 temp1))
+					(if (!= onMeCheck 26505)
+						(& onMeCheck (OnControl CONTROL temp0 temp1))
 					else
 						1
 					)
@@ -1224,31 +1224,31 @@
 
 (instance secretButton of Feature
 	(properties
-		sel_20 {secretButton}
-		sel_1 193
-		sel_0 81
-		sel_82 10
-		sel_213 44
-		sel_6 66
-		sel_7 189
-		sel_8 77
-		sel_9 198
-		sel_303 188
-		sel_304 110
+		name {secretButton}
+		x 193
+		y 81
+		z 10
+		noun 44
+		nsTop 66
+		nsLeft 189
+		nsBottom 77
+		nsRight 198
+		approachX 188
+		approachY 110
 	)
 
-	(method (sel_300 param1)
+	(method (doVerb param1)
 		(switch param1
 			(4
-				(if (MuseumRgn sel_646:)
-					(gGame sel_587:)
-					(gCurRoom sel_146: sEnterSecretPassage)
+				(if (MuseumRgn nobodyAround:)
+					(gGame handsOff:)
+					(gCurRoom setScript: sEnterSecretPassage)
 				else
 					(return 1)
 				)
 			)
 			(else
-				(super sel_300: param1)
+				(super doVerb: param1)
 			)
 		)
 	)
@@ -1256,30 +1256,30 @@
 
 (instance poetryBook of Feature
 	(properties
-		sel_20 {poetryBook}
-		sel_0 200
+		name {poetryBook}
+		y 200
 	)
 
-	(method (sel_307))
+	(method (initialize))
 
-	(method (sel_300 param1)
+	(method (doVerb param1)
 		(switch param1
 			(1
-				(if (gEgo sel_238: 17)
-					(gMessager sel_295: 32 1 3)
-					(inBooks sel_111:)
+				(if (gEgo has: 17)
+					(gMessager say: 32 1 3)
+					(inBooks dispose:)
 				else
-					(gMessager sel_295: 32 1 6)
+					(gMessager say: 32 1 6)
 				)
 			)
 			(4
 				(cond
-					((gEgo sel_238: 17)
-						(gMessager sel_295: 32 4 3)
-						(inBooks sel_111:)
+					((gEgo has: 17)
+						(gMessager say: 32 4 3)
+						(inBooks dispose:)
 					)
-					((MuseumRgn sel_646:)
-						(gCurRoom sel_422: inClosedBook)
+					((MuseumRgn nobodyAround:)
+						(gCurRoom setInset: inClosedBook)
 					)
 					(else
 						(return 1)
@@ -1288,12 +1288,12 @@
 			)
 			(8
 				(cond
-					((gEgo sel_238: 17)
-						(gMessager sel_295: 32 4 3)
-						(inBooks sel_111:)
+					((gEgo has: 17)
+						(gMessager say: 32 4 3)
+						(inBooks dispose:)
 					)
-					((MuseumRgn sel_646:)
-						(gCurRoom sel_422: inClosedBook)
+					((MuseumRgn nobodyAround:)
+						(gCurRoom setInset: inClosedBook)
 					)
 					(else
 						(return 1)
@@ -1301,7 +1301,7 @@
 				)
 			)
 			(else
-				(super sel_300: param1)
+				(super doVerb: param1)
 			)
 		)
 	)
@@ -1309,222 +1309,222 @@
 
 (instance heimlichBook of Feature
 	(properties
-		sel_20 {heimlichBook}
-		sel_0 200
-		sel_213 31
+		name {heimlichBook}
+		y 200
+		noun 31
 	)
 )
 
 (instance chair of Feature
 	(properties
-		sel_20 {chair}
-		sel_1 216
-		sel_0 161
-		sel_213 1
-		sel_6 146
-		sel_7 201
-		sel_8 176
-		sel_9 232
-		sel_301 40
+		name {chair}
+		x 216
+		y 161
+		noun 1
+		nsTop 146
+		nsLeft 201
+		nsBottom 176
+		nsRight 232
+		sightAngle 40
 	)
 )
 
 (instance shelf of Feature
 	(properties
-		sel_20 {shelf}
-		sel_1 24
-		sel_0 139
-		sel_213 2
-		sel_6 90
-		sel_8 189
-		sel_9 49
-		sel_301 40
+		name {shelf}
+		x 24
+		y 139
+		noun 2
+		nsTop 90
+		nsBottom 189
+		nsRight 49
+		sightAngle 40
 	)
 )
 
 (instance mace of Feature
 	(properties
-		sel_20 {mace}
-		sel_1 12
-		sel_0 68
-		sel_213 3
-		sel_6 52
-		sel_8 84
-		sel_9 24
-		sel_301 40
+		name {mace}
+		x 12
+		y 68
+		noun 3
+		nsTop 52
+		nsBottom 84
+		nsRight 24
+		sightAngle 40
 	)
 )
 
 (instance maceChain of Feature
 	(properties
-		sel_20 {maceChain}
-		sel_1 4
-		sel_0 26
-		sel_213 3
-		sel_6 -1
-		sel_8 53
-		sel_9 9
-		sel_301 40
+		name {maceChain}
+		x 4
+		y 26
+		noun 3
+		nsTop -1
+		nsBottom 53
+		nsRight 9
+		sightAngle 40
 	)
 )
 
 (instance leftWeapon of Feature
 	(properties
-		sel_20 {leftWeapon}
-		sel_1 21
-		sel_0 28
-		sel_213 4
-		sel_7 9
-		sel_8 56
-		sel_9 33
-		sel_301 40
+		name {leftWeapon}
+		x 21
+		y 28
+		noun 4
+		nsLeft 9
+		nsBottom 56
+		nsRight 33
+		sightAngle 40
 	)
 )
 
 (instance medalsA of Feature
 	(properties
-		sel_20 {medalsA}
-		sel_1 51
-		sel_0 54
-		sel_213 5
-		sel_6 36
-		sel_7 43
-		sel_8 73
-		sel_9 60
-		sel_301 40
+		name {medalsA}
+		x 51
+		y 54
+		noun 5
+		nsTop 36
+		nsLeft 43
+		nsBottom 73
+		nsRight 60
+		sightAngle 40
 	)
 )
 
 (instance medalsB of Feature
 	(properties
-		sel_20 {medalsB}
-		sel_1 187
-		sel_0 65
-		sel_213 6
-		sel_6 51
-		sel_7 177
-		sel_8 75
-		sel_9 197
-		sel_301 40
+		name {medalsB}
+		x 187
+		y 65
+		noun 6
+		nsTop 51
+		nsLeft 177
+		nsBottom 75
+		nsRight 197
+		sightAngle 40
 	)
 )
 
 (instance desk of Feature
 	(properties
-		sel_20 {desk}
-		sel_1 140
-		sel_0 127
-		sel_213 7
-		sel_6 106
-		sel_7 83
-		sel_8 148
-		sel_9 198
-		sel_301 40
-		sel_302 4
+		name {desk}
+		x 140
+		y 127
+		noun 7
+		nsTop 106
+		nsLeft 83
+		nsBottom 148
+		nsRight 198
+		sightAngle 40
+		onMeCheck 4
 	)
 )
 
 (instance light of Feature
 	(properties
-		sel_20 {light}
-		sel_1 160
-		sel_0 25
-		sel_213 8
-		sel_6 -1
-		sel_7 144
-		sel_8 51
-		sel_9 179
-		sel_301 40
-		sel_302 16
+		name {light}
+		x 160
+		y 25
+		noun 8
+		nsTop -1
+		nsLeft 144
+		nsBottom 51
+		nsRight 179
+		sightAngle 40
+		onMeCheck 16
 	)
 )
 
 (instance chairWolf of Feature
 	(properties
-		sel_20 {chairWolf}
-		sel_1 122
-		sel_0 120
-		sel_82 27
-		sel_213 9
-		sel_6 87
-		sel_7 111
-		sel_8 100
-		sel_9 134
-		sel_301 40
-		sel_302 8
+		name {chairWolf}
+		x 122
+		y 120
+		z 27
+		noun 9
+		nsTop 87
+		nsLeft 111
+		nsBottom 100
+		nsRight 134
+		sightAngle 40
+		onMeCheck 8
 	)
 )
 
 (instance lamp of Feature
 	(properties
-		sel_20 {lamp}
-		sel_1 114
-		sel_0 120
-		sel_82 18
-		sel_213 10
-		sel_6 95
-		sel_7 108
-		sel_8 109
-		sel_9 121
-		sel_301 40
+		name {lamp}
+		x 114
+		y 120
+		z 18
+		noun 10
+		nsTop 95
+		nsLeft 108
+		nsBottom 109
+		nsRight 121
+		sightAngle 40
 	)
 )
 
 (instance intercom of Feature
 	(properties
-		sel_20 {intercom}
-		sel_1 168
-		sel_0 120
-		sel_82 22
-		sel_213 11
-		sel_6 94
-		sel_7 160
-		sel_8 102
-		sel_9 176
-		sel_301 40
+		name {intercom}
+		x 168
+		y 120
+		z 22
+		noun 11
+		nsTop 94
+		nsLeft 160
+		nsBottom 102
+		nsRight 176
+		sightAngle 40
 	)
 )
 
 (instance blotter of Feature
 	(properties
-		sel_20 {blotter}
-		sel_1 142
-		sel_0 120
-		sel_82 18
-		sel_213 12
-		sel_6 96
-		sel_7 121
-		sel_8 109
-		sel_9 163
-		sel_301 40
-		sel_302 32
+		name {blotter}
+		x 142
+		y 120
+		z 18
+		noun 12
+		nsTop 96
+		nsLeft 121
+		nsBottom 109
+		nsRight 163
+		sightAngle 40
+		onMeCheck 32
 	)
 )
 
 (instance shelf1 of MyFeature
 	(properties
-		sel_20 {shelf1}
-		sel_1 112
-		sel_0 27
-		sel_213 13
-		sel_6 20
-		sel_7 69
-		sel_8 35
-		sel_9 156
-		sel_301 40
-		sel_302 64
-		sel_303 123
-		sel_304 115
+		name {shelf1}
+		x 112
+		y 27
+		noun 13
+		nsTop 20
+		nsLeft 69
+		nsBottom 35
+		nsRight 156
+		sightAngle 40
+		onMeCheck 64
+		approachX 123
+		approachY 115
 	)
 
-	(method (sel_300 param1)
+	(method (doVerb param1)
 		(switch param1
 			(1
 				(= local2 0)
-				(gCurRoom sel_422: inBooks)
+				(gCurRoom setInset: inBooks)
 			)
 			(else
-				(super sel_300: param1)
+				(super doVerb: param1)
 			)
 		)
 	)
@@ -1532,28 +1532,28 @@
 
 (instance shelf2 of MyFeature
 	(properties
-		sel_20 {shelf2}
-		sel_1 112
-		sel_0 37
-		sel_213 14
-		sel_6 31
-		sel_7 69
-		sel_8 44
-		sel_9 156
-		sel_301 40
-		sel_302 128
-		sel_303 123
-		sel_304 115
+		name {shelf2}
+		x 112
+		y 37
+		noun 14
+		nsTop 31
+		nsLeft 69
+		nsBottom 44
+		nsRight 156
+		sightAngle 40
+		onMeCheck 128
+		approachX 123
+		approachY 115
 	)
 
-	(method (sel_300 param1)
+	(method (doVerb param1)
 		(switch param1
 			(1
 				(= local2 1)
-				(gCurRoom sel_422: inBooks)
+				(gCurRoom setInset: inBooks)
 			)
 			(else
-				(super sel_300: param1)
+				(super doVerb: param1)
 			)
 		)
 	)
@@ -1561,27 +1561,27 @@
 
 (instance shelf3 of MyFeature
 	(properties
-		sel_20 {shelf3}
-		sel_1 106
-		sel_0 47
-		sel_213 15
-		sel_6 42
-		sel_7 69
-		sel_8 52
-		sel_9 144
-		sel_301 40
-		sel_303 123
-		sel_304 115
+		name {shelf3}
+		x 106
+		y 47
+		noun 15
+		nsTop 42
+		nsLeft 69
+		nsBottom 52
+		nsRight 144
+		sightAngle 40
+		approachX 123
+		approachY 115
 	)
 
-	(method (sel_300 param1)
+	(method (doVerb param1)
 		(switch param1
 			(1
 				(= local2 2)
-				(gCurRoom sel_422: inBooks)
+				(gCurRoom setInset: inBooks)
 			)
 			(else
-				(super sel_300: param1)
+				(super doVerb: param1)
 			)
 		)
 	)
@@ -1589,27 +1589,27 @@
 
 (instance shelf4 of MyFeature
 	(properties
-		sel_20 {shelf4}
-		sel_1 112
-		sel_0 57
-		sel_213 16
-		sel_6 52
-		sel_7 69
-		sel_8 63
-		sel_9 156
-		sel_301 40
-		sel_303 123
-		sel_304 115
+		name {shelf4}
+		x 112
+		y 57
+		noun 16
+		nsTop 52
+		nsLeft 69
+		nsBottom 63
+		nsRight 156
+		sightAngle 40
+		approachX 123
+		approachY 115
 	)
 
-	(method (sel_300 param1)
+	(method (doVerb param1)
 		(switch param1
 			(1
 				(= local2 3)
-				(gCurRoom sel_422: inBooks)
+				(gCurRoom setInset: inBooks)
 			)
 			(else
-				(super sel_300: param1)
+				(super doVerb: param1)
 			)
 		)
 	)
@@ -1617,27 +1617,27 @@
 
 (instance shelf5 of MyFeature
 	(properties
-		sel_20 {shelf5}
-		sel_1 112
-		sel_0 68
-		sel_213 17
-		sel_6 64
-		sel_7 69
-		sel_8 72
-		sel_9 156
-		sel_301 40
-		sel_303 123
-		sel_304 115
+		name {shelf5}
+		x 112
+		y 68
+		noun 17
+		nsTop 64
+		nsLeft 69
+		nsBottom 72
+		nsRight 156
+		sightAngle 40
+		approachX 123
+		approachY 115
 	)
 
-	(method (sel_300 param1)
+	(method (doVerb param1)
 		(switch param1
 			(1
 				(= local2 4)
-				(gCurRoom sel_422: inBooks)
+				(gCurRoom setInset: inBooks)
 			)
 			(else
-				(super sel_300: param1)
+				(super doVerb: param1)
 			)
 		)
 	)
@@ -1645,27 +1645,27 @@
 
 (instance shelf6a of MyFeature
 	(properties
-		sel_20 {shelf6a}
-		sel_1 84
-		sel_0 81
-		sel_213 18
-		sel_6 76
-		sel_7 70
-		sel_8 86
-		sel_9 98
-		sel_301 40
-		sel_303 123
-		sel_304 115
+		name {shelf6a}
+		x 84
+		y 81
+		noun 18
+		nsTop 76
+		nsLeft 70
+		nsBottom 86
+		nsRight 98
+		sightAngle 40
+		approachX 123
+		approachY 115
 	)
 
-	(method (sel_300 param1)
+	(method (doVerb param1)
 		(switch param1
 			(1
 				(= local2 5)
-				(gCurRoom sel_422: inBooks)
+				(gCurRoom setInset: inBooks)
 			)
 			(else
-				(super sel_300: param1)
+				(super doVerb: param1)
 			)
 		)
 	)
@@ -1673,27 +1673,27 @@
 
 (instance shelf6b of MyFeature
 	(properties
-		sel_20 {shelf6b}
-		sel_1 107
-		sel_0 80
-		sel_213 19
-		sel_6 76
-		sel_7 98
-		sel_8 85
-		sel_9 117
-		sel_301 40
-		sel_303 123
-		sel_304 115
+		name {shelf6b}
+		x 107
+		y 80
+		noun 19
+		nsTop 76
+		nsLeft 98
+		nsBottom 85
+		nsRight 117
+		sightAngle 40
+		approachX 123
+		approachY 115
 	)
 
-	(method (sel_300 param1)
+	(method (doVerb param1)
 		(switch param1
 			(1
 				(= local2 6)
-				(gCurRoom sel_422: inBooks)
+				(gCurRoom setInset: inBooks)
 			)
 			(else
-				(super sel_300: param1)
+				(super doVerb: param1)
 			)
 		)
 	)
@@ -1701,27 +1701,27 @@
 
 (instance shelf6c of MyFeature
 	(properties
-		sel_20 {shelf6c}
-		sel_1 127
-		sel_0 78
-		sel_213 20
-		sel_6 74
-		sel_7 119
-		sel_8 83
-		sel_9 135
-		sel_301 40
-		sel_303 123
-		sel_304 115
+		name {shelf6c}
+		x 127
+		y 78
+		noun 20
+		nsTop 74
+		nsLeft 119
+		nsBottom 83
+		nsRight 135
+		sightAngle 40
+		approachX 123
+		approachY 115
 	)
 
-	(method (sel_300 param1)
+	(method (doVerb param1)
 		(switch param1
 			(1
 				(= local2 7)
-				(gCurRoom sel_422: inBooks)
+				(gCurRoom setInset: inBooks)
 			)
 			(else
-				(super sel_300: param1)
+				(super doVerb: param1)
 			)
 		)
 	)
@@ -1729,27 +1729,27 @@
 
 (instance shelf6d of MyFeature
 	(properties
-		sel_20 {shelf6d}
-		sel_1 145
-		sel_0 78
-		sel_213 21
-		sel_6 74
-		sel_7 136
-		sel_8 83
-		sel_9 154
-		sel_301 40
-		sel_303 123
-		sel_304 115
+		name {shelf6d}
+		x 145
+		y 78
+		noun 21
+		nsTop 74
+		nsLeft 136
+		nsBottom 83
+		nsRight 154
+		sightAngle 40
+		approachX 123
+		approachY 115
 	)
 
-	(method (sel_300 param1)
+	(method (doVerb param1)
 		(switch param1
 			(1
 				(= local2 8)
-				(gCurRoom sel_422: inBooks)
+				(gCurRoom setInset: inBooks)
 			)
 			(else
-				(super sel_300: param1)
+				(super doVerb: param1)
 			)
 		)
 	)
@@ -1757,28 +1757,28 @@
 
 (instance shelf7 of MyFeature
 	(properties
-		sel_20 {shelf7}
-		sel_1 111
-		sel_0 89
-		sel_213 22
-		sel_6 82
-		sel_7 68
-		sel_8 96
-		sel_9 155
-		sel_301 40
-		sel_302 512
-		sel_303 123
-		sel_304 115
+		name {shelf7}
+		x 111
+		y 89
+		noun 22
+		nsTop 82
+		nsLeft 68
+		nsBottom 96
+		nsRight 155
+		sightAngle 40
+		onMeCheck 512
+		approachX 123
+		approachY 115
 	)
 
-	(method (sel_300 param1)
+	(method (doVerb param1)
 		(switch param1
 			(1
 				(= local2 9)
-				(gCurRoom sel_422: inBooks)
+				(gCurRoom setInset: inBooks)
 			)
 			(else
-				(super sel_300: param1)
+				(super doVerb: param1)
 			)
 		)
 	)
@@ -1786,28 +1786,28 @@
 
 (instance shelf8 of MyFeature
 	(properties
-		sel_20 {shelf8}
-		sel_1 111
-		sel_0 99
-		sel_213 23
-		sel_6 89
-		sel_7 68
-		sel_8 110
-		sel_9 155
-		sel_301 40
-		sel_302 256
-		sel_303 123
-		sel_304 115
+		name {shelf8}
+		x 111
+		y 99
+		noun 23
+		nsTop 89
+		nsLeft 68
+		nsBottom 110
+		nsRight 155
+		sightAngle 40
+		onMeCheck 256
+		approachX 123
+		approachY 115
 	)
 
-	(method (sel_300 param1)
+	(method (doVerb param1)
 		(switch param1
 			(1
 				(= local2 10)
-				(gCurRoom sel_422: inBooks)
+				(gCurRoom setInset: inBooks)
 			)
 			(else
-				(super sel_300: param1)
+				(super doVerb: param1)
 			)
 		)
 	)
@@ -1815,31 +1815,31 @@
 
 (instance weapons1 of Feature
 	(properties
-		sel_20 {weapons1}
-		sel_1 241
-		sel_0 60
-		sel_213 24
-		sel_6 43
-		sel_7 200
-		sel_8 69
-		sel_9 217
-		sel_301 40
+		name {weapons1}
+		x 241
+		y 60
+		noun 24
+		nsTop 43
+		nsLeft 200
+		nsBottom 69
+		nsRight 217
+		sightAngle 40
 	)
 
-	(method (sel_300 param1)
+	(method (doVerb param1)
 		(switch param1
 			(4
-				(if (MuseumRgn sel_646:)
-					(gCurRoom sel_146: sShocked 0 0)
+				(if (MuseumRgn nobodyAround:)
+					(gCurRoom setScript: sShocked 0 0)
 				else
 					(return 1)
 				)
 			)
 			(8
-				(gMessager sel_295: 39 8)
+				(gMessager say: 39 8)
 			)
 			(else
-				(super sel_300: param1)
+				(super doVerb: param1)
 			)
 		)
 	)
@@ -1847,31 +1847,31 @@
 
 (instance weapons2 of Feature
 	(properties
-		sel_20 {weapons2}
-		sel_1 21
-		sel_0 28
-		sel_213 36
-		sel_6 40
-		sel_7 215
-		sel_8 62
-		sel_9 230
-		sel_301 40
+		name {weapons2}
+		x 21
+		y 28
+		noun 36
+		nsTop 40
+		nsLeft 215
+		nsBottom 62
+		nsRight 230
+		sightAngle 40
 	)
 
-	(method (sel_300 param1)
+	(method (doVerb param1)
 		(switch param1
 			(4
-				(if (MuseumRgn sel_646:)
-					(gCurRoom sel_146: sShocked 0 1)
+				(if (MuseumRgn nobodyAround:)
+					(gCurRoom setScript: sShocked 0 1)
 				else
 					(return 1)
 				)
 			)
 			(8
-				(gMessager sel_295: 39 8)
+				(gMessager say: 39 8)
 			)
 			(else
-				(super sel_300: param1)
+				(super doVerb: param1)
 			)
 		)
 	)
@@ -1879,31 +1879,31 @@
 
 (instance weapons3 of Feature
 	(properties
-		sel_20 {weapons3}
-		sel_1 21
-		sel_0 28
-		sel_213 37
-		sel_6 37
-		sel_7 231
-		sel_8 83
-		sel_9 245
-		sel_301 40
+		name {weapons3}
+		x 21
+		y 28
+		noun 37
+		nsTop 37
+		nsLeft 231
+		nsBottom 83
+		nsRight 245
+		sightAngle 40
 	)
 
-	(method (sel_300 param1)
+	(method (doVerb param1)
 		(switch param1
 			(4
-				(if (MuseumRgn sel_646:)
-					(gCurRoom sel_146: sShocked 0 2)
+				(if (MuseumRgn nobodyAround:)
+					(gCurRoom setScript: sShocked 0 2)
 				else
 					(return 1)
 				)
 			)
 			(8
-				(gMessager sel_295: 39 8)
+				(gMessager say: 39 8)
 			)
 			(else
-				(super sel_300: param1)
+				(super doVerb: param1)
 			)
 		)
 	)
@@ -1911,31 +1911,31 @@
 
 (instance weapons4 of Feature
 	(properties
-		sel_20 {weapons4}
-		sel_1 21
-		sel_0 28
-		sel_213 38
-		sel_6 36
-		sel_7 246
-		sel_8 73
-		sel_9 278
-		sel_301 40
+		name {weapons4}
+		x 21
+		y 28
+		noun 38
+		nsTop 36
+		nsLeft 246
+		nsBottom 73
+		nsRight 278
+		sightAngle 40
 	)
 
-	(method (sel_300 param1)
+	(method (doVerb param1)
 		(switch param1
 			(4
-				(if (MuseumRgn sel_646:)
-					(gCurRoom sel_146: sShocked 0 3)
+				(if (MuseumRgn nobodyAround:)
+					(gCurRoom setScript: sShocked 0 3)
 				else
 					(return 1)
 				)
 			)
 			(8
-				(gMessager sel_295: 39 8)
+				(gMessager say: 39 8)
 			)
 			(else
-				(super sel_300: param1)
+				(super doVerb: param1)
 			)
 		)
 	)
@@ -1943,31 +1943,31 @@
 
 (instance weaponsB of Feature
 	(properties
-		sel_20 {weaponsB}
-		sel_1 305
-		sel_0 53
-		sel_213 26
-		sel_6 27
-		sel_7 297
-		sel_8 115
-		sel_9 314
-		sel_301 40
+		name {weaponsB}
+		x 305
+		y 53
+		noun 26
+		nsTop 27
+		nsLeft 297
+		nsBottom 115
+		nsRight 314
+		sightAngle 40
 	)
 
-	(method (sel_300 param1)
+	(method (doVerb param1)
 		(switch param1
 			(4
-				(if (MuseumRgn sel_646:)
-					(gCurRoom sel_146: sShocked 0 4)
+				(if (MuseumRgn nobodyAround:)
+					(gCurRoom setScript: sShocked 0 4)
 				else
 					(return 1)
 				)
 			)
 			(8
-				(gMessager sel_295: 39 8)
+				(gMessager say: 39 8)
 			)
 			(else
-				(super sel_300: param1)
+				(super doVerb: param1)
 			)
 		)
 	)
@@ -1975,33 +1975,33 @@
 
 (instance southExit of ExitFeature
 	(properties
-		sel_20 {southExit}
-		sel_6 185
-		sel_7 46
-		sel_8 189
-		sel_9 319
-		sel_33 11
-		sel_583 3
-		sel_213 42
+		name {southExit}
+		nsTop 185
+		nsLeft 46
+		nsBottom 189
+		nsRight 319
+		cursor 11
+		exitDir 3
+		noun 42
 	)
 )
 
 (instance eastExit of ExitFeature
 	(properties
-		sel_20 {eastExit}
-		sel_6 132
-		sel_7 315
-		sel_8 179
-		sel_9 319
-		sel_33 14
-		sel_583 2
-		sel_213 42
+		name {eastExit}
+		nsTop 132
+		nsLeft 315
+		nsBottom 179
+		nsRight 319
+		cursor 14
+		exitDir 2
+		noun 42
 	)
 )
 
 (instance sFX of Sound
 	(properties
-		sel_20 {sFX}
-		sel_99 1
+		name {sFX}
+		flags 1
 	)
 )

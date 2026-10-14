@@ -27,147 +27,147 @@
 
 (instance rm250 of LBRoom
 	(properties
-		sel_20 {rm250}
-		sel_213 14
-		sel_408 250
+		name {rm250}
+		noun 14
+		picture 250
 	)
 
-	(method (sel_110 &tmp [temp0 50])
+	(method (init &tmp [temp0 50])
 		(LoadMany rsVIEW 250 251 252 253 254)
 		(LoadMany rsSOUND 300 41 250 252)
-		(noise sel_40: 41 sel_99: 5 sel_39:)
-		(super sel_110:)
+		(noise number: 41 flags: 5 play:)
+		(super init:)
 		(proc0_8 1)
-		(gWalkHandler sel_129: gCurRoom)
-		(User sel_347: 1)
-		(laura sel_4: (if (gEgo sel_584:) 1 else 0) sel_317:)
-		(license sel_110:)
+		(gWalkHandler addToFront: gCurRoom)
+		(User canInput: 1)
+		(laura cel: (if (gEgo wearingGown:) 1 else 0) addToPic:)
+		(license init:)
 		(if (and (TimeCheck $0001) (IsFlag 125) (not (IsFlag 27)))
-			(trash1 sel_110:)
-			(trash2 sel_110:)
-			(trash3 sel_110:)
-			(trash4 sel_110:)
-			(trash5 sel_110:)
-			(cornerTrash sel_317:)
+			(trash1 init:)
+			(trash2 init:)
+			(trash3 init:)
+			(trash4 init:)
+			(trash5 init:)
+			(cornerTrash addToPic:)
 			(if
 				(and
-					(not (gEgo sel_584:))
-					(not (gEgo sel_238: 1))
-					(not (gEgo sel_238: 32))
+					(not (gEgo wearingGown:))
+					(not (gEgo has: 1))
+					(not (gEgo has: 32))
 				)
-				(ticket sel_110:)
+				(ticket init:)
 			)
-			(DDriver sel_317:)
+			(DDriver addToPic:)
 		else
-			(CDriver sel_317:)
+			(CDriver addToPic:)
 		)
-		(gGameMusic1 sel_40: 250)
-		(win1 sel_110: sel_313:)
-		(win2 sel_110: sel_313:)
-		(win3 sel_110: sel_313:)
-		(win4 sel_110: sel_313:)
-		(win5 sel_110: sel_313:)
-		(gNarrator sel_0: 120)
+		(gGameMusic1 number: 250)
+		(win1 init: stopUpd:)
+		(win2 init: stopUpd:)
+		(win3 init: stopUpd:)
+		(win4 init: stopUpd:)
+		(win5 init: stopUpd:)
+		(gNarrator y: 120)
 		(cond
-			((and (== gPrevRoomNum 300) (gEgo sel_584:))
-				(self sel_146: sACTBREAK)
+			((and (== gPrevRoomNum 300) (gEgo wearingGown:))
+				(self setScript: sACTBREAK)
 			)
-			((not (gEgo sel_238: 6))
-				(if (gCast sel_122: trash1)
-					(self sel_146: sNoPressPassD)
+			((not (gEgo has: 6))
+				(if (gCast contains: trash1)
+					(self setScript: sNoPressPassD)
 				else
-					(self sel_146: sNoPressPassC)
+					(self setScript: sNoPressPassC)
 				)
 			)
 			(else
-				(self sel_146: sHasPressPass)
+				(self setScript: sHasPressPass)
 			)
 		)
 	)
 
-	(method (sel_300 param1)
+	(method (doVerb param1)
 		(switch param1
 			(13
-				(gCurRoom sel_399: (if gPrevRoomNum gPrevRoomNum else 210))
+				(gCurRoom newRoom: (if gPrevRoomNum gPrevRoomNum else 210))
 			)
 			(else
-				(super sel_300: param1 &rest)
+				(super doVerb: param1 &rest)
 			)
 		)
 	)
 
-	(method (sel_399)
-		(if sel_365
-			(sel_365 sel_111:)
+	(method (newRoom)
+		(if inset
+			(inset dispose:)
 		)
-		(gWalkHandler sel_81: gCurRoom)
-		(if (gMessager sel_290:)
-			(gMessager sel_111:)
+		(gWalkHandler delete: gCurRoom)
+		(if (gMessager talkerList:)
+			(gMessager dispose:)
 		)
 		(proc0_8 0)
-		(super sel_399: &rest)
+		(super newRoom: &rest)
 	)
 )
 
 (instance sACTBREAK of Script
 	(properties
-		sel_20 {sACTBREAK}
+		name {sACTBREAK}
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
-				(gTheIconBar sel_233:)
+				(gTheIconBar disable:)
 				(proc27_2)
-				((ScriptID 21 1) sel_57: 1029) ; dropCluesCode
-				(win1 sel_161: Fwd)
-				(win2 sel_161: Fwd)
-				(win3 sel_161: Fwd)
-				(win4 sel_161: Fwd)
-				(win5 sel_161: Fwd)
-				(gGameMusic2 sel_173: 2 224 2400)
-				(= sel_136 1)
+				((ScriptID 21 1) doit: 1029) ; dropCluesCode
+				(win1 setCycle: Fwd)
+				(win2 setCycle: Fwd)
+				(win3 setCycle: Fwd)
+				(win4 setCycle: Fwd)
+				(win5 setCycle: Fwd)
+				(gGameMusic2 send: 2 224 2400)
+				(= cycles 1)
 			)
 			(1
-				(gGameMusic2 sel_173: 2 224 2800)
-				(= sel_136 1)
+				(gGameMusic2 send: 2 224 2800)
+				(= cycles 1)
 			)
 			(2
-				(gGameMusic2 sel_173: 2 224 3200)
-				(= sel_136 1)
+				(gGameMusic2 send: 2 224 3200)
+				(= cycles 1)
 			)
 			(3
-				(gGameMusic2 sel_173: 2 224 3600)
-				(= sel_136 1)
+				(gGameMusic2 send: 2 224 3600)
+				(= cycles 1)
 			)
 			(4
-				(gGameMusic2 sel_173: 2 224 4000)
-				(gGameMusic1 sel_40: 300 sel_3: 1 sel_99: 1 sel_39: self)
+				(gGameMusic2 send: 2 224 4000)
+				(gGameMusic1 number: 300 loop: 1 flags: 1 play: self)
 			)
 			(5
-				(gGameMusic2 sel_173: 2 224 3000)
-				(= sel_136 1)
+				(gGameMusic2 send: 2 224 3000)
+				(= cycles 1)
 			)
 			(6
-				(gGameMusic2 sel_173: 2 224 2000)
-				(= sel_136 1)
+				(gGameMusic2 send: 2 224 2000)
+				(= cycles 1)
 			)
 			(7
-				(gGameMusic2 sel_173: 2 224 1000)
-				(= sel_136 1)
+				(gGameMusic2 send: 2 224 1000)
+				(= cycles 1)
 			)
 			(8
-				(gGameMusic2 sel_173: 2 224 500)
-				(= sel_136 1)
+				(gGameMusic2 send: 2 224 500)
+				(= cycles 1)
 			)
 			(9
-				(gGameMusic2 sel_173: 2 224 0)
-				(= sel_136 5)
+				(gGameMusic2 send: 2 224 0)
+				(= cycles 5)
 			)
 			(10
-				(gGameMusic1 sel_170:)
-				(gGameMusic2 sel_170:)
-				(gCurRoom sel_399: 26)
+				(gGameMusic1 fade:)
+				(gGameMusic2 fade:)
+				(gCurRoom newRoom: 26)
 			)
 		)
 	)
@@ -175,34 +175,34 @@
 
 (instance sNoPressPassD of Script
 	(properties
-		sel_20 {sNoPressPassD}
+		name {sNoPressPassD}
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
-				(gGame sel_587:)
-				(User sel_347: 1)
-				(= sel_136 1)
+				(gGame handsOff:)
+				(User canInput: 1)
+				(= cycles 1)
 			)
 			(1
-				(gMessager sel_295: 1 0 9 1 self)
+				(gMessager say: 1 0 9 1 self)
 			)
 			(2
-				(gMessager sel_295: 1 0 10 1 self)
+				(gMessager say: 1 0 10 1 self)
 			)
 			(3
-				(gMessager sel_295: 1 0 9 2 self)
+				(gMessager say: 1 0 9 2 self)
 			)
 			(4
-				(gGame sel_588:)
-				(= sel_137 15)
+				(gGame handsOn:)
+				(= seconds 15)
 			)
 			(5
-				(gMessager sel_295: 1 0 9 3 self)
+				(gMessager say: 1 0 9 3 self)
 			)
 			(6
-				(gCurRoom sel_399: (if gPrevRoomNum gPrevRoomNum else 210))
+				(gCurRoom newRoom: (if gPrevRoomNum gPrevRoomNum else 210))
 			)
 		)
 	)
@@ -210,34 +210,34 @@
 
 (instance sNoPressPassC of Script
 	(properties
-		sel_20 {sNoPressPassC}
+		name {sNoPressPassC}
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
-				(gGame sel_587:)
-				(User sel_347: 1)
-				(= sel_136 1)
+				(gGame handsOff:)
+				(User canInput: 1)
+				(= cycles 1)
 			)
 			(1
-				(gMessager sel_295: 1 0 1 1 self)
+				(gMessager say: 1 0 1 1 self)
 			)
 			(2
-				(gMessager sel_295: 1 0 10 1 self)
+				(gMessager say: 1 0 10 1 self)
 			)
 			(3
-				(gMessager sel_295: 1 0 1 2 self)
+				(gMessager say: 1 0 1 2 self)
 			)
 			(4
-				(gGame sel_588:)
-				(= sel_137 15)
+				(gGame handsOn:)
+				(= seconds 15)
 			)
 			(5
-				(gMessager sel_295: 1 0 1 3 self)
+				(gMessager say: 1 0 1 3 self)
 			)
 			(6
-				(gCurRoom sel_399: (if gPrevRoomNum gPrevRoomNum else 210))
+				(gCurRoom newRoom: (if gPrevRoomNum gPrevRoomNum else 210))
 			)
 		)
 	)
@@ -245,35 +245,35 @@
 
 (instance sHasPressPass of Script
 	(properties
-		sel_20 {sHasPressPass}
+		name {sHasPressPass}
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
-				(gGame sel_587:)
-				(User sel_347: 1)
-				(= sel_136 1)
+				(gGame handsOff:)
+				(User canInput: 1)
+				(= cycles 1)
 			)
 			(1
 				(cond
-					((and (gCast sel_122: trash1) (not (IsFlag 26)))
-						(sel_42 sel_146: s1stTimeInDirtyTaxi self)
+					((and (gCast contains: trash1) (not (IsFlag 26)))
+						(client setScript: s1stTimeInDirtyTaxi self)
 					)
-					((gCast sel_122: trash1)
-						(gMessager sel_295: 1 0 7 6 self)
+					((gCast contains: trash1)
+						(gMessager say: 1 0 7 6 self)
 					)
-					((not (gCast sel_122: trash1))
-						(gMessager sel_295: 1 0 8 0 self)
+					((not (gCast contains: trash1))
+						(gMessager say: 1 0 8 0 self)
 					)
 					(else
-						(= sel_136 1)
+						(= cycles 1)
 					)
 				)
 			)
 			(2
-				(gGame sel_588:)
-				(self sel_111:)
+				(gGame handsOn:)
+				(self dispose:)
 			)
 		)
 	)
@@ -281,57 +281,57 @@
 
 (instance s1stTimeInDirtyTaxi of Script
 	(properties
-		sel_20 {s1stTimeInDirtyTaxi}
+		name {s1stTimeInDirtyTaxi}
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
-				(gGame sel_587:)
-				(User sel_347: 1)
-				(= sel_136 1)
+				(gGame handsOff:)
+				(User canInput: 1)
+				(= cycles 1)
 			)
 			(1
-				(gMessager sel_295: 1 0 7 1 self)
+				(gMessager say: 1 0 7 1 self)
 			)
 			(2
-				(gMessager sel_295: 1 0 7 2 self)
+				(gMessager say: 1 0 7 2 self)
 				(SetFlag 26)
 			)
 			(3
-				(= sel_141 0)
+				(= register 0)
 				(switch
 					(Print
-						sel_198: 16 0 0 0
-						sel_205: 1 15 0 0 1 5 18
-						sel_205: 2 15 0 0 2 5 48
-						sel_110:
+						addText: 16 0 0 0
+						addButton: 1 15 0 0 1 5 18
+						addButton: 2 15 0 0 2 5 48
+						init:
 					)
 					(1
-						(gMessager sel_295: 1 0 7 6 self)
+						(gMessager say: 1 0 7 6 self)
 					)
 					(2
-						(gMessager sel_295: 1 0 7 5 self)
-						(= sel_141 1)
+						(gMessager say: 1 0 7 5 self)
+						(= register 1)
 					)
 					(else
-						(= sel_136 1)
+						(= cycles 1)
 					)
 				)
 			)
 			(4
-				(= sel_137 1)
+				(= seconds 1)
 			)
 			(5
-				(if (== sel_141 1)
-					(gCurRoom sel_399: (if gPrevRoomNum gPrevRoomNum else 210))
+				(if (== register 1)
+					(gCurRoom newRoom: (if gPrevRoomNum gPrevRoomNum else 210))
 				else
-					(= sel_136 1)
+					(= cycles 1)
 				)
 			)
 			(6
-				(gGame sel_588:)
-				(self sel_111:)
+				(gGame handsOn:)
+				(self dispose:)
 			)
 		)
 	)
@@ -339,25 +339,25 @@
 
 (instance sWhereToBud of Script
 	(properties
-		sel_20 {sWhereToBud}
+		name {sWhereToBud}
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
-				(gGame sel_587:)
-				(User sel_347: 1)
-				(= sel_136 1)
+				(gGame handsOff:)
+				(User canInput: 1)
+				(= cycles 1)
 			)
 			(1
-				(if (not (gCast sel_122: trash1))
-					(gMessager sel_295: 5 11 8 0 self)
+				(if (not (gCast contains: trash1))
+					(gMessager say: 5 11 8 0 self)
 				else
-					(gMessager sel_295: 4 11 7 0 self)
+					(gMessager say: 4 11 7 0 self)
 				)
 			)
 			(2
-				(switch (gCurRoom sel_422: (ScriptID 20 0)) ; inNotebook
+				(switch (gCurRoom setInset: (ScriptID 20 0)) ; inNotebook
 					(513
 						(= local0 210)
 					)
@@ -382,10 +382,10 @@
 					(519
 						(= local2 1)
 						(= local0 250)
-						(if (not (gCast sel_122: trash1))
-							(gMessager sel_295: 17 14 8 0)
+						(if (not (gCast contains: trash1))
+							(gMessager say: 17 14 8 0)
 						else
-							(gMessager sel_295: 17 14 7 0)
+							(gMessager say: 17 14 7 0)
 						)
 					)
 					(-1
@@ -393,35 +393,35 @@
 					)
 					(else
 						(= local0 250)
-						(if (not (gCast sel_122: trash1))
-							(gMessager sel_295: 12 14 8 0)
+						(if (not (gCast contains: trash1))
+							(gMessager say: 12 14 8 0)
 						else
-							(gMessager sel_295: 12 14 7 0)
+							(gMessager say: 12 14 7 0)
 						)
 					)
 				)
-				(= sel_136 1)
+				(= cycles 1)
 			)
 			(3
 				(cond
 					((or (== local0 gPrevRoomNum) (== local0 gCurRoomNum))
-						(gGame sel_588:)
-						(= sel_136 1)
+						(gGame handsOn:)
+						(= cycles 1)
 					)
-					((not (gCast sel_122: trash1))
-						(self sel_146: sDoTakeOffFlight self)
+					((not (gCast contains: trash1))
+						(self setScript: sDoTakeOffFlight self)
 					)
 					(else
-						(self sel_146: sMoveBuildings self)
+						(self setScript: sMoveBuildings self)
 					)
 				)
 			)
 			(4
-				(gTheIconBar sel_177: 5)
+				(gTheIconBar enable: 5)
 				(if (!= local0 gCurRoomNum)
-					(gCurRoom sel_399: local0)
+					(gCurRoom newRoom: local0)
 				else
-					(self sel_111:)
+					(self dispose:)
 				)
 			)
 		)
@@ -430,103 +430,103 @@
 
 (instance sDoTakeOffFlight of Script
 	(properties
-		sel_20 {sDoTakeOffFlight}
+		name {sDoTakeOffFlight}
 	)
 
-	(method (sel_57)
+	(method (doit)
 		(if
 			(and
-				(== (self sel_29:) 9)
-				(== (gGameMusic1 sel_40:) 250)
-				(== (gGameMusic1 sel_165:) -1)
+				(== (self state:) 9)
+				(== (gGameMusic1 number:) 250)
+				(== (gGameMusic1 prevSignal:) -1)
 			)
-			(self sel_145:)
+			(self cue:)
 		)
-		(super sel_57:)
+		(super doit:)
 	)
 
-	(method (sel_144 param1 &tmp [temp0 50])
-		(switch (= sel_29 param1)
+	(method (changeState param1 &tmp [temp0 50])
+		(switch (= state param1)
 			(0
 				(SetFlag 125)
-				(gGame sel_587:)
-				(User sel_347: 1)
-				(= sel_136 1)
+				(gGame handsOff:)
+				(User canInput: 1)
+				(= cycles 1)
 			)
 			(1
-				(win1 sel_161: Fwd)
-				(win2 sel_161: Fwd)
-				(win3 sel_161: Fwd)
-				(win4 sel_161: Fwd)
-				(win5 sel_161: Fwd)
-				(= sel_136 1)
+				(win1 setCycle: Fwd)
+				(win2 setCycle: Fwd)
+				(win3 setCycle: Fwd)
+				(win4 setCycle: Fwd)
+				(win5 setCycle: Fwd)
+				(= cycles 1)
 			)
 			(2
-				(gGameMusic1 sel_40: 250 sel_3: 1 sel_99: 1 sel_39:)
-				(gGame sel_588:)
-				(gTheIconBar sel_233: 5 6 0)
-				(= sel_136 1)
+				(gGameMusic1 number: 250 loop: 1 flags: 1 play:)
+				(gGame handsOn:)
+				(gTheIconBar disable: 5 6 0)
+				(= cycles 1)
 			)
 			(3
-				(gGameMusic2 sel_173: 2 224 1000)
-				(= sel_136 1)
+				(gGameMusic2 send: 2 224 1000)
+				(= cycles 1)
 			)
 			(4
-				(gGameMusic2 sel_173: 2 224 2000)
-				(= sel_136 1)
+				(gGameMusic2 send: 2 224 2000)
+				(= cycles 1)
 			)
 			(5
-				(gGameMusic2 sel_173: 2 224 3000)
-				(= sel_136 1)
+				(gGameMusic2 send: 2 224 3000)
+				(= cycles 1)
 			)
 			(6
-				(gGameMusic2 sel_173: 2 224 4000)
-				((ScriptID 1902 13) sel_203: 1) ; Rocco
-				((ScriptID 1903 14) sel_203: 1) ; Bob
-				(= sel_141 (Random 11 17))
+				(gGameMusic2 send: 2 224 4000)
+				((ScriptID 1902 13) modeless: 1) ; Rocco
+				((ScriptID 1903 14) modeless: 1) ; Bob
+				(= register (Random 11 17))
 				(cond
-					((== sel_141 17)
-						(= sel_137 8)
+					((== register 17)
+						(= seconds 8)
 					)
-					((== sel_141 16)
-						(= sel_137 8)
+					((== register 16)
+						(= seconds 8)
 					)
 					(else
-						(gMessager sel_295: 10 0 sel_141 0 self)
+						(gMessager say: 10 0 register 0 self)
 					)
 				)
 			)
 			(7
-				(gGameMusic2 sel_173: 2 224 3000)
-				(= sel_136 1)
+				(gGameMusic2 send: 2 224 3000)
+				(= cycles 1)
 			)
 			(8
-				(gGameMusic2 sel_173: 2 224 2000)
-				(= sel_136 1)
+				(gGameMusic2 send: 2 224 2000)
+				(= cycles 1)
 			)
 			(9 0)
 			(10
-				(win1 sel_161: 0)
-				(win2 sel_161: 0)
-				(win3 sel_161: 0)
-				(win4 sel_161: 0)
-				(win5 sel_161: 0)
-				(gGameMusic2 sel_173: 2 224 1000)
-				(if (== sel_141 16)
-					(gMessager sel_295: 10 0 16 0 self)
+				(win1 setCycle: 0)
+				(win2 setCycle: 0)
+				(win3 setCycle: 0)
+				(win4 setCycle: 0)
+				(win5 setCycle: 0)
+				(gGameMusic2 send: 2 224 1000)
+				(if (== register 16)
+					(gMessager say: 10 0 16 0 self)
 				else
-					(= sel_141 0)
-					(= sel_136 1)
+					(= register 0)
+					(= cycles 1)
 				)
 			)
 			(11
-				(gGameMusic2 sel_173: 2 224 500)
-				(= sel_136 1)
+				(gGameMusic2 send: 2 224 500)
+				(= cycles 1)
 			)
 			(12
-				(gGameMusic2 sel_173: 2 224 0)
-				(gGame sel_588:)
-				(self sel_111:)
+				(gGameMusic2 send: 2 224 0)
+				(gGame handsOn:)
+				(self dispose:)
 			)
 		)
 	)
@@ -534,57 +534,57 @@
 
 (instance sMoveBuildings of Script
 	(properties
-		sel_20 {sMoveBuildings}
+		name {sMoveBuildings}
 	)
 
-	(method (sel_57)
+	(method (doit)
 		(if
 			(and
-				(== (self sel_29:) 6)
-				(== (gGameMusic1 sel_40:) 250)
-				(== (gGameMusic1 sel_165:) -1)
+				(== (self state:) 6)
+				(== (gGameMusic1 number:) 250)
+				(== (gGameMusic1 prevSignal:) -1)
 			)
-			(self sel_145:)
+			(self cue:)
 		)
-		(super sel_57:)
+		(super doit:)
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
-				(win1 sel_161: Fwd)
-				(win2 sel_161: Fwd)
-				(win3 sel_161: Fwd)
-				(win4 sel_161: Fwd)
-				(win5 sel_161: Fwd)
-				(= sel_136 1)
+				(win1 setCycle: Fwd)
+				(win2 setCycle: Fwd)
+				(win3 setCycle: Fwd)
+				(win4 setCycle: Fwd)
+				(win5 setCycle: Fwd)
+				(= cycles 1)
 			)
 			(1
-				(gGameMusic1 sel_40: 250 sel_3: 1 sel_99: 1 sel_39:)
-				(gGame sel_588:)
-				(gTheIconBar sel_233: 5 6 0)
-				(= sel_136 1)
+				(gGameMusic1 number: 250 loop: 1 flags: 1 play:)
+				(gGame handsOn:)
+				(gTheIconBar disable: 5 6 0)
+				(= cycles 1)
 			)
 			(2
-				(gGameMusic2 sel_173: 2 224 1000)
-				(= sel_136 1)
+				(gGameMusic2 send: 2 224 1000)
+				(= cycles 1)
 			)
 			(3
-				(gGameMusic2 sel_173: 2 224 2000)
-				(= sel_136 1)
+				(gGameMusic2 send: 2 224 2000)
+				(= cycles 1)
 			)
 			(4
-				(gGameMusic2 sel_173: 2 224 3000)
-				(= sel_136 1)
+				(gGameMusic2 send: 2 224 3000)
+				(= cycles 1)
 			)
 			(5
-				(gGameMusic2 sel_173: 2 224 4000)
-				(= sel_137 (Random 6 10))
+				(gGameMusic2 send: 2 224 4000)
+				(= seconds (Random 6 10))
 			)
 			(6 0)
 			(7
-				(self sel_111:)
-				(gGameMusic1 sel_170:)
+				(self dispose:)
+				(gGameMusic1 fade:)
 			)
 		)
 	)
@@ -592,74 +592,74 @@
 
 (instance laura of View
 	(properties
-		sel_20 {laura}
-		sel_0 100
-		sel_82 75
-		sel_2 251
-		sel_60 10
-		sel_14 4113
+		name {laura}
+		y 100
+		z 75
+		view 251
+		priority 10
+		signal 4113
 	)
 
-	(method (sel_300 param1)
+	(method (doVerb param1)
 		(if (== param1 13)
-			(gCurRoom sel_399: (if gPrevRoomNum gPrevRoomNum else 210))
+			(gCurRoom newRoom: (if gPrevRoomNum gPrevRoomNum else 210))
 		else
-			(gEgo sel_300: param1 &rest)
+			(gEgo doVerb: param1 &rest)
 		)
 	)
 )
 
 (instance DDriver of View
 	(properties
-		sel_20 {DDriver}
-		sel_1 232
-		sel_0 104
-		sel_213 4
-		sel_2 252
-		sel_3 1
-		sel_60 4
-		sel_14 6161
+		name {DDriver}
+		x 232
+		y 104
+		noun 4
+		view 252
+		loop 1
+		priority 4
+		signal 6161
 	)
 
-	(method (sel_300 param1 &tmp temp0)
+	(method (doVerb param1 &tmp temp0)
 		(switch param1
 			(1
-				(gMessager sel_295: 4 1 7 0)
+				(gMessager say: 4 1 7 0)
 			)
 			(4
-				(gMessager sel_295: 4 4 7 0)
+				(gMessager say: 4 4 7 0)
 			)
 			(13
-				(gCurRoom sel_399: (if gPrevRoomNum gPrevRoomNum else 210))
+				(gCurRoom newRoom: (if gPrevRoomNum gPrevRoomNum else 210))
 			)
 			(6
 				(cond
 					(local2
-						(gCurRoom sel_146: sWhereToBud)
+						(gCurRoom setScript: sWhereToBud)
 					)
 					(
 						(and
 							(<=
 								512
-								(= temp0 (gCurRoom sel_422: (ScriptID 20 0))) ; inNotebook
+								(= temp0 (gCurRoom setInset: (ScriptID 20 0))) ; inNotebook
 							)
 							(<= temp0 665)
 						)
-						(gMessager sel_295: 11 6 7 0)
+						(gMessager say: 11 6 7 0)
 					)
 					(else
-						(gMessager sel_295: 12 6 7 0)
+						(gMessager say: 12 6 7 0)
 					)
 				)
 			)
 			(2
-				(gMessager sel_295: 4 2 7 0)
+				(gMessager say: 4 2 7 0)
 			)
 			(11
-				(gCurRoom sel_146: sWhereToBud)
+				(gCurRoom setScript: sWhereToBud)
 			)
 			(else
-				(super sel_300: param1 &rest)
+				(super doVerb: param1 &rest)
 			)
 		)
 	)
@@ -667,54 +667,54 @@
 
 (instance CDriver of View
 	(properties
-		sel_20 {CDriver}
-		sel_1 232
-		sel_0 104
-		sel_213 5
-		sel_2 252
-		sel_60 4
-		sel_14 6161
+		name {CDriver}
+		x 232
+		y 104
+		noun 5
+		view 252
+		priority 4
+		signal 6161
 	)
 
-	(method (sel_300 param1 &tmp temp0)
+	(method (doVerb param1 &tmp temp0)
 		(switch param1
 			(1
-				(gMessager sel_295: 5 1 8 0)
+				(gMessager say: 5 1 8 0)
 			)
 			(4
-				(gMessager sel_295: 5 4 8 0)
+				(gMessager say: 5 4 8 0)
 			)
 			(6
 				(cond
 					(local2
-						(gCurRoom sel_146: sWhereToBud)
+						(gCurRoom setScript: sWhereToBud)
 					)
 					(
 						(and
 							(<=
 								512
-								(= temp0 (gCurRoom sel_422: (ScriptID 20 0))) ; inNotebook
+								(= temp0 (gCurRoom setInset: (ScriptID 20 0))) ; inNotebook
 							)
 							(<= temp0 665)
 						)
-						(gMessager sel_295: 11 6 8 0)
+						(gMessager say: 11 6 8 0)
 					)
 					(else
-						(gMessager sel_295: 12 6 8 0)
+						(gMessager say: 12 6 8 0)
 					)
 				)
 			)
 			(2
-				(gMessager sel_295: 5 2 8 0)
+				(gMessager say: 5 2 8 0)
 			)
 			(13
-				(gCurRoom sel_399: (if gPrevRoomNum gPrevRoomNum else 210))
+				(gCurRoom newRoom: (if gPrevRoomNum gPrevRoomNum else 210))
 			)
 			(11
-				(gCurRoom sel_146: sWhereToBud)
+				(gCurRoom setScript: sWhereToBud)
 			)
 			(else
-				(super sel_300: param1 &rest)
+				(super doVerb: param1 &rest)
 			)
 		)
 	)
@@ -722,23 +722,23 @@
 
 (instance win1 of Prop
 	(properties
-		sel_20 {win1}
-		sel_1 87
-		sel_0 96
-		sel_213 6
-		sel_2 253
-		sel_60 2
-		sel_14 17
-		sel_244 7
+		name {win1}
+		x 87
+		y 96
+		noun 6
+		view 253
+		priority 2
+		signal 17
+		cycleSpeed 7
 	)
 
-	(method (sel_300 param1)
+	(method (doVerb param1)
 		(switch param1
 			(13
-				(gCurRoom sel_399: (if gPrevRoomNum gPrevRoomNum else 210))
+				(gCurRoom newRoom: (if gPrevRoomNum gPrevRoomNum else 210))
 			)
 			(else
-				(super sel_300: param1 &rest)
+				(super doVerb: param1 &rest)
 			)
 		)
 	)
@@ -746,24 +746,24 @@
 
 (instance win2 of Prop
 	(properties
-		sel_20 {win2}
-		sel_1 141
-		sel_0 97
-		sel_213 6
-		sel_2 253
-		sel_3 1
-		sel_60 2
-		sel_14 16401
-		sel_244 7
+		name {win2}
+		x 141
+		y 97
+		noun 6
+		view 253
+		loop 1
+		priority 2
+		signal 16401
+		cycleSpeed 7
 	)
 
-	(method (sel_300 param1)
+	(method (doVerb param1)
 		(switch param1
 			(13
-				(gCurRoom sel_399: (if gPrevRoomNum gPrevRoomNum else 210))
+				(gCurRoom newRoom: (if gPrevRoomNum gPrevRoomNum else 210))
 			)
 			(else
-				(super sel_300: param1 &rest)
+				(super doVerb: param1 &rest)
 			)
 		)
 	)
@@ -771,23 +771,23 @@
 
 (instance win3 of Prop
 	(properties
-		sel_20 {win3}
-		sel_1 159
-		sel_0 92
-		sel_213 6
-		sel_2 254
-		sel_60 2
-		sel_14 17
-		sel_244 7
+		name {win3}
+		x 159
+		y 92
+		noun 6
+		view 254
+		priority 2
+		signal 17
+		cycleSpeed 7
 	)
 
-	(method (sel_300 param1)
+	(method (doVerb param1)
 		(switch param1
 			(13
-				(gCurRoom sel_399: (if gPrevRoomNum gPrevRoomNum else 210))
+				(gCurRoom newRoom: (if gPrevRoomNum gPrevRoomNum else 210))
 			)
 			(else
-				(super sel_300: param1 &rest)
+				(super doVerb: param1 &rest)
 			)
 		)
 	)
@@ -795,24 +795,24 @@
 
 (instance win4 of Prop
 	(properties
-		sel_20 {win4}
-		sel_1 213
-		sel_0 88
-		sel_213 6
-		sel_2 254
-		sel_3 1
-		sel_60 2
-		sel_14 17
-		sel_244 7
+		name {win4}
+		x 213
+		y 88
+		noun 6
+		view 254
+		loop 1
+		priority 2
+		signal 17
+		cycleSpeed 7
 	)
 
-	(method (sel_300 param1)
+	(method (doVerb param1)
 		(switch param1
 			(13
-				(gCurRoom sel_399: (if gPrevRoomNum gPrevRoomNum else 210))
+				(gCurRoom newRoom: (if gPrevRoomNum gPrevRoomNum else 210))
 			)
 			(else
-				(super sel_300: param1 &rest)
+				(super doVerb: param1 &rest)
 			)
 		)
 	)
@@ -820,24 +820,24 @@
 
 (instance win5 of Prop
 	(properties
-		sel_20 {win5}
-		sel_1 268
-		sel_0 89
-		sel_213 6
-		sel_2 254
-		sel_3 2
-		sel_60 2
-		sel_14 17
-		sel_244 7
+		name {win5}
+		x 268
+		y 89
+		noun 6
+		view 254
+		loop 2
+		priority 2
+		signal 17
+		cycleSpeed 7
 	)
 
-	(method (sel_300 param1)
+	(method (doVerb param1)
 		(switch param1
 			(13
-				(gCurRoom sel_399: (if gPrevRoomNum gPrevRoomNum else 210))
+				(gCurRoom newRoom: (if gPrevRoomNum gPrevRoomNum else 210))
 			)
 			(else
-				(super sel_300: param1 &rest)
+				(super doVerb: param1 &rest)
 			)
 		)
 	)
@@ -845,28 +845,28 @@
 
 (instance inTicket of Inset
 	(properties
-		sel_20 {inTicket}
-		sel_2 250
-		sel_1 190
-		sel_0 154
-		sel_570 1
-		sel_213 9
+		name {inTicket}
+		view 250
+		x 190
+		y 154
+		disposeNotOnMe 1
+		noun 9
 	)
 
-	(method (sel_300 param1)
+	(method (doVerb param1)
 		(switch param1
 			(4
-				((ScriptID 21 0) sel_57: 770) ; addCluesCode
-				(ticket sel_111:)
-				(inTicket sel_111:)
-				(gEgo sel_350: -1 1)
+				((ScriptID 21 0) doit: 770) ; addCluesCode
+				(ticket dispose:)
+				(inTicket dispose:)
+				(gEgo get: -1 1)
 				(SetFlag 27)
 			)
 			(13
-				(gCurRoom sel_399: (if gPrevRoomNum gPrevRoomNum else 210))
+				(gCurRoom newRoom: (if gPrevRoomNum gPrevRoomNum else 210))
 			)
 			(else
-				(super sel_300: param1 &rest)
+				(super doVerb: param1 &rest)
 			)
 		)
 	)
@@ -874,31 +874,31 @@
 
 (instance ticket of View
 	(properties
-		sel_20 {ticket}
-		sel_1 149
-		sel_0 178
-		sel_2 250
-		sel_3 2
-		sel_60 8
-		sel_14 16
+		name {ticket}
+		x 149
+		y 178
+		view 250
+		loop 2
+		priority 8
+		signal 16
 	)
 
-	(method (sel_300 param1 param2)
+	(method (doVerb param1 param2)
 		(switch param1
 			(1
-				(gCurRoom sel_422: inTicket)
+				(gCurRoom setInset: inTicket)
 			)
 			(4
-				(gEgo sel_350: 1)
+				(gEgo get: 1)
 				(SetFlag 27)
-				((ScriptID 21 0) sel_57: 770) ; addCluesCode
-				(self sel_111:)
+				((ScriptID 21 0) doit: 770) ; addCluesCode
+				(self dispose:)
 			)
 			(13
-				(gCurRoom sel_399: (if gPrevRoomNum gPrevRoomNum else 210))
+				(gCurRoom newRoom: (if gPrevRoomNum gPrevRoomNum else 210))
 			)
 			(else
-				(super sel_300: param1 param2 &rest)
+				(super doVerb: param1 param2 &rest)
 			)
 		)
 	)
@@ -906,28 +906,28 @@
 
 (instance license of Feature
 	(properties
-		sel_20 {license}
-		sel_1 246
-		sel_0 114
-		sel_6 99
-		sel_7 219
-		sel_8 130
-		sel_9 274
-		sel_301 40
+		name {license}
+		x 246
+		y 114
+		nsTop 99
+		nsLeft 219
+		nsBottom 130
+		nsRight 274
+		sightAngle 40
 	)
 
-	(method (sel_300 param1)
-		(if (gCast sel_122: trash1)
-			(= sel_213 7)
+	(method (doVerb param1)
+		(if (gCast contains: trash1)
+			(= noun 7)
 		else
-			(= sel_213 8)
+			(= noun 8)
 		)
 		(switch param1
 			(13
-				(gCurRoom sel_399: (if gPrevRoomNum gPrevRoomNum else 210))
+				(gCurRoom newRoom: (if gPrevRoomNum gPrevRoomNum else 210))
 			)
 			(else
-				(super sel_300: param1 &rest)
+				(super doVerb: param1 &rest)
 			)
 		)
 	)
@@ -935,96 +935,96 @@
 
 (class Trash of View
 	(properties
-		sel_20 {Trash}
-		sel_213 2
-		sel_2 250
-		sel_3 1
-		sel_671 0
-		sel_672 319
-		sel_673 155
-		sel_674 189
+		name {Trash}
+		noun 2
+		view 250
+		loop 1
+		boundryLeft 0
+		boundryRight 319
+		boundryTop 155
+		boundryBottom 189
 	)
 
-	(method (sel_110)
+	(method (init)
 		(if (and (TimeCheck $0001) (IsFlag 125) (not (IsFlag 27)))
-			(gMouseDownHandler sel_129: self)
-			(gKeyDownHandler sel_129: self)
+			(gMouseDownHandler addToFront: self)
+			(gKeyDownHandler addToFront: self)
 		)
-		(super sel_110: &rest)
+		(super init: &rest)
 	)
 
-	(method (sel_57)
-		(if (and (== local1 self) (self sel_675:))
-			(= sel_1 gMouseX)
-			(= sel_0 gMouseY)
+	(method (doit)
+		(if (and (== local1 self) (self inBounds:))
+			(= x gMouseX)
+			(= y gMouseY)
 		)
-		(super sel_57: &rest)
+		(super doit: &rest)
 	)
 
-	(method (sel_111)
-		(gMouseDownHandler sel_81: self)
-		(gKeyDownHandler sel_81: self)
-		(super sel_111:)
+	(method (dispose)
+		(gMouseDownHandler delete: self)
+		(gKeyDownHandler delete: self)
+		(super dispose:)
 	)
 
-	(method (sel_133 param1)
+	(method (handleEvent param1)
 		(cond
 			(
 				(and
-					(== (param1 sel_37:) 13)
-					(== (param1 sel_31:) 4)
-					(== (gTheIconBar sel_207:) (gTheIconBar sel_64: 2))
-					(self sel_218: param1)
+					(== (param1 message:) 13)
+					(== (param1 type:) 4)
+					(== (gTheIconBar curIcon:) (gTheIconBar at: 2))
+					(self onMe: param1)
 				)
 				(if (!= local1 self)
 					(= local1 self)
-					(noise sel_40: 54 sel_3: 1 sel_99: 5 sel_39:)
+					(noise number: 54 loop: 1 flags: 5 play:)
 				else
 					(= local1 0)
 				)
-				(param1 sel_73: 1)
+				(param1 claimed: 1)
 			)
 			(
 				(and
-					(== (param1 sel_31:) 1)
-					(== (gTheIconBar sel_207:) (gTheIconBar sel_64: 2))
-					(self sel_218: param1)
+					(== (param1 type:) 1)
+					(== (gTheIconBar curIcon:) (gTheIconBar at: 2))
+					(self onMe: param1)
 				)
-				(noise sel_40: 54 sel_3: 1 sel_99: 5 sel_39:)
+				(noise number: 54 loop: 1 flags: 5 play:)
 				(= local1 self)
-				(param1 sel_73: 1)
+				(param1 claimed: 1)
 			)
-			((and (== (param1 sel_31:) 2) (self sel_218: param1))
+			((and (== (param1 type:) 2) (self onMe: param1))
 				(= local1 0)
-				(param1 sel_73: 1)
+				(param1 claimed: 1)
 			)
 			(else
-				(super sel_133: param1 &rest)
+				(super handleEvent: param1 &rest)
 			)
 		)
 	)
 
-	(method (sel_300 param1)
+	(method (doVerb param1)
 		(switch param1
 			(13
-				(gCurRoom sel_399: (if gPrevRoomNum gPrevRoomNum else 210))
+				(gCurRoom newRoom: (if gPrevRoomNum gPrevRoomNum else 210))
 			)
 			(1
-				(gMessager sel_295: 3 1 4)
+				(gMessager say: 3 1 4)
 			)
 			(else
-				(super sel_300: param1 &rest)
+				(super doVerb: param1 &rest)
 			)
 		)
 	)
 
-	(method (sel_675)
+	(method (inBounds)
 		(return
 			(and
-				(> gMouseX sel_671)
-				(< gMouseX sel_672)
-				(> gMouseY sel_673)
-				(< gMouseY sel_674)
+				(> gMouseX boundryLeft)
+				(< gMouseX boundryRight)
+				(> gMouseY boundryTop)
+				(< gMouseY boundryBottom)
 			)
 		)
 	)
@@ -1032,91 +1032,91 @@
 
 (instance trash1 of Trash
 	(properties
-		sel_20 {trash1}
-		sel_1 166
-		sel_0 176
-		sel_4 2
-		sel_14 16384
+		name {trash1}
+		x 166
+		y 176
+		cel 2
+		signal 16384
 	)
 )
 
 (instance trash2 of Trash
 	(properties
-		sel_20 {trash2}
-		sel_1 145
-		sel_0 163
-		sel_4 3
-		sel_14 16384
+		name {trash2}
+		x 145
+		y 163
+		cel 3
+		signal 16384
 	)
 )
 
 (instance trash3 of Trash
 	(properties
-		sel_20 {trash3}
-		sel_1 148
-		sel_0 181
-		sel_4 4
-		sel_14 16384
+		name {trash3}
+		x 148
+		y 181
+		cel 4
+		signal 16384
 	)
 )
 
 (instance trash4 of Trash
 	(properties
-		sel_20 {trash4}
-		sel_1 112
-		sel_0 174
-		sel_4 5
-		sel_14 16384
+		name {trash4}
+		x 112
+		y 174
+		cel 5
+		signal 16384
 	)
 )
 
 (instance trash5 of Trash
 	(properties
-		sel_20 {trash5}
-		sel_1 58
-		sel_0 174
-		sel_14 16384
+		name {trash5}
+		x 58
+		y 174
+		signal 16384
 	)
 )
 
 (instance cornerTrash of View
 	(properties
-		sel_20 {cornerTrash}
-		sel_1 261
-		sel_0 189
-		sel_213 2
-		sel_2 250
-		sel_3 3
-		sel_60 1
-		sel_14 2064
+		name {cornerTrash}
+		x 261
+		y 189
+		noun 2
+		view 250
+		loop 3
+		priority 1
+		signal 2064
 	)
 
-	(method (sel_300 param1)
+	(method (doVerb param1)
 		(switch param1
 			(4
 				(cond
 					((IsFlag 27)
-						(gMessager sel_295: 2 4 4)
+						(gMessager say: 2 4 4)
 					)
 					((and (TimeCheck $0001) (IsFlag 125) (not (IsFlag 27)))
-						(gMessager sel_295: 2 4 2)
+						(gMessager say: 2 4 2)
 					)
-					((gEgo sel_584:)
-						(gMessager sel_295: 2 4 4)
+					((gEgo wearingGown:)
+						(gMessager say: 2 4 4)
 					)
-					((gEgo sel_238: 0)
-						(gMessager sel_295: 2 4 4)
+					((gEgo has: 0)
+						(gMessager say: 2 4 4)
 					)
 					(else
-						(gMessager sel_295: 2 4 4)
+						(gMessager say: 2 4 4)
 					)
 				)
 			)
 			(1
-				(gMessager sel_295: 3 1 4)
+				(gMessager say: 3 1 4)
 			)
 			(else
-				(super sel_300: param1 &rest)
+				(super doVerb: param1 &rest)
 			)
 		)
 	)
@@ -1124,7 +1124,7 @@
 
 (instance noise of Sound
 	(properties
-		sel_20 {noise}
-		sel_99 1
+		name {noise}
+		flags 1
 	)
 )

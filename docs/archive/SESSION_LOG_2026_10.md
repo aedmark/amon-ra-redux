@@ -2,6 +2,18 @@
 
 Archived verbatim from `docs/HANDOFF.md` when its live session log exceeded ten entries.
 
+### Session 43: 2026-10-10: Act 1 Playtest Music, Grade Frame, and Ziggy Continuity
+
+**Contributor:** Codex and maintainer
+
+**Goal:** Resolve the first three concrete regressions found during the clean Act 1 playthrough.
+
+**Done:** Restored Script 310's native randomized music wrapper and preserved its current song across the bathroom cue; retained picture 26's neutral gold Art Deco frame for all act-grade narration instead of drawing picture 780; and added explicit, plot-safe Act 1 replies when Laura asks Ziggy about Yvette or the Countess. Extended the tuple-manifest tool with idempotent SCI 1.1 record insertion so the two additive messages remain reproducible.
+
+**Verified:** Maintainer confirmed both speakeasy songs rotate and bathroom return no longer restarts the song; Script 310 compiled at 0 errors/0 warnings; Script 26 emitted updated loose patches; both additive message tuples parse and the manifest reapplies with zero changes; immutable base archives retain their vanilla hashes.
+
+**Next session should start with:** Continue the Act 1 playthrough and retest the neutral grade frame plus both new Ziggy inquiry replies.
+
 ### Session 42: 2026-10-10: Act 6 Final-Inquest Dialogue Closure
 
 **Contributor:** Codex and maintainer

@@ -13,12 +13,12 @@
 )
 
 (procedure (localproc_0)
-	(olympiaButton sel_156: 1)
-	(yvetteButton sel_156: 1)
-	(ernieButton sel_156: 1)
-	(heimlichButton sel_156: 1)
-	(nextButton sel_156: 1)
-	(lastButton sel_156: 1)
+	(olympiaButton setCel: 1)
+	(yvetteButton setCel: 1)
+	(ernieButton setCel: 1)
+	(heimlichButton setCel: 1)
+	(nextButton setCel: 1)
+	(lastButton setCel: 1)
 )
 
 (procedure (localproc_1)
@@ -32,44 +32,44 @@
 
 (instance theIntercom of Inset
 	(properties
-		sel_20 {theIntercom}
-		sel_2 563
-		sel_3 3
-		sel_1 105
-		sel_0 109
-		sel_570 1
-		sel_214 562
-		sel_213 54
+		name {theIntercom}
+		view 563
+		loop 3
+		x 105
+		y 109
+		disposeNotOnMe 1
+		modNum 562
+		noun 54
 	)
 
-	(method (sel_110)
-		(super sel_110: &rest)
-		(onOff sel_110:)
-		(sendReceive sel_110:)
-		(olympiaButton sel_110:)
-		(yvetteButton sel_110:)
-		(ernieButton sel_110:)
-		(heimlichButton sel_110:)
-		(nextButton sel_110:)
-		(lastButton sel_110:)
+	(method (init)
+		(super init: &rest)
+		(onOff init:)
+		(sendReceive init:)
+		(olympiaButton init:)
+		(yvetteButton init:)
+		(ernieButton init:)
+		(heimlichButton init:)
+		(nextButton init:)
+		(lastButton init:)
 	)
 
-	(method (sel_111)
+	(method (dispose)
 		(localproc_1)
-		(sFX sel_111:)
-		(super sel_111:)
+		(sFX dispose:)
+		(super dispose:)
 		(DisposeScript 562)
 	)
 
-	(method (sel_300 param1)
+	(method (doVerb param1)
 		(switch param1
 			(2
-				(if (and (== (onOff sel_4:) 2) (== (sendReceive sel_4:) 2))
-					(gMessager sel_295: 54 param1 0 (Random 2 7) 0 562)
+				(if (and (== (onOff cel:) 2) (== (sendReceive cel:) 2))
+					(gMessager say: 54 param1 0 (Random 2 7) 0 562)
 				)
 			)
 			(else
-				(super sel_300: param1)
+				(super doVerb: param1)
 			)
 		)
 	)
@@ -77,54 +77,54 @@
 
 (instance onOff of Prop
 	(properties
-		sel_20 {onOff}
-		sel_1 133
-		sel_0 133
-		sel_213 57
-		sel_214 562
-		sel_2 563
-		sel_3 3
-		sel_4 1
-		sel_60 14
-		sel_14 16
+		name {onOff}
+		x 133
+		y 133
+		noun 57
+		modNum 562
+		view 563
+		loop 3
+		cel 1
+		priority 14
+		signal 16
 	)
 
-	(method (sel_218 param1 param2 &tmp temp0 temp1)
+	(method (onMe param1 param2 &tmp temp0 temp1)
 		(if (IsObject param1)
-			(= temp0 (param1 sel_1:))
-			(= temp1 (param1 sel_0:))
+			(= temp0 (param1 x:))
+			(= temp1 (param1 y:))
 		else
 			(= temp0 param1)
 			(= temp1 param2)
 		)
 		(return
 			(and
-				(<= (- sel_1 8) temp0 (+ sel_1 16))
-				(<= (- sel_0 6) temp1 (+ sel_0 6))
+				(<= (- x 8) temp0 (+ x 16))
+				(<= (- y 6) temp1 (+ y 6))
 				1
 			)
 		)
 	)
 
-	(method (sel_300 param1)
+	(method (doVerb param1)
 		(switch param1
 			(4
-				(if (== sel_4 1)
-					(self sel_156: 2)
+				(if (== cel 1)
+					(self setCel: 2)
 				else
-					(self sel_156: 1)
+					(self setCel: 1)
 				)
-				(sFX sel_40: 558 sel_99: 1 sel_155: 1 sel_39:)
+				(sFX number: 558 flags: 1 setLoop: 1 play:)
 			)
 			(8
-				(if (== sel_4 2)
-					(gMessager sel_295: sel_213 param1 8 0 0 562)
+				(if (== cel 2)
+					(gMessager say: noun param1 8 0 0 562)
 				else
-					(gMessager sel_295: sel_213 param1 9 0 0 562)
+					(gMessager say: noun param1 9 0 0 562)
 				)
 			)
 			(else
-				(super sel_300: param1)
+				(super doVerb: param1)
 			)
 		)
 	)
@@ -132,54 +132,54 @@
 
 (instance sendReceive of Prop
 	(properties
-		sel_20 {sendReceive}
-		sel_1 139
-		sel_0 117
-		sel_213 77
-		sel_214 562
-		sel_2 563
-		sel_3 3
-		sel_4 1
-		sel_60 14
-		sel_14 16
+		name {sendReceive}
+		x 139
+		y 117
+		noun 77
+		modNum 562
+		view 563
+		loop 3
+		cel 1
+		priority 14
+		signal 16
 	)
 
-	(method (sel_218 param1 param2 &tmp temp0 temp1)
+	(method (onMe param1 param2 &tmp temp0 temp1)
 		(if (IsObject param1)
-			(= temp0 (param1 sel_1:))
-			(= temp1 (param1 sel_0:))
+			(= temp0 (param1 x:))
+			(= temp1 (param1 y:))
 		else
 			(= temp0 param1)
 			(= temp1 param2)
 		)
 		(return
 			(and
-				(<= (- sel_1 8) temp0 (+ sel_1 16))
-				(<= (- sel_0 6) temp1 (+ sel_0 6))
+				(<= (- x 8) temp0 (+ x 16))
+				(<= (- y 6) temp1 (+ y 6))
 				1
 			)
 		)
 	)
 
-	(method (sel_300 param1)
+	(method (doVerb param1)
 		(switch param1
 			(4
-				(if (== (self sel_4:) 1)
-					(self sel_156: 2)
+				(if (== (self cel:) 1)
+					(self setCel: 2)
 				else
-					(self sel_156: 1)
+					(self setCel: 1)
 				)
-				(sFX sel_40: 558 sel_99: 1 sel_155: 1 sel_39:)
+				(sFX number: 558 flags: 1 setLoop: 1 play:)
 			)
 			(8
-				(if (== sel_4 2)
-					(gMessager sel_295: sel_213 param1 6 0 0 562)
+				(if (== cel 2)
+					(gMessager say: noun param1 6 0 0 562)
 				else
-					(gMessager sel_295: sel_213 param1 7 0 0 562)
+					(gMessager say: noun param1 7 0 0 562)
 				)
 			)
 			(else
-				(super sel_300: param1)
+				(super doVerb: param1)
 			)
 		)
 	)
@@ -187,85 +187,85 @@
 
 (class Button of Prop
 	(properties
-		sel_20 {Button}
-		sel_213 84
-		sel_214 562
-		sel_2 563
-		sel_3 3
-		sel_4 1
-		sel_60 14
-		sel_14 16
+		name {Button}
+		noun 84
+		modNum 562
+		view 563
+		loop 3
+		cel 1
+		priority 14
+		signal 16
 	)
 
-	(method (sel_218 param1 param2 &tmp temp0 temp1)
+	(method (onMe param1 param2 &tmp temp0 temp1)
 		(if (IsObject param1)
-			(= temp0 (param1 sel_1:))
-			(= temp1 (param1 sel_0:))
+			(= temp0 (param1 x:))
+			(= temp1 (param1 y:))
 		else
 			(= temp0 param1)
 			(= temp1 param2)
 		)
 		(return
 			(and
-				(<= (- sel_1 8) temp0 (+ sel_1 36))
-				(<= (- sel_0 2) temp1 (+ sel_0 2))
+				(<= (- x 8) temp0 (+ x 36))
+				(<= (- y 2) temp1 (+ y 2))
 				1
 			)
 		)
 	)
 
-	(method (sel_300 param1)
+	(method (doVerb param1)
 		(switch param1
 			(4
-				(if (== sel_4 1)
+				(if (== cel 1)
 					(localproc_0)
 					(localproc_1)
-					(self sel_677:)
+					(self pushButton:)
 				else
-					(self sel_156: 1)
+					(self setCel: 1)
 				)
-				(sFX sel_40: 558 sel_99: 1 sel_155: 1 sel_39:)
+				(sFX number: 558 flags: 1 setLoop: 1 play:)
 			)
 			(8
-				(if (== sel_4 2)
-					(gMessager sel_295: sel_213 param1 12 0 0 562)
+				(if (== cel 2)
+					(gMessager say: noun param1 12 0 0 562)
 				else
-					(gMessager sel_295: sel_213 param1 13 0 0 562)
+					(gMessager say: noun param1 13 0 0 562)
 				)
 			)
 			(else
-				(super sel_300: param1)
+				(super doVerb: param1)
 			)
 		)
 	)
 
-	(method (sel_145)
-		(if (and (== (onOff sel_4:) 2) (== (sendReceive sel_4:) 1))
-			(sFX sel_40: 567 sel_99: 1 sel_155: 1 sel_39:)
-			(gMessager sel_295: 54 4 5 0 0 562)
+	(method (cue)
+		(if (and (== (onOff cel:) 2) (== (sendReceive cel:) 1))
+			(sFX number: 567 flags: 1 setLoop: 1 play:)
+			(gMessager say: 54 4 5 0 0 562)
 		)
 	)
 
-	(method (sel_677)
-		(self sel_156: 2)
-		((Timer sel_109:) sel_161: self 2)
+	(method (pushButton)
+		(self setCel: 2)
+		((Timer new:) setCycle: self 2)
 	)
 )
 
 (instance olympiaButton of Button
 	(properties
-		sel_20 {olympiaButton}
-		sel_1 139
-		sel_0 135
+		name {olympiaButton}
+		x 139
+		y 135
 	)
 
-	(method (sel_145)
-		(if (and (== (onOff sel_4:) 2) (== (sendReceive sel_4:) 1))
-			(sFX sel_40: 567 sel_99: 1 sel_155: 1 sel_39:)
+	(method (cue)
+		(if (and (== (onOff cel:) 2) (== (sendReceive cel:) 1))
+			(sFX number: 567 flags: 1 setLoop: 1 play:)
 			(if (IsFlag 51)
-				(gMessager sel_295: 54 4 2 0 0 562)
+				(gMessager say: 54 4 2 0 0 562)
 			else
-				(gMessager sel_295: 54 4 1 0 0 562)
+				(gMessager say: 54 4 1 0 0 562)
 				(SetFlag 51)
 			)
 		)
@@ -274,23 +274,23 @@
 
 (instance yvetteButton of Button
 	(properties
-		sel_20 {yvetteButton}
-		sel_1 140
-		sel_0 132
+		name {yvetteButton}
+		x 140
+		y 132
 	)
 
-	(method (sel_145)
-		(if (and (== (onOff sel_4:) 2) (== (sendReceive sel_4:) 1))
-			(sFX sel_40: 567 sel_99: 1 sel_155: 1 sel_39:)
+	(method (cue)
+		(if (and (== (onOff cel:) 2) (== (sendReceive cel:) 1))
+			(sFX number: 567 flags: 1 setLoop: 1 play:)
 			(if (not (IsFlag 52))
 				(SetFlag 52)
 				(if (not (IsFlag 5))
-					(gMessager sel_295: 54 4 3 0 0 562)
+					(gMessager say: 54 4 3 0 0 562)
 				else
-					(gMessager sel_295: 54 4 5 0 0 562)
+					(gMessager say: 54 4 5 0 0 562)
 				)
 			else
-				(gMessager sel_295: 54 4 2 0 0 562)
+				(gMessager say: 54 4 2 0 0 562)
 			)
 		)
 	)
@@ -298,23 +298,23 @@
 
 (instance ernieButton of Button
 	(properties
-		sel_20 {ernieButton}
-		sel_1 141
-		sel_0 129
+		name {ernieButton}
+		x 141
+		y 129
 	)
 
-	(method (sel_145)
-		(if (and (== (onOff sel_4:) 2) (== (sendReceive sel_4:) 1))
-			(sFX sel_40: 567 sel_99: 1 sel_155: 1 sel_39:)
+	(method (cue)
+		(if (and (== (onOff cel:) 2) (== (sendReceive cel:) 1))
+			(sFX number: 567 flags: 1 setLoop: 1 play:)
 			(if (not (IsFlag 53))
 				(SetFlag 53)
 				(if (and (not (IsFlag 2)) (not (IsFlag 4)))
-					(gMessager sel_295: 54 4 4 0 0 562)
+					(gMessager say: 54 4 4 0 0 562)
 				else
-					(gMessager sel_295: 54 4 5 0 0 562)
+					(gMessager say: 54 4 5 0 0 562)
 				)
 			else
-				(gMessager sel_295: 54 4 2 0 0 562)
+				(gMessager say: 54 4 2 0 0 562)
 			)
 		)
 	)
@@ -322,31 +322,31 @@
 
 (instance heimlichButton of Button
 	(properties
-		sel_20 {heimlichButton}
-		sel_1 142
-		sel_0 126
+		name {heimlichButton}
+		x 142
+		y 126
 	)
 )
 
 (instance nextButton of Button
 	(properties
-		sel_20 {nextButton}
-		sel_1 143
-		sel_0 123
+		name {nextButton}
+		x 143
+		y 123
 	)
 )
 
 (instance lastButton of Button
 	(properties
-		sel_20 {lastButton}
-		sel_1 144
-		sel_0 120
+		name {lastButton}
+		x 144
+		y 120
 	)
 )
 
 (instance sFX of Sound
 	(properties
-		sel_20 {sFX}
-		sel_99 1
+		name {sFX}
+		flags 1
 	)
 )

@@ -14,8 +14,8 @@
 	(return
 		(not
 			(and
-				(<= 0 (theObj sel_1:) 319)
-				(<= 0 (- (theObj sel_0:) (theObj sel_82:)) 189)
+				(<= 0 (theObj x:) 319)
+				(<= 0 (- (theObj y:) (theObj z:)) 189)
 			)
 		)
 	)
@@ -41,10 +41,10 @@
 			)
 		)
 	)
-	(= sx (theSight sel_1:))
-	(= sy (theSight sel_0:))
-	(= ex (theSeer sel_1:))
-	(= ey (theSeer sel_0:))
+	(= sx (theSight x:))
+	(= sy (theSight y:))
+	(= ex (theSeer x:))
+	(= ey (theSeer y:))
 	(return
 		(and
 			(!= theSight theSeer)
@@ -54,7 +54,7 @@
 					(Abs
 						(AngleDiff
 							(GetAngle ex ey sx sy)
-							(theSeer sel_55:)
+							(theSeer heading:)
 						)
 					)
 				)

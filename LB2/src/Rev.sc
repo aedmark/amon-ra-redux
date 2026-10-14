@@ -6,19 +6,19 @@
 
 (class Rev of Cycle
 	(properties
-		sel_20 {Rev}
-		sel_239 -1
+		name {Rev}
+		cycleDir -1
 	)
 
-	(method (sel_57 &tmp temp0)
-		(if (< (= temp0 (self sel_241:)) 0)
-			(self sel_242:)
+	(method (doit &tmp temp0)
+		(if (< (= temp0 (self nextCel:)) 0)
+			(self cycleDone:)
 		else
-			(sel_42 sel_4: temp0)
+			(client cel: temp0)
 		)
 	)
 
-	(method (sel_242)
-		(sel_42 sel_4: (sel_42 sel_246:))
+	(method (cycleDone)
+		(client cel: (client lastCel:))
 	)
 )

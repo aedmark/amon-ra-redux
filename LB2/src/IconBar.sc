@@ -8,82 +8,82 @@
 
 (class IconI of Obj
 	(properties
-		sel_20 {IconI}
-		sel_2 -1
-		sel_3 -1
-		sel_4 -1
-		sel_7 0
-		sel_6 -1
-		sel_9 0
-		sel_8 0
-		sel_29 0
-		sel_33 -1
-		sel_31 16384
-		sel_37 -1
-		sel_61 0
-		sel_14 1
-		sel_208 0
-		sel_209 0
-		sel_210 0
-		sel_211 0
-		sel_212 0
-		sel_213 0
-		sel_214 0
-		sel_215 0
+		name {IconI}
+		view -1
+		loop -1
+		cel -1
+		nsLeft 0
+		nsTop -1
+		nsRight 0
+		nsBottom 0
+		state 0
+		cursor -1
+		type 16384
+		message -1
+		modifiers 0
+		signal 1
+		maskView 0
+		maskLoop 0
+		maskCel 0
+		highlightColor 0
+		lowlightColor 0
+		noun 0
+		modNum 0
+		helpVerb 0
 	)
 
-	(method (sel_216 param1 param2 &tmp [temp0 7])
-		(|= sel_14 $0020)
+	(method (show param1 param2 &tmp [temp0 7])
+		(|= signal $0020)
 		(if argc
-			(= sel_9 (+ (= sel_7 param1) (CelWide sel_2 sel_3 sel_4)))
-			(= sel_8 (+ (= sel_6 param2) (CelHigh sel_2 sel_3 sel_4)))
+			(= nsRight (+ (= nsLeft param1) (CelWide view loop cel)))
+			(= nsBottom (+ (= nsTop param2) (CelHigh view loop cel)))
 		else
-			(= sel_9 (+ sel_7 (CelWide sel_2 sel_3 sel_4)))
-			(= sel_8 (+ sel_6 (CelHigh sel_2 sel_3 sel_4)))
+			(= nsRight (+ nsLeft (CelWide view loop cel)))
+			(= nsBottom (+ nsTop (CelHigh view loop cel)))
 		)
-		(DrawCel sel_2 sel_3 sel_4 sel_7 sel_6 -1)
-		(if (& sel_14 $0004)
-			(self sel_219:)
+		(DrawCel view loop cel nsLeft nsTop -1)
+		(if (& signal $0004)
+			(self mask:)
 		)
-		(if (and gPMouse (gPMouse sel_116: 167))
-			(gPMouse sel_167:)
+		(if (and gPMouse (gPMouse respondsTo: 167))
+			(gPMouse stop:)
 		)
 	)
 
-	(method (sel_178 param1 &tmp temp0 temp1)
+	(method (select param1 &tmp temp0 temp1)
 		(return
 			(cond
-				((& sel_14 $0004) 0)
-				((and argc param1 (& sel_14 $0001))
-					(DrawCel sel_2 sel_3 (= temp1 1) sel_7 sel_6 -1)
-					(Graph grUPDATE_BOX sel_6 sel_7 sel_8 sel_9 1)
-					(while (!= ((= temp0 (Event sel_109:)) sel_31:) 2)
-						(temp0 sel_148:)
+				((& signal $0004) 0)
+				((and argc param1 (& signal $0001))
+					(DrawCel view loop (= temp1 1) nsLeft nsTop -1)
+					(Graph grUPDATE_BOX nsTop nsLeft nsBottom nsRight 1)
+					(while (!= ((= temp0 (Event new:)) type:) 2)
+						(temp0 localize:)
 						(cond
-							((self sel_218: temp0)
+							((self onMe: temp0)
 								(if (not temp1)
 									(DrawCel
-										sel_2
-										sel_3
+										view
+										loop
 										(= temp1 1)
-										sel_7
-										sel_6
+										nsLeft
+										nsTop
 										-1
 									)
-									(Graph grUPDATE_BOX sel_6 sel_7 sel_8 sel_9 1)
+									(Graph grUPDATE_BOX nsTop nsLeft nsBottom nsRight 1)
 								)
 							)
 							(temp1
-								(DrawCel sel_2 sel_3 (= temp1 0) sel_7 sel_6 -1)
-								(Graph grUPDATE_BOX sel_6 sel_7 sel_8 sel_9 1)
+								(DrawCel view loop (= temp1 0) nsLeft nsTop -1)
+								(Graph grUPDATE_BOX nsTop nsLeft nsBottom nsRight 1)
 							)
 						)
-						(temp0 sel_111:)
+						(temp0 dispose:)
 					)
-					(temp0 sel_111:)
+					(temp0 dispose:)
 					(if (== temp1 1)
-						(DrawCel sel_2 sel_3 0 sel_7 sel_6 -1)
-						(Graph grUPDATE_BOX sel_6 sel_7 sel_8 sel_9 1)
+						(DrawCel view loop 0 nsLeft nsTop -1)
+						(Graph grUPDATE_BOX nsTop nsLeft nsBottom nsRight 1)
 					)
 					temp1
 				)
@@ -92,58 +92,58 @@
 		)
 	)
 
-	(method (sel_217 param1 &tmp temp0 temp1 temp2 temp3 temp4)
-		(if (or (not (& sel_14 $0020)) (== sel_211 -1))
+	(method (highlight param1 &tmp temp0 temp1 temp2 temp3 temp4)
+		(if (or (not (& signal $0020)) (== highlightColor -1))
 			(return)
 		)
-		(= temp4 (if (and argc param1) sel_211 else sel_212))
-		(= temp0 (+ sel_6 2))
-		(= temp1 (+ sel_7 2))
-		(= temp2 (- sel_8 3))
-		(= temp3 (- sel_9 4))
+		(= temp4 (if (and argc param1) highlightColor else lowlightColor))
+		(= temp0 (+ nsTop 2))
+		(= temp1 (+ nsLeft 2))
+		(= temp2 (- nsBottom 3))
+		(= temp3 (- nsRight 4))
 		(Graph grDRAW_LINE temp0 temp1 temp0 temp3 temp4 -1 -1)
 		(Graph grDRAW_LINE temp0 temp3 temp2 temp3 temp4 -1 -1)
 		(Graph grDRAW_LINE temp2 temp3 temp2 temp1 temp4 -1 -1)
 		(Graph grDRAW_LINE temp2 temp1 temp0 temp1 temp4 -1 -1)
-		(Graph grUPDATE_BOX (- sel_6 2) (- sel_7 2) sel_8 (+ sel_9 3) 1)
+		(Graph grUPDATE_BOX (- nsTop 2) (- nsLeft 2) nsBottom (+ nsRight 3) 1)
 	)
 
-	(method (sel_218 param1)
+	(method (onMe param1)
 		(return
 			(if
 				(and
-					(>= (param1 sel_1:) sel_7)
-					(>= (param1 sel_0:) sel_6)
-					(<= (param1 sel_1:) sel_9)
+					(>= (param1 x:) nsLeft)
+					(>= (param1 y:) nsTop)
+					(<= (param1 x:) nsRight)
 				)
-				(<= (param1 sel_0:) sel_8)
+				(<= (param1 y:) nsBottom)
 			else
 				0
 			)
 		)
 	)
 
-	(method (sel_219)
+	(method (mask)
 		(DrawCel
-			sel_208
-			sel_209
-			sel_210
+			maskView
+			maskLoop
+			maskCel
 			(+
-				sel_7
+				nsLeft
 				(/
 					(-
-						(CelWide sel_2 sel_3 sel_4)
-						(CelWide sel_208 sel_209 sel_210)
+						(CelWide view loop cel)
+						(CelWide maskView maskLoop maskCel)
 					)
 					2
 				)
 			)
 			(+
-				sel_6
+				nsTop
 				(/
 					(-
-						(CelHigh sel_2 sel_3 sel_4)
-						(CelHigh sel_208 sel_209 sel_210)
+						(CelHigh view loop cel)
+						(CelHigh maskView maskLoop maskCel)
 					)
 					2
 				)
@@ -155,184 +155,184 @@
 
 (class IconBar of Set
 	(properties
-		sel_20 {IconBar}
-		sel_220 0
-		sel_5 0
-		sel_221 0
-		sel_222 0
-		sel_207 0
-		sel_223 0
-		sel_224 0
-		sel_225 0
-		sel_226 0
-		sel_227 0
-		sel_228 0
-		sel_147 0
-		sel_32 0
-		sel_29 1024
-		sel_229 0
-		sel_0 0
+		name {IconBar}
+		height 0
+		underBits 0
+		oldMouseX 0
+		oldMouseY 0
+		curIcon 0
+		highlightedIcon 0
+		prevIcon 0
+		curInvIcon 0
+		useIconItem 0
+		helpIconItem 0
+		walkIconItem 0
+		port 0
+		window 0
+		state 1024
+		activateHeight 0
+		y 0
 	)
 
-	(method (sel_57 &tmp temp0 temp1 temp2 temp3)
-		(while (and (& sel_29 $0020) (= temp0 (Event sel_109:)))
-			(= temp1 (temp0 sel_31:))
-			(= temp2 (temp0 sel_37:))
-			(= temp3 (temp0 sel_61:))
+	(method (doit &tmp temp0 temp1 temp2 temp3)
+		(while (and (& state $0020) (= temp0 (Event new:)))
+			(= temp1 (temp0 type:))
+			(= temp2 (temp0 message:))
+			(= temp3 (temp0 modifiers:))
 			(Wait 1)
 			(if (== temp1 256)
 				(= temp1 4)
 				(= temp2 (if (& temp3 $0003) 27 else 13))
 				(= temp3 0)
-				(temp0 sel_31: temp1 sel_37: temp2 sel_61: temp3)
+				(temp0 type: temp1 message: temp2 modifiers: temp3)
 			)
-			(temp0 sel_148:)
+			(temp0 localize:)
 			(if
 				(and
 					(or (== temp1 1) (and (== temp1 4) (== temp2 13)))
-					(IsObject sel_227)
-					(& (sel_227 sel_14:) $0010)
+					(IsObject helpIconItem)
+					(& (helpIconItem signal:) $0010)
 				)
-				(temp0 sel_31: 24576 sel_37: (sel_227 sel_37:))
+				(temp0 type: 24576 message: (helpIconItem message:))
 			)
 			(MapKeyToDir temp0)
-			(if (self sel_232: temp0)
+			(if (self dispatchEvent: temp0)
 				(break)
 			)
 		)
 	)
 
-	(method (sel_133 param1 &tmp temp0 temp1 temp2 temp3 temp4 temp5)
-		(param1 sel_148:)
-		(= temp1 (param1 sel_31:))
+	(method (handleEvent param1 &tmp temp0 temp1 temp2 temp3 temp4 temp5)
+		(param1 localize:)
+		(= temp1 (param1 type:))
 		(cond
-			((& sel_29 $0004))
+			((& state $0004))
 			(
 				(or
 					(and
 						(not temp1)
-						(& sel_29 $0400)
-						(<= -10 (param1 sel_0:))
-						(<= (param1 sel_0:) sel_220)
-						(<= 0 (param1 sel_1:))
-						(<= (param1 sel_1:) 320)
+						(& state $0400)
+						(<= -10 (param1 y:))
+						(<= (param1 y:) height)
+						(<= 0 (param1 x:))
+						(<= (param1 x:) 320)
 						(not (= temp0 0))
 					)
 					(and
 						(== temp1 4)
 						(or
-							(== (param1 sel_37:) 27)
-							(== (param1 sel_37:) 21248)
+							(== (param1 message:) 27)
+							(== (param1 message:) 21248)
 						)
 						(= temp0 1)
 					)
 				)
-				(param1 sel_149:)
-				(= sel_221 (param1 sel_1:))
-				(= sel_222 (param1 sel_0:))
+				(param1 globalize:)
+				(= oldMouseX (param1 x:))
+				(= oldMouseY (param1 y:))
 				(= temp2 gTheCursor)
-				(= temp3 sel_207)
-				(= temp4 sel_225)
-				(self sel_216:)
-				(gGame sel_197: 999)
+				(= temp3 curIcon)
+				(= temp4 curInvIcon)
+				(self show:)
+				(gGame setCursor: 999)
 				(if temp0
 					(gGame
-						sel_197:
+						setCursor:
 							gTheCursor
 							1
 							(+
-								(sel_207 sel_7:)
-								(/ (- (sel_207 sel_9:) (sel_207 sel_7:)) 2)
+								(curIcon nsLeft:)
+								(/ (- (curIcon nsRight:) (curIcon nsLeft:)) 2)
 							)
-							(- (sel_207 sel_8:) 3)
+							(- (curIcon nsBottom:) 3)
 					)
 				)
-				(self sel_57:)
+				(self doit:)
 				(if temp0
 					(gGame
-						sel_197:
+						setCursor:
 							(if
 								(and
-									(not (gUser sel_347:))
-									(not (gUser sel_237:))
+									(not (gUser canInput:))
+									(not (gUser canControl:))
 								)
 								997
 							else
-								(sel_207 sel_33:)
+								(curIcon cursor:)
 							)
 							1
-							sel_221
-							sel_222
+							oldMouseX
+							oldMouseY
 					)
 				else
 					(gGame
-						sel_197:
+						setCursor:
 							(if
 								(and
-									(not (gUser sel_347:))
-									(not (gUser sel_237:))
+									(not (gUser canInput:))
+									(not (gUser canControl:))
 								)
 								997
 							else
-								(sel_207 sel_33:)
+								(curIcon cursor:)
 							)
 							1
-							((= temp5 (Event sel_109:)) sel_1:)
-							(Max (temp5 sel_0:) (+ 1 sel_220))
+							((= temp5 (Event new:)) x:)
+							(Max (temp5 y:) (+ 1 height))
 					)
-					(temp5 sel_111:)
+					(temp5 dispose:)
 				)
-				(self sel_102:)
+				(self hide:)
 			)
 			((& temp1 $0004)
-				(switch (param1 sel_37:)
+				(switch (param1 message:)
 					(13
-						(if (IsObject sel_207)
+						(if (IsObject curIcon)
 							(param1
-								sel_31: (sel_207 sel_31:)
-								sel_37:
-									(if (== sel_207 sel_226)
-										(sel_225 sel_37:)
+								type: (curIcon type:)
+								message:
+									(if (== curIcon useIconItem)
+										(curInvIcon message:)
 									else
-										(sel_207 sel_37:)
+										(curIcon message:)
 									)
 							)
 						)
 					)
 					(20992
-						(if (gUser sel_237:)
-							(self sel_230:)
+						(if (gUser canControl:)
+							(self swapCurIcon:)
 						)
-						(param1 sel_73: 1)
+						(param1 claimed: 1)
 					)
 					(0
-						(if (& (param1 sel_31:) $0040)
-							(self sel_231:)
-							(param1 sel_73: 1)
+						(if (& (param1 type:) $0040)
+							(self advanceCurIcon:)
+							(param1 claimed: 1)
 						)
 					)
 				)
 			)
 			((& temp1 $0001)
 				(cond
-					((& (param1 sel_61:) $0003)
-						(self sel_231:)
-						(param1 sel_73: 1)
+					((& (param1 modifiers:) $0003)
+						(self advanceCurIcon:)
+						(param1 claimed: 1)
 					)
-					((& (param1 sel_61:) $0004)
-						(if (gUser sel_237:)
-							(self sel_230:)
+					((& (param1 modifiers:) $0004)
+						(if (gUser canControl:)
+							(self swapCurIcon:)
 						)
-						(param1 sel_73: 1)
+						(param1 claimed: 1)
 					)
-					((IsObject sel_207)
+					((IsObject curIcon)
 						(param1
-							sel_31: (sel_207 sel_31:)
-							sel_37:
-								(if (== sel_207 sel_226)
-									(sel_225 sel_37:)
+							type: (curIcon type:)
+							message:
+								(if (== curIcon useIconItem)
+									(curInvIcon message:)
 								else
-									(sel_207 sel_37:)
+									(curIcon message:)
 								)
 						)
 					)
@@ -341,153 +341,153 @@
 		)
 	)
 
-	(method (sel_216 &tmp temp0 temp1 temp2 temp3 temp4 temp5 temp6 temp7)
-		(gSounds sel_168:)
-		(|= sel_29 $0020)
-		(gGame sel_197: 999 1)
-		(= sel_220
+	(method (show &tmp temp0 temp1 temp2 temp3 temp4 temp5 temp6 temp7)
+		(gSounds pause:)
+		(|= state $0020)
+		(gGame setCursor: 999 1)
+		(= height
 			(CelHigh
-				((= temp0 (self sel_64: 0)) sel_2:)
-				(temp0 sel_3:)
-				(temp0 sel_4:)
+				((= temp0 (self at: 0)) view:)
+				(temp0 loop:)
+				(temp0 cel:)
 			)
 		)
-		(= sel_147 (GetPort))
+		(= port (GetPort))
 		(SetPort -1)
-		(= sel_5 (Graph grSAVE_BOX sel_0 0 (+ sel_0 sel_220) 320 1))
+		(= underBits (Graph grSAVE_BOX y 0 (+ y height) 320 1))
 		(= temp1 (PicNotValid))
 		(PicNotValid 1)
 		(= temp3 0)
-		(= temp4 sel_0)
-		(for ((= temp5 (FirstNode sel_24))) temp5 ((= temp5 temp6))
+		(= temp4 y)
+		(for ((= temp5 (FirstNode elements))) temp5 ((= temp5 temp6))
 			(= temp6 (NextNode temp5))
 			(if (not (IsObject (= temp7 (NodeValue temp5))))
 				(return)
 			)
-			(if (<= (temp7 sel_9:) 0)
-				(temp7 sel_216: temp3 temp4)
-				(= temp3 (temp7 sel_9:))
+			(if (<= (temp7 nsRight:) 0)
+				(temp7 show: temp3 temp4)
+				(= temp3 (temp7 nsRight:))
 			else
-				(temp7 sel_216:)
+				(temp7 show:)
 			)
 		)
-		(if sel_225
-			(if (gEgo sel_238: (gInventory sel_132: sel_225))
+		(if curInvIcon
+			(if (gEgo has: (gInventory indexOf: curInvIcon))
 				(= temp3
 					(+
 						(/
 							(-
-								(- (sel_226 sel_9:) (sel_226 sel_7:))
+								(- (useIconItem nsRight:) (useIconItem nsLeft:))
 								(CelWide
-									(sel_225 sel_2:)
-									(+ (sel_225 sel_3:) 1)
-									(sel_225 sel_4:)
+									(curInvIcon view:)
+									(+ (curInvIcon loop:) 1)
+									(curInvIcon cel:)
 								)
 							)
 							2
 						)
-						(sel_226 sel_7:)
+						(useIconItem nsLeft:)
 					)
 				)
 				(= temp4
 					(+
-						sel_0
+						y
 						(/
 							(-
-								(- (sel_226 sel_8:) (sel_226 sel_6:))
+								(- (useIconItem nsBottom:) (useIconItem nsTop:))
 								(CelHigh
-									(sel_225 sel_2:)
-									(+ (sel_225 sel_3:) 1)
-									(sel_225 sel_4:)
+									(curInvIcon view:)
+									(+ (curInvIcon loop:) 1)
+									(curInvIcon cel:)
 								)
 							)
 							2
 						)
-						(sel_226 sel_6:)
+						(useIconItem nsTop:)
 					)
 				)
 				(DrawCel
-					(sel_225 sel_2:)
-					(+ (sel_225 sel_3:) 1)
-					(sel_225 sel_4:)
+					(curInvIcon view:)
+					(+ (curInvIcon loop:) 1)
+					(curInvIcon cel:)
 					temp3
 					temp4
 					-1
 				)
-				(if (& (sel_226 sel_14:) $0004)
-					(sel_226 sel_219:)
+				(if (& (useIconItem signal:) $0004)
+					(useIconItem mask:)
 				)
 			else
-				(= sel_225 0)
+				(= curInvIcon 0)
 			)
 		)
 		(PicNotValid temp1)
-		(Graph grUPDATE_BOX sel_0 0 (+ sel_0 sel_220) 320 1)
-		(self sel_217: sel_207)
+		(Graph grUPDATE_BOX y 0 (+ y height) 320 1)
+		(self highlight: curIcon)
 	)
 
-	(method (sel_102 &tmp temp0 temp1 temp2)
-		(if (& sel_29 $0020)
-			(gSounds sel_168: 0)
-			(&= sel_29 $ffdf)
-			(for ((= temp0 (FirstNode sel_24))) temp0 ((= temp0 temp1))
+	(method (hide &tmp temp0 temp1 temp2)
+		(if (& state $0020)
+			(gSounds pause: 0)
+			(&= state $ffdf)
+			(for ((= temp0 (FirstNode elements))) temp0 ((= temp0 temp1))
 				(= temp1 (NextNode temp0))
 				(if (not (IsObject (= temp2 (NodeValue temp0))))
 					(return)
 				)
-				((= temp2 (NodeValue temp0)) sel_14: (& (temp2 sel_14:) $ffdf))
+				((= temp2 (NodeValue temp0)) signal: (& (temp2 signal:) $ffdf))
 			)
-			(Graph grRESTORE_BOX sel_5)
-			(Graph grUPDATE_BOX sel_0 0 (+ sel_0 sel_220) 320 1)
-			(Graph grREDRAW_BOX sel_0 0 (+ sel_0 sel_220) 320)
-			(SetPort sel_147)
-			(= sel_220 sel_229)
+			(Graph grRESTORE_BOX underBits)
+			(Graph grUPDATE_BOX y 0 (+ y height) 320 1)
+			(Graph grREDRAW_BOX y 0 (+ y height) 320)
+			(SetPort port)
+			(= height activateHeight)
 		)
 	)
 
-	(method (sel_190 &tmp temp0 temp1)
+	(method (advance &tmp temp0 temp1)
 		(for
 			((= temp1 1))
-			(<= temp1 sel_86)
-			((= temp1 (mod (+ temp1 1) sel_86)))
+			(<= temp1 size)
+			((= temp1 (mod (+ temp1 1) size)))
 
 			(= temp0
-				(self sel_64: (mod (+ temp1 (self sel_132: sel_223)) sel_86))
+				(self at: (mod (+ temp1 (self indexOf: highlightedIcon)) size))
 			)
 			(if (not (IsObject temp0))
-				(= temp0 (NodeValue (self sel_124:)))
+				(= temp0 (NodeValue (self first:)))
 			)
-			(if (not (& (temp0 sel_14:) $0004))
+			(if (not (& (temp0 signal:) $0004))
 				(break)
 			)
 		)
-		(self sel_217: temp0 (& sel_29 $0020))
+		(self highlight: temp0 (& state $0020))
 	)
 
-	(method (sel_191 &tmp temp0 temp1)
+	(method (retreat &tmp temp0 temp1)
 		(for
 			((= temp1 1))
-			(<= temp1 sel_86)
-			((= temp1 (mod (+ temp1 1) sel_86)))
+			(<= temp1 size)
+			((= temp1 (mod (+ temp1 1) size)))
 
 			(= temp0
-				(self sel_64: (mod (- (self sel_132: sel_223) temp1) sel_86))
+				(self at: (mod (- (self indexOf: highlightedIcon) temp1) size))
 			)
 			(if (not (IsObject temp0))
-				(= temp0 (NodeValue (self sel_127:)))
+				(= temp0 (NodeValue (self last:)))
 			)
-			(if (not (& (temp0 sel_14:) $0004))
+			(if (not (& (temp0 signal:) $0004))
 				(break)
 			)
 		)
-		(self sel_217: temp0 (& sel_29 $0020))
+		(self highlight: temp0 (& state $0020))
 	)
 
-	(method (sel_178 param1 param2)
+	(method (select param1 param2)
 		(return
-			(if (param1 sel_178: (and (>= argc 2) param2))
-				(if (not (& (param1 sel_14:) $0002))
-					(= sel_207 param1)
+			(if (param1 select: (and (>= argc 2) param2))
+				(if (not (& (param1 signal:) $0002))
+					(= curIcon param1)
 				)
 				1
 			else
@@ -496,91 +496,91 @@
 		)
 	)
 
-	(method (sel_217 param1 param2 &tmp temp0)
-		(if (not (& (param1 sel_14:) $0004))
-			(if (IsObject sel_223)
-				(sel_223 sel_217: 0)
+	(method (highlight param1 param2 &tmp temp0)
+		(if (not (& (param1 signal:) $0004))
+			(if (IsObject highlightedIcon)
+				(highlightedIcon highlight: 0)
 			)
-			((= sel_223 param1) sel_217: 1)
+			((= highlightedIcon param1) highlight: 1)
 		)
 		(if (and (>= argc 2) param2)
 			(gGame
-				sel_197:
+				setCursor:
 					gTheCursor
 					1
 					(+
-						(param1 sel_7:)
-						(/ (- (param1 sel_9:) (param1 sel_7:)) 2)
+						(param1 nsLeft:)
+						(/ (- (param1 nsRight:) (param1 nsLeft:)) 2)
 					)
-					(- (param1 sel_8:) 3)
+					(- (param1 nsBottom:) 3)
 			)
 		)
 	)
 
-	(method (sel_230 &tmp temp0)
+	(method (swapCurIcon &tmp temp0)
 		(cond
-			((& sel_29 $0004)
+			((& state $0004)
 				(return)
 			)
 			(
 				(and
-					(!= sel_207 (= temp0 (NodeValue (self sel_124:))))
-					(not (& (temp0 sel_14:) $0004))
+					(!= curIcon (= temp0 (NodeValue (self first:))))
+					(not (& (temp0 signal:) $0004))
 				)
-				(= sel_224 sel_207)
-				(= sel_207 (NodeValue (self sel_124:)))
+				(= prevIcon curIcon)
+				(= curIcon (NodeValue (self first:)))
 			)
-			((and sel_224 (not (& (sel_224 sel_14:) $0004)))
-				(= sel_207 sel_224)
+			((and prevIcon (not (& (prevIcon signal:) $0004)))
+				(= curIcon prevIcon)
 			)
 		)
-		(gGame sel_197: (sel_207 sel_33:) 1)
+		(gGame setCursor: (curIcon cursor:) 1)
 	)
 
-	(method (sel_231 &tmp temp0 temp1 temp2)
-		(if (& sel_29 $0004)
+	(method (advanceCurIcon &tmp temp0 temp1 temp2)
+		(if (& state $0004)
 			(return)
 		)
-		(= temp0 sel_207)
+		(= temp0 curIcon)
 		(= temp1 0)
 		(while
 			(&
 				((= temp0
-						(self sel_64: (mod (+ (self sel_132: temp0) 1) sel_86))
+						(self at: (mod (+ (self indexOf: temp0) 1) size))
 					)
-					sel_14:
+					signal:
 				)
 				$0006
 			)
-			(if (> temp1 (+ 1 sel_86))
+			(if (> temp1 (+ 1 size))
 				(return)
 			else
 				(++ temp1)
 			)
 		)
-		(= sel_207 temp0)
-		(gGame sel_197: (sel_207 sel_33:) 1)
+		(= curIcon temp0)
+		(gGame setCursor: (curIcon cursor:) 1)
 	)
 
-	(method (sel_232 param1 &tmp temp0 temp1 temp2 temp3 temp4 temp5 temp6 [temp7 50] temp57 temp58 temp59)
-		(= temp1 (param1 sel_1:))
-		(= temp0 (param1 sel_0:))
-		(= temp2 (param1 sel_31:))
-		(= temp3 (param1 sel_37:))
-		(= temp5 (param1 sel_73:))
-		(if (= temp4 (self sel_120: 218 param1))
-			(= temp57 (temp4 sel_33:))
-			(= temp58 (temp4 sel_14:))
-			(= temp59 (== temp4 sel_227))
+	(method (dispatchEvent param1 &tmp temp0 temp1 temp2 temp3 temp4 temp5 temp6 [temp7 50] temp57 temp58 temp59)
+		(= temp1 (param1 x:))
+		(= temp0 (param1 y:))
+		(= temp2 (param1 type:))
+		(= temp3 (param1 message:))
+		(= temp5 (param1 claimed:))
+		(if (= temp4 (self firstTrue: 218 param1))
+			(= temp57 (temp4 cursor:))
+			(= temp58 (temp4 signal:))
+			(= temp59 (== temp4 helpIconItem))
 		)
-		(param1 sel_111:)
+		(param1 dispose:)
 		(if (& temp2 $0040)
 			(switch temp3
 				(3
-					(self sel_190:)
+					(self advance:)
 				)
 				(7
-					(self sel_191:)
+					(self retreat:)
 				)
 			)
 		else
@@ -591,44 +591,44 @@
 							(not
 								(and
 									(<= 0 temp0)
-									(<= temp0 (+ sel_0 sel_220))
+									(<= temp0 (+ y height))
 									(<= 0 temp1)
 									(<= temp1 320)
 								)
 							)
 							(if
 								(and
-									(& sel_29 $0400)
+									(& state $0400)
 									(or
-										(not (IsObject sel_227))
-										(not (& (sel_227 sel_14:) $0010))
+										(not (IsObject helpIconItem))
+										(not (& (helpIconItem signal:) $0010))
 									)
 								)
-								(= sel_222 0)
+								(= oldMouseY 0)
 								(= temp5 1)
 							)
 						)
-						((and temp4 (!= temp4 sel_223))
-							(= sel_222 0)
-							(self sel_217: temp4)
+						((and temp4 (!= temp4 highlightedIcon))
+							(= oldMouseY 0)
+							(self highlight: temp4)
 						)
 					)
 				)
 				(1
-					(if (and temp4 (self sel_178: temp4 1))
+					(if (and temp4 (self select: temp4 1))
 						(if temp59
 							(if temp57
-								(gGame sel_197: temp57)
+								(gGame setCursor: temp57)
 							)
-							(if (& sel_29 $0800)
-								(self sel_234:)
+							(if (& state $0800)
+								(self noClickHelp:)
 							else
-								(sel_227 sel_14: (| (sel_227 sel_14:) $0010))
+								(helpIconItem signal: (| (helpIconItem signal:) $0010))
 							)
 						else
 							(= temp5 (& temp58 $0040))
 						)
-						(temp4 sel_57:)
+						(temp4 doit:)
 					)
 				)
 				(4
@@ -641,163 +641,163 @@
 						)
 						(13
 							(if (not temp4)
-								(= temp4 sel_223)
+								(= temp4 highlightedIcon)
 							)
 							(cond
-								((and temp4 (== temp4 sel_227))
+								((and temp4 (== temp4 helpIconItem))
 									(if (!= temp57 -1)
-										(gGame sel_197: temp57)
+										(gGame setCursor: temp57)
 									)
-									(if sel_227
-										(sel_227
-											sel_14: (| (sel_227 sel_14:) $0010)
+									(if helpIconItem
+										(helpIconItem
+											signal: (| (helpIconItem signal:) $0010)
 										)
 									)
 								)
-								((and (IsObject temp4) (self sel_178: temp4))
-									(temp4 sel_57:)
+								((and (IsObject temp4) (self select: temp4))
+									(temp4 doit:)
 									(= temp5 (& temp58 $0040))
 								)
 							)
 						)
 						(3840
-							(self sel_191:)
+							(self retreat:)
 						)
 						(9
-							(self sel_190:)
+							(self advance:)
 						)
 					)
 				)
 				(24576
-					(if (and temp4 (temp4 sel_215:))
+					(if (and temp4 (temp4 helpVerb:))
 						(= temp6 (GetPort))
 						(Print
-							sel_30: gUserFont
-							sel_67: 250
-							sel_198:
-								(temp4 sel_213:)
-								(temp4 sel_215:)
+							font: gUserFont
+							width: 250
+							addText:
+								(temp4 noun:)
+								(temp4 helpVerb:)
 								0
 								1
 								0
 								0
-								(temp4 sel_214:)
-							sel_110:
+								(temp4 modNum:)
+							init:
 						)
 						(SetPort temp6)
 					)
-					(if sel_227
-						(sel_227 sel_14: (& (sel_227 sel_14:) $ffef))
+					(if helpIconItem
+						(helpIconItem signal: (& (helpIconItem signal:) $ffef))
 					)
-					(gGame sel_197: 999)
+					(gGame setCursor: 999)
 				)
 			)
 		)
 		(return temp5)
 	)
 
-	(method (sel_233 param1 &tmp temp0 temp1)
+	(method (disable param1 &tmp temp0 temp1)
 		(if argc
 			(for ((= temp0 0)) (< temp0 argc) ((++ temp0))
 				(= temp1
 					(if (IsObject [param1 temp0])
 						[param1 temp0]
 					else
-						(self sel_64: [param1 temp0])
+						(self at: [param1 temp0])
 					)
 				)
-				(if (!= temp1 (self sel_64: 7))
-					(temp1 sel_14: (| (temp1 sel_14:) $0004))
+				(if (!= temp1 (self at: 7))
+					(temp1 signal: (| (temp1 signal:) $0004))
 					(cond
-						((== temp1 sel_207)
-							(self sel_231:)
+						((== temp1 curIcon)
+							(self advanceCurIcon:)
 						)
-						((== temp1 sel_223)
-							(self sel_190:)
+						((== temp1 highlightedIcon)
+							(self advance:)
 						)
 					)
 				)
 			)
 		else
-			(|= sel_29 $0004)
+			(|= state $0004)
 		)
 	)
 
-	(method (sel_177 param1 &tmp temp0 temp1)
+	(method (enable param1 &tmp temp0 temp1)
 		(if argc
 			(for ((= temp0 0)) (< temp0 argc) ((++ temp0))
 				(= temp1
 					(if (IsObject [param1 temp0])
 						[param1 temp0]
 					else
-						(self sel_64: [param1 temp0])
+						(self at: [param1 temp0])
 					)
 				)
-				(temp1 sel_14: (& (temp1 sel_14:) $fffb))
+				(temp1 signal: (& (temp1 signal:) $fffb))
 			)
 		else
-			(&= sel_29 $fffb)
+			(&= state $fffb)
 		)
 	)
 
-	(method (sel_234 &tmp temp0 temp1 temp2 temp3 temp4)
+	(method (noClickHelp &tmp temp0 temp1 temp2 temp3 temp4)
 		(= temp1 (= temp2 0))
 		(= temp3 (GetPort))
-		(= temp4 (gSystemWindow sel_236:))
-		(gSystemWindow sel_236: 1)
-		(while (not ((= temp0 (Event sel_109:)) sel_31:))
-			(if (not (self sel_115: IconBar))
-				(temp0 sel_148:)
+		(= temp4 (gSystemWindow eraseOnly:))
+		(gSystemWindow eraseOnly: 1)
+		(while (not ((= temp0 (Event new:)) type:))
+			(if (not (self isMemberOf: IconBar))
+				(temp0 localize:)
 			)
 			(cond
-				((= temp2 (self sel_120: 218 temp0))
-					(if (and (!= temp2 temp1) (temp2 sel_215:))
+				((= temp2 (self firstTrue: 218 temp0))
+					(if (and (!= temp2 temp1) (temp2 helpVerb:))
 						(= temp1 temp2)
 						(if gModelessDialog
-							(gModelessDialog sel_111:)
+							(gModelessDialog dispose:)
 						)
 						(Print
-							sel_30: gUserFont
-							sel_67: 250
-							sel_198:
-								(temp2 sel_213:)
-								(temp2 sel_215:)
+							font: gUserFont
+							width: 250
+							addText:
+								(temp2 noun:)
+								(temp2 helpVerb:)
 								0
 								1
 								0
 								0
-								(temp2 sel_214:)
-							sel_203: 1
-							sel_110:
+								(temp2 modNum:)
+							modeless: 1
+							init:
 						)
 						(SetPort temp3)
 					)
 				)
 				(gModelessDialog
-					(gModelessDialog sel_111:)
+					(gModelessDialog dispose:)
 				)
 				(else
 					(= temp1 0)
 				)
 			)
-			(temp0 sel_111:)
+			(temp0 dispose:)
 		)
-		(gSystemWindow sel_236: temp4)
-		(gGame sel_197: 999 1)
+		(gSystemWindow eraseOnly: temp4)
+		(gGame setCursor: 999 1)
 		(if gModelessDialog
-			(gModelessDialog sel_111:)
+			(gModelessDialog dispose:)
 		)
 		(SetPort temp3)
-		(if (not (sel_227 sel_218: temp0))
-			(self sel_232: temp0)
+		(if (not (helpIconItem onMe: temp0))
+			(self dispatchEvent: temp0)
 		else
-			(temp0 sel_111:)
+			(temp0 dispose:)
 		)
 	)
 
-	(method (sel_235 param1 &tmp temp0 temp1)
+	(method (findIcon param1 &tmp temp0 temp1)
 		(for ((= temp0 0)) (< temp0 argc) ((++ temp0))
-			(if (== ((= temp1 (self sel_64: temp0)) sel_37:) param1)
+			(if (== ((= temp1 (self at: temp0)) message:) param1)
 				(return temp1)
 			)
 		)

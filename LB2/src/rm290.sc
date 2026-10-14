@@ -31,36 +31,36 @@
 
 (instance rm290 of LBRoom
 	(properties
-		sel_20 {rm290}
-		sel_213 15
-		sel_408 290
-		sel_409 295
-		sel_411 280
+		name {rm290}
+		noun 15
+		picture 290
+		north 295
+		south 280
 	)
 
-	(method (sel_110)
+	(method (init)
 		(LoadMany rsVIEW 290 291 293 292)
 		(LoadMany rsSOUND 292 280)
-		(gEgo sel_110: sel_585: 830 sel_320: Scaler 137 0 190 0)
+		(gEgo init: normalize: 830 setScale: Scaler 137 0 190 0)
 		(switch gPrevRoomNum
-			(sel_409
-				(gEgo sel_349: 0 sel_253: 180)
+			(north
+				(gEgo edgeHit: 0 setHeading: 180)
 			)
-			(sel_411
-				(gEgo sel_153: 160 230)
-				(gCurRoom sel_146: sComeInSouth)
+			(south
+				(gEgo posn: 160 230)
+				(gCurRoom setScript: sComeInSouth)
 			)
 			(else
-				(gEgo sel_153: 140 173)
-				(gGame sel_588:)
+				(gEgo posn: 140 173)
+				(gGame handsOn:)
 			)
 		)
-		(super sel_110:)
+		(super init:)
 		(self
-			sel_395:
-				((Polygon sel_109:)
-					sel_31: 2
-					sel_110:
+			addObstacle:
+				((Polygon new:)
+					type: 2
+					init:
 						0
 						0
 						319
@@ -101,62 +101,62 @@
 						123
 						0
 						189
-					sel_117:
+					yourself:
 				)
-				((Polygon sel_109:)
-					sel_31: 2
-					sel_110: 64 189 85 171 107 189
-					sel_117:
+				((Polygon new:)
+					type: 2
+					init: 64 189 85 171 107 189
+					yourself:
 				)
 		)
-		(officeDoor sel_110: sel_590: (IsFlag 43))
-		(happyWanderer sel_110: sel_146: sWander)
-		(sergeant sel_110: sel_311: 1 6 2 4 7 8 sel_146: sMoveSergeant)
-		(southExitFeature sel_110:)
-		(southExitFeature2 sel_110:)
-		(files sel_110:)
-		(desk sel_110:)
-		(poster1 sel_110:)
-		(poster2 sel_110:)
-		(poster3 sel_110:)
-		(poster4 sel_110:)
-		(poster5 sel_110:)
-		(poster6 sel_110:)
-		(pole sel_110:)
+		(officeDoor init: locked: (IsFlag 43))
+		(happyWanderer init: setScript: sWander)
+		(sergeant init: approachVerbs: 1 6 2 4 7 8 setScript: sMoveSergeant)
+		(southExitFeature init:)
+		(southExitFeature2 init:)
+		(files init:)
+		(desk init:)
+		(poster1 init:)
+		(poster2 init:)
+		(poster3 init:)
+		(poster4 init:)
+		(poster5 init:)
+		(poster6 init:)
+		(pole init:)
 	)
 
-	(method (sel_57)
+	(method (doit)
 		(cond
-			(sel_142)
+			(script)
 			((StepOn gEgo 16)
-				(self sel_146: sEgoLeaveSouth)
+				(self setScript: sEgoLeaveSouth)
 			)
 		)
-		(super sel_57: &rest)
+		(super doit: &rest)
 	)
 
-	(method (sel_111)
-		(super sel_111: &rest)
+	(method (dispose)
+		(super dispose: &rest)
 	)
 )
 
 (instance sEgoLeaveSouth of Script
 	(properties
-		sel_20 {sEgoLeaveSouth}
+		name {sEgoLeaveSouth}
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
-				(gGame sel_587:)
-				(gEgo sel_55: 180)
-				(= sel_136 1)
+				(gGame handsOff:)
+				(gEgo heading: 180)
+				(= cycles 1)
 			)
 			(1
-				(gEgo sel_312: MoveFwd 80 self)
+				(gEgo setMotion: MoveFwd 80 self)
 			)
 			(2
-				(gCurRoom sel_399: 280)
+				(gCurRoom newRoom: 280)
 			)
 		)
 	)
@@ -164,21 +164,21 @@
 
 (instance sComeInSouth of Script
 	(properties
-		sel_20 {sComeInSouth}
+		name {sComeInSouth}
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
-				(gGame sel_587:)
-				(= sel_136 1)
+				(gGame handsOff:)
+				(= cycles 1)
 			)
 			(1
-				(gEgo sel_312: MoveTo 160 175 self)
+				(gEgo setMotion: MoveTo 160 175 self)
 			)
 			(2
-				(gGame sel_588:)
-				(self sel_111:)
+				(gGame handsOn:)
+				(self dispose:)
 			)
 		)
 	)
@@ -186,22 +186,22 @@
 
 (instance sKnock of Script
 	(properties
-		sel_20 {sKnock}
+		name {sKnock}
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
-				(gGame sel_587:)
-				(knockSound sel_39: self)
+				(gGame handsOff:)
+				(knockSound play: self)
 			)
 			(1
-				(gMessager sel_295: 3 4 0 0 self)
+				(gMessager say: 3 4 0 0 self)
 			)
 			(2
 				(= local2 1)
-				(officeDoor sel_300: 4)
-				(self sel_111:)
+				(officeDoor doVerb: 4)
+				(self dispose:)
 			)
 		)
 	)
@@ -209,29 +209,29 @@
 
 (instance sMoveSergeant of Script
 	(properties
-		sel_20 {sMoveSergeant}
+		name {sMoveSergeant}
 	)
 
-	(method (sel_57)
-		(if (and (not local0) (sergeant sel_245:) (== (sergeant sel_4:) 3))
-			(shuffleSound sel_39: sergeant)
+	(method (doit)
+		(if (and (not local0) (sergeant cycler:) (== (sergeant cel:) 3))
+			(shuffleSound play: sergeant)
 			(= local0 1)
 		)
-		(super sel_57:)
+		(super doit:)
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
-				(sergeant sel_161: Fwd)
-				(= sel_137 (Random 1 6))
+				(sergeant setCycle: Fwd)
+				(= seconds (Random 1 6))
 			)
 			(1
-				(sergeant sel_161: 0)
-				(= sel_137 (Random 2 4))
+				(sergeant setCycle: 0)
+				(= seconds (Random 2 4))
 			)
 			(2
-				(self sel_110:)
+				(self init:)
 			)
 		)
 	)
@@ -239,47 +239,47 @@
 
 (instance sGiveSandwich of Script
 	(properties
-		sel_20 {sGiveSandwich}
+		name {sGiveSandwich}
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
-				(gGame sel_587:)
-				(gEgo sel_312: PolyPath 252 152 self)
+				(gGame handsOff:)
+				(gEgo setMotion: PolyPath 252 152 self)
 			)
 			(1
 				(Face gEgo sergeant self)
 			)
 			(2
-				(sergeant sel_146: 0)
-				(sergeant sel_3: 1 sel_4: 0 sel_244: 10 sel_161: CT 8 1 self)
+				(sergeant setScript: 0)
+				(sergeant loop: 1 cel: 0 cycleSpeed: 10 setCycle: CT 8 1 self)
 				(gEgo
-					sel_2: 292
-					sel_153: 240 152
-					sel_3: 1
-					sel_4: 0
-					sel_244: 10
-					sel_161: CT 4 1 self
+					view: 292
+					posn: 240 152
+					loop: 1
+					cel: 0
+					cycleSpeed: 10
+					setCycle: CT 4 1 self
 				)
 			)
 			(3
-				(gMessager sel_295: 2 15)
+				(gMessager say: 2 15)
 			)
 			(4
-				(gEgo sel_161: End self)
-				(sergeant sel_161: End self)
+				(gEgo setCycle: End self)
+				(sergeant setCycle: End self)
 			)
 			(5 0)
 			(6
-				(sergeant sel_3: 0 sel_146: sMoveSergeant)
+				(sergeant loop: 0 setScript: sMoveSergeant)
 				(SetFlag 7)
-				((ScriptID 21 1) sel_57: 772) ; dropCluesCode
-				(gEgo sel_351: 3)
-				(gEgo sel_585: 830)
-				(gEgo sel_3: 7 sel_153: 254 152 sel_253: 315)
-				(gGame sel_588:)
-				(self sel_111:)
+				((ScriptID 21 1) doit: 772) ; dropCluesCode
+				(gEgo put: 3)
+				(gEgo normalize: 830)
+				(gEgo loop: 7 posn: 254 152 setHeading: 315)
+				(gGame handsOn:)
+				(self dispose:)
 			)
 		)
 	)
@@ -287,29 +287,29 @@
 
 (instance sWander of Script
 	(properties
-		sel_20 {sWander}
+		name {sWander}
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
-				(= sel_137 (Random 3 20))
+				(= seconds (Random 3 20))
 			)
 			(1
-				(sel_42 sel_161: Walk sel_312: MoveTo 154 122 self)
+				(client setCycle: Walk setMotion: MoveTo 154 122 self)
 			)
 			(2
-				(= sel_139 (Random 30 240))
+				(= ticks (Random 30 240))
 			)
 			(3
-				(sel_42 sel_155: 2 sel_4: 0 sel_161: End self)
+				(client setLoop: 2 cel: 0 setCycle: End self)
 			)
 			(4
-				(sel_42 sel_155: 1 sel_161: Walk sel_312: MoveTo -20 141 self)
+				(client setLoop: 1 setCycle: Walk setMotion: MoveTo -20 141 self)
 			)
 			(5
-				(sel_42 sel_111:)
-				(self sel_111:)
+				(client dispose:)
+				(self dispose:)
 			)
 		)
 	)
@@ -317,30 +317,30 @@
 
 (instance happyWanderer of Actor
 	(properties
-		sel_20 {happyWanderer}
-		sel_1 -20
-		sel_0 141
-		sel_213 1
-		sel_2 293
-		sel_14 4096
+		name {happyWanderer}
+		x -20
+		y 141
+		noun 1
+		view 293
+		signal 4096
 	)
 )
 
 (instance sergeant of Prop
 	(properties
-		sel_20 {sergeant}
-		sel_1 220
-		sel_0 116
-		sel_213 2
-		sel_303 254
-		sel_304 152
-		sel_2 291
+		name {sergeant}
+		x 220
+		y 116
+		noun 2
+		approachX 254
+		approachY 152
+		view 291
 	)
 
-	(method (sel_300 param1 param2 &tmp temp0 temp1 temp2)
+	(method (doVerb param1 param2 &tmp temp0 temp1 temp2)
 		(switch param1
 			(15
-				(gCurRoom sel_146: sGiveSandwich)
+				(gCurRoom setScript: sGiveSandwich)
 			)
 			(2
 				(cond
@@ -354,12 +354,12 @@
 						(= temp1 79)
 					)
 				)
-				(gMessager sel_295: 2 2 temp1)
+				(gMessager say: 2 2 temp1)
 				(= local1 0)
 			)
 			(6
 				(if (not (IsFlag 7))
-					(gMessager sel_295: 2 6 70)
+					(gMessager say: 2 6 70)
 				else
 					(if
 						(==
@@ -367,7 +367,7 @@
 								(if (== argc 2)
 									param2
 								else
-									(gCurRoom sel_422: (ScriptID 20 0)) ; inNotebook
+									(gCurRoom setInset: (ScriptID 20 0)) ; inNotebook
 								)
 							)
 							-1
@@ -393,152 +393,152 @@
 					)
 					(switch temp0
 						(260
-							(if (officeDoor sel_590:)
-								(gMessager sel_295: 2 6 71)
+							(if (officeDoor locked:)
+								(gMessager say: 2 6 71)
 							else
-								(gMessager sel_295: 2 6 5)
+								(gMessager say: 2 6 5)
 							)
 						)
 						(520
-							(gMessager sel_295: 2 6 26)
-							((ScriptID 21 0) sel_57: 1029) ; addCluesCode
+							(gMessager say: 2 6 26)
+							((ScriptID 21 0) doit: 1029) ; addCluesCode
 						)
 						(264
-							(gMessager sel_295: 2 6 9)
-							((ScriptID 21 1) sel_57: 518) ; dropCluesCode
-							((ScriptID 21 0) sel_57: 520) ; addCluesCode
+							(gMessager say: 2 6 9)
+							((ScriptID 21 1) doit: 518) ; dropCluesCode
+							((ScriptID 21 0) doit: 520) ; addCluesCode
 						)
 						(else
-							(if (Message msgGET gCurRoomNum sel_213 6 temp1 1)
-								(gMessager sel_295: sel_213 6 temp1)
+							(if (Message msgGET gCurRoomNum noun 6 temp1 1)
+								(gMessager say: noun 6 temp1)
 							else
-								(gMessager sel_295: sel_213 6 43)
+								(gMessager say: noun 6 43)
 							)
 						)
 					)
 				)
 			)
 			(else
-				(super sel_300: param1)
+				(super doVerb: param1)
 			)
 		)
 	)
 
-	(method (sel_145)
+	(method (cue)
 		(= local0 0)
-		(super sel_145:)
+		(super cue:)
 	)
 )
 
 (instance officeDoor of Door
 	(properties
-		sel_20 {officeDoor}
-		sel_1 18
-		sel_0 57
-		sel_213 3
-		sel_303 58
-		sel_304 125
-		sel_2 290
-		sel_589 295
-		sel_597 37
-		sel_598 110
-		sel_599 0
-		sel_600 0
+		name {officeDoor}
+		x 18
+		y 57
+		noun 3
+		approachX 58
+		approachY 125
+		view 290
+		entranceTo 295
+		moveToX 37
+		moveToY 110
+		enterType 0
+		exitType 0
 	)
 
-	(method (sel_300 param1)
+	(method (doVerb param1)
 		(switch param1
 			(4
 				(cond
 					(local2
-						(super sel_300: param1 &rest)
+						(super doVerb: param1 &rest)
 					)
-					((not (self sel_590:))
-						(gEgo sel_146: sKnock)
+					((not (self locked:))
+						(gEgo setScript: sKnock)
 					)
 					(else
 						(Face gEgo officeDoor)
-						(super sel_300: param1 &rest)
+						(super doVerb: param1 &rest)
 					)
 				)
 			)
 			(else
-				(super sel_300: param1 &rest)
+				(super doVerb: param1 &rest)
 			)
 		)
 	)
 
-	(method (sel_606)
-		(super sel_606: 12 112 55 112 54 121 15 122)
+	(method (createPoly)
+		(super createPoly: 12 112 55 112 54 121 15 122)
 	)
 )
 
 (instance theWanderer of Narrator
 	(properties
-		sel_20 {theWanderer}
-		sel_26 15
+		name {theWanderer}
+		back 15
 	)
 
-	(method (sel_110)
-		(= sel_30 gUserFont)
-		(super sel_110: &rest)
+	(method (init)
+		(= font gUserFont)
+		(super init: &rest)
 	)
 )
 
 (instance files of Feature
 	(properties
-		sel_20 {files}
-		sel_0 2
-		sel_213 4
-		sel_6 76
-		sel_7 150
-		sel_8 98
-		sel_9 204
+		name {files}
+		y 2
+		noun 4
+		nsTop 76
+		nsLeft 150
+		nsBottom 98
+		nsRight 204
 	)
 )
 
 (instance desk of Feature
 	(properties
-		sel_20 {desk}
-		sel_0 1
-		sel_213 5
-		sel_6 98
-		sel_7 58
-		sel_8 151
-		sel_9 261
+		name {desk}
+		y 1
+		noun 5
+		nsTop 98
+		nsLeft 58
+		nsBottom 151
+		nsRight 261
 	)
 )
 
 (instance poster1 of Feature
 	(properties
-		sel_20 {poster1}
-		sel_0 189
-		sel_213 6
-		sel_6 34
-		sel_7 75
-		sel_8 55
-		sel_9 100
+		name {poster1}
+		y 189
+		noun 6
+		nsTop 34
+		nsLeft 75
+		nsBottom 55
+		nsRight 100
 	)
 )
 
 (instance poster2 of Feature
 	(properties
-		sel_20 {poster2}
-		sel_0 189
-		sel_213 7
-		sel_6 64
-		sel_7 84
-		sel_8 79
-		sel_9 101
+		name {poster2}
+		y 189
+		noun 7
+		nsTop 64
+		nsLeft 84
+		nsBottom 79
+		nsRight 101
 	)
 
-	(method (sel_300 param1 param2)
+	(method (doVerb param1 param2)
 		(switch param1
 			(4
-				(poster1 sel_300: 4)
+				(poster1 doVerb: 4)
 			)
 			(else
-				(super sel_300: param1 param2 &rest)
+				(super doVerb: param1 param2 &rest)
 			)
 		)
 	)
@@ -546,22 +546,22 @@
 
 (instance poster3 of Feature
 	(properties
-		sel_20 {poster3}
-		sel_0 189
-		sel_213 8
-		sel_6 66
-		sel_7 69
-		sel_8 85
-		sel_9 79
+		name {poster3}
+		y 189
+		noun 8
+		nsTop 66
+		nsLeft 69
+		nsBottom 85
+		nsRight 79
 	)
 
-	(method (sel_300 param1 param2)
+	(method (doVerb param1 param2)
 		(switch param1
 			(4
-				(poster1 sel_300: 4)
+				(poster1 doVerb: 4)
 			)
 			(else
-				(super sel_300: param1 param2 &rest)
+				(super doVerb: param1 param2 &rest)
 			)
 		)
 	)
@@ -569,22 +569,22 @@
 
 (instance poster4 of Feature
 	(properties
-		sel_20 {poster4}
-		sel_0 189
-		sel_213 9
-		sel_6 85
-		sel_7 74
-		sel_8 106
-		sel_9 81
+		name {poster4}
+		y 189
+		noun 9
+		nsTop 85
+		nsLeft 74
+		nsBottom 106
+		nsRight 81
 	)
 
-	(method (sel_300 param1 param2)
+	(method (doVerb param1 param2)
 		(switch param1
 			(4
-				(poster1 sel_300: 4)
+				(poster1 doVerb: 4)
 			)
 			(else
-				(super sel_300: param1 param2 &rest)
+				(super doVerb: param1 param2 &rest)
 			)
 		)
 	)
@@ -592,22 +592,22 @@
 
 (instance poster5 of Feature
 	(properties
-		sel_20 {poster5}
-		sel_0 189
-		sel_213 10
-		sel_6 100
-		sel_7 84
-		sel_8 114
-		sel_9 94
+		name {poster5}
+		y 189
+		noun 10
+		nsTop 100
+		nsLeft 84
+		nsBottom 114
+		nsRight 94
 	)
 
-	(method (sel_300 param1 param2)
+	(method (doVerb param1 param2)
 		(switch param1
 			(4
-				(poster1 sel_300: 4)
+				(poster1 doVerb: 4)
 			)
 			(else
-				(super sel_300: param1 param2 &rest)
+				(super doVerb: param1 param2 &rest)
 			)
 		)
 	)
@@ -615,22 +615,22 @@
 
 (instance poster6 of Feature
 	(properties
-		sel_20 {poster6}
-		sel_0 189
-		sel_213 11
-		sel_6 117
-		sel_7 69
-		sel_8 137
-		sel_9 95
+		name {poster6}
+		y 189
+		noun 11
+		nsTop 117
+		nsLeft 69
+		nsBottom 137
+		nsRight 95
 	)
 
-	(method (sel_300 param1 param2)
+	(method (doVerb param1 param2)
 		(switch param1
 			(4
-				(poster1 sel_300: 4)
+				(poster1 doVerb: 4)
 			)
 			(else
-				(super sel_300: param1 param2 &rest)
+				(super doVerb: param1 param2 &rest)
 			)
 		)
 	)
@@ -638,52 +638,52 @@
 
 (instance pole of Feature
 	(properties
-		sel_20 {pole}
-		sel_0 188
-		sel_213 12
-		sel_7 71
-		sel_8 189
-		sel_9 100
+		name {pole}
+		y 188
+		noun 12
+		nsLeft 71
+		nsBottom 189
+		nsRight 100
 	)
 )
 
 (instance southExitFeature of ExitFeature
 	(properties
-		sel_20 {southExitFeature}
-		sel_6 184
-		sel_7 111
-		sel_8 189
-		sel_9 320
-		sel_33 11
-		sel_583 3
-		sel_213 14
+		name {southExitFeature}
+		nsTop 184
+		nsLeft 111
+		nsBottom 189
+		nsRight 320
+		cursor 11
+		exitDir 3
+		noun 14
 	)
 )
 
 (instance southExitFeature2 of ExitFeature
 	(properties
-		sel_20 {southExitFeature2}
-		sel_6 184
-		sel_8 189
-		sel_9 63
-		sel_33 11
-		sel_583 3
-		sel_213 14
+		name {southExitFeature2}
+		nsTop 184
+		nsBottom 189
+		nsRight 63
+		cursor 11
+		exitDir 3
+		noun 14
 	)
 )
 
 (instance shuffleSound of Sound
 	(properties
-		sel_20 {shuffleSound}
-		sel_99 5
-		sel_40 292
+		name {shuffleSound}
+		flags 5
+		number 292
 	)
 )
 
 (instance knockSound of Sound
 	(properties
-		sel_20 {knockSound}
-		sel_99 1
-		sel_40 297
+		name {knockSound}
+		flags 1
+		number 297
 	)
 )

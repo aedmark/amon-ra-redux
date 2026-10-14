@@ -15,90 +15,90 @@
 
 (instance rm150 of LBRoom
 	(properties
-		sel_20 {rm150}
-		sel_408 150
-		sel_28 10
+		name {rm150}
+		picture 150
+		style 10
 	)
 
-	(method (sel_110)
+	(method (init)
 		(LoadMany rsVIEW 151 150)
 		(LoadMany rsSOUND 150)
-		(self sel_414: 92)
-		(super sel_110:)
-		(gGameMusic1 sel_40: 150 sel_99: 1 sel_3: -1 sel_39:)
-		(lauraTrain sel_110:)
-		(self sel_146: sCartoon)
+		(self setRegions: 92)
+		(super init:)
+		(gGameMusic1 number: 150 flags: 1 loop: -1 play:)
+		(lauraTrain init:)
+		(self setScript: sCartoon)
 	)
 )
 
 (instance sCartoon of Script
 	(properties
-		sel_20 {sCartoon}
+		name {sCartoon}
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
-				(lauraTrain sel_312: MoveTo -245 56 self)
-				(= sel_137 2)
+				(lauraTrain setMotion: MoveTo -245 56 self)
+				(= seconds 2)
 			)
 			(1
-				(creditTitle sel_110: sel_312: MoveTo 35 107 self)
-				(creditName sel_110: sel_312: MoveTo 35 151 self)
+				(creditTitle init: setMotion: MoveTo 35 107 self)
+				(creditName init: setMotion: MoveTo 35 151 self)
 			)
 			(2 0)
 			(3
-				(= sel_137 3)
+				(= seconds 3)
 			)
 			(4
-				(creditTitle sel_312: MoveTo -232 107 self)
-				(creditName sel_312: MoveTo -250 151 self)
+				(creditTitle setMotion: MoveTo -232 107 self)
+				(creditName setMotion: MoveTo -250 151 self)
 			)
 			(5 0)
 			(6
-				(= sel_137 3)
+				(= seconds 3)
 			)
 			(7
 				(creditTitle
-					sel_153: 333 130
-					sel_3: 5
-					sel_312: MoveTo -479 130 self
+					posn: 333 130
+					loop: 5
+					setMotion: MoveTo -479 130 self
 				)
 				(creditName
-					sel_153: 590 130
-					sel_3: 5
-					sel_312: MoveTo -222 130 self
+					posn: 590 130
+					loop: 5
+					setMotion: MoveTo -222 130 self
 				)
 			)
 			(8 0)
 			(9
-				(= sel_137 3)
+				(= seconds 3)
 			)
 			(10
 				(creditTitle
-					sel_153: -236 119
-					sel_3: 6
-					sel_312: MoveTo 42 119 self
+					posn: -236 119
+					loop: 6
+					setMotion: MoveTo 42 119 self
 				)
 				(creditName
-					sel_153: -135 146
-					sel_3: 6
-					sel_312: MoveTo 143 146 self
+					posn: -135 146
+					loop: 6
+					setMotion: MoveTo 143 146 self
 				)
 			)
 			(11 0)
 			(12
-				(= sel_137 3)
+				(= seconds 3)
 			)
 			(13
-				(creditTitle sel_312: MoveTo -246 119 self)
-				(creditName sel_312: MoveTo -145 146 self)
+				(creditTitle setMotion: MoveTo -246 119 self)
+				(creditName setMotion: MoveTo -145 146 self)
 			)
 			(14 0)
 			(15 0)
 			(16
-				(gCurRoom sel_399: 155)
-				(self sel_111:)
+				(gCurRoom newRoom: 155)
+				(self dispose:)
 			)
 		)
 	)
@@ -106,35 +106,35 @@
 
 (instance lauraTrain of Actor
 	(properties
-		sel_20 {lauraTrain}
-		sel_1 300
-		sel_0 56
-		sel_2 150
-		sel_53 10
+		name {lauraTrain}
+		x 300
+		y 56
+		view 150
+		moveSpeed 10
 	)
 )
 
 (instance creditTitle of Actor
 	(properties
-		sel_20 {creditTitle}
-		sel_1 35
-		sel_0 200
-		sel_2 151
-		sel_3 4
-		sel_14 26624
-		sel_53 0
+		name {creditTitle}
+		x 35
+		y 200
+		view 151
+		loop 4
+		signal 26624
+		moveSpeed 0
 	)
 )
 
 (instance creditName of Actor
 	(properties
-		sel_20 {creditName}
-		sel_1 35
-		sel_0 244
-		sel_2 151
-		sel_3 4
-		sel_4 1
-		sel_14 26624
-		sel_53 0
+		name {creditName}
+		x 35
+		y 244
+		view 151
+		loop 4
+		cel 1
+		signal 26624
+		moveSpeed 0
 	)
 )

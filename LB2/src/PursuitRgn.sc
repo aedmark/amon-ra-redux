@@ -18,11 +18,11 @@
 
 (class PursuitRgn of Rgn
 	(properties
-		sel_20 {PursuitRgn}
+		name {PursuitRgn}
 	)
 
-	(method (sel_110)
-		(super sel_110:)
+	(method (init)
+		(super init:)
 		(cond
 			((< gHowFast 5)
 				(= local0 60)
@@ -39,31 +39,31 @@
 		)
 	)
 
-	(method (sel_399 param1)
-		(= sel_407 0)
-		(= sel_406
+	(method (newRoom param1)
+		(= initialized 0)
+		(= keep
 			(OneOf param1 420 430 435 440 448 450 454 460 480 490 660)
 		)
-		(if (not sel_406)
-			(pursuitTimer sel_111: sel_81:)
+		(if (not keep)
+			(pursuitTimer dispose: delete:)
 		)
 	)
 
-	(method (sel_669)
-		(pursuitTimer sel_137: (+ (pursuitTimer sel_137:) local0))
+	(method (increaseTime)
+		(pursuitTimer seconds: (+ (pursuitTimer seconds:) local0))
 	)
 
-	(method (sel_670)
-		(pursuitTimer sel_137: (- (pursuitTimer sel_137:) local0))
+	(method (decreaseTime)
+		(pursuitTimer seconds: (- (pursuitTimer seconds:) local0))
 	)
 )
 
 (instance pursuitTimer of Timer
 	(properties
-		sel_20 {pursuitTimer}
+		name {pursuitTimer}
 	)
 
-	(method (sel_145)
-		(gCurRoom sel_403:)
+	(method (cue)
+		(gCurRoom notify:)
 	)
 )

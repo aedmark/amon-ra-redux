@@ -15,84 +15,84 @@
 
 (instance logo of LBRoom
 	(properties
-		sel_20 {logo}
-		sel_408 105
-		sel_28 10
+		name {logo}
+		picture 105
+		style 10
 	)
 
-	(method (sel_110)
+	(method (init)
 		(LoadMany rsVIEW 108)
 		(LoadMany rsPIC 780)
 		(LoadMany rsSOUND 105)
-		(self sel_414: 92)
-		(gCurRoom sel_417: 780)
-		(super sel_110:)
-		(sparkle sel_110:)
-		(gUser sel_237: 0 sel_347: 0)
-		(gGameMusic1 sel_40: 105 sel_99: 1 sel_3: 1 sel_39:)
-		(self sel_146: sRunIt)
+		(self setRegions: 92)
+		(gCurRoom drawPic: 780)
+		(super init:)
+		(sparkle init:)
+		(gUser canControl: 0 canInput: 0)
+		(gGameMusic1 number: 105 flags: 1 loop: 1 play:)
+		(self setScript: sRunIt)
 	)
 )
 
 (instance sRunIt of Script
 	(properties
-		sel_20 {sRunIt}
+		name {sRunIt}
 	)
 
-	(method (sel_57)
+	(method (doit)
 		(Palette palANIMATE 95 224 1)
-		(super sel_57: &rest)
+		(super doit: &rest)
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
 				(Palette palSET_INTENSITY 0 254 0)
-				(gCurRoom sel_417: 105 10)
-				(= sel_136 1)
+				(gCurRoom drawPic: 105 10)
+				(= cycles 1)
 			)
 			(1
-				(gGame sel_587: sel_197: 996 1 304 172)
-				(= sel_137 6)
+				(gGame handsOff: setCursor: 996 1 304 172)
+				(= seconds 6)
 			)
 			(2
-				(if (== (gGameMusic1 sel_165:) 20)
-					(sparkle sel_161: End self)
+				(if (== (gGameMusic1 prevSignal:) 20)
+					(sparkle setCycle: End self)
 				else
-					(-- sel_29)
-					(= sel_136 1)
+					(-- state)
+					(= cycles 1)
 				)
 			)
 			(3
-				(if (== (gGameMusic1 sel_165:) 30)
+				(if (== (gGameMusic1 prevSignal:) 30)
 					(sparkle
-						sel_1: 60
-						sel_0: 145
-						sel_3: 1
-						sel_4: 0
-						sel_161: End self
+						x: 60
+						y: 145
+						loop: 1
+						cel: 0
+						setCycle: End self
 					)
 				else
-					(-- sel_29)
-					(= sel_136 1)
+					(-- state)
+					(= cycles 1)
 				)
 			)
 			(4
 				(if
 					(and
-						(== (sparkle sel_4:) (sparkle sel_246:))
-						(== (gGameMusic1 sel_165:) -1)
+						(== (sparkle cel:) (sparkle lastCel:))
+						(== (gGameMusic1 prevSignal:) -1)
 					)
-					(sparkle sel_111:)
-					(= sel_136 1)
+					(sparkle dispose:)
+					(= cycles 1)
 				else
-					(-- sel_29)
-					(= sel_136 1)
+					(-- state)
+					(= cycles 1)
 				)
 			)
 			(5
-				(gCurRoom sel_399: 100)
-				(self sel_111:)
+				(gCurRoom newRoom: 100)
+				(self dispose:)
 			)
 		)
 	)
@@ -100,11 +100,11 @@
 
 (instance sparkle of Prop
 	(properties
-		sel_20 {sparkle}
-		sel_1 121
-		sel_0 54
-		sel_2 108
-		sel_60 15
-		sel_14 16
+		name {sparkle}
+		x 121
+		y 54
+		view 108
+		priority 15
+		signal 16
 	)
 )

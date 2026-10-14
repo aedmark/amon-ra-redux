@@ -21,149 +21,149 @@
 
 (instance rm710 of LBRoom
 	(properties
-		sel_20 {rm710}
-		sel_408 710
-		sel_412 700
+		name {rm710}
+		picture 710
+		west 700
 	)
 
-	(method (sel_110)
-		(gCurRoom sel_259: (List sel_109:))
-		((ScriptID 2710 0) sel_57: (gCurRoom sel_259:)) ; poly2710Code
+	(method (init)
+		(gCurRoom obstacles: (List new:))
+		((ScriptID 2710 0) doit: (gCurRoom obstacles:)) ; poly2710Code
 		(gEgo
-			sel_110:
-			sel_585: 831
-			sel_584: 1
-			sel_103: 1
-			sel_104: 110
-			sel_105: 110
-			sel_63: 10
-			sel_153: 63 155
+			init:
+			normalize: 831
+			wearingGown: 1
+			scaleSignal: 1
+			scaleX: 110
+			scaleY: 110
+			setPri: 10
+			posn: 63 155
 		)
 		(LoadMany rsSOUND 710 712 713 714 715 716)
 		(LoadMany rsVIEW 710 714 717 716 994)
 		(Load rsMESSAGE 710)
 		(Load rsFONT 69)
-		(super sel_110:)
-		(WrapMusic sel_110: 1 1710 1712 1713)
-		(wrapMusic2 sel_110: 1 714 715 716)
-		(sunnie1 sel_110: sel_161: Fwd)
-		(sunnie2 sel_110: sel_161: Fwd)
-		(tut sel_110: sel_161: Walk sel_155: 0)
-		(rameses sel_110: sel_161: StopWalk -1)
-		(bugsWithMeat sel_110: sel_155: 0 sel_161: Walk)
-		(ferret sel_110: sel_155: 5 sel_161: Walk)
-		(gCurRoom sel_146: sEnterRoom)
+		(super init:)
+		(WrapMusic init: 1 1710 1712 1713)
+		(wrapMusic2 init: 1 714 715 716)
+		(sunnie1 init: setCycle: Fwd)
+		(sunnie2 init: setCycle: Fwd)
+		(tut init: setCycle: Walk setLoop: 0)
+		(rameses init: setCycle: StopWalk -1)
+		(bugsWithMeat init: setLoop: 0 setCycle: Walk)
+		(ferret init: setLoop: 5 setCycle: Walk)
+		(gCurRoom setScript: sEnterRoom)
 	)
 
-	(method (sel_111)
+	(method (dispose)
 		(DisposeScript 2710)
-		(super sel_111: &rest)
+		(super dispose: &rest)
 	)
 )
 
 (instance sEnterRoom of Script
 	(properties
-		sel_20 {sEnterRoom}
+		name {sEnterRoom}
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
-				(gGame sel_587:)
-				((ScriptID 22 0) sel_57: 1) ; triggerAndClock
-				(= sel_139 180)
+				(gGame handsOff:)
+				((ScriptID 22 0) doit: 1) ; triggerAndClock
+				(= ticks 180)
 			)
 			(1
-				(gEgo sel_312: PolyPath 96 169 self)
+				(gEgo setMotion: PolyPath 96 169 self)
 			)
 			(2
-				(gEgo sel_63: -1)
-				(gMessager sel_295: 1 0 0 1)
-				(= sel_136 1)
+				(gEgo setPri: -1)
+				(gMessager say: 1 0 0 1)
+				(= cycles 1)
 			)
 			(3
-				(sunnie1 sel_161: End sunnie1)
-				(sunnie2 sel_161: End sunnie2)
+				(sunnie1 setCycle: End sunnie1)
+				(sunnie2 setCycle: End sunnie2)
 			)
 			(4)
 			(5
-				(WrapMusic sel_111:)
-				(wrapMusic2 sel_111: 1)
+				(WrapMusic dispose:)
+				(wrapMusic2 dispose: 1)
 				(LoadMany rsSOUND 636 637)
 				(LoadMany rsVIEW 635 632)
 				(Load rsPIC 716)
-				(= sel_139 60)
+				(= ticks 60)
 			)
 			(6
 				(gEgo
-					sel_2: 716
-					sel_155: 4
-					sel_156: 0
-					sel_244: 12
-					sel_161: End self
+					view: 716
+					setLoop: 4
+					setCel: 0
+					cycleSpeed: 12
+					setCycle: End self
 				)
-				(sunnie1 sel_313:)
-				(sunnie2 sel_313:)
+				(sunnie1 stopUpd:)
+				(sunnie2 stopUpd:)
 			)
 			(7
-				(tut sel_312: PolyPath 107 171 tut)
-				(= sel_136 35)
+				(tut setMotion: PolyPath 107 171 tut)
+				(= cycles 35)
 			)
 			(8
-				(gMessager sel_295: 1 0 0 2)
-				(sFXBeetles sel_39: 0 sel_170: 127 25 10 0)
-				(= sel_136 1)
+				(gMessager say: 1 0 0 2)
+				(sFXBeetles play: 0 fade: 127 25 10 0)
+				(= cycles 1)
 			)
 			(9
-				(bugsWithMeat sel_312: MoveTo 110 188)
-				(= sel_139 240)
-				(rameses sel_312: PolyPath 76 171 self)
+				(bugsWithMeat setMotion: MoveTo 110 188)
+				(= ticks 240)
+				(rameses setMotion: PolyPath 76 171 self)
 			)
 			(10
-				(ferret sel_312: MoveTo 133 185)
-				(sFXFerret sel_39:)
-				(sFXBeetles sel_170:)
+				(ferret setMotion: MoveTo 133 185)
+				(sFXFerret play:)
+				(sFXBeetles fade:)
 			)
 			(11
-				(rameses sel_155: 3 sel_156: 2 sel_161: CT 6 1 self)
+				(rameses setLoop: 3 setCel: 2 setCycle: CT 6 1 self)
 			)
 			(12
-				(rameses sel_2: 716 sel_155: 0 sel_156: 0 sel_161: End self)
+				(rameses view: 716 setLoop: 0 setCel: 0 setCycle: End self)
 			)
 			(13
-				(tut sel_313:)
-				(rameses sel_313:)
-				(= sel_139 30)
+				(tut stopUpd:)
+				(rameses stopUpd:)
+				(= ticks 30)
 			)
 			(14
-				(gGameMusic2 sel_40: 711 sel_99: 1 sel_3: -1 sel_39:)
-				(gCast sel_119: 102)
-				(gCurRoom sel_417: 716 9 sel_408: 716)
-				(= sel_136 1)
+				(gGameMusic2 number: 711 flags: 1 loop: -1 play:)
+				(gCast eachElementDo: 102)
+				(gCurRoom drawPic: 716 9 picture: 716)
+				(= cycles 1)
 			)
 			(15
-				(= sel_139 120)
+				(= ticks 120)
 			)
 			(16
-				(gMessager sel_295: 1 0 1)
-				(= sel_136 1)
+				(gMessager say: 1 0 1)
+				(= cycles 1)
 			)
 			(17
-				(= sel_139 120)
+				(= ticks 120)
 			)
 			(18
-				(gCast sel_119: 216)
-				(gEgo sel_111:)
-				(tut sel_111:)
-				(rameses sel_111:)
-				(sunnie1 sel_156: 0)
-				(sunnie2 sel_156: 0)
-				(gCurRoom sel_417: 710 9 sel_408: 716)
-				(= sel_139 120)
+				(gCast eachElementDo: 216)
+				(gEgo dispose:)
+				(tut dispose:)
+				(rameses dispose:)
+				(sunnie1 setCel: 0)
+				(sunnie2 setCel: 0)
+				(gCurRoom drawPic: 710 9 picture: 716)
+				(= ticks 120)
 			)
 			(19
-				(gCurRoom sel_399: 715)
-				(self sel_111:)
+				(gCurRoom newRoom: 715)
+				(self dispose:)
 			)
 		)
 	)
@@ -171,206 +171,206 @@
 
 (instance tut of Actor
 	(properties
-		sel_20 {tut}
-		sel_1 335
-		sel_0 178
-		sel_2 717
-		sel_14 16385
+		name {tut}
+		x 335
+		y 178
+		view 717
+		signal 16385
 	)
 
-	(method (sel_145)
-		(gMessager sel_295: 1 0 0 3)
-		(self sel_2: 716 sel_155: 1 sel_156: 0 sel_161: End)
+	(method (cue)
+		(gMessager say: 1 0 0 3)
+		(self view: 716 setLoop: 1 setCel: 0 setCycle: End)
 	)
 )
 
 (instance rameses of Actor
 	(properties
-		sel_20 {rameses}
-		sel_1 335
-		sel_0 178
-		sel_2 717
-		sel_3 1
-		sel_14 16385
+		name {rameses}
+		x 335
+		y 178
+		view 717
+		loop 1
+		signal 16385
 	)
 )
 
 (instance bugsWithMeat of Actor
 	(properties
-		sel_20 {bugsWithMeat}
-		sel_1 -18
-		sel_0 168
-		sel_2 635
-		sel_60 10
-		sel_14 16400
+		name {bugsWithMeat}
+		x -18
+		y 168
+		view 635
+		priority 10
+		signal 16400
 	)
 )
 
 (instance ferret of Actor
 	(properties
-		sel_20 {ferret}
-		sel_1 -5
-		sel_0 171
-		sel_2 632
-		sel_3 5
-		sel_14 16384
-		sel_51 4
+		name {ferret}
+		x -5
+		y 171
+		view 632
+		loop 5
+		signal 16384
+		xStep 4
 	)
 )
 
 (instance sunnie1 of Prop
 	(properties
-		sel_20 {sunnie1}
-		sel_1 305
-		sel_0 184
-		sel_2 710
-		sel_3 1
-		sel_14 16385
-		sel_244 12
+		name {sunnie1}
+		x 305
+		y 184
+		view 710
+		loop 1
+		signal 16385
+		cycleSpeed 12
 	)
 
-	(method (sel_145)
-		(self sel_2: 716 sel_155: 2 sel_156: 0 sel_161: End sEnterRoom)
+	(method (cue)
+		(self view: 716 setLoop: 2 setCel: 0 setCycle: End sEnterRoom)
 	)
 )
 
 (instance sunnie2 of Prop
 	(properties
-		sel_20 {sunnie2}
-		sel_1 282
-		sel_0 174
-		sel_2 714
-		sel_3 2
-		sel_14 16385
-		sel_244 12
+		name {sunnie2}
+		x 282
+		y 174
+		view 714
+		loop 2
+		signal 16385
+		cycleSpeed 12
 	)
 
-	(method (sel_145)
-		(self sel_2: 716 sel_155: 3 sel_156: 0 sel_161: End sEnterRoom)
+	(method (cue)
+		(self view: 716 setLoop: 3 setCel: 0 setCycle: End sEnterRoom)
 	)
 )
 
 (instance Rameses_a of Talker
 	(properties
-		sel_20 {Rameses}
-		sel_1 66
-		sel_0 44
-		sel_2 1716
-		sel_3 3
-		sel_537 150
-		sel_26 15
-		sel_549 20
-		sel_550 60
+		name {Rameses}
+		x 66
+		y 44
+		view 1716
+		loop 3
+		talkWidth 150
+		back 15
+		textX 20
+		textY 60
 	)
 
-	(method (sel_110)
-		(= sel_30 gUserFont)
-		(super sel_110: ramesesBust ramesesEyes ramesesMouth &rest)
+	(method (init)
+		(= font gUserFont)
+		(super init: ramesesBust ramesesEyes ramesesMouth &rest)
 	)
 )
 
 (instance ramesesBust of Prop
 	(properties
-		sel_20 {ramesesBust}
-		sel_2 1716
-		sel_3 1
+		name {ramesesBust}
+		view 1716
+		loop 1
 	)
 )
 
 (instance ramesesEyes of Prop
 	(properties
-		sel_20 {ramesesEyes}
-		sel_6 20
-		sel_7 12
-		sel_2 1716
-		sel_3 2
+		name {ramesesEyes}
+		nsTop 20
+		nsLeft 12
+		view 1716
+		loop 2
 	)
 )
 
 (instance ramesesMouth of Prop
 	(properties
-		sel_20 {ramesesMouth}
-		sel_6 32
-		sel_7 22
-		sel_2 1716
+		name {ramesesMouth}
+		nsTop 32
+		nsLeft 22
+		view 1716
 	)
 )
 
 (instance Rameses_b of Talker
 	(properties
-		sel_20 {Rameses}
-		sel_1 121
-		sel_0 54
-		sel_2 1717
-		sel_3 3
-		sel_537 150
-		sel_26 15
-		sel_550 50
+		name {Rameses}
+		x 121
+		y 54
+		view 1717
+		loop 3
+		talkWidth 150
+		back 15
+		textY 50
 	)
 
-	(method (sel_110)
-		(= sel_30 gUserFont)
-		(super sel_110: lauraBust lauraEyes lauraMouth &rest)
+	(method (init)
+		(= font gUserFont)
+		(super init: lauraBust lauraEyes lauraMouth &rest)
 	)
 )
 
 (instance lauraBust of Prop
 	(properties
-		sel_20 {lauraBust}
-		sel_2 1717
-		sel_3 1
+		name {lauraBust}
+		view 1717
+		loop 1
 	)
 )
 
 (instance lauraEyes of Prop
 	(properties
-		sel_20 {lauraEyes}
-		sel_6 20
-		sel_7 15
-		sel_2 1717
-		sel_3 2
+		name {lauraEyes}
+		nsTop 20
+		nsLeft 15
+		view 1717
+		loop 2
 	)
 )
 
 (instance lauraMouth of Prop
 	(properties
-		sel_20 {lauraMouth}
-		sel_6 28
-		sel_7 15
-		sel_2 1717
+		name {lauraMouth}
+		nsTop 28
+		nsLeft 15
+		view 1717
 	)
 )
 
 (instance sFXBeetles of Sound
 	(properties
-		sel_20 {sFXBeetles}
-		sel_99 1
-		sel_40 636
-		sel_3 -1
+		name {sFXBeetles}
+		flags 1
+		number 636
+		loop -1
 	)
 )
 
 (instance sFXFerret of Sound
 	(properties
-		sel_20 {sFXFerret}
-		sel_99 1
-		sel_40 637
+		name {sFXFerret}
+		flags 1
+		number 637
 	)
 )
 
 (instance wrapMusic2 of WrapMusic
 	(properties
-		sel_20 {wrapMusic2}
+		name {wrapMusic2}
 	)
 
-	(method (sel_110)
-		(= sel_608 sWrap)
-		(super sel_110: &rest)
+	(method (init)
+		(= wrapSound sWrap)
+		(super init: &rest)
 	)
 )
 
 (instance sWrap of Sound
 	(properties
-		sel_20 {sWrap}
+		name {sWrap}
 	)
 )

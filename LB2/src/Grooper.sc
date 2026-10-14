@@ -15,37 +15,37 @@
 
 (class Grooper of Code
 	(properties
-		sel_20 {Grooper}
-		sel_42 0
-		sel_453 0
-		sel_454 0
-		sel_143 0
+		name {Grooper}
+		client 0
+		oldCycler 0
+		oldMover 0
+		caller 0
 	)
 
-	(method (sel_57 param1 param2 param3 param4 &tmp temp0 temp1)
-		(if (not sel_42)
-			(= sel_42 param1)
+	(method (doit param1 param2 param3 param4 &tmp temp0 temp1)
+		(if (not client)
+			(= client param1)
 		)
-		(if (& (sel_42 sel_14:) $0800)
-			(if sel_143
-				(sel_143 sel_145:)
+		(if (& (client signal:) $0800)
+			(if caller
+				(caller cue:)
 			)
-			(= sel_143 0)
+			(= caller 0)
 			(return)
 		)
 		(if (>= argc 3)
-			(= sel_143 param3)
+			(= caller param3)
 		)
-		(= temp1 (if (< (NumLoops sel_42) 8) 4 else 8))
-		(if (or (not (gCast sel_122: sel_42)) (and (>= argc 4) param4))
-			(sel_42
-				sel_3:
+		(= temp1 (if (< (NumLoops client) 8) 4 else 8))
+		(if (or (not (gCast contains: client)) (and (>= argc 4) param4))
+			(client
+				loop:
 					[trans2
 						(*
 							(if (== temp1 4) 2 else 1)
 							(/
 								(umod
-									(+ (sel_42 sel_55:) (/ 180 temp1))
+									(+ (client heading:) (/ 180 temp1))
 									360
 								)
 								(/ 360 temp1)
@@ -53,137 +53,137 @@
 						)
 					]
 			)
-			(if sel_143
-				(sel_143 sel_145:)
+			(if caller
+				(caller cue:)
 			)
-			(= sel_143 0)
+			(= caller 0)
 			(return)
 		)
 		(= temp0
 			(if
 				(and
-					(== (sel_42 sel_3:) (- (NumLoops sel_42) 1))
-					((sel_42 sel_245:) sel_114: StopWalk)
-					(== ((sel_42 sel_245:) sel_452:) -1)
+					(== (client loop:) (- (NumLoops client) 1))
+					((client cycler:) isKindOf: StopWalk)
+					(== ((client cycler:) vStopped:) -1)
 				)
-				[trans1 (sel_42 sel_4:)]
+				[trans1 (client cel:)]
 			else
-				[trans1 (sel_42 sel_3:)]
+				[trans1 (client loop:)]
 			)
 		)
-		(if sel_454
-			(sel_454 sel_111:)
-			(= sel_454 0)
+		(if oldMover
+			(oldMover dispose:)
+			(= oldMover 0)
 		)
 		(if
 			(and
-				(IsObject sel_453)
+				(IsObject oldCycler)
 				(or
-					(sel_453 sel_115: Grycler)
-					(not ((sel_42 sel_245:) sel_115: Grycler))
+					(oldCycler isMemberOf: Grycler)
+					(not ((client cycler:) isMemberOf: Grycler))
 				)
 			)
-			(sel_453 sel_111:)
-			(= sel_453 0)
+			(oldCycler dispose:)
+			(= oldCycler 0)
 		)
-		(if (not sel_453)
-			(= sel_453 (sel_42 sel_245:))
+		(if (not oldCycler)
+			(= oldCycler (client cycler:))
 		)
-		(if (and (sel_42 sel_245:) ((sel_42 sel_245:) sel_115: Grycler))
-			((sel_42 sel_245:) sel_111:)
+		(if (and (client cycler:) ((client cycler:) isMemberOf: Grycler))
+			((client cycler:) dispose:)
 		)
-		(= sel_454 (sel_42 sel_56:))
-		(sel_42 sel_245: 0 sel_56: 0 sel_312: 0 sel_161: Grycler self temp0)
+		(= oldMover (client mover:))
+		(client cycler: 0 mover: 0 setMotion: 0 setCycle: Grycler self temp0)
 	)
 
-	(method (sel_111)
-		(if (IsObject sel_453)
-			(sel_453 sel_111:)
-			(= sel_453 0)
+	(method (dispose)
+		(if (IsObject oldCycler)
+			(oldCycler dispose:)
+			(= oldCycler 0)
 		)
-		(if (IsObject sel_454)
-			(sel_454 sel_111:)
-			(= sel_454 0)
+		(if (IsObject oldMover)
+			(oldMover dispose:)
+			(= oldMover 0)
 		)
-		(if sel_42
-			(sel_42 sel_59: 0)
+		(if client
+			(client looper: 0)
 		)
-		(super sel_111:)
+		(super dispose:)
 	)
 
-	(method (sel_145 &tmp temp0)
-		(if (not (IsObject (sel_42 sel_56:)))
-			(sel_42 sel_56: sel_454)
+	(method (cue &tmp temp0)
+		(if (not (IsObject (client mover:)))
+			(client mover: oldMover)
 		)
-		(if (IsObject sel_453)
-			(sel_42 sel_245: sel_453)
+		(if (IsObject oldCycler)
+			(client cycler: oldCycler)
 		)
-		(= temp0 sel_143)
-		(= sel_143 (= sel_454 (= sel_453 0)))
+		(= temp0 caller)
+		(= caller (= oldMover (= oldCycler 0)))
 		(if temp0
-			(temp0 sel_145: &rest)
+			(temp0 cue: &rest)
 		)
 	)
 )
 
 (class Grycler of Cycle
 	(properties
-		sel_20 {Grycler}
-		sel_455 0
-		sel_456 0
+		name {Grycler}
+		loopIndex 0
+		numOfLoops 0
 	)
 
-	(method (sel_110 param1 param2 param3)
-		(super sel_110: param1)
-		(= sel_143 param2)
-		(= sel_456 (if (< (NumLoops sel_42) 8) 4 else 8))
-		(= sel_239 (- (sign (AngleDiff (* param3 45) (param1 sel_55:)))))
-		(= sel_455 param3)
-		(if (self sel_457:)
+	(method (init param1 param2 param3)
+		(super init: param1)
+		(= caller param2)
+		(= numOfLoops (if (< (NumLoops client) 8) 4 else 8))
+		(= cycleDir (- (sign (AngleDiff (* param3 45) (param1 heading:)))))
+		(= loopIndex param3)
+		(if (self loopIsCorrect:)
 			(if
 				(and
-					(((sel_42 sel_59:) sel_453:) sel_114: StopWalk)
-					(== (((sel_42 sel_59:) sel_453:) sel_452:) -1)
+					(((client looper:) oldCycler:) isKindOf: StopWalk)
+					(== (((client looper:) oldCycler:) vStopped:) -1)
 				)
-				(sel_42 sel_3: [trans2 sel_455])
+				(client loop: [trans2 loopIndex])
 			)
-			(self sel_242:)
+			(self cycleDone:)
 		)
 	)
 
-	(method (sel_57)
-		(sel_42 sel_3: (self sel_241:))
-		(if (self sel_457:)
-			(self sel_242:)
+	(method (doit)
+		(client loop: (self nextCel:))
+		(if (self loopIsCorrect:)
+			(self cycleDone:)
 		)
 	)
 
-	(method (sel_241)
+	(method (nextCel)
 		(return
 			(if
 				(or
-					(< (Abs (- gGameTime sel_158)) (sel_42 sel_244:))
-					(self sel_457:)
+					(< (Abs (- gGameTime cycleCnt)) (client cycleSpeed:))
+					(self loopIsCorrect:)
 				)
-				(sel_42 sel_3:)
+				(client loop:)
 			else
-				(= sel_158 gGameTime)
-				(+= sel_455 (* sel_239 (/ 8 sel_456)))
-				(= sel_455 (umod sel_455 8))
-				[trans2 sel_455]
+				(= cycleCnt gGameTime)
+				(+= loopIndex (* cycleDir (/ 8 numOfLoops)))
+				(= loopIndex (umod loopIndex 8))
+				[trans2 loopIndex]
 			)
 		)
 	)
 
-	(method (sel_242)
-		(= gDoMotionCue (= sel_240 1))
+	(method (cycleDone)
+		(= gDoMotionCue (= completed 1))
 	)
 
-	(method (sel_457)
+	(method (loopIsCorrect)
 		(return
 			(<
-				(Abs (AngleDiff (* sel_455 45) (sel_42 sel_55:)))
-				(+ (/ 180 sel_456) 1)
+				(Abs (AngleDiff (* loopIndex 45) (client heading:)))
+				(+ (/ 180 numOfLoops) 1)
 			)
 		)
 	)

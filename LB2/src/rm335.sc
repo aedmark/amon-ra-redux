@@ -20,112 +20,112 @@
 
 (instance rm335 of LBRoom
 	(properties
-		sel_20 {rm335}
-		sel_213 5
-		sel_408 335
-		sel_409 350
-		sel_411 330
+		name {rm335}
+		noun 5
+		picture 335
+		north 350
+		south 330
 	)
 
-	(method (sel_110)
+	(method (init)
 		(gEgo
-			sel_110:
-			sel_585: (if (gEgo sel_584:) 831 else 830)
-			sel_320: Scaler 100 75 190 160
+			init:
+			normalize: (if (gEgo wearingGown:) 831 else 830)
+			setScale: Scaler 100 75 190 160
 		)
-		(self sel_414: 90 93)
+		(self setRegions: 90 93)
 		(switch gPrevRoomNum
-			(sel_409
+			(north
 				(Palette palSET_INTENSITY 0 255 60)
 				(if (and (TimeCheck $0008) (IsFlag 122) (not (IsFlag 133)))
-					(frontDoor sel_4: 255 sel_29: 2 sel_599: 2 sel_596: 0)
-					(self sel_146: sOffToSmooch)
+					(frontDoor cel: 255 state: 2 enterType: 2 forceClose: 0)
+					(self setScript: sOffToSmooch)
 				else
-					(frontDoor sel_595: 1)
+					(frontDoor forceOpen: 1)
 					(gEgo
-						sel_153: (frontDoor sel_597:) (frontDoor sel_598:)
-						sel_349: 0
+						posn: (frontDoor moveToX:) (frontDoor moveToY:)
+						edgeHit: 0
 					)
 				)
 			)
-			(sel_411
-				(self sel_146: sEnterSouth)
+			(south
+				(self setScript: sEnterSouth)
 				(cond
 					((!= gAct 2))
 					((IsFlag 25)
-						(gGameMusic1 sel_40: 335 sel_99: 1 sel_155: -1 sel_39: 50)
+						(gGameMusic1 number: 335 flags: 1 setLoop: -1 play: 50)
 					)
 					(else
-						(gGameMusic1 sel_40: 19 sel_99: 1 sel_155: -1 sel_39:)
+						(gGameMusic1 number: 19 flags: 1 setLoop: -1 play:)
 					)
 				)
 			)
 			(else
-				(gEgo sel_153: 150 180)
-				(gGame sel_588:)
+				(gEgo posn: 150 180)
+				(gGame handsOn:)
 			)
 		)
-		(super sel_110:)
-		(southExitFeature sel_110:)
-		(frontDoor sel_110: sel_63: 12)
-		(otherDoor sel_110:)
-		(banner sel_110: sel_311: 4 8)
-		(glass sel_110:)
-		(column sel_110:)
+		(super init:)
+		(southExitFeature init:)
+		(frontDoor init: setPri: 12)
+		(otherDoor init:)
+		(banner init: approachVerbs: 4 8)
+		(glass init:)
+		(column init:)
 		(if (and (== gAct 2) (not (IsFlag 25)))
 			(benefitPodium
-				sel_110:
-				sel_63: 12
-				sel_303: 186
-				sel_304: 180
-				sel_305: 4
-				sel_301: -1
-				sel_311: 1 4 8
+				init:
+				setPri: 12
+				approachX: 186
+				approachY: 180
+				approachDist: 4
+				sightAngle: -1
+				approachVerbs: 1 4 8
 			)
 			((ScriptID 32 0) ; aHeimlich
-				sel_110:
-				sel_2: 341
-				sel_620: gCurRoomNum
-				sel_153: 131 173 0
-				sel_155: 0
-				sel_299: doorActions
-				sel_303: 137
-				sel_304: 180
-				sel_311: 4 11 2 6
+				init:
+				view: 341
+				room: gCurRoomNum
+				posn: 131 173 0
+				setLoop: 0
+				actions: doorActions
+				approachX: 137
+				approachY: 180
+				approachVerbs: 4 11 2 6
 			)
 		else
-			(frontDoor sel_590: (!= gAct 2))
+			(frontDoor locked: (!= gAct 2))
 		)
 	)
 
-	(method (sel_399)
-		(gGameMusic1 sel_170:)
-		(super sel_399: &rest)
+	(method (newRoom)
+		(gGameMusic1 fade:)
+		(super newRoom: &rest)
 	)
 
-	(method (sel_57)
+	(method (doit)
 		(if (and (== gAct 2) (not (IsFlag 25)))
 			; RestoreGame can replace these with values from an old save.
-			(benefitPodium sel_303: 186 sel_304: 180 sel_305: 4 sel_301: -1)
-			((ScriptID 2335 0) sel_57: (gCurRoom sel_259:) 1) ; poly2335Code
+			(benefitPodium approachX: 186 approachY: 180 approachDist: 4 sightAngle: -1)
+			((ScriptID 2335 0) doit: (gCurRoom obstacles:) 1) ; poly2335Code
 		)
-		(super sel_57:)
+		(super doit:)
 	)
 )
 
 (instance sEnterSouth of Script
 	(properties
-		sel_20 {sEnterSouth}
+		name {sEnterSouth}
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
-				(gEgo sel_153: 165 240 sel_312: PolyPath 165 185 self)
+				(gEgo posn: 165 240 setMotion: PolyPath 165 185 self)
 			)
 			(1
-				(gGame sel_588:)
-				(self sel_111:)
+				(gGame handsOn:)
+				(self dispose:)
 			)
 		)
 	)
@@ -133,32 +133,32 @@
 
 (instance sExitNorth of Script
 	(properties
-		sel_20 {sExitNorth}
+		name {sExitNorth}
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
-				(gGame sel_587:)
-				(frontDoor sel_143: self sel_189:)
+				(gGame handsOff:)
+				(frontDoor caller: self open:)
 			)
 			(1
 				(gEgo
-					sel_312:
+					setMotion:
 						PolyPath
-						(frontDoor sel_597:)
-						(frontDoor sel_598:)
+						(frontDoor moveToX:)
+						(frontDoor moveToY:)
 						self
 				)
 			)
 			(2
 				(DrawPic 780 10)
-				(gCast sel_119: 102)
-				(= sel_136 2)
+				(gCast eachElementDo: 102)
+				(= cycles 2)
 			)
 			(3
 				(Palette palSET_INTENSITY 0 255 100)
-				(gCurRoom sel_399: (gCurRoom sel_409:))
+				(gCurRoom newRoom: (gCurRoom north:))
 			)
 		)
 	)
@@ -166,35 +166,35 @@
 
 (instance sGiveInvite of Script
 	(properties
-		sel_20 {sGiveInvite}
+		name {sGiveInvite}
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
-				(gGame sel_587:)
-				((ScriptID 32 0) sel_155: 0 sel_244: 6 sel_161: CT 8 1 self) ; aHeimlich
+				(gGame handsOff:)
+				((ScriptID 32 0) setLoop: 0 cycleSpeed: 6 setCycle: CT 8 1 self) ; aHeimlich
 			)
 			(1
-				(= sel_139 15)
+				(= ticks 15)
 			)
 			(2
-				((ScriptID 32 0) sel_161: End self) ; aHeimlich
+				((ScriptID 32 0) setCycle: End self) ; aHeimlich
 			)
 			(3
-				((ScriptID 32 0) sel_156: 0) ; aHeimlich
-				(= sel_136 2)
+				((ScriptID 32 0) setCel: 0) ; aHeimlich
+				(= cycles 2)
 			)
 			(4
-				(gMessager sel_295: 6 11 0 0 self)
+				(gMessager say: 6 11 0 0 self)
 			)
 			(5
 				(SetFlag 23)
-				(gEgo sel_351: 6)
-				((ScriptID 21 1) sel_57: 775) ; dropCluesCode
-				((ScriptID 22 0) sel_57: 28673) ; triggerAndClock
-				(gGame sel_588:)
-				(self sel_111:)
+				(gEgo put: 6)
+				((ScriptID 21 1) doit: 775) ; dropCluesCode
+				((ScriptID 22 0) doit: 28673) ; triggerAndClock
+				(gGame handsOn:)
+				(self dispose:)
 			)
 		)
 	)
@@ -202,20 +202,20 @@
 
 (instance sHeimlichStare of Script
 	(properties
-		sel_20 {sHeimlichStare}
+		name {sHeimlichStare}
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
 				; Narrator describes him, then Heimlich answers from his own message module.
-				(gMessager sel_295: 6 8 0 0 self)
+				(gMessager say: 6 8 0 0 self)
 			)
 			(1
-				(gMessager sel_295: 1 8 0 0 self 1889)
+				(gMessager say: 1 8 0 0 self 1889)
 			)
 			(2
-				(self sel_111:)
+				(self dispose:)
 			)
 		)
 	)
@@ -223,30 +223,30 @@
 
 (instance sOffToSmooch of Script
 	(properties
-		sel_20 {sOffToSmooch}
+		name {sOffToSmooch}
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
-				(gEgo sel_153: 153 160 sel_312: PolyPath 160 250 self)
-				(= sel_136 1)
+				(gEgo posn: 153 160 setMotion: PolyPath 160 250 self)
+				(= cycles 1)
 			)
 			(1
 				(DrawPic 335)
 				(Palette palSET_INTENSITY 0 255 60)
-				(= sel_139 15)
+				(= ticks 15)
 			)
 			(2
 				((ScriptID 93 8) ; Steve
-					sel_110:
-					sel_161: StopWalk -1
-					sel_153: 153 160
-					sel_312: PolyPath 130 260
+					init:
+					setCycle: StopWalk -1
+					posn: 153 160
+					setMotion: PolyPath 130 260
 				)
 			)
 			(3
-				(gCurRoom sel_399: 330)
+				(gCurRoom newRoom: 330)
 			)
 		)
 	)
@@ -254,36 +254,36 @@
 
 (instance frontDoor of Door
 	(properties
-		sel_20 {frontDoor}
-		sel_1 164
-		sel_0 162
-		sel_213 3
-		sel_303 152
-		sel_304 173
-		sel_2 336
-		sel_597 152
-		sel_598 152
-		sel_599 0
-		sel_600 0
+		name {frontDoor}
+		x 164
+		y 162
+		noun 3
+		approachX 152
+		approachY 173
+		view 336
+		moveToX 152
+		moveToY 152
+		enterType 0
+		exitType 0
 	)
 
-	(method (sel_300 param1)
+	(method (doVerb param1)
 		(switch param1
 			(4
 				(cond
-					((not (gEgo sel_584:))
-						(gMessager sel_295: sel_213 4 6)
+					((not (gEgo wearingGown:))
+						(gMessager say: noun 4 6)
 					)
 					((not (IsFlag 23))
-						(gMessager sel_295: sel_213 4 7)
+						(gMessager say: noun 4 7)
 					)
 					(else
-						(gCurRoom sel_146: sExitNorth)
+						(gCurRoom setScript: sExitNorth)
 					)
 				)
 			)
 			(else
-				(super sel_300: param1)
+				(super doVerb: param1)
 			)
 		)
 	)
@@ -291,119 +291,119 @@
 
 (instance southExitFeature of ExitFeature
 	(properties
-		sel_20 {southExitFeature}
-		sel_6 184
-		sel_7 80
-		sel_8 189
-		sel_9 290
-		sel_33 11
-		sel_583 3
-		sel_213 4
+		name {southExitFeature}
+		nsTop 184
+		nsLeft 80
+		nsBottom 189
+		nsRight 290
+		cursor 11
+		exitDir 3
+		noun 4
 	)
 )
 
 (instance banner of Feature
 	(properties
-		sel_20 {banner}
-		sel_1 215
-		sel_0 123
-		sel_213 1
-		sel_6 80
-		sel_7 203
-		sel_8 137
-		sel_9 258
-		sel_301 40
+		name {banner}
+		x 215
+		y 123
+		noun 1
+		nsTop 80
+		nsLeft 203
+		nsBottom 137
+		nsRight 258
+		sightAngle 40
 	)
 )
 
 (instance glass of Feature
 	(properties
-		sel_20 {glass}
-		sel_1 140
-		sel_0 70
-		sel_213 2
-		sel_301 40
-		sel_302 8192
+		name {glass}
+		x 140
+		y 70
+		noun 2
+		sightAngle 40
+		onMeCheck 8192
 	)
 )
 
 (instance otherDoor of Feature
 	(properties
-		sel_20 {otherDoor}
-		sel_1 131
-		sel_0 141
-		sel_213 16
-		sel_6 115
-		sel_7 121
-		sel_8 167
-		sel_9 142
-		sel_301 40
+		name {otherDoor}
+		x 131
+		y 141
+		noun 16
+		nsTop 115
+		nsLeft 121
+		nsBottom 167
+		nsRight 142
+		sightAngle 40
 	)
 
-	(method (sel_300 param1)
+	(method (doVerb param1)
 		(if (== param1 4)
-			(frontDoor sel_300: param1)
+			(frontDoor doVerb: param1)
 		else
-			(super sel_300: param1)
+			(super doVerb: param1)
 		)
 	)
 )
 
 (instance column of Feature
 	(properties
-		sel_20 {column}
-		sel_1 30
-		sel_0 170
-		sel_213 8
-		sel_301 40
-		sel_302 16384
+		name {column}
+		x 30
+		y 170
+		noun 8
+		sightAngle 40
+		onMeCheck 16384
 	)
 )
 
 (instance benefitPodium of View
 	(properties
-		sel_20 {benefitPodium}
-		sel_1 190
-		sel_0 174
-		sel_2 335
-		sel_3 0
-		sel_4 0
-		sel_60 12
-		sel_14 16400
-		sel_213 17
-		sel_6 148
-		sel_7 182
-		sel_8 174
-		sel_9 198
-		sel_301 -1 ; sightAngle: never "already facing", so repeats use the deferred CueObj path
-		sel_303 186
-		sel_304 180
-		sel_305 4 ; approachDist: already standing here skips a redundant re-approach
+		name {benefitPodium}
+		x 190
+		y 174
+		view 335
+		loop 0
+		cel 0
+		priority 12
+		signal 16400
+		noun 17
+		nsTop 148
+		nsLeft 182
+		nsBottom 174
+		nsRight 198
+		sightAngle -1 ; sightAngle: never "already facing", so repeats use the deferred CueObj path
+		approachX 186
+		approachY 180
+		approachDist 4 ; approachDist: already standing here skips a redundant re-approach
 	)
 
-	(method (sel_300 param1)
+	(method (doVerb param1)
 		(if (OneOf param1 1 4 8)
-			((ScriptID 21 0) sel_57: 263) ; Steve
-			((ScriptID 21 0) sel_57: 265) ; Heimlich
-			((ScriptID 21 0) sel_57: 266) ; Yvette
-			((ScriptID 21 0) sel_57: 268) ; Rameses
-			((ScriptID 21 0) sel_57: 269) ; Countess
-			((ScriptID 21 0) sel_57: 270) ; Olympia
-			((ScriptID 21 0) sel_57: 271) ; Tut
+			((ScriptID 21 0) doit: 263) ; Steve
+			((ScriptID 21 0) doit: 265) ; Heimlich
+			((ScriptID 21 0) doit: 266) ; Yvette
+			((ScriptID 21 0) doit: 268) ; Rameses
+			((ScriptID 21 0) doit: 269) ; Countess
+			((ScriptID 21 0) doit: 270) ; Olympia
+			((ScriptID 21 0) doit: 271) ; Tut
 			(switch param1
 				(4
 					(if (not (IsFlag 124))
 						(SetFlag 124)
-						(gMessager sel_295: sel_213 4 0)
+						(gMessager say: noun 4 0)
 					else
-						(gMessager sel_295: sel_213 4 1)
+						(gMessager say: noun 4 1)
 					)
 				)
 				(else
 					(if (not (IsFlag 124))
-						(gMessager sel_295: sel_213 1 0)
+						(gMessager say: noun 1 0)
 					else
-						(gMessager sel_295: sel_213 1 1)
+						(gMessager say: noun 1 1)
 					)
 				)
 			)
@@ -417,32 +417,32 @@
 
 (instance doorActions of Actions
 	(properties
-		sel_20 {doorActions}
+		name {doorActions}
 	)
 
-	(method (sel_300 param1)
+	(method (doVerb param1)
 		(switch param1
 			(1
-				(gMessager sel_295: 6 1)
+				(gMessager say: 6 1)
 			)
 			(4
-				(gMessager sel_295: 6 4)
+				(gMessager say: 6 4)
 			)
 			(11
-				(gCurRoom sel_146: sGiveInvite)
+				(gCurRoom setScript: sGiveInvite)
 			)
 			(2
-				(if (gEgo sel_238: 6)
-					(gMessager sel_295: 6 2 7)
+				(if (gEgo has: 6)
+					(gMessager say: 6 2 7)
 				else
-					(gMessager sel_295: 6 2)
+					(gMessager say: 6 2)
 				)
 			)
 			(6
-				(gMessager sel_295: 6 2)
+				(gMessager say: 6 2)
 			)
 			(8
-				(gCurRoom sel_146: sHeimlichStare)
+				(gCurRoom setScript: sHeimlichStare)
 			)
 			(else
 				(return 0)

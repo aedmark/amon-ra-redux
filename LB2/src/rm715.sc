@@ -19,155 +19,155 @@
 
 (instance rm715 of LBRoom
 	(properties
-		sel_20 {rm715}
-		sel_408 715
-		sel_28 12
-		sel_410 720
-		sel_412 710
+		name {rm715}
+		picture 715
+		style 12
+		east 720
+		west 710
 	)
 
-	(method (sel_110)
+	(method (init)
 		(gEgo
-			sel_584: 1
-			sel_2: 715
-			sel_3: 3
-			sel_4: 0
-			sel_153: 121 142
-			sel_110:
+			wearingGown: 1
+			view: 715
+			loop: 3
+			cel: 0
+			posn: 121 142
+			init:
 		)
 		(LoadMany rsSOUND 710 712 713)
 		(LoadMany rsVIEW 711 712 713 715 710 714 716)
-		(super sel_110:)
-		(WrapMusic sel_110: 1 1710 1712 1713)
-		(gTheIconBar sel_233: 7)
-		(tut sel_317:)
-		(rameses sel_110:)
-		(sunnie1 sel_110: sel_161: Fwd)
-		(sunnie2 sel_110: sel_161: Fwd)
-		(sunnie3 sel_110: sel_161: Fwd)
-		(sunnie4 sel_110: sel_161: Fwd)
-		(sunnie5 sel_110: sel_161: Fwd)
-		(sunnie6 sel_110: sel_161: Fwd)
-		(sunnie7 sel_110: sel_161: Fwd)
-		(sunnie8 sel_110: sel_161: Fwd)
-		(sunnie9 sel_110: sel_161: Fwd)
-		(sunnie10 sel_110: sel_161: Fwd)
-		(gCurRoom sel_146: sQuestion)
+		(super init:)
+		(WrapMusic init: 1 1710 1712 1713)
+		(gTheIconBar disable: 7)
+		(tut addToPic:)
+		(rameses init:)
+		(sunnie1 init: setCycle: Fwd)
+		(sunnie2 init: setCycle: Fwd)
+		(sunnie3 init: setCycle: Fwd)
+		(sunnie4 init: setCycle: Fwd)
+		(sunnie5 init: setCycle: Fwd)
+		(sunnie6 init: setCycle: Fwd)
+		(sunnie7 init: setCycle: Fwd)
+		(sunnie8 init: setCycle: Fwd)
+		(sunnie9 init: setCycle: Fwd)
+		(sunnie10 init: setCycle: Fwd)
+		(gCurRoom setScript: sQuestion)
 	)
 
-	(method (sel_111)
-		(gGameMusic2 sel_170:)
-		(super sel_111: &rest)
+	(method (dispose)
+		(gGameMusic2 fade:)
+		(super dispose: &rest)
 	)
 )
 
 (instance sQuestion of Script
 	(properties
-		sel_20 {sQuestion}
+		name {sQuestion}
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
-				(gGame sel_587:)
-				(= sel_136 2)
+				(gGame handsOff:)
+				(= cycles 2)
 			)
 			(1
-				(= sel_139 180)
+				(= ticks 180)
 			)
 			(2
-				(sunnie1 sel_161: End self)
-				(sunnie2 sel_161: End)
-				(sunnie3 sel_161: End self)
-				(sunnie4 sel_161: End)
-				(sunnie5 sel_161: End self)
-				(sunnie6 sel_161: End)
-				(sunnie7 sel_161: End)
-				(sunnie8 sel_161: End)
-				(sunnie9 sel_161: End)
-				(sunnie10 sel_161: End)
+				(sunnie1 setCycle: End self)
+				(sunnie2 setCycle: End)
+				(sunnie3 setCycle: End self)
+				(sunnie4 setCycle: End)
+				(sunnie5 setCycle: End self)
+				(sunnie6 setCycle: End)
+				(sunnie7 setCycle: End)
+				(sunnie8 setCycle: End)
+				(sunnie9 setCycle: End)
+				(sunnie10 setCycle: End)
 			)
 			(3)
 			(4)
 			(5
-				(sunnie1 sel_317:)
-				(sunnie2 sel_317:)
-				(sunnie3 sel_317:)
-				(sunnie4 sel_317:)
-				(sunnie5 sel_317:)
-				(sunnie6 sel_317:)
-				(sunnie7 sel_317:)
-				(sunnie8 sel_317:)
-				(sunnie9 sel_317:)
-				(sunnie10 sel_317:)
-				(WrapMusic sel_111:)
-				(= sel_136 1)
+				(sunnie1 addToPic:)
+				(sunnie2 addToPic:)
+				(sunnie3 addToPic:)
+				(sunnie4 addToPic:)
+				(sunnie5 addToPic:)
+				(sunnie6 addToPic:)
+				(sunnie7 addToPic:)
+				(sunnie8 addToPic:)
+				(sunnie9 addToPic:)
+				(sunnie10 addToPic:)
+				(WrapMusic dispose:)
+				(= cycles 1)
 			)
 			(6
-				(gMessager sel_295: 1)
-				(= sel_136 1)
+				(gMessager say: 1)
+				(= cycles 1)
 			)
 			(7
-				(gCurRoom sel_422: (ScriptID 20 0)) ; inNotebook
+				(gCurRoom setInset: (ScriptID 20 0)) ; inNotebook
 				(= local0 (not (StrCmp @global136 {WOMB})))
-				(= sel_136 1)
+				(= cycles 1)
 			)
 			(8
-				(gTheIconBar sel_233: 7)
+				(gTheIconBar disable: 7)
 				(if local0
-					(gGame sel_87: 1 156)
+					(gGame points: 1 156)
 					(= global136 0)
-					(gMessager sel_295: 1 0 2)
-					(= sel_136 1)
+					(gMessager say: 1 0 2)
+					(= cycles 1)
 				else
-					(gCurRoom sel_146: sDeath)
+					(gCurRoom setScript: sDeath)
 				)
 			)
 			(9
-				(gCurRoom sel_422: (ScriptID 20 0)) ; inNotebook
+				(gCurRoom setInset: (ScriptID 20 0)) ; inNotebook
 				(= local0 (not (StrCmp @global136 {TOMB})))
-				(= sel_136 1)
+				(= cycles 1)
 			)
 			(10
-				(gTheIconBar sel_233: 7)
+				(gTheIconBar disable: 7)
 				(if local0
-					(gGame sel_87: 1 157)
-					(gMessager sel_295: 1 0 3)
-					(= sel_136 1)
+					(gGame points: 1 157)
+					(gMessager say: 1 0 3)
+					(= cycles 1)
 				else
-					(gCurRoom sel_146: sDeath)
+					(gCurRoom setScript: sDeath)
 				)
 			)
 			(11
-				(rameses sel_161: End self)
+				(rameses setCycle: End self)
 			)
 			(12
-				(rameses sel_313:)
-				(= sel_136 1)
+				(rameses stopUpd:)
+				(= cycles 1)
 			)
 			(13
 				(gEgo
-					sel_585: 831
-					sel_3: 1
-					sel_103: 1
-					sel_104: 110
-					sel_105: 110
-					sel_253: 0 self
+					normalize: 831
+					loop: 1
+					scaleSignal: 1
+					scaleX: 110
+					scaleY: 110
+					setHeading: 0 self
 				)
 			)
 			(14
-				(gEgo sel_155: 3 sel_312: MoveTo 123 159 self)
+				(gEgo setLoop: 3 setMotion: MoveTo 123 159 self)
 			)
 			(15
-				(gEgo sel_63: 9 sel_312: MoveTo 130 159 self)
+				(gEgo setPri: 9 setMotion: MoveTo 130 159 self)
 			)
 			(16
-				(gEgo sel_155: 0 sel_312: MoveTo 152 186 self)
+				(gEgo setLoop: 0 setMotion: MoveTo 152 186 self)
 			)
 			(17
-				(gEgo sel_349: 2)
-				(gCurRoom sel_399: 720)
-				(self sel_111:)
+				(gEgo edgeHit: 2)
+				(gCurRoom newRoom: 720)
+				(self dispose:)
 			)
 		)
 	)
@@ -175,65 +175,65 @@
 
 (instance sDeath of Script
 	(properties
-		sel_20 {sDeath}
+		name {sDeath}
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
-				(rameses sel_161: End self)
+				(rameses setCycle: End self)
 			)
 			(1
-				(gMessager sel_295: 1 0 1 1)
-				(= sel_136 1)
+				(gMessager say: 1 0 1 1)
+				(= cycles 1)
 			)
 			(2
-				(rameses sel_155: 1 sel_156: 0 sel_161: CT 5 1 self)
+				(rameses setLoop: 1 setCel: 0 setCycle: CT 5 1 self)
 			)
 			(3
-				(wrap sel_110:)
-				(rameses sel_63: 15 sel_161: CT 0 1 self)
+				(wrap init:)
+				(rameses setPri: 15 setCycle: CT 0 1 self)
 			)
 			(4
-				(rameses sel_63: -1 sel_161: CT 5 1 self)
+				(rameses setPri: -1 setCycle: CT 5 1 self)
 			)
 			(5
-				(wrap sel_156: (+ (wrap sel_4:) 1))
-				(rameses sel_63: 15 sel_161: CT 0 1 self)
+				(wrap setCel: (+ (wrap cel:) 1))
+				(rameses setPri: 15 setCycle: CT 0 1 self)
 			)
 			(6
-				(rameses sel_63: -1 sel_161: CT 5 1 self)
+				(rameses setPri: -1 setCycle: CT 5 1 self)
 			)
 			(7
-				(wrap sel_156: (+ (wrap sel_4:) 1))
-				(rameses sel_63: 15 sel_161: CT 0 1 self)
+				(wrap setCel: (+ (wrap cel:) 1))
+				(rameses setPri: 15 setCycle: CT 0 1 self)
 			)
 			(8
-				(rameses sel_63: -1 sel_161: CT 5 1 self)
+				(rameses setPri: -1 setCycle: CT 5 1 self)
 			)
 			(9
-				(wrap sel_156: (+ (wrap sel_4:) 1))
-				(rameses sel_63: 15 sel_161: CT 0 1 self)
+				(wrap setCel: (+ (wrap cel:) 1))
+				(rameses setPri: 15 setCycle: CT 0 1 self)
 			)
 			(10
-				(rameses sel_63: -1 sel_161: CT 5 1 self)
+				(rameses setPri: -1 setCycle: CT 5 1 self)
 			)
 			(11
-				(lauraWrap sel_110:)
-				(= sel_139 120)
+				(lauraWrap init:)
+				(= ticks 120)
 			)
 			(12
-				(gNarrator sel_1: 59 sel_0: 30)
-				(gMessager sel_295: 1 0 1 2)
-				(= sel_136 1)
+				(gNarrator x: 59 y: 30)
+				(gMessager say: 1 0 1 2)
+				(= cycles 1)
 			)
 			(13
-				(= sel_139 180)
+				(= ticks 180)
 			)
 			(14
 				(= global145 7) ; "That about wraps it up for this mystery."
-				(gCurRoom sel_399: 99)
-				(self sel_111:)
+				(gCurRoom newRoom: 99)
+				(self dispose:)
 			)
 		)
 	)
@@ -241,155 +241,155 @@
 
 (instance tut of Actor
 	(properties
-		sel_20 {tut}
-		sel_1 141
-		sel_0 142
-		sel_2 716
-		sel_3 1
-		sel_14 16385
+		name {tut}
+		x 141
+		y 142
+		view 716
+		loop 1
+		signal 16385
 	)
 )
 
 (instance rameses of Actor
 	(properties
-		sel_20 {rameses}
-		sel_1 108
-		sel_0 142
-		sel_2 715
-		sel_14 16384
+		name {rameses}
+		x 108
+		y 142
+		view 715
+		signal 16384
 	)
 )
 
 (instance sunnie1 of Prop
 	(properties
-		sel_20 {sunnie1}
-		sel_1 27
-		sel_0 181
-		sel_2 710
-		sel_3 1
-		sel_14 16384
+		name {sunnie1}
+		x 27
+		y 181
+		view 710
+		loop 1
+		signal 16384
 	)
 )
 
 (instance sunnie2 of Prop
 	(properties
-		sel_20 {sunnie2}
-		sel_1 157
-		sel_0 189
-		sel_2 710
-		sel_3 2
-		sel_14 16384
+		name {sunnie2}
+		x 157
+		y 189
+		view 710
+		loop 2
+		signal 16384
 	)
 )
 
 (instance sunnie3 of Prop
 	(properties
-		sel_20 {sunnie3}
-		sel_1 65
-		sel_0 181
-		sel_2 711
-		sel_3 2
-		sel_14 16384
+		name {sunnie3}
+		x 65
+		y 181
+		view 711
+		loop 2
+		signal 16384
 	)
 )
 
 (instance sunnie4 of Prop
 	(properties
-		sel_20 {sunnie4}
-		sel_1 203
-		sel_0 190
-		sel_2 711
-		sel_3 1
-		sel_14 16384
+		name {sunnie4}
+		x 203
+		y 190
+		view 711
+		loop 1
+		signal 16384
 	)
 )
 
 (instance sunnie5 of Prop
 	(properties
-		sel_20 {sunnie5}
-		sel_1 47
-		sel_0 188
-		sel_2 712
-		sel_3 1
-		sel_14 16384
+		name {sunnie5}
+		x 47
+		y 188
+		view 712
+		loop 1
+		signal 16384
 	)
 )
 
 (instance sunnie6 of Prop
 	(properties
-		sel_20 {sunnie6}
-		sel_1 94
-		sel_0 179
-		sel_2 712
-		sel_3 2
-		sel_14 16384
+		name {sunnie6}
+		x 94
+		y 179
+		view 712
+		loop 2
+		signal 16384
 	)
 )
 
 (instance sunnie7 of Prop
 	(properties
-		sel_20 {sunnie7}
-		sel_1 183
-		sel_0 188
-		sel_2 713
-		sel_3 2
-		sel_14 16384
+		name {sunnie7}
+		x 183
+		y 188
+		view 713
+		loop 2
+		signal 16384
 	)
 )
 
 (instance sunnie8 of Prop
 	(properties
-		sel_20 {sunnie8}
-		sel_1 123
-		sel_0 187
-		sel_2 713
-		sel_3 1
-		sel_14 16384
+		name {sunnie8}
+		x 123
+		y 187
+		view 713
+		loop 1
+		signal 16384
 	)
 )
 
 (instance sunnie9 of Prop
 	(properties
-		sel_20 {sunnie9}
-		sel_1 96
-		sel_0 189
-		sel_2 714
-		sel_3 1
-		sel_14 16384
+		name {sunnie9}
+		x 96
+		y 189
+		view 714
+		loop 1
+		signal 16384
 	)
 )
 
 (instance sunnie10 of Prop
 	(properties
-		sel_20 {sunnie10}
-		sel_1 137
-		sel_0 183
-		sel_2 714
-		sel_3 2
-		sel_14 16384
+		name {sunnie10}
+		x 137
+		y 183
+		view 714
+		loop 2
+		signal 16384
 	)
 )
 
 (instance wrap of View
 	(properties
-		sel_20 {wrap}
-		sel_1 119
-		sel_0 101
-		sel_2 715
-		sel_3 4
-		sel_60 11
-		sel_14 17
+		name {wrap}
+		x 119
+		y 101
+		view 715
+		loop 4
+		priority 11
+		signal 17
 	)
 )
 
 (instance lauraWrap of View
 	(properties
-		sel_20 {lauraWrap}
-		sel_1 70
-		sel_0 59
-		sel_2 715
-		sel_3 2
-		sel_60 15
-		sel_14 16401
+		name {lauraWrap}
+		x 70
+		y 59
+		view 715
+		loop 2
+		priority 15
+		signal 16401
 	)
 )

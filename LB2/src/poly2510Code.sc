@@ -18,52 +18,52 @@
 
 (instance poly2510Code of Code
 	(properties
-		sel_20 {poly2510Code}
+		name {poly2510Code}
 	)
 
-	(method (sel_57 param1)
+	(method (doit param1)
 		(param1
-			sel_118: (poly2510a sel_110: sel_117:) (poly2510b sel_110: sel_117:)
+			add: (poly2510a init: yourself:) (poly2510b init: yourself:)
 		)
 	)
 )
 
 (instance poly2510a of Polygon
 	(properties
-		sel_20 {poly2510a}
+		name {poly2510a}
 	)
 
-	(method (sel_110)
-		(= sel_31 2)
-		(= sel_86 23)
-		(= sel_87 @local0)
+	(method (init)
+		(= type 2)
+		(= size 23)
+		(= points @local0)
 	)
 )
 
 (instance poly2510b of Polygon
 	(properties
-		sel_20 {poly2510b}
+		name {poly2510b}
 	)
 
-	(method (sel_110)
-		(= sel_31 2)
-		(= sel_86 4)
-		(= sel_87 @local46)
+	(method (init)
+		(= type 2)
+		(= size 4)
+		(= points @local46)
 	)
 )
 
 (instance pts2510 of MuseumPoints
 	(properties
-		sel_20 {pts2510}
-		sel_621 230
-		sel_622 160
-		sel_623 280
-		sel_624 140
-		sel_625 100
-		sel_626 250
-		sel_627 1305
-		sel_628 163
-		sel_629 15
-		sel_630 150
+		name {pts2510}
+		midPtX 230
+		midPtY 160
+		northPtX 280
+		northPtY 140
+		southPtX 100
+		southPtY 250
+		eastPtX 1305
+		eastPtY 163
+		westPtX 15
+		westPtY 150
 	)
 )

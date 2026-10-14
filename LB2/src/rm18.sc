@@ -24,84 +24,84 @@
 
 (instance tempList of List
 	(properties
-		sel_20 {tempList}
+		name {tempList}
 	)
 )
 
 (instance goodList of List
 	(properties
-		sel_20 {goodList}
+		name {goodList}
 	)
 )
 
 (instance rm18 of LBRoom
 	(properties
-		sel_20 {rm18}
-		sel_408 18
+		name {rm18}
+		picture 18
 	)
 
-	(method (sel_110 &tmp temp0 temp1 temp2 temp3)
+	(method (init &tmp temp0 temp1 temp2 temp3)
 		(LoadMany rsVIEW 18)
-		(super sel_110:)
-		(gGame sel_588:)
-		(gTheIconBar sel_233: 0 1 3 4 5 6 7)
-		(goodList sel_118:)
-		(tempList sel_118:)
+		(super init:)
+		(gGame handsOn:)
+		(gTheIconBar disable: 0 1 3 4 5 6 7)
+		(goodList add:)
+		(tempList add:)
 		(= temp2 -32)
 		(= temp3 46)
 		(for ((= temp0 0)) (< temp0 12) ((++ temp0))
-			(tempList sel_118: ((egyptProp sel_109:) sel_4: temp0 sel_117:))
+			(tempList add: ((egyptProp new:) cel: temp0 yourself:))
 		)
-		(while (tempList sel_86:)
-			(= temp0 (Random 0 (- (tempList sel_86:) 1)))
-			(= temp1 (tempList sel_64: temp0))
+		(while (tempList size:)
+			(= temp0 (Random 0 (- (tempList size:) 1)))
+			(= temp1 (tempList at: temp0))
 			(goodList
-				sel_118: (temp1 sel_1: (+= temp2 48) sel_0: temp3 sel_117:)
+				add: (temp1 x: (+= temp2 48) y: temp3 yourself:)
 			)
-			(if (== (goodList sel_86:) 6)
+			(if (== (goodList size:) 6)
 				(= temp2 -32)
 				(= temp3 111)
 			)
-			(tempList sel_81: temp1)
+			(tempList delete: temp1)
 		)
-		(gGame sel_587:)
-		(self sel_146: sInitEm)
+		(gGame handsOff:)
+		(self setScript: sInitEm)
 	)
 
-	(method (sel_111)
-		(goodList sel_125: sel_111:)
-		(tempList sel_125: sel_111:)
-		(super sel_111:)
+	(method (dispose)
+		(goodList release: dispose:)
+		(tempList release: dispose:)
+		(super dispose:)
 	)
 
-	(method (sel_133)
+	(method (handleEvent)
 		(return 0)
 	)
 )
 
 (instance sInitEm of Script
 	(properties
-		sel_20 {sInitEm}
+		name {sInitEm}
 	)
 
-	(method (sel_144 param1 &tmp temp0)
-		(switch (= sel_29 param1)
+	(method (changeState param1 &tmp temp0)
+		(switch (= state param1)
 			(0
-				(= sel_137 2)
+				(= seconds 2)
 			)
 			(1
-				((goodList sel_120: 96 checkCel sel_141)
-					sel_110:
-					sel_146: sFlipIt self sel_141
+				((goodList firstTrue: 96 checkCel register)
+					init:
+					setScript: sFlipIt self register
 				)
 			)
 			(2
-				(if (< (++ sel_141) (goodList sel_86:))
-					(= sel_29 0)
-					(= sel_136 1)
+				(if (< (++ register) (goodList size:))
+					(= state 0)
+					(= cycles 1)
 				else
-					(= sel_65 sAskIt)
-					(self sel_111:)
+					(= next sAskIt)
+					(self dispose:)
 				)
 			)
 		)
@@ -110,23 +110,23 @@
 
 (instance sFlipIt of Script
 	(properties
-		sel_20 {sFlipIt}
+		name {sFlipIt}
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
-				(= local0 (sel_42 sel_4:))
-				(sel_42 sel_3: 1 sel_4: 0)
-				(sel_42 sel_161: End self)
+				(= local0 (client cel:))
+				(client loop: 1 cel: 0)
+				(client setCycle: End self)
 			)
 			(1
-				(gGameMusic2 sel_40: 55 sel_99: 1 sel_3: 1 sel_39:)
-				(sel_42 sel_3: 0 sel_4: local0 sel_317:)
-				(if (== sel_141 11)
-					(gGame sel_588: 1)
+				(gGameMusic2 number: 55 flags: 1 loop: 1 play:)
+				(client loop: 0 cel: local0 addToPic:)
+				(if (== register 11)
+					(gGame handsOn: 1)
 				)
-				(self sel_111:)
+				(self dispose:)
 			)
 		)
 	)
@@ -134,13 +134,13 @@
 
 (instance sAskIt of Script
 	(properties
-		sel_20 {sAskIt}
+		name {sAskIt}
 	)
 
-	(method (sel_144 param1 &tmp [temp0 50])
-		(switch (= sel_29 param1)
+	(method (changeState param1 &tmp [temp0 50])
+		(switch (= state param1)
 			(0
-				(= sel_136 1)
+				(= cycles 1)
 			)
 			(1
 				(if
@@ -148,8 +148,8 @@
 						(== (= local1 (Random 1 local3)) global146)
 						(== local1 global147)
 					)
-					(-- sel_29)
-					(self sel_145:)
+					(-- state)
+					(self cue:)
 				else
 					(switch gAct
 						(1
@@ -165,7 +165,7 @@
 						)
 					)
 				)
-				(= sel_137 2)
+				(= seconds 2)
 			)
 			(2
 				(Message msgGET 18 2 0 0 local1 @temp0)
@@ -178,7 +178,7 @@
 				else
 					(ClearFlag 34)
 				)
-				(gCurRoom sel_399: local2)
+				(gCurRoom newRoom: local2)
 			)
 		)
 	)
@@ -186,18 +186,18 @@
 
 (instance egyptProp of Prop
 	(properties
-		sel_20 {egyptProp}
-		sel_2 18
+		name {egyptProp}
+		view 18
 	)
 
-	(method (sel_300 param1)
+	(method (doVerb param1)
 		(switch param1
 			(4
-				(== sel_4 [local4 (- local1 1)])
-				(sAskIt sel_145:)
+				(== cel [local4 (- local1 1)])
+				(sAskIt cue:)
 			)
 			(else
-				(super sel_300: param1)
+				(super doVerb: param1)
 			)
 		)
 	)
@@ -205,10 +205,10 @@
 
 (instance checkCel of Code
 	(properties
-		sel_20 {checkCel}
+		name {checkCel}
 	)
 
-	(method (sel_57 param1 param2)
-		(return (== (param1 sel_4:) param2))
+	(method (doit param1 param2)
+		(return (== (param1 cel:) param2))
 	)
 )

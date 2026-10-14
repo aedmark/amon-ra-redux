@@ -27,107 +27,107 @@
 
 (instance rm720 of LBRoom
 	(properties
-		sel_20 {rm720}
-		sel_213 23
-		sel_408 720
-		sel_409 730
-		sel_412 715
-		sel_108 -10
+		name {rm720}
+		noun 23
+		picture 720
+		north 730
+		west 715
+		vanishingY -10
 	)
 
-	(method (sel_110 &tmp temp0)
-		(gCurRoom sel_259: (List sel_109:))
-		((ScriptID 2720 0) sel_57: (gCurRoom sel_259:)) ; poly2720Code
-		(gEgo sel_110: sel_585: 831 sel_320: 145)
-		(self sel_146: sEnterWest)
+	(method (init &tmp temp0)
+		(gCurRoom obstacles: (List new:))
+		((ScriptID 2720 0) doit: (gCurRoom obstacles:)) ; poly2720Code
+		(gEgo init: normalize: 831 setScale: 145)
+		(self setScript: sEnterWest)
 		(Load rsVIEW 722)
 		(LoadMany rsSOUND 48 721 722 723 736 17)
-		((= temp0 (Inv sel_64: 15)) sel_4: 0)
-		(temp0 sel_33: 84)
-		(super sel_110:)
-		(gGameMusic1 sel_40: 720 sel_99: 1 sel_3: -1 sel_39:)
-		(steve sel_110:)
-		(stone sel_110:)
-		(maintDoor sel_110: sel_311: 4)
-		(furnaceDoor sel_110: sel_311: 4)
-		(stairs sel_110:)
-		(junk1 sel_110:)
-		(junk2 sel_110:)
-		(coal sel_110:)
-		(coalOnFace sel_110:)
-		(coalOnFaceFeat sel_110:)
-		(smellHere sel_110:)
-		(shovel1 sel_110:)
-		(coalShute sel_110:)
-		(longPipe sel_110:)
-		(bigPipes sel_110:)
-		(drain sel_110:)
-		(shovel2 sel_110:)
-		(tunnel sel_110:)
-		(pipe1 sel_110:)
-		(pipe2 sel_110:)
-		(furnace sel_110:)
-		(flames sel_110:)
-		(light1 sel_110:)
-		(light2 sel_110:)
-		(furnaceGrate sel_110:)
+		((= temp0 (Inv at: 15)) cel: 0)
+		(temp0 cursor: 84)
+		(super init:)
+		(gGameMusic1 number: 720 flags: 1 loop: -1 play:)
+		(steve init:)
+		(stone init:)
+		(maintDoor init: approachVerbs: 4)
+		(furnaceDoor init: approachVerbs: 4)
+		(stairs init:)
+		(junk1 init:)
+		(junk2 init:)
+		(coal init:)
+		(coalOnFace init:)
+		(coalOnFaceFeat init:)
+		(smellHere init:)
+		(shovel1 init:)
+		(coalShute init:)
+		(longPipe init:)
+		(bigPipes init:)
+		(drain init:)
+		(shovel2 init:)
+		(tunnel init:)
+		(pipe1 init:)
+		(pipe2 init:)
+		(furnace init:)
+		(flames init:)
+		(light1 init:)
+		(light2 init:)
+		(furnaceGrate init:)
 	)
 
-	(method (sel_145)
+	(method (cue)
 		(cond
-			((self sel_142:)
-				(rileyTimer sel_162: self 10)
-				(self sel_135: rileyTimer)
+			((self script:)
+				(rileyTimer setReal: self 10)
+				(self timer: rileyTimer)
 			)
 			(local0
-				(gGameMusic2 sel_40: 3 sel_3: 1 sel_99: 1 sel_39:)
-				(self sel_146: sO_RileyEnters)
+				(gGameMusic2 number: 3 loop: 1 flags: 1 play:)
+				(self setScript: sO_RileyEnters)
 			)
 			(else
-				(self sel_146: sGunShots)
+				(self setScript: sGunShots)
 			)
 		)
 	)
 
-	(method (sel_399)
-		(rileyTimer sel_111: sel_81:)
-		(super sel_399: &rest)
+	(method (newRoom)
+		(rileyTimer dispose: delete:)
+		(super newRoom: &rest)
 	)
 
-	(method (sel_111)
-		(if (gWalkHandler sel_122: tunnel)
-			(gWalkHandler sel_81: tunnel)
+	(method (dispose)
+		(if (gWalkHandler contains: tunnel)
+			(gWalkHandler delete: tunnel)
 		)
 		(DisposeScript 2720)
-		(gGameMusic1 sel_170:)
-		(super sel_111:)
+		(gGameMusic1 fade:)
+		(super dispose:)
 	)
 )
 
 (instance sGunShots of Script
 	(properties
-		sel_20 {sGunShots}
+		name {sGunShots}
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
-				(sFX sel_40: 52 sel_3: 1 sel_99: 5 sel_39: self)
+				(sFX number: 52 loop: 1 flags: 5 play: self)
 			)
 			(1
-				(= sel_139 30)
+				(= ticks 30)
 			)
 			(2
-				(sFX sel_39: self)
+				(sFX play: self)
 			)
 			(3
-				(gMessager sel_295: 22)
-				(rileyTimer sel_162: gCurRoom 30)
-				(gCurRoom sel_135: rileyTimer)
-				(gGameMusic2 sel_40: 17 sel_3: -1 sel_99: 1 sel_39:)
+				(gMessager say: 22)
+				(rileyTimer setReal: gCurRoom 30)
+				(gCurRoom timer: rileyTimer)
+				(gGameMusic2 number: 17 loop: -1 flags: 1 play:)
 				(Load rsSOUND 3)
 				(= local0 1)
-				(self sel_111:)
+				(self dispose:)
 			)
 		)
 	)
@@ -135,26 +135,26 @@
 
 (instance sEnterWest of Script
 	(properties
-		sel_20 {sEnterWest}
+		name {sEnterWest}
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
-				(gGame sel_587:)
+				(gGame handsOff:)
 				(gEgo
-					sel_2: 723
-					sel_155: 2
-					sel_153: 0 161
-					sel_312: MoveTo 54 187 self
+					view: 723
+					setLoop: 2
+					posn: 0 161
+					setMotion: MoveTo 54 187 self
 				)
 			)
 			(1
-				(rileyTimer sel_162: gCurRoom 0 2)
-				(gCurRoom sel_135: rileyTimer)
-				(gEgo sel_585: 831 sel_3: 6)
-				(gGame sel_588:)
-				(self sel_111:)
+				(rileyTimer setReal: gCurRoom 0 2)
+				(gCurRoom timer: rileyTimer)
+				(gEgo normalize: 831 loop: 6)
+				(gGame handsOn:)
+				(self dispose:)
 			)
 		)
 	)
@@ -162,88 +162,88 @@
 
 (instance sO_RileyEnters of Script
 	(properties
-		sel_20 {sO'RileyEnters}
+		name {sO'RileyEnters}
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
-				(gGame sel_587:)
+				(gGame handsOff:)
 				(o_Riley
-					sel_110:
-					sel_155: 7
-					sel_161: Walk
-					sel_312: MoveTo 62 189 self
+					init:
+					setLoop: 7
+					setCycle: Walk
+					setMotion: MoveTo 62 189 self
 				)
-				(if (< (gEgo sel_1:) 120)
+				(if (< (gEgo x:) 120)
 					(gEgo
-						sel_244: 4
-						sel_53: 4
-						sel_312: PolyPath 142 165 self
+						cycleSpeed: 4
+						moveSpeed: 4
+						setMotion: PolyPath 142 165 self
 					)
 				else
-					(= sel_136 1)
+					(= cycles 1)
 				)
 			)
 			(1)
 			(2
-				(o_Riley sel_63: -1)
-				(gEgo sel_244: 6 sel_53: 6 sel_253: 270 self)
-				(if (== (steve sel_2:) 812)
-					(steve sel_253: 270)
+				(o_Riley setPri: -1)
+				(gEgo cycleSpeed: 6 moveSpeed: 6 setHeading: 270 self)
+				(if (== (steve view:) 812)
+					(steve setHeading: 270)
 				)
 			)
 			(3
-				(o_Riley sel_155: 5 sel_156: 0 sel_161: End self)
+				(o_Riley setLoop: 5 setCel: 0 setCycle: End self)
 			)
 			(4
-				(o_Riley sel_155: 6 sel_156: 0 sel_161: CT 1 1 self)
+				(o_Riley setLoop: 6 setCel: 0 setCycle: CT 1 1 self)
 			)
 			(5
-				(sFX sel_40: 52 sel_3: 1 sel_99: 5 sel_39:)
-				(o_Riley sel_161: CT 1 1 self)
+				(sFX number: 52 loop: 1 flags: 5 play:)
+				(o_Riley setCycle: CT 1 1 self)
 			)
 			(6
-				(sFX sel_39:)
-				(o_Riley sel_161: CT 0 1 self)
+				(sFX play:)
+				(o_Riley setCycle: CT 0 1 self)
 			)
 			(7
 				(gEgo
-					sel_2: 722
-					sel_155: 4
-					sel_156: 0
-					sel_244: 12
-					sel_161: End self
+					view: 722
+					setLoop: 4
+					setCel: 0
+					cycleSpeed: 12
+					setCycle: End self
 				)
 			)
 			(8
 				(cond
 					(
 						(or
-							(== (steve sel_2:) 812)
+							(== (steve view:) 812)
 							(and
-								(== (steve sel_2:) 722)
-								(== (steve sel_3:) 0)
-								(== (steve sel_4:) 7)
+								(== (steve view:) 722)
+								(== (steve loop:) 0)
+								(== (steve cel:) 7)
 							)
 						)
-						(self sel_146: sKillSteve self)
+						(self setScript: sKillSteve self)
 					)
-					((== (steve sel_2:) 721)
-						(self sel_146: sKillCoalSteve self)
+					((== (steve view:) 721)
+						(self setScript: sKillCoalSteve self)
 					)
-					((== (steve sel_2:) 722)
-						(self sel_146: sKillNailSteve self)
+					((== (steve view:) 722)
+						(self setScript: sKillNailSteve self)
 					)
 				)
 			)
 			(9
-				(= sel_139 120)
+				(= ticks 120)
 			)
 			(10
 				(= global145 10) ; "You'll get nowhere with that holier-than-thou attitude."
-				(gCurRoom sel_399: 99)
-				(self sel_111:)
+				(gCurRoom newRoom: 99)
+				(self dispose:)
 			)
 		)
 	)
@@ -251,33 +251,33 @@
 
 (instance sKillSteve of Script
 	(properties
-		sel_20 {sKillSteve}
+		name {sKillSteve}
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
-				(o_Riley sel_155: 6 sel_156: 0 sel_161: CT 1 1 self)
+				(o_Riley setLoop: 6 setCel: 0 setCycle: CT 1 1 self)
 			)
 			(1
-				(sFX sel_40: 52 sel_3: 1 sel_99: 5 sel_39:)
-				(o_Riley sel_161: CT 1 1 self)
+				(sFX number: 52 loop: 1 flags: 5 play:)
+				(o_Riley setCycle: CT 1 1 self)
 			)
 			(2
-				(sFX sel_39:)
-				(o_Riley sel_161: CT 0 1 self)
+				(sFX play:)
+				(o_Riley setCycle: CT 0 1 self)
 			)
 			(3
 				(steve
-					sel_2: 722
-					sel_155: 3
-					sel_156: 0
-					sel_244: 12
-					sel_161: End self
+					view: 722
+					setLoop: 3
+					setCel: 0
+					cycleSpeed: 12
+					setCycle: End self
 				)
 			)
 			(4
-				(self sel_111:)
+				(self dispose:)
 			)
 		)
 	)
@@ -285,41 +285,41 @@
 
 (instance sKillCoalSteve of Script
 	(properties
-		sel_20 {sKillCoalSteve}
+		name {sKillCoalSteve}
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
 				(o_Riley
-					sel_155: 7
-					sel_161: Walk
-					sel_312:
+					setLoop: 7
+					setCycle: Walk
+					setMotion:
 						MoveTo
-						(- (steve sel_1:) 40)
-						(+ (steve sel_0:) 20)
+						(- (steve x:) 40)
+						(+ (steve y:) 20)
 						self
 				)
 			)
 			(1
-				(o_Riley sel_155: 5 sel_156: 0 sel_161: End self)
+				(o_Riley setLoop: 5 setCel: 0 setCycle: End self)
 			)
 			(2
-				(o_Riley sel_155: 6 sel_156: 0 sel_161: CT 1 1 self)
+				(o_Riley setLoop: 6 setCel: 0 setCycle: CT 1 1 self)
 			)
 			(3
-				(sFX sel_40: 52 sel_3: 1 sel_99: 5 sel_39:)
-				(o_Riley sel_161: CT 1 1 self)
+				(sFX number: 52 loop: 1 flags: 5 play:)
+				(o_Riley setCycle: CT 1 1 self)
 			)
 			(4
-				(sFX sel_39:)
-				(o_Riley sel_161: CT 0 1 self)
+				(sFX play:)
+				(o_Riley setCycle: CT 0 1 self)
 			)
 			(5
-				(steve sel_161: Osc 1 self)
+				(steve setCycle: Osc 1 self)
 			)
 			(6
-				(self sel_111:)
+				(self dispose:)
 			)
 		)
 	)
@@ -327,46 +327,46 @@
 
 (instance sKillNailSteve of Script
 	(properties
-		sel_20 {sKillNailSteve}
+		name {sKillNailSteve}
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
 				(o_Riley
-					sel_155: 7
-					sel_161: Walk
-					sel_312:
+					setLoop: 7
+					setCycle: Walk
+					setMotion:
 						MoveTo
-						(- (steve sel_1:) 50)
-						(+ (steve sel_0:) 20)
+						(- (steve x:) 50)
+						(+ (steve y:) 20)
 						self
 				)
 			)
 			(1
-				(o_Riley sel_155: 5 sel_156: 0 sel_161: End self)
+				(o_Riley setLoop: 5 setCel: 0 setCycle: End self)
 			)
 			(2
-				(o_Riley sel_155: 6 sel_156: 0 sel_161: CT 1 1 self)
+				(o_Riley setLoop: 6 setCel: 0 setCycle: CT 1 1 self)
 			)
 			(3
-				(sFX sel_40: 52 sel_3: 1 sel_99: 5 sel_39:)
-				(o_Riley sel_161: CT 1 1 self)
+				(sFX number: 52 loop: 1 flags: 5 play:)
+				(o_Riley setCycle: CT 1 1 self)
 			)
 			(4
-				(sFX sel_39:)
-				(o_Riley sel_161: CT 0 1 self)
+				(sFX play:)
+				(o_Riley setCycle: CT 0 1 self)
 			)
 			(5
-				(steve sel_156: (- (steve sel_4:) 1))
-				(= sel_139 20)
+				(steve setCel: (- (steve cel:) 1))
+				(= ticks 20)
 			)
 			(6
-				(steve sel_156: (+ (steve sel_4:) 1))
-				(= sel_139 20)
+				(steve setCel: (+ (steve cel:) 1))
+				(= ticks 20)
 			)
 			(7
-				(self sel_111:)
+				(self dispose:)
 			)
 		)
 	)
@@ -374,40 +374,40 @@
 
 (instance sBurnBabyBurn of Script
 	(properties
-		sel_20 {sBurnBabyBurn}
+		name {sBurnBabyBurn}
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
-				(gGame sel_587:)
+				(gGame handsOff:)
 				(gEgo
-					sel_2: 721
-					sel_155: 4
-					sel_156: 0
-					sel_244: 12
-					sel_161: CT 3 1 self
+					view: 721
+					setLoop: 4
+					setCel: 0
+					cycleSpeed: 12
+					setCycle: CT 3 1 self
 				)
 			)
 			(1
-				(gEgo sel_161: End self)
-				(furnaceDoor sel_244: 12 sel_161: End)
+				(gEgo setCycle: End self)
+				(furnaceDoor cycleSpeed: 12 setCycle: End)
 			)
 			(2
-				(sFX sel_40: 736 sel_3: 1 sel_99: 1 sel_39:)
-				(flames sel_161: End self)
+				(sFX number: 736 loop: 1 flags: 1 play:)
+				(flames setCycle: End self)
 			)
 			(3
-				(flames sel_161: Beg)
-				(gEgo sel_155: 5 sel_156: 0 sel_244: 13 sel_161: End self)
+				(flames setCycle: Beg)
+				(gEgo setLoop: 5 setCel: 0 cycleSpeed: 13 setCycle: End self)
 			)
 			(4
-				(= sel_139 120)
+				(= ticks 120)
 			)
 			(5
 				(= global145 2) ; "If you can't stand the heat, stay out of the furnace!"
-				(gCurRoom sel_399: 99)
-				(self sel_111:)
+				(gCurRoom newRoom: 99)
+				(self dispose:)
 			)
 		)
 	)
@@ -415,27 +415,27 @@
 
 (instance sRemoveCoal of Script
 	(properties
-		sel_20 {sRemoveCoal}
+		name {sRemoveCoal}
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
-				(gGame sel_587:)
-				(gEgo sel_312: PolyPath 279 172 self)
+				(gGame handsOff:)
+				(gEgo setMotion: PolyPath 279 172 self)
 			)
 			(1
-				(gEgo sel_2: 721 sel_155: 0 sel_156: 0 sel_161: CT 2 1 self)
+				(gEgo view: 721 setLoop: 0 setCel: 0 setCycle: CT 2 1 self)
 			)
 			(2
-				(coalOnFace sel_111:)
-				(coalOnFaceFeat sel_111:)
-				(gEgo sel_161: End self)
+				(coalOnFace dispose:)
+				(coalOnFaceFeat dispose:)
+				(gEgo setCycle: End self)
 			)
 			(3
-				(gEgo sel_585: 831 sel_3: 0)
-				(gGame sel_588:)
-				(self sel_111:)
+				(gEgo normalize: 831 loop: 0)
+				(gGame handsOn:)
+				(self dispose:)
 			)
 		)
 	)
@@ -443,42 +443,42 @@
 
 (instance sAwaken of Script
 	(properties
-		sel_20 {sAwaken}
+		name {sAwaken}
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
-				(gGame sel_587:)
-				(smellHere sel_111:)
-				(gEgo sel_312: PolyPath 279 172 self)
+				(gGame handsOff:)
+				(smellHere dispose:)
+				(gEgo setMotion: PolyPath 279 172 self)
 			)
 			(1
-				(gEgo sel_2: 721 sel_155: 0 sel_156: 0 sel_161: End self)
+				(gEgo view: 721 setLoop: 0 setCel: 0 setCycle: End self)
 			)
 			(2
-				(steve sel_161: Osc 1 self)
+				(steve setCycle: Osc 1 self)
 			)
 			(3
-				(= sel_139 60)
+				(= ticks 60)
 			)
 			(4
-				(gEgo sel_585: 831 sel_3: 0 sel_312: PolyPath 237 165 self)
+				(gEgo normalize: 831 loop: 0 setMotion: PolyPath 237 165 self)
 			)
 			(5
-				(gEgo sel_253: 90 self)
+				(gEgo setHeading: 90 self)
 			)
 			(6
-				(steve sel_155: 2 sel_156: 0 sel_244: 12 sel_161: End self)
+				(steve setLoop: 2 setCel: 0 cycleSpeed: 12 setCycle: End self)
 			)
 			(7
-				(gGame sel_588:)
-				(gTheIconBar sel_233: 0)
-				(= sel_137 (if (HaveMouse) 6 else 12))
+				(gGame handsOn:)
+				(gTheIconBar disable: 0)
+				(= seconds (if (HaveMouse) 6 else 12))
 			)
 			(8
-				(gCurRoom sel_146: sStepOnNail)
-				(self sel_111:)
+				(gCurRoom setScript: sStepOnNail)
+				(self dispose:)
 			)
 		)
 	)
@@ -486,44 +486,44 @@
 
 (instance sStepOnNail of Script
 	(properties
-		sel_20 {sStepOnNail}
+		name {sStepOnNail}
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
 				(steve
-					sel_2: 722
-					sel_155: 1
-					sel_156: 0
-					sel_153: 265 173
-					sel_161: End self
+					view: 722
+					setLoop: 1
+					setCel: 0
+					posn: 265 173
+					setCycle: End self
 				)
 			)
 			(1
-				(= sel_139 45)
+				(= ticks 45)
 			)
 			(2
-				(gEgo sel_253: 135)
+				(gEgo setHeading: 135)
 				(steve
-					sel_155: 2
-					sel_156: 0
-					sel_161: End self
-					sel_312: MoveTo 258 182 self
+					setLoop: 2
+					setCel: 0
+					setCycle: End self
+					setMotion: MoveTo 258 182 self
 				)
-				(sFX sel_40: 722 sel_99: 5 sel_39:)
+				(sFX number: 722 flags: 5 play:)
 			)
 			(3)
 			(4
-				(sFX sel_170:)
+				(sFX fade:)
 				(SetFlag 65)
-				((gCurRoom sel_259:)
-					sel_81: ((gCurRoom sel_259:) sel_64: 0)
+				((gCurRoom obstacles:)
+					delete: ((gCurRoom obstacles:) at: 0)
 				)
-				((ScriptID 2720 0) sel_57: (gCurRoom sel_259:)) ; poly2720Code
-				(steve sel_313:)
-				(gTheIconBar sel_177: 0)
-				(self sel_111:)
+				((ScriptID 2720 0) doit: (gCurRoom obstacles:)) ; poly2720Code
+				(steve stopUpd:)
+				(gTheIconBar enable: 0)
+				(self dispose:)
 			)
 		)
 	)
@@ -531,43 +531,43 @@
 
 (instance sGetUp of Script
 	(properties
-		sel_20 {sGetUp}
+		name {sGetUp}
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
-				(gGame sel_587:)
-				(steve sel_155: 3 sel_156: 0 sel_161: End self)
+				(gGame handsOff:)
+				(steve setLoop: 3 setCel: 0 setCycle: End self)
 			)
 			(1
-				(= sel_139 30)
+				(= ticks 30)
 			)
 			(2
 				(steve
-					sel_2: 722
-					sel_155: 0
-					sel_156: 0
-					sel_153: 265 173
-					sel_161: CT 2 1 self
+					view: 722
+					setLoop: 0
+					setCel: 0
+					posn: 265 173
+					setCycle: CT 2 1 self
 				)
 			)
 			(3
-				(sFX sel_40: 723 sel_99: 1 sel_39:)
-				(steve sel_161: End self)
+				(sFX number: 723 flags: 1 play:)
+				(steve setCycle: End self)
 			)
 			(4
-				(sFX sel_167:)
+				(sFX stop:)
 				(= local1 1)
-				(steve sel_63: -1 sel_313:)
+				(steve setPri: -1 stopUpd:)
 				(SetFlag 121)
-				((gCurRoom sel_259:)
-					sel_81: ((gCurRoom sel_259:) sel_64: 0)
+				((gCurRoom obstacles:)
+					delete: ((gCurRoom obstacles:) at: 0)
 				)
-				((ScriptID 2720 0) sel_57: (gCurRoom sel_259:)) ; poly2720Code
-				(gMessager sel_295: 21 2 5)
-				(gGame sel_588:)
-				(self sel_111:)
+				((ScriptID 2720 0) doit: (gCurRoom obstacles:)) ; poly2720Code
+				(gMessager say: 21 2 5)
+				(gGame handsOn:)
+				(self dispose:)
 			)
 		)
 	)
@@ -575,33 +575,33 @@
 
 (instance sSteveHelp of Script
 	(properties
-		sel_20 {sSteveHelp}
+		name {sSteveHelp}
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
 				(steve
-					sel_2: 724
-					sel_63: -1
-					sel_155: 0
-					sel_156: 0
-					sel_244: 6
-					sel_53: 6
-					sel_161: Walk
-					sel_320: 173
-					sel_312: MoveTo 230 162 self
+					view: 724
+					setPri: -1
+					setLoop: 0
+					setCel: 0
+					cycleSpeed: 6
+					moveSpeed: 6
+					setCycle: Walk
+					setScale: 173
+					setMotion: MoveTo 230 162 self
 				)
 			)
 			(1
-				(steve sel_155: 1 sel_156: 0 sel_312: MoveTo 233 154 self)
+				(steve setLoop: 1 setCel: 0 setMotion: MoveTo 233 154 self)
 			)
 			(2
-				(steve sel_155: 2 sel_156: 0 sel_312: MoveTo 270 153 self)
+				(steve setLoop: 2 setCel: 0 setMotion: MoveTo 270 153 self)
 			)
 			(3
-				(sMoveStone sel_145:)
-				(self sel_111:)
+				(sMoveStone cue:)
+				(self dispose:)
 			)
 		)
 	)
@@ -609,35 +609,35 @@
 
 (instance sPushStone of Script
 	(properties
-		sel_20 {sPushStone}
+		name {sPushStone}
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
-				(gGame sel_587:)
-				(gEgo sel_312: PolyPath 240 154 self)
+				(gGame handsOff:)
+				(gEgo setMotion: PolyPath 240 154 self)
 			)
 			(1
 				(gEgo
-					sel_2: 721
-					sel_155: 7
-					sel_156: 0
-					sel_244: 12
-					sel_161: CT 4 1 self
+					view: 721
+					setLoop: 7
+					setCel: 0
+					cycleSpeed: 12
+					setCycle: CT 4 1 self
 				)
 			)
 			(2
-				(= sel_139 60)
+				(= ticks 60)
 			)
 			(3
-				(gEgo sel_161: Beg self)
+				(gEgo setCycle: Beg self)
 			)
 			(4
-				(gMessager sel_295: 5 4 4)
-				(gEgo sel_585: 831 sel_3: 3)
-				(gGame sel_588:)
-				(self sel_111:)
+				(gMessager say: 5 4 4)
+				(gEgo normalize: 831 loop: 3)
+				(gGame handsOn:)
+				(self dispose:)
 			)
 		)
 	)
@@ -645,54 +645,54 @@
 
 (instance sMoveStone of Script
 	(properties
-		sel_20 {sMoveStone}
+		name {sMoveStone}
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
-				(gGame sel_587:)
-				(gEgo sel_312: PolyPath 240 151 self)
-				(steve sel_146: sSteveHelp)
+				(gGame handsOff:)
+				(gEgo setMotion: PolyPath 240 151 self)
+				(steve setScript: sSteveHelp)
 			)
 			(1)
 			(2
 				(gEgo
-					sel_2: 721
-					sel_155: 7
-					sel_156: 0
-					sel_244: 12
-					sel_161: Osc 1
+					view: 721
+					setLoop: 7
+					setCel: 0
+					cycleSpeed: 12
+					setCycle: Osc 1
 				)
 				(steve
-					sel_2: 721
-					sel_155: 6
-					sel_156: 0
-					sel_244: 12
-					sel_161: Osc 1
+					view: 721
+					setLoop: 6
+					setCel: 0
+					cycleSpeed: 12
+					setCycle: Osc 1
 				)
-				(stone sel_312: MoveTo 176 (stone sel_0:) self)
-				(sFX sel_40: 721 sel_99: 5 sel_39:)
+				(stone setMotion: MoveTo 176 (stone y:) self)
+				(sFX number: 721 flags: 5 play:)
 			)
 			(3
-				(sFX sel_167:)
-				(stone sel_313:)
-				(gEgo sel_161: Beg self)
-				(steve sel_161: Beg)
+				(sFX stop:)
+				(stone stopUpd:)
+				(gEgo setCycle: Beg self)
+				(steve setCycle: Beg)
 			)
 			(4
-				(gEgo sel_585: 831 sel_3: 3)
+				(gEgo normalize: 831 loop: 3)
 				(steve
-					sel_2: 812
-					sel_3: 3
-					sel_320: 0
-					sel_244: 6
-					sel_313:
-					sel_161: StopWalk -1
+					view: 812
+					loop: 3
+					setScale: 0
+					cycleSpeed: 6
+					stopUpd:
+					setCycle: StopWalk -1
 				)
-				(gWalkHandler sel_129: tunnel)
-				(gGame sel_588:)
-				(self sel_111:)
+				(gWalkHandler addToFront: tunnel)
+				(gGame handsOn:)
+				(self dispose:)
 			)
 		)
 	)
@@ -700,54 +700,54 @@
 
 (instance sEnterTunnel of Script
 	(properties
-		sel_20 {sEnterTunnel}
+		name {sEnterTunnel}
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
-				(gGame sel_587:)
-				(gEgo sel_312: PolyPath 251 146 self)
+				(gGame handsOff:)
+				(gEgo setMotion: PolyPath 251 146 self)
 			)
 			(1
-				(gEgo sel_253: 0 self)
+				(gEgo setHeading: 0 self)
 			)
 			(2
-				(gEgo sel_2: 721 sel_155: 8 sel_156: 0 sel_161: End self)
+				(gEgo view: 721 setLoop: 8 setCel: 0 setCycle: End self)
 			)
 			(3
 				(gEgo
-					sel_155: 9
-					sel_156: 0
-					sel_153: 253 125
-					sel_63: 7
-					sel_244: 12
-					sel_161: Fwd
-					sel_312: MoveTo 281 98 self
+					setLoop: 9
+					setCel: 0
+					posn: 253 125
+					setPri: 7
+					cycleSpeed: 12
+					setCycle: Fwd
+					setMotion: MoveTo 281 98 self
 				)
 			)
 			(4
-				(gEgo sel_102:)
-				(steve sel_155: -1 sel_312: PolyPath 254 148 self)
+				(gEgo hide:)
+				(steve setLoop: -1 setMotion: PolyPath 254 148 self)
 			)
 			(5
-				(steve sel_2: 721 sel_155: 10 sel_156: 0 sel_161: End self)
+				(steve view: 721 setLoop: 10 setCel: 0 setCycle: End self)
 			)
 			(6
 				(steve
-					sel_155: 11
-					sel_156: 0
-					sel_153: 254 129
-					sel_63: 7
-					sel_244: 9
-					sel_161: Fwd
-					sel_312: MoveTo 285 94 self
+					setLoop: 11
+					setCel: 0
+					posn: 254 129
+					setPri: 7
+					cycleSpeed: 9
+					setCycle: Fwd
+					setMotion: MoveTo 285 94 self
 				)
 			)
 			(7
-				(steve sel_102:)
-				(gCurRoom sel_399: (gCurRoom sel_409:))
-				(self sel_111:)
+				(steve hide:)
+				(gCurRoom newRoom: (gCurRoom north:))
+				(self dispose:)
 			)
 		)
 	)
@@ -755,154 +755,154 @@
 
 (instance rileyTimer of Timer
 	(properties
-		sel_20 {rileyTimer}
+		name {rileyTimer}
 	)
 )
 
 (instance steve of Actor
 	(properties
-		sel_20 {steve}
-		sel_1 261
-		sel_0 148
-		sel_213 21
-		sel_2 721
-		sel_3 1
-		sel_60 12
-		sel_14 16401
+		name {steve}
+		x 261
+		y 148
+		noun 21
+		view 721
+		loop 1
+		priority 12
+		signal 16401
 	)
 
-	(method (sel_300 param1)
+	(method (doVerb param1)
 		(switch param1
 			(1
 				(cond
-					((and (== sel_3 1) (== sel_2 721))
-						(gMessager sel_295: 21 1 1)
+					((and (== loop 1) (== view 721))
+						(gMessager say: 21 1 1)
 					)
-					((and (== sel_3 2) (== sel_2 722))
-						(gMessager sel_295: 21 1 2)
+					((and (== loop 2) (== view 722))
+						(gMessager say: 21 1 2)
 					)
 					(else
-						(super sel_300: param1)
+						(super doVerb: param1)
 					)
 				)
 			)
 			(27
 				(if local1
-					(gEgo sel_351: 16)
-					((ScriptID 21 1) sel_57: 785) ; dropCluesCode
-					(gMessager sel_295: 21 27)
+					(gEgo put: 16)
+					((ScriptID 21 1) doit: 785) ; dropCluesCode
+					(gMessager say: 21 27)
 				)
 			)
 			(23
-				(if (and (== sel_3 2) (== sel_2 721))
-					(gEgo sel_351: 12)
-					((ScriptID 21 1) sel_57: 781) ; dropCluesCode
-					(gCurRoom sel_146: sGetUp)
+				(if (and (== loop 2) (== view 721))
+					(gEgo put: 12)
+					((ScriptID 21 1) doit: 781) ; dropCluesCode
+					(gCurRoom setScript: sGetUp)
 				else
-					(super sel_300: param1)
+					(super doVerb: param1)
 				)
 			)
 			(8
 				(if
 					(or
-						(== sel_2 812)
+						(== view 812)
 						(and
-							(== (steve sel_2:) 722)
-							(== (steve sel_3:) 0)
-							(== (steve sel_4:) 7)
+							(== (steve view:) 722)
+							(== (steve loop:) 0)
+							(== (steve cel:) 7)
 						)
 					)
-					(gMessager sel_295: 21 8)
+					(gMessager say: 21 8)
 				else
-					(super sel_300: param1)
+					(super doVerb: param1)
 				)
 			)
 			(4
-				(if (and (== sel_3 1) (== sel_2 721))
-					(gEgo sel_312: PolyPath 279 172 self)
+				(if (and (== loop 1) (== view 721))
+					(gEgo setMotion: PolyPath 279 172 self)
 				else
-					(super sel_300: param1)
+					(super doVerb: param1)
 				)
 			)
 			(6
 				(if
 					(or
-						(== sel_2 812)
+						(== view 812)
 						(and
-							(== (steve sel_2:) 722)
-							(== (steve sel_3:) 0)
-							(== (steve sel_4:) 7)
+							(== (steve view:) 722)
+							(== (steve loop:) 0)
+							(== (steve cel:) 7)
 						)
 					)
-					(gMessager sel_295: 21 6 7)
+					(gMessager say: 21 6 7)
 				else
-					(super sel_300: param1)
+					(super doVerb: param1)
 				)
 			)
 			(2
 				(if
 					(or
-						(== sel_2 812)
+						(== view 812)
 						(and
-							(== (steve sel_2:) 722)
-							(== (steve sel_3:) 0)
-							(== (steve sel_4:) 7)
+							(== (steve view:) 722)
+							(== (steve loop:) 0)
+							(== (steve cel:) 7)
 						)
 					)
-					(gMessager sel_295: 21 2 8)
+					(gMessager say: 21 2 8)
 				else
-					(super sel_300: param1)
+					(super doVerb: param1)
 				)
 			)
 			(else
-				(super sel_300: param1)
+				(super doVerb: param1)
 			)
 		)
 	)
 
-	(method (sel_145)
-		(gMessager sel_295: 21 4 1)
+	(method (cue)
+		(gMessager say: 21 4 1)
 	)
 )
 
 (instance o_Riley of Actor
 	(properties
-		sel_20 {o'Riley}
-		sel_0 163
-		sel_2 722
-		sel_3 5
-		sel_60 15
-		sel_14 16400
+		name {o'Riley}
+		y 163
+		view 722
+		loop 5
+		priority 15
+		signal 16400
 	)
 )
 
 (instance stone of Actor
 	(properties
-		sel_20 {stone}
-		sel_1 224
-		sel_0 78
-		sel_213 5
-		sel_2 723
-		sel_3 1
-		sel_60 8
-		sel_14 17
+		name {stone}
+		x 224
+		y 78
+		noun 5
+		view 723
+		loop 1
+		priority 8
+		signal 17
 	)
 
-	(method (sel_300 param1)
+	(method (doVerb param1)
 		(switch param1
 			(4
 				(cond
-					((and local1 (== sel_1 224))
-						(gCurRoom sel_146: sMoveStone)
+					((and local1 (== x 224))
+						(gCurRoom setScript: sMoveStone)
 					)
-					((and local1 (!= sel_1 224)) 0)
+					((and local1 (!= x 224)) 0)
 					(else
-						(gCurRoom sel_146: sPushStone)
+						(gCurRoom setScript: sPushStone)
 					)
 				)
 			)
 			(else
-				(super sel_300: param1)
+				(super doVerb: param1)
 			)
 		)
 	)
@@ -910,24 +910,24 @@
 
 (instance furnaceDoor of Prop
 	(properties
-		sel_20 {furnaceDoor}
-		sel_1 141
-		sel_0 117
-		sel_213 4
-		sel_303 189
-		sel_304 163
-		sel_2 723
-		sel_60 11
-		sel_14 17
+		name {furnaceDoor}
+		x 141
+		y 117
+		noun 4
+		approachX 189
+		approachY 163
+		view 723
+		priority 11
+		signal 17
 	)
 
-	(method (sel_300 param1)
+	(method (doVerb param1)
 		(switch param1
 			(4
-				(gCurRoom sel_146: sBurnBabyBurn)
+				(gCurRoom setScript: sBurnBabyBurn)
 			)
 			(else
-				(super sel_300: param1)
+				(super doVerb: param1)
 			)
 		)
 	)
@@ -935,48 +935,48 @@
 
 (instance flames of Prop
 	(properties
-		sel_20 {flames}
-		sel_1 144
-		sel_0 101
-		sel_2 723
-		sel_3 3
-		sel_60 10
-		sel_14 17
+		name {flames}
+		x 144
+		y 101
+		view 723
+		loop 3
+		priority 10
+		signal 17
 	)
 )
 
 (instance coalOnFace of View
 	(properties
-		sel_20 {coalOnFace}
-		sel_1 297
-		sel_0 135
-		sel_2 721
-		sel_3 13
-		sel_60 13
-		sel_14 16401
+		name {coalOnFace}
+		x 297
+		y 135
+		view 721
+		loop 13
+		priority 13
+		signal 16401
 	)
 )
 
 (instance coalOnFaceFeat of Feature
 	(properties
-		sel_20 {coalOnFaceFeat}
-		sel_0 155
-		sel_6 129
-		sel_7 290
-		sel_8 139
-		sel_9 301
+		name {coalOnFaceFeat}
+		y 155
+		nsTop 129
+		nsLeft 290
+		nsBottom 139
+		nsRight 301
 	)
 
-	(method (sel_300 param1)
+	(method (doVerb param1)
 		(switch param1
 			(1
-				(gMessager sel_295: 21 1 1)
+				(gMessager say: 21 1 1)
 			)
 			(4
-				(gCurRoom sel_146: sRemoveCoal)
+				(gCurRoom setScript: sRemoveCoal)
 			)
 			(else
-				(super sel_300: param1)
+				(super doVerb: param1)
 			)
 		)
 	)
@@ -984,29 +984,29 @@
 
 (instance smellHere of Feature
 	(properties
-		sel_20 {smellHere}
-		sel_0 154
-		sel_6 129
-		sel_7 290
-		sel_8 139
-		sel_9 301
-		sel_303 297
-		sel_304 134
+		name {smellHere}
+		y 154
+		nsTop 129
+		nsLeft 290
+		nsBottom 139
+		nsRight 301
+		approachX 297
+		approachY 134
 	)
 
-	(method (sel_300 param1)
+	(method (doVerb param1)
 		(switch param1
 			(1
-				(gMessager sel_295: 21 1 1)
+				(gMessager say: 21 1 1)
 			)
 			(4
-				(gEgo sel_312: PolyPath 279 172 steve)
+				(gEgo setMotion: PolyPath 279 172 steve)
 			)
 			(24
-				(gCurRoom sel_146: sAwaken)
+				(gCurRoom setScript: sAwaken)
 			)
 			(else
-				(super sel_300: param1)
+				(super doVerb: param1)
 			)
 		)
 	)
@@ -1014,115 +1014,115 @@
 
 (instance stairs of Feature
 	(properties
-		sel_20 {stairs}
-		sel_0 1
-		sel_213 9
-		sel_302 2
+		name {stairs}
+		y 1
+		noun 9
+		onMeCheck 2
 	)
 )
 
 (instance junk1 of Feature
 	(properties
-		sel_20 {junk1}
-		sel_0 1
-		sel_213 10
-		sel_302 4
+		name {junk1}
+		y 1
+		noun 10
+		onMeCheck 4
 	)
 )
 
 (instance junk2 of Feature
 	(properties
-		sel_20 {junk2}
-		sel_0 1
-		sel_213 11
-		sel_302 8
+		name {junk2}
+		y 1
+		noun 11
+		onMeCheck 8
 	)
 )
 
 (instance coal of Feature
 	(properties
-		sel_20 {coal}
-		sel_0 1
-		sel_213 12
-		sel_302 16
+		name {coal}
+		y 1
+		noun 12
+		onMeCheck 16
 	)
 )
 
 (instance shovel1 of Feature
 	(properties
-		sel_20 {shovel1}
-		sel_1 300
-		sel_0 1
-		sel_213 13
-		sel_302 32
+		name {shovel1}
+		x 300
+		y 1
+		noun 13
+		onMeCheck 32
 	)
 )
 
 (instance coalShute of Feature
 	(properties
-		sel_20 {coalShute}
-		sel_0 1
-		sel_213 14
-		sel_302 64
+		name {coalShute}
+		y 1
+		noun 14
+		onMeCheck 64
 	)
 )
 
 (instance longPipe of Feature
 	(properties
-		sel_20 {longPipe}
-		sel_0 1
-		sel_213 15
-		sel_302 128
+		name {longPipe}
+		y 1
+		noun 15
+		onMeCheck 128
 	)
 )
 
 (instance bigPipes of Feature
 	(properties
-		sel_20 {bigPipes}
-		sel_0 1
-		sel_213 16
-		sel_302 256
+		name {bigPipes}
+		y 1
+		noun 16
+		onMeCheck 256
 	)
 )
 
 (instance drain of Feature
 	(properties
-		sel_20 {drain}
-		sel_0 1
-		sel_213 17
-		sel_302 512
+		name {drain}
+		y 1
+		noun 17
+		onMeCheck 512
 	)
 )
 
 (instance shovel2 of Feature
 	(properties
-		sel_20 {shovel2}
-		sel_0 1
-		sel_213 18
-		sel_302 1024
+		name {shovel2}
+		y 1
+		noun 18
+		onMeCheck 1024
 	)
 )
 
 (instance tunnel of Feature
 	(properties
-		sel_20 {tunnel}
-		sel_0 1
-		sel_213 19
-		sel_302 2048
-		sel_303 255
-		sel_304 135
+		name {tunnel}
+		y 1
+		noun 19
+		onMeCheck 2048
+		approachX 255
+		approachY 135
 	)
 
-	(method (sel_300 param1)
+	(method (doVerb param1)
 		(switch param1
 			(3
-				(gCurRoom sel_146: sEnterTunnel)
+				(gCurRoom setScript: sEnterTunnel)
 			)
 			(4
-				(gCurRoom sel_146: sEnterTunnel)
+				(gCurRoom setScript: sEnterTunnel)
 			)
 			(else
-				(super sel_300: param1)
+				(super doVerb: param1)
 			)
 		)
 	)
@@ -1130,93 +1130,93 @@
 
 (instance pipe1 of Feature
 	(properties
-		sel_20 {pipe1}
-		sel_0 1
-		sel_213 1
-		sel_302 4096
+		name {pipe1}
+		y 1
+		noun 1
+		onMeCheck 4096
 	)
 )
 
 (instance pipe2 of Feature
 	(properties
-		sel_20 {pipe2}
-		sel_0 1
-		sel_213 2
-		sel_302 8192
+		name {pipe2}
+		y 1
+		noun 2
+		onMeCheck 8192
 	)
 )
 
 (instance furnace of Feature
 	(properties
-		sel_20 {furnace}
-		sel_0 1
-		sel_213 3
-		sel_302 16384
+		name {furnace}
+		y 1
+		noun 3
+		onMeCheck 16384
 	)
 )
 
 (instance light1 of Feature
 	(properties
-		sel_20 {light1}
-		sel_1 64
-		sel_0 73
-		sel_213 7
-		sel_6 67
-		sel_7 59
-		sel_8 80
-		sel_9 70
-		sel_301 40
+		name {light1}
+		x 64
+		y 73
+		noun 7
+		nsTop 67
+		nsLeft 59
+		nsBottom 80
+		nsRight 70
+		sightAngle 40
 	)
 )
 
 (instance light2 of Feature
 	(properties
-		sel_20 {light2}
-		sel_1 232
-		sel_0 68
-		sel_213 8
-		sel_6 62
-		sel_7 225
-		sel_8 75
-		sel_9 239
-		sel_301 40
+		name {light2}
+		x 232
+		y 68
+		noun 8
+		nsTop 62
+		nsLeft 225
+		nsBottom 75
+		nsRight 239
+		sightAngle 40
 	)
 )
 
 (instance furnaceGrate of Feature
 	(properties
-		sel_20 {furnaceGrate}
-		sel_1 158
-		sel_0 136
-		sel_213 6
-		sel_6 128
-		sel_7 141
-		sel_8 145
-		sel_9 176
-		sel_301 40
+		name {furnaceGrate}
+		x 158
+		y 136
+		noun 6
+		nsTop 128
+		nsLeft 141
+		nsBottom 145
+		nsRight 176
+		sightAngle 40
 	)
 )
 
 (instance maintDoor of Feature
 	(properties
-		sel_20 {maintDoor}
-		sel_0 1
-		sel_213 20
-		sel_6 86
-		sel_7 7
-		sel_8 139
-		sel_9 35
-		sel_301 40
+		name {maintDoor}
+		y 1
+		noun 20
+		nsTop 86
+		nsLeft 7
+		nsBottom 139
+		nsRight 35
+		sightAngle 40
 	)
 
-	(method (sel_300 param1)
+	(method (doVerb param1)
 		(switch param1
 			(4
-				(sFXLocked sel_39:)
-				(gMessager sel_295: 20 4)
+				(sFXLocked play:)
+				(gMessager say: 20 4)
 			)
 			(else
-				(super sel_300: param1)
+				(super doVerb: param1)
 			)
 		)
 	)
@@ -1224,15 +1224,15 @@
 
 (instance sFX of Sound
 	(properties
-		sel_20 {sFX}
-		sel_99 1
+		name {sFX}
+		flags 1
 	)
 )
 
 (instance sFXLocked of Sound
 	(properties
-		sel_20 {sFXLocked}
-		sel_99 5
-		sel_40 48
+		name {sFXLocked}
+		flags 5
+		number 48
 	)
 )

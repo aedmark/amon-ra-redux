@@ -20,13 +20,13 @@
 
 (instance rm785 of LBRoom
 	(properties
-		sel_20 {rm785}
-		sel_408 780
+		name {rm785}
+		picture 780
 	)
 
-	(method (sel_110)
-		(super sel_110:)
-		(gGameMusic1 sel_40: 140 sel_99: 1 sel_3: -1 sel_39:)
+	(method (init)
+		(super init:)
+		(gGameMusic1 number: 140 flags: 1 loop: -1 play:)
 		(= local0
 			(switch global126
 				(1 1)
@@ -35,75 +35,75 @@
 				(4 4)
 			)
 		)
-		(gTheIconBar sel_233:)
-		(gGame sel_197: 996)
+		(gTheIconBar disable:)
+		(gGame setCursor: 996)
 		(= local1 (>> (& [local3 local2] $ff00) $0008))
 		(characterView
-			sel_2: (+ 1800 (& [local3 local2] $00ff))
-			sel_3: 1
-			sel_1: 10
-			sel_0: 10
-			sel_110:
+			view: (+ 1800 (& [local3 local2] $00ff))
+			loop: 1
+			x: 10
+			y: 10
+			init:
 		)
-		(gNarrator sel_1: 10 sel_0: 113 sel_537: 290)
-		(self sel_146: sCartoon)
+		(gNarrator x: 10 y: 113 talkWidth: 290)
+		(self setScript: sCartoon)
 	)
 )
 
 (instance sCartoon of Script
 	(properties
-		sel_20 {sCartoon}
+		name {sCartoon}
 	)
 
-	(method (sel_144 param1 &tmp [temp0 100])
-		(switch (= sel_29 param1)
+	(method (changeState param1 &tmp [temp0 100])
+		(switch (= state param1)
 			(0
 				(gCurRoom
-					sel_417:
-						(if (== (characterView sel_2:) 1898) 785 else 780)
+					drawPic:
+						(if (== (characterView view:) 1898) 785 else 780)
 						10
 				)
-				(= sel_136 2)
+				(= cycles 2)
 			)
 			(1
-				(gMessager sel_295: local1 0 local0 0 self)
+				(gMessager say: local1 0 local0 0 self)
 			)
 			(2
 				(++ local2)
-				(characterView sel_111:)
-				(= sel_139 120)
+				(characterView dispose:)
+				(= ticks 120)
 			)
 			(3
 				(if (== local2 19)
-					(gGameMusic1 sel_170: 0 12 30 1)
+					(gGameMusic1 fade: 0 12 30 1)
 					(gCurRoom
-						sel_399: (if (OneOf global126 1 4) 780 else 790)
+						newRoom: (if (OneOf global126 1 4) 780 else 790)
 					)
 				else
 					(= local1 (>> (& [local3 local2] $ff00) $0008))
 					(characterView
-						sel_2: (+ 1800 (& [local3 local2] $00ff))
-						sel_3: 1
-						sel_1:
+						view: (+ 1800 (& [local3 local2] $00ff))
+						loop: 1
+						x:
 							(switch (mod local1 3)
 								(0 220)
 								(1 10)
 								(2 115)
 							)
-						sel_0:
+						y:
 							(cond
 								((== local1 19) 5)
 								((and (< (mod local1 6) 4) (> (mod local1 6) 0)) 10)
 								(else 103)
 							)
-						sel_110:
+						init:
 					)
 					(gNarrator
-						sel_1: (if (== local1 19) 160 else 10)
-						sel_0: (if (== (characterView sel_0:) 10) 113 else 10)
-						sel_537: (if (== local1 19) 140 else 290)
+						x: (if (== local1 19) 160 else 10)
+						y: (if (== (characterView y:) 10) 113 else 10)
+						talkWidth: (if (== local1 19) 140 else 290)
 					)
-					(self sel_144: 0)
+					(self changeState: 0)
 				)
 			)
 		)
@@ -112,6 +112,6 @@
 
 (instance characterView of View
 	(properties
-		sel_20 {characterView}
+		name {characterView}
 	)
 )

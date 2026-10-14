@@ -17,10 +17,10 @@
 
 (instance addCluesCode of Code
 	(properties
-		sel_20 {addCluesCode}
+		name {addCluesCode}
 	)
 
-	(method (sel_57 param1 &tmp temp0)
+	(method (doit param1 &tmp temp0)
 		(switch (/ param1 256)
 			(1
 				(= local1 18)
@@ -54,10 +54,10 @@
 
 (instance dropCluesCode of Code
 	(properties
-		sel_20 {dropCluesCode}
+		name {dropCluesCode}
 	)
 
-	(method (sel_57 param1 &tmp temp0 temp1)
+	(method (doit param1 &tmp temp0 temp1)
 		(switch (/ param1 256)
 			(1
 				(= local1 18)

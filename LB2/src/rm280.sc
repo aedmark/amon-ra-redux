@@ -28,37 +28,37 @@
 
 (instance rm280 of LBRoom
 	(properties
-		sel_20 {rm280}
-		sel_213 6
-		sel_408 280
-		sel_409 290
-		sel_411 210
-		sel_107 155
+		name {rm280}
+		noun 6
+		picture 280
+		north 290
+		south 210
+		vanishingX 155
 	)
 
-	(method (sel_110)
+	(method (init)
 		(LoadMany rsVIEW 285 284 852 281 830 283)
 		(LoadMany rsSOUND 40 97 281 280 252)
-		(self sel_414: 91)
-		(gEgo sel_110: sel_585: 830 sel_320: Scaler 90 20 190 0)
+		(self setRegions: 91)
+		(gEgo init: normalize: 830 setScale: Scaler 90 20 190 0)
 		(switch gPrevRoomNum
-			(sel_409
-				(gEgo sel_349: 0 sel_253: 180)
+			(north
+				(gEgo edgeHit: 0 setHeading: 180)
 			)
-			(sel_411
-				(gCurRoom sel_146: sUpCurb)
+			(south
+				(gCurRoom setScript: sUpCurb)
 			)
 			(else
-				(gCurRoom sel_146: sOutCab)
+				(gCurRoom setScript: sOutCab)
 			)
 		)
-		(super sel_110:)
-		(gGameMusic1 sel_40: 280 sel_99: 1 sel_3: 1 sel_39:)
+		(super init:)
+		(gGameMusic1 number: 280 flags: 1 loop: 1 play:)
 		(gCurRoom
-			sel_395:
-				((Polygon sel_109:)
-					sel_31: 2
-					sel_110:
+			addObstacle:
+				((Polygon new:)
+					type: 2
+					init:
 						121
 						129
 						101
@@ -115,64 +115,64 @@
 						106
 						121
 						106
-					sel_117:
+					yourself:
 				)
-				((Polygon sel_109:)
-					sel_31: 2
-					sel_110: 246 164 277 162 275 167 249 170
-					sel_117:
+				((Polygon new:)
+					type: 2
+					init: 246 164 277 162 275 167 249 170
+					yourself:
 				)
 		)
 		(if (IsFlag 8)
 			(if
 				(not
-					(if (or (gEgo sel_238: 0) (gEgo sel_238: 3))
+					(if (or (gEgo has: 0) (gEgo has: 3))
 					else
 						(IsFlag 7)
 					)
 				)
-				(newsPaper sel_110: sel_311: 1 4 8)
+				(newsPaper init: approachVerbs: 1 4 8)
 			)
 		else
-			(drunk sel_110: sel_311: 1 2 6 sel_146: sSnore)
+			(drunk init: approachVerbs: 1 2 6 setScript: sSnore)
 		)
-		(column sel_110:)
-		(leftLion sel_110:)
-		(rightLion sel_110:)
-		(sidewalk sel_110:)
-		(steps sel_110:)
-		(street sel_110:)
-		(policeSign sel_110:)
-		(windows sel_110:)
-		(southExitFeature sel_110:)
-		(frontDoor sel_110:)
-		(stuckDoor sel_110: sel_311: 4)
-		(taxiSign sel_110:)
-		(taxi sel_110: sel_320: 200)
+		(column init:)
+		(leftLion init:)
+		(rightLion init:)
+		(sidewalk init:)
+		(steps init:)
+		(street init:)
+		(policeSign init:)
+		(windows init:)
+		(southExitFeature init:)
+		(frontDoor init:)
+		(stuckDoor init: approachVerbs: 4)
+		(taxiSign init:)
+		(taxi init: setScale: 200)
 	)
 
-	(method (sel_111)
-		(carSound sel_111:)
-		(gGameMusic1 sel_170: 0 30 12 1)
-		(super sel_111: &rest)
+	(method (dispose)
+		(carSound dispose:)
+		(gGameMusic1 fade: 0 30 12 1)
+		(super dispose: &rest)
 	)
 )
 
 (instance sPutUpInset of Script
 	(properties
-		sel_20 {sPutUpInset}
+		name {sPutUpInset}
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
-				(= sel_136 2)
+				(= cycles 2)
 			)
 			(1
-				(gMessager sel_295: (if sel_141 3 else 14) 1 0 0 self)
+				(gMessager say: (if register 3 else 14) 1 0 0 self)
 			)
 			(2
-				(self sel_111:)
+				(self dispose:)
 			)
 		)
 	)
@@ -180,18 +180,18 @@
 
 (instance sUpCurb of Script
 	(properties
-		sel_20 {sUpCurb}
+		name {sUpCurb}
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
-				(gGame sel_587:)
-				(gEgo sel_312: PolyPath 164 170 self)
+				(gGame handsOff:)
+				(gEgo setMotion: PolyPath 164 170 self)
 			)
 			(1
-				(gGame sel_588:)
-				(self sel_111:)
+				(gGame handsOn:)
+				(self dispose:)
 			)
 		)
 	)
@@ -199,26 +199,26 @@
 
 (instance sOutCab of Script
 	(properties
-		sel_20 {sOutCab}
+		name {sOutCab}
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
-				(gGame sel_587:)
-				(gEgo sel_1: 209 sel_0: 172)
-				(taxi sel_110: sel_1: 238 sel_0: 189 sel_155: 5)
-				(= sel_136 1)
+				(gGame handsOff:)
+				(gEgo x: 209 y: 172)
+				(taxi init: x: 238 y: 189 setLoop: 5)
+				(= cycles 1)
 			)
 			(1
-				(gGameMusic2 sel_173: 2 224 2000 sel_170:)
-				(taxi sel_312: MoveTo 0 280 self)
+				(gGameMusic2 send: 2 224 2000 fade:)
+				(taxi setMotion: MoveTo 0 280 self)
 			)
 			(2
-				(gGame sel_588:)
-				(taxi sel_153: 411 171)
-				(taxi sel_111:)
-				(self sel_111:)
+				(gGame handsOn:)
+				(taxi posn: 411 171)
+				(taxi dispose:)
+				(self dispose:)
 			)
 		)
 	)
@@ -226,36 +226,36 @@
 
 (instance sDrunkWakes of Script
 	(properties
-		sel_20 {sDrunkWakes}
+		name {sDrunkWakes}
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
-				(gGame sel_587:)
+				(gGame handsOff:)
 				(SetFlag 8)
-				(gEgo sel_312: PolyPath 56 182 self)
+				(gEgo setMotion: PolyPath 56 182 self)
 			)
 			(1
 				(Face gEgo drunk self)
 			)
 			(2
-				(gNarrator sel_1: 15 sel_0: 15)
-				(gMessager sel_295: 2 4 1 1)
-				(gEgo sel_2: 283 sel_3: 1 sel_4: 0 sel_161: End self)
+				(gNarrator x: 15 y: 15)
+				(gMessager say: 2 4 1 1)
+				(gEgo view: 283 loop: 1 cel: 0 setCycle: End self)
 			)
 			(3
-				(drunk sel_146: 0 sel_244: 10 sel_161: End self)
+				(drunk setScript: 0 cycleSpeed: 10 setCycle: End self)
 			)
 			(4
-				(gMessager sel_295: 2 4 1 2)
-				(gEgo sel_161: Beg self)
+				(gMessager say: 2 4 1 2)
+				(gEgo setCycle: Beg self)
 			)
 			(5
-				(gEgo sel_2: 830 sel_161: StopWalk -1)
-				(gNarrator sel_1: -1 sel_0: -1)
-				(gGame sel_588:)
-				(self sel_111:)
+				(gEgo view: 830 setCycle: StopWalk -1)
+				(gNarrator x: -1 y: -1)
+				(gGame handsOn:)
+				(self dispose:)
 			)
 		)
 	)
@@ -263,33 +263,33 @@
 
 (instance sGetNewsPaper of Script
 	(properties
-		sel_20 {sGetNewsPaper}
+		name {sGetNewsPaper}
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
-				(gGame sel_587:)
-				(gEgo sel_2: 281 sel_3: 0 sel_4: 0 sel_161: CT 2 1 self)
-				(newsPaper sel_111:)
+				(gGame handsOff:)
+				(gEgo view: 281 loop: 0 cel: 0 setCycle: CT 2 1 self)
+				(newsPaper dispose:)
 			)
 			(1
-				(gEgo sel_161: End self)
+				(gEgo setCycle: End self)
 			)
 			(2
-				(gGame sel_588:)
-				(gEgo sel_350: 0)
-				((ScriptID 21 0) sel_57: 769) ; addCluesCode
+				(gGame handsOn:)
+				(gEgo get: 0)
+				((ScriptID 21 0) doit: 769) ; addCluesCode
 				(gEgo
-					sel_2: 830
-					sel_3: 1
-					sel_4: 1
-					sel_161: StopWalk -1
-					sel_312: MoveTo (+ (gEgo sel_1:) 5) (gEgo sel_0:) self
+					view: 830
+					loop: 1
+					cel: 1
+					setCycle: StopWalk -1
+					setMotion: MoveTo (+ (gEgo x:) 5) (gEgo y:) self
 				)
 			)
 			(3
-				(self sel_111:)
+				(self dispose:)
 			)
 		)
 	)
@@ -297,26 +297,26 @@
 
 (instance sSnore of Script
 	(properties
-		sel_20 {sSnore}
+		name {sSnore}
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
-				(= sel_139 30)
+				(= ticks 30)
 			)
 			(1
-				(drunk sel_161: CT 2 1)
-				(carSound sel_40: 281 sel_99: 5 sel_3: 1 sel_39: self)
+				(drunk setCycle: CT 2 1)
+				(carSound number: 281 flags: 5 loop: 1 play: self)
 			)
 			(2
-				(= sel_139 30)
+				(= ticks 30)
 			)
 			(3
-				(drunk sel_161: CT 0 -1 self)
+				(drunk setCycle: CT 0 -1 self)
 			)
 			(4
-				(self sel_110:)
+				(self init:)
 			)
 		)
 	)
@@ -324,59 +324,59 @@
 
 (instance sHailCab of Script
 	(properties
-		sel_20 {sHailCab}
+		name {sHailCab}
 	)
 
-	(method (sel_144 param1)
-		(switch (= sel_29 param1)
+	(method (changeState param1)
+		(switch (= state param1)
 			(0
-				(gGame sel_587:)
-				(gGameMusic2 sel_40: 252 sel_99: 1 sel_3: -1 sel_39: 20)
+				(gGame handsOff:)
+				(gGameMusic2 number: 252 flags: 1 loop: -1 play: 20)
 				(gEgo
-					sel_312:
+					setMotion:
 						PolyPath
-						(- (taxiSign sel_1:) 20)
-						(+ (taxiSign sel_0:) 2)
+						(- (taxiSign x:) 20)
+						(+ (taxiSign y:) 2)
 						self
 				)
 			)
 			(1
 				(gEgo
-					sel_2: 852
-					sel_3: 0
-					sel_153: (- (gEgo sel_1:) 2) (gEgo sel_0:)
-					sel_161: End self
+					view: 852
+					loop: 0
+					posn: (- (gEgo x:) 2) (gEgo y:)
+					setCycle: End self
 				)
-				(gGameMusic1 sel_40: 97 sel_99: 1 sel_3: 1 sel_39:)
+				(gGameMusic1 number: 97 flags: 1 loop: 1 play:)
 			)
 			(2
-				(gGameMusic2 sel_173: 2 224 2000 sel_170: 127 5 5 0)
-				(taxi sel_110: sel_155: 5 sel_312: MoveTo 238 189 self)
+				(gGameMusic2 send: 2 224 2000 fade: 127 5 5 0)
+				(taxi init: setLoop: 5 setMotion: MoveTo 238 189 self)
 			)
 			(3
-				(gGameMusic2 sel_173: 2 224 1600)
-				(= sel_136 1)
+				(gGameMusic2 send: 2 224 1600)
+				(= cycles 1)
 			)
 			(4
-				(gGameMusic2 sel_173: 2 224 1200)
-				(= sel_136 1)
+				(gGameMusic2 send: 2 224 1200)
+				(= cycles 1)
 			)
 			(5
-				(gGameMusic2 sel_173: 2 224 800)
-				(= sel_136 1)
+				(gGameMusic2 send: 2 224 800)
+				(= cycles 1)
 			)
 			(6
-				(gGameMusic2 sel_173: 2 224 400)
-				(= sel_136 1)
+				(gGameMusic2 send: 2 224 400)
+				(= cycles 1)
 			)
 			(7
-				(gGameMusic2 sel_173: 2 224 0)
-				(carSound sel_40: 40 sel_3: 1 sel_99: 5 sel_39:)
-				(gEgo sel_102:)
-				(= sel_139 30)
+				(gGameMusic2 send: 2 224 0)
+				(carSound number: 40 loop: 1 flags: 5 play:)
+				(gEgo hide:)
+				(= ticks 30)
 			)
 			(8
-				(gCurRoom sel_399: 250)
+				(gCurRoom newRoom: 250)
 			)
 		)
 	)
@@ -384,53 +384,53 @@
 
 (instance frontDoor of Door
 	(properties
-		sel_20 {frontDoor}
-		sel_1 120
-		sel_0 72
-		sel_213 1
-		sel_303 131
-		sel_304 131
-		sel_2 281
-		sel_3 2
-		sel_589 290
-		sel_597 152
-		sel_598 119
-		sel_599 0
-		sel_600 0
+		name {frontDoor}
+		x 120
+		y 72
+		noun 1
+		approachX 131
+		approachY 131
+		view 281
+		loop 2
+		entranceTo 290
+		moveToX 152
+		moveToY 119
+		enterType 0
+		exitType 0
 	)
 
-	(method (sel_606)
-		(super sel_606: 116 121 145 118 146 125 117 128)
+	(method (createPoly)
+		(super createPoly: 116 121 145 118 146 125 117 128)
 	)
 )
 
 (instance drunk of Prop
 	(properties
-		sel_20 {drunk}
-		sel_1 20
-		sel_0 184
-		sel_213 2
-		sel_303 56
-		sel_304 182
-		sel_2 283
-		sel_14 16384
-		sel_244 30
+		name {drunk}
+		x 20
+		y 184
+		noun 2
+		approachX 56
+		approachY 182
+		view 283
+		signal 16384
+		cycleSpeed 30
 	)
 
-	(method (sel_300 param1)
+	(method (doVerb param1)
 		(switch param1
 			(4
 				(if (not (IsFlag 8))
-					(gCurRoom sel_146: sDrunkWakes)
+					(gCurRoom setScript: sDrunkWakes)
 				else
-					(gMessager sel_295: 2 4 2)
+					(gMessager say: 2 4 2)
 				)
 			)
 			(6
-				(gMessager sel_295: 2 6 4)
+				(gMessager say: 2 6 4)
 			)
 			(else
-				(super sel_300: param1)
+				(super doVerb: param1)
 			)
 		)
 	)
@@ -438,42 +438,42 @@
 
 (instance taxi of Actor
 	(properties
-		sel_20 {taxi}
-		sel_1 411
-		sel_0 171
-		sel_2 852
-		sel_3 5
-		sel_244 4
-		sel_53 0
+		name {taxi}
+		x 411
+		y 171
+		view 852
+		loop 5
+		cycleSpeed 4
+		moveSpeed 0
 	)
 )
 
 (instance newsPaper of View
 	(properties
-		sel_20 {newsPaper}
-		sel_1 37
-		sel_0 187
-		sel_213 11
-		sel_303 54
-		sel_304 186
-		sel_2 281
-		sel_3 1
-		sel_14 16384
+		name {newsPaper}
+		x 37
+		y 187
+		noun 11
+		approachX 54
+		approachY 186
+		view 281
+		loop 1
+		signal 16384
 	)
 
-	(method (sel_300 param1)
+	(method (doVerb param1)
 		(switch param1
 			(4
-				(gCurRoom sel_422: paperInset)
+				(gCurRoom setInset: paperInset)
 			)
 			(1
-				(gCurRoom sel_422: paperInset)
+				(gCurRoom setInset: paperInset)
 			)
 			(8
-				(gCurRoom sel_422: paperInset)
+				(gCurRoom setInset: paperInset)
 			)
 			(else
-				(super sel_300: param1 &rest)
+				(super doVerb: param1 &rest)
 			)
 		)
 	)
@@ -481,25 +481,25 @@
 
 (instance taxiSign of View
 	(properties
-		sel_20 {taxiSign}
-		sel_1 257
-		sel_0 165
-		sel_213 4
-		sel_301 40
-		sel_2 284
-		sel_3 1
-		sel_4 1
-		sel_60 12
-		sel_14 16400
+		name {taxiSign}
+		x 257
+		y 165
+		noun 4
+		sightAngle 40
+		view 284
+		loop 1
+		cel 1
+		priority 12
+		signal 16400
 	)
 
-	(method (sel_300 param1)
+	(method (doVerb param1)
 		(switch param1
 			(4
-				(gCurRoom sel_146: sHailCab)
+				(gCurRoom setScript: sHailCab)
 			)
 			(else
-				(super sel_300: param1)
+				(super doVerb: param1)
 			)
 		)
 	)
@@ -507,48 +507,48 @@
 
 (instance stuckDoor of Feature
 	(properties
-		sel_20 {stuckDoor}
-		sel_1 155
-		sel_0 98
-		sel_213 1
-		sel_6 73
-		sel_7 144
-		sel_8 123
-		sel_9 167
-		sel_301 40
-		sel_303 131
-		sel_304 131
+		name {stuckDoor}
+		x 155
+		y 98
+		noun 1
+		nsTop 73
+		nsLeft 144
+		nsBottom 123
+		nsRight 167
+		sightAngle 40
+		approachX 131
+		approachY 131
 	)
 
-	(method (sel_300 param1)
-		(frontDoor sel_300: param1)
+	(method (doVerb param1)
+		(frontDoor doVerb: param1)
 	)
 )
 
 (instance column of Feature
 	(properties
-		sel_20 {column}
-		sel_0 3
-		sel_213 15
-		sel_302 8
+		name {column}
+		y 3
+		noun 15
+		onMeCheck 8
 	)
 )
 
 (instance leftLion of Feature
 	(properties
-		sel_20 {leftLion}
-		sel_0 3
-		sel_213 9
-		sel_302 64
+		name {leftLion}
+		y 3
+		noun 9
+		onMeCheck 64
 	)
 
-	(method (sel_300 param1)
+	(method (doVerb param1)
 		(switch param1
 			(6
-				(gMessager sel_295: 9 6 4)
+				(gMessager say: 9 6 4)
 			)
 			(else
-				(super sel_300: param1 &rest)
+				(super doVerb: param1 &rest)
 			)
 		)
 	)
@@ -556,19 +556,19 @@
 
 (instance rightLion of Feature
 	(properties
-		sel_20 {rightLion}
-		sel_0 3
-		sel_213 16
-		sel_302 128
+		name {rightLion}
+		y 3
+		noun 16
+		onMeCheck 128
 	)
 
-	(method (sel_300 param1)
+	(method (doVerb param1)
 		(switch param1
 			(6
-				(gMessager sel_295: 16 6 4)
+				(gMessager say: 16 6 4)
 			)
 			(else
-				(super sel_300: param1 &rest)
+				(super doVerb: param1 &rest)
 			)
 		)
 	)
@@ -576,84 +576,84 @@
 
 (instance sidewalk of Feature
 	(properties
-		sel_20 {sidewalk}
-		sel_0 3
-		sel_213 12
-		sel_302 2
+		name {sidewalk}
+		y 3
+		noun 12
+		onMeCheck 2
 	)
 )
 
 (instance steps of Feature
 	(properties
-		sel_20 {steps}
-		sel_0 3
-		sel_213 10
-		sel_302 16384
+		name {steps}
+		y 3
+		noun 10
+		onMeCheck 16384
 	)
 )
 
 (instance street of Feature
 	(properties
-		sel_20 {street}
-		sel_0 3
-		sel_213 8
-		sel_302 4
+		name {street}
+		y 3
+		noun 8
+		onMeCheck 4
 	)
 )
 
 (instance policeSign of Feature
 	(properties
-		sel_20 {policeSign}
-		sel_0 3
-		sel_213 17
-		sel_6 20
-		sel_7 115
-		sel_8 32
-		sel_9 186
+		name {policeSign}
+		y 3
+		noun 17
+		nsTop 20
+		nsLeft 115
+		nsBottom 32
+		nsRight 186
 	)
 )
 
 (instance windows of Feature
 	(properties
-		sel_20 {windows}
-		sel_0 3
-		sel_213 13
-		sel_302 32
+		name {windows}
+		y 3
+		noun 13
+		onMeCheck 32
 	)
 )
 
 (instance paperInset of Inset
 	(properties
-		sel_20 {paperInset}
-		sel_2 285
-		sel_3 1
-		sel_1 7
-		sel_0 110
-		sel_570 1
-		sel_213 11
+		name {paperInset}
+		view 285
+		loop 1
+		x 7
+		y 110
+		disposeNotOnMe 1
+		noun 11
 	)
 
-	(method (sel_110)
-		(super sel_110: &rest)
-		(self sel_146: sPutUpInset 0 0)
+	(method (init)
+		(super init: &rest)
+		(self setScript: sPutUpInset 0 0)
 	)
 
-	(method (sel_300 param1)
+	(method (doVerb param1)
 		(switch param1
 			(4
-				(self sel_111:)
-				(gCurRoom sel_422: inCoupon)
+				(self dispose:)
+				(gCurRoom setInset: inCoupon)
 			)
 			(8
-				(self sel_111:)
-				(gCurRoom sel_422: inCoupon)
+				(self dispose:)
+				(gCurRoom setInset: inCoupon)
 			)
 			(1
-				(self sel_111:)
-				(gCurRoom sel_422: inCoupon)
+				(self dispose:)
+				(gCurRoom setInset: inCoupon)
 			)
 			(else
-				(super sel_300: param1 &rest)
+				(super doVerb: param1 &rest)
 			)
 		)
 	)
@@ -661,33 +661,33 @@
 
 (instance inCoupon of Inset
 	(properties
-		sel_20 {inCoupon}
-		sel_2 285
-		sel_1 7
-		sel_0 110
-		sel_570 1
-		sel_213 3
+		name {inCoupon}
+		view 285
+		x 7
+		y 110
+		disposeNotOnMe 1
+		noun 3
 	)
 
-	(method (sel_110)
-		(super sel_110: &rest)
-		(self sel_146: sPutUpInset 0 1)
+	(method (init)
+		(super init: &rest)
+		(self setScript: sPutUpInset 0 1)
 	)
 
-	(method (sel_300 param1)
+	(method (doVerb param1)
 		(switch param1
 			(4
-				(self sel_111:)
-				(gCurRoom sel_146: sGetNewsPaper)
+				(self dispose:)
+				(gCurRoom setScript: sGetNewsPaper)
 			)
 			(8
-				(gMessager sel_295: 3 1)
+				(gMessager say: 3 1)
 			)
 			(1
-				(gMessager sel_295: 3 1)
+				(gMessager say: 3 1)
 			)
 			(else
-				(super sel_300: param1 &rest)
+				(super doVerb: param1 &rest)
 			)
 		)
 	)
@@ -695,34 +695,34 @@
 
 (instance southExitFeature of ExitFeature
 	(properties
-		sel_20 {southExitFeature}
-		sel_6 184
-		sel_7 183
-		sel_8 189
-		sel_9 320
-		sel_33 11
-		sel_583 3
-		sel_213 7
+		name {southExitFeature}
+		nsTop 184
+		nsLeft 183
+		nsBottom 189
+		nsRight 320
+		cursor 11
+		exitDir 3
+		noun 7
 	)
 )
 
 (instance carSound of Sound
 	(properties
-		sel_20 {carSound}
-		sel_99 5
-		sel_40 40
+		name {carSound}
+		flags 5
+		number 40
 	)
 )
 
 (instance Drunk of Narrator
 	(properties
-		sel_20 {Drunk}
-		sel_26 15
+		name {Drunk}
+		back 15
 	)
 
-	(method (sel_110)
-		(= sel_30 gUserFont)
-		(= sel_540 1)
-		(super sel_110: &rest)
+	(method (init)
+		(= font gUserFont)
+		(= showTitle 1)
+		(super init: &rest)
 	)
 )
