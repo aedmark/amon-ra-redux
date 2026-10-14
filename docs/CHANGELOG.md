@@ -6,12 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
-### Changed
-- Ziggy is a slippery stool pigeon again: slang, swagger, mangled big words, and come-ons return to all his dialogue, with a light accent instead of the original phonetic spelling (D-043).
-
 ## [0.04-alpha] - 2026-10-14
 
 ### Changed
+- Ziggy is a slippery stool pigeon again: slang, swagger, mangled big words, and come-ons return to all his dialogue, with a light accent instead of the original phonetic spelling (D-043).
 - Looking at the banner outside the museum in Act 1 notes that the party calls for formal evening attire (PLAY-012).
 - At the party, Rameses talks about Ziggy as someone he met that evening, and Yvette's view of Dr. Smith no longer asks whether he killed Dr. Carter before anyone has died (PLAY-013, PLAY-015, D-042).
 - Ziggy now knows Heimlich, who checked his invitation, and Dr. Smith, who stands across from him at the party (PLAY-014).

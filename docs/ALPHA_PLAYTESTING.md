@@ -34,6 +34,7 @@ users can run `./tools/run_dosbox.sh` from the project root.
   Ziggy knows Heimlich and Dr. Smith.
 - Guests at the front rotunda's buffet table can no longer be walked through, the Mastodon Room doorway no longer
   draws Laura over its lintel, and the Ankh near Pippin's body is easier to click.
+- Ziggy is a slippery stool pigeon again, with his slang, swagger, and mangled big words restored.
 
 None of these has had a full playthrough on v0.04 yet, so reports on them are especially welcome.
 
@@ -79,6 +80,7 @@ Use this section if you want to play naturally without being told where every cl
 - [ ] Visit the speakeasy more than once and enter and leave its bathroom while a song is playing.
 - [ ] Leave the speakeasy during a song and listen for whether its music follows Laura out.
 - [ ] Ask Ziggy about every available person, especially Yvette and the Countess.
+- [ ] Note any Ziggy line that feels out of character, too crude, or hard to follow.
 - [ ] Confirm the first act grade appears against an appropriate neutral frame.
 
 ### Act 2
