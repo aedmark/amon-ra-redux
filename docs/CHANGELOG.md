@@ -6,7 +6,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
-Nothing yet.
+### Changed
+- Examining Heimlich at the museum door with the Magnifying Glass now shows the narrator's description of his scars, followed by his irritated reply. The description was previously unreachable.
 
 ## [0.02-alpha] - 2026-10-12
 

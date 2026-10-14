@@ -200,6 +200,27 @@
 	)
 )
 
+(instance sHeimlichStare of Script
+	(properties
+		sel_20 {sHeimlichStare}
+	)
+
+	(method (sel_144 param1)
+		(switch (= sel_29 param1)
+			(0
+				; Narrator describes him, then Heimlich answers from his own message module.
+				(gMessager sel_295: 6 8 0 0 self)
+			)
+			(1
+				(gMessager sel_295: 1 8 0 0 self 1889)
+			)
+			(2
+				(self sel_111:)
+			)
+		)
+	)
+)
+
 (instance sOffToSmooch of Script
 	(properties
 		sel_20 {sOffToSmooch}
@@ -419,6 +440,9 @@
 			)
 			(6
 				(gMessager sel_295: 6 2)
+			)
+			(8
+				(gCurRoom sel_146: sHeimlichStare)
 			)
 			(else
 				(return 0)

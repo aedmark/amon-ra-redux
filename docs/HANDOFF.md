@@ -114,7 +114,9 @@ None currently open. Q-001 and Q-002 have been resolved by D-007, D-017, and D-0
 
 **Verified:** Byte comparison of the saved `335.msg` against `HEAD` with the single edit applied; documentation and manual checks pass. The new message text has not been viewed in game.
 
-**Next session should start with:** Check the revised Heimlich Magnifier line in game, then decide on readable selector names (plan item B).
+- Wired the orphaned (335, 6, 8) narrator line: `doorActions` now starts `sHeimlichStare` for the Magnifying Glass, which shows the narrator's scars line and then Heimlich's (1889, 1, 8) reply, following `sGiveInvite`'s room-script pattern. `335.scr` 1,872 bytes, `335.hep` 962 bytes; maintainer confirmed in DOSBox-X.
+
+**Next session should start with:** Readable selector names (plan item B).
 
 ### Session 51: 2026-10-12: Alpha v0.02 Playtest Package
 
