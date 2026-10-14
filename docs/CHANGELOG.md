@@ -6,6 +6,19 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+## [0.05-alpha] - 2026-10-14
+
+### Changed
+- Ziggy's lines in the party eavesdropping scenes and over the intercom share his restored voice (D-043).
+- Ziggy answers about Pippin Carter at the party, and after Pippin's death (PLAY-020).
+- Ziggy no longer faces Laura's bluff about the Countess before Laura has asked the Countess about him (PLAY-021).
+- Pippin acknowledges Rameses Najeer, the museum's accountant, instead of claiming never to have heard of him (PLAY-022).
+
+### Fixed
+- Steve's 7:30 meeting in the front rotunda: he now enters from the side opposite Laura and they face each other when they talk (PLAY-023).
+- The grade text between acts appears on black with Art Deco window corners, not over the act marquee with the death window's bones (PLAY-024).
+- Asking the Countess, Olympia, O'Riley, Tut, Watney, Yvette, or Ziggy about anything from Act 3 on no longer stops with a "not found" message error. A bug in the Redux conversation lock looked every one of their lines up in the wrong message file (PLAY-019, P3-06).
+
 ## [0.04-alpha] - 2026-10-14
 
 ### Changed

@@ -1,0 +1,47 @@
+{
+  "module": 562,
+  "character": "Ziggy (Act 2 intercom, room 562)",
+  "voice": "An oily, wheedling stool pigeon and huckster: boastful, self-serving, and quick to flirt with 'toots,' but cowardly and evasive when cornered. Heavy contractions, 1920s slang, and malapropisms; a light touch of accent ('ain't,' 'ya,' 'gonna,' 'dunno,' dropped g's) but no phonetic respellings such as 'dat' or 'hoid.' Flirting sits between vanilla and the P2-08 rewrite. Maintainer direction, 2026-10-14; supersedes the earlier P2-08 Ziggy voice.",
+  "entries": [
+    {
+      "tuple": [
+        54,
+        4,
+        4,
+        3,
+        6
+      ],
+      "text": "Nothin' personal, mac, but Archie said I could look the place over."
+    },
+    {
+      "tuple": [
+        54,
+        4,
+        4,
+        5,
+        6
+      ],
+      "text": "Relax, mac. Don't get your britches in an uproar. Trust me."
+    },
+    {
+      "tuple": [
+        54,
+        4,
+        4,
+        7,
+        6
+      ],
+      "text": "Hey, now, there ain't no need for fiscal violence, mac."
+    },
+    {
+      "tuple": [
+        54,
+        4,
+        4,
+        9,
+        6
+      ],
+      "text": "Geez, you're touchy, ain't ya? But I was done down here anyways. See ya around, mac."
+    }
+  ]
+}

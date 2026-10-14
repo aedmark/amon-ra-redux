@@ -989,6 +989,16 @@
 				)
 			)
 			(cond
+				(
+					(and
+						(== temp0 269)
+						(not (or (proc27_0 0 global303) (proc27_0 0 global366)))
+					)
+					; Until Laura has asked the Countess about Ziggy, she has
+					; nothing to bluff with: Ziggy only denies knowing her, and
+					; the topic stays open (PLAY-021).
+					(gMessager say: noun 6 214 0 0 modNum)
+				)
 				((not (Message msgGET modNum noun 6 temp1 1))
 					(gMessager say: noun 6 81 0 0 modNum)
 				)

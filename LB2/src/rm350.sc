@@ -535,47 +535,51 @@
 			(0
 				(gGame handsOff:)
 				; Meet beside the guests at the table rather than among them,
-				; on Laura's side, so neither walks through anyone (PLAY-016).
+				; on Laura's side (PLAY-016). Steve enters from the far side
+				; along the front of the room, so Laura never walks past him
+				; (PLAY-023), and both cue so they face each other only once
+				; both have arrived.
 				(if (< (gEgo x:) 160)
 					((ScriptID 93 8) ; Steve
 						setCycle: StopWalk -1
-						posn: 30 183
-						loop: 0
+						posn: 330 187
+						loop: 1
 						init:
-						setMotion: PolyPath 75 183
+						setMotion: PolyPath 112 183 self
 					)
-					(gEgo setMotion: PolyPath 112 183 self)
+					(gEgo setMotion: PolyPath 75 183 self)
 				else
 					((ScriptID 93 8) ; Steve
 						setCycle: StopWalk -1
-						posn: 290 183
-						loop: 1
+						posn: -10 187
+						loop: 0
 						init:
-						setMotion: PolyPath 250 183
+						setMotion: PolyPath 215 183 self
 					)
-					(gEgo setMotion: PolyPath 215 183 self)
+					(gEgo setMotion: PolyPath 250 183 self)
 				)
 			)
-			(1
+			(1 0)
+			(2
 				(Face gEgo (ScriptID 93 8)) ; Steve
 				(Face (ScriptID 93 8) gEgo) ; Steve
 				(= cycles 2)
 			)
-			(2
+			(3
 				(gMessager say: 15 0 0 0 self)
 			)
-			(3
+			(4
 				(gEgo
 					setStep: 3 2
 					setMotion: PolyPath (gEgo x:) 240 self
 				)
 			)
-			(4
+			(5
 				((ScriptID 93 8) ; Steve
 					setMotion: PolyPath ((ScriptID 93 8) x:) 250 self ; Steve
 				)
 			)
-			(5
+			(6
 				((ScriptID 22 0) doit: 8) ; triggerAndClock
 				(gCurRoom newRoom: 335)
 			)

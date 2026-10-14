@@ -1,0 +1,157 @@
+{
+  "module": 340,
+  "character": "Ziggy (Act 2 eavesdropping, room 340)",
+  "voice": "An oily, wheedling stool pigeon and huckster: boastful, self-serving, and quick to flirt with 'toots,' but cowardly and evasive when cornered. Heavy contractions, 1920s slang, and malapropisms; a light touch of accent ('ain't,' 'ya,' 'gonna,' 'dunno,' dropped g's) but no phonetic respellings such as 'dat' or 'hoid.' Flirting sits between vanilla and the P2-08 rewrite. Maintainer direction, 2026-10-14; supersedes the earlier P2-08 Ziggy voice.",
+  "entries": [
+    {
+      "tuple": [
+        1,
+        0,
+        0,
+        1,
+        6
+      ],
+      "text": "Well, ain't you the hoity-toity dame these days? I almost didn't recognize ya with your clothes on."
+    },
+    {
+      "tuple": [
+        1,
+        0,
+        0,
+        3,
+        6
+      ],
+      "text": "Ziggy's my moniker. You gonna pretend ya don't know me?"
+    },
+    {
+      "tuple": [
+        1,
+        0,
+        0,
+        5,
+        6
+      ],
+      "text": "I ain't jokin'. You're Yvette Delacroix. I'd know that figure of yours anywhere."
+    },
+    {
+      "tuple": [
+        1,
+        0,
+        0,
+        7,
+        6
+      ],
+      "text": "Oh...I get it. You're worried one of these high-hats is gonna hear us, right? Okay, I'm clued in. We can talk later."
+    },
+    {
+      "tuple": [
+        3,
+        0,
+        0,
+        2,
+        6
+      ],
+      "text": "Hey, now, watch how ya say that, O'Riley. I don't like the sound of it."
+    },
+    {
+      "tuple": [
+        3,
+        0,
+        0,
+        4,
+        6
+      ],
+      "text": "Only by low-class types, O'Riley. By the way, ain't you afraid of bein' seen with me?"
+    },
+    {
+      "tuple": [
+        3,
+        0,
+        0,
+        6,
+        6
+      ],
+      "text": "I'm a big patron of the arts. That's the kind of high-class guy I am."
+    },
+    {
+      "tuple": [
+        3,
+        0,
+        0,
+        8,
+        6
+      ],
+      "text": "I do too!"
+    },
+    {
+      "tuple": [
+        3,
+        0,
+        0,
+        10,
+        6
+      ],
+      "text": "Umm...HEY, ain't that the Countess I see over there? I gotta talk to her."
+    },
+    {
+      "tuple": [
+        10,
+        0,
+        0,
+        1,
+        6
+      ],
+      "text": "...so that's the deal, Countess."
+    },
+    {
+      "tuple": [
+        10,
+        0,
+        0,
+        3,
+        6
+      ],
+      "text": "Yeah, no kiddin'. The walls got ears around here. And so do certain nosy reporters, if ya know what I mean."
+    },
+    {
+      "tuple": [
+        10,
+        0,
+        0,
+        5,
+        6
+      ],
+      "text": "Sure thing, toots."
+    },
+    {
+      "tuple": [
+        13,
+        0,
+        0,
+        8,
+        6
+      ],
+      "text": "So that's when ya heisted it, right?"
+    },
+    {
+      "tuple": [
+        14,
+        0,
+        0,
+        1,
+        6
+      ],
+      "text": "Boy, that Yvette, she's some dish, ain't she?"
+    },
+    {
+      "tuple": [
+        14,
+        0,
+        0,
+        5,
+        6
+      ],
+      "text": "Yeah, we Americans come up with some swell sayings, don't we?"
+    }
+  ]
+}

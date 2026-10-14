@@ -580,8 +580,9 @@ are tracked.
 - **Decision:** RotundaRgn's `PartyCase` procedure checks, during Act 2 only, for a message at the topic's case + 100
   and plays it instead of the general line. The topic's asked-before bookkeeping stays on the general case. All 11
   party actors' general Ask paths use it, so later party-only lines need only a new message record.
-- **Consequences:** Cases 100 and above are reserved for party versions in the character modules; the highest
-  existing case was 93. Topics that have their own branches in RotundaRgn (for example Yvette on Ernie and Steve) are
+- **Consequences:** Cases 100 to 199 are reserved for party versions in the character modules; the highest
+  existing case was 93. Variants chosen by another condition use case + 200, which `PartyCase` can never reach
+  (Ziggy's Countess denial, case 214, PLAY-021). Topics that have their own branches in RotundaRgn (for example Yvette on Ernie and Steve) are
   unaffected.
 
 ---
@@ -594,12 +595,14 @@ caricature.
 - **Context:** P2-08 rewrote Ziggy (modules 310 and 1890) as a soft-spoken, Peter Lorre-inspired fixer with almost no
   contractions. That removed the phonetic Brooklynese D-031 targets, but also his slang, swagger, malapropisms, and
   come-ons, which are character rather than caricature. The maintainer judged the result too clean.
-- **Decision:** Rewrite all 118 of Ziggy's lines to an oily, wheedling, boastful, cowardly-when-cornered voice:
+- **Decision:** Rewrite all 137 of Ziggy's lines, including the party eavesdropping (module 340) and intercom (562)
+  scenes, to an oily, wheedling, boastful, cowardly-when-cornered voice:
   heavy contractions, 1920s slang, and correctly spelled malapropisms ("privyooliged," "accusertory,"
   "archeometrist"), with a light accent ("ain't," "ya," "gonna," "dunno," dropped g's) and no respellings such as
   "dat" or "hoid." Flirting sits between vanilla and the P2-08 text. Keep every fact and clue, the riddle's exact
   wording, and Redux's corrections (for example Mudlark at Belmont). Record the pass in
-  `docs/dialogue/act1-ziggy-voice-2026-10.json` and `act2-ziggy-voice-2026-10.json`.
+  `docs/dialogue/act1-ziggy-voice-2026-10.json`, `act2-ziggy-voice-2026-10.json`, `act2-ziggy-voice-340-2026-10.json`, and
+  `act2-ziggy-voice-562-2026-10.json`.
 - **Consequences:** The earlier `act1-ziggy.json` and `act2-ziggy.json` manifests are historical and must not be
   re-applied (D-038). Further wording changes go through SCI Companion.
 

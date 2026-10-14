@@ -759,12 +759,16 @@
 		inConversation 0
 	)
 
-	(method (sayAndHold param1 param2 param3 param4 param5)
+	; Callers pass Messager's own argument order: noun verb case seq caller
+	; modNum. The caller slot is always 0 and is replaced by
+	; museumDialogueResume. Forwarding that slot as the module sent every
+	; museum-actor line to module 0 (PLAY-019).
+	(method (sayAndHold param1 param2 param3 param4 param5 param6)
 		(= inConversation 1)
 		(museumDialogueResume client: self)
 		(self setMotion: 0)
 		(gMessager
-			say: param1 param2 param3 param4 museumDialogueResume param5
+			say: param1 param2 param3 param4 museumDialogueResume param6
 		)
 	)
 
@@ -2133,6 +2137,21 @@
 				)
 			)
 			(cond
+				(
+					(and
+						(== temp0 269)
+						(not (or (proc27_0 0 global303) (proc27_0 0 global366)))
+					)
+					; As in RotundaRgn: no bluff before Laura has asked the
+					; Countess about Ziggy (PLAY-021).
+					(self sayAndHold: noun 6 214 0 0 modNum)
+				)
+				((and (== temp0 258) (not (IsFlag 134)))
+					; Pippin: the accusing case 3 assumes Laura knows he is dead
+					; (flag 134, as for Yvette); before that, the party version
+					; (PLAY-020).
+					(self sayAndHold: noun 6 103 0 0 modNum)
+				)
 				((not (Message msgGET modNum noun 6 temp1 1))
 					(self sayAndHold: noun 6 81 0 0 modNum)
 				)

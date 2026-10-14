@@ -862,6 +862,61 @@
         6
       ],
       "text": "Hey, you ain't supposed to be walkin' around with that thing. You're gonna spoil the barbecue."
+    },
+    {
+      "tuple": [
+        1,
+        6,
+        3,
+        1,
+        2
+      ],
+      "add": true,
+      "text": "What did you have to do with the death of Pippin Carter?"
+    },
+    {
+      "tuple": [
+        1,
+        6,
+        3,
+        2,
+        6
+      ],
+      "add": true,
+      "text": "Hey, hey, hey, little lady! I was at the party the whole time, so don't go makin' any accusertory remarks. I didn't even know the guy. Now buzz off!"
+    },
+    {
+      "tuple": [
+        1,
+        6,
+        103,
+        1,
+        2
+      ],
+      "add": true,
+      "text": "You've heard of Pippin Carter?"
+    },
+    {
+      "tuple": [
+        1,
+        6,
+        103,
+        2,
+        6
+      ],
+      "add": true,
+      "text": "Sure, the snazzy dude who brought the pigsticker over from Egypt. He's around here somewheres. Kinda a snotty guy, if ya pardon my French."
+    },
+    {
+      "tuple": [
+        1,
+        6,
+        214,
+        1,
+        6
+      ],
+      "add": true,
+      "text": "What makes you think I know anything about a dame like her? Sheesh, she wouldn't have nothin' to do with me. I mean, I dunno anything about her. Why ask me?"
     }
   ]
 }

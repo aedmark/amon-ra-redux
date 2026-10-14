@@ -12,7 +12,7 @@ Security: [SECURITY.md](SECURITY.md). Changes: [CHANGELOG.md](CHANGELOG.md). Old
 
 ## Current state
 
-_Last updated: 2026-10-14, session 56: Ziggy's voice restored (D-043)._
+_Last updated: 2026-10-14, session 56: Ziggy's voice (D-043), PLAY-019 to PLAY-024, alpha v0.05 package._
 
 **Where things stand, in one paragraph:** Alpha v0.01 is public in the SQH Discord; alpha v0.02 (`LB2/LB2-Redux-v0.02.zip`, built from `master` at `43b1fbc`) is packaged and its tester guides are updated, pending publication. The room 335 benefit podium remains at `(190, 174)` with visual bounds `nsTop: 148, nsLeft: 182, nsBottom: 174, nsRight: 198` and fixed priority 12. Script 2335's existing 14-point barred room polygon reaches `(190, 176)` around the podium, and Script 335 routes Look/Hand/Magnifier to `(186, 180)` in front of the ledger. Old saves rebind that same polygon object to current static points without heap writes or new objects. Script 21's duplicate-clue repair prevents the prior Error 5 memory corruption. The remaining one-frame “interesting approach” flash was traced to the global fallback for an unsupported verb dispatch occurring before the valid podium dispatch on exact-position repeats. The podium now handles its three intended verbs normally and locally consumes any unsupported dispatch instead of forwarding it to the global narrator (D-035). The flash persisted, and occurred only on the engine's immediate-dispatch ending, when Laura was already in place. The podium now sets `sightAngle` -1 and `approachDist` 4, so repeats take the same deferred `CueObj` path as a fresh approach (D-036). The maintainer confirmed in DOSBox-X that repeat LOOK and DO show only the guestbook response. Saved games no longer overwrite slot 0 (Script 990 fix). Session 54 found that Redux's `Main` numbers `WrapMusic` and `Actions` the reverse of vanilla, which broke Sierra-compiled rooms 450 and 640 and the archive-derived room 310, and that the committed room 750 inquest had every object property shifted one slot; all four now build from corrected source and await a runtime retest (D-040). Drifted patches stay unless their script changes; `Main`'s and `n027`'s indexed compound assignments are rewritten, and `Main` now rebuilds byte-identical to its committed patch (D-041).
 
@@ -91,12 +91,13 @@ _Last updated: 2026-10-14, session 56: Ziggy's voice restored (D-043)._
 
 ## Next steps (in order)
 
-1. Read Ziggy's restored dialogue in play (speakeasy and party) and adjust any line in SCI Companion (D-043).
-2. Retest PLAY-012 to PLAY-018 during the fresh playthrough: the Act 1 museum banner, Rameses and Yvette at the party (Ziggy, Pippin, Tut topics), Ziggy on Heimlich and Tut, the 7:30 Steve meeting in the front rotunda, the north doorway to the Mastodon Room, and clicking the Ankh.
-3. Boot and retest session 54's rooms: a museum conversation (Script 90), leaving the speakeasy (310), leaving the Egyptian room south in Act 3 or 4 and using an item on the dagger case (450), room 640's actions, and the full final inquest (750).
-4. Check the podium's collision from both sides and a Magnifier repeat.
-5. Resume the clean DOSBox-X playthrough and triage every remaining `PLAY-nnn` finding.
-6. Begin P5-01 design only after the playthrough gate closes, using the migrated compiler-facing source baseline.
+1. Retest PLAY-019 to PLAY-024 (Act 3 museum conversations, Ziggy on Pippin and the Countess, Pippin on Najeer, Steve's meeting from either side, the act-break screen).
+2. Read Ziggy's restored dialogue in play (speakeasy and party) and adjust any line in SCI Companion (D-043).
+3. Retest PLAY-012 to PLAY-018 during the fresh playthrough: the Act 1 museum banner, Rameses and Yvette at the party (Ziggy, Pippin, Tut topics), Ziggy on Heimlich and Tut, the 7:30 Steve meeting in the front rotunda, the north doorway to the Mastodon Room, and clicking the Ankh.
+4. Boot and retest session 54's rooms: a museum conversation (Script 90), leaving the speakeasy (310), leaving the Egyptian room south in Act 3 or 4 and using an item on the dagger case (450), room 640's actions, and the full final inquest (750).
+5. Check the podium's collision from both sides and a Magnifier repeat.
+6. Resume the clean DOSBox-X playthrough and triage every remaining `PLAY-nnn` finding.
+7. Begin P5-01 design only after the playthrough gate closes, using the migrated compiler-facing source baseline.
 
 ## Open questions for maintainers
 
@@ -113,7 +114,13 @@ None currently open. Q-001 and Q-002 have been resolved by D-007, D-017, and D-0
 **Done:**
 - Rewrote all 118 Ziggy lines in `310.msg` (Act 1 speakeasy, 32) and `1890.msg` (Acts 2-6, 86) to the maintainer's brief: light accent, flirting between vanilla and P2-08, full scope (D-043). Manifests `act1-ziggy-voice-2026-10.json` and `act2-ziggy-voice-2026-10.json` record the pass.
 
-**Decisions:** D-043.
+- PLAY-019: fixed MuseumRgn's `sayAndHold`, which since P3-06 forwarded the always-zero caller argument as the message module, breaking every Act 3+ conversation with the seven MuseumRgn actors. Script 90 differs from the committed build by one instruction.
+
+- PLAY-020 to PLAY-024: Ziggy's Pippin topic (cases 103 and 3) and Countess bluff gating (case 214), Pippin on Najeer, Steve's 7:30 meeting entering from the far side and waiting for both to arrive, and the act-break window (black picture 780 restored in Script 26, Art Deco corners for room 26 in Main). Main compiles with only that one change. Verified by routine-by-routine comparison and headless startup; runtime retest pending.
+- Rewrote Ziggy's 19 lines in the party eavesdropping (`340.msg`) and intercom (`562.msg`) scenes in the same voice.
+- Built `LB2/LB2-Redux-v0.05.zip` with the v0.04 layout, excluding saves and older zips: 949 files, 7,097,351 bytes; integrity test, vanilla archive MD5s, every tracked `LB2` file identical to the working tree, and headless startup of the extracted copy. Moved `alpha-playtest.html` (storage key `v005`) and `ALPHA_PLAYTESTING.md` to v0.05 and cut CHANGELOG `0.05-alpha`.
+
+**Decisions:** D-043; D-042 amended (case + 200 for condition variants).
 
 **Verified:** Only Ziggy's records changed text; record sets and reference bytes unchanged; documentation checks.
 

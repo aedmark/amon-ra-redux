@@ -10,7 +10,7 @@ only crashes.
 
 ## Before you begin
 
-- Use the build named `LB2-Redux-v0.04.zip` and keep an untouched backup.
+- Use the build named `LB2-Redux-v0.05.zip` and keep an untouched backup.
 - Extract it into a fresh directory. Do not mix its files with another Redux build, the CD edition, or an existing
   modded installation.
 - Start a new game for the most useful test. Old Sierra saves, including saves from earlier alphas, may contain state
@@ -21,6 +21,19 @@ only crashes.
 
 If launching manually in DOSBox-X, mount the extracted game directory as drive C and run `SCIDHUV.EXE`. Repository
 users can run `./tools/run_dosbox.sh` from the project root.
+
+## What's new in v0.05
+
+- From Act 3 on, the Countess, Olympia, O'Riley, Tut, Watney, Yvette, and Ziggy answer questions again instead of
+  stopping with a "not found" error.
+- The grade text between acts appears on a black screen in a window with Art Deco corners, not over the act marquee
+  with the death window's bones.
+- Steve's 7:30 meeting in the front rotunda works from either side: he arrives from the far side and faces Laura.
+- Ziggy answers about Pippin Carter, no longer faces Laura's Countess bluff before she has asked the Countess about
+  him, and his party eavesdropping and intercom lines share his restored voice.
+- Pippin acknowledges Rameses Najeer.
+
+None of these has had a full playthrough yet, so reports on them are especially welcome.
 
 ## What's new in v0.04
 
@@ -35,8 +48,6 @@ users can run `./tools/run_dosbox.sh` from the project root.
 - Guests at the front rotunda's buffet table can no longer be walked through, the Mastodon Room doorway no longer
   draws Laura over its lintel, and the Ankh near Pippin's body is easier to click.
 - Ziggy is a slippery stool pigeon again, with his slang, swagger, and mangled big words restored.
-
-None of these has had a full playthrough on v0.04 yet, so reports on them are especially welcome.
 
 ## What's new in v0.03
 
@@ -81,7 +92,7 @@ Use this section if you want to play naturally without being told where every cl
 - [ ] Leave the speakeasy during a song and listen for whether its music follows Laura out.
 - [ ] Ask Ziggy about every available person, especially Yvette and the Countess.
 - [ ] Note any Ziggy line that feels out of character, too crude, or hard to follow.
-- [ ] Confirm the first act grade appears against an appropriate neutral frame.
+- [ ] Confirm the first act grade appears on a black screen in a window with Art Deco corners.
 
 ### Act 2
 
@@ -98,6 +109,8 @@ Use this section if you want to play naturally without being told where every cl
 ### Acts 3 and 4
 
 - [ ] Revisit characters after every major discovery and look for missing, premature, or contradictory reactions.
+- [ ] Ask the Countess, Olympia, O'Riley, Tut, Watney, Yvette, and Ziggy about several topics; every question gets an
+  answer instead of an error.
 - [ ] Check whether time-sensitive characters and confrontations remain reasonably available.
 - [ ] Use both ordinary Look and the Magnifying Glass on small or reflective clues.
 - [ ] Save before dark or dangerous routes and report deaths that occur without a fair warning.
@@ -139,7 +152,8 @@ Use this section if you want to play naturally without being told where every cl
 - [ ] The two men at the speakeasy bar have distinct Look and Talk feedback.
 - [ ] Looking at the banner outside the museum mentions needing formal attire in Act 1, but not in Act 2.
 - [ ] Ziggy acknowledges knowing Yvette and the Countess without revealing later plot information.
-- [ ] The Act 1 grade uses the gold Art Deco frame rather than a skull-and-crossbones frame.
+- [ ] Every act grade appears on black in a window with Art Deco corners, not the death window's bones, and the act
+  marquee is gone before the text appears.
 
 ### Act 2: museum party
 
@@ -161,7 +175,12 @@ Use this section if you want to play naturally without being told where every cl
   conversation counter.
 - [ ] At the party, Rameses on Ziggy and Yvette on Pippin and Dr. Smith speak as if the evening is still going and no
   one has died.
-- [ ] Ziggy knows Heimlich and Dr. Smith.
+- [ ] Ziggy knows Heimlich and Dr. Smith, and answers about Pippin Carter.
+- [ ] Asking Ziggy about the Countess before asking her about him gets only his denial; after asking her, Laura's bluff
+  plays.
+- [ ] Pippin acknowledges Rameses Najeer.
+- [ ] Entering the front rotunda from either side at 7:30, Steve arrives from the far side and the two face each other
+  to talk.
 - [ ] Nobody can walk through the guests at the front rotunda's buffet table, including Steve after his 7:30 meeting
   with Laura.
 - [ ] Leaving the front rotunda north into the Mastodon Room, Laura stays inside the doorway rather than drawing over its
@@ -229,7 +248,7 @@ existing report first, but add your save or reproduction details when they provi
 Please use this template:
 
 ```text
-Alpha build: v0.04
+Alpha build: v0.05
 Environment: DOSBox-X version / ScummVM version / other
 Operating system:
 Act and location:

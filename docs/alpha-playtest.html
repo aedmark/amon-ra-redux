@@ -434,11 +434,11 @@
 <body>
   <div class="top-rule" aria-hidden="true"></div>
   <header id="top">
-    <p class="eyebrow">Public field test · Alpha v0.04</p>
+    <p class="eyebrow">Public field test · Alpha v0.05</p>
     <h1>The Dagger of Amon Ra: Redux</h1>
     <p class="subtitle">Help us test a careful modernization of Sierra's classic mystery from the newsroom to the final verdict.</p>
     <div class="hero-actions">
-      <a class="button" href="LB2-Redux-v0.04.zip" download>Download Alpha v0.04</a>
+      <a class="button" href="LB2-Redux-v0.05.zip" download>Download Alpha v0.05</a>
       <a class="button secondary" href="#report">Report a finding</a>
     </div>
   </header>
@@ -462,11 +462,11 @@
       <div class="notice-grid">
         <article class="notice">
           <strong>Fresh case</strong>
-          <p>Extract v0.04 to a new directory and start a new game; saves from earlier alphas are not recommended. This build was created from the vanilla LB2 1.00 source files and sluicebox decomps.</p>
+          <p>Extract v0.05 to a new directory and start a new game; saves from earlier alphas are not recommended. This build was created from the vanilla LB2 1.00 source files and sluicebox decomps.</p>
         </article>
         <article class="notice">
-          <strong>New in v0.04</strong>
-          <p>Fixes for the final inquest, the speakeasy and Egyptian Room music, Ernie's office, and the dagger case, plus Act 1 and 2 playtest fixes: party dialogue that treated the evening as over, guests Laura could walk through, the Mastodon Room doorway, and the Ankh. Ziggy also gets his sleazy swagger back. None of these has had a full playthrough yet, so reports on them are especially welcome.</p>
+          <strong>New in v0.05</strong>
+          <p>Museum characters answer questions again from Act 3 on, the screen between acts is black with Art Deco corners, Steve's 7:30 meeting plays from either side, and Ziggy, Pippin, and the Countess's gossip line up with what Laura knows. v0.04 brought fixes for the final inquest, the speakeasy and Egyptian Room music, Ernie's office, and the dagger case, plus Act 1 and 2 playtest fixes: party dialogue that treated the evening as over, guests Laura could walk through, the Mastodon Room doorway, and the Ankh. Ziggy also gets his sleazy swagger back. None of these has had a full playthrough yet, so reports on them are especially welcome.</p>
         </article>
         <article class="notice">
           <strong>Reference setup</strong>
@@ -521,7 +521,7 @@
             <li><label><input type="checkbox">Visit the speakeasy repeatedly and enter and leave its bathroom during a song.</label></li>
             <li><label><input type="checkbox">Ask Ziggy about every available person, especially Yvette and the Countess.</label></li>
             <li><label><input type="checkbox">Note any Ziggy line that feels out of character, too crude, or hard to follow.</label></li>
-            <li><label><input type="checkbox">Confirm the act grade appears against an appropriate neutral frame.</label></li>
+            <li><label><input type="checkbox">Confirm the act grade appears on a black screen in a window with Art Deco corners.</label></li>
           </ul>
         </article>
 
@@ -541,6 +541,7 @@
           <h3>Acts 3 &amp; 4</h3>
           <ul class="checklist">
             <li><label><input type="checkbox">Revisit people after discoveries and look for missing or premature reactions.</label></li>
+            <li><label><input type="checkbox">Ask the Countess, Olympia, O'Riley, Tut, Watney, Yvette, and Ziggy about several topics; every question gets an answer instead of an error.</label></li>
             <li><label><input type="checkbox">Check whether time-sensitive people and confrontations remain available.</label></li>
             <li><label><input type="checkbox">Use ordinary Look and the Magnifying Glass on small or reflective clues.</label></li>
             <li><label><input type="checkbox">Report deaths or traps that occur without a fair warning.</label></li>
@@ -611,7 +612,10 @@
             <li><label><input type="checkbox">Walking characters pause throughout dialogue and resume the same route afterward.</label></li>
             <li><label><input type="checkbox">Essential conversations remain available without a hidden conversation counter.</label></li>
             <li><label><input type="checkbox">At the party, Rameses on Ziggy and Yvette on Pippin and Dr. Smith speak as if the evening is still going and no one has died.</label></li>
-            <li><label><input type="checkbox">Ziggy knows Heimlich and Dr. Smith.</label></li>
+            <li><label><input type="checkbox">Ziggy knows Heimlich and Dr. Smith, and answers about Pippin Carter.</label></li>
+            <li><label><input type="checkbox">Asking Ziggy about the Countess before asking her about him gets only his denial; after asking her, Laura's bluff plays.</label></li>
+            <li><label><input type="checkbox">Pippin acknowledges Rameses Najeer.</label></li>
+            <li><label><input type="checkbox">Entering the front rotunda from either side at 7:30, Steve arrives from the far side and the two face each other to talk.</label></li>
             <li><label><input type="checkbox">Nobody can walk through the guests at the front rotunda's buffet table, including Steve after his 7:30 meeting with Laura.</label></li>
             <li><label><input type="checkbox">Leaving the front rotunda north into the Mastodon Room, Laura stays inside the doorway rather than drawing over its lintel.</label></li>
             <li><label><input type="checkbox">The Ankh near Pippin's body is easy to click.</label></li>
@@ -678,7 +682,7 @@
       <div class="report-layout">
         <div>
           <div class="report-box">
-            <pre id="reportTemplate">Alpha build: v0.04
+            <pre id="reportTemplate">Alpha build: v0.05
 Environment: DOSBox-X version / ScummVM version / other
 Operating system:
 Act and location:
@@ -724,7 +728,7 @@ Anything unusual: old save, alternate route, skipped conversation, custom MIDI, 
 
   <script>
     (() => {
-      const storageKey = "amon-ra-redux-alpha-v004r3-checks";
+      const storageKey = "amon-ra-redux-alpha-v005-checks";
       const checks = [...document.querySelectorAll('.checklist input[type="checkbox"]')];
       const progressValue = document.getElementById('progressValue');
       const progressBar = document.getElementById('progressBar');

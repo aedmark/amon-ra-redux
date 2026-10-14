@@ -131,6 +131,10 @@
 			)
 			(7
 				(titleView dispose:)
+				; Picture 780 is plain black. It clears the marquee before the
+				; grade text; the bone corners PLAY-010 objected to came from
+				; the narrator window, now fixed in Main (PLAY-024).
+				(gCurRoom drawPic: 780 10)
 				(= seconds 2)
 			)
 			(8

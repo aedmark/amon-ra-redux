@@ -2078,7 +2078,9 @@
 
 	(method (open &tmp temp0 temp1)
 		(cond
-			((OneOf gCurRoomNum 280 210 330 240 260 300)
+			; Room 26 is the act break: Art Deco corners, not the default bones
+			; the death room uses (PLAY-024).
+			((OneOf gCurRoomNum 280 210 330 240 260 300 26)
 				(= temp1 0)
 			)
 			((OneOf gCurRoomNum 210 220 230 260 270 280 290 295 300 310 320)
