@@ -136,7 +136,7 @@ None currently open. Q-001 and Q-002 have been resolved by D-007, D-017, and D-0
 - Rewrote the three indexed compound assignments (`Main` `SetFlag`/`ClearFlag`, `n027` `proc27_2`) as plain assignments; `Main` now compiles byte-identical to its committed patch and `proc27_2` matches the archive build (D-041).
 - Fixed and rebuilt room 310 (`WrapMusic dispose:`), room 450 (class 47 for `WrapMusic`, value-preserving message case, standard `super doVerb:`), room 640 (`of Actions`; now a loose patch), and room 750 (object property blocks from `7d48893`, un-shifted `state`/`cycles`/`seconds`/`font`) (D-040).
 
-- Built `LB2/LB2-Redux-v0.04.zip` from `d1117f3` with v0.03's layout (game files at the root plus `msg/` and `src/`), excluding `LB2SG.*` saves (v0.03 had shipped the maintainer's saves) and older zips: 949 files, 7,094,820 bytes. Moved `docs/alpha-playtest.html` to v0.04 with a "New in v0.04" card, checks for the five changed rooms, a v0.04 report template, and a fresh checklist storage key.
+- Built `LB2/LB2-Redux-v0.04.zip` from `30d6cb5` with v0.03's layout (game files at the root plus `msg/` and `src/`), excluding `LB2SG.*` saves (v0.03 had shipped the maintainer's saves) and older zips: 949 files, 7,096,096 bytes (rebuilt in session 55 with PLAY-012 to PLAY-018). Moved `docs/alpha-playtest.html` to v0.04 with a "New in v0.04" card, checks for the five changed rooms, a v0.04 report template, and a fresh checklist storage key.
 
 **Decisions:** D-040, D-041.
 
