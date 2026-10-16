@@ -119,7 +119,9 @@ None currently open. Q-001 and Q-002 have been resolved by D-007, D-017, and D-0
 
 **Verified:** A test package (468 files, 461,737 bytes) passed its integrity test and matched `LB2/`; the retail top level plus the package reproduces every `LB2/` game file (only the installer text files and `game.ini` differ, none used by the game). That copy, assembled with case-insensitive replacement as on DOS or Windows, passed the headless DOSBox-X smoke: `SCIDHUV` started and was still running at the 20-second timeout without dropping back to the prompt.
 
-**Next session should start with:** The maintainer's retest of PLAY-037. Before v0.09, rewrite the install steps in `ALPHA_PLAYTESTING.md` and `alpha-playtest.html` for a patch unzipped over a retail floppy v1.000 copy.
+- Rewrote the install steps in `ALPHA_PLAYTESTING.md` and `alpha-playtest.html` for a patch extracted over the player's own floppy v1.000 copy, with a Linux recipe (lowercase the copy's names, then `unzip -o -LL`), which on a fresh retail copy left no duplicates, matched every `LB2/` game file, and passed the headless boot smoke. Version labels stay at v0.08 until v0.09 is cut. Committed the maintainer's removal of the tracked full-game `LB2/LB2-Redux-v0.01.zip`; left the untracked root `LB2-Redux-v0.09.zip` out because it contains Sierra's game (`LB2_vanilla/`) and `src/`.
+
+**Next session should start with:** The maintainer's retest of PLAY-037. When cutting v0.09, build it with `tools/package_patch.py 0.09` and move the guide, page, download link, and storage key to v0.09.
 
 ### Session 58: 2026-10-16: Vats, Storeroom Crash, and Dagger Topic
 

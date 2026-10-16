@@ -10,16 +10,30 @@ only crashes.
 
 ## Before you begin
 
-- Use the build named `LB2-Redux-v0.08.zip` and keep an untouched backup.
-- Extract it into a fresh directory. Do not mix its files with another Redux build, the CD edition, or an existing
-  modded installation.
-- Start a new game for the most useful test. Old Sierra saves, including saves from earlier alphas, may contain state
-  that bypasses a fix.
+Redux is a patch, not a copy of the game. You need your own installed copy of the DOS floppy release, version 1.000:
+its `VERSION` file starts with `1.000`, and Sierra's own patch files (`0.SCR`, `90.SCR`, and others) sit beside
+`RESOURCE.000`. The CD edition, including the one sold digitally today, is a different build and will not work.
+
+1. Copy your installed game to a new directory and keep the original as an untouched backup. Do not patch a copy that
+   already holds another Redux build or other mods.
+2. Extract `LB2-Redux-v0.08.zip` into that directory, replacing the existing files when asked.
+   - On Windows and macOS, ordinary extraction is fine.
+   - On Linux, file names are case-sensitive, so Sierra's original patch could stay beside Redux's replacement
+     (`0.SCR` and `0.scr`) and the game might load the old one. In the new directory, lowercase every file name, then
+     extract with lowercase names (in bash):
+
+     ```bash
+     for f in *; do mv -n -- "$f" "${f,,}"; done
+     unzip -o -LL /path/to/LB2-Redux-v0.08.zip
+     ```
+3. Start a new game for the most useful test. Old Sierra saves, including saves from earlier alphas, may contain state
+   that bypasses a fix.
+
 - DOSBox-X is the reference environment. Reports from ScummVM are welcome, but identify them as ScummVM results.
 - Keep several rotating saves, especially near the end of each act and immediately before anything goes wrong.
 - Do not overwrite the save that reproduces a bug. Attach the complete matching `LB2SG.*` save set when possible.
 
-If launching manually in DOSBox-X, mount the extracted game directory as drive C and run `SCIDHUV.EXE`. Repository
+If launching manually in DOSBox-X, mount the patched game directory as drive C and run `SCIDHUV.EXE`. Repository
 users can run `./tools/run_dosbox.sh` from the project root.
 
 ## What's new in v0.08

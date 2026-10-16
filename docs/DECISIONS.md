@@ -672,7 +672,8 @@ Ship a package that contains no Sierra files, which players unzip over their own
   patch resources in `LB2/` (`.scr`, `.hep`, `.msg`, `.v56`, `.p56`, `.voc`). It leaves out every Sierra file and every
   patch byte-identical to one of Sierra's retail patches in `LB2_vanilla/` (currently `0.msg`, `13.hep`, `13.msg`,
   `720.scr`, `720.hep`), which players already have. Where a retail patch exists, the zip entry uses Sierra's spelling
-  (`454.HEP`), so unzipping replaces it on case-sensitive filesystems. `--mirror "LB2 (legal)/patched files" --prune`
+  (`454.HEP`), matching a copy installed from Sierra's disks; on case-sensitive filesystems the tester guide has
+  players lowercase their copy's file names and extract with `unzip -LL`, since installs differ in case. `--mirror "LB2 (legal)/patched files" --prune`
   keeps the maintainer's folder in sync. The decompiled `src/` stays in the repository, not in the player package.
   `LB2 (legal)/` and `LB2/archive/` are git-ignored.
 - **Consequences:** Players need the retail floppy v1.000 with Sierra's 23 patch files. The tester guide and playtest
