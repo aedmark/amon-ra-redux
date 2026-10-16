@@ -2,6 +2,24 @@
 
 Archived verbatim from `docs/HANDOFF.md` when its live session log exceeded ten entries.
 
+### Session 49: 2026-10-12: Room 335 Podium Fallback-Flash Guard
+
+**Contributor:** Codex
+
+**Goal:** Remove the one-frame generic narrator message that appeared before the correct guestbook response when Laura repeated an action without leaving the podium approach point.
+
+**Done:**
+- Preserved commit `ec515e0` as the runtime-stable baseline and left its approach, collision, old-save repair, and clue logic unchanged.
+- Traced the exact text to module 0's verb-47 catch-all, emitted by `proc0_6` only after an unsupported verb reaches the global default handler. This proved the flash was an extra invalid dispatch rather than a missing Room 335 message.
+- Kept LOOK, DO, and Magnifier on the standard `Feature`/`CueObj` path. Changed only `benefitPodium.sel_300`'s unsupported-verb branch to return handled locally instead of calling the superclass and global fallback. No custom cue, selector override, dispatcher, or new state was introduced (D-035).
+- Recompiled only `rm335` through the verified `LB2/RESOURCE.MAP` project. The resulting `335.SCR` is 1,752 bytes; `335.HEP` remains 902 bytes and byte-identical to the stable checkpoint.
+
+**Decisions:** D-035; D-034 followed.
+
+**Verified:** Script 335 compiles successfully; the original-interpreter headless startup smoke initializes with the new loose patch; `RESOURCE.000` and `RESOURCE.MAP` retain known MD5 hashes `2d591d9416607beeac48303c6f4fe212` and `330d4a87da2ea2520a316c9f25ab538e`. Runtime confirmation of LOOK/LOOK, DO/LOOK, LOOK/DO, and DO/DO from the exact approach point remains pending.
+
+**Next session should start with:** Run the four exact-position repeat combinations from Save 02 and confirm that only the guestbook response appears, with no flash, palette change, freeze, or interpreter error.
+
 ### Session 48: 2026-10-12: Room 335 Podium Collision and Interaction Follow-up
 
 **Contributor:** Codex

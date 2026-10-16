@@ -106,6 +106,21 @@ None currently open. Q-001 and Q-002 have been resolved by D-007, D-017, and D-0
 
 ## Session log
 
+### Session 59: 2026-10-16: Patch-Only Distribution
+
+**Contributor:** Claude Code and maintainer
+
+**Goal:** Make a distributable package that contains no Sierra files (D-047).
+
+**Done:**
+- The maintainer created `LB2 (legal)/`: the retail game at its top level (archive MD5s and all 23 retail patches match `LB2_vanilla/`) and Redux's files in `patched files/`, which matched `LB2/` byte for byte.
+- Removed the Sierra files from `patched files/`: `RESOURCE.000`, `RESOURCE.MAP`, `SCIDHUV.EXE`, `INSTALL.*`, `999.FON`, `MESSAGE.MAP`, SCI Companion's `game.ini`, and the five patches identical to Sierra's retail ones. It now holds 468 files.
+- Added `tools/package_patch.py`, which builds the patch-only zip and mirrors the same set into `patched files/`. Ignored `LB2 (legal)/` and `LB2/archive/` in git.
+
+**Verified:** A test package (468 files, 461,737 bytes) passed its integrity test and matched `LB2/`; the retail top level plus the package reproduces every `LB2/` game file (only the installer text files and `game.ini` differ, none used by the game). That copy, assembled with case-insensitive replacement as on DOS or Windows, passed the headless DOSBox-X smoke: `SCIDHUV` started and was still running at the 20-second timeout without dropping back to the prompt.
+
+**Next session should start with:** The maintainer's retest of PLAY-037. Before v0.09, rewrite the install steps in `ALPHA_PLAYTESTING.md` and `alpha-playtest.html` for a patch unzipped over a retail floppy v1.000 copy.
+
 ### Session 58: 2026-10-16: Vats, Storeroom Crash, and Dagger Topic
 
 **Contributor:** Claude Code and maintainer
@@ -287,21 +302,3 @@ None currently open. Q-001 and Q-002 have been resolved by D-007, D-017, and D-0
 **Verified:** Scripts 335 and 990 compile; the headless DOSBox-X startup smoke initializes; `RESOURCE.000`/`RESOURCE.MAP` MD5s unchanged; the maintainer confirmed repeat LOOK and DO at the podium show only the guestbook response. New saves now occupy separate slots (`LB2SG.001`–`.005` created during testing).
 
 **Next session should start with:** Resume the clean playthrough.
-
-### Session 49: 2026-10-12: Room 335 Podium Fallback-Flash Guard
-
-**Contributor:** Codex
-
-**Goal:** Remove the one-frame generic narrator message that appeared before the correct guestbook response when Laura repeated an action without leaving the podium approach point.
-
-**Done:**
-- Preserved commit `ec515e0` as the runtime-stable baseline and left its approach, collision, old-save repair, and clue logic unchanged.
-- Traced the exact text to module 0's verb-47 catch-all, emitted by `proc0_6` only after an unsupported verb reaches the global default handler. This proved the flash was an extra invalid dispatch rather than a missing Room 335 message.
-- Kept LOOK, DO, and Magnifier on the standard `Feature`/`CueObj` path. Changed only `benefitPodium.sel_300`'s unsupported-verb branch to return handled locally instead of calling the superclass and global fallback. No custom cue, selector override, dispatcher, or new state was introduced (D-035).
-- Recompiled only `rm335` through the verified `LB2/RESOURCE.MAP` project. The resulting `335.SCR` is 1,752 bytes; `335.HEP` remains 902 bytes and byte-identical to the stable checkpoint.
-
-**Decisions:** D-035; D-034 followed.
-
-**Verified:** Script 335 compiles successfully; the original-interpreter headless startup smoke initializes with the new loose patch; `RESOURCE.000` and `RESOURCE.MAP` retain known MD5 hashes `2d591d9416607beeac48303c6f4fe212` and `330d4a87da2ea2520a316c9f25ab538e`. Runtime confirmation of LOOK/LOOK, DO/LOOK, LOOK/DO, and DO/DO from the exact approach point remains pending.
-
-**Next session should start with:** Run the four exact-position repeat combinations from Save 02 and confirm that only the guestbook response appears, with no flash, palette change, freeze, or interpreter error.

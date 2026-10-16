@@ -13,6 +13,8 @@
 /LB2/CD/
 /LB2/LB2SG.*
 /LB2/*.zip
+/LB2/archive/
+/LB2 (legal)/
 
 # SCI Companion compiled object caches (tracked as baseline)
 # *.sco

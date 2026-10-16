@@ -662,6 +662,24 @@ Let more museum characters move between rooms in Act 3, preferring Sierra's own 
   restore correctly. The patrols start during Act 3, so they need a run from Act 2. Whether Olympia catches
   Laura taking the snake oil now depends on whether her patrol has her in 520, as Sierra's patrol intends.
 
+## D-047 Distribute Only Redux's Patch Files
+Ship a package that contains no Sierra files, which players unzip over their own floppy v1.000 install.
+
+- **Context:** Alphas v0.01 to v0.08 shipped the whole game directory: Sierra's archives, interpreter, drivers, installer,
+  and font beside Redux's patches. The maintainer split a copy into `LB2 (legal)/`: the untouched retail game at its
+  top level and the patch set in `patched files/`, so that Redux can be distributed legally.
+- **Decision:** `tools/package_patch.py <version>` builds `LB2/LB2-Redux-v<version>.zip` from the git-tracked numbered
+  patch resources in `LB2/` (`.scr`, `.hep`, `.msg`, `.v56`, `.p56`, `.voc`). It leaves out every Sierra file and every
+  patch byte-identical to one of Sierra's retail patches in `LB2_vanilla/` (currently `0.msg`, `13.hep`, `13.msg`,
+  `720.scr`, `720.hep`), which players already have. Where a retail patch exists, the zip entry uses Sierra's spelling
+  (`454.HEP`), so unzipping replaces it on case-sensitive filesystems. `--mirror "LB2 (legal)/patched files" --prune`
+  keeps the maintainer's folder in sync. The decompiled `src/` stays in the repository, not in the player package.
+  `LB2 (legal)/` and `LB2/archive/` are git-ignored.
+- **Consequences:** Players need the retail floppy v1.000 with Sierra's 23 patch files. The tester guide and playtest
+  page must describe installing over a retail copy from the first patch-only release. The repository still tracks some
+  Sierra files in `LB2/` (`SCIDHUV.EXE`, `INSTALL.*`, the drivers' batch files, `999.FON`, `MESSAGE.MAP`, and five
+  unchanged retail patches); the package never includes them.
+
 ## Open questions
 
 - **Q-001**: Resolved by D-007: Omit insensitive original CD voice tracks; restore murder lines as text messages in
