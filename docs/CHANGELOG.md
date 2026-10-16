@@ -6,6 +6,21 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+## [0.06-alpha] - 2026-10-16
+
+### Changed
+- The skull in Olympia's office opens the secret passage without sending Laura in; she can examine the darkness first, then walk in when you choose (PLAY-027, D-044).
+- The Countess's dialogue no longer relies on constant capitals; her grand manner now comes from her phrasing (PLAY-028, D-045).
+- The Thinker's raised head has its own descriptions, and its neck no longer describes a seam once the head is up (PLAY-029).
+
+### Fixed
+- Touching the stairwell's burned-out bulb says "Ouch!" only right after it burns out; later it hints that you need a spare, and with a spare in hand it swaps the bulb (PLAY-026).
+- The police-file volume in Carrington's office responds when you click the books on its shelves (PLAY-030).
+- The intercom's buttons respond when you click them directly (PLAY-031).
+- The Ankh near Pippin's body is easier to click; the v0.04 enlargement missed the medallion's lower half (PLAY-018).
+- Looking at the bloody footprint beside Pippin's body describes it, instead of giving the generic reply until the Magnifying Glass had been used (PLAY-032).
+- Using the carbon paper on Yvette's floor lamp while it is off, or after taking its bulb, gives the normal "You can't read it this way" reply instead of a message error (PLAY-025).
+
 ## [0.05-alpha] - 2026-10-14
 
 ### Changed

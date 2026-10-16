@@ -608,6 +608,34 @@ caricature.
 
 ---
 
+## D-044 Let the Player Choose to Enter Olympia's Passage
+
+Separate opening the hidden passage from entering it, and keep the passage's own danger.
+
+- **Context:** P3-04's outline asked for a secret-passage look mechanic, but D-019 resolved P3-04 in the room 530 stairwell
+  only. In room 520, pulling the skull still opened the panel and walked Laura through it, and room 666 kills her after
+  four seconds without the lantern (eight to light an unlit one), so the player had no moment to decline (PLAY-027).
+- **Decision:** The skull opens the panel and returns control; pulling it again closes the panel. The open panel has a
+  noun (59) with Look and Magnifier text warning of the darkness, and Hand on it, or walking into the doorway, runs the
+  original entry walk. Do not warn or block on entry, and keep room 666's lantern window and bat death unchanged; the
+  lantern can only stay lit inside the passage because its timer puts it out elsewhere.
+- **Consequences:** Room 520 gains one script object, so a save made inside Olympia's office before this change may
+  need the room re-entered. The panel resets to closed whenever the room is entered.
+
+---
+
+## D-045 Give the Countess Emphasis Through Phrasing
+
+Remove the Countess's habitual all-caps while keeping her theatrical grandeur.
+
+- **Context:** The P2-08 pass kept her "affected emphasis," which left 79 of her 158 lines with all-caps words.
+- **Decision:** Rewrite those lines so emphasis comes from diction and rhythm, keeping capitals only occasionally (five
+  remain, including "RAHTHER" and her scream). Keep her Cockney slip over the pocket watch, which hints that her title is
+  false. Record the pass in `docs/dialogue/countess-voice-2026-10.json` and `act2-countess-voice-340-2026-10.json`.
+- **Consequences:** The earlier Countess manifests are historical and must not be re-applied (D-038).
+
+---
+
 ## Open questions
 
 - **Q-001**: Resolved by D-007: Omit insensitive original CD voice tracks; restore murder lines as text messages in

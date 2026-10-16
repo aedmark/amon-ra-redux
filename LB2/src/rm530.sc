@@ -28,6 +28,7 @@
 	)
 
 	(method (init)
+		(ClearFlag 184) ; a bulb that burned out earlier has cooled (PLAY-026)
 		(LoadMany rsVIEW 530 541 542 831)
 		(LoadMany rsSOUND 540 541 542 543 558)
 		(gEgo init: normalize: 831 setScale: Scaler 105 0 190 0)
@@ -125,12 +126,19 @@
 				)
 			)
 			(4
+				; PLAY-026: a lit bulb was already changed; with the spare in
+				; hand, Hand swaps it; a bulb that burned out during this visit
+				; (flag 184) is still hot; otherwise it has cooled, and the
+				; reply points Laura toward a spare bulb.
 				(cond
-					((or (gEgo has: 23) (not (IsFlag 64)) (not cel))
-						(gMessager say: noun param1 5)
-					)
 					((not cel)
 						(gMessager say: noun param1 2)
+					)
+					((gEgo has: 23)
+						(gCurRoom setScript: sReplaceLightBulb)
+					)
+					((IsFlag 184)
+						(gMessager say: noun param1 5)
 					)
 					(else
 						(gMessager say: noun param1 1)
@@ -686,6 +694,7 @@
 			)
 			(2
 				(SetFlag 32)
+				(SetFlag 184) ; still hot until Laura leaves (PLAY-026)
 				(sFX number: 558 play:)
 				(lightBulb setCel: 1)
 				(darkPassage init:)

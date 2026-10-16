@@ -100,9 +100,11 @@
 		(rug init:)
 		(fireplaceOut init:)
 		(fireplaceIn init: approachVerbs: 4 1 8)
+		; The book goes first so it claims clicks on its shelves before the
+		; bookcase and the generic shelf descriptions (PLAY-030).
+		(book init: approachVerbs: 4 1 8)
 		(bookcase init:)
 		(genericBookshelf init:)
-		(book init: approachVerbs: 4 1 8)
 		(bigPainting init:)
 		(genericStars init:)
 		(skylightBase init:)
@@ -654,11 +656,11 @@
 		y 115
 		heading 90
 		noun 22
-		nsTop 84
-		nsLeft 212
-		nsBottom 122
-		nsRight 248
-		onMeCheck 64
+		nsTop 76
+		nsLeft 214
+		nsBottom 104
+		nsRight 241
+		onMeCheck 26505 ; the whole rectangle, not control color 6 (PLAY-030)
 		approachX 214
 		approachY 155
 	)

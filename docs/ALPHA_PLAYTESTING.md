@@ -10,7 +10,7 @@ only crashes.
 
 ## Before you begin
 
-- Use the build named `LB2-Redux-v0.05.zip` and keep an untouched backup.
+- Use the build named `LB2-Redux-v0.06.zip` and keep an untouched backup.
 - Extract it into a fresh directory. Do not mix its files with another Redux build, the CD edition, or an existing
   modded installation.
 - Start a new game for the most useful test. Old Sierra saves, including saves from earlier alphas, may contain state
@@ -22,6 +22,20 @@ only crashes.
 If launching manually in DOSBox-X, mount the extracted game directory as drive C and run `SCIDHUV.EXE`. Repository
 users can run `./tools/run_dosbox.sh` from the project root.
 
+## What's new in v0.06
+
+- The skull in Olympia's office opens the hidden passage without sending Laura in. She can look into the darkness
+  first and walk in when you choose, with or without the lantern.
+- The Countess sounds grand through her phrasing instead of constant capitals.
+- The Thinker's raised head has its own descriptions.
+- Touching the stairwell's burned-out bulb says "Ouch!" only right after it burns out; later Laura notes she needs a
+  spare, and with one in her purse she swaps it.
+- The police-file volume in Carrington's office, the intercom's buttons, the Ankh, and the bloody footprint beside
+  Pippin's body respond where you click them.
+- Using the carbon paper on Yvette's lamp while it is off gives an ordinary reply instead of an error.
+
+None of these has had a full playthrough yet, so reports on them are especially welcome.
+
 ## What's new in v0.05
 
 - From Act 3 on, the Countess, Olympia, O'Riley, Tut, Watney, Yvette, and Ziggy answer questions again instead of
@@ -32,8 +46,6 @@ users can run `./tools/run_dosbox.sh` from the project root.
 - Ziggy answers about Pippin Carter, no longer faces Laura's Countess bluff before she has asked the Countess about
   him, and his party eavesdropping and intercom lines share his restored voice.
 - Pippin acknowledges Rameses Najeer.
-
-None of these has had a full playthrough yet, so reports on them are especially welcome.
 
 ## What's new in v0.04
 
@@ -112,6 +124,7 @@ Use this section if you want to play naturally without being told where every cl
 - [ ] Ask the Countess, Olympia, O'Riley, Tut, Watney, Yvette, and Ziggy about several topics; every question gets an
   answer instead of an error.
 - [ ] Check whether time-sensitive characters and confrontations remain reasonably available.
+- [ ] Click small buttons, switches, and books directly and report any that respond only off target.
 - [ ] Use both ordinary Look and the Magnifying Glass on small or reflective clues.
 - [ ] Save before dark or dangerous routes and report deaths that occur without a fair warning.
 - [ ] Examine bookshelves, files, footprints, and other evidence before taking anything.
@@ -179,6 +192,7 @@ Use this section if you want to play naturally without being told where every cl
 - [ ] Asking Ziggy about the Countess before asking her about him gets only his denial; after asking her, Laura's bluff
   plays.
 - [ ] Pippin acknowledges Rameses Najeer.
+- [ ] The Countess sounds grand without constant capitals, and none of her lines reads oddly.
 - [ ] Entering the front rotunda from either side at 7:30, Steve arrives from the far side and the two face each other
   to talk.
 - [ ] Nobody can walk through the guests at the front rotunda's buffet table, including Steve after his 7:30 meeting
@@ -207,9 +221,17 @@ Use this section if you want to play naturally without being told where every cl
   Ernie plays out cleanly.
 - [ ] The dark eastern stairwell stops Laura with a repeatable warning instead of killing her at the threshold.
 - [ ] Replacing the bulb makes the stairwell traversable.
-- [ ] Watney Little's police file can be found through the Room 560 bookcase and its enlarged special-volume target.
+- [ ] Touching the burned-out bulb says "Ouch!" only right after it burns out; after leaving and returning, Laura notes
+  she has no spare, and with a spare in her purse she swaps it at once.
+- [ ] Watney Little's police file can be found by clicking the books on its shelf in Carrington's office.
 - [ ] Looking at the exposed file records both its contents and Watney's People entry before Take.
+- [ ] Looking at Pippin's bloody high-heel footprint describes it even before using the Magnifying Glass.
 - [ ] Inspecting Pippin's bloody high-heel footprint preserves it for the inquest evidence review.
+- [ ] The skull in Olympia's office opens and closes the hidden panel without sending Laura in. Look at the open
+  passage warns of darkness, and Hand on it or walking into it takes Laura inside.
+- [ ] Once the Thinker's head is raised, Look and the Magnifying Glass on the head and neck mention it.
+- [ ] The intercom's buttons respond when clicked directly.
+- [ ] Using the carbon paper on Yvette's lamp while it is off gives an ordinary reply, not an error.
 - [ ] Restored homicide reactions, including O'Riley's Countess response, remain reachable.
 - [ ] A complete run can earn the full Act 4 grade.
 
@@ -248,7 +270,7 @@ existing report first, but add your save or reproduction details when they provi
 Please use this template:
 
 ```text
-Alpha build: v0.05
+Alpha build: v0.06
 Environment: DOSBox-X version / ScummVM version / other
 Operating system:
 Act and location:

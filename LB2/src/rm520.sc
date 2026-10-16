@@ -114,7 +114,7 @@
 			)
 			(snakeOil init: approachVerbs: 4 1 8 stopUpd:)
 		)
-		(secretDoor init: stopUpd:)
+		(secretDoor init: stopUpd: approachVerbs: 4 ignoreActors: 1)
 		(if (or (> gAct 4) (and (== gAct 4) (TimeCheck $4108 1))) ; can 4:15 am occur?
 			(deadCountess init: stopUpd: approachVerbs: 1 8)
 		else
@@ -152,6 +152,17 @@
 		(super doit:)
 		(cond
 			(script)
+			(
+				(and
+					(secretDoor cel:)
+					(not (mountedSkull script:))
+					(> (gEgo x:) 282)
+					(> (gEgo y:) 152)
+					(not (OneOf (gEgo view:) 522 528 529))
+				)
+				; Laura walked into the open panel (PLAY-027).
+				(self setScript: sEnterPassage)
+			)
 			((and local4 (StepOn gEgo 16))
 				(self setScript: sDropCobraGetBitten)
 			)
@@ -481,7 +492,8 @@
 						(gMessager say: 58 0 7)
 					)
 					((MuseumRgn nobodyAround:)
-						(self setScript: sSecretDoor)
+						; Opens the panel, or closes it if open (PLAY-027).
+						(self setScript: sSecretDoor 0 (secretDoor cel:))
 					)
 					(else
 						(return 1)
@@ -500,9 +512,41 @@
 		name {secretDoor}
 		x 294
 		y 159
+		noun 59
+		approachX 280 ; just outside the walk-in trigger (x > 282)
+		approachY 160
 		view 524
 		loop 1
 		cycleSpeed 12
+	)
+
+	; The fully open cel is a single blank pixel, so the doorway the panel
+	; uncovers (its closed bounds) is the click area in both states.
+	(method (onMe param1 param2 &tmp temp0 temp1)
+		(if (IsObject param1)
+			(= temp0 (param1 x:))
+			(= temp1 (param1 y:))
+		else
+			(= temp0 param1)
+			(= temp1 param2)
+		)
+		(return (and (<= 294 temp0 317) (<= 87 temp1 176) 1))
+	)
+
+	; PLAY-027: once open, the passage can be examined, and Hand takes
+	; Laura in. Closed, the panel is just part of the wall.
+	(method (doVerb param1)
+		(cond
+			((not cel)
+				(gCurRoom doVerb: param1)
+			)
+			((== param1 4)
+				(gCurRoom setScript: sEnterPassage)
+			)
+			(else
+				(super doVerb: param1)
+			)
+		)
 	)
 )
 
@@ -1866,28 +1910,60 @@
 			(3
 				(gEgo cycleSpeed: 12 setCycle: Beg self)
 				(sFX number: 49 flags: 5 setLoop: 1 play:)
-				(mountedSkull setCycle: End self)
+				(if register
+					(mountedSkull setCycle: Beg self)
+				else
+					(mountedSkull setCycle: End self)
+				)
 			)
 			(4 0)
 			(5
 				(gEgo normalize: 831)
 				(Face gEgo secretDoor)
 				(sFX number: 721 flags: 5 setLoop: 1 play:)
-				(secretDoor setCycle: End self)
+				(if register
+					(secretDoor setCycle: Beg self)
+				else
+					(secretDoor setCycle: End self)
+				)
 			)
 			(6
+				; The panel stays open; walking into it, or Hand on it, runs
+				; sEnterPassage (PLAY-027).
 				(sFX stop:)
-				(gEgo setMotion: PolyPath 315 167 self)
+				(secretDoor stopUpd:)
+				(gGame handsOn:)
+				(self dispose:)
 			)
-			(7
+		)
+	)
+)
+
+(instance sEnterPassage of Script
+	(properties
+		name {sEnterPassage}
+	)
+
+	(method (changeState param1)
+		(switch (= state param1)
+			(0
+				; Straight moves: a pathfinding move to this point, outside the
+				; walkable area, could stall when started from the doorway's
+				; edge. The open panel's one-pixel cel sits on this path and
+				; would block Laura with input off, so she ignores actors and
+				; control here; room 666 normalizes her again (PLAY-027).
+				(gGame handsOff:)
+				(gEgo illegalBits: 0 ignoreActors: 1 setMotion: MoveTo 305 167 self)
+			)
+			(1
 				(gEgo setMotion: MoveTo 330 167 self)
 			)
-			(8
+			(2
 				(gEgo setPri: 2)
 				(sFX number: 721 flags: 5 setLoop: 1 play:)
 				(secretDoor setCycle: Beg self)
 			)
-			(9
+			(3
 				(sFX stop:)
 				(secretDoor stopUpd:)
 				(gCurRoom newRoom: (gCurRoom north:))

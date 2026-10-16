@@ -2,6 +2,23 @@
 
 Archived verbatim from `docs/HANDOFF.md` when its live session log exceeded ten entries.
 
+### Session 47: 2026-10-12: Room 335 Benefit Podium Positioning and Z-Ordering Fix
+
+**Contributor:** Antigravity and maintainer
+
+**Goal:** Fix Laura standing directly on top of the podium and rendering behind it during examination and signing.
+
+**Done:**
+- Re-anchored `benefitPodium` to its approved placement flanking the double doors at `(190, 174)` with visual bounds `nsTop: 148, nsLeft: 182, nsBottom: 174, nsRight: 198`.
+- Fixed podium priority to 12 via `sel_63: 12` in `rm335::init:` and instance properties `sel_60 12`, `sel_14 16400` (`$4000 ignrAct | $0010 fixPriOn`). Because Laura is in priority band 14 at the bottom of the room, she renders in front of the lectern instead of behind it.
+- Adjusted interaction approach point to `(186, 180)`: Laura walks south of the podium base (facing north-east towards the register) without horizontally colliding with or occluding the lectern.
+- Adjusted obstacle polygon `polyPodium` `[182 168  198 168  198 175  182 175]` in Script 2335 to bar the podium footprint and wall gap while leaving the (186, 180) approach freely walkable.
+- Recompiled `poly2335Code` (`2335.SCR`/`2335.HEP`) and `rm335` (`335.SCR`/`335.HEP`) via single-script pipeline and normalized patch casing. Base game archives `RESOURCE.000` and `RESOURCE.MAP` remain untouched bit-for-bit.
+
+**Verified:** Single-script compiles pass at 0 errors/0 warnings; `335.MSG` contains exact user-requested dialogue tuples; `check_docs.py` and `manual.py` checks pass; DOSBox-X smoke boots cleanly.
+
+**Next session should start with:** Test the room 335 entrance register in DOSBox-X from the Act 2 save (approach positioning, z-ordering, collision, and signing flow).
+
 ### Session 46: 2026-10-11: Room 335 Benefit Podium Refinement and Signing Flow
 
 **Contributor:** Codex and maintainer

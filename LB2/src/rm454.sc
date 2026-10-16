@@ -703,6 +703,7 @@
 		name {footprint}
 		x 228
 		y 128
+		noun 3 ; vanilla left it 0, so Look gave the generic reply (PLAY-032)
 		approachX 214
 		approachY 126
 		view 451
@@ -736,9 +737,10 @@
 		signal 16384
 	)
 
-	; The 6x6 medallion is hard to click. Extend its target left and up to
-	; 13x14, stopping short of the blood (x 233+), the footprint (y 124+),
-	; Pippin (x 236+), and the doorway (x 219-) (PLAY-018, as in P1-03).
+	; The 6x6 medallion (x 227-232, y 122-127) is hard to click. Keep its own
+	; bounds and add a 13x13 margin above and to the left, stopping short of
+	; the footprint (y 125+), the blood (x 232+), Pippin (x 236+), and the
+	; doorway (x 218-) (PLAY-018, as in P1-03).
 	(method (onMe param1 param2 &tmp temp0 temp1)
 		(if (IsObject param1)
 			(= temp0 (param1 x:))
@@ -747,7 +749,12 @@
 			(= temp0 param1)
 			(= temp1 param2)
 		)
-		(return (and (<= 220 temp0 232) (<= 110 temp1 123) 1))
+		(return
+			(or
+				(super onMe: temp0 temp1)
+				(and (<= 219 temp0 231) (<= 112 temp1 124) 1)
+			)
+		)
 	)
 
 	(method (doVerb param1 param2)

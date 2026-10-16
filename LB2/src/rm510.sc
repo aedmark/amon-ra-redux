@@ -116,9 +116,7 @@
 		(statue3 init:)
 		(statue4 init:)
 		(arch init:)
-		(if (not (IsFlag 31))
-			(rodinSeam init:)
-		)
+		(rodinSeam init:) ; the neck stays clickable with the head up (PLAY-029)
 		(rodinBody init:)
 		(transom init:)
 		(wall init:)
@@ -274,20 +272,32 @@
 	)
 
 	(method (doVerb param1)
+		; PLAY-029: with the head pushed up (flag 31), Look and Magnifier
+		; describe the raised head instead of the face or the closed seam.
+		; The neck hotspot now stays active in both positions.
 		(switch param1
 			(4
 				(if (IsFlag 31)
 					(ClearFlag 31)
-					(rodinSeam init:)
 				else
 					(gGame points: 1 142)
 					(SetFlag 31)
-					(rodinSeam dispose:)
 				)
 				(rodinDudeHead setScript: sRodinFlipSwitch)
 			)
+			(1
+				(if (IsFlag 31)
+					(gMessager say: noun param1 1)
+				else
+					(super doVerb: param1)
+				)
+			)
 			(8
-				(gMessager say: 7 1)
+				(if (IsFlag 31)
+					(gMessager say: noun param1 1)
+				else
+					(gMessager say: 7 1)
+				)
 			)
 			(else
 				(super doVerb: param1)
@@ -475,6 +485,20 @@
 					(SetFlag 31)
 				)
 				(rodinDudeHead setScript: sRodinFlipSwitch)
+			)
+			(1
+				(if (IsFlag 31)
+					(gMessager say: noun param1 1) ; opened neck (PLAY-029)
+				else
+					(super doVerb: param1)
+				)
+			)
+			(8
+				(if (IsFlag 31)
+					(gMessager say: noun param1 1) ; opened neck (PLAY-029)
+				else
+					(super doVerb: param1)
+				)
 			)
 			(else
 				(super doVerb: param1)

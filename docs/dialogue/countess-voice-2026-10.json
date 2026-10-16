@@ -1,0 +1,637 @@
+{
+  "module": 1884,
+  "character": "Countess (all acts)",
+  "voice": "Grand, vain, and entitled, with a social performer's condescension ('dear girl,' 'darling,' 'mmmm?'). Emphasis comes from phrasing and rhythm, with only occasional capitals; her one phonetic flourish ('RAHTHER') and her Cockney slip over the pocket watch stay because they characterize her. Maintainer direction, 2026-10-15.",
+  "entries": [
+    {
+      "tuple": [
+        0,
+        47,
+        0,
+        1,
+        29
+      ],
+      "text": "I have no use for that, Miss Bow. None whatsoever."
+    },
+    {
+      "tuple": [
+        1,
+        2,
+        80,
+        2,
+        29
+      ],
+      "text": "Good evening, Miss Bow. I am the Countess Lavinia Waldorf-Carlton. Do be sure to spell my name correctly in your little story, won't you?"
+    },
+    {
+      "tuple": [
+        1,
+        6,
+        1,
+        1,
+        29
+      ],
+      "text": "I bore rather easily, dear girl. Do let's move on to another subject, mmmmm?"
+    },
+    {
+      "tuple": [
+        1,
+        6,
+        2,
+        1,
+        29
+      ],
+      "text": "I have not had the pleasure of meeting him, but he sounds simply charming. A man who runs a newspaper must be quite wealthy, mmmm?"
+    },
+    {
+      "tuple": [
+        1,
+        6,
+        6,
+        1,
+        29
+      ],
+      "text": "Oh, I do so enjoy a bit of crodfoller with my tea!"
+    },
+    {
+      "tuple": [
+        1,
+        6,
+        8,
+        1,
+        29
+      ],
+      "text": "What a lovely boy. Such charming manners, and so very handsome, mmmmm?"
+    },
+    {
+      "tuple": [
+        1,
+        6,
+        9,
+        1,
+        29
+      ],
+      "text": "He seems a perfectly dreadful little fellow. Let's not discuss him."
+    },
+    {
+      "tuple": [
+        1,
+        6,
+        10,
+        1,
+        29
+      ],
+      "text": "Oh, Mister Heimlich is simply dreadful! I do believe his tiny taste of authority has gone straight to his little head, don't you, Miss Bow?"
+    },
+    {
+      "tuple": [
+        1,
+        6,
+        11,
+        1,
+        29
+      ],
+      "text": "I have no intention whatsoever of discussing that little trollop."
+    },
+    {
+      "tuple": [
+        1,
+        6,
+        12,
+        1,
+        29
+      ],
+      "text": "Well, I do wish they wouldn't let the handyman wander about during social functions. The man isn't even properly dressed!"
+    },
+    {
+      "tuple": [
+        1,
+        6,
+        13,
+        1,
+        29
+      ],
+      "text": "Oh, he is a darling little man. Simply darling."
+    },
+    {
+      "tuple": [
+        1,
+        6,
+        15,
+        1,
+        29
+      ],
+      "text": "My, she is...unusual, isn't she, dear girl? I cannot abide that horrid ferret of hers. I'm quite sure it hates me."
+    },
+    {
+      "tuple": [
+        1,
+        6,
+        16,
+        1,
+        29
+      ],
+      "text": "My, my, my, what an intense gentleman he is. Why, he's positively obsessed with that dagger."
+    },
+    {
+      "tuple": [
+        1,
+        6,
+        17,
+        1,
+        29
+      ],
+      "text": "I--I--I'm sure I don't know anyone by that name, Miss Bow. Quite, QUITE sure."
+    },
+    {
+      "tuple": [
+        1,
+        6,
+        18,
+        1,
+        29
+      ],
+      "text": "I've never met your father, dear girl. A policeman, you say? How...delightful."
+    },
+    {
+      "tuple": [
+        1,
+        6,
+        19,
+        1,
+        29
+      ],
+      "text": "I'm afraid I haven't read your newspaper, dear girl. I try to avoid the news; I find it so terribly distressing. We live in such dreadful times..."
+    },
+    {
+      "tuple": [
+        1,
+        6,
+        21,
+        1,
+        29
+      ],
+      "text": "Oh, heavens, my dear, my maids attend to my laundry!"
+    },
+    {
+      "tuple": [
+        1,
+        6,
+        22,
+        1,
+        29
+      ],
+      "text": "The docks are dreadful, rough places, Miss Bow. Simply dreadful!"
+    },
+    {
+      "tuple": [
+        1,
+        6,
+        23,
+        1,
+        29
+      ],
+      "text": "I think the Leyendecker is simply divine. Don't you agree?"
+    },
+    {
+      "tuple": [
+        1,
+        6,
+        25,
+        1,
+        29
+      ],
+      "text": "New York is simply charming, Miss Bow. It has so much culture...for an American city."
+    },
+    {
+      "tuple": [
+        1,
+        6,
+        33,
+        1,
+        29
+      ],
+      "text": "Well, isn't that charming! A little reporter!"
+    },
+    {
+      "tuple": [
+        1,
+        6,
+        34,
+        1,
+        29
+      ],
+      "text": "EEEEEEEEEK!"
+    },
+    {
+      "tuple": [
+        1,
+        6,
+        34,
+        3,
+        29
+      ],
+      "text": "'Ere now, where'd you get your mitts on that? Answer me!"
+    },
+    {
+      "tuple": [
+        1,
+        6,
+        34,
+        9,
+        29
+      ],
+      "text": "Why, yes, dear girl. I've always had the most dreadful fear of them. Heh heh."
+    },
+    {
+      "tuple": [
+        1,
+        6,
+        38,
+        1,
+        29
+      ],
+      "text": "Oh, I am simply devastated that it was stolen before I had a chance to see it. They say it's absolutely divine."
+    },
+    {
+      "tuple": [
+        1,
+        6,
+        41,
+        1,
+        29
+      ],
+      "text": "Eek! What a perfectly beastly substance!"
+    },
+    {
+      "tuple": [
+        1,
+        6,
+        42,
+        1,
+        29
+      ],
+      "text": "Oh, I don't know a thing about lanterns, dear girl. I make a point of staying out of dark, frightening places. Don't you?"
+    },
+    {
+      "tuple": [
+        1,
+        6,
+        44,
+        1,
+        29
+      ],
+      "text": "Proper young ladies do not speak of such things, Miss Bow!"
+    },
+    {
+      "tuple": [
+        1,
+        6,
+        46,
+        1,
+        29
+      ],
+      "text": "Oh, dear, whatever could that be?"
+    },
+    {
+      "tuple": [
+        1,
+        6,
+        47,
+        1,
+        29
+      ],
+      "text": "Why, isn't that one of those darling little Egyptian trinkets?"
+    },
+    {
+      "tuple": [
+        1,
+        6,
+        48,
+        1,
+        29
+      ],
+      "text": "Oh, I'm sure there's nothing on that to concern the likes of us, Miss Bow."
+    },
+    {
+      "tuple": [
+        1,
+        6,
+        49,
+        1,
+        29
+      ],
+      "text": "It's wise to observe what goes on around you, dear girl. I always do. Always."
+    },
+    {
+      "tuple": [
+        1,
+        6,
+        51,
+        3,
+        29
+      ],
+      "text": "I said, get that away from me, you silly child! I detest common criminals!"
+    },
+    {
+      "tuple": [
+        1,
+        6,
+        52,
+        1,
+        29
+      ],
+      "text": "Animal hairs? Really, Miss Bow!"
+    },
+    {
+      "tuple": [
+        1,
+        6,
+        54,
+        1,
+        29
+      ],
+      "text": "Well, I suppose they might have come from that dreadful O'Riley, or that adorable Mr. Dorian."
+    },
+    {
+      "tuple": [
+        1,
+        6,
+        55,
+        1,
+        29
+      ],
+      "text": "Well, I've seen a great many glasses tonight, dear girl. It is a party, you know."
+    },
+    {
+      "tuple": [
+        1,
+        6,
+        62,
+        1,
+        29
+      ],
+      "text": "Oh, could that be some of that cute little Egyptian writing? How perfectly charming!"
+    },
+    {
+      "tuple": [
+        1,
+        6,
+        63,
+        2,
+        29
+      ],
+      "text": "Ye--No, dear girl, it's been absolutely horrid. My darling husband Sterling died this year, you know. Whatever shall I do without him?"
+    },
+    {
+      "tuple": [
+        1,
+        6,
+        64,
+        2,
+        29
+      ],
+      "text": "Oh, it's horrid! Simply horrid! What sort of creature would make off with a priceless work of art, I wonder?"
+    },
+    {
+      "tuple": [
+        1,
+        6,
+        64,
+        4,
+        29
+      ],
+      "text": "Oh, my, no! I make a point of never associating with dreadful people, dear girl."
+    },
+    {
+      "tuple": [
+        1,
+        6,
+        68,
+        2,
+        29
+      ],
+      "text": "My dear Sterling's diary? What have you done with it?"
+    },
+    {
+      "tuple": [
+        1,
+        6,
+        68,
+        4,
+        29
+      ],
+      "text": "You didn't actually read it, did you?"
+    },
+    {
+      "tuple": [
+        1,
+        6,
+        68,
+        6,
+        29
+      ],
+      "text": "Lies! All lies! I loved that man! I love him still, whatever he did to his Will. Dear Sterling made me a rich woman...or he WILL, just as soon as the Will problems are cleared up."
+    },
+    {
+      "tuple": [
+        1,
+        6,
+        68,
+        10,
+        29
+      ],
+      "text": "Yvette? That little trollop? So that's who he was seeing behind my back! She must be the one who made him start changing his Will!"
+    },
+    {
+      "tuple": [
+        1,
+        6,
+        68,
+        12,
+        29
+      ],
+      "text": "Ohhh...I'm beginning to feel quite faint...."
+    },
+    {
+      "tuple": [
+        1,
+        6,
+        68,
+        16,
+        29
+      ],
+      "text": "I'm sure he would, girl. Don't you worry...I'm sure we'll talk again."
+    },
+    {
+      "tuple": [
+        1,
+        6,
+        71,
+        1,
+        29
+      ],
+      "text": "I'm sure I haven't the faintest idea who could have killed him."
+    },
+    {
+      "tuple": [
+        1,
+        6,
+        71,
+        3,
+        29
+      ],
+      "text": "I'm not denying anything, my dear! The man was a common worker, don't you know? I'd have no reason whatsoever to have any contact with him."
+    },
+    {
+      "tuple": [
+        1,
+        6,
+        72,
+        1,
+        29
+      ],
+      "text": "He was rather a good-looking fellow, don't you think? Of course, I was at the party when he died, surrounded by witnesses, as I've already told Mr. O'Riley."
+    },
+    {
+      "tuple": [
+        1,
+        6,
+        74,
+        2,
+        29
+      ],
+      "text": "Ziggy's...er...no, no, I'm afraid I don't know a thing about that dreadful little man."
+    },
+    {
+      "tuple": [
+        1,
+        6,
+        81,
+        1,
+        29
+      ],
+      "text": "I simply don't know how to answer that, my dear."
+    },
+    {
+      "tuple": [
+        1,
+        19,
+        0,
+        1,
+        29
+      ],
+      "text": "Eeek! How simply horrid!"
+    },
+    {
+      "tuple": [
+        1,
+        21,
+        0,
+        1,
+        29
+      ],
+      "text": "Miss Bow, proper young ladies do not carry common tools about with them."
+    },
+    {
+      "tuple": [
+        1,
+        23,
+        0,
+        1,
+        29
+      ],
+      "text": "Miss Bow, please take that dreadful object away!"
+    },
+    {
+      "tuple": [
+        1,
+        25,
+        0,
+        1,
+        29
+      ],
+      "text": "Eek! What a perfectly beastly smell!"
+    },
+    {
+      "tuple": [
+        1,
+        28,
+        0,
+        1,
+        29
+      ],
+      "text": "Miss Bow, really!"
+    },
+    {
+      "tuple": [
+        1,
+        32,
+        0,
+        1,
+        29
+      ],
+      "text": "I'm sure it's absolutely fascinating, but I simply haven't the time to read it, dear girl."
+    },
+    {
+      "tuple": [
+        1,
+        33,
+        0,
+        1,
+        29
+      ],
+      "text": "You are an odd girl, Miss Bow. But so very charming."
+    },
+    {
+      "tuple": [
+        1,
+        34,
+        0,
+        1,
+        29
+      ],
+      "text": "Oh! Oh! Give that to me, Miss Bow, I'll take care of it for you..."
+    },
+    {
+      "tuple": [
+        1,
+        37,
+        0,
+        1,
+        29
+      ],
+      "text": "Is that hair, Miss Bow? How perfectly dreadful!"
+    },
+    {
+      "tuple": [
+        1,
+        39,
+        0,
+        1,
+        29
+      ],
+      "text": "Do be careful, Miss Bow, it will turn your hands black!"
+    },
+    {
+      "tuple": [
+        1,
+        40,
+        0,
+        1,
+        29
+      ],
+      "text": "It is charming, dear girl, but it is not mine."
+    },
+    {
+      "tuple": [
+        1,
+        44,
+        0,
+        1,
+        29
+      ],
+      "text": "Whatever would I do with that, you silly girl?"
+    }
+  ]
+}

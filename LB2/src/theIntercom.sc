@@ -99,8 +99,8 @@
 		)
 		(return
 			(and
-				(<= (- x 8) temp0 (+ x 16))
-				(<= (- y 6) temp1 (+ y 6))
+				(<= (- x 4) temp0 (+ x 1))
+				(<= (- y 3) temp1 (+ y 1))
 				1
 			)
 		)
@@ -154,8 +154,8 @@
 		)
 		(return
 			(and
-				(<= (- x 8) temp0 (+ x 16))
-				(<= (- y 6) temp1 (+ y 6))
+				(<= (- x 4) temp0 (+ x 1))
+				(<= (- y 3) temp1 (+ y 1))
 				1
 			)
 		)
@@ -185,6 +185,10 @@
 	)
 )
 
+; PLAY-031: the on/off and send/receive switches had click areas reaching
+; 16 pixels right and 6 up and down, across the button column, and they are
+; checked first, so a click on a button reached a switch. Each switch and
+; button now responds around its own knob.
 (class Button of Prop
 	(properties
 		name {Button}
@@ -207,8 +211,8 @@
 		)
 		(return
 			(and
-				(<= (- x 8) temp0 (+ x 36))
-				(<= (- y 2) temp1 (+ y 2))
+				(<= (- x 4) temp0 (+ x 6))
+				(<= (- y 1) temp1 (+ y 1))
 				1
 			)
 		)

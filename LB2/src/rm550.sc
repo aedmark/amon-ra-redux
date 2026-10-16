@@ -492,7 +492,10 @@
 				(if (and (not (IsFlag 40)) (not (IsFlag 64)))
 					(gCurRoom setScript: sReadCarbonPaper)
 				else
-					(gMessager say: noun param1 6)
+					; Lamp off (flag 40) or bulb taken (flag 64). Sierra never wrote
+					; (5, 39, 6); use the lamp close-up's and the bulb's
+					; (45, 39, 6), "You can't read it this way" (PLAY-025).
+					(gMessager say: 45 param1 6)
 				)
 			)
 			(else

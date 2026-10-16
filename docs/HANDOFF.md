@@ -12,7 +12,7 @@ Security: [SECURITY.md](SECURITY.md). Changes: [CHANGELOG.md](CHANGELOG.md). Old
 
 ## Current state
 
-_Last updated: 2026-10-14, session 56: Ziggy's voice (D-043), PLAY-019 to PLAY-024, alpha v0.05 package._
+_Last updated: 2026-10-15, session 57: PLAY-025 to PLAY-031 and the PLAY-018 correction (D-044, D-045)._
 
 **Where things stand, in one paragraph:** Alpha v0.01 is public in the SQH Discord; alpha v0.02 (`LB2/LB2-Redux-v0.02.zip`, built from `master` at `43b1fbc`) is packaged and its tester guides are updated, pending publication. The room 335 benefit podium remains at `(190, 174)` with visual bounds `nsTop: 148, nsLeft: 182, nsBottom: 174, nsRight: 198` and fixed priority 12. Script 2335's existing 14-point barred room polygon reaches `(190, 176)` around the podium, and Script 335 routes Look/Hand/Magnifier to `(186, 180)` in front of the ledger. Old saves rebind that same polygon object to current static points without heap writes or new objects. Script 21's duplicate-clue repair prevents the prior Error 5 memory corruption. The remaining one-frame “interesting approach” flash was traced to the global fallback for an unsupported verb dispatch occurring before the valid podium dispatch on exact-position repeats. The podium now handles its three intended verbs normally and locally consumes any unsupported dispatch instead of forwarding it to the global narrator (D-035). The flash persisted, and occurred only on the engine's immediate-dispatch ending, when Laura was already in place. The podium now sets `sightAngle` -1 and `approachDist` 4, so repeats take the same deferred `CueObj` path as a fresh approach (D-036). The maintainer confirmed in DOSBox-X that repeat LOOK and DO show only the guestbook response. Saved games no longer overwrite slot 0 (Script 990 fix). Session 54 found that Redux's `Main` numbers `WrapMusic` and `Actions` the reverse of vanilla, which broke Sierra-compiled rooms 450 and 640 and the archive-derived room 310, and that the committed room 750 inquest had every object property shifted one slot; all four now build from corrected source and await a runtime retest (D-040). Drifted patches stay unless their script changes; `Main`'s and `n027`'s indexed compound assignments are rewritten, and `Main` now rebuilds byte-identical to its committed patch (D-041).
 
@@ -91,19 +91,40 @@ _Last updated: 2026-10-14, session 56: Ziggy's voice (D-043), PLAY-019 to PLAY-0
 
 ## Next steps (in order)
 
-1. Retest PLAY-019 to PLAY-024 (Act 3 museum conversations, Ziggy on Pippin and the Countess, Pippin on Najeer, Steve's meeting from either side, the act-break screen).
-2. Read Ziggy's restored dialogue in play (speakeasy and party) and adjust any line in SCI Companion (D-043).
-3. Retest PLAY-012 to PLAY-018 during the fresh playthrough: the Act 1 museum banner, Rameses and Yvette at the party (Ziggy, Pippin, Tut topics), Ziggy on Heimlich and Tut, the 7:30 Steve meeting in the front rotunda, the north doorway to the Mastodon Room, and clicking the Ankh.
-4. Boot and retest session 54's rooms: a museum conversation (Script 90), leaving the speakeasy (310), leaving the Egyptian room south in Act 3 or 4 and using an item on the dagger case (450), room 640's actions, and the full final inquest (750).
-5. Check the podium's collision from both sides and a Magnifier repeat.
-6. Resume the clean DOSBox-X playthrough and triage every remaining `PLAY-nnn` finding.
-7. Begin P5-01 design only after the playthrough gate closes, using the migrated compiler-facing source baseline.
+1. Retest PLAY-018 (ankh) and PLAY-025 to PLAY-031: the carbon paper on the off lamp, the stairwell bulb before and after leaving, Olympia's passage (open, look, close, enter with and without the lantern), the Countess's dialogue, the Thinker raised and lowered, the police-file shelf, and the intercom buttons.
+2. Retest PLAY-019 to PLAY-024 (Act 3 museum conversations, Ziggy on Pippin and the Countess, Pippin on Najeer, Steve's meeting from either side, the act-break screen).
+3. Read Ziggy's restored dialogue in play (speakeasy and party) and adjust any line in SCI Companion (D-043).
+4. Retest PLAY-012 to PLAY-018 during the fresh playthrough: the Act 1 museum banner, Rameses and Yvette at the party (Ziggy, Pippin, Tut topics), Ziggy on Heimlich and Tut, the 7:30 Steve meeting in the front rotunda, the north doorway to the Mastodon Room, and clicking the Ankh.
+5. Boot and retest session 54's rooms: a museum conversation (Script 90), leaving the speakeasy (310), leaving the Egyptian room south in Act 3 or 4 and using an item on the dagger case (450), room 640's actions, and the full final inquest (750).
+6. Check the podium's collision from both sides and a Magnifier repeat.
+7. Resume the clean DOSBox-X playthrough and triage every remaining `PLAY-nnn` finding.
+8. Begin P5-01 design only after the playthrough gate closes, using the migrated compiler-facing source baseline.
 
 ## Open questions for maintainers
 
 None currently open. Q-001 and Q-002 have been resolved by D-007, D-017, and D-018.
 
 ## Session log
+
+### Session 57: 2026-10-15: Act 3 and 4 Findings
+
+**Contributor:** Claude Code and maintainer
+
+**Goal:** Research the maintainer's Act 3-4 findings, agree a plan, then fix them.
+
+**Done:**
+- PLAY-025 to PLAY-031 logged and fixed: room 550 lamp message, room 530 bulb (flag 184), room 520 player-initiated passage (D-044), the Countess's voice (D-045), room 510 Thinker messages, room 560 police-file book, and the room 562 intercom click areas.
+- Found and fixed a bug in the scratch renderer (SCI1.1 cel offsets are 16-bit with the key at byte 8), which had misplaced small sprites; PLAY-018's ankh area was re-sized from correct geometry.
+- New loose message files `510.msg`, `520.msg`, and `530.msg`, created from their exact archive copies.
+- Confirmed Olympia raising the Thinker's head is vanilla behavior.
+- Maintainer retest of PLAY-027 found the open panel unclickable (open cel is one blank pixel) and a soft lock on entry (pathfinding toward an unwalkable point); fixed with a doorway click area, an approach point, and straight moves. A second retest still soft-locked: the open panel's one-pixel cel lies on the straight path and blocked Laura; the panel and Laura's scripted walk now ignore actors (Laura also ignores control until room 666 normalizes her). PLAY-032: gave the room 454 footprint noun 3. The maintainer confirmed the passage works (2026-10-16).
+- Built `LB2/LB2-Redux-v0.06.zip` with the v0.05 layout, excluding saves and older zips: 952 files, 7,107,354 bytes; integrity test, vanilla archive MD5s, and every tracked `LB2` file plus the three new message files identical to the working tree. Moved `alpha-playtest.html` (storage key `v006`) and `ALPHA_PLAYTESTING.md` to v0.06 with checks for the new fixes, and cut CHANGELOG `0.06-alpha`.
+
+**Decisions:** D-044, D-045.
+
+**Verified:** Each rebuilt script compared routine by routine with its committed build shows only the intended changes; message files changed only in the listed records; headless startup; base archive MD5s unchanged; documentation checks. Runtime retest pending.
+
+**Next session should start with:** Publish v0.06 when the maintainer is ready; collect retests of PLAY-018, PLAY-025, PLAY-026, and PLAY-028 to PLAY-032.
 
 ### Session 56: 2026-10-14: Ziggy's Voice
 
@@ -119,6 +140,7 @@ None currently open. Q-001 and Q-002 have been resolved by D-007, D-017, and D-0
 - PLAY-020 to PLAY-024: Ziggy's Pippin topic (cases 103 and 3) and Countess bluff gating (case 214), Pippin on Najeer, Steve's 7:30 meeting entering from the far side and waiting for both to arrive, and the act-break window (black picture 780 restored in Script 26, Art Deco corners for room 26 in Main). Main compiles with only that one change. Verified by routine-by-routine comparison and headless startup; runtime retest pending.
 - Rewrote Ziggy's 19 lines in the party eavesdropping (`340.msg`) and intercom (`562.msg`) scenes in the same voice.
 - Built `LB2/LB2-Redux-v0.05.zip` with the v0.04 layout, excluding saves and older zips: 949 files, 7,097,351 bytes; integrity test, vanilla archive MD5s, every tracked `LB2` file identical to the working tree, and headless startup of the extracted copy. Moved `alpha-playtest.html` (storage key `v005`) and `ALPHA_PLAYTESTING.md` to v0.05 and cut CHANGELOG `0.05-alpha`.
+- PLAY-025 (after v0.05): room 550's floor lamp asked for a carbon-paper message Sierra never wrote when the lamp is off or its bulb is gone; it now uses the existing `(45, 39, 6)`. Script 550 differs by one instruction.
 
 **Decisions:** D-043; D-042 amended (case + 200 for condition variants).
 
@@ -286,20 +308,3 @@ None currently open. Q-001 and Q-002 have been resolved by D-007, D-017, and D-0
 **Verified:** All three single-script compiles completed successfully; Script 2335 retains its original 54-word local footprint and packaged heap size while containing the `(190, 176)` boundary point and last stable pointer reapply; Script 335 contains the `(186, 180)` approach and uses standard `Feature` dispatch without a custom exact-position override; and Script 21's match path cannot fall through to the insertion read. Earlier runtime attempts reproduced and isolated the unsafe allocation, saved-pointer write, duplicate-clue, rejected `CueObj` re-entry, and rejected conditional-read failures. The final rollback build initializes under the DOSBox-X headless smoke, documentation and manual validation pass, the manual rebuilds cleanly, and the immutable base archives retain their vanilla hashes. Final save-based repeated interaction and collision verification remains pending.
 
 **Next session should start with:** Load the Act 2 entrance save, try walking through the podium from both sides, and test Look/Hand/Magnifier final position plus two consecutive LOOK and DO interactions before continuing the playthrough.
-
-### Session 47: 2026-10-12: Room 335 Benefit Podium Positioning and Z-Ordering Fix
-
-**Contributor:** Antigravity and maintainer
-
-**Goal:** Fix Laura standing directly on top of the podium and rendering behind it during examination and signing.
-
-**Done:**
-- Re-anchored `benefitPodium` to its approved placement flanking the double doors at `(190, 174)` with visual bounds `nsTop: 148, nsLeft: 182, nsBottom: 174, nsRight: 198`.
-- Fixed podium priority to 12 via `sel_63: 12` in `rm335::init:` and instance properties `sel_60 12`, `sel_14 16400` (`$4000 ignrAct | $0010 fixPriOn`). Because Laura is in priority band 14 at the bottom of the room, she renders in front of the lectern instead of behind it.
-- Adjusted interaction approach point to `(186, 180)`: Laura walks south of the podium base (facing north-east towards the register) without horizontally colliding with or occluding the lectern.
-- Adjusted obstacle polygon `polyPodium` `[182 168  198 168  198 175  182 175]` in Script 2335 to bar the podium footprint and wall gap while leaving the (186, 180) approach freely walkable.
-- Recompiled `poly2335Code` (`2335.SCR`/`2335.HEP`) and `rm335` (`335.SCR`/`335.HEP`) via single-script pipeline and normalized patch casing. Base game archives `RESOURCE.000` and `RESOURCE.MAP` remain untouched bit-for-bit.
-
-**Verified:** Single-script compiles pass at 0 errors/0 warnings; `335.MSG` contains exact user-requested dialogue tuples; `check_docs.py` and `manual.py` checks pass; DOSBox-X smoke boots cleanly.
-
-**Next session should start with:** Test the room 335 entrance register in DOSBox-X from the Act 2 save (approach positioning, z-ordering, collision, and signing flow).
