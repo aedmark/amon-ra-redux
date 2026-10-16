@@ -446,6 +446,8 @@ takes the same deferred `CueObj` path as an interaction after walking up.
 
 ## D-037 Lowercase Loose Patches on a Case-Insensitive Workspace
 
+*Naming superseded by D-048: patches are tracked uppercase again. The case-insensitive workspace still stands.*
+
 Track loose patches under the lowercase names SCI Companion writes, and keep the working copy on a case-insensitive
 filesystem, so SCI Companion's own Save and Compile work without post-processing.
 
@@ -673,13 +675,29 @@ Ship a package that contains no Sierra files, which players unzip over their own
   patch byte-identical to one of Sierra's retail patches in `LB2_vanilla/` (currently `0.msg`, `13.hep`, `13.msg`,
   `720.scr`, `720.hep`), which players already have. Zip entries have uppercase names (`0.SCR`), matching a copy installed
   from Sierra's disks, so they replace its files on case-sensitive filesystems; the tester guide has Linux players
-  uppercase any lowercase names in their copy first. The repository's own patches in `LB2/` stay lowercase (D-037). `--mirror "LB2 (legal)/patched files" --prune`
+  uppercase any lowercase names in their copy first. The repository's patches in `LB2/` are uppercase too (D-048). `--mirror "LB2 (legal)/patched files" --prune`
   keeps the maintainer's folder in sync. The decompiled `src/` stays in the repository, not in the player package.
-  `LB2 (legal)/` and `LB2/archive/` are git-ignored.
+  `LB2 (legal)/` and `LB2/archive/` are git-ignored. Folder roles: `LB2/` is the working directory, `LB2 (legal)/` is
+  where a patch release is assembled, and `LB2_vanilla/` stays the untouched retail reference.
 - **Consequences:** Players need the retail floppy v1.000 with Sierra's 23 patch files. The tester guide and playtest
   page must describe installing over a retail copy from the first patch-only release. The repository still tracks some
   Sierra files in `LB2/` (`SCIDHUV.EXE`, `INSTALL.*`, the drivers' batch files, `999.FON`, `MESSAGE.MAP`, and five
   unchanged retail patches); the package never includes them.
+
+## D-048 Uppercase File Names in LB2, as on Sierra's Disks
+Track every file in `LB2/` under its uppercase name, matching the retail release.
+
+- **Context:** D-037 tracked lowercase names because SCI Companion writes them. The patch-only package (D-047) is
+  extracted over a player's retail copy, whose names are uppercase as installed from Sierra's disks, and the maintainer
+  asked for the repository, the package, and both halves of `LB2 (legal)/` to use the retail spelling.
+- **Decision:** Rename the 476 lowercase files at the top of `LB2/` to uppercase with `git mv`, as pure renames
+  (contents unchanged); `src/` and `msg/` keep their names. Keep the case-insensitive workspace from D-037: there SCI
+  Companion rewrites an existing patch in place under its uppercase name. `tools/compile.py` uppercases a patch SCI
+  Companion creates under a lowercase name, and `tools/make_test_copy.sh` writes older commits' lowercase patches
+  under uppercase names.
+- **Consequences:** A new message file saved from SCI Companion's editor arrives lowercase and needs a two-step rename
+  (via a temporary name, since a case-only rename can be a no-op on exFAT). Older commits keep lowercase names; diffs
+  across the rename need `git log --follow` or `-M`.
 
 ## Open questions
 

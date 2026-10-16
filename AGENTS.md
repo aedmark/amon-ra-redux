@@ -20,7 +20,7 @@ linked below, not in an agent's private memory.
 
 - Reference roadmap item IDs (`P<phase>-<nn>`) and decision IDs (`D-<nnn>`).
 - Preserve immutable base game archives (`LB2/RESOURCE.000`, `LB2/RESOURCE.MAP`).
-- Apply fixes as loose lowercase `.scr`, `.hep`, and `.msg` files in `LB2/`, the names SCI Companion writes (D-037).
+- Apply fixes as loose uppercase `.SCR`, `.HEP`, and `.MSG` files in `LB2/`, as on Sierra's disks (D-048). SCI Companion rewrites existing patches in place; `tools/compile.py` uppercases any new patch it writes lowercase.
 - Work from a case-insensitive filesystem (the maintainer's exFAT drive). On case-sensitive ext4, SCI Companion under Wine deletes or clobbers patches whose names differ only by case.
 - Record architectural choices in `docs/DECISIONS.md`.
 - Keep 3x manual sources (`docs/manual/amon-ra.manual.json`) in sync with code fixes.
@@ -37,7 +37,9 @@ linked below, not in an agent's private memory.
 
 | Path | Purpose |
 | --- | --- |
-| `LB2` | Floppy v1.000 game files and loose patch override directory |
+| `LB2` | Working directory: floppy v1.000 game files plus Redux's loose patch overrides; SCI Companion and DOSBox-X run here |
+| `LB2_vanilla` | Untracked untouched retail floppy v1.000, kept as the reference for comparisons |
+| `LB2 (legal)` | Untracked release assembly: retail game at the top, Redux's patch set in `patched files/` (`tools/package_patch.py --mirror`); never ships Sierra files (D-047) |
 | `SCI Companion` | Untracked SCI Companion build from the maintainer's fork (github.com/aedmark/SCICompanion); bundled docs in `Help/` |
 | `docs/manual` | Project-owned 3x manual source, schema, and license |
 | `tools/manual.py` | Standalone 3x manual validator and HTML builder |

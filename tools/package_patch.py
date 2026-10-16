@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 """Package Redux's loose patch files for distribution, without any Sierra files.
 
-The package holds only the git-tracked patch resources in LB2/ (numbered .scr, .hep, .msg,
-.v56, .p56, and .voc files). It leaves out every Sierra file: the archives, interpreter,
+The package holds only the git-tracked patch resources in LB2/ (numbered .SCR, .HEP, .MSG,
+.V56, .P56, and .VOC files). It leaves out every Sierra file: the archives, interpreter,
 drivers, installer, and font, and any patch byte-identical to one of Sierra's retail patches
 in LB2_vanilla/, which players already have. Players unzip it over their own floppy v1.000
 install. Entry names are uppercase, as on Sierra's disks.

@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """
 tools/compile.py - Recompile an SCI script using SCI Companion under Wine
-and report the lowercase loose patch overrides written to LB2/ (D-037).
+and report the uppercase loose patch overrides written to LB2/ (D-048).
 """
 
 import sys
@@ -49,6 +49,18 @@ def get_script_number(name):
         return int(m.group(1))
     return None
 
+def uppercase_name(path):
+    """Rename a patch SCI Companion created under a lowercase name to its uppercase name (D-048)."""
+    folder, name = os.path.split(path)
+    stored = next((f for f in os.listdir(folder) if f.lower() == name.lower()), None)
+    if stored and stored != name:
+        # Two steps, since a case-only rename can be a no-op on a case-insensitive filesystem.
+        temp = os.path.join(folder, name + ".casetmp")
+        os.rename(os.path.join(folder, stored), temp)
+        os.rename(temp, path)
+        print(f"[*] Renamed {stored} to {name}")
+
+
 def compile_script(target):
     name = SCRIPT_MAP.get(target.lower(), target)
     if name.endswith(".sc"):
@@ -57,9 +69,9 @@ def compile_script(target):
     script_num = get_script_number(name)
     print(f"[*] Compiling script '{name}' (script number {script_num})...")
 
-    # SCI Companion writes lowercase patch names (D-037). On a case-insensitive
-    # workspace it replaces the existing files in place, so nothing is deleted first.
-    outputs = [f"LB2/{script_num}.scr", f"LB2/{script_num}.hep"] if script_num is not None else []
+    # Patches are tracked uppercase (D-048). On a case-insensitive workspace SCI Companion
+    # rewrites an existing patch in place under its name; a new one it writes lowercase.
+    outputs = [f"LB2/{script_num}.SCR", f"LB2/{script_num}.HEP"] if script_num is not None else []
     before = {p: os.path.getmtime(p) if os.path.exists(p) else None for p in outputs}
 
     # Ensure compile_any.exe exists
@@ -85,6 +97,9 @@ def compile_script(target):
             not os.path.exists(p) or os.path.getmtime(p) == before[p] for p in outputs):
         time.sleep(0.5)
     time.sleep(1)
+
+    for path in outputs:
+        uppercase_name(path)
 
     ok = True
     for path in outputs:

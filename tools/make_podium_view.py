@@ -174,10 +174,7 @@ def main() -> int:
     args = parser.parse_args()
     data = encode_view(draw_podium())
     args.output.write_bytes(data)
-    # Also keep lowercase in sync if it exists or is tracked
-    lower_path = args.output.parent / (args.output.stem + ".v56")
-    lower_path.write_bytes(data)
-    print(f"built {args.output} and {lower_path} ({len(data)} bytes, {WIDTH}x{HEIGHT})")
+    print(f"built {args.output} ({len(data)} bytes, {WIDTH}x{HEIGHT})")
     return 0
 
 

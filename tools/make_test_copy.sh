@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # tools/make_test_copy.sh <name> [git-rev]
 # Build a throwaway game copy in /tmp/amon-ra-test/<name> with its own DOSBox-X config, so a suspect
-# patch set can be boot-tested (or bisected) without touching LB2/. With [git-rev], the .scr/.hep files
+# patch set can be boot-tested (or bisected) without touching LB2/. With [git-rev], the .SCR/.HEP files
 # come from that commit instead of the working tree. Prints the command that boots the copy.
 set -euo pipefail
 name=${1:?usage: make_test_copy.sh <name> [git-rev]}
@@ -12,9 +12,10 @@ rm -rf "$dest"; mkdir -p "$dest"
 cp -r "$root/LB2" "$dest/LB2"
 rm -rf "$dest/LB2/src"
 if [ -n "$rev" ]; then
-  rm -f "$dest"/LB2/[0-9]*.scr "$dest"/LB2/[0-9]*.hep
-  git -C "$root" ls-tree -r --name-only "$rev" LB2 | grep -E '^LB2/[0-9]+\.(scr|hep)$' | while read -r f; do
-    git -C "$root" show "$rev:$f" > "$dest/LB2/$(basename "$f")"
+  rm -f "$dest"/LB2/[0-9]*.[sS][cC][rR] "$dest"/LB2/[0-9]*.[hH][eE][pP]
+  # Older commits track lowercase names (D-037); write them uppercase, as tracked now (D-048).
+  git -C "$root" ls-tree -r --name-only "$rev" LB2 | grep -iE '^LB2/[0-9]+\.(scr|hep)$' | while read -r f; do
+    git -C "$root" show "$rev:$f" > "$dest/LB2/$(basename "$f" | tr a-z A-Z)"
   done
 fi
 sed "s#^mount c LB2#mount c $dest/LB2#" "$root/tools/dosbox-x.conf" > "$dest/dosbox-x.conf"
