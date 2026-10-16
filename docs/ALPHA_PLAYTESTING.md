@@ -10,7 +10,7 @@ only crashes.
 
 ## Before you begin
 
-- Use the build named `LB2-Redux-v0.07.zip` and keep an untouched backup.
+- Use the build named `LB2-Redux-v0.08.zip` and keep an untouched backup.
 - Extract it into a fresh directory. Do not mix its files with another Redux build, the CD edition, or an existing
   modded installation.
 - Start a new game for the most useful test. Old Sierra saves, including saves from earlier alphas, may contain state
@@ -22,6 +22,14 @@ only crashes.
 If launching manually in DOSBox-X, mount the extracted game directory as drive C and run `SCIDHUV.EXE`. Repository
 users can run `./tools/run_dosbox.sh` from the project root.
 
+## What's new in v0.08
+
+- Meeting Dr. Smith for the first time in Act 3, Laura no longer admires the ankh he has lost.
+- Dr. Smith reacts when Laura shows him his ankh or the Dagger, and Dr. Carrington reacts to the Dagger.
+- Yvette remembers Dr. Smith wearing an ankh at the party instead of wearing one now.
+
+None of these has had a full playthrough yet, so reports on them are especially welcome.
+
 ## What's new in v0.07
 
 - In Act 3, O'Riley patrols between the pterodactyl room, the dagger case, and the spot where Pippin died; Dr. Carrington and,
@@ -31,9 +39,8 @@ users can run `./tools/run_dosbox.sh` from the project root.
 - Entering the back storeroom no longer crashes to DOS with "Build Line Error".
 - Once O'Riley takes the dagger, it leaves the notebook.
 
-None of these has had a full playthrough yet, so reports on them are especially welcome. The patrols start during
-Act 3, so test them from a save made before the end of Act 2. Saves made in Acts 3 to 6 under earlier builds may not
-restore correctly.
+The patrols start during Act 3, so test them from a save made before the end of Act 2. Saves made in Acts 3 to 6
+under builds before v0.07 may not restore correctly.
 
 ## What's new in v0.06
 
@@ -226,6 +233,10 @@ Use this section if you want to play naturally without being told where every cl
 - [ ] Dr. Carrington and, after 11:15, Olympia move between rooms instead of standing in one place.
 - [ ] After the eavesdropped scene between O'Riley and Yvette, Yvette strolls the Rodin room outside her office, and is
   gone before the next scene at her door.
+- [ ] Meeting Dr. Smith for the first time in Act 3, Laura's introduction does not mention his ankh.
+- [ ] Showing Dr. Smith the ankh: he claims it and Laura keeps it. Showing him the Dagger: he claims it for Egypt and
+  Laura says it goes to O'Riley.
+- [ ] Dr. Carrington reacts to the Dagger, and Yvette's answer about the ankh says Dr. Smith wore one at the party.
 - [ ] Using Hand on a vat in the preservation lab climbs it.
 - [ ] Entering the back storeroom with the snake oil on its shelf causes no crash.
 - [ ] Notebook completion marks and reopened topics track genuinely new dialogue.
@@ -288,7 +299,7 @@ existing report first, but add your save or reproduction details when they provi
 Please use this template:
 
 ```text
-Alpha build: v0.07
+Alpha build: v0.08
 Environment: DOSBox-X version / ScummVM version / other
 Operating system:
 Act and location:

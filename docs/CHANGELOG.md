@@ -6,6 +6,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+## [0.08-alpha] - 2026-10-16
+
 ### Fixed
 - Meeting Dr. Smith for the first time in Act 3, Laura no longer admires the ankh he has lost. He now reacts when shown his ankh or the Dagger, Dr. Carrington reacts to the Dagger, and Yvette remembers that Dr. Smith wore an ankh at the party rather than wearing one now (PLAY-037).
 

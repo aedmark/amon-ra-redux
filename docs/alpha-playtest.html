@@ -434,11 +434,11 @@
 <body>
   <div class="top-rule" aria-hidden="true"></div>
   <header id="top">
-    <p class="eyebrow">Public field test · Alpha v0.07</p>
+    <p class="eyebrow">Public field test · Alpha v0.08</p>
     <h1>The Dagger of Amon Ra: Redux</h1>
     <p class="subtitle">Help us test a careful modernization of Sierra's classic mystery from the newsroom to the final verdict.</p>
     <div class="hero-actions">
-      <a class="button" href="LB2-Redux-v0.07.zip" download>Download Alpha v0.07</a>
+      <a class="button" href="LB2-Redux-v0.08.zip" download>Download Alpha v0.08</a>
       <a class="button secondary" href="#report">Report a finding</a>
     </div>
   </header>
@@ -462,11 +462,11 @@
       <div class="notice-grid">
         <article class="notice">
           <strong>Fresh case</strong>
-          <p>Extract v0.07 to a new directory and start a new game; saves from earlier alphas are not recommended. This build was created from the vanilla LB2 1.00 source files and sluicebox decomps.</p>
+          <p>Extract v0.08 to a new directory and start a new game; saves from earlier alphas are not recommended. This build was created from the vanilla LB2 1.00 source files and sluicebox decomps.</p>
         </article>
         <article class="notice">
-          <strong>New in v0.07</strong>
-          <p>In Act 3 O'Riley, Dr. Carrington, Olympia, and Yvette move around the museum instead of standing like statues. The preservation lab's vats can be climbed again, the back storeroom no longer crashes, and the dagger leaves the notebook once O'Riley takes it. Earlier alphas brought Olympia's player-chosen passage, the Countess's phrasing, Act 3+ conversations, the final inquest, music, and many Act 1 and 2 details. None of these has had a full playthrough yet, so reports on them are especially welcome; test the patrols from a save made before the end of Act 2.</p>
+          <strong>New in v0.08</strong>
+          <p>Dr. Smith no longer has Laura admiring an ankh he has lost, and he reacts when shown his ankh or the Dagger; Dr. Carrington reacts to the Dagger too. v0.07 brought Act 3 patrols for O'Riley, Dr. Carrington, Olympia, and Yvette, climbable vats, and a storeroom crash fix; earlier alphas brought Olympia's player-chosen passage, the Countess's phrasing, Act 3+ conversations, the final inquest, music, and many Act 1 and 2 details. None of these has had a full playthrough yet, so reports on them are especially welcome; test the patrols from a save made before the end of Act 2.</p>
         </article>
         <article class="notice">
           <strong>Reference setup</strong>
@@ -635,6 +635,9 @@
             <li><label><input type="checkbox">O'Riley moves between the pterodactyl room, the dagger case, and where Pippin died, pausing at each, and never walks off mid-conversation.</label></li>
             <li><label><input type="checkbox">Dr. Carrington and, after 11:15, Olympia move between rooms instead of standing in one place.</label></li>
             <li><label><input type="checkbox">After the eavesdropped scene between O'Riley and Yvette, Yvette strolls the Rodin room outside her office, and is gone before the next scene at her door.</label></li>
+            <li><label><input type="checkbox">Meeting Dr. Smith for the first time in Act 3, Laura's introduction does not mention his ankh.</label></li>
+            <li><label><input type="checkbox">Showing Dr. Smith the ankh: he claims it and Laura keeps it. Showing him the Dagger: he claims it for Egypt and Laura says it goes to O'Riley.</label></li>
+            <li><label><input type="checkbox">Dr. Carrington reacts to the Dagger, and Yvette's answer about the ankh says Dr. Smith wore one at the party.</label></li>
             <li><label><input type="checkbox">Using Hand on a vat in the preservation lab climbs it.</label></li>
             <li><label><input type="checkbox">Entering the back storeroom with the snake oil on its shelf causes no crash.</label></li>
             <li><label><input type="checkbox">Notebook completion and reopened topics reflect genuinely new dialogue.</label></li>
@@ -695,7 +698,7 @@
       <div class="report-layout">
         <div>
           <div class="report-box">
-            <pre id="reportTemplate">Alpha build: v0.07
+            <pre id="reportTemplate">Alpha build: v0.08
 Environment: DOSBox-X version / ScummVM version / other
 Operating system:
 Act and location:
@@ -741,7 +744,7 @@ Anything unusual: old save, alternate route, skipped conversation, custom MIDI, 
 
   <script>
     (() => {
-      const storageKey = "amon-ra-redux-alpha-v007-checks";
+      const storageKey = "amon-ra-redux-alpha-v008-checks";
       const checks = [...document.querySelectorAll('.checklist input[type="checkbox"]')];
       const progressValue = document.getElementById('progressValue');
       const progressBar = document.getElementById('progressBar');
