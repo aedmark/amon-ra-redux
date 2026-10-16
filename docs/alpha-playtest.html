@@ -434,11 +434,11 @@
 <body>
   <div class="top-rule" aria-hidden="true"></div>
   <header id="top">
-    <p class="eyebrow">Public field test · Alpha v0.08</p>
+    <p class="eyebrow">Public field test · Alpha v0.09</p>
     <h1>The Dagger of Amon Ra: Redux</h1>
     <p class="subtitle">Help us test a careful modernization of Sierra's classic mystery from the newsroom to the final verdict.</p>
     <div class="hero-actions">
-      <a class="button" href="LB2-Redux-v0.08.zip" download>Download Alpha v0.08</a>
+      <a class="button" href="LB2-Redux-v0.09.zip" download>Download Alpha v0.09</a>
       <a class="button secondary" href="#report">Report a finding</a>
     </div>
   </header>
@@ -462,11 +462,11 @@
       <div class="notice-grid">
         <article class="notice">
           <strong>Your own copy</strong>
-          <p>Redux is a patch: you need your own DOS floppy copy of the game, version 1.000 (the CD edition will not work). Copy your installed game to a new directory, extract v0.08 into it, replace the existing files, and start a new game; saves from earlier alphas are not recommended. Redux's file names are uppercase, as on Sierra's disks; on Linux, uppercase any lowercase names in your copy first (<code>for f in *; do mv -n -- "$f" "$(printf '%s' "$f" | tr a-z A-Z)"; done</code>), so Redux's files replace Sierra's instead of sitting beside them.</p>
+          <p>Redux is a patch: you need your own DOS floppy copy of the game, version 1.000 (the CD edition will not work). Copy your installed game to a new directory, extract v0.09 into it, replace the existing files, and start a new game; saves from earlier alphas are not recommended. Redux's file names are uppercase, as on Sierra's disks; on Linux, uppercase any lowercase names in your copy first (<code>for f in *; do mv -n -- "$f" "$(printf '%s' "$f" | tr a-z A-Z)"; done</code>), so Redux's files replace Sierra's instead of sitting beside them.</p>
         </article>
         <article class="notice">
-          <strong>New in v0.08</strong>
-          <p>Dr. Smith no longer has Laura admiring an ankh he has lost, and he reacts when shown his ankh or the Dagger; Dr. Carrington reacts to the Dagger too. v0.07 brought Act 3 patrols for O'Riley, Dr. Carrington, Olympia, and Yvette, climbable vats, and a storeroom crash fix; earlier alphas brought Olympia's player-chosen passage, the Countess's phrasing, Act 3+ conversations, the final inquest, music, and many Act 1 and 2 details. None of these has had a full playthrough yet, so reports on them are especially welcome; test the patrols from a save made before the end of Act 2.</p>
+          <strong>New in v0.09</strong>
+          <p>Redux now ships as a patch over your own floppy copy instead of a full game; the game itself is unchanged from v0.08, so v0.08 saves work. In v0.08, Dr. Smith no longer has Laura admiring an ankh he has lost, and he reacts when shown his ankh or the Dagger; Dr. Carrington reacts to the Dagger too. v0.07 brought Act 3 patrols for O'Riley, Dr. Carrington, Olympia, and Yvette, climbable vats, and a storeroom crash fix; earlier alphas brought Olympia's player-chosen passage, the Countess's phrasing, Act 3+ conversations, the final inquest, music, and many Act 1 and 2 details. None of these has had a full playthrough yet, so reports on them are especially welcome; test the patrols from a save made before the end of Act 2.</p>
         </article>
         <article class="notice">
           <strong>Reference setup</strong>
@@ -698,7 +698,7 @@
       <div class="report-layout">
         <div>
           <div class="report-box">
-            <pre id="reportTemplate">Alpha build: v0.08
+            <pre id="reportTemplate">Alpha build: v0.09
 Environment: DOSBox-X version / ScummVM version / other
 Operating system:
 Act and location:
@@ -744,7 +744,7 @@ Anything unusual: old save, alternate route, skipped conversation, custom MIDI, 
 
   <script>
     (() => {
-      const storageKey = "amon-ra-redux-alpha-v008-checks";
+      const storageKey = "amon-ra-redux-alpha-v009-checks";
       const checks = [...document.querySelectorAll('.checklist input[type="checkbox"]')];
       const progressValue = document.getElementById('progressValue');
       const progressBar = document.getElementById('progressBar');

@@ -16,7 +16,7 @@ its `VERSION` file starts with `1.000`, and Sierra's own patch files (`0.SCR`, `
 
 1. Copy your installed game to a new directory and keep the original as an untouched backup. Do not patch a copy that
    already holds another Redux build or other mods.
-2. Extract `LB2-Redux-v0.08.zip` into that directory, replacing the existing files when asked.
+2. Extract `LB2-Redux-v0.09.zip` into that directory, replacing the existing files when asked.
    - On Windows and macOS, ordinary extraction is fine.
    - On Linux, file names are case-sensitive. Redux's files have uppercase names, as on Sierra's disks, so they
      replace a copy installed from those disks. If any of your copy's file names are lowercase, uppercase them first,
@@ -35,6 +35,12 @@ its `VERSION` file starts with `1.000`, and Sierra's own patch files (`0.SCR`, `
 
 If launching manually in DOSBox-X, mount the patched game directory as drive C and run `SCIDHUV.EXE`. Repository
 users can run `./tools/run_dosbox.sh` from the project root.
+
+## What's new in v0.09
+
+- Redux now ships as a patch: the download holds only Redux's own files, which you extract over your own copy of
+  the floppy release (see *Before you begin*). It no longer includes Sierra's game files.
+- The game itself is unchanged from v0.08, so v0.08 saves work, and the v0.08 checks below still need testing.
 
 ## What's new in v0.08
 
@@ -313,7 +319,7 @@ existing report first, but add your save or reproduction details when they provi
 Please use this template:
 
 ```text
-Alpha build: v0.08
+Alpha build: v0.09
 Environment: DOSBox-X version / ScummVM version / other
 Operating system:
 Act and location:
