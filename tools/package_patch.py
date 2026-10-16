@@ -5,7 +5,7 @@ The package holds only the git-tracked patch resources in LB2/ (numbered .scr, .
 .v56, .p56, and .voc files). It leaves out every Sierra file: the archives, interpreter,
 drivers, installer, and font, and any patch byte-identical to one of Sierra's retail patches
 in LB2_vanilla/, which players already have. Players unzip it over their own floppy v1.000
-install.
+install. Entry names are uppercase, as on Sierra's disks.
 
 Usage:
     python3 tools/package_patch.py 0.09
@@ -34,7 +34,7 @@ def patch_files():
     """Return the tracked patch files in LB2/, minus copies of Sierra's retail patches."""
     if not VANILLA.is_dir():
         sys.exit("LB2_vanilla/ is missing; it is needed to leave out Sierra's retail patches.")
-    vanilla = {p.name.lower(): (p.name, digest(p)) for p in VANILLA.iterdir() if p.is_file()}
+    vanilla = {p.name.lower(): digest(p) for p in VANILLA.iterdir() if p.is_file()}
     tracked = subprocess.run(
         ["git", "ls-files", "-z", "LB2"], cwd=ROOT, capture_output=True, check=True, text=True
     ).stdout.split("\0")
@@ -43,12 +43,11 @@ def patch_files():
         path = ROOT / rel
         if path.parent != GAME or not PATCH_NAME.match(path.name):
             continue
-        retail_name, retail_digest = vanilla.get(path.name.lower(), (path.name, None))
-        if retail_digest == digest(path):
+        if vanilla.get(path.name.lower()) == digest(path):
             skipped.append(path.name)
             continue
-        # Use Sierra's spelling so unzipping replaces the retail file on case-sensitive filesystems.
-        files.append((path, retail_name))
+        # Uppercase, as on Sierra's disks, so the package replaces an uppercase install's files on any filesystem.
+        files.append((path, path.name.upper()))
     return sorted(files, key=lambda f: f[1].lower()), sorted(skipped, key=str.lower)
 
 
@@ -81,7 +80,14 @@ def mirror(files, target, prune):
     existing = {p.name.lower(): p for p in target.iterdir() if p.is_file()}
     copied = 0
     for key, (src, name) in wanted.items():
-        dest = existing.get(key, target / name)
+        dest = existing.get(key)
+        if dest is not None and dest.name != name:
+            # Two-step rename, since a case-only rename can be a no-op on case-insensitive filesystems.
+            temp = dest.with_name(name + ".tmp")
+            dest.rename(temp)
+            temp.rename(target / name)
+            copied += 1
+        dest = target / name
         if not dest.exists() or dest.read_bytes() != src.read_bytes():
             dest.write_bytes(src.read_bytes())
             copied += 1

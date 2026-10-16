@@ -18,13 +18,13 @@ its `VERSION` file starts with `1.000`, and Sierra's own patch files (`0.SCR`, `
    already holds another Redux build or other mods.
 2. Extract `LB2-Redux-v0.08.zip` into that directory, replacing the existing files when asked.
    - On Windows and macOS, ordinary extraction is fine.
-   - On Linux, file names are case-sensitive, so Sierra's original patch could stay beside Redux's replacement
-     (`0.SCR` and `0.scr`) and the game might load the old one. In the new directory, lowercase every file name, then
-     extract with lowercase names (in bash):
+   - On Linux, file names are case-sensitive. Redux's files have uppercase names, as on Sierra's disks, so they
+     replace a copy installed from those disks. If any of your copy's file names are lowercase, uppercase them first,
+     or Sierra's original patch could stay beside Redux's replacement (`0.scr` and `0.SCR`) and the game might load
+     the old one:
 
      ```bash
-     for f in *; do mv -n -- "$f" "${f,,}"; done
-     unzip -o -LL /path/to/LB2-Redux-v0.08.zip
+     for f in *; do mv -n -- "$f" "$(printf '%s' "$f" | tr a-z A-Z)"; done
      ```
 3. Start a new game for the most useful test. Old Sierra saves, including saves from earlier alphas, may contain state
    that bypasses a fix.

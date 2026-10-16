@@ -671,9 +671,9 @@ Ship a package that contains no Sierra files, which players unzip over their own
 - **Decision:** `tools/package_patch.py <version>` builds `LB2/LB2-Redux-v<version>.zip` from the git-tracked numbered
   patch resources in `LB2/` (`.scr`, `.hep`, `.msg`, `.v56`, `.p56`, `.voc`). It leaves out every Sierra file and every
   patch byte-identical to one of Sierra's retail patches in `LB2_vanilla/` (currently `0.msg`, `13.hep`, `13.msg`,
-  `720.scr`, `720.hep`), which players already have. Where a retail patch exists, the zip entry uses Sierra's spelling
-  (`454.HEP`), matching a copy installed from Sierra's disks; on case-sensitive filesystems the tester guide has
-  players lowercase their copy's file names and extract with `unzip -LL`, since installs differ in case. `--mirror "LB2 (legal)/patched files" --prune`
+  `720.scr`, `720.hep`), which players already have. Zip entries have uppercase names (`0.SCR`), matching a copy installed
+  from Sierra's disks, so they replace its files on case-sensitive filesystems; the tester guide has Linux players
+  uppercase any lowercase names in their copy first. The repository's own patches in `LB2/` stay lowercase (D-037). `--mirror "LB2 (legal)/patched files" --prune`
   keeps the maintainer's folder in sync. The decompiled `src/` stays in the repository, not in the player package.
   `LB2 (legal)/` and `LB2/archive/` are git-ignored.
 - **Consequences:** Players need the retail floppy v1.000 with Sierra's 23 patch files. The tester guide and playtest
