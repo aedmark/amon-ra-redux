@@ -1,0 +1,18 @@
+{
+ "module": 1885,
+ "character": "Yvette",
+ "voice": "Unchanged.",
+ "notes": "PLAY-037: by the time Laura can ask about the ankh, Dr. Smith no longer wears it.",
+ "entries": [
+  {
+   "tuple": [
+    1,
+    6,
+    47,
+    1,
+    28
+   ],
+   "text": "The ankh is an Egyptian symbol, is it not? Dr. Smith wore one just like it at the party."
+  }
+ ]
+}

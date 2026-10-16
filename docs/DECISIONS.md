@@ -582,7 +582,7 @@ are tracked.
   party actors' general Ask paths use it, so later party-only lines need only a new message record.
 - **Consequences:** Cases 100 to 199 are reserved for party versions in the character modules; the highest
   existing case was 93. Variants chosen by another condition use case + 200, which `PartyCase` can never reach
-  (Ziggy's Countess denial, case 214, PLAY-021). Topics that have their own branches in RotundaRgn (for example Yvette on Ernie and Steve) are
+  (Ziggy's Countess denial, case 214, PLAY-021). That rule fits Ask topics, whose cases stay below 100; Talk's condition-80 introduction cannot take + 200 in a one-byte condition, so Tut's Act 3+ introduction uses case 82 (81 is the modules' generic no-answer case, PLAY-037). Topics that have their own branches in RotundaRgn (for example Yvette on Ernie and Steve) are
   unaffected.
 
 ---
@@ -641,7 +641,7 @@ Remove the Countess's habitual all-caps while keeping her theatrical grandeur.
 Let more museum characters move between rooms in Act 3, preferring Sierra's own authored patrols.
 
 - **Context:** In Act 3 only characters in the off-floor pool (room -1) roam, through `wanderTimer` every 120 seconds.
-  Sierra posts O'Riley in room 430, walks Watney to room 500 with no arrival callback, and keeps Olympia and Yvette in
+  Sierra posts O'Riley in room 430, walks Watney (`aWatney`, the man players know as Dr. Carrington) to room 500 with no arrival callback, and keeps Olympia and Yvette in
   scripted places. Sierra wrote Act 3 patrols for Olympia (650, 450, 454, 520) and Watney (500, 530) in Script 90's
   `wander` overrides; they never run. The maintainer asked for room patrols for O'Riley, Yvette, Watney, and Olympia
   in Act 3 only, with Yvette moving around the Rodin room (510) outside her eavesdropping scenes.

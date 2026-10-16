@@ -24,7 +24,7 @@ users can run `./tools/run_dosbox.sh` from the project root.
 
 ## What's new in v0.07
 
-- In Act 3, O'Riley patrols between the pterodactyl room, the dagger case, and the spot where Pippin died; Watney and,
+- In Act 3, O'Riley patrols between the pterodactyl room, the dagger case, and the spot where Pippin died; Dr. Carrington and,
   from 11:15, Olympia follow the rounds Sierra wrote for them; and between eavesdropping scenes Yvette strolls the
   Rodin room outside her office. Olympia is no longer always in her office to catch you with the snake oil.
 - The preservation lab's vats can be climbed again.
@@ -49,7 +49,7 @@ restore correctly.
 
 ## What's new in v0.05
 
-- From Act 3 on, the Countess, Olympia, O'Riley, Tut, Watney, Yvette, and Ziggy answer questions again instead of
+- From Act 3 on, the Countess, Dr. Carrington, Olympia, O'Riley, Tut, Yvette, and Ziggy answer questions again instead of
   stopping with a "not found" error.
 - The grade text between acts appears on a black screen in a window with Art Deco corners, not over the act marquee
   with the death window's bones.
@@ -132,7 +132,7 @@ Use this section if you want to play naturally without being told where every cl
 ### Acts 3 and 4
 
 - [ ] Revisit characters after every major discovery and look for missing, premature, or contradictory reactions.
-- [ ] Ask the Countess, Olympia, O'Riley, Tut, Watney, Yvette, and Ziggy about several topics; every question gets an
+- [ ] Ask the Countess, Dr. Carrington, Olympia, O'Riley, Tut, Yvette, and Ziggy about several topics; every question gets an
   answer instead of an error.
 - [ ] Check whether time-sensitive characters and confrontations remain reasonably available.
 - [ ] Click small buttons, switches, and books directly and report any that respond only off target.
@@ -223,7 +223,7 @@ Use this section if you want to play naturally without being told where every cl
 - [ ] O'Riley remains available after 10:15 for follow-up questions.
 - [ ] O'Riley moves between the pterodactyl room, the dagger case, and where Pippin died, pausing at each, and never
   walks off mid-conversation.
-- [ ] Watney and, after 11:15, Olympia move between rooms instead of standing in one place.
+- [ ] Dr. Carrington and, after 11:15, Olympia move between rooms instead of standing in one place.
 - [ ] After the eavesdropped scene between O'Riley and Yvette, Yvette strolls the Rodin room outside her office, and is
   gone before the next scene at her door.
 - [ ] Using Hand on a vat in the preservation lab climbs it.

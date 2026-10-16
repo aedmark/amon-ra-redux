@@ -1,0 +1,19 @@
+{
+ "module": 1886,
+ "character": "Dr. Carrington (the man posing as him)",
+ "voice": "Blustery and self-assured.",
+ "notes": "PLAY-037: the only museum character besides Tut with no reaction to the real Dagger (verb 22).",
+ "entries": [
+  {
+   "tuple": [
+    1,
+    22,
+    0,
+    1,
+    11
+   ],
+   "add": true,
+   "text": "By Jove, the genuine article! Detective O'Riley must have it at once, Miss Bow."
+  }
+ ]
+}

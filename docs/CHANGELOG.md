@@ -6,10 +6,13 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+### Fixed
+- Meeting Dr. Smith for the first time in Act 3, Laura no longer admires the ankh he has lost. He now reacts when shown his ankh or the Dagger, Dr. Carrington reacts to the Dagger, and Yvette remembers that Dr. Smith wore an ankh at the party rather than wearing one now (PLAY-037).
+
 ## [0.07-alpha] - 2026-10-16
 
 ### Changed
-- In Act 3, more of the museum comes alive: O'Riley patrols between the pterodactyl room, the dagger case, and the spot where Pippin died; Watney and, from 11:15, Olympia follow the rounds Sierra wrote for them; and between eavesdropping scenes Yvette strolls the Rodin room outside her office (PLAY-036, D-046).
+- In Act 3, more of the museum comes alive: O'Riley patrols between the pterodactyl room, the dagger case, and the spot where Pippin died; Dr. Carrington and, from 11:15, Olympia follow the rounds Sierra wrote for them; and between eavesdropping scenes Yvette strolls the Rodin room outside her office (PLAY-036, D-046).
 
 ### Fixed
 - Once O'Riley takes the dagger, it leaves the notebook too, so you can no longer ask about it as if you still had it (PLAY-035, D-015).
@@ -42,7 +45,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 ### Fixed
 - Steve's 7:30 meeting in the front rotunda: he now enters from the side opposite Laura and they face each other when they talk (PLAY-023).
 - The grade text between acts appears on black with Art Deco window corners, not over the act marquee with the death window's bones (PLAY-024).
-- Asking the Countess, Olympia, O'Riley, Tut, Watney, Yvette, or Ziggy about anything from Act 3 on no longer stops with a "not found" message error. A bug in the Redux conversation lock looked every one of their lines up in the wrong message file (PLAY-019, P3-06).
+- Asking the Countess, Dr. Carrington, Olympia, O'Riley, Tut, Yvette, or Ziggy about anything from Act 3 on no longer stops with a "not found" message error. A bug in the Redux conversation lock looked every one of their lines up in the wrong message file (PLAY-019, P3-06).
 
 ## [0.04-alpha] - 2026-10-14
 

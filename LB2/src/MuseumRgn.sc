@@ -1755,7 +1755,9 @@
 	(method (doVerb param1 param2 &tmp temp0 temp1 temp2)
 		(if (== param1 2)
 			(if (not (SetFlag 111))
-				(self sayAndHold: noun param1 80 0 0 modNum)
+				; From Act 3 he no longer wears the ankh, so Laura's introduction
+				; leaves it out (case 82, PLAY-037).
+				(self sayAndHold: noun param1 (if (>= gAct 3) 82 else 80) 0 0 modNum)
 			else
 				(super doVerb: param1)
 			)
