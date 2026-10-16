@@ -150,140 +150,25 @@
 			)
 			(= local60 1)
 		else
-			(vat14
-				approachVerbs: 4
-				approachX: local14
-				approachY:
-					[local15
-						(vat13
-							approachVerbs: 4
-							approachX: local13
-							approachY:
-								[local15
-									(vat12
-										approachVerbs: 4
-										approachX: local12
-										approachY:
-											[local15
-												(vat11
-													approachVerbs: 4
-													approachX: local11
-													approachY:
-														[local15
-															(vat10
-																approachX: local10
-																approachY:
-																	[local15
-																		(vat9
-																			approachVerbs:
-																				4
-																			approachX:
-																				local9
-																			approachY:
-																				[local15
-																					(vat8
-																						approachVerbs:
-																							4
-																						approachX:
-																							local8
-																						approachY:
-																							[local15
-																								(vat7
-																									approachVerbs:
-																										4
-																									approachX:
-																										local7
-																									approachY:
-																										[local15
-																											(vat6
-																												approachVerbs:
-																													4
-																												approachX:
-																													local6
-																												approachY:
-																													[local15
-																														(vat5
-																															approachVerbs:
-																																4
-																															approachX:
-																																local5
-																															approachY:
-																																[local15
-																																	(vat4
-																																		approachVerbs:
-																																			4
-																																		approachX:
-																																			local4
-																																		approachY:
-																																			[local15
-																																				(vat3
-																																					approachVerbs:
-																																						4
-																																					approachX:
-																																						local3
-																																					approachY:
-																																						[local15
-																																							(vat2
-																																								approachVerbs:
-																																									4
-																																								approachX:
-																																									local2
-																																								approachY:
-																																									[local15
-																																										(vat1
-																																											approachVerbs:
-																																												4
-																																											approachX:
-																																												local1
-																																											approachY:
-																																												[local15
-																																													(Load
-																																														rsSOUND
-																																														40
-																																													)
-																																												]
-																																											init:
-																																										)
-																																									]
-																																								init:
-																																							)
-																																						]
-																																					init:
-																																				)
-																																			]
-																																		init:
-																																	)
-																																]
-																															init:
-																														)
-																													]
-																												init:
-																											)
-																										]
-																									init:
-																								)
-																							]
-																						init:
-																					)
-																				]
-																			init:
-																		)
-																	]
-																approachVerbs: 4
-																init:
-															)
-														]
-													init:
-												)
-											]
-										init:
-									)
-								]
-							init:
-						)
-					]
-				init:
-			)
+			; Sierra indexes both approach arrays by vat number; the decompiled
+			; chain used the next vat's init: result as the approachY index, so
+			; Hand on a vat sent Laura toward a garbage point and out the south
+			; exit (PLAY-033).
+			(Load rsSOUND 40)
+			(vat1 approachVerbs: 4 approachX: local1 approachY: [local15 1] init:)
+			(vat2 approachVerbs: 4 approachX: local2 approachY: [local15 2] init:)
+			(vat3 approachVerbs: 4 approachX: local3 approachY: [local15 3] init:)
+			(vat4 approachVerbs: 4 approachX: local4 approachY: [local15 4] init:)
+			(vat5 approachVerbs: 4 approachX: local5 approachY: [local15 5] init:)
+			(vat6 approachVerbs: 4 approachX: local6 approachY: [local15 6] init:)
+			(vat7 approachVerbs: 4 approachX: local7 approachY: [local15 7] init:)
+			(vat8 approachVerbs: 4 approachX: local8 approachY: [local15 8] init:)
+			(vat9 approachVerbs: 4 approachX: local9 approachY: [local15 9] init:)
+			(vat10 approachX: local10 approachY: [local15 10] approachVerbs: 4 init:)
+			(vat11 approachVerbs: 4 approachX: local11 approachY: [local15 11] init:)
+			(vat12 approachVerbs: 4 approachX: local12 approachY: [local15 12] init:)
+			(vat13 approachVerbs: 4 approachX: local13 approachY: [local15 13] init:)
+			(vat14 approachVerbs: 4 approachX: local14 approachY: [local15 14] init:)
 		)
 	)
 
@@ -433,20 +318,20 @@
 				(gGame handsOff:)
 				(= local61 -1)
 				(= local62 -1)
+				; Sierra picks the side before choosing the loop; the decompiled
+				; source folded this into scaleY's index (PLAY-033).
+				(if (> (gEgo x:) 180)
+					(= register 1)
+				else
+					(= register 0)
+				)
 				(gEgo
 					view: 612
 					setLoop: register
 					setCel: 0
 					code: footstepCode
 					scaleX: [local30 global129]
-					scaleY:
-						[local30
-							(if (> (gEgo x:) 180)
-								(= register 1)
-							else
-								(= register 0)
-							)
-						]
+					scaleY: [local30 global129]
 					setScale:
 					setCycle: End self
 				)
@@ -513,22 +398,22 @@
 	(method (changeState param1)
 		(switch (= state param1)
 			(0
+				; Sierra's order: handsOff, pick the side, then index every array
+				; by vat number; the decompiled source used the side and
+				; handsOff's result as indexes (PLAY-033).
+				(gGame handsOff:)
+				(if (> [local0 global129] 180)
+					(= register 1)
+				else
+					(= register 0)
+				)
 				(gEgo
 					view: 612
 					setLoop: (+ register 2)
 					setCel: (gEgo lastCel:)
 					posn:
 						[local0 global129]
-						(-
-							[local15
-								(if (> [local0 global129] 180)
-									(= register 1)
-								else
-									(= register 0)
-								)
-							]
-							[local45 (gGame handsOff:)]
-						)
+						(- [local15 global129] [local45 global129])
 					code: footstepCode
 					scaleX: [local30 global129]
 					scaleY: [local30 global129]

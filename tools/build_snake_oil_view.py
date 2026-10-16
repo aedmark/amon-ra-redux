@@ -57,13 +57,40 @@ def decode_cel(data: bytes, header_offset: int) -> tuple[bytearray, int, int, in
     return pixels, width, height, clear
 
 
-def encode_cel(pixels: bytearray) -> tuple[bytes, bytes]:
+def encode_cel(pixels: bytearray, width: int) -> tuple[bytes, bytes]:
+    """Encode row by row, as Sierra's views are.
+
+    The original interpreter builds each scanline separately and stops with
+    "Build Line Error" on a run that crosses the end of a row, so every run
+    ends at or before the row's last pixel. Repeats of three or more pixels
+    become fill runs; everything else is copied literally.
+    """
     commands = bytearray()
     literals = bytearray()
-    for offset in range(0, len(pixels), 63):
-        chunk = pixels[offset : offset + 63]
-        commands.append(len(chunk))
-        literals.extend(chunk)
+    for row in range(0, len(pixels), width):
+        line = pixels[row : row + width]
+        x = 0
+        pending = bytearray()
+
+        def flush() -> None:
+            while pending:
+                chunk = pending[:63]
+                del pending[:63]
+                commands.append(len(chunk))
+                literals.extend(chunk)
+
+        while x < len(line):
+            run = 1
+            while x + run < len(line) and line[x + run] == line[x] and run < 63:
+                run += 1
+            if run >= 3:
+                flush()
+                commands.append(0x80 | run)
+                literals.append(line[x])
+            else:
+                pending.extend(line[x : x + run])
+            x += run
+        flush()
     return bytes(commands), bytes(literals)
 
 
@@ -131,7 +158,7 @@ def build(source: bytes) -> bytes:
 
     for loop_index, cels in enumerate(cel_sets):
         for cel_index, (pixels, _width, _height, _clear) in enumerate(cels):
-            commands, literals = encode_cel(pixels)
+            commands, literals = encode_cel(pixels, _width)
             cel_header = cel_headers[loop_index][cel_index]
             struct.pack_into("<I", cel_header, 12, len(commands) + len(literals))
             struct.pack_into("<I", cel_header, 16, len(commands))

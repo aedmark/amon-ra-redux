@@ -178,7 +178,8 @@
 			)
 			(1115
 				((ScriptID 90 1) goTo: 440) ; aCountess
-				((ScriptID 90 2) goTo: 520) ; aOlympia
+				; In Act 3, arriving starts Sierra's own patrol for her (PLAY-036).
+				((ScriptID 90 2) goTo: 520 (if (== gAct 3) (ScriptID 90 2) else 0)) ; aOlympia
 				((ScriptID 90 4) moveTo: -1) ; aTut
 			)
 			(1245

@@ -35,7 +35,9 @@
 		else
 			(self setRegions: 90)
 			(if (== gPrevRoomNum 355)
-				((ScriptID 90 5) moveTo: 420 goTo: 500) ; aWatney
+				; Passing Watney as the caller starts Sierra's own Act 3 patrol
+				; (rooms 500 and 530) when he arrives (PLAY-036).
+				((ScriptID 90 5) moveTo: 420 goTo: 500 (ScriptID 90 5)) ; aWatney
 				((ScriptID 90 1) moveTo: 420 goTo: 510) ; aCountess
 				((ScriptID 90 7) moveTo: 450 wander:) ; aZiggy
 				((ScriptID 90 4) moveTo: 454 wander:) ; aTut
@@ -47,6 +49,7 @@
 					moveTo: 430
 					posn: 155 165
 					setHeading: 135
+					cue: 0 ; start his Act 3 patrol with a pause (PLAY-036)
 				)
 			)
 		)

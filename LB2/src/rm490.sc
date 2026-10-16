@@ -361,7 +361,7 @@
 				0
 				(gGameMusic2 fade:)
 				(WrapMusic pause: 0)
-				((ScriptID 90 3) moveTo: register) ; aORiley
+				((ScriptID 90 3) moveTo: register cue: 0) ; aORiley, resume patrol (PLAY-036)
 				(gGame handsOn:)
 				(gGame points: 1 144)
 				(SetFlag 36)

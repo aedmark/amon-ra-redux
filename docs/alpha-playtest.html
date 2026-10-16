@@ -434,11 +434,11 @@
 <body>
   <div class="top-rule" aria-hidden="true"></div>
   <header id="top">
-    <p class="eyebrow">Public field test · Alpha v0.06</p>
+    <p class="eyebrow">Public field test · Alpha v0.07</p>
     <h1>The Dagger of Amon Ra: Redux</h1>
     <p class="subtitle">Help us test a careful modernization of Sierra's classic mystery from the newsroom to the final verdict.</p>
     <div class="hero-actions">
-      <a class="button" href="LB2-Redux-v0.06.zip" download>Download Alpha v0.06</a>
+      <a class="button" href="LB2-Redux-v0.07.zip" download>Download Alpha v0.07</a>
       <a class="button secondary" href="#report">Report a finding</a>
     </div>
   </header>
@@ -462,11 +462,11 @@
       <div class="notice-grid">
         <article class="notice">
           <strong>Fresh case</strong>
-          <p>Extract v0.06 to a new directory and start a new game; saves from earlier alphas are not recommended. This build was created from the vanilla LB2 1.00 source files and sluicebox decomps.</p>
+          <p>Extract v0.07 to a new directory and start a new game; saves from earlier alphas are not recommended. This build was created from the vanilla LB2 1.00 source files and sluicebox decomps.</p>
         </article>
         <article class="notice">
-          <strong>New in v0.06</strong>
-          <p>Olympia's hidden passage waits for Laura to choose to enter, the Countess sounds grand without constant capitals, the stairwell bulb gives fair hints, the Thinker's raised head has its own descriptions, and the police file, intercom, Ankh, and footprint respond where you click. Earlier alphas fixed Act 3+ conversations, the screen between acts, Steve's 7:30 meeting, the final inquest, music, Ernie's office, and many Act 1 and 2 details, and restored Ziggy's swagger. None of these has had a full playthrough yet, so reports on them are especially welcome.</p>
+          <strong>New in v0.07</strong>
+          <p>In Act 3 O'Riley, Watney, Olympia, and Yvette move around the museum instead of standing like statues. The preservation lab's vats can be climbed again, the back storeroom no longer crashes, and the dagger leaves the notebook once O'Riley takes it. Earlier alphas brought Olympia's player-chosen passage, the Countess's phrasing, Act 3+ conversations, the final inquest, music, and many Act 1 and 2 details. None of these has had a full playthrough yet, so reports on them are especially welcome; test the patrols from a save made before the end of Act 2.</p>
         </article>
         <article class="notice">
           <strong>Reference setup</strong>
@@ -632,6 +632,11 @@
             <li><label><input type="checkbox">The pocket-watch confrontation remains possible after 1:45.</label></li>
             <li><label><input type="checkbox">Murder reactions appear only after Laura learns of the corresponding death.</label></li>
             <li><label><input type="checkbox">O'Riley remains available after 10:15 for follow-up questions.</label></li>
+            <li><label><input type="checkbox">O'Riley moves between the pterodactyl room, the dagger case, and where Pippin died, pausing at each, and never walks off mid-conversation.</label></li>
+            <li><label><input type="checkbox">Watney and, after 11:15, Olympia move between rooms instead of standing in one place.</label></li>
+            <li><label><input type="checkbox">After the eavesdropped scene between O'Riley and Yvette, Yvette strolls the Rodin room outside her office, and is gone before the next scene at her door.</label></li>
+            <li><label><input type="checkbox">Using Hand on a vat in the preservation lab climbs it.</label></li>
+            <li><label><input type="checkbox">Entering the back storeroom with the snake oil on its shelf causes no crash.</label></li>
             <li><label><input type="checkbox">Notebook completion and reopened topics reflect genuinely new dialogue.</label></li>
             <li><label><input type="checkbox">A complete run can earn the full Act 3 grade.</label></li>
           </ul>
@@ -663,7 +668,7 @@
             <li><label><input type="checkbox">The jar allows three refills and rejects a full bottle or depleted jar.</label></li>
             <li><label><input type="checkbox">Intended consumption does not cause the safety check to recreate an item.</label></li>
             <li><label><input type="checkbox">The recovered dagger receives character-specific reactions.</label></li>
-            <li><label><input type="checkbox">Giving the dagger to O'Riley removes it but preserves recovery credit.</label></li>
+            <li><label><input type="checkbox">Giving the dagger to O'Riley removes it from inventory and the notebook but preserves recovery credit.</label></li>
             <li><label><input type="checkbox">A complete run can earn the full Act 5 grade.</label></li>
           </ul>
 
@@ -690,7 +695,7 @@
       <div class="report-layout">
         <div>
           <div class="report-box">
-            <pre id="reportTemplate">Alpha build: v0.06
+            <pre id="reportTemplate">Alpha build: v0.07
 Environment: DOSBox-X version / ScummVM version / other
 Operating system:
 Act and location:
@@ -736,7 +741,7 @@ Anything unusual: old save, alternate route, skipped conversation, custom MIDI, 
 
   <script>
     (() => {
-      const storageKey = "amon-ra-redux-alpha-v006-checks";
+      const storageKey = "amon-ra-redux-alpha-v007-checks";
       const checks = [...document.querySelectorAll('.checklist input[type="checkbox"]')];
       const progressValue = document.getElementById('progressValue');
       const progressBar = document.getElementById('progressBar');

@@ -6,6 +6,16 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+## [0.07-alpha] - 2026-10-16
+
+### Changed
+- In Act 3, more of the museum comes alive: O'Riley patrols between the pterodactyl room, the dagger case, and the spot where Pippin died; Watney and, from 11:15, Olympia follow the rounds Sierra wrote for them; and between eavesdropping scenes Yvette strolls the Rodin room outside her office (PLAY-036, D-046).
+
+### Fixed
+- Once O'Riley takes the dagger, it leaves the notebook too, so you can no longer ask about it as if you still had it (PLAY-035, D-015).
+- Entering the back storeroom no longer crashes to DOS with "Build Line Error". The snake oil bottle's redrawn graphics were stored in a form the original interpreter cannot draw on screen (PLAY-034, D-016).
+- Using Hand on a vat in the preservation lab climbs it again, instead of walking Laura out of the room. Every earlier alpha had this bug (PLAY-033).
+
 ## [0.06-alpha] - 2026-10-16
 
 ### Changed

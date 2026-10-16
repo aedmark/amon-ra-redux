@@ -12,7 +12,7 @@ Security: [SECURITY.md](SECURITY.md). Changes: [CHANGELOG.md](CHANGELOG.md). Old
 
 ## Current state
 
-_Last updated: 2026-10-15, session 57: PLAY-025 to PLAY-031 and the PLAY-018 correction (D-044, D-045)._
+_Last updated: 2026-10-16, session 58: PLAY-033 to PLAY-036 and alpha v0.07 (D-046 Act 3 patrols)._
 
 **Where things stand, in one paragraph:** Alpha v0.01 is public in the SQH Discord; alpha v0.02 (`LB2/LB2-Redux-v0.02.zip`, built from `master` at `43b1fbc`) is packaged and its tester guides are updated, pending publication. The room 335 benefit podium remains at `(190, 174)` with visual bounds `nsTop: 148, nsLeft: 182, nsBottom: 174, nsRight: 198` and fixed priority 12. Script 2335's existing 14-point barred room polygon reaches `(190, 176)` around the podium, and Script 335 routes Look/Hand/Magnifier to `(186, 180)` in front of the ledger. Old saves rebind that same polygon object to current static points without heap writes or new objects. Script 21's duplicate-clue repair prevents the prior Error 5 memory corruption. The remaining one-frame “interesting approach” flash was traced to the global fallback for an unsupported verb dispatch occurring before the valid podium dispatch on exact-position repeats. The podium now handles its three intended verbs normally and locally consumes any unsupported dispatch instead of forwarding it to the global narrator (D-035). The flash persisted, and occurred only on the engine's immediate-dispatch ending, when Laura was already in place. The podium now sets `sightAngle` -1 and `approachDist` 4, so repeats take the same deferred `CueObj` path as a fresh approach (D-036). The maintainer confirmed in DOSBox-X that repeat LOOK and DO show only the guestbook response. Saved games no longer overwrite slot 0 (Script 990 fix). Session 54 found that Redux's `Main` numbers `WrapMusic` and `Actions` the reverse of vanilla, which broke Sierra-compiled rooms 450 and 640 and the archive-derived room 310, and that the committed room 750 inquest had every object property shifted one slot; all four now build from corrected source and await a runtime retest (D-040). Drifted patches stay unless their script changes; `Main`'s and `n027`'s indexed compound assignments are rewritten, and `Main` now rebuilds byte-identical to its committed patch (D-041).
 
@@ -105,6 +105,27 @@ _Last updated: 2026-10-15, session 57: PLAY-025 to PLAY-031 and the PLAY-018 cor
 None currently open. Q-001 and Q-002 have been resolved by D-007, D-017, and D-018.
 
 ## Session log
+
+### Session 58: 2026-10-16: Vats, Storeroom Crash, and Dagger Topic
+
+**Contributor:** Claude Code and maintainer
+
+**Goal:** Fix PLAY-033 to PLAY-035, found during the maintainer's v0.06 retest.
+
+**Done:**
+- The maintainer confirmed PLAY-018, PLAY-025, PLAY-026, and PLAY-028 to PLAY-032.
+- PLAY-033: room 610's source came from a decompile that turned Sierra's array indexes (the vat number, held in the accumulator) into nested expressions: the next vat's `init:`, the climb side, and `handsOff`. Rewrote the vat setup in `rm610 init` and state 0 of `sClimbUpVat` and `sClimbDownVat` in Sierra's order. A scan of `src/*.sc` for the same multi-line index pattern found only these and one well-formed index in `MuseumRgn`.
+
+- The maintainer confirmed PLAY-033, then hit PLAY-034: `Build Line Error` entering room 630. The snake oil bottle drawn on its shelf comes from `61.v56`, whose cels `tools/build_snake_oil_view.py` had encoded as literal runs crossing row ends. Fixed the encoder to work row by row and rebuilt the patch from the archive's View 61 (identical pixels, headers, palette). `335.v56` is already row-bounded.
+- The maintainer confirmed PLAY-034. Confirmed that the floppy has no laundry exit motif (only sounds 260, 261 for the baseball trade, and 270); kept as Sierra shipped it.
+- PLAY-035: O'Riley's dagger handoff (Scripts 90 and 93) now drops notebook clue 780 as well as item 11.
+- Audited Script 90 after the maintainer asked why few characters wander. It matches Sierra's retail patch in `LB2_vanilla/` apart from Redux's intended changes; an earlier comparison against the archive build had wrongly suggested CD-derived code. Extended the audit to all 23 retail patch scripts (recorded in `SOURCE_PROVENANCE.md`): every Sierra fix is present. Act 3's stationary O'Riley (room 430) and Yvette (room 550) are Sierra's schedule; only actors in the off-screen pool (room -1) roam, via `wanderTimer` every 120 seconds.
+- PLAY-036 / D-046, first pass: Watney's Act 3 walk to 500 starts Sierra's authored patrol (room 370); O'Riley gets an Act 3 patrol of 430, 450, and 454 with 20-45 second pauses (Script 90), resumed after the scenes in rooms 490 and 500. Second pass: Olympia's 11:15 walk to 520 and the redirects in rooms 600 and 650 start Sierra's authored patrol in Act 3 (Scripts 22, 600, 650); Yvette stays in room 510 from eavesdropping count 7 and strolls between six spots, leaving before count 10, at 12:45, or outside Act 3 (Scripts 90 and 510).
+- Built `LB2/LB2-Redux-v0.07.zip` with the v0.06 layout, excluding saves and older zips: 952 files, 7,109,267 bytes; integrity test, vanilla archive MD5s, and every tracked `LB2` file identical to the working tree. Moved `alpha-playtest.html` (storage key `v007`) and `ALPHA_PLAYTESTING.md` to v0.07 with checks for PLAY-033 to PLAY-036, and cut CHANGELOG `0.07-alpha`. Headless startup of the extracted copy was skipped while the maintainer may be playing.
+
+**Verified:** Routine-by-routine comparison: the new build differs from the committed one only in `rm610 init`, the two climb scripts, and one equivalent codegen change; the three rewritten routines match the archive build apart from codegen style and P1-02's removed save-icon lockout. Heap unchanged. Room 630's script and properties compared with the archive build: equivalent. Rebuilt `61.v56` decoded and checked row by row. Scripts 90 and 93 differ from their committed builds only by the `dropCluesCode` call; heaps unchanged. Script 90, 22, 370, 490, 500, 510, 600, and 650 builds differ from the committed ones only in the PLAY-036 changes plus equivalent codegen in room 500; Script 90's heap keeps every property value but its method-table offsets shift. Runtime retests of PLAY-035 and PLAY-036 pending.
+
+**Next session should start with:** The maintainer's retest of PLAY-035 and PLAY-036 (from an Act 2 save), and of Olympia's and Yvette's patrols.
 
 ### Session 57: 2026-10-15: Act 3 and 4 Findings
 
@@ -282,29 +303,3 @@ None currently open. Q-001 and Q-002 have been resolved by D-007, D-017, and D-0
 **Verified:** Script 335 compiles successfully; the original-interpreter headless startup smoke initializes with the new loose patch; `RESOURCE.000` and `RESOURCE.MAP` retain known MD5 hashes `2d591d9416607beeac48303c6f4fe212` and `330d4a87da2ea2520a316c9f25ab538e`. Runtime confirmation of LOOK/LOOK, DO/LOOK, LOOK/DO, and DO/DO from the exact approach point remains pending.
 
 **Next session should start with:** Run the four exact-position repeat combinations from Save 02 and confirm that only the guestbook response appears, with no flash, palette change, freeze, or interpreter error.
-
-### Session 48: 2026-10-12: Room 335 Podium Collision and Interaction Follow-up
-
-**Contributor:** Codex
-
-**Goal:** Correct the live Room 335 behavior in which Laura could walk through the new podium and Look/Do left her standing behind it.
-
-**Done:**
-- Found that the session 47 handoff documented an interaction approach of `(186, 180)`, but both the source and packaged room script still used `(190, 184)`.
-- Set the podium's source and initialization-time approach coordinates to `(186, 180)` for Look, Hand/Do, and Magnifier.
-- Removed the standalone `polyPodium`, which overlapped the existing barred room polygon and gave SCI's pathfinder intersecting obstacle boundaries.
-- Kept `poly2335a` at its save-compatible 14 points and moved its room-edge vertex from `(178, 170)` to `(190, 176)`, producing a downward triangular barrier over the podium without changing the script-local array size.
-- Added an old-save repair that rebinds the existing `poly2335a` object to Script 2335's current static point array. Two rejected prototypes exposed why this matters: allocating a new polygon produced Error 1, while writing through a pointer restored from the save produced Error 5/palette corruption. The final path performs neither operation.
-- A first room-local clue guard did not stop the live failure: every second action combination (LOOK/LOOK, DO/LOOK, DO/DO, and LOOK/DO) still changed the palette and ended in Error 5. That matrix isolated the state change shared by all four paths: the first interaction had populated the People list, so the second encountered duplicate clues.
-- Corrected the shared Script 21 `addCluesCode` loop. Vanilla sets its index to the list length after finding a duplicate but then executes a second `memPEEK`/possible `memPOKE` in the same iteration, accessing one word past the array. The duplicate branch now skips that insertion block, preserving the original behavior for new clues and full lists while making all existing-clue calls idempotent.
-- Removed the redundant room-local scanner and restored Room 335's direct clue calls so all callers benefit from the shared repair.
-- Runtime follow-up found a one-frame generic “interesting approach” fallback only when Laura remained exactly at `(186, 180)` for the next action; moving away and letting `PApproach` return did not reproduce it. Comparison with established room hotspots showed that they rely on `Feature`'s standard approach and interaction state without a room-local exact-position override. A rejected `benefitPodium.sel_309` prototype re-entered the shared `CueObj` and caused Error 2 with palette corruption on the second Do, so that override and its custom dispatcher were removed.
-- Tried making the old-save repair conditional to avoid rewriting already-current values. After the custom dispatcher was removed, that comparison-based build produced Error 1 on the second Look. Restored the last runtime-stable behavior: Room 335 reapplies the approach coordinates and Script 2335 rebinds the existing polygon object to the known static boundary without allocating an object or writing through a saved pointer. The brief generic fallback is left unresolved rather than risking interaction stability.
-- Established D-034 after reviewing SCI Companion's official object-interaction tutorial and the project's working hotspots. `AGENTS.md` and `docs/CONTRIBUTING.md` now require future object work to inspect documentation, local base classes, and same-class references before custom cue or dispatch logic; exact-position repeat tests are part of that workflow.
-- Recompiled only `addCluesCode` (`21.SCR` 402 bytes), `rm335` (`335.SCR` 1,758 bytes / `335.HEP` 902 bytes), and `poly2335Code` (`2335.SCR` 166 bytes / `2335.HEP` 276 bytes) through the verified `LB2/RESOURCE.MAP` SCI Companion project.
-
-**Decisions:** D-009 refined; D-033; D-034.
-
-**Verified:** All three single-script compiles completed successfully; Script 2335 retains its original 54-word local footprint and packaged heap size while containing the `(190, 176)` boundary point and last stable pointer reapply; Script 335 contains the `(186, 180)` approach and uses standard `Feature` dispatch without a custom exact-position override; and Script 21's match path cannot fall through to the insertion read. Earlier runtime attempts reproduced and isolated the unsafe allocation, saved-pointer write, duplicate-clue, rejected `CueObj` re-entry, and rejected conditional-read failures. The final rollback build initializes under the DOSBox-X headless smoke, documentation and manual validation pass, the manual rebuilds cleanly, and the immutable base archives retain their vanilla hashes. Final save-based repeated interaction and collision verification remains pending.
-
-**Next session should start with:** Load the Act 2 entrance save, try walking through the podium from both sides, and test Look/Hand/Magnifier final position plus two consecutive LOOK and DO interactions before continuing the playthrough.

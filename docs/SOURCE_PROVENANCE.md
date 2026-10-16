@@ -29,3 +29,12 @@ The immutable retail archives are not derived outputs and are never committed. T
 
 - `RESOURCE.000`: `2d591d9416607beeac48303c6f4fe212`
 - `RESOURCE.MAP`: `330d4a87da2ea2520a316c9f25ab538e`
+
+## Sierra's retail patch scripts
+
+The retail floppy v1.000 installation ships 23 loose Sierra patch scripts beside the archive, preserved in
+`LB2_vanilla/`: scripts 0, 13, 20, 22, 230, 400, 420, 440, 441, 448, 450, 454, 480, 500, 510, 520, 521, 550, 630, 700,
+720, 780, and 90. In the shipped game they override `RESOURCE.000`, so for those scripts the patch, not the archive
+build, is the vanilla behavior to compare against. A 2026-10-16 audit compared every routine each patch changes:
+Redux's committed builds contain all of Sierra's fixes, and their heaps match the patches apart from Redux's own
+changes.

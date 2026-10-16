@@ -107,7 +107,8 @@
 		(cond
 			((and (== gAct 3) (not (IsFlag 57)) (not (TimeCheck $2020))) ; has 2:00 am occurred?
 				(if (== ((ScriptID 90 2) room:) gCurRoomNum) ; aOlympia
-					((ScriptID 90 2) goTo: 520) ; aOlympia
+					; Arriving resumes her Act 3 patrol (PLAY-036).
+					((ScriptID 90 2) goTo: 520 (ScriptID 90 2)) ; aOlympia
 				)
 				(string1 setScript: sIntercom)
 			)
@@ -116,7 +117,7 @@
 					(== ((ScriptID 90 2) room:) gCurRoomNum) ; aOlympia
 					(not (gEgo has: 17))
 				)
-				((ScriptID 90 2) goTo: 520) ; aOlympia
+				((ScriptID 90 2) goTo: 520 (if (== gAct 3) (ScriptID 90 2) else 0)) ; aOlympia
 			)
 		)
 	)

@@ -317,6 +317,9 @@
 			(super doVerb: param1)
 			(if (gEgo has: 11)
 				(gEgo put: 11)
+				; The dagger is in police custody, so its notebook topic goes too,
+				; as Sierra drops the baseball's when Biff takes it (PLAY-035).
+				((ScriptID 21 1) doit: 780) ; dropCluesCode
 			)
 			(return)
 		)

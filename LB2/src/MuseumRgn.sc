@@ -1499,6 +1499,9 @@
 			(super doVerb: param1)
 			(if (gEgo has: 11)
 				(gEgo put: 11)
+				; The dagger is in police custody, so its notebook topic goes too,
+				; as Sierra drops the baseball's when Biff takes it (PLAY-035).
+				((ScriptID 21 1) doit: 780) ; dropCluesCode
 			)
 			(return)
 		)
@@ -1684,6 +1687,58 @@
 			)
 		else
 			(super doVerb: param1)
+		)
+	)
+
+	; Act 3 patrol (PLAY-036). Sierra posts O'Riley in room 430 for the act;
+	; he now pauses at a post, then walks to another of 430 (the pterodactyl
+	; room), 450 (the dagger case), and 454 (where Pippin died). He never
+	; leaves the floor. A finished travel script cues with one argument (its
+	; register) and a Timer with none, so arrival starts a pause and the
+	; pause's end picks the next post. Scenes that borrow him call moveTo:,
+	; which clears wandering, so a pending pause is ignored until the room
+	; restarts the patrol with (cue: 0). Outside Act 3 he returns to 430.
+	(method (cue param1)
+		(cond
+			((!= gAct 3)
+				(if (and wandering (not script) (!= room 430))
+					(self goTo: 430)
+				)
+			)
+			(argc
+				(= wandering 1)
+				((Timer new:) setReal: self (Random 20 45))
+			)
+			((or (not wandering) script) 0)
+			(inConversation
+				((Timer new:) setReal: self 5)
+			)
+			(else
+				(self wander:)
+			)
+		)
+	)
+
+	(method (wander param1 &tmp temp0 temp1)
+		(if (or (not argc) (not param1))
+			(= temp1 room)
+			(while (== temp1 room)
+				(= temp0 (Random 1 100))
+				(cond
+					((<= temp0 50)
+						(= temp1 430)
+					)
+					((<= temp0 75)
+						(= temp1 450)
+					)
+					(else
+						(= temp1 454)
+					)
+				)
+			)
+			(super wander: temp1 self)
+		else
+			(super wander: param1 &rest)
 		)
 	)
 )
@@ -2091,6 +2146,60 @@
 			)
 			(else
 				(super doVerb: param1)
+			)
+		)
+	)
+
+	; Act 3 (PLAY-036, D-046): at eavesdropping count 7 Sierra walked Yvette
+	; out of her office to room 430; room 510 now leaves her in the Rodin room
+	; outside her door. A Timer cues with no argument: while Laura is in the
+	; room she strolls to another spot, then waits 8 to 20 seconds. Before the
+	; next scene at her door (count 10), at 12:45, or after Act 3 she leaves
+	; the floor, as Sierra's schedule has her do.
+	(method (cue param1 &tmp temp0 temp1)
+		(cond
+			((!= room 510) 0)
+			((or (!= gAct 3) (>= global111 10) (TimeCheck $c304)) ; has 12:45 am occurred?
+				(self moveTo: -2)
+			)
+			(else
+				(if
+					(and
+						(not argc)
+						(== gCurRoomNum 510)
+						(not inConversation)
+						(not mover)
+						(not script)
+					)
+					(switch (Random 0 5)
+						(0
+							(= temp0 100)
+							(= temp1 160)
+						)
+						(1
+							(= temp0 160)
+							(= temp1 158)
+						)
+						(2
+							(= temp0 225)
+							(= temp1 158)
+						)
+						(3
+							(= temp0 240)
+							(= temp1 178)
+						)
+						(4
+							(= temp0 90)
+							(= temp1 180)
+						)
+						(else
+							(= temp0 295)
+							(= temp1 178)
+						)
+					)
+					(self setMotion: PolyPath temp0 temp1)
+				)
+				((Timer new:) setReal: self (Random 8 20))
 			)
 		)
 	)

@@ -2,6 +2,32 @@
 
 Archived verbatim from `docs/HANDOFF.md` when its live session log exceeded ten entries.
 
+### Session 48: 2026-10-12: Room 335 Podium Collision and Interaction Follow-up
+
+**Contributor:** Codex
+
+**Goal:** Correct the live Room 335 behavior in which Laura could walk through the new podium and Look/Do left her standing behind it.
+
+**Done:**
+- Found that the session 47 handoff documented an interaction approach of `(186, 180)`, but both the source and packaged room script still used `(190, 184)`.
+- Set the podium's source and initialization-time approach coordinates to `(186, 180)` for Look, Hand/Do, and Magnifier.
+- Removed the standalone `polyPodium`, which overlapped the existing barred room polygon and gave SCI's pathfinder intersecting obstacle boundaries.
+- Kept `poly2335a` at its save-compatible 14 points and moved its room-edge vertex from `(178, 170)` to `(190, 176)`, producing a downward triangular barrier over the podium without changing the script-local array size.
+- Added an old-save repair that rebinds the existing `poly2335a` object to Script 2335's current static point array. Two rejected prototypes exposed why this matters: allocating a new polygon produced Error 1, while writing through a pointer restored from the save produced Error 5/palette corruption. The final path performs neither operation.
+- A first room-local clue guard did not stop the live failure: every second action combination (LOOK/LOOK, DO/LOOK, DO/DO, and LOOK/DO) still changed the palette and ended in Error 5. That matrix isolated the state change shared by all four paths: the first interaction had populated the People list, so the second encountered duplicate clues.
+- Corrected the shared Script 21 `addCluesCode` loop. Vanilla sets its index to the list length after finding a duplicate but then executes a second `memPEEK`/possible `memPOKE` in the same iteration, accessing one word past the array. The duplicate branch now skips that insertion block, preserving the original behavior for new clues and full lists while making all existing-clue calls idempotent.
+- Removed the redundant room-local scanner and restored Room 335's direct clue calls so all callers benefit from the shared repair.
+- Runtime follow-up found a one-frame generic “interesting approach” fallback only when Laura remained exactly at `(186, 180)` for the next action; moving away and letting `PApproach` return did not reproduce it. Comparison with established room hotspots showed that they rely on `Feature`'s standard approach and interaction state without a room-local exact-position override. A rejected `benefitPodium.sel_309` prototype re-entered the shared `CueObj` and caused Error 2 with palette corruption on the second Do, so that override and its custom dispatcher were removed.
+- Tried making the old-save repair conditional to avoid rewriting already-current values. After the custom dispatcher was removed, that comparison-based build produced Error 1 on the second Look. Restored the last runtime-stable behavior: Room 335 reapplies the approach coordinates and Script 2335 rebinds the existing polygon object to the known static boundary without allocating an object or writing through a saved pointer. The brief generic fallback is left unresolved rather than risking interaction stability.
+- Established D-034 after reviewing SCI Companion's official object-interaction tutorial and the project's working hotspots. `AGENTS.md` and `docs/CONTRIBUTING.md` now require future object work to inspect documentation, local base classes, and same-class references before custom cue or dispatch logic; exact-position repeat tests are part of that workflow.
+- Recompiled only `addCluesCode` (`21.SCR` 402 bytes), `rm335` (`335.SCR` 1,758 bytes / `335.HEP` 902 bytes), and `poly2335Code` (`2335.SCR` 166 bytes / `2335.HEP` 276 bytes) through the verified `LB2/RESOURCE.MAP` SCI Companion project.
+
+**Decisions:** D-009 refined; D-033; D-034.
+
+**Verified:** All three single-script compiles completed successfully; Script 2335 retains its original 54-word local footprint and packaged heap size while containing the `(190, 176)` boundary point and last stable pointer reapply; Script 335 contains the `(186, 180)` approach and uses standard `Feature` dispatch without a custom exact-position override; and Script 21's match path cannot fall through to the insertion read. Earlier runtime attempts reproduced and isolated the unsafe allocation, saved-pointer write, duplicate-clue, rejected `CueObj` re-entry, and rejected conditional-read failures. The final rollback build initializes under the DOSBox-X headless smoke, documentation and manual validation pass, the manual rebuilds cleanly, and the immutable base archives retain their vanilla hashes. Final save-based repeated interaction and collision verification remains pending.
+
+**Next session should start with:** Load the Act 2 entrance save, try walking through the podium from both sides, and test Look/Hand/Magnifier final position plus two consecutive LOOK and DO interactions before continuing the playthrough.
+
 ### Session 47: 2026-10-12: Room 335 Benefit Podium Positioning and Z-Ordering Fix
 
 **Contributor:** Antigravity and maintainer

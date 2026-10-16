@@ -181,7 +181,7 @@ Use the existing dagger inventory verb and ownership state to represent recognit
 
 - **Context:** The real Dagger of Amon Ra is acquired as inventory item 11 and presented to actors with verb 22. Existing records in message modules 1884, 1885, and 1887..1892 mostly dismissed it as a gift-shop replica, even after Laura recovered it from the alcohol vat. O'Reilly's three-line verb-22 exchange offered to borrow the dagger but left item 11 in Laura's inventory, duplicating custody in story and UI.
 - **Decision:** Supply loose message overrides for the eight accessible reactions, preserving their noun/verb/condition/sequence/talker metadata while rewriting only the dagger text. In both O'Reilly implementations (`MuseumRgn.sc` / Script 90 and `RotundaRgn.sc` / Script 93), intercept verb 22, retain the inherited message dispatch, and call `(gEgo sel_351: 11)` when Laura still owns the item. Do not allocate a separate hand-off flag; dagger ownership is the authoritative custody state.
-- **Consequences:** Resolves P2-07. Suspects now react to the authentic central artifact, and surrendering it to O'Reilly immediately removes it from Laura's inventory in either actor context. The loose-patch approach preserves base archives and the earlier P2-05 edits already carried by module 1888.
+- **Consequences:** Resolves P2-07. Suspects now react to the authentic central artifact, and surrendering it to O'Reilly immediately removes it from Laura's inventory in either actor context. The loose-patch approach preserves base archives and the earlier P2-05 edits already carried by module 1888. PLAY-035 (2026-10-16): the handoff also drops notebook clue 780 with `dropCluesCode`, as Sierra drops the baseball's topic in room 260; otherwise the notebook kept offering the dagger and O'Riley answered as if Laura still held it.
 
 ## D-016 Use Charge State as the Snake Oil UI Source of Truth
 
@@ -189,7 +189,7 @@ Derive bottle feedback and refill eligibility from the existing `global150` char
 
 - **Context:** The P3-02 outline misidentified the inventory owner as Script 20 and the refill location as Room 510. Audit found the Snake Oil item in Script 15 and the refill jar in Room 610's Alcoholic Preservation Laboratory. View 61 originally supplied one cel in each of its cursor, inventory, and toolbar loops, so no empty cel existed. The jar's verb-25 handler incremented its display cel on each use and refilled only after four applications, while the actual jar depletion flags 107, 106, and 105 already represented three available portions. No grape check exists in the vanilla handler.
 - **Decision:** Keep `global150` as the sole bottle-state authority. Supply loose `61.V56` with cel 1 added to the inventory and toolbar loops as a clear red-X empty state; Script 15 selects cel 0 when charges remain and cel 1 at zero. In Room 610, reject refill attempts when `global150 == 4` or flag 105 marks the jar empty; otherwise restore four charges in one action, advance exactly one depletion flag/cel, and enlarge the oil jar's interaction rectangle. Preserve the audited independence from inventory item 31 (Grapes).
-- **Consequences:** Resolves P3-02 without new globals or base-archive edits. Bottle appearance cannot drift from usable charges, repeated full-bottle clicks cannot consume jar supply, and the jar's three portions now correspond to three successful refills. The View 61 transformation is reproducible with `tools/build_snake_oil_view.py`.
+- **Consequences:** Resolves P3-02 without new globals or base-archive edits. Bottle appearance cannot drift from usable charges, repeated full-bottle clicks cannot consume jar supply, and the jar's three portions now correspond to three successful refills. The View 61 transformation is reproducible with `tools/build_snake_oil_view.py`. PLAY-034 (2026-10-16): the first build encoded each cel as 63-pixel literal runs that crossed row ends; Sierra's interpreter decodes cels a scanline at a time and stopped with "Build Line Error" when room 630 drew the bottle on its shelf. The tool now encodes row by row, and the patch is rebuilt from the archive's View 61 with identical pixels, cel headers, and palette.
 
 ## D-017 Preserve Authored Act Transitions and Scene-Scheduler Semantics
 
@@ -563,7 +563,7 @@ Do not rebuild a committed patch only because it no longer matches a compile of 
   assignment (`(= [a i] (| [a i] x))`), and a value-yielding conditional as `(if c v else 0)`, not `(and c v)`. The
   three existing uses are rewritten this way: `Main` now compiles byte-identical to its committed patch, and
   `n027`'s `proc27_2` matches the archive build (Script 27 still loads from the archive).
-- **Consequences:** The heap-only differences in Scripts 31 to 37 and the codegen differences elsewhere stay. The
+- **Consequences:** The heap-only differences in Scripts 31 to 37 and the codegen differences elsewhere stay. The 2026-10 review missed one real bug: room 610's committed patch and source both carried a decompiler error that wrote an accumulator-indexed array read (`[local15 n]` with `n` already in the accumulator) as `[local15 (previous expression)]`, so the index became that expression's value (PLAY-033). A multi-line `[localN` index in source deserves a check against the archive build. The
   disassembler is a session tool, not part of the repository; a future comparison can reuse the approach.
 
 ---
@@ -635,6 +635,32 @@ Remove the Countess's habitual all-caps while keeping her theatrical grandeur.
 - **Consequences:** The earlier Countess manifests are historical and must not be re-applied (D-038).
 
 ---
+
+## D-046 Give Stationary Act 3 Characters Patrols
+
+Let more museum characters move between rooms in Act 3, preferring Sierra's own authored patrols.
+
+- **Context:** In Act 3 only characters in the off-floor pool (room -1) roam, through `wanderTimer` every 120 seconds.
+  Sierra posts O'Riley in room 430, walks Watney to room 500 with no arrival callback, and keeps Olympia and Yvette in
+  scripted places. Sierra wrote Act 3 patrols for Olympia (650, 450, 454, 520) and Watney (500, 530) in Script 90's
+  `wander` overrides; they never run. The maintainer asked for room patrols for O'Riley, Yvette, Watney, and Olympia
+  in Act 3 only, with Yvette moving around the Rodin room (510) outside her eavesdropping scenes.
+- **Decision:** Start authored patrols where Sierra wrote them; write new ones in the same style only where none
+  exists. Watney's walk to 500 passes him as the caller, so arrival starts his authored patrol. O'Riley gets `cue` and
+  `wander` overrides: he pauses 20 to 45 seconds at a post, then walks to another of 430, 450, and 454, and never
+  leaves the floor. A finished travel script cues with one argument and a Timer with none, so the pause needs no new
+  object or property. Scenes that borrow him (rooms 490 and 500) already clear `wandering` with `moveTo:`; they restart
+  the patrol with `cue: 0` when they return him. Outside Act 3 he walks back to 430 and stops. In Act 3, Olympia's
+  11:15 walk to 520 and the redirects in rooms 600 and 650 pass her as the caller, so arrival starts her authored
+  patrol; Sierra already resumes it after the Heimlich meeting in 440. At eavesdropping count 7, room 510 keeps Yvette
+  in the Rodin room by her door instead of sending her to 430; a Timer-driven `cue` walks her between six spots while
+  Laura is there. She leaves the floor before the count-10 argument at her door, at 12:45, or outside Act 3, and room
+  510's init enforces that before the room is drawn. O'Riley is one of the voices at counts 4 and 10 while standing
+  elsewhere, in vanilla as now.
+- **Consequences:** Script 90's heap keeps every property value, but the new method entries for O'Riley and Yvette
+  shift later objects' method-table offsets, so saves made while Script 90 was loaded (Acts 3 to 6) under an earlier build may not
+  restore correctly. The patrols start during Act 3, so they need a run from Act 2. Whether Olympia catches
+  Laura taking the snake oil now depends on whether her patrol has her in 520, as Sierra's patrol intends.
 
 ## Open questions
 

@@ -123,7 +123,8 @@
 			(self setScript: sMeanwhile)
 		)
 		(if (and (not (IsFlag 84)) (== ((ScriptID 90 2) room:) gCurRoomNum)) ; aOlympia
-			((ScriptID 90 2) goTo: 650) ; aOlympia
+			; In Act 3, arriving resumes her patrol (PLAY-036).
+			((ScriptID 90 2) goTo: 650 (if (== gAct 3) (ScriptID 90 2) else 0)) ; aOlympia
 		)
 	)
 

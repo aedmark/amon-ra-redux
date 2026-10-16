@@ -49,6 +49,15 @@
 		)
 		(LoadMany rsSOUND 531 721)
 		(gEgo init: normalize: 831 setScale: Scaler 120 75 190 120)
+		; Yvette leaves this room before the next scene at her door, even if
+		; her own timer has not caught up yet (PLAY-036).
+		(if
+			(and
+				(== ((ScriptID 90 6) room:) 510) ; aYvette
+				(or (!= gAct 3) (>= global111 10) (TimeCheck $c304)) ; has 12:45 am occurred?
+			)
+			((ScriptID 90 6) moveTo: -2) ; aYvette
+		)
 		(self setRegions: 90)
 		(switch gPrevRoomNum
 			(521 ; meanWhile
@@ -204,7 +213,9 @@
 				(== ((ScriptID 90 6) room:) -2) ; aYvette
 				(not (TimeCheck $c304)) ; has 12:45 am occurred?
 			)
-			((ScriptID 90 6) moveTo: 510 goTo: 430) ; aYvette
+			; She now stays in this room near her door instead of walking on to
+			; 430 (PLAY-036, D-046).
+			((ScriptID 90 6) moveTo: 510 posn: 295 178 cue: 0) ; aYvette
 		)
 		(if local1
 			(ClearFlag 31)

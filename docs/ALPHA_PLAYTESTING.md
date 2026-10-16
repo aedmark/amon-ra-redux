@@ -10,7 +10,7 @@ only crashes.
 
 ## Before you begin
 
-- Use the build named `LB2-Redux-v0.06.zip` and keep an untouched backup.
+- Use the build named `LB2-Redux-v0.07.zip` and keep an untouched backup.
 - Extract it into a fresh directory. Do not mix its files with another Redux build, the CD edition, or an existing
   modded installation.
 - Start a new game for the most useful test. Old Sierra saves, including saves from earlier alphas, may contain state
@@ -21,6 +21,19 @@ only crashes.
 
 If launching manually in DOSBox-X, mount the extracted game directory as drive C and run `SCIDHUV.EXE`. Repository
 users can run `./tools/run_dosbox.sh` from the project root.
+
+## What's new in v0.07
+
+- In Act 3, O'Riley patrols between the pterodactyl room, the dagger case, and the spot where Pippin died; Watney and,
+  from 11:15, Olympia follow the rounds Sierra wrote for them; and between eavesdropping scenes Yvette strolls the
+  Rodin room outside her office. Olympia is no longer always in her office to catch you with the snake oil.
+- The preservation lab's vats can be climbed again.
+- Entering the back storeroom no longer crashes to DOS with "Build Line Error".
+- Once O'Riley takes the dagger, it leaves the notebook.
+
+None of these has had a full playthrough yet, so reports on them are especially welcome. The patrols start during
+Act 3, so test them from a save made before the end of Act 2. Saves made in Acts 3 to 6 under earlier builds may not
+restore correctly.
 
 ## What's new in v0.06
 
@@ -33,8 +46,6 @@ users can run `./tools/run_dosbox.sh` from the project root.
 - The police-file volume in Carrington's office, the intercom's buttons, the Ankh, and the bloody footprint beside
   Pippin's body respond where you click them.
 - Using the carbon paper on Yvette's lamp while it is off gives an ordinary reply instead of an error.
-
-None of these has had a full playthrough yet, so reports on them are especially welcome.
 
 ## What's new in v0.05
 
@@ -210,6 +221,13 @@ Use this section if you want to play naturally without being told where every cl
 - [ ] The pocket-watch confrontation is not lost merely because the clock has passed 1:45.
 - [ ] Characters react to murders only after Laura learns of the corresponding death.
 - [ ] O'Riley remains available after 10:15 for follow-up questions.
+- [ ] O'Riley moves between the pterodactyl room, the dagger case, and where Pippin died, pausing at each, and never
+  walks off mid-conversation.
+- [ ] Watney and, after 11:15, Olympia move between rooms instead of standing in one place.
+- [ ] After the eavesdropped scene between O'Riley and Yvette, Yvette strolls the Rodin room outside her office, and is
+  gone before the next scene at her door.
+- [ ] Using Hand on a vat in the preservation lab climbs it.
+- [ ] Entering the back storeroom with the snake oil on its shelf causes no crash.
 - [ ] Notebook completion marks and reopened topics track genuinely new dialogue.
 - [ ] A complete run can earn the full Act 3 grade.
 
@@ -242,7 +260,7 @@ Use this section if you want to play naturally without being told where every cl
 - [ ] The jar permits three successful refills and rejects a full bottle or a depleted jar.
 - [ ] Intended item consumption does not cause the safety check to recreate the item later.
 - [ ] The recovered dagger receives character-specific reactions.
-- [ ] Giving the dagger to O'Riley removes it from inventory but retains recovery credit.
+- [ ] Giving the dagger to O'Riley removes it from inventory and from the notebook but retains recovery credit.
 - [ ] A complete run can earn the full Act 5 grade.
 
 ### Act 6 and ending
@@ -270,7 +288,7 @@ existing report first, but add your save or reproduction details when they provi
 Please use this template:
 
 ```text
-Alpha build: v0.06
+Alpha build: v0.07
 Environment: DOSBox-X version / ScummVM version / other
 Operating system:
 Act and location:

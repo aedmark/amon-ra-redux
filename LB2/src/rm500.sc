@@ -1109,7 +1109,7 @@
 			)
 			(11
 				(SetFlag 85)
-				((ScriptID 90 3) moveTo: local3) ; aORiley
+				((ScriptID 90 3) moveTo: local3 cue: 0) ; aORiley, resume patrol (PLAY-036)
 				(gCurRoom newRoom: (gCurRoom south:))
 				(self dispose:)
 			)
