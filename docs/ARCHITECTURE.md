@@ -66,7 +66,7 @@ works. The floppy is a hybrid SCI1/SCI1.1 build (D-028).
 - **Dagger hand-off (P2-07, D-015):** modules 1884, 1885, and 1887..1892 react to the real artifact. O'Riley's actors in
   Scripts 90 and 93 take it on verb 22 with `(gEgo put: 11)` and drop notebook clue 780 (PLAY-035).
 - **Party lines (D-042):** RotundaRgn's `PartyCase` plays case + 100 during Act 2 when it exists.
-- **Answered topics (PLAY-008, D-049):** museum Ask sites set `global178` (character bit + 1); Script 20 greys
+- **Answered topics (PLAY-008, D-049):** museum and Act 1 Ask sites set `global178` (character bit + 1); Script 20 greys
   topics whose bit is set in the asked grid (`global296`, one word per topic) and commits the chosen topic on its
   next open, after the character's own first-time check.
 - **Identity acquisition (P2-01, D-009, D-033):** room 335's benefit register (Look, Hand, Magnifier) records Steve,

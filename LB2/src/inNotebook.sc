@@ -27,7 +27,7 @@
 	local10
 )
 
-; PLAY-008: notebook topics a museum character has already answered are drawn in grey.
+; PLAY-008: notebook topics the character being asked has already answered are drawn in grey.
 ; The asked grid is one word per topic from global296, one bit per character (proc27_0, proc27_1),
 ; cleared at each act break except bits 10 and 11 (proc27_2). Characters set global178 to their bit + 1
 ; just before opening the notebook. The chosen topic waits in global179 (grid index), global180 (bit + 1),
@@ -39,6 +39,9 @@
 	(cond
 		((and (<= 257 param1) (<= param1 272))
 			(cond
+				; Sgt. O'Flaherty's answer about O'Riley changes once Laura has read O'Riley's
+				; folder (flag 43), so the topic moves to the unused index 24 and reopens.
+				((and (== param1 260) (IsFlag 43)) (return 24))
 				((and (== param1 258) (IsFlag 134)) (return 68))
 				((and (== param1 259) (or (IsFlag 171) (IsFlag 12))) (return 67))
 				((and (== param1 264) (or (IsFlag 143) (IsFlag 72))) (return 70))

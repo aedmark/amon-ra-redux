@@ -650,7 +650,7 @@ Track every file in `LB2/` under its uppercase name, matching the retail release
   exFAT; `uppercase_names.py --check` can. Older commits keep lowercase names; diffs
   across the rename need `git log --follow` or `-M`.
 
-## D-049 Grey Out Notebook Topics a Museum Character Has Answered
+## D-049 Grey Out Notebook Topics a Character Has Answered
 
 Show which topics the character being asked has already answered, using the game's own asked grid.
 
@@ -670,14 +670,19 @@ Show which topics the character being asked has already answered, using the game
   - Topics whose bit is set for the current character draw in `global154` (mid grey). Places `513..520` use the unused
     indexes 16..23. A dead person's topic uses the handlers' death word (the Countess's uses unused index 66, since the
     handlers share 365 with Ernie's), so it reopens for everyone; `proc27_2` reopens everything at each act break.
-    The six misc topics (`1025..1030`) use the unused indexes 60..65; index 24 stays free.
+    The six misc topics (`1025..1030`) use the unused indexes 60..65.
+- **Act 1 (maintainer, 2026-10-17):** Crodfoller 0, Luigi 1, the street kid 2, Lo Fat 3, Sgt. O'Flaherty 4, Ziggy 5,
+  the speakeasy bathroom man 6, and Steve 13 set `global178` at their Ask sites (rooms 230, 210, 260, 270, 290, 310,
+  320, 240). Room 250's act break clears the grid before any museum handler reads it; Act 1 avoids bits 10 and 11,
+  which survive it. Left out: the taxi drivers, bartender, flapper, and piano player (one reply for every topic) and
+  the speakeasy password and "who sent ya" prompts (not Ask). O'Flaherty's O'Riley answer changes once Laura has
+  read O'Riley's folder (flag 43), so topic 260 then uses the unused index 24. Lo Fat's room-local first-visit replies
+  are not tracked: his topics stay grey on a later visit. Luigi and the kid answer most topics with one reply per
+  category; only the topic asked greys.
 - **Consequences:** No new objects, locals, or save fields; the globals were unused. Asking without the notebook
   (a topic passed directly) does not mark it. The dagger's recovered word (368) lies outside `proc27_2`'s range, as for
-  the handlers, so it does not reopen at act breaks. To add Act 1 characters later, set `global178` at their Ask sites
-  (`rm230`, `rm240`, `rm270`, `rm290`, `rm310`, ...) with a bit no handler reads for another character; bits clear at
-  each act break, so Act 1 can reuse museum bits for characters absent from Act 1, and Ziggy (5) and Steve (13) keep
-  theirs. Bit 12 is the ferret's (an easter egg in rooms 600 and 630) and bit 0 is read by the Countess's and
-  Ziggy's handlers. Rebuilding Scripts 31 to 37 also fixed a latent bug: their actors had 69 properties against
+  the handlers, so it does not reopen at act breaks. Bit 12 is the ferret's (an easter egg in rooms 600 and 630), and bit 0
+  is read by the Countess's and Ziggy's museum handlers. Rebuilding Scripts 31 to 37 also fixed a latent bug: their actors had 69 properties against
   `MuseumActor`'s 70 since Redux added `inConversation` (681), so `TravelToRoom cue` read one word past each of Ernie,
   Heimlich, Pippin, Rameses, and Steve and could halt their travel. Their heaps grow by one word per actor, so saves
   made while those scripts were loaded (Acts 3 to 6) under earlier builds may not restore.

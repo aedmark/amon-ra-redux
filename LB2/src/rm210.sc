@@ -540,6 +540,7 @@
 				)
 			)
 			(6
+				(= global178 2) ; PLAY-008: bit 1 marks topics Luigi has answered
 				(cond
 					(
 						(and

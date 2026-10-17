@@ -31,6 +31,7 @@
 )
 
 (procedure (localproc_0 &tmp temp0)
+	(= global178 6) ; PLAY-008: bit 5 marks topics Ziggy has answered
 	(switch (= temp0 (gCurRoom setInset: (ScriptID 20 0))) ; inNotebook
 		(1026
 			(gMessager say: 1 6 28)

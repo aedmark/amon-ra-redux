@@ -425,6 +425,7 @@
 	(method (doVerb param1 &tmp temp0)
 		(switch param1
 			(6
+				(= global178 3) ; PLAY-008: bit 2 marks topics the street kid has answered
 				(switch (= temp0 (gCurRoom setInset: (ScriptID 20 0))) ; inNotebook
 					(1026
 						(gMessager say: 18 6 5)
@@ -503,6 +504,7 @@
 	(method (doVerb param1 &tmp temp0)
 		(switch param1
 			(6
+				(= global178 3) ; PLAY-008: bit 2 marks topics the street kid has answered
 				(switch (= temp0 (gCurRoom setInset: (ScriptID 20 0))) ; inNotebook
 					(1026
 						(gMessager say: 17 6 5)
@@ -576,6 +578,7 @@
 	(method (doVerb param1 &tmp temp0)
 		(switch param1
 			(6
+				(= global178 3) ; PLAY-008: bit 2 marks topics the street kid has answered
 				(switch (= temp0 (gCurRoom setInset: (ScriptID 20 0))) ; inNotebook
 					(1026
 						(gMessager say: 19 6 5)

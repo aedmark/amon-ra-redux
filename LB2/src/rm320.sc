@@ -421,6 +421,7 @@
 				(gMessager say: 3 2)
 			)
 			(6
+				(= global178 7) ; PLAY-008: bit 6 marks topics the bathroom man has answered
 				(switch (gCurRoom setInset: (ScriptID 20 0)) ; inNotebook
 					(269
 						(gMessager say: 3 6 7)

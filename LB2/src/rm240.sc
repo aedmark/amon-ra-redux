@@ -416,6 +416,7 @@
 				(= cycles 4)
 			)
 			(4
+				(= global178 14) ; PLAY-008: bit 13 marks topics Steve has answered
 				(switch (gCurRoom setInset: (ScriptID 20 0)) ; inNotebook
 					(262
 						(gMessager say: 10 6 7 0 self)

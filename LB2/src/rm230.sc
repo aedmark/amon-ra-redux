@@ -564,6 +564,7 @@
 				(crod loop: 1 posn: 273 152 setScript: 0 setCycle: End self)
 			)
 			(1
+				(= global178 1) ; PLAY-008: bit 0 marks topics Crodfoller has answered
 				(switch (= temp0 (gCurRoom setInset: (ScriptID 20 0))) ; inNotebook
 					(1026
 						(gMessager say: 12 6 41 0 self)

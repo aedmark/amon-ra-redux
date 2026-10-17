@@ -61,11 +61,12 @@ Scripts 31 to 37's heaps, so Act 3 to 6 saves from earlier builds may not restor
 
 1. Maintainer retest of PLAY-037 (Tut's Act 3 introduction, ankh and Dagger reactions, Carrington's Dagger line),
    PLAY-002 (Rocco's greeting on a second clean-cab ride), PLAY-004 (the barflies' Talk, Ask, Magnifier), and
-   PLAY-008 (grey answered topics with museum characters; reopening after a death and at an act break).
+   PLAY-008 (grey answered topics in Act 1 and the museum; reopening after a death, after O'Riley's folder,
+   and at an act break).
 2. Publish v0.09 when ready.
 3. Retest PLAY-012 to PLAY-024 and session 54's rooms during the fresh playthrough (`PLAYTEST_CHECKLIST.md`).
 4. Check the podium's collision from both sides and a Magnifier repeat.
-5. PLAY-009 next; PLAY-006 belongs to Phase 5; PLAY-008 for Act 1 characters later (D-049).
+5. PLAY-009 next; PLAY-006 belongs to Phase 5.
 6. Begin P5-01 design only after the playthrough gate closes.
 
 ## Open questions for maintainers
@@ -108,6 +109,10 @@ global reloads (D-041 drift); heap identical. Message files gain only the new re
 - PLAY-008 / D-049: grey answered topics for the museum cast (Scripts 20, 90, 93, 31, 32, 35, 36, 37). Rebuilding
   Scripts 31 to 37 fixed a latent bug: their actors lacked `MuseumActor`'s 70th property (`inConversation`), so
   `TravelToRoom cue` read past them.
+
+- PLAY-008 for Act 1: Crodfoller, Luigi, the street kid, Lo Fat, O'Flaherty, Ziggy, the bathroom man, and Steve
+  (rooms 210 to 320); O'Flaherty's O'Riley topic reopens after the folder (flag 43). Every room build differs only
+  by its assignment; heaps identical.
 
 **Verified (PLAY-008):** Scripts 20, 90, and 93 differ from their committed builds only in the new code; heaps
 identical; misc topics added afterwards (Script 20 only, heap identical). Scripts 31 to 37 differ by the two-instruction assignment and one added property per actor, matching the
