@@ -9,6 +9,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 ### Fixed
 - After her first ride, the clean cab's driver greets Laura by name and asks where she's going, instead of asking her to prove she's a reporter every time (PLAY-002).
 - The two men at the speakeasy bar have their own replies to Talk, Ask, and the Magnifying Glass (PLAY-004).
+- The copy-protection quiz is gone: Crodfoller no longer tests Laura on Egyptology, and Acts 3 and 5 begin without the hieroglyph screen (PLAY-009, D-050).
 - From the museum party on, Ernie, Heimlich, Pippin, Rameses, and Steve can no longer get stuck partway through their rounds (D-049).
 
 ### Changed

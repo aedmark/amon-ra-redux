@@ -271,7 +271,11 @@
 				(crod setCycle: Beg self)
 			)
 			(4
-				(gCurRoom newRoom: 18)
+				; PLAY-009: no copy-protection quiz (room 18); flag 34 records it as passed.
+				(SetFlag 34)
+				(gGame handsOn:)
+				(crod setScript: sTypeAwayCrod)
+				(self dispose:)
 			)
 		)
 	)

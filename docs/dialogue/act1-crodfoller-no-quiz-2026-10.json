@@ -1,0 +1,12 @@
+{
+ "module": 230,
+ "character": "Crodfoller Rhubarb",
+ "voice": "Jokey, competitive coworker.",
+ "notes": "PLAY-009: the copy-protection quiz is removed, so his introduction no longer ends by announcing an Egyptology test; he keeps the jab and offers help in the same line. Records (11, 0, 0, 1) and (11, 0, 0, 2), his pass and fail reactions, are no longer reached.",
+ "entries": [
+  {
+   "tuple": [1, 0, 0, 9, 7],
+   "text": "Nothing personal, but I question Sam's decision to put a novice on this assignment instead of me.  Still, Sam's the boss, so I'll help you any way I can."
+  }
+ ]
+}

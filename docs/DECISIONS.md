@@ -687,6 +687,21 @@ Show which topics the character being asked has already answered, using the game
   Heimlich, Pippin, Rameses, and Steve and could halt their travel. Their heaps grow by one word per actor, so saves
   made while those scripts were loaded (Acts 3 to 6) under earlier builds may not restore.
 
+## D-050 Remove the Copy-Protection Quiz
+
+Take room 18's hieroglyph quiz out of play instead of leaving a screen that always passes.
+
+- **Context:** Room 18 shows Sierra's copy-protection quiz after Crodfoller's introduction (Act 1) and at the act
+  breaks into Acts 3 and 5, then returns to rooms 230, 355, or 420. Redux's build already passes every answer (the
+  decompiled check is lost and `local29` is fixed at 1) and sets flag 34, which rooms 230, 355, and 420 read to run a
+  failure scene. The maintainer asked for the screen to be removed entirely (PLAY-009).
+- **Decision:** Room 230's `sDoTalking` ends in the newsroom and room 26's act break goes straight to 355 or 420; both
+  set flag 34. Room 420's entry case for room 18 now matches room 26, so Act 5 still starts at (264, 164) facing
+  south. Crodfoller's last introduction line drops the test and offers help (new loose `230.MSG`, made from the
+  archive copy). Room 18 stays in the build, unreached.
+- **Consequences:** Crodfoller's pass and fail reactions (`230.MSG` noun 11) and the "research, research, research"
+  death are no longer reachable. No heap changes; saves past Act 1 already have flag 34.
+
 ## Open questions
 
 - **Q-001**: Resolved by D-007: Omit insensitive original CD voice tracks; restore murder lines as text messages in

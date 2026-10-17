@@ -128,7 +128,6 @@ Scripts still loaded from the archive (D-040's list) are first-time compiles and
 | Finding | Owning script(s) | Lead | Proposed approach |
 | --- | --- | --- | --- |
 | PLAY-006 | 1882 to 1892 `.MSG`, museum conversation handlers | Interjections need new message records and a hook that fires when the asked-about character is in range. | Phase 5 content sweep; prototype Pippin/Carrington first. |
-| PLAY-009 | 1, 3, 5 | The copy-protection screen after the intro, on first talking to Crodfoller, should be removed entirely rather than merely neutralized. | Analyzed; fix planned (see the leads above). |
 
 ## Findings register
 
@@ -145,7 +144,7 @@ diegetic discovery or additive reactions over moving old dialogue behind a new p
 | PLAY-006 | 2+ | Nearby characters should sometimes interject when asked about one another, beginning with Pippin's snide response when Laura asks Carrington about him. | Content sweep candidate; additive dialogue must not isolate existing content. |
 | PLAY-007 | 2 | Ernie, Tut, Olympia, and Watney Little appear in the notebook before Laura meets them or learns their names. | Audited: Rameses, Countess, Olympia, Yvette, Tut have Act 1 diegetic routes; Ernie and Watney remain for Act 2 diegetic checks (D-030). |
 | PLAY-008 | All | Discussed notebook topics should show completion and reopen only when new dialogue becomes available. | Fixed, retest pending (D-049): topics the character being asked has answered draw in grey, for the museum cast and eight Act 1 characters; a murdered person's topic reopens once the death is known, O'Flaherty's O'Riley topic after Laura reads O'Riley's folder, and everything at each act break. |
-| PLAY-009 | 1, 3, 5 | The copy-protection screen after the intro, on first talking to Crodfoller, should be removed entirely rather than merely neutralized. | Analyzed; fix drafted, blocked on the compile environment. See the gameplan row. |
+| PLAY-009 | 1, 3, 5 | The copy-protection screen after the intro, on first talking to Crodfoller, should be removed entirely rather than merely neutralized. | Fixed, retest pending (D-050): Crodfoller's introduction stays in the newsroom, the act breaks go straight to rooms 355 and 420, and both set flag 34 so the failure scenes cannot run. His last line no longer announces a test (`230.MSG (1, 0, 0, 9)`). Room 18 is no longer reached. |
 | PLAY-010 | 1 | The upbeat “perky demeanor” act-grade text is presented against a skull-and-crossbones frame. | Superseded by PLAY-024: the bones were the narrator window's corners, not picture 780. |
 | PLAY-011 | 1 | Asking Ziggy about Yvette or the Countess makes him claim he has never heard of either, contradicting his later dialogue and relationships. | Resolved: Ziggy now gives discreet, plot-safe acknowledgements for both women. |
 | PLAY-012 | 1 | Looking at the banner at the Leyendecker entrance should remark that the party needs formal attire, and only in Act 1. | Fixed, retest pending: the banner's Look plays new `335.msg (1, 1, 2)` in Act 1; Act 2 keeps the original line. |

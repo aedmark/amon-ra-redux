@@ -17,8 +17,8 @@ _Last updated: 2026-10-17, session 59: patch-only distribution (D-047), uppercas
 **In one paragraph:** Phases 1 to 4 are done; Phase 5's entry gate is the clean DOSBox-X playthrough in
 `PLAYTEST_CHECKLIST.md`. Alpha v0.09 is the first patch-only release: `tools/package_patch.py` zips only Redux's
 patch files, which players extract over their own floppy v1.000 copy; the game is unchanged from v0.08. Findings
-PLAY-001 to PLAY-037 are logged; most are fixed and confirmed, PLAY-037, PLAY-002, PLAY-004, PLAY-008, and PLAY-012 to PLAY-024 await a
-retest, and PLAY-006 and PLAY-009 are open. Act 3 patrols (D-046) change Script 90's method tables and D-049 grows
+PLAY-001 to PLAY-037 are logged; most are fixed and confirmed, PLAY-037, PLAY-002, PLAY-004, PLAY-008, PLAY-009, and PLAY-012 to PLAY-024
+await a retest, and PLAY-006 is open (Phase 5). Act 3 patrols (D-046) change Script 90's method tables and D-049 grows
 Scripts 31 to 37's heaps, so Act 3 to 6 saves from earlier builds may not restore.
 
 **Verified**
@@ -62,11 +62,11 @@ Scripts 31 to 37's heaps, so Act 3 to 6 saves from earlier builds may not restor
 1. Maintainer retest of PLAY-037 (Tut's Act 3 introduction, ankh and Dagger reactions, Carrington's Dagger line),
    PLAY-002 (Rocco's greeting on a second clean-cab ride), PLAY-004 (the barflies' Talk, Ask, Magnifier), and
    PLAY-008 (grey answered topics in Act 1 and the museum; reopening after a death, after O'Riley's folder,
-   and at an act break).
+   and at an act break), and PLAY-009 (Crodfoller's introduction and the starts of Acts 3 and 5, no quiz).
 2. Publish v0.09 when ready.
 3. Retest PLAY-012 to PLAY-024 and session 54's rooms during the fresh playthrough (`PLAYTEST_CHECKLIST.md`).
 4. Check the podium's collision from both sides and a Magnifier repeat.
-5. PLAY-009 next; PLAY-006 belongs to Phase 5.
+5. PLAY-006 belongs to Phase 5; no other finding is open.
 6. Begin P5-01 design only after the playthrough gate closes.
 
 ## Open questions for maintainers
@@ -113,6 +113,9 @@ global reloads (D-041 drift); heap identical. Message files gain only the new re
 - PLAY-008 for Act 1: Crodfoller, Luigi, the street kid, Lo Fat, O'Flaherty, Ziggy, the bathroom man, and Steve
   (rooms 210 to 320); O'Flaherty's O'Riley topic reopens after the folder (flag 43). Every room build differs only
   by its assignment; heaps identical.
+
+- PLAY-009 / D-050: removed the copy-protection quiz (rooms 230, 26, 420; new loose `230.MSG`). Each build
+  differs only by the change; heaps identical.
 
 **Verified (PLAY-008):** Scripts 20, 90, and 93 differ from their committed builds only in the new code; heaps
 identical; misc topics added afterwards (Script 20 only, heap identical). Scripts 31 to 37 differ by the two-instruction assignment and one added property per actor, matching the

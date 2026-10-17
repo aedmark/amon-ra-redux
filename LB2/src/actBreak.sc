@@ -36,6 +36,9 @@
 		(LoadMany rsVIEW 26)
 		(LoadMany rsSOUND 30)
 		(gGame handsOff:)
+		; PLAY-009: Acts 3 and 5 start without the copy-protection quiz (room 18), which
+		; returned to rooms 355 and 420; flag 34 records it as passed.
+		(SetFlag 34)
 		(switch gAct
 			(0
 				(= local0 230)
@@ -46,7 +49,7 @@
 			)
 			(2
 				(= local8 (/ (* gScore 100) local4))
-				(= local0 18)
+				(= local0 355)
 			)
 			(3
 				(= local8 (/ (* gScore 100) local5))
@@ -54,7 +57,7 @@
 			)
 			(4
 				(= local8 (/ (* gScore 100) local6))
-				(= local0 18)
+				(= local0 420)
 			)
 			(5
 				(= local8 (/ (* gScore 100) local7))

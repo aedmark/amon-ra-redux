@@ -86,7 +86,7 @@
 			(west
 				(self setScript: sEnterWest)
 			)
-			(18
+			(26 ; PLAY-009: Act 5 starts here from the act break, no longer via room 18.
 				(gEgo posn: 264 164)
 				(gEgo setHeading: 180)
 			)
