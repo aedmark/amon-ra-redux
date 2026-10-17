@@ -110,7 +110,7 @@ global reloads (D-041 drift); heap identical. Message files gain only the new re
   `TravelToRoom cue` read past them.
 
 **Verified (PLAY-008):** Scripts 20, 90, and 93 differ from their committed builds only in the new code; heaps
-identical. Scripts 31 to 37 differ by the two-instruction assignment and one added property per actor, matching the
+identical; misc topics added afterwards (Script 20 only, heap identical). Scripts 31 to 37 differ by the two-instruction assignment and one added property per actor, matching the
 class. Headless boot of a test copy. Not yet seen in play.
 
 **Next session should start with:** The maintainer's retest of PLAY-037, PLAY-002, PLAY-004, and PLAY-008.

@@ -57,6 +57,10 @@
 			)
 			(return (- param1 744))
 		)
+		((and (<= 1025 param1) (<= param1 1030))
+			; The six misc topics fill the grid's unused indexes 60..65.
+			(return (- param1 965))
+		)
 		(else
 			(return -1)
 		)

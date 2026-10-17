@@ -66,8 +66,8 @@ Changes in v0.02 to v0.06 are listed in the [changelog](CHANGELOG.md).
 ## Known issues
 
 These are logged but not fixed yet, so there is no need to report them again: nearby characters rarely chime in when
-asked about each other, and finished topics are greyed out only for museum characters (Acts 2 to 6), not for Act 1
-characters or the notebook's last tab.
+asked about each other, and finished topics are greyed out only for museum characters (Acts 2 to 6), not yet for Act 1
+characters.
 
 ## What every tester should watch for
 

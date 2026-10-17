@@ -670,7 +670,7 @@ Show which topics the character being asked has already answered, using the game
   - Topics whose bit is set for the current character draw in `global154` (mid grey). Places `513..520` use the unused
     indexes 16..23. A dead person's topic uses the handlers' death word (the Countess's uses unused index 66, since the
     handlers share 365 with Ernie's), so it reopens for everyone; `proc27_2` reopens everything at each act break.
-    Misc topics are not marked: the grid has no room for them.
+    The six misc topics (`1025..1030`) use the unused indexes 60..65; index 24 stays free.
 - **Consequences:** No new objects, locals, or save fields; the globals were unused. Asking without the notebook
   (a topic passed directly) does not mark it. The dagger's recovered word (368) lies outside `proc27_2`'s range, as for
   the handlers, so it does not reopen at act breaks. To add Act 1 characters later, set `global178` at their Ask sites
