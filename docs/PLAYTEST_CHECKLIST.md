@@ -128,7 +128,6 @@ Scripts still loaded from the archive (D-040's list) are first-time compiles and
 | Finding | Owning script(s) | Lead | Proposed approach |
 | --- | --- | --- | --- |
 | PLAY-006 | 1882 to 1892 `.MSG`, museum conversation handlers | Interjections need new message records and a hook that fires when the asked-about character is in range. | Phase 5 content sweep; prototype Pippin/Carrington first. |
-| PLAY-008 | 20 (`NotebookItem`), 21 (`addCluesCode`) | Clues live in packed arrays `global202`, `global220`, `global228`, `global263`. | Find the topic-complete state and audit later-act unlocks. |
 | PLAY-009 | 1, 3, 5 | The copy-protection screen after the intro, on first talking to Crodfoller, should be removed entirely rather than merely neutralized. | Analyzed; fix planned (see the leads above). |
 
 ## Findings register
@@ -145,7 +144,7 @@ diegetic discovery or additive reactions over moving old dialogue behind a new p
 | PLAY-005 | 2 | Yvette is absent from the notebook People list; establish whether this is intentional and audit every other lost entry. | Audited: introduced in Act 1 at Lo Fat's Laundry (rm270) or Act 2 at museum (D-030). |
 | PLAY-006 | 2+ | Nearby characters should sometimes interject when asked about one another, beginning with Pippin's snide response when Laura asks Carrington about him. | Content sweep candidate; additive dialogue must not isolate existing content. |
 | PLAY-007 | 2 | Ernie, Tut, Olympia, and Watney Little appear in the notebook before Laura meets them or learns their names. | Audited: Rameses, Countess, Olympia, Yvette, Tut have Act 1 diegetic routes; Ernie and Watney remain for Act 2 diegetic checks (D-030). |
-| PLAY-008 | All | Discussed notebook topics should show completion and reopen only when new dialogue becomes available. | System audit needed across topic flags and later-act unlocks. |
+| PLAY-008 | All | Discussed notebook topics should show completion and reopen only when new dialogue becomes available. | Fixed, retest pending (D-049): for the museum cast in Acts 2 to 6, topics the character being asked has answered draw in grey; a murdered person's topic reopens once the death is known, and everything reopens at each act break. Misc topics and Act 1 characters are not marked yet. |
 | PLAY-009 | 1, 3, 5 | The copy-protection screen after the intro, on first talking to Crodfoller, should be removed entirely rather than merely neutralized. | Analyzed; fix drafted, blocked on the compile environment. See the gameplan row. |
 | PLAY-010 | 1 | The upbeat “perky demeanor” act-grade text is presented against a skull-and-crossbones frame. | Superseded by PLAY-024: the bones were the narrator window's corners, not picture 780. |
 | PLAY-011 | 1 | Asking Ziggy about Yvette or the Countess makes him claim he has never heard of either, contradicting his later dialogue and relationships. | Resolved: Ziggy now gives discreet, plot-safe acknowledgements for both women. |

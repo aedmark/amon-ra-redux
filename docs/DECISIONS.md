@@ -523,7 +523,8 @@ Do not rebuild a committed patch only because it no longer matches a compile of 
   assignment (`(= [a i] (| [a i] x))`), and a value-yielding conditional as `(if c v else 0)`, not `(and c v)`. The
   three existing uses are rewritten this way: `Main` now compiles byte-identical to its committed patch, and
   `n027`'s `proc27_2` matches the archive build (Script 27 still loads from the archive).
-- **Consequences:** The heap-only differences in Scripts 31 to 37 and the codegen differences elsewhere stay. The 2026-10 review missed one real bug: room 610's committed patch and source both carried a decompiler error that wrote an accumulator-indexed array read (`[local15 n]` with `n` already in the accumulator) as `[local15 (previous expression)]`, so the index became that expression's value (PLAY-033). A multi-line `[localN` index in source deserves a check against the archive build. The
+- **Consequences:** The codegen differences stay. The heap-only differences in Scripts 31 to 37 were a real bug, a
+  missing `inConversation` property, fixed by D-049's rebuild. The 2026-10 review missed one real bug: room 610's committed patch and source both carried a decompiler error that wrote an accumulator-indexed array read (`[local15 n]` with `n` already in the accumulator) as `[local15 (previous expression)]`, so the index became that expression's value (PLAY-033). A multi-line `[localN` index in source deserves a check against the archive build. The
   disassembler is a session tool, not part of the repository; a future comparison can reuse the approach.
 
 ## D-042 Give the Act 2 Party Its Own Lines at Case + 100
@@ -648,6 +649,38 @@ Track every file in `LB2/` under its uppercase name, matching the retail release
   compiling room 250, 2026-10-17), so renaming is part of the workflow. `git status` cannot see a case-only change on
   exFAT; `uppercase_names.py --check` can. Older commits keep lowercase names; diffs
   across the rename need `git log --follow` or `-M`.
+
+## D-049 Grey Out Notebook Topics a Museum Character Has Answered
+
+Show which topics the character being asked has already answered, using the game's own asked grid.
+
+- **Context:** The notebook never marks a topic as asked (PLAY-008). The game already has an asked grid: one word per
+  topic from `global296` (people `257..272` at index `topic - 257`, things `769..803` at `topic - 744`), one bit per
+  character, read and set with `proc27_0`/`proc27_1` and cleared at each act break by `proc27_2` except bits 10 and
+  11. The characters' handlers move a murdered person's topic to a second word once the death is known (363 to 368),
+  for their murder-reaction lines. Only about 117 handler sites use the grid, for first-time/repeat lines.
+- **Decision:** Museum cast in Acts 2 to 6 only, dimmed text, the simple reopen rule (maintainer, 2026-10-17).
+  - Each of the 23 museum Ask sites (Scripts 90, 93, 31, 32, 35, 36, 37) sets `global178` to its character's bit + 1
+    just before opening the notebook. Bits: Countess 1, Heimlich 2, Olympia 3, O'Riley 4, Ziggy 5, Rameses 6, Tut 7,
+    Watney 8, Yvette 9, Steve 13, Pippin 14, Ernie 15. Handlers' own bits are kept where unique; the Countess and Ziggy
+    share Sierra's bit 0, and Steve's bit 10 survives act breaks, so they get unused bits.
+  - The notebook (Script 20) stores the chosen topic's grid index, bit, and act in `global179` to `global181`, and sets
+    the bit when it next opens, so each handler's own first-time check runs first. A topic chosen in an earlier act is
+    dropped.
+  - Topics whose bit is set for the current character draw in `global154` (mid grey). Places `513..520` use the unused
+    indexes 16..23. A dead person's topic uses the handlers' death word (the Countess's uses unused index 66, since the
+    handlers share 365 with Ernie's), so it reopens for everyone; `proc27_2` reopens everything at each act break.
+    Misc topics are not marked: the grid has no room for them.
+- **Consequences:** No new objects, locals, or save fields; the globals were unused. Asking without the notebook
+  (a topic passed directly) does not mark it. The dagger's recovered word (368) lies outside `proc27_2`'s range, as for
+  the handlers, so it does not reopen at act breaks. To add Act 1 characters later, set `global178` at their Ask sites
+  (`rm230`, `rm240`, `rm270`, `rm290`, `rm310`, ...) with a bit no handler reads for another character; bits clear at
+  each act break, so Act 1 can reuse museum bits for characters absent from Act 1, and Ziggy (5) and Steve (13) keep
+  theirs. Bit 12 is the ferret's (an easter egg in rooms 600 and 630) and bit 0 is read by the Countess's and
+  Ziggy's handlers. Rebuilding Scripts 31 to 37 also fixed a latent bug: their actors had 69 properties against
+  `MuseumActor`'s 70 since Redux added `inConversation` (681), so `TravelToRoom cue` read one word past each of Ernie,
+  Heimlich, Pippin, Rameses, and Steve and could halt their travel. Their heaps grow by one word per actor, so saves
+  made while those scripts were loaded (Acts 3 to 6) under earlier builds may not restore.
 
 ## Open questions
 

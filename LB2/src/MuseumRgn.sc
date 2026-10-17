@@ -1108,6 +1108,7 @@
 						(if (== argc 2)
 							param2
 						else
+							(= global178 2) ; PLAY-008: bit 1 marks topics aCountess has answered
 							(gCurRoom setInset: (ScriptID 20 0)) ; inNotebook
 						)
 					)
@@ -1277,6 +1278,7 @@
 						(if (== argc 2)
 							param2
 						else
+							(= global178 4) ; PLAY-008: bit 3 marks topics aOlympia has answered
 							(gCurRoom setInset: (ScriptID 20 0)) ; inNotebook
 						)
 					)
@@ -1512,6 +1514,7 @@
 						(if (== argc 2)
 							param2
 						else
+							(= global178 5) ; PLAY-008: bit 4 marks topics aORiley has answered
 							(gCurRoom setInset: (ScriptID 20 0)) ; inNotebook
 						)
 					)
@@ -1770,6 +1773,7 @@
 						(if (== argc 2)
 							param2
 						else
+							(= global178 8) ; PLAY-008: bit 7 marks topics aTut has answered
 							(gCurRoom setInset: (ScriptID 20 0)) ; inNotebook
 						)
 					)
@@ -1910,6 +1914,7 @@
 						(if (== argc 2)
 							param2
 						else
+							(= global178 9) ; PLAY-008: bit 8 marks topics aWatney has answered
 							(gCurRoom setInset: (ScriptID 20 0)) ; inNotebook
 						)
 					)
@@ -2040,6 +2045,7 @@
 							(if (== argc 2)
 								param2
 							else
+								(= global178 10) ; PLAY-008: bit 9 marks topics aYvette has answered
 								(gCurRoom setInset: (ScriptID 20 0)) ; inNotebook
 							)
 						)
@@ -2223,6 +2229,7 @@
 						(if (== argc 2)
 							param2
 						else
+							(= global178 6) ; PLAY-008: bit 5 marks topics aZiggy has answered
 							(gCurRoom setInset: (ScriptID 20 0)) ; inNotebook
 						)
 					)

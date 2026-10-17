@@ -27,6 +27,52 @@
 	local10
 )
 
+; PLAY-008: notebook topics a museum character has already answered are drawn in grey.
+; The asked grid is one word per topic from global296, one bit per character (proc27_0, proc27_1),
+; cleared at each act break except bits 10 and 11 (proc27_2). Characters set global178 to their bit + 1
+; just before opening the notebook. The chosen topic waits in global179 (grid index), global180 (bit + 1),
+; and global181 (act) until the notebook next opens, so each character's own first-time/repeat check
+; runs before the bit is set.
+(procedure (localproc_2 param1)
+	; Grid index for topic param1, or -1. A person's topic moves to the word the characters' own
+	; murder-reaction checks use once that death is known, so it reopens for everyone.
+	(cond
+		((and (<= 257 param1) (<= param1 272))
+			(cond
+				((and (== param1 258) (IsFlag 134)) (return 68))
+				((and (== param1 259) (or (IsFlag 171) (IsFlag 12))) (return 67))
+				((and (== param1 264) (or (IsFlag 143) (IsFlag 72))) (return 70))
+				((and (== param1 266) (or (IsFlag 161) (IsFlag 68))) (return 71))
+				((and (== param1 267) (or (IsFlag 158) (IsFlag 67))) (return 69))
+				((and (== param1 269) (or (IsFlag 69) (IsFlag 165) (IsFlag 166))) (return 66))
+				(else (return (- param1 257)))
+			)
+		)
+		((and (<= 513 param1) (<= param1 520))
+			(return (- param1 497))
+		)
+		((and (<= 769 param1) (<= param1 803))
+			(if (and (== param1 780) (or (IsFlag 155) (IsFlag 22) (gEgo has: 11)))
+				(return 72)
+			)
+			(return (- param1 744))
+		)
+		(else
+			(return -1)
+		)
+	)
+)
+
+(procedure (localproc_3 param1 &tmp temp0)
+	; Has the character being asked already answered topic param1?
+	(if (and global178 (!= (= temp0 (localproc_2 param1)) -1))
+		(if (& [global296 temp0] (>> $8000 (- global178 1)))
+			(return 1)
+		)
+	)
+	(return 0)
+)
+
 (procedure (localproc_0 &tmp temp0 temp1 temp2)
 	(backPage hide:)
 	(morePage hide:)
@@ -128,7 +174,11 @@
 				x
 				y
 				dsCOLOR
-				(if (== local4 param2) global160 else 0)
+				(if (== local4 param2)
+					global160
+				else
+					(if (localproc_3 param2) global154 else 0)
+				)
 				dsWIDTH
 				100
 			)
@@ -188,7 +238,18 @@
 							(notebookList firstTrue: 96 oldOnePresent local4)
 						)
 						(Message msgGET 20 temp100 1 0 temp101 @temp0)
-						(Display @temp0 dsFONT 10 dsCOORD local5 local6 dsWIDTH 100)
+						(Display
+							@temp0
+							dsFONT
+							10
+							dsCOORD
+							local5
+							local6
+							dsCOLOR
+							(if (localproc_3 local4) global154 else 0)
+							dsWIDTH
+							100
+						)
 					)
 					(= local4 subject)
 					(= local5 x)
@@ -526,6 +587,11 @@
 	)
 
 	(method (init)
+		; PLAY-008: commit the topic chosen last time, which has been answered by now.
+		(if (and global180 (== global181 gAct))
+			(= [global296 global179] (| [global296 global179] (>> $8000 (- global180 1))))
+		)
+		(= global180 0)
 		(if (= local9 (!= (((gTheIconBar at: 0) cursor:) view:) 6))
 			(proc0_8 1)
 		)
@@ -618,13 +684,20 @@
 		(DisposeScript 20)
 	)
 
-	(method (doVerb param1)
+	(method (doVerb param1 &tmp temp0)
 		(switch param1
 			(13
 				(gGame setCursor: gWaitCursor)
 				(if (not local4)
 					(= local4 -1)
 				)
+				; PLAY-008: remember the topic for the character being asked.
+				(if (and global178 (> local4 0) (!= (= temp0 (localproc_2 local4)) -1))
+					(= global179 temp0)
+					(= global180 global178)
+					(= global181 gAct)
+				)
+				(= global178 0)
 				(= local8 local4)
 				(inNotebook dispose:)
 			)

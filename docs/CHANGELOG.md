@@ -9,6 +9,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 ### Fixed
 - After her first ride, the clean cab's driver greets Laura by name and asks where she's going, instead of asking her to prove she's a reporter every time (PLAY-002).
 - The two men at the speakeasy bar have their own replies to Talk, Ask, and the Magnifying Glass (PLAY-004).
+- From the museum party on, Ernie, Heimlich, Pippin, Rameses, and Steve can no longer get stuck partway through their rounds (D-049).
+
+### Changed
+- When you ask a museum character a question, topics they have already answered appear in grey. A topic about a murder victim lights up again once Laura learns of the death, and every topic does at the start of a new act (PLAY-008, D-049). Saves from Act 3 onward made with earlier builds may not restore.
 
 ## [0.09-alpha] - 2026-10-16
 

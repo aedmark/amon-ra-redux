@@ -17,9 +17,9 @@ _Last updated: 2026-10-17, session 59: patch-only distribution (D-047), uppercas
 **In one paragraph:** Phases 1 to 4 are done; Phase 5's entry gate is the clean DOSBox-X playthrough in
 `PLAYTEST_CHECKLIST.md`. Alpha v0.09 is the first patch-only release: `tools/package_patch.py` zips only Redux's
 patch files, which players extract over their own floppy v1.000 copy; the game is unchanged from v0.08. Findings
-PLAY-001 to PLAY-037 are logged; most are fixed and confirmed, PLAY-037, PLAY-002, PLAY-004, and PLAY-012 to PLAY-024 await a retest,
-and PLAY-006, 008, and 009 are open. Act 3 patrols (D-046) change Script 90's method tables, so saves made in
-Acts 3 to 6 under builds before v0.07 may not restore.
+PLAY-001 to PLAY-037 are logged; most are fixed and confirmed, PLAY-037, PLAY-002, PLAY-004, PLAY-008, and PLAY-012 to PLAY-024 await a
+retest, and PLAY-006 and PLAY-009 are open. Act 3 patrols (D-046) change Script 90's method tables and D-049 grows
+Scripts 31 to 37's heaps, so Act 3 to 6 saves from earlier builds may not restore.
 
 **Verified**
 
@@ -60,11 +60,12 @@ Acts 3 to 6 under builds before v0.07 may not restore.
 ## Next steps (in order)
 
 1. Maintainer retest of PLAY-037 (Tut's Act 3 introduction, ankh and Dagger reactions, Carrington's Dagger line),
-   PLAY-002 (Rocco's greeting on a second clean-cab ride), and PLAY-004 (the barflies' Talk, Ask, Magnifier).
+   PLAY-002 (Rocco's greeting on a second clean-cab ride), PLAY-004 (the barflies' Talk, Ask, Magnifier), and
+   PLAY-008 (grey answered topics with museum characters; reopening after a death and at an act break).
 2. Publish v0.09 when ready.
 3. Retest PLAY-012 to PLAY-024 and session 54's rooms during the fresh playthrough (`PLAYTEST_CHECKLIST.md`).
 4. Check the podium's collision from both sides and a Magnifier repeat.
-5. Design PLAY-008 (notebook completion marks); PLAY-009 next; PLAY-006 belongs to Phase 5.
+5. PLAY-009 next; PLAY-006 belongs to Phase 5; PLAY-008 for Act 1 characters later (D-049).
 6. Begin P5-01 design only after the playthrough gate closes.
 
 ## Open questions for maintainers
@@ -104,7 +105,15 @@ the pre-rename commit both match and boot. Documentation and manual checks.
 **Verified (PLAY-002/004):** Script 250 differs from its committed build only in `sHasPressPass` plus 16 equivalent
 global reloads (D-041 drift); heap identical. Message files gain only the new records. Headless boot of a test copy.
 
-**Next session should start with:** The maintainer's retest of PLAY-037, PLAY-002, and PLAY-004; then PLAY-008.
+- PLAY-008 / D-049: grey answered topics for the museum cast (Scripts 20, 90, 93, 31, 32, 35, 36, 37). Rebuilding
+  Scripts 31 to 37 fixed a latent bug: their actors lacked `MuseumActor`'s 70th property (`inConversation`), so
+  `TravelToRoom cue` read past them.
+
+**Verified (PLAY-008):** Scripts 20, 90, and 93 differ from their committed builds only in the new code; heaps
+identical. Scripts 31 to 37 differ by the two-instruction assignment and one added property per actor, matching the
+class. Headless boot of a test copy. Not yet seen in play.
+
+**Next session should start with:** The maintainer's retest of PLAY-037, PLAY-002, PLAY-004, and PLAY-008.
 
 ### Session 58: 2026-10-16: Vats, Storeroom Crash, and Dagger Topic
 

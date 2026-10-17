@@ -42,6 +42,7 @@
 							(if (== argc 2)
 								param2
 							else
+								(= global178 14) ; PLAY-008: bit 13 marks topics aSteve has answered
 								(gCurRoom setInset: (ScriptID 20 0)) ; inNotebook
 							)
 						)
