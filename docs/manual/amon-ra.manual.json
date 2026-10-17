@@ -464,7 +464,7 @@
             "murder-investigation",
             "p2"
           ],
-          "what": "Activates inaccessible dialogue branches in MSG message resources where characters react to discovered murders (O'Reilly discussing Ziggy's or Carrington's death) and death messages. Explicitly omits the culturally insensitive CD voice acting tracks, focusing purely on high-fidelity text while maintaining SCI audio sync hooks for future custom recordings.",
+          "what": "Activates inaccessible dialogue branches in MSG message resources where characters react to discovered murders (O'Riley discussing Ziggy's or Carrington's death) and death messages. Explicitly omits the culturally insensitive CD voice acting tracks, focusing purely on high-fidelity text while maintaining SCI audio sync hooks for future custom recordings.",
           "how": {
             "lead": "Synchronizes discovery cutscene flags and interrogation switch dispatchers across MuseumRgn (Script 90), RotundaRgn (Script 93), aHeimlich (Script 32), and aRameses (Script 36):",
             "points": [
@@ -616,30 +616,30 @@
         {
           "id": "p2-07-dagger-discovery-reactions",
           "title": "P2-07: Dagger Discovery Reaction & Inventory Hand-off",
-          "summary": "Adds meaningful character reactions to seeing the dagger and fixes inventory removal upon giving it to O'Reilly.",
+          "summary": "Adds meaningful character reactions to seeing the dagger and fixes inventory removal upon giving it to O'Riley.",
           "tags": [
             "inventory",
             "dagger",
             "scripting",
             "p2"
           ],
-          "what": "Characters respond with genuine shock, fear, or suspicion when presented with the actual Dagger of Amon Ra; giving the dagger to Officer O'Reilly correctly removes it from Laura's inventory.",
+          "what": "Characters respond with genuine shock, fear, or suspicion when presented with the actual Dagger of Amon Ra; giving the dagger to Officer O'Riley correctly removes it from Laura's inventory.",
           "how": {
             "lead": "Uses the dagger's existing verb 22 and loose resource overrides:",
             "points": [
               "Replace the replica and gift-shop responses in modules 1884, 1885, and 1887 through 1892 with tailored recognition of the authentic artifact.",
-              "In both O'Reilly actor handlers (Scripts 90 and 93), preserve normal verb-22 dialogue and then execute (gEgo sel_351: 11) when Laura owns the dagger.",
+              "In both O'Riley actor handlers (Scripts 90 and 93), preserve normal verb-22 dialogue and then execute (gEgo put: 11) when Laura owns the dagger, then drop notebook clue 780 with dropCluesCode so the topic closes (PLAY-035).",
               "Use inventory ownership as the canonical custody state, so the icon disappears immediately without adding a parallel hand-off flag."
             ]
           },
           "why": "Finding the titular stolen relic is the central objective of the mystery; suspects ignoring it breaks narrative logic, and retaining the dagger after handing it to police causes item duplication glitches.",
           "evidence": [
             {
-              "label": "Museum O'Reilly Handler",
+              "label": "Museum O'Riley Handler",
               "target": "LB2/90.SCR"
             },
             {
-              "label": "Rotunda O'Reilly Handler",
+              "label": "Rotunda O'Riley Handler",
               "target": "LB2/93.SCR"
             },
             {
@@ -1062,20 +1062,20 @@
         {
           "id": "p3-06-npc-wander-stabilization",
           "title": "P3-06: NPC Wander Mechanic Stabilization",
-          "summary": "Pauses museum NPC travel during dialogue, resumes the same route afterward, and extends O'Reilly's availability in Acts 3 and 4.",
+          "summary": "Pauses museum NPC travel during dialogue, resumes the same route afterward, and extends O'Riley's availability in Acts 3 and 4.",
           "tags": [
             "npcs",
             "wandering",
             "dialogue",
             "p3"
           ],
-          "what": "Stops Script 90 museum actors from wandering off mid-conversation while preserving their scheduled destination; keeps Officer O'Reilly accessible after 10:15 for questioning in Acts 3 and 4.",
+          "what": "Stops Script 90 museum actors from wandering off mid-conversation while preserving their scheduled destination; keeps Officer O'Riley accessible after 10:15 for questioning in Acts 3 and 4.",
           "how": {
             "lead": "Coordinates Script 90's museum actors, travel controller, message callback, and Script 22 clock event:",
             "points": [
               "Route every museum-actor message through a wrapper that locks the selected actor and stops its active mover.",
               "Prevent TravelToRoom from advancing while locked; on dismissal, clear the lock and re-enter its current state so the same fixed or random route resumes.",
-              "Skip O'Reilly's 10:15 removal while global123 is Act 3 or Act 4, retaining the original removal behavior in other acts.",
+              "Skip O'Riley's 10:15 removal while global123 is Act 3 or Act 4, retaining the original removal behavior in other acts.",
               "Give the lock flag and the locking say method their own selectors (681 inConversation, 682 sayAndHold) instead of reusing vanilla's Rotunda conversation selectors 667 and 668 (D-039)."
             ]
           },
@@ -1239,7 +1239,7 @@
             "quiz-logic",
             "p4"
           ],
-          "what": "Fixes the Script 750 outcome bug that falsely claimed Laura lost the Dagger of Amon Ra when she answered theft questions incorrectly, even when she physically retained it or handed it to O'Reilly.",
+          "what": "Fixes the Script 750 outcome bug that falsely claimed Laura lost the Dagger of Amon Ra when she answered theft questions incorrectly, even when she physically retained it or handed it to O'Riley.",
           "how": {
             "lead": "Separates quiz feedback from the physical history used by the epilogue:",
             "points": [

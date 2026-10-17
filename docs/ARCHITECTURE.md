@@ -1,12 +1,9 @@
 # Architecture
 
-A technical specification of the SCI 1.1 engine architecture, resource patching model, and modernization subsystems
-for *The Dagger of Amon Ra: Redux*.
+How Redux patches the DOS floppy v1.000 release (D-001) with loose files (D-002), and how each subsystem it changes
+works. The floppy is a hybrid SCI1/SCI1.1 build (D-028).
 
 ## System overview
-
-*The Dagger of Amon Ra: Redux* modernizes Sierra On-Line's 1992 adventure game *The Dagger of Amon Ra* (Laura Bow II).
-The project builds upon the DOS Floppy v1.000 release (D-001) using a modular loose-patch architecture (D-002).
 
 ```
                                  +-------------------------+
@@ -42,61 +39,107 @@ The project builds upon the DOS Floppy v1.000 release (D-001) using a modular lo
 
 | Component | Files / Scope | Role |
 | --- | --- | --- |
-| **Base Assets** | `LB2/RESOURCE.000`, `LB2/RESOURCE.MAP`, `LB2/VERSION` | Immutable v1.000 floppy media providing uncompressed 256-color art deco backgrounds and baseline audio drivers. |
-| **SCI Companion** | `SCI Companion/SCICompanion.exe` (untracked build of the maintainer's fork, [aedmark/SCICompanion](https://github.com/aedmark/SCICompanion)) | Win32 MFC IDE executed under Wine to decompile bytecode, edit and save message tables, inspect polygon barriers, and recompile scripts. Its bundled class and kernel documentation is in `SCI Companion/Help/`. |
-| **Loose Patch Store** | `LB2/*.SCR`, `LB2/*.HEP`, `LB2/*.MSG` | High-priority drop-in script chunks overriding buggy procedures without modifying `RESOURCE.000`. |
-| **Testing Harness** | `./tools/run_dosbox.sh` | DOSBox-X execution of Sierra's original interpreter with the checked-in sound, mount, and startup configuration for deterministic save-state verification. |
-| **3x Manual System** | `docs/manual/` | Portable What/How/Why specification validated against `manual.schema.json` and compiled to standalone `docs/manual/manual.html`. |
+| **Base assets** | `LB2/RESOURCE.000`, `LB2/RESOURCE.MAP`, `LB2/VERSION` | Immutable retail archives; pristine copies in `LB2_vanilla/`. |
+| **Sierra's retail patches** | 23 loose scripts shipped with the floppy (`LB2_vanilla/`) | Vanilla behavior for those scripts; Redux builds contain all their fixes (`SOURCE_PROVENANCE.md`). |
+| **SCI Companion** | `SCI Companion/SCICompanion.exe`, untracked build of the maintainer's fork ([aedmark/SCICompanion](https://github.com/aedmark/SCICompanion)) | Runs under Wine to edit and compile scripts, save messages (D-038), and inspect polygons. Class and kernel docs in `SCI Companion/Help/`. |
+| **Loose patches** | `LB2/*.SCR`, `*.HEP`, `*.MSG`, `*.V56`, `*.VOC` (uppercase, D-048) | Override archive resources by number. |
+| **Distribution** | `tools/package_patch.py`, `LB2 (legal)/` | Zips only Redux's patches for extraction over a retail copy (D-047). |
+| **Testing harness** | `./tools/run_dosbox.sh` | Sierra's interpreter in DOSBox-X with the checked-in configuration. |
+| **3x manual** | `docs/manual/` | What/How/Why entries validated against `manual.schema.json`, built to `manual.html`. |
 
 ## Key subsystem architectures
 
-### 1. Interrogation and Notebook Engine (`Script 13`, `Script 0`)
-- **Vanilla Flow:** Requires 5 sequential clicks: Select Ask icon -> Click NPC actor -> Select Category tab -> Select Topic string -> Click Ask confirmation.
-- **Modernized Flow (P1-01, D-003):** The actor `doVerb` handler captures `vAsk`. If the notebook is closed, it launches directly focused on the target NPC's available topics. If double-clicked, it re-queries the previous subject or context clue immediately.
+### 1. Notebook (Script 20)
+- **Vanilla:** five steps per question: Ask icon, character, category tab, topic, confirm.
+- **Redux (P1-01, D-003):** Script 20's `inNotebook init` opens on the People tab or the last active tab; a
+  double-click in `NotebookItem doVerb` confirms the topic.
 
-### 2. Dialogue & Voiceover Asset Subsystem (`RESOURCE.MSG`, `Script 90`)
-- **Vanilla Flow:** Floppy release relies exclusively on text `.MSG` lumps; later CD release bundled caricatured voice tracks widely criticized for cultural insensitivity.
-- **Modernized Flow (P2-03, D-007):** Original CD voice tracks are omitted. All inaccessible murder discussions and death messages are modernized strictly via text `.MSG` message lumps. SCI talker sync and audio hooks remain intact to support future community voice packs.
-- **Historical Text Layer (P2-04, D-012):** Modules 250, 270, and 310 are supplied as loose `.MSG` overrides. They replace the postwar Pippi reference, distinguish the experimental 1926 transatlantic radiotelephone exchange from the 1927 commercial service, and identify *The Sun Also Rises* as a newly published late-1926 novel.
-- **Acquaintance Routing (P2-05, D-013):** Actor scripts 35, 36, and 90 consult the existing museum acquaintance flags 110..115 before ordinary Talk handling. An unset flag routes to the character's condition-80 formal introduction; message overrides 1882, 1883, and 1888 remove the remaining name assumptions and let Pippin, Dr. Smith, and O'Riley identify themselves.
-- **Steve Relationship Continuity (P2-06, D-014):** Script 240 sets flag 122 when Laura initiates Talk or Ask with Steve in Act 1. Scripts 330, 335, and 350 require that flag before starting the museum reunion, kiss, or embrace sequences, so ignoring Steve preserves a professional coworker relationship instead of manufacturing romantic familiarity.
-- **Dagger Evidence Hand-off (P2-07, D-015):** Loose message modules 1884, 1885, and 1887..1892 replace replica/gift-shop reactions with character-specific recognition of the recovered artifact. O'Reilly's Script 90 and Script 93 actors intercept the dagger's verb 22 after ordinary dialogue dispatch and call `(gEgo sel_351: 11)`, making inventory ownership the canonical custody state without allocating another flag.
-- **Diegetic Identity Acquisition (P2-01, D-009, D-033, D-035, D-036):** Room 335 exposes a real benefit register Feature beside Heimlich. Look, Hand, or Magnifier displays its guest/staff roster and records Steve, Heimlich, Yvette, Rameses, Countess, Olympia, and Tut. The shared Script 21 `addCluesCode` now exits its insertion branch when it finds an existing clue; vanilla instead set the index to the list length and immediately read or wrote one word past the array, which made a second register interaction corrupt memory. The podium's footprint is a downward point at `(190, 176)` in Script 2335's existing barred room polygon rather than an intersecting second polygon; its interaction approach is `(186, 180)`, immediately in front of the obstacle. Room 335 reapplies those approach values and rebinds Script 2335's existing polygon object to the current static points so older saves cannot retain stale geometry; this allocates no objects and never writes through a pointer restored from the save. A rejected attempt to pre-read the saved object and perform those assignments only when stale caused Error 1 on the second Look, so the last runtime-stable unconditional reapply is retained. LOOK, DO, and Magnifier retain the standard `Feature` approach and cue path; the podium consumes only unsupported follow-up dispatches locally so they cannot reach module 0's generic verb-47 narrator fallback. The podium sets `sightAngle` -1 and `approachDist` 4, so a repeat action from the approach point takes the deferred `CueObj` path that a fresh approach uses. The engine's immediate in-event dispatch showed a timing-sensitive generic-message flash (D-036). Ziggy and Ernie are deliberately absent; the attendee posing as Carrington never records Watney. Room 270 preserves Yvette's Act 1 introduction while reducing Heimlich and Olympia to unnamed foreshadowing, and Room 560's police file remains Watney clue 272's evidence-based source.
-- **Museum Dialogue Movement Lock (P3-06, D-021):** Script 90 routes museum `MuseumActor` messages through `sel_668`, which marks the actor dialogue-locked before disposing its current mover. `TravelToRoom.sel_145` refuses to advance while that lock is set. The shared `museumDialogueResume` callback clears the lock when `Messager` closes and re-enters the travel script's current state, preserving both fixed destinations and random-wander routes instead of assigning a new destination. Script 22 skips O'Reilly's 10:15 removal only while `global123` is Act 3 or Act 4.
+### 2. Dialogue, identity, and museum actors (messages; Scripts 21, 90, 93, 335)
+- **Text only (P2-03, D-007):** CD voice tracks are omitted; restored murder dialogue is `.MSG` text. Talker hooks
+  stay intact for a future voice pack.
+- **Historical text (P2-04, D-012):** loose `250.MSG`, `270.MSG`, and `310.MSG` fix the Pippi, radiotelephone, and
+  *The Sun Also Rises* references for the game's late-1926 setting.
+- **Acquaintance routing (P2-05, D-013):** Scripts 35, 36, and 90 check acquaintance flags 110..115 before Talk; an
+  unset flag plays the condition-80 introduction (Act 3+ Tut: case 82, D-042).
+- **Steve continuity (P2-06, D-014):** Script 240 sets flag 122 on an Act 1 Talk or Ask; Scripts 330, 335, and 350
+  require it for the romantic museum sequences.
+- **Dagger hand-off (P2-07, D-015):** modules 1884, 1885, and 1887..1892 react to the real artifact. O'Riley's actors in
+  Scripts 90 and 93 take it on verb 22 with `(gEgo put: 11)` and drop notebook clue 780 (PLAY-035).
+- **Party lines (D-042):** RotundaRgn's `PartyCase` plays case + 100 during Act 2 when it exists.
+- **Identity acquisition (P2-01, D-009, D-033):** room 335's benefit register (Look, Hand, Magnifier) records Steve,
+  Heimlich, Yvette, Rameses, Countess, Olympia, and Tut; never Ziggy, Ernie, or Watney, whose clue 272 comes from his
+  police file in room 560. Script 21's `addCluesCode` stops on a duplicate instead of writing past the array. The
+  podium's footprint is part of Script 2335's barred polygon, its approach is `(186, 180)`, and room 335 rebinds that
+  polygon to static points for old saves without allocating or writing through saved pointers (an attempt to do so
+  conditionally caused Error 1). It consumes unsupported follow-up dispatches (D-035) and uses `sightAngle` -1 and
+  `approachDist` 4 so repeats take the deferred `CueObj` path (D-036). Lo Fat (room 270) foreshadows Heimlich and
+  Olympia unnamed and introduces Yvette.
+- **Conversation lock (P3-06, D-021):** Script 90's `sayAndHold` (selector 682) sets `inConversation` (681), stops the
+  actor's mover, and passes `museumDialogueResume` as the message callback; `TravelToRoom` holds while locked and
+  re-enters its state on dismissal. Script 22 keeps O'Riley past 10:15 in Acts 3 and 4.
+- **Act 3 patrols (D-046):** Watney (the man posing as Carrington) and, from 11:15, Olympia start Sierra's authored
+  `wander` patrols; O'Riley patrols 430, 450, and 454 with 20 to 45 second pauses via `cue`/`wander` overrides;
+  Yvette strolls room 510 between eavesdropping scenes. Script 90's new methods shift later objects' method tables.
 
-### 3. Save/Load Subsystem & Chase Safety (`Script 0`, `Script 500` - `550`)
-- **Vanilla Flow:** CD release disabled `theIconBar` save buttons in Act 5 chase sequences, causing instant-death punishment.
-- **Modernized Flow (P1-02, D-004):** `(theIconBar disable: ICON_SAVE)` calls are removed across chase rooms. Chase villain timer threads check `(theGame isPaused:)` during save dialog interaction to prevent ambush deaths upon restore.
+### 3. Save availability (Scripts 0, 17, 937, 525, 560, 565, 610)
+- **Vanilla:** the save icon is disabled in chase and corpse rooms.
+- **Redux (P1-02, D-004):** icon 7 is protected in `IconBar disable:`, `handsOn`, and `LBRoom setInset:`, and the room
+  lockouts are removed. Script 990's slot search breaks on a match, so new saves no longer overwrite slot 0.
 
-### 4. Progression State Engine & Story Scheduling (`Script 26`, Scripts 22, 250, 454, 510, 560, 610, 630)
-- **Act 1 Errand Gate (P3-05, D-020):** Script 22 stores the press pass, docks visit, baseball trade, and Ziggy conversation as independent `global124` bits 1, 2, 4, and 8. Script 250 formerly used `(proc0_10 16 1)` to require the entire low nibble before displaying the dirty taxi; because its claim ticket is the route to Lo Fat's evening gown, three otherwise optional errands became mandatory. The taxi's three coordinated state checks now use `(proc0_10 1)`, making the persistent press-pass milestone sufficient while preserving the dirty-taxi scene, claim ticket, gown exchange, and dressed Act 1 transition.
-- **Audited Flow (P3-03, D-017):** The outline's alleged Act 2 gate requiring 14 eavesdropping scenes does not exist. Act changes are explicit calls to room 26 (`actBreak`) from authored story sequences; the Act 2-to-3 transition is driven by the Pippin discovery/report sequence in room 454. `global111` is a later ordered scene scheduler shared by rooms 510, 560, and 630, while Script 22's clock logic may set it directly to 15 at 3:00. It is neither a knowledge bitmask nor consulted by `actBreak`.
-- **Preservation Rule:** Do not replace `global111` with an aggregate clue threshold. Skipping its intermediate values can suppress staged conversations, character movement, and murder-era timing, and changing its meaning would reinterpret existing saves. Add future museum activities only as independently scoped content with their own narrative and asset specification.
-- **Post-Bugfix Expansion (P5-01, D-018):** Act 2's passive pacing remains a design target even though it is not caused by a numeric gate. After Phases 3 and 4, add several compact investigations that use existing museum geography and lead naturally into the essential conversation schedule. New activities must layer onto—not replace—the authored transition and scheduler state, with explicit clue, score, message, and old-save behavior.
+### 4. Progression and scheduling (Scripts 22, 26, 250, 454, 510, 560, 610, 630)
+- **Act 1 errands (P3-05, D-020, D-030):** Script 22 stores press pass, docks, baseball, and Ziggy as `global124` bits
+  1, 2, 4, 8. The dirty taxi (claim ticket for Lo Fat's gown) now needs only the press pass `(proc0_10 1)`, a prior
+  clean ride (flag 125), and no ticket yet (flag 27).
+- **Act transitions (P3-03, D-017):** there is no 14-eavesdrop gate. Authored sequences call room 26 (`actBreak`);
+  Act 2 ends with room 454's Pippin discovery. `global111` orders door-listening and character scenes in rooms 510,
+  560, and 630 (Act 3 runs 0 to 10; the act break sets 11; Script 22 may set 15 at 3:00). Do not replace it with a
+  clue threshold: skipping values suppresses scenes and reinterprets saves.
+- **Act 2 expansion (P5-01, D-018):** new activities must layer onto the authored transitions and `global111`, with
+  explicit clue, score, message, and old-save behavior.
 
-### 5. Fair-Play Hazard Warnings (`Script 530`)
-- **Dark Stairwell Warning (P3-04, D-019):** The hidden eastern-tower stairwell uses flag 32 for its blown-out bulb state and item 23 as the intended replacement light. Crossing its north boundary while dark now starts `sWarnDarkStairs`, which halts Laura, moves her back to a safe coordinate, and displays the existing noun 11 / verb 1 / condition 2 warning already used by the `darkPassage` Look handler. The original lit traversal remains unchanged. Inventory item 15 is not treated as the solution because its timer intentionally disables the lantern in rooms below 730.
+### 5. Hazard warnings (Scripts 520, 530)
+- **Dark stairwell (P3-04, D-019):** with the bulb out (flag 32), crossing the north boundary runs `sWarnDarkStairs`:
+  Laura steps back and gets the existing `darkPassage` warning (noun 11, verb 1, condition 2). Bulb item 23 restores
+  the lit route; the lantern (item 15) is no solution because its timer puts it out below room 730. Flag 184 tracks a
+  bulb that burned out this visit (PLAY-026).
+- **Olympia's passage (D-044):** the skull in room 520 opens or closes the panel; Hand on the open panel, or walking
+  in, enters. Room 666's lantern window and bat death are unchanged.
 
-### 6. Softlock Prevention & Item Management (`Script 0`, `Script 15`)
-- **Vanilla Flow:** Missing Wire Cutters, Snake Oil, or Cheese in earlier acts creates unrecoverable "Dead Man Walking" states in Act 5.
-- **Act 5 Supply Audit (P3-01, D-005):** Main's room-transition handler performs one guarded audit when `global123` first equals 5. Missing inventory indices 10 (Wire Cutters), 14 (Snake Oil), and 16 (Cheese) are restored; an empty oil charge counter (`global150 == 0`) is reset to four. Flag 123 makes the repair idempotent, including for existing Act 5 saves, and prevents oil or cheese from reappearing after their intended finale use.
-- **Snake Oil Feedback (P3-02, D-016):** `global150` remains the authoritative four-charge counter. The Snake Oil item in Script 15 maps nonzero charges to View 61's original cel 0 and zero charges to the loose patch's red-X cel 1 in both inventory and toolbar loops. Room 610's laboratory oil jar refills a non-full bottle in one action, rejects full-bottle and empty-jar attempts, consumes one of its three portions, and exposes an enlarged interaction rectangle. The audited vanilla handler has no grape dependency, so none was introduced.
+### 6. Item safety (Scripts 0, 15, 610)
+- **Act 5 supply audit (P3-01, D-005):** on first entering Act 5 (`global123` 5, flag 123 unset), Main restores
+  missing items 10 (wire cutters), 14 (snake oil), and 16 (cheese) and refills an empty `global150` to four; flag 123
+  makes it one-time.
+- **Snake oil (P3-02, D-016):** `global150` is the four-charge counter. Script 15 shows View 61 cel 0 with charges and
+  the red-X cel 1 at zero (`61.V56`, encoded row by row: PLAY-034). Room 610's jar refills a non-full bottle in one
+  action and holds three portions.
 
-### 7. Coroner Inquest & Scoring Logic (`Script 750`, `Script 780`)
-- **Vanilla Flow:** Quiz scoring errors retroactively forced the epilogue to report the Dagger was lost even if Laura retained it. Act score divisors were inconsistent and uninitialized grade indices flashed startup F grades.
-- **Watney Evidence Discovery (P4-01, D-022):** Script 560 owns the police-file path: its bookcase opens a closed-book inset, whose concealed file is inventory item 24. The special volume's rectangle is expanded from 11x15 to 36x38 pixels, and the full bookcase accepts Look, Hand, or Magnifier as a discovery fallback until the file is acquired. Looking at the exposed file idempotently adds clue 793 (its contents) and clue 272 (Watney's People entry); the original Take path still adds both clues, awards its authored point, and grants the item.
-- **Planted-Evidence Review (P4-02, D-023):** The questionnaire and final evaluation are both in Script 750, not the outline's proposed Scripts 700/720. Room 454 records inspection of its bloody high-heel footprint with unused point bit 179. After question 16, Script 750 separately recognizes inventory item 20 (Ankh), item 21 (Pippin's appointment notepad), and the bit-179 footprint plus item 30 (Yvette's shoe). The coroner explains why each is useful but not dispositive and awards idempotent insight points 180, 181, and 182. Carbon paper item 29 is not a schedule and remains unrelated evidence.
-- **Hint-Book Evidence Alignment (P4-03, D-024):** Script 750's best-evidence predicate now implements Sierra's complete 13-item list rather than the vanilla subset of dagger, grapes, cutters, bifocals, and red hair. Inventory remains authoritative for ordinary evidence. Previously recorded acquisition/read state supplies equivalent credit for the surrendered dagger (bit 155) and consumed carbon paper (bit 170), while Room 560 records non-scoring police-file discovery in unused bit 183 so either Look or Take satisfies the file requirement. Murder-answer and theft-answer correctness remain separate inputs to `global126`.
-- **Physical Dagger Outcome (P4-04, D-006, D-025):** Script 750 retains `global126`'s four quiz-result states while the coroner delivers feedback. At the epilogue boundary it preserves the murder-solved dimension (states 1/4 versus 2/3), replaces the theft-quiz dimension with actual recovery `(item 11 or bit 155)`, and writes the normalized four-state outcome before routing. The newspaper art, solved/unsolved scene, and all 19 Script 785 character cards therefore agree with physical history, including a dagger surrendered to O'Reilly.
-- **Attainable Grade Denominators (P4-05, D-006, D-026):** Script 26 grades cumulative `global15` points at each act break. Its original divisors overstated the attainable maxima after Act 2. Auditing every idempotent score flag gives vanilla maxima `5/12/37/47/50`; Redux's footprint point 179 raises Acts 2–5 to `13/38/48/51`. Those five values are now the divisors, so a complete act reports 100%. Grade-band selection is skipped while `global123 == 0`, preventing the ungraded introduction from advancing the first F-message counter. The three P4-02 coroner-review points occur after the Act 5 grade and bring the final raw tally from 51 to 54 without pretending they were available earlier.
-- **Required and Bonus Inquest Sections (P4-06, D-027):** Script 750 labels questions 1–11 as required case findings: questions 1–9 alone can invalidate the murder verdict, and questions 10–11 alone can invalidate the coroner's dagger-theft assessment. Questions 12–16 now run in a separate `sBonusQuestions` state machine under an explicit bonus-museum-inquiries notice. They preserve all authored art-theft, High Priest, feedback, and conditional-skip content but contain no writes to either verdict flag, so bonus answers cannot change the coroner result or ending route.
+### 7. Evidence, inquest, and scoring (Scripts 26, 454, 560, 750)
+- **Police file (P4-01, D-022):** room 560's special volume (now its whole rectangle, PLAY-030) and the bookcase open
+  the inset; looking at the exposed file adds clues 793 and 272, as Take does.
+- **Evidence review (P4-02, D-023):** room 454's footprint close-up sets bit 179. After question 16, Script 750
+  separately credits the Ankh (item 20), Pippin's notepad (21), and footprint plus Yvette's shoe (30) with points
+  180..182, explaining that none proves guilt.
+- **Best evidence (P4-03, D-024):** Sierra's 13-item hint-book list. Bits 155 (dagger acquired), 170 (carbon paper
+  read), and 183 (police file seen) stand in for surrendered, consumed, or untaken items.
+- **Dagger outcome (P4-04, D-025):** feedback uses the quiz states; at the epilogue, `global126` is rebuilt from murder
+  success plus recovery (item 11 or bit 155), so the newspaper, scene, and 19 Script 785 cards follow physical history.
+- **Grades (P4-05, D-026):** Script 26 divides cumulative `global15` by `5/13/38/48/51` (vanilla attainable
+  `5/12/37/47/50` plus point 179); the introduction is ungraded. The three review points raise the final raw total to 54.
+- **Required and bonus questions (P4-06, D-027):** questions 1..11 decide the verdicts; 12..16 run in
+  `sBonusQuestions`, which writes neither verdict flag.
 
 ## Invariants and boundaries
 
-1. **Archive Immutability:** `RESOURCE.000` and `RESOURCE.MAP` must never be directly modified. All fixes are delivered as loose files.
-2. **Floppy Visual Preservation:** No dithered or downgraded CD background graphics may replace the original 256-color hand-painted brushstroke assets (P1-06).
-3. **Voiceover Policy:** Original CD voice tracks remain excluded; talker hooks remain clean for prospective voice talent (D-007).
-4. **Save Compatibility:** Save files (`LB2SG.*`) must deserialize safely across patched rooms without pointer corruption.
-5. **Hybrid Version Handling (D-028, D-032):** The floppy has SCI1.1 scripts but an SCI1-style 6-byte `RESOURCE.MAP`. Compile the repository game one script at a time via `tools/compile.py`; never run Compile All or a resource rebuild against `LB2/`, and boot the game after every compile. P5-00 used Compile All only in a disposable `/tmp` copy as a source-compatibility diagnostic.
-6. **Compiler-facing source (D-032, D-039, D-040, D-041):** `LB2/src/` is a coherent 221-script Sluicebox-annotated reconstruction of the effective Redux bytecode. Selectors carry one readable name per ID from `tools/selector_names.json` (D-039); Redux-only selectors start at 681. `LB2/997.voc` reserves SCI metadata names at IDs 4098, 4100, 4102, and 4103. `Main` numbers `WrapMusic` 47 and `Actions` 127, the reverse of vanilla, so Sierra-compiled scripts that name either class must be rebuilt from source (D-040).
-6. **Toolchain Portability:** Development workflow must remain fully operational under Linux using Wine for SCI Companion and DOSBox-X for original-interpreter regression testing.
+1. **Archive immutability:** never modify `RESOURCE.000` or `RESOURCE.MAP`; every fix is a loose file.
+2. **Floppy art:** no CD background graphics replace the floppy's (P1-06).
+3. **Voice:** CD voice tracks stay excluded; talker hooks stay intact (D-007).
+4. **Save compatibility:** saves (`LB2SG.*`) must restore safely; changes that add objects, locals, or methods to a
+   loaded script are noted with the saves they affect (D-044, D-046).
+5. **Hybrid build (D-028, D-029):** SCI1.1 scripts with an SCI1-style 6-byte `RESOURCE.MAP`. Compile one script at a
+   time with `tools/compile.py`; never Compile All or rebuild resources in `LB2/`; boot after every compile.
+6. **Compiler-facing source (D-032, D-039 to D-041):** `LB2/src/` is a 221-script Sluicebox-annotated reconstruction
+   of the effective Redux bytecode, with one readable name per selector (`tools/selector_names.json`; Redux-only
+   selectors from 681; metadata names at 4098, 4100, 4102, 4103 in `997.VOC`). `Main` numbers `WrapMusic` 47 and
+   `Actions` 127, the reverse of vanilla (D-040).
+7. **Distribution (D-047):** player packages contain only Redux's patch files, never Sierra's.
+8. **Toolchain:** everything runs on Linux: SCI Companion under Wine, Sierra's interpreter in DOSBox-X.

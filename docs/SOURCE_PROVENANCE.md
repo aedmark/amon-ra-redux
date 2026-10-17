@@ -19,7 +19,7 @@ publication as the symbol and annotation reference.
 The published selectors are contextual aliases: one numeric SCI selector can have several human-readable names, so
 the published tree cannot be compiled against one global `vocab.997`. Redux therefore regenerated the effective
 compiled game through Sluicebox's annotation pipeline while emitting stable numeric selector names. All globals,
-objects, procedures, recovered control flow, and annotations remain readable. Since D-039, `LB2/997.voc` and the source
+objects, procedures, recovered control flow, and annotations remain readable. Since D-039, `LB2/997.VOC` and the source
 use one readable name per selector from `tools/selector_names.json` (applied by `tools/name_selectors.py`); 528 of the
 563 names appear in the same order in the CD release's vocab 997, which the floppy lacks. The earlier `sel_N` vocabulary named selectors `sel_N`
 except for SCI's required metadata selectors 4098 (`-propDict-`), 4100 (`-classScript-`), 4102 (`-super-`), and 4103

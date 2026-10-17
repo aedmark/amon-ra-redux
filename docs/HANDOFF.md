@@ -12,118 +12,90 @@ Security: [SECURITY.md](SECURITY.md). Changes: [CHANGELOG.md](CHANGELOG.md). Old
 
 ## Current state
 
-_Last updated: 2026-10-16, session 58: PLAY-033 to PLAY-037, alpha v0.07 (D-046 Act 3 patrols) and v0.08._
+_Last updated: 2026-10-17, session 59: patch-only distribution (D-047), uppercase names (D-048), docs review._
 
-**Where things stand, in one paragraph:** Alpha v0.01 is public in the SQH Discord; alpha v0.02 (`LB2/LB2-Redux-v0.02.zip`, built from `master` at `43b1fbc`) is packaged and its tester guides are updated, pending publication. The room 335 benefit podium remains at `(190, 174)` with visual bounds `nsTop: 148, nsLeft: 182, nsBottom: 174, nsRight: 198` and fixed priority 12. Script 2335's existing 14-point barred room polygon reaches `(190, 176)` around the podium, and Script 335 routes Look/Hand/Magnifier to `(186, 180)` in front of the ledger. Old saves rebind that same polygon object to current static points without heap writes or new objects. Script 21's duplicate-clue repair prevents the prior Error 5 memory corruption. The remaining one-frame “interesting approach” flash was traced to the global fallback for an unsupported verb dispatch occurring before the valid podium dispatch on exact-position repeats. The podium now handles its three intended verbs normally and locally consumes any unsupported dispatch instead of forwarding it to the global narrator (D-035). The flash persisted, and occurred only on the engine's immediate-dispatch ending, when Laura was already in place. The podium now sets `sightAngle` -1 and `approachDist` 4, so repeats take the same deferred `CueObj` path as a fresh approach (D-036). The maintainer confirmed in DOSBox-X that repeat LOOK and DO show only the guestbook response. Saved games no longer overwrite slot 0 (Script 990 fix). Session 54 found that Redux's `Main` numbers `WrapMusic` and `Actions` the reverse of vanilla, which broke Sierra-compiled rooms 450 and 640 and the archive-derived room 310, and that the committed room 750 inquest had every object property shifted one slot; all four now build from corrected source and await a runtime retest (D-040). Drifted patches stay unless their script changes; `Main`'s and `n027`'s indexed compound assignments are rewritten, and `Main` now rebuilds byte-identical to its committed patch (D-041).
+**In one paragraph:** Phases 1 to 4 are done; Phase 5's entry gate is the clean DOSBox-X playthrough in
+`PLAYTEST_CHECKLIST.md`. Alpha v0.09 is the first patch-only release: `tools/package_patch.py` zips only Redux's
+patch files, which players extract over their own floppy v1.000 copy; the game is unchanged from v0.08. Findings
+PLAY-001 to PLAY-037 are logged; most are fixed and confirmed, PLAY-037 and PLAY-012 to PLAY-024 await a retest, and
+PLAY-002, 004, 006, 008, and 009 are open. Act 3 patrols (D-046) change Script 90's method tables, so saves made in
+Acts 3 to 6 under builds before v0.07 may not restore.
 
-**Verified** (2026-10-12, Linux workspace)
+**Verified**
 
-| Suite | Result |
-| --- | --- |
-| Room 335 podium & collision | **Compile/static pass: 16x26 view at (190, 174), 14-point poly2335a boundary reaches (190, 176), approach (186, 180), fixed priority 12, stable old-save static-pointer reapply, Script 21 duplicate-clue repair, and object-local unsupported-dispatch guard; Scripts 21/335/2335 compiled; runtime retest pending** |
-| Register signing & inspection | **Pass: flag 124 gating; Do signs with flourish [17,4,0]; repeat Do reports already signed [17,4,1]; Look reflects signature [17,1,1]; 335.MSG matches user text** |
-| P2-01 identity-flow refinement | **Compile/static pass: explicit register records clues 263, 265, 266, 268..271; Lo Fat records only Yvette; disguised Carrington cannot add Watney 272** |
-| Public alpha test plan | **Updated for v0.02: Markdown guide, Neocities page (download link, fresh checklist storage key, v0.02 report template), What's new section, and register/save-slot checks; v0.02 zip built from `43b1fbc` (946 files, no saves), vanilla archive MD5s and committed patches verified, extracted copy boots** |
-| PLAY-003/010/011 Act 1 follow-up | **Pass: music rotation and bathroom continuity maintainer-verified; Scripts 26/310 compile; two new Ziggy tuples parse and reapply idempotently** |
-| P2-08 Act 6 final inquest | **Pass: all 77 module-750 records structurally compared; exactly 28 approved text changes; all tuple/talker/reference metadata and ending routes preserved** |
-| P5-00 coherent source inventory | **Pass: 221 `.sc` + 221 `.sco`; no nested duplicate tree or unknown-property placeholders** |
-| P5-00 isolated compilation | **Pass: representative and blocker scripts at 0 errors/0 warnings; disposable Compile All captured no errors** |
-| P2-08 Act 5 and ending closure | **Pass: 169 records across modules 710, 715, 730, 750, and 770 structurally compared; 64 intended text changes; all tuple/talker/reference metadata and untargeted text preserved** |
-| P2-08 Act 4 closure | **Pass: 255 records across modules 600, 1510, and 1889 structurally compared; 19 intended text changes; all tuple/talker/reference metadata and untargeted text preserved** |
-| P2-08 Act 3 final closure | **Pass: 626 records across 10 touched modules structurally compared; 155 reviewed records current and idempotent; all routing metadata and untargeted text preserved** |
-| P2-08 Act 3 O'Riley closure | **Pass: 91 records across modules 454 and 1550 structurally compared; 7 reviewed records current and idempotent; all routing metadata and untargeted text preserved** |
-| P2-08 Act 3 Yvette | **Pass: 342 records across modules 562, 610, 640, 1510, 1550, and 1560 structurally compared; 130 reviewed scene records current; all routing metadata and untargeted text preserved** |
-| P2-08 Act 3 Rameses and Heimlich | **Pass: 423 records across modules 400, 562, 610, 1440, 1490, 1500, 1560, and 1600 structurally compared; 117 reviewed records current; all routing metadata and untargeted text preserved** |
-| P2-08 effective-layer closure | **Pass: 2,726 records across 26 target modules structurally compared; 1,025 manifest entries current; only four documented talker IDs changed; Act 1/2 obsolete wording scan has 0 target hits** |
-| P2-08 party and cutscene dialogue | **Pass: modules 120, 335, 340, and 355 preserve all 237 records and routing metadata; 103 reviewed entries apply idempotently** |
-| P2-08 Act 1 adjacent voices | **Pass: modules 210, 250, 240, and 260 preserve all routing metadata; vendor, cabbie, Steve, and slur-cleanup manifests apply idempotently** |
-| P2-08 Tut and adjacent cleanup | **Pass: 96 manifest records match module 1883; all 121 records parse; Pippin/Countess/Steve/Olympia cleanup manifests apply idempotently** |
-| P2-08 Ziggy cross-act rewrite | **Pass: 31 manifest records match module 310 and 89 match module 1890; all 186 records parse; only the documented diary-response talker ID changed** |
-| P2-08 Act 2 O'Riley rewrite | **Pass: 136 manifest records match module 1888; all 185 records parse; one clue-question talker ID corrected** |
-| P2-08 Act 2 Yvette rewrite | **Pass: 128 manifest records match module 1885; all 172 records parse; one diary-answer talker ID corrected** |
-| P2-08 Act 2 Heimlich rewrite | **Pass: 113 manifest records match module 1889; all 132 tuple/talker records preserved** |
-| P2-08 Act 2 Rameses rewrite | **Pass: 113 manifest records match module 1891; all 144 tuple/talker records preserved** |
-| P2-08 Act 1 message rewrites | **Pass: modules 270/290/295 structurally parsed; exact tuple/talker/reference metadata preserved** |
-| D-030 / PLAY-001 dirty cab gating | **Pass: 250.SCR/250.HEP compiled, gated on flag 125 & (not flag 27)** |
-| D-030 clue flow preservation | **Pass: 14.SCR/14.HEP matches authentic baseline (648 / 52 bytes)** |
-| Act 1 message resource mapping | **Pass: 20.MSG, 230.MSG, 240.MSG, 270.MSG, 290.MSG, 310.MSG verified** |
-| Phase 3 & 4 script compilations | **Pass: 22, 26, 90, 454, 530, 560, and 750 loose patches emitted by SCI Companion** |
-| `python3 tools/check_docs.py` | **Pass: 0 errors, 0 warnings** |
-| `python3 tools/manual.py check ...` | **Pass: 6 sections, 31 entries, 0 errors** |
-| `python3 tools/manual.py build ...` | **Pass: compiled docs/manual/manual.html** |
-| DOSBox-X headless startup | **Pass: original interpreter environment initialized with loose patches mounted** |
-| Base Game Archive MD5 Integrity | **Pass: RESOURCE.000 and RESOURCE.MAP match vanilla bit-for-bit** |
-
-**What works**
-
-- **Phase 1 Overhaul:** All six Phase 1 items (P1-01 through P1-06) compiled as loose patches in `LB2/`.
-- **Phase 2 Narrative:** Suspect fallbacks (P2-01), watch confrontation (P2-02), murder reactions (P2-03), historical dialogue (P2-04), acquaintance routing (P2-05), Steve continuity (P2-06), dagger reactions (P2-07), and period dialogue de-caricature (P2-08) are complete.
-- **Phase 3 Mechanics:** Supply safety audit (P3-01), snake oil feedback (P3-02), fair stairwell (P3-04), flexible Act 1 and cab gating (P3-05, D-030), and museum conversation lock (P3-06).
-- **Phase 4 Scoring & Mystery:** Accurate act grades (P4-05), clear inquest scope (P4-06), evidence checklist (P4-03), and decoupled quiz/dagger outcome (P4-04).
-- **Act 1 Investigation Context:** Authentic starting contacts preserved in `lb2InitCode.sc`; suspects discovered naturally through Act 1 inquiry trees (D-030).
-- **Act 1 Dialogue:** Lo Fat, Sgt. O'Flaherty, O'Riley, Ziggy, the sandwich vendor, and the cabbie use distinct, readable period voices without altering dialogue logic (P2-08, D-031).
-- **Act 2 Dialogue:** Rameses, Heimlich, Yvette, O'Riley, Ziggy, and Tut Smith use distinct, readable period characterization across character topics, the museum entry, all fourteen party conversations, the Carter murder scene, Pippin discovery, deferred reactions, and adjacent cleanup lines (P2-08, D-031).
-- **Act 3 Dialogue:** Rameses, Heimlich, Yvette, O'Riley, Ziggy, Ernie, the Countess, Tut Smith, and Olympia retain their approved voices through private conversations, intercom scenes, laboratory warnings, relationships, office interruptions, evidence confrontations, alibi interviews, grief interviews, and murder discoveries (P2-08, D-031).
-- **Act 4 Dialogue:** Laura, Steve, Olympia, and Heimlich retain their established character beats through the reunion, forged-painting discovery, murder/Dagger reactions, and lantern warning without residual mock-German spelling (P2-08, D-031).
-- **Act 5 Dialogue:** Rameses's Society confrontation and riddle, Tut's inquest testimony, Steve's already-clean escape dialogue, and O'Riley's jailhouse threat preserve the ending while removing the final phonetic caricatures (P2-08, D-031).
-- **Act 6 Dialogue:** The coroner conducts the complete final inquest in a dry, exacting professional voice; every question, evidence check, joke, verdict, and ending route remains intact (P2-08, D-031).
-- **Source Baseline:** P5-00's Sluicebox-annotated effective reconstruction is active under D-032; normal work remains single-script compilation under D-028.
-- **Documentation Architecture:** `docs/ROADMAP.md`, `DECISIONS.md` (D-001 through D-039), `docs/manual/`, `docs/manual/manual.html`, and `docs/PLAYTEST_CHECKLIST.md` synchronized.
+- Each fix: routine-by-routine comparison of the rebuilt script against its committed build (only intended changes),
+  headless DOSBox-X startup, base archive MD5s, documentation and manual checks. Per-session evidence is in the log.
+- Maintainer-confirmed in DOSBox-X: PLAY-003, PLAY-018, PLAY-025 to PLAY-036, and the podium's repeat LOOK and DO.
+- v0.09 package: retail copy plus package reproduces every `LB2/` game file and passes the headless boot smoke, with
+  either Sierra's uppercase names or a lowercase copy uppercased per the tester guide.
 
 **Not verified**
 
-- End-to-end multi-act playthrough regression testing in DOSBox-X.
-- Direct in-game verification of the playtest findings during continuous run.
-- Room 335 podium collision from both sides and the Magnifier repeat (LOOK and DO repeats are maintainer-verified).
+- An end-to-end playthrough of every act.
+- Session 54's rebuilt rooms (Script 90, 310, 450, 640, 750) and the podium's collision and Magnifier repeat.
 
-**Gotchas for the next session**
+**Gotchas**
 
-- Edit message text in SCI Companion's message editor using the fork build in `SCI Companion/` (D-038); it saves LB2's message format in place. Upstream SCI Companion cannot write it (D-037). `docs/dialogue/*.json` manifests are a historical record of the P2-08 rewrites: re-running `tools/dialogue.py` would overwrite later editor changes.
-- Before changing an interactive room object, follow `docs/CONTRIBUTING.md`'s reference-first SCI object workflow (D-034): consult SCI Companion's object-interaction documentation, inspect `Feature.sc`/`PApproach.sc`/`Polygon.sc`, and compare at least two established same-class hotspots before adding custom selectors, cues, dispatchers, or per-cycle mutation.
-- Selectors have readable names (D-039). Change a name only in `tools/selector_names.json`, rerun `python3 tools/name_selectors.py LB2`, restart SCI Companion (it reads `997.voc` only at startup), and recompile to confirm byte-identical output. Never give a selector the same name as an instance, class, or procedure used inside a method (`controls` vs. selector 343 changed `Game`'s bytecode).
-- SCI Companion resolves classes from other scripts through their `.sco` files. Compile a class's defining script before scripts that use changed classes (`Interface` before `Dialog`); several committed `.sco` files predate the current source.
-- `tools/compile.py` closes the script window it opened once the patches are written, so batch compiles no longer pile up windows. SCI Companion ignores a game path given on its command line and reopens the last game, and reads `997.voc` only at startup.
-- Class numbers: Redux's `Main` has `WrapMusic` 47 and `Actions` 127, the reverse of vanilla. A Sierra-compiled or archive-decompiled script that names either class needs checking before it ships (D-040). SCI Companion turns `(and c v)` into a boolean and may miscompile compound assignments to array elements with a computed index; write those as plain assignments (D-041).
-- Loose patch files in `LB2/` are uppercase (`.SCR`, `.HEP`, `.MSG`, `.V56`), as on Sierra's disks, and the working copy lives on a case-insensitive exFAT drive, where SCI Companion rewrites them in place (D-037, D-048). `core.fileMode` is false there because exFAT has no Unix permissions; case-only renames need `git mv -f` plus a two-step rename on disk.
-- Before any SCI Companion GUI action, inspect the active window and verify the loaded archive/project identity; if it is ambiguous, ask the maintainer rather than closing, reloading, or choosing a window by inference.
-- Single-script compilation only: use `python3 tools/compile.py <script>`. Never use Compile All or resource rebuild.
-- If a script disappears from SCI Companion's list when patch files are deleted, restore files and restart with `wineserver -k`.
+- Message text: edit in the forked SCI Companion (`SCI Companion/`, D-038). `docs/dialogue/*.json` are historical
+  records; re-running `tools/dialogue.py` would overwrite later editor changes.
+- Interactive room objects: follow `CONTRIBUTING.md`'s reference-first workflow (D-034).
+- Selector names live only in `tools/selector_names.json`; after a change run `python3 tools/name_selectors.py LB2`,
+  restart SCI Companion (it reads `997.VOC` only at startup), and confirm byte-identical output (D-039). A selector
+  must not share a name with an instance, class, or procedure used in a method.
+- SCI Companion resolves other scripts' classes through `.sco` files: compile a changed class's script first
+  (`Interface` before `Dialog`). Several committed `.sco` files predate the current source.
+- SCI Companion ignores a game path on its command line and reopens the last game. Before any GUI action, confirm
+  the loaded archive; if unsure, ask the maintainer.
+- Class numbers: Redux's `Main` has `WrapMusic` 47 and `Actions` 127, the reverse of vanilla; check any
+  Sierra-compiled script that names either (D-040). Avoid `(and c v)` for values and compound assignments to
+  computed array indexes (D-041). Check multi-line `[localN` indexes against the archive build (PLAY-033).
+- Compare against Sierra's retail patches in `LB2_vanilla/` where they exist, not the archive (`SOURCE_PROVENANCE.md`).
+- Files in `LB2/` are uppercase on a case-insensitive exFAT drive (D-037, D-048); `core.fileMode` is false there.
+  Case-only renames need `git mv` through a temporary name.
+- Compile one script at a time with `tools/compile.py`; never Compile All or rebuild resources (D-028). If a script
+  drops out of SCI Companion's list, restore its patch files and restart with `wineserver -k`.
+- Ask before a boot test while the maintainer may be playing.
 
 ## Next steps (in order)
 
-1. Retest PLAY-018 (ankh) and PLAY-025 to PLAY-031: the carbon paper on the off lamp, the stairwell bulb before and after leaving, Olympia's passage (open, look, close, enter with and without the lantern), the Countess's dialogue, the Thinker raised and lowered, the police-file shelf, and the intercom buttons.
-2. Retest PLAY-019 to PLAY-024 (Act 3 museum conversations, Ziggy on Pippin and the Countess, Pippin on Najeer, Steve's meeting from either side, the act-break screen).
-3. Read Ziggy's restored dialogue in play (speakeasy and party) and adjust any line in SCI Companion (D-043).
-4. Retest PLAY-012 to PLAY-018 during the fresh playthrough: the Act 1 museum banner, Rameses and Yvette at the party (Ziggy, Pippin, Tut topics), Ziggy on Heimlich and Tut, the 7:30 Steve meeting in the front rotunda, the north doorway to the Mastodon Room, and clicking the Ankh.
-5. Boot and retest session 54's rooms: a museum conversation (Script 90), leaving the speakeasy (310), leaving the Egyptian room south in Act 3 or 4 and using an item on the dagger case (450), room 640's actions, and the full final inquest (750).
-6. Check the podium's collision from both sides and a Magnifier repeat.
-7. Resume the clean DOSBox-X playthrough and triage every remaining `PLAY-nnn` finding.
-8. Begin P5-01 design only after the playthrough gate closes, using the migrated compiler-facing source baseline.
+1. Maintainer retest of PLAY-037 (Tut's Act 3 introduction, ankh and Dagger reactions, Carrington's Dagger line).
+2. Publish v0.09 when ready.
+3. Retest PLAY-012 to PLAY-024 and session 54's rooms during the fresh playthrough (`PLAYTEST_CHECKLIST.md`).
+4. Check the podium's collision from both sides and a Magnifier repeat.
+5. Triage the open findings (PLAY-002, 004, 006, 008, 009) and any new ones.
+6. Begin P5-01 design only after the playthrough gate closes.
 
 ## Open questions for maintainers
 
-None currently open. Q-001 and Q-002 have been resolved by D-007, D-017, and D-018.
+None open. Q-001 and Q-002 are resolved (D-007, D-017, D-018).
 
 ## Session log
 
-### Session 59: 2026-10-16: Patch-Only Distribution
+### Session 59: 2026-10-16/17: Patch-Only Distribution and Docs Review
 
 **Contributor:** Claude Code and maintainer
 
-**Goal:** Make a distributable package that contains no Sierra files (D-047).
+**Goal:** Make a distributable package with no Sierra files (D-047), then review the docs.
 
 **Done:**
-- The maintainer created `LB2 (legal)/`: the retail game at its top level (archive MD5s and all 23 retail patches match `LB2_vanilla/`) and Redux's files in `patched files/`, which matched `LB2/` byte for byte.
-- Removed the Sierra files from `patched files/`: `RESOURCE.000`, `RESOURCE.MAP`, `SCIDHUV.EXE`, `INSTALL.*`, `999.FON`, `MESSAGE.MAP`, SCI Companion's `game.ini`, and the five patches identical to Sierra's retail ones. It now holds 468 files.
-- Added `tools/package_patch.py`, which builds the patch-only zip and mirrors the same set into `patched files/`. Ignored `LB2 (legal)/` and `LB2/archive/` in git.
+- The maintainer created `LB2 (legal)/`: the retail game at its top level and Redux's files in `patched files/`.
+  Removed the Sierra files from `patched files/` (archives, interpreter, installer, font, `MESSAGE.MAP`, `game.ini`,
+  and the five patches identical to Sierra's), leaving 468.
+- Added `tools/package_patch.py`: builds the patch-only zip and mirrors it into `patched files/`. Ignored
+  `LB2 (legal)/` and `LB2/archive/`.
+- Rewrote the tester guide's and page's install steps for a patch over the player's own floppy v1.000 copy, then moved
+  both to v0.09. The maintainer's own v0.09 zip bundles `LB2_vanilla/` and `src/` for internal testing.
+- D-048: all files at the top of `LB2/` and `LB2 (legal)/` renamed to uppercase (476 tracked, contents identical);
+  `compile.py` uppercases a new patch, `make_test_copy.sh` uppercases older commits' patches. Folder roles recorded in
+  `AGENTS.md`.
+- Docs review: rewrote HANDOFF's current state; corrected stale facts (selector names, O'Riley's spelling, the stairwell
+  room, the Act 5 save lockouts, the compile workflow) and trimmed duplicated prose across the live docs.
 
-**Verified:** A test package (468 files, 461,737 bytes) passed its integrity test and matched `LB2/`; the retail top level plus the package reproduces every `LB2/` game file (only the installer text files and `game.ini` differ, none used by the game). That copy, assembled with case-insensitive replacement as on DOS or Windows, passed the headless DOSBox-X smoke: `SCIDHUV` started and was still running at the 20-second timeout without dropping back to the prompt.
+**Verified:** The retail copy plus the package reproduces every `LB2/` game file and passes the headless boot smoke
+(case-insensitive extraction, and the tester guide's Linux recipe). A test copy of the renamed tree and one built from
+the pre-rename commit both match and boot. Documentation and manual checks.
 
-- Rewrote the install steps in `ALPHA_PLAYTESTING.md` and `alpha-playtest.html` for a patch extracted over the player's own floppy v1.000 copy. At the maintainer's request the package and `LB2 (legal)/patched files/` use uppercase extensions, as on Sierra's disks (`LB2/` stays lowercase, D-037); Linux players uppercase any lowercase names in their copy before extracting. Version labels stay at v0.08 until v0.09 is cut. Committed the maintainer's removal of the tracked full-game `LB2/LB2-Redux-v0.01.zip`; left the untracked root `LB2-Redux-v0.09.zip` out because it contains Sierra's game (`LB2_vanilla/`) and `src/`.
-
-- D-048: renamed the 476 lowercase files at the top of `LB2/` to uppercase with `git mv` (contents identical) and uppercased the top level of `LB2 (legal)/`, matching Sierra's disks. `compile.py` uppercases a new patch SCI Companion writes lowercase; `make_test_copy.sh` uppercases older commits' patches; `.gitignore`, `AGENTS.md`, and `TESTING.md` follow. Recorded the folder roles in `AGENTS.md`: `LB2/` working directory, `LB2 (legal)/` release assembly, `LB2_vanilla/` retail reference. A test copy of the renamed tree and one built from the pre-rename commit both match and boot (headless smoke).
-
-**Next session should start with:** The maintainer's retest of PLAY-037. When cutting v0.09, build it with `tools/package_patch.py 0.09` and move the guide, page, download link, and storage key to v0.09.
+**Next session should start with:** The maintainer's retest of PLAY-037.
 
 ### Session 58: 2026-10-16: Vats, Storeroom Crash, and Dagger Topic
 

@@ -4,9 +4,8 @@ Thank you for testing *The Dagger of Amon Ra: Redux*. This alpha is a modernizat
 of Sierra's *The Dagger of Amon Ra*. It repairs bugs, softlocks, interface problems, clue logic, scoring, and dialogue
 while preserving the original mystery, artwork, puzzles, and character arcs.
 
-This is still an alpha. A complete game can take many hours, so reports from partial runs are useful too. Strange
-behavior, awkward wording, missing music, visual glitches, and small continuity problems are all worth reporting—not
-only crashes.
+A complete game takes many hours, so partial runs are useful too. Strange behavior, awkward wording, missing music,
+visual glitches, and continuity slips are all worth reporting, not only crashes.
 
 ## Before you begin
 
@@ -62,57 +61,13 @@ None of these has had a full playthrough yet, so reports on them are especially 
 The patrols start during Act 3, so test them from a save made before the end of Act 2. Saves made in Acts 3 to 6
 under builds before v0.07 may not restore correctly.
 
-## What's new in v0.06
+Changes in v0.02 to v0.06 are listed in the [changelog](CHANGELOG.md).
 
-- The skull in Olympia's office opens the hidden passage without sending Laura in. She can look into the darkness
-  first and walk in when you choose, with or without the lantern.
-- The Countess sounds grand through her phrasing instead of constant capitals.
-- The Thinker's raised head has its own descriptions.
-- Touching the stairwell's burned-out bulb says "Ouch!" only right after it burns out; later Laura notes she needs a
-  spare, and with one in her purse she swaps it.
-- The police-file volume in Carrington's office, the intercom's buttons, the Ankh, and the bloody footprint beside
-  Pippin's body respond where you click them.
-- Using the carbon paper on Yvette's lamp while it is off gives an ordinary reply instead of an error.
+## Known issues
 
-## What's new in v0.05
-
-- From Act 3 on, the Countess, Dr. Carrington, Olympia, O'Riley, Tut, Yvette, and Ziggy answer questions again instead of
-  stopping with a "not found" error.
-- The grade text between acts appears on a black screen in a window with Art Deco corners, not over the act marquee
-  with the death window's bones.
-- Steve's 7:30 meeting in the front rotunda works from either side: he arrives from the far side and faces Laura.
-- Ziggy answers about Pippin Carter, no longer faces Laura's Countess bluff before she has asked the Countess about
-  him, and his party eavesdropping and intercom lines share his restored voice.
-- Pippin acknowledges Rameses Najeer.
-
-## What's new in v0.04
-
-- The coroner's final inquest uses the game's standard object layout again. In earlier alphas every inquest object's
-  properties sat one slot off, which could stall the inquest or misplace its props.
-- Leaving the Egyptian Room to the south in Acts 3 and 4 pauses the rotating music correctly.
-- Leaving the speakeasy stops its rotating songs, as in the original game.
-- Ernie's office and the Egyptian Room's dagger case respond correctly to actions and items.
-- In Act 1, the banner outside the museum notes that the party calls for formal attire.
-- At the party, Rameses, Yvette, and Ziggy no longer speak as if the evening were over or Pippin already dead, and
-  Ziggy knows Heimlich and Dr. Smith.
-- Guests at the front rotunda's buffet table can no longer be walked through, the Mastodon Room doorway no longer
-  draws Laura over its lintel, and the Ankh near Pippin's body is easier to click.
-- Ziggy is a slippery stool pigeon again, with his slang, swagger, and mangled big words restored.
-
-## What's new in v0.03
-
-- Examining Heimlich at the museum door with the Magnifying Glass shows the narrator's description of his scars,
-  followed by his reply.
-- Revised wording for the benefit register and Heimlich's check-in lines.
-
-## What's new in v0.02
-
-- Act 2's check-in no longer hands Laura the whole cast list. A leather-bound benefit register on a podium beside
-  Heimlich records the guests and staff when Laura reads it, and Hand lets her sign it.
-- Lo Fat foreshadows two museum figures instead of naming them outright.
-- Saving a new game no longer overwrites your previous save. If you tested v0.01, your saves may have been
-  overwritten silently; please re-check save and restore with several slots.
-- The title screen's restore option now reads “Resume Case.”
+These are logged but not fixed yet, so there is no need to report them again: the cabbie does not remember Laura
+after she shows her press pass; the two men at the speakeasy bar share one reply; nearby characters rarely chime in
+when asked about each other; and notebook topics do not always show when they are finished.
 
 ## What every tester should watch for
 
