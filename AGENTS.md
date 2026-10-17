@@ -20,7 +20,7 @@ linked below, not in an agent's private memory.
 
 - Reference roadmap item IDs (`P<phase>-<nn>`) and decision IDs (`D-<nnn>`).
 - Preserve immutable base game archives (`LB2/RESOURCE.000`, `LB2/RESOURCE.MAP`).
-- Apply fixes as loose uppercase `.SCR`, `.HEP`, and `.MSG` files in `LB2/`, as on Sierra's disks (D-048). SCI Companion rewrites existing patches in place; `tools/compile.py` uppercases any new patch it writes lowercase.
+- Apply fixes as loose uppercase `.SCR`, `.HEP`, and `.MSG` files in `LB2/`, as on Sierra's disks (D-048). SCI Companion writes every patch it compiles or saves in lowercase: `tools/compile.py` renames its outputs, and after any save in SCI Companion run `python3 tools/uppercase_names.py`.
 - Work from a case-insensitive filesystem (the maintainer's exFAT drive). On case-sensitive ext4, SCI Companion under Wine deletes or clobbers patches whose names differ only by case.
 - Record architectural choices in `docs/DECISIONS.md`.
 - Keep 3x manual sources (`docs/manual/amon-ra.manual.json`) in sync with code fixes.

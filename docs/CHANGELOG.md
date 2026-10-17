@@ -6,6 +6,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+### Fixed
+- After her first ride, the clean cab's driver greets Laura by name and asks where she's going, instead of asking her to prove she's a reporter every time (PLAY-002).
+- The two men at the speakeasy bar have their own replies to Talk, Ask, and the Magnifying Glass (PLAY-004).
+
 ## [0.09-alpha] - 2026-10-16
 
 ### Changed

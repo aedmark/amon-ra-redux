@@ -17,8 +17,8 @@ _Last updated: 2026-10-17, session 59: patch-only distribution (D-047), uppercas
 **In one paragraph:** Phases 1 to 4 are done; Phase 5's entry gate is the clean DOSBox-X playthrough in
 `PLAYTEST_CHECKLIST.md`. Alpha v0.09 is the first patch-only release: `tools/package_patch.py` zips only Redux's
 patch files, which players extract over their own floppy v1.000 copy; the game is unchanged from v0.08. Findings
-PLAY-001 to PLAY-037 are logged; most are fixed and confirmed, PLAY-037 and PLAY-012 to PLAY-024 await a retest, and
-PLAY-002, 004, 006, 008, and 009 are open. Act 3 patrols (D-046) change Script 90's method tables, so saves made in
+PLAY-001 to PLAY-037 are logged; most are fixed and confirmed, PLAY-037, PLAY-002, PLAY-004, and PLAY-012 to PLAY-024 await a retest,
+and PLAY-006, 008, and 009 are open. Act 3 patrols (D-046) change Script 90's method tables, so saves made in
 Acts 3 to 6 under builds before v0.07 may not restore.
 
 **Verified**
@@ -51,18 +51,20 @@ Acts 3 to 6 under builds before v0.07 may not restore.
   computed array indexes (D-041). Check multi-line `[localN` indexes against the archive build (PLAY-033).
 - Compare against Sierra's retail patches in `LB2_vanilla/` where they exist, not the archive (`SOURCE_PROVENANCE.md`).
 - Files in `LB2/` are uppercase on a case-insensitive exFAT drive (D-037, D-048); `core.fileMode` is false there.
-  Case-only renames need `git mv` through a temporary name.
+  SCI Companion writes everything lowercase: `compile.py` renames its outputs; after other saves run
+  `tools/uppercase_names.py` (`--check` before committing, since `git status` cannot see case-only changes).
 - Compile one script at a time with `tools/compile.py`; never Compile All or rebuild resources (D-028). If a script
   drops out of SCI Companion's list, restore its patch files and restart with `wineserver -k`.
 - Ask before a boot test while the maintainer may be playing.
 
 ## Next steps (in order)
 
-1. Maintainer retest of PLAY-037 (Tut's Act 3 introduction, ankh and Dagger reactions, Carrington's Dagger line).
+1. Maintainer retest of PLAY-037 (Tut's Act 3 introduction, ankh and Dagger reactions, Carrington's Dagger line),
+   PLAY-002 (Rocco's greeting on a second clean-cab ride), and PLAY-004 (the barflies' Talk, Ask, Magnifier).
 2. Publish v0.09 when ready.
 3. Retest PLAY-012 to PLAY-024 and session 54's rooms during the fresh playthrough (`PLAYTEST_CHECKLIST.md`).
 4. Check the podium's collision from both sides and a Magnifier repeat.
-5. Triage the open findings (PLAY-002, 004, 006, 008, 009) and any new ones.
+5. Design PLAY-008 (notebook completion marks); PLAY-009 next; PLAY-006 belongs to Phase 5.
 6. Begin P5-01 design only after the playthrough gate closes.
 
 ## Open questions for maintainers
@@ -95,7 +97,14 @@ None open. Q-001 and Q-002 are resolved (D-007, D-017, D-018).
 (case-insensitive extraction, and the tester guide's Linux recipe). A test copy of the renamed tree and one built from
 the pre-rename commit both match and boot. Documentation and manual checks.
 
-**Next session should start with:** The maintainer's retest of PLAY-037.
+- PLAY-002: Rocco greets Laura by name on later clean-cab rides and goes straight to her destination (Script 250,
+  `250.MSG`). PLAY-004: six `310.MSG` lines for the barflies' Talk, Ask, and Magnifier. Found that SCI Companion writes
+  even existing patches in lowercase; added `tools/uppercase_names.py` to the SOP.
+
+**Verified (PLAY-002/004):** Script 250 differs from its committed build only in `sHasPressPass` plus 16 equivalent
+global reloads (D-041 drift); heap identical. Message files gain only the new records. Headless boot of a test copy.
+
+**Next session should start with:** The maintainer's retest of PLAY-037, PLAY-002, and PLAY-004; then PLAY-008.
 
 ### Session 58: 2026-10-16: Vats, Storeroom Crash, and Dagger Topic
 

@@ -640,12 +640,13 @@ Track every file in `LB2/` under its uppercase name, matching the retail release
   extracted over a player's retail copy, whose names are uppercase as installed from Sierra's disks, and the maintainer
   asked for the repository, the package, and both halves of `LB2 (legal)/` to use the retail spelling.
 - **Decision:** Rename the 476 lowercase files at the top of `LB2/` to uppercase with `git mv`, as pure renames
-  (contents unchanged); `src/` and `msg/` keep their names. Keep the case-insensitive workspace from D-037: there SCI
-  Companion rewrites an existing patch in place under its uppercase name. `tools/compile.py` uppercases a patch SCI
-  Companion creates under a lowercase name, and `tools/make_test_copy.sh` writes older commits' lowercase patches
-  under uppercase names.
-- **Consequences:** A new message file saved from SCI Companion's editor arrives lowercase and needs a two-step rename
-  (via a temporary name, since a case-only rename can be a no-op on exFAT). Older commits keep lowercase names; diffs
+  (contents unchanged); `src/` and `msg/` keep their names. Keep the case-insensitive workspace from D-037, so SCI Companion's
+  lowercase output replaces the uppercase file instead of sitting beside it. `tools/compile.py` renames its outputs,
+  `tools/uppercase_names.py` renames anything else (run it after saving in SCI Companion), and
+  `tools/make_test_copy.sh` writes older commits' lowercase patches under uppercase names.
+- **Consequences:** SCI Companion writes every compiled or saved patch in lowercase, existing ones included (seen
+  compiling room 250, 2026-10-17), so renaming is part of the workflow. `git status` cannot see a case-only change on
+  exFAT; `uppercase_names.py --check` can. Older commits keep lowercase names; diffs
   across the rename need `git log --follow` or `-M`.
 
 ## Open questions

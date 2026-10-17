@@ -1,0 +1,14 @@
+{
+ "module": 310,
+ "character": "Narrator, on the two men at the speakeasy bar",
+ "voice": "Dry narrator.",
+ "notes": "PLAY-004: the serious drinker (noun 3) and the comatose man (noun 10) had distinct Look and Hand replies but shared the generic reply for Talk (2), Ask (6), and the Magnifying Glass (8).",
+ "entries": [
+  {"tuple": [3, 2, 0, 1, 99], "add": true, "text": "He grunts into his glass without looking up. Conversation is not on tonight's menu."},
+  {"tuple": [3, 6, 0, 1, 99], "add": true, "text": "He's far too busy drinking to answer questions."},
+  {"tuple": [3, 8, 0, 1, 99], "add": true, "text": "Up close, he smells like a distillery with the windows shut."},
+  {"tuple": [10, 2, 0, 1, 99], "add": true, "text": "He sways, blinks once, and goes on not being here."},
+  {"tuple": [10, 6, 0, 1, 99], "add": true, "text": "He's in no condition to answer anything."},
+  {"tuple": [10, 8, 0, 1, 99], "add": true, "text": "Up close, you can see he's breathing. Just barely."}
+ ]
+}

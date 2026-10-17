@@ -127,8 +127,6 @@ Scripts still loaded from the archive (D-040's list) are first-time compiles and
 
 | Finding | Owning script(s) | Lead | Proposed approach |
 | --- | --- | --- | --- |
-| PLAY-002 | 250 (`Trash.sc`) | Trace the cabbie's recognition states. | Reuse an existing state before allocating a flag. |
-| PLAY-004 | 310 and `310.MSG` | `barfly1` and `barfly2` are plain `View`s with no verb handler, so both get the shared reply. | Two Look/Talk messages plus a minimal handler. |
 | PLAY-006 | 1882 to 1892 `.MSG`, museum conversation handlers | Interjections need new message records and a hook that fires when the asked-about character is in range. | Phase 5 content sweep; prototype Pippin/Carrington first. |
 | PLAY-008 | 20 (`NotebookItem`), 21 (`addCluesCode`) | Clues live in packed arrays `global202`, `global220`, `global228`, `global263`. | Find the topic-complete state and audit later-act unlocks. |
 | PLAY-009 | 1, 3, 5 | The copy-protection screen after the intro, on first talking to Crodfoller, should be removed entirely rather than merely neutralized. | Analyzed; fix planned (see the leads above). |
@@ -141,9 +139,9 @@ diegetic discovery or additive reactions over moving old dialogue behind a new p
 | ID | Act | Observation / desired behavior | Triage status |
 | --- | --- | --- | --- |
 | PLAY-001 | 1 | The dirty cab should only appear after a first normal cab ride, and never reappear once the claim ticket is taken. | Resolved (D-030): gated on `(and (proc0_10 1) (proc0_2 125) (not (proc0_2 27)))`; clean ride sets flag 125 in `Trash.sc`. |
-| PLAY-002 | 1 | After Laura shows the press pass once, the cabbie should remember her. | Observed; identify existing recognition state before allocating anything new. |
+| PLAY-002 | 1 | After Laura shows the press pass once, the cabbie should remember her. | Fixed, retest pending: flag 125 (set when a clean-cab ride starts, which needs the pass) already means Rocco has seen it. On later rides he says "Welcome back, Miss Bow!" (`250.MSG (1, 0, 11, 1)`) and goes straight to asking her destination (Script 250 `sHasPressPass`). Bob, the dirty cab's driver, is unchanged. |
 | PLAY-003 | 1 | Music is absent in the speakeasy, its bathroom, and outside Lo Fat's laundry. The CD speakeasy rotates two songs, including a live recording of “I Want to Marry an Archaeologist”; determine the intended floppy equivalent. | Resolved: the speakeasy's `WrapMusic` rotation is restored and survives the bathroom (maintainer-verified). Room 270 has no exit motif on the floppy (only the baseball trade's sounds); kept as Sierra shipped it (2026-10-16). |
-| PLAY-004 | 1 | The two men at the speakeasy bar need distinct interaction messages. | Observed; inventory existing nouns/messages before adding text. |
+| PLAY-004 | 1 | The two men at the speakeasy bar need distinct interaction messages. | Fixed, retest pending: they already had distinct Look and Hand replies; Talk, Ask, and the Magnifying Glass fell to the shared generic reply. Six new `310.MSG` lines (nouns 3 and 10, verbs 2, 6, 8); `Feature doVerb` plays them with no script change. |
 | PLAY-005 | 2 | Yvette is absent from the notebook People list; establish whether this is intentional and audit every other lost entry. | Audited: introduced in Act 1 at Lo Fat's Laundry (rm270) or Act 2 at museum (D-030). |
 | PLAY-006 | 2+ | Nearby characters should sometimes interject when asked about one another, beginning with Pippin's snide response when Laura asks Carrington about him. | Content sweep candidate; additive dialogue must not isolate existing content. |
 | PLAY-007 | 2 | Ernie, Tut, Olympia, and Watney Little appear in the notebook before Laura meets them or learns their names. | Audited: Rameses, Countess, Olympia, Yvette, Tut have Act 1 diegetic routes; Ernie and Watney remain for Act 2 diegetic checks (D-030). |

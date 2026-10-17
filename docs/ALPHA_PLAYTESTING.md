@@ -65,9 +65,8 @@ Changes in v0.02 to v0.06 are listed in the [changelog](CHANGELOG.md).
 
 ## Known issues
 
-These are logged but not fixed yet, so there is no need to report them again: the cabbie does not remember Laura
-after she shows her press pass; the two men at the speakeasy bar share one reply; nearby characters rarely chime in
-when asked about each other; and notebook topics do not always show when they are finished.
+These are logged but not fixed yet, so there is no need to report them again: nearby characters rarely chime in when
+asked about each other, and notebook topics do not show when they are finished.
 
 ## What every tester should watch for
 

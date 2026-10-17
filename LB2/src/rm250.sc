@@ -253,6 +253,7 @@
 			(0
 				(gGame handsOff:)
 				(User canInput: 1)
+				(= register 0)
 				(= cycles 1)
 			)
 			(1
@@ -263,6 +264,11 @@
 					((gCast contains: trash1)
 						(gMessager say: 1 0 7 6 self)
 					)
+					; PLAY-002: flag 125 means Rocco has already seen her press pass.
+					((IsFlag 125)
+						(= register 1)
+						(gMessager say: 1 0 11 1 self)
+					)
 					((not (gCast contains: trash1))
 						(gMessager say: 1 0 8 0 self)
 					)
@@ -272,8 +278,12 @@
 				)
 			)
 			(2
-				(gGame handsOn:)
-				(self dispose:)
+				(if register
+					(client setScript: sWhereToBud)
+				else
+					(gGame handsOn:)
+					(self dispose:)
+				)
 			)
 		)
 	)

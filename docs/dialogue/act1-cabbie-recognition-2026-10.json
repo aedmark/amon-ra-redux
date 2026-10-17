@@ -1,0 +1,13 @@
+{
+ "module": 250,
+ "character": "Rocco, the clean-cab driver",
+ "voice": "Formal and courteous.",
+ "notes": "PLAY-002: after Laura's first clean-cab ride (flag 125), Rocco greets her by name and goes straight to asking her destination.",
+ "entries": [
+  {
+   "tuple": [1, 0, 11, 1, 13],
+   "add": true,
+   "text": "Welcome back, Miss Bow!"
+  }
+ ]
+}
