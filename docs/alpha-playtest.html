@@ -434,11 +434,11 @@
 <body>
   <div class="top-rule" aria-hidden="true"></div>
   <header id="top">
-    <p class="eyebrow">Public field test · Alpha v0.09</p>
+    <p class="eyebrow">Public field test · Alpha v0.10</p>
     <h1>The Dagger of Amon Ra: Redux</h1>
     <p class="subtitle">Help us test a careful modernization of Sierra's classic mystery from the newsroom to the final verdict.</p>
     <div class="hero-actions">
-      <a class="button" href="LB2-Redux-v0.09.zip" download>Download Alpha v0.09</a>
+      <a class="button" href="LB2-Redux-v0.10.zip" download>Download Alpha v0.10</a>
       <a class="button secondary" href="#report">Report a finding</a>
     </div>
   </header>
@@ -462,11 +462,11 @@
       <div class="notice-grid">
         <article class="notice">
           <strong>Your own copy</strong>
-          <p>Redux is a patch: you need your own DOS floppy copy of the game, version 1.000 (the CD edition will not work). Copy your installed game to a new directory, extract v0.09 into it, replace the existing files, and start a new game; saves from earlier alphas are not recommended. Redux's file names are uppercase, as on Sierra's disks; on Linux, uppercase any lowercase names in your copy first (<code>for f in *; do mv -n -- "$f" "$(printf '%s' "$f" | tr a-z A-Z)"; done</code>), so Redux's files replace Sierra's instead of sitting beside them.</p>
+          <p>Redux is a patch: you need your own DOS floppy copy of the game, version 1.000 (the CD edition will not work). Copy your installed game to a new directory, extract v0.10 into it, replace the existing files, and start a new game; saves from earlier alphas are not recommended. Redux's file names are uppercase, as on Sierra's disks; on Linux, uppercase any lowercase names in your copy first (<code>for f in *; do mv -n -- "$f" "$(printf '%s' "$f" | tr a-z A-Z)"; done</code>), so Redux's files replace Sierra's instead of sitting beside them.</p>
         </article>
         <article class="notice">
-          <strong>New in v0.09</strong>
-          <p>Redux now ships as a patch over your own floppy copy instead of a full game; the game itself is unchanged from v0.08, so v0.08 saves work. In v0.08, Dr. Smith no longer has Laura admiring an ankh he has lost, and he reacts when shown his ankh or the Dagger; Dr. Carrington reacts to the Dagger too. v0.07 brought Act 3 patrols for O'Riley, Dr. Carrington, Olympia, and Yvette, climbable vats, and a storeroom crash fix; earlier alphas brought Olympia's player-chosen passage, the Countess's phrasing, Act 3+ conversations, the final inquest, music, and many Act 1 and 2 details. None of these has had a full playthrough yet, so reports on them are especially welcome; test the patrols from a save made before the end of Act 2.</p>
+          <strong>New in v0.10</strong>
+          <p>Topics a person has already answered now appear grey when you ask them something, the copy-protection quiz is gone, the cabbie remembers Laura, the speakeasy's two barflies have their own replies, and Ernie, Heimlich, Pippin, Rameses, and Steve no longer stall on their rounds. Saves from Act 3 onward made with earlier alphas may not restore, so please start a new game. Earlier alphas brought Act 3 patrols, Dr. Smith's ankh and Dagger reactions, Olympia's player-chosen passage, the Countess's phrasing, Act 3+ conversations, the final inquest, music, and many Act 1 and 2 details.</p>
         </article>
         <article class="notice">
           <strong>Reference setup</strong>
@@ -583,8 +583,10 @@
           <h3>Prologue &amp; Act 1</h3>
           <ul class="checklist">
             <li><label><input type="checkbox">About opens without a false memory warning.</label></li>
+            <li><label><input type="checkbox">Crodfoller's introduction ends with his offer of help; no Egyptology quiz appears, here or at the start of Acts 3 and 5.</label></li>
+            <li><label><input type="checkbox">Asking a character a topic turns it grey in the notebook for that character only; Sgt. O'Flaherty's O'Riley topic lights up again after Laura reads O'Riley's folder.</label></li>
             <li><label><input type="checkbox">Speaking with Steve records the personal path; skipping him produces the professional greeting later.</label></li>
-            <li><label><input type="checkbox">After seeing the press pass once, the cabbie remembers Laura.</label></li>
+            <li><label><input type="checkbox">On a later ride, the clean cab's driver greets Laura by name and asks where she's going.</label></li>
             <li><label><input type="checkbox">The dirty cab appears only after a normal ride and acquisition of the press pass.</label></li>
             <li><label><input type="checkbox">The docks, baseball trade, and Ziggy conversation remain optional for obtaining the gown.</label></li>
             <li><label><input type="checkbox">After taking the claim ticket, taxi travel never requires entering the dirty cab again.</label></li>
@@ -592,7 +594,7 @@
             <li><label><input type="checkbox">Both speakeasy songs rotate; the bathroom interrupts and then resumes the current song without restarting it.</label></li>
             <li><label><input type="checkbox">Leaving the speakeasy stops its songs; they do not carry on into the next room.</label></li>
             <li><label><input type="checkbox">The street outside Lo Fat's laundry has its intended music.</label></li>
-            <li><label><input type="checkbox">The two men at the speakeasy bar have distinct Look and Talk feedback.</label></li>
+            <li><label><input type="checkbox">The two men at the speakeasy bar have their own Look, Talk, Ask, and Magnifying Glass replies.</label></li>
             <li><label><input type="checkbox">Looking at the banner outside the museum mentions needing formal attire in Act 1, but not in Act 2.</label></li>
             <li><label><input type="checkbox">Ziggy acknowledges Yvette and the Countess without exposing later revelations.</label></li>
             <li><label><input type="checkbox">The Act 1 grade uses the gold Art Deco frame, not skull-and-crossbones artwork.</label></li>
@@ -609,7 +611,7 @@
             <li><label><input type="checkbox">Pippin, Smith, Countess, Yvette, O'Riley, and Rameses introduce themselves when earlier meetings were missed.</label></li>
             <li><label><input type="checkbox">Steve's greeting reflects whether Laura spoke with him in Act 1.</label></li>
             <li><label><input type="checkbox">Asking Carrington about nearby Pippin produces a believable exchange.</label></li>
-            <li><label><input type="checkbox">Completed notebook topics reopen only when genuinely new information exists.</label></li>
+            <li><label><input type="checkbox">Topics the person being asked has already answered appear grey; a murder victim's topic lights up again once Laura learns of the death, and every topic at a new act.</label></li>
             <li><label><input type="checkbox">Walking characters pause throughout dialogue and resume the same route afterward.</label></li>
             <li><label><input type="checkbox">Essential conversations remain available without a hidden conversation counter.</label></li>
             <li><label><input type="checkbox">At the party, Rameses on Ziggy and Yvette on Pippin and Dr. Smith speak as if the evening is still going and no one has died.</label></li>
@@ -698,7 +700,7 @@
       <div class="report-layout">
         <div>
           <div class="report-box">
-            <pre id="reportTemplate">Alpha build: v0.09
+            <pre id="reportTemplate">Alpha build: v0.10
 Environment: DOSBox-X version / ScummVM version / other
 Operating system:
 Act and location:
@@ -744,7 +746,7 @@ Anything unusual: old save, alternate route, skipped conversation, custom MIDI, 
 
   <script>
     (() => {
-      const storageKey = "amon-ra-redux-alpha-v009-checks";
+      const storageKey = "amon-ra-redux-alpha-v010-checks";
       const checks = [...document.querySelectorAll('.checklist input[type="checkbox"]')];
       const progressValue = document.getElementById('progressValue');
       const progressBar = document.getElementById('progressBar');

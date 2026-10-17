@@ -15,7 +15,7 @@ its `VERSION` file starts with `1.000`, and Sierra's own patch files (`0.SCR`, `
 
 1. Copy your installed game to a new directory and keep the original as an untouched backup. Do not patch a copy that
    already holds another Redux build or other mods.
-2. Extract `LB2-Redux-v0.09.zip` into that directory, replacing the existing files when asked.
+2. Extract `LB2-Redux-v0.10.zip` into that directory, replacing the existing files when asked.
    - On Windows and macOS, ordinary extraction is fine.
    - On Linux, file names are case-sensitive. Redux's files have uppercase names, as on Sierra's disks, so they
      replace a copy installed from those disks. If any of your copy's file names are lowercase, uppercase them first,
@@ -34,6 +34,19 @@ its `VERSION` file starts with `1.000`, and Sierra's own patch files (`0.SCR`, `
 
 If launching manually in DOSBox-X, mount the patched game directory as drive C and run `SCIDHUV.EXE`. Repository
 users can run `./tools/run_dosbox.sh` from the project root.
+
+## What's new in v0.10
+
+- When you ask someone a question, topics they have already answered appear grey. A murder victim's topic lights up
+  again once Laura learns of the death, and every topic does at the start of a new act. (Lo Fat's stay grey on a
+  later visit, although he gives his first answers again.)
+- The copy-protection quiz is gone: Crodfoller no longer tests Laura, and Acts 3 and 5 begin without the hieroglyph
+  screen.
+- After her first ride, the clean cab's driver greets Laura by name and asks where she's going.
+- The two men at the speakeasy bar have their own replies to Talk, Ask, and the Magnifying Glass.
+- Ernie, Heimlich, Pippin, Rameses, and Steve can no longer stall partway through their rounds.
+
+Saves from Act 3 onward made with earlier alphas may not restore; please start a new game.
 
 ## What's new in v0.09
 
@@ -144,8 +157,12 @@ Use this section if you want to play naturally without being told where every cl
 ### Prologue and Act 1
 
 - [ ] The About screen opens without a false memory warning.
+- [ ] Crodfoller's introduction ends with his offer of help; no Egyptology quiz appears, here or at the start of Acts 3
+  and 5.
+- [ ] Asking a character a topic turns it grey in the notebook for that character only; Sgt. O'Flaherty's O'Riley topic
+  lights up again after Laura reads O'Riley's folder.
 - [ ] Speaking with Steve records the personal relationship path; skipping him produces the professional greeting later.
-- [ ] Once Laura shows her press pass, the cabbie remembers her.
+- [ ] On a later ride, the clean cab's driver greets Laura by name and asks where she's going.
 - [ ] The dirty cab appears only after a prior normal ride and acquisition of the press pass.
 - [ ] The docks, baseball trade, and Ziggy conversation are optional; none is required merely to obtain the gown.
 - [ ] After Laura takes the claim ticket, ordinary taxi travel never puts her in the dirty cab again.
@@ -154,7 +171,7 @@ Use this section if you want to play naturally without being told where every cl
   restarting.
 - [ ] Leaving the speakeasy stops its songs; they do not carry on into the next room.
 - [ ] The street outside Lo Fat's laundry has its intended music.
-- [ ] The two men at the speakeasy bar have distinct Look and Talk feedback.
+- [ ] The two men at the speakeasy bar have their own Look, Talk, Ask, and Magnifying Glass replies.
 - [ ] Looking at the banner outside the museum mentions needing formal attire in Act 1, but not in Act 2.
 - [ ] Ziggy acknowledges knowing Yvette and the Countess without revealing later plot information.
 - [ ] Every act grade appears on black in a window with Art Deco corners, not the death window's bones, and the act
@@ -174,7 +191,8 @@ Use this section if you want to play naturally without being told where every cl
   was missed.
 - [ ] Steve's greeting reflects whether Laura spoke with him in Act 1.
 - [ ] Asking Carrington about Pippin while Pippin is nearby produces a believable exchange.
-- [ ] Discussed notebook topics show completion and reopen only when new information becomes available.
+- [ ] Topics the person being asked has already answered appear grey; a murder victim's topic lights up again once
+  Laura learns of the death, and every topic at a new act.
 - [ ] Walking characters pause for the entire conversation and resume the same route afterward.
 - [ ] Essential conversations and eavesdropping scenes remain available in their intended order without a hidden
   conversation counter.
@@ -273,7 +291,7 @@ existing report first, but add your save or reproduction details when they provi
 Please use this template:
 
 ```text
-Alpha build: v0.09
+Alpha build: v0.10
 Environment: DOSBox-X version / ScummVM version / other
 Operating system:
 Act and location:

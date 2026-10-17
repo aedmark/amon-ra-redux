@@ -12,11 +12,11 @@ Security: [SECURITY.md](SECURITY.md). Changes: [CHANGELOG.md](CHANGELOG.md). Old
 
 ## Current state
 
-_Last updated: 2026-10-17, session 59: patch-only distribution (D-047), uppercase names (D-048), docs review._
+_Last updated: 2026-10-17, session 59: patch-only distribution, docs review, PLAY-002/004/008/009, alpha v0.10._
 
 **In one paragraph:** Phases 1 to 4 are done; Phase 5's entry gate is the clean DOSBox-X playthrough in
-`PLAYTEST_CHECKLIST.md`. Alpha v0.09 is the first patch-only release: `tools/package_patch.py` zips only Redux's
-patch files, which players extract over their own floppy v1.000 copy; the game is unchanged from v0.08. Findings
+`PLAYTEST_CHECKLIST.md`. Alpha v0.10 is the current patch-only release (v0.09 was the first): `tools/package_patch.py` zips only Redux's
+patch files, which players extract over their own floppy v1.000 copy. Findings
 PLAY-001 to PLAY-037 are logged; most are fixed and confirmed, PLAY-037, PLAY-002, PLAY-004, PLAY-008, PLAY-009, and PLAY-012 to PLAY-024
 await a retest, and PLAY-006 is open (Phase 5). Act 3 patrols (D-046) change Script 90's method tables and D-049 grows
 Scripts 31 to 37's heaps, so Act 3 to 6 saves from earlier builds may not restore.
@@ -63,7 +63,7 @@ Scripts 31 to 37's heaps, so Act 3 to 6 saves from earlier builds may not restor
    PLAY-002 (Rocco's greeting on a second clean-cab ride), PLAY-004 (the barflies' Talk, Ask, Magnifier), and
    PLAY-008 (grey answered topics in Act 1 and the museum; reopening after a death, after O'Riley's folder,
    and at an act break), and PLAY-009 (Crodfoller's introduction and the starts of Acts 3 and 5, no quiz).
-2. Publish v0.09 when ready.
+2. Publish v0.10 when ready (`LB2/LB2-Redux-v0.10.zip`, patch-only).
 3. Retest PLAY-012 to PLAY-024 and session 54's rooms during the fresh playthrough (`PLAYTEST_CHECKLIST.md`).
 4. Check the podium's collision from both sides and a Magnifier repeat.
 5. PLAY-006 belongs to Phase 5; no other finding is open.
@@ -116,6 +116,11 @@ global reloads (D-041 drift); heap identical. Message files gain only the new re
 
 - PLAY-009 / D-050: removed the copy-protection quiz (rooms 230, 26, 420; new loose `230.MSG`). Each build
   differs only by the change; heaps identical.
+
+- Built `LB2/LB2-Redux-v0.10.zip` with `tools/package_patch.py`: 469 patch files, 470,277 bytes, no Sierra files;
+  `LB2_vanilla/` plus the zip matches every `LB2/` game file and passes the headless boot smoke. Mirrored into
+  `LB2 (legal)/patched files/`. Moved the tester guide and page (storage key `v010`) to v0.10 and cut CHANGELOG
+  `0.10-alpha`.
 
 **Verified (PLAY-008):** Scripts 20, 90, and 93 differ from their committed builds only in the new code; heaps
 identical; misc topics added afterwards (Script 20 only, heap identical). Scripts 31 to 37 differ by the two-instruction assignment and one added property per actor, matching the
