@@ -21,7 +21,6 @@
 
 # Scratch & temporary logs
 /dumps/*.txt
-!/dumps/.gitkeep
 *.bak
 
 # Temporary test binaries
@@ -38,3 +37,21 @@ tools/*.dll
 .idea/
 __pycache__/
 *.pyc
+/LB2/0.MSG
+/LB2/13.HEP
+/LB2/13.MSG
+/LB2/720.HEP
+/LB2/720.SCR
+/LB2/999.FON
+/LB2/INSTALL.ERR
+/LB2/INSTALL.EXE
+/LB2/INSTALL.HLP
+/LB2/INSTALL.SCR
+/LB2/INSTALL.TXT
+/LB2/INTERP.ERR
+/LB2/MESSAGE.MAP
+/LB2/MT32_REV0.TXT
+/LB2/RA.BAT
+/LB2/SCIDHUV.EXE
+/LB2/SIERRA.BAT
+/LB2/SOUND.TXT
