@@ -18,6 +18,7 @@ How Redux changes are verified.
 | **3x Manual Build** | HTML compilation | `python3 tools/manual.py build docs/manual/amon-ra.manual.json --output docs/manual/manual.html` | Generates portable single-page manual HTML. |
 | **DOSBox-X Smoke** | Original interpreter startup | `./tools/run_dosbox.sh` | Mounts `LB2/` as drive C and launches `SCIDHUV.EXE` with loose patches active. |
 | **DOSBox-X Headless Smoke** | Automated startup | `SDL_VIDEODRIVER=dummy SDL_AUDIODRIVER=dummy timeout --signal=INT 20 ./tools/run_dosbox.sh -silent -log-con` | `scidhuv` starts and is still running at the timeout (no return to the DOS prompt). Cannot show the screen. |
+| **Property layout** | Every loaded script | `python3 tools/check_layout.py` | Each instance has its class's property count and each class extends its superclass's selectors (D-049). Run after changing a class. |
 | **Release package** | Patch-only zip (D-047) | `python3 tools/package_patch.py <version>` | Integrity test passes; a copy of `LB2_vanilla/` with the zip extracted over it matches every `LB2/` game file and passes the headless smoke. |
 
 ## Compile and boot workflow
@@ -31,7 +32,7 @@ How Redux changes are verified.
 
 **Before step 1:** SCI Companion's "Compile modified scripts before run" option must be off (registry `CompileModifiedScriptsBeforeRun=0`). With it on, pressing Run silently recompiles every script whose source is newer than its patch and overwrites the committed files. Launch the game only with `./tools/run_dosbox.sh`.
 
-**Before shipping a rebuilt script that had a drifted committed patch (D-041),** compare the two builds routine by routine rather than byte by byte, and check that every object's property count matches its class. Write compound assignments to array elements with a computed index as plain assignments (D-041).
+**Before shipping a rebuilt script that had a drifted committed patch (D-041),** compare the two builds routine by routine rather than byte by byte, and run `python3 tools/check_layout.py` so every object's property count matches its class. Write compound assignments to array elements with a computed index as plain assignments (D-041).
 
 **Compile output must match the committed layout.** After compiling an unmodified script, its `.SCR`/`.HEP` should be byte-identical to the committed files (compare with `git show HEAD:LB2/N.HEP | cmp - LB2/N.HEP`). A larger heap (extra entry per object) means the SCI Companion version setting or `.sco` caches are wrong; such patches crash the game (D-028). For the 23 scripts Sierra patched, compare against `LB2_vanilla/`, not the archive.
 

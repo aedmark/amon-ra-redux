@@ -122,6 +122,12 @@ global reloads (D-041 drift); heap identical. Message files gain only the new re
   `LB2 (legal)/patched files/`. Moved the tester guide and page (storage key `v010`) to v0.10 and cut CHANGELOG
   `0.10-alpha`.
 
+- Untracked the 18 Sierra files still in git (interpreter, installer, batch and error files, font, `MESSAGE.MAP`,
+  text files, five unchanged retail patches); they stay on disk. The installer text files on disk, which git had
+  converted to LF, were restored from `LB2_vanilla/`. Property-layout drift check of all 221 loaded scripts: no
+  mismatches; a control with the pre-D-049 Script 31 was caught. Added it as `tools/check_layout.py`, with
+  `tools/sci_archive.py` (archive reader and DCL decompressor).
+
 **Verified (PLAY-008):** Scripts 20, 90, and 93 differ from their committed builds only in the new code; heaps
 identical; misc topics added afterwards (Script 20 only, heap identical). Scripts 31 to 37 differ by the two-instruction assignment and one added property per actor, matching the
 class. Headless boot of a test copy. Not yet seen in play.

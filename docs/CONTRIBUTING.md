@@ -6,7 +6,9 @@ Guidelines for contributing to *The Dagger of Amon Ra: Redux*.
 
 1. Ensure Wine 11+ is installed for running SCI Companion: `wine --version`.
 2. Ensure DOSBox-X is installed for original-interpreter runtime verification: `dosbox-x --version`.
-3. Work in `LB2/` on a case-insensitive filesystem (D-037). Never overwrite `RESOURCE.000`, `RESOURCE.MAP`, `RESOURCE.MSG`, or `MESSAGE.MAP`; pristine copies live in `LB2_vanilla/`. Never run Compile All or any resource rebuild in SCI Companion (D-028).
+3. Work in `LB2/` on a case-insensitive filesystem (D-037). The repository holds only Redux's files: copy your retail
+   floppy v1.000 into `LB2/` and into `LB2_vanilla/` without overwriting anything already there
+   (`cp -n /path/to/retail/* LB2/`), since Redux's patches replace some of Sierra's (D-047). Never overwrite `RESOURCE.000`, `RESOURCE.MAP`, `RESOURCE.MSG`, or `MESSAGE.MAP`; pristine copies live in `LB2_vanilla/`. Never run Compile All or any resource rebuild in SCI Companion (D-028).
 4. Run `python3 tools/check_docs.py` to confirm documentation consistency.
 
 ## Reference-first SCI object workflow

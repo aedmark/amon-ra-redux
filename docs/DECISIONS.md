@@ -524,7 +524,9 @@ Do not rebuild a committed patch only because it no longer matches a compile of 
   three existing uses are rewritten this way: `Main` now compiles byte-identical to its committed patch, and
   `n027`'s `proc27_2` matches the archive build (Script 27 still loads from the archive).
 - **Consequences:** The codegen differences stay. The heap-only differences in Scripts 31 to 37 were a real bug, a
-  missing `inConversation` property, fixed by D-049's rebuild. The 2026-10 review missed one real bug: room 610's committed patch and source both carried a decompiler error that wrote an accumulator-indexed array read (`[local15 n]` with `n` already in the accumulator) as `[local15 (previous expression)]`, so the index became that expression's value (PLAY-033). A multi-line `[localN` index in source deserves a check against the archive build. The
+  missing `inConversation` property, fixed by D-049's rebuild. A 2026-10-18 check of every loaded script (221
+  scripts, 2,362 objects, 114 classes) found no other instance whose size differs from its class and no class whose
+  selectors fail to extend its superclass's. The 2026-10 review missed one real bug: room 610's committed patch and source both carried a decompiler error that wrote an accumulator-indexed array read (`[local15 n]` with `n` already in the accumulator) as `[local15 (previous expression)]`, so the index became that expression's value (PLAY-033). A multi-line `[localN` index in source deserves a check against the archive build. The
   disassembler is a session tool, not part of the repository; a future comparison can reuse the approach.
 
 ## D-042 Give the Act 2 Party Its Own Lines at Case + 100
@@ -629,9 +631,10 @@ Ship a package that contains no Sierra files, which players unzip over their own
   stays out of the player package. Folder roles: `LB2/` is the working directory, `LB2 (legal)/` (git-ignored) is where
   a release is assembled, and `LB2_vanilla/` is the untouched retail reference. Internal test builds may bundle more.
 - **Consequences:** Players need the retail floppy v1.000 with Sierra's 23 patch files; v0.09 is the first patch-only
-  release. The repository still tracks some
-  Sierra files in `LB2/` (`SCIDHUV.EXE`, `INSTALL.*`, the drivers' batch files, `999.FON`, `MESSAGE.MAP`, and five
-  unchanged retail patches); the package never includes them.
+  release. Since 2026-10-18 the repository tracks no Sierra
+  files either: the interpreter, installer, batch and error files, `999.FON`, `MESSAGE.MAP`, the text files, and the
+  five unchanged retail patches were untracked (they remain in git history). A clone needs the retail game copied
+  into `LB2/` without overwriting Redux's files.
 
 ## D-048 Uppercase File Names in LB2, as on Sierra's Disks
 
