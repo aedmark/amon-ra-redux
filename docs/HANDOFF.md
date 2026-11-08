@@ -12,9 +12,9 @@ Security: [SECURITY.md](SECURITY.md). Changes: [CHANGELOG.md](CHANGELOG.md). Old
 
 ## Current state
 
-_Last updated: 2026-11-08, session 61: Manifold Tier 2 (AGENTS.md). Session 59: patch-only distribution, PLAY-002/004/008/009, alpha v0.10._
+_Last updated: 2026-11-08, session 62, on `master` (`5ab3399` plus this session's documentation changes): Manifold Tier 3. Session 59 holds the last game change: patch-only distribution, PLAY-002/004/008/009, alpha v0.10._
 
-**Session owner:** none since session 61 (2026-11-08).
+**Session owner:** none since session 62 (2026-11-08).
 
 **In one paragraph:** Phases 1 to 4 are done; Phase 5's entry gate is the clean DOSBox-X playthrough in
 `PLAYTEST_CHECKLIST.md`. Alpha v0.10 is the current patch-only release (v0.09 was the first): `tools/package_patch.py` zips only Redux's
@@ -23,13 +23,19 @@ PLAY-001 to PLAY-037 are logged; most are fixed and confirmed, PLAY-037, PLAY-00
 await a retest, and PLAY-006 is open (Phase 5). Act 3 patrols (D-046) change Script 90's method tables and D-049 grows
 Scripts 31 to 37's heaps, so Act 3 to 6 saves from earlier builds may not restore.
 
-**Verified**
+**Verified** (on `master` at `5ab3399`; game files last changed in `fa0e1ed`, 2026-10-18; Linux, Wine 11.21,
+DOSBox-X 2026.10.01, Python 3.14.9)
 
-- Each fix: routine-by-routine comparison of the rebuilt script against its committed build (only intended changes),
-  headless DOSBox-X startup, base archive MD5s, documentation and manual checks. Per-session evidence is in the log.
-- Maintainer-confirmed in DOSBox-X: PLAY-003, PLAY-018, PLAY-025 to PLAY-036, and the podium's repeat LOOK and DO.
-- v0.09 package: retail copy plus package reproduces every `LB2/` game file and passes the headless boot smoke, with
-  either Sierra's uppercase names or a lowercase copy uppercased per the tester guide.
+Rows run this session say so; the rest are carried over with their date.
+
+| Check | Result |
+| --- | --- |
+| `python3 tools/check_docs.py` (2026-11-08, session 62) | **0 errors, 0 warnings**, 18 files |
+| `python3 tools/manual.py check docs/manual/amon-ra.manual.json` (2026-11-08, session 62) | passed, 31 entries |
+| `python3 tools/check_layout.py` (2026-11-08, session 62) | **0 mismatches**: 221 scripts, 2,362 objects, 114 classes |
+| Each fix: routine comparison against its committed build, headless startup, base archive MD5s (carried over; per session in the log) | only intended changes |
+| Maintainer-confirmed in DOSBox-X (carried over, through 2026-10-17) | PLAY-003, PLAY-018, PLAY-025 to PLAY-036, the podium's repeat LOOK and DO |
+| v0.10 package (carried over, 2026-10-17, session 59) | `LB2_vanilla/` plus the zip matches every `LB2/` game file and passes the headless smoke |
 
 **Not verified**
 
@@ -76,6 +82,63 @@ Scripts 31 to 37's heaps, so Act 3 to 6 saves from earlier builds may not restor
 - Q-003 How the `tools/*.c` Wine helpers are built; blocks rebuilding one on a fresh machine.
 
 ## Session log
+
+Newest first. Copy the template for each new session. Work done between sessions (a maintainer's commits, another
+agent) gets a short entry too, written by whoever notices it. Past 10 entries, move the oldest to `docs/archive/`.
+
+```
+### Session N: YYYY-MM-DD: short title
+
+**Contributor:** person or agent/tool
+**Goal:**
+**Done:** roadmap, PLAY, and decision IDs; files and behaviour changed
+**Decisions:** D-numbers added
+**Verified:** checks and their results; for each rebuilt script, the routine comparison and boot
+**Not verified:** checks skipped or environments unavailable
+**Problems / surprises:**
+**Corrections:** earlier notes (here or in other docs) found wrong, and what was actually true
+**Left undone:**
+**Next session should start with:**
+```
+
+### Session 62: 2026-11-08: Manifold Tier 3 (Docs Structure)
+
+**Contributor:** Claude Code and maintainer
+
+**Goal:** Bring HANDOFF, ARCHITECTURE, TESTING, SECURITY, CONTRIBUTING, and the documentation map up to the
+Manifold template's structure (Tier 3).
+
+**Done:**
+- Pushed session 61 (`5ab3399`).
+- `ARCHITECTURE.md`: a one-paragraph shape; Code map; Interfaces and data flow; every invariant names what enforces
+  it (most are by hand), plus a new uppercase-names invariant; Boundaries; Dependencies with observed versions; State
+  and caches; Failure modes; Claims vs. code (the 34 drifted patches, stale `.sco` files, `docs/dialogue/`, D-041's
+  untested hazard). The diagram's "Decompile & Edit" label now reads "Edit source & messages", since the source came
+  from Sluicebox's tools.
+- `TESTING.md`: the suite table gains Proves and Does not prove columns and three rows (routine comparison, windowed
+  boot, save checkpoints); fast and full sets; Before any run; Adding a check; Change-to-check matrix; Manual checks;
+  Environment recipes; three pitfalls.
+- `HANDOFF.md`: a stamped Verified table (commit, environment, which rows were carried over), branch and commit in
+  Last updated, and the session-log template.
+- `SECURITY.md`: an assets table with owners, secure development rules, security verification, and an incident
+  response the maintainer has not yet confirmed. `CONTRIBUTING.md`: assumption check, Verify, Submit and review,
+  Compatibility and migrations. `docs/README.md`: a Does not own column and an update-triggers table.
+  `archive/README.md`: the retention line. Moved session 52 to the archive.
+
+**Decisions:** none.
+
+**Verified:** `python3 tools/check_docs.py`: 0 errors, 0 warnings in 18 files. The manual check passed.
+`python3 tools/check_layout.py`: 0 mismatches. Code-map files and entry points checked against `LB2/src/`.
+
+**Not verified:** No game files changed; no boot test needed. The headless-smoke pitfall (a black-screen stall would
+pass) is inferred, not observed.
+
+**Corrections:** The first code-map draft named a nonexistent `n090.sc`; Script 90 is `MuseumRgn.sc`.
+
+**Left undone:** Q-003 (helper build command). The incident response in `SECURITY.md` needs the maintainer's
+confirmation.
+
+**Next session should start with:** the maintainer's retests (Next steps 1).
 
 ### Session 61: 2026-11-08: Manifold Tier 2 (AGENTS.md)
 
@@ -318,22 +381,3 @@ class. Headless boot of a test copy. Not yet seen in play.
 **Verified:** Byte comparisons as above; headless DOSBox-X startup; base archive MD5s unchanged; documentation and manual checks.
 
 **Next session should start with:** Give Redux's museum-actor uses of selectors 667/668 their own names (new IDs), then decide whether to rebuild the 34 scripts whose committed patches differ from current source.
-
-### Session 52: 2026-10-13: SCI Companion Message Saving and Workspace Cleanup
-
-**Contributor:** Claude Code and maintainer
-
-**Goal:** Make SCI Companion's message editor usable for LB2 and remove the obsolete in-repo SCI Companion copy.
-
-**Done:**
-- Added `MessageWriteTo_3411` and reference-byte preservation to the maintainer's SCI Companion fork (`aedmark/SCICompanion` `04b1aeb0`, with a round-trip unit test); the maintainer built it on Windows and placed the build in the untracked `SCI Companion/` folder.
-- Verified a real editor save: `335.msg` noun 6 verb 8 now reads “He's a man of many scars (and scowls).”, and the file is byte-identical to the original apart from that text (D-038).
-- Removed the tracked `SCICompanion/` folder (docs, templates, tools, and source stubs); `.gitignore` now ignores `/SCI Companion/`. Updated launch commands in `TESTING.md` and `CONTRIBUTING.md`, the tool table in `ARCHITECTURE.md`, and the `AGENTS.md` layout. Tracked `LB2/msg/335.shm`. Recorded the maintainer's move of `SOURCE_MIGRATION_PLAN.md` to `docs/archive/`.
-
-**Decisions:** D-038; D-037 updated.
-
-**Verified:** Byte comparison of the saved `335.msg` against `HEAD` with the single edit applied; documentation and manual checks pass. The new message text has not been viewed in game.
-
-- Wired the orphaned (335, 6, 8) narrator line: `doorActions` now starts `sHeimlichStare` for the Magnifying Glass, which shows the narrator's scars line and then Heimlich's (1889, 1, 8) reply, following `sGiveInvite`'s room-script pattern. `335.scr` 1,872 bytes, `335.hep` 962 bytes; maintainer confirmed in DOSBox-X.
-
-**Next session should start with:** Readable selector names (plan item B) — done in session 53.

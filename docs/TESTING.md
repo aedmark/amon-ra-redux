@@ -11,15 +11,32 @@ How Redux changes are verified.
 
 ## Test matrix and commands
 
-| Suite | Scope | Command | Verification Target |
-| --- | --- | --- | --- |
-| **Doc Consistency** | Docs | `python3 tools/check_docs.py` | 0 errors; no orphaned IDs, broken links, or placeholders. |
-| **3x Manual Check** | Manual specification | `python3 tools/manual.py check docs/manual/amon-ra.manual.json` | 0 errors; validates What/How/Why triads and cross-references. |
-| **3x Manual Build** | HTML compilation | `python3 tools/manual.py build docs/manual/amon-ra.manual.json --output docs/manual/manual.html` | Generates portable single-page manual HTML. |
-| **DOSBox-X Smoke** | Original interpreter startup | `./tools/run_dosbox.sh` | Mounts `LB2/` as drive C and launches `SCIDHUV.EXE` with loose patches active. |
-| **DOSBox-X Headless Smoke** | Automated startup | `SDL_VIDEODRIVER=dummy SDL_AUDIODRIVER=dummy timeout --signal=INT 20 ./tools/run_dosbox.sh -silent -log-con` | `scidhuv` starts and is still running at the timeout (no return to the DOS prompt). Cannot show the screen. |
-| **Property layout** | Every loaded script | `python3 tools/check_layout.py` | Each instance has its class's property count and each class extends its superclass's selectors (D-049). Run after changing a class. |
-| **Release package** | Patch-only zip (D-047) | `python3 tools/package_patch.py <version>` | Integrity test passes; a copy of `LB2_vanilla/` with the zip extracted over it matches every `LB2/` game file and passes the headless smoke. |
+| Suite | Command | Proves | Does not prove | Time, needs |
+| --- | --- | --- | --- | --- |
+| **Doc consistency** | `python3 tools/check_docs.py` | No placeholders, dangling `P-`/`D-`/`Q-`/`T-` IDs, broken links, duplicate sessions, missing layout paths, or invisible characters | That the prose matches the code | Seconds |
+| **3x manual check** | `python3 tools/manual.py check docs/manual/amon-ra.manual.json` | The manual matches its schema and its What/How/Why triads and cross-references resolve | That an entry describes the shipped behaviour | Seconds |
+| **3x manual build** | `python3 tools/manual.py build docs/manual/amon-ra.manual.json --output docs/manual/manual.html` | The single-page manual builds | Anything about the game | Seconds |
+| **Property layout** | `python3 tools/check_layout.py` | Each instance in every loaded script has its class's property count, and each class extends its superclass's selectors (D-049) | Heap values, method tables, or behaviour | Seconds; reads the archive and loose patches |
+| **Routine comparison** | by hand: the rebuilt `.SCR`/`.HEP` against `git show HEAD:LB2/N.SCR` (D-041) | Only the intended routines and heap entries changed | That the change works in play | Minutes per script |
+| **DOSBox-X headless smoke** | `SDL_VIDEODRIVER=dummy SDL_AUDIODRIVER=dummy timeout --signal=INT 20 ./tools/run_dosbox.sh -silent -log-con` | `scidhuv` starts and has not returned to the DOS prompt at the timeout | What the screen shows: a black-screen stall would also pass | 20 seconds, DOSBox-X |
+| **DOSBox-X boot** | `./tools/run_dosbox.sh` | The intro appears with the patch set loaded (D-029) | Any scene after the intro | A minute; the maintainer's eyes |
+| **Save checkpoints** | the saves below, in `./tools/run_dosbox.sh` | The named branches behave as described | Branches not on the list; saves from other builds | Minutes to hours; the maintainer |
+| **Release package** | `python3 tools/package_patch.py <version>` | The zip's integrity test passes; a copy of `LB2_vanilla/` with the zip extracted over it matches every `LB2/` game file and passes the headless smoke (D-047) | That the build plays correctly | A minute; `LB2_vanilla/` |
+
+**The fast set** (before every commit): doc consistency and the 3x manual check. **Script changes** add the routine
+comparison, property layout, and the boot test. **The full set** (before a release): all of the above, plus the
+playtest checklist.
+
+**Expected results** live in HANDOFF's "Verified" section, with the date and commit they were measured on.
+
+## Before any run
+
+- **Ask first** if the maintainer may be playing; a boot test or compile changes files the running game reads.
+- **Clean state:** bisect or try risky patches in a throwaway copy (`tools/make_test_copy.sh <name> [git-rev]`, in
+  `/tmp/amon-ra-test/`), not in `LB2/`. Never delete or move `LB2/LB2SG.*`.
+- **SCI Companion:** "Compile modified scripts before run" is off, the loaded archive is `LB2/RESOURCE.MAP`, and the
+  working copy is on the case-insensitive drive (D-037).
+- **References:** `LB2_vanilla/` is present (the release check and Sierra-patch comparisons need it).
 
 ## Compile and boot workflow
 
@@ -58,7 +75,38 @@ Keep these saves for targeted regression runs:
 
 For `P4-05`, retain a save immediately before each Script 26 act break. With every then-attainable point, verify cumulative totals/divisors of Act 1 `5/5`, Act 2 `13/13`, Act 3 `38/38`, Act 4 `48/48`, and Act 5 `51/51`, each selecting the A band at 100%. Repeat representative 0%, 20%, 21%, 40%, 41%, 60%, 61%, 80%, 81%, and 100% boundaries. On a fresh game, confirm the introduction displays no grade and the first later F uses the first F narrator message. After P4-02's inquest review, verify the raw score can reach 54 without changing the already-issued Act 5 grade.
 
-## Known limitations
+## Adding a check
+
+- Python checks go in `tools/` and use only the standard library; reuse `tools/sci_archive.py` to read resources.
+- Assert on what happened (a byte, a property count, a file on disk), not on words in a message.
+- Before trusting a new check, make it fail: run it against a build without the fix. `check_layout.py` was trusted
+  only after it caught the pre-D-049 Script 31.
+
+## Change-to-check matrix
+
+| Changed area | Minimum checks | Additional evidence |
+| --- | --- | --- |
+| Documentation only | doc consistency | The manual check if the manual changed |
+| 3x manual | manual check and build | |
+| One script's logic | compile, routine comparison, boot | The save checkpoint for that branch; the maintainer's playtest |
+| A class, or anything adding objects, locals, methods, or properties | the above plus property layout | Name the saves it affects; confirm with the maintainer first |
+| Message text (`.MSG`) | boot | Read the changed lines in play; confirm the wording with the maintainer first |
+| Selector names | `tools/name_selectors.py`, restart SCI Companion, byte-identical recompile | |
+| Release | the full set and the release package | The tester guide's install recipe on a clean copy |
+
+## Manual checks (before a release)
+
+- The Phase 5 gate run in [PLAYTEST_CHECKLIST.md](PLAYTEST_CHECKLIST.md) for the acts the release touches.
+- The tester guide's install steps, followed exactly, on a fresh retail copy.
+- Record who checked what, where, and when in HANDOFF.
+
+## Environment recipes
+
+- SCI Companion: step 1 of the compile and boot workflow above; stop it with `wineserver -k`.
+- DOSBox-X configuration: `tools/dosbox-x.conf`, used by `tools/run_dosbox.sh`.
+- The `tools/*.exe` helpers: build command not recorded (Q-003).
+
+## Known limitations and pitfalls
 
 - **Never rebuild resources and never Compile All against `LB2/` (D-028).** A rebuild replaces `RESOURCE.000`/`RESOURCE.MAP` with a 5-byte-map volume holding only loose files (healthy base: `RESOURCE.000` 5,035,964 bytes, `RESOURCE.MAP` 6,489 bytes; compare `LB2_vanilla/`). Compile All regenerates every patch and previously produced a build that stalls on a black screen at boot. Compile single scripts with `tools/compile.py` and boot the game before committing. P5-00's one full-tree compatibility check ran only in a disposable `/tmp` copy and its rebuilt archives were discarded.
 - Patches are tracked uppercase, as on Sierra's disks (D-048), but SCI Companion writes every compiled or saved patch in lowercase, replacing the uppercase file. Keep the working copy on a case-insensitive filesystem so that never leaves two files (D-037). `git status` cannot see a case-only change there, so run `python3 tools/uppercase_names.py --check` before committing.
@@ -66,3 +114,11 @@ For `P4-05`, retain a save immediately before each Script 26 act break. With eve
   save-state playback and manual interaction remain necessary for behavioral verification.
 - DOSBox-X reproduces the original interpreter environment but offers less direct SCI object/flag introspection than a
   dedicated reimplementation debugger, so source-level flag audits remain part of regression testing.
+
+- **A headless smoke pass is not a boot pass.** The smoke checks only that `scidhuv` has not exited. A patch set that
+  stalls on a black screen (D-028) would not exit, so it would pass (inferred, not observed); only the windowed boot
+  shows the intro.
+- **A routine comparison must start from the committed build, not a fresh compile.** 34 committed patches already
+  differ from their source's compile (D-041); diffing two fresh compiles hides that drift.
+- **Compare Sierra-patched scripts against `LB2_vanilla/`.** For the 23 scripts Sierra patched, the archive build is
+  not vanilla (`SOURCE_PROVENANCE.md`).

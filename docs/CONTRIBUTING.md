@@ -35,10 +35,47 @@ workaround (D-034).
 
 ## Workflow
 
-1. Select an open task from `docs/ROADMAP.md` (e.g. `P1-01`).
+1. Select an open task from `docs/ROADMAP.md` (e.g. `P1-01`). Check `git status` and HANDOFF's session owner so the
+   change does not overlap other work, and surface unstated assumptions: for an ambiguous requirement or a change
+   that could break saves, ask (or record an open question in [DECISIONS.md](DECISIONS.md)) before editing.
 2. Open the game in SCI Companion: `wine "SCI Companion/SCICompanion.exe" 'Z:\run\media\gordonk\Oopy Goopy\amon-ra-redux\LB2\RESOURCE.MAP'`.
 3. Edit the script source in `LB2/src/` and compile that one script into loose `.SCR` and `.HEP` files with `python3 tools/compile.py <script>`; follow the steps in [TESTING.md](TESTING.md#compile-and-boot-workflow).
 4. Boot the game in DOSBox-X before committing: `./tools/run_dosbox.sh` (D-029).
 5. Update `docs/ROADMAP.md` or `docs/PLAYTEST_CHECKLIST.md`, `docs/HANDOFF.md`, and 3x manual entries.
 6. Verify documentation: `python3 tools/check_docs.py`.
 7. To release, build the patch-only zip with `python3 tools/package_patch.py <version>` (D-047).
+
+If implementation or testing invalidates the agreed scope, or exposes an unexpected dependency on another script or
+class, pause and re-scope before continuing.
+
+## Verify
+
+```bash
+python3 tools/check_docs.py
+python3 tools/manual.py check docs/manual/amon-ra.manual.json
+python3 tools/check_layout.py
+```
+
+Script changes also need the compile and boot workflow. Follow [TESTING.md](TESTING.md), "Change-to-check matrix", for
+what each kind of change needs. Report the exact checks run and any skipped; a partial pass is not a full pass.
+
+## Submit and review
+
+Work lands directly on `master`; there are no pull requests. The maintainer reviews and commits, or asks an agent to
+commit and push (`AGENTS.md`, "Working agreement"). Commit summaries are imperative and name their roadmap, playtest,
+and decision IDs, for example `Remove the copy-protection quiz (PLAY-009, D-050)`. Stage files by explicit path.
+
+A change is ready when its scope is clear, the checks it needs pass, its effect on saves is stated, no Sierra file or
+save is staged, patch names are uppercase, and the documentation it invalidated is updated.
+
+## Compatibility and migrations
+
+Redux supports only the DOS floppy v1.000 (D-001). Saves are the stored data: a change that adds objects, locals,
+methods, or properties to a script that is loaded when saving can stop saves from earlier builds restoring. Avoid it
+where a smaller change works; otherwise name the affected acts in the decision record and `CHANGELOG.md` (D-044,
+D-046, D-049). There is no general save migration; a script handles old saves itself where it must (room 335 rebinds
+its polygon for saves made before the podium change).
+
+## Reporting security issues
+
+Follow [SECURITY.md](SECURITY.md).

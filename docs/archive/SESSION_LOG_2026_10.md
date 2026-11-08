@@ -2,6 +2,25 @@
 
 Archived verbatim from `docs/HANDOFF.md` when its live session log exceeded ten entries.
 
+### Session 52: 2026-10-13: SCI Companion Message Saving and Workspace Cleanup
+
+**Contributor:** Claude Code and maintainer
+
+**Goal:** Make SCI Companion's message editor usable for LB2 and remove the obsolete in-repo SCI Companion copy.
+
+**Done:**
+- Added `MessageWriteTo_3411` and reference-byte preservation to the maintainer's SCI Companion fork (`aedmark/SCICompanion` `04b1aeb0`, with a round-trip unit test); the maintainer built it on Windows and placed the build in the untracked `SCI Companion/` folder.
+- Verified a real editor save: `335.msg` noun 6 verb 8 now reads “He's a man of many scars (and scowls).”, and the file is byte-identical to the original apart from that text (D-038).
+- Removed the tracked `SCICompanion/` folder (docs, templates, tools, and source stubs); `.gitignore` now ignores `/SCI Companion/`. Updated launch commands in `TESTING.md` and `CONTRIBUTING.md`, the tool table in `ARCHITECTURE.md`, and the `AGENTS.md` layout. Tracked `LB2/msg/335.shm`. Recorded the maintainer's move of `SOURCE_MIGRATION_PLAN.md` to `docs/archive/`.
+
+**Decisions:** D-038; D-037 updated.
+
+**Verified:** Byte comparison of the saved `335.msg` against `HEAD` with the single edit applied; documentation and manual checks pass. The new message text has not been viewed in game.
+
+- Wired the orphaned (335, 6, 8) narrator line: `doorActions` now starts `sHeimlichStare` for the Magnifying Glass, which shows the narrator's scars line and then Heimlich's (1889, 1, 8) reply, following `sGiveInvite`'s room-script pattern. `335.scr` 1,872 bytes, `335.hep` 962 bytes; maintainer confirmed in DOSBox-X.
+
+**Next session should start with:** Readable selector names (plan item B) — done in session 53.
+
 ### Session 51: 2026-10-12: Alpha v0.02 Playtest Package
 
 **Contributor:** Claude Code

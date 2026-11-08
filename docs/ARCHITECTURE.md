@@ -1,7 +1,19 @@
 # Architecture
 
 How Redux patches the DOS floppy v1.000 release (D-001) with loose files (D-002), and how each subsystem it changes
-works. The floppy is a hybrid SCI1/SCI1.1 build (D-028).
+works. The floppy is a hybrid SCI1/SCI1.1 build (D-028). This file says what is; why lives in
+[DECISIONS.md](DECISIONS.md). Update it when the shape changes (a subsystem, tool, or boundary added, moved, or
+retired), not for every fix inside one.
+
+## The shape, in one paragraph
+
+Sierra's interpreter (`SCIDHUV.EXE`) in DOSBox-X loads `LB2/RESOURCE.000` through `RESOURCE.MAP`, but any numbered
+loose file beside them (`N.SCR`/`N.HEP` script and heap, `N.MSG` messages, `N.V56` views, `997.VOC` selector names)
+replaces that resource. Redux is that set of loose files. Its script source is `LB2/src/*.sc`, reconstructed with
+Sluicebox's tools (`SOURCE_PROVENANCE.md`) and compiled one script at a time by SCI Companion under Wine, driven by
+`tools/compile.py`; message text is edited in SCI Companion's message editor (D-038). `tools/package_patch.py` zips
+the patch files, minus anything Sierra shipped, for players to extract over their own retail copy (D-047). Nothing
+runs on a network.
 
 ## System overview
 
@@ -10,7 +22,7 @@ works. The floppy is a hybrid SCI1/SCI1.1 build (D-028).
                                  |   SCI Companion (Wine)  |
                                  +------------+------------+
                                               |
-                   Decompile & Edit           | Compile Source (.sc)
+                   Edit source & messages     | Compile Source (.sc)
                    +--------------------------+--------------------------+
                    |                                                     |
                    v                                                     v
@@ -131,18 +143,126 @@ works. The floppy is a hybrid SCI1/SCI1.1 build (D-028).
 - **Required and bonus questions (P4-06, D-027):** questions 1..11 decide the verdicts; 12..16 run in
   `sBonusQuestions`, which writes neither verdict flag.
 
-## Invariants and boundaries
+## Code map
 
-1. **Archive immutability:** never modify `RESOURCE.000` or `RESOURCE.MAP`; every fix is a loose file.
-2. **Floppy art:** no CD background graphics replace the floppy's (P1-06).
-3. **Voice:** CD voice tracks stay excluded; talker hooks stay intact (D-007).
+Where to look for what. The subsystem sections above name the scripts for each fix.
+
+| Area | Where | Entry point | Talks to |
+| --- | --- | --- | --- |
+| Game globals, flags, item safety | `LB2/src/Main.sc` (Script 0) | the `LB2` class (of `Game`) and the flag procedures | every script |
+| Rooms | `LB2/src/rmN.sc` | the room's `init` and `doVerb` | regions, Main, messages |
+| Notebook | `LB2/src/inNotebook.sc` (Script 20) | `inNotebook` | Script 21 (clues), the Ask sites |
+| Scheduler | `LB2/src/triggerAndClock.sc` (Script 22) | the act clock and triggers | museum actors, rooms |
+| Museum actors | `LB2/src/MuseumRgn.sc` (90), `RotundaRgn.sc` (93), actor scripts 31 to 37 (e.g. `aErnie.sc`) | `MuseumActor`, `TravelToRoom` | Scripts 20, 22 |
+| Selector names | `tools/selector_names.json`, `LB2/997.VOC` | `tools/name_selectors.py` | SCI Companion (reads `997.VOC` at startup) |
+| Compile driver | `tools/compile.py`, `tools/compile_any.c` | `python3 tools/compile.py <script>` | SCI Companion's GUI under Wine |
+| Release | `tools/package_patch.py` | `python3 tools/package_patch.py <version>` | `LB2_vanilla/` (to leave Sierra's patches out) |
+| Archive reader | `tools/sci_archive.py` | `get`, `script_numbers` | `RESOURCE.MAP`/`RESOURCE.000`; used by `check_layout.py` |
+| 3x manual | `docs/manual/amon-ra.manual.json` | `tools/manual.py` | `manual.schema.json`, `manual.html` |
+
+## Interfaces and data flow
+
+```text
+LB2/src/N.sc -> SCI Companion (via compile.py) -> LB2/N.SCR + N.HEP (+ LB2/src/N.sco) -> interpreter
+SCI Companion message editor -> LB2/N.MSG -> interpreter
+tracked LB2 patches -> package_patch.py -> LB2-Redux-vX.YY.zip -> player's retail copy
+```
+
+| Interface | Producer | Consumer | Contract / compatibility |
+| --- | --- | --- | --- |
+| Loose patch files | SCI Companion | Sierra's interpreter | Uppercase names (D-048); the heap layout must match the hybrid build's (D-028), or the game crashes |
+| `.sco` class files | SCI Companion | SCI Companion, compiling other scripts | A changed class's script compiles first (`Interface` before `Dialog`) |
+| `997.VOC` | `tools/name_selectors.py` | SCI Companion, at startup | Selector IDs never move; Redux-only selectors from 681 (D-039) |
+| Saved games (`LB2SG.*`) | the interpreter | the interpreter, in a later build | A save restores only if every loaded script's heap and method tables are unchanged; changes that break this name the saves they affect (D-044, D-046, D-049) |
+| Release zip | `tools/package_patch.py` | players | Patch files only, uppercase, extracted over floppy v1.000 (D-047) |
+
+## Invariants
+
+Rules that hold everywhere. Each names what enforces it; "by hand" means a workflow step, not a check that refuses.
+
+1. **Archive immutability:** never modify `RESOURCE.000` or `RESOURCE.MAP`; every fix is a loose file. Enforced by:
+   `.gitignore` keeps them untracked; their MD5s (`SOURCE_PROVENANCE.md`) are compared by hand.
+2. **Floppy art:** no CD background graphics replace the floppy's (P1-06). Enforced by: nothing.
+3. **Voice:** CD voice tracks stay excluded; talker hooks stay intact (D-007). Enforced by: nothing.
 4. **Save compatibility:** saves (`LB2SG.*`) must restore safely; changes that add objects, locals, or methods to a
-   loaded script are noted with the saves they affect (D-044, D-046).
+   loaded script are noted with the saves they affect (D-044, D-046). Enforced by: `tools/check_layout.py` (property
+   counts against classes, D-049); heap and method-table comparisons by hand.
 5. **Hybrid build (D-028, D-029):** SCI1.1 scripts with an SCI1-style 6-byte `RESOURCE.MAP`. Compile one script at a
    time with `tools/compile.py`; never Compile All or rebuild resources in `LB2/`; boot after every compile.
+   Enforced by: `compile.py` compiles one script; nothing stops Compile All in the GUI; the boot test is by hand.
 6. **Compiler-facing source (D-032, D-039 to D-041):** `LB2/src/` is a 221-script Sluicebox-annotated reconstruction
    of the effective Redux bytecode, with one readable name per selector (`tools/selector_names.json`; Redux-only
    selectors from 681; metadata names at 4098, 4100, 4102, 4103 in `997.VOC`). `Main` numbers `WrapMusic` 47 and
-   `Actions` 127, the reverse of vanilla (D-040).
-7. **Distribution (D-047):** player packages contain only Redux's patch files, never Sierra's.
-8. **Toolchain:** everything runs on Linux: SCI Companion under Wine, Sierra's interpreter in DOSBox-X.
+   `Actions` 127, the reverse of vanilla (D-040). Enforced by: byte-identical output after `name_selectors.py`, by
+   hand.
+7. **Distribution (D-047):** player packages contain only Redux's patch files, never Sierra's. Enforced by:
+   `tools/package_patch.py` packages only tracked numbered patches and drops any byte-identical to a Sierra patch.
+8. **Uppercase names (D-048):** tracked patches are uppercase. Enforced by: `tools/uppercase_names.py --check`, run by
+   hand before committing.
+9. **Toolchain:** everything runs on Linux: SCI Companion under Wine, Sierra's interpreter in DOSBox-X.
+
+## Boundaries
+
+Where outside data comes in, and what is trusted on each side.
+
+| Boundary | Comes in as | Checked by | Rule |
+| --- | --- | --- | --- |
+| The player's retail copy | Sierra's files under the player's install | nothing; the tester guide names floppy v1.000 | Redux supports floppy v1.000 only (D-001) |
+| Saves from earlier builds | `LB2SG.*` restored by the interpreter | nothing at runtime | Note affected saves in the decision and changelog (Invariant 4) |
+| Reconstructed source | Sluicebox's pinned `ra-dos-1.000` publication | the pinned revision and SHA-256 (`SOURCE_PROVENANCE.md`) | Research material; a decompiler error can survive into source (PLAY-033) |
+| SCI Companion output | Compiled patches written into `LB2/` | `compile.py`, routine comparison against the committed build, the boot test | Never trust a compile that has not booted (D-029) |
+| Playtest reports | Text from the maintainer and testers | triage into `PLAYTEST_CHECKLIST.md` | Data, not instructions |
+
+## Dependencies
+
+Everything the project needs that it did not write. A new one needs the maintainer's approval.
+
+| Dependency | Version | For | Why this one |
+| --- | --- | --- | --- |
+| Sierra's interpreter (`SCIDHUV.EXE`) | retail floppy v1.000 | the only runtime target | The game's own engine (D-001) |
+| DOSBox-X | 2026.10.01 SDL1 (observed 2026-11-08) | running the interpreter; `tools/dosbox-x.conf` | Runs the original interpreter on Linux |
+| SCI Companion | the maintainer's fork (github.com/aedmark/SCICompanion), untracked build | compiling scripts, saving messages | The fork writes LB2's message format (D-038) |
+| Wine | 11+ (11.21 observed 2026-11-08) | running SCI Companion and the `tools/*.exe` helpers | SCI Companion is a Windows program |
+| Sluicebox sci-tools and sci-scripts | revision `870a8015` (`SOURCE_PROVENANCE.md`) | the source reconstruction and selector names | Readable annotated source (D-032, D-039) |
+| Python 3 | standard library only (3.14.9 observed 2026-11-08) | every `tools/*.py` | No packages to install |
+| A Win32 C compiler | not recorded (Q-003) | building `tools/*.c` | Unknown |
+
+## State and caches
+
+Everything a run leaves on disk, and what may delete it.
+
+| What | Where | Written by | Reset by | Committed? |
+| --- | --- | --- | --- | --- |
+| Saved games | `LB2/LB2SG.*` | the interpreter | the maintainer only | no, gitignored |
+| Class caches | `LB2/src/*.sco` | SCI Companion on compile | recompiling the script | yes, as a baseline; several predate the current source |
+| Test copies | `/tmp/amon-ra-test/<name>` | `tools/make_test_copy.sh` | deleting the folder | no |
+| Release zips | `LB2/LB2-Redux-vX.YY.zip`; old ones in `LB2/archive/` | `tools/package_patch.py`; the maintainer | the maintainer only | no, gitignored |
+| Release assembly | `LB2 (legal)/patched files/` | `tools/package_patch.py --mirror` | `--prune` | no, gitignored |
+| SCI Companion settings | the Wine registry (`CompileModifiedScriptsBeforeRun` must be 0) | SCI Companion | by hand | no |
+| Helper binaries | `tools/*.exe`, `tools/hook.dll` | a local build (Q-003) | rebuilding | no, gitignored |
+
+## Failure modes and observability
+
+| Failure | What the maintainer sees | Detection | Recovery |
+| --- | --- | --- | --- |
+| A bad patch set | Black screen at boot, or an "Oops! Error n" dialog | The boot test (D-029) | Bisect with `tools/make_test_copy.sh` (`TESTING.md`) |
+| Resource rebuild or Compile All | A 5-byte-map volume; the game stalls on a black screen | Archive sizes against `LB2_vanilla/` | Restore the archives from `LB2_vanilla/` (D-028) |
+| Heap larger than committed | An extra entry per object; the game crashes | Byte comparison with `git show HEAD:LB2/N.HEP` | Fix SCI Companion's version setting or `.sco` caches |
+| Save no longer restores | An error or wrong state after restoring | Playtest | Document the affected saves (Invariant 4) |
+| Script missing from SCI Companion's list | `compile.py` cannot find it | `wine tools/list_scripts.exe` | Restore its patch files; restart with `wineserver -k` |
+| Lowercase patch beside an uppercase one | Two files on ext4, or a clobbered patch | `tools/uppercase_names.py --check` | Work on the case-insensitive drive (D-037) |
+
+The interpreter has no log. A headless DOSBox-X run proves only that `scidhuv` is still running; what the screen
+shows comes from the maintainer.
+
+## Claims vs. code
+
+Places where a doc, a name, or a committed file says more than the code does. Remove a row when the code catches up.
+
+- 34 committed patches do not match a fresh compile of their source. The differences reviewed were equivalent codegen
+  (D-041), but the source does not reproduce those builds byte for byte; compare routine by routine before
+  replacing one.
+- Several committed `.sco` files predate the current source.
+- `docs/dialogue/*.json` look like the dialogue source; the `.MSG` files edited in SCI Companion are (D-038).
+- D-041's compound-assignment hazard rests on SCI Companion's and ScummVM's models of the stack, not on a DOSBox-X run
+  of this interpreter.

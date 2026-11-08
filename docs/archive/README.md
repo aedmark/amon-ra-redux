@@ -11,4 +11,5 @@ true when it was written. Search it before re-trying something that sounds new.
 - **Anything else** (an old handoff section, a retired doc): one file per thing, with a line at the top saying when
   and why it was moved.
 
-Archive content is historical, not normative.
+Archive content is historical, not normative. Never store saves, Sierra files, or anything else the repository must not hold here
+merely because it is old; follow `docs/SECURITY.md`.
