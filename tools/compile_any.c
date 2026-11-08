@@ -3,19 +3,6 @@
 #include <stdio.h>
 #include <string.h>
 
-/* hook.dll sits beside this helper in tools/, wherever the checkout lives. */
-static int hook_dll_path(char *out, DWORD size)
-{
-    DWORD n = GetModuleFileNameA(NULL, out, size);
-    if (n == 0 || n >= size) return 0;
-    char *slash = strrchr(out, '\\');
-    if (!slash) return 0;
-    slash[1] = '\0';
-    if (strlen(out) + sizeof("hook.dll") > size) return 0;
-    strcat(out, "hook.dll");
-    return GetFileAttributesA(out) != INVALID_FILE_ATTRIBUTES;
-}
-
 BOOL CALLBACK EnumWindowsProc(HWND hwnd, LPARAM lParam) {
     char title[256];
     GetWindowTextA(hwnd, title, sizeof(title));
@@ -44,20 +31,6 @@ BOOL CALLBACK EnumChildWindowsProc(HWND hwnd, LPARAM lParam) {
             g_hwndLists[g_listViewCount] = hwnd;
             g_hwndListCounts[g_listViewCount] = count;
             g_listViewCount++;
-        }
-    }
-    return TRUE;
-}
-
-HWND g_hwndListBox = NULL;
-BOOL CALLBACK EnumListBoxProc(HWND hwnd, LPARAM lParam) {
-    char className[256];
-    GetClassNameA(hwnd, className, sizeof(className));
-    if (strcmp(className, "ListBox") == 0) {
-        int count = SendMessageA(hwnd, LB_GETCOUNT, 0, 0);
-        if (count > 0) {
-            g_hwndListBox = hwnd;
-            return FALSE;
         }
     }
     return TRUE;
@@ -207,24 +180,6 @@ int main(int argc, char **argv) {
     GetWindowTextA(hwndMain, title, sizeof(title));
     printf("Window title after opening: '%s'\n", title);
 
-    // Inject hook DLL if not already injected
-    char dllPath[MAX_PATH];
-    if (!hook_dll_path(dllPath, sizeof dllPath)) {
-        printf("hook.dll not found beside this helper; compiling without it.\n");
-        dllPath[0] = '\0';
-    }
-    void *pMem = dllPath[0] ? VirtualAllocEx(hProc, NULL, strlen(dllPath) + 1, MEM_COMMIT, PAGE_READWRITE) : NULL;
-    if (pMem) {
-        WriteProcessMemory(hProc, pMem, dllPath, strlen(dllPath) + 1, NULL);
-        HMODULE hKernel32 = GetModuleHandleA("kernel32.dll");
-        void *pLoadLibrary = (void*)GetProcAddress(hKernel32, "LoadLibraryA");
-        HANDLE hThread = CreateRemoteThread(hProc, NULL, 0, (LPTHREAD_START_ROUTINE)pLoadLibrary, pMem, 0, NULL);
-        if (hThread) {
-            WaitForSingleObject(hThread, 3000);
-            CloseHandle(hThread);
-        }
-    }
-
     // Trigger ID_COMPILE (32838)
     printf("Sending ID_COMPILE (32838)...\n");
     SendMessageA(hwndMain, WM_COMMAND, 32838, 0);
@@ -244,18 +199,6 @@ int main(int argc, char **argv) {
             SendMessageA(hwndPopup, WM_COMMAND, IDOK, 0);
         }
         Sleep(500);
-    }
-
-    // Scroll output listbox
-    EnumChildWindows(hwndMain, EnumListBoxProc, 0);
-    if (g_hwndListBox) {
-        int lbCount = SendMessageA(g_hwndListBox, LB_GETCOUNT, 0, 0);
-        for (int i = 0; i < lbCount; i += 5) {
-            SendMessageA(g_hwndListBox, LB_SETTOPINDEX, i, 0);
-            InvalidateRect(g_hwndListBox, NULL, TRUE);
-            UpdateWindow(g_hwndListBox);
-            Sleep(5);
-        }
     }
 
     CloseHandle(hProc);

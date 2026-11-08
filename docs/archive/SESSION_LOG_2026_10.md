@@ -2,6 +2,26 @@
 
 Archived verbatim from `docs/HANDOFF.md` when its live session log exceeded ten entries.
 
+### Session 55: 2026-10-14: Act 1 and 2 Playtest Findings
+
+**Contributor:** Claude Code and maintainer
+
+**Goal:** Fix the maintainer's findings from the last playthrough up to Act 2 before a fresh run.
+
+**Done:**
+- Logged PLAY-012 to PLAY-018 in `docs/PLAYTEST_CHECKLIST.md`.
+- Room 335: the banner's Look plays a new Act 1 line about formal attire (`335.msg (1, 1, 2)`).
+- RotundaRgn (Script 93): `PartyCase` plays a topic's case + 100 during Act 2 when it exists (D-042). Added Rameses on Ziggy `(1, 6, 109)` and Yvette on Tut `(1, 6, 116)`, which stops before the murder questions. Yvette's Pippin line `(1, 6, 3)` is present tense again. Ziggy now knows Heimlich `(1, 6, 10)` and Tut `(1, 6, 16)`.
+- Room 350 (Scripts 350, 2350): the table outline covers the guests throughout Act 2, `sMeetSteve` meets beside the group on Laura's side, and `sExitNorth` no longer walks Laura's head over the lintel.
+- Room 454: the Ankh's click target grows from 6x6 to 13x14 without overlapping nearby objects.
+- Added a scratch renderer for LB2's pictures, views, and control screens (VGA 1.1 cels; SCI1.0 resource map) to check positions against the art; it confirmed the guests, doorway, and Ankh geometry.
+
+**Decisions:** D-042.
+
+**Verified:** Each rebuilt script compared routine by routine with its committed build shows only the intended changes; message files changed only in the listed records; headless DOSBox-X startup; base archive MD5s unchanged; documentation checks. Runtime retest pending.
+
+**Next session should start with:** The maintainer's fresh playthrough, starting with Next steps 1.
+
 ### Session 54: 2026-10-14: Museum Selectors, Class Numbering, and the Inquest Layout
 
 **Contributor:** Claude Code and maintainer

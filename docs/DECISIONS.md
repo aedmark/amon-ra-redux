@@ -729,6 +729,23 @@ Take room 18's hieroglyph quiz out of play instead of leaving a screen that alwa
 - **Consequences:** Crodfoller's pass and fail reactions (`230.MSG` noun 11) and the "research, research, research"
   death are no longer reachable. No heap changes; saves past Act 1 already have flag 34.
 
+## D-051 Retire the hook.dll Compiler-Output Capture  (2026-11-08, status: accepted)
+
+Stop injecting a DLL into SCI Companion during compiles.
+
+- **Context:** `compile_any` and `compile_by_name` injected `tools/hook.dll` into SCI Companion, which patched
+  `DrawTextA` to log the compiler's output text to `dumps/compiler_captured.txt`; after compiling they scrolled the
+  output list so every line was redrawn and logged. `inject_and_scroll` did only that. `dumps/` was removed on
+  2026-10-17, so the capture had logged nothing since, and no tool reads the file: `compile.py` judges a compile by
+  whether the `.SCR`/`.HEP` were rewritten.
+- **Decision:** Remove the injection and the output-list scrolling from `compile_any.c` and `compile_by_name.c`, and
+  delete `hook_dll.c` and `inject_and_scroll.c`.
+- **Alternatives:** Point the capture at an existing folder (rejected: nothing consumes it, and patching code inside
+  SCI Companion is a risk with no current use).
+- **Consequences:** Compiles no longer modify SCI Companion's process. Compiler messages are visible only in SCI
+  Companion's window.
+- **Review trigger:** A need to read compile errors automatically.
+
 ## Held tensions
 
 A tension is two claims that are both true and do not fit together yet. It is not an open question: an open question

@@ -12,9 +12,9 @@ Security: [SECURITY.md](SECURITY.md). Changes: [CHANGELOG.md](CHANGELOG.md). Old
 
 ## Current state
 
-_Last updated: 2026-11-08, session 64, on `master` (`f4af14b` plus this session's documentation and helper changes): Q-003 answered; helpers find `hook.dll` beside themselves. Session 59 holds the last game change: patch-only distribution, PLAY-002/004/008/009, alpha v0.10._
+_Last updated: 2026-11-08, session 65, on `master` (`ee05c34` plus this session's helper and documentation changes): `hook.dll` capture retired (D-051). Session 59 holds the last game change: patch-only distribution, PLAY-002/004/008/009, alpha v0.10._
 
-**Session owner:** none since session 64 (2026-11-08).
+**Session owner:** none since session 65 (2026-11-08).
 
 **In one paragraph:** Phases 1 to 4 are done; Phase 5's entry gate is the clean DOSBox-X playthrough in
 `PLAYTEST_CHECKLIST.md`. Alpha v0.10 is the current patch-only release (v0.09 was the first): `tools/package_patch.py` zips only Redux's
@@ -100,6 +100,34 @@ agent) gets a short entry too, written by whoever notices it. Past 10 entries, m
 **Left undone:**
 **Next session should start with:**
 ```
+
+### Session 65: 2026-11-08: Retire the hook.dll Capture
+
+**Contributor:** Claude Code and maintainer
+
+**Goal:** Retire `hook.dll` once it was confirmed that nothing needs it (D-051).
+
+**Done:**
+- Removed the DLL injection and the output-list scrolling from `tools/compile_any.c` and `compile_by_name.c`
+  (114 lines); deleted `tools/hook_dll.c` and `inject_and_scroll.c`. Rebuilt the two compile helpers. Moved the
+  untracked `hook.dll` and `inject_and_scroll.exe`, and the previous two compile helpers, to the session scratch folder.
+- Updated TESTING's build recipe and ARCHITECTURE's state and Claims vs. code (three other helpers still write to the
+  missing `dumps/`). Moved session 55 to the archive.
+
+**Decisions:** D-051.
+
+**Verified:** Both helpers build with `-Wall` and no warnings, and their sources contain no `hook`, `ListBox`, or `LoadLibrary`
+references. `python3 tools/check_docs.py`: 0 errors, 0 warnings.
+
+**Verified (maintainer-approved compile):** `python3 tools/compile.py rm230` through the rebuilt `compile_any.exe`
+wrote `230.SCR` and `230.HEP` byte-identical to HEAD; `tools/uppercase_names.py --check` clean; SCI Companion stopped
+with `wineserver -k`. No game file changed, so no boot test.
+
+**Not verified:** `compile_by_name.exe` was rebuilt but not run (`compile.py` does not use it).
+
+**Left undone:** `copy_output`, `get_compile_log`, and `get_errors` still write to the missing `dumps/`.
+
+**Next session should start with:** the maintainer's retests (Next steps 1).
 
 ### Session 64: 2026-11-08: Helpers Find hook.dll Beside Themselves
 
@@ -387,23 +415,3 @@ class. Headless boot of a test copy. Not yet seen in play.
 **Verified:** Only Ziggy's records changed text; record sets and reference bytes unchanged; documentation checks.
 
 **Next session should start with:** The maintainer's fresh playthrough (Next steps 1-2).
-
-### Session 55: 2026-10-14: Act 1 and 2 Playtest Findings
-
-**Contributor:** Claude Code and maintainer
-
-**Goal:** Fix the maintainer's findings from the last playthrough up to Act 2 before a fresh run.
-
-**Done:**
-- Logged PLAY-012 to PLAY-018 in `docs/PLAYTEST_CHECKLIST.md`.
-- Room 335: the banner's Look plays a new Act 1 line about formal attire (`335.msg (1, 1, 2)`).
-- RotundaRgn (Script 93): `PartyCase` plays a topic's case + 100 during Act 2 when it exists (D-042). Added Rameses on Ziggy `(1, 6, 109)` and Yvette on Tut `(1, 6, 116)`, which stops before the murder questions. Yvette's Pippin line `(1, 6, 3)` is present tense again. Ziggy now knows Heimlich `(1, 6, 10)` and Tut `(1, 6, 16)`.
-- Room 350 (Scripts 350, 2350): the table outline covers the guests throughout Act 2, `sMeetSteve` meets beside the group on Laura's side, and `sExitNorth` no longer walks Laura's head over the lintel.
-- Room 454: the Ankh's click target grows from 6x6 to 13x14 without overlapping nearby objects.
-- Added a scratch renderer for LB2's pictures, views, and control screens (VGA 1.1 cels; SCI1.0 resource map) to check positions against the art; it confirmed the guests, doorway, and Ankh geometry.
-
-**Decisions:** D-042.
-
-**Verified:** Each rebuilt script compared routine by routine with its committed build shows only the intended changes; message files changed only in the listed records; headless DOSBox-X startup; base archive MD5s unchanged; documentation checks. Runtime retest pending.
-
-**Next session should start with:** The maintainer's fresh playthrough, starting with Next steps 1.

@@ -239,7 +239,7 @@ Everything a run leaves on disk, and what may delete it.
 | Release zips | `LB2/LB2-Redux-vX.YY.zip`; old ones in `LB2/archive/` | `tools/package_patch.py`; the maintainer | the maintainer only | no, gitignored |
 | Release assembly | `LB2 (legal)/patched files/` | `tools/package_patch.py --mirror` | `--prune` | no, gitignored |
 | SCI Companion settings | the Wine registry (`CompileModifiedScriptsBeforeRun` must be 0) | SCI Companion | by hand | no |
-| Helper binaries | `tools/*.exe`, `tools/hook.dll` | `i686-w64-mingw32-gcc` (Q-003); `compile.py` rebuilds a missing `compile_any.exe` | rebuilding | no, gitignored |
+| Helper binaries | `tools/*.exe` | `i686-w64-mingw32-gcc` (Q-003); `compile.py` rebuilds a missing `compile_any.exe` | rebuilding | no, gitignored |
 
 ## Failure modes and observability
 
@@ -264,8 +264,7 @@ Places where a doc, a name, or a committed file says more than the code does. Re
   replacing one.
 - Several committed `.sco` files predate the current source.
 - `docs/dialogue/*.json` look like the dialogue source; the `.MSG` files edited in SCI Companion are (D-038).
-- `tools/hook.dll` is injected into SCI Companion on every compile to capture its `DrawTextA` text, but it writes to
-  `Z:\home\gordonk\PycharmProjects\amon-ra-redux\dumps\compiler_captured.txt` (a symlink to this repository),
-  and `dumps/` no longer exists, so it captures nothing. Nothing reads that file.
+- `tools/copy_output.c`, `get_compile_log.c`, and `get_errors.c` write `dumps/compile_output.txt`, but `dumps/` no
+  longer exists, so they would fail to save. `compile.py` uses none of them.
 - D-041's compound-assignment hazard rests on SCI Companion's and ScummVM's models of the stack, not on a DOSBox-X run
   of this interpreter.
