@@ -211,7 +211,7 @@ Things an agent must not change without explicit permission.
   `WrapMusic` 47 and `Actions` 127, the reverse of vanilla (D-040).
 - New selectors go past the vanilla range (from 681), named in `tools/selector_names.json` (D-039).
 - Tools are Python 3 using only the standard library. `tools/*.c` are Win32 helpers for driving SCI Companion under
-  Wine; their `.exe`/`.dll` builds are untracked, and their build command is not recorded yet.
+  Wine; their `.exe`/`.dll` builds are untracked. Build with `i686-w64-mingw32-gcc` (`docs/TESTING.md`, Q-003).
 - Generated and committed: `docs/manual/manual.html` (from `tools/manual.py build`). Generated and untracked: release
   zips, test copies from `tools/make_test_copy.sh`, `LB2 (legal)/patched files/`.
 - Supported target: Sierra's original interpreter (`SCIDHUV.EXE`) in DOSBox-X.

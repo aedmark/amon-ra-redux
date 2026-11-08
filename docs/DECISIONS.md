@@ -769,6 +769,8 @@ decisions that answered them.
 - **Q-002** ~~How should Act 2 progression be gated?~~ Answered 2026-10-07 by D-008 (a diegetic knowledge threshold);
   re-answered 2026-10-08 when D-008 was superseded: keep the authored transition and scheduler model, and address
   Act 2's passive pacing through the P5-01 content milestone after the core fixes, D-017 and D-018.
-- **Q-003** How are the Win32 helpers in `tools/*.c` built (compiler, flags, `hook.dll`)? (asked 2026-11-08, by Claude
-  Code during the Manifold Tier 2 pass; blocks rebuilding a helper on a fresh machine; recommendation: record the
-  command in `docs/TESTING.md`, "Environment recipes")
+- **Q-003** ~~How are the Win32 helpers in `tools/*.c` built (compiler, flags, `hook.dll`)?~~ Answered 2026-11-08:
+  32-bit MinGW-w64 with no extra flags or libraries, `i686-w64-mingw32-gcc -o tools/NAME.exe tools/NAME.c`, and
+  `-shared -o tools/hook.dll tools/hook_dll.c` for the DLL. `tools/compile.py` already builds `compile_any.exe` this
+  way when it is missing (since `8d764df`); all 24 sources rebuild cleanly with GCC 16.2 (recipe in
+  `docs/TESTING.md`).

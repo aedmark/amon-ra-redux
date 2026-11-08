@@ -2,6 +2,44 @@
 
 Archived verbatim from `docs/HANDOFF.md` when its live session log exceeded ten entries.
 
+### Session 54: 2026-10-14: Museum Selectors, Class Numbering, and the Inquest Layout
+
+**Contributor:** Claude Code and maintainer
+
+**Goal:** Finish session 53's deferred items: separate the museum lock from vanilla selectors 667/668, explain the 34 drifted patches, and stop batch compiles from leaving script windows open.
+
+**Done:**
+- Gave the P3-06 museum lock its own selectors, 681 `inConversation` and 682 `sayAndHold` (`selector_names.json`, `997.voc`, `MuseumRgn.sc`); rebuilt Script 90, which matches the committed build except for the selector IDs (D-039).
+- `compile_any` gained `--is-open` and `--close`; `compile.py` waits for the patches and closes the window it opened.
+- Rebuilt the 30 other drifted scripts in place, compared each with the committed build using a normalizing disassembler, and restored every committed patch. Differences are codegen except for the findings in D-040 and D-041.
+- Rewrote the three indexed compound assignments (`Main` `SetFlag`/`ClearFlag`, `n027` `proc27_2`) as plain assignments; `Main` now compiles byte-identical to its committed patch and `proc27_2` matches the archive build (D-041).
+- Fixed and rebuilt room 310 (`WrapMusic dispose:`), room 450 (class 47 for `WrapMusic`, value-preserving message case, standard `super doVerb:`), room 640 (`of Actions`; now a loose patch), and room 750 (object property blocks from `7d48893`, un-shifted `state`/`cycles`/`seconds`/`font`) (D-040).
+
+- Built `LB2/LB2-Redux-v0.04.zip` from `f62ad5a` with v0.03's layout (game files at the root plus `msg/` and `src/`), excluding `LB2SG.*` saves (v0.03 had shipped the maintainer's saves) and older zips: 949 files, 7,096,350 bytes (rebuilt in session 55 with PLAY-012 to PLAY-018 and in session 56 with Ziggy's restored voice, which moved into CHANGELOG 0.04-alpha; the playtest page and guide gained matching checks and the page a fresh checklist storage key (now `v004r3` after the Ziggy check was added), because saved checks are stored by position). Moved `docs/alpha-playtest.html` to v0.04 with a "New in v0.04" card, checks for the five changed rooms, a v0.04 report template, and a fresh checklist storage key.
+
+**Decisions:** D-040, D-041.
+
+**Verified:** v0.04 zip integrity test, vanilla archive MD5s, changed patches equal to `HEAD`, and headless startup of the extracted copy. Script 90, 310, 450, 640, and 750 builds compared routine by routine against the committed, archive, and Sierra patch builds; 750's object sizes, property values, and slot writes match vanilla. Headless DOSBox-X startup; base archive MD5s unchanged; documentation and manual checks. Runtime retest pending.
+
+**Next session should start with:** The maintainer's retest of rooms 90, 310, 450, 640, and 750 (Next steps 1).
+
+### Session 53: 2026-10-13: Readable Selector Names
+
+**Contributor:** Claude Code and maintainer
+
+**Goal:** Make the source readable in SCI Companion by naming selectors without changing compiled output.
+
+**Done:**
+- Built `tools/selector_names.json` (563 IDs) by aligning `LB2/src` with the pinned Sluicebox publication and resolving disagreements from class definitions; cross-checked against the CD release's vocab 997 extracted from the maintainer's disc image (528 names in matching order). Added `tools/name_selectors.py` and applied it to `LB2/997.voc` and 218 source files (D-039).
+- Verified with two full SCI Companion rebuilds (original vs. renamed source) and targeted reruns: every compiled script is byte-identical. Fixed the one difference by naming selector 343 `theControls`.
+- Restored all playtested `.scr`/`.hep` patches from git afterwards; kept the regenerated `Interface.sco`, which fixes `Dialog`'s "Unknown class DItem" errors. Fixed `tools/make_test_copy.sh` for lowercase patch names.
+
+**Decisions:** D-039 (supersedes D-032's numeric-selector rule).
+
+**Verified:** Byte comparisons as above; headless DOSBox-X startup; base archive MD5s unchanged; documentation and manual checks.
+
+**Next session should start with:** Give Redux's museum-actor uses of selectors 667/668 their own names (new IDs), then decide whether to rebuild the 34 scripts whose committed patches differ from current source.
+
 ### Session 52: 2026-10-13: SCI Companion Message Saving and Workspace Cleanup
 
 **Contributor:** Claude Code and maintainer

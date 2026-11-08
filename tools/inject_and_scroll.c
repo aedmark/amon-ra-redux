@@ -2,6 +2,19 @@
 #include <stdio.h>
 #include <string.h>
 
+/* hook.dll sits beside this helper in tools/, wherever the checkout lives. */
+static int hook_dll_path(char *out, DWORD size)
+{
+    DWORD n = GetModuleFileNameA(NULL, out, size);
+    if (n == 0 || n >= size) return 0;
+    char *slash = strrchr(out, '\\');
+    if (!slash) return 0;
+    slash[1] = '\0';
+    if (strlen(out) + sizeof("hook.dll") > size) return 0;
+    strcat(out, "hook.dll");
+    return GetFileAttributesA(out) != INVALID_FILE_ATTRIBUTES;
+}
+
 HWND g_hwndListBox = NULL;
 
 BOOL CALLBACK EnumChildWindowsProc(HWND hwnd, LPARAM lParam) {
@@ -45,7 +58,11 @@ int main() {
         return 1;
     }
 
-    const char *dllPath = "Z:\\home\\gordonk\\PycharmProjects\\amon-ra-redux\\tools\\hook.dll";
+    char dllPath[MAX_PATH];
+    if (!hook_dll_path(dllPath, sizeof dllPath)) {
+        printf("hook.dll not found beside this helper.\n");
+        return 1;
+    }
     void *pMem = VirtualAllocEx(hProc, NULL, strlen(dllPath) + 1, MEM_COMMIT, PAGE_READWRITE);
     WriteProcessMemory(hProc, pMem, dllPath, strlen(dllPath) + 1, NULL);
 

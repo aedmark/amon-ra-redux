@@ -3,6 +3,19 @@
 #include <stdio.h>
 #include <string.h>
 
+/* hook.dll sits beside this helper in tools/, wherever the checkout lives. */
+static int hook_dll_path(char *out, DWORD size)
+{
+    DWORD n = GetModuleFileNameA(NULL, out, size);
+    if (n == 0 || n >= size) return 0;
+    char *slash = strrchr(out, '\\');
+    if (!slash) return 0;
+    slash[1] = '\0';
+    if (strlen(out) + sizeof("hook.dll") > size) return 0;
+    strcat(out, "hook.dll");
+    return GetFileAttributesA(out) != INVALID_FILE_ATTRIBUTES;
+}
+
 BOOL CALLBACK EnumWindowsProc(HWND hwnd, LPARAM lParam) {
     char title[256];
     GetWindowTextA(hwnd, title, sizeof(title));
@@ -143,8 +156,12 @@ int main(int argc, char **argv) {
     printf("Window title after opening: '%s'\n", title);
 
     // Inject hook DLL if not already injected
-    const char *dllPath = "Z:\\home\\gordonk\\PycharmProjects\\amon-ra-redux\\tools\\hook.dll";
-    void *pMem = VirtualAllocEx(hProc, NULL, strlen(dllPath) + 1, MEM_COMMIT, PAGE_READWRITE);
+    char dllPath[MAX_PATH];
+    if (!hook_dll_path(dllPath, sizeof dllPath)) {
+        printf("hook.dll not found beside this helper; compiling without it.\n");
+        dllPath[0] = '\0';
+    }
+    void *pMem = dllPath[0] ? VirtualAllocEx(hProc, NULL, strlen(dllPath) + 1, MEM_COMMIT, PAGE_READWRITE) : NULL;
     if (pMem) {
         WriteProcessMemory(hProc, pMem, dllPath, strlen(dllPath) + 1, NULL);
         HMODULE hKernel32 = GetModuleHandleA("kernel32.dll");

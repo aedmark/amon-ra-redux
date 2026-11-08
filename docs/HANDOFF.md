@@ -12,9 +12,9 @@ Security: [SECURITY.md](SECURITY.md). Changes: [CHANGELOG.md](CHANGELOG.md). Old
 
 ## Current state
 
-_Last updated: 2026-11-08, session 62, on `master` (`5ab3399` plus this session's documentation changes): Manifold Tier 3. Session 59 holds the last game change: patch-only distribution, PLAY-002/004/008/009, alpha v0.10._
+_Last updated: 2026-11-08, session 64, on `master` (`f4af14b` plus this session's documentation and helper changes): Q-003 answered; helpers find `hook.dll` beside themselves. Session 59 holds the last game change: patch-only distribution, PLAY-002/004/008/009, alpha v0.10._
 
-**Session owner:** none since session 62 (2026-11-08).
+**Session owner:** none since session 64 (2026-11-08).
 
 **In one paragraph:** Phases 1 to 4 are done; Phase 5's entry gate is the clean DOSBox-X playthrough in
 `PLAYTEST_CHECKLIST.md`. Alpha v0.10 is the current patch-only release (v0.09 was the first): `tools/package_patch.py` zips only Redux's
@@ -79,7 +79,7 @@ Rows run this session say so; the rest are carried over with their date.
 
 ## Open questions for maintainers
 
-- Q-003 How the `tools/*.c` Wine helpers are built; blocks rebuilding one on a fresh machine.
+None open. Q-003 was answered in session 63 (`docs/DECISIONS.md`).
 
 ## Session log
 
@@ -100,6 +100,70 @@ agent) gets a short entry too, written by whoever notices it. Past 10 entries, m
 **Left undone:**
 **Next session should start with:**
 ```
+
+### Session 64: 2026-11-08: Helpers Find hook.dll Beside Themselves
+
+**Contributor:** Claude Code and maintainer
+
+**Goal:** Stop three helpers depending on a hardcoded `hook.dll` path.
+
+**Done:**
+- `tools/compile_any.c`, `compile_by_name.c`, and `inject_and_scroll.c` resolve `hook.dll` from their own location
+  (`GetModuleFileNameA`, then `hook.dll` in the same folder) instead of
+  `Z:\home\gordonk\PycharmProjects\amon-ra-redux\tools\hook.dll`. If it is missing, the two compile helpers say
+  so and compile without it, as they effectively did before when injection failed; `inject_and_scroll` exits 1.
+  Rebuilt the three `.exe` files with `i686-w64-mingw32-gcc -Wall` (old binaries kept in the session scratch folder).
+- Recorded under ARCHITECTURE's Claims vs. code that `hook.dll` itself captures nothing: it writes to a `dumps/`
+  folder that no longer exists, and nothing reads the file. `hook_dll.c` is unchanged. Moved session 54 to the archive.
+
+**Decisions:** none.
+
+**Verified:** All three build without warnings, and none contains the old path (`strings`). A test program with the
+same function, run under Wine from `tools/`, resolved `O:\amon-ra-redux\tools\hook.dll` (Wine's drive for the exFAT
+mount) and returned 1; run from a folder without `hook.dll`, it returned 0. `python3 tools/check_docs.py`: 0 errors,
+0 warnings.
+
+**Verified (maintainer-approved compile):** With SCI Companion on `LB2` (`CompileModifiedScriptsBeforeRun` 0),
+`python3 tools/compile.py rm230` ran through the rebuilt `compile_any.exe`, printed no "hook.dll not found" line, and
+wrote `230.SCR` and `230.HEP` byte-identical to HEAD; `tools/uppercase_names.py --check` clean; SCI Companion stopped
+with `wineserver -k`. No game file changed, so no boot test.
+
+**Not verified:** That `hook.dll` loaded inside SCI Companion (it logs nothing, since `dumps/` is gone).
+
+**Corrections:** Session 63 called `/home/gordonk/PycharmProjects/amon-ra-redux` an old checkout. It is a symlink to
+this repository (created 2026-10-12), so the "two" `hook.dll` copies were one file.
+
+**Left undone:** Whether to repair or retire `hook.dll`'s capture (it has done nothing since `dumps/` was removed).
+
+**Next session should start with:** the maintainer's retests (Next steps 1).
+
+### Session 63: 2026-11-08: Helper Build Command and Incident Response
+
+**Contributor:** Claude Code and maintainer
+
+**Goal:** Answer Q-003 and record the maintainer's confirmation of the incident response.
+
+**Done:**
+- Pushed session 62 (`f4af14b`). The maintainer confirmed `SECURITY.md`'s incident response.
+- Q-003: the helpers are 32-bit MinGW-w64 builds. Evidence: `i686-w64-mingw32` CRT paths and GCC strings in the
+  binaries; imports limited to `KERNEL32`, `USER32`, and the UCRT; `tools/compile.py` has built a missing
+  `compile_any.exe` with `i686-w64-mingw32-gcc` since `8d764df`. Recorded in TESTING's environment recipes,
+  ARCHITECTURE's dependencies and state, and AGENTS.
+- Found that three helpers load `hook.dll` from the old checkout path (`/home/gordonk/PycharmProjects/amon-ra-redux`);
+  recorded under ARCHITECTURE's Claims vs. code. Moved session 53 to the archive.
+
+**Decisions:** none.
+
+**Verified:** All 24 `tools/*.c` built without errors in a scratch folder with GCC 16.2.0 (`-shared` for
+`hook_dll.c`). 15 match the committed-era binaries' DLL imports; the other 9 differ only by extra UCRT import DLLs
+in the older builds. The two `hook.dll` copies have the same MD5. `python3 tools/check_docs.py`: 0 errors,
+0 warnings. The binaries in `tools/` were not replaced.
+
+**Not verified:** A rebuilt helper was not run against SCI Companion.
+
+**Left undone:** Pointing the three helpers at this repository's `hook.dll` (a code change; not requested).
+
+**Next session should start with:** the maintainer's retests (Next steps 1).
 
 ### Session 62: 2026-11-08: Manifold Tier 3 (Docs Structure)
 
@@ -343,41 +407,3 @@ class. Headless boot of a test copy. Not yet seen in play.
 **Verified:** Each rebuilt script compared routine by routine with its committed build shows only the intended changes; message files changed only in the listed records; headless DOSBox-X startup; base archive MD5s unchanged; documentation checks. Runtime retest pending.
 
 **Next session should start with:** The maintainer's fresh playthrough, starting with Next steps 1.
-
-### Session 54: 2026-10-14: Museum Selectors, Class Numbering, and the Inquest Layout
-
-**Contributor:** Claude Code and maintainer
-
-**Goal:** Finish session 53's deferred items: separate the museum lock from vanilla selectors 667/668, explain the 34 drifted patches, and stop batch compiles from leaving script windows open.
-
-**Done:**
-- Gave the P3-06 museum lock its own selectors, 681 `inConversation` and 682 `sayAndHold` (`selector_names.json`, `997.voc`, `MuseumRgn.sc`); rebuilt Script 90, which matches the committed build except for the selector IDs (D-039).
-- `compile_any` gained `--is-open` and `--close`; `compile.py` waits for the patches and closes the window it opened.
-- Rebuilt the 30 other drifted scripts in place, compared each with the committed build using a normalizing disassembler, and restored every committed patch. Differences are codegen except for the findings in D-040 and D-041.
-- Rewrote the three indexed compound assignments (`Main` `SetFlag`/`ClearFlag`, `n027` `proc27_2`) as plain assignments; `Main` now compiles byte-identical to its committed patch and `proc27_2` matches the archive build (D-041).
-- Fixed and rebuilt room 310 (`WrapMusic dispose:`), room 450 (class 47 for `WrapMusic`, value-preserving message case, standard `super doVerb:`), room 640 (`of Actions`; now a loose patch), and room 750 (object property blocks from `7d48893`, un-shifted `state`/`cycles`/`seconds`/`font`) (D-040).
-
-- Built `LB2/LB2-Redux-v0.04.zip` from `f62ad5a` with v0.03's layout (game files at the root plus `msg/` and `src/`), excluding `LB2SG.*` saves (v0.03 had shipped the maintainer's saves) and older zips: 949 files, 7,096,350 bytes (rebuilt in session 55 with PLAY-012 to PLAY-018 and in session 56 with Ziggy's restored voice, which moved into CHANGELOG 0.04-alpha; the playtest page and guide gained matching checks and the page a fresh checklist storage key (now `v004r3` after the Ziggy check was added), because saved checks are stored by position). Moved `docs/alpha-playtest.html` to v0.04 with a "New in v0.04" card, checks for the five changed rooms, a v0.04 report template, and a fresh checklist storage key.
-
-**Decisions:** D-040, D-041.
-
-**Verified:** v0.04 zip integrity test, vanilla archive MD5s, changed patches equal to `HEAD`, and headless startup of the extracted copy. Script 90, 310, 450, 640, and 750 builds compared routine by routine against the committed, archive, and Sierra patch builds; 750's object sizes, property values, and slot writes match vanilla. Headless DOSBox-X startup; base archive MD5s unchanged; documentation and manual checks. Runtime retest pending.
-
-**Next session should start with:** The maintainer's retest of rooms 90, 310, 450, 640, and 750 (Next steps 1).
-
-### Session 53: 2026-10-13: Readable Selector Names
-
-**Contributor:** Claude Code and maintainer
-
-**Goal:** Make the source readable in SCI Companion by naming selectors without changing compiled output.
-
-**Done:**
-- Built `tools/selector_names.json` (563 IDs) by aligning `LB2/src` with the pinned Sluicebox publication and resolving disagreements from class definitions; cross-checked against the CD release's vocab 997 extracted from the maintainer's disc image (528 names in matching order). Added `tools/name_selectors.py` and applied it to `LB2/997.voc` and 218 source files (D-039).
-- Verified with two full SCI Companion rebuilds (original vs. renamed source) and targeted reruns: every compiled script is byte-identical. Fixed the one difference by naming selector 343 `theControls`.
-- Restored all playtested `.scr`/`.hep` patches from git afterwards; kept the regenerated `Interface.sco`, which fixes `Dialog`'s "Unknown class DItem" errors. Fixed `tools/make_test_copy.sh` for lowercase patch names.
-
-**Decisions:** D-039 (supersedes D-032's numeric-selector rule).
-
-**Verified:** Byte comparisons as above; headless DOSBox-X startup; base archive MD5s unchanged; documentation and manual checks.
-
-**Next session should start with:** Give Redux's museum-actor uses of selectors 667/668 their own names (new IDs), then decide whether to rebuild the 34 scripts whose committed patches differ from current source.

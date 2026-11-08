@@ -225,7 +225,7 @@ Everything the project needs that it did not write. A new one needs the maintain
 | Wine | 11+ (11.21 observed 2026-11-08) | running SCI Companion and the `tools/*.exe` helpers | SCI Companion is a Windows program |
 | Sluicebox sci-tools and sci-scripts | revision `870a8015` (`SOURCE_PROVENANCE.md`) | the source reconstruction and selector names | Readable annotated source (D-032, D-039) |
 | Python 3 | standard library only (3.14.9 observed 2026-11-08) | every `tools/*.py` | No packages to install |
-| A Win32 C compiler | not recorded (Q-003) | building `tools/*.c` | Unknown |
+| MinGW-w64 (`i686-w64-mingw32-gcc`) | 16.2.0 observed 2026-11-08 | building `tools/*.c` (Q-003) | Cross-compiles 32-bit Windows helpers on Linux |
 
 ## State and caches
 
@@ -239,7 +239,7 @@ Everything a run leaves on disk, and what may delete it.
 | Release zips | `LB2/LB2-Redux-vX.YY.zip`; old ones in `LB2/archive/` | `tools/package_patch.py`; the maintainer | the maintainer only | no, gitignored |
 | Release assembly | `LB2 (legal)/patched files/` | `tools/package_patch.py --mirror` | `--prune` | no, gitignored |
 | SCI Companion settings | the Wine registry (`CompileModifiedScriptsBeforeRun` must be 0) | SCI Companion | by hand | no |
-| Helper binaries | `tools/*.exe`, `tools/hook.dll` | a local build (Q-003) | rebuilding | no, gitignored |
+| Helper binaries | `tools/*.exe`, `tools/hook.dll` | `i686-w64-mingw32-gcc` (Q-003); `compile.py` rebuilds a missing `compile_any.exe` | rebuilding | no, gitignored |
 
 ## Failure modes and observability
 
@@ -264,5 +264,8 @@ Places where a doc, a name, or a committed file says more than the code does. Re
   replacing one.
 - Several committed `.sco` files predate the current source.
 - `docs/dialogue/*.json` look like the dialogue source; the `.MSG` files edited in SCI Companion are (D-038).
+- `tools/hook.dll` is injected into SCI Companion on every compile to capture its `DrawTextA` text, but it writes to
+  `Z:\home\gordonk\PycharmProjects\amon-ra-redux\dumps\compiler_captured.txt` (a symlink to this repository),
+  and `dumps/` no longer exists, so it captures nothing. Nothing reads that file.
 - D-041's compound-assignment hazard rests on SCI Companion's and ScummVM's models of the stack, not on a DOSBox-X run
   of this interpreter.

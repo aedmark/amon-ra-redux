@@ -104,7 +104,11 @@ For `P4-05`, retain a save immediately before each Script 26 act break. With eve
 
 - SCI Companion: step 1 of the compile and boot workflow above; stop it with `wineserver -k`.
 - DOSBox-X configuration: `tools/dosbox-x.conf`, used by `tools/run_dosbox.sh`.
-- The `tools/*.exe` helpers: build command not recorded (Q-003).
+- The `tools/*.exe` helpers (Q-003): 32-bit MinGW-w64, no extra flags or libraries. Build one with
+  `i686-w64-mingw32-gcc -o tools/NAME.exe tools/NAME.c`, and the DLL with
+  `i686-w64-mingw32-gcc -shared -o tools/hook.dll tools/hook_dll.c`. `tools/compile.py` builds `compile_any.exe` itself
+  when it is missing. All 24 sources built cleanly with GCC 16.2.0 on 2026-11-08; the committed-era binaries came
+  from GCC 15.2 (named in `hook.dll`'s strings).
 
 ## Known limitations and pitfalls
 

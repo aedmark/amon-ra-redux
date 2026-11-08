@@ -40,6 +40,6 @@ extracted copy matches `LB2/`), and the boot test. Nothing scans the helper bina
 
 ## Incident response
 
-Proposed 2026-11-08; the maintainer has not confirmed it. If a published package turns out to contain Sierra's files or a crashing patch: take the download down, rebuild with
+Confirmed by the maintainer 2026-11-08. If a published package turns out to contain Sierra's files or a crashing patch: take the download down, rebuild with
 `tools/package_patch.py`, record what happened in the HANDOFF session log and `CHANGELOG.md`, and tell testers through
 the playtest page.
