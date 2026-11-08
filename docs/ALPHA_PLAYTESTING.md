@@ -152,7 +152,7 @@ Use this section if you want to play naturally without being told where every cl
 - [ ] Let the credits finish and confirm the game exits or returns cleanly.
 
 <details>
-<summary><strong>Focused regression checklist — contains substantial spoilers</strong></summary>
+<summary><strong>Focused regression checklist (contains substantial spoilers)</strong></summary>
 
 ### Prologue and Act 1
 

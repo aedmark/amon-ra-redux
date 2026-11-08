@@ -12,7 +12,9 @@ Security: [SECURITY.md](SECURITY.md). Changes: [CHANGELOG.md](CHANGELOG.md). Old
 
 ## Current state
 
-_Last updated: 2026-11-08, session 60: Manifold Tier 1 (checker, decision format, held tensions). Session 59: patch-only distribution, docs review, PLAY-002/004/008/009, alpha v0.10._
+_Last updated: 2026-11-08, session 61: Manifold Tier 2 (AGENTS.md). Session 59: patch-only distribution, PLAY-002/004/008/009, alpha v0.10._
+
+**Session owner:** none since session 61 (2026-11-08).
 
 **In one paragraph:** Phases 1 to 4 are done; Phase 5's entry gate is the clean DOSBox-X playthrough in
 `PLAYTEST_CHECKLIST.md`. Alpha v0.10 is the current patch-only release (v0.09 was the first): `tools/package_patch.py` zips only Redux's
@@ -71,9 +73,39 @@ Scripts 31 to 37's heaps, so Act 3 to 6 saves from earlier builds may not restor
 
 ## Open questions for maintainers
 
-None open. Q-001 and Q-002 are resolved (D-007, D-017, D-018).
+- Q-003 How the `tools/*.c` Wine helpers are built; blocks rebuilding one on a fresh machine.
 
 ## Session log
+
+### Session 61: 2026-11-08: Manifold Tier 2 (AGENTS.md)
+
+**Contributor:** Claude Code and maintainer
+
+**Goal:** Bring `AGENTS.md` up to the Manifold template's sections and rules (Tier 2).
+
+**Done:**
+- Pushed session 60 (`f232b37`).
+- `AGENTS.md`: added Zones and untrusted context, the template's while-working rules (session owner check, part
+  against whole, loop back, stop on resistance, reconstruct the question, no silent assumptions, prefer enforcement),
+  the review and consolidation steps in Finishing, Working agreement, Maintainer preferences, Protected areas, Names
+  and terms, Engineering conventions, Environments, and Run and verify. Every existing rule is kept. The heading stays
+  "Layout" because `tools/check_docs.py` validates that table's paths.
+- The maintainer's answers: direct-to-master, agents commit and push only on request; adopt the Manifold writing rule;
+  confirm before any SCI Companion GUI action, save-breaking change, release zip, or message-text change; report
+  result, evidence, then gaps.
+- Removed the em dashes from the live docs (DECISIONS, ROADMAP, ALPHA_PLAYTESTING). Added a Session owner line to
+  current state. Q-003 records the unknown helper build command. Moved session 51 to the archive.
+
+**Decisions:** none.
+
+**Verified:** `python3 tools/check_docs.py`: 0 errors, 0 warnings in 18 files. Paths named in the new sections exist
+(`LB2/997.VOC`, `LB2/src/rm750.sc`, `package_patch.py --mirror`).
+
+**Not verified:** No game files changed; no boot test needed.
+
+**Left undone:** Manifold Tier 3 (HANDOFF, ARCHITECTURE, TESTING, SECURITY, CONTRIBUTING structure).
+
+**Next session should start with:** the maintainer's retests (Next steps 1), or Manifold Tier 3.
 
 ### Session 60: 2026-11-08: Manifold Tier 1 Adoption
 
@@ -305,20 +337,3 @@ class. Headless boot of a test copy. Not yet seen in play.
 - Wired the orphaned (335, 6, 8) narrator line: `doorActions` now starts `sHeimlichStare` for the Magnifying Glass, which shows the narrator's scars line and then Heimlich's (1889, 1, 8) reply, following `sGiveInvite`'s room-script pattern. `335.scr` 1,872 bytes, `335.hep` 962 bytes; maintainer confirmed in DOSBox-X.
 
 **Next session should start with:** Readable selector names (plan item B) — done in session 53.
-
-### Session 51: 2026-10-12: Alpha v0.02 Playtest Package
-
-**Contributor:** Claude Code
-
-**Goal:** Update the playtest checklists for the post-v0.01 changes and package alpha v0.02.
-
-**Done:**
-- `docs/PLAYTEST_CHECKLIST.md`: added the multi-slot save invariant, the “Resume Case” title button, and the podium collision, approach, signing, and exact-position repeat matrix.
-- `docs/ALPHA_PLAYTESTING.md` and `docs/alpha-playtest.html`: moved to v0.02, added a What's new section (Markdown), matching register and save-slot checks, a v0.02 download link and report template, and a new checklist storage key so v0.01 checkmarks do not carry over.
-- `docs/CHANGELOG.md`: split into `[0.02-alpha]` (register/podium, Lo Fat foreshadowing, Resume Case, Script 21 duplicate-clue fix, repeat-flash fix, save slots) and `[0.01-alpha]`.
-- Revised the register and Heimlich lines per the maintainer (manifests `act2-guest-register.json`, `act2-heimlich-entry.json`, reapplied idempotently to `335.MSG`) and rebuilt the zip with them.
-- Built `LB2/LB2-Redux-v0.02.zip` with the v0.01 layout (game files at the root plus `src/`), excluding all `LB2SG.*` saves and zip files: 946 files, 7,073,540 bytes.
-
-**Verified:** Zip integrity test passes; extracted `RESOURCE.000`/`RESOURCE.MAP` match the vanilla MD5s; extracted Scripts 21, 335, 990, and 2335 match `HEAD`; the extracted copy completes the headless DOSBox-X startup smoke; documentation check passes.
-
-**Next session should start with:** Publish v0.02 (zip and updated `alpha-playtest.html`) when the maintainer is ready, then collect reports.

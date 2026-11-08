@@ -2,6 +2,23 @@
 
 Archived verbatim from `docs/HANDOFF.md` when its live session log exceeded ten entries.
 
+### Session 51: 2026-10-12: Alpha v0.02 Playtest Package
+
+**Contributor:** Claude Code
+
+**Goal:** Update the playtest checklists for the post-v0.01 changes and package alpha v0.02.
+
+**Done:**
+- `docs/PLAYTEST_CHECKLIST.md`: added the multi-slot save invariant, the “Resume Case” title button, and the podium collision, approach, signing, and exact-position repeat matrix.
+- `docs/ALPHA_PLAYTESTING.md` and `docs/alpha-playtest.html`: moved to v0.02, added a What's new section (Markdown), matching register and save-slot checks, a v0.02 download link and report template, and a new checklist storage key so v0.01 checkmarks do not carry over.
+- `docs/CHANGELOG.md`: split into `[0.02-alpha]` (register/podium, Lo Fat foreshadowing, Resume Case, Script 21 duplicate-clue fix, repeat-flash fix, save slots) and `[0.01-alpha]`.
+- Revised the register and Heimlich lines per the maintainer (manifests `act2-guest-register.json`, `act2-heimlich-entry.json`, reapplied idempotently to `335.MSG`) and rebuilt the zip with them.
+- Built `LB2/LB2-Redux-v0.02.zip` with the v0.01 layout (game files at the root plus `src/`), excluding all `LB2SG.*` saves and zip files: 946 files, 7,073,540 bytes.
+
+**Verified:** Zip integrity test passes; extracted `RESOURCE.000`/`RESOURCE.MAP` match the vanilla MD5s; extracted Scripts 21, 335, 990, and 2335 match `HEAD`; the extracted copy completes the headless DOSBox-X startup smoke; documentation check passes.
+
+**Next session should start with:** Publish v0.02 (zip and updated `alpha-playtest.html`) when the maintainer is ready, then collect reports.
+
 ### Session 50: 2026-10-12: Room 335 Podium Repeat Flash and Save Slots
 
 **Contributor:** Claude Code
