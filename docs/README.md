@@ -10,7 +10,7 @@ Every fact has one home; update the document that owns a change.
 | `docs/ROADMAP.md` | What work is planned, active, done, or dropped? | Task progress, phase status, or item scope changes. |
 | `docs/HANDOFF.md` | What is true right now, and what happens next? | Work pauses or current state changes materially. |
 | `docs/ARCHITECTURE.md` | How does the system fit together and what invariants hold? | Engine boundaries, patch loading, or subsystem designs change. |
-| `docs/DECISIONS.md` | Why was a durable architectural choice made? | An architectural choice is made or superseded; questions asked. |
+| `docs/DECISIONS.md` | Why was a durable architectural choice made? | A durable choice is made or superseded, a tension is held or resolved, or a question is asked or answered. |
 | `docs/TESTING.md` | How is behavior verified and what remains unproved? | Test commands, test cases, or DOSBox-X recipes change. |
 | `docs/ALPHA_PLAYTESTING.md` | How do public testers install, test, and report the current build? | Install steps, checks, or reporting change. |
 | `docs/alpha-playtest.html` | The same, as a self-contained page for Neocities. | The download, checklist, or report form changes. |

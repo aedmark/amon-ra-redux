@@ -1,9 +1,33 @@
 # Architecture Decisions
 
-Item IDs are permanent: `D-<nnn>` (accepted) or `D-<nnn> (superseded by D-<mmm>)`. Never renumber; append new
-decisions at the end. Open questions use `Q-<nnn>`.
+Short, append-only record of choices that a future session might otherwise re-litigate. One entry per decision, newest
+at the bottom. IDs are permanent: `D-<nnn>` for decisions, `T-<nnn>` for held tensions, `Q-<nnn>` for open questions;
+never renumber. To reverse a decision, add a new entry that supersedes it; the old one keeps its text and only its
+status changes ("superseded by D-MMM", or "accepted; <part> superseded by D-MMM" for a partial reversal).
 
-## D-001 Base Engine Version: DOS Floppy v1.000
+Record pre-existing choices too, the first time a session has to understand them. Every constraint in the codebase
+answers an earlier question or failure mode; recording that question stops a later session from removing a fence
+whose purpose it forgot. The date in each heading is the day the decision was first recorded in git: D-001 to D-015
+arrived with the initial commit (2026-10-07) and predate it.
+
+Format:
+
+```
+## D-NNN Title  (YYYY-MM-DD, status: proposed | accepted | rejected | superseded by D-MMM)
+
+One-line summary of the choice.
+
+- **Context:** the originating question, failure mode, or measurement this choice answers (roadmap item or PLAY-nnn).
+- **Decision:** what we chose.
+- **Alternatives:** what else was considered, and why not (one line each). Optional, but it stops re-litigation.
+- **Consequences:** what it costs or constrains, including which saves it affects; what was left out and why.
+- **Review trigger:** an event that should cause reconsideration. Optional.
+```
+
+Entries up to D-050 predate the Alternatives and Review trigger fields; where an alternative was weighed, it is in
+their Context or Consequences.
+
+## D-001 Base Engine Version: DOS Floppy v1.000  (2026-10-07, status: accepted)
 
 The DOS Floppy release (version 1.000) is the immutable base for the Amon Ra Redux project.
 
@@ -12,7 +36,7 @@ The DOS Floppy release (version 1.000) is the immutable base for the Amon Ra Red
 - **Decision:** Use the DOS floppy v1.000 in `LB2/`; `RESOURCE.000` stays unmodified.
 - **Consequences:** The floppy art is preserved. CD speech is out of scope (D-007).
 
-## D-002 Patch Strategy: Modular Loose File Overrides
+## D-002 Patch Strategy: Modular Loose File Overrides  (2026-10-07, status: accepted)
 
 Use Sierra SCI 1.1's native loose-file priority loader rather than repacking `RESOURCE.000`.
 
@@ -21,7 +45,7 @@ Use Sierra SCI 1.1's native loose-file priority loader rather than repacking `RE
 - **Consequences:** Patches are version-controllable and diffable per script; deleting them restores vanilla
   (apart from Sierra's own retail patches, which players keep).
 
-## D-003 Interrogation Streamlining: Double-Click and Context Pre-selection
+## D-003 Interrogation Streamlining: Double-Click and Context Pre-selection  (2026-10-07, status: accepted)
 
 Shorten the five-click Ask loop without changing the notebook's topics.
 
@@ -30,7 +54,7 @@ Shorten the five-click Ask loop without changing the notebook's topics.
   doVerb` lets a double-click confirm the topic (P1-01).
 - **Consequences:** Fewer clicks per question; every dialogue tree is unchanged.
 
-## D-004 Unrestricted Save/Load Policy
+## D-004 Unrestricted Save/Load Policy  (2026-10-07, status: accepted)
 
 Enable Save and Restore functions across all screens and game phases.
 
@@ -39,7 +63,7 @@ Enable Save and Restore functions across all screens and game phases.
   (Script 17), and remove the lockouts in Scripts 525, 560, 565, and 610 (P1-02).
 - **Consequences:** Saving works everywhere, including during danger sequences.
 
-## D-005 Softlock Prevention: Multi-Layer Item Safety
+## D-005 Softlock Prevention: Multi-Layer Item Safety  (2026-10-07, status: accepted)
 
 Eliminate "Dead Man Walking" states for Act 5 critical items (Wire Cutters, Snake Oil, Cheese).
 
@@ -47,7 +71,7 @@ Eliminate "Dead Man Walking" states for Act 5 critical items (Wire Cutters, Snak
 - **Decision:** In Main's central room-transition handler (Script 0), perform a one-time audit whenever `global123 == 5` and guard flag 123 is unset. Grant only missing inventory indices 10 (Wire Cutters), 14 (Snake Oil), and 16 (Cheese); if the snake-oil charge counter `global150` is zero, restore it to four. Set flag 123 after the audit. This catches normal Act 5 entry, debug warps, and pre-patch Act 5 saves without blocking progression or adding room-specific pickups.
 - **Consequences:** Resolves P3-01. Players cannot enter or resume Act 5 in a doomed inventory state, while the one-shot guard prevents cheese and snake oil from being recreated after their intended consumption. The repair is save-compatible and does not change earlier-act puzzle acquisition.
 
-## D-006 Inquest Scoring Standardization and Physical Clue Decoupling
+## D-006 Inquest Scoring Standardization and Physical Clue Decoupling  (2026-10-07, status: accepted)
 
 Standardize point math and decouple physical dagger ownership from inquest questionnaire results.
 
@@ -58,7 +82,7 @@ Standardize point math and decouple physical dagger ownership from inquest quest
 - **Consequences:** Ending headlines follow physical possession and grades use attainable maxima. Implemented by D-025
   and D-026.
 
-## D-007 Voice Asset Policy: Omit Original CD Audio, Keep Text and Talker Hooks
+## D-007 Voice Asset Policy: Omit Original CD Audio, Keep Text and Talker Hooks  (2026-10-07, status: accepted)
 
 Leave out the CD voice tracks and deliver all dialogue as text (`.MSG`), keeping hooks for a future voice pack.
 
@@ -67,7 +91,7 @@ Leave out the CD voice tracks and deliver all dialogue as text (`.MSG`), keeping
   resources only. Keep SCI's audio sync and talker hooks intact for optional new recordings.
 - **Consequences:** Resolves Q-001. Small patches, floppy presentation preserved.
 
-## D-008 Act 2 Progression Model: Diegetic Knowledge Gating (superseded by D-017)
+## D-008 Act 2 Progression Model: Diegetic Knowledge Gating  (2026-10-07, status: superseded by D-017)
 
 Replace the outline's 14-eavesdrop Act 2 requirement with a knowledge threshold, and add investigative activities.
 
@@ -77,7 +101,7 @@ Replace the outline's 14-eavesdrop Act 2 requirement with a knowledge threshold,
 - **Consequences:** Superseded by D-017: the source audit found no such gate. The activity idea continues as P5-01
   (D-018).
 
-## D-009 Inaccessible Plot Information & Notebook Fallback Triggers
+## D-009 Inaccessible Plot Information & Notebook Fallback Triggers  (2026-10-07, status: accepted)
 
 Establish encounter-based fallback triggers so optional Act 1 routes cannot permanently lock later interrogation topics.
 
@@ -92,7 +116,7 @@ Establish encounter-based fallback triggers so optional Act 1 routes cannot perm
 - **Consequences:** Later questions remain reachable without turning the notebook into an omniscient cast list. Identity
   acquisition now follows what Laura has actually read, heard, or observed.
 
-## D-010 Pocket Watch Confrontation Timing & Armor Room Lockout Adjustment
+## D-010 Pocket Watch Confrontation Timing & Armor Room Lockout Adjustment  (2026-10-07, status: accepted)
 
 Adjust item acquisition lockouts, schedule gating, and confrontation scripting to make presenting Carrington's pocket watch to Countess Waldorf-Carlton in the Armor Room reliably accessible.
 
@@ -108,7 +132,7 @@ Adjust item acquisition lockouts, schedule gating, and confrontation scripting t
   4. **Countess Relocation Schedule (`LB2/src/triggerAndClock.sc`):** At 1:45 (`145`), preserved Countess destination at Room 440 until confrontation is completed (`if (proc0_2 120)`), moving her to 520 at 2:00 (`200`) if missed.
 - **Consequences:** Resolves P2-02. Restores the dramatic pocket watch confrontation and dialogue in the Armor Room whether Laura hides behind the tapestry or enters directly carrying the watch.
 
-## D-011 Unused Dialogue & Murder Reaction Restoration
+## D-011 Unused Dialogue & Murder Reaction Restoration  (2026-10-07, status: accepted)
 
 Establish a dual-tier flag synchronization architecture and restore missing NPC interrogation branches for discovered homicides.
 
@@ -131,7 +155,7 @@ Establish a dual-tier flag synchronization architecture and restore missing NPC 
   3. **Room 490 Head Display Restoration:** Update `rm490.sc` line 66 to check `(if (or (proc0_2 143) (proc0_2 72)))`.
 - **Consequences:** Resolves P2-03. Completely restores all authored murder reactions across suspects, enables Ziggy's severed head exhibit in room 490, and connects O'Riley's Countess dialogue without requiring modifications to base resource files.
 
-## D-012 Late-1926 Historical Dialogue Corrections
+## D-012 Late-1926 Historical Dialogue Corrections  (2026-10-07, status: accepted)
 
 Anchor narrative corrections to the chronology established by the game itself and deliver them as isolated message overrides.
 
@@ -139,7 +163,7 @@ Anchor narrative corrections to the chronology established by the game itself an
 - **Decision:** Treat late 1926 as the internal chronology rather than the design outline's inaccurate Spring 1926 description. Replace Lo Fat's Pippi joke with a period-valid misunderstanding involving Pip from Dickens' *Great Expectations*. Preserve the genuine transatlantic milestone but explicitly call it an experimental two-way radiotelephone conversation. Identify Hemingway's book as the newly published *The Sun Also Rises*. Package only affected modules as `LB2/250.MSG`, `LB2/270.MSG`, and `LB2/310.MSG`; do not alter `RESOURCE.MSG` or either base archive.
 - **Consequences:** Resolves P2-04 without discarding a real 1926 technology reference or inventing an early publication scenario for Hemingway's novel. The three patches preserve message tuple metadata and talkers while replacing only four text records. Effective-resource auditing across all 103 modules and 5,888 message records finds none of the obsolete target strings.
 
-## D-013 Reuse Museum Acquaintance Flags for Formal Introductions
+## D-013 Reuse Museum Acquaintance Flags for Formal Introductions  (2026-10-07, status: accepted)
 
 Route later museum conversations through the introductions Sierra already authored instead of adding parallel state.
 
@@ -147,7 +171,7 @@ Route later museum conversations through the introductions Sierra already author
 - **Decision:** In actor scripts 35, 36, and 90, intercept Talk when the corresponding acquaintance flag is unset and play message condition 80; otherwise preserve the existing handler. Do not allocate new globals. Supply loose message overrides 1882, 1883, and 1888 that retain tuple/talker metadata while changing only the first two condition-80 records to a neutral greeting followed by the character's self-introduction.
 - **Consequences:** Resolves P2-05 for all six rotunda acquaintances, preserves established save-state semantics, and avoids new flag-array dependencies. A player who missed the party introduction now receives it on first later conversation, while already-acquainted dialogue remains unchanged.
 
-## D-014 Gate Steve Romance Sequences on Act 1 Conversation
+## D-014 Gate Steve Romance Sequences on Act 1 Conversation  (2026-10-07, status: accepted)
 
 Use a dedicated relationship bit to distinguish an established personal connection from an ignored coworker.
 
@@ -155,7 +179,7 @@ Use a dedicated relationship bit to distinguish an established personal connecti
 - **Decision:** Reserve flag 122 as the Steve Act 1 conversation bit. Set it when either `sTalkSteve` or `sAskSteve` begins its dialogue in Script 240. Require the bit alongside the existing timing and presence conditions before starting the romantic sequences in Scripts 330, 335, and 350. When it is unset, preserve the normal room initialization and professional coworker flow.
 - **Consequences:** Resolves P2-06 without rewriting dialogue resources or changing the museum schedule. Existing saves default to the non-romantic branch unless the Act 1 conversation has occurred in that playthrough.
 
-## D-015 Treat the Recovered Dagger as Physical Evidence
+## D-015 Treat the Recovered Dagger as Physical Evidence  (2026-10-07, status: accepted)
 
 Use the existing dagger inventory verb and ownership state to represent recognition and police custody.
 
@@ -163,7 +187,7 @@ Use the existing dagger inventory verb and ownership state to represent recognit
 - **Decision:** Supply loose message overrides for the eight accessible reactions, preserving their noun/verb/condition/sequence/talker metadata while rewriting only the dagger text. In both O'Riley implementations (`MuseumRgn.sc` / Script 90 and `RotundaRgn.sc` / Script 93), intercept verb 22, retain the inherited message dispatch, and call `(gEgo put: 11)` when Laura still owns the item. Do not allocate a separate hand-off flag; dagger ownership is the authoritative custody state.
 - **Consequences:** Resolves P2-07. Suspects now react to the authentic central artifact, and surrendering it to O'Riley immediately removes it from Laura's inventory in either actor context. The loose-patch approach preserves base archives and the earlier P2-05 edits already carried by module 1888. PLAY-035 (2026-10-16): the handoff also drops notebook clue 780 with `dropCluesCode`, as Sierra drops the baseball's topic in room 260; otherwise the notebook kept offering the dagger and O'Riley answered as if Laura still held it.
 
-## D-016 Use Charge State as the Snake Oil UI Source of Truth
+## D-016 Use Charge State as the Snake Oil UI Source of Truth  (2026-10-08, status: accepted)
 
 Derive bottle feedback and refill eligibility from the existing `global150` charge counter rather than adding parallel state.
 
@@ -171,7 +195,7 @@ Derive bottle feedback and refill eligibility from the existing `global150` char
 - **Decision:** Keep `global150` as the sole bottle-state authority. Supply loose `61.V56` with cel 1 added to the inventory and toolbar loops as a clear red-X empty state; Script 15 selects cel 0 when charges remain and cel 1 at zero. In Room 610, reject refill attempts when `global150 == 4` or flag 105 marks the jar empty; otherwise restore four charges in one action, advance exactly one depletion flag/cel, and enlarge the oil jar's interaction rectangle. Preserve the audited independence from inventory item 31 (Grapes).
 - **Consequences:** Resolves P3-02 without new globals or base-archive edits. Bottle appearance cannot drift from usable charges, repeated full-bottle clicks cannot consume jar supply, and the jar's three portions now correspond to three successful refills. The View 61 transformation is reproducible with `tools/build_snake_oil_view.py`. PLAY-034 (2026-10-16): the first build encoded each cel as 63-pixel literal runs that crossed row ends; Sierra's interpreter decodes cels a scanline at a time and stopped with "Build Line Error" when room 630 drew the bottle on its shelf. The tool now encodes row by row, and the patch is rebuilt from the archive's View 61 with identical pixels, cel headers, and palette.
 
-## D-017 Preserve Authored Act Transitions and Scene-Scheduler Semantics
+## D-017 Preserve Authored Act Transitions and Scene-Scheduler Semantics  (2026-10-08, status: accepted)
 
 Do not build a replacement knowledge threshold on the outline's unsupported “14 mandatory eavesdropping scenes” premise.
 
@@ -179,7 +203,7 @@ Do not build a replacement knowledge threshold on the outline's unsupported “1
 - **Decision:** Preserve the existing event-driven act transitions and `global111` save semantics. Do not introduce a parallel clue bitmask, force a threshold into Room 230, or skip scheduler states. Treat new museum activities as an explicit content-expansion milestone requiring narrative, message, art, and save-state specifications.
 - **Consequences:** Completes P3-03's technical audit without a risky binary change and avoids skipping authored scenes or invalidating saves. It does not dismiss the underlying pacing problem; that design goal continues as P5-01 after the bug-fix roadmap.
 
-## D-018 Stage Act 2 Interactive Content After Core Bug Fixes
+## D-018 Stage Act 2 Interactive Content After Core Bug Fixes  (2026-10-08, status: accepted)
 
 Retain Act 2's essential social context while adding player-driven investigation only after the existing bug-fix phases are stable.
 
@@ -187,7 +211,7 @@ Retain Act 2's essential social context while adding player-driven investigation
 - **Decision:** Add Phase 5 and P5-01 as a post-bugfix content milestone. Its design pass will map the complete Act 2 schedule and clue dependencies before selecting several compact museum activities that route the player naturally between existing conversations. Prefer mechanics grounded in existing rooms and props—such as exhibit-security inspection, guest/staff record comparison, or artifact observations—while preserving essential dialogue, authored act transitions, `global111`, and old-save behavior. Require explicit narrative text, resource ownership, scoring, state allocation, and deterministic DOSBox-X test saves before implementation.
 - **Consequences:** The pacing concern remains first-class work rather than being closed by the technical audit. Deferring new content until P3 and P4 bug fixes are complete prevents new scripts and state from obscuring current defects and gives the expansion a stable behavioral baseline.
 
-## D-019 Reuse the Stairwell's Existing Darkness State and Warning Text
+## D-019 Reuse the Stairwell's Existing Darkness State and Warning Text  (2026-10-08, status: accepted)
 
 Block the unlit hidden-stairwell boundary using its existing bulb flag and Look description rather than inventing a parallel light-source system.
 
@@ -195,7 +219,7 @@ Block the unlit hidden-stairwell boundary using its existing bulb flag and Look 
 - **Decision:** Replace only the unsafe boundary dispatch with `sWarnDarkStairs`. Freeze input, move Laura back to y=165, display the existing dark-passage warning tuple, restore control, and leave the lit stair traversal unchanged. Retain the original fall animation as unreachable legacy code instead of deleting unrelated assets or death state.
 - **Consequences:** Resolves P3-04 without a new flag, message override, or altered inventory behavior. Players receive the same diegetic warning whether they Look first or approach the hazard, and must restore the intended bulb before proceeding.
 
-## D-020 Make the Press Pass the Act 1 Taxi Milestone
+## D-020 Make the Press Pass the Act 1 Taxi Milestone  (2026-10-08, status: accepted)
 
 Use the essential press-pass event to unlock the dirty taxi instead of requiring every unrelated introductory errand.
 
@@ -203,7 +227,7 @@ Use the essential press-pass event to unlock the dirty taxi instead of requiring
 - **Decision:** Change all three coordinated Script 250 taxi-state checks—room appearance, trash hotspot handler selection, and corner-trash description—from the complete-low-nibble test to `(proc0_10 1)`, the persistent press-pass acquisition bit. Preserve the dirty-taxi introduction, claim ticket, Lo Fat gown exchange, and dressed taxi Act 1 transition. Do not auto-complete or remove the docks, baseball, or Ziggy content.
 - **Consequences:** Resolves P3-05 without new flags, inventory grants, dialogue, or save-format changes. New and existing Act 1 saves that acquired the press pass can reach the claim ticket and gown immediately; the other errands remain available in any order for their clues, character context, clock advancement, and magnifying-glass reward.
 
-## D-021 Preserve Museum Travel State Across Dialogue
+## D-021 Preserve Museum Travel State Across Dialogue  (2026-10-08, status: accepted)
 
 Pause the selected museum actor's existing route for the lifetime of a message instead of replacing its destination or globally freezing the cast.
 
@@ -211,7 +235,7 @@ Pause the selected museum actor's existing route for the lifetime of a message i
 - **Decision:** Route all Script 90 museum-actor messages through a shared wrapper. It sets an actor-local lock, stops the active mover, and assigns `museumDialogueResume` as the message callback. `TravelToRoom` does not advance while locked; on dismissal, the callback clears the lock and re-enters the same travel state so its original fixed or random destination survives. Gate O'Riley's 10:15 removal out only when `global123` is 3 or 4, preserving the authored behavior in other acts.
 - **Consequences:** Resolves P3-06 without new globals, save-state fields, room-table rewrites, or a museum-wide freeze. The speaking NPC remains present throughout dialogue, other NPCs continue their schedules, and O'Riley remains reachable for the restored Act 3–4 questioning. Direct DOSBox-X observation from deterministic Act 3 and Act 4 saves remains the behavioral regression test.
 
-## D-022 Expose Watney's Existing Police-File Path
+## D-022 Expose Watney's Existing Police-File Path  (2026-10-08, status: accepted)
 
 Improve access through the authored Room 560 book and clue records instead of inventing a second file or dialogue trail.
 
@@ -219,7 +243,7 @@ Improve access through the authored Room 560 book and clue records instead of in
 - **Decision:** Preserve the existing item, message, score, and clue identities. Expand the special volume's rectangle to 36x38 pixels and route Look, Hand, or Magnifier on the larger bookcase feature to the same closed-book inset while item 24 remains uncollected. On Look at the exposed file, idempotently add clues 793 and 272 before showing the original description; retain the original Take path as a second registration route. Do not add speculative dialogue or new save-state fields.
 - **Consequences:** Resolves P4-01 through a prominent environmental interaction and two independent clue-registration paths. Existing saves remain compatible, repeated inspection cannot duplicate notebook entries, and the later inquest receives the same canonical evidence IDs as the vanilla Take path.
 
-## D-023 Reconcile Canonical Planted Evidence in Script 750
+## D-023 Reconcile Canonical Planted Evidence in Script 750  (2026-10-08, status: accepted)
 
 Recognize the game's real evidence identities at the inquest and award idempotent insight credit without changing questionnaire answers or ending tiers.
 
@@ -227,7 +251,7 @@ Recognize the game's real evidence identities at the inquest and award idempoten
 - **Decision:** Record opening Room 454's footprint inset through unused score bit 179. After the sixteenth inquest question, review three evidence chains independently: Ankh item 20, appointment-notepad item 21, and footprint bit 179 paired with shoe item 30. Use the existing score-bit mechanism to award one point per recognized chain through unused bits 180..182, making repeat entry idempotent. Explain in coroner text that the items contribute timeline or framing evidence but do not by themselves establish guilt. Do not relabel the carbon paper, change murder-answer correctness, or alter final outcome tiers; those remain scoped to P4-03 through P4-06.
 - **Consequences:** Resolves P4-02 in the actual owning scripts, preserves old saves and inventory semantics, and turns the previously ephemeral footprint into durable investigative state. Saves created before the patch can still receive Ankh and notepad credit; footprint comparison credit requires inspecting the footprint under the patched script. D-026 accounts for the footprint in Acts 2–5 and records the three later evidence-review awards in the post-grade raw maximum.
 
-## D-024 Use Sierra's Complete Evidence Checklist for the Best Ending
+## D-024 Use Sierra's Complete Evidence Checklist for the Best Ending  (2026-10-08, status: accepted)
 
 Replace the accidental vanilla subset with the official 13-item evidence list while crediting evidence Laura legitimately discovered and no longer carries.
 
@@ -235,7 +259,7 @@ Replace the accidental vanilla subset with the official 13-item evidence list wh
 - **Decision:** Centralize the best-evidence predicate in Script 750 and require all 13 published objects. Test ordinary evidence by inventory identity. Treat dagger acquisition bit 155 as equivalent to still carrying item 11 because P2-07 allows Laura to surrender it to O'Riley; treat carbon-paper read bit 170 as equivalent to item 29 because reading consumes the paper. Record Room 560 police-file inspection in previously unused bit 183 with zero score, allowing either Look or Take to satisfy item 24. Preserve the independent correct-murder (`local4`) and correct-theft (`local5`) answers and the existing `global126` outcome meanings for later P4-04 and P4-06 work.
 - **Consequences:** A maximum outcome now corresponds to Sierra's documented investigation rather than two arbitrary missable objects. Legitimate custody, consumption, and inspection paths do not invalidate a completed investigation. Old saves that already took the police file still pass through inventory; old saves that only looked at it must revisit the inset because no prior durable discovery state existed. Bit 183 is state only and does not alter the score denominator targeted by P4-05.
 
-## D-025 Normalize Physical Dagger State at the Epilogue Boundary
+## D-025 Normalize Physical Dagger State at the Epilogue Boundary  (2026-10-08, status: accepted)
 
 Keep the inquest's answer assessment intact, but derive every post-inquest dagger claim from recovery history rather than quiz correctness.
 
@@ -243,7 +267,7 @@ Keep the inquest's answer assessment intact, but derive every post-inquest dagge
 - **Decision:** Add one Script 750 recovery predicate accepting item 11 or bit 155. Preserve `global126` unchanged through the coroner's evaluation and response so wrong answers still receive appropriate feedback. For the newspaper preview and the epilogue boundary, derive a normalized four-way outcome from the existing murder-success dimension plus the recovery predicate: 1 = murders solved and dagger recovered, 2 = dagger recovered only, 3 = neither, 4 = murders solved only. Store that normalized value immediately before route selection so the later Rooms 770, 775, 785, and 790 and every condition-indexed epilogue message agree without parallel state.
 - **Consequences:** P4-04 is contained in the actual owning script and remains compatible with old saves. Answering the theft questions incorrectly no longer changes physical history, while failing the murder case still selects the authored unsolved-murder content. A dagger handed to O'Riley is treated identically to one Laura still carries. No message resources, inventory format, or additional save bit are required.
 
-## D-026 Grade Against Attainable Cumulative Points
+## D-026 Grade Against Attainable Cumulative Points  (2026-10-09, status: accepted)
 
 Use each act's real maximum score as its percentage divisor and leave the introduction ungraded.
 
@@ -251,7 +275,7 @@ Use each act's real maximum score as its percentage divisor and leave the introd
 - **Decision:** Set Script 26's cumulative divisors to 5, 13, 38, 48, and 51 for Acts 1–5. Retain the existing inclusive grade bands: F 0–20, D 21–40, C 41–60, B 61–80, and A 81–100. Guard grade-band selection and its per-band message-counter increments behind nonzero `global123`, leaving the introduction ungraded. Do not fold the three post-grade inquest points into earlier denominators; document the complete post-inquest raw maximum as 54.
 - **Consequences:** A player who collects every point currently available at an act break receives 100%, while partial runs are measured against achievable progress rather than cut or future awards. Existing saves remain compatible because score flags, raw totals, thresholds, and message counters are unchanged. Fresh games retain the first authored F response until a real scored act earns that band.
 
-## D-027 Isolate Bonus Museum Questions from Inquest Verdict State
+## D-027 Isolate Bonus Museum Questions from Inquest Verdict State  (2026-10-09, status: accepted)
 
 Make the questionnaire's existing outcome boundary visible to players and structural in Script 750.
 
@@ -259,7 +283,7 @@ Make the questionnaire's existing outcome boundary visible to players and struct
 - **Decision:** Present a required-case notice before question 1 explaining that questions 1–11 determine the coroner's murder and dagger-theft conclusions. Move questions 12–16 unchanged into `sBonusQuestions` and present an explicit bonus-museum notice before that state begins. Preserve every original answer menu, feedback message, and conditional skip. Keep all `local4` writes in the homicide scripts and all `local5` writes in the required theft script; the bonus script contains neither verdict flag.
 - **Consequences:** Players can distinguish the essential case findings from optional lore before answering them. Wrong art-theft or High Priest answers still receive their authored feedback but cannot affect the coroner result, newspaper, ending route, epilogue cards, or rank. No new save flag, message resource, score event, or answer requirement is introduced, and existing saves remain compatible.
 
-## D-028 Treat the Floppy as a Hybrid SCI1/SCI1.1 Build; Compile Single Scripts and Never Compile All or Rebuild
+## D-028 Treat the Floppy as a Hybrid SCI1/SCI1.1 Build; Compile Single Scripts and Never Compile All or Rebuild  (2026-10-09, status: accepted)
 
 Compile only the scripts whose source changed, one at a time, and never run Compile All or any resource rebuild.
 
@@ -267,7 +291,7 @@ Compile only the scripts whose source changed, one at a time, and never run Comp
 - **Decision:** Keep the map format at 1.1 for compilation. Treat the committed `.SCR`/`.HEP` set as authoritative for every script not deliberately changed by a roadmap item. Compile one script at a time with `python3 tools/compile.py <script>` (file naming: D-037, D-048). Never run Compile All and never run any SCI Companion command that rebuilds or repacks resources. The original `RESOURCE.000`, `RESOURCE.MAP`, `RESOURCE.MSG`, and `MESSAGE.MAP` stay the base (pristine copies live in `LB2_vanilla/`) and all fixes remain loose patches.
 - **Consequences:** Base scripts that no roadmap item touched keep running from the original archive or their known-good committed patches. Source edits that exist only to make decompiled output compile (such as the 13 listed in the Session 24 handoff) are not kept in the tree; they remain in commit `7d48893`. After any compile, boot the game before committing, because a compile can succeed and still stall the game at startup. If a rebuild ever happens, the symptom is a roughly 2 KB 5-byte `RESOURCE.MAP` and a `RESOURCE.000` under 1 MB; restore the four base files from `LB2_vanilla/`.
 
-## D-029 Gate Every Compile on a Boot Test and Treat First-Time Script Compiles as High Risk
+## D-029 Gate Every Compile on a Boot Test and Treat First-Time Script Compiles as High Risk  (2026-10-09, status: accepted)
 
 A patch is not done until the game boots with it, and scripts that have no committed loose patch get extra scrutiny.
 
@@ -275,7 +299,7 @@ A patch is not done until the game boots with it, and scripts that have no commi
 - **Decision:** Boot the game under DOSBox-X after every compile and before every commit that changes `.SCR` or `.HEP` files. Use `tools/make_test_copy.sh <name> [git-rev]` to build a throwaway copy (optionally with the patch set of an earlier commit) and bisect there, never in `LB2/`. Treat the first loose patch of a script that has none as high risk: compile it alone, boot-test it, and only then commit. Keep the repository's sources identical to the shipped patches; compile-only edits to decompiled sources that were never shipped stay out of the tree until a roadmap item needs that script. Before any bulk file operation (restore, rename, revert), copy the affected files somewhere outside the repository, and note that `git` history, not the working tree, is the recovery point; also commit before a restore.
 - **Consequences:** Roadmap items that touch an unpatched script carry the first-compile cost explicitly. A boot regression is caught within one compile instead of after a bulk change. The 13 compile-fix edits and the nine overrides made on 2026-10-09 remain recoverable from commit `7d48893` for the day a roadmap item needs them.
 
-## D-030 Dirty Cab Progression Gating and Act 1 Diegetic Clue Flow Preservation
+## D-030 Dirty Cab Progression Gating and Act 1 Diegetic Clue Flow Preservation  (2026-10-09, status: accepted)
 
 Gate the dirty cab behind a completed normal taxi ride, eliminate it after finding the claim ticket, and preserve Act 1's authentic diegetic clue discovery chain.
 
@@ -291,7 +315,7 @@ Gate the dirty cab behind a completed normal taxi ride, eliminate it after findi
   3. Keep `lb2InitCode.sc` (Script 14) restricted to the authentic starting contacts (Laura, Pippin, Carrington, O'Riley, Crodfoller, Sam, Dad), allowing the suspects to be discovered naturally through Act 1's investigation web.
 - **Consequences:** Resolves PLAY-001, ensures clean cab ride progression, and preserves the diegetic investigative storytelling of Act 1 without premature notebook clutter or out-of-context dialogue.
 
-## D-031 Preserve Character and Period While Removing Phonetic Caricature
+## D-031 Preserve Character and Period While Removing Phonetic Caricature  (2026-10-10, status: accepted)
 
 Rewrite culturally stereotyped dialogue act by act without flattening distinct voices or erasing period-specific characterization.
 
@@ -299,7 +323,7 @@ Rewrite culturally stereotyped dialogue act by act without flattening distinct v
 - **Decision:** Rewrite spoken text through tuple-addressed loose `.MSG` overrides, never by changing dialogue routing. Give Lo Fat complete grammar, dry wit, and a light British-English cadence. Give O'Flaherty standard spelling with restrained Irish-American rhythm and idiom. Permit O'Riley a more performative caricature because it serves his antagonistic role, but keep every sentence intelligible. Preserve period attitudes when they reveal character, while removing phonetic ethnicity as the joke itself. Clean adjacent narrator text when it repeats the same stereotype. Store reviewed wording in `docs/dialogue/` manifests and apply it with `tools/dialogue.py` so tuple, talker, reference, and progression metadata remain unchanged.
 - **Consequences:** Act 1 modules 210, 250, 260, 270, 290, 295, and 310 retain all clues and triggers while becoming clearer and less demeaning; the sandwich vendor, street kid, and cabbie keep their rapid New York patter and abrasive working-class voices without mock-Italian or dense borough eye-dialect. In Act 2, Rameses replaces the written lisp with precise, reserved speech while retaining his family, profession, Egyptian identity, repatriation argument, suspicions, and humor. Heimlich preserves his militance, duelling scars, security obsession, paranoia, and grief without faux-German spelling, ethnic-superiority jokes, or premature Nazi parody. Yvette uses fluent English and selective French vocabulary while retaining her ambition, intelligence, sexual confidence, strategic relationships, and plot-bearing history. O'Riley remains blustering, sexist, corrupt, xenophobic, and antagonistic without leprechaun vocabulary or dense stage-Irish spelling. Ziggy has one continuous Peter Lorre-inspired voice through Act 3, preserving his clues, lies, fencing offers, police arrangement, Rameses riddle, Hemingway bluff, carbon-paper hint, knowledge of Yvette, and illicit museum inspection. Tut Smith now sounds like an educated, imposing Cairo Museum envoy: fiercely committed to repatriation, vain, patriarchal, guarded about his alibi, and ominously theatrical without camel, snake-charmer, amputation, or mystical-native cliches. The Pippin/Tut confrontation, museum check-in, all fourteen party conversations, immediate Carter murder scene, Pippin discovery, and every deferred murder reaction follow the approved voices. Adjacent Pippin, Countess, Steve, Carrington, Olympia, Ernie, and Laura lines no longer reintroduce the removed caricatures. The Act 3 continuation preserves the approved ensemble voices through private conversations, intercom scenes, laboratory warnings, office interruptions, evidence confrontations, alibi interviews, and murder discoveries. Act 4 preserves Olympia's interest in Steve's dock scars and Steve's forged-painting clue while replacing Heimlich's remaining mock-German lines with controlled authority. Act 5 removes Rameses's written lisp from the complete Society of Amon Ra sequence, makes Laura's historically correct objection establish that human sacrifice is the modern society's invented rite, gives Tut dignified eyewitness testimony, and closes O'Riley without stage-Irish spelling. Act 6 recasts the coroner as a dry, exacting professional throughout the final inquest, replacing dated language and unsupported accusations while preserving all questions, evidence checks, jokes, verdicts, and ending routes. Heidelberg academic fencing replaces generic scar parody; Yvette's genuine grief, Steve's scars and neck-rub scenes, O'Riley corruption clues, Ernie gambling trail, Dr. Smith leverage, and isolated “loan fish” clue remain intact. All nine original references to the 1950s `Andrea Doria` are replaced with period-neutral steamship travel; the Rameses I chronology, `hieroglyphs`, `Ruhmkorff`, and isolated spelling errors are corrected. Four plainly erroneous talker IDs are repaired for Ziggy's diary advice, Yvette's diary answer, Laura's clue question to O'Riley, and Carrington's interrupted reply. All other routing and reference metadata remains unchanged.
 
-## D-032 Use Sluicebox Annotations with Stable Numeric Selectors (selector naming superseded by D-039)
+## D-032 Use Sluicebox Annotations with Stable Numeric Selectors  (2026-10-10, status: accepted; selector naming superseded by D-039)
 
 Adopt a compiler-facing source reconstruction from the effective Redux resources rather than importing the published
 `ra-dos-1.000` text verbatim.
@@ -318,7 +342,7 @@ Adopt a compiler-facing source reconstruction from the effective Redux resources
   substantially better names and structure. A disposable isolated Compile All is allowed only as a migration
   diagnostic; normal repository work remains single-script compilation under D-028.
 
-## D-033 Make the Benefit Register an Explicit Identity Source
+## D-033 Make the Benefit Register an Explicit Identity Source  (2026-10-11, status: accepted)
 
 Use an inspectable entrance prop and restrained Act 1 foreshadowing to distinguish knowing of a person from learning a
 name.
@@ -338,7 +362,7 @@ name.
   Ziggy's absence becomes an in-character detail, Ernie retains his greeting, and Watney remains an investigative thread
   until evidence exposes him. Existing clue IDs and addCluesCode idempotence preserve save compatibility.
 
-## D-034 Use a Reference-First Workflow for Interactive SCI Objects
+## D-034 Use a Reference-First Workflow for Interactive SCI Objects  (2026-10-12, status: accepted)
 
 Consult the engine documentation, local base classes, and established game objects before introducing room-local
 interaction machinery.
@@ -362,7 +386,7 @@ interaction machinery.
   Repeat-action testing becomes mandatory for stateful hotspots, reducing transient fallback messages, cue re-entry,
   palette corruption, and interpreter errors.
 
-## D-035 Consume Unsupported Podium Dispatches at the Object Boundary
+## D-035 Consume Unsupported Podium Dispatches at the Object Boundary  (2026-10-12, status: accepted)
 
 Keep the Room 335 benefit podium's valid verbs on the engine path while preventing an extra unsupported dispatch from
 reaching the game's generic narrator fallback.
@@ -382,7 +406,7 @@ reaching the game's generic narrator fallback.
   are silent rather than receiving a generic narrator quip. The change is isolated to Script 335 and must retain the
   exact-position repeat matrix in `docs/TESTING.md`.
 
-## D-036 Route Room 335 Podium Repeats Through the Deferred CueObj Path
+## D-036 Route Room 335 Podium Repeats Through the Deferred CueObj Path  (2026-10-12, status: accepted)
 
 Use the engine's standard `sightAngle` and `approachDist` properties so a repeat interaction from the approach point
 takes the same deferred `CueObj` path as an interaction after walking up.
@@ -410,7 +434,7 @@ takes the same deferred `CueObj` path as an interaction after walking up.
   - If a similar flash appears on another hotspot's immediate-dispatch path, apply the same property pattern before
     adding code.
 
-## D-037 Lowercase Loose Patches on a Case-Insensitive Workspace
+## D-037 Lowercase Loose Patches on a Case-Insensitive Workspace  (2026-10-12, status: accepted; lowercase naming superseded by D-048)
 
 *Naming superseded by D-048: patches are tracked uppercase again. The case-insensitive workspace still stands.*
 
@@ -433,7 +457,7 @@ filesystem, so SCI Companion's own Save and Compile work without post-processing
   symlinks (the unused `.venv` stays off the drive), and journaling (eject cleanly and push often). D-028's one-script
   rule still stands. SCI Companion's message editor cannot save LB2 message resources at all: upstream implements writing only for format 4000+, and LB2's are `0x0C29`–`0x0D0C`. D-038 supersedes this with the fork's writer.
 
-## D-038 Edit Messages in the Forked SCI Companion
+## D-038 Edit Messages in the Forked SCI Companion  (2026-10-13, status: accepted)
 
 Make SCI Companion's message editor the source of truth for LB2 message text, using the maintainer's fork.
 
@@ -451,7 +475,7 @@ Make SCI Companion's message editor the source of truth for LB2 message text, us
   revert later editor changes. SCI Companion also writes `LB2/msg/<n>.shm` noun and condition name files, which are
   tracked so names chosen in the editor persist.
 
-## D-039 Name Selectors from the Sluicebox Reference, Verified Against the CD Vocabulary
+## D-039 Name Selectors from the Sluicebox Reference, Verified Against the CD Vocabulary  (2026-10-13, status: accepted)
 
 Replace the `sel_N` placeholders with one readable name per selector ID, keeping every ID unchanged.
 
@@ -475,7 +499,7 @@ Replace the `sel_N` placeholders with one readable name per selector ID, keeping
   330, 450, 610, 720, 730, and 750) cannot be reproduced from the current source. D-041 records what those differences
   turned out to be.
 
-## D-040 Keep Redux's Class Numbering and Rebuild the Scripts That Assumed Vanilla's
+## D-040 Keep Redux's Class Numbering and Rebuild the Scripts That Assumed Vanilla's  (2026-10-14, status: accepted)
 
 Treat SCI Companion's class numbers as authoritative, and rebuild from source any loaded script still compiled with
 Sierra's numbers for the classes Redux renumbered.
@@ -503,7 +527,7 @@ Sierra's numbers for the classes Redux renumbered.
   future patch to a script that is still Sierra-compiled must be built from source, or checked for classes 47 and 127,
   before it ships. Rooms 310, 450, 640, and 750 need a runtime retest.
 
-## D-041 Leave Drifted Patches Alone, and Avoid Two SCI Companion Codegen Hazards
+## D-041 Leave Drifted Patches Alone, and Avoid Two SCI Companion Codegen Hazards  (2026-10-14, status: accepted)
 
 Do not rebuild a committed patch only because it no longer matches a compile of its source.
 
@@ -529,7 +553,7 @@ Do not rebuild a committed patch only because it no longer matches a compile of 
   selectors fail to extend its superclass's. The 2026-10 review missed one real bug: room 610's committed patch and source both carried a decompiler error that wrote an accumulator-indexed array read (`[local15 n]` with `n` already in the accumulator) as `[local15 (previous expression)]`, so the index became that expression's value (PLAY-033). A multi-line `[localN` index in source deserves a check against the archive build. The
   disassembler is a session tool, not part of the repository; a future comparison can reuse the approach.
 
-## D-042 Give the Act 2 Party Its Own Lines at Case + 100
+## D-042 Give the Act 2 Party Its Own Lines at Case + 100  (2026-10-14, status: accepted)
 
 Let an Act 2 party conversation use its own version of a topic's line without changing which topics exist or how they
 are tracked.
@@ -546,7 +570,7 @@ are tracked.
   (Ziggy's Countess denial, case 214, PLAY-021). That rule fits Ask topics, whose cases stay below 100; Talk's condition-80 introduction cannot take + 200 in a one-byte condition, so Tut's Act 3+ introduction uses case 82 (81 is the modules' generic no-answer case, PLAY-037). Topics that have their own branches in RotundaRgn (for example Yvette on Ernie and Steve) are
   unaffected.
 
-## D-043 Restore Ziggy's Sleaze with a Light Accent
+## D-043 Restore Ziggy's Sleaze with a Light Accent  (2026-10-14, status: accepted)
 
 Bring back Ziggy's oily stool-pigeon character that the P2-08 rewrite flattened, without returning to phonetic
 caricature.
@@ -565,7 +589,7 @@ caricature.
 - **Consequences:** The earlier `act1-ziggy.json` and `act2-ziggy.json` manifests are historical and must not be
   re-applied (D-038). Further wording changes go through SCI Companion.
 
-## D-044 Let the Player Choose to Enter Olympia's Passage
+## D-044 Let the Player Choose to Enter Olympia's Passage  (2026-10-16, status: accepted)
 
 Separate opening the hidden passage from entering it, and keep the passage's own danger.
 
@@ -579,7 +603,7 @@ Separate opening the hidden passage from entering it, and keep the passage's own
 - **Consequences:** Room 520 gains one script object, so a save made inside Olympia's office before this change may
   need the room re-entered. The panel resets to closed whenever the room is entered.
 
-## D-045 Give the Countess Emphasis Through Phrasing
+## D-045 Give the Countess Emphasis Through Phrasing  (2026-10-16, status: accepted)
 
 Remove the Countess's habitual all-caps while keeping her theatrical grandeur.
 
@@ -589,7 +613,7 @@ Remove the Countess's habitual all-caps while keeping her theatrical grandeur.
   false. Record the pass in `docs/dialogue/countess-voice-2026-10.json` and `act2-countess-voice-340-2026-10.json`.
 - **Consequences:** The earlier Countess manifests are historical and must not be re-applied (D-038).
 
-## D-046 Give Stationary Act 3 Characters Patrols
+## D-046 Give Stationary Act 3 Characters Patrols  (2026-10-16, status: accepted)
 
 Let more museum characters move between rooms in Act 3, preferring Sierra's own authored patrols.
 
@@ -615,7 +639,7 @@ Let more museum characters move between rooms in Act 3, preferring Sierra's own 
   restore correctly. The patrols start during Act 3, so they need a run from Act 2. Whether Olympia catches
   Laura taking the snake oil now depends on whether her patrol has her in 520, as Sierra's patrol intends.
 
-## D-047 Distribute Only Redux's Patch Files
+## D-047 Distribute Only Redux's Patch Files  (2026-10-16, status: accepted)
 
 Ship a package that contains no Sierra files, which players unzip over their own floppy v1.000 install.
 
@@ -636,7 +660,7 @@ Ship a package that contains no Sierra files, which players unzip over their own
   five unchanged retail patches were untracked (they remain in git history). A clone needs the retail game copied
   into `LB2/` without overwriting Redux's files.
 
-## D-048 Uppercase File Names in LB2, as on Sierra's Disks
+## D-048 Uppercase File Names in LB2, as on Sierra's Disks  (2026-10-16, status: accepted)
 
 Track every file in `LB2/` under its uppercase name, matching the retail release.
 
@@ -653,7 +677,7 @@ Track every file in `LB2/` under its uppercase name, matching the retail release
   exFAT; `uppercase_names.py --check` can. Older commits keep lowercase names; diffs
   across the rename need `git log --follow` or `-M`.
 
-## D-049 Grey Out Notebook Topics a Character Has Answered
+## D-049 Grey Out Notebook Topics a Character Has Answered  (2026-10-17, status: accepted)
 
 Show which topics the character being asked has already answered, using the game's own asked grid.
 
@@ -690,7 +714,7 @@ Show which topics the character being asked has already answered, using the game
   Heimlich, Pippin, Rameses, and Steve and could halt their travel. Their heaps grow by one word per actor, so saves
   made while those scripts were loaded (Acts 3 to 6) under earlier builds may not restore.
 
-## D-050 Remove the Copy-Protection Quiz
+## D-050 Remove the Copy-Protection Quiz  (2026-10-17, status: accepted)
 
 Take room 18's hieroglyph quiz out of play instead of leaving a screen that always passes.
 
@@ -705,9 +729,43 @@ Take room 18's hieroglyph quiz out of play instead of leaving a screen that alwa
 - **Consequences:** Crodfoller's pass and fail reactions (`230.MSG` noun 11) and the "research, research, research"
   death are no longer reachable. No heap changes; saves past Act 1 already have flag 34.
 
+## Held tensions
+
+A tension is two claims that are both true and do not fit together yet. It is not an open question: an open question
+has an unknown answer; a held tension has two known answers and a price. Hold one only while holding costs less than
+choosing badly. Each names an owner, a review trigger, and the cost of holding both. A tension with no owner or no
+trigger is deleted at consolidation; one that survives review becomes a decision, with the losing claim recorded as
+an alternative.
+
+Format:
+
+```
+### T-NNN Title  (YYYY-MM-DD, status: held | resolved by D-MMM)
+**Owner:** ...
+**Claim A:** ...
+**Claim B:** ...
+**Why both hold:** ...
+**Cost of holding both:** ...
+**Review trigger:** ...
+```
+
+None held.
+
 ## Open questions
 
-- **Q-001**: Resolved by D-007: Omit insensitive original CD voice tracks; restore murder lines as text messages in
-  `.MSG`, leaving talker audio hooks open for future custom voice recordings.
-- **Q-002**: Resolved by D-017 and D-018: preserve the existing transition/scheduler model, then address the genuine
-  passive-pacing problem through the post-bugfix P5-01 Act 2 content milestone.
+Questions that need the maintainer's input. This is their one home: HANDOFF and the roadmap refer to them by ID.
+Numbers are permanent; an answered question stays, with its answer and date.
+
+```
+- **Q-NNN** The question. (asked YYYY-MM-DD, by whom; blocks P<n>-<nn>; recommendation: ...)
+- **Q-NNN** ~~The question.~~ Answered YYYY-MM-DD: the answer, D-NNN.
+```
+
+The wording of Q-001 and Q-002 was not recorded when they were asked; the questions below are reconstructed from the
+decisions that answered them.
+
+- **Q-001** ~~What should Redux do with the CD release's voice tracks?~~ Answered 2026-10-07: omit them; restore the
+  murder lines as text in `.MSG` and leave the talker audio hooks open for future recordings, D-007.
+- **Q-002** ~~How should Act 2 progression be gated?~~ Answered 2026-10-07 by D-008 (a diegetic knowledge threshold);
+  re-answered 2026-10-08 when D-008 was superseded: keep the authored transition and scheduler model, and address
+  Act 2's passive pacing through the P5-01 content milestone after the core fixes, D-017 and D-018.

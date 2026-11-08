@@ -12,7 +12,7 @@ Security: [SECURITY.md](SECURITY.md). Changes: [CHANGELOG.md](CHANGELOG.md). Old
 
 ## Current state
 
-_Last updated: 2026-10-17, session 59: patch-only distribution, docs review, PLAY-002/004/008/009, alpha v0.10._
+_Last updated: 2026-11-08, session 60: Manifold Tier 1 (checker, decision format, held tensions). Session 59: patch-only distribution, docs review, PLAY-002/004/008/009, alpha v0.10._
 
 **In one paragraph:** Phases 1 to 4 are done; Phase 5's entry gate is the clean DOSBox-X playthrough in
 `PLAYTEST_CHECKLIST.md`. Alpha v0.10 is the current patch-only release (v0.09 was the first): `tools/package_patch.py` zips only Redux's
@@ -74,6 +74,36 @@ Scripts 31 to 37's heaps, so Act 3 to 6 saves from earlier builds may not restor
 None open. Q-001 and Q-002 are resolved (D-007, D-017, D-018).
 
 ## Session log
+
+### Session 60: 2026-11-08: Manifold Tier 1 Adoption
+
+**Contributor:** Claude Code and maintainer
+
+**Goal:** Compare Redux with the expanded Manifold template (`the-manifold`, root template) and adopt its
+checker and decision-record structure (Tier 1).
+
+**Done:**
+- `tools/check_docs.py` replaced by the template's checker: held tensions (`T-NNN`: duplicates, order, dangling
+  references) and invisible or bidirectional control characters are now errors. It also reads
+  `ALPHA_PLAYTESTING.md`, `PLAYTEST_CHECKLIST.md`, and `SOURCE_PROVENANCE.md`, which it skipped before.
+- `DECISIONS.md`: the template's preamble and entry format (Alternatives and Review trigger fields from now on); every
+  heading carries its first-recorded git date and status (D-008 superseded; D-032 and D-037 partly superseded); new
+  Held tensions section (none held); open questions in the template's answered form.
+- Moved session 50 to `archive/SESSION_LOG_2026_10.md`.
+
+**Decisions:** none.
+
+**Verified:** `python3 tools/check_docs.py`: 0 errors, 0 warnings in 18 files. Mutation check in a scratch copy: an
+injected U+200B, a reference to an undefined held tension, and a broken link in a newly covered doc each produced an error.
+
+**Not verified:** No game files changed; no boot test needed.
+
+**Corrections:** Q-001's and Q-002's question text was never recorded; reconstructed from D-007 and D-008.
+
+**Left undone:** Manifold Tiers 2 and 3 (AGENTS.md sections and rules; HANDOFF, ARCHITECTURE, TESTING, SECURITY,
+CONTRIBUTING structure).
+
+**Next session should start with:** the maintainer's retests (Next steps 1), or Manifold Tier 2 in `AGENTS.md`.
 
 ### Session 59: 2026-10-16/17: Patch-Only Distribution and Docs Review
 
@@ -292,26 +322,3 @@ class. Headless boot of a test copy. Not yet seen in play.
 **Verified:** Zip integrity test passes; extracted `RESOURCE.000`/`RESOURCE.MAP` match the vanilla MD5s; extracted Scripts 21, 335, 990, and 2335 match `HEAD`; the extracted copy completes the headless DOSBox-X startup smoke; documentation check passes.
 
 **Next session should start with:** Publish v0.02 (zip and updated `alpha-playtest.html`) when the maintainer is ready, then collect reports.
-
-### Session 50: 2026-10-12: Room 335 Podium Repeat Flash and Save Slots
-
-**Contributor:** Claude Code
-
-**Goal:** Stop the brief generic message that still appeared before the guestbook response when Laura repeated LOOK or DO from where she stopped.
-
-**Done:**
-- Set `approachDist` (`sel_305`) to 4. This alone did not fix the flash.
-- Ran silent trace builds. They logged every `gMessager say:`, every `gDoVerbCode` fallback, room `doVerb`, and podium `doVerb`, and the banner Look dumped the log. Each repeat logged exactly one podium dispatch and one `335:17,verb` message. Every trace build also hid the flash, so the defect is timing- or layout-sensitive and only on the immediate-dispatch ending of `Feature::handleEvent`.
-- Fixed it by setting `sightAngle` (`sel_301`) to -1, so `facingMe` always queues the deferred `CueObj` path that a fresh approach uses. Applied it in the instance properties, room init, and the per-frame old-save reapply (D-036). D-035's guard is retained. The trace code is removed. `335.SCR` is 1,778 bytes; `335.HEP` is 902 bytes. The maintainer confirmed no flash on repeat LOOK and DO.
-
-- Fixed saved-game slot reuse in Script 990 (`LB2/src/Save.sc`): the decompiled free-slot search and duplicate-name search had lost their `break`s, so every new save took slot 0 and overwrote the previous one. Both loops now break on a match; `990.SCR` recompiled (2,564 bytes). Restored the maintainer's overwritten Test2 save from `HEAD` as slot 1.
-
-**Gotchas:**
-- Trace code in this game: `Printf` takes a buffer first (`(Printf @buf {fmt} args)`); a missing buffer makes `Format` treat the next argument as a text resource (`1.TEX` soft lock). `&rest` forwards only arguments after a method's named parameters, so a wrapper with named parameters must forward them explicitly. Adding script locals makes saves made inside that room unsafe to restore on the new build.
-- `tools/compile.py` deletes the existing `.SCR`/`.HEP` before invoking SCI Companion. If SCI Companion is not open, or the script is missing from its list, the run fails after the deletion. That removes the script from SCI Companion's list until the files are restored and SCI Companion is restarted. Before compiling, check `wine tools/list_scripts.exe` and confirm the main window is open.
-
-**Decisions:** D-036; D-034 followed.
-
-**Verified:** Scripts 335 and 990 compile; the headless DOSBox-X startup smoke initializes; `RESOURCE.000`/`RESOURCE.MAP` MD5s unchanged; the maintainer confirmed repeat LOOK and DO at the podium show only the guestbook response. New saves now occupy separate slots (`LB2SG.001`–`.005` created during testing).
-
-**Next session should start with:** Resume the clean playthrough.

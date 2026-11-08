@@ -2,6 +2,29 @@
 
 Archived verbatim from `docs/HANDOFF.md` when its live session log exceeded ten entries.
 
+### Session 50: 2026-10-12: Room 335 Podium Repeat Flash and Save Slots
+
+**Contributor:** Claude Code
+
+**Goal:** Stop the brief generic message that still appeared before the guestbook response when Laura repeated LOOK or DO from where she stopped.
+
+**Done:**
+- Set `approachDist` (`sel_305`) to 4. This alone did not fix the flash.
+- Ran silent trace builds. They logged every `gMessager say:`, every `gDoVerbCode` fallback, room `doVerb`, and podium `doVerb`, and the banner Look dumped the log. Each repeat logged exactly one podium dispatch and one `335:17,verb` message. Every trace build also hid the flash, so the defect is timing- or layout-sensitive and only on the immediate-dispatch ending of `Feature::handleEvent`.
+- Fixed it by setting `sightAngle` (`sel_301`) to -1, so `facingMe` always queues the deferred `CueObj` path that a fresh approach uses. Applied it in the instance properties, room init, and the per-frame old-save reapply (D-036). D-035's guard is retained. The trace code is removed. `335.SCR` is 1,778 bytes; `335.HEP` is 902 bytes. The maintainer confirmed no flash on repeat LOOK and DO.
+
+- Fixed saved-game slot reuse in Script 990 (`LB2/src/Save.sc`): the decompiled free-slot search and duplicate-name search had lost their `break`s, so every new save took slot 0 and overwrote the previous one. Both loops now break on a match; `990.SCR` recompiled (2,564 bytes). Restored the maintainer's overwritten Test2 save from `HEAD` as slot 1.
+
+**Gotchas:**
+- Trace code in this game: `Printf` takes a buffer first (`(Printf @buf {fmt} args)`); a missing buffer makes `Format` treat the next argument as a text resource (`1.TEX` soft lock). `&rest` forwards only arguments after a method's named parameters, so a wrapper with named parameters must forward them explicitly. Adding script locals makes saves made inside that room unsafe to restore on the new build.
+- `tools/compile.py` deletes the existing `.SCR`/`.HEP` before invoking SCI Companion. If SCI Companion is not open, or the script is missing from its list, the run fails after the deletion. That removes the script from SCI Companion's list until the files are restored and SCI Companion is restarted. Before compiling, check `wine tools/list_scripts.exe` and confirm the main window is open.
+
+**Decisions:** D-036; D-034 followed.
+
+**Verified:** Scripts 335 and 990 compile; the headless DOSBox-X startup smoke initializes; `RESOURCE.000`/`RESOURCE.MAP` MD5s unchanged; the maintainer confirmed repeat LOOK and DO at the podium show only the guestbook response. New saves now occupy separate slots (`LB2SG.001`–`.005` created during testing).
+
+**Next session should start with:** Resume the clean playthrough.
+
 ### Session 49: 2026-10-12: Room 335 Podium Fallback-Flash Guard
 
 **Contributor:** Codex
