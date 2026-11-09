@@ -8,8 +8,8 @@ true when it was written. Search it before re-trying something that sounds new.
   whole; do not summarise them on the way. `tools/check_docs.py` reads these files too, so session numbers stay
   unique and references in them still resolve.
 - **Roadmap phases:** a finished phase can move to `ROADMAP_YYYY_MM.md`, items unchanged. Its IDs stay reserved.
-- **Anything else** (an old handoff section, a retired doc): one file per thing, with a line at the top saying when
-  and why it was moved.
+- **Anything else** (an old handoff section, a retired doc or tool): one file per thing, with a line at the top
+  saying when and why it was moved. `RETIRED_TOOLS.md` records the compiler-output capture helpers (D-051, D-052).
 
 Archive content is historical, not normative. Never store saves, Sierra files, or anything else the repository must not hold here
 merely because it is old; follow `docs/SECURITY.md`.

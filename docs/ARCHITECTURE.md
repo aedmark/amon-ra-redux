@@ -264,7 +264,5 @@ Places where a doc, a name, or a committed file says more than the code does. Re
   replacing one.
 - Several committed `.sco` files predate the current source.
 - `docs/dialogue/*.json` look like the dialogue source; the `.MSG` files edited in SCI Companion are (D-038).
-- `tools/copy_output.c`, `get_compile_log.c`, and `get_errors.c` write `dumps/compile_output.txt`, but `dumps/` no
-  longer exists, so they would fail to save. `compile.py` uses none of them.
 - D-041's compound-assignment hazard rests on SCI Companion's and ScummVM's models of the stack, not on a DOSBox-X run
   of this interpreter.

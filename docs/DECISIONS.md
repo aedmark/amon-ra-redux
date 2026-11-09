@@ -746,6 +746,19 @@ Stop injecting a DLL into SCI Companion during compiles.
   Companion's window.
 - **Review trigger:** A need to read compile errors automatically.
 
+## D-052 Retire the Clipboard Output Helpers  (2026-11-08, status: accepted)
+
+Delete the last three compiler-output capture helpers, and keep their history in the archive.
+
+- **Context:** `tools/copy_output.c`, `get_compile_log.c`, and `get_errors.c` (2026-10-07, `8d764df`) copied SCI
+  Companion's compiler output list through the clipboard into `dumps/compile_output.txt`. No tool or document used
+  them, and `dumps/` has not existed since 2026-10-17. D-051 retired the other two capture helpers.
+- **Decision:** Delete the three sources and set their untracked binaries aside. Record what all five capture helpers
+  did, and where their last source is, in `docs/archive/RETIRED_TOOLS.md`.
+- **Alternatives:** Keep them for a future need (rejected: the archive page names the commit to restore each one).
+- **Consequences:** No helper writes compiler output to disk. The archive page is the starting point if D-051's
+  review trigger fires.
+
 ## Held tensions
 
 A tension is two claims that are both true and do not fit together yet. It is not an open question: an open question

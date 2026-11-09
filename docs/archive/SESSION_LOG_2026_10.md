@@ -2,6 +2,28 @@
 
 Archived verbatim from `docs/HANDOFF.md` when its live session log exceeded ten entries.
 
+### Session 56: 2026-10-14: Ziggy's Voice
+
+**Contributor:** Claude Code and maintainer
+
+**Goal:** Restore the sleaze the P2-08 rewrite took out of Ziggy.
+
+**Done:**
+- Rewrote all 118 Ziggy lines in `310.msg` (Act 1 speakeasy, 32) and `1890.msg` (Acts 2-6, 86) to the maintainer's brief: light accent, flirting between vanilla and P2-08, full scope (D-043). Manifests `act1-ziggy-voice-2026-10.json` and `act2-ziggy-voice-2026-10.json` record the pass.
+
+- PLAY-019: fixed MuseumRgn's `sayAndHold`, which since P3-06 forwarded the always-zero caller argument as the message module, breaking every Act 3+ conversation with the seven MuseumRgn actors. Script 90 differs from the committed build by one instruction.
+
+- PLAY-020 to PLAY-024: Ziggy's Pippin topic (cases 103 and 3) and Countess bluff gating (case 214), Pippin on Najeer, Steve's 7:30 meeting entering from the far side and waiting for both to arrive, and the act-break window (black picture 780 restored in Script 26, Art Deco corners for room 26 in Main). Main compiles with only that one change. Verified by routine-by-routine comparison and headless startup; runtime retest pending.
+- Rewrote Ziggy's 19 lines in the party eavesdropping (`340.msg`) and intercom (`562.msg`) scenes in the same voice.
+- Built `LB2/LB2-Redux-v0.05.zip` with the v0.04 layout, excluding saves and older zips: 949 files, 7,097,351 bytes; integrity test, vanilla archive MD5s, every tracked `LB2` file identical to the working tree, and headless startup of the extracted copy. Moved `alpha-playtest.html` (storage key `v005`) and `ALPHA_PLAYTESTING.md` to v0.05 and cut CHANGELOG `0.05-alpha`.
+- PLAY-025 (after v0.05): room 550's floor lamp asked for a carbon-paper message Sierra never wrote when the lamp is off or its bulb is gone; it now uses the existing `(45, 39, 6)`. Script 550 differs by one instruction.
+
+**Decisions:** D-043; D-042 amended (case + 200 for condition variants).
+
+**Verified:** Only Ziggy's records changed text; record sets and reference bytes unchanged; documentation checks.
+
+**Next session should start with:** The maintainer's fresh playthrough (Next steps 1-2).
+
 ### Session 55: 2026-10-14: Act 1 and 2 Playtest Findings
 
 **Contributor:** Claude Code and maintainer

@@ -12,9 +12,9 @@ Security: [SECURITY.md](SECURITY.md). Changes: [CHANGELOG.md](CHANGELOG.md). Old
 
 ## Current state
 
-_Last updated: 2026-11-08, session 65, on `master` (`ee05c34` plus this session's helper and documentation changes): `hook.dll` capture retired (D-051). Session 59 holds the last game change: patch-only distribution, PLAY-002/004/008/009, alpha v0.10._
+_Last updated: 2026-11-08, session 66, on `master` (`8e18e27` plus this session's changes): the capture helpers are retired (D-051, D-052). Session 59 holds the last game change: patch-only distribution, PLAY-002/004/008/009, alpha v0.10._
 
-**Session owner:** none since session 65 (2026-11-08).
+**Session owner:** none since session 66 (2026-11-08).
 
 **In one paragraph:** Phases 1 to 4 are done; Phase 5's entry gate is the clean DOSBox-X playthrough in
 `PLAYTEST_CHECKLIST.md`. Alpha v0.10 is the current patch-only release (v0.09 was the first): `tools/package_patch.py` zips only Redux's
@@ -100,6 +100,31 @@ agent) gets a short entry too, written by whoever notices it. Past 10 entries, m
 **Left undone:**
 **Next session should start with:**
 ```
+
+### Session 66: 2026-11-08: Retire the Clipboard Output Helpers
+
+**Contributor:** Claude Code and maintainer
+
+**Goal:** Retire the three unused helpers that wrote to the missing `dumps/`, and keep their history (D-052).
+
+**Done:**
+- Deleted `tools/copy_output.c`, `get_compile_log.c`, and `get_errors.c`; moved their untracked `.exe` files to the
+  session scratch folder with the D-051 binaries.
+- Wrote `docs/archive/RETIRED_TOOLS.md`: why the five capture helpers existed, what each did, the commit that holds its
+  last source, and where to start if the need returns. Linked it from the archive README; removed the Claims vs. code
+  row. Moved session 56 to the archive.
+
+**Decisions:** D-052.
+
+**Verified:** `git grep` found no use of the three outside today's notes. `python3 tools/check_docs.py`: 0 errors,
+0 warnings.
+
+**Not verified:** Nothing ran; no game or compile path uses these helpers.
+
+**Left undone:** Other `tools/*.c` helpers may be unused too (only `compile_any`, `list_scripts`, and `list_windows`
+are named in the docs); not audited.
+
+**Next session should start with:** the maintainer's retests (Next steps 1).
 
 ### Session 65: 2026-11-08: Retire the hook.dll Capture
 
@@ -393,25 +418,3 @@ class. Headless boot of a test copy. Not yet seen in play.
 **Verified:** Each rebuilt script compared routine by routine with its committed build shows only the intended changes; message files changed only in the listed records; headless startup; base archive MD5s unchanged; documentation checks. Runtime retest pending.
 
 **Next session should start with:** Publish v0.06 when the maintainer is ready; collect retests of PLAY-018, PLAY-025, PLAY-026, and PLAY-028 to PLAY-032.
-
-### Session 56: 2026-10-14: Ziggy's Voice
-
-**Contributor:** Claude Code and maintainer
-
-**Goal:** Restore the sleaze the P2-08 rewrite took out of Ziggy.
-
-**Done:**
-- Rewrote all 118 Ziggy lines in `310.msg` (Act 1 speakeasy, 32) and `1890.msg` (Acts 2-6, 86) to the maintainer's brief: light accent, flirting between vanilla and P2-08, full scope (D-043). Manifests `act1-ziggy-voice-2026-10.json` and `act2-ziggy-voice-2026-10.json` record the pass.
-
-- PLAY-019: fixed MuseumRgn's `sayAndHold`, which since P3-06 forwarded the always-zero caller argument as the message module, breaking every Act 3+ conversation with the seven MuseumRgn actors. Script 90 differs from the committed build by one instruction.
-
-- PLAY-020 to PLAY-024: Ziggy's Pippin topic (cases 103 and 3) and Countess bluff gating (case 214), Pippin on Najeer, Steve's 7:30 meeting entering from the far side and waiting for both to arrive, and the act-break window (black picture 780 restored in Script 26, Art Deco corners for room 26 in Main). Main compiles with only that one change. Verified by routine-by-routine comparison and headless startup; runtime retest pending.
-- Rewrote Ziggy's 19 lines in the party eavesdropping (`340.msg`) and intercom (`562.msg`) scenes in the same voice.
-- Built `LB2/LB2-Redux-v0.05.zip` with the v0.04 layout, excluding saves and older zips: 949 files, 7,097,351 bytes; integrity test, vanilla archive MD5s, every tracked `LB2` file identical to the working tree, and headless startup of the extracted copy. Moved `alpha-playtest.html` (storage key `v005`) and `ALPHA_PLAYTESTING.md` to v0.05 and cut CHANGELOG `0.05-alpha`.
-- PLAY-025 (after v0.05): room 550's floor lamp asked for a carbon-paper message Sierra never wrote when the lamp is off or its bulb is gone; it now uses the existing `(45, 39, 6)`. Script 550 differs by one instruction.
-
-**Decisions:** D-043; D-042 amended (case + 200 for condition variants).
-
-**Verified:** Only Ziggy's records changed text; record sets and reference bytes unchanged; documentation checks.
-
-**Next session should start with:** The maintainer's fresh playthrough (Next steps 1-2).
